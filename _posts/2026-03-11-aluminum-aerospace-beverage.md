@@ -15,38 +15,65 @@ Aluminum is everywhere — in your soda can, your car doors, the wings of every 
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-aluminum"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "NYSE:AA",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-aluminum",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "aluminum", label: "Aluminum +10%", type: "commodity", price: "$2,450/ton", change: "+10%" },
-    { id: "xme_al", label: "XME (Metals ETF)", type: "etf", impact: +6.5, correlation: 0.74 },
-    { id: "aa", label: "Alcoa (AA)", type: "positive", impact: +14, correlation: 0.88, sector: "Aluminum" },
-    { id: "cenx", label: "Century Aluminum (CENX)", type: "positive", impact: +18, correlation: 0.92, sector: "Aluminum" },
-    { id: "rio_al", label: "Rio Tinto (RIO)", type: "positive", impact: +5, correlation: 0.62, sector: "Mining" },
-    { id: "ba", label: "Boeing (BA)", type: "negative", impact: -3, correlation: -0.42, sector: "Aerospace" },
-    { id: "lmt", label: "Lockheed Martin (LMT)", type: "negative", impact: -2, correlation: -0.35, sector: "Defense" },
-    { id: "f_al", label: "Ford Motor (F)", type: "negative", impact: -4, correlation: -0.51, sector: "Auto" },
-    { id: "bud", label: "AB InBev (BUD)", type: "negative", impact: -3, correlation: -0.45, sector: "Beverages" },
-    { id: "ball", label: "Ball Corporation (BALL)", type: "negative", impact: -5, correlation: -0.62, sector: "Packaging" },
-    { id: "ardagh", label: "Ardagh Metal Packaging", type: "negative", impact: -5, correlation: -0.60, sector: "Packaging" },
-    { id: "aerospace_ind", label: "Aerospace Industry", type: "negative", impact: -3, sector: "Industrials" },
-    { id: "beverage_ind", label: "Beverage Can Industry", type: "negative", impact: -5, sector: "Packaging" },
-  ],
-  links: [
-    { source: "aluminum", target: "xme_al", strength: 0.74 },
-    { source: "aluminum", target: "aa", strength: 0.88 },
-    { source: "aluminum", target: "cenx", strength: 0.92 },
-    { source: "aluminum", target: "rio_al", strength: 0.62 },
-    { source: "aluminum", target: "ba", strength: 0.42 },
-    { source: "aluminum", target: "lmt", strength: 0.35 },
-    { source: "aluminum", target: "f_al", strength: 0.51 },
-    { source: "aluminum", target: "bud", strength: 0.45 },
-    { source: "aluminum", target: "ball", strength: 0.62 },
-    { source: "aluminum", target: "ardagh", strength: 0.60 },
-    { source: "aluminum", target: "aerospace_ind", strength: 0.40 },
-    { source: "aluminum", target: "beverage_ind", strength: 0.62 },
+  commodity: { id: "aluminum", label: "Aluminum ↑8%", price: "$2,300/ton", change: "+8%" },
+  levels: [
+    { nodes: [
+      { id: "aa", label: "Alcoa (AA)", type: "positive", impact: 14.5, correlation: 0.88, marketCap: "8B", sector: "Aluminum Producer" },
+      { id: "cenx", label: "Century Aluminum (CENX)", type: "positive", impact: 18.0, correlation: 0.92, marketCap: "1B", sector: "Aluminum Producer" },
+      { id: "rio_al", label: "Rio Tinto (RIO)", type: "positive", impact: 7.5, correlation: 0.72, marketCap: "110B", sector: "Diversified Mining" },
+      { id: "ba_al", label: "Boeing (BA)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "130B", sector: "Aerospace" },
+      { id: "f_al", label: "Ford Motor (F)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "48B", sector: "Automotive" }
+    ]},
+    { nodes: [
+      { id: "norsk", label: "Norsk Hydro (NHYDY)", type: "positive", impact: 12.0, correlation: 0.85, sector: "Aluminum/Energy", parentId: "aa" },
+      { id: "rusal", label: "RUSAL (0486.HK)", type: "positive", impact: 16.0, correlation: 0.90, sector: "Aluminum", parentId: "cenx" },
+      { id: "rolling_mills", label: "Novelis (Hindalco)", type: "negative", impact: -5.0, correlation: -0.55, sector: "Aluminum Rolling", parentId: "rio_al" },
+      { id: "airbus_al", label: "Airbus (AIR.PA)", type: "negative", impact: -3.0, correlation: -0.38, sector: "Aerospace", parentId: "ba_al" }
+    ]},
+    { nodes: [
+      { id: "bauxite", label: "Bauxite Mining (AWCMY)", type: "positive", impact: 10.0, correlation: 0.82, sector: "Bauxite", parentId: "norsk" },
+      { id: "alumina", label: "Alumina Ltd (AWC.AX)", type: "positive", impact: 12.0, correlation: 0.86, sector: "Alumina Refining", parentId: "rusal" },
+      { id: "cans", label: "Ball Corp (BALL)", type: "negative", impact: -5.5, correlation: -0.60, marketCap: "16B", sector: "Beverage Cans", parentId: "rolling_mills" }
+    ]},
+    { nodes: [
+      { id: "beverage_al", label: "Coca-Cola (KO)", type: "negative", impact: -1.5, correlation: -0.25, marketCap: "280B", sector: "Beverages", parentId: "cans" },
+      { id: "auto_parts_al", label: "Nemak (NEMAK.MX)", type: "negative", impact: -6.0, correlation: -0.65, sector: "Auto Parts", parentId: "f_al" },
+      { id: "construction_al", label: "Construction (facade)", type: "negative", impact: -4.0, correlation: -0.50, sector: "Construction", parentId: "rolling_mills" }
+    ]},
+    { nodes: [
+      { id: "energy_al", label: "Electricity Costs", type: "positive", impact: 8.0, sector: "Macro", parentId: "aa" },
+      { id: "china_al", label: "China Capacity Cuts", type: "positive", impact: 7.0, sector: "Macro", parentId: "cenx" },
+      { id: "recycling_al", label: "Aluminum Recycling", type: "negative", impact: -5.0, sector: "Macro", parentId: "cans" }
+    ]}
   ]
 };
 </script>

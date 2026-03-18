@@ -15,36 +15,65 @@ Coffee prices hit 50-year highs in early 2025, driven by devastating droughts in
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-coffee"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "ICEUS:KC1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-coffee",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "coffee", label: "Coffee +30%", type: "commodity", price: "$3.85/lb Arabica", change: "+30%" },
-    { id: "jo", label: "JO (Coffee ETF)", type: "etf", impact: +29.2, correlation: 0.97 },
-    { id: "cafe", label: "iPath Coffee Index", type: "etf", impact: +28.5, correlation: 0.96 },
-    { id: "sbux", label: "Starbucks (SBUX)", type: "negative", impact: -8, correlation: -0.68, sector: "Restaurants" },
-    { id: "dnkn", label: "Dunkin Brands", type: "negative", impact: -6, correlation: -0.58, sector: "Restaurants" },
-    { id: "jaclue", label: "JAB Holdings (private)", type: "negative", impact: -7, correlation: -0.62, sector: "Coffee Retail" },
-    { id: "mcd_coffee", label: "McDonald's (MCD)", type: "negative", impact: -3, correlation: -0.44, sector: "Restaurants" },
-    { id: "green_mtn", label: "Keurig Dr Pepper (KDP)", type: "negative", impact: -5, correlation: -0.54, sector: "Beverages" },
-    { id: "brazil_farms", label: "Brazilian Coffee Farms", type: "positive", impact: +28, correlation: 0.94, sector: "Agriculture" },
-    { id: "specialty_roasters", label: "Specialty Roasters", type: "negative", impact: -9, sector: "Retail" },
-    { id: "instant_coffee", label: "Instant Coffee Industry", type: "negative", impact: -6, sector: "Food" },
-    { id: "cafes", label: "Independent Cafes", type: "negative", impact: -12, sector: "Restaurants" },
-  ],
-  links: [
-    { source: "coffee", target: "jo", strength: 0.97 },
-    { source: "coffee", target: "cafe", strength: 0.96 },
-    { source: "coffee", target: "sbux", strength: 0.68 },
-    { source: "coffee", target: "dnkn", strength: 0.58 },
-    { source: "coffee", target: "mcd_coffee", strength: 0.44 },
-    { source: "coffee", target: "green_mtn", strength: 0.54 },
-    { source: "coffee", target: "jaclue", strength: 0.62 },
-    { source: "coffee", target: "brazil_farms", strength: 0.94 },
-    { source: "coffee", target: "specialty_roasters", strength: 0.75 },
-    { source: "coffee", target: "instant_coffee", strength: 0.70 },
-    { source: "coffee", target: "cafes", strength: 0.80 },
+  commodity: { id: "coffee", label: "Coffee ↑20%", price: "$2.80/lb", change: "+20%" },
+  levels: [
+    { nodes: [
+      { id: "jo", label: "iPath Coffee (JO)", type: "etf", impact: 18.5, correlation: 0.92, marketCap: "0.1B", sector: "ETF" },
+      { id: "sbux", label: "Starbucks (SBUX)", type: "negative", impact: -8.5, correlation: -0.72, marketCap: "110B", sector: "Coffee Retail" },
+      { id: "mcd_c", label: "McDonald's (MCD)", type: "negative", impact: -3.5, correlation: -0.48, marketCap: "215B", sector: "Fast Food" },
+      { id: "jde", label: "JDE Peet's (JDEP.AS)", type: "negative", impact: -10.0, correlation: -0.82, marketCap: "14B", sector: "Coffee Roasting" },
+      { id: "nen_c", label: "Nestlé (NESN.SW)", type: "negative", impact: -5.0, correlation: -0.62, marketCap: "300B", sector: "Food & Coffee" }
+    ]},
+    { nodes: [
+      { id: "brazil_coffee", label: "Brazilian Growers", type: "positive", impact: 25.0, correlation: 0.95, sector: "Coffee Production", parentId: "jde" },
+      { id: "colombia", label: "Colombian Cooperatives", type: "positive", impact: 22.0, correlation: 0.90, sector: "Coffee Production", parentId: "jde" },
+      { id: "dunkin_c", label: "Dunkin' (Private)", type: "negative", impact: -6.5, correlation: -0.68, sector: "Coffee Chain", parentId: "sbux" },
+      { id: "lavazza", label: "Lavazza (Private)", type: "negative", impact: -8.5, correlation: -0.75, sector: "Coffee Roasting", parentId: "jde" }
+    ]},
+    { nodes: [
+      { id: "shipping_c", label: "Container Shipping", type: "positive", impact: 5.0, correlation: 0.55, sector: "Logistics", parentId: "brazil_coffee" },
+      { id: "roasters", label: "Specialty Roasters", type: "negative", impact: -12.0, correlation: -0.88, sector: "Artisan Coffee", parentId: "lavazza" },
+      { id: "cups_c", label: "Packaging (Pactiv Evergreen)", type: "negative", impact: -2.5, correlation: -0.35, sector: "Packaging", parentId: "sbux" }
+    ]},
+    { nodes: [
+      { id: "baristas", label: "Café Employment", type: "negative", impact: -3.0, sector: "Labor", parentId: "dunkin_c" },
+      { id: "office_coffee", label: "Office Coffee Services", type: "negative", impact: -7.0, correlation: -0.70, sector: "B2B", parentId: "roasters" },
+      { id: "capsules", label: "Nespresso Pods", type: "negative", impact: -9.0, correlation: -0.78, sector: "Coffee Capsules", parentId: "nen_c" }
+    ]},
+    { nodes: [
+      { id: "brazil_drought", label: "Brazil Drought", type: "positive", impact: 18.0, sector: "Macro", parentId: "brazil_coffee" },
+      { id: "la_nina_c", label: "La Niña Weather", type: "positive", impact: 12.0, sector: "Macro", parentId: "jo" },
+      { id: "consumer_trade", label: "Consumer Trade-Down", type: "negative", impact: -5.0, sector: "Macro", parentId: "sbux" }
+    ]}
   ]
 };
 </script>

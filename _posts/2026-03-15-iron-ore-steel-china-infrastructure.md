@@ -15,38 +15,65 @@ Iron ore is China's most important imported commodity — and the single biggest
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-iron_ore"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "NASDAQ:VALE",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-iron_ore",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "iron_ore", label: "Iron Ore +15%", type: "commodity", price: "$115/ton", change: "+15%" },
-    { id: "vale", label: "Vale (VALE)", type: "positive", impact: +18, correlation: 0.91, sector: "Mining" },
-    { id: "rio", label: "Rio Tinto (RIO)", type: "positive", impact: +14, correlation: 0.86, sector: "Mining" },
-    { id: "bhp", label: "BHP Group (BHP)", type: "positive", impact: +12, correlation: 0.83, sector: "Mining" },
-    { id: "fortescue", label: "Fortescue (FSUGY)", type: "positive", impact: +20, correlation: 0.94, sector: "Mining" },
-    { id: "gxc", label: "GXC (China ETF)", type: "positive", impact: +5, correlation: 0.62, sector: "China" },
-    { id: "fxi", label: "FXI (China Large Cap ETF)", type: "positive", impact: +4, correlation: 0.58, sector: "China" },
-    { id: "x_io", label: "US Steel (X)", type: "negative", impact: -4, correlation: -0.48, sector: "Steel" },
-    { id: "nue_io", label: "Nucor (NUE)", type: "negative", impact: -3, correlation: -0.42, sector: "Steel" },
-    { id: "china_steel", label: "Chinese Steel Mills", type: "negative", impact: -8, correlation: -0.72, sector: "Steel" },
-    { id: "infra_ind", label: "Infrastructure Industry", type: "positive", impact: +6, sector: "Construction" },
-    { id: "global_shipping", label: "Bulk Shipping (BDRY)", type: "positive", impact: +12, sector: "Shipping" },
-    { id: "dry_bulk", label: "Dry Bulk Carriers", type: "positive", impact: +10, sector: "Shipping" },
-  ],
-  links: [
-    { source: "iron_ore", target: "vale", strength: 0.91 },
-    { source: "iron_ore", target: "rio", strength: 0.86 },
-    { source: "iron_ore", target: "bhp", strength: 0.83 },
-    { source: "iron_ore", target: "fortescue", strength: 0.94 },
-    { source: "iron_ore", target: "gxc", strength: 0.62 },
-    { source: "iron_ore", target: "fxi", strength: 0.58 },
-    { source: "iron_ore", target: "x_io", strength: 0.48 },
-    { source: "iron_ore", target: "nue_io", strength: 0.42 },
-    { source: "iron_ore", target: "china_steel", strength: 0.72 },
-    { source: "iron_ore", target: "infra_ind", strength: 0.65 },
-    { source: "iron_ore", target: "global_shipping", strength: 0.80 },
-    { source: "iron_ore", target: "dry_bulk", strength: 0.78 },
+  commodity: { id: "iron_ore", label: "Iron Ore ↑8%", price: "$120/ton", change: "+8%" },
+  levels: [
+    { nodes: [
+      { id: "vale", label: "Vale SA (VALE)", type: "positive", impact: 15.5, correlation: 0.91, marketCap: "60B", sector: "Iron Ore Mining" },
+      { id: "bhp_i", label: "BHP Group (BHP)", type: "positive", impact: 12.0, correlation: 0.88, marketCap: "145B", sector: "Diversified Mining" },
+      { id: "rio_i", label: "Rio Tinto (RIO)", type: "positive", impact: 13.5, correlation: 0.89, marketCap: "110B", sector: "Iron Ore Mining" },
+      { id: "x_i", label: "US Steel (X)", type: "negative", impact: -5.5, correlation: -0.62, marketCap: "7B", sector: "Steel Producer" },
+      { id: "nue_i", label: "Nucor (NUE)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "35B", sector: "Steel Producer" }
+    ]},
+    { nodes: [
+      { id: "fortescue", label: "Fortescue (FMG.AX)", type: "positive", impact: 18.0, correlation: 0.93, marketCap: "55B", sector: "Iron Ore Mining", parentId: "vale" },
+      { id: "champion", label: "Champion Iron (CIA.TO)", type: "positive", impact: 20.0, correlation: 0.92, marketCap: "3B", sector: "Iron Ore Mining", parentId: "rio_i" },
+      { id: "chinese_steel", label: "Baosteel (600019.SS)", type: "negative", impact: -6.5, correlation: -0.70, sector: "China Steel", parentId: "x_i" },
+      { id: "shipping_io", label: "Capesize Shipping", type: "positive", impact: 10.0, correlation: 0.78, sector: "Bulk Shipping", parentId: "bhp_i" }
+    ]},
+    { nodes: [
+      { id: "rail_io", label: "FMG Rail Infrastructure", type: "positive", impact: 8.5, correlation: 0.72, sector: "Mining Infrastructure", parentId: "fortescue" },
+      { id: "pellets_io", label: "Iron Ore Pellets", type: "positive", impact: 12.0, correlation: 0.85, sector: "Value-Added Ore", parentId: "champion" },
+      { id: "dri_io", label: "DRI/HBI Production", type: "negative", impact: -5.0, correlation: -0.58, sector: "Direct Reduction", parentId: "chinese_steel" }
+    ]},
+    { nodes: [
+      { id: "construction_io", label: "Chinese Construction", type: "positive", impact: 9.0, correlation: 0.82, sector: "Real Estate", parentId: "chinese_steel" },
+      { id: "auto_io", label: "Auto Steel (BWA)", type: "negative", impact: -4.0, correlation: -0.50, sector: "Automotive", parentId: "nue_i" },
+      { id: "greensteeel", label: "Green Steel (SSAB)", type: "negative", impact: -6.0, correlation: -0.62, sector: "Green Steel", parentId: "dri_io" }
+    ]},
+    { nodes: [
+      { id: "china_stimulus", label: "China Stimulus", type: "positive", impact: 12.0, sector: "Macro", parentId: "vale" },
+      { id: "evergrande_io", label: "China Property Crisis", type: "negative", impact: -10.0, sector: "Macro", parentId: "chinese_steel" },
+      { id: "h2_steel", label: "Hydrogen Steelmaking", type: "negative", impact: -7.0, sector: "Macro", parentId: "greensteeel" }
+    ]}
   ]
 };
 </script>

@@ -15,40 +15,65 @@ Lumber's pandemic surge from $350 to $1,700 per thousand board feet — a 386% e
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-lumber"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "CME:LBS1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-lumber",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "lumber", label: "Lumber +25%", type: "commodity", price: "$650/MBF", change: "+25%" },
-    { id: "wood_etf", label: "WOOD (Timber ETF)", type: "etf", impact: +18.5, correlation: 0.88 },
-    { id: "cut_etf", label: "CUT (Timber ETF)", type: "etf", impact: +16.2, correlation: 0.84 },
-    { id: "wfg", label: "West Fraser Timber (WFG)", type: "positive", impact: +22, correlation: 0.91, sector: "Lumber" },
-    { id: "lpx", label: "LP Building (LPX)", type: "positive", impact: +20, correlation: 0.89, sector: "Building Products" },
-    { id: "weyerhaeuser", label: "Weyerhaeuser (WY)", type: "positive", impact: +16, correlation: 0.85, sector: "Timber REIT" },
-    { id: "potlatch", label: "PotlatchDeltic (PCH)", type: "positive", impact: +14, correlation: 0.82, sector: "Timber REIT" },
-    { id: "dhi_l", label: "D.R. Horton (DHI)", type: "negative", impact: -8, correlation: -0.72, sector: "Homebuilding" },
-    { id: "len_l", label: "Lennar (LEN)", type: "negative", impact: -7, correlation: -0.68, sector: "Homebuilding" },
-    { id: "nvr", label: "NVR Inc (NVR)", type: "negative", impact: -6, correlation: -0.64, sector: "Homebuilding" },
-    { id: "hd", label: "Home Depot (HD)", type: "positive", impact: +4, correlation: 0.52, sector: "Home Improvement" },
-    { id: "low", label: "Lowe's (LOW)", type: "positive", impact: +3, correlation: 0.48, sector: "Home Improvement" },
-    { id: "homebuilding_ind", label: "Homebuilding Industry", type: "negative", impact: -8, sector: "Construction" },
-    { id: "renovation_ind", label: "Home Renovation", type: "positive", impact: +3, sector: "Consumer" },
-  ],
-  links: [
-    { source: "lumber", target: "wood_etf", strength: 0.88 },
-    { source: "lumber", target: "cut_etf", strength: 0.84 },
-    { source: "lumber", target: "wfg", strength: 0.91 },
-    { source: "lumber", target: "lpx", strength: 0.89 },
-    { source: "lumber", target: "weyerhaeuser", strength: 0.85 },
-    { source: "lumber", target: "potlatch", strength: 0.82 },
-    { source: "lumber", target: "dhi_l", strength: 0.72 },
-    { source: "lumber", target: "len_l", strength: 0.68 },
-    { source: "lumber", target: "nvr", strength: 0.64 },
-    { source: "lumber", target: "hd", strength: 0.52 },
-    { source: "lumber", target: "low", strength: 0.48 },
-    { source: "lumber", target: "homebuilding_ind", strength: 0.70 },
-    { source: "lumber", target: "renovation_ind", strength: 0.50 },
+  commodity: { id: "lumber", label: "Lumber ↑15%", price: "$550/MBF", change: "+15%" },
+  levels: [
+    { nodes: [
+      { id: "wood", label: "iPath Lumber (WOOD)", type: "etf", impact: 13.5, correlation: 0.88, marketCap: "1B", sector: "ETF" },
+      { id: "weyerhaeuser", label: "Weyerhaeuser (WY)", type: "positive", impact: 18.5, correlation: 0.92, marketCap: "25B", sector: "Timberland REIT" },
+      { id: "potlatch", label: "PotlatchDeltic (PCH)", type: "positive", impact: 16.0, correlation: 0.89, marketCap: "5B", sector: "Timberland REIT" },
+      { id: "bldr_l", label: "Builders FirstSource (BLDR)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "20B", sector: "Building Materials" },
+      { id: "tol_l", label: "Toll Brothers (TOL)", type: "negative", impact: -5.5, correlation: -0.60, marketCap: "12B", sector: "Homebuilder" }
+    ]},
+    { nodes: [
+      { id: "canfor", label: "Canfor Corp (CFP.TO)", type: "positive", impact: 22.0, correlation: 0.94, sector: "Lumber Producer", parentId: "weyerhaeuser" },
+      { id: "west_fraser", label: "West Fraser (WFG)", type: "positive", impact: 20.0, correlation: 0.92, marketCap: "8B", sector: "Lumber Producer", parentId: "potlatch" },
+      { id: "home_depot_l", label: "Home Depot (HD)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "385B", sector: "Home Improvement", parentId: "bldr_l" },
+      { id: "lennar_l", label: "Lennar Corp (LEN)", type: "negative", impact: -5.0, correlation: -0.58, marketCap: "55B", sector: "Homebuilder", parentId: "tol_l" }
+    ]},
+    { nodes: [
+      { id: "pulp_l", label: "Resolute Forest (RFP)", type: "positive", impact: 12.0, correlation: 0.78, sector: "Pulp & Paper", parentId: "canfor" },
+      { id: "sawmill_equip", label: "TimberPro Equipment", type: "positive", impact: 7.0, correlation: 0.62, sector: "Equipment", parentId: "west_fraser" },
+      { id: "lowes_l", label: "Lowe's (LOW)", type: "negative", impact: -3.5, correlation: -0.48, marketCap: "140B", sector: "Home Improvement", parentId: "home_depot_l" }
+    ]},
+    { nodes: [
+      { id: "homebuilders", label: "DR Horton (DHI)", type: "negative", impact: -6.0, correlation: -0.65, marketCap: "55B", sector: "Homebuilder", parentId: "lennar_l" },
+      { id: "renovation", label: "Renovation Services", type: "negative", impact: -4.0, correlation: -0.52, sector: "Services", parentId: "lowes_l" },
+      { id: "paper_l", label: "International Paper (IP)", type: "positive", impact: 5.5, correlation: 0.58, marketCap: "8B", sector: "Packaging/Paper", parentId: "pulp_l" }
+    ]},
+    { nodes: [
+      { id: "housing_starts", label: "Housing Starts", type: "positive", impact: 12.0, sector: "Macro", parentId: "weyerhaeuser" },
+      { id: "mortgage_l", label: "Mortgage Rates", type: "negative", impact: -8.0, sector: "Macro", parentId: "tol_l" },
+      { id: "bc_wildfires", label: "BC Wildfire/Beetle", type: "positive", impact: 8.0, sector: "Macro", parentId: "canfor" }
+    ]}
   ]
 };
 </script>

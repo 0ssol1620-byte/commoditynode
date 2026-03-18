@@ -15,40 +15,65 @@ Steel is the backbone of the modern economy — and its price movements expose f
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-steel"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "NYSE:X",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-steel",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "steel", label: "Steel +15%", type: "commodity", price: "$850/ton HRC", change: "+15%" },
-    { id: "xme", label: "XME (Metals ETF)", type: "etf", impact: +9.5, correlation: 0.82 },
-    { id: "steel_etf", label: "SLX (Steel ETF)", type: "etf", impact: +12.8, correlation: 0.91 },
-    { id: "nue", label: "Nucor Corp (NUE)", type: "positive", impact: +16, correlation: 0.89, sector: "Steel" },
-    { id: "stld", label: "Steel Dynamics (STLD)", type: "positive", impact: +18, correlation: 0.92, sector: "Steel" },
-    { id: "x", label: "US Steel (X)", type: "positive", impact: +20, correlation: 0.94, sector: "Steel" },
-    { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: +22, correlation: 0.95, sector: "Steel" },
-    { id: "ford", label: "Ford Motor (F)", type: "negative", impact: -5, correlation: -0.58, sector: "Auto" },
-    { id: "gm", label: "General Motors (GM)", type: "negative", impact: -4, correlation: -0.54, sector: "Auto" },
-    { id: "dhr", label: "Homebuilders (DHI)", type: "negative", impact: -6, correlation: -0.65, sector: "Construction" },
-    { id: "len", label: "Lennar (LEN)", type: "negative", impact: -5, correlation: -0.60, sector: "Construction" },
-    { id: "cat", label: "Caterpillar (CAT)", type: "negative", impact: -3, correlation: -0.44, sector: "Heavy Equipment" },
-    { id: "auto_industry", label: "Auto Manufacturing", type: "negative", impact: -5, sector: "Automotive" },
-    { id: "construction_ind", label: "Construction Industry", type: "negative", impact: -6, sector: "Construction" },
-  ],
-  links: [
-    { source: "steel", target: "xme", strength: 0.82 },
-    { source: "steel", target: "steel_etf", strength: 0.91 },
-    { source: "steel", target: "nue", strength: 0.89 },
-    { source: "steel", target: "stld", strength: 0.92 },
-    { source: "steel", target: "x", strength: 0.94 },
-    { source: "steel", target: "clf", strength: 0.95 },
-    { source: "steel", target: "ford", strength: 0.58 },
-    { source: "steel", target: "gm", strength: 0.54 },
-    { source: "steel", target: "dhr", strength: 0.65 },
-    { source: "steel", target: "len", strength: 0.60 },
-    { source: "steel", target: "cat", strength: 0.44 },
-    { source: "steel", target: "auto_industry", strength: 0.56 },
-    { source: "steel", target: "construction_ind", strength: 0.63 },
+  commodity: { id: "steel", label: "Steel ↑8%", price: "$750/ton", change: "+8%" },
+  levels: [
+    { nodes: [
+      { id: "x_us", label: "US Steel (X)", type: "positive", impact: 14.5, correlation: 0.88, marketCap: "7B", sector: "Steel Producer" },
+      { id: "nue", label: "Nucor (NUE)", type: "positive", impact: 12.0, correlation: 0.85, marketCap: "35B", sector: "Steel Producer" },
+      { id: "stld", label: "Steel Dynamics (STLD)", type: "positive", impact: 13.5, correlation: 0.87, marketCap: "18B", sector: "Steel Producer" },
+      { id: "cat_s", label: "Caterpillar (CAT)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "180B", sector: "Heavy Equipment" },
+      { id: "f_s", label: "Ford Motor (F)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "48B", sector: "Automotive" }
+    ]},
+    { nodes: [
+      { id: "ak_steel", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 18.0, correlation: 0.92, marketCap: "8B", sector: "Steel/Iron Ore", parentId: "x_us" },
+      { id: "cms", label: "Commercial Metals (CMC)", type: "positive", impact: 11.0, correlation: 0.82, marketCap: "5B", sector: "Steel Processing", parentId: "nue" },
+      { id: "service_centers", label: "Metals USA", type: "positive", impact: 8.5, correlation: 0.75, sector: "Distribution", parentId: "stld" },
+      { id: "gm_s", label: "General Motors (GM)", type: "negative", impact: -3.5, correlation: -0.44, marketCap: "48B", sector: "Automotive", parentId: "f_s" }
+    ]},
+    { nodes: [
+      { id: "coking_coal", label: "Arch Resources (ARCH)", type: "positive", impact: 10.0, correlation: 0.78, marketCap: "3B", sector: "Coking Coal", parentId: "ak_steel" },
+      { id: "iron_ore_s", label: "Vale SA (VALE)", type: "positive", impact: 9.5, correlation: 0.80, marketCap: "60B", sector: "Iron Ore", parentId: "ak_steel" },
+      { id: "fabricators", label: "Steel Fabricators", type: "positive", impact: 7.0, correlation: 0.65, sector: "Manufacturing", parentId: "service_centers" }
+    ]},
+    { nodes: [
+      { id: "construction_s", label: "Construction Industry", type: "negative", impact: -5.5, correlation: -0.60, sector: "Construction", parentId: "fabricators" },
+      { id: "machinery_s", label: "Machine Makers (DE)", type: "negative", impact: -3.0, correlation: -0.38, sector: "Machinery", parentId: "cat_s" },
+      { id: "auto_s", label: "Auto Parts (BWA)", type: "negative", impact: -4.5, correlation: -0.52, sector: "Auto Parts", parentId: "gm_s" }
+    ]},
+    { nodes: [
+      { id: "china_s", label: "China Demand", type: "positive", impact: 10.0, sector: "Macro", parentId: "x_us" },
+      { id: "tariffs_s", label: "Section 232 Tariffs", type: "positive", impact: 8.0, sector: "Macro", parentId: "nue" },
+      { id: "infra_s", label: "Infrastructure Bill", type: "positive", impact: 6.0, sector: "Macro", parentId: "construction_s" }
+    ]}
   ]
 };
 </script>

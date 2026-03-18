@@ -15,36 +15,67 @@ Gold is the ultimate safe-haven asset — but its price movements create far mor
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-gold"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "COMEX:GC1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-gold",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "gold", label: "Gold +10%", type: "commodity", price: "$2,680", change: "+10%" },
-    { id: "gld", label: "GLD (Gold ETF)", type: "etf", impact: +9.8, correlation: 0.99 },
-    { id: "gdx", label: "GDX (Miners ETF)", type: "etf", impact: +18.5, correlation: 0.87 },
-    { id: "nem", label: "Newmont (NEM)", type: "positive", impact: +20, correlation: 0.85, sector: "Mining" },
-    { id: "gold_stock", label: "Barrick Gold (GOLD)", type: "positive", impact: +18, correlation: 0.83, sector: "Mining" },
-    { id: "agnico", label: "Agnico Eagle (AEM)", type: "positive", impact: +22, correlation: 0.88, sector: "Mining" },
-    { id: "tiffany", label: "Luxury Jewelry", type: "negative", impact: -3, correlation: -0.42, sector: "Retail" },
-    { id: "apple", label: "Electronics (AAPL)", type: "negative", impact: -0.5, correlation: -0.18, sector: "Technology" },
-    { id: "sig", label: "Signet Jewelers (SIG)", type: "negative", impact: -5, correlation: -0.51, sector: "Retail" },
-    { id: "mining_industry", label: "Gold Mining Industry", type: "positive", impact: +19, sector: "Materials" },
-    { id: "jewelry_industry", label: "Jewelry Manufacturing", type: "negative", impact: -4, sector: "Consumer" },
-    { id: "central_banks", label: "Central Bank Reserves", type: "positive", impact: +8, sector: "Finance" },
-  ],
-  links: [
-    { source: "gold", target: "gld", strength: 0.99 },
-    { source: "gold", target: "gdx", strength: 0.87 },
-    { source: "gold", target: "nem", strength: 0.85 },
-    { source: "gold", target: "gold_stock", strength: 0.83 },
-    { source: "gold", target: "agnico", strength: 0.88 },
-    { source: "gold", target: "tiffany", strength: 0.42 },
-    { source: "gold", target: "sig", strength: 0.51 },
-    { source: "gold", target: "apple", strength: 0.18 },
-    { source: "gold", target: "mining_industry", strength: 0.86 },
-    { source: "gold", target: "jewelry_industry", strength: 0.48 },
-    { source: "gold", target: "central_banks", strength: 0.72 },
+  commodity: { id: "gold", label: "Gold ↑8.2%", price: "$2,450/oz", change: "+8.2%" },
+  levels: [
+    { nodes: [
+      { id: "gld", label: "SPDR Gold (GLD)", type: "etf", impact: 7.8, correlation: 0.98, marketCap: "57B", sector: "ETF" },
+      { id: "gdx", label: "VanEck Miners (GDX)", type: "etf", impact: 14.2, correlation: 0.85, marketCap: "12B", sector: "ETF" },
+      { id: "nem", label: "Newmont (NEM)", type: "positive", impact: 18.5, correlation: 0.89, marketCap: "48B", sector: "Gold Mining" },
+      { id: "gold_b", label: "Barrick (GOLD)", type: "positive", impact: 16.2, correlation: 0.87, marketCap: "35B", sector: "Gold Mining" },
+      { id: "agn", label: "Agnico Eagle (AEM)", type: "positive", impact: 15.8, correlation: 0.86, marketCap: "28B", sector: "Gold Mining" },
+      { id: "jpm", label: "JPMorgan (JPM)", type: "negative", impact: -2.1, correlation: -0.31, marketCap: "580B", sector: "Banking" }
+    ]},
+    { nodes: [
+      { id: "royalty", label: "Franco-Nevada (FNV)", type: "positive", impact: 12.3, correlation: 0.78, marketCap: "22B", sector: "Royalty", parentId: "nem" },
+      { id: "wheaton", label: "Wheaton Precious (WPM)", type: "positive", impact: 11.5, correlation: 0.75, marketCap: "21B", sector: "Royalty", parentId: "nem" },
+      { id: "refiners_g", label: "Gold Refiners", type: "positive", impact: 5.2, correlation: 0.65, sector: "Refining", parentId: "gold_b" },
+      { id: "central_banks", label: "Central Banks", type: "positive", impact: 3.1, sector: "Finance", parentId: "gld" }
+    ]},
+    { nodes: [
+      { id: "mining_equip_g", label: "Caterpillar (CAT)", type: "positive", impact: 4.2, correlation: 0.45, marketCap: "180B", sector: "Mining Equipment", parentId: "nem" },
+      { id: "explosion_g", label: "Orica (ORI)", type: "positive", impact: 3.8, correlation: 0.42, sector: "Mining Services", parentId: "gold_b" },
+      { id: "logistics_g", label: "Brinks (BCO)", type: "positive", impact: 2.5, correlation: 0.38, sector: "Logistics", parentId: "refiners_g" }
+    ]},
+    { nodes: [
+      { id: "jewelry_ret", label: "Signet (SIG)", type: "negative", impact: -8.5, correlation: -0.72, marketCap: "3B", sector: "Jewelry Retail", parentId: "refiners_g" },
+      { id: "tiffany", label: "LVMH (MC.PA)", type: "negative", impact: -4.2, correlation: -0.58, sector: "Luxury", parentId: "refiners_g" },
+      { id: "electronics_g", label: "Apple (AAPL)", type: "negative", impact: -1.8, correlation: -0.22, marketCap: "3T", sector: "Electronics", parentId: "refiners_g" },
+      { id: "dental", label: "Dentsply (XRAY)", type: "negative", impact: -3.1, correlation: -0.41, sector: "Medical", parentId: "refiners_g" }
+    ]},
+    { nodes: [
+      { id: "dollar_g", label: "USD Index", type: "negative", impact: -3.2, correlation: -0.78, sector: "Macro", parentId: "central_banks" },
+      { id: "inflation_g", label: "Inflation Hedge", type: "positive", impact: 8.0, sector: "Macro", parentId: "gld" },
+      { id: "geopolitics", label: "Geopolitical Risk", type: "positive", impact: 5.5, sector: "Macro", parentId: "central_banks" }
+    ]}
   ]
 };
 </script>

@@ -15,38 +15,65 @@ Natural gas is the most volatile major commodity — winter cold snaps or supply
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-natural_gas"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "NYMEX:NG1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-natural_gas",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "natgas", label: "Natural Gas +20%", type: "commodity", price: "$3.85/MMBtu", change: "+20%" },
-    { id: "ung", label: "UNG (Nat Gas ETF)", type: "etf", impact: +19.5, correlation: 0.97 },
-    { id: "fcg", label: "FCG (Gas Producers ETF)", type: "etf", impact: +14.8, correlation: 0.88 },
-    { id: "lng", label: "Cheniere Energy (LNG)", type: "positive", impact: +16, correlation: 0.84, sector: "LNG Export" },
-    { id: "eqt", label: "EQT Corp (EQT)", type: "positive", impact: +22, correlation: 0.91, sector: "E&P" },
-    { id: "ar", label: "Antero Resources (AR)", type: "positive", impact: +25, correlation: 0.93, sector: "E&P" },
-    { id: "so", label: "Southern Company (SO)", type: "negative", impact: -6, correlation: -0.68, sector: "Utilities" },
-    { id: "ed", label: "Consolidated Edison (ED)", type: "negative", impact: -5, correlation: -0.63, sector: "Utilities" },
-    { id: "cf", label: "CF Industries (CF)", type: "negative", impact: -8, correlation: -0.72, sector: "Fertilizers" },
-    { id: "lyx", label: "LyondellBasell (LYB)", type: "negative", impact: -6, correlation: -0.65, sector: "Chemicals" },
-    { id: "utilities_ind", label: "Utilities Industry", type: "negative", impact: -5.5, sector: "Utilities" },
-    { id: "chemicals_ind", label: "Chemical Industry", type: "negative", impact: -7, sector: "Materials" },
-    { id: "lng_export", label: "LNG Export Terminals", type: "positive", impact: +15, sector: "Energy" },
-  ],
-  links: [
-    { source: "natgas", target: "ung", strength: 0.97 },
-    { source: "natgas", target: "fcg", strength: 0.88 },
-    { source: "natgas", target: "lng", strength: 0.84 },
-    { source: "natgas", target: "eqt", strength: 0.91 },
-    { source: "natgas", target: "ar", strength: 0.93 },
-    { source: "natgas", target: "so", strength: 0.68 },
-    { source: "natgas", target: "ed", strength: 0.63 },
-    { source: "natgas", target: "cf", strength: 0.72 },
-    { source: "natgas", target: "lyx", strength: 0.65 },
-    { source: "natgas", target: "utilities_ind", strength: 0.66 },
-    { source: "natgas", target: "chemicals_ind", strength: 0.68 },
-    { source: "natgas", target: "lng_export", strength: 0.82 },
+  commodity: { id: "natgas", label: "Nat Gas ↑15%", price: "$3.20/MMBtu", change: "+15%" },
+  levels: [
+    { nodes: [
+      { id: "ung", label: "UNG Gas ETF", type: "etf", impact: 14.5, correlation: 0.96, marketCap: "1.5B", sector: "ETF" },
+      { id: "eqt", label: "EQT Corp (EQT)", type: "positive", impact: 18.0, correlation: 0.88, marketCap: "20B", sector: "Gas Production" },
+      { id: "rrc", label: "Range Resources (RRC)", type: "positive", impact: 20.0, correlation: 0.91, marketCap: "7B", sector: "Gas Production" },
+      { id: "chk", label: "Chesapeake Energy (CHK)", type: "positive", impact: 22.0, correlation: 0.89, marketCap: "10B", sector: "Gas Production" },
+      { id: "duke", label: "Duke Energy (DUK)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "78B", sector: "Utilities" }
+    ]},
+    { nodes: [
+      { id: "kinder", label: "Kinder Morgan (KMI)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "22B", sector: "Pipelines", parentId: "eqt" },
+      { id: "williams", label: "Williams Companies (WMB)", type: "positive", impact: 9.0, correlation: 0.75, marketCap: "50B", sector: "Pipelines", parentId: "rrc" },
+      { id: "cheniere", label: "Cheniere Energy (LNG)", type: "positive", impact: 12.5, correlation: 0.82, marketCap: "40B", sector: "LNG Export", parentId: "chk" },
+      { id: "sempra", label: "Sempra Energy (SRE)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "48B", sector: "Utilities", parentId: "duke" }
+    ]},
+    { nodes: [
+      { id: "lng_export", label: "LNG Tankers (GLNG)", type: "positive", impact: 7.5, correlation: 0.68, sector: "Shipping", parentId: "cheniere" },
+      { id: "compressors", label: "Archrock (AROC)", type: "positive", impact: 5.5, correlation: 0.62, marketCap: "3B", sector: "Compression Services", parentId: "kinder" },
+      { id: "fertilizer", label: "CF Industries (CF)", type: "negative", impact: -12.0, correlation: -0.85, marketCap: "15B", sector: "Fertilizers", parentId: "williams" }
+    ]},
+    { nodes: [
+      { id: "steel_ng", label: "Steel Industry", type: "negative", impact: -4.5, correlation: -0.55, sector: "Industrials", parentId: "fertilizer" },
+      { id: "chemical_ng", label: "BASF SE (BASFY)", type: "negative", impact: -8.0, correlation: -0.72, sector: "Chemicals", parentId: "fertilizer" },
+      { id: "glass_ng", label: "Owens Corning (OC)", type: "negative", impact: -3.5, correlation: -0.45, marketCap: "9B", sector: "Building Materials", parentId: "sempra" }
+    ]},
+    { nodes: [
+      { id: "winter_ng", label: "Winter Demand Spike", type: "positive", impact: 15.0, sector: "Macro", parentId: "eqt" },
+      { id: "europe_ng", label: "Europe Gas Crisis", type: "positive", impact: 8.0, sector: "Macro", parentId: "cheniere" },
+      { id: "renewable_ng", label: "Renewables Substitution", type: "negative", impact: -5.0, sector: "Macro", parentId: "duke" }
+    ]}
   ]
 };
 </script>

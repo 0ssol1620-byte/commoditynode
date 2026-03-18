@@ -15,36 +15,65 @@ Economists call copper "Dr. Copper" because it has a PhD in predicting economic 
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-copper"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "COMEX:HG1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-copper",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "copper", label: "Copper +10%", type: "commodity", price: "$4.52/lb", change: "+10%" },
-    { id: "copx", label: "COPX (Copper ETF)", type: "etf", impact: +14.2, correlation: 0.91 },
-    { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: +18, correlation: 0.93, sector: "Mining" },
-    { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: +16, correlation: 0.89, sector: "Mining" },
-    { id: "bhp_cu", label: "BHP Group (BHP)", type: "positive", impact: +8, correlation: 0.74, sector: "Mining" },
-    { id: "tsla", label: "Tesla (TSLA)", type: "negative", impact: -3, correlation: -0.38, sector: "EV" },
-    { id: "construction", label: "Construction Industry", type: "negative", impact: -4, correlation: -0.52, sector: "Construction" },
-    { id: "wiring", label: "Electrical Wiring", type: "negative", impact: -5, correlation: -0.58, sector: "Electrical" },
-    { id: "bld", label: "Builders FirstSource (BLDR)", type: "negative", impact: -3, correlation: -0.44, sector: "Construction" },
-    { id: "ev_batteries", label: "EV Battery Makers", type: "negative", impact: -4, correlation: -0.45, sector: "Technology" },
-    { id: "copper_mining", label: "Copper Mining Industry", type: "positive", impact: +16, sector: "Materials" },
-    { id: "renewables_cu", label: "Solar/Wind Infrastructure", type: "negative", impact: -3, sector: "Energy" },
-  ],
-  links: [
-    { source: "copper", target: "copx", strength: 0.91 },
-    { source: "copper", target: "fcx", strength: 0.93 },
-    { source: "copper", target: "scco", strength: 0.89 },
-    { source: "copper", target: "bhp_cu", strength: 0.74 },
-    { source: "copper", target: "tsla", strength: 0.38 },
-    { source: "copper", target: "construction", strength: 0.52 },
-    { source: "copper", target: "wiring", strength: 0.58 },
-    { source: "copper", target: "bld", strength: 0.44 },
-    { source: "copper", target: "ev_batteries", strength: 0.45 },
-    { source: "copper", target: "copper_mining", strength: 0.92 },
-    { source: "copper", target: "renewables_cu", strength: 0.42 },
+  commodity: { id: "copper", label: "Copper ↑10%", price: "$4.52/lb", change: "+10%" },
+  levels: [
+    { nodes: [
+      { id: "copx", label: "COPX ETF", type: "etf", impact: 14.2, correlation: 0.91, marketCap: "2B", sector: "ETF" },
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 18.0, correlation: 0.93, marketCap: "62B", sector: "Copper Mining" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: 16.0, correlation: 0.89, marketCap: "55B", sector: "Copper Mining" },
+      { id: "bhp_c", label: "BHP Group (BHP)", type: "positive", impact: 8.0, correlation: 0.74, marketCap: "145B", sector: "Diversified Mining" },
+      { id: "tsla_c", label: "Tesla (TSLA)", type: "negative", impact: -3.0, correlation: -0.38, marketCap: "700B", sector: "EV" }
+    ]},
+    { nodes: [
+      { id: "glencore", label: "Glencore (GLEN.L)", type: "positive", impact: 12.0, correlation: 0.82, marketCap: "68B", sector: "Trading/Mining", parentId: "fcx" },
+      { id: "antofagasta", label: "Antofagasta (ANTO.L)", type: "positive", impact: 14.0, correlation: 0.88, marketCap: "22B", sector: "Copper Mining", parentId: "scco" },
+      { id: "phelps", label: "Copper Smelters", type: "positive", impact: 7.0, correlation: 0.68, sector: "Smelting", parentId: "fcx" },
+      { id: "cat_c", label: "Caterpillar (CAT)", type: "positive", impact: 5.0, correlation: 0.55, marketCap: "180B", sector: "Mining Equipment", parentId: "bhp_c" }
+    ]},
+    { nodes: [
+      { id: "wire_makers", label: "Encore Wire (WIRE)", type: "negative", impact: -8.0, correlation: -0.75, marketCap: "3B", sector: "Wire Manufacturing", parentId: "phelps" },
+      { id: "bldr_c", label: "Builders FirstSource (BLDR)", type: "negative", impact: -3.0, correlation: -0.44, marketCap: "20B", sector: "Construction", parentId: "phelps" },
+      { id: "nextracker", label: "Nextracker (NXT)", type: "negative", impact: -5.0, correlation: -0.58, marketCap: "7B", sector: "Solar Equipment", parentId: "glencore" }
+    ]},
+    { nodes: [
+      { id: "ev_bat", label: "EV Battery Makers", type: "negative", impact: -4.0, correlation: -0.45, sector: "Technology", parentId: "tsla_c" },
+      { id: "construction_c", label: "Construction Industry", type: "negative", impact: -4.0, correlation: -0.52, sector: "Construction", parentId: "bldr_c" },
+      { id: "honeywell", label: "Honeywell (HON)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "135B", sector: "Industrial", parentId: "wire_makers" }
+    ]},
+    { nodes: [
+      { id: "china_gdp", label: "China GDP Growth", type: "positive", impact: 9.0, correlation: 0.82, sector: "Macro", parentId: "fcx" },
+      { id: "green_infra", label: "Green Infrastructure", type: "positive", impact: 6.5, sector: "Macro", parentId: "nextracker" },
+      { id: "usd_c", label: "USD Index", type: "negative", impact: -3.0, correlation: -0.65, sector: "Macro", parentId: "glencore" }
+    ]}
   ]
 };
 </script>

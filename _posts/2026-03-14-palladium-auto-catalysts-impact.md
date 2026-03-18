@@ -15,38 +15,65 @@ Palladium is the most critical commodity most investors have never heard of. It'
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-palladium"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "COMEX:PA1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-palladium",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "palladium", label: "Palladium +20%", type: "commodity", price: "$1,050/oz", change: "+20%" },
-    { id: "pall", label: "PALL (Palladium ETF)", type: "etf", impact: +19.5, correlation: 0.98 },
-    { id: "pplt", label: "PPLT (Platinum ETF)", type: "etf", impact: +8.2, correlation: 0.72 },
-    { id: "sibanye", label: "Sibanye Stillwater (SBSW)", type: "positive", impact: +22, correlation: 0.88, sector: "PGM Mining" },
-    { id: "implats", label: "Impala Platinum (IMPUY)", type: "positive", impact: +18, correlation: 0.82, sector: "PGM Mining" },
-    { id: "norilsk", label: "Norilsk Nickel (GMKN)", type: "positive", impact: +24, correlation: 0.91, sector: "PGM Mining" },
-    { id: "ford_pd", label: "Ford Motor (F)", type: "negative", impact: -5, correlation: -0.58, sector: "Auto" },
-    { id: "toyota", label: "Toyota Motor (TM)", type: "negative", impact: -4, correlation: -0.52, sector: "Auto" },
-    { id: "gm_pd", label: "General Motors (GM)", type: "negative", impact: -4, correlation: -0.54, sector: "Auto" },
-    { id: "basf", label: "BASF (BASFY)", type: "negative", impact: -3, correlation: -0.44, sector: "Chemicals" },
-    { id: "umicore", label: "Umicore (UMICF)", type: "negative", impact: -5, correlation: -0.62, sector: "Catalyst Tech" },
-    { id: "auto_catalyst", label: "Auto Catalyst Industry", type: "negative", impact: -5, sector: "Chemicals" },
-    { id: "ev_transition", label: "EV Makers (long-term)", type: "positive", impact: +2, sector: "Automotive" },
-  ],
-  links: [
-    { source: "palladium", target: "pall", strength: 0.98 },
-    { source: "palladium", target: "pplt", strength: 0.72 },
-    { source: "palladium", target: "sibanye", strength: 0.88 },
-    { source: "palladium", target: "implats", strength: 0.82 },
-    { source: "palladium", target: "norilsk", strength: 0.91 },
-    { source: "palladium", target: "ford_pd", strength: 0.58 },
-    { source: "palladium", target: "toyota", strength: 0.52 },
-    { source: "palladium", target: "gm_pd", strength: 0.54 },
-    { source: "palladium", target: "basf", strength: 0.44 },
-    { source: "palladium", target: "umicore", strength: 0.62 },
-    { source: "palladium", target: "auto_catalyst", strength: 0.65 },
-    { source: "palladium", target: "ev_transition", strength: 0.30 },
+  commodity: { id: "palladium", label: "Palladium ↑10%", price: "$950/oz", change: "+10%" },
+  levels: [
+    { nodes: [
+      { id: "pall", label: "abrdn Palladium (PALL)", type: "etf", impact: 9.5, correlation: 0.96, marketCap: "0.5B", sector: "ETF" },
+      { id: "sibanye", label: "Sibanye-Stillwater (SBSW)", type: "positive", impact: 18.0, correlation: 0.88, marketCap: "5B", sector: "PGM Mining" },
+      { id: "impala", label: "Impala Platinum (IMPUY)", type: "positive", impact: 15.0, correlation: 0.84, marketCap: "8B", sector: "PGM Mining" },
+      { id: "toyota_p", label: "Toyota Motor (TM)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "280B", sector: "Automotive" },
+      { id: "vw_p", label: "Volkswagen (VOW.DE)", type: "negative", impact: -4.0, correlation: -0.50, marketCap: "80B", sector: "Automotive" }
+    ]},
+    { nodes: [
+      { id: "norilsk", label: "Nornickel (MNOD.ME)", type: "positive", impact: 22.0, correlation: 0.92, sector: "PGM/Nickel Mining", parentId: "sibanye" },
+      { id: "lonmin_p", label: "Anglo American Platinum", type: "positive", impact: 16.0, correlation: 0.86, sector: "PGM Mining", parentId: "impala" },
+      { id: "cat_converters", label: "BASF Catalysts", type: "negative", impact: -8.5, correlation: -0.75, sector: "Catalysts", parentId: "toyota_p" },
+      { id: "umicore", label: "Umicore (UMI.BR)", type: "negative", impact: -6.5, correlation: -0.68, sector: "Auto Catalysts", parentId: "vw_p" }
+    ]},
+    { nodes: [
+      { id: "russia_supply", label: "Russian Supply Risk", type: "positive", impact: 15.0, correlation: 0.85, sector: "Geopolitics", parentId: "norilsk" },
+      { id: "recyclers_p", label: "PGM Recyclers", type: "positive", impact: 8.0, correlation: 0.65, sector: "Recycling", parentId: "lonmin_p" },
+      { id: "emission_equip", label: "Emissions Equipment", type: "negative", impact: -9.0, correlation: -0.80, sector: "Auto Components", parentId: "cat_converters" }
+    ]},
+    { nodes: [
+      { id: "honda_p", label: "Honda Motor (HMC)", type: "negative", impact: -4.0, correlation: -0.52, marketCap: "60B", sector: "Automotive", parentId: "toyota_p" },
+      { id: "ford_p", label: "Ford Motor (F)", type: "negative", impact: -3.5, correlation: -0.48, marketCap: "48B", sector: "Automotive", parentId: "vw_p" },
+      { id: "dentistry_p", label: "Dental Alloys Industry", type: "negative", impact: -3.0, correlation: -0.38, sector: "Medical", parentId: "umicore" }
+    ]},
+    { nodes: [
+      { id: "ev_shift_p", label: "BEV vs ICE Shift", type: "negative", impact: -12.0, sector: "Macro", parentId: "toyota_p" },
+      { id: "emission_regs", label: "Euro 7 Regulations", type: "positive", impact: 8.0, sector: "Macro", parentId: "cat_converters" },
+      { id: "south_africa_p", label: "SA Power Outages", type: "positive", impact: 6.0, sector: "Macro", parentId: "sibanye" }
+    ]}
   ]
 };
 </script>

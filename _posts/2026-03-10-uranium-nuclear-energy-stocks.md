@@ -15,38 +15,65 @@ Uranium has undergone one of the most dramatic commodity revivals in history —
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-uranium"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "NYSE:CCJ",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-uranium",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "uranium", label: "Uranium +25%", type: "commodity", price: "$92/lb U3O8", change: "+25%" },
-    { id: "ura", label: "URA (Uranium ETF)", type: "etf", impact: +28.5, correlation: 0.91 },
-    { id: "urnm", label: "URNM (Miners ETF)", type: "etf", impact: +32.0, correlation: 0.94 },
-    { id: "ccj", label: "Cameco (CCJ)", type: "positive", impact: +30, correlation: 0.92, sector: "Uranium Mining" },
-    { id: "nxe", label: "NexGen Energy (NXE)", type: "positive", impact: +38, correlation: 0.95, sector: "Uranium Mining" },
-    { id: "dnn", label: "Denison Mines (DNN)", type: "positive", impact: +42, correlation: 0.96, sector: "Uranium Mining" },
-    { id: "pfe_u", label: "Paladin Energy (PDN)", type: "positive", impact: +35, correlation: 0.93, sector: "Uranium Mining" },
-    { id: "nee", label: "NextEra Energy (NEE)", type: "positive", impact: +4, correlation: 0.42, sector: "Nuclear Utility" },
-    { id: "exelon", label: "Exelon (EXC)", type: "positive", impact: +6, correlation: 0.54, sector: "Nuclear Utility" },
-    { id: "constellation", label: "Constellation (CEG)", type: "positive", impact: +8, correlation: 0.61, sector: "Nuclear Utility" },
-    { id: "uranium_mining", label: "Uranium Mining Industry", type: "positive", impact: +34, sector: "Energy" },
-    { id: "nuclear_utilities", label: "Nuclear Utilities", type: "positive", impact: +6, sector: "Utilities" },
-    { id: "smr_developers", label: "SMR Developers", type: "positive", impact: +15, sector: "Technology" },
-  ],
-  links: [
-    { source: "uranium", target: "ura", strength: 0.91 },
-    { source: "uranium", target: "urnm", strength: 0.94 },
-    { source: "uranium", target: "ccj", strength: 0.92 },
-    { source: "uranium", target: "nxe", strength: 0.95 },
-    { source: "uranium", target: "dnn", strength: 0.96 },
-    { source: "uranium", target: "pfe_u", strength: 0.93 },
-    { source: "uranium", target: "nee", strength: 0.42 },
-    { source: "uranium", target: "exelon", strength: 0.54 },
-    { source: "uranium", target: "constellation", strength: 0.61 },
-    { source: "uranium", target: "uranium_mining", strength: 0.93 },
-    { source: "uranium", target: "nuclear_utilities", strength: 0.55 },
-    { source: "uranium", target: "smr_developers", strength: 0.70 },
+  commodity: { id: "uranium", label: "Uranium ↑25%", price: "$90/lb U3O8", change: "+25%" },
+  levels: [
+    { nodes: [
+      { id: "ura", label: "Global X Uranium (URA)", type: "etf", impact: 22.0, correlation: 0.88, marketCap: "4B", sector: "ETF" },
+      { id: "ccj", label: "Cameco (CCJ)", type: "positive", impact: 35.0, correlation: 0.94, marketCap: "22B", sector: "Uranium Mining" },
+      { id: "nxe", label: "NexGen Energy (NXE)", type: "positive", impact: 40.0, correlation: 0.92, marketCap: "5B", sector: "Uranium Mining" },
+      { id: "nee", label: "NextEra Energy (NEE)", type: "positive", impact: 3.5, correlation: 0.38, marketCap: "148B", sector: "Nuclear/Renewables" },
+      { id: "sre_u", label: "Sempra (SRE)", type: "negative", impact: -1.5, correlation: -0.22, marketCap: "48B", sector: "Utilities" }
+    ]},
+    { nodes: [
+      { id: "kazatom", label: "Kazatomprom (KAP.L)", type: "positive", impact: 38.0, correlation: 0.95, sector: "State Uranium", parentId: "ccj" },
+      { id: "denison", label: "Denison Mines (DNN)", type: "positive", impact: 42.0, correlation: 0.91, sector: "Uranium Mining", parentId: "nxe" },
+      { id: "enrichment", label: "Centrus Energy (LEU)", type: "positive", impact: 28.0, correlation: 0.85, marketCap: "1B", sector: "Uranium Enrichment", parentId: "ccj" },
+      { id: "bwx_u", label: "BWX Technologies (BWXT)", type: "positive", impact: 12.0, correlation: 0.72, marketCap: "7B", sector: "Nuclear Services", parentId: "nee" }
+    ]},
+    { nodes: [
+      { id: "fuel_fab", label: "Nuclear Fuel Fabrication", type: "positive", impact: 15.0, correlation: 0.78, sector: "Nuclear Fuel", parentId: "enrichment" },
+      { id: "reactor_build", label: "NuScale Power (SMR)", type: "positive", impact: 18.0, correlation: 0.75, sector: "Small Modular Reactors", parentId: "bwx_u" },
+      { id: "waste_mgmt", label: "Waste Management Nuclear", type: "positive", impact: 8.0, correlation: 0.62, sector: "Nuclear Services", parentId: "denison" }
+    ]},
+    { nodes: [
+      { id: "utilities_u", label: "Nuclear Utilities (ETR)", type: "positive", impact: 5.0, correlation: 0.55, sector: "Utilities", parentId: "fuel_fab" },
+      { id: "grid_u", label: "Grid Operators", type: "positive", impact: 3.5, correlation: 0.42, sector: "Grid", parentId: "reactor_build" },
+      { id: "coal_replace", label: "Coal Plants (closing)", type: "negative", impact: -8.0, correlation: -0.65, sector: "Coal", parentId: "utilities_u" }
+    ]},
+    { nodes: [
+      { id: "ai_power", label: "AI Data Center Power", type: "positive", impact: 15.0, sector: "Macro", parentId: "nee" },
+      { id: "net_zero", label: "Net Zero 2050 Policy", type: "positive", impact: 12.0, sector: "Macro", parentId: "ura" },
+      { id: "fukushima", label: "Safety Regulation Risk", type: "negative", impact: -8.0, sector: "Macro", parentId: "ccj" }
+    ]}
   ]
 };
 </script>

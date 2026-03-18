@@ -15,38 +15,70 @@ Crude oil prices have surged 15% this quarter, sending shockwaves through global
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-crude_oil"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "NYMEX:CL1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-crude_oil",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "oil", label: "Crude Oil ↑15%", type: "commodity" },
-    { id: "airlines", label: "Airlines", type: "negative", impact: -12 },
-    { id: "refiners", label: "Refiners", type: "positive", impact: +8 },
-    { id: "logistics", label: "Logistics", type: "negative", impact: -6 },
-    { id: "ev", label: "EV Makers", type: "positive", impact: +15 },
-    { id: "plastics", label: "Plastics", type: "negative", impact: -4 },
-    { id: "renewables", label: "Renewables", type: "positive", impact: +10 },
-    { id: "chemicals", label: "Chemicals", type: "negative", impact: -7 },
-    { id: "shipping", label: "Shipping", type: "negative", impact: -5 },
-    { id: "oilfield", label: "Oilfield Services", type: "positive", impact: +18 },
-    { id: "consumer", label: "Consumer Staples", type: "negative", impact: -3 },
-    { id: "defense", label: "Defense", type: "positive", impact: +6 },
-    { id: "utilities", label: "Utilities", type: "negative", impact: -4 },
-  ],
-  links: [
-    { source: "oil", target: "airlines" },
-    { source: "oil", target: "refiners" },
-    { source: "oil", target: "logistics" },
-    { source: "oil", target: "ev" },
-    { source: "oil", target: "plastics" },
-    { source: "oil", target: "renewables" },
-    { source: "oil", target: "chemicals" },
-    { source: "oil", target: "shipping" },
-    { source: "oil", target: "oilfield" },
-    { source: "oil", target: "consumer" },
-    { source: "oil", target: "defense" },
-    { source: "oil", target: "utilities" },
+  commodity: { id: "crude_oil", label: "Crude Oil ↑10%", price: "$85/bbl", change: "+10%" },
+  levels: [
+    { nodes: [
+      { id: "xle", label: "XLE Energy ETF", type: "etf", impact: 8.2, correlation: 0.92, marketCap: "36B", sector: "ETF" },
+      { id: "xom", label: "ExxonMobil (XOM)", type: "positive", impact: 9.0, correlation: 0.89, marketCap: "512B", sector: "Oil Major" },
+      { id: "cvx", label: "Chevron (CVX)", type: "positive", impact: 8.0, correlation: 0.87, marketCap: "298B", sector: "Oil Major" },
+      { id: "jets", label: "JETS Airlines ETF", type: "etf", impact: -7.1, correlation: -0.81, marketCap: "2B", sector: "ETF" },
+      { id: "aal", label: "American Airlines (AAL)", type: "negative", impact: -11.0, correlation: -0.79, marketCap: "9B", sector: "Airlines" },
+      { id: "dal", label: "Delta Air Lines (DAL)", type: "negative", impact: -9.0, correlation: -0.76, marketCap: "25B", sector: "Airlines" }
+    ]},
+    { nodes: [
+      { id: "hal", label: "Halliburton (HAL)", type: "positive", impact: 14.0, correlation: 0.91, marketCap: "32B", sector: "Oilfield Services", parentId: "xom" },
+      { id: "slb", label: "SLB (SLB)", type: "positive", impact: 12.0, correlation: 0.88, marketCap: "65B", sector: "Oilfield Services", parentId: "cvx" },
+      { id: "psx", label: "Phillips 66 (PSX)", type: "positive", impact: 4.5, correlation: 0.62, marketCap: "52B", sector: "Refining", parentId: "xom" },
+      { id: "mpc", label: "Marathon Pete (MPC)", type: "positive", impact: 5.2, correlation: 0.66, marketCap: "60B", sector: "Refining", parentId: "cvx" },
+      { id: "ups", label: "UPS (UPS)", type: "negative", impact: -4.0, correlation: -0.62, marketCap: "110B", sector: "Logistics", parentId: "jets" }
+    ]},
+    { nodes: [
+      { id: "bhp_o", label: "BHP Group (BHP)", type: "positive", impact: 5.5, correlation: 0.58, marketCap: "145B", sector: "Diversified Mining", parentId: "hal" },
+      { id: "drilling", label: "Patterson-UTI (PTEN)", type: "positive", impact: 11.0, correlation: 0.85, marketCap: "4B", sector: "Contract Drilling", parentId: "slb" },
+      { id: "pipeline", label: "Kinder Morgan (KMI)", type: "positive", impact: 3.2, correlation: 0.48, marketCap: "22B", sector: "Pipelines", parentId: "psx" },
+      { id: "chemicals", label: "LyondellBasell (LYB)", type: "negative", impact: -5.0, correlation: -0.55, marketCap: "28B", sector: "Chemicals", parentId: "mpc" }
+    ]},
+    { nodes: [
+      { id: "auto", label: "Ford Motor (F)", type: "negative", impact: -2.0, correlation: -0.32, marketCap: "48B", sector: "Automotive", parentId: "ups" },
+      { id: "trucking", label: "Werner Enterprises (WERN)", type: "negative", impact: -6.0, correlation: -0.68, marketCap: "3B", sector: "Trucking", parentId: "ups" },
+      { id: "plastics", label: "Dow Inc (DOW)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "40B", sector: "Plastics", parentId: "chemicals" },
+      { id: "tankers", label: "Frontline (FRO)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "6B", sector: "Oil Tankers", parentId: "pipeline" }
+    ]},
+    { nodes: [
+      { id: "inflation_o", label: "CPI Inflation", type: "negative", impact: -2.5, sector: "Macro", parentId: "auto" },
+      { id: "opec", label: "OPEC+ Supply", type: "positive", impact: 7.0, sector: "Macro", parentId: "xom" },
+      { id: "usd_o", label: "USD Strength", type: "negative", impact: -3.5, correlation: -0.62, sector: "Macro", parentId: "pipeline" },
+      { id: "consumer_o", label: "Consumer Spending", type: "negative", impact: -1.8, sector: "Macro", parentId: "trucking" }
+    ]}
   ]
 };
 </script>

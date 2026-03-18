@@ -15,38 +15,65 @@ Silver occupies a unique position in commodity markets — it's simultaneously a
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-silver"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "COMEX:SI1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-silver",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "silver", label: "Silver +15%", type: "commodity", price: "$31.50/oz", change: "+15%" },
-    { id: "slv", label: "SLV (Silver ETF)", type: "etf", impact: +14.8, correlation: 0.99 },
-    { id: "pslv", label: "PSLV (Physical Silver)", type: "etf", impact: +14.9, correlation: 0.99 },
-    { id: "panamerican", label: "Pan American Silver (PAAS)", type: "positive", impact: +22, correlation: 0.87, sector: "Mining" },
-    { id: "first_majestic", label: "First Majestic (AG)", type: "positive", impact: +28, correlation: 0.91, sector: "Mining" },
-    { id: "wheaton", label: "Wheaton Precious (WPM)", type: "positive", impact: +18, correlation: 0.85, sector: "Royalties" },
-    { id: "first_solar", label: "First Solar (FSLR)", type: "negative", impact: -4, correlation: -0.48, sector: "Solar" },
-    { id: "enphase", label: "Enphase Energy (ENPH)", type: "negative", impact: -3, correlation: -0.41, sector: "Solar" },
-    { id: "electronics_ind", label: "Electronics Industry", type: "negative", impact: -2, correlation: -0.32, sector: "Technology" },
-    { id: "photography", label: "Photography/Film", type: "negative", impact: -3, correlation: -0.38, sector: "Consumer" },
-    { id: "solar_industry", label: "Solar Panel Industry", type: "negative", impact: -4, sector: "Energy" },
-    { id: "silver_mining", label: "Silver Mining Industry", type: "positive", impact: +23, sector: "Materials" },
-    { id: "jewelry_ag", label: "Silver Jewelry", type: "positive", impact: +5, sector: "Consumer" },
-  ],
-  links: [
-    { source: "silver", target: "slv", strength: 0.99 },
-    { source: "silver", target: "pslv", strength: 0.99 },
-    { source: "silver", target: "panamerican", strength: 0.87 },
-    { source: "silver", target: "first_majestic", strength: 0.91 },
-    { source: "silver", target: "wheaton", strength: 0.85 },
-    { source: "silver", target: "first_solar", strength: 0.48 },
-    { source: "silver", target: "enphase", strength: 0.41 },
-    { source: "silver", target: "electronics_ind", strength: 0.32 },
-    { source: "silver", target: "photography", strength: 0.38 },
-    { source: "silver", target: "solar_industry", strength: 0.46 },
-    { source: "silver", target: "silver_mining", strength: 0.90 },
-    { source: "silver", target: "jewelry_ag", strength: 0.62 },
+  commodity: { id: "silver", label: "Silver ↑12%", price: "$28/oz", change: "+12%" },
+  levels: [
+    { nodes: [
+      { id: "slv", label: "iShares Silver (SLV)", type: "etf", impact: 11.8, correlation: 0.97, marketCap: "12B", sector: "ETF" },
+      { id: "silj", label: "ETFMG Silver Miners", type: "etf", impact: 20.5, correlation: 0.82, marketCap: "0.5B", sector: "ETF" },
+      { id: "paas", label: "Pan American Silver (PAAS)", type: "positive", impact: 22.0, correlation: 0.88, marketCap: "8B", sector: "Silver Mining" },
+      { id: "hl", label: "Hecla Mining (HL)", type: "positive", impact: 25.0, correlation: 0.86, marketCap: "4B", sector: "Silver Mining" },
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "25B", sector: "Solar" }
+    ]},
+    { nodes: [
+      { id: "fresnillo", label: "Fresnillo (FRES.L)", type: "positive", impact: 20.0, correlation: 0.85, sector: "Silver/Gold Mining", parentId: "paas" },
+      { id: "mag_s", label: "MAG Silver (MAG)", type: "positive", impact: 28.0, correlation: 0.91, sector: "Silver Mining", parentId: "hl" },
+      { id: "first_majestic", label: "First Majestic (AG)", type: "positive", impact: 30.0, correlation: 0.92, sector: "Silver Mining", parentId: "paas" },
+      { id: "solar_mfg", label: "First Solar (FSLR)", type: "negative", impact: -3.8, correlation: -0.45, marketCap: "20B", sector: "Solar Panels", parentId: "enph" }
+    ]},
+    { nodes: [
+      { id: "silver_refine", label: "Silver Refiners", type: "positive", impact: 8.5, correlation: 0.72, sector: "Refining", parentId: "fresnillo" },
+      { id: "photovoltaic", label: "Solar Cell Makers", type: "negative", impact: -5.5, correlation: -0.60, sector: "Technology", parentId: "solar_mfg" },
+      { id: "electronics_s", label: "Electronics Components", type: "negative", impact: -2.0, correlation: -0.28, sector: "Technology", parentId: "mag_s" }
+    ]},
+    { nodes: [
+      { id: "jewelry_s", label: "Tiffany/LVMH", type: "negative", impact: -3.5, correlation: -0.42, sector: "Luxury", parentId: "silver_refine" },
+      { id: "photographic", label: "Kodak (KODK)", type: "negative", impact: -6.0, correlation: -0.62, sector: "Photography", parentId: "electronics_s" },
+      { id: "medical_s", label: "Medical Device Cos", type: "negative", impact: -2.5, correlation: -0.32, sector: "Medical", parentId: "electronics_s" }
+    ]},
+    { nodes: [
+      { id: "solar_demand_s", label: "Solar Boom", type: "positive", impact: 10.0, sector: "Macro", parentId: "enph" },
+      { id: "gold_ratio", label: "Gold/Silver Ratio", type: "positive", impact: 8.0, sector: "Macro", parentId: "slv" },
+      { id: "industrial_s", label: "Industrial Demand", type: "positive", impact: 7.0, sector: "Macro", parentId: "paas" }
+    ]}
   ]
 };
 </script>

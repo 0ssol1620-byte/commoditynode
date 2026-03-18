@@ -1421,4 +1421,21 @@ hr {
 
 @media (max-width: 600px) {
   .price-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+/* ── TradingView Chart Container ── */
+.chart-container {
+  margin: 2rem 0;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+.chart-container h3 {
+  margin-bottom: 1rem;
+  color: var(--accent);
+}
+.tradingview-widget-container {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 400px;
 }

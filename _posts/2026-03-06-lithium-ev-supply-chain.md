@@ -15,38 +15,65 @@ Lithium is the defining commodity of the EV revolution. Its price went from $6,0
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-lithium"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "NASDAQ:LTHM",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-lithium",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "lithium", label: "Lithium +30%", type: "commodity", price: "$16,500/ton", change: "+30%" },
-    { id: "batt", label: "BATT (Battery ETF)", type: "etf", impact: +8.5, correlation: 0.72 },
-    { id: "lit", label: "LIT (Lithium ETF)", type: "etf", impact: +22.0, correlation: 0.88 },
-    { id: "alb", label: "Albemarle (ALB)", type: "positive", impact: +28, correlation: 0.91, sector: "Lithium Mining" },
-    { id: "sqm", label: "SQM (SQM)", type: "positive", impact: +25, correlation: 0.88, sector: "Lithium Mining" },
-    { id: "lthm", label: "Livent (LTHM)", type: "positive", impact: +32, correlation: 0.93, sector: "Lithium Mining" },
-    { id: "tsla_li", label: "Tesla (TSLA)", type: "negative", impact: -5, correlation: -0.52, sector: "EV" },
-    { id: "rivian", label: "Rivian (RIVN)", type: "negative", impact: -8, correlation: -0.61, sector: "EV" },
-    { id: "catl", label: "CATL / Battery Makers", type: "negative", impact: -7, correlation: -0.68, sector: "Batteries" },
-    { id: "panasonic", label: "Panasonic (PCRFY)", type: "negative", impact: -4, correlation: -0.48, sector: "Batteries" },
-    { id: "ev_makers", label: "EV Industry", type: "negative", impact: -6, sector: "Automotive" },
-    { id: "grid_storage", label: "Grid Storage Industry", type: "negative", impact: -5, sector: "Energy" },
-    { id: "smartphone", label: "Smartphone Makers", type: "negative", impact: -2, sector: "Technology" },
-  ],
-  links: [
-    { source: "lithium", target: "batt", strength: 0.72 },
-    { source: "lithium", target: "lit", strength: 0.88 },
-    { source: "lithium", target: "alb", strength: 0.91 },
-    { source: "lithium", target: "sqm", strength: 0.88 },
-    { source: "lithium", target: "lthm", strength: 0.93 },
-    { source: "lithium", target: "tsla_li", strength: 0.52 },
-    { source: "lithium", target: "rivian", strength: 0.61 },
-    { source: "lithium", target: "catl", strength: 0.68 },
-    { source: "lithium", target: "panasonic", strength: 0.48 },
-    { source: "lithium", target: "ev_makers", strength: 0.58 },
-    { source: "lithium", target: "grid_storage", strength: 0.55 },
-    { source: "lithium", target: "smartphone", strength: 0.32 },
+  commodity: { id: "lithium", label: "Lithium ↑20%", price: "$18,000/t", change: "+20%" },
+  levels: [
+    { nodes: [
+      { id: "lit", label: "Global X Lithium (LIT)", type: "etf", impact: 16.5, correlation: 0.88, marketCap: "3B", sector: "ETF" },
+      { id: "alb", label: "Albemarle (ALB)", type: "positive", impact: 28.0, correlation: 0.94, marketCap: "14B", sector: "Lithium Mining" },
+      { id: "sqm", label: "SQM (SQM)", type: "positive", impact: 25.0, correlation: 0.91, marketCap: "15B", sector: "Lithium Mining" },
+      { id: "lthm", label: "Livent Corp (LTHM)", type: "positive", impact: 30.0, correlation: 0.92, marketCap: "4B", sector: "Lithium Mining" },
+      { id: "tsla_l", label: "Tesla (TSLA)", type: "negative", impact: -5.0, correlation: -0.58, marketCap: "700B", sector: "EV" }
+    ]},
+    { nodes: [
+      { id: "pilbara", label: "Pilbara Minerals (PLS.AX)", type: "positive", impact: 32.0, correlation: 0.95, sector: "Lithium Mining", parentId: "alb" },
+      { id: "ganfeng", label: "Ganfeng Lithium", type: "positive", impact: 28.0, correlation: 0.90, sector: "Lithium Processing", parentId: "sqm" },
+      { id: "catl", label: "CATL (300750.SZ)", type: "negative", impact: -8.0, correlation: -0.72, sector: "Battery Manufacturing", parentId: "lthm" },
+      { id: "panasonic_l", label: "Panasonic (6752.T)", type: "negative", impact: -6.5, correlation: -0.65, sector: "Battery Manufacturing", parentId: "tsla_l" }
+    ]},
+    { nodes: [
+      { id: "battery_mfg", label: "Battery Manufacturers", type: "negative", impact: -9.0, correlation: -0.78, sector: "Technology", parentId: "catl" },
+      { id: "recycling_l", label: "Li-Cycle (LICY)", type: "positive", impact: 12.0, correlation: 0.72, sector: "Battery Recycling", parentId: "ganfeng" },
+      { id: "mining_eq_l", label: "Mining Equipment", type: "positive", impact: 5.0, correlation: 0.55, sector: "Equipment", parentId: "pilbara" }
+    ]},
+    { nodes: [
+      { id: "gm_l", label: "General Motors (GM)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "48B", sector: "Automotive", parentId: "tsla_l" },
+      { id: "ford_l", label: "Ford Motor (F)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "48B", sector: "Automotive", parentId: "tsla_l" },
+      { id: "grid_storage", label: "Grid Storage (STEM)", type: "negative", impact: -7.5, correlation: -0.68, sector: "Energy Storage", parentId: "battery_mfg" }
+    ]},
+    { nodes: [
+      { id: "ev_demand", label: "EV Adoption Rate", type: "positive", impact: 18.0, sector: "Macro", parentId: "lit" },
+      { id: "chile_pol", label: "Chile Nationalization", type: "positive", impact: 12.0, sector: "Macro", parentId: "sqm" },
+      { id: "solid_state", label: "Solid-State Tech", type: "negative", impact: -10.0, sector: "Macro", parentId: "battery_mfg" }
+    ]}
   ]
 };
 </script>

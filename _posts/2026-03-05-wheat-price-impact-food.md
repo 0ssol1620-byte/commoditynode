@@ -15,37 +15,65 @@ Wheat feeds the world — literally. As the base ingredient in bread, pasta, pas
 
 ## The Impact Map
 
+<div class="chart-container">
+  <h3>📈 Live Price Chart</h3>
+  <div class="tradingview-widget-container">
+    <div id="tv-chart-wheat"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    <script>
+    new TradingView.widget({
+      autosize: true,
+      symbol: "CBOT:ZW1!",
+      interval: "W",
+      timezone: "America/New_York",
+      theme: "dark",
+      style: "1",
+      locale: "en",
+      backgroundColor: "rgba(5, 5, 8, 0.9)",
+      gridColor: "rgba(39, 39, 42, 0.5)",
+      hide_top_toolbar: false,
+      allow_symbol_change: false,
+      container_id: "tv-chart-wheat",
+      height: 400,
+    });
+    </script>
+  </div>
+</div>
+
 <div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
-  nodes: [
-    { id: "wheat", label: "Wheat +15%", type: "commodity", price: "$5.85/bushel", change: "+15%" },
-    { id: "weat", label: "WEAT (Wheat ETF)", type: "etf", impact: +14.2, correlation: 0.96 },
-    { id: "teucrium", label: "TAGS (Ag ETF)", type: "etf", impact: +8.5, correlation: 0.72 },
-    { id: "adm", label: "Archer-Daniels (ADM)", type: "positive", impact: +6, correlation: 0.58, sector: "Agribusiness" },
-    { id: "bunge", label: "Bunge Global (BG)", type: "positive", impact: +5, correlation: 0.54, sector: "Agribusiness" },
-    { id: "mcd", label: "McDonald's (MCD)", type: "negative", impact: -3, correlation: -0.44, sector: "Restaurants" },
-    { id: "sbux_w", label: "Starbucks (SBUX)", type: "negative", impact: -2, correlation: -0.35, sector: "Restaurants" },
-    { id: "grubhub", label: "Restaurant Chains", type: "negative", impact: -4, correlation: -0.48, sector: "Restaurants" },
-    { id: "kel", label: "Kellanova (K)", type: "negative", impact: -5, correlation: -0.62, sector: "Food Manufacturing" },
-    { id: "cag", label: "ConAgra Brands (CAG)", type: "negative", impact: -4, correlation: -0.55, sector: "Food Manufacturing" },
-    { id: "flour_mills", label: "Flour Milling Industry", type: "negative", impact: -6, sector: "Food Processing" },
-    { id: "bakery", label: "Bakery Industry", type: "negative", impact: -7, sector: "Food" },
-    { id: "pasta", label: "Pasta Manufacturers", type: "negative", impact: -5, sector: "Food" },
-  ],
-  links: [
-    { source: "wheat", target: "weat", strength: 0.96 },
-    { source: "wheat", target: "teucrium", strength: 0.72 },
-    { source: "wheat", target: "adm", strength: 0.58 },
-    { source: "wheat", target: "bunge", strength: 0.54 },
-    { source: "wheat", target: "mcd", strength: 0.44 },
-    { source: "wheat", target: "sbux_w", strength: 0.35 },
-    { source: "wheat", target: "kel", strength: 0.62 },
-    { source: "wheat", target: "cag", strength: 0.55 },
-    { source: "wheat", target: "flour_mills", strength: 0.70 },
-    { source: "wheat", target: "bakery", strength: 0.75 },
-    { source: "wheat", target: "pasta", strength: 0.72 },
+  commodity: { id: "wheat", label: "Wheat ↑12%", price: "$6.80/bu", change: "+12%" },
+  levels: [
+    { nodes: [
+      { id: "weat", label: "Wheat ETF (WEAT)", type: "etf", impact: 11.5, correlation: 0.95, marketCap: "0.3B", sector: "ETF" },
+      { id: "adm", label: "Archer-Daniels (ADM)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "38B", sector: "Grain Processing" },
+      { id: "bunge", label: "Bunge Limited (BG)", type: "positive", impact: 7.8, correlation: 0.68, marketCap: "14B", sector: "Grain Trading" },
+      { id: "mosaic", label: "Mosaic Co (MOS)", type: "positive", impact: 6.5, correlation: 0.62, marketCap: "12B", sector: "Fertilizers" },
+      { id: "mcd", label: "McDonald's (MCD)", type: "negative", impact: -2.0, correlation: -0.35, marketCap: "215B", sector: "Fast Food" }
+    ]},
+    { nodes: [
+      { id: "cargill_w", label: "Cargill (Private)", type: "positive", impact: 9.0, correlation: 0.75, sector: "Grain Trading", parentId: "adm" },
+      { id: "agco", label: "AGCO Corp (AGCO)", type: "positive", impact: 5.5, correlation: 0.58, marketCap: "10B", sector: "Farm Equipment", parentId: "bunge" },
+      { id: "cf_w", label: "CF Industries (CF)", type: "positive", impact: 10.0, correlation: 0.78, marketCap: "15B", sector: "Fertilizers", parentId: "mosaic" },
+      { id: "flowers", label: "Flowers Foods (FLO)", type: "negative", impact: -5.5, correlation: -0.62, marketCap: "4B", sector: "Bakery", parentId: "mcd" }
+    ]},
+    { nodes: [
+      { id: "deere_w", label: "John Deere (DE)", type: "positive", impact: 4.5, correlation: 0.52, marketCap: "130B", sector: "Farm Equipment", parentId: "agco" },
+      { id: "milling", label: "Ardent Mills", type: "negative", impact: -6.0, correlation: -0.68, sector: "Flour Milling", parentId: "cf_w" },
+      { id: "cereal", label: "WK Kellogg (KLG)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "2B", sector: "Cereal", parentId: "flowers" }
+    ]},
+    { nodes: [
+      { id: "bread_w", label: "Bakeries & Bread", type: "negative", impact: -7.0, correlation: -0.72, sector: "Food Manufacturing", parentId: "milling" },
+      { id: "pasta_w", label: "Barilla Group", type: "negative", impact: -6.5, sector: "Food Manufacturing", parentId: "milling" },
+      { id: "livestock_w", label: "Tyson Foods (TSN)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "22B", sector: "Meat Processing", parentId: "cereal" }
+    ]},
+    { nodes: [
+      { id: "drought_w", label: "Drought / Climate", type: "positive", impact: 12.0, sector: "Macro", parentId: "weat" },
+      { id: "ukraine_w", label: "Ukraine War Supply", type: "positive", impact: 9.5, sector: "Macro", parentId: "bunge" },
+      { id: "food_inflation", label: "Food CPI Index", type: "negative", impact: -2.0, sector: "Macro", parentId: "bread_w" }
+    ]}
   ]
 };
 </script>
