@@ -26,7 +26,7 @@ social:
     - https://twitter.com/commoditynode
 
 # Google
-google_analytics: ""  # Add GA4 ID later
+google_analytics: "G-8YF60DEP0W"  # Add GA4 ID later
 google_site_verification: ""  # Add after GSC verification
 
 # Build
