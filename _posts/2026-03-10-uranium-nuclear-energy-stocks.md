@@ -127,7 +127,3 @@ Unlike oil or steel, uranium has NO major industrial "loser" category — becaus
 Uranium's 25% move produces extraordinary miner leverage: DNN averages **+42%**, NXE **+38%**, and CCJ **+30%**. The URNM ETF captures this with a **+32%** average response. Unlike other commodities, uranium price increases don't create significant industrial losers — they broadly strengthen nuclear energy economics.
 
 **Bull case catalysts:** AI data center power demand (Microsoft+OpenAI nuclear deals), SMR commercialization (NuScale, TerraPower), nuclear life extensions (US/Europe), and physical uranium funds (Sprott) removing supply from the market. This structural demand shift makes uranium one of the most compelling long-term commodity theses.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

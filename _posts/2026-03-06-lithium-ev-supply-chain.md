@@ -127,7 +127,3 @@ window.COMMODITY_DATA = {
 Lithium's extreme volatility creates extreme opportunity. When lithium rises 30%, LIT delivers **+22%** and pure-plays like LTHM average **+32%**. EV makers face the opposite: Rivian drops **-8%** on average and even Tesla sees **-5%** pressure. 
 
 **Cycle watch:** Lithium bottomed in early 2024 around $12,000/ton. With EV penetration accelerating toward 25-30% of global auto sales, structural demand growth should support prices — but mine expansions in Chile, Argentina, and Australia create periodic oversupply risk.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

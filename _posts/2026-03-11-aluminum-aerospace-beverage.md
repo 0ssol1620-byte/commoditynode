@@ -126,7 +126,3 @@ window.COMMODITY_DATA = {
 Aluminum's 10% move creates **+18% gains for CENX** and **+14% for Alcoa** — reflecting high operational leverage. The clear losers are packaging companies: Ball Corp drops **-5%** on average, facing direct margin pressure. Ford and Boeing face smaller but meaningful impacts from their structural aluminum dependence.
 
 **Geopolitical note:** China produces 57% of global aluminum and Russia is a major supplier. Trade sanctions or Chinese export restrictions can cause sudden aluminum supply shocks with immediate equity impacts across the entire chain.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

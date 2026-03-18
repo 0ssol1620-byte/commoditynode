@@ -128,7 +128,3 @@ window.COMMODITY_DATA = {
 Gold's 10% move produces a near-perfect 9.8% response in GLD, but the real action is in miners: GDX averages **+18.5%** on a gold rally, with individual seniors like Agnico Eagle hitting **+22%**. Jewelry retailers absorb the cost pressure, with SIG typically falling **5%** on gold spikes.
 
 **Trading framework:** During gold bull markets, use GLD as your baseline, GDX for amplified exposure, and watch SIG as a contrarian indicator — extreme weakness in SIG often precedes gold exhaustion.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

@@ -127,7 +127,3 @@ window.COMMODITY_DATA = {
 Steel's 15% move generates **+12.8% in SLX** and up to **+22% for CLF** — among the strongest leverage ratios in metals. Automakers (F, GM) and homebuilders (DHI, LEN) bear the heaviest input cost burden at **-5 to -6%** per 15% steel move.
 
 **Trade policy lens:** US steel tariffs (Section 232) mean domestic producers often diverge from global prices. When tariffs increase, CLF and NUE get a dual tailwind — rising prices AND protection from cheap imports. Watch trade policy announcements as a key catalyst.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

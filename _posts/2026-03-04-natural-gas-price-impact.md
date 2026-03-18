@@ -127,7 +127,3 @@ window.COMMODITY_DATA = {
 Natural gas volatility is extreme — 20% moves happen regularly. UNG tracks gas almost perfectly (+19.5%), while gas E&P stocks like AR amplify moves to **+25%**. Fertilizer companies (CF) are the primary industrial loser, with a consistent **-8%** average response to 20% gas spikes.
 
 **Seasonal pattern:** The Oct-Feb window historically sees the largest gas price moves. Positioning AR long / CF short heading into winter has historically been one of the highest-conviction seasonal trades in commodities.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

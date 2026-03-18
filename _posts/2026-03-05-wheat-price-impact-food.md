@@ -126,7 +126,3 @@ window.COMMODITY_DATA = {
 Wheat's 15% move produces a **+14.2% WEAT** response and modest **+5-6% gains** for commodity traders like ADM. The losers are clear: bakery manufacturers face **-7% average** impacts, with packaged food companies like Kellanova averaging **-5%**. Fast food is more insulated but still registers **-3%** on average.
 
 **Geopolitical alert:** Russia/Ukraine together produce ~30% of global wheat exports. Any geopolitical escalation in the Black Sea region is an immediate buy signal for WEAT and ADM, and a hedge trigger for food manufacturing stocks.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

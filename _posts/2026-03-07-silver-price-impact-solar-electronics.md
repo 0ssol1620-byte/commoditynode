@@ -127,7 +127,3 @@ window.COMMODITY_DATA = {
 Silver's dual role as precious and industrial metal creates distinct winner and loser groups. SLV/PSLV track silver almost perfectly, while silver miners like First Majestic leverage the move to **+28%** on average. Solar manufacturers face **-4%** headwinds — a tension that will intensify as solar deployment scales.
 
 **The silver paradox:** Solar growth is silver's biggest demand driver AND its biggest cost pressure point. For long-term silver bulls, the structural demand from solar represents a compelling fundamental thesis beyond traditional safe-haven buying.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

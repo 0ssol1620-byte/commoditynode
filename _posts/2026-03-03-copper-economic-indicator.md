@@ -126,7 +126,3 @@ window.COMMODITY_DATA = {
 Copper's role as an economic bellwether makes it a must-watch commodity. When copper rises 10%, COPX delivers **+14.2%** and FCX averages **+18%** — one of the strongest leverage ratios in commodity markets. The losers — EV makers and construction — face cost pressure averaging **3-5%** per 10% copper move.
 
 **Macro signal:** Copper rising above its 200-day moving average while China's PMI is expanding is historically one of the most reliable buy signals for global cyclical stocks. Watch COPX as your early indicator.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

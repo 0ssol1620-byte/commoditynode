@@ -127,7 +127,3 @@ window.COMMODITY_DATA = {
 Palladium's 20% move creates near-perfect **+19.5% PALL** tracking and strong miner gains: SBSW averages **+22%** and Norilsk **+24%**. Automakers face **-4 to -5%** headwinds. But the structural story is transformative: the EV transition will steadily erode palladium demand, potentially making today's miners excellent short candidates over a 5-10 year horizon.
 
 **Trade setup:** Russia sanctions risk = tactical long PALL; EV adoption rate = structural short. The tension between these two forces creates the palladium volatility trade — position sizing matters enormously given the geopolitical unpredictability.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

@@ -18,7 +18,7 @@ Crude oil prices have surged 15% this quarter, sending shockwaves through global
 <div class="chart-container">
   <h3>📈 Live Price Chart</h3>
   <div class="tradingview-widget-container">
-    <div id="tv-chart-crude_oil"></div>
+    <div id="tv-chart-oil2"></div>
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <script>
     new TradingView.widget({
@@ -33,7 +33,7 @@ Crude oil prices have surged 15% this quarter, sending shockwaves through global
       gridColor: "rgba(39, 39, 42, 0.5)",
       hide_top_toolbar: false,
       allow_symbol_change: false,
-      container_id: "tv-chart-crude_oil",
+      container_id: "tv-chart-oil2",
       height: 400,
     });
     </script>
@@ -146,7 +146,3 @@ Container shipping fuel (bunker oil) prices rise proportionally. Maersk, ZIM Int
 Oil price surges create a clear divergence: **energy producers and alternatives win, while energy consumers lose**. The magnitude of impact depends on each industry's energy cost as a percentage of revenue.
 
 Smart investors don't just react to oil prices — they map the entire ripple effect and position accordingly.
-
----
-
-*This analysis is for educational purposes only. Not financial advice. Always do your own research before investing.*

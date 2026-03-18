@@ -23,7 +23,7 @@ Iron ore is China's most important imported commodity — and the single biggest
     <script>
     new TradingView.widget({
       autosize: true,
-      symbol: "NASDAQ:VALE",
+      symbol: "NYSE:VALE",
       interval: "W",
       timezone: "America/New_York",
       theme: "dark",
@@ -127,7 +127,3 @@ window.COMMODITY_DATA = {
 Iron ore's 15% move produces **+20% Fortescue**, **+18% Vale**, and **+14% Rio Tinto** — with the pure-plays clearly outperforming diversified miners. Chinese steel mills bear the heaviest cost burden at **-8%**. The Baltic Dry shipping index adds a second leverage play at **+12%** correlation.
 
 **China macro signal:** Iron ore prices are the most direct real-time indicator of Chinese infrastructure stimulus. When iron ore breaks above its 200-day moving average on strong volume, it historically signals a Chinese stimulus cycle is beginning — a powerful leading indicator for global cyclical stocks, shipping, and emerging market equities.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

@@ -125,7 +125,3 @@ window.COMMODITY_DATA = {
 Coffee's 30% move produces **+29.2% JO** tracking and represents one of the clearest commodity → retail impact chains. Starbucks faces **-8%** headwinds as its largest variable input cost surges. Independent cafes are hit hardest at **-12%** but lack public equity exposure.
 
 **Contrarian opportunity:** During extreme coffee price spikes, SBUX often oversells. Once coffee prices stabilize (typically 6-12 months after the weather event), SBUX recovers strongly as margins expand. The SBUX/JO inverse relationship is a reliable mean-reversion trade.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

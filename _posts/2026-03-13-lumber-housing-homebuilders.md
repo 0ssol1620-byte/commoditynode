@@ -23,7 +23,7 @@ Lumber's pandemic surge from $350 to $1,700 per thousand board feet — a 386% e
     <script>
     new TradingView.widget({
       autosize: true,
-      symbol: "CME:LBS1!",
+      symbol: "NYSE:WFG",
       interval: "W",
       timezone: "America/New_York",
       theme: "dark",
@@ -128,7 +128,3 @@ window.COMMODITY_DATA = {
 Lumber's 25% move produces **+18.5% WOOD ETF** and **+22% WFG** — strong leverage for investors who time the housing cycle. Homebuilders (DHI, LEN) face **-7 to -8%** headwinds as their primary input cost surges.
 
 **Seasonal pattern:** Lumber demand peaks in spring (March-May) as the construction season ramps. Buying WFG in January-February and trimming by May has historically captured this seasonal pattern, while monitoring housing start data as a demand pulse check.
-
----
-
-*Disclaimer: This analysis is for educational purposes only and does not constitute financial advice. Correlation data is based on historical patterns and past performance does not guarantee future results. Always conduct your own due diligence before making investment decisions.*

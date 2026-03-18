@@ -46,16 +46,48 @@
     bg:        'rgba(13,13,20,0.0)',
   };
 
-  const LEVEL_RADII = [0, 110, 200, 290, 380, 470];
+  /* ── Node fill by type/level ── */
+  function nodeFillColor(d) {
+    if (d.level === 0)          return '#fbbf24'; // gold for commodity center
+    if (d.type === 'etf')       return '#818cf8'; // indigo
+    if (d.type === 'positive' || d.impact > 0)  return '#22c55e'; // green
+    if (d.type === 'negative' || d.impact < 0)  return '#ef4444'; // red
+    if (d.type === 'producer')  return '#f59e0b'; // amber
+    if (d.type === 'processor') return '#06b6d4'; // cyan
+    return '#94a3b8'; // slate default
+  }
 
-  /* ── Dimensions ── */
-  const W  = container.clientWidth  || 860;
-  const H  = Math.max(600, Math.min(window.innerHeight * 0.65, 720));
-  const CX = W / 2;
-  const CY = H / 2;
+  /* ── Expanded radii to reduce crowding ── */
+  const LEVEL_RADII = [0, 130, 240, 360, 490, 630];
 
-  container.style.height  = H + 'px';
+  /* ── Dimensions (responsive) ── */
+  function getH() {
+    return window.innerWidth < 768 ? 400 : 600;
+  }
+
+  let W  = container.clientWidth  || 860;
+  let H  = getH();
+  let CX = W / 2;
+  let CY = H / 2;
+
+  container.style.height   = H + 'px';
   container.style.position = 'relative';
+
+  /* ── Truncate label based on level ── */
+  function truncLabel(label, level) {
+    let maxLen;
+    if (level <= 1)      maxLen = 20;
+    else if (level <= 3) maxLen = 18;
+    else                 maxLen = 16;
+    return label.length > maxLen ? label.substring(0, maxLen - 1) + '…' : label;
+  }
+
+  /* ── Font size based on level ── */
+  function labelFontSize(d) {
+    if (d.level === 0) return '12px';
+    if (d.level <= 2)  return '10px';
+    return '9px';
+  }
 
   /* ── Build flat node/link arrays ── */
   function buildGraph(commodityData) {
@@ -80,11 +112,12 @@
     (commodityData.levels || []).forEach((lvl, li) => {
       const levelIndex = li + 1;
       const levelNodes = (lvl.nodes || []);
-      const radius     = LEVEL_RADII[levelIndex] || (110 + levelIndex * 90);
+      const radius     = LEVEL_RADII[levelIndex] || (130 + levelIndex * 110);
       const count      = levelNodes.length;
 
       levelNodes.forEach((n, ni) => {
-        const angle = (2 * Math.PI * ni / count) - Math.PI / 2;
+        /* Space nodes evenly on each ring with slight offset per level */
+        const angle = (2 * Math.PI * ni / count) - Math.PI / 2 + (levelIndex * 0.1);
         nodes.push({
           ...n,
           level:     levelIndex,
@@ -109,6 +142,15 @@
   }
 
   let { nodes, links } = buildGraph(data);
+
+  /* Compute dynamic canvas height from outermost ring */
+  function computeH() {
+    const base = getH();
+    if (nodes.length === 0) return base;
+    const maxLevel = Math.max(...nodes.map(n => n.level));
+    const outerR = LEVEL_RADII[maxLevel] || (130 + maxLevel * 110);
+    return Math.max(base, outerR * 2 + 100);
+  }
 
   /* ── State ── */
   let expandedNode   = null;
@@ -185,7 +227,7 @@
 
   /* ── Level ring guides (faint) ── */
   const ringG = zoomG.append('g').attr('class', 'rings');
-  LEVEL_RADII.slice(1).forEach((r, i) => {
+  LEVEL_RADII.slice(1).forEach((r) => {
     ringG.append('circle')
       .attr('cx', CX).attr('cy', CY).attr('r', r)
       .attr('fill', 'none')
@@ -223,10 +265,8 @@
   /* ── Helper: node fill ── */
   function nodeFill(d) {
     if (d.level === 0) return `url(#lg-l0)`;
-    if (d.type === 'etf') return `url(#lg-l${Math.min(d.level, 5)})`;
-    if (d.impact > 0) return COLORS.positive;
-    if (d.impact < 0) return COLORS.negative;
-    return COLORS.neutral;
+    const fc = nodeFillColor(d);
+    return fc;
   }
 
   /* ── Helper: visible nodes/links ── */
@@ -302,15 +342,30 @@
       .attr('stroke-width', d => d.level === 0 ? 2.5 : 1)
       .attr('filter', d => d.level === 0 ? 'url(#glow-sc)' : null);
 
+    /* Label background rect for readability */
+    nodeEnter.append('rect')
+      .attr('class', 'node-label-bg')
+      .attr('fill', 'rgba(5,5,8,0.75)')
+      .attr('rx', 3)
+      .attr('ry', 3)
+      .attr('pointer-events', 'none');
+
     /* Label */
     nodeEnter.append('text')
       .attr('class', 'sc-label')
       .attr('text-anchor', 'middle')
       .attr('dy', d => nodeRadius(d) + 12)
-      .attr('font-size', d => d.level === 0 ? '11px' : '9px')
+      .attr('font-size', d => labelFontSize(d))
+      .attr('font-family', "'Inter', sans-serif")
       .attr('fill', '#e2e8f0')
       .attr('pointer-events', 'none')
-      .text(d => d.label.length > 18 ? d.label.substring(0, 17) + '…' : d.label);
+      .style('text-shadow', '0 0 6px #050508')
+      .each(function(d) {
+        const el = d3.select(this);
+        el.text(truncLabel(d.label, d.level));
+        /* Add title for full name on hover */
+        el.append('title').text(d.label);
+      });
 
     /* Impact badge on nodes (level 0 only) */
     nodeEnter.filter(d => d.level === 0).append('text')
@@ -322,12 +377,31 @@
     /* Merge */
     const allNodes = nodeEnter.merge(nodeSel);
 
-    /* Update positions */
+    /* Update circles */
     allNodes.select('circle')
       .attr('r', d => nodeRadius(d))
       .attr('fill', d => nodeFill(d));
 
+    /* Size & position label background rects */
+    allNodes.each(function(d) {
+      const g = d3.select(this);
+      const textEl = g.select('text.sc-label').node();
+      if (!textEl) return;
+      try {
+        const bbox = textEl.getBBox();
+        g.select('rect.node-label-bg')
+          .attr('x', bbox.x - 2)
+          .attr('y', bbox.y - 1)
+          .attr('width', bbox.width + 4)
+          .attr('height', bbox.height + 2);
+      } catch(e) {
+        /* getBBox may fail if not in DOM yet */
+      }
+    });
+
     allNodes.select('text.sc-label')
+      .attr('visibility', showLabels ? 'visible' : 'hidden');
+    allNodes.select('rect.node-label-bg')
       .attr('visibility', showLabels ? 'visible' : 'hidden');
 
     /* Animate staggered by level */
@@ -415,15 +489,13 @@
     `;
 
     const items = [
-      { color: COLORS.levels[0], label: 'Commodity (Center)' },
-      { color: COLORS.levels[1], label: 'Level 1: ETFs / Producers' },
-      { color: COLORS.levels[2], label: 'Level 2: Processing / Royalty' },
-      { color: COLORS.levels[3], label: 'Level 3: Equipment / Services' },
-      { color: COLORS.levels[4], label: 'Level 4: Consumer Industries' },
-      { color: COLORS.levels[5], label: 'Level 5: Macro / End Consumers' },
-      { color: COLORS.positive,  label: '▲ Positive Impact' },
-      { color: COLORS.negative,  label: '▼ Negative Impact' },
-      { color: COLORS.neutral,   label: '● Neutral' },
+      { color: '#fbbf24',  label: 'Commodity (Center)' },
+      { color: '#818cf8',  label: 'ETF' },
+      { color: '#f59e0b',  label: 'Producer' },
+      { color: '#06b6d4',  label: 'Processor' },
+      { color: COLORS.positive, label: '▲ Positive Impact' },
+      { color: COLORS.negative, label: '▼ Negative Impact' },
+      { color: '#94a3b8',  label: '● Neutral' },
     ];
 
     items.forEach(item => {
@@ -470,6 +542,7 @@
     document.getElementById('sc-labels').addEventListener('click', () => {
       showLabels = !showLabels;
       nodeG.selectAll('text.sc-label').attr('visibility', showLabels ? 'visible' : 'hidden');
+      nodeG.selectAll('rect.node-label-bg').attr('visibility', showLabels ? 'visible' : 'hidden');
     });
 
     document.getElementById('sc-filter-p').addEventListener('click', () => { filterMode = 'positive'; draw(false); });
@@ -477,15 +550,38 @@
     document.getElementById('sc-filter-a').addEventListener('click', () => { filterMode = 'all';      draw(false); });
   }
 
+  /* ── Redraw on resize ── */
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      W  = container.clientWidth || 860;
+      H  = getH();
+      CX = W / 2;
+      CY = H / 2;
+
+      container.style.height = H + 'px';
+      svg.attr('height', H);
+
+      /* Recompute node positions */
+      const savedNodes = buildGraph(data);
+      nodes.length = 0;
+      savedNodes.nodes.forEach(n => nodes.push(n));
+      links.length = 0;
+      savedNodes.links.forEach(l => links.push(l));
+
+      /* Reposition ring guides */
+      ringG.selectAll('circle')
+        .attr('cx', CX)
+        .attr('cy', CY);
+
+      draw(false);
+    }, 200);
+  });
+
   /* ── Init ── */
   buildControls();
   draw(true);
   buildLegend();
-
-  /* ── Resize ── */
-  window.addEventListener('resize', () => {
-    const newW = container.clientWidth;
-    svg.attr('width', newW);
-  });
 
 })();
