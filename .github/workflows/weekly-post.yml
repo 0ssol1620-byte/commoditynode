@@ -1,0 +1,24 @@
+name: Weekly Market Summary Post
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'  # Monday 10AM KST
+  workflow_dispatch:
+
+jobs:
+  generate-post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install yfinance
+      - run: python scripts/generate_weekly_post.py
+      - name: Push new post
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add -A
+          git diff --staged --quiet || git commit -m "📈 Auto-post: Weekly Commodity Market Summary"
+          git push

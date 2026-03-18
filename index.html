@@ -59,6 +59,29 @@ title: Home
 
 <div class="divider"></div>
 
+<!-- ===== LIVE COMMODITY PRICES ===== -->
+<section class="live-prices section" aria-labelledby="prices-title">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Real-Time Data</p>
+      <h2 class="section-title" id="prices-title">📊 Live Commodity Prices</h2>
+      <p class="section-desc">Updated daily via automated market data feeds.</p>
+    </header>
+    <div class="price-grid" data-animate>
+      {% assign prices = site.data.prices %}
+      {% for item in prices %}
+      <div class="price-card {% if item[1].change_pct > 0 %}up{% else %}down{% endif %}">
+        <div class="price-name">{{ item[1].name }}</div>
+        <div class="price-value">${{ item[1].price }}</div>
+        <div class="price-change">{% if item[1].change_pct > 0 %}+{% endif %}{{ item[1].change_pct }}%</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ===== LATEST POSTS ===== -->
 <section class="section" id="latest" aria-labelledby="latest-title">
   <div class="container">
