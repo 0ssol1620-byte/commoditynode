@@ -15,32 +15,8 @@ Uranium has undergone one of the most dramatic commodity revivals in history —
 
 ## The Impact Map
 
-<div class="chart-container">
-  <h3>📈 Live Price Chart</h3>
-  <div class="tradingview-widget-container">
-    <div id="tv-chart-uranium"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-    <script>
-    new TradingView.widget({
-      autosize: true,
-      symbol: "NYSE:CCJ",
-      interval: "W",
-      timezone: "America/New_York",
-      theme: "dark",
-      style: "1",
-      locale: "en",
-      backgroundColor: "rgba(5, 5, 8, 0.9)",
-      gridColor: "rgba(39, 39, 42, 0.5)",
-      hide_top_toolbar: false,
-      allow_symbol_change: false,
-      container_id: "tv-chart-uranium",
-      height: 400,
-    });
-    </script>
-  </div>
-</div>
-
-<div id="impact-graph"></div>
+<div class="cn-price-chart" data-symbol="CCJ" data-name="Cameco (CCJ)"></div>
+<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
