@@ -6,6 +6,9 @@ categories: [Industrial Metals, Analysis]
 tags: [steel, US-Steel, NUE, STLD, construction, automotive, infrastructure]
 description: "How steel price movements impact US Steel (X), Nucor (NUE), Steel Dynamics (STLD), construction companies, and auto manufacturers. Full correlation analysis."
 reading_time: 8
+commodity_name: "Steel"
+image: /assets/images/og-steel.png
+canonical_url: https://commoditynode.com/steel-price-construction-auto/
 ---
 
 Steel is the backbone of the modern economy — and its price movements expose fault lines between producers who profit and manufacturers who pay. When hot-rolled coil steel prices surge, the ripple effects hit automakers, construction companies, appliance makers, and infrastructure projects within weeks.

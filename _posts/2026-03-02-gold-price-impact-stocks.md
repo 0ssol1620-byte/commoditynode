@@ -6,6 +6,9 @@ categories: [Precious Metals, Analysis]
 tags: [gold, GLD, GDX, NEM, Newmont, jewelry, electronics, safe-haven]
 description: "How gold price movements ripple through GLD ETF, GDX miners, Newmont (NEM), jewelry retailers, and electronics manufacturers — with full correlation analysis."
 reading_time: 8
+commodity_name: "Gold"
+image: /assets/images/og-gold.png
+canonical_url: https://commoditynode.com/gold-price-impact-stocks/
 ---
 
 Gold is the ultimate safe-haven asset — but its price movements create far more complex ripple effects than most investors realize. When gold rallies 10%, the impact cascades from mining giants to jewelry retailers to electronics manufacturers, each responding differently based on their gold cost exposure.

@@ -6,6 +6,9 @@ categories: [Agriculture, Analysis]
 tags: [corn, CORN-ETF, ethanol, livestock, food-processing, ADM, agriculture]
 description: "How corn price movements affect CORN ETF, ethanol producers, livestock feed costs, food processing companies, and consumer staples. Detailed correlation analysis."
 reading_time: 7
+commodity_name: "Corn"
+image: /assets/images/og-corn.png
+canonical_url: https://commoditynode.com/corn-price-ethanol-livestock/
 ---
 
 Corn is quietly one of the most important commodities in the American economy — it's in 3,500+ supermarket products, fuels cars as ethanol, and feeds the livestock that becomes your dinner. When corn prices spike, the effects ripple through energy markets, meat prices, and packaged foods simultaneously.

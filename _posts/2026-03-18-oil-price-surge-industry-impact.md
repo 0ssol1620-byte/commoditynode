@@ -6,6 +6,9 @@ categories: [Energy, Analysis]
 tags: [oil, crude-oil, airlines, ev, energy, refining, logistics]
 description: "Interactive analysis of how a 15% oil price surge impacts airlines, refiners, EV makers, and 9 other industries."
 reading_time: 8
+commodity_name: "Crude Oil"
+image: /assets/images/og-crude-oil.png
+canonical_url: https://commoditynode.com/oil-price-surge-industry-impact/
 ---
 
 Crude oil prices have surged 15% this quarter, sending shockwaves through global markets. But the impact isn't uniform — some industries suffer while others thrive. Let's trace the ripple effects.

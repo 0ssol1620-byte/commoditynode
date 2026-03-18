@@ -6,6 +6,9 @@ categories: [Industrial Metals, Analysis]
 tags: [iron-ore, BHP, VALE, RIO, China, steel-mills, infrastructure, mining]
 description: "How iron ore price movements impact BHP, Vale (VALE), Rio Tinto (RIO), Chinese steel mills, and global infrastructure investment. Full correlation analysis."
 reading_time: 8
+commodity_name: "Iron Ore"
+image: /assets/images/og-iron-ore.png
+canonical_url: https://commoditynode.com/iron-ore-steel-china-infrastructure/
 ---
 
 Iron ore is China's most important imported commodity — and the single biggest indicator of Chinese economic activity. Every 10% move in iron ore prices tells a story about Chinese stimulus, infrastructure spending, and global steel demand. Mastering iron ore's market dynamics is mastering China macro investing.

@@ -6,6 +6,9 @@ categories: [Agriculture, Analysis]
 tags: [wheat, WEAT, food-producers, restaurants, bakeries, flour, agricultural]
 description: "How wheat price spikes impact WEAT ETF, major food producers, bread/pasta makers, and restaurant chains. Full correlation analysis with historical data."
 reading_time: 7
+commodity_name: "Wheat"
+image: /assets/images/og-wheat.png
+canonical_url: https://commoditynode.com/wheat-price-impact-food/
 ---
 
 Wheat feeds the world — literally. As the base ingredient in bread, pasta, pastries, and animal feed, wheat price movements cascade through the entire food industry. When wheat rallies 20%, the effects are felt from commodity traders to fast-food margins within weeks.

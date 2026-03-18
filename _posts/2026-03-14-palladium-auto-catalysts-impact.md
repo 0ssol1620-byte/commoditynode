@@ -6,6 +6,9 @@ categories: [Precious Metals, Analysis]
 tags: [palladium, PALL, auto-catalysts, Ford, Toyota, BASF, platinum-group]
 description: "How palladium price movements impact PALL ETF, auto catalyst manufacturers, Ford, Toyota, BASF, and the EV transition's effect on palladium demand."
 reading_time: 8
+commodity_name: "Palladium"
+image: /assets/images/og-palladium.png
+canonical_url: https://commoditynode.com/palladium-auto-catalysts-impact/
 ---
 
 Palladium is the most critical commodity most investors have never heard of. It's the precious metal inside every gasoline car's catalytic converter — responsible for transforming toxic exhaust into cleaner emissions. When palladium prices surge, auto manufacturers face billions in cost increases while Russian-dependent supplies create geopolitical risk.

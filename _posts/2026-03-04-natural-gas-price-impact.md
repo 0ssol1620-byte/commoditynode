@@ -6,6 +6,9 @@ categories: [Energy, Analysis]
 tags: [natural-gas, UNG, utilities, chemicals, LNG, Cheniere, fertilizers]
 description: "How natural gas price movements impact UNG ETF, utility stocks, chemical companies, fertilizer producers, and LNG exporters. Correlation data and historical analysis."
 reading_time: 8
+commodity_name: "Natural Gas"
+image: /assets/images/og-natural-gas.png
+canonical_url: https://commoditynode.com/natural-gas-price-impact/
 ---
 
 Natural gas is the most volatile major commodity — winter cold snaps or supply disruptions can trigger 50%+ price moves in days. These swings create enormous divergences between energy exporters who profit and utility/chemical companies who face surging input costs.

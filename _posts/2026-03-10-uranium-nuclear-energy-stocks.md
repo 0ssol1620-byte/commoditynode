@@ -6,6 +6,9 @@ categories: [Energy, Analysis]
 tags: [uranium, URA, CCJ, NXE, nuclear-energy, Cameco, clean-energy]
 description: "How uranium price movements impact URA ETF, Cameco (CCJ), NexGen Energy (NXE), nuclear utilities, and the nuclear energy renaissance. Full correlation analysis."
 reading_time: 9
+commodity_name: "Uranium"
+image: /assets/images/og-uranium.png
+canonical_url: https://commoditynode.com/uranium-nuclear-energy-stocks/
 ---
 
 Uranium has undergone one of the most dramatic commodity revivals in history — from post-Fukushima lows of $18/lb in 2016 to over $100/lb in 2024. As the nuclear energy renaissance accelerates with AI data center power demand, small modular reactors (SMRs), and net-zero commitments, uranium is back at the forefront of energy investing.

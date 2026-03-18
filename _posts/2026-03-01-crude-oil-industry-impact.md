@@ -6,6 +6,9 @@ categories: [Energy, Analysis]
 tags: [crude-oil, XOM, CVX, HAL, XLE, JETS, energy, airlines, refining]
 description: "Interactive analysis of how crude oil price movements impact XOM, CVX, HAL, airlines (JETS ETF), and the entire energy sector with correlation data."
 reading_time: 9
+commodity_name: "Crude Oil"
+image: /assets/images/og-crude-oil.png
+canonical_url: https://commoditynode.com/crude-oil-industry-impact/
 ---
 
 Crude oil remains the world's most traded commodity — and its price swings create immediate winners and losers across global markets. A 10% move in WTI crude ripples through airlines, refiners, oilfield services, and consumer staples within days. Understanding those correlations is the edge every investor needs.

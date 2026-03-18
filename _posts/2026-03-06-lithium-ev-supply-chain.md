@@ -6,6 +6,9 @@ categories: [Battery Metals, Analysis]
 tags: [lithium, LTHM, ALB, SQM, BATT, EV, batteries, Albemarle, Tesla]
 description: "How lithium price swings impact LTHM, Albemarle (ALB), SQM, BATT ETF, Tesla, and the entire EV battery supply chain. Comprehensive correlation analysis."
 reading_time: 9
+commodity_name: "Lithium"
+image: /assets/images/og-lithium.png
+canonical_url: https://commoditynode.com/lithium-ev-supply-chain/
 ---
 
 Lithium is the defining commodity of the EV revolution. Its price went from $6,000/ton in 2020 to $80,000/ton in 2022, then crashed back to $12,000 by 2024 — creating the most dramatic commodity cycle in recent memory. Understanding the winners and losers in this volatility is critical for EV investors.

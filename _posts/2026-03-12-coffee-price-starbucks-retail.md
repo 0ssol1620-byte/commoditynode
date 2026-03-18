@@ -6,6 +6,9 @@ categories: [Soft Commodities, Analysis]
 tags: [coffee, JO-ETF, SBUX, Starbucks, Dunkin, specialty-coffee, arabica]
 description: "How coffee price spikes impact JO ETF, Starbucks (SBUX), Dunkin (DNKN), specialty roasters, and coffee retailers. Full correlation analysis with historical data."
 reading_time: 7
+commodity_name: "Coffee"
+image: /assets/images/og-coffee.png
+canonical_url: https://commoditynode.com/coffee-price-starbucks-retail/
 ---
 
 Coffee prices hit 50-year highs in early 2025, driven by devastating droughts in Brazil and Vietnam. This wasn't just a commodity story — it was a margin crisis for the world's biggest coffee chains and a windfall for coffee producers. Understanding who wins and loses when your morning cup gets more expensive is essential for investors.

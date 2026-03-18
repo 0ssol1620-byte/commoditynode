@@ -6,6 +6,9 @@ categories: [Industrial Metals, Analysis]
 tags: [aluminum, AA, CENX, aerospace, beverage-cans, automotive, packaging]
 description: "How aluminum price moves affect Alcoa (AA), Century Aluminum (CENX), aerospace manufacturers, beverage can makers, and auto companies. Correlation analysis."
 reading_time: 7
+commodity_name: "Aluminum"
+image: /assets/images/og-aluminum.png
+canonical_url: https://commoditynode.com/aluminum-aerospace-beverage/
 ---
 
 Aluminum is everywhere — in your soda can, your car doors, the wings of every commercial aircraft, and the solar panel frames on rooftops. Its price movements create complex winner-loser dynamics across aerospace, automotive, beverage, and packaging industries.

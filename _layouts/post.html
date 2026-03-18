@@ -2,6 +2,50 @@
 layout: default
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ page.description | default: site.description | escape }}",
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "author": {
+    "@type": "Organization",
+    "name": "CommodityNode",
+    "url": "https://commoditynode.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "CommodityNode",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://commoditynode.com/assets/images/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  },
+  "image": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}"
+}
+</script>
+
+{% if page.categories contains "Commodities" or page.categories contains "Energy" or page.categories contains "Metals" or page.categories contains "Precious Metals" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "{{ page.commodity_name | default: page.title }}",
+  "description": "{{ page.description }}",
+  "provider": {
+    "@type": "Organization",
+    "name": "CommodityNode"
+  }
+}
+</script>
+{% endif %}
+
 <!-- Post Header -->
 <header class="post-header">
   <div class="container">

@@ -6,6 +6,9 @@ categories: [Forest Products, Analysis]
 tags: [lumber, WFG, LPX, housing, homebuilders, renovation, construction]
 description: "How lumber price movements impact West Fraser (WFG), LP Building (LPX), homebuilder stocks, and home renovation companies. Full correlation analysis."
 reading_time: 7
+commodity_name: "Lumber"
+image: /assets/images/og-lumber.png
+canonical_url: https://commoditynode.com/lumber-housing-homebuilders/
 ---
 
 Lumber's pandemic surge from $350 to $1,700 per thousand board feet — a 386% explosion — was one of the most dramatic commodity runs in history. It fundamentally changed housing economics for years. Understanding lumber's ripple effects through housing, renovation, and wood products is essential for real estate investors.

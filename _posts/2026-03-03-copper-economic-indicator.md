@@ -6,6 +6,9 @@ categories: [Industrial Metals, Analysis]
 tags: [copper, FCX, COPX, construction, EV-batteries, electrical, Freeport]
 description: "Why copper is 'Dr. Copper' — and how FCX, COPX ETF, EV battery makers, and construction stocks respond to copper price shifts. Full correlation data included."
 reading_time: 8
+commodity_name: "Copper"
+image: /assets/images/og-copper.png
+canonical_url: https://commoditynode.com/copper-economic-indicator/
 ---
 
 Economists call copper "Dr. Copper" because it has a PhD in predicting economic activity. Copper's price movements signal global growth trends months before GDP data arrives — and they create immediate, measurable impacts on mining stocks, EV battery manufacturers, and construction companies.

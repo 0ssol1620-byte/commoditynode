@@ -1,9 +1,33 @@
 title: CommodityNode
-description: "Where Raw Materials Meet Markets — Interactive commodity-to-industry impact analysis"
+tagline: "Where Raw Materials Meet Markets"
+description: "Interactive analysis of how commodity price movements ripple through global industries, ETFs, and stocks. Real-time impact maps for crude oil, gold, copper, lithium, and more."
 url: "https://commoditynode.com"
 baseurl: ""
+
+# Author
+author:
+  name: CommodityNode Research
+  email: contact@commoditynode.com
+  twitter: commoditynode
+
+# SEO
 lang: en
-timezone: Asia/Seoul
+timezone: America/New_York
+logo: /assets/images/logo.png
+
+# Social
+twitter:
+  username: commoditynode
+  card: summary_large_image
+
+social:
+  name: CommodityNode
+  links:
+    - https://twitter.com/commoditynode
+
+# Google
+google_analytics: ""  # Add GA4 ID later
+google_site_verification: ""  # Add after GSC verification
 
 # Build
 markdown: kramdown
@@ -11,18 +35,11 @@ permalink: /:title/
 paginate: 10
 paginate_path: "/page/:num/"
 
-# Plugins
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-paginate
-
-# SEO
-twitter:
-  card: summary_large_image
-social:
-  name: CommodityNode
 
 # Collections
 collections:
@@ -34,10 +51,11 @@ collections:
 defaults:
   - scope:
       path: ""
-      type: "posts"
+      type: posts
     values:
-      layout: "post"
-      author: "CommodityNode"
+      layout: post
+      author: CommodityNode Research
+      image: /assets/images/og-default.png
   - scope:
       path: ""
       type: "commodities"
