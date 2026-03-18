@@ -1,0 +1,54 @@
+title: CommodityNode
+description: "Where Raw Materials Meet Markets — Interactive commodity-to-industry impact analysis"
+url: "https://commoditynode.com"
+baseurl: ""
+lang: en
+timezone: Asia/Seoul
+
+# Build
+markdown: kramdown
+permalink: /:title/
+paginate: 10
+paginate_path: "/page/:num/"
+
+# Theme
+remote_theme: pages-themes/minimal@v0.2.0
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+
+# SEO
+twitter:
+  card: summary_large_image
+social:
+  name: CommodityNode
+  
+# Google AdSense (add after approval)
+# google_adsense: "ca-pub-XXXXXXXXXXXXXXXX"
+
+# Analytics (add your GA4 ID)
+# google_analytics: "G-XXXXXXXXXX"
+
+# Collections
+collections:
+  commodities:
+    output: true
+    permalink: /commodities/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "CommodityNode"
+  - scope:
+      path: ""
+      type: "commodities"
+    values:
+      layout: "commodity"
