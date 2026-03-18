@@ -11,9 +11,6 @@ permalink: /:title/
 paginate: 10
 paginate_path: "/page/:num/"
 
-# Theme
-remote_theme: pages-themes/minimal@v0.2.0
-
 # Plugins
 plugins:
   - jekyll-feed
@@ -26,12 +23,6 @@ twitter:
   card: summary_large_image
 social:
   name: CommodityNode
-  
-# Google AdSense (add after approval)
-# google_adsense: "ca-pub-XXXXXXXXXXXXXXXX"
-
-# Analytics (add your GA4 ID)
-# google_analytics: "G-XXXXXXXXXX"
 
 # Collections
 collections:

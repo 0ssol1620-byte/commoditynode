@@ -2,32 +2,195 @@
 layout: default
 title: Home
 ---
-<section class="hero">
-  <h1>⛓️ Commodity<strong style="color:var(--accent)">Node</strong></h1>
-  <p class="hero-sub">Where Raw Materials Meet Markets</p>
-  <p>Interactive analysis of how commodity price movements ripple through global industries, stocks, and ETFs.</p>
-</section>
 
-<section class="posts">
-  <h2>Latest Analysis</h2>
-  <ul class="post-list">
-    {% for post in site.posts limit:10 %}
-    <li class="post-card">
-      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-      <div class="post-meta">
-        <time>{{ post.date | date: "%B %d, %Y" }}</time>
-        {% for cat in post.categories %}<span class="category">{{ cat }}</span>{% endfor %}
+<!-- ===== HERO ===== -->
+<section class="hero" aria-label="Hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge" data-animate>
+        <span class="dot" aria-hidden="true"></span>
+        Live Commodity Intelligence
       </div>
-      <p>{{ post.excerpt | strip_html | truncatewords: 40 }}</p>
-    </li>
-    {% endfor %}
-  </ul>
+
+      <h1 data-animate data-delay="100">
+        Where Raw Materials<br>
+        Meet <span class="highlight">Markets</span>
+      </h1>
+
+      <p class="hero-desc" data-animate data-delay="200">
+        Interactive analysis of how commodity price movements ripple through
+        global industries, stocks, and ETFs — visualized in real time.
+      </p>
+
+      <div class="hero-actions" data-animate data-delay="300">
+        <a href="#latest" class="btn btn-primary">
+          <span>📊</span> Read Latest Analysis
+        </a>
+        <a href="/commodities/" class="btn btn-secondary">
+          <span>🔗</span> Browse Commodities
+        </a>
+      </div>
+
+      <div class="hero-stats" data-animate data-delay="400">
+        <div class="hero-stat">
+          <span class="value positive"
+                data-count="15.3"
+                data-prefix="+"
+                data-suffix="%">+15.3%</span>
+          <span class="label">WTI Surge (Q1)</span>
+        </div>
+        <div class="hero-stat">
+          <span class="value counting"
+                data-count="12"
+                data-suffix=" Industries">12 Industries</span>
+          <span class="label">Impact Traced</span>
+        </div>
+        <div class="hero-stat">
+          <span class="value"
+                data-count="8"
+                data-suffix=" min">8 min</span>
+          <span class="label">Avg. Read Time</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<style>
-.hero { text-align: center; padding: 60px 0 40px; }
-.hero h1 { font-size: 2.5rem; margin-bottom: 8px; }
-.hero-sub { color: var(--accent); font-size: 1.2rem; margin-bottom: 16px; }
-.hero p { color: var(--text2); max-width: 600px; margin: 0 auto; }
-.posts h2 { margin-bottom: 20px; }
-</style>
+<div class="divider"></div>
+
+<!-- ===== LATEST POSTS ===== -->
+<section class="section" id="latest" aria-labelledby="latest-title">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Latest Analysis</p>
+      <h2 class="section-title" id="latest-title">Commodity Impact Reports</h2>
+      <p class="section-desc">
+        Deep dives into how commodity price swings cascade through sectors,
+        supply chains, and equity markets.
+      </p>
+    </header>
+
+    <div class="posts-grid">
+      {% assign posts = site.posts %}
+      {% for post in posts limit:9 %}
+      <article class="post-card{% if forloop.first %} post-card--featured{% endif %}"
+               data-animate data-delay="{{ forloop.index0 | times: 100 | modulo: 500 }}">
+
+        {% if forloop.first %}
+        <div class="post-card-visual" aria-hidden="true">⛽</div>
+        {% endif %}
+
+        <div class="post-card-accent" aria-hidden="true"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">
+              {{ post.date | date: "%b %d, %Y" }}
+            </time>
+            {% for cat in post.categories limit:2 %}
+            <span class="post-category">{{ cat }}</span>
+            {% endfor %}
+          </div>
+
+          <h2 class="post-card-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h2>
+
+          <p class="post-card-excerpt">
+            {{ post.description | default: post.excerpt | strip_html | truncatewords: 35 }}
+          </p>
+
+          <div class="post-card-footer">
+            <span class="read-more">
+              Read analysis <span aria-hidden="true">→</span>
+            </span>
+            {% if post.reading_time %}
+            <span class="reading-time">{{ post.reading_time }} min read</span>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+
+      {% if site.posts.size == 0 %}
+      <div class="feature-card text-center" style="grid-column:1/-1;padding:60px">
+        <p class="text-muted">Analysis posts coming soon.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== WHY COMMODITYNODE ===== -->
+<section class="section" aria-labelledby="features-title">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Why CommodityNode</p>
+      <h2 class="section-title" id="features-title">Market Intelligence, Visualized</h2>
+      <p class="section-desc">
+        We map the invisible threads connecting raw materials to your portfolio.
+      </p>
+    </header>
+
+    <div class="features-grid">
+      <div class="feature-card" data-animate data-delay="0">
+        <div class="feature-icon" aria-hidden="true">🔗</div>
+        <h3 class="feature-title">Interactive Node Graphs</h3>
+        <p class="feature-desc">
+          Drag, zoom, and explore force-directed graphs that reveal commodity-to-industry
+          connections in a single glance.
+        </p>
+      </div>
+
+      <div class="feature-card" data-animate data-delay="100">
+        <div class="feature-icon" aria-hidden="true">📈</div>
+        <h3 class="feature-title">Quantified Impact</h3>
+        <p class="feature-desc">
+          Every analysis quantifies directional impact with percentage estimates —
+          no vague "positive/negative" verdicts.
+        </p>
+      </div>
+
+      <div class="feature-card" data-animate data-delay="200">
+        <div class="feature-icon" aria-hidden="true">⚡</div>
+        <h3 class="feature-title">Timely Coverage</h3>
+        <p class="feature-desc">
+          Published when price moves matter most — we chase the signal, not the calendar.
+        </p>
+      </div>
+
+      <div class="feature-card" data-animate data-delay="300">
+        <div class="feature-icon" aria-hidden="true">🌐</div>
+        <h3 class="feature-title">Cross-Sector Ripples</h3>
+        <p class="feature-desc">
+          From airlines to EV makers to consumer staples — we trace multi-hop
+          supply chain effects you won't find on Bloomberg terminals.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== CTA STRIP ===== -->
+<section class="section" aria-label="Call to action">
+  <div class="container text-center" data-animate>
+    <div class="hero-badge" style="display:inline-flex;margin-bottom:24px;">
+      <span class="dot" aria-hidden="true"></span>
+      Free &amp; Open Access
+    </div>
+    <h2 class="section-title" style="max-width:500px;margin:0 auto 16px;">
+      Stay Ahead of the Commodity Curve
+    </h2>
+    <p class="section-desc" style="margin:0 auto 32px;">
+      Bookmark us, follow the RSS feed, or explore the commodities index.
+    </p>
+    <div class="hero-actions" style="justify-content:center;">
+      <a href="/feed.xml"      class="btn btn-primary">⚡ RSS Feed</a>
+      <a href="/commodities/"  class="btn btn-secondary">🔗 All Commodities</a>
+    </div>
+  </div>
+</section>
