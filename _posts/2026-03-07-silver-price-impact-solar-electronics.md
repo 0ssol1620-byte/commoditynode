@@ -16,7 +16,7 @@ Silver occupies a unique position in commodity markets — it's simultaneously a
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="SI=F" data-name="Silver Futures"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
