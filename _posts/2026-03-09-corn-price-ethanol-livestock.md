@@ -16,7 +16,7 @@ Corn is quietly one of the most important commodities in the American economy â€
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="ZC=F" data-name="Corn Futures"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
