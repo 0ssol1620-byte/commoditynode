@@ -16,7 +16,7 @@ Crude oil prices have surged 15% this quarter, sending shockwaves through global
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="CL=F" data-name="Crude Oil (WTI)"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
