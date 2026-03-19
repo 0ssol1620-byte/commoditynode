@@ -1644,3 +1644,47 @@ h1.post-title {
     touch-action: none;
   }
 }
+
+
+/* ── Premium additions v2 ── */
+
+/* Wider container on large screens */
+@media (min-width: 1280px) {
+  .container { max-width: 1200px; }
+}
+
+/* Impact graph: full width, 520px desktop / 420px mobile */
+#impact-graph {
+  width: 100% !important;
+  min-height: 520px !important;
+}
+@media (max-width: 768px) {
+  #impact-graph { min-height: 420px !important; }
+}
+
+/* Hide drag hint if still present */
+.impact-graph-hint { display: none !important; }
+
+/* Post content: no max-width cap so nodemap breathes */
+.post-content { max-width: 100%; }
+
+/* Commodity card hover glow */
+a.feature-card:hover,
+.feature-card:hover {
+  box-shadow: 0 0 0 1px rgba(34,211,238,0.35), 0 8px 40px rgba(34,211,238,0.12), 0 20px 60px rgba(0,0,0,0.5) !important;
+  border-color: rgba(34,211,238,0.4) !important;
+}
+
+/* Commodities grid: 3-4 cards per row on desktop */
+.features-grid {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+}
+
+/* Post card title always bright */
+.post-card-title, .post-card-title a { color: #f4f4f5 !important; }
+.post-card:hover .post-card-title { color: #22d3ee !important; }
+
+/* Chart header right side */
+.cn-chart-header-right {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+}
