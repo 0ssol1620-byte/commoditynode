@@ -16,7 +16,7 @@ Steel is the backbone of the modern economy — and its price movements expose f
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="X" data-name="U.S. Steel (X)"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
