@@ -1588,3 +1588,59 @@ h1.post-title {
     font-size: 1rem;
   }
 }
+
+
+/* ── Loading spinner ── */
+.cn-loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(34,211,238,0.2);
+  border-top-color: #22d3ee;
+  border-radius: 50%;
+  animation: cn-spin 0.7s linear infinite;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+@keyframes cn-spin {
+  to { transform: rotate(360deg); }
+}
+.cn-chart-loading {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Post title: solid color override (gradient breaks text-shadow) ── */
+.post-header h1 {
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  color: #f4f4f5 !important;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.9) !important;
+}
+
+/* ── Mobile post title contrast ── */
+@media (max-width: 768px) {
+  .post-header h1 {
+    font-size: 1.5rem !important;
+    color: #ffffff !important;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,1) !important;
+  }
+  /* Home page card titles */
+  .post-card-title,
+  .post-card-title a {
+    color: #f4f4f5 !important;
+    text-shadow: none !important;
+  }
+}
+
+/* ── Nodemap: hide overflow cleanly on mobile ── */
+@media (max-width: 768px) {
+  #impact-graph {
+    min-height: 340px !important;
+    overflow: hidden !important;
+  }
+  #impact-graph svg {
+    touch-action: none;
+  }
+}
