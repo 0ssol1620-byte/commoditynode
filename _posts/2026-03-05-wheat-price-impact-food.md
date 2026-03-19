@@ -16,7 +16,7 @@ Wheat feeds the world — literally. As the base ingredient in bread, pasta, pas
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="ZW=F" data-name="Wheat Futures"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
