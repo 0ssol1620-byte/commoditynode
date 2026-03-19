@@ -16,7 +16,7 @@ Economists call copper "Dr. Copper" because it has a PhD in predicting economic 
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="HG=F" data-name="Copper Futures"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
