@@ -16,7 +16,7 @@ Uranium has undergone one of the most dramatic commodity revivals in history —
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="CCJ" data-name="Cameco (CCJ)"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
