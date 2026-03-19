@@ -1739,3 +1739,169 @@ em:has-text('Drag nodes') { display: none; }
   gap: 12px;
   flex-wrap: wrap;
 }
+
+
+/* ════════════════════════════════════════════
+   POST — Full-bleed graph section
+   ════════════════════════════════════════════ */
+.post-graph-bleed {
+  width: 100%;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 0 0 48px;
+  overflow: hidden;
+}
+
+.post-chart-bleed {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 32px 0;
+}
+
+.post-nodemap-bleed {
+  /* Full width within the bleed section */
+  padding: 0;
+}
+
+.post-nodemap-bleed #impact-graph {
+  width: 100%;
+  height: 580px;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  background: var(--bg2);
+}
+
+@media (max-width: 768px) {
+  .post-nodemap-bleed #impact-graph { height: 420px; }
+  .post-chart-bleed { padding: 20px 16px 0; }
+}
+
+.post-body-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ════════════════════════════════════════════
+   NODEMAP container (fallback if not bleed)
+   ════════════════════════════════════════════ */
+#impact-graph {
+  min-height: 560px;
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 0 0 24px;
+  position: relative;
+}
+
+/* ════════════════════════════════════════════
+   CHART header — right-aligned period + date
+   ════════════════════════════════════════════ */
+.cn-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cn-chart-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ════════════════════════════════════════════
+   POST content refinements
+   ════════════════════════════════════════════ */
+.post-content h2 {
+  scroll-margin-top: 80px;
+}
+.post-content h3 {
+  scroll-margin-top: 80px;
+}
+
+/* Impact table enhanced */
+.post-content table th { font-size: 0.75rem; }
+.post-content table td { font-size: 0.88rem; }
+.post-content tr:hover td { background: rgba(34,211,238,0.04); }
+
+/* ════════════════════════════════════════════
+   HERO — remove emoji from buttons
+   ════════════════════════════════════════════ */
+.hero-actions .btn span[aria-hidden] { display: none; }
+
+/* ════════════════════════════════════════════
+   HOME — price cards improved
+   ════════════════════════════════════════════ */
+.price-card {
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.price-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(34,211,238,0.06), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.price-card:hover::after { opacity: 1; }
+.price-card.up  { border-left: 3px solid #22c55e; box-shadow: -3px 0 12px rgba(34,197,94,0.15); }
+.price-card.down { border-left: 3px solid #ef4444; box-shadow: -3px 0 12px rgba(239,68,68,0.15); }
+
+/* ════════════════════════════════════════════
+   COMMODITIES grid cards — hover glow
+   ════════════════════════════════════════════ */
+.feature-card:hover {
+  border-color: rgba(34,211,238,0.4) !important;
+  box-shadow: 0 0 0 1px rgba(34,211,238,0.15), 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(34,211,238,0.06) !important;
+}
+
+/* ════════════════════════════════════════════
+   ABOUT page — markdown rendering fix
+   ════════════════════════════════════════════ */
+.post-content strong { color: #f0f0f5; }
+.post-content ul li::marker { color: var(--accent); }
+
+/* ════════════════════════════════════════════
+   FOOTER — compact on mobile
+   ════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .footer-inner { gap: 28px; }
+  .site-footer { padding: 40px 0 24px; }
+}
+
+/* ════════════════════════════════════════════
+   SCROLLBAR — thinner + accent color
+   ════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: rgba(34,211,238,0.3); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ════════════════════════════════════════════
+   SELECTION color
+   ════════════════════════════════════════════ */
+::selection { background: rgba(34,211,238,0.25); color: #fff; }
+
+/* ════════════════════════════════════════════
+   FOCUS — accessibility
+   ════════════════════════════════════════════ */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ════════════════════════════════════════════
+   LOGO icon — SVG sizing
+   ════════════════════════════════════════════ */
+.logo-icon svg {
+  width: 20px; height: 20px;
+  color: var(--bg);
+}
