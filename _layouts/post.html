@@ -10,23 +10,12 @@ layout: default
   "description": "{{ page.description | default: site.description | escape }}",
   "datePublished": "{{ page.date | date_to_xmlschema }}",
   "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
-  "author": {
-    "@type": "Organization",
-    "name": "CommodityNode",
-    "url": "https://commoditynode.com"
-  },
+  "author": { "@type": "Organization", "name": "CommodityNode", "url": "https://commoditynode.com" },
   "publisher": {
-    "@type": "Organization",
-    "name": "CommodityNode",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://commoditynode.com/assets/images/logo.png"
-    }
+    "@type": "Organization", "name": "CommodityNode",
+    "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/logo.png" }
   },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ page.url | absolute_url }}"
-  },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },
   "image": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}"
 }
 </script>
@@ -38,10 +27,7 @@ layout: default
   "@type": "FinancialProduct",
   "name": "{{ page.commodity_name | default: page.title }}",
   "description": "{{ page.description }}",
-  "provider": {
-    "@type": "Organization",
-    "name": "CommodityNode"
-  }
+  "provider": { "@type": "Organization", "name": "CommodityNode" }
 }
 </script>
 {% endif %}
@@ -57,17 +43,9 @@ layout: default
       <span class="badge badge-gold">{{ page.reading_time }} min read</span>
       {% endif %}
     </div>
-
     <h1>{{ page.title }}</h1>
-
     <div class="post-meta-bar">
-      <time datetime="{{ page.date | date: '%Y-%m-%d' }}">
-        {{ page.date | date: "%B %d, %Y" }}
-      </time>
-      {% if page.author %}
-      <span class="separator" aria-hidden="true"></span>
-      <span>{{ page.author }}</span>
-      {% endif %}
+      <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %d, %Y" }}</time>
       {% if page.reading_time %}
       <span class="separator" aria-hidden="true"></span>
       <span>{{ page.reading_time }} min read</span>
@@ -78,15 +56,16 @@ layout: default
   </div>
 </header>
 
-<!-- Post Body -->
-<div class="container" style="padding-top: 0; padding-bottom: 80px;">
-  <div class="post-layout" id="post-layout">
+<!-- Full-bleed graph section (outside container) -->
+<div class="post-graph-bleed" id="post-graph-zone">
+  <!-- Impact graph injected here by JS if present in content -->
+</div>
 
-    <!-- Article -->
+<!-- Post Body -->
+<div class="container post-body-container">
+  <div class="post-layout" id="post-layout">
     <article class="post-content" id="post-article" data-animate>
       {{ content }}
-
-      <!-- Tags -->
       {% if page.tags.size > 0 %}
       <div class="post-tags" aria-label="Post tags">
         {% for tag in page.tags %}
@@ -96,14 +75,9 @@ layout: default
       {% endif %}
     </article>
 
-    <!-- TOC Sidebar -->
     <aside class="toc-sidebar" aria-label="Table of contents">
       <p class="toc-title">In This Article</p>
-      <ul class="toc-nav" id="toc-list">
-        <!-- Populated by main.js -->
-      </ul>
-
-      <!-- Quick stats widget -->
+      <ul class="toc-nav" id="toc-list"></ul>
       {% if page.tags %}
       <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
         <p class="toc-title">Quick Stats</p>
@@ -126,9 +100,37 @@ layout: default
       </div>
       {% endif %}
     </aside>
-
   </div>
 </div>
 
-<!-- Load impact graph script if commodity data present -->
+<script>
+// Move #impact-graph into full-bleed zone
+(function() {
+  var article = document.getElementById('post-article');
+  var zone = document.getElementById('post-graph-zone');
+  if (!article || !zone) return;
+  var graph = article.querySelector('#impact-graph');
+  if (graph) {
+    // Also move the preceding chart div
+    var chart = article.querySelector('.cn-price-chart');
+    if (chart) {
+      var chartWrap = document.createElement('div');
+      chartWrap.className = 'post-chart-bleed';
+      chartWrap.appendChild(chart.cloneNode(true));
+      zone.appendChild(chartWrap);
+      chart.remove();
+    }
+    var graphWrap = document.createElement('div');
+    graphWrap.className = 'post-nodemap-bleed';
+    graphWrap.appendChild(graph.cloneNode(true));
+    zone.appendChild(graphWrap);
+    graph.remove();
+    // Re-init chart in new location
+    if (window.CommodityNodeChart) {
+      window.CommodityNodeChart.init();
+    }
+  }
+})();
+</script>
+
 <script src="{{ '/assets/js/impact-graph.js' | relative_url }}" defer></script>
