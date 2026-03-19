@@ -10,7 +10,7 @@ description: "Get in touch with the CommodityNode team for tips, corrections, pa
       <span class="badge badge-cyan">Contact</span>
     </div>
     <h1>Get In Touch</h1>
-    <p class="post-meta-bar">Tips, partnerships, corrections, feedback — we want to hear from you.</p>
+    <p class="post-meta-bar">Tips, partnerships, corrections, feedback &mdash; we want to hear from you.</p>
   </div>
 </div>
 
@@ -18,37 +18,31 @@ description: "Get in touch with the CommodityNode team for tips, corrections, pa
 <div class="contact-grid" data-animate>
 
   <div class="post-content">
+    <h2>How to Reach Us</h2>
+    <p>CommodityNode is run by a small independent team. We welcome:</p>
+    <ul>
+      <li><strong>News tips</strong> &mdash; Commodity price moves we should cover</li>
+      <li><strong>Data corrections</strong> &mdash; Spotted a mistake in our analysis?</li>
+      <li><strong>Partnerships</strong> &mdash; Research collaborations, data partnerships</li>
+      <li><strong>Feedback</strong> &mdash; What we&rsquo;re getting right (and wrong)</li>
+    </ul>
 
-## How to Reach Us
+    <h3>Email</h3>
+    <p>For all inquiries, please use the form on this page or reach us at:</p>
+    <p><strong>contact [at] commoditynode [dot] com</strong></p>
+    <p>We aim to respond within 2&ndash;3 business days.</p>
 
-CommodityNode is run by a small independent team. We welcome:
+    <hr>
 
-- **News tips** — Commodity price moves we should cover
-- **Data corrections** — Spotted a mistake in our analysis?
-- **Partnerships** — Research collaborations, data partnerships
-- **Feedback** — What we're getting right (and wrong)
-
-### Email
-
-For all inquiries, please use the form on this page or reach us at:
-
-**contact [at] commoditynode [dot] com**
-
-We aim to respond within 2–3 business days.
-
----
-
-### A Note on Financial Advice
-
-We do **not** provide personalized financial or investment advice. Please consult a licensed financial professional for investment decisions.
-
+    <h3>A Note on Financial Advice</h3>
+    <p>We do <strong>not</strong> provide personalized financial or investment advice. Please consult a licensed financial professional for investment decisions.</p>
   </div>
 
   <div data-animate data-delay="200">
     <div class="glass-card" style="padding:32px;">
       <h3 style="margin-bottom:24px;font-size:1.1rem;">Send a Message</h3>
 
-      <form action="https://formspree.io/f/contact" method="POST" id="contact-form">
+      <form action="https://formspree.io/f/mrgvbnwp" method="POST" id="contact-form">
         <div class="form-group">
           <label class="form-label" for="name">Your Name</label>
           <input class="form-control" type="text" id="name" name="name" placeholder="Jane Doe" required>
@@ -73,11 +67,11 @@ We do **not** provide personalized financial or investment advice. Please consul
 
         <div class="form-group">
           <label class="form-label" for="message">Message</label>
-          <textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell us what's on your mind..." required></textarea>
+          <textarea class="form-control" id="message" name="message" rows="5" placeholder="Tell us what&#39;s on your mind..." required></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">
-          <span>✉️</span> Send Message
+          Send Message &rarr;
         </button>
       </form>
     </div>
