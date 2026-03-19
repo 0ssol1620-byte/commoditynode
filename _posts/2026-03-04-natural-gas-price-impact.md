@@ -16,7 +16,7 @@ Natural gas is the most volatile major commodity — winter cold snaps or supply
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="NG=F" data-name="Natural Gas"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
