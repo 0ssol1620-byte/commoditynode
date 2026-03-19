@@ -1,12 +1,18 @@
 // assets/js/price-chart.js
-// Premium candlestick chart for CommodityNode
-// Uses Yahoo Finance via allorigins CORS proxy
+// CommodityNode — Premium Candlestick Chart v2
+// Multi-proxy fallback for reliable Yahoo Finance data
 
 (function() {
   'use strict';
 
-  const PROXY = 'https://api.allorigins.win/get?url=';
+  // Multiple CORS proxies — try in order until one works
+  const PROXIES = [
+    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+    url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+    url => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
+  ];
   const YF_BASE = 'https://query1.finance.yahoo.com/v8/finance/chart/';
+  const TIMEOUT_MS = 8000;
 
   const PERIODS = {
     '1M': { range: '1mo', interval: '1d' },
@@ -25,15 +31,39 @@
     return '$' + p.toLocaleString('en-US', { minimumFractionDigits: decimals || 2, maximumFractionDigits: decimals || 2 });
   }
 
+  function fetchWithTimeout(url, ms) {
+    return Promise.race([
+      fetch(url),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms))
+    ]);
+  }
+
+  async function fetchViaProxy(yfUrl, proxyFn) {
+    const res = await fetchWithTimeout(proxyFn(yfUrl), TIMEOUT_MS);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    // allorigins wraps in {contents: "..."}; corsproxy.io returns raw JSON
+    const raw = json.contents ? JSON.parse(json.contents) : json;
+    return raw;
+  }
+
   async function fetchData(symbol, period) {
     const cfg = PERIODS[period] || PERIODS['3M'];
-    const url = `${YF_BASE}${encodeURIComponent(symbol)}?range=${cfg.range}&interval=${cfg.interval}&includePrePost=false`;
-    const proxyUrl = PROXY + encodeURIComponent(url);
+    const yfUrl = `${YF_BASE}${encodeURIComponent(symbol)}?range=${cfg.range}&interval=${cfg.interval}&includePrePost=false`;
+
+    let data = null;
+    for (const proxyFn of PROXIES) {
+      try {
+        data = await fetchViaProxy(yfUrl, proxyFn);
+        if (data?.chart?.result) break;
+      } catch (e) {
+        console.warn('Proxy failed, trying next...', e.message);
+      }
+    }
+
+    if (!data?.chart?.result?.[0]) return null;
 
     try {
-      const res = await fetch(proxyUrl);
-      const json = await res.json();
-      const data = JSON.parse(json.contents);
       const result = data.chart.result[0];
       const timestamps = result.timestamp;
       const ohlcv = result.indicators.quote[0];
@@ -50,7 +80,7 @@
       const meta = result.meta;
       return { candles, meta, currency: meta.currency || 'USD' };
     } catch (e) {
-      console.warn('Price fetch failed:', e);
+      console.warn('Parse failed:', e);
       return null;
     }
   }
@@ -59,38 +89,29 @@
     const ctx = container.querySelector('canvas');
     if (!ctx) return;
 
-    // Calculate change
     const first = candles[0].c;
-    const last = candles[candles.length - 1].c;
+    const last  = candles[candles.length - 1].c;
     const change = ((last - first) / first * 100).toFixed(2);
     const isUp = change >= 0;
 
-    // Update price display
-    const priceEl = container.querySelector('.cn-price');
+    const priceEl  = container.querySelector('.cn-price');
     const changeEl = container.querySelector('.cn-change');
-    if (priceEl) priceEl.textContent = formatPrice(last, currency === 'USD' ? 2 : 4);
+    if (priceEl)  priceEl.textContent = formatPrice(last, currency === 'USD' ? 2 : 4);
     if (changeEl) {
       changeEl.textContent = (isUp ? '+' : '') + change + '%';
       changeEl.className = 'cn-change ' + (isUp ? 'up' : 'down');
     }
 
-    // Destroy existing chart
     if (ctx._chart) ctx._chart.destroy();
 
-    // Colors
-    const UP_COLOR = '#22c55e';
+    const UP_COLOR   = '#22c55e';
     const DOWN_COLOR = '#ef4444';
-    const GRID = 'rgba(255,255,255,0.06)';
-    const TEXT = '#a1a1aa';
+    const GRID       = 'rgba(255,255,255,0.06)';
+    const TEXT       = '#a1a1aa';
 
-    const chartData = candles.map(c => ({
-      x: c.x,
-      o: c.o, h: c.h, l: c.l, c: c.c
-    }));
-
+    const chartData  = candles.map(c => ({ x: c.x, o: c.o, h: c.h, l: c.l, c: c.c }));
     const volumeData = candles.map(c => ({
-      x: c.x,
-      y: c.v,
+      x: c.x, y: c.v,
       color: c.c >= c.o ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'
     }));
 
@@ -166,7 +187,6 @@
               }
             }
           },
-          crosshair: false,
         },
         interaction: { mode: 'index', intersect: false },
       }
@@ -175,10 +195,9 @@
 
   async function initChart(el) {
     const symbol = el.dataset.symbol;
-    const name = el.dataset.name || symbol;
+    const name   = el.dataset.name || symbol;
     if (!symbol) return;
 
-    // Build inner HTML
     el.innerHTML = `
       <div class="cn-chart-header">
         <div class="cn-chart-title">
@@ -193,15 +212,17 @@
         </div>
       </div>
       <div class="cn-chart-body">
-        <div class="cn-chart-loading">Loading price data...</div>
+        <div class="cn-chart-loading">
+          <div class="cn-loading-spinner"></div>
+          <span>Fetching price data…</span>
+        </div>
         <canvas></canvas>
       </div>
     `;
 
-    const canvas = el.querySelector('canvas');
+    const canvas    = el.querySelector('canvas');
     const loadingEl = el.querySelector('.cn-chart-loading');
 
-    // Load Chart.js dependencies if not already loaded
     if (!window.Chart) {
       await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js');
       await loadScript('https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3/dist/chartjs-adapter-date-fns.bundle.min.js');
@@ -222,12 +243,12 @@
       if (data && data.candles.length > 0) {
         renderChart(el, data.candles, symbol, data.currency);
       } else {
-        loadingEl.textContent = 'Price data unavailable';
+        loadingEl.querySelector('span').textContent = 'Price data unavailable';
+        loadingEl.querySelector('.cn-loading-spinner').style.display = 'none';
         loadingEl.style.display = 'flex';
       }
     }
 
-    // Period buttons
     el.querySelectorAll('.cn-period').forEach(btn => {
       btn.addEventListener('click', () => {
         el.querySelectorAll('.cn-period').forEach(b => b.classList.remove('active'));
@@ -249,7 +270,6 @@
     });
   }
 
-  // Initialize all charts on page
   function init() {
     document.querySelectorAll('.cn-price-chart').forEach(initChart);
   }
