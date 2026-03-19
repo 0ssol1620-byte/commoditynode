@@ -16,7 +16,7 @@ Gold is the ultimate safe-haven asset — but its price movements create far mor
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="GC=F" data-name="Gold Futures"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
