@@ -1731,3 +1731,11 @@ a.feature-card:hover,
 /* ── Impact graph hint text hidden ── */
 .impact-graph-hint { display: none !important; }
 em:has-text('Drag nodes') { display: none; }
+
+/* ── Chart header right side ── */
+.cn-chart-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
