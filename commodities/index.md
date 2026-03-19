@@ -24,32 +24,32 @@ description: "Explore how each commodity's price movements impact industries, st
 
 <div class="features-grid" data-animate data-delay="100">
   <a href="/commodities/crude-oil/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon">⛽</div>
+    <div class="feature-icon" style="font-size:0.7rem;font-weight:800;letter-spacing:0.05em;color:var(--accent)">OIL</div>
     <h3 class="feature-title">Crude Oil</h3>
-    <p class="feature-desc">The most interconnected commodity — traces impact across 12+ industries.</p>
+    <p class="feature-desc">The most interconnected commodity &mdash; traces impact across 12+ industries.</p>
   </a>
   <a href="/commodities/natural-gas/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon">🔥</div>
+    <div class="feature-icon" style="font-size:0.7rem;font-weight:800;letter-spacing:0.05em;color:var(--accent)">GAS</div>
     <h3 class="feature-title">Natural Gas</h3>
-    <p class="feature-desc">Heating, electricity generation, and chemical feedstock — wide downstream exposure.</p>
+    <p class="feature-desc">Heating, electricity generation, and chemical feedstock &mdash; wide downstream exposure.</p>
   </a>
 </div>
 
 <div class="section-header" style="margin-top:48px;" data-animate>
   <p class="section-label">Metals</p>
-  <h2 class="section-title">Metals & Mining</h2>
+  <h2 class="section-title">Metals &amp; Mining</h2>
 </div>
 
 <div class="features-grid" data-animate data-delay="100">
   <a href="/commodities/copper/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon">🥉</div>
+    <div class="feature-icon" style="font-size:0.7rem;font-weight:800;letter-spacing:0.05em;color:var(--accent)">Cu</div>
     <h3 class="feature-title">Copper</h3>
-    <p class="feature-desc">The economy's pulse — a leading indicator for global industrial activity.</p>
+    <p class="feature-desc">The economy&rsquo;s pulse &mdash; a leading indicator for global industrial activity.</p>
   </a>
   <a href="/commodities/gold/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon">🥇</div>
+    <div class="feature-icon" style="font-size:0.7rem;font-weight:800;letter-spacing:0.05em;color:var(--gold)">Au</div>
     <h3 class="feature-title">Gold</h3>
-    <p class="feature-desc">The ultimate safe haven — reacts to inflation, geopolitics, and dollar strength.</p>
+    <p class="feature-desc">The ultimate safe haven &mdash; inverse correlation with risk assets during crises.</p>
   </a>
 </div>
 
@@ -60,14 +60,14 @@ description: "Explore how each commodity's price movements impact industries, st
 
 <div class="features-grid" data-animate data-delay="100">
   <a href="/commodities/wheat/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon">🌾</div>
+    <div class="feature-icon" style="font-size:0.7rem;font-weight:800;letter-spacing:0.05em;color:var(--accent)">WHT</div>
     <h3 class="feature-title">Wheat</h3>
-    <p class="feature-desc">Global food security indicator — sensitive to weather, geopolitics, and trade policy.</p>
+    <p class="feature-desc">Global food security bellwether &mdash; geopolitics and weather in every bushel.</p>
   </a>
   <a href="/commodities/corn/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon">🌽</div>
+    <div class="feature-icon" style="font-size:0.7rem;font-weight:800;letter-spacing:0.05em;color:var(--accent)">CRN</div>
     <h3 class="feature-title">Corn</h3>
-    <p class="feature-desc">Food, feed, and biofuel — among the most policy-sensitive commodities.</p>
+    <p class="feature-desc">Ethanol, livestock feed, and food supply chains &mdash; multisector ripple effects.</p>
   </a>
 </div>
 
