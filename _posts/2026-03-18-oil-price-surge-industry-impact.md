@@ -60,7 +60,6 @@ window.COMMODITY_DATA = {
 </script>
 <script src="/assets/js/impact-graph.js"></script>
 
-*Drag nodes to explore. Green = positive impact, Red = negative impact.*
 
 ## Winners 🟢
 
