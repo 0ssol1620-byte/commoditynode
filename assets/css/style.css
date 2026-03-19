@@ -1688,3 +1688,46 @@ a.feature-card:hover,
 .cn-chart-header-right {
   display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
 }
+
+/* ── Commodity grid (3-4 cols on desktop) ── */
+.commodity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* ── Commodity tag badge in feature-icon ── */
+.commodity-tag {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.1em !important;
+  color: var(--accent) !important;
+  background: rgba(34,211,238,0.1) !important;
+  border: 1px solid rgba(34,211,238,0.25) !important;
+  border-radius: var(--radius-sm) !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* ── Wider post content for nodemap ── */
+.post-content {
+  max-width: 100%;
+}
+.container {
+  max-width: 1200px;
+}
+#impact-graph {
+  min-height: 520px;
+}
+@media (max-width: 768px) {
+  #impact-graph { min-height: 400px; }
+  .commodity-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Impact graph hint text hidden ── */
+.impact-graph-hint { display: none !important; }
+em:has-text('Drag nodes') { display: none; }
