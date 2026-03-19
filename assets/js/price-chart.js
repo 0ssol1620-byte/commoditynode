@@ -1,118 +1,75 @@
 // assets/js/price-chart.js
-// CommodityNode — Premium Candlestick Chart v2
-// Multi-proxy fallback for reliable Yahoo Finance data
+// CommodityNode — Premium Candlestick Chart v3
+// Reads from /assets/data/chart-data.json (same-origin, no CORS issues)
+// Falls back gracefully with "Live data temporarily unavailable" message
 
 (function() {
   'use strict';
 
-  // Multiple CORS proxies — try in order until one works
-  const PROXIES = [
-    url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-    url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-    url => `https://thingproxy.freeboard.io/fetch/${encodeURIComponent(url)}`,
-  ];
-  const YF_BASE = 'https://query1.finance.yahoo.com/v8/finance/chart/';
-  const TIMEOUT_MS = 8000;
+  const CHART_DATA_URL = '/assets/data/chart-data.json';
+  const PERIODS = ['1M', '3M', '1Y', '5Y'];
 
-  const PERIODS = {
-    '1M': { range: '1mo', interval: '1d' },
-    '3M': { range: '3mo', interval: '1d' },
-    '1Y': { range: '1y',  interval: '1wk' },
-    '5Y': { range: '5y',  interval: '1mo' },
-  };
+  let _cache = null;
+  let _fetchPromise = null;
+
+  function getChartData() {
+    if (_cache) return Promise.resolve(_cache);
+    if (_fetchPromise) return _fetchPromise;
+    _fetchPromise = fetch(CHART_DATA_URL)
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(data => { _cache = data; return data; })
+      .catch(err => { console.warn('[CommodityNode] chart-data.json unavailable:', err.message); return null; });
+    return _fetchPromise;
+  }
 
   function formatDate(ts) {
-    const d = new Date(ts * 1000);
+    const d = new Date(ts);
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
   }
 
-  function formatPrice(p, decimals) {
+  function formatPrice(p) {
     if (p === null || p === undefined || isNaN(p)) return 'N/A';
-    return '$' + p.toLocaleString('en-US', { minimumFractionDigits: decimals || 2, maximumFractionDigits: decimals || 2 });
+    return '$' + p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  function fetchWithTimeout(url, ms) {
-    return Promise.race([
-      fetch(url),
-      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms))
-    ]);
-  }
-
-  async function fetchViaProxy(yfUrl, proxyFn) {
-    const res = await fetchWithTimeout(proxyFn(yfUrl), TIMEOUT_MS);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const json = await res.json();
-    // allorigins wraps in {contents: "..."}; corsproxy.io returns raw JSON
-    const raw = json.contents ? JSON.parse(json.contents) : json;
-    return raw;
-  }
-
-  async function fetchData(symbol, period) {
-    const cfg = PERIODS[period] || PERIODS['3M'];
-    const yfUrl = `${YF_BASE}${encodeURIComponent(symbol)}?range=${cfg.range}&interval=${cfg.interval}&includePrePost=false`;
-
-    let data = null;
-    for (const proxyFn of PROXIES) {
-      try {
-        data = await fetchViaProxy(yfUrl, proxyFn);
-        if (data?.chart?.result) break;
-      } catch (e) {
-        console.warn('Proxy failed, trying next...', e.message);
-      }
-    }
-
-    if (!data?.chart?.result?.[0]) return null;
-
-    try {
-      const result = data.chart.result[0];
-      const timestamps = result.timestamp;
-      const ohlcv = result.indicators.quote[0];
-
-      const candles = timestamps.map((ts, i) => ({
-        x: ts * 1000,
-        o: ohlcv.open[i],
-        h: ohlcv.high[i],
-        l: ohlcv.low[i],
-        c: ohlcv.close[i],
-        v: ohlcv.volume[i],
-      })).filter(c => c.o && c.h && c.l && c.c);
-
-      const meta = result.meta;
-      return { candles, meta, currency: meta.currency || 'USD' };
-    } catch (e) {
-      console.warn('Parse failed:', e);
-      return null;
-    }
-  }
-
-  function renderChart(container, candles, symbol, currency) {
+  function renderChart(container, candles, symbol, updatedAt) {
     const ctx = container.querySelector('canvas');
     if (!ctx) return;
 
     const first = candles[0].c;
     const last  = candles[candles.length - 1].c;
     const change = ((last - first) / first * 100).toFixed(2);
-    const isUp = change >= 0;
+    const isUp = parseFloat(change) >= 0;
 
     const priceEl  = container.querySelector('.cn-price');
     const changeEl = container.querySelector('.cn-change');
-    if (priceEl)  priceEl.textContent = formatPrice(last, currency === 'USD' ? 2 : 4);
+    const updateEl = container.querySelector('.cn-updated');
+    if (priceEl)  priceEl.textContent = formatPrice(last);
     if (changeEl) {
       changeEl.textContent = (isUp ? '+' : '') + change + '%';
       changeEl.className = 'cn-change ' + (isUp ? 'up' : 'down');
+    }
+    if (updateEl && updatedAt) {
+      try {
+        const d = new Date(updatedAt);
+        if (!isNaN(d)) {
+          updateEl.textContent = 'Updated: ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+      } catch(e) {}
     }
 
     if (ctx._chart) ctx._chart.destroy();
 
     const UP_COLOR   = '#22c55e';
     const DOWN_COLOR = '#ef4444';
-    const GRID       = 'rgba(255,255,255,0.06)';
-    const TEXT       = '#a1a1aa';
+    const GRID_C     = 'rgba(255,255,255,0.06)';
+    const TEXT_C     = '#a1a1aa';
 
     const chartData  = candles.map(c => ({ x: c.x, o: c.o, h: c.h, l: c.l, c: c.c }));
+    const maxVol     = Math.max(...candles.map(c => c.v || 0), 1);
     const volumeData = candles.map(c => ({
-      x: c.x, y: c.v,
-      color: c.c >= c.o ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'
+      x: c.x, y: c.v || 0,
+      color: (c.c >= c.o) ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'
     }));
 
     ctx._chart = new Chart(ctx, {
@@ -127,61 +84,43 @@
             backgroundColors: { up: UP_COLOR, down: DOWN_COLOR, unchanged: '#94a3b8' },
           },
           {
-            type: 'bar',
-            label: 'Volume',
+            type: 'bar', label: 'Volume',
             data: volumeData,
             backgroundColor: volumeData.map(v => v.color),
-            yAxisID: 'volume',
-            order: 2,
+            yAxisID: 'volume', order: 2,
           }
         ]
       },
       options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        animation: { duration: 600, easing: 'easeInOutQuart' },
+        responsive: true, maintainAspectRatio: false,
+        animation: { duration: 500, easing: 'easeInOutQuart' },
         layout: { padding: { top: 8, right: 16, bottom: 8, left: 8 } },
         scales: {
           x: {
-            type: 'time',
-            time: { tooltipFormat: 'MMM d, yyyy' },
-            grid: { color: GRID, drawBorder: false },
-            ticks: { color: TEXT, maxTicksLimit: 8, font: { family: 'Inter', size: 11 } },
+            type: 'time', time: { tooltipFormat: 'MMM d, yyyy' },
+            grid: { color: GRID_C, drawBorder: false },
+            ticks: { color: TEXT_C, maxTicksLimit: 8, font: { family: 'Inter', size: 11 } },
             adapters: { date: { locale: 'en-US' } }
           },
           y: {
             position: 'right',
-            grid: { color: GRID, drawBorder: false },
-            ticks: {
-              color: TEXT,
-              font: { family: 'JetBrains Mono', size: 11 },
-              callback: v => '$' + v.toLocaleString()
-            }
+            grid: { color: GRID_C, drawBorder: false },
+            ticks: { color: TEXT_C, font: { family: 'JetBrains Mono', size: 11 }, callback: v => '$' + v.toLocaleString() }
           },
-          volume: {
-            position: 'left',
-            max: Math.max(...candles.map(c => c.v)) * 5,
-            grid: { display: false },
-            ticks: { display: false },
-          }
+          volume: { position: 'left', max: maxVol * 5, grid: { display: false }, ticks: { display: false } }
         },
         plugins: {
           legend: { display: false },
           tooltip: {
-            mode: 'index',
-            intersect: false,
-            backgroundColor: 'rgba(13,13,20,0.95)',
-            borderColor: 'rgba(255,255,255,0.1)',
-            borderWidth: 1,
-            titleColor: '#e4e4e7',
-            bodyColor: '#a1a1aa',
-            padding: 12,
+            mode: 'index', intersect: false,
+            backgroundColor: 'rgba(13,13,20,0.95)', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+            titleColor: '#e4e4e7', bodyColor: '#a1a1aa', padding: 12,
             titleFont: { family: 'Inter', size: 12, weight: '600' },
             bodyFont: { family: 'JetBrains Mono', size: 11 },
             callbacks: {
-              title: items => formatDate(items[0].parsed.x / 1000),
+              title: items => formatDate(items[0].parsed.x),
               label: item => {
-                if (item.dataset.type === 'bar') return `Vol: ${(item.parsed.y/1e6).toFixed(1)}M`;
+                if (item.datasetIndex === 1) return `Vol: ${((item.parsed.y||0)/1e6).toFixed(1)}M`;
                 const d = item.raw;
                 return [`O: $${d.o?.toFixed(2)}  H: $${d.h?.toFixed(2)}`, `L: $${d.l?.toFixed(2)}  C: $${d.c?.toFixed(2)}`];
               }
@@ -205,16 +144,17 @@
           <span class="cn-price">—</span>
           <span class="cn-change">—</span>
         </div>
-        <div class="cn-period-btns">
-          ${Object.keys(PERIODS).map((p, i) =>
-            `<button class="cn-period${i===1?' active':''}" data-period="${p}">${p}</button>`
-          ).join('')}
+        <div class="cn-chart-header-right" style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+          <span class="cn-updated" style="font-size:0.7rem;color:#52525b;font-family:'JetBrains Mono',monospace;"></span>
+          <div class="cn-period-btns">
+            ${PERIODS.map((p,i) => `<button class="cn-period${i===1?' active':''}" data-period="${p}">${p}</button>`).join('')}
+          </div>
         </div>
       </div>
       <div class="cn-chart-body">
         <div class="cn-chart-loading">
           <div class="cn-loading-spinner"></div>
-          <span>Fetching price data…</span>
+          <span>Loading chart data\u2026</span>
         </div>
         <canvas></canvas>
       </div>
@@ -222,6 +162,7 @@
 
     const canvas    = el.querySelector('canvas');
     const loadingEl = el.querySelector('.cn-chart-loading');
+    let currentPeriod = '3M';
 
     if (!window.Chart) {
       await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js');
@@ -229,23 +170,21 @@
       await loadScript('https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.2.1/dist/chartjs-chart-financial.min.js');
     }
 
-    let currentPeriod = '3M';
-
     async function loadAndRender(period) {
+      loadingEl.innerHTML = '<div class="cn-loading-spinner"></div><span>Loading chart data\u2026</span>';
       loadingEl.style.display = 'flex';
       canvas.style.opacity = '0';
 
-      const data = await fetchData(symbol, period);
-
-      loadingEl.style.display = 'none';
-      canvas.style.opacity = '1';
-
-      if (data && data.candles.length > 0) {
-        renderChart(el, data.candles, symbol, data.currency);
+      const allData = await getChartData();
+      if (allData && allData[symbol] && allData[symbol][period] &&
+          allData[symbol][period].candles && allData[symbol][period].candles.length > 0) {
+        loadingEl.style.display = 'none';
+        canvas.style.opacity = '1';
+        renderChart(el, allData[symbol][period].candles, symbol, allData[symbol].updated_at);
       } else {
-        loadingEl.querySelector('span').textContent = 'Price data unavailable';
-        loadingEl.querySelector('.cn-loading-spinner').style.display = 'none';
+        loadingEl.innerHTML = '<span style="color:#52525b;font-family:\'JetBrains Mono\',monospace;font-size:0.82rem;text-align:center;padding:8px;line-height:1.5">Live data temporarily unavailable<br>\u2014 showing latest cached prices</span>';
         loadingEl.style.display = 'flex';
+        canvas.style.opacity = '0';
       }
     }
 
@@ -270,15 +209,10 @@
     });
   }
 
-  function init() {
-    document.querySelectorAll('.cn-price-chart').forEach(initChart);
-  }
+  function init() { document.querySelectorAll('.cn-price-chart').forEach(initChart); }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 
   window.CommodityNodeChart = { init, initChart };
 })();
