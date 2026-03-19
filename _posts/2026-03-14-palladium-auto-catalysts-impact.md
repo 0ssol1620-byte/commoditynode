@@ -16,7 +16,7 @@ Palladium is the most critical commodity most investors have never heard of. It'
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="PA=F" data-name="Palladium Futures"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
