@@ -1,76 +1,54 @@
-// assets/js/price-chart.js
-// CommodityNode — Premium Candlestick Chart v3
-// Reads from /assets/data/chart-data.json (same-origin, no CORS issues)
-// Falls back gracefully with "Live data temporarily unavailable" message
+// assets/js/price-chart.js v3
+// CommodityNode — reads from /assets/data/chart-data.json (same-origin, no CORS)
 
-(function() {
+(function () {
   'use strict';
 
-  const CHART_DATA_URL = '/assets/data/chart-data.json';
   const PERIODS = ['1M', '3M', '1Y', '5Y'];
 
-  let _cache = null;
-  let _fetchPromise = null;
-
-  function getChartData() {
-    if (_cache) return Promise.resolve(_cache);
-    if (_fetchPromise) return _fetchPromise;
-    _fetchPromise = fetch(CHART_DATA_URL)
-      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-      .then(data => { _cache = data; return data; })
-      .catch(err => { console.warn('[CommodityNode] chart-data.json unavailable:', err.message); return null; });
-    return _fetchPromise;
+  let chartDataCache = null;
+  async function loadChartData() {
+    if (chartDataCache) return chartDataCache;
+    try {
+      const res = await fetch('/assets/data/chart-data.json');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      chartDataCache = await res.json();
+      return chartDataCache;
+    } catch (e) {
+      console.warn('chart-data.json not found:', e.message);
+      return null;
+    }
   }
 
   function formatDate(ts) {
-    const d = new Date(ts);
-    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+    return new Date(ts).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
   }
 
-  function formatPrice(p) {
-    if (p === null || p === undefined || isNaN(p)) return 'N/A';
-    return '$' + p.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function formatPrice(p, decimals) {
+    if (p == null || isNaN(p)) return 'N/A';
+    return '$' + (+p).toLocaleString('en-US', { minimumFractionDigits: decimals || 2, maximumFractionDigits: decimals || 2 });
   }
 
-  function renderChart(container, candles, symbol, updatedAt) {
+  function renderChart(container, candles, symbol, name) {
     const ctx = container.querySelector('canvas');
     if (!ctx) return;
+    if (ctx._chart) { ctx._chart.destroy(); ctx._chart = null; }
 
-    const first = candles[0].c;
-    const last  = candles[candles.length - 1].c;
+    const first = candles[0].c, last = candles[candles.length - 1].c;
     const change = ((last - first) / first * 100).toFixed(2);
-    const isUp = parseFloat(change) >= 0;
+    const isUp = +change >= 0;
 
     const priceEl  = container.querySelector('.cn-price');
     const changeEl = container.querySelector('.cn-change');
-    const updateEl = container.querySelector('.cn-updated');
+    const updEl    = container.querySelector('.cn-updated');
     if (priceEl)  priceEl.textContent = formatPrice(last);
-    if (changeEl) {
-      changeEl.textContent = (isUp ? '+' : '') + change + '%';
-      changeEl.className = 'cn-change ' + (isUp ? 'up' : 'down');
-    }
-    if (updateEl && updatedAt) {
-      try {
-        const d = new Date(updatedAt);
-        if (!isNaN(d)) {
-          updateEl.textContent = 'Updated: ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        }
-      } catch(e) {}
-    }
+    if (changeEl) { changeEl.textContent = (isUp ? '+' : '') + change + '%'; changeEl.className = 'cn-change ' + (isUp ? 'up' : 'down'); }
+    if (updEl)    updEl.textContent = 'Updated ' + formatDate(candles[candles.length - 1].x);
 
-    if (ctx._chart) ctx._chart.destroy();
-
-    const UP_COLOR   = '#22c55e';
-    const DOWN_COLOR = '#ef4444';
-    const GRID_C     = 'rgba(255,255,255,0.06)';
-    const TEXT_C     = '#a1a1aa';
+    const UP = '#22c55e', DOWN = '#ef4444', GRID = 'rgba(255,255,255,0.05)', TEXT = '#71717a';
 
     const chartData  = candles.map(c => ({ x: c.x, o: c.o, h: c.h, l: c.l, c: c.c }));
-    const maxVol     = Math.max(...candles.map(c => c.v || 0), 1);
-    const volumeData = candles.map(c => ({
-      x: c.x, y: c.v || 0,
-      color: (c.c >= c.o) ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'
-    }));
+    const volumeData = candles.map(c => ({ x: c.x, y: c.v, color: c.c >= c.o ? 'rgba(34,197,94,0.25)' : 'rgba(239,68,68,0.25)' }));
 
     ctx._chart = new Chart(ctx, {
       type: 'candlestick',
@@ -79,9 +57,9 @@
           {
             label: symbol,
             data: chartData,
-            color: { up: UP_COLOR, down: DOWN_COLOR, unchanged: '#94a3b8' },
-            borderColor: { up: UP_COLOR, down: DOWN_COLOR, unchanged: '#94a3b8' },
-            backgroundColors: { up: UP_COLOR, down: DOWN_COLOR, unchanged: '#94a3b8' },
+            color: { up: UP, down: DOWN, unchanged: '#94a3b8' },
+            borderColor: { up: UP, down: DOWN, unchanged: '#94a3b8' },
+            backgroundColors: { up: UP, down: DOWN, unchanged: '#94a3b8' },
           },
           {
             type: 'bar', label: 'Volume',
@@ -93,39 +71,46 @@
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        animation: { duration: 500, easing: 'easeInOutQuart' },
-        layout: { padding: { top: 8, right: 16, bottom: 8, left: 8 } },
+        animation: { duration: 500 },
+        layout: { padding: { top: 8, right: 20, bottom: 4, left: 4 } },
         scales: {
           x: {
-            type: 'time', time: { tooltipFormat: 'MMM d, yyyy' },
-            grid: { color: GRID_C, drawBorder: false },
-            ticks: { color: TEXT_C, maxTicksLimit: 8, font: { family: 'Inter', size: 11 } },
+            type: 'time',
+            time: { tooltipFormat: 'MMM d, yyyy' },
+            grid: { color: GRID, drawBorder: false },
+            ticks: { color: TEXT, maxTicksLimit: 8, font: { family: 'Inter', size: 11 } },
             adapters: { date: { locale: 'en-US' } }
           },
           y: {
             position: 'right',
-            grid: { color: GRID_C, drawBorder: false },
-            ticks: { color: TEXT_C, font: { family: 'JetBrains Mono', size: 11 }, callback: v => '$' + v.toLocaleString() }
+            grid: { color: GRID, drawBorder: false },
+            ticks: { color: TEXT, font: { family: 'JetBrains Mono', size: 11 }, callback: v => '$' + v.toLocaleString() }
           },
-          volume: { position: 'left', max: maxVol * 5, grid: { display: false }, ticks: { display: false } }
+          volume: {
+            position: 'left',
+            max: Math.max(...candles.map(c => c.v || 0)) * 5,
+            grid: { display: false }, ticks: { display: false },
+          }
         },
         plugins: {
           legend: { display: false },
           tooltip: {
             mode: 'index', intersect: false,
-            backgroundColor: 'rgba(13,13,20,0.95)', borderColor: 'rgba(255,255,255,0.1)', borderWidth: 1,
+            backgroundColor: 'rgba(10,10,18,0.96)',
+            borderColor: 'rgba(255,255,255,0.08)', borderWidth: 1,
             titleColor: '#e4e4e7', bodyColor: '#a1a1aa', padding: 12,
             titleFont: { family: 'Inter', size: 12, weight: '600' },
             bodyFont: { family: 'JetBrains Mono', size: 11 },
             callbacks: {
-              title: items => formatDate(items[0].parsed.x),
+              title: items => formatDate(items[0].parsed?.x ?? items[0].raw?.x),
               label: item => {
                 if (item.datasetIndex === 1) return `Vol: ${((item.parsed.y||0)/1e6).toFixed(1)}M`;
                 const d = item.raw;
-                return [`O: $${d.o?.toFixed(2)}  H: $${d.h?.toFixed(2)}`, `L: $${d.l?.toFixed(2)}  C: $${d.c?.toFixed(2)}`];
+                if (!d) return '';
+                return [`O: $${(+d.o).toFixed(2)}  H: $${(+d.h).toFixed(2)}`, `L: $${(+d.l).toFixed(2)}  C: $${(+d.c).toFixed(2)}`];
               }
             }
-          },
+          }
         },
         interaction: { mode: 'index', intersect: false },
       }
@@ -144,47 +129,48 @@
           <span class="cn-price">—</span>
           <span class="cn-change">—</span>
         </div>
-        <div class="cn-chart-header-right" style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
-          <span class="cn-updated" style="font-size:0.7rem;color:#52525b;font-family:'JetBrains Mono',monospace;"></span>
+        <div class="cn-chart-right">
+          <span class="cn-updated" style="font-size:0.72rem;color:#52525b;font-family:'JetBrains Mono',monospace;"></span>
           <div class="cn-period-btns">
-            ${PERIODS.map((p,i) => `<button class="cn-period${i===1?' active':''}" data-period="${p}">${p}</button>`).join('')}
+            ${PERIODS.map((p, i) => `<button class="cn-period${i===1?' active':''}" data-period="${p}">${p}</button>`).join('')}
           </div>
         </div>
       </div>
       <div class="cn-chart-body">
-        <div class="cn-chart-loading">
-          <div class="cn-loading-spinner"></div>
-          <span>Loading chart data\u2026</span>
-        </div>
+        <div class="cn-chart-loading"><div class="cn-loading-spinner"></div><span>Loading…</span></div>
         <canvas></canvas>
       </div>
     `;
 
-    const canvas    = el.querySelector('canvas');
     const loadingEl = el.querySelector('.cn-chart-loading');
-    let currentPeriod = '3M';
 
+    // Load Chart.js if needed
     if (!window.Chart) {
       await loadScript('https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js');
       await loadScript('https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3/dist/chartjs-adapter-date-fns.bundle.min.js');
       await loadScript('https://cdn.jsdelivr.net/npm/chartjs-chart-financial@0.2.1/dist/chartjs-chart-financial.min.js');
     }
 
-    async function loadAndRender(period) {
-      loadingEl.innerHTML = '<div class="cn-loading-spinner"></div><span>Loading chart data\u2026</span>';
-      loadingEl.style.display = 'flex';
-      canvas.style.opacity = '0';
+    const chartData = await loadChartData();
+    let currentPeriod = '3M';
 
-      const allData = await getChartData();
-      if (allData && allData[symbol] && allData[symbol][period] &&
-          allData[symbol][period].candles && allData[symbol][period].candles.length > 0) {
-        loadingEl.style.display = 'none';
-        canvas.style.opacity = '1';
-        renderChart(el, allData[symbol][period].candles, symbol, allData[symbol].updated_at);
+    async function loadAndRender(period) {
+      loadingEl.style.display = 'flex';
+      el.querySelector('canvas').style.opacity = '0';
+
+      const symbolData = chartData?.[symbol];
+      const periodData = symbolData?.[period];
+      const candles = periodData?.candles;
+
+      loadingEl.style.display = 'none';
+      el.querySelector('canvas').style.opacity = '1';
+
+      if (candles && candles.length > 0) {
+        renderChart(el, candles, symbol, name);
       } else {
-        loadingEl.innerHTML = '<span style="color:#52525b;font-family:\'JetBrains Mono\',monospace;font-size:0.82rem;text-align:center;padding:8px;line-height:1.5">Live data temporarily unavailable<br>\u2014 showing latest cached prices</span>';
+        loadingEl.querySelector('span').textContent = 'Price data temporarily unavailable';
+        loadingEl.querySelector('.cn-loading-spinner').style.display = 'none';
         loadingEl.style.display = 'flex';
-        canvas.style.opacity = '0';
       }
     }
 
@@ -210,7 +196,6 @@
   }
 
   function init() { document.querySelectorAll('.cn-price-chart').forEach(initChart); }
-
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 
