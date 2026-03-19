@@ -16,7 +16,7 @@ Iron ore is China's most important imported commodity — and the single biggest
 ## The Impact Map
 
 <div class="cn-price-chart" data-symbol="VALE" data-name="Vale (VALE)"></div>
-<script src="/assets/js/price-chart.js"></script><div id="impact-graph"></div>
+<div id="impact-graph"></div>
 
 <script>
 window.COMMODITY_DATA = {
