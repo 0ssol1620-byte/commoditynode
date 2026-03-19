@@ -20,36 +20,25 @@ title: Home
 
       <p class="hero-desc" data-animate data-delay="200">
         Interactive analysis of how commodity price movements ripple through
-        global industries, stocks, and ETFs — visualized in real time.
+        global industries, stocks, and ETFs &mdash; visualized in real time.
       </p>
 
       <div class="hero-actions" data-animate data-delay="300">
-        <a href="#latest" class="btn btn-primary">
-          <span>📊</span> Read Latest Analysis
-        </a>
-        <a href="/commodities/" class="btn btn-secondary">
-          <span>🔗</span> Browse Commodities
-        </a>
+        <a href="#latest" class="btn btn-primary">Read Latest Analysis</a>
+        <a href="/commodities/" class="btn btn-secondary">Browse Commodities</a>
       </div>
 
       <div class="hero-stats" data-animate data-delay="400">
         <div class="hero-stat">
-          <span class="value positive"
-                data-count="15.3"
-                data-prefix="+"
-                data-suffix="%">+15.3%</span>
+          <span class="value positive" data-count="15.3" data-prefix="+" data-suffix="%">+15.3%</span>
           <span class="label">WTI Surge (Q1)</span>
         </div>
         <div class="hero-stat">
-          <span class="value counting"
-                data-count="12"
-                data-suffix=" Industries">12 Industries</span>
+          <span class="value counting" data-count="12" data-suffix=" Industries">12 Industries</span>
           <span class="label">Impact Traced</span>
         </div>
         <div class="hero-stat">
-          <span class="value"
-                data-count="8"
-                data-suffix=" min">8 min</span>
+          <span class="value" data-count="8" data-suffix=" min">8 min</span>
           <span class="label">Avg. Read Time</span>
         </div>
       </div>
@@ -64,7 +53,7 @@ title: Home
   <div class="container">
     <header class="section-header" data-animate>
       <p class="section-label">Real-Time Data</p>
-      <h2 class="section-title" id="prices-title">📊 Live Commodity Prices</h2>
+      <h2 class="section-title" id="prices-title">Live Commodity Prices</h2>
       <p class="section-desc">Updated daily via automated market data feeds.</p>
     </header>
     <div class="price-grid" data-animate>
@@ -101,7 +90,19 @@ title: Home
                data-animate data-delay="{{ forloop.index0 | times: 100 | modulo: 500 }}">
 
         {% if forloop.first %}
-        <div class="post-card-visual" aria-hidden="true">⛽</div>
+        <div class="post-card-visual" aria-hidden="true">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" opacity="0.4">
+            <circle cx="40" cy="40" r="12" stroke="#22d3ee" stroke-width="2"/>
+            <circle cx="15" cy="20" r="7" stroke="#fbbf24" stroke-width="2"/>
+            <circle cx="65" cy="20" r="7" stroke="#22c55e" stroke-width="2"/>
+            <circle cx="15" cy="60" r="7" stroke="#ef4444" stroke-width="2"/>
+            <circle cx="65" cy="60" r="7" stroke="#818cf8" stroke-width="2"/>
+            <line x1="40" y1="40" x2="15" y2="20" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
+            <line x1="40" y1="40" x2="65" y2="20" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
+            <line x1="40" y1="40" x2="15" y2="60" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
+            <line x1="40" y1="40" x2="65" y2="60" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
+          </svg>
+        </div>
         {% endif %}
 
         <div class="post-card-accent" aria-hidden="true"></div>
@@ -124,9 +125,7 @@ title: Home
           </p>
 
           <div class="post-card-footer">
-            <span class="read-more">
-              Read analysis <span aria-hidden="true">→</span>
-            </span>
+            <span class="read-more">Read analysis <span aria-hidden="true">&rarr;</span></span>
             {% if post.reading_time %}
             <span class="reading-time">{{ post.reading_time }} min read</span>
             {% endif %}
@@ -152,45 +151,61 @@ title: Home
     <header class="section-header" data-animate>
       <p class="section-label">Why CommodityNode</p>
       <h2 class="section-title" id="features-title">Market Intelligence, Visualized</h2>
-      <p class="section-desc">
-        We map the invisible threads connecting raw materials to your portfolio.
-      </p>
+      <p class="section-desc">We map the invisible threads connecting raw materials to your portfolio.</p>
     </header>
 
     <div class="features-grid">
       <div class="feature-card" data-animate data-delay="0">
-        <div class="feature-icon" aria-hidden="true">🔗</div>
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="3" fill="#22d3ee"/>
+            <circle cx="4"  cy="6"  r="2" fill="#22d3ee" opacity="0.7"/>
+            <circle cx="20" cy="6"  r="2" fill="#22d3ee" opacity="0.7"/>
+            <circle cx="4"  cy="18" r="2" fill="#22d3ee" opacity="0.7"/>
+            <circle cx="20" cy="18" r="2" fill="#22d3ee" opacity="0.7"/>
+            <line x1="12" y1="12" x2="4"  y2="6"  stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
+            <line x1="12" y1="12" x2="20" y2="6"  stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
+            <line x1="12" y1="12" x2="4"  y2="18" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
+            <line x1="12" y1="12" x2="20" y2="18" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
+          </svg>
+        </div>
         <h3 class="feature-title">Interactive Node Graphs</h3>
-        <p class="feature-desc">
-          Drag, zoom, and explore force-directed graphs that reveal commodity-to-industry
-          connections in a single glance.
-        </p>
+        <p class="feature-desc">Drag, zoom, and explore force-directed graphs that reveal commodity-to-industry connections in a single glance.</p>
       </div>
 
       <div class="feature-card" data-animate data-delay="100">
-        <div class="feature-icon" aria-hidden="true">📈</div>
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="2,18 8,12 13,16 22,6" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+            <polyline points="18,6 22,6 22,10" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
         <h3 class="feature-title">Quantified Impact</h3>
-        <p class="feature-desc">
-          Every analysis quantifies directional impact with percentage estimates —
-          no vague "positive/negative" verdicts.
-        </p>
+        <p class="feature-desc">Every analysis quantifies directional impact with percentage estimates &mdash; no vague "positive/negative" verdicts.</p>
       </div>
 
       <div class="feature-card" data-animate data-delay="200">
-        <div class="feature-icon" aria-hidden="true">⚡</div>
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" stroke="#22d3ee" stroke-width="1.8"/>
+            <line x1="12" y1="7" x2="12" y2="12" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/>
+            <line x1="12" y1="12" x2="15.5" y2="15.5" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h3 class="feature-title">Timely Coverage</h3>
-        <p class="feature-desc">
-          Published when price moves matter most — we chase the signal, not the calendar.
-        </p>
+        <p class="feature-desc">Published when price moves matter most &mdash; we chase the signal, not the calendar.</p>
       </div>
 
       <div class="feature-card" data-animate data-delay="300">
-        <div class="feature-icon" aria-hidden="true">🌐</div>
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" stroke="#22d3ee" stroke-width="1.8"/>
+            <ellipse cx="12" cy="12" rx="4" ry="9" stroke="#22d3ee" stroke-width="1.4"/>
+            <line x1="3" y1="12" x2="21" y2="12" stroke="#22d3ee" stroke-width="1.4"/>
+          </svg>
+        </div>
         <h3 class="feature-title">Cross-Sector Ripples</h3>
-        <p class="feature-desc">
-          From airlines to EV makers to consumer staples — we trace multi-hop
-          supply chain effects you won't find on Bloomberg terminals.
-        </p>
+        <p class="feature-desc">From airlines to EV makers to consumer staples &mdash; we trace multi-hop supply chain effects you won't find on Bloomberg terminals.</p>
       </div>
     </div>
   </div>
@@ -212,8 +227,8 @@ title: Home
       Bookmark us, follow the RSS feed, or explore the commodities index.
     </p>
     <div class="hero-actions" style="justify-content:center;">
-      <a href="/feed.xml"      class="btn btn-primary">⚡ RSS Feed</a>
-      <a href="/commodities/"  class="btn btn-secondary">🔗 All Commodities</a>
+      <a href="/feed.xml"     class="btn btn-primary">RSS Feed</a>
+      <a href="/commodities/" class="btn btn-secondary">All Commodities</a>
     </div>
   </div>
 </section>
