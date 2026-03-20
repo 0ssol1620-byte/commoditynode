@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Corn Rises
+
+## Winners When Corn Rises
 
 ### Corn ETF & Ethanol Producers
 
@@ -70,7 +70,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Green Plains (GPRE) is the most direct equity play on corn prices — it's one of America's largest ethanol producers, converting ~300 million bushels of corn annually. When corn spikes, GPRE's existing corn inventory and forward contracts create paper gains.
 
-## 🔴 Losers When Corn Rises
+## Losers When Corn Rises
 
 ### Poultry, Meat Packers & Food Companies
 
@@ -86,7 +86,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Poultry stocks (PPC, Sanderson) have higher corn sensitivity than beef processors because chickens are raised on pure grain diets with short production cycles. Beef cattle eat corn for only the final "finishing" months, giving beef producers more time to adapt pricing.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Corn Price Move | CORN ETF | GPRE Change | Tyson Change | PPC Change | Notes |
 |------|----------------|---------|------------|-------------|-----------|-------|
@@ -97,7 +97,7 @@ window.COMMODITY_DATA = {
 | May 2024 | +18% (Dry) | +17.5% | +20% | -7% | -10% | Weather risk |
 | **Average** | **±20%** | **±19.5%** | **±18%** | **±8%** | **±10%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Corn's 20% move produces near-perfect **+19.5% CORN ETF** tracking and amplified **+18% gains for ethanol producers** like Green Plains. Poultry companies suffer most: Pilgrim's Pride drops **-10%** on average, while Tyson faces **-8%** headwinds as feed costs surge.
 
