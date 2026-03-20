@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Natural Gas Rises
+
+## Winners When Natural Gas Rises
 
 ### Gas Producers & LNG Exporters
 
@@ -71,7 +71,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Antero Resources (AR) has historically been the most volatile natural gas stock — a pure-play Appalachian producer with minimal oil exposure. During gas bull markets (winters of 2022, 2024), AR has delivered 3-6x returns from trough to peak.
 
-## 🔴 Losers When Natural Gas Rises
+## Losers When Natural Gas Rises
 
 ### Utilities, Chemicals & Fertilizers
 
@@ -87,7 +87,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** The CF Industries / natural gas relationship is one of the most direct commodity-to-manufacturer links in the market. When US Henry Hub gas doubles, CF's stock often falls 30-40% before recovering as fertilizer prices adjust upward.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Nat Gas Move | UNG Change | EQT Change | AR Change | CF Industries | Notes |
 |------|-------------|-----------|-----------|---------|--------------|-------|
@@ -98,7 +98,7 @@ window.COMMODITY_DATA = {
 | Jan 2024 | +35% (Cold snap) | +33% | +28% | +35% | -15% | Weather-driven |
 | **Average** | **±20%** | **±19.5%** | **±22%** | **±25%** | **±8%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Natural gas volatility is extreme — 20% moves happen regularly. UNG tracks gas almost perfectly (+19.5%), while gas E&P stocks like AR amplify moves to **+25%**. Fertilizer companies (CF) are the primary industrial loser, with a consistent **-8%** average response to 20% gas spikes.
 
