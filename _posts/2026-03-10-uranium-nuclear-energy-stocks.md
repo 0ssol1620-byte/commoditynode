@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Uranium Rises
+
+## Winners When Uranium Rises
 
 ### Uranium Miners & Nuclear ETFs
 
@@ -72,7 +72,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** NexGen Energy's Arrow deposit in Saskatchewan is one of the world's highest-grade uranium deposits — but it's still years from production. This means NXE trades on uranium price expectations and sentiment rather than current cash flow, creating explosive leverage (often 3-5x uranium's percentage move) in both directions.
 
-## 🔴 Losers When Uranium Rises
+## Losers When Uranium Rises
 
 ### Nuclear-Dependent Industries (indirect)
 
@@ -87,7 +87,7 @@ Unlike oil or steel, uranium has NO major industrial "loser" category — becaus
 
 **Key insight:** Constellation Energy (CEG) and Exelon (EXC) actually benefit from rising uranium prices — it signals stronger nuclear economics and supports their case for plant life extensions and capacity market pricing.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Uranium Price Move | URA Change | CCJ Change | NXE Change | DNN Change | Notes |
 |------|-------------------|-----------|-----------|-----------|-----------|-------|
@@ -98,7 +98,7 @@ Unlike oil or steel, uranium has NO major industrial "loser" category — becaus
 | Oct 2023 | +35% (SMR rush) | +40% | +32% | +50% | +58% | SMR announcements |
 | **Average** | **±25%** | **±28.5%** | **±30%** | **±38%** | **±42%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Uranium's 25% move produces extraordinary miner leverage: DNN averages **+42%**, NXE **+38%**, and CCJ **+30%**. The URNM ETF captures this with a **+32%** average response. Unlike other commodities, uranium price increases don't create significant industrial losers — they broadly strengthen nuclear energy economics.
 
