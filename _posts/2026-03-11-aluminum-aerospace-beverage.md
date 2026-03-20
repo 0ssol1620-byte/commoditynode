@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Aluminum Rises
+
+## Winners When Aluminum Rises
 
 ### Aluminum Producers
 
@@ -70,7 +70,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Aluminum smelting is enormously energy-intensive (~15,000 kWh per ton). CENX's profitability depends on the aluminum-electricity spread. When electricity costs fall while aluminum rises — a favorable environment — CENX's margins expand geometrically.
 
-## 🔴 Losers When Aluminum Rises
+## Losers When Aluminum Rises
 
 ### Packaging, Aerospace & Auto
 
@@ -86,7 +86,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Ball Corporation's hedge ratio varies quarterly — when fully hedged (12-18 months out), aluminum spikes have minimal near-term impact. When hedges roll off at higher prices, margin compression materializes. Watch BALL's hedging disclosures as a timing indicator.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Aluminum Price Move | AA Change | CENX Change | Ball Corp | BA Change | Notes |
 |------|--------------------|-----------|-----------|-----------|-----------| ----- |
@@ -97,7 +97,7 @@ window.COMMODITY_DATA = {
 | Jan 2024 | +12% (China) | +16% | +22% | -5% | -3% | Demand recovery |
 | **Average** | **±10%** | **±14%** | **±18%** | **±5%** | **±3%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Aluminum's 10% move creates **+18% gains for CENX** and **+14% for Alcoa** — reflecting high operational leverage. The clear losers are packaging companies: Ball Corp drops **-5%** on average, facing direct margin pressure. Ford and Boeing face smaller but meaningful impacts from their structural aluminum dependence.
 
