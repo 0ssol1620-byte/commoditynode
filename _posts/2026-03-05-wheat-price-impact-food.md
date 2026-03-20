@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Wheat Rises
+
+## Winners When Wheat Rises
 
 ### Agribusiness & Commodity Traders
 
@@ -70,7 +70,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** ADM's business is most profitable when there is VOLATILITY in grain prices — not just direction. Rising uncertainty leads to more hedging demand from food companies, boosting ADM's risk management revenues.
 
-## 🔴 Losers When Wheat Rises
+## Losers When Wheat Rises
 
 ### Food Manufacturers & Restaurant Chains
 
@@ -86,7 +86,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** The 2022 Russia-Ukraine war triggered the most dramatic wheat spike in decades (+70% in weeks). Packaged food companies saw margin compression that took 12-18 months to recover through price increases. Watch input cost hedging disclosures in quarterly earnings.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Wheat Price Move | WEAT Change | ADM Change | Kellanova | MCD Change | Notes |
 |------|-----------------|------------|-----------|----------|-----------|-------|
@@ -97,7 +97,7 @@ window.COMMODITY_DATA = {
 | Jun 2023 | +18% (Black Sea) | +17% | +6% | -6% | -4% | Export disruption |
 | **Average** | **±15%** | **±14.2%** | **±6%** | **±5%** | **±3%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Wheat's 15% move produces a **+14.2% WEAT** response and modest **+5-6% gains** for commodity traders like ADM. The losers are clear: bakery manufacturers face **-7% average** impacts, with packaged food companies like Kellanova averaging **-5%**. Fast food is more insulated but still registers **-3%** on average.
 
