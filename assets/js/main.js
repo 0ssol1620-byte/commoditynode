@@ -201,34 +201,33 @@
   }
 
   /* ---------- Live Ticker ---------- */
-  // Live ticker from prices.json
-  async function buildTicker() {
+  // Live ticker — reads from already-rendered price cards (no extra fetch)
+  function buildTicker() {
     const track = document.querySelector('.ticker-track');
     if (!track) return;
 
     let tickerData = [];
-    try {
-      const res = await fetch('/assets/data/prices.json');
-      if (res.ok) {
-        const prices = await res.json();
-        tickerData = Object.values(prices).map(p => ({
-          name: p.name,
-          price: '$' + (+p.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
-          change: (p.change_pct >= 0 ? '+' : '') + p.change_pct + '%',
-          up: p.change_pct >= 0,
-        }));
-      }
-    } catch (e) { /* fallback to static */ }
 
-    // Fallback if fetch fails
+    // Read from price-grid cards already on page (Jekyll-rendered)
+    document.querySelectorAll('.price-card').forEach(card => {
+      const name   = card.querySelector('.price-name')?.textContent?.trim();
+      const price  = card.querySelector('.price-value')?.textContent?.trim();
+      const change = card.querySelector('.price-change')?.textContent?.trim();
+      const up     = card.classList.contains('up');
+      if (name && price) tickerData.push({ name, price, change: change || '', up });
+    });
+
+    // Fallback static data
     if (!tickerData.length) {
       tickerData = [
-        { name: 'Crude Oil', price: '$93.99', change: '-2.31%', up: false },
-        { name: 'Gold',      price: '$4,996', change: '-0.09%', up: false },
-        { name: 'Copper',    price: '$5.73',  change: '+0.02%', up: true  },
-        { name: 'Nat. Gas',  price: '$2.94',  change: '-3.17%', up: false },
-        { name: 'Silver',    price: '$79.79', change: '+0.33%', up: true  },
-        { name: 'Wheat',     price: '$591.8', change: '+0.34%', up: true  },
+        { name:'Crude Oil', price:'$93.99', change:'-2.31%', up:false },
+        { name:'Gold',      price:'$4,996', change:'-0.09%', up:false },
+        { name:'Copper',    price:'$5.73',  change:'+0.02%', up:true  },
+        { name:'Nat. Gas',  price:'$2.94',  change:'-3.17%', up:false },
+        { name:'Silver',    price:'$79.79', change:'+0.33%', up:true  },
+        { name:'Wheat',     price:'$591.8', change:'+0.34%', up:true  },
+        { name:'Corn',      price:'$453.0', change:'-0.22%', up:false },
+        { name:'Palladium', price:'$1,048', change:'-1.22%', up:false },
       ];
     }
 
@@ -242,7 +241,12 @@
     `).join('');
   }
 
-  buildTicker();
+  // Build after DOM is ready so price-grid cards exist
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildTicker);
+  } else {
+    buildTicker();
+  }
 
   /* ---------- TOC Active Highlight ---------- */
   const tocLinks = document.querySelectorAll('.toc-nav a');
@@ -346,5 +350,17 @@
       document.documentElement.style.opacity = '1';
     });
   }
+
+
+  /* ---------- Scroll-to-Top Button ---------- */
+  (function() {
+    const btn = document.getElementById('scroll-top');
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+      btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    }, { passive: true });
+    btn.addEventListener('mouseenter', () => { btn.style.borderColor = '#22d3ee'; btn.style.transform = 'translateY(-2px)'; });
+    btn.addEventListener('mouseleave', () => { btn.style.borderColor = 'rgba(34,211,238,0.3)'; btn.style.transform = ''; });
+  })();
 
 })();
