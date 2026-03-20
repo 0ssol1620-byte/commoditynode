@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Lithium Rises
+
+## Winners When Lithium Rises
 
 ### Lithium Miners & ETFs
 
@@ -71,7 +71,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** The lithium cycle is driven by EV adoption forecasts. When Tesla announces blowout delivery numbers or China reports record EV sales, lithium prices spike within days. Watch the monthly China NEV (New Energy Vehicle) sales data as the leading indicator for lithium demand.
 
-## 🔴 Losers When Lithium Rises
+## Losers When Lithium Rises
 
 ### EV Makers & Battery Manufacturers
 
@@ -87,7 +87,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** The lithium price cycle creates a natural hedge opportunity: long ALB / short RIVN captures the value transfer from EV makers to miners during commodity upswings. This trade was exceptionally profitable during 2021-2022.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Lithium Price Move | LIT Change | ALB Change | LTHM Change | TSLA Change | Notes |
 |------|-------------------|-----------|-----------|------------|------------|-------|
@@ -98,7 +98,7 @@ window.COMMODITY_DATA = {
 | Jun 2024 | +25% (Recovery) | +20% | +22% | +28% | -8% | Demand recovery |
 | **Average** | **±30%** | **±22%** | **±28%** | **±32%** | **±5%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Lithium's extreme volatility creates extreme opportunity. When lithium rises 30%, LIT delivers **+22%** and pure-plays like LTHM average **+32%**. EV makers face the opposite: Rivian drops **-8%** on average and even Tesla sees **-5%** pressure. 
 
