@@ -2,10 +2,16 @@
 layout: default
 ---
 
+{% assign commodity_slug = page.name | remove: '.md' %}
+{% assign related_posts = site.posts | where_exp: "post", "post.tags contains commodity_slug" %}
+
 <header class="post-header">
   <div class="container">
     <div class="post-header-badge">
-      <span class="badge badge-gold">Commodity</span>
+      <span class="badge badge-gold">Commodity Hub</span>
+      {% if related_posts.size > 0 %}
+      <span class="badge badge-cyan">{{ related_posts.size }} Signal Reports</span>
+      {% endif %}
     </div>
     <h1>{{ page.title }}</h1>
     {% if page.description %}
@@ -14,8 +20,77 @@ layout: default
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
-  <div class="post-content" data-animate>
-    {{ content }}
-  </div>
+<div class="post-layout container" style="padding-top:48px;padding-bottom:80px;">
+  <article class="post-body-container">
+    <div class="post-content" data-animate>
+      {{ content }}
+    </div>
+  </article>
+
+  <aside class="toc-sidebar" aria-label="Commodity Quick Stats">
+    <p class="toc-title">Quick Stats</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+      <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+        <span style="color:var(--text3)">Signal Reports</span>
+        <span style="color:var(--accent)">{{ related_posts.size }}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+        <span style="color:var(--text3)">Latest</span>
+        <span style="color:var(--text2)">{% if related_posts.size > 0 %}{{ related_posts.first.date | date: "%b %d" }}{% else %}—{% endif %}</span>
+      </div>
+      {% if page.price %}
+      <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+        <span style="color:var(--text3)">Price</span>
+        <span style="color:var(--text2)">{{ page.price }}</span>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if related_posts.size > 0 %}
+    <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <p class="toc-title">Related Reports</p>
+      <ul style="list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:8px;">
+        {% for post in related_posts limit:5 %}
+        <li>
+          <a href="{{ post.url | relative_url }}" style="font-size:0.8rem;color:var(--text2);text-decoration:none;line-height:1.4;display:block;">
+            {{ post.title | truncatewords: 8 }}
+          </a>
+          <time style="font-size:0.72rem;color:var(--text3);">{{ post.date | date: "%b %d, %Y" }}</time>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </aside>
 </div>
+
+{% if related_posts.size > 0 %}
+<section class="related-posts section" aria-labelledby="commodity-reports-title">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <p class="section-label">Ripple Analysis</p>
+      <h2 class="section-title" id="commodity-reports-title">Signal Reports for {{ page.title }}</h2>
+      <p class="section-desc">All published impact maps and ripple-chain analyses for this commodity.</p>
+    </div>
+    <div class="posts-grid">
+      {% for post in related_posts limit:6 %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+            {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
+          <div class="post-card-footer">
+            <span class="read-more">Open signal →</span>
+            {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

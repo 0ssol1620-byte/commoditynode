@@ -84,15 +84,15 @@ code, kbd, pre {
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
-/* ---------- Layout ---------- */
+/* ---------- Layout (consolidated) ---------- */
 .container {
-  max-width: 1100px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
 .container--wide {
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0 32px;
 }
@@ -223,15 +223,6 @@ code, kbd, pre {
 }
 
 /* Live ticker bar */
-.ticker-bar {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  overflow: hidden;
-  height: 32px;
-  display: flex;
-  align-items: center;
-}
-
 .ticker-label {
   flex-shrink: 0;
   padding: 0 16px;
@@ -243,23 +234,6 @@ code, kbd, pre {
   background: var(--bg2);
   border-right: 1px solid var(--border);
   z-index: 2;
-}
-
-.ticker-track {
-  display: flex;
-  gap: 0;
-  animation: ticker-scroll 30s linear infinite;
-  white-space: nowrap;
-}
-
-.ticker-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 24px;
-  font-size: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
-  border-right: 1px solid var(--border);
 }
 
 .ticker-item .name { color: var(--text2); }
@@ -702,17 +676,6 @@ code, kbd, pre {
 }
 
 /* ---------- D3 Graph ---------- */
-#impact-graph {
-  width: 100%;
-  min-height: 480px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin: 24px 0;
-  position: relative;
-}
-
 #impact-graph svg { display: block; width: 100%; height: 100%; }
 
 .graph-tooltip {
@@ -736,6 +699,12 @@ code, kbd, pre {
 .graph-tooltip .tt-hint { font-size: 0.72rem; color: var(--text3); margin-top: 4px; }
 
 /* ---------- Post Layout ---------- */
+.post-body-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
 .post-header {
   padding: 60px 0 40px;
   border-bottom: 1px solid var(--border);
@@ -772,13 +741,6 @@ code, kbd, pre {
   height: 4px;
   border-radius: 50%;
   background: var(--text3);
-}
-
-.post-layout {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 48px;
-  align-items: start;
 }
 
 /* TOC */
@@ -830,12 +792,13 @@ code, kbd, pre {
   padding-left: 18px;
 }
 
-/* Post content */
+/* Post content (consolidated) */
 .post-content {
   font-size: 1.05rem;
   line-height: 1.85;
   color: var(--text2);
   min-width: 0;
+  max-width: none;
 }
 
 .post-content > * + * { margin-top: 1.4em; }
@@ -994,12 +957,6 @@ code, kbd, pre {
 }
 
 /* ---------- Features / About Sections ---------- */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-}
-
 .feature-card {
   padding: 28px;
   border: 1px solid var(--border);
@@ -1350,16 +1307,13 @@ hr {
 
 /* ---------- Mobile Responsive ---------- */
 @media (max-width: 1024px) {
-  .post-layout { grid-template-columns: 1fr; }
-  .toc-sidebar { position: static; max-height: none; }
+    .toc-sidebar { position: static; max-height: none; }
   .footer-inner { grid-template-columns: 1fr 1fr; }
   .post-card--featured { flex-direction: column; }
 }
 
 @media (max-width: 768px) {
-  .container { padding: 0 16px; }
-
-  .main-nav { display: none; flex-direction: column; gap: 4px; position: absolute; top: 64px; left: 0; right: 0; background: rgba(5,5,8,0.97); padding: 12px 16px 16px; border-bottom: 1px solid var(--border); }
+    .main-nav { display: none; flex-direction: column; gap: 4px; position: absolute; top: 64px; left: 0; right: 0; background: rgba(5,5,8,0.97); padding: 12px 16px 16px; border-bottom: 1px solid var(--border); }
   .main-nav.open { display: flex; }
   .main-nav a { padding: 10px 14px; }
   .nav-toggle { display: flex; }
@@ -1371,14 +1325,11 @@ hr {
   .section { padding: 56px 0; }
 
   .posts-grid { grid-template-columns: 1fr; }
-  .features-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; }
 
   .footer-bottom { flex-direction: column; align-items: flex-start; }
-  .ticker-bar { display: none; }
-
-  .post-header h1 { font-size: 1.7rem; }
+    .post-header h1 { font-size: 1.7rem; }
   .post-meta-bar { gap: 10px; }
 }
 
@@ -1513,10 +1464,6 @@ hr {
 }
 .cn-period:hover { border-color: #22d3ee; color: #22d3ee; }
 .cn-period.active { background: #22d3ee; border-color: #22d3ee; color: #050508; font-weight: 700; }
-.cn-chart-body {
-  position: relative;
-  height: 320px;
-}
 .cn-chart-body canvas {
   transition: opacity 0.3s;
 }
@@ -1531,8 +1478,7 @@ hr {
   font-family: 'JetBrains Mono', monospace;
 }
 @media (max-width: 640px) {
-  .cn-chart-body { height: 240px; }
-  .cn-chart-header { flex-direction: column; align-items: flex-start; }
+    .cn-chart-header { flex-direction: column; align-items: flex-start; }
 }
 
 /* ── Node Graph Tooltip ── */
@@ -1552,11 +1498,6 @@ hr {
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   z-index: 100;
 }
-#impact-graph {
-  position: relative;
-  min-height: 400px;
-}
-
 /* ── Post Title High Contrast ── */
 .post-header h1,
 .post h1,
@@ -1634,40 +1575,8 @@ h1.post-title {
   }
 }
 
-/* ── Nodemap: hide overflow cleanly on mobile ── */
-@media (max-width: 768px) {
-  #impact-graph {
-    min-height: 340px !important;
-    overflow: hidden !important;
-  }
-  #impact-graph svg {
-    touch-action: none;
-  }
-}
-
-
-/* ── Premium additions v2 ── */
-
-/* Wider container on large screens */
-@media (min-width: 1280px) {
-  .container { max-width: 1200px; }
-}
-
-/* Impact graph: full width, 520px desktop / 420px mobile */
-#impact-graph {
-  width: 100% !important;
-  min-height: 520px !important;
-}
-@media (max-width: 768px) {
-  #impact-graph { min-height: 420px !important; }
-}
-
 /* Hide drag hint if still present */
 .impact-graph-hint { display: none !important; }
-
-/* Post content: no max-width cap so nodemap breathes */
-.post-content { max-width: 100%; }
-
 /* Commodity card hover glow */
 a.feature-card:hover,
 .feature-card:hover {
@@ -1714,33 +1623,12 @@ a.feature-card:hover,
 }
 
 /* ── Wider post content for nodemap ── */
-.post-content {
-  max-width: 100%;
-}
-.container {
-  max-width: 1200px;
-}
-#impact-graph {
-  min-height: 520px;
-}
 @media (max-width: 768px) {
-  #impact-graph { min-height: 400px; }
-  .commodity-grid { grid-template-columns: repeat(2, 1fr); }
+    .commodity-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ── Impact graph hint text hidden ── */
-.impact-graph-hint { display: none !important; }
 em:has-text('Drag nodes') { display: none; }
-
-/* ── Chart header right side ── */
-.cn-chart-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-
 /* ════════════════════════════════════════════
    POST — Full-bleed graph section
    ════════════════════════════════════════════ */
@@ -1760,59 +1648,11 @@ em:has-text('Drag nodes') { display: none; }
 }
 
 .post-nodemap-bleed {
-  /* Full width within the bleed section */
   padding: 0;
 }
 
-.post-nodemap-bleed #impact-graph {
-  width: 100%;
-  height: 580px;
-  border: none;
-  border-radius: 0;
-  margin: 0;
-  background: var(--bg2);
-}
-
 @media (max-width: 768px) {
-  .post-nodemap-bleed #impact-graph { height: 420px; }
   .post-chart-bleed { padding: 20px 16px 0; }
-}
-
-.post-body-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px 80px;
-}
-
-/* ════════════════════════════════════════════
-   NODEMAP container (fallback if not bleed)
-   ════════════════════════════════════════════ */
-#impact-graph {
-  min-height: 560px;
-  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin: 0 0 24px;
-  position: relative;
-}
-
-/* ════════════════════════════════════════════
-   CHART header — right-aligned period + date
-   ════════════════════════════════════════════ */
-.cn-chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.cn-chart-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
 }
 
 /* ════════════════════════════════════════════
@@ -1864,9 +1704,8 @@ em:has-text('Drag nodes') { display: none; }
 }
 
 /* ════════════════════════════════════════════
-   ABOUT page — markdown rendering fix
+   ABOUT page — marker accent
    ════════════════════════════════════════════ */
-.post-content strong { color: #f0f0f5; }
 .post-content ul li::marker { color: var(--accent); }
 
 /* ════════════════════════════════════════════
@@ -1908,56 +1747,13 @@ a:focus-visible, button:focus-visible {
 
 
 /* ════════════════════════════════════════
-   IMPACT GRAPH — wide breakout in post
+   Price chart — top radius when stacked with graph
    ════════════════════════════════════════ */
-.post-content #impact-graph,
-#post-article #impact-graph {
-  /* Break out of the post-layout column */
-  width: calc(100% + 0px);
-  min-height: 560px;
-  margin-left: 0;
-  margin-right: 0;
-  border-radius: var(--radius);
-  background: linear-gradient(160deg, #0d0d18 0%, #080810 100%);
-}
-
-/* Price chart in post — slightly wider */
 .post-content .cn-price-chart {
   margin-bottom: 0;
   border-radius: var(--radius) var(--radius) 0 0;
   border-bottom: none;
 }
-.post-content #impact-graph {
-  border-radius: 0 0 var(--radius) var(--radius);
-  border-top: 1px solid rgba(34,211,238,0.08);
-}
-
-/* Post body container override */
-.post-body-container {
-  padding: 0 24px 80px;
-}
-
-/* Make post article take more width when nodemap present */
-@media (min-width: 1024px) {
-  #post-article .post-layout > .post-content {
-    min-width: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .post-content #impact-graph,
-  #post-article #impact-graph {
-    min-height: 400px;
-  }
-}
-
-/* ════════════════════════════════════════
-   TICKER — live data styling
-   ════════════════════════════════════════ */
-.ticker-track {
-  will-change: transform;
-}
-
 /* ════════════════════════════════════════
    HERO stats — dynamic update flash
    ════════════════════════════════════════ */
@@ -1974,10 +1770,7 @@ a:focus-visible, button:focus-visible {
    on mobile (no sidebar)
    ════════════════════════════════════════ */
 @media (max-width: 1024px) {
-  .post-layout {
-    display: block;
-  }
-  .toc-sidebar {
+    .toc-sidebar {
     margin-top: 32px;
   }
 }
@@ -1991,13 +1784,8 @@ a:focus-visible, button:focus-visible {
 }
 
 /* ── Chart body height ── */
-.cn-chart-body {
-  position: relative;
-  height: 340px;
-}
 @media (max-width: 640px) {
-  .cn-chart-body { height: 260px; }
-}
+  }
 
 /* ── Hex node legend dots ── */
 .cn-graph-tooltip strong { color: #f0f0f5; }
@@ -2005,11 +1793,7 @@ a:focus-visible, button:focus-visible {
 
 /* ── Nodemap mobile scroll fix ── */
 @media (max-width: 768px) {
-  #impact-graph {
-    touch-action: pan-y;
-    /* Allow single-finger scroll to pass through */
-  }
-  #impact-graph svg {
+    #impact-graph svg {
     touch-action: pan-y;
   }
 }
@@ -2147,29 +1931,6 @@ a:focus-visible, button:focus-visible {
 
 
 /* ════════════════════════════════════════════════
-   LAYOUT — wider container for premium feel
-   ════════════════════════════════════════════════ */
-.container {
-  max-width: 1280px !important;
-}
-.container--wide {
-  max-width: 1600px !important;
-}
-
-/* Post body wider */
-.post-body-container {
-  max-width: 1280px !important;
-}
-
-/* Post layout: article wider on large screens */
-@media (min-width: 1200px) {
-  .post-layout {
-    grid-template-columns: 1fr 260px;
-    gap: 40px;
-  }
-}
-
-/* ════════════════════════════════════════════════
    CHART — full-bleed breakout from post column
    ════════════════════════════════════════════════ */
 .post-content .cn-price-chart {
@@ -2180,25 +1941,7 @@ a:focus-visible, button:focus-visible {
   border-right: none;
 }
 
-/* ════════════════════════════════════════════════
-   NODEMAP — full-bleed, taller, space background
-   ════════════════════════════════════════════════ */
-#impact-graph {
-  margin-left: -24px !important;
-  margin-right: -24px !important;
-  border-radius: 0 !important;
-  border-left: none !important;
-  border-right: none !important;
-  min-height: 620px !important;
-  background: radial-gradient(ellipse at 50% 50%, #0d0d1f 0%, #050508 70%) !important;
-}
-
 @media (max-width: 768px) {
-  #impact-graph {
-    margin-left: -16px !important;
-    margin-right: -16px !important;
-    min-height: 460px !important;
-  }
   .post-content .cn-price-chart {
     margin-left: -16px;
     margin-right: -16px;
@@ -2455,17 +2198,9 @@ a:focus-visible, button:focus-visible {
   padding-top: 0;
 }
 
-.post-body-container {
-  max-width: 1380px !important;
-}
-
 .post-layout {
   grid-template-columns: minmax(0, 1fr) 280px;
   gap: 36px;
-}
-
-.post-content {
-  max-width: none;
 }
 
 .post-content > p,
@@ -2484,27 +2219,8 @@ a:focus-visible, button:focus-visible {
 
 .post-content .cn-price-chart,
 .post-content #impact-graph,
-#post-article #impact-graph {
-  max-width: none;
-  width: calc(100% + 120px);
-  margin-left: -60px !important;
-  margin-right: -60px !important;
-  border-radius: 24px !important;
-  border-left: 1px solid rgba(255,255,255,0.06) !important;
-  border-right: 1px solid rgba(255,255,255,0.06) !important;
-}
-
-.post-content .cn-price-chart {
+#post-article .post-content .cn-price-chart {
   padding: 24px 24px 12px;
-}
-
-#impact-graph {
-  min-height: 680px !important;
-  background: radial-gradient(circle at center, rgba(18,24,42,0.98), rgba(5,5,8,1) 72%) !important;
-}
-
-.cn-chart-body {
-  height: 380px;
 }
 
 .cn-chart-body canvas {
@@ -2582,10 +2298,6 @@ a:focus-visible, button:focus-visible {
     min-height: 520px !important;
   }
 
-  .cn-chart-body {
-    height: 300px;
-  }
-
   .cn-graph-controls {
     position: static;
     padding: 14px 14px 0;
@@ -2610,8 +2322,12 @@ a:focus-visible, button:focus-visible {
   #impact-graph {
     min-height: 480px !important;
   }
+}
 
-  .cn-chart-body {
-    height: 280px;
-  }
+/* ── Chart height optimization (consolidated) ── */
+.cn-chart-body { height: 380px; }
+@media (min-width: 768px) { .cn-chart-body { height: 320px; } }
+@media (max-width: 767px) {
+  .cn-chart-body { height: 300px; }
+  .cn-period { font-size: 0.7rem; padding: 4px 8px; }
 }
