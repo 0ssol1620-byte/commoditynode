@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Palladium Rises
+
+## Winners When Palladium Rises
 
 ### PGM Miners & ETFs
 
@@ -71,7 +71,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Palladium's supply concentration (Russia + South Africa = ~90% of supply) makes it uniquely vulnerable to sanctions, labor strikes, and geopolitical disruptions. The 2022 Russia-Ukraine sanctions initially pushed palladium to $3,400/oz before supply rerouting stabilized prices.
 
-## 🔴 Losers When Palladium Rises
+## Losers When Palladium Rises
 
 ### Automakers & Catalyst Manufacturers
 
@@ -87,7 +87,7 @@ window.COMMODITY_DATA = {
 
 **Key insight — EV disruption:** This is the most important long-term story in palladium. Electric vehicles don't need catalytic converters — they produce zero tailpipe emissions. As EV adoption accelerates from 15% of global auto sales in 2024 to projected 40-50% by 2030, palladium demand will structurally decline. This creates a fascinating trading dynamic: short-term supply shocks still spike prices, but the long-term demand trend is structurally bearish.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Palladium Price Move | PALL Change | SBSW Change | Ford Change | Toyota Change | Notes |
 |------|---------------------|-----------|------------|------------|--------------|-------|
@@ -98,7 +98,7 @@ window.COMMODITY_DATA = {
 | Jan 2024 | -30% (EV growth) | -29% | -35% | +6% | +5% | EV adoption |
 | **Average** | **±20%** | **±19.5%** | **±22%** | **±5%** | **±4%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Palladium's 20% move creates near-perfect **+19.5% PALL** tracking and strong miner gains: SBSW averages **+22%** and Norilsk **+24%**. Automakers face **-4 to -5%** headwinds. But the structural story is transformative: the EV transition will steadily erode palladium demand, potentially making today's miners excellent short candidates over a 5-10 year horizon.
 
