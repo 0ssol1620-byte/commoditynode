@@ -78,6 +78,18 @@ layout: default
         <span class="summary-metric-label">Linked themes</span>
         <strong>{{ page.tags.size | default: 0 }}</strong>
       </div>
+      <div class="summary-metric">
+        <span class="summary-metric-label">Data as of</span>
+        <strong>{{ page.date | date: "%b %d, %Y" }}</strong>
+      </div>
+      <div class="summary-metric">
+        <span class="summary-metric-label">Source</span>
+        <strong>CommodityNode + market data</strong>
+      </div>
+      <div class="summary-metric">
+        <span class="summary-metric-label">Confidence</span>
+        <strong>Research signal</strong>
+      </div>
     </div>
   </div>
 

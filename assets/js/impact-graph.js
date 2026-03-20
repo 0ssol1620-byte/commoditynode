@@ -31,6 +31,7 @@
     const nodes = [], links = [];
     let maxVisibleLevel = Infinity;
     let sentimentFilter = 'all';
+    let kindFilter = 'all';
     const center = { id: commodity?.id||'center', label: commodity?.label||'Commodity', type:'commodity', level:0, impact:null };
     nodes.push(center);
     levels.forEach((lvl, li) => {
@@ -175,6 +176,13 @@
         <button type="button" data-sentiment="positive">Positive</button>
         <button type="button" data-sentiment="negative">Negative</button>
       </div>
+      <div class="cn-graph-control-group">
+        <span class="cn-graph-control-label">Type</span>
+        <button type="button" class="is-active" data-kind="all">All</button>
+        <button type="button" data-kind="company">Company</button>
+        <button type="button" data-kind="etf">ETF</button>
+        <button type="button" data-kind="macro">Macro</button>
+      </div>
     `);
 
     const sim = d3.forceSimulation(nodes)
@@ -314,12 +322,21 @@
       })
     );
 
+    function matchesKind(d) {
+      if (kindFilter === 'all' || d.level === 0) return true;
+      if (kindFilter === 'etf') return d.type === 'etf';
+      if (kindFilter === 'macro') return d.sector === 'Macro';
+      if (kindFilter === 'company') return d.type !== 'etf' && d.sector !== 'Macro';
+      return true;
+    }
+
     function nodeVisible(d) {
       const passesDepth = d.level <= maxVisibleLevel;
+      const passesKind = matchesKind(d);
       if (d.level === 0) return true;
-      if (sentimentFilter === 'positive') return passesDepth && (d.impact == null || d.impact >= 0 || d.type === 'etf');
-      if (sentimentFilter === 'negative') return passesDepth && (d.impact == null || d.impact <= 0 || d.type === 'etf');
-      return passesDepth;
+      if (sentimentFilter === 'positive') return passesDepth && passesKind && (d.impact == null || d.impact >= 0 || d.type === 'etf');
+      if (sentimentFilter === 'negative') return passesDepth && passesKind && (d.impact == null || d.impact <= 0 || d.type === 'etf');
+      return passesDepth && passesKind;
     }
 
     function linkVisible(d) {
@@ -339,6 +356,7 @@
       const button = d3.select(this);
       const depth = button.attr('data-depth');
       const sentiment = button.attr('data-sentiment');
+      const kind = button.attr('data-kind');
       if (depth != null) {
         maxVisibleLevel = +depth >= 99 ? Infinity : +depth;
         controls.selectAll('[data-depth]').classed('is-active', false);
@@ -347,6 +365,11 @@
       if (sentiment != null) {
         sentimentFilter = sentiment;
         controls.selectAll('[data-sentiment]').classed('is-active', false);
+        button.classed('is-active', true);
+      }
+      if (kind != null) {
+        kindFilter = kind;
+        controls.selectAll('[data-kind]').classed('is-active', false);
         button.classed('is-active', true);
       }
       updateVisibility();

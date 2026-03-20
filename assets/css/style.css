@@ -2420,7 +2420,7 @@ a:focus-visible, button:focus-visible {
 
 .summary-metrics {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 14px;
 }
 
@@ -2546,7 +2546,7 @@ a:focus-visible, button:focus-visible {
   }
 
   .summary-metrics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 
   .post-content .cn-price-chart,
@@ -2630,5 +2630,46 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 900px) {
   .tag-hub-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+.exposure-matrix {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(10,10,18,0.92), rgba(6,6,12,0.96));
+}
+
+.exposure-row {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 22px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.exposure-row--head {
+  border-top: none;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+}
+
+.exposure-row .positive { color: var(--green); }
+.exposure-row .negative { color: var(--red); }
+
+.exposure-row a {
+  justify-self: end;
+}
+
+@media (max-width: 900px) {
+  .exposure-row {
+    grid-template-columns: 1fr;
+  }
+
+  .exposure-row a {
+    justify-self: start;
   }
 }
