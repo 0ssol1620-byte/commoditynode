@@ -30,18 +30,28 @@ title: Home
 
       <div class="hero-stats" data-animate data-delay="400">
         <div class="hero-stat">
-          <span class="value positive" data-count="15.3" data-prefix="+" data-suffix="%">+15.3%</span>
-          <span class="label">WTI Surge (Q1)</span>
+          <span class="value positive" id="hero-wti-change">—</span>
+          <span class="label">WTI Today</span>
         </div>
         <div class="hero-stat">
-          <span class="value counting" data-count="12" data-suffix=" Industries">12 Industries</span>
-          <span class="label">Impact Traced</span>
+          <span class="value counting" data-count="16" data-suffix=" posts">16 posts</span>
+          <span class="label">Analyses Published</span>
         </div>
         <div class="hero-stat">
           <span class="value" data-count="8" data-suffix=" min">8 min</span>
           <span class="label">Avg. Read Time</span>
         </div>
       </div>
+      <script>
+      fetch('/assets/data/prices.json').then(r=>r.json()).then(d=>{
+        const oil=d.crude_oil; if(!oil)return;
+        const el=document.getElementById('hero-wti-change');
+        if(!el)return;
+        const sign=oil.change_pct>=0?'+':'';
+        el.textContent=sign+oil.change_pct+'%';
+        el.className='value '+(oil.change_pct>=0?'positive':'negative');
+      }).catch(()=>{const e=document.getElementById('hero-wti-change');if(e)e.textContent='+0.00%';});
+      </script>
     </div>
   </div>
 </section>
