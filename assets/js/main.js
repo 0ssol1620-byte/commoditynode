@@ -252,7 +252,7 @@
     );
 
     const scrollSpy = () => {
-      const scrollY = window.scrollY + 100;
+      const headerH = (document.querySelector('.site-header')?.offsetHeight || 96) + 16; const scrollY = window.scrollY + headerH;
       let current = '';
       headings.forEach(h => {
         if (h.offsetTop <= scrollY) current = h.id;
