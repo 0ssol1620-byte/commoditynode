@@ -201,25 +201,37 @@
   }
 
   /* ---------- Live Ticker ---------- */
-  const tickerData = [
-    { name: 'WTI Crude',   price: '$82.45', change: '+1.23%',  up: true },
-    { name: 'Brent',       price: '$86.20', change: '+0.98%',  up: true },
-    { name: 'Nat. Gas',    price: '$2.84',  change: '-2.15%',  up: false },
-    { name: 'Gold',        price: '$2,341', change: '+0.45%',  up: true },
-    { name: 'Silver',      price: '$27.82', change: '+1.10%',  up: true },
-    { name: 'Copper',      price: '$4.52',  change: '-0.30%',  up: false },
-    { name: 'Corn',        price: '$445.2', change: '-0.72%',  up: false },
-    { name: 'Wheat',       price: '$608.4', change: '+2.30%',  up: true },
-    { name: 'Soybeans',    price: '$1,185', change: '+0.62%',  up: true },
-    { name: 'Cotton',      price: '$78.40', change: '-0.55%',  up: false },
-    { name: 'Palladium',   price: '$1,048', change: '-1.22%',  up: false },
-    { name: 'Platinum',    price: '$1,010', change: '+0.88%',  up: true },
-  ];
-
-  function buildTicker() {
+  // Live ticker from prices.json
+  async function buildTicker() {
     const track = document.querySelector('.ticker-track');
     if (!track) return;
-    // Duplicate for seamless loop
+
+    let tickerData = [];
+    try {
+      const res = await fetch('/assets/data/prices.json');
+      if (res.ok) {
+        const prices = await res.json();
+        tickerData = Object.values(prices).map(p => ({
+          name: p.name,
+          price: '$' + (+p.price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+          change: (p.change_pct >= 0 ? '+' : '') + p.change_pct + '%',
+          up: p.change_pct >= 0,
+        }));
+      }
+    } catch (e) { /* fallback to static */ }
+
+    // Fallback if fetch fails
+    if (!tickerData.length) {
+      tickerData = [
+        { name: 'Crude Oil', price: '$93.99', change: '-2.31%', up: false },
+        { name: 'Gold',      price: '$4,996', change: '-0.09%', up: false },
+        { name: 'Copper',    price: '$5.73',  change: '+0.02%', up: true  },
+        { name: 'Nat. Gas',  price: '$2.94',  change: '-3.17%', up: false },
+        { name: 'Silver',    price: '$79.79', change: '+0.33%', up: true  },
+        { name: 'Wheat',     price: '$591.8', change: '+0.34%', up: true  },
+      ];
+    }
+
     const items = [...tickerData, ...tickerData];
     track.innerHTML = items.map(t => `
       <span class="ticker-item">
