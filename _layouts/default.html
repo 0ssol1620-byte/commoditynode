@@ -164,5 +164,11 @@
 
   <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
   <script src="{{ '/assets/js/price-chart.js' | relative_url }}" defer></script>
+
+  <!-- Scroll to Top -->
+  <button id="scroll-top" aria-label="Scroll to top" style="position:fixed;bottom:24px;right:24px;width:40px;height:40px;background:rgba(10,10,20,0.92);border:1px solid rgba(34,211,238,0.3);border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:50;transition:all 0.25s ease;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,0.4);" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
 </body>
 </html>
