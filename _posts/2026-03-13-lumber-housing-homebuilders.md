@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Lumber Rises
+
+## Winners When Lumber Rises
 
 ### Timber Producers & Wood Products
 
@@ -73,7 +73,7 @@ window.COMMODITY_DATA = {
 
 **Surprising winner — Home Depot (+4%):** Higher lumber prices actually boost Home Depot's lumber aisle revenues and drive renovation spending by homeowners who can't afford new homes.
 
-## 🔴 Losers When Lumber Rises
+## Losers When Lumber Rises
 
 ### Homebuilders
 
@@ -88,7 +88,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** DHI is the most exposed large homebuilder because it targets the entry-level affordable home segment — least pricing power to pass through cost increases. NVR uses a "lot option" model that insulates it somewhat from lumber cost timing, explaining its slightly lower sensitivity.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Lumber Price Move | WOOD Change | WFG Change | LPX Change | DHI Change | Notes |
 |------|------------------|-----------|-----------|-----------|-----------|-------|
@@ -99,7 +99,7 @@ window.COMMODITY_DATA = {
 | Mar 2024 | +22% (Spring) | +14% | +20% | +18% | -7% | Seasonal demand |
 | **Average** | **±25%** | **±18.5%** | **±22%** | **±20%** | **±8%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Lumber's 25% move produces **+18.5% WOOD ETF** and **+22% WFG** — strong leverage for investors who time the housing cycle. Homebuilders (DHI, LEN) face **-7 to -8%** headwinds as their primary input cost surges.
 
