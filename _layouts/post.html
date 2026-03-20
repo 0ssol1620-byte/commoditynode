@@ -46,10 +46,6 @@ layout: default
     <h1>{{ page.title }}</h1>
     <div class="post-meta-bar">
       <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %d, %Y" }}</time>
-      {% if page.reading_time %}
-      <span class="separator" aria-hidden="true"></span>
-      <span>{{ page.reading_time }} min read</span>
-      {% endif %}
       <span class="separator" aria-hidden="true"></span>
       <span class="live-dot">Live Analysis</span>
     </div>
