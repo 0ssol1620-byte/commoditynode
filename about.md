@@ -22,6 +22,7 @@ description: "CommodityNode maps how commodity price movements ripple through gl
 <p>CommodityNode maps the <strong>invisible connections</strong> between raw material price movements and the industries, companies, and portfolios that feel their impact.</p>
 <p>When crude oil jumps 15%, it doesn't just affect gas stations. The ripple reaches airlines, EV makers, plastics manufacturers, logistics companies, and a dozen more sectors — each in different directions, at different magnitudes.</p>
 <p>We trace those ripples.</p>
+<p><a href="/reports/">Browse the research archive</a> or read the <a href="/methodology/">methodology</a> to understand how those chains are built.</p>
 
 <h2>Our Approach</h2>
 <p>Every analysis on CommodityNode is built around three principles:</p>
@@ -36,6 +37,7 @@ description: "CommodityNode maps how commodity price movements ripple through gl
   <li><strong>Chart.js</strong> — Premium candlestick price charts</li>
   <li><strong>Jekyll</strong> — Fast, static, GitHub Pages hosted</li>
   <li><strong>Zero paywalls</strong> — Open access, always</li>
+  <li><strong>Theme hubs</strong> — Navigate from reports into recurring tags and commodity hubs</li>
 </ul>
 
 <h2>Disclaimer</h2>

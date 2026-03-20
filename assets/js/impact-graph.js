@@ -29,6 +29,8 @@
     const CLR = { commodity:'#fbbf24', etf:'#818cf8', positive:'#22c55e', negative:'#ef4444', producer:'#f59e0b', processor:'#06b6d4', default:'#94a3b8' };
 
     const nodes = [], links = [];
+    let maxVisibleLevel = Infinity;
+    let sentimentFilter = 'all';
     const center = { id: commodity?.id||'center', label: commodity?.label||'Commodity', type:'commodity', level:0, impact:null };
     nodes.push(center);
     levels.forEach((lvl, li) => {
@@ -157,6 +159,23 @@
     const HR = d => d.level===0?30:d.level===1?21:d.level===2?16:d.level===3?13:11;
     const maxLevel = Math.max(...nodes.map(n => n.level));
     const ringR = isMob ? 80 : 108;
+
+    const controls = d3.select(container).append('div').attr('class','cn-graph-controls');
+    controls.html(`
+      <div class="cn-graph-control-group">
+        <span class="cn-graph-control-label">Depth</span>
+        <button type="button" class="is-active" data-depth="99">All</button>
+        <button type="button" data-depth="1">L1</button>
+        <button type="button" data-depth="2">L2</button>
+        <button type="button" data-depth="3">L3</button>
+      </div>
+      <div class="cn-graph-control-group">
+        <span class="cn-graph-control-label">Impact</span>
+        <button type="button" class="is-active" data-sentiment="all">All</button>
+        <button type="button" data-sentiment="positive">Positive</button>
+        <button type="button" data-sentiment="negative">Negative</button>
+      </div>
+    `);
 
     const sim = d3.forceSimulation(nodes)
       .force('link', d3.forceLink(links).id(d=>d.id).distance(d=>{
@@ -295,6 +314,44 @@
       })
     );
 
+    function nodeVisible(d) {
+      const passesDepth = d.level <= maxVisibleLevel;
+      if (d.level === 0) return true;
+      if (sentimentFilter === 'positive') return passesDepth && (d.impact == null || d.impact >= 0 || d.type === 'etf');
+      if (sentimentFilter === 'negative') return passesDepth && (d.impact == null || d.impact <= 0 || d.type === 'etf');
+      return passesDepth;
+    }
+
+    function linkVisible(d) {
+      const source = typeof d.source === 'object' ? d.source : nodes.find(n => n.id === d.source);
+      const target = typeof d.target === 'object' ? d.target : nodes.find(n => n.id === d.target);
+      return source && target && nodeVisible(source) && nodeVisible(target);
+    }
+
+    function updateVisibility() {
+      nEls.style('display', d => nodeVisible(d) ? null : 'none');
+      lEls.style('display', d => linkVisible(d) ? null : 'none');
+      pEls.style('display', d => linkVisible(links[d.li]) ? null : 'none');
+      fitBgs();
+    }
+
+    controls.selectAll('button').on('click', function() {
+      const button = d3.select(this);
+      const depth = button.attr('data-depth');
+      const sentiment = button.attr('data-sentiment');
+      if (depth != null) {
+        maxVisibleLevel = +depth >= 99 ? Infinity : +depth;
+        controls.selectAll('[data-depth]').classed('is-active', false);
+        button.classed('is-active', true);
+      }
+      if (sentiment != null) {
+        sentimentFilter = sentiment;
+        controls.selectAll('[data-sentiment]').classed('is-active', false);
+        button.classed('is-active', true);
+      }
+      updateVisibility();
+    });
+
     // Staggered reveal
     for (let l=0; l<=maxLevel; l++) {
       const dl = l*120;
@@ -347,6 +404,6 @@
       .text(isMob ? 'Pinch zoom · Tap ⊙ to reset' : 'Scroll zoom · Drag · ⊙ to reset');
 
     // Auto-fit after reveal
-    setTimeout(() => fitAll(false), maxLevel*120+700);
+    setTimeout(() => { fitAll(false); updateVisibility(); }, maxLevel*120+700);
   }
 })();

@@ -1,35 +1,87 @@
 ---
 layout: default
 ---
+{% assign tagged_posts = site.tags[page.tag] %}
+{% assign primary_post = tagged_posts | first %}
 <div class="post-header">
   <div class="container">
-    <div class="post-header-badge"><span class="badge badge-cyan">Tag</span></div>
+    <div class="post-header-badge">
+      <span class="badge badge-cyan">Theme Hub</span>
+      <span class="badge badge-gold">{{ tagged_posts.size }} Reports</span>
+    </div>
     <h1>#{{ page.tag }}</h1>
-    <p class="post-meta-bar">Posts tagged "{{ page.tag }}"</p>
+    <p class="post-meta-bar">Track every report tied to the <strong>{{ page.tag }}</strong> exposure chain, plus adjacent themes to explore next.</p>
   </div>
 </div>
-<div class="container" style="padding:48px 24px 80px;">
-  <div class="posts-grid" data-animate>
-    {% assign tagged_posts = site.posts | where_exp: "post", "post.tags contains page.tag" %}
-    {% for post in tagged_posts %}
-    <article class="post-card">
-      <div class="post-card-accent"></div>
-      <div class="post-card-body">
-        <div class="post-card-meta">
-          <time class="post-time">{{ post.date | date: "%b %d, %Y" }}</time>
-          {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+
+<section class="section archive-section">
+  <div class="container">
+    <div class="tag-hub-grid" data-animate>
+      <article class="signal-panel signal-panel--featured">
+        <p class="signal-panel-label">Theme Snapshot</p>
+        <h2>{{ page.title | default: page.tag }}</h2>
+        <p>{% if primary_post and primary_post.description %}{{ primary_post.description }}{% else %}This hub groups CommodityNode reports linked to {{ page.tag }} so readers can trace the ripple chain across commodities, sectors, and companies.{% endif %}</p>
+        <div class="summary-metrics">
+          <div class="summary-metric">
+            <span class="summary-metric-label">Reports</span>
+            <strong>{{ tagged_posts.size }}</strong>
+          </div>
+          <div class="summary-metric">
+            <span class="summary-metric-label">Latest update</span>
+            <strong>{% if primary_post %}{{ primary_post.date | date: "%b %d, %Y" }}{% else %}—{% endif %}</strong>
+          </div>
+          <div class="summary-metric">
+            <span class="summary-metric-label">Primary chain</span>
+            <strong>{{ page.tag | replace: '-', ' ' }}</strong>
+          </div>
         </div>
-        <h2 class="post-card-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
-        {% if post.description %}<p class="post-card-excerpt">{{ post.description }}</p>{% endif %}
-        <div class="post-card-footer">
-          <a href="{{ post.url }}" class="read-more">Read Analysis &rarr;</a>
-          {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+      </article>
+
+      <article class="signal-panel">
+        <p class="signal-panel-label">Explore Next</p>
+        <ul class="signal-list">
+          {% if primary_post %}
+          {% for tag in primary_post.tags limit:5 %}
+            {% unless tag == page.tag %}
+            <li><a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a></li>
+            {% endunless %}
+          {% endfor %}
+          {% endif %}
+          <li><a href="/reports/">Open research archive</a></li>
+          <li><a href="/commodities/">Browse commodity hubs</a></li>
+          <li><a href="/methodology/">Read methodology</a></li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="posts-grid" data-animate>
+      {% for post in tagged_posts %}
+      <article class="post-card">
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time">{{ post.date | date: "%b %d, %Y" }}</time>
+            {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+          </div>
+          <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          {% if post.description %}<p class="post-card-excerpt">{{ post.description }}</p>{% endif %}
+          {% if post.tags %}
+          <div class="post-card-tags">
+            {% for tag in post.tags limit:4 %}
+            <span class="post-tag-pill">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <div class="post-card-footer">
+            <a href="{{ post.url | relative_url }}" class="read-more">Read Analysis &rarr;</a>
+            {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+          </div>
         </div>
-      </div>
-    </article>
-    {% endfor %}
-    {% if tagged_posts.size == 0 %}
-    <p style="color:var(--text2);padding:40px 0;">No posts found for this tag yet.</p>
-    {% endif %}
+      </article>
+      {% endfor %}
+      {% if tagged_posts.size == 0 %}
+      <p style="color:var(--text2);padding:40px 0;">No posts found for this tag yet.</p>
+      {% endif %}
+    </div>
   </div>
-</div>
+</section>

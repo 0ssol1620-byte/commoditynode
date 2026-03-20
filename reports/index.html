@@ -1,0 +1,63 @@
+---
+layout: default
+title: Research Archive
+permalink: /reports/
+description: "Browse the full CommodityNode archive of impact maps, signal reports, and commodity ripple-chain analysis."
+---
+
+<div class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-cyan">Archive</span>
+      <span class="badge badge-gold">{{ site.posts.size }} Reports</span>
+    </div>
+    <h1>Research Archive</h1>
+    <p class="post-meta-bar">Browse every CommodityNode impact map, signal report, and ripple-chain analysis in one place.</p>
+  </div>
+</div>
+
+<section class="section archive-section">
+  <div class="container">
+    <div class="archive-toolbar" data-animate>
+      <div class="filter-chips" role="tablist" aria-label="Filter archive reports">
+        <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+        <button class="filter-chip" type="button" data-filter="energy">Energy</button>
+        <button class="filter-chip" type="button" data-filter="metals">Metals</button>
+        <button class="filter-chip" type="button" data-filter="agriculture">Agriculture</button>
+        <button class="filter-chip" type="button" data-filter="battery">Battery</button>
+      </div>
+      <p class="archive-meta">Filter by cluster and paginate through the full archive.</p>
+    </div>
+
+    <div class="posts-grid posts-grid--paginated" id="archive-posts-grid" data-page-size="12">
+      {% for post in site.posts %}
+      {% assign categories_joined = post.categories | join: '|' | downcase %}
+      {% assign tags_joined = post.tags | join: '|' | downcase %}
+      <article class="post-card post-card--discoverable" data-post-card data-filter-tags="{{ categories_joined }}|{{ tags_joined }}" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+            {% for cat in post.categories limit:2 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+          </div>
+          <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+          <p class="post-card-excerpt">{{ post.description | default: post.excerpt | strip_html | truncatewords: 32 }}</p>
+          {% if post.tags and post.tags.size > 0 %}
+          <div class="post-card-tags">
+            {% for tag in post.tags limit:4 %}
+            <span class="post-tag-pill">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          <div class="post-card-footer">
+            <span class="read-more">Open signal →</span>
+            {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min read</span>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="posts-pagination" id="archive-posts-pagination" aria-live="polite"></div>
+  </div>
+</section>

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Home
+description: "Commodity intelligence platform tracking ripple effects from oil, metals, agriculture, and energy across industries, stocks, ETFs, and supply chains."
 ---
 
 <!-- ===== HERO ===== -->
@@ -14,18 +15,18 @@ title: Home
       </div>
 
       <h1 data-animate data-delay="100">
-        Where Raw Materials<br>
-        Meet <span class="highlight">Markets</span>
+        The Commodity <span class="highlight">Ripple Map</span><br>
+        For Markets, Supply Chains &amp; Equities
       </h1>
 
       <p class="hero-desc" data-animate data-delay="200">
-        Interactive analysis of how commodity price movements ripple through
-        global industries, stocks, and ETFs &mdash; visualized in real time.
+        Track how oil, metals, agriculture, and energy shocks propagate through
+        sectors, companies, ETFs, and second-order supply-chain relationships.
       </p>
 
       <div class="hero-actions" data-animate data-delay="300">
-        <a href="#latest" class="btn btn-primary">Read Latest Analysis</a>
-        <a href="/commodities/" class="btn btn-secondary">Browse Commodities</a>
+        <a href="#latest" class="btn btn-primary">Explore Latest Signals</a>
+        <a href="/reports/" class="btn btn-secondary">Open Research Archive</a>
       </div>
 
       <div class="hero-stats" data-animate data-delay="400">
@@ -34,12 +35,12 @@ title: Home
           <span class="label">WTI Today</span>
         </div>
         <div class="hero-stat">
-          <span class="value counting" data-count="16" data-suffix=" posts">16 posts</span>
-          <span class="label">Analyses Published</span>
+          <span class="value counting" data-count="{{ site.posts.size }}" data-suffix=" reports">{{ site.posts.size }} reports</span>
+          <span class="label">Published Signals</span>
         </div>
         <div class="hero-stat">
-          <span class="value" data-count="8" data-suffix=" min">8 min</span>
-          <span class="label">Avg. Read Time</span>
+          <span class="value" data-count="{{ site.tags.size }}" data-suffix=" themes">{{ site.tags.size }} themes</span>
+          <span class="label">Mapped Topics</span>
         </div>
       </div>
       <script>
@@ -52,6 +53,56 @@ title: Home
         el.className='value '+(oil.change_pct>=0?'positive':'negative');
       }).catch(()=>{const e=document.getElementById('hero-wti-change');if(e)e.textContent='+0.00%';});
       </script>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section" aria-labelledby="market-dashboard-title">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Platform View</p>
+      <h2 class="section-title" id="market-dashboard-title">Signal Dashboard</h2>
+      <p class="section-desc">A faster way to discover the strongest current commodity-to-equity transmission paths across the site.</p>
+    </header>
+
+    <div class="signal-dashboard" data-animate data-delay="100">
+      <article class="signal-panel signal-panel--featured">
+        <p class="signal-panel-label">Featured Ripple Chain</p>
+        <h3>Crude Oil → Airlines → Logistics → Consumer Spending</h3>
+        <p>Energy price shocks remain the clearest live example of first-order and second-order exposure chains on the platform.</p>
+        <div class="signal-chain">
+          <span class="signal-node up">Crude Oil</span>
+          <span class="signal-arrow">→</span>
+          <span class="signal-node down">Airlines</span>
+          <span class="signal-arrow">→</span>
+          <span class="signal-node down">Logistics</span>
+          <span class="signal-arrow">→</span>
+          <span class="signal-node down">Consumer</span>
+        </div>
+        <a href="/crude-oil-industry-impact/" class="btn btn-secondary">View Impact Map</a>
+      </article>
+
+      <article class="signal-panel">
+        <p class="signal-panel-label">Browse by Lens</p>
+        <ul class="signal-list">
+          <li><a href="/commodities/">Commodity hubs</a></li>
+          <li><a href="/reports/">All signal reports</a></li>
+          <li><a href="/tags/energy/">Energy exposures</a></li>
+          <li><a href="/tags/ev/">EV supply chains</a></li>
+        </ul>
+      </article>
+
+      <article class="signal-panel">
+        <p class="signal-panel-label">Coverage Priorities</p>
+        <ul class="signal-list signal-list--muted">
+          <li>Multi-hop ripple chains</li>
+          <li>Commodity, ETF, and company cross-links</li>
+          <li>Event-driven updates + evergreen maps</li>
+          <li>Shareable OG cards per report</li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
@@ -87,18 +138,34 @@ title: Home
   <div class="container">
     <header class="section-header" data-animate>
       <p class="section-label">Latest Analysis</p>
-      <h2 class="section-title" id="latest-title">Commodity Impact Reports</h2>
+      <h2 class="section-title" id="latest-title">Signal Reports &amp; Impact Maps</h2>
       <p class="section-desc">
-        Deep dives into how commodity price swings cascade through sectors,
-        supply chains, and equity markets.
+        Filter by commodity complex, then paginate through the latest reports,
+        ripple chains, and company-exposure notes.
       </p>
     </header>
 
-    <div class="posts-grid">
+    <div class="posts-toolbar" data-animate data-delay="100">
+      <div class="filter-chips" role="tablist" aria-label="Filter reports">
+        <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+        <button class="filter-chip" type="button" data-filter="energy">Energy</button>
+        <button class="filter-chip" type="button" data-filter="metals">Metals</button>
+        <button class="filter-chip" type="button" data-filter="agriculture">Agriculture</button>
+        <button class="filter-chip" type="button" data-filter="battery">Battery</button>
+      </div>
+      <a href="/reports/" class="posts-toolbar-link">Full archive →</a>
+    </div>
+
+    <div class="posts-grid posts-grid--paginated" id="home-posts-grid">
       {% assign posts = site.posts %}
-      {% for post in posts limit:9 %}
-      <article class="post-card{% if forloop.first %} post-card--featured{% endif %}"
-               data-animate data-delay="{{ forloop.index0 | times: 100 | modulo: 500 }}">
+      {% for post in posts %}
+      {% assign categories_joined = post.categories | join: '|' | downcase %}
+      {% assign tags_joined = post.tags | join: '|' | downcase %}
+      <article class="post-card{% if forloop.first %} post-card--featured{% endif %} post-card--discoverable"
+               data-animate
+               data-delay="{{ forloop.index0 | times: 100 | modulo: 500 }}"
+               data-post-card
+               data-filter-tags="{{ categories_joined }}|{{ tags_joined }}">
 
         {% if forloop.first %}
         <div class="post-card-visual" aria-hidden="true">
@@ -135,8 +202,16 @@ title: Home
             {{ post.description | default: post.excerpt | strip_html | truncatewords: 35 }}
           </p>
 
+          {% if post.tags and post.tags.size > 0 %}
+          <div class="post-card-tags">
+            {% for tag in post.tags limit:3 %}
+            <span class="post-tag-pill">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
           <div class="post-card-footer">
-            <span class="read-more">Read analysis <span aria-hidden="true">&rarr;</span></span>
+            <span class="read-more">Open signal <span aria-hidden="true">&rarr;</span></span>
             {% if post.reading_time %}
             <span class="reading-time">{{ post.reading_time }} min read</span>
             {% endif %}
@@ -145,16 +220,17 @@ title: Home
       </article>
       {% endfor %}
 
-
-    <div style="text-align:center;margin-top:40px;" data-animate>
-      <a href="/commodities/" class="btn btn-secondary" style="min-width:220px;justify-content:center;">View All Analyses &rarr;</a>
-    </div>
-
       {% if site.posts.size == 0 %}
       <div class="feature-card text-center" style="grid-column:1/-1;padding:60px">
         <p class="text-muted">Analysis posts coming soon.</p>
       </div>
       {% endif %}
+    </div>
+
+    <div class="posts-pagination" id="home-posts-pagination" data-animate data-delay="150" aria-live="polite"></div>
+
+    <div class="posts-section-footer" data-animate>
+      <a href="/reports/" class="btn btn-secondary" style="min-width:220px;justify-content:center;">Browse Full Research Archive &rarr;</a>
     </div>
   </div>
 </section>
@@ -185,8 +261,8 @@ title: Home
             <line x1="12" y1="12" x2="20" y2="18" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
           </svg>
         </div>
-        <h3 class="feature-title">Interactive Node Graphs</h3>
-        <p class="feature-desc">Drag, zoom, and explore force-directed graphs that reveal commodity-to-industry connections in a single glance.</p>
+        <h3 class="feature-title">Interactive Ripple Graphs</h3>
+        <p class="feature-desc">Drag, zoom, filter depth, and study multi-hop force-directed graphs that reveal commodity-to-industry chains at a glance.</p>
       </div>
 
       <div class="feature-card" data-animate data-delay="100">
@@ -196,8 +272,8 @@ title: Home
             <polyline points="18,6 22,6 22,10" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="feature-title">Quantified Impact</h3>
-        <p class="feature-desc">Every analysis quantifies directional impact with percentage estimates &mdash; no vague "positive/negative" verdicts.</p>
+        <h3 class="feature-title">Quantified Exposure</h3>
+        <p class="feature-desc">Every report aims to quantify directional impact, tie it to supply-chain structure, and show who wins first, second, and third.</p>
       </div>
 
       <div class="feature-card" data-animate data-delay="200">
@@ -209,7 +285,7 @@ title: Home
           </svg>
         </div>
         <h3 class="feature-title">Timely Coverage</h3>
-        <p class="feature-desc">Published when price moves matter most &mdash; we chase the signal, not the calendar.</p>
+        <p class="feature-desc">Published when commodity moves matter most — with evergreen maps that can compound into an institutional-grade archive.</p>
       </div>
 
       <div class="feature-card" data-animate data-delay="300">
@@ -221,7 +297,7 @@ title: Home
           </svg>
         </div>
         <h3 class="feature-title">Cross-Sector Ripples</h3>
-        <p class="feature-desc">From airlines to EV makers to consumer staples &mdash; we trace multi-hop supply chain effects you won't find on Bloomberg terminals.</p>
+        <p class="feature-desc">From airlines to EV makers to consumer staples, CommodityNode is designed to evolve from single-hop impacts into a market-wide relationship atlas.</p>
       </div>
     </div>
   </div>
@@ -236,15 +312,16 @@ title: Home
       <span class="dot" aria-hidden="true"></span>
       Free &amp; Open Access
     </div>
-    <h2 class="section-title" style="max-width:500px;margin:0 auto 16px;">
-      Stay Ahead of the Commodity Curve
+    <h2 class="section-title" style="max-width:640px;margin:0 auto 16px;">
+      Build Your Commodity Exposure Mental Model Faster
     </h2>
     <p class="section-desc" style="margin:0 auto 32px;">
-      Bookmark us, follow the RSS feed, or explore the commodities index.
+      Start with the archive, jump into a commodity hub, or follow the RSS feed for new signal reports.
     </p>
     <div class="hero-actions" style="justify-content:center;">
-      <a href="/feed.xml"     class="btn btn-primary">RSS Feed</a>
-      <a href="/commodities/" class="btn btn-secondary">All Commodities</a>
+      <a href="/reports/" class="btn btn-primary">Research Archive</a>
+      <a href="/commodities/" class="btn btn-secondary">Commodity Hubs</a>
+      <a href="/feed.xml" class="btn btn-secondary">RSS Feed</a>
     </div>
   </div>
 </section>
