@@ -2144,3 +2144,82 @@ a:focus-visible, button:focus-visible {
   text-align: center;
   margin-top: 40px;
 }
+
+
+/* ════════════════════════════════════════════════
+   LAYOUT — wider container for premium feel
+   ════════════════════════════════════════════════ */
+.container {
+  max-width: 1280px !important;
+}
+.container--wide {
+  max-width: 1600px !important;
+}
+
+/* Post body wider */
+.post-body-container {
+  max-width: 1280px !important;
+}
+
+/* Post layout: article wider on large screens */
+@media (min-width: 1200px) {
+  .post-layout {
+    grid-template-columns: 1fr 260px;
+    gap: 40px;
+  }
+}
+
+/* ════════════════════════════════════════════════
+   CHART — full-bleed breakout from post column
+   ════════════════════════════════════════════════ */
+.post-content .cn-price-chart {
+  margin-left: -24px;
+  margin-right: -24px;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+}
+
+/* ════════════════════════════════════════════════
+   NODEMAP — full-bleed, taller, space background
+   ════════════════════════════════════════════════ */
+#impact-graph {
+  margin-left: -24px !important;
+  margin-right: -24px !important;
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  min-height: 620px !important;
+  background: radial-gradient(ellipse at 50% 50%, #0d0d1f 0%, #050508 70%) !important;
+}
+
+@media (max-width: 768px) {
+  #impact-graph {
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    min-height: 460px !important;
+  }
+  .post-content .cn-price-chart {
+    margin-left: -16px;
+    margin-right: -16px;
+  }
+}
+
+/* ════════════════════════════════════════════════
+   HERO — wider, more impactful
+   ════════════════════════════════════════════════ */
+.hero h1 {
+  font-size: clamp(2.8rem, 6vw, 5rem);
+}
+
+/* ════════════════════════════════════════════════
+   POST HEADER — gradient accent line
+   ════════════════════════════════════════════════ */
+.post-header::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), var(--gold), transparent);
+  margin-top: 40px;
+  opacity: 0.4;
+}
