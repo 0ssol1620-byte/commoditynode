@@ -39,7 +39,7 @@ description: "Get in touch with the CommodityNode team for tips, corrections, pa
   <div data-animate data-delay="200">
     <div class="glass-card" style="padding:32px;">
       <h3 style="margin-bottom:24px;font-size:1.1rem;">Send a Message</h3>
-      <form action="https://formspree.io/f/mrgvbnwp" method="POST" id="contact-form">
+      <form action="https://formspree.io/f/maqpvgkq" method="POST" id="contact-form">
         <div class="form-group">
           <label class="form-label" for="name">Your Name</label>
           <input class="form-control" type="text" id="name" name="name" placeholder="Jane Doe" required>
