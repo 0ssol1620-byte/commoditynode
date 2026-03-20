@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Iron Ore Rises
+
+## Winners When Iron Ore Rises
 
 ### Iron Ore Miners & Shippers
 
@@ -73,7 +73,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Vale's Brumadinho dam disaster (2019) and subsequent supply constraints demonstrated that iron ore's supply can be disrupted suddenly, creating violent 30-50% price spikes. Watch Brazilian environmental regulatory news for early risk signals.
 
-## 🔴 Losers When Iron Ore Rises
+## Losers When Iron Ore Rises
 
 ### Chinese Steel Mills & Western Producers
 
@@ -87,7 +87,7 @@ window.COMMODITY_DATA = {
 
 **Counter-intuitive note:** Rising iron ore can sometimes be bullish for US mini-mills that use electric arc furnaces with scrap metal. If iron ore rises but scrap stays flat, US EAF producers gain a competitive cost advantage over Chinese blast-furnace producers.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Iron Ore Price Move | VALE Change | RIO Change | BHP Change | FSUGY Change | Notes |
 |------|--------------------|-----------|-----------|-----------|-----------| ----- |
@@ -98,7 +98,7 @@ window.COMMODITY_DATA = {
 | Jan 2024 | +20% (Recovery) | +18% | +14% | +12% | +24% | Stimulus hopes |
 | **Average** | **±15%** | **±18%** | **±14%** | **±12%** | **±20%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Iron ore's 15% move produces **+20% Fortescue**, **+18% Vale**, and **+14% Rio Tinto** — with the pure-plays clearly outperforming diversified miners. Chinese steel mills bear the heaviest cost burden at **-8%**. The Baltic Dry shipping index adds a second leverage play at **+12%** correlation.
 
