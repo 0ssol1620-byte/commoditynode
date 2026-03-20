@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Copper Rises
+
+## Winners When Copper Rises
 
 ### Copper Miners & ETFs
 
@@ -70,7 +70,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** FCX's price sensitivity to copper is exceptional: 1% copper move = ~1.8% FCX move on average. During copper bull markets (China stimulus cycles), FCX has delivered 3-5x returns over 12-18 months.
 
-## 🔴 Losers When Copper Rises
+## Losers When Copper Rises
 
 ### Construction, EV, & Electrical Industries
 
@@ -86,7 +86,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** The EV transition is a structural tailwind for copper demand — creating a feedback loop where EV adoption drives copper prices higher, which then temporarily pressures EV makers' margins. This paradox resolves as long-term supply contracts are locked in.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Copper Price Move | COPX Change | FCX Change | SCCO Change | Construction Impact | Notes |
 |------|------------------|------------|-----------|------------|---------------------|-------|
@@ -97,7 +97,7 @@ window.COMMODITY_DATA = {
 | Nov 2024 | +12% (EV demand) | +17% | +22% | +18% | -5% | Green energy |
 | **Average** | **±10%** | **±14.2%** | **±18%** | **±16%** | **±4%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Copper's role as an economic bellwether makes it a must-watch commodity. When copper rises 10%, COPX delivers **+14.2%** and FCX averages **+18%** — one of the strongest leverage ratios in commodity markets. The losers — EV makers and construction — face cost pressure averaging **3-5%** per 10% copper move.
 
