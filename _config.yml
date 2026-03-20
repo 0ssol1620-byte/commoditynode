@@ -4,18 +4,15 @@ description: "Interactive analysis of how commodity price movements ripple throu
 url: "https://commoditynode.com"
 baseurl: ""
 
-# Author
 author:
   name: CommodityNode Research
   email: contact@commoditynode.com
   twitter: commoditynode
 
-# SEO
 lang: en
 timezone: America/New_York
-logo: /assets/images/logo.png
+logo: /assets/images/logo.svg
 
-# Social
 twitter:
   username: commoditynode
   card: summary_large_image
@@ -25,14 +22,11 @@ social:
   links:
     - https://twitter.com/commoditynode
 
-# Google
-google_analytics: "G-8YF60DEP0W"  # Add GA4 ID later
-google_site_verification: ""  # Add after GSC verification
+google_analytics: "G-8YF60DEP0W"
 
-# Build
 markdown: kramdown
 permalink: /:title/
-paginate: 10
+paginate: 12
 paginate_path: "/page/:num/"
 
 plugins:
@@ -41,13 +35,11 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
 
-# Collections
 collections:
   commodities:
     output: true
     permalink: /commodities/:name/
 
-# Defaults
 defaults:
   - scope:
       path: ""
@@ -55,9 +47,17 @@ defaults:
     values:
       layout: post
       author: CommodityNode Research
-      image: /assets/images/og-default.png
+      image: /assets/images/og-default.svg
   - scope:
       path: ""
       type: "commodities"
     values:
       layout: "commodity"
+
+exclude:
+  - node_modules/
+  - vendor/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - .gitignore
