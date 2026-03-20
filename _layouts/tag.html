@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<div class="post-header">
+  <div class="container">
+    <div class="post-header-badge"><span class="badge badge-cyan">Tag</span></div>
+    <h1>#{{ page.tag }}</h1>
+    <p class="post-meta-bar">Posts tagged "{{ page.tag }}"</p>
+  </div>
+</div>
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="posts-grid" data-animate>
+    {% assign tagged_posts = site.posts | where_exp: "post", "post.tags contains page.tag" %}
+    {% for post in tagged_posts %}
+    <article class="post-card">
+      <div class="post-card-accent"></div>
+      <div class="post-card-body">
+        <div class="post-card-meta">
+          <time class="post-time">{{ post.date | date: "%b %d, %Y" }}</time>
+          {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+        </div>
+        <h2 class="post-card-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        {% if post.description %}<p class="post-card-excerpt">{{ post.description }}</p>{% endif %}
+        <div class="post-card-footer">
+          <a href="{{ post.url }}" class="read-more">Read Analysis &rarr;</a>
+          {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+    {% if tagged_posts.size == 0 %}
+    <p style="color:var(--text2);padding:40px 0;">No posts found for this tag yet.</p>
+    {% endif %}
+  </div>
+</div>
