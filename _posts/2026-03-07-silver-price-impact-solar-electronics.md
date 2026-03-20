@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Silver Rises
+
+## Winners When Silver Rises
 
 ### Silver Miners & ETFs
 
@@ -71,7 +71,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** First Majestic (AG) is the highest-beta silver stock available — its leverage ratio to silver is typically 1.8-2.2x. During the January 2021 Reddit-driven silver squeeze, AG tripled in value over five trading days.
 
-## 🔴 Losers When Silver Rises
+## Losers When Silver Rises
 
 ### Solar Manufacturers & Electronics
 
@@ -87,7 +87,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** The silver-solar nexus creates a long-term structural demand driver. As solar deployment accelerates, silver demand from this sector is projected to consume 15-20% of annual mining supply by 2030 — a fundamental bull case for silver regardless of investment demand.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Silver Price Move | SLV Change | First Majestic | PAAS Change | FSLR Change | Notes |
 |------|-----------------|-----------|---------------|------------|------------|-------|
@@ -98,7 +98,7 @@ window.COMMODITY_DATA = {
 | Oct 2023 | +20% (Gold rally) | +19.5% | +42% | +32% | -6% | Safe haven |
 | **Average** | **±15%** | **±14.8%** | **±28%** | **±22%** | **±4%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Silver's dual role as precious and industrial metal creates distinct winner and loser groups. SLV/PSLV track silver almost perfectly, while silver miners like First Majestic leverage the move to **+28%** on average. Solar manufacturers face **-4%** headwinds — a tension that will intensify as solar deployment scales.
 
