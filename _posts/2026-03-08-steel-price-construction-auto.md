@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Steel Rises
+
+## Winners When Steel Rises
 
 ### Steel Producers & ETFs
 
@@ -71,7 +71,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** The two types of US steel producers respond differently: integrated mills (CLF, X) have more fixed-cost leverage but are slower to adapt. Mini-mills (NUE, STLD) use electric arc furnaces with scrap metal inputs — faster to ramp production and historically more profitable per ton through the cycle.
 
-## 🔴 Losers When Steel Rises
+## Losers When Steel Rises
 
 ### Automakers, Homebuilders & Equipment
 
@@ -87,7 +87,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** The 2021-2022 steel spike (hot-rolled coil to $1,900/ton) caused Ford to add steel cost surcharges and delay vehicle launches. This delayed production created the "chip shortage + steel shortage" double squeeze that suppressed auto output for 18 months.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | HRC Steel Move | SLX Change | CLF Change | NUE Change | Ford Change | Notes |
 |------|---------------|-----------|-----------|-----------|------------|-------|
@@ -98,7 +98,7 @@ window.COMMODITY_DATA = {
 | Oct 2024 | +12% (Tariffs) | +10% | +15% | +14% | -6% | Trade protection |
 | **Average** | **±15%** | **±12.8%** | **±22%** | **±16%** | **±5%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Steel's 15% move generates **+12.8% in SLX** and up to **+22% for CLF** — among the strongest leverage ratios in metals. Automakers (F, GM) and homebuilders (DHI, LEN) bear the heaviest input cost burden at **-5 to -6%** per 15% steel move.
 
