@@ -61,8 +61,7 @@ window.COMMODITY_DATA = {
 
 
 
-## Winners 🟢
-
+## Winners
 ### 1. Oilfield Services (+18%)
 Companies like Halliburton (HAL) and Schlumberger (SLB) directly benefit from higher oil prices as exploration and production activity increases.
 
@@ -83,8 +82,7 @@ Refiners profit from the "crack spread" — the difference between crude oil cos
 
 **Key stocks:** Valero (VLO), Marathon Petroleum (MPC)
 
-## Losers 🔴
-
+## Losers
 ### 1. Airlines (-12%)
 Fuel is 25-30% of airline operating costs. A 15% oil surge directly compresses margins.
 
