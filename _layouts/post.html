@@ -56,11 +56,6 @@ layout: default
   </div>
 </header>
 
-<!-- Full-bleed graph section (outside container) -->
-<div class="post-graph-bleed" id="post-graph-zone">
-  <!-- Impact graph injected here by JS if present in content -->
-</div>
-
 <!-- Post Body -->
 <div class="container post-body-container">
   <div class="post-layout" id="post-layout">
@@ -102,35 +97,5 @@ layout: default
     </aside>
   </div>
 </div>
-
-<script>
-// Move #impact-graph into full-bleed zone
-(function() {
-  var article = document.getElementById('post-article');
-  var zone = document.getElementById('post-graph-zone');
-  if (!article || !zone) return;
-  var graph = article.querySelector('#impact-graph');
-  if (graph) {
-    // Also move the preceding chart div
-    var chart = article.querySelector('.cn-price-chart');
-    if (chart) {
-      var chartWrap = document.createElement('div');
-      chartWrap.className = 'post-chart-bleed';
-      chartWrap.appendChild(chart.cloneNode(true));
-      zone.appendChild(chartWrap);
-      chart.remove();
-    }
-    var graphWrap = document.createElement('div');
-    graphWrap.className = 'post-nodemap-bleed';
-    graphWrap.appendChild(graph.cloneNode(true));
-    zone.appendChild(graphWrap);
-    graph.remove();
-    // Re-init chart in new location
-    if (window.CommodityNodeChart) {
-      window.CommodityNodeChart.init();
-    }
-  }
-})();
-</script>
 
 <script src="{{ '/assets/js/impact-graph.js' | relative_url }}" defer></script>
