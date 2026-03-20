@@ -53,9 +53,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Coffee Rises
+
+## Winners When Coffee Rises
 
 ### Coffee ETFs & Producers
 
@@ -69,7 +69,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Coffee is uniquely driven by weather in two countries: Brazil (38% of global supply) and Vietnam (20%). Brazilian frost or drought years are the primary price catalysts. Watch NOAA's Brazil weather forecasts and the CONAB crop reports for early positioning opportunities in JO.
 
-## 🔴 Losers When Coffee Rises
+## Losers When Coffee Rises
 
 ### Coffee Chains & Retailers
 
@@ -85,7 +85,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Starbucks can raise prices $0.10-0.25/cup and absorb most coffee cost increases. But this creates a perception problem: SBUX is already facing customer pushback on prices. The 2024-2025 coffee spike contributed directly to SBUX's traffic decline and CEO change. Coffee cost pressure exposed the underlying consumer value equation.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Arabica Coffee Move | JO Change | SBUX Change | KDP Change | Notes |
 |------|---------------------|----------|------------|-----------|-------|
@@ -96,7 +96,7 @@ window.COMMODITY_DATA = {
 | Jan 2025 | +80% (Record) | +77% | -18% | -10% | Multi-year drought |
 | **Average** | **±30%** | **±29.2%** | **±8%** | **±5%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Coffee's 30% move produces **+29.2% JO** tracking and represents one of the clearest commodity → retail impact chains. Starbucks faces **-8%** headwinds as its largest variable input cost surges. Independent cafes are hit hardest at **-12%** but lack public equity exposure.
 
