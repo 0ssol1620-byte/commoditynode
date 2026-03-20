@@ -176,15 +176,22 @@
     ctx.textAlign = 'center';
     ctx.fillText(fmt(lastC), W - PAD.right/2 + 2, yLast);
 
-    // X-axis date labels
+    // X-axis date labels — auto-spacing to prevent overlap
     ctx.fillStyle = '#4a4a6a';
-    ctx.font = `10px 'JetBrains Mono', monospace`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
-    const labelEvery = Math.ceil(n / 6);
+    // Estimate label width and compute max labels that fit
+    const dateStr = fmtDate(candles[0].x);
+    ctx.font = `10px 'JetBrains Mono', monospace`;
+    const labelW = ctx.measureText(dateStr).width + 8; // +8 padding
+    const maxLabels = Math.max(2, Math.floor(cW / labelW));
+    const labelEvery = Math.ceil(n / maxLabels);
     candles.forEach((c, i) => {
       if (i % labelEvery === 0) {
-        ctx.fillText(fmtDate(c.x), xOf(i), PAD.top + cH + 4);
+        // Short date format: "Mar 20" instead of "Mar 20, 26"
+        const d = new Date(c.x);
+        const label = d.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+        ctx.fillText(label, xOf(i), PAD.top + cH + 5);
       }
     });
 
