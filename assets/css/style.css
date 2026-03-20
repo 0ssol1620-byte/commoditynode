@@ -2040,3 +2040,107 @@ a:focus-visible, button:focus-visible {
     stroke-width: 2.5px !important;
   }
 }
+
+
+/* ════════════════════════════════════
+   TICKER — ensure animation works
+   ════════════════════════════════════ */
+.ticker-bar { overflow: hidden; position: relative; }
+.ticker-track {
+  display: inline-flex !important;
+  animation: ticker-scroll 40s linear infinite;
+  white-space: nowrap;
+  will-change: transform;
+}
+.ticker-track:hover { animation-play-state: paused; }
+.ticker-item { flex-shrink: 0; }
+
+/* ════════════════════════════════════
+   PRICE CARD — symbol label
+   ════════════════════════════════════ */
+.price-symbol {
+  font-size: 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+/* ════════════════════════════════════
+   POST — share bar
+   ════════════════════════════════════ */
+.post-share {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  padding: 18px 24px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.post-share-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  margin-right: 4px;
+}
+.post-share-btn {
+  padding: 7px 14px !important;
+  font-size: 0.8rem !important;
+  gap: 6px !important;
+}
+.post-share-btn:hover { transform: translateY(-1px); }
+
+/* ════════════════════════════════════
+   POST — related posts section
+   ════════════════════════════════════ */
+.related-posts .post-card {
+  transition: all 0.25s ease;
+}
+.related-posts .post-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(34,211,238,0.3);
+}
+
+/* ════════════════════════════════════
+   HOMEPAGE — post grid responsive
+   ════════════════════════════════════ */
+@media (min-width: 640px) and (max-width: 1024px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .post-card--featured {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .post-card--featured {
+    flex-direction: column !important;
+  }
+  .post-card--featured .post-card-visual {
+    min-height: 120px !important;
+  }
+}
+
+/* ════════════════════════════════════
+   SCROLL-TO-TOP button hover
+   ════════════════════════════════════ */
+#scroll-top:hover {
+  border-color: #22d3ee !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px rgba(34,211,238,0.25);
+}
+
+/* ════════════════════════════════════
+   VIEW ALL button
+   ════════════════════════════════════ */
+.posts-section-footer {
+  text-align: center;
+  margin-top: 40px;
+}
