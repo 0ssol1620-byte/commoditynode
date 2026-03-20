@@ -58,7 +58,7 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
+
 
 
 ## Winners 🟢
