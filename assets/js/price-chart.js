@@ -1,11 +1,12 @@
-// assets/js/price-chart.js v4 — Premium
-// MA20/MA50 · current price line · clean volume · dark theme
+// assets/js/price-chart.js v5 — Robust defer-safe init
+// MA20/MA50 · current price · premium dark theme · mobile optimized
 
 (function () {
   'use strict';
 
   const PERIODS = ['1M', '3M', '1Y', '5Y'];
   let chartDataCache = null;
+  let initDone = false;
 
   async function loadChartData() {
     if (chartDataCache) return chartDataCache;
@@ -26,16 +27,17 @@
 
   function fmtPrice(p) {
     if (p == null || isNaN(p)) return 'N/A';
-    return '$' + (+p).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const n = +p;
+    return '$' + n.toLocaleString('en-US', { minimumFractionDigits: n < 10 ? 3 : 2, maximumFractionDigits: n < 10 ? 3 : 2 });
   }
 
-  // Simple moving average
   function sma(candles, period) {
-    return candles.map((_, i) => {
-      if (i < period - 1) return null;
-      const slice = candles.slice(i - period + 1, i + 1);
-      return { x: candles[i].x, y: slice.reduce((s, c) => s + c.c, 0) / period };
-    }).filter(p => p !== null);
+    const out = [];
+    for (let i = period - 1; i < candles.length; i++) {
+      const avg = candles.slice(i - period + 1, i + 1).reduce((s, c) => s + c.c, 0) / period;
+      out.push({ x: candles[i].x, y: avg });
+    }
+    return out;
   }
 
   function renderChart(container, candles, symbol, name) {
@@ -44,210 +46,142 @@
     if (canvas._chart) { canvas._chart.destroy(); canvas._chart = null; }
 
     const first = candles[0].c, last = candles[candles.length - 1].c;
-    const change = ((last - first) / first * 100).toFixed(2);
-    const isUp = +change >= 0;
+    const chgPct = ((last - first) / first * 100).toFixed(2);
+    const isUp = +chgPct >= 0;
 
     const priceEl  = container.querySelector('.cn-price');
     const changeEl = container.querySelector('.cn-change');
     const updEl    = container.querySelector('.cn-updated');
     if (priceEl)  priceEl.textContent = fmtPrice(last);
-    if (changeEl) {
-      changeEl.textContent = (isUp ? '+' : '') + change + '%';
-      changeEl.className = 'cn-change ' + (isUp ? 'up' : 'down');
-    }
-    if (updEl) updEl.textContent = fmtDate(candles[candles.length - 1].x);
+    if (changeEl) { changeEl.textContent = (isUp ? '+' : '') + chgPct + '%'; changeEl.className = 'cn-change ' + (isUp ? 'up' : 'down'); }
+    if (updEl)    updEl.textContent = fmtDate(candles[candles.length - 1].x);
 
-    // Colors
-    const UP   = '#22c55e';
-    const DOWN = '#ef4444';
+    const UP = '#22c55e', DOWN = '#ef4444';
     const ACCENT = isUp ? UP : DOWN;
-    const GRID = 'rgba(255,255,255,0.04)';
-    const TEXT = '#52525b';
+    const GRID = 'rgba(255,255,255,0.04)', TICK = '#4a4a6a';
 
-    const chartData  = candles.map(c => ({ x: c.x, o: c.o, h: c.h, l: c.l, c: c.c }));
-    const volumeData = candles.map(c => ({
-      x: c.x, y: c.v || 0,
-      color: c.c >= c.o ? 'rgba(34,197,94,0.18)' : 'rgba(239,68,68,0.18)'
-    }));
-
-    // MA lines
-    const ma20data = sma(candles, Math.min(20, candles.length));
-    const ma50data = sma(candles, Math.min(50, candles.length));
-
-    // Current price line dataset
-    const currentPriceLine = [
-      { x: candles[0].x, y: last },
-      { x: candles[candles.length - 1].x, y: last }
-    ];
+    const ma20 = sma(candles, Math.min(20, candles.length));
+    const ma50 = sma(candles, Math.min(50, candles.length));
 
     canvas._chart = new Chart(canvas, {
       type: 'candlestick',
       data: {
         datasets: [
           {
-            label: symbol, type: 'candlestick',
-            data: chartData, order: 1,
+            label: symbol, type: 'candlestick', data: candles.map(c => ({ x: c.x, o: c.o, h: c.h, l: c.l, c: c.c })),
             color: { up: UP, down: DOWN, unchanged: '#71717a' },
             borderColor: { up: UP, down: DOWN, unchanged: '#71717a' },
             backgroundColors: { up: UP, down: DOWN, unchanged: '#71717a' },
-            barThickness: candles.length > 50 ? 'flex' : undefined,
+            order: 1,
           },
           {
-            label: 'Volume', type: 'bar',
-            data: volumeData,
-            backgroundColor: volumeData.map(v => v.color),
-            yAxisID: 'volume', order: 3,
+            label: 'Vol', type: 'bar',
+            data: candles.map(c => ({ x: c.x, y: c.v || 0 })),
+            backgroundColor: candles.map(c => c.c >= c.o ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)'),
+            yAxisID: 'vol', order: 3,
           },
+          { label: 'MA20', type: 'line', data: ma20, borderColor: 'rgba(251,191,36,0.75)', borderWidth: 1.2, pointRadius: 0, tension: 0.3, order: 2, yAxisID: 'y' },
+          { label: 'MA50', type: 'line', data: ma50, borderColor: 'rgba(129,140,248,0.65)', borderWidth: 1.2, pointRadius: 0, tension: 0.3, order: 2, yAxisID: 'y' },
           {
-            label: 'MA20', type: 'line',
-            data: ma20data,
-            borderColor: 'rgba(251,191,36,0.7)',
-            borderWidth: 1.2, pointRadius: 0,
-            tension: 0.3, order: 2,
-            yAxisID: 'y',
-          },
-          {
-            label: 'MA50', type: 'line',
-            data: ma50data,
-            borderColor: 'rgba(129,140,248,0.6)',
-            borderWidth: 1.2, pointRadius: 0,
-            tension: 0.3, order: 2,
-            yAxisID: 'y',
-          },
-          {
-            label: 'Current', type: 'line',
-            data: currentPriceLine,
-            borderColor: ACCENT,
-            borderWidth: 1,
-            borderDash: [4, 3],
-            pointRadius: 0,
-            tension: 0, order: 2,
-            yAxisID: 'y',
+            label: 'Price', type: 'line',
+            data: [{ x: candles[0].x, y: last }, { x: candles[candles.length-1].x, y: last }],
+            borderColor: ACCENT + 'aa', borderWidth: 1, borderDash: [5, 4],
+            pointRadius: 0, tension: 0, order: 2, yAxisID: 'y',
           },
         ]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        animation: { duration: 400 },
-        layout: { padding: { top: 12, right: 64, bottom: 4, left: 4 } },
+        animation: { duration: 350 },
+        layout: { padding: { top: 10, right: 70, bottom: 2, left: 2 } },
         scales: {
           x: {
-            type: 'time',
-            time: { tooltipFormat: 'MMM d, yyyy' },
+            type: 'time', time: { tooltipFormat: 'MMM d, yyyy' },
             grid: { color: GRID, drawBorder: false },
-            ticks: {
-              color: TEXT, maxTicksLimit: 7,
-              font: { family: 'JetBrains Mono', size: 10 },
-            },
+            ticks: { color: TICK, maxTicksLimit: 6, font: { family: 'JetBrains Mono', size: 10 } },
             adapters: { date: { locale: 'en-US' } },
             border: { display: false },
           },
           y: {
-            position: 'right',
-            grid: { color: GRID, drawBorder: false },
-            ticks: {
-              color: TEXT,
-              font: { family: 'JetBrains Mono', size: 10 },
-              callback: v => {
-                if (v >= 1000) return '$' + (v/1000).toFixed(1) + 'k';
-                return '$' + v.toFixed(v < 10 ? 3 : 2);
-              },
-              maxTicksLimit: 6,
-            },
+            position: 'right', grid: { color: GRID, drawBorder: false },
+            ticks: { color: TICK, font: { family: 'JetBrains Mono', size: 10 }, maxTicksLimit: 6,
+              callback: v => v >= 1000 ? '$' + (v/1000).toFixed(1) + 'k' : '$' + (+v).toFixed(v < 10 ? 3 : 2) },
             border: { display: false },
           },
-          volume: {
-            position: 'left',
-            max: Math.max(...candles.map(c => c.v || 0)) * 6,
-            grid: { display: false },
-            ticks: { display: false },
-            border: { display: false },
-          }
+          vol: {
+            position: 'left', max: Math.max(...candles.map(c => c.v || 0)) * 6,
+            grid: { display: false }, ticks: { display: false }, border: { display: false },
+          },
         },
         plugins: {
           legend: { display: false },
           tooltip: {
             mode: 'index', intersect: false,
-            backgroundColor: 'rgba(8,8,16,0.97)',
+            backgroundColor: 'rgba(6,6,14,0.97)',
             borderColor: 'rgba(255,255,255,0.06)', borderWidth: 1,
-            titleColor: '#e4e4e7', bodyColor: '#71717a',
-            padding: { x: 14, y: 10 },
+            titleColor: '#e4e4e7', bodyColor: '#52525b', padding: { x: 12, y: 9 },
             titleFont: { family: 'Inter', size: 11, weight: '700' },
             bodyFont: { family: 'JetBrains Mono', size: 10 },
             callbacks: {
               title: items => fmtDate(items[0].parsed?.x ?? items[0].raw?.x),
               label: item => {
-                if (item.datasetIndex === 1) {
-                  const v = item.parsed.y || 0;
-                  return `Vol  ${v > 1e6 ? (v/1e6).toFixed(1)+'M' : v > 1e3 ? (v/1e3).toFixed(0)+'K' : v}`;
-                }
-                if (item.datasetIndex >= 2) return null; // hide MA/price line in tooltip
-                const d = item.raw;
-                if (!d) return '';
-                const chg = d.c >= d.o ? '▲' : '▼';
-                return [
-                  `O ${fmtPrice(d.o)}   H ${fmtPrice(d.h)}`,
-                  `L ${fmtPrice(d.l)}   C ${fmtPrice(d.c)} ${chg}`,
-                ];
+                if (item.datasetIndex === 1) { const v = item.parsed.y||0; return `Vol  ${v>1e6?(v/1e6).toFixed(1)+'M':v>1e3?(v/1e3).toFixed(0)+'K':v}`; }
+                if (item.datasetIndex >= 2) return null;
+                const d = item.raw; if (!d) return '';
+                return [`O ${fmtPrice(d.o)}   H ${fmtPrice(d.h)}`, `L ${fmtPrice(d.l)}   C ${fmtPrice(d.c)}`];
               },
-              filter: item => item.formattedValue !== null,
+              filter: item => item.formattedValue !== null && item.datasetIndex < 4,
             }
           }
         },
         interaction: { mode: 'index', intersect: false },
-      }
+      },
+      plugins: [{
+        id: 'priceLabel',
+        afterDraw(chart) {
+          try {
+            const yScale = chart.scales.y;
+            const yPx = yScale.getPixelForValue(last);
+            const ctx2 = chart.ctx;
+            ctx2.save();
+            const txt = fmtPrice(last);
+            ctx2.font = '700 10px JetBrains Mono, monospace';
+            const tw = ctx2.measureText(txt).width;
+            const px = chart.chartArea.right + 4;
+            const pad = 5;
+            ctx2.fillStyle = ACCENT + '22';
+            ctx2.beginPath();
+            if (ctx2.roundRect) ctx2.roundRect(px, yPx - 9, tw + pad*2, 18, 3);
+            else ctx2.rect(px, yPx - 9, tw + pad*2, 18);
+            ctx2.fill();
+            ctx2.fillStyle = ACCENT;
+            ctx2.textAlign = 'left';
+            ctx2.textBaseline = 'middle';
+            ctx2.fillText(txt, px + pad, yPx);
+            ctx2.restore();
+          } catch(e) {}
+        }
+      }]
     });
 
-    // Draw current price label on right
-    const origDraw = canvas._chart.draw.bind(canvas._chart);
-    canvas._chart.draw = function() {
-      origDraw();
-      try {
-        const meta = canvas._chart.getDatasetMeta(0);
-        if (!meta || !meta.data.length) return;
-        const yScale = canvas._chart.scales.y;
-        const yPx = yScale.getPixelForValue(last);
-        const ctx2 = canvas.getContext('2d');
-        const labelX = canvas.width - 6;
-        ctx2.save();
-        ctx2.fillStyle = ACCENT;
-        ctx2.font = '700 10px JetBrains Mono, monospace';
-        ctx2.textAlign = 'right';
-        ctx2.textBaseline = 'middle';
-        // Background pill
-        const txt = fmtPrice(last);
-        const tw = ctx2.measureText(txt).width;
-        ctx2.fillStyle = ACCENT + '22';
-        const pad = 4;
-        ctx2.beginPath();
-        ctx2.roundRect(labelX - tw - pad*2, yPx - 9, tw + pad*2, 18, 3);
-        ctx2.fill();
-        ctx2.fillStyle = ACCENT;
-        ctx2.fillText(txt, labelX - pad, yPx);
-        ctx2.restore();
-      } catch(e) {}
-    };
-  }
-
-  // MA legend
-  function renderLegend(container) {
-    const existing = container.querySelector('.cn-ma-legend');
-    if (existing) existing.remove();
-    const leg = document.createElement('div');
-    leg.className = 'cn-ma-legend';
+    // MA legend
+    let leg = container.querySelector('.cn-ma-legend');
+    if (!leg) {
+      leg = document.createElement('div');
+      leg.className = 'cn-ma-legend';
+      const hdr = container.querySelector('.cn-chart-right');
+      if (hdr) hdr.prepend(leg);
+    }
     leg.innerHTML = `
-      <span style="color:rgba(251,191,36,0.8);font-size:10px;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;">
-        <span style="display:inline-block;width:16px;height:1.5px;background:rgba(251,191,36,0.7);"></span>MA20
-      </span>
-      <span style="color:rgba(129,140,248,0.8);font-size:10px;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;">
-        <span style="display:inline-block;width:16px;height:1.5px;background:rgba(129,140,248,0.6);"></span>MA50
-      </span>
+      <span style="color:rgba(251,191,36,0.85);font-size:10px;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:14px;height:1.5px;background:rgba(251,191,36,0.75);flex-shrink:0"></span>MA20</span>
+      <span style="color:rgba(129,140,248,0.85);font-size:10px;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:4px;"><span style="display:inline-block;width:14px;height:1.5px;background:rgba(129,140,248,0.65);flex-shrink:0"></span>MA50</span>
     `;
-    const header = container.querySelector('.cn-chart-header');
-    if (header) header.appendChild(leg);
   }
 
   async function initChart(el) {
+    if (el.dataset.chartInit) return;
+    el.dataset.chartInit = '1';
+
     const symbol = el.dataset.symbol;
     const name   = el.dataset.name || symbol;
     if (!symbol) return;
@@ -260,7 +194,7 @@
           <span class="cn-change">—</span>
         </div>
         <div class="cn-chart-right">
-          <span class="cn-updated" style="font-size:0.7rem;color:#3f3f5a;font-family:'JetBrains Mono',monospace;"></span>
+          <span class="cn-updated" style="font-size:0.68rem;color:#3f3f5a;font-family:'JetBrains Mono',monospace;"></span>
           <div class="cn-period-btns">
             ${PERIODS.map((p, i) => `<button class="cn-period${i===1?' active':''}" data-period="${p}">${p}</button>`).join('')}
           </div>
@@ -285,19 +219,21 @@
 
     async function loadAndRender(period) {
       loadingEl.style.display = 'flex';
-      el.querySelector('canvas').style.opacity = '0';
+      const cvs = el.querySelector('canvas');
+      if (cvs) cvs.style.opacity = '0';
 
       const candles = allData?.[symbol]?.[period]?.candles;
 
       loadingEl.style.display = 'none';
-      el.querySelector('canvas').style.opacity = '1';
+      if (cvs) cvs.style.opacity = '1';
 
       if (candles && candles.length > 1) {
         renderChart(el, candles, symbol, name);
-        renderLegend(el);
       } else {
-        loadingEl.querySelector('span').textContent = 'Price data temporarily unavailable';
-        loadingEl.querySelector('.cn-loading-spinner').style.display = 'none';
+        const sp = loadingEl.querySelector('span');
+        if (sp) sp.textContent = 'Price data temporarily unavailable';
+        const spinner = loadingEl.querySelector('.cn-loading-spinner');
+        if (spinner) spinner.style.display = 'none';
         loadingEl.style.display = 'flex';
       }
     }
@@ -323,9 +259,19 @@
     });
   }
 
-  function init() { document.querySelectorAll('.cn-price-chart').forEach(initChart); }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  function init() {
+    if (initDone) return;
+    initDone = true;
+    document.querySelectorAll('.cn-price-chart').forEach(initChart);
+  }
+
+  // Multiple init triggers to handle defer timing
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  window.addEventListener('load', init);
 
   window.CommodityNodeChart = { init, initChart };
 })();
