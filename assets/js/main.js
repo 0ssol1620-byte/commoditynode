@@ -335,6 +335,97 @@
     document.head.appendChild(s);
   }
 
+
+  /* ---------- Discoverable Post Grids ---------- */
+  function initDiscoverablePosts(root) {
+    const grid = root.querySelector('.posts-grid--paginated');
+    if (!grid) return;
+    const pagination = root.querySelector('.posts-pagination');
+    const chips = root.querySelectorAll('.filter-chip');
+    const cards = Array.from(grid.querySelectorAll('[data-post-card]'));
+    if (!cards.length) return;
+
+    const pageSize = parseInt(grid.dataset.pageSize || '6', 10);
+    let currentFilter = 'all';
+    let currentPage = 1;
+
+    const filterMatchers = {
+      all: () => true,
+      energy: tags => /energy|oil|crude|gas|uranium/.test(tags),
+      metals: tags => /metal|gold|silver|copper|steel|aluminum|palladium|iron-ore/.test(tags),
+      agriculture: tags => /agriculture|wheat|corn|coffee|lumber|food/.test(tags),
+      battery: tags => /battery|lithium|ev|uranium|clean-energy/.test(tags)
+    };
+
+    function getVisibleCards() {
+      return cards.filter(card => {
+        const haystack = (card.dataset.filterTags || '').toLowerCase();
+        return (filterMatchers[currentFilter] || filterMatchers.all)(haystack);
+      });
+    }
+
+    function renderPagination(totalPages, totalItems) {
+      if (!pagination) return;
+      if (totalItems === 0) {
+        pagination.innerHTML = '<p class="pagination-empty">No reports match this filter yet.</p>';
+        return;
+      }
+      if (totalPages <= 1) {
+        pagination.innerHTML = `<p class="pagination-status">Showing ${totalItems} report${totalItems === 1 ? '' : 's'}.</p>`;
+        return;
+      }
+      let html = `<button type="button" class="pagination-btn" data-page="${Math.max(1, currentPage - 1)}" ${currentPage === 1 ? 'disabled' : ''}>Prev</button>`;
+      for (let i = 1; i <= totalPages; i++) {
+        html += `<button type="button" class="pagination-btn ${i === currentPage ? 'is-active' : ''}" data-page="${i}">${i}</button>`;
+      }
+      html += `<button type="button" class="pagination-btn" data-page="${Math.min(totalPages, currentPage + 1)}" ${currentPage === totalPages ? 'disabled' : ''}>Next</button>`;
+      html += `<span class="pagination-status">Page ${currentPage} of ${totalPages}</span>`;
+      pagination.innerHTML = html;
+    }
+
+    function render() {
+      const visibleCards = getVisibleCards();
+      const totalPages = Math.max(1, Math.ceil(visibleCards.length / pageSize));
+      if (currentPage > totalPages) currentPage = totalPages;
+      const start = (currentPage - 1) * pageSize;
+      const end = start + pageSize;
+
+      cards.forEach(card => {
+        card.hidden = true;
+        card.classList.remove('is-visible-page');
+      });
+
+      visibleCards.slice(start, end).forEach(card => {
+        card.hidden = false;
+        card.classList.add('is-visible-page');
+      });
+
+      renderPagination(totalPages, visibleCards.length);
+    }
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        currentFilter = chip.dataset.filter || 'all';
+        currentPage = 1;
+        chips.forEach(btn => btn.classList.toggle('is-active', btn === chip));
+        render();
+      });
+    });
+
+    pagination?.addEventListener('click', e => {
+      const btn = e.target.closest('[data-page]');
+      if (!btn) return;
+      currentPage = parseInt(btn.dataset.page || '1', 10);
+      render();
+      const top = grid.getBoundingClientRect().top + window.scrollY - 120;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+
+    render();
+  }
+
+  document.querySelectorAll('.section, .archive-section').forEach(initDiscoverablePosts);
+
   /* ---------- Smooth reveal for first visit ---------- */
   document.documentElement.style.opacity = '0';
   document.documentElement.style.transition = 'opacity 0.4s ease';

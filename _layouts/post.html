@@ -2,6 +2,11 @@
 layout: default
 ---
 
+{% assign related_candidates = site.posts | where_exp: "post", "post.url != page.url" %}
+{% assign primary_tag = page.tags | first %}
+{% assign related_by_tag = related_candidates | where_exp: "post", "primary_tag and post.tags contains primary_tag" %}
+{% assign related_by_category = related_candidates | where_exp: "post", "page.categories and post.categories and post.categories[0] == page.categories[0]" %}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -32,7 +37,6 @@ layout: default
 </script>
 {% endif %}
 
-<!-- Post Header -->
 <header class="post-header">
   <div class="container">
     <div class="post-header-badge">
@@ -44,19 +48,46 @@ layout: default
       {% endif %}
     </div>
     <h1>{{ page.title }}</h1>
+    <p class="post-standfirst">{{ page.description | default: site.description }}</p>
     <div class="post-meta-bar">
       <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %d, %Y" }}</time>
       <span class="separator" aria-hidden="true"></span>
       <span class="live-dot">Live Analysis</span>
+      {% if primary_tag %}
+      <span class="separator" aria-hidden="true"></span>
+      <span>Primary theme: {{ primary_tag }}</span>
+      {% endif %}
     </div>
   </div>
 </header>
 
-<!-- Post Body -->
 <div class="container post-body-container">
+  <div class="article-summary-card" data-animate>
+    <div>
+      <p class="summary-kicker">Signal Snapshot</p>
+      <h2>{{ page.commodity_name | default: primary_tag | default: 'Commodity' }} Exposure Summary</h2>
+      <p>{{ page.description | default: site.description }}</p>
+    </div>
+    <div class="summary-metrics" aria-label="Article quick stats">
+      <div class="summary-metric">
+        <span class="summary-metric-label">Published</span>
+        <strong>{{ page.date | date: "%b %d, %Y" }}</strong>
+      </div>
+      <div class="summary-metric">
+        <span class="summary-metric-label">Reading time</span>
+        <strong>{{ page.reading_time | default: 8 }} min</strong>
+      </div>
+      <div class="summary-metric">
+        <span class="summary-metric-label">Linked themes</span>
+        <strong>{{ page.tags.size | default: 0 }}</strong>
+      </div>
+    </div>
+  </div>
+
   <div class="post-layout" id="post-layout">
     <article class="post-content" id="post-article" data-animate>
       {{ content }}
+
       {% if page.tags.size > 0 %}
       <div class="post-tags" aria-label="Post tags">
         {% for tag in page.tags %}
@@ -64,12 +95,24 @@ layout: default
         {% endfor %}
       </div>
       {% endif %}
+
+      <section class="post-share" aria-label="Share this report">
+        <span class="post-share-label">Share</span>
+        <a class="btn btn-secondary post-share-btn" href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ page.url | absolute_url | uri_escape }}" target="_blank" rel="noopener">X / Twitter</a>
+        <a class="btn btn-secondary post-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | uri_escape }}" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-secondary post-share-btn" href="mailto:?subject={{ page.title | uri_escape }}&body={{ page.url | absolute_url | uri_escape }}">Email</a>
+      </section>
+
+      <section class="methodology-note" aria-labelledby="methodology-title">
+        <p class="summary-kicker">Methodology</p>
+        <h2 id="methodology-title">How to read this impact map</h2>
+        <p>CommodityNode reports combine directional sensitivity, supply-chain structure, category overlap, and linked thematic context. Treat the percentages and correlations as research signals designed to accelerate deeper diligence, not as financial advice.</p>
+      </section>
     </article>
 
     <aside class="toc-sidebar" aria-label="Table of contents">
       <p class="toc-title">In This Article</p>
       <ul class="toc-nav" id="toc-list"></ul>
-      {% if page.tags %}
       <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
         <p class="toc-title">Quick Stats</p>
         <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
@@ -87,11 +130,69 @@ layout: default
             <span style="color:var(--text3)">Topics</span>
             <span style="color:var(--accent)">{{ page.tags.size }}</span>
           </div>
+          {% if primary_tag %}
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+            <span style="color:var(--text3)">Next hop</span>
+            <a href="/tags/{{ primary_tag | slugify }}/" style="color:var(--text2)">{{ primary_tag }}</a>
+          </div>
+          {% endif %}
         </div>
       </div>
-      {% endif %}
     </aside>
   </div>
+
+  <section class="related-posts section" aria-labelledby="related-posts-title">
+    <div class="section-header" data-animate>
+      <p class="section-label">Continue Exploring</p>
+      <h2 class="section-title" id="related-posts-title">Related Impact Maps</h2>
+      <p class="section-desc">Follow adjacent commodity, sector, and company exposure chains from this report.</p>
+    </div>
+
+    <div class="posts-grid">
+      {% assign rendered_related = 0 %}
+      {% for post in related_by_tag limit:3 %}
+        {% assign rendered_related = rendered_related | plus: 1 %}
+        <article class="post-card">
+          <div class="post-card-accent"></div>
+          <div class="post-card-body">
+            <div class="post-card-meta">
+              <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+              {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+            </div>
+            <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+            <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
+            <div class="post-card-footer">
+              <span class="read-more">Open signal →</span>
+              {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+
+      {% if rendered_related < 3 %}
+        {% for post in related_by_category limit:3 %}
+          {% if rendered_related < 3 %}
+            {% assign rendered_related = rendered_related | plus: 1 %}
+            <article class="post-card">
+              <div class="post-card-accent"></div>
+              <div class="post-card-body">
+                <div class="post-card-meta">
+                  <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+                  {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+                </div>
+                <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
+                <div class="post-card-footer">
+                  <span class="read-more">Open signal →</span>
+                  {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+                </div>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </section>
 </div>
 
 <script src="{{ '/assets/js/impact-graph.js' | relative_url }}" defer></script>
