@@ -117,6 +117,11 @@ description: "Explore how each commodity's price movements impact industries, st
     <h3 class="feature-title">Uranium</h3>
     <p class="feature-desc">Nuclear renaissance — uranium demand surges as clean energy policy accelerates.</p>
   </a>
+  <a href="/iron-ore-steel-china-infrastructure/" class="feature-card" style="text-decoration:none;display:block;">
+    <div class="feature-icon commodity-tag">Fe</div>
+    <h3 class="feature-title">Iron Ore</h3>
+    <p class="feature-desc">China's infrastructure pulse — iron ore prices predict steel output and global construction cycles.</p>
+  </a>
 </div>
 
 </div>
