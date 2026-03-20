@@ -55,9 +55,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Gold Rises
+
+## Winners When Gold Rises
 
 ### Gold ETFs & Mining Stocks
 
@@ -73,7 +73,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** Junior miners (GDXJ ETF) carry even more leverage — averaging 2.5-3x gold's move — but with significantly higher volatility and balance sheet risk. For safer gold exposure, GLD is the benchmark.
 
-## 🔴 Losers When Gold Rises
+## Losers When Gold Rises
 
 ### Jewelry Retailers & Electronics
 
@@ -88,7 +88,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** SIG (Signet Jewelers) is uniquely exposed because it both manufactures and retails gold jewelry — double input cost pressure. Watch SIG's hedging disclosures in 10-K filings to assess forward exposure.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Gold Price Move | GLD Change | GDX Change | NEM Change | SIG Change | Notes |
 |------|----------------|-----------|-----------|-----------|-----------|-------|
@@ -99,7 +99,7 @@ window.COMMODITY_DATA = {
 | Jan 2025 | +8% (Geopolitics) | +7.9% | +15% | +14% | -5% | Central bank buying |
 | **Average** | **±10%** | **±9.8%** | **±18.5%** | **±20%** | **±5%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Gold's 10% move produces a near-perfect 9.8% response in GLD, but the real action is in miners: GDX averages **+18.5%** on a gold rally, with individual seniors like Agnico Eagle hitting **+22%**. Jewelry retailers absorb the cost pressure, with SIG typically falling **5%** on gold spikes.
 
