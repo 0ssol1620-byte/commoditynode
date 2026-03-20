@@ -1981,3 +1981,23 @@ a:focus-visible, button:focus-visible {
     margin-top: 32px;
   }
 }
+
+/* ── MA legend in chart header ── */
+.cn-ma-legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 8px;
+}
+
+/* ── Chart body height ── */
+.cn-chart-body {
+  position: relative;
+  height: 340px;
+}
+@media (max-width: 640px) {
+  .cn-chart-body { height: 260px; }
+}
+
+/* ── Hex node legend dots ── */
+.cn-graph-tooltip strong { color: #f0f0f5; }
