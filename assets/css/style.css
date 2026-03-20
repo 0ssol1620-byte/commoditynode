@@ -1905,3 +1905,79 @@ a:focus-visible, button:focus-visible {
   width: 20px; height: 20px;
   color: var(--bg);
 }
+
+
+/* ════════════════════════════════════════
+   IMPACT GRAPH — wide breakout in post
+   ════════════════════════════════════════ */
+.post-content #impact-graph,
+#post-article #impact-graph {
+  /* Break out of the post-layout column */
+  width: calc(100% + 0px);
+  min-height: 560px;
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, #0d0d18 0%, #080810 100%);
+}
+
+/* Price chart in post — slightly wider */
+.post-content .cn-price-chart {
+  margin-bottom: 0;
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+}
+.post-content #impact-graph {
+  border-radius: 0 0 var(--radius) var(--radius);
+  border-top: 1px solid rgba(34,211,238,0.08);
+}
+
+/* Post body container override */
+.post-body-container {
+  padding: 0 24px 80px;
+}
+
+/* Make post article take more width when nodemap present */
+@media (min-width: 1024px) {
+  #post-article .post-layout > .post-content {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .post-content #impact-graph,
+  #post-article #impact-graph {
+    min-height: 400px;
+  }
+}
+
+/* ════════════════════════════════════════
+   TICKER — live data styling
+   ════════════════════════════════════════ */
+.ticker-track {
+  will-change: transform;
+}
+
+/* ════════════════════════════════════════
+   HERO stats — dynamic update flash
+   ════════════════════════════════════════ */
+.hero-stat .value.updated {
+  animation: stat-flash 0.5s ease;
+}
+@keyframes stat-flash {
+  0%   { color: var(--accent); }
+  100% { color: inherit; }
+}
+
+/* ════════════════════════════════════════
+   POST layout — article takes full width
+   on mobile (no sidebar)
+   ════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .post-layout {
+    display: block;
+  }
+  .toc-sidebar {
+    margin-top: 32px;
+  }
+}
