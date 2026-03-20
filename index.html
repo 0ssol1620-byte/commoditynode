@@ -70,6 +70,7 @@ title: Home
       {% assign prices = site.data.prices %}
       {% for item in prices %}
       <div class="price-card {% if item[1].change_pct > 0 %}up{% else %}down{% endif %}">
+        <div class="price-symbol">{{ item[1].symbol }}</div>
         <div class="price-name">{{ item[1].name }}</div>
         <div class="price-value">${{ item[1].price }}</div>
         <div class="price-change">{% if item[1].change_pct > 0 %}+{% endif %}{{ item[1].change_pct }}%</div>
@@ -143,6 +144,11 @@ title: Home
         </div>
       </article>
       {% endfor %}
+
+
+    <div style="text-align:center;margin-top:40px;" data-animate>
+      <a href="/commodities/" class="btn btn-secondary" style="min-width:220px;justify-content:center;">View All Analyses &rarr;</a>
+    </div>
 
       {% if site.posts.size == 0 %}
       <div class="feature-card text-center" style="grid-column:1/-1;padding:60px">
