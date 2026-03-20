@@ -92,7 +92,26 @@
 
     const g = svg.append('g').attr('class','cn-g');
     const zoom = d3.zoom().scaleExtent([0.2,5]).on('zoom', e => g.attr('transform', e.transform));
-    svg.call(zoom).on('dblclick.zoom', null);
+
+    if (isMob) {
+      // Mobile: only enable zoom/pan with 2 fingers (pinch) — single finger scrolls page
+      svg.style('touch-action', 'pan-y');
+      svg.on('touchstart', function(event) {
+        if (event.touches.length >= 2) {
+          event.preventDefault();
+          svg.call(zoom);
+        } else {
+          // Single touch: remove zoom to allow page scroll
+          svg.on('.zoom', null);
+        }
+      }, { passive: false });
+      svg.on('touchend', function() {
+        // Re-enable zoom after touch ends for pinch
+        svg.call(zoom);
+      });
+    } else {
+      svg.call(zoom).on('dblclick.zoom', null);
+    }
 
     // Node size by level (hex radius)
     const HR = d => d.level===0 ? 30 : d.level===1 ? 20 : d.level===2 ? 16 : d.level===3 ? 13 : 11;
@@ -199,7 +218,7 @@
     nEls.append('text').attr('class','cn-lbl')
       .attr('text-anchor','middle').attr('dy', d=>(HR(d)+16)+'px')
       .attr('font-family','Inter,sans-serif')
-      .attr('font-size', d=>d.level===0?'12px':d.level<=2?'10px':'9px')
+      .attr('font-size', d=>d.level===0?(isMob?'11px':'12px'):d.level<=2?(isMob?'10px':'10px'):(isMob?'9px':'9px'))
       .attr('font-weight', d=>d.level<=1?'700':'500')
       .attr('fill','#e4e4e7').attr('stroke','#0a0a12').attr('stroke-width','3.5')
       .attr('paint-order','stroke').attr('pointer-events','none').attr('opacity',0)
