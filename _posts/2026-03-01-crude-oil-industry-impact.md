@@ -58,9 +58,9 @@ window.COMMODITY_DATA = {
   ]
 };
 </script>
-<script src="/assets/js/impact-graph.js"></script>
 
-## 🟢 Winners When Oil Rises
+
+## Winners When Oil Rises
 
 ### Energy Producers & ETFs
 
@@ -76,7 +76,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** HAL and SLB tend to outperform integrated majors during oil surges because rising prices incentivize capex spending on new wells — amplifying services demand beyond simple price leverage.
 
-## 🔴 Losers When Oil Rises
+## Losers When Oil Rises
 
 ### Airlines & Logistics
 
@@ -92,7 +92,7 @@ window.COMMODITY_DATA = {
 
 **Key insight:** AAL has historically less hedging than Delta, making it more volatile during oil spikes. Watch the hedge ratio in quarterly earnings to calibrate exposure timing.
 
-## 📊 Historical Price Move Analysis
+## Historical Price Move Analysis
 
 | Date | Oil Price Move | XLE Change | JETS Change | XOM Change | HAL Change | Notes |
 |------|---------------|-----------|------------|-----------|-----------|-------|
@@ -103,7 +103,7 @@ window.COMMODITY_DATA = {
 | Jan 2024 | +15% (Middle East) | +12% | -10% | +11% | +16% | Geopolitical risk |
 | **Average** | **±10%** | **±8.2%** | **±7.1%** | **±7.8%** | **±11.4%** | |
 
-## 🎯 Key Takeaway
+## Key Takeaway
 
 Crude oil's 10% move generates an average **8.2% response in XLE**, with oilfield services companies (HAL, SLB) amplifying that to **12-14%**. Airlines bear the heaviest cost burden, with JETS ETF dropping **7.1%** on average. For traders: the oil-airline inverse relationship is one of the most reliable macro trades in commodities.
 
