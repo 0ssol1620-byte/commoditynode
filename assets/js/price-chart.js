@@ -92,32 +92,6 @@
       ctx.fillStyle = isUp ? 'rgba(34,197,94,0.18)' : 'rgba(239,68,68,0.18)';
       ctx.fillRect(x - candleW/2, PAD.top + cH - h, candleW, h);
     });
-
-    // MA50 line
-    const ma50 = sma(candles, Math.min(50, n));
-    const ma50Start = n - ma50.length;
-    ctx.strokeStyle = 'rgba(129,140,248,0.65)';
-    ctx.lineWidth = 1.2;
-    ctx.lineJoin = 'round';
-    ctx.beginPath();
-    ma50.forEach((v, i) => {
-      const x = xOf(ma50Start + i), y = yOf(v);
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    });
-    ctx.stroke();
-
-    // MA20 line
-    const ma20 = sma(candles, Math.min(20, n));
-    const ma20Start = n - ma20.length;
-    ctx.strokeStyle = 'rgba(251,191,36,0.75)';
-    ctx.lineWidth = 1.2;
-    ctx.beginPath();
-    ma20.forEach((v, i) => {
-      const x = xOf(ma20Start + i), y = yOf(v);
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    });
-    ctx.stroke();
-
     // Current price dashed line
     const lastC = candles[n-1].c;
     const isUp  = lastC >= candles[0].c;
@@ -194,23 +168,6 @@
         ctx.fillText(label, xOf(i), PAD.top + cH + 5);
       }
     });
-
-    // MA legend
-    const legY = PAD.top + 10;
-    ctx.font = `10px 'JetBrains Mono', monospace`;
-    ctx.textAlign = 'left';
-    ctx.textBaseline = 'middle';
-
-    ctx.strokeStyle = 'rgba(251,191,36,0.75)'; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(PAD.left+4, legY); ctx.lineTo(PAD.left+18, legY); ctx.stroke();
-    ctx.fillStyle = 'rgba(251,191,36,0.85)';
-    ctx.fillText('MA20', PAD.left+22, legY);
-
-    ctx.strokeStyle = 'rgba(129,140,248,0.65)'; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.moveTo(PAD.left+60, legY); ctx.lineTo(PAD.left+74, legY); ctx.stroke();
-    ctx.fillStyle = 'rgba(129,140,248,0.85)';
-    ctx.fillText('MA50', PAD.left+78, legY);
-
     // Tooltip on hover (store data for mouse handler)
     canvas._candles = candles;
     canvas._xOf = xOf;
