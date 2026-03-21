@@ -7,6 +7,7 @@
   'use strict';
 
   /* ---------- Page Loader ---------- */
+  var _loaderStart = Date.now();
   var _loaderHidden = false;
   function hideLoader() {
     if (_loaderHidden) return;
@@ -17,13 +18,27 @@
       setTimeout(function() { loader.style.display = "none"; }, 500);
     }
   }
-  // Hide after all resources loaded (images, scripts, fonts)
-  window.addEventListener("load", function() {
-    // Minimum 1.5s display so users see the orbital animation
-    setTimeout(hideLoader, 1500);
-  });
-  // Hard cap at 4s for slow connections
-  setTimeout(hideLoader, 4000);
+  // Wait for page content to be ready (graphs, charts)
+  function checkContentReady() {
+    var minTime = 1800; // show loader at least 1.8s
+    var elapsed = Date.now() - _loaderStart;
+    // Check if main content areas exist and have rendered
+    var graph = document.getElementById('impact-graph');
+    var graphHasSvg = graph && graph.querySelector('svg');
+    var charts = document.querySelectorAll('.cn-price-chart canvas');
+    var isPostPage = !!document.getElementById('post-article');
+    // For post pages: wait until graph or chart is rendered (or timeout)
+    if (isPostPage && !graphHasSvg && elapsed < 5000) {
+      setTimeout(checkContentReady, 200);
+      return;
+    }
+    // Ensure minimum display time
+    var remaining = Math.max(0, minTime - elapsed);
+    setTimeout(hideLoader, remaining);
+  }
+  window.addEventListener("load", function() { setTimeout(checkContentReady, 100); });
+  // Hard cap at 6s
+  setTimeout(hideLoader, 6000);
 
   /* ---------- Page Transition ---------- */
   const transitionEl = document.getElementById('page-transition');

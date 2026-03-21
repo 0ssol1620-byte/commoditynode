@@ -675,6 +675,8 @@
     linkEls.transition().delay(maxLevel * 140 + 100).duration(500).attr('opacity', 1);
     particleEls.transition().delay(maxLevel * 140 + 400).duration(500).attr('opacity', 0.5);
     setTimeout(fitBgs, maxLevel * 140 + 500);
+    // Signal graph rendering complete
+    setTimeout(function() { window.dispatchEvent(new Event('graph-ready')); }, maxLevel * 140 + 600);
 
     // ── SUN PULSE ──
     function sunPulse() {
