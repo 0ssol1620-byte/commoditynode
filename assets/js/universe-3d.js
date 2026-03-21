@@ -879,7 +879,7 @@
       }
 
       /* Star field twinkle (shader uniform) */
-      starMat.uniforms.time.value = elapsed;
+      // starMat.uniforms.time.value = elapsed; // disabled twinkle
 
       /* Commodity pulse + shader time update */
       commodityMeshes.forEach(function (c, ci) {
