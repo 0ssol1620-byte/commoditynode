@@ -7,6 +7,7 @@ tags: [uranium, URA, CCJ, NXE, nuclear-energy, Cameco, clean-energy]
 description: "How uranium price movements impact URA ETF, Cameco (CCJ), NexGen Energy (NXE), nuclear utilities, and the nuclear energy renaissance. Full correlation analysis."
 reading_time: 9
 commodity_name: "Uranium"
+direction: bullish
 image: /assets/images/og-uranium.png
 canonical_url: https://commoditynode.com/uranium-nuclear-energy-stocks/
 ---
@@ -23,32 +24,32 @@ window.COMMODITY_DATA = {
   commodity: { id: "uranium", label: "Uranium ↑25%", price: "$90/lb U3O8", change: "+25%" },
   levels: [
     { nodes: [
-      { id: "ura", label: "Global X Uranium (URA)", type: "etf", impact: 22.0, correlation: 0.88, marketCap: "4B", sector: "ETF" },
-      { id: "ccj", label: "Cameco (CCJ)", type: "positive", impact: 35.0, correlation: 0.94, marketCap: "22B", sector: "Uranium Mining" },
-      { id: "nxe", label: "NexGen Energy (NXE)", type: "positive", impact: 40.0, correlation: 0.92, marketCap: "5B", sector: "Uranium Mining" },
-      { id: "nee", label: "NextEra Energy (NEE)", type: "positive", impact: 3.5, correlation: 0.38, marketCap: "148B", sector: "Nuclear/Renewables" },
-      { id: "sre_u", label: "Sempra (SRE)", type: "negative", impact: -1.5, correlation: -0.22, marketCap: "48B", sector: "Utilities" }
+      { id: "ura", label: "Global X Uranium (URA)", type: "etf", impact: 22, correlation: 0.88, marketCap: "4B", sector: "ETF" },
+      { id: "ccj", label: "Cameco (CCJ)", type: "producer", impact: 35, correlation: 0.94, marketCap: "22B", sector: "Uranium Mining" },
+      { id: "nxe", label: "NexGen Energy (NXE)", type: "producer", impact: 40, correlation: 0.92, marketCap: "5B", sector: "Uranium Mining" },
+      { id: "nee", label: "NextEra Energy (NEE)", type: "consumer", impact: 3.5, correlation: 0.38, marketCap: "148B", sector: "Nuclear/Renewables" },
+      { id: "sre_u", label: "Sempra (SRE)", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "48B", sector: "Utilities" }
     ]},
     { nodes: [
-      { id: "kazatom", label: "Kazatomprom (KAP.L)", type: "positive", impact: 38.0, correlation: 0.95, sector: "State Uranium", parentId: "ccj" },
-      { id: "denison", label: "Denison Mines (DNN)", type: "positive", impact: 42.0, correlation: 0.91, sector: "Uranium Mining", parentId: "nxe" },
-      { id: "enrichment", label: "Centrus Energy (LEU)", type: "positive", impact: 28.0, correlation: 0.85, marketCap: "1B", sector: "Uranium Enrichment", parentId: "ccj" },
-      { id: "bwx_u", label: "BWX Technologies (BWXT)", type: "positive", impact: 12.0, correlation: 0.72, marketCap: "7B", sector: "Nuclear Services", parentId: "nee" }
+      { id: "kazatom", label: "Kazatomprom (KAP.L)", type: "producer", impact: 38, correlation: 0.95, sector: "State Uranium", parentId: "ccj" },
+      { id: "denison", label: "Denison Mines (DNN)", type: "producer", impact: 42, correlation: 0.91, sector: "Uranium Mining", parentId: "nxe" },
+      { id: "enrichment", label: "Centrus Energy (LEU)", type: "processor", impact: 28, correlation: 0.85, marketCap: "1B", sector: "Uranium Enrichment", parentId: "ccj" },
+      { id: "bwx_u", label: "BWX Technologies (BWXT)", type: "supplier", impact: 12, correlation: 0.72, marketCap: "7B", sector: "Nuclear Services", parentId: "nee" }
     ]},
     { nodes: [
-      { id: "fuel_fab", label: "Nuclear Fuel Fabrication", type: "positive", impact: 15.0, correlation: 0.78, sector: "Nuclear Fuel", parentId: "enrichment" },
-      { id: "reactor_build", label: "NuScale Power (SMR)", type: "positive", impact: 18.0, correlation: 0.75, sector: "Small Modular Reactors", parentId: "bwx_u" },
-      { id: "waste_mgmt", label: "Waste Management Nuclear", type: "positive", impact: 8.0, correlation: 0.62, sector: "Nuclear Services", parentId: "denison" }
+      { id: "fuel_fab", label: "Nuclear Fuel Fabrication", type: "processor", impact: 15, correlation: 0.78, sector: "Nuclear Fuel", parentId: "enrichment" },
+      { id: "reactor_build", label: "NuScale Power (SMR)", type: "supplier", impact: 18, correlation: 0.75, sector: "Small Modular Reactors", parentId: "bwx_u" },
+      { id: "waste_mgmt", label: "Waste Management Nuclear", type: "supplier", impact: 8, correlation: 0.62, sector: "Nuclear Services", parentId: "denison" }
     ]},
     { nodes: [
-      { id: "utilities_u", label: "Nuclear Utilities (ETR)", type: "positive", impact: 5.0, correlation: 0.55, sector: "Utilities", parentId: "fuel_fab" },
-      { id: "grid_u", label: "Grid Operators", type: "positive", impact: 3.5, correlation: 0.42, sector: "Grid", parentId: "reactor_build" },
-      { id: "coal_replace", label: "Coal Plants (closing)", type: "negative", impact: -8.0, correlation: -0.65, sector: "Coal", parentId: "utilities_u" }
+      { id: "utilities_u", label: "Nuclear Utilities (ETR)", type: "consumer", impact: 5, correlation: 0.55, sector: "Utilities", parentId: "fuel_fab" },
+      { id: "grid_u", label: "Grid Operators", type: "consumer", impact: 3.5, correlation: 0.42, sector: "Grid", parentId: "reactor_build" },
+      { id: "coal_replace", label: "Coal Plants (closing)", type: "macro", impact: -8, correlation: -0.65, sector: "Coal", parentId: "utilities_u" }
     ]},
     { nodes: [
-      { id: "ai_power", label: "AI Data Center Power", type: "positive", impact: 15.0, sector: "Macro", parentId: "nee" },
-      { id: "net_zero", label: "Net Zero 2050 Policy", type: "positive", impact: 12.0, sector: "Macro", parentId: "ura" },
-      { id: "fukushima", label: "Safety Regulation Risk", type: "negative", impact: -8.0, sector: "Macro", parentId: "ccj" }
+      { id: "ai_power", label: "AI Data Center Power", type: "macro", impact: 15, sector: "Macro", parentId: "nee" },
+      { id: "net_zero", label: "Net Zero 2050 Policy", type: "macro", impact: 12, sector: "Macro", parentId: "ura" },
+      { id: "fukushima", label: "Safety Regulation Risk", type: "macro", impact: -8, sector: "Macro", parentId: "ccj" }
     ]}
   ]
 };

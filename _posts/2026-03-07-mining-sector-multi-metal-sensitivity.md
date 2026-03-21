@@ -7,6 +7,7 @@ tags: [copper, gold, iron-ore, metals, BHP, RIO, FCX, VALE, mining]
 description: 'Multi-metal sensitivity analysis of the mining sector — how diversified miners respond to copper, iron ore, gold, and lithium price movements simultaneously.'
 reading_time: 10
 commodity_name: 'Metals'
+direction: bearish
 image: /assets/images/og-copper.png
 ---
 
@@ -24,35 +25,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "metals-sector", label: "Base Metals ↑10%", price: "Multi", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "bhp", label: "BHP Group (BHP)", type: "positive", impact: 8.5, correlation: 0.84, marketCap: "155B", sector: "Diversified Mining" },
-      { id: "rio", label: "Rio Tinto (RIO)", type: "positive", impact: 9.2, correlation: 0.86, marketCap: "118B", sector: "Diversified Mining" },
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 14.5, correlation: 0.92, marketCap: "62B", sector: "Copper Mining" },
+      { id: "bhp", label: "BHP Group (BHP)", type: "producer", impact: 8.5, correlation: 0.84, marketCap: "155B", sector: "Diversified Mining" },
+      { id: "rio", label: "Rio Tinto (RIO)", type: "producer", impact: 9.2, correlation: 0.86, marketCap: "118B", sector: "Diversified Mining" },
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 14.5, correlation: 0.92, marketCap: "62B", sector: "Copper Mining" },
       { id: "vale", label: "Vale SA (VALE)", type: "positive", impact: 11.8, correlation: 0.88, marketCap: "52B", sector: "Iron Ore / Nickel" },
-      { id: "xme", label: "XME Metals ETF", type: "etf", impact: 9.8, correlation: 0.90, marketCap: "1.8B", sector: "ETF" },
-      { id: "gm_m", label: "General Motors (GM)", type: "negative", impact: -3.2, correlation: -0.42, marketCap: "50B", sector: "Automotive" }
+      { id: "xme", label: "XME Metals ETF", type: "etf", impact: 9.8, correlation: 0.9, marketCap: "1.8B", sector: "ETF" },
+      { id: "gm_m", label: "General Motors (GM)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "50B", sector: "Automotive" }
     ]},
     { nodes: [
-      { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: 15.2, correlation: 0.93, marketCap: "78B", sector: "Copper Mining", parentId: "fcx" },
-      { id: "nem", label: "Newmont Corp (NEM)", type: "positive", impact: 8.8, correlation: 0.72, marketCap: "48B", sector: "Gold Mining", parentId: "bhp" },
-      { id: "teck", label: "Teck Resources (TECK)", type: "positive", impact: 12.0, correlation: 0.85, marketCap: "25B", sector: "Diversified Mining", parentId: "rio" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 15.2, correlation: 0.93, marketCap: "78B", sector: "Copper Mining", parentId: "fcx" },
+      { id: "nem", label: "Newmont Corp (NEM)", type: "producer", impact: 8.8, correlation: 0.72, marketCap: "48B", sector: "Gold Mining", parentId: "bhp" },
+      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 12, correlation: 0.85, marketCap: "25B", sector: "Diversified Mining", parentId: "rio" },
       { id: "gdx", label: "GDX Gold Miners ETF", type: "etf", impact: 7.5, correlation: 0.68, marketCap: "13B", sector: "ETF", parentId: "nem" },
-      { id: "nue_m", label: "Nucor (NUE)", type: "positive", impact: 6.8, correlation: 0.62, marketCap: "38B", sector: "Steel", parentId: "vale" },
-      { id: "tsla_m", label: "Tesla (TSLA)", type: "negative", impact: -4.5, correlation: -0.48, marketCap: "780B", sector: "EV Manufacturer", parentId: "gm_m" }
+      { id: "nue_m", label: "Nucor (NUE)", type: "producer", impact: 6.8, correlation: 0.62, marketCap: "38B", sector: "Steel", parentId: "vale" },
+      { id: "tsla_m", label: "Tesla (TSLA)", type: "consumer", impact: -4.5, correlation: -0.48, marketCap: "780B", sector: "EV Manufacturer", parentId: "gm_m" }
     ]},
     { nodes: [
-      { id: "cat_m", label: "Caterpillar (CAT)", type: "positive", impact: 5.2, correlation: 0.58, marketCap: "178B", sector: "Mining Equipment", parentId: "bhp" },
-      { id: "de_m", label: "Deere & Co (DE)", type: "positive", impact: 3.8, correlation: 0.45, marketCap: "120B", sector: "Equipment", parentId: "rio" },
-      { id: "phm_m", label: "PulteGroup (PHM)", type: "negative", impact: -4.2, correlation: -0.52, marketCap: "22B", sector: "Homebuilders", parentId: "nue_m" },
-      { id: "aapl_m", label: "Apple (AAPL)", type: "negative", impact: -1.8, correlation: -0.25, marketCap: "3.2T", sector: "Electronics", parentId: "tsla_m" },
-      { id: "stld", label: "Steel Dynamics (STLD)", type: "positive", impact: 7.5, correlation: 0.65, marketCap: "20B", sector: "Steel", parentId: "vale" },
+      { id: "cat_m", label: "Caterpillar (CAT)", type: "producer", impact: 5.2, correlation: 0.58, marketCap: "178B", sector: "Mining Equipment", parentId: "bhp" },
+      { id: "de_m", label: "Deere & Co (DE)", type: "supplier", impact: 3.8, correlation: 0.45, marketCap: "120B", sector: "Equipment", parentId: "rio" },
+      { id: "phm_m", label: "PulteGroup (PHM)", type: "consumer", impact: -4.2, correlation: -0.52, marketCap: "22B", sector: "Homebuilders", parentId: "nue_m" },
+      { id: "aapl_m", label: "Apple (AAPL)", type: "consumer", impact: -1.8, correlation: -0.25, marketCap: "3.2T", sector: "Electronics", parentId: "tsla_m" },
+      { id: "stld", label: "Steel Dynamics (STLD)", type: "producer", impact: 7.5, correlation: 0.65, marketCap: "20B", sector: "Steel", parentId: "vale" },
       { id: "wpm", label: "Wheaton Precious (WPM)", type: "positive", impact: 9.5, correlation: 0.78, marketCap: "28B", sector: "Streaming / Royalties", parentId: "nem" }
     ]},
     { nodes: [
-      { id: "construction_m", label: "Construction Sector", type: "negative", impact: -3.8, correlation: -0.45, sector: "Macro", parentId: "phm_m" },
+      { id: "construction_m", label: "Construction Sector", type: "macro", impact: -3.8, correlation: -0.45, sector: "Macro", parentId: "phm_m" },
       { id: "china_pmi", label: "China Manufacturing PMI", type: "macro", impact: 6.5, correlation: 0.72, sector: "Macro", parentId: "vale" },
       { id: "usd_m", label: "USD Index (DXY)", type: "macro", impact: -4.2, correlation: -0.65, sector: "Macro", parentId: "fcx" },
-      { id: "green_capex", label: "Green Transition CapEx", type: "macro", impact: 7.0, sector: "Macro", parentId: "scco" },
-      { id: "nee_m", label: "NextEra (NEE)", type: "negative", impact: -2.8, correlation: -0.32, marketCap: "155B", sector: "Utilities (CapEx)", parentId: "construction_m" }
+      { id: "green_capex", label: "Green Transition CapEx", type: "macro", impact: 7, sector: "Macro", parentId: "scco" },
+      { id: "nee_m", label: "NextEra (NEE)", type: "consumer", impact: -2.8, correlation: -0.32, marketCap: "155B", sector: "Utilities (CapEx)", parentId: "construction_m" }
     ]}
   ]
 };

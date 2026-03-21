@@ -7,6 +7,7 @@ tags: [coffee, soft, SBUX, KDP, DNKN, JDE, FARM, agriculture]
 description: 'How Starbucks manages coffee bean price volatility, the impact on margins, and which companies win or lose when arabica prices surge.'
 reading_time: 9
 commodity_name: 'Coffee'
+direction: bearish
 image: /assets/images/og-coffee.png
 ---
 
@@ -31,33 +32,33 @@ window.COMMODITY_DATA = {
   commodity: { id: "coffee", label: "Coffee ↑15%", price: "$3.05/lb", change: "+15%" },
   levels: [
     { nodes: [
-      { id: "sbux", label: "Starbucks (SBUX)", type: "negative", impact: -7.8, correlation: -0.72, marketCap: "105B", sector: "Coffee Retail" },
-      { id: "kdp", label: "Keurig Dr Pepper (KDP)", type: "negative", impact: -5.2, correlation: -0.58, marketCap: "45B", sector: "Beverages" },
+      { id: "sbux", label: "Starbucks (SBUX)", type: "consumer", impact: -7.8, correlation: -0.72, marketCap: "105B", sector: "Coffee Retail" },
+      { id: "kdp", label: "Keurig Dr Pepper (KDP)", type: "consumer", impact: -5.2, correlation: -0.58, marketCap: "45B", sector: "Beverages" },
       { id: "jo", label: "iPath Coffee (JO)", type: "etf", impact: 14.2, correlation: 0.96, marketCap: "0.12B", sector: "ETF" },
-      { id: "jde", label: "JDE Peet's (JDEP.AS)", type: "negative", impact: -9.5, correlation: -0.80, marketCap: "13B", sector: "Coffee Roasting" },
-      { id: "farm", label: "Farmer Bros (FARM)", type: "negative", impact: -11.5, correlation: -0.84, marketCap: "0.08B", sector: "Coffee Distribution" }
+      { id: "jde", label: "JDE Peet's (JDEP.AS)", type: "consumer", impact: -9.5, correlation: -0.8, marketCap: "13B", sector: "Coffee Roasting" },
+      { id: "farm", label: "Farmer Bros (FARM)", type: "consumer", impact: -11.5, correlation: -0.84, marketCap: "0.08B", sector: "Coffee Distribution" }
     ]},
     { nodes: [
-      { id: "brazil_growers", label: "Brazilian Growers", type: "positive", impact: 22.0, correlation: 0.94, sector: "Coffee Production", parentId: "jo" },
-      { id: "colombia_coop", label: "Colombian Cooperatives", type: "positive", impact: 19.5, correlation: 0.91, sector: "Coffee Production", parentId: "jo" },
-      { id: "nesn", label: "Nestlé (NESN.SW)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "290B", sector: "Food & Coffee", parentId: "jde" },
-      { id: "dnkn", label: "Dunkin' Brands", type: "negative", impact: -5.8, correlation: -0.62, sector: "Coffee Chain", parentId: "sbux" },
-      { id: "vietnam_prod", label: "Vietnam Robusta Growers", type: "positive", impact: 18.0, correlation: 0.88, sector: "Coffee Production", parentId: "brazil_growers" }
+      { id: "brazil_growers", label: "Brazilian Growers", type: "producer", impact: 22, correlation: 0.94, sector: "Coffee Production", parentId: "jo" },
+      { id: "colombia_coop", label: "Colombian Cooperatives", type: "producer", impact: 19.5, correlation: 0.91, sector: "Coffee Production", parentId: "jo" },
+      { id: "nesn", label: "Nestlé (NESN.SW)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "290B", sector: "Food & Coffee", parentId: "jde" },
+      { id: "dnkn", label: "Dunkin' Brands", type: "consumer", impact: -5.8, correlation: -0.62, sector: "Coffee Chain", parentId: "sbux" },
+      { id: "vietnam_prod", label: "Vietnam Robusta Growers", type: "producer", impact: 18, correlation: 0.88, sector: "Coffee Production", parentId: "brazil_growers" }
     ]},
     { nodes: [
-      { id: "green_traders", label: "Green Coffee Traders", type: "positive", impact: 12.5, correlation: 0.82, sector: "Trading", parentId: "brazil_growers" },
-      { id: "shipping_coffee", label: "Coffee Logistics (Santos)", type: "positive", impact: 6.5, correlation: 0.60, sector: "Logistics", parentId: "brazil_growers" },
-      { id: "specialty_roasters", label: "Specialty Roasters", type: "negative", impact: -14.0, correlation: -0.88, sector: "Artisan Coffee", parentId: "jde" },
-      { id: "mcd_coffee", label: "McDonald's McCafe", type: "negative", impact: -2.8, correlation: -0.35, marketCap: "215B", sector: "Fast Food", parentId: "dnkn" },
-      { id: "treatt", label: "Treatt (TET.L)", type: "negative", impact: -5.0, correlation: -0.50, marketCap: "0.6B", sector: "Flavoring", parentId: "nesn" }
+      { id: "green_traders", label: "Green Coffee Traders", type: "processor", impact: 12.5, correlation: 0.82, sector: "Trading", parentId: "brazil_growers" },
+      { id: "shipping_coffee", label: "Coffee Logistics (Santos)", type: "positive", impact: 6.5, correlation: 0.6, sector: "Logistics", parentId: "brazil_growers" },
+      { id: "specialty_roasters", label: "Specialty Roasters", type: "consumer", impact: -14, correlation: -0.88, sector: "Artisan Coffee", parentId: "jde" },
+      { id: "mcd_coffee", label: "McDonald's McCafe", type: "consumer", impact: -2.8, correlation: -0.35, marketCap: "215B", sector: "Fast Food", parentId: "dnkn" },
+      { id: "treatt", label: "Treatt (TET.L)", type: "consumer", impact: -5, correlation: -0.5, marketCap: "0.6B", sector: "Flavoring", parentId: "nesn" }
     ]},
     { nodes: [
-      { id: "eth_coffee", label: "Ethiopian Exporters", type: "positive", impact: 16.5, correlation: 0.86, sector: "Coffee Production", parentId: "colombia_coop" },
-      { id: "office_svc", label: "Office Coffee Services", type: "negative", impact: -7.5, correlation: -0.68, sector: "B2B Coffee", parentId: "specialty_roasters" },
-      { id: "capsule_mfg", label: "Nespresso Capsule Makers", type: "negative", impact: -8.5, correlation: -0.74, sector: "Coffee Capsules", parentId: "nesn" },
-      { id: "brazil_real", label: "Brazilian Real (BRL)", type: "positive", impact: 4.0, correlation: 0.48, sector: "Currency", parentId: "green_traders" },
+      { id: "eth_coffee", label: "Ethiopian Exporters", type: "producer", impact: 16.5, correlation: 0.86, sector: "Coffee Production", parentId: "colombia_coop" },
+      { id: "office_svc", label: "Office Coffee Services", type: "consumer", impact: -7.5, correlation: -0.68, sector: "B2B Coffee", parentId: "specialty_roasters" },
+      { id: "capsule_mfg", label: "Nespresso Capsule Makers", type: "consumer", impact: -8.5, correlation: -0.74, sector: "Coffee Capsules", parentId: "nesn" },
+      { id: "brazil_real", label: "Brazilian Real (BRL)", type: "macro", impact: 4, correlation: 0.48, sector: "Currency", parentId: "green_traders" },
       { id: "cafe_equip", label: "Cafe Equipment (MFIC)", type: "negative", impact: -3.5, correlation: -0.38, sector: "Equipment", parentId: "dnkn" },
-      { id: "packaging_cof", label: "Coffee Packaging", type: "negative", impact: -2.5, correlation: -0.30, sector: "Packaging", parentId: "specialty_roasters" }
+      { id: "packaging_cof", label: "Coffee Packaging", type: "consumer", impact: -2.5, correlation: -0.3, sector: "Packaging", parentId: "specialty_roasters" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [palladium, PALL, auto-catalysts, Ford, Toyota, BASF, platinum-group]
 description: "How palladium price movements impact PALL ETF, auto catalyst manufacturers, Ford, Toyota, BASF, and the EV transition's effect on palladium demand."
 reading_time: 8
 commodity_name: "Palladium"
+direction: bullish
 image: /assets/images/og-palladium.png
 canonical_url: https://commoditynode.com/palladium-auto-catalysts-impact/
 ---
@@ -24,31 +25,31 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "pall", label: "abrdn Palladium (PALL)", type: "etf", impact: 9.5, correlation: 0.96, marketCap: "0.5B", sector: "ETF" },
-      { id: "sibanye", label: "Sibanye-Stillwater (SBSW)", type: "positive", impact: 18.0, correlation: 0.88, marketCap: "5B", sector: "PGM Mining" },
-      { id: "impala", label: "Impala Platinum (IMPUY)", type: "positive", impact: 15.0, correlation: 0.84, marketCap: "8B", sector: "PGM Mining" },
-      { id: "toyota_p", label: "Toyota Motor (TM)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "280B", sector: "Automotive" },
-      { id: "vw_p", label: "Volkswagen (VOW.DE)", type: "negative", impact: -4.0, correlation: -0.50, marketCap: "80B", sector: "Automotive" }
+      { id: "sibanye", label: "Sibanye-Stillwater (SBSW)", type: "producer", impact: 18, correlation: 0.88, marketCap: "5B", sector: "PGM Mining" },
+      { id: "impala", label: "Impala Platinum (IMPUY)", type: "producer", impact: 15, correlation: 0.84, marketCap: "8B", sector: "PGM Mining" },
+      { id: "toyota_p", label: "Toyota Motor (TM)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "280B", sector: "Automotive" },
+      { id: "vw_p", label: "Volkswagen (VOW.DE)", type: "consumer", impact: -4, correlation: -0.5, marketCap: "80B", sector: "Automotive" }
     ]},
     { nodes: [
-      { id: "norilsk", label: "Nornickel (MNOD.ME)", type: "positive", impact: 22.0, correlation: 0.92, sector: "PGM/Nickel Mining", parentId: "sibanye" },
-      { id: "lonmin_p", label: "Anglo American Platinum", type: "positive", impact: 16.0, correlation: 0.86, sector: "PGM Mining", parentId: "impala" },
-      { id: "cat_converters", label: "BASF Catalysts", type: "negative", impact: -8.5, correlation: -0.75, sector: "Catalysts", parentId: "toyota_p" },
-      { id: "umicore", label: "Umicore (UMI.BR)", type: "negative", impact: -6.5, correlation: -0.68, sector: "Auto Catalysts", parentId: "vw_p" }
+      { id: "norilsk", label: "Nornickel (MNOD.ME)", type: "producer", impact: 22, correlation: 0.92, sector: "PGM/Nickel Mining", parentId: "sibanye" },
+      { id: "lonmin_p", label: "Anglo American Platinum", type: "producer", impact: 16, correlation: 0.86, sector: "PGM Mining", parentId: "impala" },
+      { id: "cat_converters", label: "BASF Catalysts", type: "consumer", impact: -8.5, correlation: -0.75, sector: "Catalysts", parentId: "toyota_p" },
+      { id: "umicore", label: "Umicore (UMI.BR)", type: "consumer", impact: -6.5, correlation: -0.68, sector: "Auto Catalysts", parentId: "vw_p" }
     ]},
     { nodes: [
-      { id: "russia_supply", label: "Russian Supply Risk", type: "positive", impact: 15.0, correlation: 0.85, sector: "Geopolitics", parentId: "norilsk" },
-      { id: "recyclers_p", label: "PGM Recyclers", type: "positive", impact: 8.0, correlation: 0.65, sector: "Recycling", parentId: "lonmin_p" },
-      { id: "emission_equip", label: "Emissions Equipment", type: "negative", impact: -9.0, correlation: -0.80, sector: "Auto Components", parentId: "cat_converters" }
+      { id: "russia_supply", label: "Russian Supply Risk", type: "macro", impact: 15, correlation: 0.85, sector: "Geopolitics", parentId: "norilsk" },
+      { id: "recyclers_p", label: "PGM Recyclers", type: "substitute", impact: 8, correlation: 0.65, sector: "Recycling", parentId: "lonmin_p" },
+      { id: "emission_equip", label: "Emissions Equipment", type: "consumer", impact: -9, correlation: -0.8, sector: "Auto Components", parentId: "cat_converters" }
     ]},
     { nodes: [
-      { id: "honda_p", label: "Honda Motor (HMC)", type: "negative", impact: -4.0, correlation: -0.52, marketCap: "60B", sector: "Automotive", parentId: "toyota_p" },
-      { id: "ford_p", label: "Ford Motor (F)", type: "negative", impact: -3.5, correlation: -0.48, marketCap: "48B", sector: "Automotive", parentId: "vw_p" },
-      { id: "dentistry_p", label: "Dental Alloys Industry", type: "negative", impact: -3.0, correlation: -0.38, sector: "Medical", parentId: "umicore" }
+      { id: "honda_p", label: "Honda Motor (HMC)", type: "consumer", impact: -4, correlation: -0.52, marketCap: "60B", sector: "Automotive", parentId: "toyota_p" },
+      { id: "ford_p", label: "Ford Motor (F)", type: "consumer", impact: -3.5, correlation: -0.48, marketCap: "48B", sector: "Automotive", parentId: "vw_p" },
+      { id: "dentistry_p", label: "Dental Alloys Industry", type: "negative", impact: -3, correlation: -0.38, sector: "Medical", parentId: "umicore" }
     ]},
     { nodes: [
-      { id: "ev_shift_p", label: "BEV vs ICE Shift", type: "negative", impact: -12.0, sector: "Macro", parentId: "toyota_p" },
-      { id: "emission_regs", label: "Euro 7 Regulations", type: "positive", impact: 8.0, sector: "Macro", parentId: "cat_converters" },
-      { id: "south_africa_p", label: "SA Power Outages", type: "positive", impact: 6.0, sector: "Macro", parentId: "sibanye" }
+      { id: "ev_shift_p", label: "BEV vs ICE Shift", type: "macro", impact: -12, sector: "Macro", parentId: "toyota_p" },
+      { id: "emission_regs", label: "Euro 7 Regulations", type: "macro", impact: 8, sector: "Macro", parentId: "cat_converters" },
+      { id: "south_africa_p", label: "SA Power Outages", type: "macro", impact: 6, sector: "Macro", parentId: "sibanye" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [tin, semiconductors, electronics, metals, soldering]
 description: 'How tin price movements impact semiconductor companies, electronics manufacturers, PCB makers, and solder supply chains. Full correlation analysis.'
 reading_time: 8
 commodity_name: 'Tin'
+direction: bullish
 image: /assets/images/og-tin.png
 ---
 
@@ -26,33 +27,33 @@ window.COMMODITY_DATA = {
   commodity: { id: "tin", label: "Tin ↑10%", price: "$28,500/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "aapl_sn", label: "Apple Inc (AAPL)", type: "negative", impact: -1.8, correlation: -0.30, marketCap: "3200B", sector: "Consumer Electronics" },
-      { id: "tsm", label: "TSMC (TSM)", type: "negative", impact: -2.5, correlation: -0.38, marketCap: "650B", sector: "Semiconductor Foundry" },
-      { id: "intc", label: "Intel Corporation (INTC)", type: "negative", impact: -2.2, correlation: -0.34, marketCap: "110B", sector: "Semiconductors" },
-      { id: "nvda_sn", label: "NVIDIA (NVDA)", type: "negative", impact: -1.5, correlation: -0.28, marketCap: "2800B", sector: "Semiconductors" },
-      { id: "msc", label: "Minsur S.A. (MINSURI1.LM)", type: "positive", impact: 20.0, correlation: 0.90, marketCap: "3.5B", sector: "Tin Mining" }
+      { id: "aapl_sn", label: "Apple Inc (AAPL)", type: "consumer", impact: -1.8, correlation: -0.3, marketCap: "3200B", sector: "Consumer Electronics" },
+      { id: "tsm", label: "TSMC (TSM)", type: "consumer", impact: -2.5, correlation: -0.38, marketCap: "650B", sector: "Semiconductor Foundry" },
+      { id: "intc", label: "Intel Corporation (INTC)", type: "consumer", impact: -2.2, correlation: -0.34, marketCap: "110B", sector: "Semiconductors" },
+      { id: "nvda_sn", label: "NVIDIA (NVDA)", type: "consumer", impact: -1.5, correlation: -0.28, marketCap: "2800B", sector: "Semiconductors" },
+      { id: "msc", label: "Minsur S.A. (MINSURI1.LM)", type: "producer", impact: 20, correlation: 0.9, marketCap: "3.5B", sector: "Tin Mining" }
     ]},
     { nodes: [
-      { id: "alphamin", label: "Alphamin Resources (AFM.V)", type: "positive", impact: 24.0, correlation: 0.93, marketCap: "1.2B", sector: "Tin Mining", parentId: "msc" },
-      { id: "yunnan_tin", label: "Yunnan Tin (000960.SZ)", type: "positive", impact: 22.0, correlation: 0.91, marketCap: "6B", sector: "Tin Mining/Smelting", parentId: "msc" },
-      { id: "samsung_sn", label: "Samsung Electronics", type: "negative", impact: -2.0, correlation: -0.32, marketCap: "380B", sector: "Electronics", parentId: "aapl_sn" },
-      { id: "amkor", label: "Amkor Technology (AMKR)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "7B", sector: "Semiconductor Packaging", parentId: "tsm" }
+      { id: "alphamin", label: "Alphamin Resources (AFM.V)", type: "producer", impact: 24, correlation: 0.93, marketCap: "1.2B", sector: "Tin Mining", parentId: "msc" },
+      { id: "yunnan_tin", label: "Yunnan Tin (000960.SZ)", type: "producer", impact: 22, correlation: 0.91, marketCap: "6B", sector: "Tin Mining/Smelting", parentId: "msc" },
+      { id: "samsung_sn", label: "Samsung Electronics", type: "consumer", impact: -2, correlation: -0.32, marketCap: "380B", sector: "Electronics", parentId: "aapl_sn" },
+      { id: "amkor", label: "Amkor Technology (AMKR)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "7B", sector: "Semiconductor Packaging", parentId: "tsm" }
     ]},
     { nodes: [
-      { id: "solder_mfg", label: "Solder Manufacturers (Indium Corp)", type: "negative", impact: -6.0, correlation: -0.62, sector: "Solder Materials", parentId: "alphamin" },
-      { id: "pcb_makers", label: "PCB Makers (TTM Technologies)", type: "negative", impact: -5.0, correlation: -0.55, marketCap: "2.1B", sector: "PCB Manufacturing", parentId: "amkor" },
-      { id: "ase", label: "ASE Technology (ASX)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "18B", sector: "Semiconductor Packaging", parentId: "tsm" },
-      { id: "tin_recycle", label: "Tin Recyclers/Recovery", type: "positive", impact: 8.0, correlation: 0.60, sector: "Recycling", parentId: "yunnan_tin" }
+      { id: "solder_mfg", label: "Solder Manufacturers (Indium Corp)", type: "consumer", impact: -6, correlation: -0.62, sector: "Solder Materials", parentId: "alphamin" },
+      { id: "pcb_makers", label: "PCB Makers (TTM Technologies)", type: "processor", impact: -5, correlation: -0.55, marketCap: "2.1B", sector: "PCB Manufacturing", parentId: "amkor" },
+      { id: "ase", label: "ASE Technology (ASX)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "18B", sector: "Semiconductor Packaging", parentId: "tsm" },
+      { id: "tin_recycle", label: "Tin Recyclers/Recovery", type: "substitute", impact: 8, correlation: 0.6, sector: "Recycling", parentId: "yunnan_tin" }
     ]},
     { nodes: [
-      { id: "flex", label: "Flex Ltd (FLEX)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "12B", sector: "EMS/Contract Mfg", parentId: "pcb_makers" },
-      { id: "jabil", label: "Jabil Inc (JBL)", type: "negative", impact: -3.2, correlation: -0.40, marketCap: "14B", sector: "EMS/Contract Mfg", parentId: "pcb_makers" },
-      { id: "malaysia_smelter", label: "Malaysia Smelting (MSC.KL)", type: "positive", impact: 15.0, correlation: 0.82, marketCap: "0.5B", sector: "Tin Smelting", parentId: "yunnan_tin" }
+      { id: "flex", label: "Flex Ltd (FLEX)", type: "processor", impact: -3.5, correlation: -0.42, marketCap: "12B", sector: "EMS/Contract Mfg", parentId: "pcb_makers" },
+      { id: "jabil", label: "Jabil Inc (JBL)", type: "processor", impact: -3.2, correlation: -0.4, marketCap: "14B", sector: "EMS/Contract Mfg", parentId: "pcb_makers" },
+      { id: "malaysia_smelter", label: "Malaysia Smelting (MSC.KL)", type: "processor", impact: 15, correlation: 0.82, marketCap: "0.5B", sector: "Tin Smelting", parentId: "yunnan_tin" }
     ]},
     { nodes: [
-      { id: "ai_demand", label: "AI/Data Center Build-out", type: "positive", impact: 12.0, sector: "Macro", parentId: "nvda_sn" },
-      { id: "indonesia_reg", label: "Indonesia Smelter Regulations", type: "positive", impact: 14.0, sector: "Macro", parentId: "msc" },
-      { id: "semicon_cycle", label: "Semiconductor Upcycle", type: "positive", impact: 10.0, sector: "Macro", parentId: "tsm" }
+      { id: "ai_demand", label: "AI/Data Center Build-out", type: "macro", impact: 12, sector: "Macro", parentId: "nvda_sn" },
+      { id: "indonesia_reg", label: "Indonesia Smelter Regulations", type: "macro", impact: 14, sector: "Macro", parentId: "msc" },
+      { id: "semicon_cycle", label: "Semiconductor Upcycle", type: "macro", impact: 10, sector: "Macro", parentId: "tsm" }
     ]}
   ]
 };

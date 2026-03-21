@@ -7,6 +7,7 @@ tags: [gold, precious, NEM, GOLD, AEM, GDX, GLD, mining]
 description: 'How Newmont Corporation leverages gold price movements as the worlds largest gold miner, with analysis of AISC, production costs, and portfolio hedging value.'
 reading_time: 10
 commodity_name: 'Gold'
+direction: bullish
 image: /assets/images/og-gold.png
 ---
 
@@ -35,49 +36,36 @@ When investors buy gold mining stocks like NEM, they are not merely betting on a
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: {
-    id: "gold",
-    label: "Gold ↑8%",
-    price: "$4,950/oz",
-    change: "+8%"
-  },
+  commodity: { id: "gold", label: "Gold ↑8%", price: "$4,950/oz", change: "+8%" },
   levels: [
-    {
-      nodes: [
-        { id: "nem", label: "Newmont Corp (NEM)", type: "positive", impact: 14.5, correlation: 0.85, marketCap: "58B", sector: "Gold Mining" },
-        { id: "gold_barrick", label: "Barrick Gold (GOLD)", type: "positive", impact: 13.0, correlation: 0.82, marketCap: "36B", sector: "Gold Mining" },
-        { id: "aem", label: "Agnico Eagle (AEM)", type: "positive", impact: 12.5, correlation: 0.83, marketCap: "42B", sector: "Gold Mining" },
-        { id: "gdx", label: "GDX Gold Miners ETF", type: "etf", impact: 12.0, correlation: 0.88, marketCap: "14B", sector: "ETF" },
-        { id: "gld", label: "GLD Physical Gold ETF", type: "etf", impact: 8.0, correlation: 0.99, marketCap: "72B", sector: "ETF" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "fnv", label: "Franco-Nevada (FNV)", type: "positive", impact: 9.5, correlation: 0.80, marketCap: "24B", sector: "Royalty/Streaming" },
-        { id: "wpm", label: "Wheaton Precious (WPM)", type: "positive", impact: 10.5, correlation: 0.82, marketCap: "28B", sector: "Royalty/Streaming" },
-        { id: "rgld", label: "Royal Gold (RGLD)", type: "positive", impact: 9.0, correlation: 0.78, marketCap: "10B", sector: "Royalty/Streaming" },
-        { id: "kgc", label: "Kinross Gold (KGC)", type: "positive", impact: 15.0, correlation: 0.80, marketCap: "12B", sector: "Gold Mining" },
-        { id: "central_bank", label: "Central Bank Demand", type: "macro", impact: 5.0, correlation: 0.55, marketCap: "N/A", sector: "Macro" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "dxy", label: "USD Index (DXY)", type: "negative", impact: -3.5, correlation: -0.62, marketCap: "N/A", sector: "Macro" },
-        { id: "qqq", label: "Growth Stocks (QQQ)", type: "negative", impact: -2.0, correlation: -0.28, marketCap: "250B", sector: "Growth Equity" },
-        { id: "jpm", label: "JPMorgan Chase (JPM)", type: "negative", impact: -1.8, correlation: -0.22, marketCap: "620B", sector: "Banking" },
-        { id: "gs", label: "Goldman Sachs (GS)", type: "negative", impact: -1.5, correlation: -0.20, marketCap: "165B", sector: "Banking" },
-        { id: "real_rates", label: "Real Interest Rates", type: "macro", impact: -6.0, correlation: -0.72, marketCap: "N/A", sector: "Macro" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "sig", label: "Signet Jewelers (SIG)", type: "negative", impact: -4.5, correlation: -0.48, marketCap: "4.5B", sector: "Jewelry Retail" },
-        { id: "tif", label: "Tiffany/LVMH (MC)", type: "negative", impact: -2.0, correlation: -0.25, marketCap: "380B", sector: "Luxury/Jewelry" },
-        { id: "inflation", label: "CPI Inflation", type: "macro", impact: 4.5, correlation: 0.55, marketCap: "N/A", sector: "Macro" },
-        { id: "gdxj", label: "GDXJ Junior Miners ETF", type: "etf", impact: 16.0, correlation: 0.85, marketCap: "5.5B", sector: "ETF" },
-        { id: "geopolitical", label: "Geopolitical Risk Index", type: "macro", impact: 3.5, correlation: 0.45, marketCap: "N/A", sector: "Macro" }
-      ]
-    }
+    { nodes: [
+      { id: "nem", label: "Newmont Corp (NEM)", type: "producer", impact: 14.5, correlation: 0.85, marketCap: "58B", sector: "Gold Mining" },
+      { id: "gold_barrick", label: "Barrick Gold (GOLD)", type: "producer", impact: 13, correlation: 0.82, marketCap: "36B", sector: "Gold Mining" },
+      { id: "aem", label: "Agnico Eagle (AEM)", type: "producer", impact: 12.5, correlation: 0.83, marketCap: "42B", sector: "Gold Mining" },
+      { id: "gdx", label: "GDX Gold Miners ETF", type: "etf", impact: 12, correlation: 0.88, marketCap: "14B", sector: "ETF" },
+      { id: "gld", label: "GLD Physical Gold ETF", type: "etf", impact: 8, correlation: 0.99, marketCap: "72B", sector: "ETF" }
+    ]},
+    { nodes: [
+      { id: "fnv", label: "Franco-Nevada (FNV)", type: "producer", impact: 9.5, correlation: 0.8, marketCap: "24B", sector: "Royalty/Streaming" },
+      { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 10.5, correlation: 0.82, marketCap: "28B", sector: "Royalty/Streaming" },
+      { id: "rgld", label: "Royal Gold (RGLD)", type: "producer", impact: 9, correlation: 0.78, marketCap: "10B", sector: "Royalty/Streaming" },
+      { id: "kgc", label: "Kinross Gold (KGC)", type: "producer", impact: 15, correlation: 0.8, marketCap: "12B", sector: "Gold Mining" },
+      { id: "central_bank", label: "Central Bank Demand", type: "macro", impact: 5, correlation: 0.55, marketCap: "N/A", sector: "Macro" }
+    ]},
+    { nodes: [
+      { id: "dxy", label: "USD Index (DXY)", type: "macro", impact: -3.5, correlation: -0.62, marketCap: "N/A", sector: "Macro" },
+      { id: "qqq", label: "Growth Stocks (QQQ)", type: "macro", impact: -2, correlation: -0.28, marketCap: "250B", sector: "Growth Equity" },
+      { id: "jpm", label: "JPMorgan Chase (JPM)", type: "macro", impact: -1.8, correlation: -0.22, marketCap: "620B", sector: "Banking" },
+      { id: "gs", label: "Goldman Sachs (GS)", type: "macro", impact: -1.5, correlation: -0.2, marketCap: "165B", sector: "Banking" },
+      { id: "real_rates", label: "Real Interest Rates", type: "macro", impact: -6, correlation: -0.72, marketCap: "N/A", sector: "Macro" }
+    ]},
+    { nodes: [
+      { id: "sig", label: "Signet Jewelers (SIG)", type: "consumer", impact: -4.5, correlation: -0.48, marketCap: "4.5B", sector: "Jewelry Retail" },
+      { id: "tif", label: "Tiffany/LVMH (MC)", type: "consumer", impact: -2, correlation: -0.25, marketCap: "380B", sector: "Luxury/Jewelry" },
+      { id: "inflation", label: "CPI Inflation", type: "macro", impact: 4.5, correlation: 0.55, marketCap: "N/A", sector: "Macro" },
+      { id: "gdxj", label: "GDXJ Junior Miners ETF", type: "etf", impact: 16, correlation: 0.85, marketCap: "5.5B", sector: "ETF" },
+      { id: "geopolitical", label: "Geopolitical Risk Index", type: "macro", impact: 3.5, correlation: 0.45, marketCap: "N/A", sector: "Macro" }
+    ]}
   ]
 };
 </script>

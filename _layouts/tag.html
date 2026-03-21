@@ -8,14 +8,14 @@ layout: default
   <div class="container">
     <div class="post-header-badge">
       <span class="badge badge-cyan">Theme</span>
-      <span class="badge badge-gold">{{ tagged_posts.size }} Reports</span>
+      <span class="badge badge-gold">{{ tagged_posts.size }} Signal Reports</span>
     </div>
     <h1>#{{ tag_display }}</h1>
     <p class="post-meta-bar">
-      {% if page.description %}{{ page.description }}{% else %}All CommodityNode signal reports tagged with "{{ page.tag }}"{% endif %}
+      {% if page.description %}{{ page.description }}{% else %}All CommodityNode Signal Reports tagged with "{{ page.tag }}"{% endif %}
     </p>
     <div class="post-meta-bar" style="margin-top:12px;font-size:0.85rem;color:var(--text3);">
-      {{ tagged_posts.size }} impact map{% if tagged_posts.size != 1 %}s{% endif %} ·
+      {{ tagged_posts.size }} Impact Map{% if tagged_posts.size != 1 %}s{% endif %} &middot;
       {% if tagged_posts.size > 0 %}Latest: {{ tagged_posts.first.date | date: "%B %d, %Y" }}{% endif %}
     </div>
   </div>
@@ -42,7 +42,7 @@ layout: default
         </div>
         {% endif %}
         <div class="post-card-footer">
-          <a href="{{ post.url | relative_url }}" class="read-more">Open signal →</a>
+          <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report →</a>
           {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
         </div>
       </div>
@@ -52,7 +52,7 @@ layout: default
   {% else %}
   <div style="text-align:center;padding:80px 0;">
     <p style="color:var(--text2);font-size:1.1rem;">No reports for <strong>#{{ page.tag }}</strong> yet.</p>
-    <p style="color:var(--text3);margin-top:8px;">Check back soon — new signal reports are added weekly.</p>
+    <p style="color:var(--text3);margin-top:8px;">Check back soon — new Signal Reports are added weekly.</p>
     <a href="/reports/" class="btn btn-secondary" style="margin-top:24px;display:inline-block;">Browse All Reports</a>
   </div>
   {% endif %}

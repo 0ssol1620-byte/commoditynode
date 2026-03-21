@@ -7,6 +7,7 @@ tags: [nickel, battery, ev, VALE, BHP, TSLA, lithium, cobalt]
 description: 'Mapping the nickel supply bottleneck from Indonesian mines through battery cathodes to EV production lines — where the EV transition could stall.'
 reading_time: 9
 commodity_name: 'Nickel'
+direction: bullish
 image: /assets/images/og-nickel.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "nickel", label: "Nickel ↑12%", price: "$18,500/t", change: "+12%" },
   levels: [
     { nodes: [
-      { id: "vale", label: "Vale (VALE)", type: "positive", impact: 5.8, correlation: 0.62, marketCap: "58B", sector: "Diversified Mining" },
-      { id: "bhp", label: "BHP Group (BHP)", type: "positive", impact: 3.5, correlation: 0.45, marketCap: "150B", sector: "Diversified Mining" },
-      { id: "glen", label: "Glencore (GLEN.L)", type: "positive", impact: 4.2, correlation: 0.52, marketCap: "62B", sector: "Mining/Trading" },
-      { id: "nio_nickel", label: "Nickel Industries (NIC.AX)", type: "positive", impact: 14.5, correlation: 0.85, marketCap: "4B", sector: "Nickel Mining" },
-      { id: "indo_supply", label: "Indonesia Supply Risk", type: "macro", impact: 6.0, sector: "Macro" }
+      { id: "vale", label: "Vale (VALE)", type: "producer", impact: 5.8, correlation: 0.62, marketCap: "58B", sector: "Diversified Mining" },
+      { id: "bhp", label: "BHP Group (BHP)", type: "producer", impact: 3.5, correlation: 0.45, marketCap: "150B", sector: "Diversified Mining" },
+      { id: "glen", label: "Glencore (GLEN.L)", type: "producer", impact: 4.2, correlation: 0.52, marketCap: "62B", sector: "Mining/Trading" },
+      { id: "nio_nickel", label: "Nickel Industries (NIC.AX)", type: "producer", impact: 14.5, correlation: 0.85, marketCap: "4B", sector: "Nickel Mining" },
+      { id: "indo_supply", label: "Indonesia Supply Risk", type: "macro", impact: 6, sector: "Macro" }
     ]},
     { nodes: [
-      { id: "catl_proxy", label: "CATL (300750.SZ)", type: "negative", impact: -3.8, correlation: -0.42, marketCap: "180B", sector: "Battery Cathode", parentId: "vale" },
-      { id: "lgchem", label: "LG Energy (373220.KS)", type: "negative", impact: -3.2, correlation: -0.38, marketCap: "80B", sector: "Battery Cathode", parentId: "bhp" },
-      { id: "panasonic", label: "Panasonic (6752.T)", type: "negative", impact: -2.5, correlation: -0.32, marketCap: "28B", sector: "Battery Cathode", parentId: "glen" },
-      { id: "samsung_sdi", label: "Samsung SDI (006400.KS)", type: "negative", impact: -2.8, correlation: -0.35, marketCap: "32B", sector: "Battery Cathode", parentId: "glen" },
-      { id: "batt", label: "Amplify Lithium & Battery (BATT)", type: "etf", impact: -2.2, correlation: -0.30, marketCap: "0.2B", sector: "ETF", parentId: "vale" },
-      { id: "qs", label: "QuantumScape (QS)", type: "positive", impact: 4.5, correlation: 0.28, marketCap: "5B", sector: "Solid-State Battery", parentId: "catl_proxy" }
+      { id: "catl_proxy", label: "CATL (300750.SZ)", type: "processor", impact: -3.8, correlation: -0.42, marketCap: "180B", sector: "Battery Cathode", parentId: "vale" },
+      { id: "lgchem", label: "LG Energy (373220.KS)", type: "processor", impact: -3.2, correlation: -0.38, marketCap: "80B", sector: "Battery Cathode", parentId: "bhp" },
+      { id: "panasonic", label: "Panasonic (6752.T)", type: "processor", impact: -2.5, correlation: -0.32, marketCap: "28B", sector: "Battery Cathode", parentId: "glen" },
+      { id: "samsung_sdi", label: "Samsung SDI (006400.KS)", type: "processor", impact: -2.8, correlation: -0.35, marketCap: "32B", sector: "Battery Cathode", parentId: "glen" },
+      { id: "batt", label: "Amplify Lithium & Battery (BATT)", type: "etf", impact: -2.2, correlation: -0.3, marketCap: "0.2B", sector: "ETF", parentId: "vale" },
+      { id: "qs", label: "QuantumScape (QS)", type: "substitute", impact: 4.5, correlation: 0.28, marketCap: "5B", sector: "Solid-State Battery", parentId: "catl_proxy" }
     ]},
     { nodes: [
-      { id: "tsla", label: "Tesla (TSLA)", type: "negative", impact: -2.8, correlation: -0.32, marketCap: "820B", sector: "EV Maker", parentId: "catl_proxy" },
-      { id: "rivn", label: "Rivian (RIVN)", type: "negative", impact: -4.5, correlation: -0.42, marketCap: "15B", sector: "EV Maker", parentId: "lgchem" },
-      { id: "f_ev", label: "Ford EV Division (F)", type: "negative", impact: -2.0, correlation: -0.25, marketCap: "42B", sector: "EV/Legacy Auto", parentId: "panasonic" },
-      { id: "gm_ev", label: "GM EV Division (GM)", type: "negative", impact: -1.8, correlation: -0.22, marketCap: "45B", sector: "EV/Legacy Auto", parentId: "samsung_sdi" },
-      { id: "li", label: "Li Auto (LI)", type: "negative", impact: -3.0, correlation: -0.35, marketCap: "28B", sector: "EV Maker", parentId: "catl_proxy" },
-      { id: "driv_etf", label: "Global X EV ETF (DRIV)", type: "etf", impact: -1.5, correlation: -0.20, marketCap: "1B", sector: "ETF", parentId: "tsla" }
+      { id: "tsla", label: "Tesla (TSLA)", type: "consumer", impact: -2.8, correlation: -0.32, marketCap: "820B", sector: "EV Maker", parentId: "catl_proxy" },
+      { id: "rivn", label: "Rivian (RIVN)", type: "consumer", impact: -4.5, correlation: -0.42, marketCap: "15B", sector: "EV Maker", parentId: "lgchem" },
+      { id: "f_ev", label: "Ford EV Division (F)", type: "consumer", impact: -2, correlation: -0.25, marketCap: "42B", sector: "EV/Legacy Auto", parentId: "panasonic" },
+      { id: "gm_ev", label: "GM EV Division (GM)", type: "consumer", impact: -1.8, correlation: -0.22, marketCap: "45B", sector: "EV/Legacy Auto", parentId: "samsung_sdi" },
+      { id: "li", label: "Li Auto (LI)", type: "consumer", impact: -3, correlation: -0.35, marketCap: "28B", sector: "EV Maker", parentId: "catl_proxy" },
+      { id: "driv_etf", label: "Global X EV ETF (DRIV)", type: "etf", impact: -1.5, correlation: -0.2, marketCap: "1B", sector: "ETF", parentId: "tsla" }
     ]},
     { nodes: [
-      { id: "lfp_alt", label: "LFP Chemistry (No Nickel)", type: "positive", impact: 3.5, sector: "Alt. Technology", parentId: "tsla" },
-      { id: "chpt", label: "ChargePoint (CHPT)", type: "negative", impact: -2.2, correlation: -0.18, marketCap: "2B", sector: "Charging Infra", parentId: "rivn" },
-      { id: "ev_adoption", label: "EV Adoption Rate", type: "macro", impact: -2.0, sector: "Macro", parentId: "f_ev" },
-      { id: "stainless", label: "Stainless Steel Producers", type: "positive", impact: 2.5, correlation: 0.35, sector: "Industrial", parentId: "vale" },
-      { id: "recycling", label: "Li-Cycle (LICY)", type: "positive", impact: 5.5, correlation: 0.40, marketCap: "0.5B", sector: "Battery Recycling", parentId: "catl_proxy" }
+      { id: "lfp_alt", label: "LFP Chemistry (No Nickel)", type: "substitute", impact: 3.5, sector: "Alt. Technology", parentId: "tsla" },
+      { id: "chpt", label: "ChargePoint (CHPT)", type: "macro", impact: -2.2, correlation: -0.18, marketCap: "2B", sector: "Charging Infra", parentId: "rivn" },
+      { id: "ev_adoption", label: "EV Adoption Rate", type: "macro", impact: -2, sector: "Macro", parentId: "f_ev" },
+      { id: "stainless", label: "Stainless Steel Producers", type: "macro", impact: 2.5, correlation: 0.35, sector: "Industrial", parentId: "vale" },
+      { id: "recycling", label: "Li-Cycle (LICY)", type: "substitute", impact: 5.5, correlation: 0.4, marketCap: "0.5B", sector: "Battery Recycling", parentId: "catl_proxy" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [iron-ore, metals, RIO, BHP, VALE, CLF, steel, china]
 description: 'Analysis of Rio Tinto iron ore operations, China steel demand dependency, and how iron ore prices signal global infrastructure and construction activity.'
 reading_time: 10
 commodity_name: 'Iron Ore'
+direction: bullish
 image: /assets/images/og-iron-ore.png
 ---
 
@@ -25,34 +26,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "iron-ore", label: "Iron Ore ↑10%", price: "$118/t", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "rio", label: "Rio Tinto (RIO)", type: "positive", impact: 12.0, correlation: 0.88, marketCap: "120B", sector: "Iron Ore Mining" },
-      { id: "bhp", label: "BHP Group (BHP)", type: "positive", impact: 10.5, correlation: 0.85, marketCap: "150B", sector: "Diversified Mining" },
-      { id: "vale", label: "Vale SA (VALE)", type: "positive", impact: 13.5, correlation: 0.90, marketCap: "58B", sector: "Iron Ore Mining" },
-      { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 9.0, correlation: 0.72, marketCap: "8B", sector: "Iron Ore/Steel" },
-      { id: "pick", label: "iShares MSCI Mining (PICK)", type: "etf", impact: 7.5, correlation: 0.80, marketCap: "1.2B", sector: "ETF" },
-      { id: "nue_io", label: "Nucor (NUE)", type: "negative", impact: -3.5, correlation: -0.38, marketCap: "38B", sector: "Steel Producer" }
+      { id: "rio", label: "Rio Tinto (RIO)", type: "producer", impact: 12, correlation: 0.88, marketCap: "120B", sector: "Iron Ore Mining" },
+      { id: "bhp", label: "BHP Group (BHP)", type: "producer", impact: 10.5, correlation: 0.85, marketCap: "150B", sector: "Diversified Mining" },
+      { id: "vale", label: "Vale SA (VALE)", type: "producer", impact: 13.5, correlation: 0.9, marketCap: "58B", sector: "Iron Ore Mining" },
+      { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 9, correlation: 0.72, marketCap: "8B", sector: "Iron Ore/Steel" },
+      { id: "pick", label: "iShares MSCI Mining (PICK)", type: "etf", impact: 7.5, correlation: 0.8, marketCap: "1.2B", sector: "ETF" },
+      { id: "nue_io", label: "Nucor (NUE)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "38B", sector: "Steel Producer" }
     ]},
     { nodes: [
-      { id: "gogl", label: "Golden Ocean (GOGL)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "3B", sector: "Dry Bulk Shipping", parentId: "rio" },
-      { id: "sblk", label: "Star Bulk Carriers (SBLK)", type: "positive", impact: 7.8, correlation: 0.70, marketCap: "2.5B", sector: "Dry Bulk Shipping", parentId: "rio" },
-      { id: "cat_io", label: "Caterpillar (CAT)", type: "positive", impact: 4.0, correlation: 0.42, marketCap: "175B", sector: "Mining Equipment", parentId: "bhp" },
-      { id: "x_io", label: "U.S. Steel (X)", type: "negative", impact: -4.5, correlation: -0.45, marketCap: "7B", sector: "Steel Producer", parentId: "nue_io" },
-      { id: "fmg", label: "Fortescue Metals (FSUGY)", type: "positive", impact: 14.5, correlation: 0.92, marketCap: "45B", sector: "Iron Ore Mining", parentId: "vale" }
+      { id: "gogl", label: "Golden Ocean (GOGL)", type: "supplier", impact: 8.5, correlation: 0.72, marketCap: "3B", sector: "Dry Bulk Shipping", parentId: "rio" },
+      { id: "sblk", label: "Star Bulk Carriers (SBLK)", type: "supplier", impact: 7.8, correlation: 0.7, marketCap: "2.5B", sector: "Dry Bulk Shipping", parentId: "rio" },
+      { id: "cat_io", label: "Caterpillar (CAT)", type: "producer", impact: 4, correlation: 0.42, marketCap: "175B", sector: "Mining Equipment", parentId: "bhp" },
+      { id: "x_io", label: "U.S. Steel (X)", type: "consumer", impact: -4.5, correlation: -0.45, marketCap: "7B", sector: "Steel Producer", parentId: "nue_io" },
+      { id: "fmg", label: "Fortescue Metals (FSUGY)", type: "producer", impact: 14.5, correlation: 0.92, marketCap: "45B", sector: "Iron Ore Mining", parentId: "vale" }
     ]},
     { nodes: [
-      { id: "bdry", label: "Baltic Dry Index", type: "positive", impact: 10.0, correlation: 0.75, sector: "Shipping Rates", parentId: "gogl" },
-      { id: "de_io", label: "Deere & Co (DE)", type: "positive", impact: 2.5, correlation: 0.30, marketCap: "110B", sector: "Heavy Equipment", parentId: "cat_io" },
-      { id: "construction", label: "Construction Industry", type: "negative", impact: -4.0, correlation: -0.42, sector: "Construction", parentId: "x_io" },
-      { id: "china_property", label: "China Property Developers", type: "negative", impact: -6.0, correlation: -0.55, sector: "Real Estate", parentId: "vale" },
-      { id: "coking_coal", label: "Coking Coal Miners", type: "positive", impact: 6.5, correlation: 0.62, sector: "Coal Mining", parentId: "clf" },
-      { id: "steel_cost", label: "Global Steel Production Costs", type: "negative", impact: -5.0, correlation: -0.50, sector: "Steel Manufacturing", parentId: "nue_io" }
+      { id: "bdry", label: "Baltic Dry Index", type: "supplier", impact: 10, correlation: 0.75, sector: "Shipping Rates", parentId: "gogl" },
+      { id: "de_io", label: "Deere & Co (DE)", type: "supplier", impact: 2.5, correlation: 0.3, marketCap: "110B", sector: "Heavy Equipment", parentId: "cat_io" },
+      { id: "construction", label: "Construction Industry", type: "consumer", impact: -4, correlation: -0.42, sector: "Construction", parentId: "x_io" },
+      { id: "china_property", label: "China Property Developers", type: "regional", impact: -6, correlation: -0.55, sector: "Real Estate", parentId: "vale" },
+      { id: "coking_coal", label: "Coking Coal Miners", type: "producer", impact: 6.5, correlation: 0.62, sector: "Coal Mining", parentId: "clf" },
+      { id: "steel_cost", label: "Global Steel Production Costs", type: "consumer", impact: -5, correlation: -0.5, sector: "Steel Manufacturing", parentId: "nue_io" }
     ]},
     { nodes: [
-      { id: "china_stimulus", label: "China Stimulus Policy", type: "macro", impact: 12.0, correlation: 0.80, sector: "Macro", parentId: "china_property" },
-      { id: "india_steel", label: "India Steel Demand Growth", type: "macro", impact: 6.0, correlation: 0.50, sector: "Macro", parentId: "rio" },
-      { id: "green_steel", label: "Green Steel Transition", type: "macro", impact: 4.0, correlation: 0.35, sector: "Macro", parentId: "bhp" },
-      { id: "aud_fx", label: "Australian Dollar (AUD)", type: "macro", impact: 5.5, correlation: 0.60, sector: "Macro", parentId: "rio" },
-      { id: "brl_fx", label: "Brazilian Real (BRL)", type: "macro", impact: 5.0, correlation: 0.55, sector: "Macro", parentId: "vale" }
+      { id: "china_stimulus", label: "China Stimulus Policy", type: "macro", impact: 12, correlation: 0.8, sector: "Macro", parentId: "china_property" },
+      { id: "india_steel", label: "India Steel Demand Growth", type: "macro", impact: 6, correlation: 0.5, sector: "Macro", parentId: "rio" },
+      { id: "green_steel", label: "Green Steel Transition", type: "macro", impact: 4, correlation: 0.35, sector: "Macro", parentId: "bhp" },
+      { id: "aud_fx", label: "Australian Dollar (AUD)", type: "macro", impact: 5.5, correlation: 0.6, sector: "Macro", parentId: "rio" },
+      { id: "brl_fx", label: "Brazilian Real (BRL)", type: "macro", impact: 5, correlation: 0.55, sector: "Macro", parentId: "vale" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [natural-gas, UNG, utilities, chemicals, LNG, Cheniere, fertilizers]
 description: "How natural gas price movements impact UNG ETF, utility stocks, chemical companies, fertilizer producers, and LNG exporters. Correlation data and historical analysis."
 reading_time: 8
 commodity_name: "Natural Gas"
+direction: bullish
 image: /assets/images/og-natural-gas.png
 canonical_url: https://commoditynode.com/natural-gas-price-impact/
 ---
@@ -24,31 +25,31 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "ung", label: "UNG Gas ETF", type: "etf", impact: 14.5, correlation: 0.96, marketCap: "1.5B", sector: "ETF" },
-      { id: "eqt", label: "EQT Corp (EQT)", type: "positive", impact: 18.0, correlation: 0.88, marketCap: "20B", sector: "Gas Production" },
-      { id: "rrc", label: "Range Resources (RRC)", type: "positive", impact: 20.0, correlation: 0.91, marketCap: "7B", sector: "Gas Production" },
-      { id: "chk", label: "Chesapeake Energy (CHK)", type: "positive", impact: 22.0, correlation: 0.89, marketCap: "10B", sector: "Gas Production" },
-      { id: "duke", label: "Duke Energy (DUK)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "78B", sector: "Utilities" }
+      { id: "eqt", label: "EQT Corp (EQT)", type: "producer", impact: 18, correlation: 0.88, marketCap: "20B", sector: "Gas Production" },
+      { id: "rrc", label: "Range Resources (RRC)", type: "producer", impact: 20, correlation: 0.91, marketCap: "7B", sector: "Gas Production" },
+      { id: "chk", label: "Chesapeake Energy (CHK)", type: "producer", impact: 22, correlation: 0.89, marketCap: "10B", sector: "Gas Production" },
+      { id: "duke", label: "Duke Energy (DUK)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "78B", sector: "Utilities" }
     ]},
     { nodes: [
-      { id: "kinder", label: "Kinder Morgan (KMI)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "22B", sector: "Pipelines", parentId: "eqt" },
-      { id: "williams", label: "Williams Companies (WMB)", type: "positive", impact: 9.0, correlation: 0.75, marketCap: "50B", sector: "Pipelines", parentId: "rrc" },
-      { id: "cheniere", label: "Cheniere Energy (LNG)", type: "positive", impact: 12.5, correlation: 0.82, marketCap: "40B", sector: "LNG Export", parentId: "chk" },
-      { id: "sempra", label: "Sempra Energy (SRE)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "48B", sector: "Utilities", parentId: "duke" }
+      { id: "kinder", label: "Kinder Morgan (KMI)", type: "supplier", impact: 8.5, correlation: 0.72, marketCap: "22B", sector: "Pipelines", parentId: "eqt" },
+      { id: "williams", label: "Williams Companies (WMB)", type: "supplier", impact: 9, correlation: 0.75, marketCap: "50B", sector: "Pipelines", parentId: "rrc" },
+      { id: "cheniere", label: "Cheniere Energy (LNG)", type: "producer", impact: 12.5, correlation: 0.82, marketCap: "40B", sector: "LNG Export", parentId: "chk" },
+      { id: "sempra", label: "Sempra Energy (SRE)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "48B", sector: "Utilities", parentId: "duke" }
     ]},
     { nodes: [
-      { id: "lng_export", label: "LNG Tankers (GLNG)", type: "positive", impact: 7.5, correlation: 0.68, sector: "Shipping", parentId: "cheniere" },
-      { id: "compressors", label: "Archrock (AROC)", type: "positive", impact: 5.5, correlation: 0.62, marketCap: "3B", sector: "Compression Services", parentId: "kinder" },
-      { id: "fertilizer", label: "CF Industries (CF)", type: "negative", impact: -12.0, correlation: -0.85, marketCap: "15B", sector: "Fertilizers", parentId: "williams" }
+      { id: "lng_export", label: "LNG Tankers (GLNG)", type: "supplier", impact: 7.5, correlation: 0.68, sector: "Shipping", parentId: "cheniere" },
+      { id: "compressors", label: "Archrock (AROC)", type: "supplier", impact: 5.5, correlation: 0.62, marketCap: "3B", sector: "Compression Services", parentId: "kinder" },
+      { id: "fertilizer", label: "CF Industries (CF)", type: "consumer", impact: -12, correlation: -0.85, marketCap: "15B", sector: "Fertilizers", parentId: "williams" }
     ]},
     { nodes: [
-      { id: "steel_ng", label: "Steel Industry", type: "negative", impact: -4.5, correlation: -0.55, sector: "Industrials", parentId: "fertilizer" },
-      { id: "chemical_ng", label: "BASF SE (BASFY)", type: "negative", impact: -8.0, correlation: -0.72, sector: "Chemicals", parentId: "fertilizer" },
-      { id: "glass_ng", label: "Owens Corning (OC)", type: "negative", impact: -3.5, correlation: -0.45, marketCap: "9B", sector: "Building Materials", parentId: "sempra" }
+      { id: "steel_ng", label: "Steel Industry", type: "consumer", impact: -4.5, correlation: -0.55, sector: "Industrials", parentId: "fertilizer" },
+      { id: "chemical_ng", label: "BASF SE (BASFY)", type: "consumer", impact: -8, correlation: -0.72, sector: "Chemicals", parentId: "fertilizer" },
+      { id: "glass_ng", label: "Owens Corning (OC)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "9B", sector: "Building Materials", parentId: "sempra" }
     ]},
     { nodes: [
-      { id: "winter_ng", label: "Winter Demand Spike", type: "positive", impact: 15.0, sector: "Macro", parentId: "eqt" },
-      { id: "europe_ng", label: "Europe Gas Crisis", type: "positive", impact: 8.0, sector: "Macro", parentId: "cheniere" },
-      { id: "renewable_ng", label: "Renewables Substitution", type: "negative", impact: -5.0, sector: "Macro", parentId: "duke" }
+      { id: "winter_ng", label: "Winter Demand Spike", type: "macro", impact: 15, sector: "Macro", parentId: "eqt" },
+      { id: "europe_ng", label: "Europe Gas Crisis", type: "macro", impact: 8, sector: "Macro", parentId: "cheniere" },
+      { id: "renewable_ng", label: "Renewables Substitution", type: "macro", impact: -5, sector: "Macro", parentId: "duke" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [crude-oil, natural-gas, energy, XLE, XOM, CVX, SLB, coal]
 description: 'Comprehensive matrix of energy sector commodity exposures across oil, natural gas, coal, and uranium — mapping which sub-industries win and lose from price shifts.'
 reading_time: 10
 commodity_name: 'Crude Oil'
+direction: bullish
 image: /assets/images/og-crude-oil.png
 ---
 
@@ -25,36 +26,36 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "xle", label: "XLE Energy ETF", type: "etf", impact: 8.5, correlation: 0.93, marketCap: "38B", sector: "ETF" },
-      { id: "xom", label: "ExxonMobil (XOM)", type: "positive", impact: 9.2, correlation: 0.89, marketCap: "520B", sector: "Integrated Oil" },
-      { id: "cvx", label: "Chevron (CVX)", type: "positive", impact: 8.4, correlation: 0.87, marketCap: "305B", sector: "Integrated Oil" },
-      { id: "cop", label: "ConocoPhillips (COP)", type: "positive", impact: 10.8, correlation: 0.91, marketCap: "148B", sector: "E&P" },
+      { id: "xom", label: "ExxonMobil (XOM)", type: "producer", impact: 9.2, correlation: 0.89, marketCap: "520B", sector: "Integrated Oil" },
+      { id: "cvx", label: "Chevron (CVX)", type: "producer", impact: 8.4, correlation: 0.87, marketCap: "305B", sector: "Integrated Oil" },
+      { id: "cop", label: "ConocoPhillips (COP)", type: "producer", impact: 10.8, correlation: 0.91, marketCap: "148B", sector: "E&P" },
       { id: "jets", label: "JETS Airlines ETF", type: "etf", impact: -7.5, correlation: -0.82, marketCap: "2.1B", sector: "ETF" },
-      { id: "dal_e", label: "Delta Air Lines (DAL)", type: "negative", impact: -8.8, correlation: -0.76, marketCap: "28B", sector: "Airlines" }
+      { id: "dal_e", label: "Delta Air Lines (DAL)", type: "consumer", impact: -8.8, correlation: -0.76, marketCap: "28B", sector: "Airlines" }
     ]},
     { nodes: [
-      { id: "slb", label: "SLB (SLB)", type: "positive", impact: 13.5, correlation: 0.90, marketCap: "68B", sector: "Oilfield Services", parentId: "xom" },
-      { id: "hal", label: "Halliburton (HAL)", type: "positive", impact: 14.2, correlation: 0.92, marketCap: "33B", sector: "Oilfield Services", parentId: "cvx" },
-      { id: "epd", label: "Enterprise Products (EPD)", type: "positive", impact: 4.1, correlation: 0.55, marketCap: "64B", sector: "Midstream", parentId: "xom" },
-      { id: "et", label: "Energy Transfer (ET)", type: "positive", impact: 4.8, correlation: 0.58, marketCap: "52B", sector: "Midstream", parentId: "cvx" },
-      { id: "eqt", label: "EQT Corp (EQT)", type: "positive", impact: 11.5, correlation: 0.85, marketCap: "22B", sector: "Natural Gas E&P", parentId: "cop" },
-      { id: "lyb", label: "LyondellBasell (LYB)", type: "negative", impact: -5.2, correlation: -0.56, marketCap: "29B", sector: "Chemicals", parentId: "jets" },
-      { id: "ual", label: "United Airlines (UAL)", type: "negative", impact: -9.5, correlation: -0.78, marketCap: "22B", sector: "Airlines", parentId: "dal_e" }
+      { id: "slb", label: "SLB (SLB)", type: "supplier", impact: 13.5, correlation: 0.9, marketCap: "68B", sector: "Oilfield Services", parentId: "xom" },
+      { id: "hal", label: "Halliburton (HAL)", type: "supplier", impact: 14.2, correlation: 0.92, marketCap: "33B", sector: "Oilfield Services", parentId: "cvx" },
+      { id: "epd", label: "Enterprise Products (EPD)", type: "supplier", impact: 4.1, correlation: 0.55, marketCap: "64B", sector: "Midstream", parentId: "xom" },
+      { id: "et", label: "Energy Transfer (ET)", type: "supplier", impact: 4.8, correlation: 0.58, marketCap: "52B", sector: "Midstream", parentId: "cvx" },
+      { id: "eqt", label: "EQT Corp (EQT)", type: "producer", impact: 11.5, correlation: 0.85, marketCap: "22B", sector: "Natural Gas E&P", parentId: "cop" },
+      { id: "lyb", label: "LyondellBasell (LYB)", type: "consumer", impact: -5.2, correlation: -0.56, marketCap: "29B", sector: "Chemicals", parentId: "jets" },
+      { id: "ual", label: "United Airlines (UAL)", type: "consumer", impact: -9.5, correlation: -0.78, marketCap: "22B", sector: "Airlines", parentId: "dal_e" }
     ]},
     { nodes: [
-      { id: "vlo", label: "Valero Energy (VLO)", type: "positive", impact: 6.2, correlation: 0.64, marketCap: "46B", sector: "Refining", parentId: "slb" },
-      { id: "mpc", label: "Marathon Petroleum (MPC)", type: "positive", impact: 5.8, correlation: 0.62, marketCap: "62B", sector: "Refining", parentId: "hal" },
-      { id: "btu", label: "Peabody Energy (BTU)", type: "positive", impact: 12.8, correlation: 0.78, marketCap: "4.2B", sector: "Coal", parentId: "eqt" },
-      { id: "cco", label: "Cameco Corp (CCJ)", type: "positive", impact: 6.5, correlation: 0.42, marketCap: "24B", sector: "Uranium", parentId: "et" },
-      { id: "wern", label: "Werner Enterprises (WERN)", type: "negative", impact: -5.8, correlation: -0.65, marketCap: "3.1B", sector: "Trucking", parentId: "lyb" },
-      { id: "nei", label: "NEE (NextEra Energy)", type: "negative", impact: -3.2, correlation: -0.38, marketCap: "155B", sector: "Gas-Fired Utility", parentId: "ual" }
+      { id: "vlo", label: "Valero Energy (VLO)", type: "processor", impact: 6.2, correlation: 0.64, marketCap: "46B", sector: "Refining", parentId: "slb" },
+      { id: "mpc", label: "Marathon Petroleum (MPC)", type: "processor", impact: 5.8, correlation: 0.62, marketCap: "62B", sector: "Refining", parentId: "hal" },
+      { id: "btu", label: "Peabody Energy (BTU)", type: "producer", impact: 12.8, correlation: 0.78, marketCap: "4.2B", sector: "Coal", parentId: "eqt" },
+      { id: "cco", label: "Cameco Corp (CCJ)", type: "producer", impact: 6.5, correlation: 0.42, marketCap: "24B", sector: "Uranium", parentId: "et" },
+      { id: "wern", label: "Werner Enterprises (WERN)", type: "consumer", impact: -5.8, correlation: -0.65, marketCap: "3.1B", sector: "Trucking", parentId: "lyb" },
+      { id: "nei", label: "NEE (NextEra Energy)", type: "consumer", impact: -3.2, correlation: -0.38, marketCap: "155B", sector: "Gas-Fired Utility", parentId: "ual" }
     ]},
     { nodes: [
-      { id: "kmi", label: "Kinder Morgan (KMI)", type: "positive", impact: 3.5, correlation: 0.48, marketCap: "23B", sector: "Pipelines", parentId: "epd" },
-      { id: "pten", label: "Patterson-UTI (PTEN)", type: "positive", impact: 15.2, correlation: 0.88, marketCap: "4.5B", sector: "Contract Drilling", parentId: "hal" },
-      { id: "dow_e", label: "Dow Inc (DOW)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "41B", sector: "Chemical Feedstock", parentId: "lyb" },
-      { id: "fdx_e", label: "FedEx (FDX)", type: "negative", impact: -3.8, correlation: -0.48, marketCap: "62B", sector: "Logistics", parentId: "wern" },
+      { id: "kmi", label: "Kinder Morgan (KMI)", type: "supplier", impact: 3.5, correlation: 0.48, marketCap: "23B", sector: "Pipelines", parentId: "epd" },
+      { id: "pten", label: "Patterson-UTI (PTEN)", type: "producer", impact: 15.2, correlation: 0.88, marketCap: "4.5B", sector: "Contract Drilling", parentId: "hal" },
+      { id: "dow_e", label: "Dow Inc (DOW)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "41B", sector: "Chemical Feedstock", parentId: "lyb" },
+      { id: "fdx_e", label: "FedEx (FDX)", type: "consumer", impact: -3.8, correlation: -0.48, marketCap: "62B", sector: "Logistics", parentId: "wern" },
       { id: "cpi_energy", label: "CPI Energy Component", type: "macro", impact: 3.5, sector: "Macro", parentId: "vlo" },
-      { id: "opec_supply", label: "OPEC+ Supply Dynamics", type: "macro", impact: 8.0, sector: "Macro", parentId: "cop" }
+      { id: "opec_supply", label: "OPEC+ Supply Dynamics", type: "macro", impact: 8, sector: "Macro", parentId: "cop" }
     ]}
   ]
 };

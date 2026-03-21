@@ -7,6 +7,7 @@ tags: [wheat, agriculture, food, GIS, KHC, KR, WMT, flour]
 description: 'How wheat price shocks transmit through flour mills, bakeries, and packaged food companies to consumer staples pricing and grocery store shelves.'
 reading_time: 9
 commodity_name: 'Wheat'
+direction: bearish
 image: /assets/images/og-wheat.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "wheat", label: "Wheat ↑12%", price: "$6.80/bu", change: "+12%" },
   levels: [
     { nodes: [
-      { id: "adm", label: "ADM (ADM)", type: "positive", impact: 6.5, correlation: 0.78, marketCap: "42B", sector: "Grain Trading" },
-      { id: "bg", label: "Bunge (BG)", type: "positive", impact: 7.2, correlation: 0.81, marketCap: "16B", sector: "Grain Trading" },
+      { id: "adm", label: "ADM (ADM)", type: "processor", impact: 6.5, correlation: 0.78, marketCap: "42B", sector: "Grain Trading" },
+      { id: "bg", label: "Bunge (BG)", type: "processor", impact: 7.2, correlation: 0.81, marketCap: "16B", sector: "Grain Trading" },
       { id: "weat", label: "Teucrium Wheat ETF (WEAT)", type: "etf", impact: 11.5, correlation: 0.97, marketCap: "0.3B", sector: "ETF" },
       { id: "dba", label: "Invesco Ag ETF (DBA)", type: "etf", impact: 4.8, correlation: 0.62, marketCap: "0.9B", sector: "ETF" },
-      { id: "ctva", label: "Corteva (CTVA)", type: "positive", impact: 3.8, correlation: 0.52, marketCap: "38B", sector: "Ag Inputs" }
+      { id: "ctva", label: "Corteva (CTVA)", type: "consumer", impact: 3.8, correlation: 0.52, marketCap: "38B", sector: "Ag Inputs" }
     ]},
     { nodes: [
-      { id: "gis", label: "General Mills (GIS)", type: "negative", impact: -3.2, correlation: -0.48, marketCap: "38B", sector: "Packaged Food", parentId: "adm" },
-      { id: "khc", label: "Kraft Heinz (KHC)", type: "negative", impact: -2.8, correlation: -0.42, marketCap: "42B", sector: "Packaged Food", parentId: "adm" },
-      { id: "mdlz", label: "Mondelez (MDLZ)", type: "negative", impact: -2.1, correlation: -0.35, marketCap: "95B", sector: "Snacks", parentId: "bg" },
-      { id: "sjm", label: "J.M. Smucker (SJM)", type: "negative", impact: -2.5, correlation: -0.38, marketCap: "13B", sector: "Packaged Food", parentId: "bg" },
-      { id: "flo", label: "Flowers Foods (FLO)", type: "negative", impact: -4.8, correlation: -0.61, marketCap: "5B", sector: "Bakeries", parentId: "adm" },
-      { id: "ingr", label: "Ingredion (INGR)", type: "positive", impact: 3.5, correlation: 0.45, marketCap: "8B", sector: "Ingredient Processing", parentId: "bg" },
-      { id: "de", label: "Deere & Co (DE)", type: "positive", impact: 2.8, correlation: 0.38, marketCap: "118B", sector: "Farm Equipment", parentId: "ctva" }
+      { id: "gis", label: "General Mills (GIS)", type: "consumer", impact: -3.2, correlation: -0.48, marketCap: "38B", sector: "Packaged Food", parentId: "adm" },
+      { id: "khc", label: "Kraft Heinz (KHC)", type: "consumer", impact: -2.8, correlation: -0.42, marketCap: "42B", sector: "Packaged Food", parentId: "adm" },
+      { id: "mdlz", label: "Mondelez (MDLZ)", type: "consumer", impact: -2.1, correlation: -0.35, marketCap: "95B", sector: "Snacks", parentId: "bg" },
+      { id: "sjm", label: "J.M. Smucker (SJM)", type: "consumer", impact: -2.5, correlation: -0.38, marketCap: "13B", sector: "Packaged Food", parentId: "bg" },
+      { id: "flo", label: "Flowers Foods (FLO)", type: "consumer", impact: -4.8, correlation: -0.61, marketCap: "5B", sector: "Bakeries", parentId: "adm" },
+      { id: "ingr", label: "Ingredion (INGR)", type: "processor", impact: 3.5, correlation: 0.45, marketCap: "8B", sector: "Ingredient Processing", parentId: "bg" },
+      { id: "de", label: "Deere & Co (DE)", type: "consumer", impact: 2.8, correlation: 0.38, marketCap: "118B", sector: "Farm Equipment", parentId: "ctva" }
     ]},
     { nodes: [
-      { id: "kr", label: "Kroger (KR)", type: "negative", impact: -1.8, correlation: -0.28, marketCap: "40B", sector: "Grocery", parentId: "gis" },
-      { id: "wmt", label: "Walmart (WMT)", type: "negative", impact: -1.2, correlation: -0.22, marketCap: "580B", sector: "Retail", parentId: "khc" },
-      { id: "cost", label: "Costco (COST)", type: "negative", impact: -1.0, correlation: -0.18, marketCap: "380B", sector: "Wholesale Retail", parentId: "mdlz" },
-      { id: "sbux", label: "Starbucks (SBUX)", type: "negative", impact: -1.5, correlation: -0.24, marketCap: "105B", sector: "Coffee/Bakery", parentId: "flo" },
-      { id: "mcd", label: "McDonald's (MCD)", type: "negative", impact: -1.8, correlation: -0.29, marketCap: "210B", sector: "QSR", parentId: "gis" },
-      { id: "dri", label: "Darden (DRI)", type: "negative", impact: -2.2, correlation: -0.34, marketCap: "20B", sector: "Restaurants", parentId: "sjm" }
+      { id: "kr", label: "Kroger (KR)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "40B", sector: "Grocery", parentId: "gis" },
+      { id: "wmt", label: "Walmart (WMT)", type: "consumer", impact: -1.2, correlation: -0.22, marketCap: "580B", sector: "Retail", parentId: "khc" },
+      { id: "cost", label: "Costco (COST)", type: "consumer", impact: -1, correlation: -0.18, marketCap: "380B", sector: "Wholesale Retail", parentId: "mdlz" },
+      { id: "sbux", label: "Starbucks (SBUX)", type: "consumer", impact: -1.5, correlation: -0.24, marketCap: "105B", sector: "Coffee/Bakery", parentId: "flo" },
+      { id: "mcd", label: "McDonald's (MCD)", type: "consumer", impact: -1.8, correlation: -0.29, marketCap: "210B", sector: "QSR", parentId: "gis" },
+      { id: "dri", label: "Darden (DRI)", type: "consumer", impact: -2.2, correlation: -0.34, marketCap: "20B", sector: "Restaurants", parentId: "sjm" }
     ]},
     { nodes: [
-      { id: "cpi_food", label: "CPI Food Index", type: "macro", impact: -2.0, sector: "Macro", parentId: "kr" },
+      { id: "cpi_food", label: "CPI Food Index", type: "macro", impact: -2, sector: "Macro", parentId: "kr" },
       { id: "consumer_sent", label: "Consumer Sentiment", type: "macro", impact: -1.5, sector: "Macro", parentId: "wmt" },
       { id: "xlp", label: "Consumer Staples (XLP)", type: "etf", impact: -1.8, correlation: -0.26, marketCap: "18B", sector: "ETF", parentId: "cost" },
-      { id: "export_policy", label: "Export Policy Risk", type: "macro", impact: 3.0, sector: "Macro", parentId: "adm" },
+      { id: "export_policy", label: "Export Policy Risk", type: "macro", impact: 3, sector: "Macro", parentId: "adm" },
       { id: "snap_prog", label: "SNAP/Food Aid Spending", type: "macro", impact: -1.2, sector: "Macro", parentId: "cpi_food" }
     ]}
   ]

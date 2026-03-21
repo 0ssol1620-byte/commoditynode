@@ -7,6 +7,7 @@ tags: [jet-fuel, airlines, DAL, UAL, AAL, LUV, JETS, energy]
 description: 'Deep dive into Delta Air Lines sensitivity to jet fuel prices, hedging strategies, and how fuel costs ripple through airline profitability and stock performance.'
 reading_time: 9
 commodity_name: 'Jet Fuel'
+direction: bearish
 image: /assets/images/og-jet-fuel.png
 ---
 
@@ -32,49 +33,36 @@ The correlations presented below are calculated from rolling 90-day windows acro
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: {
-    id: "jet-fuel",
-    label: "Jet Fuel ↑12%",
-    price: "$2.85/gal",
-    change: "+12%"
-  },
+  commodity: { id: "jet-fuel", label: "Jet Fuel ↑12%", price: "$2.85/gal", change: "+12%" },
   levels: [
-    {
-      nodes: [
-        { id: "dal", label: "Delta Air Lines (DAL)", type: "negative", impact: -7.5, correlation: -0.76, marketCap: "31B", sector: "Airlines" },
-        { id: "ual", label: "United Airlines (UAL)", type: "negative", impact: -8.0, correlation: -0.78, marketCap: "23B", sector: "Airlines" },
-        { id: "aal", label: "American Airlines (AAL)", type: "negative", impact: -11.2, correlation: -0.83, marketCap: "9.8B", sector: "Airlines" },
-        { id: "luv", label: "Southwest Airlines (LUV)", type: "negative", impact: -6.2, correlation: -0.68, marketCap: "18B", sector: "Airlines" },
-        { id: "jets", label: "JETS Airlines ETF", type: "etf", impact: -8.0, correlation: -0.82, marketCap: "1.9B", sector: "ETF" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "vlo", label: "Valero Energy (VLO)", type: "positive", impact: 7.2, correlation: 0.80, marketCap: "49B", sector: "Refining" },
-        { id: "mpc", label: "Marathon Petroleum (MPC)", type: "positive", impact: 6.8, correlation: 0.76, marketCap: "62B", sector: "Refining" },
-        { id: "psx", label: "Phillips 66 (PSX)", type: "positive", impact: 6.0, correlation: 0.73, marketCap: "54B", sector: "Refining" },
-        { id: "xom", label: "ExxonMobil (XOM)", type: "positive", impact: 5.5, correlation: 0.68, marketCap: "515B", sector: "Integrated Oil" },
-        { id: "cvx", label: "Chevron (CVX)", type: "positive", impact: 5.0, correlation: 0.65, marketCap: "302B", sector: "Integrated Oil" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "bkng", label: "Booking Holdings (BKNG)", type: "negative", impact: -4.0, correlation: -0.46, marketCap: "138B", sector: "Travel/OTA" },
-        { id: "abnb", label: "Airbnb (ABNB)", type: "negative", impact: -3.2, correlation: -0.38, marketCap: "78B", sector: "Travel/OTA" },
-        { id: "ccl", label: "Carnival Corp (CCL)", type: "negative", impact: -6.8, correlation: -0.62, marketCap: "25B", sector: "Cruise Lines" },
-        { id: "rcl", label: "Royal Caribbean (RCL)", type: "negative", impact: -5.5, correlation: -0.56, marketCap: "44B", sector: "Cruise Lines" },
-        { id: "ba", label: "Boeing Co (BA)", type: "negative", impact: -3.2, correlation: -0.40, marketCap: "132B", sector: "Aerospace" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "mar", label: "Marriott Intl (MAR)", type: "negative", impact: -2.8, correlation: -0.35, marketCap: "74B", sector: "Hotels" },
-        { id: "hlt", label: "Hilton Worldwide (HLT)", type: "negative", impact: -2.5, correlation: -0.33, marketCap: "58B", sector: "Hotels" },
-        { id: "travel_gdp", label: "Travel Sector GDP", type: "macro", impact: -3.5, correlation: -0.52, marketCap: "N/A", sector: "Macro" },
-        { id: "consumer_air", label: "Consumer Air Demand", type: "macro", impact: -4.0, correlation: -0.58, marketCap: "N/A", sector: "Macro" },
-        { id: "fuel_hedge", label: "Hedge Ratio Impact", type: "macro", impact: 2.5, correlation: 0.30, marketCap: "N/A", sector: "Macro" }
-      ]
-    }
+    { nodes: [
+      { id: "dal", label: "Delta Air Lines (DAL)", type: "consumer", impact: -7.5, correlation: -0.76, marketCap: "31B", sector: "Airlines" },
+      { id: "ual", label: "United Airlines (UAL)", type: "consumer", impact: -8, correlation: -0.78, marketCap: "23B", sector: "Airlines" },
+      { id: "aal", label: "American Airlines (AAL)", type: "consumer", impact: -11.2, correlation: -0.83, marketCap: "9.8B", sector: "Airlines" },
+      { id: "luv", label: "Southwest Airlines (LUV)", type: "consumer", impact: -6.2, correlation: -0.68, marketCap: "18B", sector: "Airlines" },
+      { id: "jets", label: "JETS Airlines ETF", type: "etf", impact: -8, correlation: -0.82, marketCap: "1.9B", sector: "ETF" }
+    ]},
+    { nodes: [
+      { id: "vlo", label: "Valero Energy (VLO)", type: "processor", impact: 7.2, correlation: 0.8, marketCap: "49B", sector: "Refining" },
+      { id: "mpc", label: "Marathon Petroleum (MPC)", type: "processor", impact: 6.8, correlation: 0.76, marketCap: "62B", sector: "Refining" },
+      { id: "psx", label: "Phillips 66 (PSX)", type: "processor", impact: 6, correlation: 0.73, marketCap: "54B", sector: "Refining" },
+      { id: "xom", label: "ExxonMobil (XOM)", type: "producer", impact: 5.5, correlation: 0.68, marketCap: "515B", sector: "Integrated Oil" },
+      { id: "cvx", label: "Chevron (CVX)", type: "producer", impact: 5, correlation: 0.65, marketCap: "302B", sector: "Integrated Oil" }
+    ]},
+    { nodes: [
+      { id: "bkng", label: "Booking Holdings (BKNG)", type: "consumer", impact: -4, correlation: -0.46, marketCap: "138B", sector: "Travel/OTA" },
+      { id: "abnb", label: "Airbnb (ABNB)", type: "consumer", impact: -3.2, correlation: -0.38, marketCap: "78B", sector: "Travel/OTA" },
+      { id: "ccl", label: "Carnival Corp (CCL)", type: "consumer", impact: -6.8, correlation: -0.62, marketCap: "25B", sector: "Cruise Lines" },
+      { id: "rcl", label: "Royal Caribbean (RCL)", type: "consumer", impact: -5.5, correlation: -0.56, marketCap: "44B", sector: "Cruise Lines" },
+      { id: "ba", label: "Boeing Co (BA)", type: "consumer", impact: -3.2, correlation: -0.4, marketCap: "132B", sector: "Aerospace" }
+    ]},
+    { nodes: [
+      { id: "mar", label: "Marriott Intl (MAR)", type: "consumer", impact: -2.8, correlation: -0.35, marketCap: "74B", sector: "Hotels" },
+      { id: "hlt", label: "Hilton Worldwide (HLT)", type: "consumer", impact: -2.5, correlation: -0.33, marketCap: "58B", sector: "Hotels" },
+      { id: "travel_gdp", label: "Travel Sector GDP", type: "macro", impact: -3.5, correlation: -0.52, marketCap: "N/A", sector: "Macro" },
+      { id: "consumer_air", label: "Consumer Air Demand", type: "macro", impact: -4, correlation: -0.58, marketCap: "N/A", sector: "Macro" },
+      { id: "fuel_hedge", label: "Hedge Ratio Impact", type: "macro", impact: 2.5, correlation: 0.3, marketCap: "N/A", sector: "Macro" }
+    ]}
   ]
 };
 </script>

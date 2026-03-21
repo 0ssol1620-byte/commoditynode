@@ -2605,3 +2605,236 @@ a:focus-visible, button:focus-visible {
   font-size: 0.72rem;
   color: var(--text3);
 }
+
+/* ============================================================
+   3C: Text vs Data Width Separation
+   ============================================================ */
+.content-narrow {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.data-block-wide {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .content-narrow,
+  .data-block-wide {
+    max-width: 100%;
+  }
+}
+
+/* Smooth visual transition between narrow text and wide data blocks */
+.content-narrow + .data-block-wide,
+.data-block-wide + .content-narrow {
+  margin-top: 2rem;
+}
+
+/* ============================================================
+   3D: Enhanced Post Cards
+   ============================================================ */
+
+/* Direction chip */
+.post-card-direction {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+}
+.post-card-direction.bullish {
+  color: var(--green);
+  background: rgba(16,185,129,0.12);
+  border: 1px solid rgba(16,185,129,0.25);
+}
+.post-card-direction.bearish {
+  color: var(--red);
+  background: rgba(244,63,94,0.12);
+  border: 1px solid rgba(244,63,94,0.25);
+}
+
+/* Post card status labels */
+.post-card-label {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.post-card-label--new {
+  color: #050508;
+  background: var(--green);
+}
+.post-card-label--updated {
+  color: #050508;
+  background: var(--gold);
+}
+.post-card-label--evergreen {
+  color: var(--accent);
+  background: rgba(34,211,238,0.15);
+  border: 1px solid rgba(34,211,238,0.25);
+}
+
+/* Commodity color-coded left border on post cards */
+.post-card[data-commodity="oil"],
+.post-card[data-commodity="crude-oil"],
+.post-card[data-commodity="diesel"],
+.post-card[data-commodity="jet-fuel"] {
+  border-left: 3px solid var(--accent);
+}
+.post-card[data-commodity="gold"],
+.post-card[data-commodity="silver"],
+.post-card[data-commodity="platinum"],
+.post-card[data-commodity="palladium"] {
+  border-left: 3px solid var(--gold);
+}
+.post-card[data-commodity="copper"],
+.post-card[data-commodity="steel"],
+.post-card[data-commodity="iron-ore"],
+.post-card[data-commodity="aluminum"],
+.post-card[data-commodity="zinc"],
+.post-card[data-commodity="tin"],
+.post-card[data-commodity="nickel"] {
+  border-left: 3px solid var(--purple);
+}
+.post-card[data-commodity="lithium"],
+.post-card[data-commodity="cobalt"],
+.post-card[data-commodity="uranium"],
+.post-card[data-commodity="rare-earth"] {
+  border-left: 3px solid var(--green);
+}
+.post-card[data-commodity="wheat"],
+.post-card[data-commodity="corn"],
+.post-card[data-commodity="soybeans"],
+.post-card[data-commodity="coffee"],
+.post-card[data-commodity="sugar"],
+.post-card[data-commodity="cocoa"],
+.post-card[data-commodity="cotton"],
+.post-card[data-commodity="lumber"] {
+  border-left: 3px solid #f59e0b;
+}
+.post-card[data-commodity="natural-gas"],
+.post-card[data-commodity="lng"],
+.post-card[data-commodity="coal"] {
+  border-left: 3px solid #06b6d4;
+}
+
+/* Featured card distinct styling */
+.post-card--featured {
+  border: 1px solid rgba(34,211,238,0.25);
+  background: linear-gradient(135deg, var(--bg2), rgba(34,211,238,0.04));
+}
+.post-card--featured .post-card-accent {
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--gold), var(--green));
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   3E: Data Confidence Layer
+   ============================================================ */
+.data-confidence-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
+  color: var(--text3);
+  margin-top: 8px;
+}
+.data-confidence-bar .confidence-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.data-confidence-bar .confidence-item strong {
+  color: var(--text2);
+}
+
+/* Methodology page */
+.methodology-section {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+.methodology-section h2 {
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.methodology-section h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-top: 1.5em;
+}
+.methodology-section p,
+.methodology-section li {
+  color: var(--text2);
+  line-height: 1.75;
+  font-size: 1rem;
+}
+.methodology-section ul {
+  padding-left: 1.5em;
+}
+.methodology-section li + li {
+  margin-top: 0.4em;
+}
+.methodology-section .disclaimer-box {
+  margin-top: 3em;
+  padding: 24px 28px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(244,63,94,0.2);
+  background: rgba(244,63,94,0.04);
+}
+.methodology-section .disclaimer-box h3 {
+  color: var(--red);
+  margin-top: 0;
+}
+
+/* ============================================================
+   3F: Graph Search Input
+   ============================================================ */
+.cn-search-group {
+  position: relative;
+}
+.cn-graph-search {
+  appearance: none;
+  background: rgba(7,10,18,0.86);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  width: 140px;
+  outline: none;
+  transition: all var(--transition);
+  backdrop-filter: blur(10px);
+}
+.cn-graph-search:focus {
+  border-color: rgba(34,211,238,0.4);
+  width: 180px;
+  box-shadow: 0 0 8px rgba(34,211,238,0.15);
+}
+.cn-graph-search::placeholder {
+  color: var(--text3);
+}
+@media (max-width: 768px) {
+  .cn-graph-search { width: 120px; }
+  .cn-graph-search:focus { width: 150px; }
+}

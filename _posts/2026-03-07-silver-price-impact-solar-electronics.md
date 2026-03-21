@@ -7,6 +7,7 @@ tags: [silver, SLV, PSLV, solar-energy, electronics, photography, industrial-met
 description: "How silver price movements impact SLV ETF, PSLV, solar panel manufacturers, electronics companies, and photography. Full correlation analysis with historical data."
 reading_time: 8
 commodity_name: "Silver"
+direction: bullish
 image: /assets/images/og-silver.png
 canonical_url: https://commoditynode.com/silver-price-impact-solar-electronics/
 ---
@@ -25,30 +26,30 @@ window.COMMODITY_DATA = {
     { nodes: [
       { id: "slv", label: "iShares Silver (SLV)", type: "etf", impact: 11.8, correlation: 0.97, marketCap: "12B", sector: "ETF" },
       { id: "silj", label: "ETFMG Silver Miners", type: "etf", impact: 20.5, correlation: 0.82, marketCap: "0.5B", sector: "ETF" },
-      { id: "paas", label: "Pan American Silver (PAAS)", type: "positive", impact: 22.0, correlation: 0.88, marketCap: "8B", sector: "Silver Mining" },
-      { id: "hl", label: "Hecla Mining (HL)", type: "positive", impact: 25.0, correlation: 0.86, marketCap: "4B", sector: "Silver Mining" },
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "25B", sector: "Solar" }
+      { id: "paas", label: "Pan American Silver (PAAS)", type: "producer", impact: 22, correlation: 0.88, marketCap: "8B", sector: "Silver Mining" },
+      { id: "hl", label: "Hecla Mining (HL)", type: "producer", impact: 25, correlation: 0.86, marketCap: "4B", sector: "Silver Mining" },
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "25B", sector: "Solar" }
     ]},
     { nodes: [
-      { id: "fresnillo", label: "Fresnillo (FRES.L)", type: "positive", impact: 20.0, correlation: 0.85, sector: "Silver/Gold Mining", parentId: "paas" },
-      { id: "mag_s", label: "MAG Silver (MAG)", type: "positive", impact: 28.0, correlation: 0.91, sector: "Silver Mining", parentId: "hl" },
-      { id: "first_majestic", label: "First Majestic (AG)", type: "positive", impact: 30.0, correlation: 0.92, sector: "Silver Mining", parentId: "paas" },
-      { id: "solar_mfg", label: "First Solar (FSLR)", type: "negative", impact: -3.8, correlation: -0.45, marketCap: "20B", sector: "Solar Panels", parentId: "enph" }
+      { id: "fresnillo", label: "Fresnillo (FRES.L)", type: "producer", impact: 20, correlation: 0.85, sector: "Silver/Gold Mining", parentId: "paas" },
+      { id: "mag_s", label: "MAG Silver (MAG)", type: "producer", impact: 28, correlation: 0.91, sector: "Silver Mining", parentId: "hl" },
+      { id: "first_majestic", label: "First Majestic (AG)", type: "producer", impact: 30, correlation: 0.92, sector: "Silver Mining", parentId: "paas" },
+      { id: "solar_mfg", label: "First Solar (FSLR)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "20B", sector: "Solar Panels", parentId: "enph" }
     ]},
     { nodes: [
-      { id: "silver_refine", label: "Silver Refiners", type: "positive", impact: 8.5, correlation: 0.72, sector: "Refining", parentId: "fresnillo" },
-      { id: "photovoltaic", label: "Solar Cell Makers", type: "negative", impact: -5.5, correlation: -0.60, sector: "Technology", parentId: "solar_mfg" },
-      { id: "electronics_s", label: "Electronics Components", type: "negative", impact: -2.0, correlation: -0.28, sector: "Technology", parentId: "mag_s" }
+      { id: "silver_refine", label: "Silver Refiners", type: "processor", impact: 8.5, correlation: 0.72, sector: "Refining", parentId: "fresnillo" },
+      { id: "photovoltaic", label: "Solar Cell Makers", type: "consumer", impact: -5.5, correlation: -0.6, sector: "Technology", parentId: "solar_mfg" },
+      { id: "electronics_s", label: "Electronics Components", type: "consumer", impact: -2, correlation: -0.28, sector: "Technology", parentId: "mag_s" }
     ]},
     { nodes: [
-      { id: "jewelry_s", label: "Tiffany/LVMH", type: "negative", impact: -3.5, correlation: -0.42, sector: "Luxury", parentId: "silver_refine" },
-      { id: "photographic", label: "Kodak (KODK)", type: "negative", impact: -6.0, correlation: -0.62, sector: "Photography", parentId: "electronics_s" },
+      { id: "jewelry_s", label: "Tiffany/LVMH", type: "consumer", impact: -3.5, correlation: -0.42, sector: "Luxury", parentId: "silver_refine" },
+      { id: "photographic", label: "Kodak (KODK)", type: "substitute", impact: -6, correlation: -0.62, sector: "Photography", parentId: "electronics_s" },
       { id: "medical_s", label: "Medical Device Cos", type: "negative", impact: -2.5, correlation: -0.32, sector: "Medical", parentId: "electronics_s" }
     ]},
     { nodes: [
-      { id: "solar_demand_s", label: "Solar Boom", type: "positive", impact: 10.0, sector: "Macro", parentId: "enph" },
-      { id: "gold_ratio", label: "Gold/Silver Ratio", type: "positive", impact: 8.0, sector: "Macro", parentId: "slv" },
-      { id: "industrial_s", label: "Industrial Demand", type: "positive", impact: 7.0, sector: "Macro", parentId: "paas" }
+      { id: "solar_demand_s", label: "Solar Boom", type: "macro", impact: 10, sector: "Macro", parentId: "enph" },
+      { id: "gold_ratio", label: "Gold/Silver Ratio", type: "macro", impact: 8, sector: "Macro", parentId: "slv" },
+      { id: "industrial_s", label: "Industrial Demand", type: "macro", impact: 7, sector: "Macro", parentId: "paas" }
     ]}
   ]
 };

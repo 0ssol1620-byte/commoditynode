@@ -7,6 +7,7 @@ tags: [copper, metals, FCX, SCCO, TECK, BHP, COPX, ev]
 description: 'How Freeport-McMoRan serves as the market bellwether for copper prices, with analysis of mining economics, EV demand, and infrastructure exposure.'
 reading_time: 9
 commodity_name: 'Copper'
+direction: bullish
 image: /assets/images/og-copper.png
 ---
 
@@ -37,49 +38,36 @@ Aluminum can substitute for copper in some applications, but at a significant pe
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: {
-    id: "copper",
-    label: "Copper ↑10%",
-    price: "$4.85/lb",
-    change: "+10%"
-  },
+  commodity: { id: "copper", label: "Copper ↑10%", price: "$4.85/lb", change: "+10%" },
   levels: [
-    {
-      nodes: [
-        { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 15.5, correlation: 0.88, marketCap: "68B", sector: "Copper Mining" },
-        { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: 13.8, correlation: 0.85, marketCap: "78B", sector: "Copper Mining" },
-        { id: "teck", label: "Teck Resources (TECK)", type: "positive", impact: 10.2, correlation: 0.75, marketCap: "24B", sector: "Diversified Mining" },
-        { id: "bhp", label: "BHP Group (BHP)", type: "positive", impact: 5.8, correlation: 0.62, marketCap: "155B", sector: "Diversified Mining" },
-        { id: "copx", label: "COPX Copper Miners ETF", type: "etf", impact: 13.0, correlation: 0.90, marketCap: "2.1B", sector: "ETF" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "cat", label: "Caterpillar (CAT)", type: "positive", impact: 4.5, correlation: 0.48, marketCap: "175B", sector: "Mining Equipment" },
-        { id: "de", label: "Deere & Co (DE)", type: "positive", impact: 3.2, correlation: 0.38, marketCap: "120B", sector: "Mining Equipment" },
-        { id: "rio", label: "Rio Tinto (RIO)", type: "positive", impact: 6.5, correlation: 0.58, marketCap: "110B", sector: "Diversified Mining" },
-        { id: "vale", label: "Vale SA (VALE)", type: "positive", impact: 5.2, correlation: 0.50, marketCap: "52B", sector: "Diversified Mining" },
-        { id: "china_pmi", label: "China Manufacturing PMI", type: "macro", impact: 6.0, correlation: 0.65, marketCap: "N/A", sector: "Macro" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "lii", label: "Lennox Intl (LII)", type: "negative", impact: -3.5, correlation: -0.38, marketCap: "20B", sector: "HVAC/Construction" },
-        { id: "pwr", label: "Quanta Services (PWR)", type: "negative", impact: -2.8, correlation: -0.32, marketCap: "42B", sector: "Utility Construction" },
-        { id: "aapl", label: "Apple Inc (AAPL)", type: "negative", impact: -1.2, correlation: -0.18, marketCap: "3.2T", sector: "Electronics" },
-        { id: "phm", label: "PulteGroup (PHM)", type: "negative", impact: -3.8, correlation: -0.42, marketCap: "24B", sector: "Homebuilders" },
-        { id: "dhi", label: "D.R. Horton (DHI)", type: "negative", impact: -3.5, correlation: -0.40, marketCap: "48B", sector: "Homebuilders" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "etn", label: "Eaton Corp (ETN)", type: "negative", impact: -2.5, correlation: -0.30, marketCap: "128B", sector: "Electrical Components" },
-        { id: "nee", label: "NextEra Energy (NEE)", type: "negative", impact: -1.8, correlation: -0.22, marketCap: "155B", sector: "Utilities" },
-        { id: "ev_demand", label: "EV Battery Demand", type: "macro", impact: 5.5, correlation: 0.58, marketCap: "N/A", sector: "Macro" },
-        { id: "infra_spend", label: "Infrastructure Spending", type: "macro", impact: 4.0, correlation: 0.45, marketCap: "N/A", sector: "Macro" },
-        { id: "housing_starts", label: "Housing Starts", type: "macro", impact: -2.0, correlation: -0.28, marketCap: "N/A", sector: "Macro" }
-      ]
-    }
+    { nodes: [
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 15.5, correlation: 0.88, marketCap: "68B", sector: "Copper Mining" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 13.8, correlation: 0.85, marketCap: "78B", sector: "Copper Mining" },
+      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 10.2, correlation: 0.75, marketCap: "24B", sector: "Diversified Mining" },
+      { id: "bhp", label: "BHP Group (BHP)", type: "producer", impact: 5.8, correlation: 0.62, marketCap: "155B", sector: "Diversified Mining" },
+      { id: "copx", label: "COPX Copper Miners ETF", type: "etf", impact: 13, correlation: 0.9, marketCap: "2.1B", sector: "ETF" }
+    ]},
+    { nodes: [
+      { id: "cat", label: "Caterpillar (CAT)", type: "producer", impact: 4.5, correlation: 0.48, marketCap: "175B", sector: "Mining Equipment" },
+      { id: "de", label: "Deere & Co (DE)", type: "producer", impact: 3.2, correlation: 0.38, marketCap: "120B", sector: "Mining Equipment" },
+      { id: "rio", label: "Rio Tinto (RIO)", type: "producer", impact: 6.5, correlation: 0.58, marketCap: "110B", sector: "Diversified Mining" },
+      { id: "vale", label: "Vale SA (VALE)", type: "producer", impact: 5.2, correlation: 0.5, marketCap: "52B", sector: "Diversified Mining" },
+      { id: "china_pmi", label: "China Manufacturing PMI", type: "macro", impact: 6, correlation: 0.65, marketCap: "N/A", sector: "Macro" }
+    ]},
+    { nodes: [
+      { id: "lii", label: "Lennox Intl (LII)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "20B", sector: "HVAC/Construction" },
+      { id: "pwr", label: "Quanta Services (PWR)", type: "consumer", impact: -2.8, correlation: -0.32, marketCap: "42B", sector: "Utility Construction" },
+      { id: "aapl", label: "Apple Inc (AAPL)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "3.2T", sector: "Electronics" },
+      { id: "phm", label: "PulteGroup (PHM)", type: "consumer", impact: -3.8, correlation: -0.42, marketCap: "24B", sector: "Homebuilders" },
+      { id: "dhi", label: "D.R. Horton (DHI)", type: "consumer", impact: -3.5, correlation: -0.4, marketCap: "48B", sector: "Homebuilders" }
+    ]},
+    { nodes: [
+      { id: "etn", label: "Eaton Corp (ETN)", type: "consumer", impact: -2.5, correlation: -0.3, marketCap: "128B", sector: "Electrical Components" },
+      { id: "nee", label: "NextEra Energy (NEE)", type: "consumer", impact: -1.8, correlation: -0.22, marketCap: "155B", sector: "Utilities" },
+      { id: "ev_demand", label: "EV Battery Demand", type: "macro", impact: 5.5, correlation: 0.58, marketCap: "N/A", sector: "Macro" },
+      { id: "infra_spend", label: "Infrastructure Spending", type: "macro", impact: 4, correlation: 0.45, marketCap: "N/A", sector: "Macro" },
+      { id: "housing_starts", label: "Housing Starts", type: "macro", impact: -2, correlation: -0.28, marketCap: "N/A", sector: "Macro" }
+    ]}
   ]
 };
 </script>

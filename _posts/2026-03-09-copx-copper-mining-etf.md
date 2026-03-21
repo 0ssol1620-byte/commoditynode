@@ -7,6 +7,7 @@ tags: [copper, metals, COPX, FCX, SCCO, TECK, HG, infrastructure, ev]
 description: 'COPX copper miners ETF analysis — infrastructure theme exposure, EV demand tailwind, and how copper price moves amplify through mining equities.'
 reading_time: 8
 commodity_name: 'Copper'
+direction: bullish
 image: /assets/images/og-copper.png
 ---
 
@@ -45,35 +46,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "copper", label: "Copper ↑10%", price: "$4.85/lb", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "copx", label: "Global X Copper Miners (COPX)", type: "etf", impact: 20.0, correlation: 0.91, marketCap: "2.5B", sector: "ETF" },
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 18.5, correlation: 0.92, marketCap: "72B", sector: "Copper Mining" },
-      { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: 16.0, correlation: 0.89, marketCap: "85B", sector: "Copper Mining" },
-      { id: "teck", label: "Teck Resources (TECK)", type: "positive", impact: 14.5, correlation: 0.82, marketCap: "26B", sector: "Diversified Mining" },
-      { id: "ivpaf", label: "Antofagasta PLC (ANTO)", type: "positive", impact: 17.0, correlation: 0.88, marketCap: "22B", sector: "Copper Mining" },
-      { id: "construction", label: "Construction Sector", type: "negative", impact: -4.5, correlation: -0.48, marketCap: "N/A", sector: "Construction" }
+      { id: "copx", label: "Global X Copper Miners (COPX)", type: "etf", impact: 20, correlation: 0.91, marketCap: "2.5B", sector: "ETF" },
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 18.5, correlation: 0.92, marketCap: "72B", sector: "Copper Mining" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 16, correlation: 0.89, marketCap: "85B", sector: "Copper Mining" },
+      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 14.5, correlation: 0.82, marketCap: "26B", sector: "Diversified Mining" },
+      { id: "ivpaf", label: "Antofagasta PLC (ANTO)", type: "producer", impact: 17, correlation: 0.88, marketCap: "22B", sector: "Copper Mining" },
+      { id: "construction", label: "Construction Sector", type: "consumer", impact: -4.5, correlation: -0.48, marketCap: "N/A", sector: "Construction" }
     ]},
     { nodes: [
-      { id: "ero", label: "Ero Copper (ERO)", type: "positive", impact: 22.5, correlation: 0.86, marketCap: "3.5B", sector: "Copper Mining" },
-      { id: "hudbay", label: "Hudbay Minerals (HBM)", type: "positive", impact: 21.0, correlation: 0.84, marketCap: "4.2B", sector: "Copper Mining" },
-      { id: "lundin", label: "Lundin Mining (LUNMF)", type: "positive", impact: 19.5, correlation: 0.85, marketCap: "8B", sector: "Copper Mining" },
-      { id: "cat", label: "Caterpillar (CAT)", type: "positive", impact: 5.5, correlation: 0.52, marketCap: "180B", sector: "Mining Equipment" },
-      { id: "de", label: "Deere & Co (DE)", type: "positive", impact: 3.0, correlation: 0.35, marketCap: "120B", sector: "Heavy Equipment" },
-      { id: "pwr", label: "Quanta Services (PWR)", type: "negative", impact: -3.5, correlation: -0.38, marketCap: "42B", sector: "Electrical Contractor" }
+      { id: "ero", label: "Ero Copper (ERO)", type: "producer", impact: 22.5, correlation: 0.86, marketCap: "3.5B", sector: "Copper Mining" },
+      { id: "hudbay", label: "Hudbay Minerals (HBM)", type: "producer", impact: 21, correlation: 0.84, marketCap: "4.2B", sector: "Copper Mining" },
+      { id: "lundin", label: "Lundin Mining (LUNMF)", type: "producer", impact: 19.5, correlation: 0.85, marketCap: "8B", sector: "Copper Mining" },
+      { id: "cat", label: "Caterpillar (CAT)", type: "producer", impact: 5.5, correlation: 0.52, marketCap: "180B", sector: "Mining Equipment" },
+      { id: "de", label: "Deere & Co (DE)", type: "supplier", impact: 3, correlation: 0.35, marketCap: "120B", sector: "Heavy Equipment" },
+      { id: "pwr", label: "Quanta Services (PWR)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "42B", sector: "Electrical Contractor" }
     ]},
     { nodes: [
-      { id: "bhp", label: "BHP Group (BHP)", type: "positive", impact: 8.0, correlation: 0.68, marketCap: "165B", sector: "Diversified Mining" },
-      { id: "rio", label: "Rio Tinto (RIO)", type: "positive", impact: 7.0, correlation: 0.62, marketCap: "115B", sector: "Diversified Mining" },
+      { id: "bhp", label: "BHP Group (BHP)", type: "producer", impact: 8, correlation: 0.68, marketCap: "165B", sector: "Diversified Mining" },
+      { id: "rio", label: "Rio Tinto (RIO)", type: "producer", impact: 7, correlation: 0.62, marketCap: "115B", sector: "Diversified Mining" },
       { id: "cper", label: "United States Copper (CPER)", type: "positive", impact: 9.8, correlation: 0.98, marketCap: "0.3B", sector: "ETF" },
-      { id: "wire", label: "Encore Wire (WIRE)", type: "negative", impact: -5.5, correlation: -0.55, marketCap: "6B", sector: "Wire & Cable" },
-      { id: "itw", label: "Illinois Tool Works (ITW)", type: "negative", impact: -2.5, correlation: -0.30, marketCap: "78B", sector: "Industrials" },
+      { id: "wire", label: "Encore Wire (WIRE)", type: "consumer", impact: -5.5, correlation: -0.55, marketCap: "6B", sector: "Wire & Cable" },
+      { id: "itw", label: "Illinois Tool Works (ITW)", type: "consumer", impact: -2.5, correlation: -0.3, marketCap: "78B", sector: "Industrials" },
       { id: "xlu", label: "Utilities SPDR (XLU)", type: "negative", impact: -2.8, correlation: -0.32, marketCap: "18B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "ev_demand", label: "EV Production Growth", type: "macro", impact: 8.0, correlation: 0.60, marketCap: "N/A", sector: "Macro" },
+      { id: "ev_demand", label: "EV Production Growth", type: "macro", impact: 8, correlation: 0.6, marketCap: "N/A", sector: "Macro" },
       { id: "china_pmi", label: "China Manufacturing PMI", type: "macro", impact: 6.5, correlation: 0.58, marketCap: "N/A", sector: "Macro" },
-      { id: "infra_bill", label: "US Infrastructure Spending", type: "macro", impact: 5.0, correlation: 0.45, marketCap: "N/A", sector: "Macro" },
-      { id: "phm", label: "PulteGroup (PHM)", type: "negative", impact: -3.2, correlation: -0.35, marketCap: "25B", sector: "Homebuilding" },
-      { id: "aapl", label: "Apple Inc (AAPL)", type: "negative", impact: -1.0, correlation: -0.12, marketCap: "3.4T", sector: "Electronics" }
+      { id: "infra_bill", label: "US Infrastructure Spending", type: "macro", impact: 5, correlation: 0.45, marketCap: "N/A", sector: "Macro" },
+      { id: "phm", label: "PulteGroup (PHM)", type: "regional", impact: -3.2, correlation: -0.35, marketCap: "25B", sector: "Homebuilding" },
+      { id: "aapl", label: "Apple Inc (AAPL)", type: "consumer", impact: -1, correlation: -0.12, marketCap: "3.4T", sector: "Electronics" }
     ]}
   ]
 };

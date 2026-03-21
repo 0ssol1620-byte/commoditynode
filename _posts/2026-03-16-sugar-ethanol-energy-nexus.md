@@ -7,6 +7,7 @@ tags: [sugar, ethanol, energy, biofuel, agriculture, corn, brazil]
 description: 'How sugar prices connect to ethanol production and energy markets through Brazils biofuel nexus, creating a unique commodity-energy feedback loop.'
 reading_time: 9
 commodity_name: 'Sugar'
+direction: bullish
 image: /assets/images/og-sugar.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "sugar", label: "Sugar ↑12%", price: "$0.28/lb", change: "+12%" },
   levels: [
     { nodes: [
-      { id: "cane", label: "Cosan (CSAN)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "8B", sector: "Sugar/Ethanol" },
-      { id: "sao_martinho", label: "São Martinho (SMTO3.SA)", type: "positive", impact: 9.2, correlation: 0.78, marketCap: "4B", sector: "Sugar/Ethanol" },
+      { id: "cane", label: "Cosan (CSAN)", type: "producer", impact: 8.5, correlation: 0.72, marketCap: "8B", sector: "Sugar/Ethanol" },
+      { id: "sao_martinho", label: "São Martinho (SMTO3.SA)", type: "producer", impact: 9.2, correlation: 0.78, marketCap: "4B", sector: "Sugar/Ethanol" },
       { id: "sgb", label: "Sugar ETN (SGG)", type: "etf", impact: 11.4, correlation: 0.96, marketCap: "0.1B", sector: "ETF" },
-      { id: "cane_etf", label: "Teucrium Sugar ETF (CANE)", type: "etf", impact: 11.0, correlation: 0.95, marketCap: "0.05B", sector: "ETF" },
-      { id: "brl", label: "Brazilian Real (BRL)", type: "macro", impact: 3.0, correlation: 0.35, sector: "Macro" }
+      { id: "cane_etf", label: "Teucrium Sugar ETF (CANE)", type: "etf", impact: 11, correlation: 0.95, marketCap: "0.05B", sector: "ETF" },
+      { id: "brl", label: "Brazilian Real (BRL)", type: "macro", impact: 3, correlation: 0.35, sector: "Macro" }
     ]},
     { nodes: [
-      { id: "gpre", label: "Green Plains (GPRE)", type: "positive", impact: 5.8, correlation: 0.48, marketCap: "1B", sector: "Ethanol Producer", parentId: "cane" },
+      { id: "gpre", label: "Green Plains (GPRE)", type: "producer", impact: 5.8, correlation: 0.48, marketCap: "1B", sector: "Ethanol Producer", parentId: "cane" },
       { id: "adm_eth", label: "ADM Ethanol Div. (ADM)", type: "positive", impact: 3.5, correlation: 0.42, marketCap: "42B", sector: "Diversified Ag", parentId: "cane" },
-      { id: "rex", label: "REX Energy (REXR)", type: "positive", impact: 4.2, correlation: 0.38, marketCap: "0.8B", sector: "Ethanol Investor", parentId: "sao_martinho" },
-      { id: "corn_compete", label: "Corn Futures (ZC=F)", type: "positive", impact: 3.8, correlation: 0.42, marketCap: "—", sector: "Competing Feedstock", parentId: "cane" },
-      { id: "ewz", label: "Brazil ETF (EWZ)", type: "positive", impact: 2.8, correlation: 0.30, marketCap: "5B", sector: "ETF", parentId: "brl" },
-      { id: "raizen", label: "Raízen (RAIZ4.SA)", type: "positive", impact: 7.5, correlation: 0.68, marketCap: "6B", sector: "Sugar/Ethanol", parentId: "sao_martinho" }
+      { id: "rex", label: "REX Energy (REXR)", type: "regional", impact: 4.2, correlation: 0.38, marketCap: "0.8B", sector: "Ethanol Investor", parentId: "sao_martinho" },
+      { id: "corn_compete", label: "Corn Futures (ZC=F)", type: "substitute", impact: 3.8, correlation: 0.42, marketCap: "—", sector: "Competing Feedstock", parentId: "cane" },
+      { id: "ewz", label: "Brazil ETF (EWZ)", type: "positive", impact: 2.8, correlation: 0.3, marketCap: "5B", sector: "ETF", parentId: "brl" },
+      { id: "raizen", label: "Raízen (RAIZ4.SA)", type: "producer", impact: 7.5, correlation: 0.68, marketCap: "6B", sector: "Sugar/Ethanol", parentId: "sao_martinho" }
     ]},
     { nodes: [
-      { id: "blend_fuel", label: "E10/E15 Fuel Blending", type: "negative", impact: -1.8, sector: "Fuel Blending", parentId: "gpre" },
-      { id: "ko", label: "Coca-Cola (KO)", type: "negative", impact: -1.5, correlation: -0.22, marketCap: "265B", sector: "Beverages", parentId: "adm_eth" },
-      { id: "pep", label: "PepsiCo (PEP)", type: "negative", impact: -1.3, correlation: -0.20, marketCap: "225B", sector: "Beverages", parentId: "adm_eth" },
-      { id: "mdlz_sugar", label: "Mondelez (MDLZ)", type: "negative", impact: -1.8, correlation: -0.28, marketCap: "95B", sector: "Confectionery", parentId: "gpre" },
-      { id: "hsy", label: "Hershey (HSY)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "32B", sector: "Confectionery", parentId: "rex" },
-      { id: "tr", label: "Tootsie Roll (TR)", type: "negative", impact: -3.2, correlation: -0.40, marketCap: "2B", sector: "Confectionery", parentId: "hsy" }
+      { id: "blend_fuel", label: "E10/E15 Fuel Blending", type: "substitute", impact: -1.8, sector: "Fuel Blending", parentId: "gpre" },
+      { id: "ko", label: "Coca-Cola (KO)", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "265B", sector: "Beverages", parentId: "adm_eth" },
+      { id: "pep", label: "PepsiCo (PEP)", type: "consumer", impact: -1.3, correlation: -0.2, marketCap: "225B", sector: "Beverages", parentId: "adm_eth" },
+      { id: "mdlz_sugar", label: "Mondelez (MDLZ)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "95B", sector: "Confectionery", parentId: "gpre" },
+      { id: "hsy", label: "Hershey (HSY)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "32B", sector: "Confectionery", parentId: "rex" },
+      { id: "tr", label: "Tootsie Roll (TR)", type: "consumer", impact: -3.2, correlation: -0.4, marketCap: "2B", sector: "Confectionery", parentId: "hsy" }
     ]},
     { nodes: [
       { id: "cpi_food_sugar", label: "CPI Food (Sugar Component)", type: "macro", impact: -1.2, sector: "Macro", parentId: "ko" },
       { id: "energy_cpi", label: "Energy CPI (Ethanol Blend)", type: "macro", impact: -0.8, sector: "Macro", parentId: "blend_fuel" },
       { id: "brent_link", label: "Brent Crude Correlation", type: "macro", impact: 2.5, correlation: 0.38, sector: "Macro", parentId: "blend_fuel" },
-      { id: "india_policy", label: "India Export Policy", type: "macro", impact: 4.0, sector: "Macro", parentId: "cane" },
-      { id: "hfcs_sub", label: "HFCS Substitution Effect", type: "positive", impact: 1.5, sector: "Macro", parentId: "corn_compete" }
+      { id: "india_policy", label: "India Export Policy", type: "macro", impact: 4, sector: "Macro", parentId: "cane" },
+      { id: "hfcs_sub", label: "HFCS Substitution Effect", type: "macro", impact: 1.5, sector: "Macro", parentId: "corn_compete" }
     ]}
   ]
 };

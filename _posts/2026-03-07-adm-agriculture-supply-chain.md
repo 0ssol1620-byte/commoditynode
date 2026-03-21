@@ -7,6 +7,7 @@ tags: [soybeans, agriculture, ADM, BG, INGR, DAR, MOO, corn]
 description: 'How ADM dominates the agriculture supply chain and why soybean and grain price swings amplify through processing, livestock feed, and consumer food prices.'
 reading_time: 9
 commodity_name: 'Soybeans'
+direction: bullish
 image: /assets/images/og-soybeans.png
 ---
 
@@ -25,36 +26,36 @@ window.COMMODITY_DATA = {
   commodity: { id: "soybeans", label: "Soybeans ↑10%", price: "$13.20/bu", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "adm", label: "ADM (ADM)", type: "positive", impact: 7.8, correlation: 0.76, marketCap: "26B", sector: "Ag Processing" },
-      { id: "bg", label: "Bunge (BG)", type: "positive", impact: 8.4, correlation: 0.79, marketCap: "16B", sector: "Ag Processing" },
-      { id: "ingr", label: "Ingredion (INGR)", type: "positive", impact: 4.2, correlation: 0.54, marketCap: "8B", sector: "Ingredients" },
+      { id: "adm", label: "ADM (ADM)", type: "processor", impact: 7.8, correlation: 0.76, marketCap: "26B", sector: "Ag Processing" },
+      { id: "bg", label: "Bunge (BG)", type: "processor", impact: 8.4, correlation: 0.79, marketCap: "16B", sector: "Ag Processing" },
+      { id: "ingr", label: "Ingredion (INGR)", type: "processor", impact: 4.2, correlation: 0.54, marketCap: "8B", sector: "Ingredients" },
       { id: "moo", label: "VanEck Agribusiness (MOO)", type: "etf", impact: 5.5, correlation: 0.68, marketCap: "1.2B", sector: "ETF" },
-      { id: "tsn", label: "Tyson Foods (TSN)", type: "negative", impact: -6.8, correlation: -0.67, marketCap: "22B", sector: "Livestock" },
-      { id: "mos", label: "Mosaic (MOS)", type: "positive", impact: 5.0, correlation: 0.58, marketCap: "12B", sector: "Fertilizer" }
+      { id: "tsn", label: "Tyson Foods (TSN)", type: "consumer", impact: -6.8, correlation: -0.67, marketCap: "22B", sector: "Livestock" },
+      { id: "mos", label: "Mosaic (MOS)", type: "consumer", impact: 5, correlation: 0.58, marketCap: "12B", sector: "Fertilizer" }
     ]},
     { nodes: [
-      { id: "dar", label: "Darling Ingredients (DAR)", type: "positive", impact: 5.5, correlation: 0.60, marketCap: "7B", sector: "Rendering", parentId: "adm" },
-      { id: "crush_margin", label: "Soy Crush Margin", type: "positive", impact: 12.5, correlation: 0.87, sector: "Processing", parentId: "bg" },
-      { id: "ppc", label: "Pilgrim's Pride (PPC)", type: "negative", impact: -7.2, correlation: -0.72, marketCap: "10B", sector: "Poultry", parentId: "tsn" },
-      { id: "ntr", label: "Nutrien (NTR)", type: "positive", impact: 4.5, correlation: 0.52, marketCap: "28B", sector: "Fertilizer", parentId: "mos" },
-      { id: "gis", label: "General Mills (GIS)", type: "negative", impact: -3.2, correlation: -0.44, marketCap: "40B", sector: "Packaged Food", parentId: "ingr" },
-      { id: "hrl", label: "Hormel Foods (HRL)", type: "negative", impact: -4.0, correlation: -0.50, marketCap: "18B", sector: "Packaged Meat", parentId: "tsn" }
+      { id: "dar", label: "Darling Ingredients (DAR)", type: "processor", impact: 5.5, correlation: 0.6, marketCap: "7B", sector: "Rendering", parentId: "adm" },
+      { id: "crush_margin", label: "Soy Crush Margin", type: "processor", impact: 12.5, correlation: 0.87, sector: "Processing", parentId: "bg" },
+      { id: "ppc", label: "Pilgrim's Pride (PPC)", type: "consumer", impact: -7.2, correlation: -0.72, marketCap: "10B", sector: "Poultry", parentId: "tsn" },
+      { id: "ntr", label: "Nutrien (NTR)", type: "consumer", impact: 4.5, correlation: 0.52, marketCap: "28B", sector: "Fertilizer", parentId: "mos" },
+      { id: "gis", label: "General Mills (GIS)", type: "consumer", impact: -3.2, correlation: -0.44, marketCap: "40B", sector: "Packaged Food", parentId: "ingr" },
+      { id: "hrl", label: "Hormel Foods (HRL)", type: "consumer", impact: -4, correlation: -0.5, marketCap: "18B", sector: "Packaged Meat", parentId: "tsn" }
     ]},
     { nodes: [
-      { id: "soy_oil", label: "Soybean Oil Market", type: "positive", impact: 11.0, correlation: 0.88, sector: "Edible Oils", parentId: "crush_margin" },
-      { id: "brazil_farms", label: "Brazilian Soy Farms", type: "positive", impact: 13.5, correlation: 0.90, sector: "Agriculture", parentId: "bg" },
-      { id: "khc", label: "Kraft Heinz (KHC)", type: "negative", impact: -3.8, correlation: -0.46, marketCap: "42B", sector: "Packaged Food", parentId: "gis" },
-      { id: "feed_lots", label: "Animal Feed Operators", type: "negative", impact: -8.0, correlation: -0.78, sector: "Animal Feed", parentId: "ppc" },
-      { id: "mcd", label: "McDonald's (MCD)", type: "negative", impact: -2.2, correlation: -0.30, marketCap: "210B", sector: "Restaurants", parentId: "hrl" },
-      { id: "farmland_reit", label: "Farmland Partners (FPI)", type: "positive", impact: 6.0, correlation: 0.62, marketCap: "0.6B", sector: "Farmland REIT", parentId: "brazil_farms" }
+      { id: "soy_oil", label: "Soybean Oil Market", type: "processor", impact: 11, correlation: 0.88, sector: "Edible Oils", parentId: "crush_margin" },
+      { id: "brazil_farms", label: "Brazilian Soy Farms", type: "positive", impact: 13.5, correlation: 0.9, sector: "Agriculture", parentId: "bg" },
+      { id: "khc", label: "Kraft Heinz (KHC)", type: "consumer", impact: -3.8, correlation: -0.46, marketCap: "42B", sector: "Packaged Food", parentId: "gis" },
+      { id: "feed_lots", label: "Animal Feed Operators", type: "consumer", impact: -8, correlation: -0.78, sector: "Animal Feed", parentId: "ppc" },
+      { id: "mcd", label: "McDonald's (MCD)", type: "consumer", impact: -2.2, correlation: -0.3, marketCap: "210B", sector: "Restaurants", parentId: "hrl" },
+      { id: "farmland_reit", label: "Farmland Partners (FPI)", type: "regional", impact: 6, correlation: 0.62, marketCap: "0.6B", sector: "Farmland REIT", parentId: "brazil_farms" }
     ]},
     { nodes: [
-      { id: "biodiesel", label: "U.S. Biodiesel Plants", type: "negative", impact: -5.5, correlation: -0.60, sector: "Renewable Fuels", parentId: "soy_oil" },
-      { id: "cmg", label: "Chipotle (CMG)", type: "negative", impact: -1.8, correlation: -0.25, marketCap: "75B", sector: "Restaurants", parentId: "mcd" },
-      { id: "china_demand", label: "China Import Demand", type: "macro", impact: 10.0, correlation: 0.82, sector: "Macro", parentId: "brazil_farms" },
-      { id: "weather_risk", label: "U.S. Midwest Weather", type: "macro", impact: 9.0, correlation: 0.80, sector: "Macro", parentId: "adm" },
-      { id: "hog_farms", label: "U.S. Hog Operations", type: "negative", impact: -8.5, correlation: -0.80, sector: "Livestock", parentId: "feed_lots" },
-      { id: "consumer_food", label: "Consumer Food Prices", type: "macro", impact: -3.5, correlation: -0.40, sector: "Macro", parentId: "khc" }
+      { id: "biodiesel", label: "U.S. Biodiesel Plants", type: "substitute", impact: -5.5, correlation: -0.6, sector: "Renewable Fuels", parentId: "soy_oil" },
+      { id: "cmg", label: "Chipotle (CMG)", type: "consumer", impact: -1.8, correlation: -0.25, marketCap: "75B", sector: "Restaurants", parentId: "mcd" },
+      { id: "china_demand", label: "China Import Demand", type: "macro", impact: 10, correlation: 0.82, sector: "Macro", parentId: "brazil_farms" },
+      { id: "weather_risk", label: "U.S. Midwest Weather", type: "macro", impact: 9, correlation: 0.8, sector: "Macro", parentId: "adm" },
+      { id: "hog_farms", label: "U.S. Hog Operations", type: "consumer", impact: -8.5, correlation: -0.8, sector: "Livestock", parentId: "feed_lots" },
+      { id: "consumer_food", label: "Consumer Food Prices", type: "macro", impact: -3.5, correlation: -0.4, sector: "Macro", parentId: "khc" }
     ]}
   ]
 };

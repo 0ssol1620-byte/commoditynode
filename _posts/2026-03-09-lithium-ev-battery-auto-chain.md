@@ -7,6 +7,7 @@ tags: [lithium, ev, battery, TSLA, ALB, LIT, auto, clean-energy]
 description: 'Tracing the EV transition chain from lithium mines to battery cells to auto showrooms — how lithium costs determine the pace of electric vehicle adoption.'
 reading_time: 10
 commodity_name: 'Lithium'
+direction: bullish
 image: /assets/images/og-lithium.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "lithium", label: "Lithium ↑15%", price: "$14,500/t", change: "+15%" },
   levels: [
     { nodes: [
-      { id: "alb", label: "Albemarle (ALB)", type: "positive", impact: 18.5, correlation: 0.88, marketCap: "12B", sector: "Lithium Mining" },
-      { id: "sqm", label: "SQM (SQM)", type: "positive", impact: 16.8, correlation: 0.85, marketCap: "14B", sector: "Lithium Mining" },
-      { id: "pll", label: "Piedmont Lithium (PLL)", type: "positive", impact: 22.0, correlation: 0.82, marketCap: "0.6B", sector: "Lithium Development" },
-      { id: "lac", label: "Lithium Americas (LAC)", type: "positive", impact: 24.5, correlation: 0.80, marketCap: "1.2B", sector: "Lithium Development" },
+      { id: "alb", label: "Albemarle (ALB)", type: "producer", impact: 18.5, correlation: 0.88, marketCap: "12B", sector: "Lithium Mining" },
+      { id: "sqm", label: "SQM (SQM)", type: "producer", impact: 16.8, correlation: 0.85, marketCap: "14B", sector: "Lithium Mining" },
+      { id: "pll", label: "Piedmont Lithium (PLL)", type: "producer", impact: 22, correlation: 0.82, marketCap: "0.6B", sector: "Lithium Development" },
+      { id: "lac", label: "Lithium Americas (LAC)", type: "producer", impact: 24.5, correlation: 0.8, marketCap: "1.2B", sector: "Lithium Development" },
       { id: "lit", label: "Global X Lithium (LIT)", type: "etf", impact: 10.5, correlation: 0.78, marketCap: "3B", sector: "ETF" },
-      { id: "pilbf", label: "Pilbara Minerals (PILBF)", type: "positive", impact: 20.0, correlation: 0.86, marketCap: "8B", sector: "Lithium Mining" }
+      { id: "pilbf", label: "Pilbara Minerals (PILBF)", type: "producer", impact: 20, correlation: 0.86, marketCap: "8B", sector: "Lithium Mining" }
     ]},
     { nodes: [
-      { id: "catl_proxy", label: "CATL (via LIT)", type: "negative", impact: -5.5, correlation: -0.48, marketCap: "145B", sector: "Battery Manufacturing" },
-      { id: "samsung_sdi", label: "Samsung SDI", type: "negative", impact: -4.8, correlation: -0.45, marketCap: "22B", sector: "Battery Manufacturing" },
-      { id: "panasonic_b", label: "Panasonic (Battery Div)", type: "negative", impact: -4.2, correlation: -0.42, marketCap: "28B", sector: "Battery Manufacturing" },
-      { id: "qs", label: "QuantumScape (QS)", type: "negative", impact: -6.2, correlation: -0.52, marketCap: "5B", sector: "Solid-State Battery" },
-      { id: "envx", label: "Enovix (ENVX)", type: "negative", impact: -5.0, correlation: -0.48, marketCap: "2B", sector: "Battery Tech" },
-      { id: "freyr", label: "FREYR Battery (FREY)", type: "negative", impact: -5.5, correlation: -0.50, marketCap: "0.8B", sector: "Battery Manufacturing" }
+      { id: "catl_proxy", label: "CATL (via LIT)", type: "processor", impact: -5.5, correlation: -0.48, marketCap: "145B", sector: "Battery Manufacturing" },
+      { id: "samsung_sdi", label: "Samsung SDI", type: "processor", impact: -4.8, correlation: -0.45, marketCap: "22B", sector: "Battery Manufacturing" },
+      { id: "panasonic_b", label: "Panasonic (Battery Div)", type: "processor", impact: -4.2, correlation: -0.42, marketCap: "28B", sector: "Battery Manufacturing" },
+      { id: "qs", label: "QuantumScape (QS)", type: "substitute", impact: -6.2, correlation: -0.52, marketCap: "5B", sector: "Solid-State Battery" },
+      { id: "envx", label: "Enovix (ENVX)", type: "processor", impact: -5, correlation: -0.48, marketCap: "2B", sector: "Battery Tech" },
+      { id: "freyr", label: "FREYR Battery (FREY)", type: "processor", impact: -5.5, correlation: -0.5, marketCap: "0.8B", sector: "Battery Manufacturing" }
     ]},
     { nodes: [
-      { id: "tsla", label: "Tesla (TSLA)", type: "negative", impact: -3.5, correlation: -0.40, marketCap: "780B", sector: "EV Automaker" },
-      { id: "rivn", label: "Rivian (RIVN)", type: "negative", impact: -5.8, correlation: -0.55, marketCap: "15B", sector: "EV Automaker" },
-      { id: "lcid", label: "Lucid Group (LCID)", type: "negative", impact: -6.5, correlation: -0.58, marketCap: "7B", sector: "EV Automaker" },
-      { id: "f_ev", label: "Ford (F) - EV Div", type: "negative", impact: -2.8, correlation: -0.35, marketCap: "45B", sector: "Legacy Auto (EV)" },
-      { id: "gm_ev", label: "GM (GM) - EV Div", type: "negative", impact: -2.5, correlation: -0.32, marketCap: "50B", sector: "Legacy Auto (EV)" }
+      { id: "tsla", label: "Tesla (TSLA)", type: "consumer", impact: -3.5, correlation: -0.4, marketCap: "780B", sector: "EV Automaker" },
+      { id: "rivn", label: "Rivian (RIVN)", type: "consumer", impact: -5.8, correlation: -0.55, marketCap: "15B", sector: "EV Automaker" },
+      { id: "lcid", label: "Lucid Group (LCID)", type: "consumer", impact: -6.5, correlation: -0.58, marketCap: "7B", sector: "EV Automaker" },
+      { id: "f_ev", label: "Ford (F) - EV Div", type: "consumer", impact: -2.8, correlation: -0.35, marketCap: "45B", sector: "Legacy Auto (EV)" },
+      { id: "gm_ev", label: "GM (GM) - EV Div", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "50B", sector: "Legacy Auto (EV)" }
     ]},
     { nodes: [
-      { id: "chpt_li", label: "ChargePoint (CHPT)", type: "negative", impact: -3.0, correlation: -0.35, marketCap: "2B", sector: "EV Charging" },
-      { id: "blnk_li", label: "Blink Charging (BLNK)", type: "negative", impact: -3.2, correlation: -0.38, marketCap: "0.5B", sector: "EV Charging" },
+      { id: "chpt_li", label: "ChargePoint (CHPT)", type: "consumer", impact: -3, correlation: -0.35, marketCap: "2B", sector: "EV Charging" },
+      { id: "blnk_li", label: "Blink Charging (BLNK)", type: "consumer", impact: -3.2, correlation: -0.38, marketCap: "0.5B", sector: "EV Charging" },
       { id: "ice_benefit", label: "ICE Automakers Benefit", type: "positive", impact: 1.5, correlation: 0.22, sector: "Traditional Auto" },
-      { id: "oil_demand", label: "Oil Demand Sustained", type: "positive", impact: 1.2, correlation: 0.18, sector: "Macro" },
-      { id: "ev_adoption", label: "EV Adoption Pace", type: "macro", impact: -2.5, correlation: -0.40, sector: "Macro" }
+      { id: "oil_demand", label: "Oil Demand Sustained", type: "macro", impact: 1.2, correlation: 0.18, sector: "Macro" },
+      { id: "ev_adoption", label: "EV Adoption Pace", type: "macro", impact: -2.5, correlation: -0.4, sector: "Macro" }
     ]}
   ]
 };

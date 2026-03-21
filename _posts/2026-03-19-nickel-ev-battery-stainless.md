@@ -7,6 +7,7 @@ tags: [nickel, ev, batteries, stainless-steel, metals, VALE, BHP]
 description: 'How nickel price movements impact EV battery supply chains, stainless steel producers, and mining companies like VALE and BHP. Full correlation analysis.'
 reading_time: 8
 commodity_name: 'Nickel'
+direction: bullish
 image: /assets/images/og-nickel.png
 ---
 
@@ -26,33 +27,33 @@ window.COMMODITY_DATA = {
   commodity: { id: "nickel", label: "Nickel ↑10%", price: "$18,500/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "vale", label: "Vale S.A. (VALE)", type: "positive", impact: 14.0, correlation: 0.82, marketCap: "62B", sector: "Diversified Mining" },
-      { id: "bhp", label: "BHP Group (BHP)", type: "positive", impact: 10.0, correlation: 0.72, marketCap: "155B", sector: "Diversified Mining" },
-      { id: "glen", label: "Glencore (GLEN)", type: "positive", impact: 12.0, correlation: 0.78, marketCap: "68B", sector: "Mining & Trading" },
-      { id: "tsla_n", label: "Tesla (TSLA)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "700B", sector: "EV" },
-      { id: "rivn_n", label: "Rivian (RIVN)", type: "negative", impact: -6.0, correlation: -0.58, marketCap: "18B", sector: "EV" }
+      { id: "vale", label: "Vale S.A. (VALE)", type: "producer", impact: 14, correlation: 0.82, marketCap: "62B", sector: "Diversified Mining" },
+      { id: "bhp", label: "BHP Group (BHP)", type: "producer", impact: 10, correlation: 0.72, marketCap: "155B", sector: "Diversified Mining" },
+      { id: "glen", label: "Glencore (GLEN)", type: "producer", impact: 12, correlation: 0.78, marketCap: "68B", sector: "Mining & Trading" },
+      { id: "tsla_n", label: "Tesla (TSLA)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "700B", sector: "EV" },
+      { id: "rivn_n", label: "Rivian (RIVN)", type: "consumer", impact: -6, correlation: -0.58, marketCap: "18B", sector: "EV" }
     ]},
     { nodes: [
-      { id: "norilsk_n", label: "Nornickel (MNOD.ME)", type: "positive", impact: 20.0, correlation: 0.90, sector: "Nickel Mining", parentId: "vale" },
-      { id: "nico", label: "Nickel Industries (NIC.AX)", type: "positive", impact: 22.0, correlation: 0.92, marketCap: "4.5B", sector: "Nickel Mining", parentId: "glen" },
-      { id: "catl_n", label: "CATL (300750.SZ)", type: "negative", impact: -6.5, correlation: -0.65, sector: "Battery Manufacturing", parentId: "tsla_n" },
-      { id: "pana_n", label: "Panasonic (6752.T)", type: "negative", impact: -5.5, correlation: -0.60, sector: "Battery Manufacturing", parentId: "tsla_n" }
+      { id: "norilsk_n", label: "Nornickel (MNOD.ME)", type: "producer", impact: 20, correlation: 0.9, sector: "Nickel Mining", parentId: "vale" },
+      { id: "nico", label: "Nickel Industries (NIC.AX)", type: "producer", impact: 22, correlation: 0.92, marketCap: "4.5B", sector: "Nickel Mining", parentId: "glen" },
+      { id: "catl_n", label: "CATL (300750.SZ)", type: "processor", impact: -6.5, correlation: -0.65, sector: "Battery Manufacturing", parentId: "tsla_n" },
+      { id: "pana_n", label: "Panasonic (6752.T)", type: "processor", impact: -5.5, correlation: -0.6, sector: "Battery Manufacturing", parentId: "tsla_n" }
     ]},
     { nodes: [
-      { id: "stainless", label: "Stainless Steel Producers", type: "negative", impact: -7.0, correlation: -0.68, sector: "Steel", parentId: "glen" },
-      { id: "aperam", label: "Aperam (APAM.AS)", type: "negative", impact: -6.0, correlation: -0.62, marketCap: "3.2B", sector: "Stainless Steel", parentId: "bhp" },
-      { id: "acerinox", label: "Acerinox (ACX.MC)", type: "negative", impact: -5.5, correlation: -0.58, marketCap: "3.8B", sector: "Stainless Steel", parentId: "bhp" },
-      { id: "battery_recycle", label: "Li-Cycle (LICY)", type: "positive", impact: 8.0, correlation: 0.62, sector: "Battery Recycling", parentId: "catl_n" }
+      { id: "stainless", label: "Stainless Steel Producers", type: "consumer", impact: -7, correlation: -0.68, sector: "Steel", parentId: "glen" },
+      { id: "aperam", label: "Aperam (APAM.AS)", type: "consumer", impact: -6, correlation: -0.62, marketCap: "3.2B", sector: "Stainless Steel", parentId: "bhp" },
+      { id: "acerinox", label: "Acerinox (ACX.MC)", type: "consumer", impact: -5.5, correlation: -0.58, marketCap: "3.8B", sector: "Stainless Steel", parentId: "bhp" },
+      { id: "battery_recycle", label: "Li-Cycle (LICY)", type: "substitute", impact: 8, correlation: 0.62, sector: "Battery Recycling", parentId: "catl_n" }
     ]},
     { nodes: [
-      { id: "aerospace_n", label: "Aerospace Alloys (HWM)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "35B", sector: "Aerospace", parentId: "stainless" },
-      { id: "samsung_sdi", label: "Samsung SDI", type: "negative", impact: -5.0, correlation: -0.55, sector: "Battery Manufacturing", parentId: "catl_n" },
-      { id: "nio_n", label: "NIO Inc (NIO)", type: "negative", impact: -5.5, correlation: -0.54, marketCap: "12B", sector: "EV", parentId: "rivn_n" }
+      { id: "aerospace_n", label: "Aerospace Alloys (HWM)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "35B", sector: "Aerospace", parentId: "stainless" },
+      { id: "samsung_sdi", label: "Samsung SDI", type: "processor", impact: -5, correlation: -0.55, sector: "Battery Manufacturing", parentId: "catl_n" },
+      { id: "nio_n", label: "NIO Inc (NIO)", type: "consumer", impact: -5.5, correlation: -0.54, marketCap: "12B", sector: "EV", parentId: "rivn_n" }
     ]},
     { nodes: [
-      { id: "indonesia_ban", label: "Indonesia Export Policy", type: "positive", impact: 15.0, sector: "Macro", parentId: "nico" },
-      { id: "ev_demand_n", label: "Global EV Adoption Rate", type: "positive", impact: 12.0, sector: "Macro", parentId: "vale" },
-      { id: "construction_n", label: "Global Construction Cycle", type: "positive", impact: 8.0, sector: "Macro", parentId: "stainless" }
+      { id: "indonesia_ban", label: "Indonesia Export Policy", type: "macro", impact: 15, sector: "Macro", parentId: "nico" },
+      { id: "ev_demand_n", label: "Global EV Adoption Rate", type: "macro", impact: 12, sector: "Macro", parentId: "vale" },
+      { id: "construction_n", label: "Global Construction Cycle", type: "macro", impact: 8, sector: "Macro", parentId: "stainless" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [gold, precious, NEM, GOLD, GDX, GLD, mining, inflation]
 description: 'Gold crosses the $5,000 milestone — historical analysis of how gold mining stocks, royalty companies, and related assets perform during major price breakouts.'
 reading_time: 9
 commodity_name: 'Gold'
+direction: bullish
 image: /assets/images/og-gold.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "gold", label: "Gold ↑12%", price: "$5,020/oz", change: "+12%" },
   levels: [
     { nodes: [
-      { id: "nem", label: "Newmont (NEM)", type: "positive", impact: 18.5, correlation: 0.88, marketCap: "72B", sector: "Gold Mining" },
-      { id: "gold_stock", label: "Barrick Gold (GOLD)", type: "positive", impact: 17.0, correlation: 0.86, marketCap: "48B", sector: "Gold Mining" },
+      { id: "nem", label: "Newmont (NEM)", type: "producer", impact: 18.5, correlation: 0.88, marketCap: "72B", sector: "Gold Mining" },
+      { id: "gold_stock", label: "Barrick Gold (GOLD)", type: "producer", impact: 17, correlation: 0.86, marketCap: "48B", sector: "Gold Mining" },
       { id: "gdx", label: "VanEck Gold Miners (GDX)", type: "etf", impact: 16.5, correlation: 0.92, marketCap: "15B", sector: "ETF" },
-      { id: "gld", label: "SPDR Gold Shares (GLD)", type: "etf", impact: 10.0, correlation: 0.99, marketCap: "78B", sector: "ETF" },
-      { id: "fnv", label: "Franco-Nevada (FNV)", type: "positive", impact: 12.0, correlation: 0.82, marketCap: "32B", sector: "Royalty/Streaming" },
-      { id: "dxy_gold", label: "USD Index (DXY)", type: "negative", impact: -4.5, correlation: -0.72, sector: "Macro" }
+      { id: "gld", label: "SPDR Gold Shares (GLD)", type: "etf", impact: 10, correlation: 0.99, marketCap: "78B", sector: "ETF" },
+      { id: "fnv", label: "Franco-Nevada (FNV)", type: "producer", impact: 12, correlation: 0.82, marketCap: "32B", sector: "Royalty/Streaming" },
+      { id: "dxy_gold", label: "USD Index (DXY)", type: "macro", impact: -4.5, correlation: -0.72, sector: "Macro" }
     ]},
     { nodes: [
-      { id: "aem", label: "Agnico Eagle (AEM)", type: "positive", impact: 19.5, correlation: 0.90, marketCap: "52B", sector: "Gold Mining", parentId: "nem" },
-      { id: "wpm", label: "Wheaton Precious (WPM)", type: "positive", impact: 13.5, correlation: 0.84, marketCap: "28B", sector: "Royalty/Streaming", parentId: "fnv" },
-      { id: "gdxj", label: "VanEck Junior Gold (GDXJ)", type: "etf", impact: 22.0, correlation: 0.88, marketCap: "5B", sector: "ETF", parentId: "gdx" },
-      { id: "real_yields", label: "Real Yields (TIPS)", type: "negative", impact: -6.0, correlation: -0.68, sector: "Macro", parentId: "dxy_gold" },
-      { id: "jpm_gold", label: "JPMorgan Chase (JPM)", type: "negative", impact: -2.5, correlation: -0.25, marketCap: "580B", sector: "Banking", parentId: "dxy_gold" }
+      { id: "aem", label: "Agnico Eagle (AEM)", type: "producer", impact: 19.5, correlation: 0.9, marketCap: "52B", sector: "Gold Mining", parentId: "nem" },
+      { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 13.5, correlation: 0.84, marketCap: "28B", sector: "Royalty/Streaming", parentId: "fnv" },
+      { id: "gdxj", label: "VanEck Junior Gold (GDXJ)", type: "etf", impact: 22, correlation: 0.88, marketCap: "5B", sector: "ETF", parentId: "gdx" },
+      { id: "real_yields", label: "Real Yields (TIPS)", type: "macro", impact: -6, correlation: -0.68, sector: "Macro", parentId: "dxy_gold" },
+      { id: "jpm_gold", label: "JPMorgan Chase (JPM)", type: "macro", impact: -2.5, correlation: -0.25, marketCap: "580B", sector: "Banking", parentId: "dxy_gold" }
     ]},
     { nodes: [
-      { id: "kgc", label: "Kinross Gold (KGC)", type: "positive", impact: 21.0, correlation: 0.85, marketCap: "14B", sector: "Gold Mining", parentId: "aem" },
-      { id: "rgld", label: "Royal Gold (RGLD)", type: "positive", impact: 11.5, correlation: 0.80, marketCap: "10B", sector: "Royalty/Streaming", parentId: "wpm" },
-      { id: "ssrm", label: "SSR Mining (SSRM)", type: "positive", impact: 24.0, correlation: 0.82, marketCap: "4B", sector: "Gold Mining", parentId: "gdxj" },
-      { id: "growth_tech", label: "Growth/Tech Rotation", type: "negative", impact: -3.0, correlation: -0.35, sector: "Macro", parentId: "real_yields" },
-      { id: "gs_gold", label: "Goldman Sachs (GS)", type: "negative", impact: -1.8, correlation: -0.20, marketCap: "155B", sector: "Banking", parentId: "jpm_gold" },
+      { id: "kgc", label: "Kinross Gold (KGC)", type: "producer", impact: 21, correlation: 0.85, marketCap: "14B", sector: "Gold Mining", parentId: "aem" },
+      { id: "rgld", label: "Royal Gold (RGLD)", type: "producer", impact: 11.5, correlation: 0.8, marketCap: "10B", sector: "Royalty/Streaming", parentId: "wpm" },
+      { id: "ssrm", label: "SSR Mining (SSRM)", type: "producer", impact: 24, correlation: 0.82, marketCap: "4B", sector: "Gold Mining", parentId: "gdxj" },
+      { id: "growth_tech", label: "Growth/Tech Rotation", type: "macro", impact: -3, correlation: -0.35, sector: "Macro", parentId: "real_yields" },
+      { id: "gs_gold", label: "Goldman Sachs (GS)", type: "macro", impact: -1.8, correlation: -0.2, marketCap: "155B", sector: "Banking", parentId: "jpm_gold" },
       { id: "slv_sympathy", label: "iShares Silver (SLV)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "14B", sector: "ETF", parentId: "gld" }
     ]},
     { nodes: [
-      { id: "central_banks", label: "Central Bank Buying", type: "positive", impact: 9.0, sector: "Macro", parentId: "nem" },
-      { id: "crypto_rotation", label: "Crypto Rotation Risk", type: "negative", impact: -2.0, sector: "Macro", parentId: "growth_tech" },
-      { id: "fed_rate", label: "Fed Rate Path", type: "positive", impact: 7.5, sector: "Macro", parentId: "real_yields" },
-      { id: "geopolitical", label: "Geopolitical Risk Premium", type: "positive", impact: 6.0, sector: "Macro", parentId: "gld" },
-      { id: "inflation_exp", label: "Inflation Expectations", type: "positive", impact: 5.5, sector: "Macro", parentId: "central_banks" }
+      { id: "central_banks", label: "Central Bank Buying", type: "macro", impact: 9, sector: "Macro", parentId: "nem" },
+      { id: "crypto_rotation", label: "Crypto Rotation Risk", type: "macro", impact: -2, sector: "Macro", parentId: "growth_tech" },
+      { id: "fed_rate", label: "Fed Rate Path", type: "macro", impact: 7.5, sector: "Macro", parentId: "real_yields" },
+      { id: "geopolitical", label: "Geopolitical Risk Premium", type: "macro", impact: 6, sector: "Macro", parentId: "gld" },
+      { id: "inflation_exp", label: "Inflation Expectations", type: "macro", impact: 5.5, sector: "Macro", parentId: "central_banks" }
     ]}
   ]
 };

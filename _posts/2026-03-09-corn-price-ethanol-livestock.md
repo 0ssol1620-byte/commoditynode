@@ -7,6 +7,7 @@ tags: [corn, CORN-ETF, ethanol, livestock, food-processing, ADM, agriculture]
 description: "How corn price movements affect CORN ETF, ethanol producers, livestock feed costs, food processing companies, and consumer staples. Detailed correlation analysis."
 reading_time: 7
 commodity_name: "Corn"
+direction: bullish
 image: /assets/images/og-corn.png
 canonical_url: https://commoditynode.com/corn-price-ethanol-livestock/
 ---
@@ -24,31 +25,31 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "corn_etf", label: "Teucrium Corn (CORN)", type: "etf", impact: 9.5, correlation: 0.94, marketCap: "0.2B", sector: "ETF" },
-      { id: "adm_c", label: "Archer-Daniels (ADM)", type: "positive", impact: 7.5, correlation: 0.70, marketCap: "38B", sector: "Grain Processing" },
-      { id: "bunge_c", label: "Bunge Limited (BG)", type: "positive", impact: 6.8, correlation: 0.65, marketCap: "14B", sector: "Grain Trading" },
-      { id: "poet", label: "POET LLC (Private)", type: "positive", impact: 15.0, correlation: 0.88, sector: "Ethanol" },
-      { id: "tsn_c", label: "Tyson Foods (TSN)", type: "negative", impact: -5.5, correlation: -0.62, marketCap: "22B", sector: "Meat Processing" }
+      { id: "adm_c", label: "Archer-Daniels (ADM)", type: "processor", impact: 7.5, correlation: 0.7, marketCap: "38B", sector: "Grain Processing" },
+      { id: "bunge_c", label: "Bunge Limited (BG)", type: "processor", impact: 6.8, correlation: 0.65, marketCap: "14B", sector: "Grain Trading" },
+      { id: "poet", label: "POET LLC (Private)", type: "producer", impact: 15, correlation: 0.88, sector: "Ethanol" },
+      { id: "tsn_c", label: "Tyson Foods (TSN)", type: "consumer", impact: -5.5, correlation: -0.62, marketCap: "22B", sector: "Meat Processing" }
     ]},
     { nodes: [
-      { id: "green_plains", label: "Green Plains (GPRE)", type: "positive", impact: 18.0, correlation: 0.90, marketCap: "1B", sector: "Ethanol", parentId: "poet" },
-      { id: "rex_energy", label: "REX Energy (REXI)", type: "positive", impact: 16.0, correlation: 0.88, sector: "Ethanol", parentId: "poet" },
-      { id: "deere_c", label: "John Deere (DE)", type: "positive", impact: 4.5, correlation: 0.52, marketCap: "130B", sector: "Farm Equipment", parentId: "adm_c" },
-      { id: "pilgrim", label: "Pilgrim's Pride (PPC)", type: "negative", impact: -7.0, correlation: -0.72, marketCap: "9B", sector: "Poultry", parentId: "tsn_c" }
+      { id: "green_plains", label: "Green Plains (GPRE)", type: "producer", impact: 18, correlation: 0.9, marketCap: "1B", sector: "Ethanol", parentId: "poet" },
+      { id: "rex_energy", label: "REX Energy (REXI)", type: "producer", impact: 16, correlation: 0.88, sector: "Ethanol", parentId: "poet" },
+      { id: "deere_c", label: "John Deere (DE)", type: "consumer", impact: 4.5, correlation: 0.52, marketCap: "130B", sector: "Farm Equipment", parentId: "adm_c" },
+      { id: "pilgrim", label: "Pilgrim's Pride (PPC)", type: "consumer", impact: -7, correlation: -0.72, marketCap: "9B", sector: "Poultry", parentId: "tsn_c" }
     ]},
     { nodes: [
-      { id: "ethanol_blend", label: "Ethanol Blenders", type: "positive", impact: 8.0, correlation: 0.68, sector: "Energy", parentId: "green_plains" },
-      { id: "corn_syrup", label: "High Fructose Corn Syrup", type: "negative", impact: -6.5, correlation: -0.70, sector: "Food Ingredients", parentId: "adm_c" },
-      { id: "hog_feed", label: "Hog Feed Producers", type: "negative", impact: -8.0, correlation: -0.78, sector: "Animal Feed", parentId: "tsn_c" }
+      { id: "ethanol_blend", label: "Ethanol Blenders", type: "macro", impact: 8, correlation: 0.68, sector: "Energy", parentId: "green_plains" },
+      { id: "corn_syrup", label: "High Fructose Corn Syrup", type: "consumer", impact: -6.5, correlation: -0.7, sector: "Food Ingredients", parentId: "adm_c" },
+      { id: "hog_feed", label: "Hog Feed Producers", type: "consumer", impact: -8, correlation: -0.78, sector: "Animal Feed", parentId: "tsn_c" }
     ]},
     { nodes: [
-      { id: "soda_c", label: "Coca-Cola (KO)", type: "negative", impact: -2.5, correlation: -0.32, marketCap: "280B", sector: "Beverages", parentId: "corn_syrup" },
-      { id: "packaged_c", label: "General Mills (GIS)", type: "negative", impact: -3.0, correlation: -0.40, marketCap: "42B", sector: "Packaged Foods", parentId: "corn_syrup" },
-      { id: "beef_c", label: "Beef Industry", type: "negative", impact: -4.5, correlation: -0.55, sector: "Meat", parentId: "hog_feed" }
+      { id: "soda_c", label: "Coca-Cola (KO)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "280B", sector: "Beverages", parentId: "corn_syrup" },
+      { id: "packaged_c", label: "General Mills (GIS)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "42B", sector: "Packaged Foods", parentId: "corn_syrup" },
+      { id: "beef_c", label: "Beef Industry", type: "consumer", impact: -4.5, correlation: -0.55, sector: "Meat", parentId: "hog_feed" }
     ]},
     { nodes: [
-      { id: "ethanol_policy", label: "RFS Ethanol Policy", type: "positive", impact: 8.0, sector: "Macro", parentId: "poet" },
-      { id: "drought_c", label: "Midwest Drought", type: "positive", impact: 10.0, sector: "Macro", parentId: "corn_etf" },
-      { id: "fertilizer_c", label: "Fertilizer Costs", type: "positive", impact: 5.0, sector: "Macro", parentId: "adm_c" }
+      { id: "ethanol_policy", label: "RFS Ethanol Policy", type: "macro", impact: 8, sector: "Macro", parentId: "poet" },
+      { id: "drought_c", label: "Midwest Drought", type: "macro", impact: 10, sector: "Macro", parentId: "corn_etf" },
+      { id: "fertilizer_c", label: "Fertilizer Costs", type: "macro", impact: 5, sector: "Macro", parentId: "adm_c" }
     ]}
   ]
 };

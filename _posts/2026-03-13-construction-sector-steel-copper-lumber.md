@@ -7,6 +7,7 @@ tags: [steel, copper, lumber, construction, DHI, LEN, VMC, MLM, NUE]
 description: 'How the three-commodity triangle of steel, copper, and lumber creates compounding cost pressure for homebuilders, commercial construction, and infrastructure.'
 reading_time: 9
 commodity_name: 'Steel'
+direction: bullish
 image: /assets/images/og-steel.png
 ---
 
@@ -24,35 +25,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "construction", label: "Materials ↑10%", price: "Multi", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "nue", label: "Nucor (NUE)", type: "positive", impact: 8.5, correlation: 0.82, marketCap: "39B", sector: "Steel Producer" },
-      { id: "stld_c", label: "Steel Dynamics (STLD)", type: "positive", impact: 9.2, correlation: 0.85, marketCap: "20B", sector: "Steel Producer" },
-      { id: "fcx_c", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 10.8, correlation: 0.88, marketCap: "62B", sector: "Copper Mining" },
-      { id: "dhi", label: "D.R. Horton (DHI)", type: "negative", impact: -6.5, correlation: -0.68, marketCap: "48B", sector: "Homebuilder" },
-      { id: "len", label: "Lennar (LEN)", type: "negative", impact: -6.0, correlation: -0.65, marketCap: "38B", sector: "Homebuilder" },
-      { id: "vmc", label: "Vulcan Materials (VMC)", type: "positive", impact: 5.8, correlation: 0.62, marketCap: "36B", sector: "Aggregates" }
+      { id: "nue", label: "Nucor (NUE)", type: "producer", impact: 8.5, correlation: 0.82, marketCap: "39B", sector: "Steel Producer" },
+      { id: "stld_c", label: "Steel Dynamics (STLD)", type: "producer", impact: 9.2, correlation: 0.85, marketCap: "20B", sector: "Steel Producer" },
+      { id: "fcx_c", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 10.8, correlation: 0.88, marketCap: "62B", sector: "Copper Mining" },
+      { id: "dhi", label: "D.R. Horton (DHI)", type: "consumer", impact: -6.5, correlation: -0.68, marketCap: "48B", sector: "Homebuilder" },
+      { id: "len", label: "Lennar (LEN)", type: "consumer", impact: -6, correlation: -0.65, marketCap: "38B", sector: "Homebuilder" },
+      { id: "vmc", label: "Vulcan Materials (VMC)", type: "supplier", impact: 5.8, correlation: 0.62, marketCap: "36B", sector: "Aggregates" }
     ]},
     { nodes: [
-      { id: "mlm", label: "Martin Marietta (MLM)", type: "positive", impact: 5.5, correlation: 0.60, marketCap: "34B", sector: "Aggregates", parentId: "vmc" },
-      { id: "cat_c", label: "Caterpillar (CAT)", type: "positive", impact: 4.8, correlation: 0.52, marketCap: "178B", sector: "Construction Equipment", parentId: "nue" },
-      { id: "phm", label: "PulteGroup (PHM)", type: "negative", impact: -5.8, correlation: -0.62, marketCap: "22B", sector: "Homebuilder", parentId: "dhi" },
-      { id: "x", label: "U.S. Steel (X)", type: "positive", impact: 11.5, correlation: 0.88, marketCap: "8B", sector: "Steel Producer", parentId: "nue" },
-      { id: "wfg", label: "West Fraser Timber (WFG)", type: "positive", impact: 12.0, correlation: 0.90, marketCap: "7.5B", sector: "Lumber Producer", parentId: "stld_c" },
-      { id: "scco_c", label: "Southern Copper (SCCO)", type: "positive", impact: 11.2, correlation: 0.90, marketCap: "78B", sector: "Copper Mining", parentId: "fcx_c" },
+      { id: "mlm", label: "Martin Marietta (MLM)", type: "supplier", impact: 5.5, correlation: 0.6, marketCap: "34B", sector: "Aggregates", parentId: "vmc" },
+      { id: "cat_c", label: "Caterpillar (CAT)", type: "supplier", impact: 4.8, correlation: 0.52, marketCap: "178B", sector: "Construction Equipment", parentId: "nue" },
+      { id: "phm", label: "PulteGroup (PHM)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "22B", sector: "Homebuilder", parentId: "dhi" },
+      { id: "x", label: "U.S. Steel (X)", type: "producer", impact: 11.5, correlation: 0.88, marketCap: "8B", sector: "Steel Producer", parentId: "nue" },
+      { id: "wfg", label: "West Fraser Timber (WFG)", type: "producer", impact: 12, correlation: 0.9, marketCap: "7.5B", sector: "Lumber Producer", parentId: "stld_c" },
+      { id: "scco_c", label: "Southern Copper (SCCO)", type: "producer", impact: 11.2, correlation: 0.9, marketCap: "78B", sector: "Copper Mining", parentId: "fcx_c" },
       { id: "xhb", label: "XHB Homebuilders ETF", type: "etf", impact: -4.8, correlation: -0.55, marketCap: "1.5B", sector: "ETF", parentId: "len" }
     ]},
     { nodes: [
-      { id: "wm_c", label: "Weyerhaeuser (WY)", type: "positive", impact: 9.5, correlation: 0.82, marketCap: "26B", sector: "Timber REIT", parentId: "wfg" },
-      { id: "uri", label: "United Rentals (URI)", type: "positive", impact: 3.5, correlation: 0.38, marketCap: "48B", sector: "Equipment Rental", parentId: "cat_c" },
-      { id: "o_reit", label: "Commercial REITs (SPG)", type: "negative", impact: -3.2, correlation: -0.40, marketCap: "55B", sector: "Commercial REIT", parentId: "phm" },
-      { id: "pwr", label: "Quanta Services (PWR)", type: "negative", impact: -3.8, correlation: -0.42, marketCap: "42B", sector: "Infrastructure Contractor", parentId: "xhb" },
-      { id: "mtu", label: "MTU / Infrastructure Contractors", type: "negative", impact: -4.0, correlation: -0.45, sector: "Infrastructure", parentId: "pwr" }
+      { id: "wm_c", label: "Weyerhaeuser (WY)", type: "regional", impact: 9.5, correlation: 0.82, marketCap: "26B", sector: "Timber REIT", parentId: "wfg" },
+      { id: "uri", label: "United Rentals (URI)", type: "supplier", impact: 3.5, correlation: 0.38, marketCap: "48B", sector: "Equipment Rental", parentId: "cat_c" },
+      { id: "o_reit", label: "Commercial REITs (SPG)", type: "regional", impact: -3.2, correlation: -0.4, marketCap: "55B", sector: "Commercial REIT", parentId: "phm" },
+      { id: "pwr", label: "Quanta Services (PWR)", type: "macro", impact: -3.8, correlation: -0.42, marketCap: "42B", sector: "Infrastructure Contractor", parentId: "xhb" },
+      { id: "mtu", label: "MTU / Infrastructure Contractors", type: "macro", impact: -4, correlation: -0.45, sector: "Infrastructure", parentId: "pwr" }
     ]},
     { nodes: [
-      { id: "housing_starts", label: "Housing Starts (SAAR)", type: "macro", impact: -5.0, sector: "Macro", parentId: "dhi" },
+      { id: "housing_starts", label: "Housing Starts (SAAR)", type: "macro", impact: -5, sector: "Macro", parentId: "dhi" },
       { id: "infra_bill", label: "Infrastructure Spending", type: "macro", impact: 4.5, sector: "Macro", parentId: "vmc" },
-      { id: "mortgage_rates", label: "Mortgage Rates", type: "macro", impact: -4.0, sector: "Macro", parentId: "len" },
+      { id: "mortgage_rates", label: "Mortgage Rates", type: "macro", impact: -4, sector: "Macro", parentId: "len" },
       { id: "china_steel", label: "China Steel Exports", type: "macro", impact: -3.5, correlation: -0.42, sector: "Macro", parentId: "nue" },
-      { id: "tariffs_c", label: "Steel / Lumber Tariffs", type: "macro", impact: 6.0, sector: "Macro", parentId: "x" }
+      { id: "tariffs_c", label: "Steel / Lumber Tariffs", type: "macro", impact: 6, sector: "Macro", parentId: "x" }
     ]}
   ]
 };

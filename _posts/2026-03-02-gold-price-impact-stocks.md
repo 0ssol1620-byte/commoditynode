@@ -7,6 +7,7 @@ tags: [gold, GLD, GDX, NEM, Newmont, jewelry, electronics, safe-haven]
 description: "How gold price movements ripple through GLD ETF, GDX miners, Newmont (NEM), jewelry retailers, and electronics manufacturers — with full correlation analysis."
 reading_time: 8
 commodity_name: "Gold"
+direction: bullish
 image: /assets/images/og-gold.png
 canonical_url: https://commoditynode.com/gold-price-impact-stocks/
 ---
@@ -25,32 +26,32 @@ window.COMMODITY_DATA = {
     { nodes: [
       { id: "gld", label: "SPDR Gold (GLD)", type: "etf", impact: 7.8, correlation: 0.98, marketCap: "57B", sector: "ETF" },
       { id: "gdx", label: "VanEck Miners (GDX)", type: "etf", impact: 14.2, correlation: 0.85, marketCap: "12B", sector: "ETF" },
-      { id: "nem", label: "Newmont (NEM)", type: "positive", impact: 18.5, correlation: 0.89, marketCap: "48B", sector: "Gold Mining" },
-      { id: "gold_b", label: "Barrick (GOLD)", type: "positive", impact: 16.2, correlation: 0.87, marketCap: "35B", sector: "Gold Mining" },
-      { id: "agn", label: "Agnico Eagle (AEM)", type: "positive", impact: 15.8, correlation: 0.86, marketCap: "28B", sector: "Gold Mining" },
-      { id: "jpm", label: "JPMorgan (JPM)", type: "negative", impact: -2.1, correlation: -0.31, marketCap: "580B", sector: "Banking" }
+      { id: "nem", label: "Newmont (NEM)", type: "producer", impact: 18.5, correlation: 0.89, marketCap: "48B", sector: "Gold Mining" },
+      { id: "gold_b", label: "Barrick (GOLD)", type: "producer", impact: 16.2, correlation: 0.87, marketCap: "35B", sector: "Gold Mining" },
+      { id: "agn", label: "Agnico Eagle (AEM)", type: "producer", impact: 15.8, correlation: 0.86, marketCap: "28B", sector: "Gold Mining" },
+      { id: "jpm", label: "JPMorgan (JPM)", type: "macro", impact: -2.1, correlation: -0.31, marketCap: "580B", sector: "Banking" }
     ]},
     { nodes: [
-      { id: "royalty", label: "Franco-Nevada (FNV)", type: "positive", impact: 12.3, correlation: 0.78, marketCap: "22B", sector: "Royalty", parentId: "nem" },
-      { id: "wheaton", label: "Wheaton Precious (WPM)", type: "positive", impact: 11.5, correlation: 0.75, marketCap: "21B", sector: "Royalty", parentId: "nem" },
-      { id: "refiners_g", label: "Gold Refiners", type: "positive", impact: 5.2, correlation: 0.65, sector: "Refining", parentId: "gold_b" },
-      { id: "central_banks", label: "Central Banks", type: "positive", impact: 3.1, sector: "Finance", parentId: "gld" }
+      { id: "royalty", label: "Franco-Nevada (FNV)", type: "producer", impact: 12.3, correlation: 0.78, marketCap: "22B", sector: "Royalty", parentId: "nem" },
+      { id: "wheaton", label: "Wheaton Precious (WPM)", type: "producer", impact: 11.5, correlation: 0.75, marketCap: "21B", sector: "Royalty", parentId: "nem" },
+      { id: "refiners_g", label: "Gold Refiners", type: "processor", impact: 5.2, correlation: 0.65, sector: "Refining", parentId: "gold_b" },
+      { id: "central_banks", label: "Central Banks", type: "macro", impact: 3.1, sector: "Finance", parentId: "gld" }
     ]},
     { nodes: [
-      { id: "mining_equip_g", label: "Caterpillar (CAT)", type: "positive", impact: 4.2, correlation: 0.45, marketCap: "180B", sector: "Mining Equipment", parentId: "nem" },
-      { id: "explosion_g", label: "Orica (ORI)", type: "positive", impact: 3.8, correlation: 0.42, sector: "Mining Services", parentId: "gold_b" },
+      { id: "mining_equip_g", label: "Caterpillar (CAT)", type: "producer", impact: 4.2, correlation: 0.45, marketCap: "180B", sector: "Mining Equipment", parentId: "nem" },
+      { id: "explosion_g", label: "Orica (ORI)", type: "supplier", impact: 3.8, correlation: 0.42, sector: "Mining Services", parentId: "gold_b" },
       { id: "logistics_g", label: "Brinks (BCO)", type: "positive", impact: 2.5, correlation: 0.38, sector: "Logistics", parentId: "refiners_g" }
     ]},
     { nodes: [
-      { id: "jewelry_ret", label: "Signet (SIG)", type: "negative", impact: -8.5, correlation: -0.72, marketCap: "3B", sector: "Jewelry Retail", parentId: "refiners_g" },
-      { id: "tiffany", label: "LVMH (MC.PA)", type: "negative", impact: -4.2, correlation: -0.58, sector: "Luxury", parentId: "refiners_g" },
-      { id: "electronics_g", label: "Apple (AAPL)", type: "negative", impact: -1.8, correlation: -0.22, marketCap: "3T", sector: "Electronics", parentId: "refiners_g" },
+      { id: "jewelry_ret", label: "Signet (SIG)", type: "consumer", impact: -8.5, correlation: -0.72, marketCap: "3B", sector: "Jewelry Retail", parentId: "refiners_g" },
+      { id: "tiffany", label: "LVMH (MC.PA)", type: "consumer", impact: -4.2, correlation: -0.58, sector: "Luxury", parentId: "refiners_g" },
+      { id: "electronics_g", label: "Apple (AAPL)", type: "consumer", impact: -1.8, correlation: -0.22, marketCap: "3T", sector: "Electronics", parentId: "refiners_g" },
       { id: "dental", label: "Dentsply (XRAY)", type: "negative", impact: -3.1, correlation: -0.41, sector: "Medical", parentId: "refiners_g" }
     ]},
     { nodes: [
-      { id: "dollar_g", label: "USD Index", type: "negative", impact: -3.2, correlation: -0.78, sector: "Macro", parentId: "central_banks" },
-      { id: "inflation_g", label: "Inflation Hedge", type: "positive", impact: 8.0, sector: "Macro", parentId: "gld" },
-      { id: "geopolitics", label: "Geopolitical Risk", type: "positive", impact: 5.5, sector: "Macro", parentId: "central_banks" }
+      { id: "dollar_g", label: "USD Index", type: "macro", impact: -3.2, correlation: -0.78, sector: "Macro", parentId: "central_banks" },
+      { id: "inflation_g", label: "Inflation Hedge", type: "macro", impact: 8, sector: "Macro", parentId: "gld" },
+      { id: "geopolitics", label: "Geopolitical Risk", type: "macro", impact: 5.5, sector: "Macro", parentId: "central_banks" }
     ]}
   ]
 };

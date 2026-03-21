@@ -157,7 +157,7 @@ layout: default
     <div class="section-header" data-animate>
       <p class="section-label">Ripple Analysis</p>
       <h2 class="section-title" id="commodity-reports-title">Signal Reports for {{ page.title }}</h2>
-      <p class="section-desc">All published impact maps and ripple-chain analyses for this commodity.</p>
+      <p class="section-desc">All published Impact Maps and Ripple Chain analyses for this commodity.</p>
     </div>
     <div class="posts-grid">
       {% for post in related_posts limit:9 %}
@@ -171,7 +171,7 @@ layout: default
           <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
           <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
           <div class="post-card-footer">
-            <span class="read-more">Open signal →</span>
+            <span class="read-more">Open Signal Report →</span>
             {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
           </div>
         </div>

@@ -7,6 +7,7 @@ tags: [cobalt, ev, batteries, smartphones, metals, supply-chain]
 description: 'How cobalt price movements impact EV makers like Tesla and NIO, battery manufacturers, smartphone supply chains, and DRC supply concentration risk.'
 reading_time: 8
 commodity_name: 'Cobalt'
+direction: bullish
 image: /assets/images/og-cobalt.png
 ---
 
@@ -26,34 +27,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "cobalt", label: "Cobalt ↑10%", price: "$33,000/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "glen_co", label: "Glencore (GLEN)", type: "positive", impact: 8.0, correlation: 0.68, marketCap: "68B", sector: "Mining & Trading" },
-      { id: "cmclf", label: "China Moly (CMCLF)", type: "positive", impact: 18.0, correlation: 0.88, marketCap: "12B", sector: "Cobalt/Moly Mining" },
-      { id: "tsla_co", label: "Tesla (TSLA)", type: "negative", impact: -3.5, correlation: -0.45, marketCap: "700B", sector: "EV" },
-      { id: "nio_co", label: "NIO Inc (NIO)", type: "negative", impact: -5.5, correlation: -0.55, marketCap: "12B", sector: "EV" },
-      { id: "rivn_co", label: "Rivian (RIVN)", type: "negative", impact: -6.0, correlation: -0.58, marketCap: "18B", sector: "EV" }
+      { id: "glen_co", label: "Glencore (GLEN)", type: "producer", impact: 8, correlation: 0.68, marketCap: "68B", sector: "Mining & Trading" },
+      { id: "cmclf", label: "China Moly (CMCLF)", type: "producer", impact: 18, correlation: 0.88, marketCap: "12B", sector: "Cobalt/Moly Mining" },
+      { id: "tsla_co", label: "Tesla (TSLA)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "700B", sector: "EV" },
+      { id: "nio_co", label: "NIO Inc (NIO)", type: "consumer", impact: -5.5, correlation: -0.55, marketCap: "12B", sector: "EV" },
+      { id: "rivn_co", label: "Rivian (RIVN)", type: "consumer", impact: -6, correlation: -0.58, marketCap: "18B", sector: "EV" }
     ]},
     { nodes: [
-      { id: "katanga", label: "Katanga/Mutanda Mines", type: "positive", impact: 22.0, correlation: 0.92, sector: "DRC Cobalt Mining", parentId: "glen_co" },
-      { id: "eramet", label: "Eramet (ERA.PA)", type: "positive", impact: 10.0, correlation: 0.72, marketCap: "3.5B", sector: "Mining", parentId: "cmclf" },
-      { id: "catl_co", label: "CATL (300750.SZ)", type: "negative", impact: -5.5, correlation: -0.58, sector: "Battery Manufacturing", parentId: "tsla_co" },
-      { id: "lg_chem", label: "LG Energy Solution", type: "negative", impact: -5.0, correlation: -0.55, sector: "Battery Manufacturing", parentId: "nio_co" }
+      { id: "katanga", label: "Katanga/Mutanda Mines", type: "producer", impact: 22, correlation: 0.92, sector: "DRC Cobalt Mining", parentId: "glen_co" },
+      { id: "eramet", label: "Eramet (ERA.PA)", type: "producer", impact: 10, correlation: 0.72, marketCap: "3.5B", sector: "Mining", parentId: "cmclf" },
+      { id: "catl_co", label: "CATL (300750.SZ)", type: "processor", impact: -5.5, correlation: -0.58, sector: "Battery Manufacturing", parentId: "tsla_co" },
+      { id: "lg_chem", label: "LG Energy Solution", type: "processor", impact: -5, correlation: -0.55, sector: "Battery Manufacturing", parentId: "nio_co" }
     ]},
     { nodes: [
-      { id: "aapl_co", label: "Apple Inc (AAPL)", type: "negative", impact: -1.2, correlation: -0.22, marketCap: "3200B", sector: "Consumer Electronics", parentId: "catl_co" },
-      { id: "samsung_co", label: "Samsung Electronics", type: "negative", impact: -1.5, correlation: -0.25, marketCap: "380B", sector: "Consumer Electronics", parentId: "lg_chem" },
-      { id: "umicore_co", label: "Umicore (UMI.BR)", type: "positive", impact: 7.0, correlation: 0.60, marketCap: "6B", sector: "Cobalt Refining", parentId: "glen_co" },
-      { id: "cobalt_recycle", label: "Battery Recyclers (LICY)", type: "positive", impact: 9.0, correlation: 0.65, sector: "Battery Recycling", parentId: "katanga" }
+      { id: "aapl_co", label: "Apple Inc (AAPL)", type: "consumer", impact: -1.2, correlation: -0.22, marketCap: "3200B", sector: "Consumer Electronics", parentId: "catl_co" },
+      { id: "samsung_co", label: "Samsung Electronics", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "380B", sector: "Consumer Electronics", parentId: "lg_chem" },
+      { id: "umicore_co", label: "Umicore (UMI.BR)", type: "processor", impact: 7, correlation: 0.6, marketCap: "6B", sector: "Cobalt Refining", parentId: "glen_co" },
+      { id: "cobalt_recycle", label: "Battery Recyclers (LICY)", type: "substitute", impact: 9, correlation: 0.65, sector: "Battery Recycling", parentId: "katanga" }
     ]},
     { nodes: [
-      { id: "xpev_co", label: "XPeng (XPEV)", type: "negative", impact: -5.0, correlation: -0.52, marketCap: "10B", sector: "EV", parentId: "nio_co" },
-      { id: "panasonic_co", label: "Panasonic (6752.T)", type: "negative", impact: -3.8, correlation: -0.45, sector: "Battery Manufacturing", parentId: "tsla_co" },
-      { id: "aerospace_co", label: "Aerospace Superalloys", type: "negative", impact: -2.5, correlation: -0.35, sector: "Aerospace", parentId: "eramet" },
-      { id: "fortune_min", label: "Fortune Minerals (FT.TO)", type: "positive", impact: 25.0, correlation: 0.90, marketCap: "0.1B", sector: "Cobalt Development", parentId: "cmclf" }
+      { id: "xpev_co", label: "XPeng (XPEV)", type: "consumer", impact: -5, correlation: -0.52, marketCap: "10B", sector: "EV", parentId: "nio_co" },
+      { id: "panasonic_co", label: "Panasonic (6752.T)", type: "processor", impact: -3.8, correlation: -0.45, sector: "Battery Manufacturing", parentId: "tsla_co" },
+      { id: "aerospace_co", label: "Aerospace Superalloys", type: "consumer", impact: -2.5, correlation: -0.35, sector: "Aerospace", parentId: "eramet" },
+      { id: "fortune_min", label: "Fortune Minerals (FT.TO)", type: "producer", impact: 25, correlation: 0.9, marketCap: "0.1B", sector: "Cobalt Development", parentId: "cmclf" }
     ]},
     { nodes: [
-      { id: "drc_risk", label: "DRC Political/Supply Risk", type: "positive", impact: 20.0, sector: "Macro", parentId: "katanga" },
-      { id: "cobalt_free", label: "Cobalt-Free Battery Tech (LFP)", type: "negative", impact: -15.0, sector: "Macro", parentId: "catl_co" },
-      { id: "ev_growth_co", label: "Global EV Sales Growth", type: "positive", impact: 12.0, sector: "Macro", parentId: "glen_co" }
+      { id: "drc_risk", label: "DRC Political/Supply Risk", type: "macro", impact: 20, sector: "Macro", parentId: "katanga" },
+      { id: "cobalt_free", label: "Cobalt-Free Battery Tech (LFP)", type: "macro", impact: -15, sector: "Macro", parentId: "catl_co" },
+      { id: "ev_growth_co", label: "Global EV Sales Growth", type: "macro", impact: 12, sector: "Macro", parentId: "glen_co" }
     ]}
   ]
 };

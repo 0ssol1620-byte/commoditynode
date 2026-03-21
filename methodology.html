@@ -1,0 +1,103 @@
+---
+layout: default
+title: Methodology
+permalink: /methodology/
+description: "How CommodityNode calculates impact scores, correlation data, sensitivity ratings, and confidence levels for commodity Impact Maps and Signal Reports."
+---
+
+<div class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-cyan">Methodology</span>
+    </div>
+    <h1>How CommodityNode Works</h1>
+    <p class="post-standfirst">Our approach to calculating impact scores, correlations, sensitivity ratings, and confidence levels across every Signal Report and Impact Map.</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="methodology-section">
+
+    <h2>Impact Score Calculation</h2>
+    <p>Each node on a CommodityNode Impact Map displays an <strong>impact percentage</strong> — the estimated price response of that asset to a 10% move in the underlying commodity.</p>
+    <ul>
+      <li><strong>Level 1 (Direct Impact):</strong> Calculated from 5-year rolling regression of asset returns against commodity price changes, using weekly data. We use the beta coefficient scaled to a 10% commodity move.</li>
+      <li><strong>Level 2 (Secondary Impact):</strong> Derived from supply-chain input-output relationships. If Company A sources 30% of its COGS from a Level 1 commodity, and the commodity moves 10%, we estimate the margin impact after typical hedging and pass-through rates.</li>
+      <li><strong>Level 3 (Tertiary Impact):</strong> Estimated using industry-level sensitivity models. These capture second-order effects like demand destruction, substitution, and capex cycle changes.</li>
+      <li><strong>Level 4 (Macro Factors):</strong> Based on historical macro-commodity relationships — e.g., the oil-CPI transmission coefficient, USD-commodity inverse correlation, and freight cost indices.</li>
+    </ul>
+    <p>Impact scores are directional estimates, not precise predictions. They represent the most likely magnitude and direction of response based on historical patterns.</p>
+
+    <h2>Data Sources</h2>
+    <p>CommodityNode draws on multiple data sources to build each Signal Report:</p>
+    <ul>
+      <li><strong>Price data:</strong> Yahoo Finance API for real-time and historical commodity, equity, and ETF prices</li>
+      <li><strong>Fundamental data:</strong> SEC filings (10-K, 10-Q) for revenue breakdowns, cost structures, and hedging disclosures</li>
+      <li><strong>Industry reports:</strong> IEA, USDA, World Bureau of Metal Statistics, LME, and other commodity-specific reporting bodies</li>
+      <li><strong>Supply chain data:</strong> Corporate supply chain disclosures, Bloomberg supply chain mapping, and industry association data</li>
+      <li><strong>Macro data:</strong> Federal Reserve (FRED), BLS, and central bank publications for inflation, employment, and monetary policy context</li>
+    </ul>
+
+    <h2>Correlation Methodology</h2>
+    <p>Correlation values displayed on each node represent the <strong>Pearson correlation coefficient</strong> between the asset's weekly returns and the commodity's weekly price changes over a rolling 3-year window.</p>
+    <ul>
+      <li><strong>Range:</strong> -1.0 (perfect inverse) to +1.0 (perfect positive)</li>
+      <li><strong>Update frequency:</strong> Recalculated quarterly using the most recent 156 weeks of data</li>
+      <li><strong>Significance:</strong> We only display correlations where p-value < 0.05 (95% confidence)</li>
+      <li><strong>Lag adjustment:</strong> For secondary and tertiary impacts, we test correlations at 0, 1, 2, and 4-week lags and report the strongest statistically significant relationship</li>
+    </ul>
+
+    <h2>Sensitivity Analysis</h2>
+    <p>Sensitivity ratings classify how responsive an asset or sector is to commodity price movements:</p>
+    <ul>
+      <li><strong>Very High:</strong> Impact > 10%, Correlation > 0.80 — asset moves almost in lockstep with the commodity</li>
+      <li><strong>High:</strong> Impact 5–10%, Correlation 0.60–0.80 — strong, reliable transmission</li>
+      <li><strong>Medium:</strong> Impact 2–5%, Correlation 0.40–0.60 — meaningful but moderated by other factors</li>
+      <li><strong>Low:</strong> Impact < 2%, Correlation < 0.40 — commodity is one of many drivers</li>
+    </ul>
+    <p>Sensitivity accounts for hedging ratios (from 10-K disclosures), contractual pass-through mechanisms, and inventory buffer effects that dampen or amplify raw price transmission.</p>
+
+    <h2>Confidence Levels</h2>
+    <p>Each Signal Report carries a confidence assessment based on data quality and model reliability:</p>
+    <ul>
+      <li><strong>High:</strong> 5+ years of clean price data, well-documented supply chain, multiple confirming data sources, statistically significant correlations (p < 0.01)</li>
+      <li><strong>Medium-High:</strong> 3–5 years of data, established commodity-equity relationship, some hedging uncertainty</li>
+      <li><strong>Medium:</strong> 2–3 years of data, or newer commodity/equity with less historical context. Correlations may be regime-dependent.</li>
+      <li><strong>Low-Medium:</strong> Limited historical data, emerging commodity (e.g., lithium pre-2020), or structural market changes that may invalidate historical patterns</li>
+    </ul>
+
+    <h2>Node Types</h2>
+    <p>Impact Map nodes are classified by their relationship to the commodity:</p>
+    <ul>
+      <li><strong>Commodity</strong> (gold center) — the primary commodity being analyzed</li>
+      <li><strong>ETF</strong> (purple) — exchange-traded funds providing direct or sector exposure</li>
+      <li><strong>Producer</strong> (orange) — companies that extract or produce the commodity</li>
+      <li><strong>Processor</strong> (cyan) — companies that refine or transform the commodity</li>
+      <li><strong>Consumer</strong> (orange-light) — companies or sectors that consume the commodity as input</li>
+      <li><strong>Supplier</strong> (green-light) — upstream suppliers to the commodity's production chain</li>
+      <li><strong>Substitute</strong> (yellow) — alternative commodities or technologies</li>
+      <li><strong>Regional</strong> (blue-light) — geographic or country-level exposure factors</li>
+      <li><strong>Macro</strong> (purple-light) — macroeconomic factors like FX, inflation, policy</li>
+      <li><strong>Policy</strong> (pink) — regulatory, tariff, or government policy factors</li>
+    </ul>
+
+    <h2>Ripple Chain Methodology</h2>
+    <p>Ripple Chains trace multi-hop impact paths from a commodity shock to downstream effects. Each hop represents a documented transmission mechanism:</p>
+    <ul>
+      <li><strong>Hop 1:</strong> Direct price sensitivity (commodity → producer/consumer)</li>
+      <li><strong>Hop 2:</strong> Cost pass-through (producer → downstream industry)</li>
+      <li><strong>Hop 3:</strong> Second-order demand effects (industry → end consumer/macro)</li>
+      <li><strong>Hop 4:</strong> Macro feedback loops (inflation → policy → commodity)</li>
+    </ul>
+    <p>Ripple Chain strength diminishes with each hop. We typically see 60–80% of the signal transmitted at Hop 1, 30–50% at Hop 2, and 10–25% at Hop 3+.</p>
+
+    <div class="disclaimer-box">
+      <h3>Disclaimer</h3>
+      <p>CommodityNode provides research signals and analytical tools for educational and informational purposes only. Nothing on this site constitutes financial advice, investment recommendations, or trading signals.</p>
+      <p>Impact scores, correlations, and sensitivity ratings are based on historical data and statistical models. Past performance does not guarantee future results. Commodity markets are inherently volatile and subject to rapid regime changes that can invalidate historical relationships.</p>
+      <p>Always conduct your own due diligence and consult with a qualified financial advisor before making investment decisions. CommodityNode is not a registered investment advisor.</p>
+      <p>Data may contain errors or delays. We make no warranties about the accuracy, completeness, or timeliness of the information presented.</p>
+    </div>
+
+  </div>
+</div>

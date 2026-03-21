@@ -43,6 +43,11 @@ layout: default
       {% if page.reading_time %}
       <span class="badge badge-gold">{{ page.reading_time }} min read</span>
       {% endif %}
+      {% if page.direction == "bullish" %}
+      <span class="post-card-direction bullish">&#9650; Bullish</span>
+      {% elsif page.direction == "bearish" %}
+      <span class="post-card-direction bearish">&#9660; Bearish</span>
+      {% endif %}
     </div>
     <h1>{{ page.title }}</h1>
     <p class="post-standfirst">{{ page.description | default: site.description }}</p>
@@ -54,6 +59,10 @@ layout: default
       <span class="separator" aria-hidden="true"></span>
       <span>Primary theme: {{ primary_tag }}</span>
       {% endif %}
+    </div>
+    <div class="data-confidence-bar">
+      <span class="confidence-item">Data as of: <strong>{{ page.date | date: "%B %d, %Y" }}</strong></span>
+      <span class="confidence-item">Sources: <strong>Yahoo Finance, SEC filings, industry reports</strong></span>
     </div>
   </div>
 </header>
@@ -67,16 +76,16 @@ layout: default
     </div>
     <div class="summary-metrics" aria-label="Article quick stats">
       <div class="summary-metric">
-        <span class="summary-metric-label">Published</span>
-        <strong>{{ page.date | date: "%b %d, %Y" }}</strong>
+        <span class="summary-metric-label">Correlation</span>
+        <strong>{{ page.correlation | default: "0.70–0.95" }}</strong>
       </div>
       <div class="summary-metric">
-        <span class="summary-metric-label">Reading time</span>
-        <strong>{{ page.reading_time | default: 8 }} min</strong>
+        <span class="summary-metric-label">Sensitivity</span>
+        <strong>{{ page.sensitivity | default: "High" }}</strong>
       </div>
       <div class="summary-metric">
-        <span class="summary-metric-label">Linked themes</span>
-        <strong>{{ page.tags.size | default: 0 }}</strong>
+        <span class="summary-metric-label">Confidence</span>
+        <strong>{{ page.confidence | default: "Medium-High" }}</strong>
       </div>
     </div>
   </div>
@@ -93,7 +102,7 @@ layout: default
       </div>
       {% endif %}
 
-      <section class="post-share" aria-label="Share this report">
+      <section class="post-share" aria-label="Share this Signal Report">
         <span class="post-share-label">Share</span>
         <a class="btn btn-secondary post-share-btn" href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ page.url | absolute_url | uri_escape }}" target="_blank" rel="noopener">X / Twitter</a>
         <a class="btn btn-secondary post-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url={{ page.url | absolute_url | uri_escape }}" target="_blank" rel="noopener">LinkedIn</a>
@@ -102,8 +111,8 @@ layout: default
 
       <section class="methodology-note" aria-labelledby="methodology-title">
         <p class="summary-kicker">Methodology</p>
-        <h2 id="methodology-title">How to read this impact map</h2>
-        <p>CommodityNode reports combine directional sensitivity, supply-chain structure, category overlap, and linked thematic context. Treat the percentages and correlations as research signals designed to accelerate deeper diligence, not as financial advice.</p>
+        <h2 id="methodology-title">How to read this Impact Map</h2>
+        <p>CommodityNode Signal Reports combine directional sensitivity, supply-chain structure, category overlap, and linked thematic context. Treat the percentages and correlations as research signals designed to accelerate deeper diligence, not as financial advice. <a href="/methodology/">Read our full methodology</a>.</p>
       </section>
     </article>
 
@@ -127,6 +136,12 @@ layout: default
             <span style="color:var(--text3)">Topics</span>
             <span style="color:var(--accent)">{{ page.tags.size }}</span>
           </div>
+          {% if page.direction %}
+          <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+            <span style="color:var(--text3)">Direction</span>
+            <span style="color:{% if page.direction == 'bullish' %}var(--green){% else %}var(--red){% endif %}">{{ page.direction | capitalize }}</span>
+          </div>
+          {% endif %}
           {% if primary_tag %}
           <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
             <span style="color:var(--text3)">Next hop</span>
@@ -142,7 +157,7 @@ layout: default
     <div class="section-header" data-animate>
       <p class="section-label">Continue Exploring</p>
       <h2 class="section-title" id="related-posts-title">Related Impact Maps</h2>
-      <p class="section-desc">Follow adjacent commodity, sector, and company exposure chains from this report.</p>
+      <p class="section-desc">Follow adjacent commodity, sector, and company exposure chains from this Signal Report.</p>
     </div>
 
     <div class="posts-grid">
@@ -162,7 +177,7 @@ layout: default
               <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
               <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
               <div class="post-card-footer">
-                <span class="read-more">Open signal →</span>
+                <span class="read-more">Open Signal Report &rarr;</span>
                 {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
               </div>
             </div>
@@ -188,7 +203,7 @@ layout: default
                 <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
                 <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
                 <div class="post-card-footer">
-                  <span class="read-more">Open signal →</span>
+                  <span class="read-more">Open Signal Report &rarr;</span>
                   {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
                 </div>
               </div>

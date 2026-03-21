@@ -11,7 +11,7 @@ description: "Explore how each commodity's price movements impact industries, st
       <span class="badge badge-cyan">Index</span>
       <span class="badge badge-gold">{{ site.commodities.size }} Hubs</span>
     </div>
-    <h1>Commodity Impact Maps</h1>
+    <h1>Commodity Hubs</h1>
     <p class="post-meta-bar">Explore how price movements ripple through industries, stocks, and ETFs.</p>
   </div>
 </div>

@@ -7,6 +7,7 @@ tags: [iron-ore, BHP, VALE, RIO, China, steel-mills, infrastructure, mining]
 description: "How iron ore price movements impact BHP, Vale (VALE), Rio Tinto (RIO), Chinese steel mills, and global infrastructure investment. Full correlation analysis."
 reading_time: 8
 commodity_name: "Iron Ore"
+direction: bullish
 image: /assets/images/og-iron-ore.png
 canonical_url: https://commoditynode.com/iron-ore-steel-china-infrastructure/
 ---
@@ -23,32 +24,32 @@ window.COMMODITY_DATA = {
   commodity: { id: "iron_ore", label: "Iron Ore ↑8%", price: "$120/ton", change: "+8%" },
   levels: [
     { nodes: [
-      { id: "vale", label: "Vale SA (VALE)", type: "positive", impact: 15.5, correlation: 0.91, marketCap: "60B", sector: "Iron Ore Mining" },
-      { id: "bhp_i", label: "BHP Group (BHP)", type: "positive", impact: 12.0, correlation: 0.88, marketCap: "145B", sector: "Diversified Mining" },
-      { id: "rio_i", label: "Rio Tinto (RIO)", type: "positive", impact: 13.5, correlation: 0.89, marketCap: "110B", sector: "Iron Ore Mining" },
-      { id: "x_i", label: "US Steel (X)", type: "negative", impact: -5.5, correlation: -0.62, marketCap: "7B", sector: "Steel Producer" },
-      { id: "nue_i", label: "Nucor (NUE)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "35B", sector: "Steel Producer" }
+      { id: "vale", label: "Vale SA (VALE)", type: "producer", impact: 15.5, correlation: 0.91, marketCap: "60B", sector: "Iron Ore Mining" },
+      { id: "bhp_i", label: "BHP Group (BHP)", type: "producer", impact: 12, correlation: 0.88, marketCap: "145B", sector: "Diversified Mining" },
+      { id: "rio_i", label: "Rio Tinto (RIO)", type: "producer", impact: 13.5, correlation: 0.89, marketCap: "110B", sector: "Iron Ore Mining" },
+      { id: "x_i", label: "US Steel (X)", type: "consumer", impact: -5.5, correlation: -0.62, marketCap: "7B", sector: "Steel Producer" },
+      { id: "nue_i", label: "Nucor (NUE)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "35B", sector: "Steel Producer" }
     ]},
     { nodes: [
-      { id: "fortescue", label: "Fortescue (FMG.AX)", type: "positive", impact: 18.0, correlation: 0.93, marketCap: "55B", sector: "Iron Ore Mining", parentId: "vale" },
-      { id: "champion", label: "Champion Iron (CIA.TO)", type: "positive", impact: 20.0, correlation: 0.92, marketCap: "3B", sector: "Iron Ore Mining", parentId: "rio_i" },
-      { id: "chinese_steel", label: "Baosteel (600019.SS)", type: "negative", impact: -6.5, correlation: -0.70, sector: "China Steel", parentId: "x_i" },
-      { id: "shipping_io", label: "Capesize Shipping", type: "positive", impact: 10.0, correlation: 0.78, sector: "Bulk Shipping", parentId: "bhp_i" }
+      { id: "fortescue", label: "Fortescue (FMG.AX)", type: "producer", impact: 18, correlation: 0.93, marketCap: "55B", sector: "Iron Ore Mining", parentId: "vale" },
+      { id: "champion", label: "Champion Iron (CIA.TO)", type: "producer", impact: 20, correlation: 0.92, marketCap: "3B", sector: "Iron Ore Mining", parentId: "rio_i" },
+      { id: "chinese_steel", label: "Baosteel (600019.SS)", type: "regional", impact: -6.5, correlation: -0.7, sector: "China Steel", parentId: "x_i" },
+      { id: "shipping_io", label: "Capesize Shipping", type: "supplier", impact: 10, correlation: 0.78, sector: "Bulk Shipping", parentId: "bhp_i" }
     ]},
     { nodes: [
-      { id: "rail_io", label: "FMG Rail Infrastructure", type: "positive", impact: 8.5, correlation: 0.72, sector: "Mining Infrastructure", parentId: "fortescue" },
-      { id: "pellets_io", label: "Iron Ore Pellets", type: "positive", impact: 12.0, correlation: 0.85, sector: "Value-Added Ore", parentId: "champion" },
-      { id: "dri_io", label: "DRI/HBI Production", type: "negative", impact: -5.0, correlation: -0.58, sector: "Direct Reduction", parentId: "chinese_steel" }
+      { id: "rail_io", label: "FMG Rail Infrastructure", type: "producer", impact: 8.5, correlation: 0.72, sector: "Mining Infrastructure", parentId: "fortescue" },
+      { id: "pellets_io", label: "Iron Ore Pellets", type: "producer", impact: 12, correlation: 0.85, sector: "Value-Added Ore", parentId: "champion" },
+      { id: "dri_io", label: "DRI/HBI Production", type: "processor", impact: -5, correlation: -0.58, sector: "Direct Reduction", parentId: "chinese_steel" }
     ]},
     { nodes: [
-      { id: "construction_io", label: "Chinese Construction", type: "positive", impact: 9.0, correlation: 0.82, sector: "Real Estate", parentId: "chinese_steel" },
-      { id: "auto_io", label: "Auto Steel (BWA)", type: "negative", impact: -4.0, correlation: -0.50, sector: "Automotive", parentId: "nue_i" },
-      { id: "greensteeel", label: "Green Steel (SSAB)", type: "negative", impact: -6.0, correlation: -0.62, sector: "Green Steel", parentId: "dri_io" }
+      { id: "construction_io", label: "Chinese Construction", type: "macro", impact: 9, correlation: 0.82, sector: "Real Estate", parentId: "chinese_steel" },
+      { id: "auto_io", label: "Auto Steel (BWA)", type: "consumer", impact: -4, correlation: -0.5, sector: "Automotive", parentId: "nue_i" },
+      { id: "greensteeel", label: "Green Steel (SSAB)", type: "processor", impact: -6, correlation: -0.62, sector: "Green Steel", parentId: "dri_io" }
     ]},
     { nodes: [
-      { id: "china_stimulus", label: "China Stimulus", type: "positive", impact: 12.0, sector: "Macro", parentId: "vale" },
-      { id: "evergrande_io", label: "China Property Crisis", type: "negative", impact: -10.0, sector: "Macro", parentId: "chinese_steel" },
-      { id: "h2_steel", label: "Hydrogen Steelmaking", type: "negative", impact: -7.0, sector: "Macro", parentId: "greensteeel" }
+      { id: "china_stimulus", label: "China Stimulus", type: "macro", impact: 12, sector: "Macro", parentId: "vale" },
+      { id: "evergrande_io", label: "China Property Crisis", type: "macro", impact: -10, sector: "Macro", parentId: "chinese_steel" },
+      { id: "h2_steel", label: "Hydrogen Steelmaking", type: "macro", impact: -7, sector: "Macro", parentId: "greensteeel" }
     ]}
   ]
 };

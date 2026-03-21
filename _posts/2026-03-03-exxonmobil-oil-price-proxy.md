@@ -7,6 +7,7 @@ tags: [crude-oil, energy, XOM, CVX, COP, OXY, oil, XLE]
 description: 'Analysis of ExxonMobil as the market premiere oil price proxy, examining upstream/downstream dynamics and how XOM amplifies crude oil movements.'
 reading_time: 10
 commodity_name: 'Crude Oil'
+direction: bullish
 image: /assets/images/og-crude-oil.png
 ---
 
@@ -29,49 +30,36 @@ The goal is to provide investors with a precise framework for sizing oil exposur
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: {
-    id: "crude-oil",
-    label: "Crude Oil ↑10%",
-    price: "$82/bbl",
-    change: "+10%"
-  },
+  commodity: { id: "crude-oil", label: "Crude Oil ↑10%", price: "$82/bbl", change: "+10%" },
   levels: [
-    {
-      nodes: [
-        { id: "xom", label: "ExxonMobil (XOM)", type: "positive", impact: 9.2, correlation: 0.89, marketCap: "515B", sector: "Integrated Oil" },
-        { id: "cvx", label: "Chevron (CVX)", type: "positive", impact: 8.5, correlation: 0.87, marketCap: "302B", sector: "Integrated Oil" },
-        { id: "cop", label: "ConocoPhillips (COP)", type: "positive", impact: 11.5, correlation: 0.91, marketCap: "148B", sector: "E&P" },
-        { id: "oxy", label: "Occidental Petroleum (OXY)", type: "positive", impact: 14.0, correlation: 0.88, marketCap: "52B", sector: "E&P" },
-        { id: "xle", label: "XLE Energy ETF", type: "etf", impact: 8.8, correlation: 0.93, marketCap: "38B", sector: "ETF" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "slb", label: "SLB (SLB)", type: "positive", impact: 12.5, correlation: 0.88, marketCap: "67B", sector: "Oilfield Services" },
-        { id: "hal", label: "Halliburton (HAL)", type: "positive", impact: 14.2, correlation: 0.90, marketCap: "33B", sector: "Oilfield Services" },
-        { id: "epd", label: "Enterprise Products (EPD)", type: "positive", impact: 3.8, correlation: 0.52, marketCap: "65B", sector: "Midstream/MLP" },
-        { id: "et", label: "Energy Transfer (ET)", type: "positive", impact: 4.2, correlation: 0.55, marketCap: "52B", sector: "Midstream/MLP" },
-        { id: "opec", label: "OPEC+ Supply Policy", type: "macro", impact: 8.0, correlation: 0.75, marketCap: "N/A", sector: "Macro" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "dal", label: "Delta Air Lines (DAL)", type: "negative", impact: -7.5, correlation: -0.76, marketCap: "31B", sector: "Airlines" },
-        { id: "ual", label: "United Airlines (UAL)", type: "negative", impact: -8.0, correlation: -0.78, marketCap: "23B", sector: "Airlines" },
-        { id: "odfl", label: "Old Dominion (ODFL)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "42B", sector: "Trucking" },
-        { id: "xpo", label: "XPO Inc (XPO)", type: "negative", impact: -5.2, correlation: -0.60, marketCap: "12B", sector: "Trucking" },
-        { id: "dow", label: "Dow Inc (DOW)", type: "negative", impact: -4.8, correlation: -0.52, marketCap: "40B", sector: "Chemicals" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "lyb", label: "LyondellBasell (LYB)", type: "negative", impact: -5.0, correlation: -0.55, marketCap: "28B", sector: "Chemicals" },
-        { id: "inflation", label: "CPI Inflation Pressure", type: "macro", impact: -2.5, correlation: -0.42, marketCap: "N/A", sector: "Macro" },
-        { id: "usd", label: "USD Index (DXY)", type: "macro", impact: -3.0, correlation: -0.60, marketCap: "N/A", sector: "Macro" },
-        { id: "consumer", label: "Consumer Discretionary", type: "macro", impact: -2.0, correlation: -0.35, marketCap: "N/A", sector: "Macro" },
-        { id: "fro", label: "Frontline (FRO)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "6.5B", sector: "Oil Tankers" }
-      ]
-    }
+    { nodes: [
+      { id: "xom", label: "ExxonMobil (XOM)", type: "producer", impact: 9.2, correlation: 0.89, marketCap: "515B", sector: "Integrated Oil" },
+      { id: "cvx", label: "Chevron (CVX)", type: "producer", impact: 8.5, correlation: 0.87, marketCap: "302B", sector: "Integrated Oil" },
+      { id: "cop", label: "ConocoPhillips (COP)", type: "producer", impact: 11.5, correlation: 0.91, marketCap: "148B", sector: "E&P" },
+      { id: "oxy", label: "Occidental Petroleum (OXY)", type: "producer", impact: 14, correlation: 0.88, marketCap: "52B", sector: "E&P" },
+      { id: "xle", label: "XLE Energy ETF", type: "etf", impact: 8.8, correlation: 0.93, marketCap: "38B", sector: "ETF" }
+    ]},
+    { nodes: [
+      { id: "slb", label: "SLB (SLB)", type: "supplier", impact: 12.5, correlation: 0.88, marketCap: "67B", sector: "Oilfield Services" },
+      { id: "hal", label: "Halliburton (HAL)", type: "supplier", impact: 14.2, correlation: 0.9, marketCap: "33B", sector: "Oilfield Services" },
+      { id: "epd", label: "Enterprise Products (EPD)", type: "supplier", impact: 3.8, correlation: 0.52, marketCap: "65B", sector: "Midstream/MLP" },
+      { id: "et", label: "Energy Transfer (ET)", type: "supplier", impact: 4.2, correlation: 0.55, marketCap: "52B", sector: "Midstream/MLP" },
+      { id: "opec", label: "OPEC+ Supply Policy", type: "macro", impact: 8, correlation: 0.75, marketCap: "N/A", sector: "Macro" }
+    ]},
+    { nodes: [
+      { id: "dal", label: "Delta Air Lines (DAL)", type: "consumer", impact: -7.5, correlation: -0.76, marketCap: "31B", sector: "Airlines" },
+      { id: "ual", label: "United Airlines (UAL)", type: "consumer", impact: -8, correlation: -0.78, marketCap: "23B", sector: "Airlines" },
+      { id: "odfl", label: "Old Dominion (ODFL)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "42B", sector: "Trucking" },
+      { id: "xpo", label: "XPO Inc (XPO)", type: "consumer", impact: -5.2, correlation: -0.6, marketCap: "12B", sector: "Trucking" },
+      { id: "dow", label: "Dow Inc (DOW)", type: "consumer", impact: -4.8, correlation: -0.52, marketCap: "40B", sector: "Chemicals" }
+    ]},
+    { nodes: [
+      { id: "lyb", label: "LyondellBasell (LYB)", type: "consumer", impact: -5, correlation: -0.55, marketCap: "28B", sector: "Chemicals" },
+      { id: "inflation", label: "CPI Inflation Pressure", type: "macro", impact: -2.5, correlation: -0.42, marketCap: "N/A", sector: "Macro" },
+      { id: "usd", label: "USD Index (DXY)", type: "macro", impact: -3, correlation: -0.6, marketCap: "N/A", sector: "Macro" },
+      { id: "consumer", label: "Consumer Discretionary", type: "macro", impact: -2, correlation: -0.35, marketCap: "N/A", sector: "Macro" },
+      { id: "fro", label: "Frontline (FRO)", type: "supplier", impact: 8.5, correlation: 0.72, marketCap: "6.5B", sector: "Oil Tankers" }
+    ]}
   ]
 };
 </script>

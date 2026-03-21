@@ -7,6 +7,7 @@ tags: [copper, ev, infrastructure, construction, FCX, SCCO]
 description: 'How copper price surges impact Freeport-McMoRan, Southern Copper, EV charging networks, construction, utilities, and renewable energy infrastructure. Full correlation analysis.'
 reading_time: 8
 commodity_name: "Copper"
+direction: bullish
 image: /assets/images/og-copper.png
 ---
 
@@ -23,40 +24,40 @@ For investors, a copper rally creates opportunities across the mining sector whi
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: { id: "copper_pm", label: "Copper \u219110%", price: "$4.25/lb", change: "+10%" },
+  commodity: { id: "copper_pm", label: "Copper ↑10%", price: "$4.25/lb", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 18.0, correlation: 0.92, marketCap: "65B", sector: "Copper Mining" },
-      { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: 15.0, correlation: 0.88, marketCap: "75B", sector: "Copper Mining" },
-      { id: "teck", label: "Teck Resources (TECK)", type: "positive", impact: 10.0, correlation: 0.75, marketCap: "25B", sector: "Diversified Mining" },
-      { id: "chpt", label: "ChargePoint (CHPT)", type: "negative", impact: -5.0, correlation: -0.52, marketCap: "2B", sector: "EV Charging" },
-      { id: "copx_etf", label: "Global X Copper Miners (COPX)", type: "etf", impact: 14.0, correlation: 0.90, marketCap: "2B", sector: "ETF" }
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 18, correlation: 0.92, marketCap: "65B", sector: "Copper Mining" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 15, correlation: 0.88, marketCap: "75B", sector: "Copper Mining" },
+      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 10, correlation: 0.75, marketCap: "25B", sector: "Diversified Mining" },
+      { id: "chpt", label: "ChargePoint (CHPT)", type: "consumer", impact: -5, correlation: -0.52, marketCap: "2B", sector: "EV Charging" },
+      { id: "copx_etf", label: "Global X Copper Miners (COPX)", type: "etf", impact: 14, correlation: 0.9, marketCap: "2B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "blnk", label: "Blink Charging (BLNK)", type: "negative", impact: -6.0, correlation: -0.55, marketCap: "0.5B", sector: "EV Charging", parentId: "chpt" },
-      { id: "evgo", label: "EVgo (EVGO)", type: "negative", impact: -5.5, correlation: -0.53, marketCap: "1B", sector: "EV Charging", parentId: "chpt" },
-      { id: "bhp_cu", label: "BHP Group (BHP)", type: "positive", impact: 8.0, correlation: 0.70, marketCap: "155B", sector: "Diversified Mining", parentId: "fcx" },
-      { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "positive", impact: 20.0, correlation: 0.93, marketCap: "12B", sector: "Copper Development", parentId: "fcx" },
-      { id: "construction", label: "U.S. Construction Sector", type: "negative", impact: -4.0, correlation: -0.45, sector: "Construction", parentId: "teck" }
+      { id: "blnk", label: "Blink Charging (BLNK)", type: "consumer", impact: -6, correlation: -0.55, marketCap: "0.5B", sector: "EV Charging", parentId: "chpt" },
+      { id: "evgo", label: "EVgo (EVGO)", type: "consumer", impact: -5.5, correlation: -0.53, marketCap: "1B", sector: "EV Charging", parentId: "chpt" },
+      { id: "bhp_cu", label: "BHP Group (BHP)", type: "producer", impact: 8, correlation: 0.7, marketCap: "155B", sector: "Diversified Mining", parentId: "fcx" },
+      { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "producer", impact: 20, correlation: 0.93, marketCap: "12B", sector: "Copper Development", parentId: "fcx" },
+      { id: "construction", label: "U.S. Construction Sector", type: "consumer", impact: -4, correlation: -0.45, sector: "Construction", parentId: "teck" }
     ]},
     { nodes: [
-      { id: "wire_cable", label: "Wiring & Cable Mfrs", type: "negative", impact: -7.0, correlation: -0.68, sector: "Electrical Equipment", parentId: "construction" },
-      { id: "utilities", label: "Electric Utilities", type: "negative", impact: -3.5, correlation: -0.38, sector: "Utilities", parentId: "construction" },
-      { id: "chile_mines", label: "Chilean Copper Mines", type: "positive", impact: 16.0, correlation: 0.90, sector: "Mining", parentId: "scco" },
-      { id: "renewable_infra", label: "Renewable Energy Infra", type: "negative", impact: -4.5, correlation: -0.48, sector: "Renewable Energy", parentId: "evgo" },
-      { id: "plumbing", label: "Plumbing & HVAC", type: "negative", impact: -5.0, correlation: -0.52, sector: "Building Products", parentId: "construction" }
+      { id: "wire_cable", label: "Wiring & Cable Mfrs", type: "consumer", impact: -7, correlation: -0.68, sector: "Electrical Equipment", parentId: "construction" },
+      { id: "utilities", label: "Electric Utilities", type: "consumer", impact: -3.5, correlation: -0.38, sector: "Utilities", parentId: "construction" },
+      { id: "chile_mines", label: "Chilean Copper Mines", type: "producer", impact: 16, correlation: 0.9, sector: "Mining", parentId: "scco" },
+      { id: "renewable_infra", label: "Renewable Energy Infra", type: "substitute", impact: -4.5, correlation: -0.48, sector: "Renewable Energy", parentId: "evgo" },
+      { id: "plumbing", label: "Plumbing & HVAC", type: "consumer", impact: -5, correlation: -0.52, sector: "Building Products", parentId: "construction" }
     ]},
     { nodes: [
-      { id: "homebuilders", label: "Homebuilders (DHI, LEN)", type: "negative", impact: -3.0, correlation: -0.35, sector: "Residential", parentId: "plumbing" },
-      { id: "wind_solar", label: "Wind & Solar Developers", type: "negative", impact: -4.0, correlation: -0.42, sector: "Clean Energy", parentId: "renewable_infra" },
-      { id: "data_centers", label: "Data Center Builders", type: "negative", impact: -3.5, correlation: -0.40, sector: "Technology", parentId: "wire_cable" },
-      { id: "recycling_cu", label: "Copper Recyclers", type: "positive", impact: 8.0, correlation: 0.72, sector: "Recycling", parentId: "wire_cable" },
-      { id: "peru_mines", label: "Peruvian Copper Mines", type: "positive", impact: 14.0, correlation: 0.85, sector: "Mining", parentId: "chile_mines" }
+      { id: "homebuilders", label: "Homebuilders (DHI, LEN)", type: "consumer", impact: -3, correlation: -0.35, sector: "Residential", parentId: "plumbing" },
+      { id: "wind_solar", label: "Wind & Solar Developers", type: "substitute", impact: -4, correlation: -0.42, sector: "Clean Energy", parentId: "renewable_infra" },
+      { id: "data_centers", label: "Data Center Builders", type: "consumer", impact: -3.5, correlation: -0.4, sector: "Technology", parentId: "wire_cable" },
+      { id: "recycling_cu", label: "Copper Recyclers", type: "substitute", impact: 8, correlation: 0.72, sector: "Recycling", parentId: "wire_cable" },
+      { id: "peru_mines", label: "Peruvian Copper Mines", type: "producer", impact: 14, correlation: 0.85, sector: "Mining", parentId: "chile_mines" }
     ]},
     { nodes: [
-      { id: "china_pmi", label: "China Manufacturing PMI", type: "positive", impact: 6.0, sector: "Macro", parentId: "fcx" },
-      { id: "ev_adoption", label: "Global EV Adoption Rate", type: "positive", impact: 5.0, sector: "Macro", parentId: "chpt" },
-      { id: "infra_bill", label: "U.S. Infrastructure Spending", type: "positive", impact: 7.0, sector: "Macro", parentId: "construction" }
+      { id: "china_pmi", label: "China Manufacturing PMI", type: "macro", impact: 6, sector: "Macro", parentId: "fcx" },
+      { id: "ev_adoption", label: "Global EV Adoption Rate", type: "macro", impact: 5, sector: "Macro", parentId: "chpt" },
+      { id: "infra_bill", label: "U.S. Infrastructure Spending", type: "macro", impact: 7, sector: "Macro", parentId: "construction" }
     ]}
   ]
 };

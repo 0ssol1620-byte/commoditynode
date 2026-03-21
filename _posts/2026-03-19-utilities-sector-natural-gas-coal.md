@@ -7,6 +7,7 @@ tags: [natural-gas, coal, energy, NEE, DUK, SO, XLU, uranium]
 description: 'Utilities sector fuel cost analysis — how natural gas and coal prices impact generation costs, rate cases, and renewable energy competitiveness.'
 reading_time: 9
 commodity_name: 'Natural Gas'
+direction: bullish
 image: /assets/images/og-natural-gas.png
 ---
 
@@ -24,35 +25,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "utilities", label: "Nat Gas ↑15%", price: "$3.20/MMBtu", change: "+15%" },
   levels: [
     { nodes: [
-      { id: "nee", label: "NextEra Energy (NEE)", type: "positive", impact: 3.8, correlation: 0.45, marketCap: "155B", sector: "Renewable Utility" },
-      { id: "ceg", label: "Constellation Energy (CEG)", type: "positive", impact: 5.5, correlation: 0.62, marketCap: "65B", sector: "Nuclear Generation" },
-      { id: "nrg", label: "NRG Energy (NRG)", type: "negative", impact: -4.2, correlation: -0.55, marketCap: "18B", sector: "Gas/Retail Power" },
-      { id: "duk", label: "Duke Energy (DUK)", type: "negative", impact: -1.8, correlation: -0.25, marketCap: "82B", sector: "Regulated Utility" },
-      { id: "eqt_gas", label: "EQT Corporation (EQT)", type: "positive", impact: 8.5, correlation: 0.82, marketCap: "18B", sector: "Gas Producer" },
+      { id: "nee", label: "NextEra Energy (NEE)", type: "consumer", impact: 3.8, correlation: 0.45, marketCap: "155B", sector: "Renewable Utility" },
+      { id: "ceg", label: "Constellation Energy (CEG)", type: "consumer", impact: 5.5, correlation: 0.62, marketCap: "65B", sector: "Nuclear Generation" },
+      { id: "nrg", label: "NRG Energy (NRG)", type: "consumer", impact: -4.2, correlation: -0.55, marketCap: "18B", sector: "Gas/Retail Power" },
+      { id: "duk", label: "Duke Energy (DUK)", type: "consumer", impact: -1.8, correlation: -0.25, marketCap: "82B", sector: "Regulated Utility" },
+      { id: "eqt_gas", label: "EQT Corporation (EQT)", type: "producer", impact: 8.5, correlation: 0.82, marketCap: "18B", sector: "Gas Producer" },
       { id: "xlu", label: "Utilities Select SPDR (XLU)", type: "etf", impact: -0.8, correlation: -0.12, marketCap: "15B", sector: "Utilities ETF" }
     ]},
     { nodes: [
-      { id: "vst", label: "Vistra Corp (VST)", type: "positive", impact: 4.8, correlation: 0.58, marketCap: "38B", sector: "Nuclear/Retail Power", parentId: "ceg" },
-      { id: "so", label: "Southern Company (SO)", type: "negative", impact: -2.2, correlation: -0.30, marketCap: "90B", sector: "Regulated Utility", parentId: "duk" },
-      { id: "aes", label: "AES Corporation (AES)", type: "positive", impact: 2.5, correlation: 0.32, marketCap: "12B", sector: "Renewable/Global Utility", parentId: "nee" },
-      { id: "d", label: "Dominion Energy (D)", type: "negative", impact: -1.5, correlation: -0.22, marketCap: "44B", sector: "Regulated Gas/Electric", parentId: "duk" },
-      { id: "ar_gas", label: "Antero Resources (AR)", type: "positive", impact: 7.8, correlation: 0.78, marketCap: "8B", sector: "Gas Producer", parentId: "eqt_gas" },
-      { id: "bep", label: "Brookfield Renewable (BEP)", type: "positive", impact: 3.0, correlation: 0.38, marketCap: "20B", sector: "Renewable IPP", parentId: "nee" }
+      { id: "vst", label: "Vistra Corp (VST)", type: "consumer", impact: 4.8, correlation: 0.58, marketCap: "38B", sector: "Nuclear/Retail Power", parentId: "ceg" },
+      { id: "so", label: "Southern Company (SO)", type: "consumer", impact: -2.2, correlation: -0.3, marketCap: "90B", sector: "Regulated Utility", parentId: "duk" },
+      { id: "aes", label: "AES Corporation (AES)", type: "consumer", impact: 2.5, correlation: 0.32, marketCap: "12B", sector: "Renewable/Global Utility", parentId: "nee" },
+      { id: "d", label: "Dominion Energy (D)", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "44B", sector: "Regulated Gas/Electric", parentId: "duk" },
+      { id: "ar_gas", label: "Antero Resources (AR)", type: "producer", impact: 7.8, correlation: 0.78, marketCap: "8B", sector: "Gas Producer", parentId: "eqt_gas" },
+      { id: "bep", label: "Brookfield Renewable (BEP)", type: "consumer", impact: 3, correlation: 0.38, marketCap: "20B", sector: "Renewable IPP", parentId: "nee" }
     ]},
     { nodes: [
-      { id: "peg", label: "PSEG (PEG)", type: "positive", impact: 2.8, correlation: 0.35, marketCap: "35B", sector: "Nuclear/Regulated", parentId: "ceg" },
-      { id: "dte", label: "DTE Energy (DTE)", type: "negative", impact: -2.0, correlation: -0.28, marketCap: "24B", sector: "Gas Distribution", parentId: "so" },
-      { id: "etr", label: "Entergy (ETR)", type: "negative", impact: -2.5, correlation: -0.34, marketCap: "22B", sector: "Nuclear/Gas Utility", parentId: "so" },
-      { id: "uuuu", label: "Energy Fuels (UUUU)", type: "positive", impact: 6.0, correlation: 0.55, marketCap: "2B", sector: "Uranium Mining", parentId: "ceg" },
-      { id: "cwen", label: "Clearway Energy (CWEN)", type: "positive", impact: 2.2, correlation: 0.28, marketCap: "6B", sector: "Renewable YieldCo", parentId: "aes" },
-      { id: "industrial_pwr", label: "Industrial Power Consumers", type: "negative", impact: -3.5, correlation: -0.45, sector: "Macro", parentId: "nrg" }
+      { id: "peg", label: "PSEG (PEG)", type: "consumer", impact: 2.8, correlation: 0.35, marketCap: "35B", sector: "Nuclear/Regulated", parentId: "ceg" },
+      { id: "dte", label: "DTE Energy (DTE)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "24B", sector: "Gas Distribution", parentId: "so" },
+      { id: "etr", label: "Entergy (ETR)", type: "consumer", impact: -2.5, correlation: -0.34, marketCap: "22B", sector: "Nuclear/Gas Utility", parentId: "so" },
+      { id: "uuuu", label: "Energy Fuels (UUUU)", type: "producer", impact: 6, correlation: 0.55, marketCap: "2B", sector: "Uranium Mining", parentId: "ceg" },
+      { id: "cwen", label: "Clearway Energy (CWEN)", type: "consumer", impact: 2.2, correlation: 0.28, marketCap: "6B", sector: "Renewable YieldCo", parentId: "aes" },
+      { id: "industrial_pwr", label: "Industrial Power Consumers", type: "macro", impact: -3.5, correlation: -0.45, sector: "Macro", parentId: "nrg" }
     ]},
     { nodes: [
-      { id: "lng_demand", label: "LNG Export Demand", type: "macro", impact: 5.0, sector: "Macro", parentId: "eqt_gas" },
+      { id: "lng_demand", label: "LNG Export Demand", type: "macro", impact: 5, sector: "Macro", parentId: "eqt_gas" },
       { id: "coal_switch", label: "Gas-to-Coal Switching", type: "macro", impact: -2.5, sector: "Macro", parentId: "nrg" },
       { id: "rate_case", label: "Rate Case Risk", type: "macro", impact: -1.5, sector: "Regulatory", parentId: "duk" },
-      { id: "ai_power", label: "AI Data Center Power Demand", type: "macro", impact: 4.0, sector: "Macro", parentId: "ceg" },
-      { id: "carbon_price", label: "Carbon Pricing Tailwind", type: "macro", impact: 3.0, sector: "Macro", parentId: "nee" }
+      { id: "ai_power", label: "AI Data Center Power Demand", type: "macro", impact: 4, sector: "Macro", parentId: "ceg" },
+      { id: "carbon_price", label: "Carbon Pricing Tailwind", type: "macro", impact: 3, sector: "Macro", parentId: "nee" }
     ]}
   ]
 };

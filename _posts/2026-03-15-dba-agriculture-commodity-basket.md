@@ -7,6 +7,7 @@ tags: [agriculture, wheat, corn, soybeans, coffee, sugar, DBA, MOO]
 description: 'DBA agriculture commodity ETF risk analysis — basket composition, weather sensitivity, and how diversified ag exposure compares to single-commodity plays.'
 reading_time: 8
 commodity_name: 'Agriculture'
+direction: bullish
 image: /assets/images/og-wheat.png
 ---
 
@@ -25,33 +26,33 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "dba", label: "Invesco DB Ag (DBA)", type: "etf", impact: 9.2, correlation: 0.95, marketCap: "0.9B", sector: "ETF" },
-      { id: "adm_dba", label: "Archer-Daniels (ADM)", type: "positive", impact: 7.5, correlation: 0.82, marketCap: "28B", sector: "Grain Processing" },
-      { id: "bg_dba", label: "Bunge Global (BG)", type: "positive", impact: 7.0, correlation: 0.80, marketCap: "14B", sector: "Grain Trading" },
-      { id: "mos_dba", label: "Mosaic Co (MOS)", type: "positive", impact: 8.8, correlation: 0.78, marketCap: "12B", sector: "Fertilizer" },
-      { id: "ntr_dba", label: "Nutrien (NTR)", type: "positive", impact: 8.2, correlation: 0.76, marketCap: "25B", sector: "Fertilizer" },
-      { id: "gis_dba", label: "General Mills (GIS)", type: "negative", impact: -3.8, correlation: -0.48, marketCap: "38B", sector: "Food Processing" }
+      { id: "adm_dba", label: "Archer-Daniels (ADM)", type: "processor", impact: 7.5, correlation: 0.82, marketCap: "28B", sector: "Grain Processing" },
+      { id: "bg_dba", label: "Bunge Global (BG)", type: "processor", impact: 7, correlation: 0.8, marketCap: "14B", sector: "Grain Trading" },
+      { id: "mos_dba", label: "Mosaic Co (MOS)", type: "consumer", impact: 8.8, correlation: 0.78, marketCap: "12B", sector: "Fertilizer" },
+      { id: "ntr_dba", label: "Nutrien (NTR)", type: "consumer", impact: 8.2, correlation: 0.76, marketCap: "25B", sector: "Fertilizer" },
+      { id: "gis_dba", label: "General Mills (GIS)", type: "consumer", impact: -3.8, correlation: -0.48, marketCap: "38B", sector: "Food Processing" }
     ]},
     { nodes: [
       { id: "moo_dba", label: "VanEck Agribusiness (MOO)", type: "etf", impact: 6.5, correlation: 0.78, marketCap: "1.2B", sector: "ETF", parentId: "dba" },
-      { id: "de_dba", label: "Deere & Co (DE)", type: "positive", impact: 5.5, correlation: 0.68, marketCap: "118B", sector: "Farm Equipment", parentId: "adm_dba" },
-      { id: "cf_dba", label: "CF Industries (CF)", type: "positive", impact: 7.8, correlation: 0.74, marketCap: "16B", sector: "Nitrogen", parentId: "ntr_dba" },
-      { id: "cpb_dba", label: "Campbell Soup (CPB)", type: "negative", impact: -3.2, correlation: -0.42, marketCap: "14B", sector: "Food Processing", parentId: "gis_dba" },
-      { id: "tsn_dba", label: "Tyson Foods (TSN)", type: "negative", impact: -5.8, correlation: -0.68, marketCap: "22B", sector: "Livestock", parentId: "gis_dba" }
+      { id: "de_dba", label: "Deere & Co (DE)", type: "consumer", impact: 5.5, correlation: 0.68, marketCap: "118B", sector: "Farm Equipment", parentId: "adm_dba" },
+      { id: "cf_dba", label: "CF Industries (CF)", type: "producer", impact: 7.8, correlation: 0.74, marketCap: "16B", sector: "Nitrogen", parentId: "ntr_dba" },
+      { id: "cpb_dba", label: "Campbell Soup (CPB)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "14B", sector: "Food Processing", parentId: "gis_dba" },
+      { id: "tsn_dba", label: "Tyson Foods (TSN)", type: "consumer", impact: -5.8, correlation: -0.68, marketCap: "22B", sector: "Livestock", parentId: "gis_dba" }
     ]},
     { nodes: [
-      { id: "mcd_dba", label: "McDonald's (MCD)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "210B", sector: "Restaurants", parentId: "cpb_dba" },
-      { id: "yum_dba", label: "Yum! Brands (YUM)", type: "negative", impact: -2.0, correlation: -0.30, marketCap: "40B", sector: "Restaurants", parentId: "mcd_dba" },
-      { id: "sbux_dba", label: "Starbucks (SBUX)", type: "negative", impact: -3.5, correlation: -0.55, marketCap: "105B", sector: "Coffee Retail", parentId: "dba" },
-      { id: "fpi_dba", label: "Farmland Partners (FPI)", type: "positive", impact: 5.5, correlation: 0.65, marketCap: "0.6B", sector: "Farmland REIT", parentId: "de_dba" },
-      { id: "ppc_dba", label: "Pilgrims Pride (PPC)", type: "negative", impact: -6.5, correlation: -0.72, marketCap: "8B", sector: "Poultry", parentId: "tsn_dba" }
+      { id: "mcd_dba", label: "McDonald's (MCD)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "210B", sector: "Restaurants", parentId: "cpb_dba" },
+      { id: "yum_dba", label: "Yum! Brands (YUM)", type: "consumer", impact: -2, correlation: -0.3, marketCap: "40B", sector: "Restaurants", parentId: "mcd_dba" },
+      { id: "sbux_dba", label: "Starbucks (SBUX)", type: "consumer", impact: -3.5, correlation: -0.55, marketCap: "105B", sector: "Coffee Retail", parentId: "dba" },
+      { id: "fpi_dba", label: "Farmland Partners (FPI)", type: "regional", impact: 5.5, correlation: 0.65, marketCap: "0.6B", sector: "Farmland REIT", parentId: "de_dba" },
+      { id: "ppc_dba", label: "Pilgrims Pride (PPC)", type: "consumer", impact: -6.5, correlation: -0.72, marketCap: "8B", sector: "Poultry", parentId: "tsn_dba" }
     ]},
     { nodes: [
-      { id: "hsy_dba", label: "Hershey Co (HSY)", type: "negative", impact: -4.0, correlation: -0.50, marketCap: "32B", sector: "Confectionery", parentId: "sbux_dba" },
-      { id: "kgc_dba", label: "Keurig Dr Pepper (KDP)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "46B", sector: "Beverages", parentId: "sbux_dba" },
-      { id: "weather_dba", label: "La Nina / El Nino Cycle", type: "macro", impact: 14.0, sector: "Macro", parentId: "dba" },
-      { id: "usd_dba", label: "USD Strength", type: "negative", impact: -6.0, correlation: -0.62, sector: "Macro", parentId: "adm_dba" },
-      { id: "biofuel_dba", label: "Biofuel Mandates", type: "positive", impact: 5.0, sector: "Macro", parentId: "bg_dba" },
-      { id: "food_cpi", label: "Food CPI Inflation", type: "negative", impact: -3.0, sector: "Macro", parentId: "gis_dba" }
+      { id: "hsy_dba", label: "Hershey Co (HSY)", type: "consumer", impact: -4, correlation: -0.5, marketCap: "32B", sector: "Confectionery", parentId: "sbux_dba" },
+      { id: "kgc_dba", label: "Keurig Dr Pepper (KDP)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "46B", sector: "Beverages", parentId: "sbux_dba" },
+      { id: "weather_dba", label: "La Nina / El Nino Cycle", type: "macro", impact: 14, sector: "Macro", parentId: "dba" },
+      { id: "usd_dba", label: "USD Strength", type: "macro", impact: -6, correlation: -0.62, sector: "Macro", parentId: "adm_dba" },
+      { id: "biofuel_dba", label: "Biofuel Mandates", type: "macro", impact: 5, sector: "Macro", parentId: "bg_dba" },
+      { id: "food_cpi", label: "Food CPI Inflation", type: "macro", impact: -3, sector: "Macro", parentId: "gis_dba" }
     ]}
   ]
 };

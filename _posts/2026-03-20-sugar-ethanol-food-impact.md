@@ -7,6 +7,7 @@ tags: [sugar, ethanol, food, agriculture, confectionery]
 description: 'How sugar price spikes impact ethanol producers, confectionery giants like Hershey and Mondelez, beverage companies, and global food manufacturers. Full correlation analysis.'
 reading_time: 8
 commodity_name: "Sugar"
+direction: bullish
 image: /assets/images/og-sugar.png
 ---
 
@@ -23,38 +24,38 @@ For investors, the sugar supply chain offers distinct opportunities on both side
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: { id: "sugar", label: "Sugar \u219110%", price: "$0.24/lb", change: "+10%" },
+  commodity: { id: "sugar", label: "Sugar ↑10%", price: "$0.24/lb", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "csan", label: "Cosan (CSAN)", type: "positive", impact: 9.0, correlation: 0.82, marketCap: "8B", sector: "Sugar/Ethanol" },
-      { id: "wilmar", label: "Wilmar Intl (F34.SI)", type: "positive", impact: 5.5, correlation: 0.60, marketCap: "22B", sector: "Agribusiness" },
-      { id: "hsy", label: "Hershey (HSY)", type: "negative", impact: -7.0, correlation: -0.72, marketCap: "35B", sector: "Confectionery" },
-      { id: "ko", label: "Coca-Cola (KO)", type: "negative", impact: -3.0, correlation: -0.38, marketCap: "265B", sector: "Beverages" },
+      { id: "csan", label: "Cosan (CSAN)", type: "producer", impact: 9, correlation: 0.82, marketCap: "8B", sector: "Sugar/Ethanol" },
+      { id: "wilmar", label: "Wilmar Intl (F34.SI)", type: "processor", impact: 5.5, correlation: 0.6, marketCap: "22B", sector: "Agribusiness" },
+      { id: "hsy", label: "Hershey (HSY)", type: "consumer", impact: -7, correlation: -0.72, marketCap: "35B", sector: "Confectionery" },
+      { id: "ko", label: "Coca-Cola (KO)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "265B", sector: "Beverages" },
       { id: "sgb_etf", label: "iPath Sugar (SGG)", type: "etf", impact: 9.8, correlation: 0.96, marketCap: "0.04B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "mdlz", label: "Mondelez (MDLZ)", type: "negative", impact: -5.5, correlation: -0.62, marketCap: "95B", sector: "Confectionery", parentId: "hsy" },
-      { id: "tr", label: "Tootsie Roll (TR)", type: "negative", impact: -8.0, correlation: -0.78, marketCap: "3B", sector: "Confectionery", parentId: "hsy" },
-      { id: "pep", label: "PepsiCo (PEP)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "230B", sector: "Beverages", parentId: "ko" },
-      { id: "brazil_ethanol", label: "Brazilian Ethanol", type: "positive", impact: 7.5, correlation: 0.72, sector: "Biofuels", parentId: "csan" },
-      { id: "india_mills", label: "Indian Sugar Mills", type: "positive", impact: 10.0, correlation: 0.85, sector: "Sugar Milling", parentId: "wilmar" }
+      { id: "mdlz", label: "Mondelez (MDLZ)", type: "consumer", impact: -5.5, correlation: -0.62, marketCap: "95B", sector: "Confectionery", parentId: "hsy" },
+      { id: "tr", label: "Tootsie Roll (TR)", type: "consumer", impact: -8, correlation: -0.78, marketCap: "3B", sector: "Confectionery", parentId: "hsy" },
+      { id: "pep", label: "PepsiCo (PEP)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "230B", sector: "Beverages", parentId: "ko" },
+      { id: "brazil_ethanol", label: "Brazilian Ethanol", type: "processor", impact: 7.5, correlation: 0.72, sector: "Biofuels", parentId: "csan" },
+      { id: "india_mills", label: "Indian Sugar Mills", type: "producer", impact: 10, correlation: 0.85, sector: "Sugar Milling", parentId: "wilmar" }
     ]},
     { nodes: [
-      { id: "candy_mfg", label: "Small Candy Makers", type: "negative", impact: -11.0, correlation: -0.85, sector: "Confectionery", parentId: "tr" },
-      { id: "bakery", label: "Commercial Bakeries", type: "negative", impact: -6.0, correlation: -0.58, sector: "Baked Goods", parentId: "mdlz" },
-      { id: "sugar_refiners", label: "Sugar Refiners", type: "positive", impact: 6.0, correlation: 0.65, sector: "Refining", parentId: "india_mills" },
-      { id: "hfcs", label: "HFCS Producers (ADM)", type: "positive", impact: 4.5, correlation: 0.55, sector: "Sweeteners", parentId: "ko" }
+      { id: "candy_mfg", label: "Small Candy Makers", type: "consumer", impact: -11, correlation: -0.85, sector: "Confectionery", parentId: "tr" },
+      { id: "bakery", label: "Commercial Bakeries", type: "consumer", impact: -6, correlation: -0.58, sector: "Baked Goods", parentId: "mdlz" },
+      { id: "sugar_refiners", label: "Sugar Refiners", type: "processor", impact: 6, correlation: 0.65, sector: "Refining", parentId: "india_mills" },
+      { id: "hfcs", label: "HFCS Producers (ADM)", type: "processor", impact: 4.5, correlation: 0.55, sector: "Sweeteners", parentId: "ko" }
     ]},
     { nodes: [
-      { id: "food_service", label: "Food Service Chains", type: "negative", impact: -3.5, correlation: -0.42, sector: "Restaurants", parentId: "bakery" },
-      { id: "cane_farmers", label: "Sugarcane Growers", type: "positive", impact: 12.0, correlation: 0.90, sector: "Agriculture", parentId: "brazil_ethanol" },
-      { id: "beet_farmers", label: "Sugar Beet Farmers", type: "positive", impact: 8.0, correlation: 0.75, sector: "Agriculture", parentId: "sugar_refiners" },
-      { id: "diet_drinks", label: "Diet/Zero Sugar Brands", type: "positive", impact: 3.0, correlation: 0.40, sector: "Beverages", parentId: "pep" }
+      { id: "food_service", label: "Food Service Chains", type: "consumer", impact: -3.5, correlation: -0.42, sector: "Restaurants", parentId: "bakery" },
+      { id: "cane_farmers", label: "Sugarcane Growers", type: "positive", impact: 12, correlation: 0.9, sector: "Agriculture", parentId: "brazil_ethanol" },
+      { id: "beet_farmers", label: "Sugar Beet Farmers", type: "positive", impact: 8, correlation: 0.75, sector: "Agriculture", parentId: "sugar_refiners" },
+      { id: "diet_drinks", label: "Diet/Zero Sugar Brands", type: "positive", impact: 3, correlation: 0.4, sector: "Beverages", parentId: "pep" }
     ]},
     { nodes: [
-      { id: "el_nino", label: "El Nino / La Nina", type: "positive", impact: 8.0, sector: "Macro", parentId: "csan" },
-      { id: "india_policy", label: "India Export Policy", type: "positive", impact: 10.0, sector: "Macro", parentId: "india_mills" },
-      { id: "consumer_shift", label: "Sugar-Free Consumer Trend", type: "positive", impact: 2.5, sector: "Macro", parentId: "diet_drinks" }
+      { id: "el_nino", label: "El Nino / La Nina", type: "macro", impact: 8, sector: "Macro", parentId: "csan" },
+      { id: "india_policy", label: "India Export Policy", type: "macro", impact: 10, sector: "Macro", parentId: "india_mills" },
+      { id: "consumer_shift", label: "Sugar-Free Consumer Trend", type: "macro", impact: 2.5, sector: "Macro", parentId: "diet_drinks" }
     ]}
   ]
 };

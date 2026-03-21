@@ -7,6 +7,7 @@ tags: [steel, metals, SLX, NUE, STLD, X, CLF, infrastructure]
 description: 'SLX steel ETF sensitivity to steel prices, construction cycles, infrastructure spending, and how steelmaker margins drive ETF performance.'
 reading_time: 8
 commodity_name: 'Steel'
+direction: bullish
 image: /assets/images/og-steel.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "steel", label: "Steel ↑10%", price: "$850/t", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "slx", label: "VanEck Steel (SLX)", type: "etf", impact: 9.2, correlation: 0.90, marketCap: "0.1B", sector: "ETF" },
-      { id: "nue", label: "Nucor Corp (NUE)", type: "positive", impact: 11.5, correlation: 0.92, marketCap: "38B", sector: "Steel" },
-      { id: "stld", label: "Steel Dynamics (STLD)", type: "positive", impact: 12.8, correlation: 0.93, marketCap: "20B", sector: "Steel" },
-      { id: "x", label: "US Steel (X)", type: "positive", impact: 15.2, correlation: 0.91, marketCap: "8B", sector: "Steel" },
-      { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 14.5, correlation: 0.90, marketCap: "7B", sector: "Steel/Iron Ore" },
-      { id: "f_steel", label: "Ford Motor (F)", type: "negative", impact: -3.2, correlation: -0.48, marketCap: "42B", sector: "Automotive" }
+      { id: "slx", label: "VanEck Steel (SLX)", type: "etf", impact: 9.2, correlation: 0.9, marketCap: "0.1B", sector: "ETF" },
+      { id: "nue", label: "Nucor Corp (NUE)", type: "producer", impact: 11.5, correlation: 0.92, marketCap: "38B", sector: "Steel" },
+      { id: "stld", label: "Steel Dynamics (STLD)", type: "producer", impact: 12.8, correlation: 0.93, marketCap: "20B", sector: "Steel" },
+      { id: "x", label: "US Steel (X)", type: "producer", impact: 15.2, correlation: 0.91, marketCap: "8B", sector: "Steel" },
+      { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 14.5, correlation: 0.9, marketCap: "7B", sector: "Steel/Iron Ore" },
+      { id: "f_steel", label: "Ford Motor (F)", type: "consumer", impact: -3.2, correlation: -0.48, marketCap: "42B", sector: "Automotive" }
     ]},
     { nodes: [
-      { id: "mt", label: "ArcelorMittal (MT)", type: "positive", impact: 10.0, correlation: 0.87, marketCap: "24B", sector: "Steel", parentId: "slx" },
-      { id: "vale_s", label: "Vale SA (VALE)", type: "positive", impact: 6.5, correlation: 0.72, marketCap: "55B", sector: "Iron Ore", parentId: "clf" },
-      { id: "rio_s", label: "Rio Tinto (RIO)", type: "positive", impact: 5.2, correlation: 0.65, marketCap: "110B", sector: "Iron Ore", parentId: "clf" },
-      { id: "schn", label: "Schnitzer Steel (SCHN)", type: "positive", impact: 13.5, correlation: 0.88, marketCap: "1.5B", sector: "Scrap Recycling", parentId: "nue" },
-      { id: "gm_s", label: "General Motors (GM)", type: "negative", impact: -2.8, correlation: -0.42, marketCap: "48B", sector: "Automotive", parentId: "f_steel" }
+      { id: "mt", label: "ArcelorMittal (MT)", type: "producer", impact: 10, correlation: 0.87, marketCap: "24B", sector: "Steel", parentId: "slx" },
+      { id: "vale_s", label: "Vale SA (VALE)", type: "producer", impact: 6.5, correlation: 0.72, marketCap: "55B", sector: "Iron Ore", parentId: "clf" },
+      { id: "rio_s", label: "Rio Tinto (RIO)", type: "producer", impact: 5.2, correlation: 0.65, marketCap: "110B", sector: "Iron Ore", parentId: "clf" },
+      { id: "schn", label: "Schnitzer Steel (SCHN)", type: "substitute", impact: 13.5, correlation: 0.88, marketCap: "1.5B", sector: "Scrap Recycling", parentId: "nue" },
+      { id: "gm_s", label: "General Motors (GM)", type: "consumer", impact: -2.8, correlation: -0.42, marketCap: "48B", sector: "Automotive", parentId: "f_steel" }
     ]},
     { nodes: [
-      { id: "whr", label: "Whirlpool (WHR)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "6B", sector: "Appliances", parentId: "gm_s" },
-      { id: "cat_s", label: "Caterpillar (CAT)", type: "positive", impact: 3.8, correlation: 0.52, marketCap: "165B", sector: "Construction Equip", parentId: "mt" },
-      { id: "vmx", label: "Vulcan Materials (VMC)", type: "positive", impact: 2.5, correlation: 0.40, marketCap: "32B", sector: "Aggregates", parentId: "cat_s" },
-      { id: "xhb", label: "Homebuilders (XHB)", type: "negative", impact: -3.8, correlation: -0.50, marketCap: "2B", sector: "ETF", parentId: "whr" },
-      { id: "lii", label: "Lennox Intl (LII)", type: "negative", impact: -3.2, correlation: -0.44, marketCap: "15B", sector: "HVAC", parentId: "whr" }
+      { id: "whr", label: "Whirlpool (WHR)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "6B", sector: "Appliances", parentId: "gm_s" },
+      { id: "cat_s", label: "Caterpillar (CAT)", type: "supplier", impact: 3.8, correlation: 0.52, marketCap: "165B", sector: "Construction Equip", parentId: "mt" },
+      { id: "vmx", label: "Vulcan Materials (VMC)", type: "supplier", impact: 2.5, correlation: 0.4, marketCap: "32B", sector: "Aggregates", parentId: "cat_s" },
+      { id: "xhb", label: "Homebuilders (XHB)", type: "negative", impact: -3.8, correlation: -0.5, marketCap: "2B", sector: "ETF", parentId: "whr" },
+      { id: "lii", label: "Lennox Intl (LII)", type: "consumer", impact: -3.2, correlation: -0.44, marketCap: "15B", sector: "HVAC", parentId: "whr" }
     ]},
     { nodes: [
-      { id: "dhx", label: "DHI Group (DHI)", type: "negative", impact: -2.5, correlation: -0.38, marketCap: "52B", sector: "Homebuilders", parentId: "xhb" },
-      { id: "infra", label: "Infrastructure Spending (IIJA)", type: "positive", impact: 8.0, sector: "Macro", parentId: "cat_s" },
-      { id: "china_steel", label: "China Steel Demand", type: "positive", impact: 10.0, sector: "Macro", parentId: "mt" },
-      { id: "rates_s", label: "Interest Rates / Construction", type: "negative", impact: -5.5, correlation: -0.58, sector: "Macro", parentId: "xhb" },
-      { id: "tariff", label: "Section 232 Tariffs", type: "positive", impact: 6.0, sector: "Macro", parentId: "nue" },
-      { id: "auto_prod", label: "Auto Production Cycle", type: "positive", impact: 4.5, sector: "Macro", parentId: "f_steel" }
+      { id: "dhx", label: "DHI Group (DHI)", type: "consumer", impact: -2.5, correlation: -0.38, marketCap: "52B", sector: "Homebuilders", parentId: "xhb" },
+      { id: "infra", label: "Infrastructure Spending (IIJA)", type: "macro", impact: 8, sector: "Macro", parentId: "cat_s" },
+      { id: "china_steel", label: "China Steel Demand", type: "macro", impact: 10, sector: "Macro", parentId: "mt" },
+      { id: "rates_s", label: "Interest Rates / Construction", type: "macro", impact: -5.5, correlation: -0.58, sector: "Macro", parentId: "xhb" },
+      { id: "tariff", label: "Section 232 Tariffs", type: "macro", impact: 6, sector: "Macro", parentId: "nue" },
+      { id: "auto_prod", label: "Auto Production Cycle", type: "macro", impact: 4.5, sector: "Macro", parentId: "f_steel" }
     ]}
   ]
 };

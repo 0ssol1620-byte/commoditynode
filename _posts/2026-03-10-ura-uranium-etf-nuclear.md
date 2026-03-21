@@ -7,6 +7,7 @@ tags: [uranium, energy, URA, CCJ, NXE, URNM, LEU, nuclear]
 description: 'Analysis of the URA uranium ETF, nuclear energy policy tailwinds, supply deficit dynamics, and which holdings offer the best uranium price leverage.'
 reading_time: 9
 commodity_name: 'Uranium'
+direction: bullish
 image: /assets/images/og-uranium.png
 ---
 
@@ -48,33 +49,33 @@ window.COMMODITY_DATA = {
   commodity: { id: "uranium", label: "Uranium ↑15%", price: "$92/lb", change: "+15%" },
   levels: [
     { nodes: [
-      { id: "ura", label: "Global X Uranium (URA)", type: "etf", impact: 25.0, correlation: 0.90, marketCap: "3.2B", sector: "ETF" },
-      { id: "urnm", label: "Sprott Uranium Miners (URNM)", type: "etf", impact: 28.0, correlation: 0.93, marketCap: "1.5B", sector: "ETF" },
-      { id: "ccj", label: "Cameco Corp (CCJ)", type: "positive", impact: 22.0, correlation: 0.91, marketCap: "28B", sector: "Uranium Mining" },
-      { id: "nxe", label: "NexGen Energy (NXE)", type: "positive", impact: 35.0, correlation: 0.88, marketCap: "5.5B", sector: "Uranium Development" },
-      { id: "leu", label: "Centrus Energy (LEU)", type: "positive", impact: 20.0, correlation: 0.78, marketCap: "3.2B", sector: "Enrichment" },
-      { id: "ng_gen", label: "Natural Gas Generators", type: "negative", impact: -3.5, correlation: -0.30, marketCap: "N/A", sector: "Power Gen" }
+      { id: "ura", label: "Global X Uranium (URA)", type: "etf", impact: 25, correlation: 0.9, marketCap: "3.2B", sector: "ETF" },
+      { id: "urnm", label: "Sprott Uranium Miners (URNM)", type: "etf", impact: 28, correlation: 0.93, marketCap: "1.5B", sector: "ETF" },
+      { id: "ccj", label: "Cameco Corp (CCJ)", type: "producer", impact: 22, correlation: 0.91, marketCap: "28B", sector: "Uranium Mining" },
+      { id: "nxe", label: "NexGen Energy (NXE)", type: "producer", impact: 35, correlation: 0.88, marketCap: "5.5B", sector: "Uranium Development" },
+      { id: "leu", label: "Centrus Energy (LEU)", type: "processor", impact: 20, correlation: 0.78, marketCap: "3.2B", sector: "Enrichment" },
+      { id: "ng_gen", label: "Natural Gas Generators", type: "consumer", impact: -3.5, correlation: -0.3, marketCap: "N/A", sector: "Power Gen" }
     ]},
     { nodes: [
-      { id: "uuuu", label: "Energy Fuels (UUUU)", type: "positive", impact: 30.0, correlation: 0.86, marketCap: "2.8B", sector: "Uranium Mining" },
-      { id: "dnn", label: "Denison Mines (DNN)", type: "positive", impact: 32.0, correlation: 0.85, marketCap: "2.2B", sector: "Uranium Development" },
-      { id: "urg", label: "Ur-Energy (URG)", type: "positive", impact: 28.0, correlation: 0.82, marketCap: "1.2B", sector: "Uranium Mining" },
-      { id: "sput", label: "Sprott Physical Uranium (U.UN)", type: "positive", impact: 14.5, correlation: 0.97, marketCap: "4.8B", sector: "Physical Trust" },
-      { id: "ceg", label: "Constellation Energy (CEG)", type: "positive", impact: 8.0, correlation: 0.55, marketCap: "75B", sector: "Nuclear Utility" },
-      { id: "vst", label: "Vistra Corp (VST)", type: "positive", impact: 5.5, correlation: 0.42, marketCap: "42B", sector: "Power Gen" }
+      { id: "uuuu", label: "Energy Fuels (UUUU)", type: "producer", impact: 30, correlation: 0.86, marketCap: "2.8B", sector: "Uranium Mining" },
+      { id: "dnn", label: "Denison Mines (DNN)", type: "producer", impact: 32, correlation: 0.85, marketCap: "2.2B", sector: "Uranium Development" },
+      { id: "urg", label: "Ur-Energy (URG)", type: "producer", impact: 28, correlation: 0.82, marketCap: "1.2B", sector: "Uranium Mining" },
+      { id: "sput", label: "Sprott Physical Uranium (U.UN)", type: "macro", impact: 14.5, correlation: 0.97, marketCap: "4.8B", sector: "Physical Trust" },
+      { id: "ceg", label: "Constellation Energy (CEG)", type: "consumer", impact: 8, correlation: 0.55, marketCap: "75B", sector: "Nuclear Utility" },
+      { id: "vst", label: "Vistra Corp (VST)", type: "consumer", impact: 5.5, correlation: 0.42, marketCap: "42B", sector: "Power Gen" }
     ]},
     { nodes: [
-      { id: "glatf", label: "Global Atomic (GLATF)", type: "positive", impact: 38.0, correlation: 0.80, marketCap: "0.5B", sector: "Uranium Development" },
-      { id: "bqssf", label: "Boss Energy (BQSSF)", type: "positive", impact: 33.0, correlation: 0.83, marketCap: "1.8B", sector: "Uranium Mining" },
-      { id: "palaf", label: "Paladin Energy (PALAF)", type: "positive", impact: 29.0, correlation: 0.84, marketCap: "3.5B", sector: "Uranium Mining" },
+      { id: "glatf", label: "Global Atomic (GLATF)", type: "producer", impact: 38, correlation: 0.8, marketCap: "0.5B", sector: "Uranium Development" },
+      { id: "bqssf", label: "Boss Energy (BQSSF)", type: "producer", impact: 33, correlation: 0.83, marketCap: "1.8B", sector: "Uranium Mining" },
+      { id: "palaf", label: "Paladin Energy (PALAF)", type: "producer", impact: 29, correlation: 0.84, marketCap: "3.5B", sector: "Uranium Mining" },
       { id: "tan", label: "Invesco Solar (TAN)", type: "negative", impact: -2.5, correlation: -0.22, marketCap: "1.5B", sector: "ETF" },
-      { id: "kold", label: "Coal Plant Operators", type: "negative", impact: -2.0, correlation: -0.18, marketCap: "N/A", sector: "Power Gen" }
+      { id: "kold", label: "Coal Plant Operators", type: "consumer", impact: -2, correlation: -0.18, marketCap: "N/A", sector: "Power Gen" }
     ]},
     { nodes: [
-      { id: "policy", label: "Nuclear Policy Support", type: "macro", impact: 12.0, correlation: 0.65, marketCap: "N/A", sector: "Macro" },
-      { id: "supply_def", label: "U3O8 Supply Deficit", type: "macro", impact: 10.0, correlation: 0.72, marketCap: "N/A", sector: "Macro" },
-      { id: "util_contract", label: "Utility Recontracting Cycle", type: "macro", impact: 8.5, correlation: 0.60, marketCap: "N/A", sector: "Macro" },
-      { id: "smr", label: "SMR Development Pipeline", type: "macro", impact: 6.0, correlation: 0.45, marketCap: "N/A", sector: "Macro" },
+      { id: "policy", label: "Nuclear Policy Support", type: "macro", impact: 12, correlation: 0.65, marketCap: "N/A", sector: "Macro" },
+      { id: "supply_def", label: "U3O8 Supply Deficit", type: "macro", impact: 10, correlation: 0.72, marketCap: "N/A", sector: "Macro" },
+      { id: "util_contract", label: "Utility Recontracting Cycle", type: "macro", impact: 8.5, correlation: 0.6, marketCap: "N/A", sector: "Macro" },
+      { id: "smr", label: "SMR Development Pipeline", type: "macro", impact: 6, correlation: 0.45, marketCap: "N/A", sector: "Macro" },
       { id: "icln", label: "iShares Clean Energy (ICLN)", type: "negative", impact: -1.5, correlation: -0.15, marketCap: "3B", sector: "ETF" }
     ]}
   ]

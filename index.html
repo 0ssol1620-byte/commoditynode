@@ -15,7 +15,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       </div>
 
       <h1 data-animate data-delay="100">
-        The Commodity <span class="highlight">Ripple Map</span><br>
+        The Commodity <span class="highlight">Impact Map</span><br>
         For Markets, Supply Chains &amp; Equities
       </h1>
 
@@ -25,18 +25,18 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       </p>
 
       <div class="hero-actions" data-animate data-delay="300">
-        <a href="/commodities/" class="btn btn-primary">Explore Commodities</a>
+        <a href="/commodities/" class="btn btn-primary">Explore Commodity Hubs</a>
         <a href="#signals" class="btn btn-secondary">Top Signals Today</a>
       </div>
 
       <div class="hero-stats" data-animate data-delay="400">
         <div class="hero-stat">
-          <span class="value positive" id="hero-wti-change">—</span>
+          <span class="value positive" id="hero-wti-change">&mdash;</span>
           <span class="label">WTI Today</span>
         </div>
         <div class="hero-stat">
           <span class="value counting" data-count="{{ site.posts.size }}" data-suffix=" reports">{{ site.posts.size }} reports</span>
-          <span class="label">Published Signals</span>
+          <span class="label">Signal Reports</span>
         </div>
         <div class="hero-stat">
           <span class="value" data-count="{{ site.commodities.size }}" data-suffix=" hubs">{{ site.commodities.size }} hubs</span>
@@ -72,38 +72,38 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       <div class="signal-mover-card" id="signal-oil">
         <div class="signal-mover-header">
           <span class="signal-mover-tag">OIL</span>
-          <span class="signal-mover-direction" id="signal-oil-dir">—</span>
+          <span class="signal-mover-direction" id="signal-oil-dir">&mdash;</span>
         </div>
         <div class="signal-mover-name">Crude Oil (WTI)</div>
-        <div class="signal-mover-price" id="signal-oil-price">—</div>
-        <a href="/commodities/crude-oil/" class="signal-mover-link">View hub →</a>
+        <div class="signal-mover-price" id="signal-oil-price">&mdash;</div>
+        <a href="/commodities/crude-oil/" class="signal-mover-link">View Commodity Hub &rarr;</a>
       </div>
       <div class="signal-mover-card" id="signal-gold">
         <div class="signal-mover-header">
           <span class="signal-mover-tag" style="background:rgba(251,191,36,0.15);color:#fbbf24;">Au</span>
-          <span class="signal-mover-direction" id="signal-gold-dir">—</span>
+          <span class="signal-mover-direction" id="signal-gold-dir">&mdash;</span>
         </div>
         <div class="signal-mover-name">Gold</div>
-        <div class="signal-mover-price" id="signal-gold-price">—</div>
-        <a href="/commodities/gold/" class="signal-mover-link">View hub →</a>
+        <div class="signal-mover-price" id="signal-gold-price">&mdash;</div>
+        <a href="/commodities/gold/" class="signal-mover-link">View Commodity Hub &rarr;</a>
       </div>
       <div class="signal-mover-card" id="signal-copper">
         <div class="signal-mover-header">
           <span class="signal-mover-tag" style="background:rgba(16,185,129,0.15);color:#10b981;">Cu</span>
-          <span class="signal-mover-direction" id="signal-copper-dir">—</span>
+          <span class="signal-mover-direction" id="signal-copper-dir">&mdash;</span>
         </div>
         <div class="signal-mover-name">Copper</div>
-        <div class="signal-mover-price" id="signal-copper-price">—</div>
-        <a href="/commodities/copper/" class="signal-mover-link">View hub →</a>
+        <div class="signal-mover-price" id="signal-copper-price">&mdash;</div>
+        <a href="/commodities/copper/" class="signal-mover-link">View Commodity Hub &rarr;</a>
       </div>
       <div class="signal-mover-card" id="signal-gas">
         <div class="signal-mover-header">
           <span class="signal-mover-tag" style="background:rgba(168,85,247,0.15);color:#a855f7;">GAS</span>
-          <span class="signal-mover-direction" id="signal-gas-dir">—</span>
+          <span class="signal-mover-direction" id="signal-gas-dir">&mdash;</span>
         </div>
         <div class="signal-mover-name">Natural Gas</div>
-        <div class="signal-mover-price" id="signal-gas-price">—</div>
-        <a href="/commodities/natural-gas/" class="signal-mover-link">View hub →</a>
+        <div class="signal-mover-price" id="signal-gas-price">&mdash;</div>
+        <a href="/commodities/natural-gas/" class="signal-mover-link">View Commodity Hub &rarr;</a>
       </div>
     </div>
 
@@ -136,56 +136,56 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
     <div class="ripple-chains-grid" data-animate data-delay="100">
       <a href="/commodities/crude-oil/" class="ripple-chain-card" style="text-decoration:none;">
-        <div class="ripple-chain-title">Oil → Airlines → Travel → Consumer</div>
+        <div class="ripple-chain-title">Oil &rarr; Airlines &rarr; Travel &rarr; Consumer</div>
         <div class="ripple-chain-visual">
           <span class="ripple-node rn-energy">Oil</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-down">Airlines</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-down">Travel</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-down">Consumer</span>
         </div>
         <div class="ripple-chain-desc">Energy price shocks compress airline margins, slow travel demand, and reduce consumer discretionary spending.</div>
       </a>
 
       <a href="/commodities/natural-gas/" class="ripple-chain-card" style="text-decoration:none;">
-        <div class="ripple-chain-title">Nat Gas → Fertilizer → Food → Inflation</div>
+        <div class="ripple-chain-title">Nat Gas &rarr; Fertilizer &rarr; Food &rarr; Inflation</div>
         <div class="ripple-chain-visual">
           <span class="ripple-node rn-energy">Nat Gas</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">Fertilizer</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">Food</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">Inflation</span>
         </div>
         <div class="ripple-chain-desc">Natural gas is the primary feedstock for nitrogen fertilizers — price spikes cascade into crop costs and food CPI.</div>
       </a>
 
       <a href="/commodities/copper/" class="ripple-chain-card" style="text-decoration:none;">
-        <div class="ripple-chain-title">Copper → Construction → Housing → REITs</div>
+        <div class="ripple-chain-title">Copper &rarr; Construction &rarr; Housing &rarr; REITs</div>
         <div class="ripple-chain-visual">
           <span class="ripple-node rn-metal">Copper</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">Construction</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">Housing</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">REITs</span>
         </div>
         <div class="ripple-chain-desc">Dr. Copper signals industrial activity — elevated prices raise building costs and compress homebuilder margins.</div>
       </a>
 
       <a href="/commodities/lithium/" class="ripple-chain-card" style="text-decoration:none;">
-        <div class="ripple-chain-title">Lithium → Battery → EV → Auto</div>
+        <div class="ripple-chain-title">Lithium &rarr; Battery &rarr; EV &rarr; Auto</div>
         <div class="ripple-chain-visual">
           <span class="ripple-node rn-battery">Lithium</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">Battery</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">EV</span>
-          <span class="ripple-arrow">→</span>
+          <span class="ripple-arrow">&rarr;</span>
           <span class="ripple-node rn-up">Auto</span>
         </div>
         <div class="ripple-chain-desc">Lithium prices directly impact battery pack costs — the largest single component determining EV profitability.</div>
@@ -196,12 +196,12 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
 <div class="divider"></div>
 
-<!-- ===== SECTOR EXPOSURE MATRIX ===== -->
+<!-- ===== EXPOSURE MATRIX ===== -->
 <section class="section" aria-labelledby="matrix-title">
   <div class="container">
     <header class="section-header" data-animate>
       <p class="section-label">Cross-Sector View</p>
-      <h2 class="section-title" id="matrix-title">Sector Exposure Matrix</h2>
+      <h2 class="section-title" id="matrix-title">Exposure Matrix</h2>
       <p class="section-desc">How commodity price increases affect major sectors — at a glance.</p>
     </header>
 
@@ -325,7 +325,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
         <div class="browse-icon" style="color:var(--accent);">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><line x1="12" y1="12" x2="4" y2="6"/><line x1="12" y1="12" x2="20" y2="6"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/></svg>
         </div>
-        <div class="browse-label">Commodities</div>
+        <div class="browse-label">Commodity Hubs</div>
         <div class="browse-count">{{ site.commodities.size }} hubs</div>
       </a>
       <a href="/industries/" class="browse-card">
@@ -355,27 +355,27 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
 <div class="divider"></div>
 
-<!-- ===== SIGNAL DASHBOARD ===== -->
+<!-- ===== MARKET DASHBOARD ===== -->
 <section class="section" aria-labelledby="market-dashboard-title">
   <div class="container">
     <header class="section-header" data-animate>
       <p class="section-label">Platform View</p>
-      <h2 class="section-title" id="market-dashboard-title">Signal Dashboard</h2>
+      <h2 class="section-title" id="market-dashboard-title">Market Dashboard</h2>
       <p class="section-desc">Discover the strongest commodity-to-equity transmission paths across the site.</p>
     </header>
 
     <div class="signal-dashboard" data-animate data-delay="100">
       <article class="signal-panel signal-panel--featured">
         <p class="signal-panel-label">Featured Ripple Chain</p>
-        <h3>Crude Oil → Airlines → Logistics → Consumer Spending</h3>
+        <h3>Crude Oil &rarr; Airlines &rarr; Logistics &rarr; Consumer Spending</h3>
         <p>Energy price shocks remain the clearest live example of first-order and second-order exposure chains on the platform.</p>
         <div class="signal-chain">
           <span class="signal-node up">Crude Oil</span>
-          <span class="signal-arrow">→</span>
+          <span class="signal-arrow">&rarr;</span>
           <span class="signal-node down">Airlines</span>
-          <span class="signal-arrow">→</span>
+          <span class="signal-arrow">&rarr;</span>
           <span class="signal-node down">Logistics</span>
-          <span class="signal-arrow">→</span>
+          <span class="signal-arrow">&rarr;</span>
           <span class="signal-node down">Consumer</span>
         </div>
         <a href="/commodities/crude-oil/" class="btn btn-secondary">View Impact Map</a>
@@ -384,7 +384,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       <article class="signal-panel">
         <p class="signal-panel-label">Browse by Lens</p>
         <ul class="signal-list">
-          <li><a href="/commodities/">Commodity hubs</a></li>
+          <li><a href="/commodities/">Commodity Hubs</a></li>
           <li><a href="/industries/">Industry exposure</a></li>
           <li><a href="/companies/">Company analysis</a></li>
           <li><a href="/themes/">Investment themes</a></li>
@@ -394,8 +394,8 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       <article class="signal-panel">
         <p class="signal-panel-label">Coverage Highlights</p>
         <ul class="signal-list signal-list--muted">
-          <li>Multi-hop ripple chains</li>
-          <li>Sector exposure matrix</li>
+          <li>Multi-hop Ripple Chains</li>
+          <li>Exposure Matrix</li>
           <li>Company commodity sensitivity</li>
           <li>Structural theme analysis</li>
         </ul>
@@ -430,26 +430,26 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
 <div class="divider"></div>
 
-<!-- ===== LATEST POSTS ===== -->
+<!-- ===== LATEST SIGNAL REPORTS ===== -->
 <section class="section" id="latest" aria-labelledby="latest-title">
   <div class="container">
     <header class="section-header" data-animate>
       <p class="section-label">Latest Analysis</p>
       <h2 class="section-title" id="latest-title">Signal Reports &amp; Impact Maps</h2>
       <p class="section-desc">
-        Curated ripple chains, company-exposure notes, and commodity intelligence.
+        Curated Ripple Chains, company-exposure notes, and commodity intelligence.
       </p>
     </header>
 
     <div class="posts-toolbar" data-animate data-delay="100">
-      <div class="filter-chips" role="tablist" aria-label="Filter reports">
+      <div class="filter-chips" role="tablist" aria-label="Filter Signal Reports">
         <button class="filter-chip is-active" type="button" data-filter="all">All</button>
         <button class="filter-chip" type="button" data-filter="energy">Energy</button>
         <button class="filter-chip" type="button" data-filter="metals">Metals</button>
         <button class="filter-chip" type="button" data-filter="agriculture">Agriculture</button>
         <button class="filter-chip" type="button" data-filter="battery">Battery</button>
       </div>
-      <a href="/reports/" class="posts-toolbar-link">Full archive →</a>
+      <a href="/reports/" class="posts-toolbar-link">Full archive &rarr;</a>
     </div>
 
     <div class="posts-grid posts-grid--paginated" id="home-posts-grid">
@@ -457,11 +457,13 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       {% for post in posts %}
       {% assign categories_joined = post.categories | join: '|' | downcase %}
       {% assign tags_joined = post.tags | join: '|' | downcase %}
+      {% assign first_tag = post.tags | first | slugify %}
       <article class="post-card{% if forloop.first %} post-card--featured{% endif %} post-card--discoverable"
                data-animate
                data-delay="{{ forloop.index0 | times: 100 | modulo: 500 }}"
                data-post-card
-               data-filter-tags="{{ categories_joined }}|{{ tags_joined }}">
+               data-filter-tags="{{ categories_joined }}|{{ tags_joined }}"
+               data-commodity="{{ first_tag }}">
 
         {% if forloop.first %}
         <div class="post-card-visual" aria-hidden="true">
@@ -488,6 +490,19 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
             {% for cat in post.categories limit:2 %}
             <span class="post-category">{{ cat }}</span>
             {% endfor %}
+            {% if post.direction == "bullish" %}
+            <span class="post-card-direction bullish">&#9650; Bullish</span>
+            {% elsif post.direction == "bearish" %}
+            <span class="post-card-direction bearish">&#9660; Bearish</span>
+            {% endif %}
+            {% assign post_age = 'now' | date: '%s' | minus: post.date | date: '%s' %}
+            {% if post_age < 259200 %}
+            <span class="post-card-label post-card-label--new">NEW</span>
+            {% elsif post.updated %}
+            <span class="post-card-label post-card-label--updated">UPDATED</span>
+            {% elsif post.evergreen %}
+            <span class="post-card-label post-card-label--evergreen">EVERGREEN</span>
+            {% endif %}
           </div>
 
           <h2 class="post-card-title">
@@ -507,7 +522,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
           {% endif %}
 
           <div class="post-card-footer">
-            <span class="read-more">Open signal <span aria-hidden="true">&rarr;</span></span>
+            <span class="read-more">Open Signal Report <span aria-hidden="true">&rarr;</span></span>
             {% if post.reading_time %}
             <span class="reading-time">{{ post.reading_time }} min read</span>
             {% endif %}
@@ -518,7 +533,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
       {% if site.posts.size == 0 %}
       <div class="feature-card text-center" style="grid-column:1/-1;padding:60px">
-        <p class="text-muted">Analysis posts coming soon.</p>
+        <p class="text-muted">Signal Reports coming soon.</p>
       </div>
       {% endif %}
     </div>
@@ -544,7 +559,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       Build Your Commodity Exposure Mental Model Faster
     </h2>
     <p class="section-desc" style="margin:0 auto 32px;">
-      Start with a commodity hub, explore an industry, or follow the RSS feed for new signal reports.
+      Start with a Commodity Hub, explore an industry, or follow the RSS feed for new Signal Reports.
     </p>
     <div class="hero-actions" style="justify-content:center;">
       <a href="/commodities/" class="btn btn-primary">Commodity Hubs</a>

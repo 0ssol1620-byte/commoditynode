@@ -7,6 +7,7 @@ tags: [iron-ore, steel, infrastructure, RIO, BHP, VALE, NUE, china]
 description: "How iron ore prices signal China's economic trajectory through the steel-to-infrastructure chain, with implications for global shipping, construction, and growth."
 reading_time: 9
 commodity_name: 'Iron Ore'
+direction: bullish
 image: /assets/images/og-iron-ore.png
 ---
 
@@ -24,35 +25,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "iron-ore", label: "Iron Ore ↑10%", price: "$118/t", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "rio", label: "Rio Tinto (RIO)", type: "positive", impact: 8.5, correlation: 0.88, marketCap: "120B", sector: "Iron Ore Mining" },
-      { id: "bhp", label: "BHP Group (BHP)", type: "positive", impact: 7.8, correlation: 0.85, marketCap: "155B", sector: "Diversified Mining" },
-      { id: "vale", label: "Vale S.A. (VALE)", type: "positive", impact: 9.2, correlation: 0.90, marketCap: "52B", sector: "Iron Ore Mining" },
-      { id: "fmg", label: "Fortescue (FSUGY)", type: "positive", impact: 11.5, correlation: 0.92, marketCap: "42B", sector: "Iron Ore Mining" },
-      { id: "pick", label: "iShares MSCI Mining (PICK)", type: "etf", impact: 6.5, correlation: 0.80, marketCap: "1.5B", sector: "ETF" },
+      { id: "rio", label: "Rio Tinto (RIO)", type: "producer", impact: 8.5, correlation: 0.88, marketCap: "120B", sector: "Iron Ore Mining" },
+      { id: "bhp", label: "BHP Group (BHP)", type: "producer", impact: 7.8, correlation: 0.85, marketCap: "155B", sector: "Diversified Mining" },
+      { id: "vale", label: "Vale S.A. (VALE)", type: "producer", impact: 9.2, correlation: 0.9, marketCap: "52B", sector: "Iron Ore Mining" },
+      { id: "fmg", label: "Fortescue (FSUGY)", type: "producer", impact: 11.5, correlation: 0.92, marketCap: "42B", sector: "Iron Ore Mining" },
+      { id: "pick", label: "iShares MSCI Mining (PICK)", type: "etf", impact: 6.5, correlation: 0.8, marketCap: "1.5B", sector: "ETF" },
       { id: "clf_ore", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 6.8, correlation: 0.72, marketCap: "8B", sector: "Iron Ore/Steel" }
     ]},
     { nodes: [
-      { id: "nue", label: "Nucor Corp (NUE)", type: "positive", impact: 5.2, correlation: 0.62, marketCap: "38B", sector: "Steel Production" },
-      { id: "stld", label: "Steel Dynamics (STLD)", type: "positive", impact: 5.5, correlation: 0.65, marketCap: "20B", sector: "Steel Production" },
-      { id: "x", label: "U.S. Steel (X)", type: "positive", impact: 6.8, correlation: 0.70, marketCap: "8B", sector: "Steel Production" },
-      { id: "clf_steel", label: "Cleveland-Cliffs Steel", type: "positive", impact: 6.2, correlation: 0.68, marketCap: "8B", sector: "Steel Production" },
+      { id: "nue", label: "Nucor Corp (NUE)", type: "producer", impact: 5.2, correlation: 0.62, marketCap: "38B", sector: "Steel Production" },
+      { id: "stld", label: "Steel Dynamics (STLD)", type: "producer", impact: 5.5, correlation: 0.65, marketCap: "20B", sector: "Steel Production" },
+      { id: "x", label: "U.S. Steel (X)", type: "producer", impact: 6.8, correlation: 0.7, marketCap: "8B", sector: "Steel Production" },
+      { id: "clf_steel", label: "Cleveland-Cliffs Steel", type: "producer", impact: 6.2, correlation: 0.68, marketCap: "8B", sector: "Steel Production" },
       { id: "slx", label: "VanEck Steel ETF (SLX)", type: "etf", impact: 5.8, correlation: 0.68, marketCap: "0.1B", sector: "ETF" },
-      { id: "china_mills", label: "China Steel Mills (Baowu)", type: "negative", impact: -3.5, correlation: -0.45, sector: "Steel Production" }
+      { id: "china_mills", label: "China Steel Mills (Baowu)", type: "consumer", impact: -3.5, correlation: -0.45, sector: "Steel Production" }
     ]},
     { nodes: [
-      { id: "cat", label: "Caterpillar (CAT)", type: "positive", impact: 4.2, correlation: 0.55, marketCap: "180B", sector: "Heavy Equipment" },
-      { id: "de_infra", label: "Deere & Co (DE)", type: "positive", impact: 3.0, correlation: 0.42, marketCap: "115B", sector: "Heavy Equipment" },
-      { id: "vmc", label: "Vulcan Materials (VMC)", type: "positive", impact: 3.5, correlation: 0.48, marketCap: "35B", sector: "Aggregates" },
-      { id: "mlm", label: "Martin Marietta (MLM)", type: "positive", impact: 3.2, correlation: 0.45, marketCap: "38B", sector: "Aggregates" },
-      { id: "pave", label: "Global X Infrastructure (PAVE)", type: "etf", impact: 3.0, correlation: 0.45, marketCap: "7B", sector: "ETF" }
+      { id: "cat", label: "Caterpillar (CAT)", type: "supplier", impact: 4.2, correlation: 0.55, marketCap: "180B", sector: "Heavy Equipment" },
+      { id: "de_infra", label: "Deere & Co (DE)", type: "supplier", impact: 3, correlation: 0.42, marketCap: "115B", sector: "Heavy Equipment" },
+      { id: "vmc", label: "Vulcan Materials (VMC)", type: "supplier", impact: 3.5, correlation: 0.48, marketCap: "35B", sector: "Aggregates" },
+      { id: "mlm", label: "Martin Marietta (MLM)", type: "supplier", impact: 3.2, correlation: 0.45, marketCap: "38B", sector: "Aggregates" },
+      { id: "pave", label: "Global X Infrastructure (PAVE)", type: "etf", impact: 3, correlation: 0.45, marketCap: "7B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "bdry", label: "Dry Bulk Shipping (BDRY)", type: "positive", impact: 8.0, correlation: 0.75, marketCap: "0.05B", sector: "Shipping" },
-      { id: "gogl", label: "Golden Ocean (GOGL)", type: "positive", impact: 7.5, correlation: 0.72, marketCap: "3B", sector: "Dry Bulk Shipping" },
-      { id: "sblk", label: "Star Bulk Carriers (SBLK)", type: "positive", impact: 7.0, correlation: 0.70, marketCap: "2.5B", sector: "Dry Bulk Shipping" },
+      { id: "bdry", label: "Dry Bulk Shipping (BDRY)", type: "supplier", impact: 8, correlation: 0.75, marketCap: "0.05B", sector: "Shipping" },
+      { id: "gogl", label: "Golden Ocean (GOGL)", type: "supplier", impact: 7.5, correlation: 0.72, marketCap: "3B", sector: "Dry Bulk Shipping" },
+      { id: "sblk", label: "Star Bulk Carriers (SBLK)", type: "supplier", impact: 7, correlation: 0.7, marketCap: "2.5B", sector: "Dry Bulk Shipping" },
       { id: "china_gdp", label: "China GDP Signal", type: "macro", impact: 3.5, correlation: 0.65, sector: "Macro" },
-      { id: "china_property", label: "China Property Developers", type: "positive", impact: 5.0, correlation: 0.58, sector: "Real Estate" },
-      { id: "global_growth", label: "Global Growth Expectations", type: "macro", impact: 2.0, correlation: 0.45, sector: "Macro" }
+      { id: "china_property", label: "China Property Developers", type: "macro", impact: 5, correlation: 0.58, sector: "Real Estate" },
+      { id: "global_growth", label: "Global Growth Expectations", type: "macro", impact: 2, correlation: 0.45, sector: "Macro" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [rare-earth, lithium, cobalt, tin, technology, AAPL, NVDA, INTC, copper]
 description: 'How the technology sector depends on rare earths, cobalt, tin, copper, and lithium — mapping supply chain vulnerabilities from chips to devices.'
 reading_time: 10
 commodity_name: 'Rare Earth'
+direction: bullish
 image: /assets/images/og-tin.png
 ---
 
@@ -24,35 +25,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "tech-metals", label: "Tech Metals ↑10%", price: "Multi", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "aapl", label: "Apple Inc (AAPL)", type: "negative", impact: -2.0, correlation: -0.32, marketCap: "3200B", sector: "Consumer Electronics" },
-      { id: "nvda", label: "NVIDIA (NVDA)", type: "negative", impact: -1.6, correlation: -0.26, marketCap: "2800B", sector: "Semiconductors" },
-      { id: "intc", label: "Intel Corp (INTC)", type: "negative", impact: -2.8, correlation: -0.40, marketCap: "110B", sector: "Semiconductor Fabs" },
-      { id: "tsm", label: "TSMC (TSM)", type: "negative", impact: -2.4, correlation: -0.36, marketCap: "650B", sector: "Semiconductor Foundry" },
-      { id: "mp", label: "MP Materials (MP)", type: "positive", impact: 14.5, correlation: 0.88, marketCap: "4B", sector: "Rare Earth Mining" },
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 8.2, correlation: 0.78, marketCap: "58B", sector: "Copper Mining" }
+      { id: "aapl", label: "Apple Inc (AAPL)", type: "consumer", impact: -2, correlation: -0.32, marketCap: "3200B", sector: "Consumer Electronics" },
+      { id: "nvda", label: "NVIDIA (NVDA)", type: "consumer", impact: -1.6, correlation: -0.26, marketCap: "2800B", sector: "Semiconductors" },
+      { id: "intc", label: "Intel Corp (INTC)", type: "consumer", impact: -2.8, correlation: -0.4, marketCap: "110B", sector: "Semiconductor Fabs" },
+      { id: "tsm", label: "TSMC (TSM)", type: "consumer", impact: -2.4, correlation: -0.36, marketCap: "650B", sector: "Semiconductor Foundry" },
+      { id: "mp", label: "MP Materials (MP)", type: "producer", impact: 14.5, correlation: 0.88, marketCap: "4B", sector: "Rare Earth Mining" },
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 8.2, correlation: 0.78, marketCap: "58B", sector: "Copper Mining" }
     ]},
     { nodes: [
-      { id: "eqix", label: "Equinix (EQIX)", type: "negative", impact: -1.8, correlation: -0.28, marketCap: "72B", sector: "Data Centers", parentId: "nvda" },
-      { id: "dell", label: "Dell Technologies (DELL)", type: "negative", impact: -2.5, correlation: -0.38, marketCap: "45B", sector: "Hardware/Servers", parentId: "nvda" },
-      { id: "vale_co", label: "Vale SA (VALE) - Cobalt", type: "positive", impact: 6.8, correlation: 0.65, marketCap: "45B", sector: "Cobalt/Nickel Mining", parentId: "fcx" },
-      { id: "lthm", label: "Arcadium Lithium (ALTM)", type: "positive", impact: 12.0, correlation: 0.85, marketCap: "5B", sector: "Lithium Production", parentId: "mp" },
-      { id: "amkr", label: "Amkor Technology (AMKR)", type: "negative", impact: -3.8, correlation: -0.48, marketCap: "7B", sector: "Chip Packaging", parentId: "tsm" },
-      { id: "hon", label: "Honeywell (HON)", type: "negative", impact: -1.2, correlation: -0.18, marketCap: "140B", sector: "Industrial Tech", parentId: "intc" }
+      { id: "eqix", label: "Equinix (EQIX)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "72B", sector: "Data Centers", parentId: "nvda" },
+      { id: "dell", label: "Dell Technologies (DELL)", type: "consumer", impact: -2.5, correlation: -0.38, marketCap: "45B", sector: "Hardware/Servers", parentId: "nvda" },
+      { id: "vale_co", label: "Vale SA (VALE) - Cobalt", type: "producer", impact: 6.8, correlation: 0.65, marketCap: "45B", sector: "Cobalt/Nickel Mining", parentId: "fcx" },
+      { id: "lthm", label: "Arcadium Lithium (ALTM)", type: "producer", impact: 12, correlation: 0.85, marketCap: "5B", sector: "Lithium Production", parentId: "mp" },
+      { id: "amkr", label: "Amkor Technology (AMKR)", type: "consumer", impact: -3.8, correlation: -0.48, marketCap: "7B", sector: "Chip Packaging", parentId: "tsm" },
+      { id: "hon", label: "Honeywell (HON)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "140B", sector: "Industrial Tech", parentId: "intc" }
     ]},
     { nodes: [
-      { id: "asx", label: "ASE Technology (ASX)", type: "negative", impact: -3.5, correlation: -0.45, marketCap: "18B", sector: "Chip Packaging", parentId: "amkr" },
-      { id: "flex", label: "Flex Ltd (FLEX)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "12B", sector: "Contract Manufacturing", parentId: "dell" },
-      { id: "recyclers", label: "E-Waste Recyclers (Umicore)", type: "positive", impact: 7.5, correlation: 0.62, marketCap: "8B", sector: "Metal Recycling", parentId: "vale_co" },
-      { id: "lynas", label: "Lynas Rare Earths (LYC.AX)", type: "positive", impact: 16.0, correlation: 0.90, marketCap: "6B", sector: "Rare Earth Mining", parentId: "mp" },
-      { id: "dlr", label: "Digital Realty (DLR)", type: "negative", impact: -1.5, correlation: -0.24, marketCap: "42B", sector: "Data Centers", parentId: "eqix" },
-      { id: "jbl", label: "Jabil Inc (JBL)", type: "negative", impact: -2.6, correlation: -0.36, marketCap: "14B", sector: "Contract Manufacturing", parentId: "dell" }
+      { id: "asx", label: "ASE Technology (ASX)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "18B", sector: "Chip Packaging", parentId: "amkr" },
+      { id: "flex", label: "Flex Ltd (FLEX)", type: "processor", impact: -2.8, correlation: -0.38, marketCap: "12B", sector: "Contract Manufacturing", parentId: "dell" },
+      { id: "recyclers", label: "E-Waste Recyclers (Umicore)", type: "substitute", impact: 7.5, correlation: 0.62, marketCap: "8B", sector: "Metal Recycling", parentId: "vale_co" },
+      { id: "lynas", label: "Lynas Rare Earths (LYC.AX)", type: "producer", impact: 16, correlation: 0.9, marketCap: "6B", sector: "Rare Earth Mining", parentId: "mp" },
+      { id: "dlr", label: "Digital Realty (DLR)", type: "consumer", impact: -1.5, correlation: -0.24, marketCap: "42B", sector: "Data Centers", parentId: "eqix" },
+      { id: "jbl", label: "Jabil Inc (JBL)", type: "processor", impact: -2.6, correlation: -0.36, marketCap: "14B", sector: "Contract Manufacturing", parentId: "dell" }
     ]},
     { nodes: [
-      { id: "china_export", label: "China Export Restrictions", type: "macro", impact: 18.0, sector: "Geopolitical", parentId: "mp" },
-      { id: "ev_demand", label: "EV Battery Metal Demand", type: "macro", impact: 10.0, sector: "Macro", parentId: "lthm" },
-      { id: "ai_infra", label: "AI Infrastructure Build-out", type: "macro", impact: -3.0, sector: "Macro", parentId: "nvda" },
-      { id: "ttm", label: "TTM Technologies (TTMI)", type: "negative", impact: -3.2, correlation: -0.42, marketCap: "2B", sector: "PCB Manufacturing", parentId: "asx" },
-      { id: "drc_supply", label: "DRC Cobalt Supply Risk", type: "macro", impact: 12.0, sector: "Geopolitical", parentId: "vale_co" }
+      { id: "china_export", label: "China Export Restrictions", type: "macro", impact: 18, sector: "Geopolitical", parentId: "mp" },
+      { id: "ev_demand", label: "EV Battery Metal Demand", type: "macro", impact: 10, sector: "Macro", parentId: "lthm" },
+      { id: "ai_infra", label: "AI Infrastructure Build-out", type: "macro", impact: -3, sector: "Macro", parentId: "nvda" },
+      { id: "ttm", label: "TTM Technologies (TTMI)", type: "processor", impact: -3.2, correlation: -0.42, marketCap: "2B", sector: "PCB Manufacturing", parentId: "asx" },
+      { id: "drc_supply", label: "DRC Cobalt Supply Risk", type: "macro", impact: 12, sector: "Geopolitical", parentId: "vale_co" }
     ]}
   ]
 };

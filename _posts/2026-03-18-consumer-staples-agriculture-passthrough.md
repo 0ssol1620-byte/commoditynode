@@ -7,6 +7,7 @@ tags: [agriculture, wheat, corn, coffee, cocoa, PG, KO, GIS, KHC, food]
 description: 'How agriculture commodity prices pass through to consumer staples companies — analyzing pricing power, margin compression, and which brands absorb vs transfer costs.'
 reading_time: 9
 commodity_name: 'Agriculture'
+direction: bearish
 image: /assets/images/og-corn.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "consumer-staples", label: "Ag Inputs ↑10%", price: "Multi", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "gis", label: "General Mills (GIS)", type: "negative", impact: -3.8, correlation: -0.52, marketCap: "38B", sector: "Packaged Food" },
-      { id: "khc", label: "Kraft Heinz (KHC)", type: "negative", impact: -4.2, correlation: -0.58, marketCap: "42B", sector: "Packaged Food" },
-      { id: "ko", label: "Coca-Cola (KO)", type: "negative", impact: -1.8, correlation: -0.28, marketCap: "260B", sector: "Beverages" },
-      { id: "pg", label: "Procter & Gamble (PG)", type: "negative", impact: -1.5, correlation: -0.24, marketCap: "380B", sector: "Household Products" },
-      { id: "adm", label: "ADM (ADM)", type: "positive", impact: 6.5, correlation: 0.72, marketCap: "24B", sector: "Ag Processing" },
-      { id: "dba", label: "Invesco DB Agriculture (DBA)", type: "etf", impact: 8.0, correlation: 0.88, marketCap: "1B", sector: "Agriculture ETF" }
+      { id: "gis", label: "General Mills (GIS)", type: "consumer", impact: -3.8, correlation: -0.52, marketCap: "38B", sector: "Packaged Food" },
+      { id: "khc", label: "Kraft Heinz (KHC)", type: "consumer", impact: -4.2, correlation: -0.58, marketCap: "42B", sector: "Packaged Food" },
+      { id: "ko", label: "Coca-Cola (KO)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "260B", sector: "Beverages" },
+      { id: "pg", label: "Procter & Gamble (PG)", type: "consumer", impact: -1.5, correlation: -0.24, marketCap: "380B", sector: "Household Products" },
+      { id: "adm", label: "ADM (ADM)", type: "processor", impact: 6.5, correlation: 0.72, marketCap: "24B", sector: "Ag Processing" },
+      { id: "dba", label: "Invesco DB Agriculture (DBA)", type: "etf", impact: 8, correlation: 0.88, marketCap: "1B", sector: "Agriculture ETF" }
     ]},
     { nodes: [
-      { id: "cpb", label: "Campbell Soup (CPB)", type: "negative", impact: -3.2, correlation: -0.46, marketCap: "14B", sector: "Packaged Food", parentId: "gis" },
-      { id: "pep", label: "PepsiCo (PEP)", type: "negative", impact: -2.0, correlation: -0.30, marketCap: "220B", sector: "Beverage/Snacks", parentId: "ko" },
-      { id: "cl", label: "Colgate-Palmolive (CL)", type: "negative", impact: -1.6, correlation: -0.26, marketCap: "72B", sector: "Household/Oral Care", parentId: "pg" },
+      { id: "cpb", label: "Campbell Soup (CPB)", type: "consumer", impact: -3.2, correlation: -0.46, marketCap: "14B", sector: "Packaged Food", parentId: "gis" },
+      { id: "pep", label: "PepsiCo (PEP)", type: "consumer", impact: -2, correlation: -0.3, marketCap: "220B", sector: "Beverage/Snacks", parentId: "ko" },
+      { id: "cl", label: "Colgate-Palmolive (CL)", type: "consumer", impact: -1.6, correlation: -0.26, marketCap: "72B", sector: "Household/Oral Care", parentId: "pg" },
       { id: "kr", label: "Kroger (KR)", type: "positive", impact: 2.8, correlation: 0.35, marketCap: "40B", sector: "Grocery Retail", parentId: "khc" },
-      { id: "bg", label: "Bunge Global (BG)", type: "positive", impact: 5.8, correlation: 0.68, marketCap: "14B", sector: "Ag Processing/Trading", parentId: "adm" },
-      { id: "mos", label: "Mosaic Company (MOS)", type: "positive", impact: 4.5, correlation: 0.55, marketCap: "10B", sector: "Fertilizer", parentId: "adm" }
+      { id: "bg", label: "Bunge Global (BG)", type: "processor", impact: 5.8, correlation: 0.68, marketCap: "14B", sector: "Ag Processing/Trading", parentId: "adm" },
+      { id: "mos", label: "Mosaic Company (MOS)", type: "consumer", impact: 4.5, correlation: 0.55, marketCap: "10B", sector: "Fertilizer", parentId: "adm" }
     ]},
     { nodes: [
-      { id: "stz", label: "Constellation Brands (STZ)", type: "negative", impact: -1.4, correlation: -0.22, marketCap: "35B", sector: "Beer/Wine/Spirits", parentId: "pep" },
-      { id: "mdlz", label: "Mondelez (MDLZ)", type: "negative", impact: -3.5, correlation: -0.50, marketCap: "90B", sector: "Snacks/Confectionery", parentId: "cpb" },
-      { id: "hsy", label: "Hershey (HSY)", type: "negative", impact: -4.8, correlation: -0.62, marketCap: "32B", sector: "Confectionery", parentId: "cpb" },
-      { id: "cost", label: "Costco (COST)", type: "positive", impact: 1.5, correlation: 0.20, marketCap: "350B", sector: "Warehouse Retail", parentId: "kr" },
-      { id: "de", label: "Deere & Company (DE)", type: "positive", impact: 3.2, correlation: 0.42, marketCap: "110B", sector: "Ag Equipment", parentId: "mos" },
-      { id: "ctva_ag", label: "Corteva (CTVA)", type: "positive", impact: 3.0, correlation: 0.38, marketCap: "38B", sector: "Seeds/Crop Protection", parentId: "mos" }
+      { id: "stz", label: "Constellation Brands (STZ)", type: "consumer", impact: -1.4, correlation: -0.22, marketCap: "35B", sector: "Beer/Wine/Spirits", parentId: "pep" },
+      { id: "mdlz", label: "Mondelez (MDLZ)", type: "consumer", impact: -3.5, correlation: -0.5, marketCap: "90B", sector: "Snacks/Confectionery", parentId: "cpb" },
+      { id: "hsy", label: "Hershey (HSY)", type: "consumer", impact: -4.8, correlation: -0.62, marketCap: "32B", sector: "Confectionery", parentId: "cpb" },
+      { id: "cost", label: "Costco (COST)", type: "positive", impact: 1.5, correlation: 0.2, marketCap: "350B", sector: "Warehouse Retail", parentId: "kr" },
+      { id: "de", label: "Deere & Company (DE)", type: "supplier", impact: 3.2, correlation: 0.42, marketCap: "110B", sector: "Ag Equipment", parentId: "mos" },
+      { id: "ctva_ag", label: "Corteva (CTVA)", type: "consumer", impact: 3, correlation: 0.38, marketCap: "38B", sector: "Seeds/Crop Protection", parentId: "mos" }
     ]},
     { nodes: [
       { id: "private_label", label: "Private Label Shift", type: "macro", impact: 3.5, sector: "Macro", parentId: "kr" },
-      { id: "shrinkflation", label: "Shrinkflation/Reformulation", type: "macro", impact: -2.0, sector: "Macro", parentId: "gis" },
-      { id: "el_nino", label: "El Nino/Weather Risk", type: "macro", impact: 8.0, sector: "Macro", parentId: "dba" },
-      { id: "k", label: "Kellanova (K)", type: "negative", impact: -3.4, correlation: -0.48, marketCap: "22B", sector: "Cereal/Snacks", parentId: "gis" }
+      { id: "shrinkflation", label: "Shrinkflation/Reformulation", type: "macro", impact: -2, sector: "Macro", parentId: "gis" },
+      { id: "el_nino", label: "El Nino/Weather Risk", type: "macro", impact: 8, sector: "Macro", parentId: "dba" },
+      { id: "k", label: "Kellanova (K)", type: "consumer", impact: -3.4, correlation: -0.48, marketCap: "22B", sector: "Cereal/Snacks", parentId: "gis" }
     ]}
   ]
 };

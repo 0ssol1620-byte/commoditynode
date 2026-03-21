@@ -7,6 +7,7 @@ tags: [copper, FCX, COPX, construction, EV-batteries, electrical, Freeport]
 description: "Why copper is 'Dr. Copper' — and how FCX, COPX ETF, EV battery makers, and construction stocks respond to copper price shifts. Full correlation data included."
 reading_time: 8
 commodity_name: "Copper"
+direction: bullish
 image: /assets/images/og-copper.png
 canonical_url: https://commoditynode.com/copper-economic-indicator/
 ---
@@ -24,31 +25,31 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "copx", label: "COPX ETF", type: "etf", impact: 14.2, correlation: 0.91, marketCap: "2B", sector: "ETF" },
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 18.0, correlation: 0.93, marketCap: "62B", sector: "Copper Mining" },
-      { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: 16.0, correlation: 0.89, marketCap: "55B", sector: "Copper Mining" },
-      { id: "bhp_c", label: "BHP Group (BHP)", type: "positive", impact: 8.0, correlation: 0.74, marketCap: "145B", sector: "Diversified Mining" },
-      { id: "tsla_c", label: "Tesla (TSLA)", type: "negative", impact: -3.0, correlation: -0.38, marketCap: "700B", sector: "EV" }
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 18, correlation: 0.93, marketCap: "62B", sector: "Copper Mining" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 16, correlation: 0.89, marketCap: "55B", sector: "Copper Mining" },
+      { id: "bhp_c", label: "BHP Group (BHP)", type: "producer", impact: 8, correlation: 0.74, marketCap: "145B", sector: "Diversified Mining" },
+      { id: "tsla_c", label: "Tesla (TSLA)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "700B", sector: "EV" }
     ]},
     { nodes: [
-      { id: "glencore", label: "Glencore (GLEN.L)", type: "positive", impact: 12.0, correlation: 0.82, marketCap: "68B", sector: "Trading/Mining", parentId: "fcx" },
-      { id: "antofagasta", label: "Antofagasta (ANTO.L)", type: "positive", impact: 14.0, correlation: 0.88, marketCap: "22B", sector: "Copper Mining", parentId: "scco" },
-      { id: "phelps", label: "Copper Smelters", type: "positive", impact: 7.0, correlation: 0.68, sector: "Smelting", parentId: "fcx" },
-      { id: "cat_c", label: "Caterpillar (CAT)", type: "positive", impact: 5.0, correlation: 0.55, marketCap: "180B", sector: "Mining Equipment", parentId: "bhp_c" }
+      { id: "glencore", label: "Glencore (GLEN.L)", type: "producer", impact: 12, correlation: 0.82, marketCap: "68B", sector: "Trading/Mining", parentId: "fcx" },
+      { id: "antofagasta", label: "Antofagasta (ANTO.L)", type: "producer", impact: 14, correlation: 0.88, marketCap: "22B", sector: "Copper Mining", parentId: "scco" },
+      { id: "phelps", label: "Copper Smelters", type: "processor", impact: 7, correlation: 0.68, sector: "Smelting", parentId: "fcx" },
+      { id: "cat_c", label: "Caterpillar (CAT)", type: "producer", impact: 5, correlation: 0.55, marketCap: "180B", sector: "Mining Equipment", parentId: "bhp_c" }
     ]},
     { nodes: [
-      { id: "wire_makers", label: "Encore Wire (WIRE)", type: "negative", impact: -8.0, correlation: -0.75, marketCap: "3B", sector: "Wire Manufacturing", parentId: "phelps" },
-      { id: "bldr_c", label: "Builders FirstSource (BLDR)", type: "negative", impact: -3.0, correlation: -0.44, marketCap: "20B", sector: "Construction", parentId: "phelps" },
-      { id: "nextracker", label: "Nextracker (NXT)", type: "negative", impact: -5.0, correlation: -0.58, marketCap: "7B", sector: "Solar Equipment", parentId: "glencore" }
+      { id: "wire_makers", label: "Encore Wire (WIRE)", type: "consumer", impact: -8, correlation: -0.75, marketCap: "3B", sector: "Wire Manufacturing", parentId: "phelps" },
+      { id: "bldr_c", label: "Builders FirstSource (BLDR)", type: "consumer", impact: -3, correlation: -0.44, marketCap: "20B", sector: "Construction", parentId: "phelps" },
+      { id: "nextracker", label: "Nextracker (NXT)", type: "consumer", impact: -5, correlation: -0.58, marketCap: "7B", sector: "Solar Equipment", parentId: "glencore" }
     ]},
     { nodes: [
-      { id: "ev_bat", label: "EV Battery Makers", type: "negative", impact: -4.0, correlation: -0.45, sector: "Technology", parentId: "tsla_c" },
-      { id: "construction_c", label: "Construction Industry", type: "negative", impact: -4.0, correlation: -0.52, sector: "Construction", parentId: "bldr_c" },
-      { id: "honeywell", label: "Honeywell (HON)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "135B", sector: "Industrial", parentId: "wire_makers" }
+      { id: "ev_bat", label: "EV Battery Makers", type: "consumer", impact: -4, correlation: -0.45, sector: "Technology", parentId: "tsla_c" },
+      { id: "construction_c", label: "Construction Industry", type: "consumer", impact: -4, correlation: -0.52, sector: "Construction", parentId: "bldr_c" },
+      { id: "honeywell", label: "Honeywell (HON)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "135B", sector: "Industrial", parentId: "wire_makers" }
     ]},
     { nodes: [
-      { id: "china_gdp", label: "China GDP Growth", type: "positive", impact: 9.0, correlation: 0.82, sector: "Macro", parentId: "fcx" },
-      { id: "green_infra", label: "Green Infrastructure", type: "positive", impact: 6.5, sector: "Macro", parentId: "nextracker" },
-      { id: "usd_c", label: "USD Index", type: "negative", impact: -3.0, correlation: -0.65, sector: "Macro", parentId: "glencore" }
+      { id: "china_gdp", label: "China GDP Growth", type: "macro", impact: 9, correlation: 0.82, sector: "Macro", parentId: "fcx" },
+      { id: "green_infra", label: "Green Infrastructure", type: "macro", impact: 6.5, sector: "Macro", parentId: "nextracker" },
+      { id: "usd_c", label: "USD Index", type: "macro", impact: -3, correlation: -0.65, sector: "Macro", parentId: "glencore" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [lithium, ev, ALB, SQM, LTHM, LIT, battery, energy]
 description: 'Deep analysis of Albemarle lithium mining operations and how lithium price swings impact EV battery costs, automakers, and the clean energy transition.'
 reading_time: 9
 commodity_name: 'Lithium'
+direction: bullish
 image: /assets/images/og-lithium.png
 ---
 
@@ -35,49 +36,36 @@ The CME Group launched a lithium futures contract in 2021, but liquidity remains
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: {
-    id: "lithium",
-    label: "Lithium ↑15%",
-    price: "$14,500/t",
-    change: "+15%"
-  },
+  commodity: { id: "lithium", label: "Lithium ↑15%", price: "$14,500/t", change: "+15%" },
   levels: [
-    {
-      nodes: [
-        { id: "alb", label: "Albemarle Corp (ALB)", type: "positive", impact: 22.0, correlation: 0.90, marketCap: "14B", sector: "Lithium Mining" },
-        { id: "sqm", label: "SQM (SQM)", type: "positive", impact: 18.5, correlation: 0.86, marketCap: "16B", sector: "Lithium Mining" },
-        { id: "pll", label: "Piedmont Lithium (PLL)", type: "positive", impact: 25.0, correlation: 0.82, marketCap: "0.6B", sector: "Lithium Development" },
-        { id: "lit", label: "LIT Lithium ETF", type: "etf", impact: 14.0, correlation: 0.88, marketCap: "1.2B", sector: "ETF" },
-        { id: "lac", label: "Lithium Americas (LAC)", type: "positive", impact: 20.0, correlation: 0.78, marketCap: "1.8B", sector: "Lithium Development" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "licy", label: "Li-Cycle Holdings (LICY)", type: "positive", impact: 18.0, correlation: 0.72, marketCap: "0.4B", sector: "Battery Recycling" },
-        { id: "mp", label: "MP Materials (MP)", type: "positive", impact: 8.5, correlation: 0.55, marketCap: "4.5B", sector: "Rare Earth/Materials" },
-        { id: "igo", label: "IGO Limited (IGO)", type: "positive", impact: 16.0, correlation: 0.80, marketCap: "5.2B", sector: "Lithium Mining" },
-        { id: "ev_cost", label: "EV Battery Cost Index", type: "macro", impact: -8.0, correlation: -0.82, marketCap: "N/A", sector: "Macro" },
-        { id: "supply_growth", label: "Lithium Supply Growth", type: "macro", impact: -5.0, correlation: -0.45, marketCap: "N/A", sector: "Macro" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "tsla", label: "Tesla Inc (TSLA)", type: "negative", impact: -3.5, correlation: -0.38, marketCap: "800B", sector: "EV Automaker" },
-        { id: "rivn", label: "Rivian Automotive (RIVN)", type: "negative", impact: -5.8, correlation: -0.52, marketCap: "14B", sector: "EV Automaker" },
-        { id: "lcid", label: "Lucid Group (LCID)", type: "negative", impact: -6.5, correlation: -0.58, marketCap: "7B", sector: "EV Automaker" },
-        { id: "panasonic", label: "Panasonic (PCRFY)", type: "negative", impact: -4.0, correlation: -0.42, marketCap: "28B", sector: "Battery Cells" },
-        { id: "qscell", label: "QuantumScape (QS)", type: "negative", impact: -4.5, correlation: -0.45, marketCap: "5B", sector: "Solid-State Battery" }
-      ]
-    },
-    {
-      nodes: [
-        { id: "aapl_li", label: "Apple Inc (AAPL)", type: "negative", impact: -0.8, correlation: -0.12, marketCap: "3.2T", sector: "Consumer Electronics" },
-        { id: "dell", label: "Dell Technologies (DELL)", type: "negative", impact: -1.2, correlation: -0.18, marketCap: "95B", sector: "Consumer Electronics" },
-        { id: "enph", label: "Enphase Energy (ENPH)", type: "negative", impact: -3.0, correlation: -0.35, marketCap: "22B", sector: "Energy Storage" },
-        { id: "sedg", label: "SolarEdge (SEDG)", type: "negative", impact: -2.8, correlation: -0.32, marketCap: "4B", sector: "Energy Storage" },
-        { id: "china_ev", label: "China EV Demand", type: "macro", impact: -3.5, correlation: -0.40, marketCap: "N/A", sector: "Macro" }
-      ]
-    }
+    { nodes: [
+      { id: "alb", label: "Albemarle Corp (ALB)", type: "producer", impact: 22, correlation: 0.9, marketCap: "14B", sector: "Lithium Mining" },
+      { id: "sqm", label: "SQM (SQM)", type: "producer", impact: 18.5, correlation: 0.86, marketCap: "16B", sector: "Lithium Mining" },
+      { id: "pll", label: "Piedmont Lithium (PLL)", type: "producer", impact: 25, correlation: 0.82, marketCap: "0.6B", sector: "Lithium Development" },
+      { id: "lit", label: "LIT Lithium ETF", type: "etf", impact: 14, correlation: 0.88, marketCap: "1.2B", sector: "ETF" },
+      { id: "lac", label: "Lithium Americas (LAC)", type: "producer", impact: 20, correlation: 0.78, marketCap: "1.8B", sector: "Lithium Development" }
+    ]},
+    { nodes: [
+      { id: "licy", label: "Li-Cycle Holdings (LICY)", type: "substitute", impact: 18, correlation: 0.72, marketCap: "0.4B", sector: "Battery Recycling" },
+      { id: "mp", label: "MP Materials (MP)", type: "macro", impact: 8.5, correlation: 0.55, marketCap: "4.5B", sector: "Rare Earth/Materials" },
+      { id: "igo", label: "IGO Limited (IGO)", type: "producer", impact: 16, correlation: 0.8, marketCap: "5.2B", sector: "Lithium Mining" },
+      { id: "ev_cost", label: "EV Battery Cost Index", type: "macro", impact: -8, correlation: -0.82, marketCap: "N/A", sector: "Macro" },
+      { id: "supply_growth", label: "Lithium Supply Growth", type: "macro", impact: -5, correlation: -0.45, marketCap: "N/A", sector: "Macro" }
+    ]},
+    { nodes: [
+      { id: "tsla", label: "Tesla Inc (TSLA)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "800B", sector: "EV Automaker" },
+      { id: "rivn", label: "Rivian Automotive (RIVN)", type: "consumer", impact: -5.8, correlation: -0.52, marketCap: "14B", sector: "EV Automaker" },
+      { id: "lcid", label: "Lucid Group (LCID)", type: "consumer", impact: -6.5, correlation: -0.58, marketCap: "7B", sector: "EV Automaker" },
+      { id: "panasonic", label: "Panasonic (PCRFY)", type: "processor", impact: -4, correlation: -0.42, marketCap: "28B", sector: "Battery Cells" },
+      { id: "qscell", label: "QuantumScape (QS)", type: "substitute", impact: -4.5, correlation: -0.45, marketCap: "5B", sector: "Solid-State Battery" }
+    ]},
+    { nodes: [
+      { id: "aapl_li", label: "Apple Inc (AAPL)", type: "consumer", impact: -0.8, correlation: -0.12, marketCap: "3.2T", sector: "Consumer Electronics" },
+      { id: "dell", label: "Dell Technologies (DELL)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "95B", sector: "Consumer Electronics" },
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "macro", impact: -3, correlation: -0.35, marketCap: "22B", sector: "Energy Storage" },
+      { id: "sedg", label: "SolarEdge (SEDG)", type: "macro", impact: -2.8, correlation: -0.32, marketCap: "4B", sector: "Energy Storage" },
+      { id: "china_ev", label: "China EV Demand", type: "macro", impact: -3.5, correlation: -0.4, marketCap: "N/A", sector: "Macro" }
+    ]}
   ]
 };
 </script>

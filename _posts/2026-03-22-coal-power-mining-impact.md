@@ -7,6 +7,7 @@ tags: [coal, mining, electricity, steel, cement, energy]
 description: 'Interactive analysis of how coal price movements impact miners (BTU, ARCH, HCC), steel producers (X, NUE, CLF), utilities, cement makers, and renewable energy stocks.'
 reading_time: 8
 commodity_name: 'Coal'
+direction: bullish
 image: /assets/images/og-coal.png
 ---
 
@@ -26,36 +27,36 @@ window.COMMODITY_DATA = {
   commodity: { id: "coal", label: "Coal ↑10%", price: "$135/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "btu", label: "Peabody Energy (BTU)", type: "positive", impact: 15.0, correlation: 0.92, marketCap: "3.8B", sector: "Coal Mining" },
-      { id: "arch", label: "ARCH Resources (ARCH)", type: "positive", impact: 13.5, correlation: 0.89, marketCap: "2.5B", sector: "Coal Mining" },
-      { id: "hcc", label: "Warrior Met Coal (HCC)", type: "positive", impact: 12.0, correlation: 0.85, marketCap: "3.2B", sector: "Met Coal Mining" },
-      { id: "x", label: "U.S. Steel (X)", type: "negative", impact: -5.5, correlation: -0.58, marketCap: "8B", sector: "Steel" },
-      { id: "nue", label: "Nucor Corp (NUE)", type: "positive", impact: 2.0, correlation: 0.22, marketCap: "42B", sector: "Steel (EAF)" }
+      { id: "btu", label: "Peabody Energy (BTU)", type: "producer", impact: 15, correlation: 0.92, marketCap: "3.8B", sector: "Coal Mining" },
+      { id: "arch", label: "ARCH Resources (ARCH)", type: "producer", impact: 13.5, correlation: 0.89, marketCap: "2.5B", sector: "Coal Mining" },
+      { id: "hcc", label: "Warrior Met Coal (HCC)", type: "producer", impact: 12, correlation: 0.85, marketCap: "3.2B", sector: "Met Coal Mining" },
+      { id: "x", label: "U.S. Steel (X)", type: "consumer", impact: -5.5, correlation: -0.58, marketCap: "8B", sector: "Steel" },
+      { id: "nue", label: "Nucor Corp (NUE)", type: "positive", impact: 2, correlation: 0.22, marketCap: "42B", sector: "Steel (EAF)" }
     ]},
     { nodes: [
-      { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "negative", impact: -4.8, correlation: -0.52, marketCap: "9B", sector: "Steel", parentId: "x" },
-      { id: "vmc", label: "Vulcan Materials (VMC)", type: "negative", impact: -3.2, correlation: -0.35, marketCap: "35B", sector: "Cement/Aggregates", parentId: "x" },
-      { id: "mlm", label: "Martin Marietta (MLM)", type: "negative", impact: -3.0, correlation: -0.33, marketCap: "32B", sector: "Cement/Aggregates", parentId: "x" },
-      { id: "unp", label: "Union Pacific (UNP)", type: "positive", impact: 3.5, correlation: 0.42, marketCap: "148B", sector: "Railroads", parentId: "btu" },
-      { id: "nsc", label: "Norfolk Southern (NSC)", type: "positive", impact: 4.0, correlation: 0.48, marketCap: "52B", sector: "Railroads", parentId: "arch" }
+      { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "consumer", impact: -4.8, correlation: -0.52, marketCap: "9B", sector: "Steel", parentId: "x" },
+      { id: "vmc", label: "Vulcan Materials (VMC)", type: "consumer", impact: -3.2, correlation: -0.35, marketCap: "35B", sector: "Cement/Aggregates", parentId: "x" },
+      { id: "mlm", label: "Martin Marietta (MLM)", type: "consumer", impact: -3, correlation: -0.33, marketCap: "32B", sector: "Cement/Aggregates", parentId: "x" },
+      { id: "unp", label: "Union Pacific (UNP)", type: "supplier", impact: 3.5, correlation: 0.42, marketCap: "148B", sector: "Railroads", parentId: "btu" },
+      { id: "nsc", label: "Norfolk Southern (NSC)", type: "supplier", impact: 4, correlation: 0.48, marketCap: "52B", sector: "Railroads", parentId: "arch" }
     ]},
     { nodes: [
       { id: "xlu", label: "XLU Utilities ETF", type: "etf", impact: -3.5, correlation: -0.42, marketCap: "18B", sector: "ETF", parentId: "clf" },
-      { id: "aep", label: "American Elec Power (AEP)", type: "negative", impact: -4.2, correlation: -0.50, marketCap: "48B", sector: "Utilities", parentId: "clf" },
-      { id: "so", label: "Southern Company (SO)", type: "negative", impact: -3.0, correlation: -0.38, marketCap: "78B", sector: "Utilities", parentId: "vmc" },
-      { id: "icln", label: "ICLN Clean Energy ETF", type: "etf", impact: 5.0, correlation: 0.45, marketCap: "3B", sector: "ETF", parentId: "xlu" }
+      { id: "aep", label: "American Elec Power (AEP)", type: "consumer", impact: -4.2, correlation: -0.5, marketCap: "48B", sector: "Utilities", parentId: "clf" },
+      { id: "so", label: "Southern Company (SO)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "78B", sector: "Utilities", parentId: "vmc" },
+      { id: "icln", label: "ICLN Clean Energy ETF", type: "etf", impact: 5, correlation: 0.45, marketCap: "3B", sector: "ETF", parentId: "xlu" }
     ]},
     { nodes: [
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "positive", impact: 4.5, correlation: 0.40, marketCap: "25B", sector: "Solar", parentId: "icln" },
-      { id: "fslr", label: "First Solar (FSLR)", type: "positive", impact: 4.0, correlation: 0.38, marketCap: "22B", sector: "Solar", parentId: "icln" },
-      { id: "nee", label: "NextEra Energy (NEE)", type: "positive", impact: 3.5, correlation: 0.35, marketCap: "155B", sector: "Renewables", parentId: "icln" },
-      { id: "esg_funds", label: "ESG Fund Flows", type: "positive", impact: 3.0, sector: "Macro", parentId: "icln" }
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: 4.5, correlation: 0.4, marketCap: "25B", sector: "Solar", parentId: "icln" },
+      { id: "fslr", label: "First Solar (FSLR)", type: "consumer", impact: 4, correlation: 0.38, marketCap: "22B", sector: "Solar", parentId: "icln" },
+      { id: "nee", label: "NextEra Energy (NEE)", type: "substitute", impact: 3.5, correlation: 0.35, marketCap: "155B", sector: "Renewables", parentId: "icln" },
+      { id: "esg_funds", label: "ESG Fund Flows", type: "macro", impact: 3, sector: "Macro", parentId: "icln" }
     ]},
     { nodes: [
-      { id: "carbon_price", label: "Carbon Credit Price", type: "positive", impact: 5.5, sector: "Macro", parentId: "enph" },
-      { id: "electricity", label: "Electricity Price Index", type: "negative", impact: -4.0, sector: "Macro", parentId: "aep" },
-      { id: "steel_price", label: "HRC Steel Price", type: "positive", impact: 3.5, sector: "Macro", parentId: "x" },
-      { id: "coal_to_gas", label: "Coal-to-Gas Switching", type: "positive", impact: 2.5, sector: "Macro", parentId: "so" }
+      { id: "carbon_price", label: "Carbon Credit Price", type: "macro", impact: 5.5, sector: "Macro", parentId: "enph" },
+      { id: "electricity", label: "Electricity Price Index", type: "macro", impact: -4, sector: "Macro", parentId: "aep" },
+      { id: "steel_price", label: "HRC Steel Price", type: "macro", impact: 3.5, sector: "Macro", parentId: "x" },
+      { id: "coal_to_gas", label: "Coal-to-Gas Switching", type: "macro", impact: 2.5, sector: "Macro", parentId: "so" }
     ]}
   ]
 };

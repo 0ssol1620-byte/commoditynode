@@ -7,6 +7,7 @@ tags: [lithium, ev, TSLA, RIVN, LCID, NIO, cobalt, nickel, battery]
 description: 'How Tesla battery metal costs in lithium, nickel, and cobalt create margin pressure and supply chain vulnerabilities across the EV industry.'
 reading_time: 10
 commodity_name: 'Lithium'
+direction: bullish
 image: /assets/images/og-lithium.png
 ---
 
@@ -35,33 +36,33 @@ window.COMMODITY_DATA = {
   commodity: { id: "lithium", label: "Battery Metals ↑15%", price: "$14,500/t Li", change: "+15%" },
   levels: [
     { nodes: [
-      { id: "tsla", label: "Tesla (TSLA)", type: "negative", impact: -6.5, correlation: -0.58, marketCap: "750B", sector: "EV Manufacturer" },
-      { id: "alb", label: "Albemarle (ALB)", type: "positive", impact: 18.5, correlation: 0.92, marketCap: "12B", sector: "Lithium Mining" },
-      { id: "sqm", label: "SQM (SQM)", type: "positive", impact: 16.0, correlation: 0.88, marketCap: "14B", sector: "Lithium/Chemicals" },
-      { id: "lit", label: "Global X Lithium (LIT)", type: "etf", impact: 12.0, correlation: 0.85, marketCap: "3.5B", sector: "ETF" },
-      { id: "rivn", label: "Rivian (RIVN)", type: "negative", impact: -9.0, correlation: -0.68, marketCap: "18B", sector: "EV Manufacturer" }
+      { id: "tsla", label: "Tesla (TSLA)", type: "consumer", impact: -6.5, correlation: -0.58, marketCap: "750B", sector: "EV Manufacturer" },
+      { id: "alb", label: "Albemarle (ALB)", type: "producer", impact: 18.5, correlation: 0.92, marketCap: "12B", sector: "Lithium Mining" },
+      { id: "sqm", label: "SQM (SQM)", type: "positive", impact: 16, correlation: 0.88, marketCap: "14B", sector: "Lithium/Chemicals" },
+      { id: "lit", label: "Global X Lithium (LIT)", type: "etf", impact: 12, correlation: 0.85, marketCap: "3.5B", sector: "ETF" },
+      { id: "rivn", label: "Rivian (RIVN)", type: "consumer", impact: -9, correlation: -0.68, marketCap: "18B", sector: "EV Manufacturer" }
     ]},
     { nodes: [
-      { id: "lcid", label: "Lucid Group (LCID)", type: "negative", impact: -10.5, correlation: -0.72, marketCap: "7B", sector: "EV Manufacturer", parentId: "tsla" },
-      { id: "nio", label: "NIO Inc (NIO)", type: "negative", impact: -8.5, correlation: -0.65, marketCap: "10B", sector: "EV Manufacturer", parentId: "tsla" },
-      { id: "lac", label: "Lithium Americas (LAC)", type: "positive", impact: 22.0, correlation: 0.94, marketCap: "3B", sector: "Lithium Development", parentId: "alb" },
-      { id: "pll", label: "Piedmont Lithium (PLL)", type: "positive", impact: 20.5, correlation: 0.91, marketCap: "0.8B", sector: "Lithium Development", parentId: "alb" },
-      { id: "vale_ni", label: "Vale (VALE) - Nickel", type: "positive", impact: 8.0, correlation: 0.65, marketCap: "55B", sector: "Nickel/Mining", parentId: "sqm" }
+      { id: "lcid", label: "Lucid Group (LCID)", type: "consumer", impact: -10.5, correlation: -0.72, marketCap: "7B", sector: "EV Manufacturer", parentId: "tsla" },
+      { id: "nio", label: "NIO Inc (NIO)", type: "consumer", impact: -8.5, correlation: -0.65, marketCap: "10B", sector: "EV Manufacturer", parentId: "tsla" },
+      { id: "lac", label: "Lithium Americas (LAC)", type: "producer", impact: 22, correlation: 0.94, marketCap: "3B", sector: "Lithium Development", parentId: "alb" },
+      { id: "pll", label: "Piedmont Lithium (PLL)", type: "producer", impact: 20.5, correlation: 0.91, marketCap: "0.8B", sector: "Lithium Development", parentId: "alb" },
+      { id: "vale_ni", label: "Vale (VALE) - Nickel", type: "producer", impact: 8, correlation: 0.65, marketCap: "55B", sector: "Nickel/Mining", parentId: "sqm" }
     ]},
     { nodes: [
-      { id: "licy", label: "Li-Cycle (LICY)", type: "positive", impact: 14.0, correlation: 0.78, marketCap: "0.5B", sector: "Battery Recycling", parentId: "lit" },
-      { id: "catl", label: "CATL (300750.SZ)", type: "negative", impact: -4.5, correlation: -0.42, marketCap: "180B", sector: "Battery Cell Maker", parentId: "tsla" },
-      { id: "panasonic", label: "Panasonic (6752.T)", type: "negative", impact: -3.8, correlation: -0.38, marketCap: "25B", sector: "Battery Cell Maker", parentId: "tsla" },
-      { id: "bhp_ni", label: "BHP Nickel (BHP)", type: "positive", impact: 5.5, correlation: 0.52, marketCap: "145B", sector: "Diversified Mining", parentId: "vale_ni" },
-      { id: "glencore_co", label: "Glencore Cobalt (GLEN.L)", type: "positive", impact: 6.0, correlation: 0.55, marketCap: "60B", sector: "Cobalt/Mining", parentId: "vale_ni" }
+      { id: "licy", label: "Li-Cycle (LICY)", type: "substitute", impact: 14, correlation: 0.78, marketCap: "0.5B", sector: "Battery Recycling", parentId: "lit" },
+      { id: "catl", label: "CATL (300750.SZ)", type: "processor", impact: -4.5, correlation: -0.42, marketCap: "180B", sector: "Battery Cell Maker", parentId: "tsla" },
+      { id: "panasonic", label: "Panasonic (6752.T)", type: "processor", impact: -3.8, correlation: -0.38, marketCap: "25B", sector: "Battery Cell Maker", parentId: "tsla" },
+      { id: "bhp_ni", label: "BHP Nickel (BHP)", type: "producer", impact: 5.5, correlation: 0.52, marketCap: "145B", sector: "Diversified Mining", parentId: "vale_ni" },
+      { id: "glencore_co", label: "Glencore Cobalt (GLEN.L)", type: "producer", impact: 6, correlation: 0.55, marketCap: "60B", sector: "Cobalt/Mining", parentId: "vale_ni" }
     ]},
     { nodes: [
-      { id: "chpt", label: "ChargePoint (CHPT)", type: "negative", impact: -5.0, correlation: -0.45, marketCap: "2B", sector: "EV Charging", parentId: "lcid" },
-      { id: "plug_ev", label: "Plug Power (PLUG)", type: "negative", impact: -3.0, correlation: -0.30, marketCap: "3B", sector: "Green Hydrogen", parentId: "chpt" },
-      { id: "sss_mining", label: "Sigma Lithium (SGML)", type: "positive", impact: 24.0, correlation: 0.95, marketCap: "2B", sector: "Lithium Mining", parentId: "lac" },
-      { id: "mp_materials", label: "MP Materials (MP)", type: "positive", impact: 7.0, correlation: 0.55, marketCap: "4B", sector: "Rare Earths", parentId: "licy" },
-      { id: "qs", label: "QuantumScape (QS)", type: "negative", impact: -7.5, correlation: -0.52, marketCap: "5B", sector: "Solid-State Battery", parentId: "catl" },
-      { id: "xpev", label: "XPeng (XPEV)", type: "negative", impact: -7.0, correlation: -0.60, marketCap: "12B", sector: "EV Manufacturer", parentId: "nio" }
+      { id: "chpt", label: "ChargePoint (CHPT)", type: "consumer", impact: -5, correlation: -0.45, marketCap: "2B", sector: "EV Charging", parentId: "lcid" },
+      { id: "plug_ev", label: "Plug Power (PLUG)", type: "substitute", impact: -3, correlation: -0.3, marketCap: "3B", sector: "Green Hydrogen", parentId: "chpt" },
+      { id: "sss_mining", label: "Sigma Lithium (SGML)", type: "producer", impact: 24, correlation: 0.95, marketCap: "2B", sector: "Lithium Mining", parentId: "lac" },
+      { id: "mp_materials", label: "MP Materials (MP)", type: "macro", impact: 7, correlation: 0.55, marketCap: "4B", sector: "Rare Earths", parentId: "licy" },
+      { id: "qs", label: "QuantumScape (QS)", type: "substitute", impact: -7.5, correlation: -0.52, marketCap: "5B", sector: "Solid-State Battery", parentId: "catl" },
+      { id: "xpev", label: "XPeng (XPEV)", type: "consumer", impact: -7, correlation: -0.6, marketCap: "12B", sector: "EV Manufacturer", parentId: "nio" }
     ]}
   ]
 };

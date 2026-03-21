@@ -7,6 +7,7 @@ tags: [diesel, jet-fuel, crude-oil, energy, DAL, UNP, FDX, ODFL, JETS]
 description: 'Cross-modal analysis of fuel cost sensitivity in airlines, trucking, rail, and shipping — which transportation modes absorb or pass through energy price shocks.'
 reading_time: 9
 commodity_name: 'Diesel'
+direction: bearish
 image: /assets/images/og-diesel.png
 ---
 
@@ -26,33 +27,33 @@ window.COMMODITY_DATA = {
     { nodes: [
       { id: "jets_t", label: "JETS Airlines ETF", type: "etf", impact: -8.2, correlation: -0.83, marketCap: "2.1B", sector: "ETF" },
       { id: "iyt", label: "IYT Transport ETF", type: "etf", impact: -4.5, correlation: -0.55, marketCap: "0.8B", sector: "ETF" },
-      { id: "dal_t", label: "Delta Air Lines (DAL)", type: "negative", impact: -9.5, correlation: -0.78, marketCap: "28B", sector: "Airlines" },
-      { id: "ual_t", label: "United Airlines (UAL)", type: "negative", impact: -10.2, correlation: -0.80, marketCap: "22B", sector: "Airlines" },
-      { id: "unp", label: "Union Pacific (UNP)", type: "positive", impact: 2.8, correlation: 0.32, marketCap: "148B", sector: "Railroad" },
-      { id: "vlo_t", label: "Valero Energy (VLO)", type: "positive", impact: 7.5, correlation: 0.72, marketCap: "46B", sector: "Refining" }
+      { id: "dal_t", label: "Delta Air Lines (DAL)", type: "consumer", impact: -9.5, correlation: -0.78, marketCap: "28B", sector: "Airlines" },
+      { id: "ual_t", label: "United Airlines (UAL)", type: "consumer", impact: -10.2, correlation: -0.8, marketCap: "22B", sector: "Airlines" },
+      { id: "unp", label: "Union Pacific (UNP)", type: "supplier", impact: 2.8, correlation: 0.32, marketCap: "148B", sector: "Railroad" },
+      { id: "vlo_t", label: "Valero Energy (VLO)", type: "processor", impact: 7.5, correlation: 0.72, marketCap: "46B", sector: "Refining" }
     ]},
     { nodes: [
-      { id: "odfl", label: "Old Dominion (ODFL)", type: "negative", impact: -5.2, correlation: -0.58, marketCap: "42B", sector: "LTL Trucking", parentId: "iyt" },
-      { id: "xpo", label: "XPO Inc (XPO)", type: "negative", impact: -5.8, correlation: -0.62, marketCap: "12B", sector: "LTL Trucking", parentId: "iyt" },
-      { id: "jbht", label: "J.B. Hunt (JBHT)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "20B", sector: "Intermodal / Trucking", parentId: "unp" },
-      { id: "csx", label: "CSX Corp (CSX)", type: "positive", impact: 2.5, correlation: 0.30, marketCap: "68B", sector: "Railroad", parentId: "unp" },
-      { id: "nsc", label: "Norfolk Southern (NSC)", type: "positive", impact: 2.2, correlation: 0.28, marketCap: "55B", sector: "Railroad", parentId: "csx" },
-      { id: "mpc_t", label: "Marathon Petroleum (MPC)", type: "positive", impact: 6.8, correlation: 0.68, marketCap: "62B", sector: "Refining", parentId: "vlo_t" },
-      { id: "aal_t", label: "American Airlines (AAL)", type: "negative", impact: -12.5, correlation: -0.82, marketCap: "9B", sector: "Airlines", parentId: "dal_t" }
+      { id: "odfl", label: "Old Dominion (ODFL)", type: "consumer", impact: -5.2, correlation: -0.58, marketCap: "42B", sector: "LTL Trucking", parentId: "iyt" },
+      { id: "xpo", label: "XPO Inc (XPO)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "12B", sector: "LTL Trucking", parentId: "iyt" },
+      { id: "jbht", label: "J.B. Hunt (JBHT)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "20B", sector: "Intermodal / Trucking", parentId: "unp" },
+      { id: "csx", label: "CSX Corp (CSX)", type: "supplier", impact: 2.5, correlation: 0.3, marketCap: "68B", sector: "Railroad", parentId: "unp" },
+      { id: "nsc", label: "Norfolk Southern (NSC)", type: "supplier", impact: 2.2, correlation: 0.28, marketCap: "55B", sector: "Railroad", parentId: "csx" },
+      { id: "mpc_t", label: "Marathon Petroleum (MPC)", type: "processor", impact: 6.8, correlation: 0.68, marketCap: "62B", sector: "Refining", parentId: "vlo_t" },
+      { id: "aal_t", label: "American Airlines (AAL)", type: "consumer", impact: -12.5, correlation: -0.82, marketCap: "9B", sector: "Airlines", parentId: "dal_t" }
     ]},
     { nodes: [
-      { id: "fdx_t", label: "FedEx (FDX)", type: "negative", impact: -4.2, correlation: -0.50, marketCap: "62B", sector: "Express / Parcel", parentId: "odfl" },
-      { id: "ups_t", label: "UPS (UPS)", type: "negative", impact: -3.8, correlation: -0.46, marketCap: "108B", sector: "Express / Parcel", parentId: "xpo" },
-      { id: "ksu", label: "Kansas City Southern (CP)", type: "positive", impact: 2.0, correlation: 0.25, marketCap: "75B", sector: "Railroad", parentId: "nsc" },
-      { id: "epd_t", label: "Enterprise Products (EPD)", type: "positive", impact: 3.5, correlation: 0.42, marketCap: "64B", sector: "Pipeline (No Fuel)", parentId: "vlo_t" },
-      { id: "luv", label: "Southwest Airlines (LUV)", type: "negative", impact: -8.0, correlation: -0.72, marketCap: "18B", sector: "Airlines", parentId: "aal_t" }
+      { id: "fdx_t", label: "FedEx (FDX)", type: "consumer", impact: -4.2, correlation: -0.5, marketCap: "62B", sector: "Express / Parcel", parentId: "odfl" },
+      { id: "ups_t", label: "UPS (UPS)", type: "consumer", impact: -3.8, correlation: -0.46, marketCap: "108B", sector: "Express / Parcel", parentId: "xpo" },
+      { id: "ksu", label: "Kansas City Southern (CP)", type: "supplier", impact: 2, correlation: 0.25, marketCap: "75B", sector: "Railroad", parentId: "nsc" },
+      { id: "epd_t", label: "Enterprise Products (EPD)", type: "supplier", impact: 3.5, correlation: 0.42, marketCap: "64B", sector: "Pipeline (No Fuel)", parentId: "vlo_t" },
+      { id: "luv", label: "Southwest Airlines (LUV)", type: "consumer", impact: -8, correlation: -0.72, marketCap: "18B", sector: "Airlines", parentId: "aal_t" }
     ]},
     { nodes: [
       { id: "consumer_t", label: "Consumer Shipping Costs", type: "macro", impact: -2.5, sector: "Macro", parentId: "fdx_t" },
-      { id: "crack_spread", label: "Crack Spread Dynamics", type: "macro", impact: 5.0, sector: "Macro", parentId: "vlo_t" },
-      { id: "modal_shift", label: "Modal Shift (Truck→Rail)", type: "macro", impact: 3.0, sector: "Macro", parentId: "unp" },
+      { id: "crack_spread", label: "Crack Spread Dynamics", type: "macro", impact: 5, sector: "Macro", parentId: "vlo_t" },
+      { id: "modal_shift", label: "Modal Shift (Truck→Rail)", type: "macro", impact: 3, sector: "Macro", parentId: "unp" },
       { id: "fuel_surcharge", label: "Fuel Surcharge Recovery", type: "macro", impact: -1.5, sector: "Macro", parentId: "odfl" },
-      { id: "maersk", label: "Maersk (AMKBY)", type: "negative", impact: -3.5, correlation: -0.38, marketCap: "28B", sector: "Container Shipping", parentId: "ups_t" }
+      { id: "maersk", label: "Maersk (AMKBY)", type: "macro", impact: -3.5, correlation: -0.38, marketCap: "28B", sector: "Container Shipping", parentId: "ups_t" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [copper, construction, housing, FCX, DHI, LEN, infrastructure, ev]
 description: 'Mapping the infrastructure chain from copper prices through construction costs to housing affordability, with EV charging and grid modernization adding new demand.'
 reading_time: 9
 commodity_name: 'Copper'
+direction: bullish
 image: /assets/images/og-copper.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "copper", label: "Copper ↑10%", price: "$4.85/lb", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 12.5, correlation: 0.92, marketCap: "68B", sector: "Copper Mining" },
-      { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: 11.8, correlation: 0.90, marketCap: "78B", sector: "Copper Mining" },
-      { id: "teck", label: "Teck Resources (TECK)", type: "positive", impact: 8.5, correlation: 0.78, marketCap: "22B", sector: "Diversified Mining" },
-      { id: "copx", label: "Global X Copper Miners (COPX)", type: "etf", impact: 11.0, correlation: 0.91, marketCap: "2.5B", sector: "ETF" },
-      { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "positive", impact: 14.0, correlation: 0.88, marketCap: "12B", sector: "Copper Mining" },
-      { id: "ero", label: "Ero Copper (ERO)", type: "positive", impact: 13.2, correlation: 0.86, marketCap: "3B", sector: "Copper Mining" }
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 12.5, correlation: 0.92, marketCap: "68B", sector: "Copper Mining" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 11.8, correlation: 0.9, marketCap: "78B", sector: "Copper Mining" },
+      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 8.5, correlation: 0.78, marketCap: "22B", sector: "Diversified Mining" },
+      { id: "copx", label: "Global X Copper Miners (COPX)", type: "etf", impact: 11, correlation: 0.91, marketCap: "2.5B", sector: "ETF" },
+      { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "producer", impact: 14, correlation: 0.88, marketCap: "12B", sector: "Copper Mining" },
+      { id: "ero", label: "Ero Copper (ERO)", type: "producer", impact: 13.2, correlation: 0.86, marketCap: "3B", sector: "Copper Mining" }
     ]},
     { nodes: [
       { id: "ati", label: "ATI Inc (ATI)", type: "negative", impact: -3.2, correlation: -0.42, marketCap: "7B", sector: "Specialty Metals" },
-      { id: "pwr", label: "Quanta Services (PWR)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "42B", sector: "Electrical Contractors" },
-      { id: "ame", label: "AMETEK Inc (AME)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "38B", sector: "Electronic Instruments" },
-      { id: "eaton", label: "Eaton Corp (ETN)", type: "negative", impact: -2.2, correlation: -0.32, marketCap: "115B", sector: "Power Management" },
-      { id: "wire_mfg", label: "Encore Wire (WIRE)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "5B", sector: "Wire/Cable" },
-      { id: "hubb", label: "Hubbell Inc (HUBB)", type: "negative", impact: -3.0, correlation: -0.40, marketCap: "22B", sector: "Electrical Products" }
+      { id: "pwr", label: "Quanta Services (PWR)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "42B", sector: "Electrical Contractors" },
+      { id: "ame", label: "AMETEK Inc (AME)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "38B", sector: "Electronic Instruments" },
+      { id: "eaton", label: "Eaton Corp (ETN)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "115B", sector: "Power Management" },
+      { id: "wire_mfg", label: "Encore Wire (WIRE)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "5B", sector: "Wire/Cable" },
+      { id: "hubb", label: "Hubbell Inc (HUBB)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "22B", sector: "Electrical Products" }
     ]},
     { nodes: [
-      { id: "dhi", label: "D.R. Horton (DHI)", type: "negative", impact: -3.5, correlation: -0.45, marketCap: "48B", sector: "Homebuilders" },
-      { id: "len", label: "Lennar Corp (LEN)", type: "negative", impact: -3.2, correlation: -0.42, marketCap: "38B", sector: "Homebuilders" },
-      { id: "phm", label: "PulteGroup (PHM)", type: "negative", impact: -3.4, correlation: -0.44, marketCap: "24B", sector: "Homebuilders" },
-      { id: "nvr", label: "NVR Inc (NVR)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "28B", sector: "Homebuilders" },
-      { id: "xhb", label: "SPDR Homebuilders (XHB)", type: "etf", impact: -3.0, correlation: -0.42, marketCap: "2B", sector: "ETF" }
+      { id: "dhi", label: "D.R. Horton (DHI)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "48B", sector: "Homebuilders" },
+      { id: "len", label: "Lennar Corp (LEN)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "38B", sector: "Homebuilders" },
+      { id: "phm", label: "PulteGroup (PHM)", type: "consumer", impact: -3.4, correlation: -0.44, marketCap: "24B", sector: "Homebuilders" },
+      { id: "nvr", label: "NVR Inc (NVR)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "28B", sector: "Homebuilders" },
+      { id: "xhb", label: "SPDR Homebuilders (XHB)", type: "etf", impact: -3, correlation: -0.42, marketCap: "2B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "chpt", label: "ChargePoint (CHPT)", type: "negative", impact: -4.2, correlation: -0.50, marketCap: "2B", sector: "EV Charging" },
-      { id: "blnk", label: "Blink Charging (BLNK)", type: "negative", impact: -4.8, correlation: -0.52, marketCap: "0.5B", sector: "EV Charging" },
+      { id: "chpt", label: "ChargePoint (CHPT)", type: "consumer", impact: -4.2, correlation: -0.5, marketCap: "2B", sector: "EV Charging" },
+      { id: "blnk", label: "Blink Charging (BLNK)", type: "consumer", impact: -4.8, correlation: -0.52, marketCap: "0.5B", sector: "EV Charging" },
       { id: "infra_spend", label: "Infrastructure Spending", type: "macro", impact: -1.5, correlation: -0.25, sector: "Macro" },
-      { id: "housing_afford", label: "Housing Affordability", type: "macro", impact: -2.0, correlation: -0.35, sector: "Macro" },
-      { id: "grid_mod", label: "Grid Modernization Cost", type: "macro", impact: -1.8, correlation: -0.30, sector: "Macro" }
+      { id: "housing_afford", label: "Housing Affordability", type: "macro", impact: -2, correlation: -0.35, sector: "Macro" },
+      { id: "grid_mod", label: "Grid Modernization Cost", type: "macro", impact: -1.8, correlation: -0.3, sector: "Macro" }
     ]}
   ]
 };

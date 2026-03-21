@@ -7,6 +7,7 @@ tags: [natural-gas, fertilizer, agriculture, wheat, MOS, CF, NTR, food]
 description: 'How natural gas price spikes cascade through fertilizer production to crop prices and ultimately to consumer food inflation — the hidden inflation pipeline.'
 reading_time: 10
 commodity_name: 'Natural Gas'
+direction: bullish
 image: /assets/images/og-natural-gas.png
 ---
 
@@ -24,35 +25,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "natural-gas", label: "Natural Gas ↑15%", price: "$3.20/MMBtu", change: "+15%" },
   levels: [
     { nodes: [
-      { id: "eqt", label: "EQT Corporation (EQT)", type: "positive", impact: 10.5, correlation: 0.88, marketCap: "22B", sector: "Gas Production" },
-      { id: "ar", label: "Antero Resources (AR)", type: "positive", impact: 11.2, correlation: 0.90, marketCap: "9B", sector: "Gas Production" },
-      { id: "swn", label: "SWN Energy (SWN)", type: "positive", impact: 12.0, correlation: 0.91, marketCap: "7B", sector: "Gas Production" },
-      { id: "tell", label: "Tellurian (TELL)", type: "positive", impact: 8.5, correlation: 0.75, marketCap: "1.5B", sector: "LNG Export" },
+      { id: "eqt", label: "EQT Corporation (EQT)", type: "producer", impact: 10.5, correlation: 0.88, marketCap: "22B", sector: "Gas Production" },
+      { id: "ar", label: "Antero Resources (AR)", type: "producer", impact: 11.2, correlation: 0.9, marketCap: "9B", sector: "Gas Production" },
+      { id: "swn", label: "SWN Energy (SWN)", type: "producer", impact: 12, correlation: 0.91, marketCap: "7B", sector: "Gas Production" },
+      { id: "tell", label: "Tellurian (TELL)", type: "producer", impact: 8.5, correlation: 0.75, marketCap: "1.5B", sector: "LNG Export" },
       { id: "ung", label: "US Natural Gas Fund (UNG)", type: "etf", impact: 13.8, correlation: 0.95, marketCap: "0.8B", sector: "ETF" },
-      { id: "lng_ch", label: "Cheniere Energy (LNG)", type: "positive", impact: 6.2, correlation: 0.65, marketCap: "42B", sector: "LNG Export" }
+      { id: "lng_ch", label: "Cheniere Energy (LNG)", type: "producer", impact: 6.2, correlation: 0.65, marketCap: "42B", sector: "LNG Export" }
     ]},
     { nodes: [
-      { id: "cf", label: "CF Industries (CF)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "16B", sector: "Nitrogen Fertilizer" },
+      { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "16B", sector: "Nitrogen Fertilizer" },
       { id: "mos", label: "Mosaic Company (MOS)", type: "negative", impact: -3.2, correlation: -0.42, marketCap: "11B", sector: "Potash/Phosphate" },
-      { id: "ntr", label: "Nutrien (NTR)", type: "negative", impact: -3.8, correlation: -0.48, marketCap: "28B", sector: "Diversified Fertilizer" },
-      { id: "uan", label: "CVR Partners (UAN)", type: "negative", impact: -5.8, correlation: -0.62, marketCap: "1.2B", sector: "Nitrogen Fertilizer" },
-      { id: "iff_fert", label: "ICL Group (ICL)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "8B", sector: "Specialty Fertilizer" }
+      { id: "ntr", label: "Nutrien (NTR)", type: "consumer", impact: -3.8, correlation: -0.48, marketCap: "28B", sector: "Diversified Fertilizer" },
+      { id: "uan", label: "CVR Partners (UAN)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "1.2B", sector: "Nitrogen Fertilizer" },
+      { id: "iff_fert", label: "ICL Group (ICL)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "8B", sector: "Specialty Fertilizer" }
     ]},
     { nodes: [
-      { id: "adm", label: "ADM (ADM)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "25B", sector: "Grain Trading" },
-      { id: "bg", label: "Bunge Global (BG)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "14B", sector: "Grain Trading" },
-      { id: "wheat_f", label: "Wheat Futures (ZW=F)", type: "positive", impact: 5.2, correlation: 0.48, sector: "Crops" },
-      { id: "corn_f", label: "Corn Futures (ZC=F)", type: "positive", impact: 4.8, correlation: 0.45, sector: "Crops" },
-      { id: "dba", label: "Invesco DB Agriculture (DBA)", type: "etf", impact: 3.5, correlation: 0.40, marketCap: "0.9B", sector: "ETF" },
-      { id: "de_ag", label: "Deere & Co (DE)", type: "negative", impact: -2.0, correlation: -0.30, marketCap: "115B", sector: "Farm Equipment" }
+      { id: "adm", label: "ADM (ADM)", type: "processor", impact: -2.8, correlation: -0.38, marketCap: "25B", sector: "Grain Trading" },
+      { id: "bg", label: "Bunge Global (BG)", type: "processor", impact: -2.5, correlation: -0.35, marketCap: "14B", sector: "Grain Trading" },
+      { id: "wheat_f", label: "Wheat Futures (ZW=F)", type: "producer", impact: 5.2, correlation: 0.48, sector: "Crops" },
+      { id: "corn_f", label: "Corn Futures (ZC=F)", type: "producer", impact: 4.8, correlation: 0.45, sector: "Crops" },
+      { id: "dba", label: "Invesco DB Agriculture (DBA)", type: "etf", impact: 3.5, correlation: 0.4, marketCap: "0.9B", sector: "ETF" },
+      { id: "de_ag", label: "Deere & Co (DE)", type: "consumer", impact: -2, correlation: -0.3, marketCap: "115B", sector: "Farm Equipment" }
     ]},
     { nodes: [
-      { id: "kr", label: "Kroger (KR)", type: "negative", impact: -1.8, correlation: -0.28, marketCap: "38B", sector: "Grocery Retail" },
-      { id: "gis", label: "General Mills (GIS)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "35B", sector: "Packaged Food" },
-      { id: "khc", label: "Kraft Heinz (KHC)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "42B", sector: "Packaged Food" },
-      { id: "mcd", label: "McDonald's (MCD)", type: "negative", impact: -1.5, correlation: -0.25, marketCap: "215B", sector: "Fast Food" },
+      { id: "kr", label: "Kroger (KR)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "38B", sector: "Grocery Retail" },
+      { id: "gis", label: "General Mills (GIS)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "35B", sector: "Packaged Food" },
+      { id: "khc", label: "Kraft Heinz (KHC)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "42B", sector: "Packaged Food" },
+      { id: "mcd", label: "McDonald's (MCD)", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "215B", sector: "Fast Food" },
       { id: "food_cpi", label: "Food CPI Impact", type: "macro", impact: 2.2, correlation: 0.42, sector: "Macro" },
-      { id: "emerging_mkts", label: "EM Food Inflation", type: "macro", impact: 3.5, correlation: 0.50, sector: "Macro" }
+      { id: "emerging_mkts", label: "EM Food Inflation", type: "macro", impact: 3.5, correlation: 0.5, sector: "Macro" }
     ]}
   ]
 };

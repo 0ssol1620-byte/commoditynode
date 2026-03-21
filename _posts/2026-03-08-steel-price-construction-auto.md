@@ -7,6 +7,7 @@ tags: [steel, US-Steel, NUE, STLD, construction, automotive, infrastructure]
 description: "How steel price movements impact US Steel (X), Nucor (NUE), Steel Dynamics (STLD), construction companies, and auto manufacturers. Full correlation analysis."
 reading_time: 8
 commodity_name: "Steel"
+direction: bearish
 image: /assets/images/og-steel.png
 canonical_url: https://commoditynode.com/steel-price-construction-auto/
 ---
@@ -23,32 +24,32 @@ window.COMMODITY_DATA = {
   commodity: { id: "steel", label: "Steel ↑8%", price: "$750/ton", change: "+8%" },
   levels: [
     { nodes: [
-      { id: "x_us", label: "US Steel (X)", type: "positive", impact: 14.5, correlation: 0.88, marketCap: "7B", sector: "Steel Producer" },
-      { id: "nue", label: "Nucor (NUE)", type: "positive", impact: 12.0, correlation: 0.85, marketCap: "35B", sector: "Steel Producer" },
-      { id: "stld", label: "Steel Dynamics (STLD)", type: "positive", impact: 13.5, correlation: 0.87, marketCap: "18B", sector: "Steel Producer" },
-      { id: "cat_s", label: "Caterpillar (CAT)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "180B", sector: "Heavy Equipment" },
-      { id: "f_s", label: "Ford Motor (F)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "48B", sector: "Automotive" }
+      { id: "x_us", label: "US Steel (X)", type: "producer", impact: 14.5, correlation: 0.88, marketCap: "7B", sector: "Steel Producer" },
+      { id: "nue", label: "Nucor (NUE)", type: "producer", impact: 12, correlation: 0.85, marketCap: "35B", sector: "Steel Producer" },
+      { id: "stld", label: "Steel Dynamics (STLD)", type: "producer", impact: 13.5, correlation: 0.87, marketCap: "18B", sector: "Steel Producer" },
+      { id: "cat_s", label: "Caterpillar (CAT)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "180B", sector: "Heavy Equipment" },
+      { id: "f_s", label: "Ford Motor (F)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "48B", sector: "Automotive" }
     ]},
     { nodes: [
-      { id: "ak_steel", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 18.0, correlation: 0.92, marketCap: "8B", sector: "Steel/Iron Ore", parentId: "x_us" },
-      { id: "cms", label: "Commercial Metals (CMC)", type: "positive", impact: 11.0, correlation: 0.82, marketCap: "5B", sector: "Steel Processing", parentId: "nue" },
+      { id: "ak_steel", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 18, correlation: 0.92, marketCap: "8B", sector: "Steel/Iron Ore", parentId: "x_us" },
+      { id: "cms", label: "Commercial Metals (CMC)", type: "processor", impact: 11, correlation: 0.82, marketCap: "5B", sector: "Steel Processing", parentId: "nue" },
       { id: "service_centers", label: "Metals USA", type: "positive", impact: 8.5, correlation: 0.75, sector: "Distribution", parentId: "stld" },
-      { id: "gm_s", label: "General Motors (GM)", type: "negative", impact: -3.5, correlation: -0.44, marketCap: "48B", sector: "Automotive", parentId: "f_s" }
+      { id: "gm_s", label: "General Motors (GM)", type: "consumer", impact: -3.5, correlation: -0.44, marketCap: "48B", sector: "Automotive", parentId: "f_s" }
     ]},
     { nodes: [
-      { id: "coking_coal", label: "Arch Resources (ARCH)", type: "positive", impact: 10.0, correlation: 0.78, marketCap: "3B", sector: "Coking Coal", parentId: "ak_steel" },
-      { id: "iron_ore_s", label: "Vale SA (VALE)", type: "positive", impact: 9.5, correlation: 0.80, marketCap: "60B", sector: "Iron Ore", parentId: "ak_steel" },
-      { id: "fabricators", label: "Steel Fabricators", type: "positive", impact: 7.0, correlation: 0.65, sector: "Manufacturing", parentId: "service_centers" }
+      { id: "coking_coal", label: "Arch Resources (ARCH)", type: "producer", impact: 10, correlation: 0.78, marketCap: "3B", sector: "Coking Coal", parentId: "ak_steel" },
+      { id: "iron_ore_s", label: "Vale SA (VALE)", type: "producer", impact: 9.5, correlation: 0.8, marketCap: "60B", sector: "Iron Ore", parentId: "ak_steel" },
+      { id: "fabricators", label: "Steel Fabricators", type: "macro", impact: 7, correlation: 0.65, sector: "Manufacturing", parentId: "service_centers" }
     ]},
     { nodes: [
-      { id: "construction_s", label: "Construction Industry", type: "negative", impact: -5.5, correlation: -0.60, sector: "Construction", parentId: "fabricators" },
-      { id: "machinery_s", label: "Machine Makers (DE)", type: "negative", impact: -3.0, correlation: -0.38, sector: "Machinery", parentId: "cat_s" },
-      { id: "auto_s", label: "Auto Parts (BWA)", type: "negative", impact: -4.5, correlation: -0.52, sector: "Auto Parts", parentId: "gm_s" }
+      { id: "construction_s", label: "Construction Industry", type: "consumer", impact: -5.5, correlation: -0.6, sector: "Construction", parentId: "fabricators" },
+      { id: "machinery_s", label: "Machine Makers (DE)", type: "negative", impact: -3, correlation: -0.38, sector: "Machinery", parentId: "cat_s" },
+      { id: "auto_s", label: "Auto Parts (BWA)", type: "consumer", impact: -4.5, correlation: -0.52, sector: "Auto Parts", parentId: "gm_s" }
     ]},
     { nodes: [
-      { id: "china_s", label: "China Demand", type: "positive", impact: 10.0, sector: "Macro", parentId: "x_us" },
-      { id: "tariffs_s", label: "Section 232 Tariffs", type: "positive", impact: 8.0, sector: "Macro", parentId: "nue" },
-      { id: "infra_s", label: "Infrastructure Bill", type: "positive", impact: 6.0, sector: "Macro", parentId: "construction_s" }
+      { id: "china_s", label: "China Demand", type: "macro", impact: 10, sector: "Macro", parentId: "x_us" },
+      { id: "tariffs_s", label: "Section 232 Tariffs", type: "macro", impact: 8, sector: "Macro", parentId: "nue" },
+      { id: "infra_s", label: "Infrastructure Bill", type: "macro", impact: 6, sector: "Macro", parentId: "construction_s" }
     ]}
   ]
 };

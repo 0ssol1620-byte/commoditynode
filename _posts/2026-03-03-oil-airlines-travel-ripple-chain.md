@@ -7,6 +7,7 @@ tags: [crude-oil, airlines, jet-fuel, DAL, UAL, BKNG, JETS, travel]
 description: 'Tracing the classic ripple chain from crude oil price spikes through airline costs to travel sector impacts on hotels, OTAs, and tourism economies.'
 reading_time: 9
 commodity_name: 'Crude Oil'
+direction: bearish
 image: /assets/images/og-crude-oil.png
 ---
 
@@ -24,34 +25,34 @@ window.COMMODITY_DATA = {
   commodity: { id: "crude-oil", label: "Crude Oil ↑10%", price: "$82/bbl", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "xom", label: "ExxonMobil (XOM)", type: "positive", impact: 7.2, correlation: 0.85, marketCap: "480B", sector: "Oil Majors" },
-      { id: "cvx", label: "Chevron (CVX)", type: "positive", impact: 6.8, correlation: 0.83, marketCap: "310B", sector: "Oil Majors" },
-      { id: "vlo", label: "Valero (VLO)", type: "positive", impact: 5.5, correlation: 0.72, marketCap: "46B", sector: "Refining" },
-      { id: "mpc", label: "Marathon Petroleum (MPC)", type: "positive", impact: 5.8, correlation: 0.74, marketCap: "58B", sector: "Refining" },
-      { id: "xle", label: "Energy Select (XLE)", type: "etf", impact: 6.5, correlation: 0.90, marketCap: "38B", sector: "ETF" },
-      { id: "psx", label: "Phillips 66 (PSX)", type: "positive", impact: 4.8, correlation: 0.68, marketCap: "52B", sector: "Refining" }
+      { id: "xom", label: "ExxonMobil (XOM)", type: "producer", impact: 7.2, correlation: 0.85, marketCap: "480B", sector: "Oil Majors" },
+      { id: "cvx", label: "Chevron (CVX)", type: "producer", impact: 6.8, correlation: 0.83, marketCap: "310B", sector: "Oil Majors" },
+      { id: "vlo", label: "Valero (VLO)", type: "processor", impact: 5.5, correlation: 0.72, marketCap: "46B", sector: "Refining" },
+      { id: "mpc", label: "Marathon Petroleum (MPC)", type: "processor", impact: 5.8, correlation: 0.74, marketCap: "58B", sector: "Refining" },
+      { id: "xle", label: "Energy Select (XLE)", type: "etf", impact: 6.5, correlation: 0.9, marketCap: "38B", sector: "ETF" },
+      { id: "psx", label: "Phillips 66 (PSX)", type: "processor", impact: 4.8, correlation: 0.68, marketCap: "52B", sector: "Refining" }
     ]},
     { nodes: [
-      { id: "dal", label: "Delta Air Lines (DAL)", type: "negative", impact: -6.2, correlation: -0.78, marketCap: "32B", sector: "Airlines" },
-      { id: "ual", label: "United Airlines (UAL)", type: "negative", impact: -6.8, correlation: -0.80, marketCap: "24B", sector: "Airlines" },
-      { id: "aal", label: "American Airlines (AAL)", type: "negative", impact: -7.5, correlation: -0.82, marketCap: "10B", sector: "Airlines" },
-      { id: "luv", label: "Southwest Airlines (LUV)", type: "negative", impact: -5.0, correlation: -0.70, marketCap: "18B", sector: "Airlines" },
+      { id: "dal", label: "Delta Air Lines (DAL)", type: "consumer", impact: -6.2, correlation: -0.78, marketCap: "32B", sector: "Airlines" },
+      { id: "ual", label: "United Airlines (UAL)", type: "consumer", impact: -6.8, correlation: -0.8, marketCap: "24B", sector: "Airlines" },
+      { id: "aal", label: "American Airlines (AAL)", type: "consumer", impact: -7.5, correlation: -0.82, marketCap: "10B", sector: "Airlines" },
+      { id: "luv", label: "Southwest Airlines (LUV)", type: "consumer", impact: -5, correlation: -0.7, marketCap: "18B", sector: "Airlines" },
       { id: "jets", label: "US Global Jets (JETS)", type: "etf", impact: -5.8, correlation: -0.76, marketCap: "1.5B", sector: "ETF" },
-      { id: "save", label: "Spirit Airlines (SAVE)", type: "negative", impact: -9.2, correlation: -0.85, marketCap: "0.8B", sector: "Airlines" },
-      { id: "jblu", label: "JetBlue Airways (JBLU)", type: "negative", impact: -7.8, correlation: -0.81, marketCap: "2.5B", sector: "Airlines" }
+      { id: "save", label: "Spirit Airlines (SAVE)", type: "consumer", impact: -9.2, correlation: -0.85, marketCap: "0.8B", sector: "Airlines" },
+      { id: "jblu", label: "JetBlue Airways (JBLU)", type: "consumer", impact: -7.8, correlation: -0.81, marketCap: "2.5B", sector: "Airlines" }
     ]},
     { nodes: [
-      { id: "bkng", label: "Booking Holdings (BKNG)", type: "negative", impact: -3.5, correlation: -0.52, marketCap: "145B", sector: "OTA" },
-      { id: "abnb", label: "Airbnb (ABNB)", type: "negative", impact: -2.8, correlation: -0.45, marketCap: "78B", sector: "OTA" },
-      { id: "mar", label: "Marriott (MAR)", type: "negative", impact: -3.2, correlation: -0.50, marketCap: "72B", sector: "Hotels" },
-      { id: "hlt", label: "Hilton (HLT)", type: "negative", impact: -2.9, correlation: -0.48, marketCap: "55B", sector: "Hotels" },
-      { id: "expe", label: "Expedia (EXPE)", type: "negative", impact: -3.8, correlation: -0.55, marketCap: "20B", sector: "OTA" }
+      { id: "bkng", label: "Booking Holdings (BKNG)", type: "consumer", impact: -3.5, correlation: -0.52, marketCap: "145B", sector: "OTA" },
+      { id: "abnb", label: "Airbnb (ABNB)", type: "consumer", impact: -2.8, correlation: -0.45, marketCap: "78B", sector: "OTA" },
+      { id: "mar", label: "Marriott (MAR)", type: "consumer", impact: -3.2, correlation: -0.5, marketCap: "72B", sector: "Hotels" },
+      { id: "hlt", label: "Hilton (HLT)", type: "consumer", impact: -2.9, correlation: -0.48, marketCap: "55B", sector: "Hotels" },
+      { id: "expe", label: "Expedia (EXPE)", type: "consumer", impact: -3.8, correlation: -0.55, marketCap: "20B", sector: "OTA" }
     ]},
     { nodes: [
-      { id: "ccl", label: "Carnival Corp (CCL)", type: "negative", impact: -8.5, correlation: -0.80, marketCap: "24B", sector: "Cruise Lines" },
-      { id: "rcl", label: "Royal Caribbean (RCL)", type: "negative", impact: -7.2, correlation: -0.75, marketCap: "40B", sector: "Cruise Lines" },
-      { id: "nclh", label: "Norwegian Cruise (NCLH)", type: "negative", impact: -8.8, correlation: -0.82, marketCap: "10B", sector: "Cruise Lines" },
-      { id: "gdp_tourism", label: "Tourism GDP Impact", type: "macro", impact: -1.8, correlation: -0.40, sector: "Macro" },
+      { id: "ccl", label: "Carnival Corp (CCL)", type: "consumer", impact: -8.5, correlation: -0.8, marketCap: "24B", sector: "Cruise Lines" },
+      { id: "rcl", label: "Royal Caribbean (RCL)", type: "consumer", impact: -7.2, correlation: -0.75, marketCap: "40B", sector: "Cruise Lines" },
+      { id: "nclh", label: "Norwegian Cruise (NCLH)", type: "consumer", impact: -8.8, correlation: -0.82, marketCap: "10B", sector: "Cruise Lines" },
+      { id: "gdp_tourism", label: "Tourism GDP Impact", type: "macro", impact: -1.8, correlation: -0.4, sector: "Macro" },
       { id: "consumer_conf", label: "Consumer Confidence", type: "macro", impact: -2.2, correlation: -0.38, sector: "Macro" }
     ]}
   ]

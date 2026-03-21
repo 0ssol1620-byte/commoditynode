@@ -7,6 +7,7 @@ tags: [diesel, energy, transportation, agriculture, manufacturing, XPO, ODFL, AD
 description: "Diesel price surges ripple through trucking fleets, farm equipment costs, and industrial supply chains — interactive impact map with sensitivity scores for XPO, ODFL, Deere, and ADM."
 reading_time: 8
 commodity_name: "Diesel"
+direction: bearish
 image: /assets/images/og-diesel.png
 canonical_url: https://commoditynode.com/diesel-price-transportation-impact/
 ---
@@ -27,31 +28,31 @@ window.COMMODITY_DATA = {
   commodity: { id: "diesel", label: "Diesel ↑10%", price: "$3.80/gal", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "xpo", label: "XPO Inc (XPO)", type: "negative", impact: -8.5, correlation: -0.78, marketCap: "18B", sector: "Freight" },
-      { id: "odfl", label: "Old Dominion (ODFL)", type: "negative", impact: -7.0, correlation: -0.74, marketCap: "45B", sector: "LTL Trucking" },
-      { id: "jbht", label: "J.B. Hunt (JBHT)", type: "negative", impact: -7.8, correlation: -0.76, marketCap: "20B", sector: "Trucking" },
-      { id: "de", label: "Deere & Co (DE)", type: "negative", impact: -4.5, correlation: -0.58, marketCap: "120B", sector: "Farm Equipment" },
-      { id: "adm", label: "Archer-Daniels (ADM)", type: "negative", impact: -3.8, correlation: -0.52, marketCap: "30B", sector: "Agri-Processing" },
-      { id: "vntr", label: "Valero Energy (VLO)", type: "positive", impact: 6.5, correlation: 0.72, marketCap: "50B", sector: "Refining" }
+      { id: "xpo", label: "XPO Inc (XPO)", type: "consumer", impact: -8.5, correlation: -0.78, marketCap: "18B", sector: "Freight" },
+      { id: "odfl", label: "Old Dominion (ODFL)", type: "consumer", impact: -7, correlation: -0.74, marketCap: "45B", sector: "LTL Trucking" },
+      { id: "jbht", label: "J.B. Hunt (JBHT)", type: "consumer", impact: -7.8, correlation: -0.76, marketCap: "20B", sector: "Trucking" },
+      { id: "de", label: "Deere & Co (DE)", type: "consumer", impact: -4.5, correlation: -0.58, marketCap: "120B", sector: "Farm Equipment" },
+      { id: "adm", label: "Archer-Daniels (ADM)", type: "consumer", impact: -3.8, correlation: -0.52, marketCap: "30B", sector: "Agri-Processing" },
+      { id: "vntr", label: "Valero Energy (VLO)", type: "processor", impact: 6.5, correlation: 0.72, marketCap: "50B", sector: "Refining" }
     ]},
     { nodes: [
-      { id: "werner", label: "Werner Enterprises (WERN)", type: "negative", impact: -9.2, correlation: -0.82, marketCap: "3B", sector: "Trucking", parentId: "xpo" },
-      { id: "saia", label: "Saia Inc (SAIA)", type: "negative", impact: -8.0, correlation: -0.77, marketCap: "8B", sector: "LTL", parentId: "odfl" },
-      { id: "agco", label: "AGCO Corp (AGCO)", type: "negative", impact: -5.0, correlation: -0.61, marketCap: "10B", sector: "Farm Equipment", parentId: "de" },
-      { id: "bunge", label: "Bunge Global (BG)", type: "negative", impact: -3.2, correlation: -0.48, marketCap: "14B", sector: "Grain Trading", parentId: "adm" },
-      { id: "psx", label: "Phillips 66 (PSX)", type: "positive", impact: 5.8, correlation: 0.68, marketCap: "52B", sector: "Refining", parentId: "vntr" }
+      { id: "werner", label: "Werner Enterprises (WERN)", type: "consumer", impact: -9.2, correlation: -0.82, marketCap: "3B", sector: "Trucking", parentId: "xpo" },
+      { id: "saia", label: "Saia Inc (SAIA)", type: "consumer", impact: -8, correlation: -0.77, marketCap: "8B", sector: "LTL", parentId: "odfl" },
+      { id: "agco", label: "AGCO Corp (AGCO)", type: "consumer", impact: -5, correlation: -0.61, marketCap: "10B", sector: "Farm Equipment", parentId: "de" },
+      { id: "bunge", label: "Bunge Global (BG)", type: "processor", impact: -3.2, correlation: -0.48, marketCap: "14B", sector: "Grain Trading", parentId: "adm" },
+      { id: "psx", label: "Phillips 66 (PSX)", type: "processor", impact: 5.8, correlation: 0.68, marketCap: "52B", sector: "Refining", parentId: "vntr" }
     ]},
     { nodes: [
-      { id: "amzn_log", label: "Amazon Logistics", type: "negative", impact: -2.5, correlation: -0.41, marketCap: "2T", sector: "E-commerce", parentId: "werner" },
-      { id: "fedex", label: "FedEx Corp (FDX)", type: "negative", impact: -5.5, correlation: -0.67, marketCap: "65B", sector: "Parcel Delivery", parentId: "saia" },
-      { id: "crop_ins", label: "Crop input costs ↑", type: "negative", impact: -4.0, sector: "Agriculture", parentId: "agco" },
-      { id: "food_mfg", label: "Food CPI inflation", type: "negative", impact: -2.0, sector: "Consumer", parentId: "bunge" },
-      { id: "diesel_arb", label: "Diesel–gasoline spread", type: "positive", impact: 3.5, sector: "Refining", parentId: "psx" }
+      { id: "amzn_log", label: "Amazon Logistics", type: "consumer", impact: -2.5, correlation: -0.41, marketCap: "2T", sector: "E-commerce", parentId: "werner" },
+      { id: "fedex", label: "FedEx Corp (FDX)", type: "consumer", impact: -5.5, correlation: -0.67, marketCap: "65B", sector: "Parcel Delivery", parentId: "saia" },
+      { id: "crop_ins", label: "Crop input costs ↑", type: "negative", impact: -4, sector: "Agriculture", parentId: "agco" },
+      { id: "food_mfg", label: "Food CPI inflation", type: "consumer", impact: -2, sector: "Consumer", parentId: "bunge" },
+      { id: "diesel_arb", label: "Diesel–gasoline spread", type: "processor", impact: 3.5, sector: "Refining", parentId: "psx" }
     ]},
     { nodes: [
-      { id: "consumer_d", label: "Consumer Staples ↑", type: "negative", impact: -1.5, sector: "Macro", parentId: "food_mfg" },
-      { id: "cpi_d", label: "Core CPI inflation", type: "negative", impact: -2.2, sector: "Macro", parentId: "crop_ins" },
-      { id: "reshoring", label: "Nearshoring demand", type: "positive", impact: 2.0, sector: "Industrial", parentId: "diesel_arb" }
+      { id: "consumer_d", label: "Consumer Staples ↑", type: "macro", impact: -1.5, sector: "Macro", parentId: "food_mfg" },
+      { id: "cpi_d", label: "Core CPI inflation", type: "macro", impact: -2.2, sector: "Macro", parentId: "crop_ins" },
+      { id: "reshoring", label: "Nearshoring demand", type: "macro", impact: 2, sector: "Industrial", parentId: "diesel_arb" }
     ]}
   ]
 };

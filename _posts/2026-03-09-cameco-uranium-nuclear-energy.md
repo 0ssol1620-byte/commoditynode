@@ -7,6 +7,7 @@ tags: [uranium, energy, CCJ, URA, NXE, LEU, nuclear, clean-energy]
 description: 'Deep dive into Cameco uranium production, nuclear energy renaissance, and how uranium supply deficits create asymmetric upside for mining stocks.'
 reading_time: 10
 commodity_name: 'Uranium'
+direction: bullish
 image: /assets/images/og-uranium.png
 ---
 
@@ -25,33 +26,33 @@ window.COMMODITY_DATA = {
   commodity: { id: "uranium", label: "Uranium ↑15%", price: "$92/lb", change: "+15%" },
   levels: [
     { nodes: [
-      { id: "ccj", label: "Cameco (CCJ)", type: "positive", impact: 18.0, correlation: 0.90, marketCap: "25B", sector: "Uranium Mining" },
-      { id: "nxe", label: "NexGen Energy (NXE)", type: "positive", impact: 22.0, correlation: 0.88, marketCap: "5B", sector: "Uranium Development" },
-      { id: "ura", label: "Global X Uranium (URA)", type: "etf", impact: 14.0, correlation: 0.92, marketCap: "3.5B", sector: "ETF" },
-      { id: "leu", label: "Centrus Energy (LEU)", type: "positive", impact: 20.0, correlation: 0.85, marketCap: "3B", sector: "Enrichment" },
-      { id: "uuuu", label: "Energy Fuels (UUUU)", type: "positive", impact: 24.0, correlation: 0.86, marketCap: "2.5B", sector: "Uranium Mining" },
-      { id: "ceg", label: "Constellation Energy (CEG)", type: "positive", impact: 8.0, correlation: 0.55, marketCap: "72B", sector: "Nuclear Utility" }
+      { id: "ccj", label: "Cameco (CCJ)", type: "producer", impact: 18, correlation: 0.9, marketCap: "25B", sector: "Uranium Mining" },
+      { id: "nxe", label: "NexGen Energy (NXE)", type: "producer", impact: 22, correlation: 0.88, marketCap: "5B", sector: "Uranium Development" },
+      { id: "ura", label: "Global X Uranium (URA)", type: "etf", impact: 14, correlation: 0.92, marketCap: "3.5B", sector: "ETF" },
+      { id: "leu", label: "Centrus Energy (LEU)", type: "processor", impact: 20, correlation: 0.85, marketCap: "3B", sector: "Enrichment" },
+      { id: "uuuu", label: "Energy Fuels (UUUU)", type: "producer", impact: 24, correlation: 0.86, marketCap: "2.5B", sector: "Uranium Mining" },
+      { id: "ceg", label: "Constellation Energy (CEG)", type: "consumer", impact: 8, correlation: 0.55, marketCap: "72B", sector: "Nuclear Utility" }
     ]},
     { nodes: [
-      { id: "vst", label: "Vistra Corp (VST)", type: "positive", impact: 5.5, correlation: 0.42, marketCap: "40B", sector: "Power Generation", parentId: "ceg" },
-      { id: "dnn", label: "Denison Mines (DNN)", type: "positive", impact: 21.0, correlation: 0.87, marketCap: "2B", sector: "Uranium Development", parentId: "nxe" },
-      { id: "sput", label: "Sprott Physical Uranium", type: "positive", impact: 15.0, correlation: 0.95, marketCap: "6B", sector: "Physical Trust", parentId: "ccj" },
-      { id: "kazatomprom", label: "Kazatomprom (KAP)", type: "positive", impact: 14.0, correlation: 0.82, marketCap: "18B", sector: "Uranium Mining", parentId: "ccj" },
-      { id: "eqt", label: "EQT Corp (EQT)", type: "negative", impact: -3.0, correlation: -0.28, marketCap: "20B", sector: "Natural Gas", parentId: "ceg" }
+      { id: "vst", label: "Vistra Corp (VST)", type: "consumer", impact: 5.5, correlation: 0.42, marketCap: "40B", sector: "Power Generation", parentId: "ceg" },
+      { id: "dnn", label: "Denison Mines (DNN)", type: "producer", impact: 21, correlation: 0.87, marketCap: "2B", sector: "Uranium Development", parentId: "nxe" },
+      { id: "sput", label: "Sprott Physical Uranium", type: "macro", impact: 15, correlation: 0.95, marketCap: "6B", sector: "Physical Trust", parentId: "ccj" },
+      { id: "kazatomprom", label: "Kazatomprom (KAP)", type: "producer", impact: 14, correlation: 0.82, marketCap: "18B", sector: "Uranium Mining", parentId: "ccj" },
+      { id: "eqt", label: "EQT Corp (EQT)", type: "macro", impact: -3, correlation: -0.28, marketCap: "20B", sector: "Natural Gas", parentId: "ceg" }
     ]},
     { nodes: [
-      { id: "smr", label: "NuScale Power (SMR)", type: "positive", impact: 12.0, correlation: 0.65, marketCap: "4B", sector: "Nuclear Technology", parentId: "ceg" },
-      { id: "bwxt", label: "BWX Technologies (BWXT)", type: "positive", impact: 6.5, correlation: 0.48, marketCap: "10B", sector: "Nuclear Components", parentId: "leu" },
-      { id: "ng_plants", label: "Natural Gas Generators", type: "negative", impact: -4.0, correlation: -0.35, sector: "Power Generation", parentId: "eqt" },
-      { id: "coal_plants", label: "Coal Power Plants", type: "negative", impact: -3.5, correlation: -0.30, sector: "Power Generation", parentId: "ng_plants" },
-      { id: "conversion", label: "Uranium Conversion (CVT)", type: "positive", impact: 16.0, correlation: 0.80, sector: "Nuclear Fuel Cycle", parentId: "leu" }
+      { id: "smr", label: "NuScale Power (SMR)", type: "supplier", impact: 12, correlation: 0.65, marketCap: "4B", sector: "Nuclear Technology", parentId: "ceg" },
+      { id: "bwxt", label: "BWX Technologies (BWXT)", type: "supplier", impact: 6.5, correlation: 0.48, marketCap: "10B", sector: "Nuclear Components", parentId: "leu" },
+      { id: "ng_plants", label: "Natural Gas Generators", type: "consumer", impact: -4, correlation: -0.35, sector: "Power Generation", parentId: "eqt" },
+      { id: "coal_plants", label: "Coal Power Plants", type: "consumer", impact: -3.5, correlation: -0.3, sector: "Power Generation", parentId: "ng_plants" },
+      { id: "conversion", label: "Uranium Conversion (CVT)", type: "processor", impact: 16, correlation: 0.8, sector: "Nuclear Fuel Cycle", parentId: "leu" }
     ]},
     { nodes: [
-      { id: "ai_demand", label: "AI Data Center Demand", type: "macro", impact: 10.0, correlation: 0.60, sector: "Macro", parentId: "ceg" },
-      { id: "net_zero", label: "Net-Zero Policy Targets", type: "macro", impact: 8.0, correlation: 0.50, sector: "Macro", parentId: "smr" },
-      { id: "supply_deficit", label: "Structural Supply Deficit", type: "macro", impact: 15.0, correlation: 0.88, sector: "Macro", parentId: "ccj" },
-      { id: "renewable_only", label: "Renewable-Only Utilities", type: "negative", impact: -2.5, correlation: -0.22, sector: "Power Generation", parentId: "net_zero" },
-      { id: "geopolitics", label: "Russia/Kazakhstan Risk", type: "macro", impact: 12.0, correlation: 0.75, sector: "Macro", parentId: "kazatomprom" }
+      { id: "ai_demand", label: "AI Data Center Demand", type: "macro", impact: 10, correlation: 0.6, sector: "Macro", parentId: "ceg" },
+      { id: "net_zero", label: "Net-Zero Policy Targets", type: "macro", impact: 8, correlation: 0.5, sector: "Macro", parentId: "smr" },
+      { id: "supply_deficit", label: "Structural Supply Deficit", type: "macro", impact: 15, correlation: 0.88, sector: "Macro", parentId: "ccj" },
+      { id: "renewable_only", label: "Renewable-Only Utilities", type: "consumer", impact: -2.5, correlation: -0.22, sector: "Power Generation", parentId: "net_zero" },
+      { id: "geopolitics", label: "Russia/Kazakhstan Risk", type: "macro", impact: 12, correlation: 0.75, sector: "Macro", parentId: "kazatomprom" }
     ]}
   ]
 };

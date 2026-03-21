@@ -7,6 +7,7 @@ tags: [lithium, ev, LIT, ALB, SQM, TSLA, battery, energy]
 description: 'LIT lithium and battery ETF analysis — supply chain exposure from lithium miners to battery makers to EV companies and the clean energy transition.'
 reading_time: 9
 commodity_name: 'Lithium'
+direction: bullish
 image: /assets/images/og-lithium.png
 ---
 
@@ -25,32 +26,32 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "lit", label: "Global X Lithium (LIT)", type: "etf", impact: 10.5, correlation: 0.85, marketCap: "3.2B", sector: "ETF" },
-      { id: "alb", label: "Albemarle (ALB)", type: "positive", impact: 18.5, correlation: 0.93, marketCap: "12B", sector: "Lithium Mining" },
-      { id: "sqm", label: "SQM (SQM)", type: "positive", impact: 16.8, correlation: 0.90, marketCap: "14B", sector: "Lithium Mining" },
-      { id: "pll", label: "Piedmont Lithium (PLL)", type: "positive", impact: 22.5, correlation: 0.92, marketCap: "0.5B", sector: "Lithium Development" },
-      { id: "tsla_lit", label: "Tesla (TSLA)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "780B", sector: "EV" }
+      { id: "alb", label: "Albemarle (ALB)", type: "producer", impact: 18.5, correlation: 0.93, marketCap: "12B", sector: "Lithium Mining" },
+      { id: "sqm", label: "SQM (SQM)", type: "producer", impact: 16.8, correlation: 0.9, marketCap: "14B", sector: "Lithium Mining" },
+      { id: "pll", label: "Piedmont Lithium (PLL)", type: "producer", impact: 22.5, correlation: 0.92, marketCap: "0.5B", sector: "Lithium Development" },
+      { id: "tsla_lit", label: "Tesla (TSLA)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "780B", sector: "EV" }
     ]},
     { nodes: [
-      { id: "pls", label: "Pilbara Minerals (PLS.AX)", type: "positive", impact: 20.0, correlation: 0.94, sector: "Lithium Mining", parentId: "alb" },
-      { id: "lac", label: "Lithium Americas (LAC)", type: "positive", impact: 24.0, correlation: 0.91, marketCap: "1.8B", sector: "Lithium Development", parentId: "pll" },
-      { id: "catl_lit", label: "CATL (300750.SZ)", type: "negative", impact: -5.5, correlation: -0.62, sector: "Battery Manufacturing", parentId: "tsla_lit" },
-      { id: "panasonic_lit", label: "Panasonic (6752.T)", type: "negative", impact: -4.2, correlation: -0.52, sector: "Battery Manufacturing", parentId: "tsla_lit" },
-      { id: "licy", label: "Li-Cycle Holdings (LICY)", type: "positive", impact: 12.0, correlation: 0.75, marketCap: "0.4B", sector: "Battery Recycling", parentId: "lit" }
+      { id: "pls", label: "Pilbara Minerals (PLS.AX)", type: "producer", impact: 20, correlation: 0.94, sector: "Lithium Mining", parentId: "alb" },
+      { id: "lac", label: "Lithium Americas (LAC)", type: "producer", impact: 24, correlation: 0.91, marketCap: "1.8B", sector: "Lithium Development", parentId: "pll" },
+      { id: "catl_lit", label: "CATL (300750.SZ)", type: "processor", impact: -5.5, correlation: -0.62, sector: "Battery Manufacturing", parentId: "tsla_lit" },
+      { id: "panasonic_lit", label: "Panasonic (6752.T)", type: "processor", impact: -4.2, correlation: -0.52, sector: "Battery Manufacturing", parentId: "tsla_lit" },
+      { id: "licy", label: "Li-Cycle Holdings (LICY)", type: "substitute", impact: 12, correlation: 0.75, marketCap: "0.4B", sector: "Battery Recycling", parentId: "lit" }
     ]},
     { nodes: [
-      { id: "mp_lit", label: "MP Materials (MP)", type: "positive", impact: 4.5, correlation: 0.48, marketCap: "4B", sector: "Critical Minerals", parentId: "pls" },
-      { id: "mining_eq", label: "Epiroc AB (EPIR-B)", type: "positive", impact: 6.2, correlation: 0.58, sector: "Mining Equipment", parentId: "alb" },
-      { id: "rivn", label: "Rivian (RIVN)", type: "negative", impact: -6.8, correlation: -0.58, marketCap: "12B", sector: "EV Startup", parentId: "tsla_lit" },
-      { id: "lcid", label: "Lucid Group (LCID)", type: "negative", impact: -7.5, correlation: -0.62, marketCap: "6B", sector: "EV Startup", parentId: "rivn" },
-      { id: "aapl_lit", label: "Apple (AAPL)", type: "negative", impact: -0.8, correlation: -0.15, marketCap: "3200B", sector: "Consumer Electronics", parentId: "panasonic_lit" }
+      { id: "mp_lit", label: "MP Materials (MP)", type: "macro", impact: 4.5, correlation: 0.48, marketCap: "4B", sector: "Critical Minerals", parentId: "pls" },
+      { id: "mining_eq", label: "Epiroc AB (EPIR-B)", type: "producer", impact: 6.2, correlation: 0.58, sector: "Mining Equipment", parentId: "alb" },
+      { id: "rivn", label: "Rivian (RIVN)", type: "consumer", impact: -6.8, correlation: -0.58, marketCap: "12B", sector: "EV Startup", parentId: "tsla_lit" },
+      { id: "lcid", label: "Lucid Group (LCID)", type: "consumer", impact: -7.5, correlation: -0.62, marketCap: "6B", sector: "EV Startup", parentId: "rivn" },
+      { id: "aapl_lit", label: "Apple (AAPL)", type: "consumer", impact: -0.8, correlation: -0.15, marketCap: "3200B", sector: "Consumer Electronics", parentId: "panasonic_lit" }
     ]},
     { nodes: [
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "negative", impact: -2.5, correlation: -0.32, marketCap: "10B", sector: "Solar/Storage", parentId: "catl_lit" },
-      { id: "stem_lit", label: "Stem Inc (STEM)", type: "negative", impact: -4.0, correlation: -0.45, marketCap: "0.8B", sector: "Grid Storage", parentId: "catl_lit" },
-      { id: "ev_demand", label: "Global EV Adoption", type: "positive", impact: 15.0, sector: "Macro", parentId: "lit" },
-      { id: "chile_lit", label: "Chile Policy / Nationalization", type: "positive", impact: 10.0, sector: "Macro", parentId: "sqm" },
-      { id: "ira", label: "IRA / Battery Subsidies", type: "positive", impact: 8.0, sector: "Macro", parentId: "lacy" },
-      { id: "solid_state", label: "Solid-State Battery Tech", type: "negative", impact: -6.0, sector: "Macro", parentId: "catl_lit" }
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "10B", sector: "Solar/Storage", parentId: "catl_lit" },
+      { id: "stem_lit", label: "Stem Inc (STEM)", type: "macro", impact: -4, correlation: -0.45, marketCap: "0.8B", sector: "Grid Storage", parentId: "catl_lit" },
+      { id: "ev_demand", label: "Global EV Adoption", type: "macro", impact: 15, sector: "Macro", parentId: "lit" },
+      { id: "chile_lit", label: "Chile Policy / Nationalization", type: "macro", impact: 10, sector: "Macro", parentId: "sqm" },
+      { id: "ira", label: "IRA / Battery Subsidies", type: "macro", impact: 8, sector: "Macro", parentId: "lacy" },
+      { id: "solid_state", label: "Solid-State Battery Tech", type: "macro", impact: -6, sector: "Macro", parentId: "catl_lit" }
     ]}
   ]
 };

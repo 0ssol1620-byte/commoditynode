@@ -7,6 +7,7 @@ tags: [gold, mining, precious, NEM, GOLD, GDX, emerging-markets, central-banks]
 description: 'Tracing golds safe haven chain from bullion prices through mining equities to emerging market economies where gold reserves shape monetary policy.'
 reading_time: 10
 commodity_name: 'Gold'
+direction: bullish
 image: /assets/images/og-gold.png
 ---
 
@@ -31,28 +32,28 @@ window.COMMODITY_DATA = {
       { id: "real_yields", label: "Real Yields (10Y TIPS)", type: "macro", impact: 2.8, correlation: -0.52, sector: "Macro" }
     ]},
     { nodes: [
-      { id: "nem", label: "Newmont (NEM)", type: "positive", impact: 14.2, correlation: 0.85, marketCap: "52B", sector: "Gold Mining", parentId: "gdx" },
-      { id: "gold_barrick", label: "Barrick Gold (GOLD)", type: "positive", impact: 13.5, correlation: 0.83, marketCap: "36B", sector: "Gold Mining", parentId: "gdx" },
-      { id: "aem", label: "Agnico Eagle (AEM)", type: "positive", impact: 15.0, correlation: 0.87, marketCap: "42B", sector: "Gold Mining", parentId: "gdx" },
-      { id: "kgc", label: "Kinross Gold (KGC)", type: "positive", impact: 16.8, correlation: 0.82, marketCap: "12B", sector: "Gold Mining", parentId: "gdx" },
-      { id: "gdxj", label: "Junior Miners (GDXJ)", type: "etf", impact: 18.5, correlation: 0.80, marketCap: "5B", sector: "ETF", parentId: "gdx" },
-      { id: "au_physical", label: "Physical Demand (Jewelry/Tech)", type: "negative", impact: -2.5, correlation: -0.30, sector: "Physical", parentId: "gld" }
+      { id: "nem", label: "Newmont (NEM)", type: "producer", impact: 14.2, correlation: 0.85, marketCap: "52B", sector: "Gold Mining", parentId: "gdx" },
+      { id: "gold_barrick", label: "Barrick Gold (GOLD)", type: "producer", impact: 13.5, correlation: 0.83, marketCap: "36B", sector: "Gold Mining", parentId: "gdx" },
+      { id: "aem", label: "Agnico Eagle (AEM)", type: "producer", impact: 15, correlation: 0.87, marketCap: "42B", sector: "Gold Mining", parentId: "gdx" },
+      { id: "kgc", label: "Kinross Gold (KGC)", type: "producer", impact: 16.8, correlation: 0.82, marketCap: "12B", sector: "Gold Mining", parentId: "gdx" },
+      { id: "gdxj", label: "Junior Miners (GDXJ)", type: "etf", impact: 18.5, correlation: 0.8, marketCap: "5B", sector: "ETF", parentId: "gdx" },
+      { id: "au_physical", label: "Physical Demand (Jewelry/Tech)", type: "macro", impact: -2.5, correlation: -0.3, sector: "Physical", parentId: "gld" }
     ]},
     { nodes: [
-      { id: "fnv", label: "Franco-Nevada (FNV)", type: "positive", impact: 10.8, correlation: 0.82, marketCap: "25B", sector: "Royalty/Streaming", parentId: "nem" },
-      { id: "wpm", label: "Wheaton Precious (WPM)", type: "positive", impact: 11.5, correlation: 0.84, marketCap: "28B", sector: "Royalty/Streaming", parentId: "gold_barrick" },
-      { id: "rgld", label: "Royal Gold (RGLD)", type: "positive", impact: 9.8, correlation: 0.79, marketCap: "9B", sector: "Royalty/Streaming", parentId: "aem" },
-      { id: "ssrm", label: "SSR Mining (SSRM)", type: "positive", impact: 14.5, correlation: 0.75, marketCap: "3B", sector: "Mid-Tier Mining", parentId: "kgc" },
-      { id: "btg", label: "B2Gold (BTG)", type: "positive", impact: 15.2, correlation: 0.77, marketCap: "5B", sector: "Mid-Tier Mining", parentId: "gdxj" },
-      { id: "sig", label: "Signet Jewelers (SIG)", type: "negative", impact: -3.5, correlation: -0.32, marketCap: "4B", sector: "Jewelry Retail", parentId: "au_physical" }
+      { id: "fnv", label: "Franco-Nevada (FNV)", type: "producer", impact: 10.8, correlation: 0.82, marketCap: "25B", sector: "Royalty/Streaming", parentId: "nem" },
+      { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 11.5, correlation: 0.84, marketCap: "28B", sector: "Royalty/Streaming", parentId: "gold_barrick" },
+      { id: "rgld", label: "Royal Gold (RGLD)", type: "producer", impact: 9.8, correlation: 0.79, marketCap: "9B", sector: "Royalty/Streaming", parentId: "aem" },
+      { id: "ssrm", label: "SSR Mining (SSRM)", type: "producer", impact: 14.5, correlation: 0.75, marketCap: "3B", sector: "Mid-Tier Mining", parentId: "kgc" },
+      { id: "btg", label: "B2Gold (BTG)", type: "producer", impact: 15.2, correlation: 0.77, marketCap: "5B", sector: "Mid-Tier Mining", parentId: "gdxj" },
+      { id: "sig", label: "Signet Jewelers (SIG)", type: "consumer", impact: -3.5, correlation: -0.32, marketCap: "4B", sector: "Jewelry Retail", parentId: "au_physical" }
     ]},
     { nodes: [
       { id: "cb_china", label: "PBOC Gold Reserves", type: "macro", impact: 4.5, sector: "Central Banks", parentId: "fnv" },
       { id: "cb_india", label: "RBI Gold Reserves", type: "macro", impact: 3.8, sector: "Central Banks", parentId: "wpm" },
       { id: "eem", label: "EM Equities (EEM)", type: "positive", impact: 2.2, correlation: 0.28, marketCap: "22B", sector: "ETF", parentId: "cb_china" },
-      { id: "em_fx", label: "EM Currencies (Gold-Linked)", type: "positive", impact: 2.8, sector: "Macro", parentId: "cb_india" },
-      { id: "tlt_inv", label: "Treasuries Opportunity Cost", type: "negative", impact: -1.5, correlation: -0.35, marketCap: "50B", sector: "Bonds", parentId: "real_yields" },
-      { id: "geopolitics", label: "Geopolitical Risk Premium", type: "macro", impact: 5.0, sector: "Macro", parentId: "dxy_inv" }
+      { id: "em_fx", label: "EM Currencies (Gold-Linked)", type: "macro", impact: 2.8, sector: "Macro", parentId: "cb_india" },
+      { id: "tlt_inv", label: "Treasuries Opportunity Cost", type: "macro", impact: -1.5, correlation: -0.35, marketCap: "50B", sector: "Bonds", parentId: "real_yields" },
+      { id: "geopolitics", label: "Geopolitical Risk Premium", type: "macro", impact: 5, sector: "Macro", parentId: "dxy_inv" }
     ]}
   ]
 };

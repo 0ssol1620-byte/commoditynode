@@ -7,6 +7,7 @@ tags: [cotton, textile, apparel, fashion, NKE, LEVI, GPS, PVH]
 description: 'How cotton price movements weave through textile mills, apparel brands, and fast fashion retailers — from field to fabric to consumer wardrobe costs.'
 reading_time: 8
 commodity_name: 'Cotton'
+direction: bullish
 image: /assets/images/og-cotton.png
 ---
 
@@ -25,33 +26,33 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "bal", label: "iPath Cotton ETN (BAL)", type: "etf", impact: 9.6, correlation: 0.97, marketCap: "0.05B", sector: "ETF" },
-      { id: "us_cotton", label: "U.S. Cotton Producers", type: "positive", impact: 8.0, correlation: 0.85, sector: "Farming" },
-      { id: "india_cotton", label: "India Cotton (MCX)", type: "positive", impact: 7.5, correlation: 0.80, sector: "Farming" },
-      { id: "adm_cotton", label: "ADM Cotton Trading (ADM)", type: "positive", impact: 3.2, correlation: 0.38, marketCap: "42B", sector: "Commodity Trading" },
-      { id: "ctva_cotton", label: "Corteva Seeds (CTVA)", type: "positive", impact: 2.5, correlation: 0.30, marketCap: "38B", sector: "Ag Inputs" }
+      { id: "us_cotton", label: "U.S. Cotton Producers", type: "producer", impact: 8, correlation: 0.85, sector: "Farming" },
+      { id: "india_cotton", label: "India Cotton (MCX)", type: "producer", impact: 7.5, correlation: 0.8, sector: "Farming" },
+      { id: "adm_cotton", label: "ADM Cotton Trading (ADM)", type: "processor", impact: 3.2, correlation: 0.38, marketCap: "42B", sector: "Commodity Trading" },
+      { id: "ctva_cotton", label: "Corteva Seeds (CTVA)", type: "consumer", impact: 2.5, correlation: 0.3, marketCap: "38B", sector: "Ag Inputs" }
     ]},
     { nodes: [
-      { id: "textile_mills", label: "Textile Mills (Global)", type: "negative", impact: -4.5, correlation: -0.52, sector: "Textile Mfg" , parentId: "us_cotton"},
-      { id: "unifi", label: "Unifi (UFI)", type: "negative", impact: -5.2, correlation: -0.55, marketCap: "0.3B", sector: "Yarn Maker", parentId: "us_cotton" },
-      { id: "alb_yarn", label: "Albany International (AIN)", type: "negative", impact: -2.8, correlation: -0.32, marketCap: "3B", sector: "Textile Tech", parentId: "india_cotton" },
-      { id: "polyester", label: "Polyester Substitution", type: "positive", impact: 3.5, correlation: 0.40, sector: "Synthetic Fiber", parentId: "us_cotton" },
-      { id: "cotton_inc", label: "Cotton Incorporated Index", type: "macro", impact: 9.0, correlation: 0.92, sector: "Macro", parentId: "us_cotton" }
+      { id: "textile_mills", label: "Textile Mills (Global)", type: "consumer", impact: -4.5, correlation: -0.52, sector: "Textile Mfg", parentId: "us_cotton" },
+      { id: "unifi", label: "Unifi (UFI)", type: "consumer", impact: -5.2, correlation: -0.55, marketCap: "0.3B", sector: "Yarn Maker", parentId: "us_cotton" },
+      { id: "alb_yarn", label: "Albany International (AIN)", type: "consumer", impact: -2.8, correlation: -0.32, marketCap: "3B", sector: "Textile Tech", parentId: "india_cotton" },
+      { id: "polyester", label: "Polyester Substitution", type: "substitute", impact: 3.5, correlation: 0.4, sector: "Synthetic Fiber", parentId: "us_cotton" },
+      { id: "cotton_inc", label: "Cotton Incorporated Index", type: "macro", impact: 9, correlation: 0.92, sector: "Macro", parentId: "us_cotton" }
     ]},
     { nodes: [
-      { id: "nke", label: "Nike (NKE)", type: "negative", impact: -2.2, correlation: -0.28, marketCap: "135B", sector: "Athletic Apparel", parentId: "textile_mills" },
-      { id: "levi", label: "Levi Strauss (LEVI)", type: "negative", impact: -3.8, correlation: -0.45, marketCap: "8B", sector: "Denim/Apparel", parentId: "textile_mills" },
-      { id: "pvh", label: "PVH Corp (PVH)", type: "negative", impact: -3.2, correlation: -0.40, marketCap: "6B", sector: "Apparel Brands", parentId: "textile_mills" },
-      { id: "rl", label: "Ralph Lauren (RL)", type: "negative", impact: -2.0, correlation: -0.25, marketCap: "12B", sector: "Premium Apparel", parentId: "alb_yarn" },
-      { id: "hbi", label: "Hanesbrands (HBI)", type: "negative", impact: -4.5, correlation: -0.52, marketCap: "2B", sector: "Basics/Underwear", parentId: "unifi" },
-      { id: "vfc", label: "VF Corp (VFC)", type: "negative", impact: -3.0, correlation: -0.35, marketCap: "7B", sector: "Apparel Brands", parentId: "textile_mills" }
+      { id: "nke", label: "Nike (NKE)", type: "consumer", impact: -2.2, correlation: -0.28, marketCap: "135B", sector: "Athletic Apparel", parentId: "textile_mills" },
+      { id: "levi", label: "Levi Strauss (LEVI)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "8B", sector: "Denim/Apparel", parentId: "textile_mills" },
+      { id: "pvh", label: "PVH Corp (PVH)", type: "consumer", impact: -3.2, correlation: -0.4, marketCap: "6B", sector: "Apparel Brands", parentId: "textile_mills" },
+      { id: "rl", label: "Ralph Lauren (RL)", type: "consumer", impact: -2, correlation: -0.25, marketCap: "12B", sector: "Premium Apparel", parentId: "alb_yarn" },
+      { id: "hbi", label: "Hanesbrands (HBI)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "2B", sector: "Basics/Underwear", parentId: "unifi" },
+      { id: "vfc", label: "VF Corp (VFC)", type: "consumer", impact: -3, correlation: -0.35, marketCap: "7B", sector: "Apparel Brands", parentId: "textile_mills" }
     ]},
     { nodes: [
-      { id: "gps", label: "Gap Inc (GPS)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "9B", sector: "Fast Fashion Retail", parentId: "pvh" },
-      { id: "urbn", label: "Urban Outfitters (URBN)", type: "negative", impact: -2.8, correlation: -0.32, marketCap: "4B", sector: "Specialty Retail", parentId: "nke" },
-      { id: "anf", label: "Abercrombie & Fitch (ANF)", type: "negative", impact: -2.5, correlation: -0.30, marketCap: "5B", sector: "Specialty Retail", parentId: "levi" },
+      { id: "gps", label: "Gap Inc (GPS)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "9B", sector: "Fast Fashion Retail", parentId: "pvh" },
+      { id: "urbn", label: "Urban Outfitters (URBN)", type: "consumer", impact: -2.8, correlation: -0.32, marketCap: "4B", sector: "Specialty Retail", parentId: "nke" },
+      { id: "anf", label: "Abercrombie & Fitch (ANF)", type: "consumer", impact: -2.5, correlation: -0.3, marketCap: "5B", sector: "Specialty Retail", parentId: "levi" },
       { id: "xrt", label: "Retail SPDR (XRT)", type: "etf", impact: -1.2, correlation: -0.15, marketCap: "0.5B", sector: "ETF", parentId: "gps" },
       { id: "consumer_spend", label: "Apparel CPI", type: "macro", impact: -1.5, sector: "Macro", parentId: "gps" },
-      { id: "sustainable", label: "Sustainable Cotton Premium", type: "macro", impact: 2.0, sector: "Macro", parentId: "cotton_inc" }
+      { id: "sustainable", label: "Sustainable Cotton Premium", type: "macro", impact: 2, sector: "Macro", parentId: "cotton_inc" }
     ]}
   ]
 };

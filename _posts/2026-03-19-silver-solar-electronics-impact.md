@@ -7,6 +7,7 @@ tags: [silver, solar, electronics, precious-metals, SLV, PAAS]
 description: 'How silver price increases impact miners like Pan American Silver and Hecla, solar manufacturers, electronics companies, and SLV ETF. Full supply chain correlation analysis.'
 reading_time: 8
 commodity_name: "Silver"
+direction: bullish
 image: /assets/images/og-silver.png
 ---
 
@@ -23,39 +24,39 @@ For investors, a silver rally creates leverage across the mining sector, tailwin
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: { id: "silver", label: "Silver \u219110%", price: "$28.50/oz", change: "+10%" },
+  commodity: { id: "silver", label: "Silver ↑10%", price: "$28.50/oz", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "paas", label: "Pan American Silver (PAAS)", type: "positive", impact: 16.0, correlation: 0.88, marketCap: "9B", sector: "Silver Mining" },
-      { id: "hl", label: "Hecla Mining (HL)", type: "positive", impact: 18.0, correlation: 0.90, marketCap: "4B", sector: "Silver Mining" },
+      { id: "paas", label: "Pan American Silver (PAAS)", type: "producer", impact: 16, correlation: 0.88, marketCap: "9B", sector: "Silver Mining" },
+      { id: "hl", label: "Hecla Mining (HL)", type: "producer", impact: 18, correlation: 0.9, marketCap: "4B", sector: "Silver Mining" },
       { id: "slv", label: "iShares Silver (SLV)", type: "etf", impact: 9.5, correlation: 0.99, marketCap: "12B", sector: "ETF" },
-      { id: "fslr", label: "First Solar (FSLR)", type: "negative", impact: -2.0, correlation: -0.25, marketCap: "22B", sector: "Solar" },
-      { id: "ag", label: "First Majestic (AG)", type: "positive", impact: 20.0, correlation: 0.92, marketCap: "3B", sector: "Silver Mining" }
+      { id: "fslr", label: "First Solar (FSLR)", type: "consumer", impact: -2, correlation: -0.25, marketCap: "22B", sector: "Solar" },
+      { id: "ag", label: "First Majestic (AG)", type: "producer", impact: 20, correlation: 0.92, marketCap: "3B", sector: "Silver Mining" }
     ]},
     { nodes: [
-      { id: "wpm", label: "Wheaton Precious (WPM)", type: "positive", impact: 12.0, correlation: 0.82, marketCap: "22B", sector: "Streaming/Royalty", parentId: "paas" },
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "negative", impact: -2.5, correlation: -0.30, marketCap: "15B", sector: "Solar Inverters", parentId: "fslr" },
-      { id: "sedg", label: "SolarEdge (SEDG)", type: "negative", impact: -3.0, correlation: -0.32, marketCap: "4B", sector: "Solar Tech", parentId: "fslr" },
-      { id: "aapl", label: "Apple (AAPL)", type: "negative", impact: -0.5, correlation: -0.08, marketCap: "3200B", sector: "Electronics", parentId: "slv" },
+      { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 12, correlation: 0.82, marketCap: "22B", sector: "Streaming/Royalty", parentId: "paas" },
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: -2.5, correlation: -0.3, marketCap: "15B", sector: "Solar Inverters", parentId: "fslr" },
+      { id: "sedg", label: "SolarEdge (SEDG)", type: "consumer", impact: -3, correlation: -0.32, marketCap: "4B", sector: "Solar Tech", parentId: "fslr" },
+      { id: "aapl", label: "Apple (AAPL)", type: "consumer", impact: -0.5, correlation: -0.08, marketCap: "3200B", sector: "Electronics", parentId: "slv" },
       { id: "silver_etf2", label: "Sprott Silver (PSLV)", type: "etf", impact: 9.3, correlation: 0.98, marketCap: "5B", sector: "ETF", parentId: "slv" }
     ]},
     { nodes: [
-      { id: "solar_paste", label: "Silver Paste Mfrs (Heraeus)", type: "positive", impact: 8.0, correlation: 0.70, sector: "Solar Materials", parentId: "enph" },
-      { id: "jewelry", label: "Silver Jewelry Retailers", type: "negative", impact: -5.5, correlation: -0.58, sector: "Jewelry Retail", parentId: "wpm" },
-      { id: "connectors", label: "Electrical Connectors", type: "negative", impact: -3.0, correlation: -0.35, sector: "Electronics", parentId: "aapl" },
-      { id: "coin_dealers", label: "Bullion Coin Dealers", type: "positive", impact: 6.0, correlation: 0.65, sector: "Numismatics", parentId: "slv" },
-      { id: "mexico_mines", label: "Mexican Silver Mines", type: "positive", impact: 15.0, correlation: 0.88, sector: "Mining", parentId: "ag" }
+      { id: "solar_paste", label: "Silver Paste Mfrs (Heraeus)", type: "positive", impact: 8, correlation: 0.7, sector: "Solar Materials", parentId: "enph" },
+      { id: "jewelry", label: "Silver Jewelry Retailers", type: "consumer", impact: -5.5, correlation: -0.58, sector: "Jewelry Retail", parentId: "wpm" },
+      { id: "connectors", label: "Electrical Connectors", type: "consumer", impact: -3, correlation: -0.35, sector: "Electronics", parentId: "aapl" },
+      { id: "coin_dealers", label: "Bullion Coin Dealers", type: "macro", impact: 6, correlation: 0.65, sector: "Numismatics", parentId: "slv" },
+      { id: "mexico_mines", label: "Mexican Silver Mines", type: "producer", impact: 15, correlation: 0.88, sector: "Mining", parentId: "ag" }
     ]},
     { nodes: [
-      { id: "pv_cells", label: "PV Cell Manufacturers", type: "negative", impact: -4.0, correlation: -0.45, sector: "Solar Mfg", parentId: "solar_paste" },
-      { id: "brazing", label: "Brazing Alloy Producers", type: "negative", impact: -3.5, correlation: -0.40, sector: "Industrial", parentId: "connectors" },
-      { id: "recycling", label: "Silver Recycling", type: "positive", impact: 7.0, correlation: 0.68, sector: "Recycling", parentId: "jewelry" },
-      { id: "photography", label: "Film Photography (Fuji)", type: "negative", impact: -2.0, correlation: -0.22, sector: "Imaging", parentId: "connectors" }
+      { id: "pv_cells", label: "PV Cell Manufacturers", type: "consumer", impact: -4, correlation: -0.45, sector: "Solar Mfg", parentId: "solar_paste" },
+      { id: "brazing", label: "Brazing Alloy Producers", type: "consumer", impact: -3.5, correlation: -0.4, sector: "Industrial", parentId: "connectors" },
+      { id: "recycling", label: "Silver Recycling", type: "substitute", impact: 7, correlation: 0.68, sector: "Recycling", parentId: "jewelry" },
+      { id: "photography", label: "Film Photography (Fuji)", type: "substitute", impact: -2, correlation: -0.22, sector: "Imaging", parentId: "connectors" }
     ]},
     { nodes: [
-      { id: "fed_rates", label: "Fed Rate Expectations", type: "positive", impact: 8.0, sector: "Macro", parentId: "slv" },
-      { id: "solar_mandate", label: "Solar Installation Mandates", type: "positive", impact: 6.0, sector: "Macro", parentId: "fslr" },
-      { id: "gold_ratio", label: "Gold/Silver Ratio", type: "positive", impact: 5.0, sector: "Macro", parentId: "wpm" }
+      { id: "fed_rates", label: "Fed Rate Expectations", type: "macro", impact: 8, sector: "Macro", parentId: "slv" },
+      { id: "solar_mandate", label: "Solar Installation Mandates", type: "macro", impact: 6, sector: "Macro", parentId: "fslr" },
+      { id: "gold_ratio", label: "Gold/Silver Ratio", type: "macro", impact: 5, sector: "Macro", parentId: "wpm" }
     ]}
   ]
 };

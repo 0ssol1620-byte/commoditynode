@@ -7,6 +7,7 @@ tags: [platinum, automotive, catalysts, fuel-cells, metals]
 description: 'How platinum price movements affect automotive catalyst makers, fuel cell companies, jewelry demand, and miners like IMPUY and SBSW. Full impact analysis.'
 reading_time: 8
 commodity_name: 'Platinum'
+direction: bullish
 image: /assets/images/og-platinum.png
 ---
 
@@ -27,33 +28,33 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "pplt", label: "abrdn Platinum (PPLT)", type: "etf", impact: 9.8, correlation: 0.97, marketCap: "1.1B", sector: "ETF" },
-      { id: "impuy", label: "Impala Platinum (IMPUY)", type: "positive", impact: 16.0, correlation: 0.86, marketCap: "8B", sector: "PGM Mining" },
-      { id: "sbsw", label: "Sibanye-Stillwater (SBSW)", type: "positive", impact: 14.0, correlation: 0.82, marketCap: "5B", sector: "PGM Mining" },
-      { id: "angpy", label: "Anglo American Plat (ANGPY)", type: "positive", impact: 18.0, correlation: 0.90, marketCap: "12B", sector: "PGM Mining" },
-      { id: "tm_pt", label: "Toyota Motor (TM)", type: "negative", impact: -3.5, correlation: -0.48, marketCap: "280B", sector: "Automotive" }
+      { id: "impuy", label: "Impala Platinum (IMPUY)", type: "producer", impact: 16, correlation: 0.86, marketCap: "8B", sector: "PGM Mining" },
+      { id: "sbsw", label: "Sibanye-Stillwater (SBSW)", type: "producer", impact: 14, correlation: 0.82, marketCap: "5B", sector: "PGM Mining" },
+      { id: "angpy", label: "Anglo American Plat (ANGPY)", type: "producer", impact: 18, correlation: 0.9, marketCap: "12B", sector: "PGM Mining" },
+      { id: "tm_pt", label: "Toyota Motor (TM)", type: "consumer", impact: -3.5, correlation: -0.48, marketCap: "280B", sector: "Automotive" }
     ]},
     { nodes: [
-      { id: "plug", label: "Plug Power (PLUG)", type: "negative", impact: -8.0, correlation: -0.62, marketCap: "3B", sector: "Fuel Cells", parentId: "angpy" },
-      { id: "be", label: "Bloom Energy (BE)", type: "negative", impact: -5.0, correlation: -0.48, marketCap: "4.5B", sector: "Fuel Cells", parentId: "angpy" },
-      { id: "fcel", label: "FuelCell Energy (FCEL)", type: "negative", impact: -7.5, correlation: -0.58, marketCap: "0.8B", sector: "Fuel Cells", parentId: "impuy" },
-      { id: "gm_pt", label: "General Motors (GM)", type: "negative", impact: -3.0, correlation: -0.44, marketCap: "48B", sector: "Automotive", parentId: "tm_pt" },
-      { id: "ford_pt", label: "Ford Motor (F)", type: "negative", impact: -2.8, correlation: -0.42, marketCap: "48B", sector: "Automotive", parentId: "tm_pt" }
+      { id: "plug", label: "Plug Power (PLUG)", type: "consumer", impact: -8, correlation: -0.62, marketCap: "3B", sector: "Fuel Cells", parentId: "angpy" },
+      { id: "be", label: "Bloom Energy (BE)", type: "consumer", impact: -5, correlation: -0.48, marketCap: "4.5B", sector: "Fuel Cells", parentId: "angpy" },
+      { id: "fcel", label: "FuelCell Energy (FCEL)", type: "consumer", impact: -7.5, correlation: -0.58, marketCap: "0.8B", sector: "Fuel Cells", parentId: "impuy" },
+      { id: "gm_pt", label: "General Motors (GM)", type: "consumer", impact: -3, correlation: -0.44, marketCap: "48B", sector: "Automotive", parentId: "tm_pt" },
+      { id: "ford_pt", label: "Ford Motor (F)", type: "consumer", impact: -2.8, correlation: -0.42, marketCap: "48B", sector: "Automotive", parentId: "tm_pt" }
     ]},
     { nodes: [
-      { id: "basf_pt", label: "BASF Catalysts (BAS.DE)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "42B", sector: "Catalyst Manufacturing", parentId: "gm_pt" },
-      { id: "johnson_m", label: "Johnson Matthey (JMAT.L)", type: "positive", impact: 8.0, correlation: 0.68, marketCap: "5.5B", sector: "PGM Refining", parentId: "sbsw" },
-      { id: "jewelry_pt", label: "Signet Jewelers (SIG)", type: "negative", impact: -3.5, correlation: -0.40, marketCap: "4.2B", sector: "Jewelry Retail", parentId: "pplt" },
-      { id: "recyclers_pt", label: "PGM Recyclers", type: "positive", impact: 7.0, correlation: 0.60, sector: "Recycling", parentId: "impuy" }
+      { id: "basf_pt", label: "BASF Catalysts (BAS.DE)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "42B", sector: "Catalyst Manufacturing", parentId: "gm_pt" },
+      { id: "johnson_m", label: "Johnson Matthey (JMAT.L)", type: "processor", impact: 8, correlation: 0.68, marketCap: "5.5B", sector: "PGM Refining", parentId: "sbsw" },
+      { id: "jewelry_pt", label: "Signet Jewelers (SIG)", type: "consumer", impact: -3.5, correlation: -0.4, marketCap: "4.2B", sector: "Jewelry Retail", parentId: "pplt" },
+      { id: "recyclers_pt", label: "PGM Recyclers", type: "substitute", impact: 7, correlation: 0.6, sector: "Recycling", parentId: "impuy" }
     ]},
     { nodes: [
-      { id: "ballard", label: "Ballard Power (BLDP)", type: "negative", impact: -6.5, correlation: -0.55, marketCap: "1.2B", sector: "Fuel Cells", parentId: "plug" },
-      { id: "hyzon", label: "Hyzon Motors (HYZN)", type: "negative", impact: -7.0, correlation: -0.52, marketCap: "0.3B", sector: "Hydrogen Trucks", parentId: "fcel" },
-      { id: "heraeus", label: "Heraeus Precious Metals", type: "positive", impact: 6.0, correlation: 0.58, sector: "PGM Processing", parentId: "johnson_m" }
+      { id: "ballard", label: "Ballard Power (BLDP)", type: "consumer", impact: -6.5, correlation: -0.55, marketCap: "1.2B", sector: "Fuel Cells", parentId: "plug" },
+      { id: "hyzon", label: "Hyzon Motors (HYZN)", type: "substitute", impact: -7, correlation: -0.52, marketCap: "0.3B", sector: "Hydrogen Trucks", parentId: "fcel" },
+      { id: "heraeus", label: "Heraeus Precious Metals", type: "processor", impact: 6, correlation: 0.58, sector: "PGM Processing", parentId: "johnson_m" }
     ]},
     { nodes: [
-      { id: "sa_power", label: "SA Eskom Power Crisis", type: "positive", impact: 10.0, sector: "Macro", parentId: "impuy" },
-      { id: "hydrogen_policy", label: "Global Hydrogen Policy", type: "positive", impact: 14.0, sector: "Macro", parentId: "plug" },
-      { id: "diesel_decline", label: "Diesel Vehicle Decline", type: "negative", impact: -8.0, sector: "Macro", parentId: "tm_pt" }
+      { id: "sa_power", label: "SA Eskom Power Crisis", type: "macro", impact: 10, sector: "Macro", parentId: "impuy" },
+      { id: "hydrogen_policy", label: "Global Hydrogen Policy", type: "macro", impact: 14, sector: "Macro", parentId: "plug" },
+      { id: "diesel_decline", label: "Diesel Vehicle Decline", type: "macro", impact: -8, sector: "Macro", parentId: "tm_pt" }
     ]}
   ]
 };

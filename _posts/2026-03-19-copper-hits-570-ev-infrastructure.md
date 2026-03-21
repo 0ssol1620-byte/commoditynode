@@ -7,6 +7,7 @@ tags: [copper, metals, FCX, SCCO, COPX, ev, infrastructure, green-energy]
 description: 'Copper breaks $5.70/lb on EV and infrastructure demand — analyzing the green premium in copper pricing and implications for miners, builders, and the energy transition.'
 reading_time: 9
 commodity_name: 'Copper'
+direction: bullish
 image: /assets/images/og-copper.png
 ---
 
@@ -24,35 +25,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "copper", label: "Copper ↑14%", price: "$5.70/lb", change: "+14%" },
   levels: [
     { nodes: [
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "positive", impact: 19.5, correlation: 0.93, marketCap: "72B", sector: "Copper Mining" },
-      { id: "scco", label: "Southern Copper (SCCO)", type: "positive", impact: 16.0, correlation: 0.89, marketCap: "82B", sector: "Copper Mining" },
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 19.5, correlation: 0.93, marketCap: "72B", sector: "Copper Mining" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 16, correlation: 0.89, marketCap: "82B", sector: "Copper Mining" },
       { id: "copx", label: "Global X Copper Miners (COPX)", type: "etf", impact: 15.5, correlation: 0.91, marketCap: "3B", sector: "ETF" },
-      { id: "teck", label: "Teck Resources (TECK)", type: "positive", impact: 11.5, correlation: 0.78, marketCap: "27B", sector: "Diversified Mining" },
-      { id: "dhi", label: "D.R. Horton (DHI)", type: "negative", impact: -4.5, correlation: -0.42, marketCap: "42B", sector: "Homebuilders" },
-      { id: "chpt_cu", label: "ChargePoint (CHPT)", type: "negative", impact: -5.5, correlation: -0.55, marketCap: "2B", sector: "EV Charging" }
+      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 11.5, correlation: 0.78, marketCap: "27B", sector: "Diversified Mining" },
+      { id: "dhi", label: "D.R. Horton (DHI)", type: "consumer", impact: -4.5, correlation: -0.42, marketCap: "42B", sector: "Homebuilders" },
+      { id: "chpt_cu", label: "ChargePoint (CHPT)", type: "consumer", impact: -5.5, correlation: -0.55, marketCap: "2B", sector: "EV Charging" }
     ]},
     { nodes: [
-      { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "positive", impact: 22.0, correlation: 0.94, marketCap: "14B", sector: "Copper Development", parentId: "fcx" },
-      { id: "bhp_cu", label: "BHP Group (BHP)", type: "positive", impact: 9.0, correlation: 0.72, marketCap: "158B", sector: "Diversified Mining", parentId: "scco" },
-      { id: "len", label: "Lennar (LEN)", type: "negative", impact: -3.8, correlation: -0.38, marketCap: "35B", sector: "Homebuilders", parentId: "dhi" },
-      { id: "blnk_cu", label: "Blink Charging (BLNK)", type: "negative", impact: -6.2, correlation: -0.58, marketCap: "0.5B", sector: "EV Charging", parentId: "chpt_cu" },
-      { id: "ero", label: "Ero Copper (ERO)", type: "positive", impact: 24.0, correlation: 0.90, marketCap: "3B", sector: "Copper Mining", parentId: "copx" },
-      { id: "rio_cu", label: "Rio Tinto (RIO)", type: "positive", impact: 7.5, correlation: 0.65, marketCap: "120B", sector: "Diversified Mining", parentId: "teck" }
+      { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "producer", impact: 22, correlation: 0.94, marketCap: "14B", sector: "Copper Development", parentId: "fcx" },
+      { id: "bhp_cu", label: "BHP Group (BHP)", type: "producer", impact: 9, correlation: 0.72, marketCap: "158B", sector: "Diversified Mining", parentId: "scco" },
+      { id: "len", label: "Lennar (LEN)", type: "consumer", impact: -3.8, correlation: -0.38, marketCap: "35B", sector: "Homebuilders", parentId: "dhi" },
+      { id: "blnk_cu", label: "Blink Charging (BLNK)", type: "consumer", impact: -6.2, correlation: -0.58, marketCap: "0.5B", sector: "EV Charging", parentId: "chpt_cu" },
+      { id: "ero", label: "Ero Copper (ERO)", type: "producer", impact: 24, correlation: 0.9, marketCap: "3B", sector: "Copper Mining", parentId: "copx" },
+      { id: "rio_cu", label: "Rio Tinto (RIO)", type: "producer", impact: 7.5, correlation: 0.65, marketCap: "120B", sector: "Diversified Mining", parentId: "teck" }
     ]},
     { nodes: [
-      { id: "wire_mfrs", label: "Wiring & Cable Mfrs", type: "negative", impact: -7.5, correlation: -0.68, sector: "Electrical Equipment", parentId: "len" },
-      { id: "recyclers_cu", label: "Copper Recyclers", type: "positive", impact: 9.0, correlation: 0.74, sector: "Recycling", parentId: "ivn" },
-      { id: "util_capex", label: "Utility CapEx Budgets", type: "negative", impact: -4.0, correlation: -0.42, sector: "Utilities", parentId: "blnk_cu" },
-      { id: "chile_ops", label: "Chilean Operations", type: "positive", impact: 17.0, correlation: 0.91, sector: "Mining", parentId: "scco" },
-      { id: "elect_mfrs", label: "Electronics Mfrs (APH, TEL)", type: "negative", impact: -3.5, correlation: -0.35, marketCap: "75B", sector: "Electronics", parentId: "wire_mfrs" },
-      { id: "peru_ops", label: "Peruvian Operations", type: "positive", impact: 15.0, correlation: 0.86, sector: "Mining", parentId: "bhp_cu" }
+      { id: "wire_mfrs", label: "Wiring & Cable Mfrs", type: "consumer", impact: -7.5, correlation: -0.68, sector: "Electrical Equipment", parentId: "len" },
+      { id: "recyclers_cu", label: "Copper Recyclers", type: "substitute", impact: 9, correlation: 0.74, sector: "Recycling", parentId: "ivn" },
+      { id: "util_capex", label: "Utility CapEx Budgets", type: "consumer", impact: -4, correlation: -0.42, sector: "Utilities", parentId: "blnk_cu" },
+      { id: "chile_ops", label: "Chilean Operations", type: "producer", impact: 17, correlation: 0.91, sector: "Mining", parentId: "scco" },
+      { id: "elect_mfrs", label: "Electronics Mfrs (APH, TEL)", type: "consumer", impact: -3.5, correlation: -0.35, marketCap: "75B", sector: "Electronics", parentId: "wire_mfrs" },
+      { id: "peru_ops", label: "Peruvian Operations", type: "producer", impact: 15, correlation: 0.86, sector: "Mining", parentId: "bhp_cu" }
     ]},
     { nodes: [
-      { id: "china_pmi_cu", label: "China Manufacturing PMI", type: "positive", impact: 6.5, sector: "Macro", parentId: "fcx" },
-      { id: "ev_adoption_cu", label: "Global EV Sales Growth", type: "positive", impact: 7.0, sector: "Macro", parentId: "chpt_cu" },
-      { id: "infra_spend", label: "Global Infrastructure Spend", type: "positive", impact: 8.0, sector: "Macro", parentId: "teck" },
-      { id: "housing_starts", label: "U.S. Housing Starts", type: "negative", impact: -3.0, sector: "Macro", parentId: "dhi" },
-      { id: "green_capex", label: "Green Energy CapEx", type: "positive", impact: 7.5, sector: "Macro", parentId: "copx" }
+      { id: "china_pmi_cu", label: "China Manufacturing PMI", type: "macro", impact: 6.5, sector: "Macro", parentId: "fcx" },
+      { id: "ev_adoption_cu", label: "Global EV Sales Growth", type: "macro", impact: 7, sector: "Macro", parentId: "chpt_cu" },
+      { id: "infra_spend", label: "Global Infrastructure Spend", type: "macro", impact: 8, sector: "Macro", parentId: "teck" },
+      { id: "housing_starts", label: "U.S. Housing Starts", type: "macro", impact: -3, sector: "Macro", parentId: "dhi" },
+      { id: "green_capex", label: "Green Energy CapEx", type: "macro", impact: 7.5, sector: "Macro", parentId: "copx" }
     ]}
   ]
 };

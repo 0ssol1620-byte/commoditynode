@@ -7,6 +7,7 @@ tags: [cotton, textile, apparel, agriculture, fashion]
 description: 'How cotton price increases impact Nike, VF Corp, Hanesbrands, apparel retailers, fast fashion, and the global textile supply chain. Full correlation analysis.'
 reading_time: 8
 commodity_name: "Cotton"
+direction: bullish
 image: /assets/images/og-cotton.png
 ---
 
@@ -23,39 +24,39 @@ For investors, the cotton supply chain offers asymmetric opportunities. Companie
 
 <script>
 window.COMMODITY_DATA = {
-  commodity: { id: "cotton", label: "Cotton \u219110%", price: "$0.82/lb", change: "+10%" },
+  commodity: { id: "cotton", label: "Cotton ↑10%", price: "$0.82/lb", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "nke", label: "Nike (NKE)", type: "negative", impact: -3.5, correlation: -0.40, marketCap: "145B", sector: "Athletic Apparel" },
-      { id: "vfc", label: "VF Corp (VFC)", type: "negative", impact: -6.5, correlation: -0.68, marketCap: "8B", sector: "Apparel" },
-      { id: "hbi", label: "Hanesbrands (HBI)", type: "negative", impact: -9.0, correlation: -0.80, marketCap: "3B", sector: "Basics Apparel" },
+      { id: "nke", label: "Nike (NKE)", type: "consumer", impact: -3.5, correlation: -0.4, marketCap: "145B", sector: "Athletic Apparel" },
+      { id: "vfc", label: "VF Corp (VFC)", type: "consumer", impact: -6.5, correlation: -0.68, marketCap: "8B", sector: "Apparel" },
+      { id: "hbi", label: "Hanesbrands (HBI)", type: "consumer", impact: -9, correlation: -0.8, marketCap: "3B", sector: "Basics Apparel" },
       { id: "bal_etf", label: "iPath Cotton (BAL)", type: "etf", impact: 9.5, correlation: 0.96, marketCap: "0.03B", sector: "ETF" },
-      { id: "pvh", label: "PVH Corp (PVH)", type: "negative", impact: -5.0, correlation: -0.55, marketCap: "6B", sector: "Fashion Apparel" }
+      { id: "pvh", label: "PVH Corp (PVH)", type: "consumer", impact: -5, correlation: -0.55, marketCap: "6B", sector: "Fashion Apparel" }
     ]},
     { nodes: [
-      { id: "tjx", label: "TJX Companies (TJX)", type: "negative", impact: -2.0, correlation: -0.28, marketCap: "120B", sector: "Off-Price Retail", parentId: "nke" },
-      { id: "gps", label: "Gap Inc (GPS)", type: "negative", impact: -7.5, correlation: -0.72, marketCap: "10B", sector: "Casual Apparel", parentId: "vfc" },
-      { id: "us_cotton", label: "U.S. Cotton Farmers", type: "positive", impact: 12.0, correlation: 0.90, sector: "Agriculture", parentId: "bal_etf" },
-      { id: "india_cotton", label: "Indian Cotton Growers", type: "positive", impact: 11.0, correlation: 0.88, sector: "Agriculture", parentId: "bal_etf" },
-      { id: "fast_fashion", label: "Fast Fashion (H&M, SHEIN)", type: "negative", impact: -5.5, correlation: -0.58, sector: "Fashion Retail", parentId: "gps" }
+      { id: "tjx", label: "TJX Companies (TJX)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "120B", sector: "Off-Price Retail", parentId: "nke" },
+      { id: "gps", label: "Gap Inc (GPS)", type: "consumer", impact: -7.5, correlation: -0.72, marketCap: "10B", sector: "Casual Apparel", parentId: "vfc" },
+      { id: "us_cotton", label: "U.S. Cotton Farmers", type: "positive", impact: 12, correlation: 0.9, sector: "Agriculture", parentId: "bal_etf" },
+      { id: "india_cotton", label: "Indian Cotton Growers", type: "positive", impact: 11, correlation: 0.88, sector: "Agriculture", parentId: "bal_etf" },
+      { id: "fast_fashion", label: "Fast Fashion (H&M, SHEIN)", type: "consumer", impact: -5.5, correlation: -0.58, sector: "Fashion Retail", parentId: "gps" }
     ]},
     { nodes: [
-      { id: "textile_mills", label: "Asian Textile Mills", type: "negative", impact: -8.0, correlation: -0.75, sector: "Textile Mfg", parentId: "india_cotton" },
-      { id: "polyester", label: "Polyester Producers", type: "positive", impact: 5.0, correlation: 0.55, sector: "Synthetic Fibers", parentId: "hbi" },
-      { id: "luxury", label: "Luxury Brands (LVMH, Hermes)", type: "negative", impact: -1.0, correlation: -0.12, sector: "Luxury Fashion", parentId: "pvh" },
-      { id: "denim", label: "Denim Manufacturers", type: "negative", impact: -10.0, correlation: -0.85, sector: "Denim", parentId: "gps" },
-      { id: "organic_cotton", label: "Organic Cotton Farms", type: "positive", impact: 14.0, correlation: 0.92, sector: "Specialty Agriculture", parentId: "us_cotton" }
+      { id: "textile_mills", label: "Asian Textile Mills", type: "consumer", impact: -8, correlation: -0.75, sector: "Textile Mfg", parentId: "india_cotton" },
+      { id: "polyester", label: "Polyester Producers", type: "substitute", impact: 5, correlation: 0.55, sector: "Synthetic Fibers", parentId: "hbi" },
+      { id: "luxury", label: "Luxury Brands (LVMH, Hermes)", type: "consumer", impact: -1, correlation: -0.12, sector: "Luxury Fashion", parentId: "pvh" },
+      { id: "denim", label: "Denim Manufacturers", type: "consumer", impact: -10, correlation: -0.85, sector: "Denim", parentId: "gps" },
+      { id: "organic_cotton", label: "Organic Cotton Farms", type: "producer", impact: 14, correlation: 0.92, sector: "Specialty Agriculture", parentId: "us_cotton" }
     ]},
     { nodes: [
-      { id: "home_textiles", label: "Home Textile (Bed/Bath)", type: "negative", impact: -6.0, correlation: -0.60, sector: "Home Goods", parentId: "textile_mills" },
-      { id: "yarn_spinners", label: "Yarn Spinners", type: "negative", impact: -7.0, correlation: -0.68, sector: "Textile Supply", parentId: "textile_mills" },
-      { id: "recycled_fiber", label: "Recycled Fiber Producers", type: "positive", impact: 4.0, correlation: 0.48, sector: "Sustainability", parentId: "polyester" },
-      { id: "bangladesh_rmg", label: "Bangladesh RMG Sector", type: "negative", impact: -8.5, correlation: -0.78, sector: "Garment Mfg", parentId: "textile_mills" }
+      { id: "home_textiles", label: "Home Textile (Bed/Bath)", type: "consumer", impact: -6, correlation: -0.6, sector: "Home Goods", parentId: "textile_mills" },
+      { id: "yarn_spinners", label: "Yarn Spinners", type: "consumer", impact: -7, correlation: -0.68, sector: "Textile Supply", parentId: "textile_mills" },
+      { id: "recycled_fiber", label: "Recycled Fiber Producers", type: "substitute", impact: 4, correlation: 0.48, sector: "Sustainability", parentId: "polyester" },
+      { id: "bangladesh_rmg", label: "Bangladesh RMG Sector", type: "consumer", impact: -8.5, correlation: -0.78, sector: "Garment Mfg", parentId: "textile_mills" }
     ]},
     { nodes: [
-      { id: "china_reserve", label: "China Strategic Reserve", type: "positive", impact: 7.0, sector: "Macro", parentId: "us_cotton" },
-      { id: "weather_belt", label: "U.S. Cotton Belt Weather", type: "positive", impact: 9.0, sector: "Macro", parentId: "us_cotton" },
-      { id: "fiber_sub", label: "Natural-to-Synthetic Shift", type: "positive", impact: 3.0, sector: "Macro", parentId: "polyester" }
+      { id: "china_reserve", label: "China Strategic Reserve", type: "macro", impact: 7, sector: "Macro", parentId: "us_cotton" },
+      { id: "weather_belt", label: "U.S. Cotton Belt Weather", type: "macro", impact: 9, sector: "Macro", parentId: "us_cotton" },
+      { id: "fiber_sub", label: "Natural-to-Synthetic Shift", type: "macro", impact: 3, sector: "Macro", parentId: "polyester" }
     ]}
   ]
 };

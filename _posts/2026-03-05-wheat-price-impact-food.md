@@ -7,6 +7,7 @@ tags: [wheat, WEAT, food-producers, restaurants, bakeries, flour, agricultural]
 description: "How wheat price spikes impact WEAT ETF, major food producers, bread/pasta makers, and restaurant chains. Full correlation analysis with historical data."
 reading_time: 7
 commodity_name: "Wheat"
+direction: bullish
 image: /assets/images/og-wheat.png
 canonical_url: https://commoditynode.com/wheat-price-impact-food/
 ---
@@ -24,31 +25,31 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "weat", label: "Wheat ETF (WEAT)", type: "etf", impact: 11.5, correlation: 0.95, marketCap: "0.3B", sector: "ETF" },
-      { id: "adm", label: "Archer-Daniels (ADM)", type: "positive", impact: 8.5, correlation: 0.72, marketCap: "38B", sector: "Grain Processing" },
-      { id: "bunge", label: "Bunge Limited (BG)", type: "positive", impact: 7.8, correlation: 0.68, marketCap: "14B", sector: "Grain Trading" },
-      { id: "mosaic", label: "Mosaic Co (MOS)", type: "positive", impact: 6.5, correlation: 0.62, marketCap: "12B", sector: "Fertilizers" },
-      { id: "mcd", label: "McDonald's (MCD)", type: "negative", impact: -2.0, correlation: -0.35, marketCap: "215B", sector: "Fast Food" }
+      { id: "adm", label: "Archer-Daniels (ADM)", type: "processor", impact: 8.5, correlation: 0.72, marketCap: "38B", sector: "Grain Processing" },
+      { id: "bunge", label: "Bunge Limited (BG)", type: "processor", impact: 7.8, correlation: 0.68, marketCap: "14B", sector: "Grain Trading" },
+      { id: "mosaic", label: "Mosaic Co (MOS)", type: "consumer", impact: 6.5, correlation: 0.62, marketCap: "12B", sector: "Fertilizers" },
+      { id: "mcd", label: "McDonald's (MCD)", type: "consumer", impact: -2, correlation: -0.35, marketCap: "215B", sector: "Fast Food" }
     ]},
     { nodes: [
-      { id: "cargill_w", label: "Cargill (Private)", type: "positive", impact: 9.0, correlation: 0.75, sector: "Grain Trading", parentId: "adm" },
-      { id: "agco", label: "AGCO Corp (AGCO)", type: "positive", impact: 5.5, correlation: 0.58, marketCap: "10B", sector: "Farm Equipment", parentId: "bunge" },
-      { id: "cf_w", label: "CF Industries (CF)", type: "positive", impact: 10.0, correlation: 0.78, marketCap: "15B", sector: "Fertilizers", parentId: "mosaic" },
-      { id: "flowers", label: "Flowers Foods (FLO)", type: "negative", impact: -5.5, correlation: -0.62, marketCap: "4B", sector: "Bakery", parentId: "mcd" }
+      { id: "cargill_w", label: "Cargill (Private)", type: "processor", impact: 9, correlation: 0.75, sector: "Grain Trading", parentId: "adm" },
+      { id: "agco", label: "AGCO Corp (AGCO)", type: "consumer", impact: 5.5, correlation: 0.58, marketCap: "10B", sector: "Farm Equipment", parentId: "bunge" },
+      { id: "cf_w", label: "CF Industries (CF)", type: "consumer", impact: 10, correlation: 0.78, marketCap: "15B", sector: "Fertilizers", parentId: "mosaic" },
+      { id: "flowers", label: "Flowers Foods (FLO)", type: "consumer", impact: -5.5, correlation: -0.62, marketCap: "4B", sector: "Bakery", parentId: "mcd" }
     ]},
     { nodes: [
-      { id: "deere_w", label: "John Deere (DE)", type: "positive", impact: 4.5, correlation: 0.52, marketCap: "130B", sector: "Farm Equipment", parentId: "agco" },
-      { id: "milling", label: "Ardent Mills", type: "negative", impact: -6.0, correlation: -0.68, sector: "Flour Milling", parentId: "cf_w" },
-      { id: "cereal", label: "WK Kellogg (KLG)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "2B", sector: "Cereal", parentId: "flowers" }
+      { id: "deere_w", label: "John Deere (DE)", type: "consumer", impact: 4.5, correlation: 0.52, marketCap: "130B", sector: "Farm Equipment", parentId: "agco" },
+      { id: "milling", label: "Ardent Mills", type: "consumer", impact: -6, correlation: -0.68, sector: "Flour Milling", parentId: "cf_w" },
+      { id: "cereal", label: "WK Kellogg (KLG)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "2B", sector: "Cereal", parentId: "flowers" }
     ]},
     { nodes: [
-      { id: "bread_w", label: "Bakeries & Bread", type: "negative", impact: -7.0, correlation: -0.72, sector: "Food Manufacturing", parentId: "milling" },
-      { id: "pasta_w", label: "Barilla Group", type: "negative", impact: -6.5, sector: "Food Manufacturing", parentId: "milling" },
-      { id: "livestock_w", label: "Tyson Foods (TSN)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "22B", sector: "Meat Processing", parentId: "cereal" }
+      { id: "bread_w", label: "Bakeries & Bread", type: "consumer", impact: -7, correlation: -0.72, sector: "Food Manufacturing", parentId: "milling" },
+      { id: "pasta_w", label: "Barilla Group", type: "consumer", impact: -6.5, sector: "Food Manufacturing", parentId: "milling" },
+      { id: "livestock_w", label: "Tyson Foods (TSN)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "22B", sector: "Meat Processing", parentId: "cereal" }
     ]},
     { nodes: [
-      { id: "drought_w", label: "Drought / Climate", type: "positive", impact: 12.0, sector: "Macro", parentId: "weat" },
-      { id: "ukraine_w", label: "Ukraine War Supply", type: "positive", impact: 9.5, sector: "Macro", parentId: "bunge" },
-      { id: "food_inflation", label: "Food CPI Index", type: "negative", impact: -2.0, sector: "Macro", parentId: "bread_w" }
+      { id: "drought_w", label: "Drought / Climate", type: "macro", impact: 12, sector: "Macro", parentId: "weat" },
+      { id: "ukraine_w", label: "Ukraine War Supply", type: "macro", impact: 9.5, sector: "Macro", parentId: "bunge" },
+      { id: "food_inflation", label: "Food CPI Index", type: "macro", impact: -2, sector: "Macro", parentId: "bread_w" }
     ]}
   ]
 };

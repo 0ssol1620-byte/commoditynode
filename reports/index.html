@@ -2,24 +2,24 @@
 layout: default
 title: Research Archive
 permalink: /reports/
-description: "Browse the full CommodityNode archive of impact maps, signal reports, and commodity ripple-chain analysis."
+description: "Browse the full CommodityNode archive of Impact Maps, Signal Reports, and commodity Ripple Chain analysis."
 ---
 
 <div class="post-header">
   <div class="container">
     <div class="post-header-badge">
       <span class="badge badge-cyan">Archive</span>
-      <span class="badge badge-gold">{{ site.posts.size }} Reports</span>
+      <span class="badge badge-gold">{{ site.posts.size }} Signal Reports</span>
     </div>
     <h1>Research Archive</h1>
-    <p class="post-meta-bar">Browse every CommodityNode impact map, signal report, and ripple-chain analysis in one place.</p>
+    <p class="post-meta-bar">Browse every CommodityNode Impact Map, Signal Report, and Ripple Chain analysis in one place.</p>
   </div>
 </div>
 
 <section class="section archive-section">
   <div class="container">
     <div class="archive-toolbar" data-animate>
-      <div class="filter-chips" role="tablist" aria-label="Filter archive reports">
+      <div class="filter-chips" role="tablist" aria-label="Filter archive Signal Reports">
         <button class="filter-chip is-active" type="button" data-filter="all">All</button>
         <button class="filter-chip" type="button" data-filter="energy">Energy</button>
         <button class="filter-chip" type="button" data-filter="metals">Metals</button>
@@ -33,12 +33,26 @@ description: "Browse the full CommodityNode archive of impact maps, signal repor
       {% for post in site.posts %}
       {% assign categories_joined = post.categories | join: '|' | downcase %}
       {% assign tags_joined = post.tags | join: '|' | downcase %}
-      <article class="post-card post-card--discoverable" data-post-card data-filter-tags="{{ categories_joined }}|{{ tags_joined }}" data-animate>
+      {% assign first_tag = post.tags | first | slugify %}
+      <article class="post-card post-card--discoverable" data-post-card data-filter-tags="{{ categories_joined }}|{{ tags_joined }}" data-commodity="{{ first_tag }}" data-animate>
         <div class="post-card-accent"></div>
         <div class="post-card-body">
           <div class="post-card-meta">
             <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
             {% for cat in post.categories limit:2 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+            {% if post.direction == "bullish" %}
+            <span class="post-card-direction bullish">&#9650; Bullish</span>
+            {% elsif post.direction == "bearish" %}
+            <span class="post-card-direction bearish">&#9660; Bearish</span>
+            {% endif %}
+            {% assign post_age = 'now' | date: '%s' | minus: post.date | date: '%s' %}
+            {% if post_age < 259200 %}
+            <span class="post-card-label post-card-label--new">NEW</span>
+            {% elsif post.updated %}
+            <span class="post-card-label post-card-label--updated">UPDATED</span>
+            {% elsif post.evergreen %}
+            <span class="post-card-label post-card-label--evergreen">EVERGREEN</span>
+            {% endif %}
           </div>
           <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
           <p class="post-card-excerpt">{{ post.description | default: post.excerpt | strip_html | truncatewords: 32 }}</p>
@@ -50,7 +64,7 @@ description: "Browse the full CommodityNode archive of impact maps, signal repor
           </div>
           {% endif %}
           <div class="post-card-footer">
-            <span class="read-more">Open signal →</span>
+            <span class="read-more">Open Signal Report &rarr;</span>
             {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min read</span>{% endif %}
           </div>
         </div>

@@ -7,6 +7,7 @@ tags: [natural-gas, crude-oil, chemicals, DOW, LYB, DD, EMN, energy]
 description: 'Mapping feedstock price sensitivity across the chemical sector — how natural gas liquids, naphtha, and ethylene costs flow through specialty and commodity chemicals.'
 reading_time: 9
 commodity_name: 'Natural Gas'
+direction: bearish
 image: /assets/images/og-natural-gas.png
 ---
 
@@ -24,35 +25,35 @@ window.COMMODITY_DATA = {
   commodity: { id: "chemicals", label: "Feedstock ↑10%", price: "NGL/Naphtha", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "dow", label: "Dow Inc (DOW)", type: "negative", impact: -5.2, correlation: -0.68, marketCap: "35B", sector: "Commodity Chemicals" },
-      { id: "lyb", label: "LyondellBasell (LYB)", type: "negative", impact: -4.8, correlation: -0.64, marketCap: "28B", sector: "Commodity Chemicals" },
-      { id: "dd", label: "DuPont (DD)", type: "negative", impact: -2.1, correlation: -0.35, marketCap: "32B", sector: "Specialty Chemicals" },
-      { id: "emn", label: "Eastman Chemical (EMN)", type: "negative", impact: -2.8, correlation: -0.42, marketCap: "10B", sector: "Specialty Chemicals" },
-      { id: "eqt", label: "EQT Corporation (EQT)", type: "positive", impact: 8.5, correlation: 0.82, marketCap: "18B", sector: "Natural Gas Production" },
+      { id: "dow", label: "Dow Inc (DOW)", type: "consumer", impact: -5.2, correlation: -0.68, marketCap: "35B", sector: "Commodity Chemicals" },
+      { id: "lyb", label: "LyondellBasell (LYB)", type: "consumer", impact: -4.8, correlation: -0.64, marketCap: "28B", sector: "Commodity Chemicals" },
+      { id: "dd", label: "DuPont (DD)", type: "consumer", impact: -2.1, correlation: -0.35, marketCap: "32B", sector: "Specialty Chemicals" },
+      { id: "emn", label: "Eastman Chemical (EMN)", type: "consumer", impact: -2.8, correlation: -0.42, marketCap: "10B", sector: "Specialty Chemicals" },
+      { id: "eqt", label: "EQT Corporation (EQT)", type: "producer", impact: 8.5, correlation: 0.82, marketCap: "18B", sector: "Natural Gas Production" },
       { id: "xle", label: "Energy Select SPDR (XLE)", type: "etf", impact: 4.2, correlation: 0.71, marketCap: "38B", sector: "Energy ETF" }
     ]},
     { nodes: [
-      { id: "ce", label: "Celanese (CE)", type: "negative", impact: -3.5, correlation: -0.48, marketCap: "12B", sector: "Acetyls/Specialty", parentId: "dow" },
-      { id: "hun", label: "Huntsman Corp (HUN)", type: "negative", impact: -4.1, correlation: -0.55, marketCap: "4B", sector: "Polyurethanes", parentId: "lyb" },
-      { id: "wlk", label: "Westlake Chemical (WLK)", type: "negative", impact: -4.5, correlation: -0.60, marketCap: "15B", sector: "Vinyls/Polyethylene", parentId: "lyb" },
-      { id: "fmc", label: "FMC Corporation (FMC)", type: "negative", impact: -1.8, correlation: -0.28, marketCap: "6B", sector: "Ag Chemicals", parentId: "dd" },
-      { id: "ctva", label: "Corteva Agriscience (CTVA)", type: "negative", impact: -1.5, correlation: -0.25, marketCap: "38B", sector: "Ag Chemicals", parentId: "dd" },
-      { id: "ar", label: "Antero Resources (AR)", type: "positive", impact: 7.8, correlation: 0.78, marketCap: "8B", sector: "NGL Production", parentId: "eqt" }
+      { id: "ce", label: "Celanese (CE)", type: "consumer", impact: -3.5, correlation: -0.48, marketCap: "12B", sector: "Acetyls/Specialty", parentId: "dow" },
+      { id: "hun", label: "Huntsman Corp (HUN)", type: "consumer", impact: -4.1, correlation: -0.55, marketCap: "4B", sector: "Polyurethanes", parentId: "lyb" },
+      { id: "wlk", label: "Westlake Chemical (WLK)", type: "consumer", impact: -4.5, correlation: -0.6, marketCap: "15B", sector: "Vinyls/Polyethylene", parentId: "lyb" },
+      { id: "fmc", label: "FMC Corporation (FMC)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "6B", sector: "Ag Chemicals", parentId: "dd" },
+      { id: "ctva", label: "Corteva Agriscience (CTVA)", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "38B", sector: "Ag Chemicals", parentId: "dd" },
+      { id: "ar", label: "Antero Resources (AR)", type: "producer", impact: 7.8, correlation: 0.78, marketCap: "8B", sector: "NGL Production", parentId: "eqt" }
     ]},
     { nodes: [
-      { id: "shw", label: "Sherwin-Williams (SHW)", type: "negative", impact: -1.9, correlation: -0.30, marketCap: "78B", sector: "Paint/Coatings", parentId: "emn" },
-      { id: "ppg", label: "PPG Industries (PPG)", type: "negative", impact: -2.2, correlation: -0.34, marketCap: "30B", sector: "Paint/Coatings", parentId: "emn" },
-      { id: "iff", label: "IFF (IFF)", type: "negative", impact: -1.4, correlation: -0.22, marketCap: "20B", sector: "Specialty Ingredients", parentId: "dd" },
-      { id: "olin", label: "Olin Corporation (OLN)", type: "negative", impact: -3.2, correlation: -0.45, marketCap: "5B", sector: "Chlor-Alkali", parentId: "wlk" },
-      { id: "ngpl", label: "NGL Energy Partners", type: "positive", impact: 6.5, correlation: 0.72, marketCap: "2B", sector: "NGL Midstream", parentId: "ar" },
-      { id: "trgp", label: "Targa Resources (TRGP)", type: "positive", impact: 5.8, correlation: 0.68, marketCap: "22B", sector: "NGL Processing", parentId: "ar" }
+      { id: "shw", label: "Sherwin-Williams (SHW)", type: "consumer", impact: -1.9, correlation: -0.3, marketCap: "78B", sector: "Paint/Coatings", parentId: "emn" },
+      { id: "ppg", label: "PPG Industries (PPG)", type: "consumer", impact: -2.2, correlation: -0.34, marketCap: "30B", sector: "Paint/Coatings", parentId: "emn" },
+      { id: "iff", label: "IFF (IFF)", type: "consumer", impact: -1.4, correlation: -0.22, marketCap: "20B", sector: "Specialty Ingredients", parentId: "dd" },
+      { id: "olin", label: "Olin Corporation (OLN)", type: "consumer", impact: -3.2, correlation: -0.45, marketCap: "5B", sector: "Chlor-Alkali", parentId: "wlk" },
+      { id: "ngpl", label: "NGL Energy Partners", type: "supplier", impact: 6.5, correlation: 0.72, marketCap: "2B", sector: "NGL Midstream", parentId: "ar" },
+      { id: "trgp", label: "Targa Resources (TRGP)", type: "processor", impact: 5.8, correlation: 0.68, marketCap: "22B", sector: "NGL Processing", parentId: "ar" }
     ]},
     { nodes: [
-      { id: "pkg_cos", label: "Packaging Companies (SEE, BERY)", type: "negative", impact: -2.5, correlation: -0.38, sector: "Plastics Packaging", parentId: "wlk" },
-      { id: "cf", label: "CF Industries (CF)", type: "negative", impact: -3.8, correlation: -0.52, marketCap: "14B", sector: "Nitrogen Fertilizer", parentId: "fmc" },
-      { id: "gas_spike", label: "Henry Hub >$5 Scenario", type: "macro", impact: -8.0, sector: "Macro", parentId: "eqt" },
-      { id: "naphtha_arb", label: "Ethane-Naphtha Spread", type: "macro", impact: 5.0, sector: "Macro", parentId: "xle" },
-      { id: "axta", label: "Axalta Coating (AXTA)", type: "negative", impact: -1.7, correlation: -0.27, marketCap: "7B", sector: "Coatings", parentId: "ppg" }
+      { id: "pkg_cos", label: "Packaging Companies (SEE, BERY)", type: "consumer", impact: -2.5, correlation: -0.38, sector: "Plastics Packaging", parentId: "wlk" },
+      { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: -3.8, correlation: -0.52, marketCap: "14B", sector: "Nitrogen Fertilizer", parentId: "fmc" },
+      { id: "gas_spike", label: "Henry Hub >$5 Scenario", type: "macro", impact: -8, sector: "Macro", parentId: "eqt" },
+      { id: "naphtha_arb", label: "Ethane-Naphtha Spread", type: "macro", impact: 5, sector: "Macro", parentId: "xle" },
+      { id: "axta", label: "Axalta Coating (AXTA)", type: "consumer", impact: -1.7, correlation: -0.27, marketCap: "7B", sector: "Coatings", parentId: "ppg" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [agriculture, soybeans, corn, wheat, MOO, DE, ADM, NTR, CTVA]
 description: 'MOO agriculture ETF analysis — cross-commodity exposure to grain prices, fertilizer costs, and the farm equipment cycle across global agribusiness.'
 reading_time: 8
 commodity_name: 'Agriculture'
+direction: bullish
 image: /assets/images/og-soybeans.png
 ---
 
@@ -25,34 +26,34 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "moo", label: "VanEck Agribusiness (MOO)", type: "etf", impact: 7.5, correlation: 0.82, marketCap: "1.2B", sector: "ETF" },
-      { id: "de", label: "Deere & Co (DE)", type: "positive", impact: 6.8, correlation: 0.74, marketCap: "118B", sector: "Farm Equipment" },
-      { id: "adm", label: "Archer-Daniels (ADM)", type: "positive", impact: 8.2, correlation: 0.86, marketCap: "28B", sector: "Grain Processing" },
-      { id: "ntr", label: "Nutrien (NTR)", type: "positive", impact: 9.5, correlation: 0.88, marketCap: "25B", sector: "Fertilizer" },
-      { id: "ctva", label: "Corteva (CTVA)", type: "positive", impact: 5.8, correlation: 0.71, marketCap: "42B", sector: "Seed/Crop Science" },
-      { id: "tsn", label: "Tyson Foods (TSN)", type: "negative", impact: -6.5, correlation: -0.72, marketCap: "22B", sector: "Livestock" }
+      { id: "de", label: "Deere & Co (DE)", type: "consumer", impact: 6.8, correlation: 0.74, marketCap: "118B", sector: "Farm Equipment" },
+      { id: "adm", label: "Archer-Daniels (ADM)", type: "processor", impact: 8.2, correlation: 0.86, marketCap: "28B", sector: "Grain Processing" },
+      { id: "ntr", label: "Nutrien (NTR)", type: "consumer", impact: 9.5, correlation: 0.88, marketCap: "25B", sector: "Fertilizer" },
+      { id: "ctva", label: "Corteva (CTVA)", type: "consumer", impact: 5.8, correlation: 0.71, marketCap: "42B", sector: "Seed/Crop Science" },
+      { id: "tsn", label: "Tyson Foods (TSN)", type: "consumer", impact: -6.5, correlation: -0.72, marketCap: "22B", sector: "Livestock" }
     ]},
     { nodes: [
-      { id: "mos", label: "Mosaic Co (MOS)", type: "positive", impact: 10.2, correlation: 0.85, marketCap: "12B", sector: "Fertilizer", parentId: "ntr" },
-      { id: "cf", label: "CF Industries (CF)", type: "positive", impact: 8.8, correlation: 0.80, marketCap: "16B", sector: "Nitrogen Fertilizer", parentId: "ntr" },
-      { id: "bg", label: "Bunge Global (BG)", type: "positive", impact: 7.6, correlation: 0.83, marketCap: "14B", sector: "Grain Trading", parentId: "adm" },
-      { id: "cnhi", label: "CNH Industrial (CNHI)", type: "positive", impact: 5.5, correlation: 0.68, marketCap: "18B", sector: "Farm Equipment", parentId: "de" },
-      { id: "ppc", label: "Pilgrims Pride (PPC)", type: "negative", impact: -7.2, correlation: -0.76, marketCap: "8B", sector: "Poultry", parentId: "tsn" },
-      { id: "hor", label: "Hormel Foods (HRL)", type: "negative", impact: -4.8, correlation: -0.58, marketCap: "17B", sector: "Meat Processing", parentId: "tsn" }
+      { id: "mos", label: "Mosaic Co (MOS)", type: "consumer", impact: 10.2, correlation: 0.85, marketCap: "12B", sector: "Fertilizer", parentId: "ntr" },
+      { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: 8.8, correlation: 0.8, marketCap: "16B", sector: "Nitrogen Fertilizer", parentId: "ntr" },
+      { id: "bg", label: "Bunge Global (BG)", type: "processor", impact: 7.6, correlation: 0.83, marketCap: "14B", sector: "Grain Trading", parentId: "adm" },
+      { id: "cnhi", label: "CNH Industrial (CNHI)", type: "consumer", impact: 5.5, correlation: 0.68, marketCap: "18B", sector: "Farm Equipment", parentId: "de" },
+      { id: "ppc", label: "Pilgrims Pride (PPC)", type: "consumer", impact: -7.2, correlation: -0.76, marketCap: "8B", sector: "Poultry", parentId: "tsn" },
+      { id: "hor", label: "Hormel Foods (HRL)", type: "consumer", impact: -4.8, correlation: -0.58, marketCap: "17B", sector: "Meat Processing", parentId: "tsn" }
     ]},
     { nodes: [
-      { id: "fmc", label: "FMC Corp (FMC)", type: "positive", impact: 4.5, correlation: 0.62, marketCap: "6B", sector: "Crop Protection", parentId: "ctva" },
-      { id: "fpi", label: "Farmland Partners (FPI)", type: "positive", impact: 6.0, correlation: 0.70, marketCap: "0.6B", sector: "Farmland REIT", parentId: "de" },
+      { id: "fmc", label: "FMC Corp (FMC)", type: "consumer", impact: 4.5, correlation: 0.62, marketCap: "6B", sector: "Crop Protection", parentId: "ctva" },
+      { id: "fpi", label: "Farmland Partners (FPI)", type: "regional", impact: 6, correlation: 0.7, marketCap: "0.6B", sector: "Farmland REIT", parentId: "de" },
       { id: "dba", label: "Invesco Ag Fund (DBA)", type: "etf", impact: 8.5, correlation: 0.91, marketCap: "0.9B", sector: "ETF", parentId: "moo" },
-      { id: "mcd", label: "McDonald's (MCD)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "210B", sector: "Restaurants", parentId: "hor" },
-      { id: "gis", label: "General Mills (GIS)", type: "negative", impact: -3.5, correlation: -0.45, marketCap: "38B", sector: "Food Processing", parentId: "bg" }
+      { id: "mcd", label: "McDonald's (MCD)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "210B", sector: "Restaurants", parentId: "hor" },
+      { id: "gis", label: "General Mills (GIS)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "38B", sector: "Food Processing", parentId: "bg" }
     ]},
     { nodes: [
-      { id: "yum", label: "Yum! Brands (YUM)", type: "negative", impact: -2.2, correlation: -0.32, marketCap: "40B", sector: "Restaurants", parentId: "mcd" },
-      { id: "cpb", label: "Campbell Soup (CPB)", type: "negative", impact: -3.0, correlation: -0.40, marketCap: "14B", sector: "Food Processing", parentId: "gis" },
-      { id: "weather", label: "La Nina / El Nino", type: "macro", impact: 12.0, sector: "Macro", parentId: "dba" },
-      { id: "usd_ag", label: "USD / Export Demand", type: "macro", impact: -5.5, correlation: -0.60, sector: "Macro", parentId: "adm" },
-      { id: "ethanol", label: "Ethanol Mandate", type: "positive", impact: 4.0, sector: "Macro", parentId: "adm" },
-      { id: "china_import", label: "China Import Demand", type: "positive", impact: 8.0, sector: "Macro", parentId: "bg" }
+      { id: "yum", label: "Yum! Brands (YUM)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "40B", sector: "Restaurants", parentId: "mcd" },
+      { id: "cpb", label: "Campbell Soup (CPB)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "14B", sector: "Food Processing", parentId: "gis" },
+      { id: "weather", label: "La Nina / El Nino", type: "macro", impact: 12, sector: "Macro", parentId: "dba" },
+      { id: "usd_ag", label: "USD / Export Demand", type: "macro", impact: -5.5, correlation: -0.6, sector: "Macro", parentId: "adm" },
+      { id: "ethanol", label: "Ethanol Mandate", type: "macro", impact: 4, sector: "Macro", parentId: "adm" },
+      { id: "china_import", label: "China Import Demand", type: "macro", impact: 8, sector: "Macro", parentId: "bg" }
     ]}
   ]
 };

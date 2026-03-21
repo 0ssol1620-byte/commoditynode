@@ -7,6 +7,7 @@ tags: [crude-oil, energy, XLE, XOP, OIH, XOM, CVX, oil]
 description: 'Head-to-head comparison of XLE and XOP oil ETFs, analyzing sensitivity to crude prices, portfolio composition, and which better captures energy upside.'
 reading_time: 8
 commodity_name: 'Crude Oil'
+direction: bullish
 image: /assets/images/og-crude-oil.png
 ---
 
@@ -44,36 +45,36 @@ window.COMMODITY_DATA = {
     { nodes: [
       { id: "xop", label: "SPDR Oil & Gas E&P (XOP)", type: "etf", impact: 12.5, correlation: 0.94, marketCap: "4.2B", sector: "ETF" },
       { id: "xle", label: "Energy Select SPDR (XLE)", type: "etf", impact: 8.4, correlation: 0.91, marketCap: "37B", sector: "ETF" },
-      { id: "oih", label: "VanEck Oil Services (OIH)", type: "etf", impact: 13.8, correlation: 0.90, marketCap: "2.8B", sector: "ETF" },
-      { id: "xom", label: "ExxonMobil (XOM)", type: "positive", impact: 8.8, correlation: 0.88, marketCap: "520B", sector: "Oil Major" },
-      { id: "cvx", label: "Chevron (CVX)", type: "positive", impact: 7.9, correlation: 0.86, marketCap: "305B", sector: "Oil Major" },
+      { id: "oih", label: "VanEck Oil Services (OIH)", type: "etf", impact: 13.8, correlation: 0.9, marketCap: "2.8B", sector: "ETF" },
+      { id: "xom", label: "ExxonMobil (XOM)", type: "producer", impact: 8.8, correlation: 0.88, marketCap: "520B", sector: "Oil Major" },
+      { id: "cvx", label: "Chevron (CVX)", type: "producer", impact: 7.9, correlation: 0.86, marketCap: "305B", sector: "Oil Major" },
       { id: "jets", label: "US Global Jets (JETS)", type: "negative", impact: -7.5, correlation: -0.82, marketCap: "1.8B", sector: "ETF" },
       { id: "iyt", label: "iShares Transport (IYT)", type: "negative", impact: -4.2, correlation: -0.58, marketCap: "0.9B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "pxd", label: "Pioneer Natural Res (PXD)", type: "positive", impact: 14.2, correlation: 0.93, marketCap: "62B", sector: "E&P" },
-      { id: "fang", label: "Diamondback Energy (FANG)", type: "positive", impact: 15.0, correlation: 0.92, marketCap: "35B", sector: "E&P" },
-      { id: "dvn", label: "Devon Energy (DVN)", type: "positive", impact: 13.5, correlation: 0.91, marketCap: "30B", sector: "E&P" },
-      { id: "hal", label: "Halliburton (HAL)", type: "positive", impact: 14.5, correlation: 0.90, marketCap: "33B", sector: "Oilfield Services" },
-      { id: "slb", label: "SLB Ltd (SLB)", type: "positive", impact: 12.2, correlation: 0.88, marketCap: "68B", sector: "Oilfield Services" },
-      { id: "dal", label: "Delta Air Lines (DAL)", type: "negative", impact: -8.0, correlation: -0.76, marketCap: "26B", sector: "Airlines" },
-      { id: "ual", label: "United Airlines (UAL)", type: "negative", impact: -9.2, correlation: -0.78, marketCap: "20B", sector: "Airlines" }
+      { id: "pxd", label: "Pioneer Natural Res (PXD)", type: "producer", impact: 14.2, correlation: 0.93, marketCap: "62B", sector: "E&P" },
+      { id: "fang", label: "Diamondback Energy (FANG)", type: "producer", impact: 15, correlation: 0.92, marketCap: "35B", sector: "E&P" },
+      { id: "dvn", label: "Devon Energy (DVN)", type: "producer", impact: 13.5, correlation: 0.91, marketCap: "30B", sector: "E&P" },
+      { id: "hal", label: "Halliburton (HAL)", type: "supplier", impact: 14.5, correlation: 0.9, marketCap: "33B", sector: "Oilfield Services" },
+      { id: "slb", label: "SLB Ltd (SLB)", type: "supplier", impact: 12.2, correlation: 0.88, marketCap: "68B", sector: "Oilfield Services" },
+      { id: "dal", label: "Delta Air Lines (DAL)", type: "consumer", impact: -8, correlation: -0.76, marketCap: "26B", sector: "Airlines" },
+      { id: "ual", label: "United Airlines (UAL)", type: "consumer", impact: -9.2, correlation: -0.78, marketCap: "20B", sector: "Airlines" }
     ]},
     { nodes: [
-      { id: "mpc", label: "Marathon Petroleum (MPC)", type: "positive", impact: 5.5, correlation: 0.64, marketCap: "62B", sector: "Refining" },
-      { id: "vlo", label: "Valero Energy (VLO)", type: "positive", impact: 5.0, correlation: 0.60, marketCap: "48B", sector: "Refining" },
-      { id: "kmi", label: "Kinder Morgan (KMI)", type: "positive", impact: 3.5, correlation: 0.50, marketCap: "46B", sector: "Midstream" },
-      { id: "wm", label: "Williams Cos (WMB)", type: "positive", impact: 3.0, correlation: 0.45, marketCap: "52B", sector: "Midstream" },
-      { id: "luv", label: "Southwest Airlines (LUV)", type: "negative", impact: -7.8, correlation: -0.74, marketCap: "18B", sector: "Airlines" },
+      { id: "mpc", label: "Marathon Petroleum (MPC)", type: "processor", impact: 5.5, correlation: 0.64, marketCap: "62B", sector: "Refining" },
+      { id: "vlo", label: "Valero Energy (VLO)", type: "processor", impact: 5, correlation: 0.6, marketCap: "48B", sector: "Refining" },
+      { id: "kmi", label: "Kinder Morgan (KMI)", type: "supplier", impact: 3.5, correlation: 0.5, marketCap: "46B", sector: "Midstream" },
+      { id: "wm", label: "Williams Cos (WMB)", type: "supplier", impact: 3, correlation: 0.45, marketCap: "52B", sector: "Midstream" },
+      { id: "luv", label: "Southwest Airlines (LUV)", type: "consumer", impact: -7.8, correlation: -0.74, marketCap: "18B", sector: "Airlines" },
       { id: "xlu", label: "Utilities SPDR (XLU)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "18B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "opec", label: "OPEC+ Supply Policy", type: "macro", impact: 8.0, correlation: 0.70, marketCap: "N/A", sector: "Macro" },
-      { id: "usd", label: "USD Index (DXY)", type: "macro", impact: -3.0, correlation: -0.58, marketCap: "N/A", sector: "Macro" },
+      { id: "opec", label: "OPEC+ Supply Policy", type: "macro", impact: 8, correlation: 0.7, marketCap: "N/A", sector: "Macro" },
+      { id: "usd", label: "USD Index (DXY)", type: "macro", impact: -3, correlation: -0.58, marketCap: "N/A", sector: "Macro" },
       { id: "cpi", label: "CPI Inflation", type: "macro", impact: -2.2, correlation: -0.42, marketCap: "N/A", sector: "Macro" },
-      { id: "xly", label: "Consumer Discr SPDR (XLY)", type: "negative", impact: -3.0, correlation: -0.40, marketCap: "22B", sector: "ETF" },
-      { id: "fdx", label: "FedEx Corp (FDX)", type: "negative", impact: -4.5, correlation: -0.55, marketCap: "65B", sector: "Logistics" },
-      { id: "uber", label: "Uber Technologies (UBER)", type: "negative", impact: -3.8, correlation: -0.48, marketCap: "145B", sector: "Ride-hail" }
+      { id: "xly", label: "Consumer Discr SPDR (XLY)", type: "negative", impact: -3, correlation: -0.4, marketCap: "22B", sector: "ETF" },
+      { id: "fdx", label: "FedEx Corp (FDX)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "65B", sector: "Logistics" },
+      { id: "uber", label: "Uber Technologies (UBER)", type: "consumer", impact: -3.8, correlation: -0.48, marketCap: "145B", sector: "Ride-hail" }
     ]}
   ]
 };

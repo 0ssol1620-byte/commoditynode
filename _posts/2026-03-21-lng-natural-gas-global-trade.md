@@ -7,6 +7,7 @@ tags: [lng, natural-gas, LNG, utilities, chemicals, fertilizer, energy]
 description: 'Interactive analysis of how LNG and natural gas price movements impact utilities (NEE, DUK, SO), chemical producers (DOW, LYB), fertilizer companies (NTR, MOS, CF), and LNG exporters.'
 reading_time: 8
 commodity_name: 'LNG'
+direction: bullish
 image: /assets/images/og-lng.png
 ---
 
@@ -26,36 +27,36 @@ window.COMMODITY_DATA = {
   commodity: { id: "lng", label: "LNG ↑10%", price: "$8.50/MMBtu", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "lng_exp", label: "Cheniere Energy (LNG)", type: "positive", impact: 9.5, correlation: 0.88, marketCap: "45B", sector: "LNG Export" },
-      { id: "tell", label: "Tellurian Inc (TELL)", type: "positive", impact: 14.0, correlation: 0.91, marketCap: "2.5B", sector: "LNG Export" },
-      { id: "nee", label: "NextEra Energy (NEE)", type: "negative", impact: -3.5, correlation: -0.42, marketCap: "155B", sector: "Utilities" },
-      { id: "duk", label: "Duke Energy (DUK)", type: "negative", impact: -4.0, correlation: -0.48, marketCap: "82B", sector: "Utilities" },
-      { id: "so", label: "Southern Company (SO)", type: "negative", impact: -3.8, correlation: -0.45, marketCap: "78B", sector: "Utilities" }
+      { id: "lng_exp", label: "Cheniere Energy (LNG)", type: "producer", impact: 9.5, correlation: 0.88, marketCap: "45B", sector: "LNG Export" },
+      { id: "tell", label: "Tellurian Inc (TELL)", type: "producer", impact: 14, correlation: 0.91, marketCap: "2.5B", sector: "LNG Export" },
+      { id: "nee", label: "NextEra Energy (NEE)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "155B", sector: "Utilities" },
+      { id: "duk", label: "Duke Energy (DUK)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "82B", sector: "Utilities" },
+      { id: "so", label: "Southern Company (SO)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "78B", sector: "Utilities" }
     ]},
     { nodes: [
-      { id: "dow", label: "Dow Inc (DOW)", type: "negative", impact: -6.5, correlation: -0.68, marketCap: "38B", sector: "Chemicals", parentId: "lng_exp" },
-      { id: "lyb", label: "LyondellBasell (LYB)", type: "negative", impact: -5.8, correlation: -0.62, marketCap: "28B", sector: "Chemicals", parentId: "lng_exp" },
-      { id: "ntr", label: "Nutrien Ltd (NTR)", type: "positive", impact: 7.2, correlation: 0.75, marketCap: "32B", sector: "Fertilizer", parentId: "tell" },
-      { id: "mos", label: "Mosaic Co (MOS)", type: "positive", impact: 5.8, correlation: 0.64, marketCap: "12B", sector: "Fertilizer", parentId: "tell" },
-      { id: "cf", label: "CF Industries (CF)", type: "positive", impact: 8.5, correlation: 0.82, marketCap: "16B", sector: "Fertilizer", parentId: "tell" }
+      { id: "dow", label: "Dow Inc (DOW)", type: "consumer", impact: -6.5, correlation: -0.68, marketCap: "38B", sector: "Chemicals", parentId: "lng_exp" },
+      { id: "lyb", label: "LyondellBasell (LYB)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "28B", sector: "Chemicals", parentId: "lng_exp" },
+      { id: "ntr", label: "Nutrien Ltd (NTR)", type: "consumer", impact: 7.2, correlation: 0.75, marketCap: "32B", sector: "Fertilizer", parentId: "tell" },
+      { id: "mos", label: "Mosaic Co (MOS)", type: "consumer", impact: 5.8, correlation: 0.64, marketCap: "12B", sector: "Fertilizer", parentId: "tell" },
+      { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: 8.5, correlation: 0.82, marketCap: "16B", sector: "Fertilizer", parentId: "tell" }
     ]},
     { nodes: [
-      { id: "xlu", label: "XLU Utilities ETF", type: "etf", impact: -3.2, correlation: -0.40, marketCap: "18B", sector: "ETF", parentId: "nee" },
-      { id: "eqt", label: "EQT Corp (EQT)", type: "positive", impact: 12.0, correlation: 0.90, marketCap: "18B", sector: "Gas Producer", parentId: "lng_exp" },
-      { id: "ar", label: "Antero Resources (AR)", type: "positive", impact: 11.0, correlation: 0.86, marketCap: "8B", sector: "Gas Producer", parentId: "lng_exp" },
-      { id: "apd", label: "Air Products (APD)", type: "negative", impact: -3.5, correlation: -0.40, marketCap: "62B", sector: "Industrial Gas", parentId: "dow" }
+      { id: "xlu", label: "XLU Utilities ETF", type: "etf", impact: -3.2, correlation: -0.4, marketCap: "18B", sector: "ETF", parentId: "nee" },
+      { id: "eqt", label: "EQT Corp (EQT)", type: "producer", impact: 12, correlation: 0.9, marketCap: "18B", sector: "Gas Producer", parentId: "lng_exp" },
+      { id: "ar", label: "Antero Resources (AR)", type: "producer", impact: 11, correlation: 0.86, marketCap: "8B", sector: "Gas Producer", parentId: "lng_exp" },
+      { id: "apd", label: "Air Products (APD)", type: "consumer", impact: -3.5, correlation: -0.4, marketCap: "62B", sector: "Industrial Gas", parentId: "dow" }
     ]},
     { nodes: [
-      { id: "residential", label: "Residential Heating", type: "negative", impact: -4.5, sector: "Macro", parentId: "duk" },
-      { id: "industrial", label: "Industrial Production", type: "negative", impact: -2.8, sector: "Macro", parentId: "dow" },
-      { id: "food_prices", label: "Food Price Index", type: "negative", impact: -3.0, sector: "Macro", parentId: "ntr" },
-      { id: "renewables", label: "Renewable Competitiveness", type: "positive", impact: 4.0, sector: "Macro", parentId: "nee" }
+      { id: "residential", label: "Residential Heating", type: "macro", impact: -4.5, sector: "Macro", parentId: "duk" },
+      { id: "industrial", label: "Industrial Production", type: "macro", impact: -2.8, sector: "Macro", parentId: "dow" },
+      { id: "food_prices", label: "Food Price Index", type: "macro", impact: -3, sector: "Macro", parentId: "ntr" },
+      { id: "renewables", label: "Renewable Competitiveness", type: "macro", impact: 4, sector: "Macro", parentId: "nee" }
     ]},
     { nodes: [
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "positive", impact: 5.5, correlation: 0.48, marketCap: "25B", sector: "Solar", parentId: "renewables" },
-      { id: "fslr", label: "First Solar (FSLR)", type: "positive", impact: 4.8, correlation: 0.42, marketCap: "22B", sector: "Solar", parentId: "renewables" },
-      { id: "eu_gas", label: "EU Gas Storage", type: "negative", impact: -3.5, sector: "Macro", parentId: "residential" },
-      { id: "ammonia", label: "Ammonia Price Index", type: "positive", impact: 6.0, sector: "Macro", parentId: "cf" }
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: 5.5, correlation: 0.48, marketCap: "25B", sector: "Solar", parentId: "renewables" },
+      { id: "fslr", label: "First Solar (FSLR)", type: "consumer", impact: 4.8, correlation: 0.42, marketCap: "22B", sector: "Solar", parentId: "renewables" },
+      { id: "eu_gas", label: "EU Gas Storage", type: "macro", impact: -3.5, sector: "Macro", parentId: "residential" },
+      { id: "ammonia", label: "Ammonia Price Index", type: "macro", impact: 6, sector: "Macro", parentId: "cf" }
     ]}
   ]
 };

@@ -7,6 +7,7 @@ tags: [zinc, construction, galvanizing, metals, infrastructure]
 description: 'How zinc price movements impact construction companies, galvanizing demand, infrastructure stocks, and miners like Teck and Glencore. Full analysis.'
 reading_time: 8
 commodity_name: 'Zinc'
+direction: bullish
 image: /assets/images/og-zinc.png
 ---
 
@@ -26,33 +27,33 @@ window.COMMODITY_DATA = {
   commodity: { id: "zinc", label: "Zinc ↑10%", price: "$2,650/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "teck", label: "Teck Resources (TECK)", type: "positive", impact: 11.0, correlation: 0.76, marketCap: "22B", sector: "Diversified Mining" },
-      { id: "glen_z", label: "Glencore (GLEN)", type: "positive", impact: 9.0, correlation: 0.70, marketCap: "68B", sector: "Mining & Trading" },
-      { id: "boliden", label: "Boliden (BOL.ST)", type: "positive", impact: 13.0, correlation: 0.80, marketCap: "8B", sector: "Zinc/Copper Mining" },
-      { id: "cat_z", label: "Caterpillar (CAT)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "160B", sector: "Construction Equipment" },
-      { id: "vmc", label: "Vulcan Materials (VMC)", type: "negative", impact: -2.0, correlation: -0.30, marketCap: "32B", sector: "Construction Materials" }
+      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 11, correlation: 0.76, marketCap: "22B", sector: "Diversified Mining" },
+      { id: "glen_z", label: "Glencore (GLEN)", type: "producer", impact: 9, correlation: 0.7, marketCap: "68B", sector: "Mining & Trading" },
+      { id: "boliden", label: "Boliden (BOL.ST)", type: "producer", impact: 13, correlation: 0.8, marketCap: "8B", sector: "Zinc/Copper Mining" },
+      { id: "cat_z", label: "Caterpillar (CAT)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "160B", sector: "Construction Equipment" },
+      { id: "vmc", label: "Vulcan Materials (VMC)", type: "consumer", impact: -2, correlation: -0.3, marketCap: "32B", sector: "Construction Materials" }
     ]},
     { nodes: [
-      { id: "nyrstar", label: "Nyrstar (Trafigura)", type: "positive", impact: 18.0, correlation: 0.88, sector: "Zinc Smelting", parentId: "glen_z" },
-      { id: "hindustan_z", label: "Hindustan Zinc (500188.BO)", type: "positive", impact: 16.0, correlation: 0.85, marketCap: "18B", sector: "Zinc Mining", parentId: "teck" },
-      { id: "gm_z", label: "General Motors (GM)", type: "negative", impact: -2.8, correlation: -0.38, marketCap: "48B", sector: "Automotive", parentId: "cat_z" },
-      { id: "ford_z", label: "Ford Motor (F)", type: "negative", impact: -2.5, correlation: -0.35, marketCap: "48B", sector: "Automotive", parentId: "cat_z" }
+      { id: "nyrstar", label: "Nyrstar (Trafigura)", type: "processor", impact: 18, correlation: 0.88, sector: "Zinc Smelting", parentId: "glen_z" },
+      { id: "hindustan_z", label: "Hindustan Zinc (500188.BO)", type: "producer", impact: 16, correlation: 0.85, marketCap: "18B", sector: "Zinc Mining", parentId: "teck" },
+      { id: "gm_z", label: "General Motors (GM)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "48B", sector: "Automotive", parentId: "cat_z" },
+      { id: "ford_z", label: "Ford Motor (F)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "48B", sector: "Automotive", parentId: "cat_z" }
     ]},
     { nodes: [
-      { id: "galvanizers", label: "Galvanizing Industry", type: "negative", impact: -5.5, correlation: -0.58, sector: "Metal Processing", parentId: "nyrstar" },
-      { id: "nucor_z", label: "Nucor Corporation (NUE)", type: "negative", impact: -3.0, correlation: -0.40, marketCap: "38B", sector: "Steel", parentId: "glen_z" },
+      { id: "galvanizers", label: "Galvanizing Industry", type: "processor", impact: -5.5, correlation: -0.58, sector: "Metal Processing", parentId: "nyrstar" },
+      { id: "nucor_z", label: "Nucor Corporation (NUE)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "38B", sector: "Steel", parentId: "glen_z" },
       { id: "infra_etf", label: "Infrastructure ETFs (PAVE)", type: "negative", impact: -1.5, correlation: -0.25, marketCap: "7B", sector: "ETF", parentId: "vmc" },
-      { id: "zinc_recycle", label: "Zinc Recyclers", type: "positive", impact: 7.0, correlation: 0.58, sector: "Recycling", parentId: "hindustan_z" }
+      { id: "zinc_recycle", label: "Zinc Recyclers", type: "substitute", impact: 7, correlation: 0.58, sector: "Recycling", parentId: "hindustan_z" }
     ]},
     { nodes: [
-      { id: "mlm", label: "Martin Marietta (MLM)", type: "negative", impact: -1.8, correlation: -0.28, marketCap: "34B", sector: "Construction Materials", parentId: "vmc" },
-      { id: "stld", label: "Steel Dynamics (STLD)", type: "negative", impact: -2.5, correlation: -0.36, marketCap: "18B", sector: "Steel", parentId: "nucor_z" },
-      { id: "transmission", label: "Power Transmission Towers", type: "negative", impact: -3.5, correlation: -0.42, sector: "Utilities Infrastructure", parentId: "galvanizers" }
+      { id: "mlm", label: "Martin Marietta (MLM)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "34B", sector: "Construction Materials", parentId: "vmc" },
+      { id: "stld", label: "Steel Dynamics (STLD)", type: "consumer", impact: -2.5, correlation: -0.36, marketCap: "18B", sector: "Steel", parentId: "nucor_z" },
+      { id: "transmission", label: "Power Transmission Towers", type: "consumer", impact: -3.5, correlation: -0.42, sector: "Utilities Infrastructure", parentId: "galvanizers" }
     ]},
     { nodes: [
-      { id: "china_construction", label: "China Construction Cycle", type: "positive", impact: 12.0, sector: "Macro", parentId: "hindustan_z" },
-      { id: "us_infra", label: "US Infrastructure Bill", type: "positive", impact: 10.0, sector: "Macro", parentId: "teck" },
-      { id: "mine_closures", label: "Mine Depletion Cycle", type: "positive", impact: 8.0, sector: "Macro", parentId: "boliden" }
+      { id: "china_construction", label: "China Construction Cycle", type: "macro", impact: 12, sector: "Macro", parentId: "hindustan_z" },
+      { id: "us_infra", label: "US Infrastructure Bill", type: "macro", impact: 10, sector: "Macro", parentId: "teck" },
+      { id: "mine_closures", label: "Mine Depletion Cycle", type: "macro", impact: 8, sector: "Macro", parentId: "boliden" }
     ]}
   ]
 };
