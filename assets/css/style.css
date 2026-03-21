@@ -270,11 +270,12 @@ code, kbd, pre {
   position: relative;
   z-index: 2;
   max-width: 720px;
-  background: linear-gradient(135deg, rgba(5,5,16,0.85) 0%, rgba(5,5,16,0.6) 100%);
+  background: linear-gradient(135deg, rgba(5,5,16,0.92) 0%, rgba(5,5,16,0.82) 100%);
   padding: 36px 32px;
   border-radius: 20px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(34,211,238,0.08);
 }
 
 .hero-badge {
@@ -310,10 +311,11 @@ code, kbd, pre {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   line-height: 1.05;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+  background: linear-gradient(135deg, #ffffff 20%, #e0f7ff 60%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(34,211,238,0.15));
 }
 
 .hero h1 .highlight {
@@ -325,7 +327,7 @@ code, kbd, pre {
 
 .hero-desc {
   font-size: 1.15rem;
-  color: var(--text2);
+  color: #c8d8e8;
   margin-bottom: 40px;
   max-width: 560px;
   line-height: 1.75;
@@ -2317,12 +2319,30 @@ a:focus-visible, button:focus-visible {
   }
 
   #impact-graph {
-    min-height: 520px !important;
+    min-height: 560px !important;
   }
 
   .cn-graph-controls {
-    position: static;
-    padding: 14px 14px 0;
+    position: absolute;
+    top: auto;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    padding: 8px 10px;
+    background: rgba(5,5,16,0.92);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    border-radius: 0 0 12px 12px;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 10;
+    max-height: 160px;
+    overflow-y: auto;
+  }
+  .cn-graph-control-group {
+    width: 100%;
+    border-radius: 8px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
   }
 }
 

@@ -94,7 +94,7 @@
 
     // ── ORBITAL RADII ──
     const baseRadii = [0, 150, 280, 400, 500, 600];
-    const radii = baseRadii.map(r => isMob ? r * 0.5 : r);
+    const radii = baseRadii.map(r => isMob ? r * 0.65 : r);
     const maxLevel = Math.max(...nodes.map(n => n.level));
 
     // ── SVG SETUP ──
@@ -171,7 +171,7 @@
         const b = g.node().getBBox();
         if (!b.width) return;
         const pad = 60;
-        const sc = Math.min(0.88, Math.min((W-pad*2)/b.width, (H-pad*2)/b.height));
+        const sc = Math.min(isMob ? 0.95 : 0.88, Math.min((W-pad*2)/b.width, (H-pad*2)/b.height));
         const tx = (W - b.width*sc)/2 - b.x*sc;
         const ty = (H - b.height*sc)/2 - b.y*sc;
         const t = d3.zoomIdentity.translate(tx, ty).scale(sc);
