@@ -7,9 +7,10 @@
 
   function boot() {
     if (typeof d3 === 'undefined') { setTimeout(boot, 100); return; }
+    if (!window.COMMODITY_DATA) { setTimeout(boot, 200); return; }
     document.querySelectorAll('#impact-graph').forEach(initGraph);
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function() { setTimeout(boot, 200); }); else setTimeout(boot, 200);
 
   function initGraph(container) {
     const rawData = window.COMMODITY_DATA;
@@ -607,14 +608,7 @@
       });
     }
 
-    // Reset button
-    const resetBtn = svg.append('g').attr('transform', `translate(${W - 56}, 8)`).style('cursor', 'pointer').style('opacity', 0.9).style('pointer-events', 'all');
-    resetBtn.append('rect').attr('width', 44).attr('height', 44).attr('rx', 8)
-      .attr('fill', 'rgba(10,10,26,0.9)').attr('stroke', 'rgba(34,211,238,0.4)').attr('stroke-width', 1);
-    resetBtn.append('text').attr('x', 15).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('font-size', '16px').attr('fill', '#22d3ee').text('\u2299');
-    resetBtn.append('text').attr('x', 34).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('font-size', '9px').attr('fill', '#22d3ee').attr('font-family', 'Inter,system-ui,sans-serif').text('Reset');
+    // Reset button (appended after zoom so it sits on top)
     function handleReset() {
       tracedChain = null; collapsedNodes.clear(); typeFilter = 'all'; maxVisibleLevel = Infinity; searchTerm = '';
       controls.selectAll('[data-depth]').classed('is-active', false);
@@ -625,7 +619,15 @@
       updateVisibility();
       fitAll(true);
     }
-    resetBtn.on('click', handleReset).on('touchstart', function(e) { e.preventDefault(); handleReset(); })
+    const resetBtn = svg.append('g').attr('transform', `translate(${W - 56}, 8)`).style('cursor', 'pointer').style('opacity', 0.9).style('pointer-events', 'all');
+    resetBtn.append('rect').attr('width', 44).attr('height', 44).attr('rx', 8)
+      .attr('fill', 'rgba(10,10,26,0.9)').attr('stroke', 'rgba(34,211,238,0.4)').attr('stroke-width', 1)
+      .style('pointer-events', 'all');
+    resetBtn.append('text').attr('x', 15).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+      .attr('font-size', '16px').attr('fill', '#22d3ee').text('\u2299').style('pointer-events', 'all');
+    resetBtn.append('text').attr('x', 34).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+      .attr('font-size', '9px').attr('fill', '#22d3ee').attr('font-family', 'Inter,system-ui,sans-serif').text('Reset').style('pointer-events', 'all');
+    resetBtn.on('click.reset', handleReset).on('touchstart.reset', function(e) { e.preventDefault(); e.stopPropagation(); handleReset(); })
       .on('mouseenter', function() { d3.select(this).style('opacity', 1).select('rect').attr('stroke', 'rgba(34,211,238,0.7)'); })
       .on('mouseleave', function() { d3.select(this).style('opacity', 0.9).select('rect').attr('stroke', 'rgba(34,211,238,0.4)'); });
 
