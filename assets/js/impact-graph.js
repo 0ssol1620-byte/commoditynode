@@ -122,7 +122,7 @@
     container.innerHTML = '';
 
     // ── ORBITAL RADII ──
-    const baseRadii = [0, 70, 130, 190, 240, 280];
+    const baseRadii = [0, 100, 180, 260, 330, 390];
     const radii = baseRadii.map(r => isMob ? r * 0.7 : r);
     const maxLevel = Math.max(...nodes.map(n => n.level));
 
@@ -258,8 +258,8 @@
         const tl = typeof d.target === 'object' ? d.target.level : 1;
         return radii[Math.min(tl, 5)] * 0.4 + 40;
       }).strength(0.3))
-      .force('charge', d3.forceManyBody().strength(d => d.level === 0 ? -600 : -120 - nodes.length * 0.5))
-      .force('collide', d3.forceCollide(d => nodeR(d) + 12))
+      .force('charge', d3.forceManyBody().strength(d => d.level === 0 ? -800 : -180 - nodes.length * 0.8))
+      .force('collide', d3.forceCollide(d => nodeR(d) + 22))
       .force('center', d3.forceCenter(cx, cy).strength(0.04))
       .force('radial', d3.forceRadial(d => {
         if (d.level === 0) return 0;
