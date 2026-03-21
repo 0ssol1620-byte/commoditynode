@@ -157,10 +157,8 @@
       .scaleExtent([0.12, 8])
       .filter(function(event) {
         if (event.ctrlKey) return false;
-        // Exclude reset button and controls from zoom
-        if (event.target.closest && event.target.closest('.cn-reset-btn, .cn-graph-controls')) return false;
-        var el = event.target;
-        while (el && el !== this) { if (el.classList && el.classList.contains('cn-reset-btn')) return false; el = el.parentNode; }
+        // Exclude controls from zoom (reset button is now HTML overlay outside SVG)
+        if (event.target.closest && event.target.closest('.cn-graph-controls, .cn-reset-overlay-btn')) return false;
         if (event.type === 'touchstart' || event.type === 'touchmove') return event.touches.length >= 2;
         return !event.button;
       })
@@ -623,17 +621,15 @@
       updateVisibility();
       fitAll(true);
     }
-    const resetBtn = svg.append('g').attr('class', 'cn-reset-btn').attr('transform', `translate(${W - 56}, 8)`).style('cursor', 'pointer').style('opacity', 0.9).style('pointer-events', 'all');
-    resetBtn.append('rect').attr('width', 44).attr('height', 44).attr('rx', 8)
-      .attr('fill', 'rgba(10,10,26,0.9)').attr('stroke', 'rgba(34,211,238,0.4)').attr('stroke-width', 1)
-      .style('pointer-events', 'all');
-    resetBtn.append('text').attr('x', 15).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('font-size', '16px').attr('fill', '#22d3ee').text('\u2299').style('pointer-events', 'all');
-    resetBtn.append('text').attr('x', 34).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('font-size', '9px').attr('fill', '#22d3ee').attr('font-family', 'Inter,system-ui,sans-serif').text('Reset').style('pointer-events', 'all');
-    resetBtn.on('click.reset', function(e) { e.stopPropagation(); e.preventDefault(); handleReset(); }).on('touchstart.reset', function(e) { e.preventDefault(); e.stopPropagation(); handleReset(); }).on('mousedown.reset', function(e) { e.stopPropagation(); }).on('pointerdown.reset', function(e) { e.stopPropagation(); })
-      .on('mouseenter', function() { d3.select(this).style('opacity', 1).select('rect').attr('stroke', 'rgba(34,211,238,0.7)'); })
-      .on('mouseleave', function() { d3.select(this).style('opacity', 0.9).select('rect').attr('stroke', 'rgba(34,211,238,0.4)'); });
+    const resetOverlay = document.createElement('button');
+    resetOverlay.className = 'cn-reset-overlay-btn';
+    resetOverlay.innerHTML = '⊙ Reset';
+    resetOverlay.style.cssText = 'position:absolute;top:8px;right:8px;background:rgba(10,10,26,0.9);border:1px solid rgba(34,211,238,0.4);border-radius:8px;color:#22d3ee;font-size:12px;padding:6px 12px;cursor:pointer;z-index:10;transition:all 0.2s;';
+    resetOverlay.addEventListener('mouseenter', () => { resetOverlay.style.borderColor = 'rgba(34,211,238,0.8)'; resetOverlay.style.opacity = '1'; });
+    resetOverlay.addEventListener('mouseleave', () => { resetOverlay.style.borderColor = 'rgba(34,211,238,0.4)'; });
+    resetOverlay.addEventListener('click', handleReset);
+    container.style.position = 'relative';
+    container.appendChild(resetOverlay);
 
     // ── STAGGERED REVEAL ──
     for (let l = 0; l <= maxLevel; l++) {

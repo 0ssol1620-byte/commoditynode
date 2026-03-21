@@ -465,3 +465,44 @@
   })();
 
 })();
+
+/* ---------- Populate Signal Prices from Chart Data ---------- */
+async function populateSignals() {
+  try {
+    const r = await fetch('/assets/data/chart-data.json');
+    const data = await r.json();
+    const map = { oil: 'CL=F', gold: 'GC=F', copper: 'HG=F', natgas: 'NG=F' };
+    Object.entries(map).forEach(([key, sym]) => {
+      const d = data[sym];
+      if (!d) return;
+      const price = d.candles && d.candles.length ? d.candles[d.candles.length-1].c : null;
+      const prev = d.candles && d.candles.length > 1 ? d.candles[d.candles.length-2].c : null;
+      const pct = price && prev ? ((price - prev) / prev * 100).toFixed(2) : null;
+      const up = pct ? pct > 0 : null;
+      const dirEl = document.getElementById('signal-' + key + '-dir');
+      const priceEl = document.getElementById('signal-' + key + '-price');
+      if (dirEl && pct !== null) {
+        dirEl.textContent = (up ? '▲ ' : '▼ ') + Math.abs(pct) + '%';
+        dirEl.style.color = up ? '#22c55e' : '#ef4444';
+      }
+      if (priceEl && price) {
+        priceEl.textContent = '$' + price.toFixed(price < 10 ? 3 : 2);
+      }
+    });
+    // Hero WTI
+    const wti = data['CL=F'];
+    if (wti && wti.candles && wti.candles.length > 1) {
+      const last = wti.candles[wti.candles.length-1].c;
+      const prev = wti.candles[wti.candles.length-2].c;
+      const pct = ((last - prev) / prev * 100).toFixed(2);
+      const el = document.getElementById('hero-wti-change');
+      if (el) {
+        el.textContent = (pct > 0 ? '+' : '') + pct + '%';
+        el.style.color = pct > 0 ? '#22c55e' : '#ef4444';
+        el.className = 'value ' + (pct > 0 ? 'positive' : 'negative');
+      }
+    }
+  } catch(e) { console.warn('signals:', e); }
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', populateSignals);
+else populateSignals();

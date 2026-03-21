@@ -1429,15 +1429,17 @@ hr {
   fill: rgba(5, 5, 8, 0.7);
 }
 
-/* ── CommodityNode Price Chart ── */
+/* ── CommodityNode Price Chart (consolidated) ── */
 .cn-price-chart {
-  background: rgba(10,10,18,0.6);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  padding: 1.25rem 1.5rem;
-  margin: 2rem 0;
-  backdrop-filter: blur(12px);
+  min-height: 320px;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
 }
+@media (max-width: 768px) { .cn-price-chart { min-height: 260px; } }
 .cn-chart-header {
   display: flex;
   justify-content: space-between;
@@ -1773,14 +1775,7 @@ a:focus-visible, button:focus-visible {
 }
 
 
-/* ════════════════════════════════════════
-   Price chart — top radius when stacked with graph
-   ════════════════════════════════════════ */
-.post-content .cn-price-chart {
-  margin-bottom: 0;
-  border-radius: var(--radius) var(--radius) 0 0;
-  border-bottom: none;
-}
+/* Price chart — top radius when stacked with graph: consolidated into base .cn-price-chart */
 /* ════════════════════════════════════════
    HERO stats — dynamic update flash
    ════════════════════════════════════════ */
@@ -1957,23 +1952,7 @@ a:focus-visible, button:focus-visible {
 }
 
 
-/* ════════════════════════════════════════════════
-   CHART — full-bleed breakout from post column
-   ════════════════════════════════════════════════ */
-.post-content .cn-price-chart {
-  margin-left: -24px;
-  margin-right: -24px;
-  border-radius: 0;
-  border-left: none;
-  border-right: none;
-}
-
-@media (max-width: 768px) {
-  .post-content .cn-price-chart {
-    margin-left: -16px;
-    margin-right: -16px;
-  }
-}
+/* CHART full-bleed: consolidated into base .cn-price-chart */
 
 /* ════════════════════════════════════════════════
    HERO — wider, more impactful
@@ -2366,6 +2345,10 @@ a:focus-visible, button:focus-visible {
     min-height: 480px !important;
   }
 }
+
+/* ── HTML Reset Button Overlay ── */
+.cn-reset-overlay-btn { font-family: 'JetBrains Mono', 'Courier New', monospace; letter-spacing: 0.02em; }
+.cn-reset-overlay-btn:hover { opacity: 1 !important; box-shadow: 0 0 12px rgba(34,211,238,0.3); }
 
 /* ── Chart height optimization (consolidated) ── */
 .cn-chart-body { height: 380px; }
