@@ -1,10 +1,14 @@
-/* ===== CommodityNode 3D Universe Impact Map ===== */
-/* Three.js r128 UMD – uses global THREE namespace  */
+/* ===== CommodityNode 3D Universe Impact Map – Premium Edition ===== */
+/* Three.js r128 UMD – uses global THREE namespace                     */
 
 (function () {
   'use strict';
 
   if (typeof THREE === 'undefined') return;
+
+  /* ---- Mobile detection ---- */
+  var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+    || window.innerWidth < 768;
 
   /* ---- Data ---- */
   var UNIVERSE_DATA = [
@@ -161,24 +165,182 @@
     return sprite;
   }
 
-  function makeGlow(color, size) {
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+
+  /* ---- Glow texture generators ---- */
+  function makeGlowTexture(innerStop, outerStop) {
     var canvas = document.createElement('canvas');
     canvas.width = 128; canvas.height = 128;
     var ctx = canvas.getContext('2d');
     var gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-    gradient.addColorStop(0, color + 'aa');
-    gradient.addColorStop(0.3, color + '44');
-    gradient.addColorStop(1, color + '00');
+    gradient.addColorStop(0, 'rgba(255,255,255,' + innerStop + ')');
+    gradient.addColorStop(0.2, 'rgba(255,255,255,' + (innerStop * 0.6) + ')');
+    gradient.addColorStop(0.5, 'rgba(255,255,255,' + (innerStop * 0.2) + ')');
+    gradient.addColorStop(1, 'rgba(255,255,255,0)');
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 128, 128);
-    var texture = new THREE.CanvasTexture(canvas);
-    var material = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.6 });
-    var sprite = new THREE.Sprite(material);
-    sprite.scale.set(size * 4, size * 4, 1);
-    return sprite;
+    return new THREE.CanvasTexture(canvas);
   }
 
-  function rand(min, max) { return Math.random() * (max - min) + min; }
+  /* Create 3 glow textures for multi-layer glow (shared) */
+  var glowTexInner = makeGlowTexture(0.9);
+  var glowTexMid   = makeGlowTexture(0.5);
+  var glowTexOuter = makeGlowTexture(0.2);
+
+  function makeMultiGlow(color, size) {
+    var c = hexToRGB(color);
+    var layers = [];
+
+    /* Inner glow */
+    var m1 = new THREE.SpriteMaterial({ map: glowTexInner, color: c, transparent: true, opacity: 0.5, depthWrite: false });
+    var s1 = new THREE.Sprite(m1);
+    s1.scale.set(size * 3, size * 3, 1);
+    s1.userData.baseScale = size * 3;
+    s1.userData.pulseRate = 2.0;
+    layers.push(s1);
+
+    /* Mid glow */
+    var m2 = new THREE.SpriteMaterial({ map: glowTexMid, color: c, transparent: true, opacity: 0.25, depthWrite: false });
+    var s2 = new THREE.Sprite(m2);
+    s2.scale.set(size * 5, size * 5, 1);
+    s2.userData.baseScale = size * 5;
+    s2.userData.pulseRate = 1.5;
+    layers.push(s2);
+
+    /* Outer glow */
+    var m3 = new THREE.SpriteMaterial({ map: glowTexOuter, color: c, transparent: true, opacity: 0.08, depthWrite: false });
+    var s3 = new THREE.Sprite(m3);
+    s3.scale.set(size * 8, size * 8, 1);
+    s3.userData.baseScale = size * 8;
+    s3.userData.pulseRate = 1.0;
+    layers.push(s3);
+
+    return layers;
+  }
+
+  /* ---- Star Shader Material (living sun effect) ---- */
+  var starVertexShader = [
+    'varying vec3 vNormal;',
+    'varying vec3 vPosition;',
+    'void main() {',
+    '  vNormal = normalize(normalMatrix * normal);',
+    '  vPosition = position;',
+    '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
+    '}'
+  ].join('\n');
+
+  var starFragmentShader = [
+    'uniform float time;',
+    'uniform vec3 baseColor;',
+    'varying vec3 vNormal;',
+    'varying vec3 vPosition;',
+    'void main() {',
+    '  float noise = sin(vPosition.x * 8.0 + time) * sin(vPosition.y * 6.0 + time * 0.7) * sin(vPosition.z * 7.0 + time * 1.3);',
+    '  noise = noise * 0.5 + 0.5;',
+    '  float noise2 = sin(vPosition.x * 12.0 - time * 0.5) * sin(vPosition.y * 10.0 + time * 1.1) * sin(vPosition.z * 11.0 - time * 0.8);',
+    '  noise2 = noise2 * 0.5 + 0.5;',
+    '  float combinedNoise = noise * 0.6 + noise2 * 0.4;',
+    '  float fresnel = pow(1.0 - abs(dot(vNormal, vec3(0.0, 0.0, 1.0))), 2.0);',
+    '  vec3 core = mix(vec3(1.0), baseColor, 0.3 + combinedNoise * 0.4);',
+    '  vec3 rim = baseColor * 1.5;',
+    '  vec3 finalColor = mix(core, rim, fresnel * 0.7);',
+    '  float alpha = 0.85 + fresnel * 0.15;',
+    '  float pulse = 0.9 + sin(time * 2.0) * 0.1;',
+    '  gl_FragColor = vec4(finalColor * pulse, alpha);',
+    '}'
+  ].join('\n');
+
+  /* ---- Twinkling star field shader ---- */
+  var starFieldVertexShader = [
+    'attribute float size;',
+    'attribute float randomOffset;',
+    'attribute vec3 starColor;',
+    'uniform float time;',
+    'varying float vOpacity;',
+    'varying vec3 vColor;',
+    'void main() {',
+    '  vColor = starColor;',
+    '  vOpacity = 0.4 + 0.6 * (0.5 + 0.5 * sin(time * (0.3 + randomOffset * 0.7) + randomOffset * 6.283));',
+    '  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);',
+    '  gl_PointSize = size * (200.0 / -mvPosition.z);',
+    '  gl_Position = projectionMatrix * mvPosition;',
+    '}'
+  ].join('\n');
+
+  var starFieldFragmentShader = [
+    'varying float vOpacity;',
+    'varying vec3 vColor;',
+    'void main() {',
+    '  float d = length(gl_PointCoord - vec2(0.5));',
+    '  if (d > 0.5) discard;',
+    '  float alpha = smoothstep(0.5, 0.1, d) * vOpacity;',
+    '  gl_FragColor = vec4(vColor, alpha);',
+    '}'
+  ].join('\n');
+
+  /* ---- Connection line (gradient vertex-colored line) ---- */
+  function makeConnection(parentColor, childColor, startPos, endPos) {
+    var positions = new Float32Array(6);
+    positions[0] = startPos.x; positions[1] = startPos.y; positions[2] = startPos.z;
+    positions[3] = endPos.x;   positions[4] = endPos.y;   positions[5] = endPos.z;
+
+    var pColor = hexToRGB(parentColor);
+    var cColor = hexToRGB(childColor);
+    var colors = new Float32Array(6);
+    colors[0] = pColor.r; colors[1] = pColor.g; colors[2] = pColor.b;
+    colors[3] = cColor.r; colors[4] = cColor.g; colors[5] = cColor.b;
+
+    var geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    var mat = new THREE.LineBasicMaterial({
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.2,
+      depthWrite: false
+    });
+
+    var line = new THREE.Line(geo, mat);
+    line.userData.lineGeo = geo;
+    return line;
+  }
+
+  /* ---- Orbital Ring ---- */
+  function makeOrbitalRing(radius, color, tiltX, tiltZ) {
+    var segments = 64;
+    var points = [];
+    for (var i = 0; i <= segments; i++) {
+      var angle = (i / segments) * Math.PI * 2;
+      points.push(new THREE.Vector3(
+        Math.cos(angle) * radius,
+        Math.sin(angle * 0.7) * radius * 0.3,
+        Math.sin(angle) * radius
+      ));
+    }
+    var geo = new THREE.BufferGeometry().setFromPoints(points);
+    var mat = new THREE.LineBasicMaterial({
+      color: hexToRGB(color),
+      transparent: true,
+      opacity: 0.1,
+      depthWrite: false
+    });
+    return new THREE.Line(geo, mat);
+  }
+
+  /* ---- Satellite glow sprite (small) ---- */
+  function makeSatGlow(color, size) {
+    var mat = new THREE.SpriteMaterial({
+      map: glowTexInner,
+      color: hexToRGB(color),
+      transparent: true,
+      opacity: 0.3,
+      depthWrite: false
+    });
+    var sprite = new THREE.Sprite(mat);
+    sprite.scale.set(size * 2, size * 2, 1);
+    return sprite;
+  }
 
   /* ---- Init ---- */
   function init() {
@@ -201,7 +363,34 @@
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ReinhardToneMapping;
+    renderer.toneMappingExposure = 1.5;
     container.appendChild(renderer.domElement);
+
+    /* ---- Bloom post-processing ---- */
+    var composer = null;
+    var useBloom = false;
+    try {
+      if (typeof THREE.EffectComposer !== 'undefined' &&
+          typeof THREE.RenderPass !== 'undefined' &&
+          typeof THREE.UnrealBloomPass !== 'undefined') {
+        composer = new THREE.EffectComposer(renderer);
+        var renderPass = new THREE.RenderPass(scene, camera);
+        composer.addPass(renderPass);
+        var bloomPass = new THREE.UnrealBloomPass(
+          new THREE.Vector2(width, height),
+          1.2,   /* strength */
+          0.8,   /* radius */
+          0.2    /* threshold */
+        );
+        composer.addPass(bloomPass);
+        useBloom = true;
+      }
+    } catch (e) {
+      /* Fallback: standard rendering without bloom */
+      composer = null;
+      useBloom = false;
+    }
 
     /* Controls */
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
@@ -212,11 +401,17 @@
     controls.minDistance = 100;
     controls.maxDistance = 2000;
 
-    /* ---- Star field ---- */
-    var starGeo = new THREE.BufferGeometry();
-    var starCount = 3000;
+    /* ---- Lighting ---- */
+    var ambientLight = new THREE.AmbientLight(0x111122, 0.3);
+    scene.add(ambientLight);
+
+    /* ---- Enhanced Star Field ---- */
+    var starCount = isMobile ? 1500 : 3000;
     var starPositions = new Float32Array(starCount * 3);
     var starSizes = new Float32Array(starCount);
+    var starOffsets = new Float32Array(starCount);
+    var starColors = new Float32Array(starCount * 3);
+
     for (var i = 0; i < starCount; i++) {
       var theta = Math.random() * Math.PI * 2;
       var phi = Math.acos(2 * Math.random() - 1);
@@ -224,18 +419,57 @@
       starPositions[i*3]   = r * Math.sin(phi) * Math.cos(theta);
       starPositions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
       starPositions[i*3+2] = r * Math.cos(phi);
-      starSizes[i] = Math.random() < 0.1 ? rand(2, 4) : rand(0.5, 1.5);
+
+      /* Vary size */
+      starSizes[i] = Math.random() < 0.1 ? rand(2.0, 3.0) : rand(0.5, 1.5);
+
+      /* Random offset for twinkling */
+      starOffsets[i] = Math.random();
+
+      /* Color tint: mostly white, some faint blue, some faint gold */
+      var colorRoll = Math.random();
+      if (colorRoll < 0.15) {
+        /* Faint blue */
+        starColors[i*3]   = 0.7;
+        starColors[i*3+1] = 0.8;
+        starColors[i*3+2] = 1.0;
+      } else if (colorRoll < 0.25) {
+        /* Faint gold */
+        starColors[i*3]   = 1.0;
+        starColors[i*3+1] = 0.95;
+        starColors[i*3+2] = 0.7;
+      } else {
+        /* White */
+        starColors[i*3]   = 1.0;
+        starColors[i*3+1] = 1.0;
+        starColors[i*3+2] = 1.0;
+      }
     }
+
+    var starGeo = new THREE.BufferGeometry();
     starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
     starGeo.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
-    var starMat = new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, sizeAttenuation: true, transparent: true, opacity: 0.7 });
+    starGeo.setAttribute('randomOffset', new THREE.BufferAttribute(starOffsets, 1));
+    starGeo.setAttribute('starColor', new THREE.BufferAttribute(starColors, 3));
+
+    var starMat = new THREE.ShaderMaterial({
+      uniforms: { time: { value: 0 } },
+      vertexShader: starFieldVertexShader,
+      fragmentShader: starFieldFragmentShader,
+      transparent: true,
+      depthWrite: false
+    });
     var stars = new THREE.Points(starGeo, starMat);
     scene.add(stars);
 
     /* ---- Build commodities ---- */
-    var commodityMeshes = [];   // { mesh, glow, label, group, data, satellites, x, y, z }
-    var satellites = [];        // { mesh, line, parentObj, angle, speed, orbitR, tiltX, tiltZ }
+    var commodityMeshes = [];   /* { mesh, glowLayers, label, group, data, satellites, x, y, z, pointLight, orbitalRings, connectionMeshes } */
+    var satellites = [];        /* { mesh, satGlow, parentObj, angle, speed, orbitR, nodeData } */
     var allGroups = [];
+    var pointLights = [];
+
+    /* Shared satellite geometry (instancing concept but manual for r128 compat) */
+    var sharedSatGeo = new THREE.SphereGeometry(1, 12, 12);
 
     UNIVERSE_DATA.forEach(function (d) {
       var cluster = CLUSTERS[d.category];
@@ -247,15 +481,29 @@
       group.position.set(cx, cy, cz);
       group.userData = { category: d.category, id: d.id, data: d };
 
-      /* Commodity sphere */
-      var geo = new THREE.SphereGeometry(d.size, 24, 24);
-      var mat = new THREE.MeshBasicMaterial({ color: hexToRGB(d.color) });
+      /* ---- 1. Commodity Star: Living Sun Shader ---- */
+      var geo = new THREE.SphereGeometry(d.size, 32, 32);
+      var mat = new THREE.ShaderMaterial({
+        uniforms: {
+          time: { value: 0 },
+          baseColor: { value: hexToRGB(d.color) }
+        },
+        vertexShader: starVertexShader,
+        fragmentShader: starFragmentShader,
+        transparent: true,
+        depthWrite: true
+      });
       var mesh = new THREE.Mesh(geo, mat);
       group.add(mesh);
 
-      /* Glow */
-      var glow = makeGlow(d.color, d.size);
-      group.add(glow);
+      /* ---- 2. Multi-layer Glow (3 layers) ---- */
+      var glowLayers = makeMultiGlow(d.color, d.size);
+      glowLayers.forEach(function (gl) { group.add(gl); });
+
+      /* ---- 5. Point Light per commodity star ---- */
+      var pLight = new THREE.PointLight(hexToRGB(d.color), 0.5, 150);
+      group.add(pLight);
+      pointLights.push(pLight);
 
       /* Label */
       var label = makeLabel(d.name, d.color);
@@ -265,20 +513,38 @@
       scene.add(group);
       allGroups.push(group);
 
-      var cObj = { mesh: mesh, glow: glow, label: label, group: group, data: d, x: cx, y: cy, z: cz, satellites: [] };
+      var cObj = {
+        mesh: mesh, glowLayers: glowLayers, label: label, group: group, data: d,
+        x: cx, y: cy, z: cz, satellites: [], pointLight: pLight,
+        orbitalRings: [], connectionMeshes: []
+      };
       commodityMeshes.push(cObj);
 
-      /* Satellite nodes */
+      /* ---- 4. Orbital Rings ---- */
+      var orbitRadii = {};
+
+      /* ---- Satellite nodes ---- */
       d.nodes.forEach(function (n, ni) {
         var orbitR = rand(30, 50);
         var angle = (ni / d.nodes.length) * Math.PI * 2;
         var speed = rand(0.002, 0.008);
         var nColor = TYPE_COLORS[n.type] || '#94a3b8';
+        var satSize = rand(2, 4);
 
-        var sGeo = new THREE.SphereGeometry(rand(2, 4), 12, 12);
-        var sMat = new THREE.MeshBasicMaterial({ color: hexToRGB(nColor) });
+        /* ---- 3. Glass/Crystal Satellite ---- */
+        var sGeo = sharedSatGeo;
+        var sMat = new THREE.MeshPhongMaterial({
+          color: hexToRGB(nColor),
+          transparent: true,
+          opacity: 0.7,
+          shininess: 100,
+          specular: new THREE.Color(0xffffff),
+          emissive: hexToRGB(nColor),
+          emissiveIntensity: 0.15
+        });
         var sMesh = new THREE.Mesh(sGeo, sMat);
-        sMesh.userData = { name: n.name, type: n.type, parent: d.name, parentLink: d.link };
+        sMesh.scale.set(satSize, satSize, satSize);
+        sMesh.userData = { name: n.name, type: n.type, parent: d.name, parentLink: d.link, baseOpacity: 0.7, baseEmissive: 0.15 };
 
         var sx = Math.cos(angle) * orbitR;
         var sz = Math.sin(angle) * orbitR;
@@ -286,26 +552,45 @@
         sMesh.position.set(sx, sy, sz);
         group.add(sMesh);
 
-        /* Orbit line */
-        var lineGeo = new THREE.BufferGeometry().setFromPoints([
-          new THREE.Vector3(0, 0, 0),
-          new THREE.Vector3(sx, sy, sz)
-        ]);
-        var lineMat = new THREE.LineBasicMaterial({ color: hexToRGB(nColor), transparent: true, opacity: 0.15 });
-        var line = new THREE.Line(lineGeo, lineMat);
-        group.add(line);
+        /* Satellite glow sprite */
+        var satGlowSprite = makeSatGlow(nColor, satSize);
+        satGlowSprite.position.copy(sMesh.position);
+        group.add(satGlowSprite);
 
-        var satObj = { mesh: sMesh, line: line, lineGeo: lineGeo, parentObj: cObj, angle: angle, speed: speed, orbitR: orbitR };
+        /* ---- 7. Connection line (gradient) ---- */
+        var connMesh = makeConnection(d.color, nColor, new THREE.Vector3(0, 0, 0), new THREE.Vector3(sx, sy, sz));
+        group.add(connMesh);
+        cObj.connectionMeshes.push(connMesh);
+
+        /* Track orbit radii for ring drawing */
+        var rKey = Math.round(orbitR);
+        if (!orbitRadii[rKey]) orbitRadii[rKey] = orbitR;
+
+        var satObj = {
+          mesh: sMesh, satGlow: satGlowSprite, parentObj: cObj,
+          angle: angle, speed: speed, orbitR: orbitR,
+          nodeData: n, connMesh: connMesh, nColor: nColor
+        };
         satellites.push(satObj);
         cObj.satellites.push(satObj);
       });
+
+      /* Draw orbital rings at unique radii */
+      var ringKeys = Object.keys(orbitRadii);
+      ringKeys.forEach(function (key) {
+        var ring = makeOrbitalRing(orbitRadii[key], d.color);
+        group.add(ring);
+        cObj.orbitalRings.push(ring);
+      });
     });
 
-    /* ---- Raycaster ---- */
+    /* ---- Raycaster (throttled to every 3 frames) ---- */
     var raycaster = new THREE.Raycaster();
     raycaster.params.Points = { threshold: 5 };
     var mouse = new THREE.Vector2();
     var hoveredObj = null;
+    var frameCount = 0;
+    var lastHit = null;
 
     function getIntersects(event) {
       var rect = renderer.domElement.getBoundingClientRect();
@@ -350,8 +635,81 @@
       if (tooltip) tooltip.style.display = 'none';
     }
 
-    /* ---- Hover ---- */
+    /* ---- Hover effects ---- */
+    var lastMouseEvent = null;
+
+    function applyHoverEffects(hovered) {
+      if (hovered) {
+        /* Brighten hovered commodity, dim others */
+        commodityMeshes.forEach(function (c) {
+          if (c === hovered) {
+            /* Boost glow by 50% */
+            c.glowLayers.forEach(function (gl) {
+              gl.material.opacity = gl === c.glowLayers[0] ? 0.75 : (gl === c.glowLayers[1] ? 0.38 : 0.12);
+            });
+            /* Brighten orbital rings */
+            c.orbitalRings.forEach(function (ring) {
+              ring.material.opacity = 0.3;
+            });
+            /* Brighten satellites */
+            c.satellites.forEach(function (sat) {
+              if (sat.mesh.material.emissiveIntensity !== undefined) {
+                sat.mesh.material.emissiveIntensity = 0.4;
+              }
+              if (sat.satGlow) sat.satGlow.material.opacity = 0.5;
+            });
+            /* Brighten connections */
+            c.connectionMeshes.forEach(function (conn) {
+              conn.material.opacity = 0.4;
+            });
+          } else {
+            /* Dim non-hovered commodities */
+            c.glowLayers.forEach(function (gl) {
+              gl.material.opacity = gl === c.glowLayers[0] ? 0.2 : (gl === c.glowLayers[1] ? 0.1 : 0.03);
+            });
+            c.mesh.material.transparent = true;
+            if (c.mesh.material.uniforms) {
+              /* The shader doesn't have an opacity uniform, but we can use the group */
+            }
+            c.group.traverse(function (child) {
+              if (child.material && child !== c.mesh) {
+                if (child.material.opacity !== undefined) {
+                  child.material.opacity = Math.min(child.material.opacity, 0.15);
+                }
+              }
+            });
+          }
+        });
+      } else {
+        /* Reset all to default */
+        commodityMeshes.forEach(function (c) {
+          c.glowLayers[0].material.opacity = 0.5;
+          c.glowLayers[1].material.opacity = 0.25;
+          c.glowLayers[2].material.opacity = 0.08;
+          c.orbitalRings.forEach(function (ring) {
+            ring.material.opacity = 0.1;
+          });
+          c.satellites.forEach(function (sat) {
+            sat.mesh.material.opacity = 0.7;
+            if (sat.mesh.material.emissiveIntensity !== undefined) {
+              sat.mesh.material.emissiveIntensity = 0.15;
+            }
+            if (sat.satGlow) sat.satGlow.material.opacity = 0.3;
+          });
+          c.connectionMeshes.forEach(function (conn) {
+            conn.material.opacity = 0.2;
+          });
+        });
+      }
+    }
+
     renderer.domElement.addEventListener('mousemove', function (e) {
+      lastMouseEvent = e;
+    });
+
+    function processHover() {
+      if (!lastMouseEvent) return;
+      var e = lastMouseEvent;
       var hit = getIntersects(e);
       if (hit) {
         renderer.domElement.style.cursor = 'pointer';
@@ -363,7 +721,10 @@
             '<div style="margin-top:6px;font-size:0.8rem;color:#cbd5e1;">' + d.nodes.length + ' connected nodes</div>' +
             '<div style="margin-top:4px;font-size:0.75rem;color:#64748b;">Click to zoom in</div>'
           );
-          hoveredObj = hit.obj;
+          if (hoveredObj !== hit.obj) {
+            hoveredObj = hit.obj;
+            applyHoverEffects(hoveredObj);
+          }
         } else {
           var ud = hit.obj.userData;
           showTooltip(e,
@@ -371,21 +732,34 @@
             '<div style="font-size:0.78rem;color:#94a3b8;margin-top:2px;">Type: ' + ud.type + '</div>' +
             '<div style="font-size:0.78rem;color:#64748b;">Part of ' + ud.parent + '</div>'
           );
-          hoveredObj = null;
+          if (hoveredObj !== null) {
+            hoveredObj = null;
+            applyHoverEffects(null);
+          }
         }
       } else {
         renderer.domElement.style.cursor = 'grab';
         hideTooltip();
-        hoveredObj = null;
+        if (hoveredObj !== null) {
+          hoveredObj = null;
+          applyHoverEffects(null);
+        }
       }
-    });
+    }
 
     /* ---- Click / zoom ---- */
     var zoomTarget = null;
     var defaultCamPos = new THREE.Vector3(0, 0, 800);
     var defaultTarget = new THREE.Vector3(0, 0, 0);
+    var isZoomed = false;
 
     renderer.domElement.addEventListener('click', function (e) {
+      /* Force raycast on click */
+      var rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+
       var hit = getIntersects(e);
       if (hit && hit.type === 'commodity') {
         var c = hit.obj;
@@ -393,11 +767,12 @@
           pos: new THREE.Vector3(c.x, c.y, c.z + 80),
           look: new THREE.Vector3(c.x, c.y, c.z)
         };
+        isZoomed = true;
         controls.autoRotate = false;
       } else if (hit && hit.type === 'satellite') {
         var link = hit.obj.userData.parentLink;
         if (link) window.location.href = link;
-      } else if (zoomTarget) {
+      } else if (isZoomed) {
         resetView();
       }
     });
@@ -407,6 +782,7 @@
         pos: defaultCamPos.clone(),
         look: defaultTarget.clone()
       };
+      isZoomed = false;
       setTimeout(function () {
         zoomTarget = null;
         controls.autoRotate = true;
@@ -415,7 +791,7 @@
 
     /* Escape key */
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && zoomTarget) resetView();
+      if (e.key === 'Escape' && isZoomed) resetView();
     });
 
     /* Reset button */
@@ -483,6 +859,9 @@
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
+      if (useBloom && composer) {
+        composer.setSize(width, height);
+      }
     }
     window.addEventListener('resize', onResize);
 
@@ -492,15 +871,33 @@
     function animate() {
       requestAnimationFrame(animate);
       var elapsed = clock.getElapsedTime();
+      frameCount++;
 
-      /* Star twinkle */
-      starMat.opacity = 0.55 + Math.sin(elapsed * 0.5) * 0.15;
+      /* Throttled raycaster: every 3 frames */
+      if (frameCount % 3 === 0) {
+        processHover();
+      }
 
-      /* Commodity pulse */
+      /* Star field twinkle (shader uniform) */
+      starMat.uniforms.time.value = elapsed;
+
+      /* Commodity pulse + shader time update */
       commodityMeshes.forEach(function (c, ci) {
         var s = 1 + Math.sin(elapsed * 1.5 + ci * 0.8) * 0.08;
         c.mesh.scale.set(s, s, s);
-        c.glow.scale.set(c.data.size * 4 * s, c.data.size * 4 * s, 1);
+
+        /* Update shader time */
+        if (c.mesh.material.uniforms) {
+          c.mesh.material.uniforms.time.value = elapsed;
+        }
+
+        /* Multi-layer glow pulse at different rates */
+        c.glowLayers.forEach(function (gl) {
+          var baseScale = gl.userData.baseScale;
+          var rate = gl.userData.pulseRate;
+          var ps = 1 + Math.sin(elapsed * rate + ci * 0.5) * 0.1;
+          gl.scale.set(baseScale * ps, baseScale * ps, 1);
+        });
       });
 
       /* Satellite orbits */
@@ -510,26 +907,86 @@
         var sz = Math.sin(sat.angle) * sat.orbitR;
         var sy = Math.sin(sat.angle * 0.7) * sat.orbitR * 0.3;
         sat.mesh.position.set(sx, sy, sz);
-        /* Update line endpoint */
-        var positions = sat.lineGeo.attributes.position.array;
-        positions[3] = sx; positions[4] = sy; positions[5] = sz;
-        sat.lineGeo.attributes.position.needsUpdate = true;
+
+        /* Update satellite glow position */
+        if (sat.satGlow) {
+          sat.satGlow.position.set(sx, sy, sz);
+        }
+
+        /* Update connection line endpoint */
+        if (sat.connMesh && sat.connMesh.userData.lineGeo) {
+          var posArr = sat.connMesh.userData.lineGeo.attributes.position.array;
+          posArr[3] = sx; posArr[4] = sy; posArr[5] = sz;
+          sat.connMesh.userData.lineGeo.attributes.position.needsUpdate = true;
+
+          /* Pulsing opacity for flowing energy effect */
+          var pulse = 0.15 + Math.sin(elapsed * 3.0 + sat.angle) * 0.1;
+          sat.connMesh.material.opacity = Math.max(0.05, pulse);
+        }
       });
 
-      /* Camera zoom lerp */
+      /* ---- 9. Camera zoom-in enhancement ---- */
       if (zoomTarget) {
         camera.position.lerp(zoomTarget.pos, 0.05);
         controls.target.lerp(zoomTarget.look, 0.05);
       }
 
+      /* Depth-of-field feel when zoomed: dim distant objects */
+      if (isZoomed && zoomTarget) {
+        var focusPoint = zoomTarget.look;
+        commodityMeshes.forEach(function (c) {
+          var dist = Math.sqrt(
+            Math.pow(c.x - focusPoint.x, 2) +
+            Math.pow(c.y - focusPoint.y, 2) +
+            Math.pow(c.z - focusPoint.z, 2)
+          );
+          if (dist < 10) {
+            /* Focused commodity: show satellite labels, brighten orbital rings */
+            c.label.material.opacity = 1.0;
+            c.orbitalRings.forEach(function (ring) {
+              ring.material.opacity = 0.25;
+            });
+            c.satellites.forEach(function (sat) {
+              /* Show satellite labels (not currently labels, but enhance visibility) */
+              sat.mesh.material.opacity = 0.9;
+              if (sat.mesh.material.emissiveIntensity !== undefined) {
+                sat.mesh.material.emissiveIntensity = 0.3;
+              }
+            });
+          } else {
+            /* Distant: fade based on distance */
+            var fadeFactor = Math.max(0.1, 1.0 - dist / 500);
+            c.label.material.opacity = fadeFactor * 0.85;
+            c.glowLayers[0].material.opacity = 0.5 * fadeFactor;
+            c.glowLayers[1].material.opacity = 0.25 * fadeFactor;
+            c.glowLayers[2].material.opacity = 0.08 * fadeFactor;
+          }
+        });
+      }
+
       controls.update();
-      renderer.render(scene, camera);
+
+      /* Render with bloom or standard */
+      if (useBloom && composer) {
+        composer.render();
+      } else {
+        renderer.render(scene, camera);
+      }
     }
 
     animate();
 
     /* ---- Cleanup on page navigation ---- */
     window.addEventListener('beforeunload', function () {
+      /* Dispose geometries and materials */
+      scene.traverse(function (child) {
+        if (child.geometry) child.geometry.dispose();
+        if (child.material) {
+          if (child.material.map) child.material.map.dispose();
+          child.material.dispose();
+        }
+      });
+      if (composer && composer.dispose) composer.dispose();
       renderer.dispose();
       window.removeEventListener('resize', onResize);
     });
