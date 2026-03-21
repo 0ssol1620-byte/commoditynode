@@ -473,33 +473,39 @@ async function populateSignals() {
     const data = await r.json();
     const map = { oil: 'CL=F', gold: 'GC=F', copper: 'HG=F', natgas: 'NG=F' };
     Object.entries(map).forEach(([key, sym]) => {
-      const d = data[sym];
-      if (!d) return;
-      const price = d.candles && d.candles.length ? d.candles[d.candles.length-1].c : null;
-      const prev = d.candles && d.candles.length > 1 ? d.candles[d.candles.length-2].c : null;
-      const pct = price && prev ? ((price - prev) / prev * 100).toFixed(2) : null;
-      const up = pct ? pct > 0 : null;
-      const dirEl = document.getElementById('signal-' + key + '-dir');
+      const entry = data[sym];
+      if (!entry) return;
+      // Data structure: entry['1M'].candles or entry['3M'].candles
+      const period = entry['1M'] || entry['3M'] || entry['1Y'];
+      const candles = period && period.candles;
+      if (!candles || candles.length < 2) return;
+      const price = candles[candles.length - 1].c;
+      const prev  = candles[candles.length - 2].c;
+      const pct   = ((price - prev) / prev * 100).toFixed(2);
+      const up    = parseFloat(pct) > 0;
+      const dirEl   = document.getElementById('signal-' + key + '-dir');
       const priceEl = document.getElementById('signal-' + key + '-price');
-      if (dirEl && pct !== null) {
+      if (dirEl) {
         dirEl.textContent = (up ? '▲ ' : '▼ ') + Math.abs(pct) + '%';
         dirEl.style.color = up ? '#22c55e' : '#ef4444';
       }
-      if (priceEl && price) {
-        priceEl.textContent = '$' + price.toFixed(price < 10 ? 3 : 2);
+      if (priceEl) {
+        priceEl.textContent = '$' + (price >= 1000 ? price.toLocaleString('en-US', {minimumFractionDigits:2,maximumFractionDigits:2}) : price.toFixed(price < 10 ? 3 : 2));
       }
     });
     // Hero WTI
     const wti = data['CL=F'];
-    if (wti && wti.candles && wti.candles.length > 1) {
-      const last = wti.candles[wti.candles.length-1].c;
-      const prev = wti.candles[wti.candles.length-2].c;
-      const pct = ((last - prev) / prev * 100).toFixed(2);
+    const wtiPeriod = wti && (wti['1M'] || wti['3M']);
+    const wtiCandles = wtiPeriod && wtiPeriod.candles;
+    if (wtiCandles && wtiCandles.length > 1) {
+      const last = wtiCandles[wtiCandles.length-1].c;
+      const prev = wtiCandles[wtiCandles.length-2].c;
+      const pct  = ((last - prev) / prev * 100).toFixed(2);
       const el = document.getElementById('hero-wti-change');
       if (el) {
-        el.textContent = (pct > 0 ? '+' : '') + pct + '%';
-        el.style.color = pct > 0 ? '#22c55e' : '#ef4444';
-        el.className = 'value ' + (pct > 0 ? 'positive' : 'negative');
+        el.textContent = (parseFloat(pct) > 0 ? '+' : '') + pct + '%';
+        el.style.color = parseFloat(pct) > 0 ? '#22c55e' : '#ef4444';
+        el.className = 'value ' + (parseFloat(pct) > 0 ? 'positive' : 'negative');
       }
     }
   } catch(e) { console.warn('signals:', e); }
