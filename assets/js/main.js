@@ -7,15 +7,23 @@
   'use strict';
 
   /* ---------- Page Loader ---------- */
+  var _loaderHidden = false;
+  function hideLoader() {
+    if (_loaderHidden) return;
+    _loaderHidden = true;
+    var loader = document.getElementById("page-loader");
+    if (loader) {
+      loader.style.opacity = "0";
+      setTimeout(function() { loader.style.display = "none"; }, 500);
+    }
+  }
+  // Hide after all resources loaded (images, scripts, fonts)
   window.addEventListener("load", function() {
-    var loader = document.getElementById("page-loader");
-    if (loader) { loader.style.opacity = "0"; setTimeout(function() { loader.style.display = "none"; }, 400); }
+    // Minimum 1.5s display so users see the orbital animation
+    setTimeout(hideLoader, 1500);
   });
-  // Fast hide after 2s max regardless
-  setTimeout(function() {
-    var loader = document.getElementById("page-loader");
-    if (loader) { loader.style.opacity = "0"; setTimeout(function() { loader.style.display = "none"; }, 400); }
-  }, 2000);
+  // Hard cap at 4s for slow connections
+  setTimeout(hideLoader, 4000);
 
   /* ---------- Page Transition ---------- */
   const transitionEl = document.getElementById('page-transition');

@@ -5,23 +5,40 @@
 (function () {
   'use strict';
 
+  var _bootAttempts = 0;
   function boot() {
+    _bootAttempts++;
+    if (_bootAttempts > 60) return; // give up after 3s
     if (typeof d3 === 'undefined') { setTimeout(boot, 50); return; }
+    // Only run on pages that have #impact-graph
+    var els = document.querySelectorAll('#impact-graph');
+    if (!els.length) return;
     if (!window.COMMODITY_DATA) { setTimeout(boot, 50); return; }
-    document.querySelectorAll('#impact-graph').forEach(function(el) {
-      // Wait until element has actual width before rendering
-      if (el.getBoundingClientRect().width > 0) {
+    els.forEach(function(el) {
+      var w = el.getBoundingClientRect().width;
+      if (w > 10) {
         initGraph(el);
       } else {
+        // Element has no width yet — use ResizeObserver + fallback timeout
+        var done = false;
         var ro = new ResizeObserver(function(entries) {
-          var w = entries[0].contentRect.width;
-          if (w > 0) { ro.disconnect(); initGraph(el); }
+          if (done) return;
+          var rw = entries[0].contentRect.width;
+          if (rw > 10) { done = true; ro.disconnect(); initGraph(el); }
         });
         ro.observe(el);
+        // Fallback: force render after 800ms using window width
+        setTimeout(function() {
+          if (done) return;
+          done = true;
+          ro.disconnect();
+          el.style.width = '100%';
+          initGraph(el);
+        }, 800);
       }
     });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else setTimeout(boot, 0);
 
   function initGraph(container) {
     const rawData = window.COMMODITY_DATA;
