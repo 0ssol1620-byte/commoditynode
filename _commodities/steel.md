@@ -9,7 +9,6 @@ etfs: ["SLX"]
 companies: ["NUE", "STLD", "X", "CLF"]
 substitutes: ["Aluminum", "Carbon Fiber", "Engineered Wood"]
 themes: ["Infrastructure Boom"]
-permalink: /commodities/steel/
 ---
 
 ## Overview

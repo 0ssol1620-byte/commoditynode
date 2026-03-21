@@ -9,7 +9,6 @@ etfs: ["PPLT"]
 companies: ["SBSW", "IMPUY", "ANGPY"]
 substitutes: ["Palladium", "Rhodium"]
 themes: ["EV Transition", "Clean Energy"]
-permalink: /commodities/platinum/
 ---
 
 ## Overview

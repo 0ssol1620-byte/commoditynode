@@ -9,7 +9,6 @@ etfs: ["JJM"]
 companies: ["MINSUR", "YTL"]
 substitutes: ["Lead-free Alternatives", "Conductive Adhesives"]
 themes: ["Supply Chain Disruption"]
-permalink: /commodities/tin/
 ---
 
 ## Overview

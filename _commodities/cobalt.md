@@ -9,7 +9,6 @@ etfs: ["BATT"]
 companies: ["GLNCY", "CMCLF"]
 substitutes: ["LFP Chemistry", "High-Nickel NMC"]
 themes: ["EV Transition", "Supply Chain Disruption"]
-permalink: /commodities/cobalt/
 ---
 
 ## Overview

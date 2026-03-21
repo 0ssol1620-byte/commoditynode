@@ -10,7 +10,6 @@ companies: ["EQT", "CHK", "AR", "SWN"]
 substitutes: ["Solar", "Wind", "Nuclear", "Oil"]
 themes: ["Clean Energy", "Food Inflation"]
 tags: [natural gas, commodity analysis, supply chain]
-permalink: /commodities/natural-gas/
 ---
 
 <script>

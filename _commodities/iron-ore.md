@@ -9,7 +9,6 @@ etfs: ["PICK"]
 companies: ["BHP", "RIO", "VALE", "CLF"]
 substitutes: ["Recycled Scrap Steel"]
 themes: ["Infrastructure Boom"]
-permalink: /commodities/iron-ore/
 ---
 
 ## Overview

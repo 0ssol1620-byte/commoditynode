@@ -10,7 +10,6 @@ companies: ["NEM", "GOLD", "AEM", "KGC"]
 substitutes: ["Silver", "Bitcoin", "Treasury Bonds"]
 themes: ["Clean Energy"]
 tags: [gold, commodity analysis, supply chain]
-permalink: /commodities/gold/
 ---
 
 <script>

@@ -9,7 +9,6 @@ etfs: ["JJU"]
 companies: ["AA", "CENX", "ARNC"]
 substitutes: ["Steel", "Carbon Fiber", "Plastics"]
 themes: ["EV Transition", "Clean Energy"]
-permalink: /commodities/aluminum/
 ---
 
 ## Overview

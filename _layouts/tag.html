@@ -1,30 +1,22 @@
 ---
 layout: default
 ---
-{% assign tagged_posts = site.posts | where_exp: "post", "post.tags contains page.tag" %}
 {% assign tag_display = page.tag | replace: '-', ' ' | capitalize %}
 
 <div class="post-header">
   <div class="container">
     <div class="post-header-badge">
       <span class="badge badge-cyan">Theme</span>
-      <span class="badge badge-gold">{{ tagged_posts.size }} Signal Reports</span>
     </div>
     <h1>#{{ tag_display }}</h1>
-    <p class="post-meta-bar">
-      {% if page.description %}{{ page.description }}{% else %}All CommodityNode Signal Reports tagged with "{{ page.tag }}"{% endif %}
-    </p>
-    <div class="post-meta-bar" style="margin-top:12px;font-size:0.85rem;color:var(--text3);">
-      {{ tagged_posts.size }} Impact Map{% if tagged_posts.size != 1 %}s{% endif %} &middot;
-      {% if tagged_posts.size > 0 %}Latest: {{ tagged_posts.first.date | date: "%B %d, %Y" }}{% endif %}
-    </div>
+    <p class="post-meta-bar">All CommodityNode Signal Reports tagged with "{{ page.tag }}"</p>
   </div>
 </div>
 
 <div class="container" style="padding:48px 24px 80px;">
-  {% if tagged_posts.size > 0 %}
   <div class="posts-grid" data-animate>
-    {% for post in tagged_posts %}
+    {% for post in site.posts %}
+      {% if post.tags contains page.tag %}
     <article class="post-card">
       <div class="post-card-accent"></div>
       <div class="post-card-body">
@@ -34,26 +26,13 @@ layout: default
         </div>
         <h2 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
         {% if post.description %}<p class="post-card-excerpt">{{ post.description }}</p>{% endif %}
-        {% if post.tags and post.tags.size > 0 %}
-        <div class="post-card-tags">
-          {% for t in post.tags limit:4 %}
-          <a href="/tags/{{ t | slugify }}/" class="post-tag-pill">{{ t }}</a>
-          {% endfor %}
-        </div>
-        {% endif %}
         <div class="post-card-footer">
           <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report →</a>
           {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
         </div>
       </div>
     </article>
+      {% endif %}
     {% endfor %}
   </div>
-  {% else %}
-  <div style="text-align:center;padding:80px 0;">
-    <p style="color:var(--text2);font-size:1.1rem;">No reports for <strong>#{{ page.tag }}</strong> yet.</p>
-    <p style="color:var(--text3);margin-top:8px;">Check back soon — new Signal Reports are added weekly.</p>
-    <a href="/reports/" class="btn btn-secondary" style="margin-top:24px;display:inline-block;">Browse All Reports</a>
-  </div>
-  {% endif %}
 </div>

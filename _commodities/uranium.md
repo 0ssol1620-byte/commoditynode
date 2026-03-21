@@ -9,7 +9,6 @@ etfs: ["URA", "URNM"]
 companies: ["CCJ", "NXE", "LEU", "UEC"]
 substitutes: ["Solar", "Wind", "Natural Gas"]
 themes: ["Nuclear Renaissance", "Clean Energy"]
-permalink: /commodities/uranium/
 ---
 
 ## Overview

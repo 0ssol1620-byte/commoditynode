@@ -9,7 +9,6 @@ etfs: ["CANE", "SGG"]
 companies: ["ASR", "AGRO"]
 substitutes: ["HFCS", "Stevia", "Aspartame"]
 themes: ["Food Inflation"]
-permalink: /commodities/sugar/
 ---
 
 ## Overview

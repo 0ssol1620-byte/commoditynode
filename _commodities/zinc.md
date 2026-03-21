@@ -9,7 +9,6 @@ etfs: ["JJM"]
 companies: ["BHP", "GLNCY", "TECK"]
 substitutes: ["Aluminum", "Plastics"]
 themes: ["Infrastructure Boom"]
-permalink: /commodities/zinc/
 ---
 
 ## Overview

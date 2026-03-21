@@ -10,7 +10,6 @@ companies: ["ADM", "BG", "INGR"]
 substitutes: ["Rice", "Corn", "Barley"]
 themes: ["Food Inflation"]
 tags: [wheat, commodity analysis, supply chain]
-permalink: /commodities/wheat/
 ---
 
 <script>

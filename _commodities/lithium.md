@@ -9,7 +9,6 @@ etfs: ["LIT", "BATT"]
 companies: ["ALB", "SQM", "LTHM", "PLL"]
 substitutes: ["Sodium-ion", "Solid-state", "Hydrogen Fuel Cells"]
 themes: ["EV Transition", "Clean Energy"]
-permalink: /commodities/lithium/
 ---
 
 ## Overview

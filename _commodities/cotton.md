@@ -9,7 +9,6 @@ etfs: ["BAL"]
 companies: ["LEVI", "GPS", "PVH"]
 substitutes: ["Polyester", "Nylon", "Rayon"]
 themes: ["Supply Chain Disruption"]
-permalink: /commodities/cotton/
 ---
 
 ## Overview

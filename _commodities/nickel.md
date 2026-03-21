@@ -9,7 +9,6 @@ etfs: ["JJN"]
 companies: ["BHP", "VALE", "GLNCY"]
 substitutes: ["LFP Battery Chemistry", "Aluminum"]
 themes: ["EV Transition"]
-permalink: /commodities/nickel/
 ---
 
 ## Overview

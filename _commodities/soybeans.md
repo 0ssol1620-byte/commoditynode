@@ -9,7 +9,6 @@ etfs: ["SOYB"]
 companies: ["ADM", "BG", "CTVA", "MOS"]
 substitutes: ["Canola", "Sunflower", "Palm Oil"]
 themes: ["Food Inflation"]
-permalink: /commodities/soybeans/
 ---
 
 ## Overview

@@ -9,7 +9,6 @@ etfs: ["FCG"]
 companies: ["LNG", "TTE", "SHEL", "CQP"]
 substitutes: ["Pipeline Gas", "Nuclear", "Coal"]
 themes: ["Clean Energy", "Supply Chain Disruption"]
-permalink: /commodities/lng/
 ---
 
 ## Overview

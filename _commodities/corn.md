@@ -10,7 +10,6 @@ companies: ["ADM", "DE", "CTVA", "CF"]
 substitutes: ["Wheat", "Sorghum", "Sugar Cane"]
 themes: ["Food Inflation"]
 tags: [corn, commodity analysis, supply chain]
-permalink: /commodities/corn/
 ---
 
 <script>

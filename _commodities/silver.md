@@ -9,7 +9,6 @@ etfs: ["SLV", "SIVR"]
 companies: ["PAAS", "AG", "WPM", "MAG"]
 substitutes: ["Gold", "Platinum", "Copper"]
 themes: ["Clean Energy"]
-permalink: /commodities/silver/
 ---
 
 ## Overview

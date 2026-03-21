@@ -10,7 +10,6 @@ companies: ["XOM", "CVX", "HAL", "SLB"]
 substitutes: ["Natural Gas", "Renewables", "Nuclear"]
 themes: ["Supply Chain Disruption", "Clean Energy"]
 tags: [crude oil, commodity analysis, supply chain]
-permalink: /commodities/crude-oil/
 ---
 
 <script>

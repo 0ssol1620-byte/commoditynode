@@ -9,7 +9,6 @@ etfs: ["PALL"]
 companies: ["SBSW", "IMPUY"]
 substitutes: ["Platinum", "Rhodium"]
 themes: ["EV Transition"]
-permalink: /commodities/palladium/
 ---
 
 ## Overview

@@ -9,7 +9,6 @@ etfs: ["UGA"]
 companies: ["VLO", "MPC", "PSX"]
 substitutes: ["Biodiesel", "Electric Trucks", "LNG"]
 themes: ["Supply Chain Disruption"]
-permalink: /commodities/diesel/
 ---
 
 ## Overview

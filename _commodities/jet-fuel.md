@@ -9,7 +9,6 @@ etfs: ["JETS"]
 companies: ["DAL", "UAL", "AAL", "LUV"]
 substitutes: ["Sustainable Aviation Fuel", "Electric Aircraft"]
 themes: ["Supply Chain Disruption"]
-permalink: /commodities/jet-fuel/
 ---
 
 ## Overview

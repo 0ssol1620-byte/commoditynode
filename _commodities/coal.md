@@ -9,7 +9,6 @@ etfs: ["KOL"]
 companies: ["BTU", "ARCH", "ARLP", "CEIX"]
 substitutes: ["Natural Gas", "Solar", "Nuclear", "Wind"]
 themes: ["Clean Energy"]
-permalink: /commodities/coal/
 ---
 
 ## Overview

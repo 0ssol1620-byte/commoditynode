@@ -9,7 +9,6 @@ etfs: ["JO"]
 companies: ["SBUX", "KDP", "DNKN"]
 substitutes: ["Tea", "Energy Drinks"]
 themes: ["Food Inflation"]
-permalink: /commodities/coffee/
 ---
 
 ## Overview

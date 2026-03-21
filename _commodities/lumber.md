@@ -9,7 +9,6 @@ etfs: ["WOOD"]
 companies: ["WY", "RYN", "LPX"]
 substitutes: ["Steel Framing", "Concrete", "Engineered Wood"]
 themes: ["Infrastructure Boom"]
-permalink: /commodities/lumber/
 ---
 
 ## Overview

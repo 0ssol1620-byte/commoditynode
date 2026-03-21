@@ -10,7 +10,6 @@ companies: ["FCX", "SCCO", "TECK"]
 substitutes: ["Aluminum", "Fiber Optics"]
 themes: ["EV Transition", "Infrastructure Boom", "Clean Energy"]
 tags: [copper, commodity analysis, supply chain]
-permalink: /commodities/copper/
 ---
 
 <script>

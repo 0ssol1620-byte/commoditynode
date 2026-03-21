@@ -9,7 +9,6 @@ etfs: ["NIB"]
 companies: ["HSY", "MDLZ", "NSRGY", "TR"]
 substitutes: ["Carob", "Compound Chocolate"]
 themes: ["Food Inflation"]
-permalink: /commodities/cocoa/
 ---
 
 ## Overview
