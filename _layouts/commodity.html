@@ -2,15 +2,23 @@
 layout: default
 ---
 
-{% assign commodity_slug = page.name | remove: '.md' %}
-{% assign related_posts = site.posts | where_exp: "post", "post.tags contains commodity_slug" %}
+{% assign commodity_slug = page.commodity_slug | default: page.name | remove: '.md' %}
+{% assign related_posts = '' | split: '' %}
+{% for post in site.posts %}
+  {% if post.tags contains commodity_slug %}
+    {% assign related_posts = related_posts | push: post %}
+  {% endif %}
+{% endfor %}
 
 <header class="post-header">
   <div class="container">
     <div class="post-header-badge">
       <span class="badge badge-gold">Commodity Hub</span>
+      {% if page.sector %}
+      <span class="badge badge-cyan">{{ page.sector }}</span>
+      {% endif %}
       {% if related_posts.size > 0 %}
-      <span class="badge badge-cyan">{{ related_posts.size }} Signal Reports</span>
+      <span class="badge" style="background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.3);">{{ related_posts.size }} Signal Reports</span>
       {% endif %}
     </div>
     <h1>{{ page.title }}</h1>
@@ -20,50 +28,129 @@ layout: default
   </div>
 </header>
 
-<div class="post-layout container" style="padding-top:48px;padding-bottom:80px;">
-  <article class="post-body-container">
-    <div class="post-content" data-animate>
-      {{ content }}
-    </div>
-  </article>
+<div class="container" style="padding-top:48px;padding-bottom:80px;">
 
-  <aside class="toc-sidebar" aria-label="Commodity Quick Stats">
-    <p class="toc-title">Quick Stats</p>
-    <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-      <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-        <span style="color:var(--text3)">Signal Reports</span>
-        <span style="color:var(--accent)">{{ related_posts.size }}</span>
+  <!-- Price Chart -->
+  {% if page.symbol %}
+  <div class="cn-price-chart" data-symbol="{{ page.symbol }}" data-name="{{ page.title }}" style="margin-bottom:40px;"></div>
+  {% endif %}
+
+  <div class="post-layout">
+    <!-- Main Content -->
+    <article class="post-body-container">
+      <div class="post-content" data-animate>
+        {{ content }}
       </div>
-      <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-        <span style="color:var(--text3)">Latest</span>
-        <span style="color:var(--text2)">{% if related_posts.size > 0 %}{{ related_posts.first.date | date: "%b %d" }}{% else %}—{% endif %}</span>
-      </div>
-      {% if page.price %}
-      <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-        <span style="color:var(--text3)">Price</span>
-        <span style="color:var(--text2)">{{ page.price }}</span>
+
+      <!-- Substitutes & Alternatives -->
+      {% if page.substitutes %}
+      <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);" data-animate>
+        <h2 style="font-size:1.25rem;margin-bottom:16px;">Substitutes &amp; Alternatives</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          {% for sub in page.substitutes %}
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">{{ sub }}</span>
+          {% endfor %}
+        </div>
       </div>
       {% endif %}
-    </div>
 
-    {% if related_posts.size > 0 %}
-    <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
-      <p class="toc-title">Related Reports</p>
-      <ul style="list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:8px;">
-        {% for post in related_posts limit:5 %}
-        <li>
-          <a href="{{ post.url | relative_url }}" style="font-size:0.8rem;color:var(--text2);text-decoration:none;line-height:1.4;display:block;">
-            {{ post.title | truncatewords: 8 }}
-          </a>
-          <time style="font-size:0.72rem;color:var(--text3);">{{ post.date | date: "%b %d, %Y" }}</time>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-  </aside>
+      <!-- Structural Themes -->
+      {% if page.themes %}
+      <div style="margin-top:32px;padding-top:32px;border-top:1px solid var(--border);" data-animate>
+        <h2 style="font-size:1.25rem;margin-bottom:16px;">Structural Themes</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          {% for theme in page.themes %}
+          {% assign theme_slug = theme | slugify %}
+          <a href="/themes/{{ theme_slug }}/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">{{ theme }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </article>
+
+    <!-- Sidebar -->
+    <aside class="toc-sidebar" aria-label="Commodity Quick Stats">
+      <!-- Quick Stats -->
+      <p class="toc-title">Quick Stats</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        {% if page.sector %}
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Sector</span>
+          <span style="color:var(--gold)">{{ page.sector }}</span>
+        </div>
+        {% endif %}
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Signal Reports</span>
+          <span style="color:var(--accent)">{{ related_posts.size }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Latest</span>
+          <span style="color:var(--text2)">{% if related_posts.size > 0 %}{{ related_posts.first.date | date: "%b %d" }}{% else %}—{% endif %}</span>
+        </div>
+        {% if page.symbol %}
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Symbol</span>
+          <span style="color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:0.75rem;">{{ page.symbol }}</span>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Top ETFs -->
+      {% if page.etfs %}
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Top ETFs</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          {% for etf in page.etfs %}
+          <span style="display:inline-block;padding:4px 10px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);border-radius:14px;color:#a855f7;font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{{ etf }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Key Companies -->
+      {% if page.companies %}
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Key Companies</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+          {% for company in page.companies %}
+          <a href="/companies/{{ company | downcase }}/" style="display:inline-block;padding:4px 10px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);border-radius:14px;color:#fbbf24;font-size:0.75rem;font-family:'JetBrains Mono',monospace;text-decoration:none;">{{ company }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Related Reports -->
+      {% if related_posts.size > 0 %}
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Related Reports</p>
+        <ul style="list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:8px;">
+          {% for post in related_posts limit:5 %}
+          <li>
+            <a href="{{ post.url | relative_url }}" style="font-size:0.8rem;color:var(--text2);text-decoration:none;line-height:1.4;display:block;">
+              {{ post.title | truncatewords: 8 }}
+            </a>
+            <time style="font-size:0.72rem;color:var(--text3);">{{ post.date | date: "%b %d, %Y" }}</time>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <!-- Explore More -->
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Commodities</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Companies</a></li>
+          <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Themes</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
 </div>
 
+<!-- Full Signal Reports Grid -->
 {% if related_posts.size > 0 %}
 <section class="related-posts section" aria-labelledby="commodity-reports-title">
   <div class="container">
@@ -73,7 +160,7 @@ layout: default
       <p class="section-desc">All published impact maps and ripple-chain analyses for this commodity.</p>
     </div>
     <div class="posts-grid">
-      {% for post in related_posts limit:6 %}
+      {% for post in related_posts limit:9 %}
       <article class="post-card" data-animate>
         <div class="post-card-accent"></div>
         <div class="post-card-body">

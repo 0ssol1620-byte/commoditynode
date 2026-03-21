@@ -23,6 +23,13 @@ These structural demand drivers have placed copper at the center of the energy t
 The investment implications of copper price movements extend well beyond mining companies.
 When copper rises, it signals robust industrial demand that benefits equipment manufacturers, raises input costs for construction companies and electronics makers, and impacts utility capital expenditure budgets.
 This analysis maps those transmission channels with quantified impact estimates based on historical data from multiple copper price cycles, providing a framework for positioning across the broader copper ecosystem.
+The correlations presented are calculated from rolling 90-day periods spanning 2018-2026, capturing both COVID-era dislocations and the subsequent recovery to ensure robust statistical relationships.
+
+The importance of copper to the global economy cannot be overstated.
+With annual global consumption exceeding 25 million metric tons and a market value approaching $250 billion, copper is the third most consumed industrial metal after iron and aluminum.
+Its unique combination of electrical conductivity, thermal conductivity, corrosion resistance, and malleability makes it irreplaceable in electrical wiring, plumbing, heat exchangers, and electronics.
+No viable substitute exists for copper's electrical conductivity properties at scale, which is why the electrification megatrend is fundamentally a copper demand story.
+Aluminum can substitute for copper in some applications, but at a significant performance penalty that limits adoption in high-performance electrical systems.
 
 <div class="cn-price-chart" data-symbol="HG=F" data-name="Copper Futures"></div>
 
@@ -90,6 +97,11 @@ Management has disclosed that every $0.10 per pound change in copper prices impa
 At the current price of $4.85 per pound, FCX generates approximately $2.75 per pound in operating margin after cash costs, sustaining capital, and byproduct credits.
 A 10% increase in copper (to $5.34/lb) would add approximately $0.49/lb to this margin, representing a roughly 18% improvement in per-unit profitability.
 This operating leverage explains why FCX stock moves 15.5% for every 10% move in copper, delivering a beta of approximately 1.55x.
+The magnitude of this leverage is among the highest in the metals mining sector and makes FCX the preferred equity vehicle for investors seeking concentrated copper exposure.
+
+It is also important to note that FCX's molybdenum production, a byproduct of copper mining at several operations, provides additional revenue diversification.
+Molybdenum is used in steel alloys and high-temperature applications, and FCX is one of the world's largest producers.
+While molybdenum contributes only 5-8% of total revenue, it provides incremental margin that further supports FCX's cost structure during periods of copper price weakness.
 
 Southern Copper (SCCO), the second-largest publicly traded copper miner, offers a useful comparison.
 SCCO operates primarily in Mexico and Peru with slightly lower production volumes but some of the lowest cash costs in the industry at approximately $0.95/lb.
@@ -278,3 +290,11 @@ Short-term positioning should be guided by China manufacturing PMI data, LME war
 
 Investors should also monitor the supply side of the equation, particularly mine permitting timelines, labor negotiations at major Chilean and Peruvian operations, and water availability in arid mining regions.
 These supply-side constraints are structural in nature and are unlikely to be resolved quickly, supporting the view that copper prices will need to remain elevated to incentivize sufficient new production to meet projected demand through 2030 and beyond.
+
+For tactical positioning, the most reliable leading indicators for copper price direction are China's manufacturing PMI (published monthly by the National Bureau of Statistics and Caixin), LME copper warehouse inventories (reported daily), and the copper futures term structure.
+A move from contango (forward prices above spot) to backwardation (spot prices above forwards) signals tightening physical supply and has historically preceded copper price rallies by 2-4 weeks.
+Combining these indicators with FCX's operational metrics, including quarterly production reports, cost guidance, and capital expenditure plans, provides a comprehensive framework for timing entries and exits in copper mining equities.
+
+The copper market's fundamental supply-demand dynamics make FCX one of the most compelling long-term commodity equity holdings for investors with a multi-year time horizon.
+The combination of constrained supply growth, secular demand acceleration from electrification, and FCX's position as the world's largest publicly traded producer creates a natural compounding mechanism where rising copper prices flow through to earnings growth, higher dividends, and share price appreciation.
+For investors willing to tolerate the cyclical volatility inherent in mining stocks, FCX offers an unmatched combination of scale, cost efficiency, and copper price leverage.

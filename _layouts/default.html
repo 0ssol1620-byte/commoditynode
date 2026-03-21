@@ -71,9 +71,11 @@
         <nav class="main-nav" role="navigation" aria-label="Main navigation">
           <a href="{{ '/' | relative_url }}"             {% if page.url == '/' %}class="active"{% endif %}>Home</a>
           <a href="{{ '/commodities/' | relative_url }}" {% if page.url contains '/commodities' %}class="active"{% endif %}>Commodities</a>
+          <a href="{{ '/industries/' | relative_url }}" {% if page.url contains '/industries' %}class="active"{% endif %}>Industries</a>
+          <a href="{{ '/companies/' | relative_url }}" {% if page.url contains '/companies' %}class="active"{% endif %}>Companies</a>
+          <a href="{{ '/themes/' | relative_url }}" {% if page.url contains '/themes' %}class="active"{% endif %}>Themes</a>
           <a href="{{ '/reports/' | relative_url }}" {% if page.url contains '/reports' %}class="active"{% endif %}>Reports</a>
           <a href="{{ '/about/' | relative_url }}"       {% if page.url contains '/about' %}class="active"{% endif %}>About</a>
-          <a href="{{ '/contact/' | relative_url }}"     {% if page.url contains '/contact' %}class="active"{% endif %} class="nav-cta">Contact</a>
         </nav>
 
         <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,6 +138,9 @@
           <ul class="footer-nav">
             <li><a href="{{ '/' | relative_url }}">Latest Posts</a></li>
             <li><a href="{{ '/commodities/' | relative_url }}">Commodities</a></li>
+            <li><a href="{{ '/industries/' | relative_url }}">Industries</a></li>
+            <li><a href="{{ '/companies/' | relative_url }}">Companies</a></li>
+            <li><a href="{{ '/themes/' | relative_url }}">Themes</a></li>
             <li><a href="{{ '/reports/' | relative_url }}">Research Archive</a></li>
           </ul>
         </div>

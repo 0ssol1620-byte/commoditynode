@@ -1,0 +1,88 @@
+---
+layout: default
+title: "Deere & Company (DE)"
+description: "Commodity exposure analysis for Deere & Company - farm equipment demand driven by grain prices and agricultural income cycles."
+permalink: /companies/de/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Company Hub</span>
+      <span class="badge badge-cyan">DE</span>
+    </div>
+    <h1>Deere &amp; Company (DE)</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Company Overview</h2>
+        <p>Deere & Company, operating under the John Deere brand, is the world's largest manufacturer of agricultural equipment and a major producer of construction and forestry machinery. Founded in 1837, the company has grown into a technology-driven industrial leader with precision agriculture platforms (See & Spray, ExactEmerge, John Deere Operations Center) that increasingly differentiate its equipment. Deere's Production & Precision Agriculture segment (large tractors, combines, sprayers, planters) is the earnings engine, and demand for this equipment is fundamentally linked to farm income — which itself is driven by commodity grain prices.</p>
+
+        <h2>Commodity Exposures</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/corn/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Corn</a>
+          <a href="/commodities/wheat/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Wheat</a>
+        </div>
+        <p>Deere's commodity exposure is entirely indirect — the company manufactures and sells equipment, not commodities. However, farmer purchasing decisions are tightly linked to current and expected crop income. When corn trades above $5.50/bushel and soybeans above $13/bushel, U.S. farm income is typically strong enough to support new equipment purchases and upgrades. Below these thresholds, farmers defer replacements and extend the life of existing equipment, compressing Deere's order book. The USDA's Net Farm Income estimate is the single best leading indicator for Deere's large agriculture equipment revenue. Wheat prices influence demand in international markets, particularly Australia, Western Canada, and the Black Sea region. On the input side, Deere uses steel (approximately 20% of manufacturing cost), rubber, and electronic components, creating a secondary sensitivity to industrial commodity prices.</p>
+
+        <h2>Price Sensitivity</h2>
+        <p>Deere's stock correlates approximately 0.45-0.55 with a basket of corn and soybean futures on a 12-month rolling basis. The relationship is lagged: grain prices drive farm income in the current season, which influences equipment purchasing decisions 3-9 months later, which flows into Deere's order book and revenue 6-12 months after that. This creates a cycle where Deere's earnings peak 12-18 months after grain price peaks. The farm equipment cycle tends to be longer and slower than commodity cycles — equipment is a durable good, so farmers can defer purchases for several years during downturns, leading to pent-up demand that amplifies the next upcycle.</p>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">MOO</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Stats</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Sector</span>
+          <span style="color:var(--text2)">Agriculture Equipment</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Primary Exposure</span>
+          <span style="color:var(--accent)">Corn, Wheat</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Posts -->
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="posts-grid">
+    {% for post in site.posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'de' or tags_str contains 'deere' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><span class="read-more">Read analysis →</span></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>

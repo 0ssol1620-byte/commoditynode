@@ -1,11 +1,15 @@
 ---
-layout: post
+layout: commodity
 title: "Gold Price Impact: Miners, Dollar & Safe Haven Flows"
 description: "How gold price movements reflect inflation, currency, and risk sentiment across global markets."
-categories: [Commodities]
+commodity_slug: "gold"
+symbol: "GC=F"
+sector: "Precious Metals"
+etfs: ["GLD", "GDX", "IAU", "GDXJ"]
+companies: ["NEM", "GOLD", "AEM", "KGC"]
+substitutes: ["Silver", "Bitcoin", "Treasury Bonds"]
+themes: ["Clean Energy"]
 tags: [gold, commodity analysis, supply chain]
-reading_time: 5
-commodity_name: "Gold"
 permalink: /commodities/gold/
 ---
 

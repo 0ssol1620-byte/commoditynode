@@ -288,3 +288,13 @@ Monitoring OPEC+ production decisions, U.S. weekly inventory reports, and the WT
 The key differentiator for XOM as an oil proxy versus holding crude oil futures directly is the company's ability to generate shareholder returns beyond commodity price appreciation.
 XOM's dividend yield, share buyback program, and operational efficiency improvements compound investor returns over time, meaning that even in a flat oil price environment, XOM shareholders earn positive total returns.
 This "carry" advantage makes XOM particularly attractive for long-term investors who want oil exposure with a built-in income component.
+
+Looking forward, ExxonMobil's evolving business mix may gradually alter its oil price sensitivity.
+The company's growing investment in carbon capture and storage (CCS), hydrogen production, and lithium extraction represents a strategic pivot toward energy transition revenues that are less correlated with crude oil prices.
+While these low-carbon businesses currently contribute less than 5% of total earnings, management has targeted significant scaling over the next decade.
+As these diversified revenue streams grow, XOM's oil beta may moderate further, potentially reducing the stock's utility as a pure oil price proxy but improving its risk-adjusted return profile for long-term holders.
+
+The Pioneer Natural Resources integration also introduces a subtle shift in XOM's oil sensitivity.
+Pioneer's Permian Basin assets are among the lowest-cost production sources in the world, with breakeven prices below $40/bbl.
+This cost structure means XOM's weighted average breakeven has declined, extending the range of oil prices at which the company generates positive free cash flow.
+The practical implication is that while XOM's upside beta to oil remains strong, its downside risk in moderate oil price declines is now lower than historical averages would suggest, creating an even more favorable asymmetric return profile.

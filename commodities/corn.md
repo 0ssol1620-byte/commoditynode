@@ -1,11 +1,15 @@
 ---
-layout: post
+layout: commodity
 title: "Corn Price Impact: Ethanol, Livestock & Food Supply"
 description: "How corn prices cascade through ethanol producers, livestock operations, and food manufacturers."
-categories: [Commodities]
+commodity_slug: "corn"
+symbol: "ZC=F"
+sector: "Agriculture"
+etfs: ["CORN"]
+companies: ["ADM", "DE", "CTVA", "CF"]
+substitutes: ["Wheat", "Sorghum", "Sugar Cane"]
+themes: ["Food Inflation"]
 tags: [corn, commodity analysis, supply chain]
-reading_time: 5
-commodity_name: "Corn"
 permalink: /commodities/corn/
 ---
 

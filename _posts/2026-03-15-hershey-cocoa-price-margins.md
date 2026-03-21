@@ -10,11 +10,19 @@ commodity_name: 'Cocoa'
 image: /assets/images/og-cocoa.png
 ---
 
-Cocoa prices have reached an extraordinary $9,800 per metric ton on the ICE Futures exchange, a level that would have been considered unthinkable just three years ago when the commodity traded at $2,500. For Hershey Company, North America's dominant chocolate manufacturer with an estimated 45% share of the U.S. chocolate market, this price environment represents the most severe cost challenge in the company's 130-year history. Cocoa and cocoa butter together represent approximately 35-40% of Hershey's cost of goods sold, and unlike many commodity exposures that can be hedged over multi-year horizons, cocoa's extreme volatility and thin futures liquidity beyond 12-18 months make long-term hedging prohibitively expensive.
+Cocoa prices have reached an extraordinary $9,800 per metric ton on the ICE Futures exchange, a level that would have been considered unthinkable just three years ago when the commodity traded at $2,500.
 
-The cocoa supply crisis is structural, not cyclical. West Africa -- specifically Ivory Coast and Ghana, which together produce roughly 60% of the world's cocoa -- is facing a convergence of crises: the cocoa swollen shoot virus disease (CSSVD) has infected an estimated 15-20% of Ghana's cocoa tree stock, requiring mass cutting and replanting programs that remove productive trees for 3-5 years. Simultaneously, aging tree demographics are reducing yields across the region, as trees planted during the cocoa boom of the 1980s and 1990s approach the end of their productive lives at 25-30 years. Climate change is shifting rainfall patterns in the Guinean forest zone, compressing the optimal growing belt and increasing crop stress.
+For Hershey Company, North America's dominant chocolate manufacturer with an estimated 45% share of the U.S. chocolate market, this price environment represents the most severe cost challenge in the company's 130-year history.
 
-For equity investors, the cocoa price surge creates the most dramatic winner-loser divide in the soft commodities space. Upstream cocoa-producing nations and trading houses capture windfall profits, while downstream chocolate manufacturers face an unprecedented cost squeeze that is forcing fundamental changes in product formulation, package sizes, and pricing strategy. The magnitude of the current rally -- cocoa has nearly quadrupled from its 2022 lows -- exceeds any comparable move in the past half century and requires investors to rethink traditional assumptions about mean reversion in agricultural commodities.
+Cocoa and cocoa butter together represent approximately 35-40% of Hershey's cost of goods sold, and unlike many commodity exposures that can be hedged over multi-year horizons, cocoa's extreme volatility and thin futures liquidity beyond 12-18 months make long-term hedging prohibitively expensive.
+
+The cocoa supply crisis is structural, not cyclical. West Africa -- specifically Ivory Coast and Ghana, which together produce roughly 60% of the world's cocoa -- is facing a convergence of crises.
+
+The cocoa swollen shoot virus disease (CSSVD) has infected an estimated 15-20% of Ghana's cocoa tree stock, requiring mass cutting and replanting programs that remove productive trees for 3-5 years.
+
+Simultaneously, aging tree demographics are reducing yields across the region, as trees planted during the cocoa boom of the 1980s and 1990s approach the end of their productive lives at 25-30 years. Climate change is shifting rainfall patterns in the Guinean forest zone, compressing the optimal growing belt.
+
+These are not problems that resolve in a single growing season. The magnitude of the current rally -- cocoa has nearly quadrupled from its 2022 lows -- exceeds any comparable move in the past half century and requires investors to rethink traditional assumptions about mean reversion.
 
 <div class="cn-price-chart" data-symbol="CC=F" data-name="Cocoa Futures (ICE)"></div>
 
@@ -59,13 +67,41 @@ window.COMMODITY_DATA = {
 
 ## Understanding Hershey's Cocoa Exposure
 
-Hershey purchases approximately 350,000 metric tons of cocoa beans and cocoa-derived ingredients annually, making it one of the top five cocoa buyers in the world. The company's procurement strategy involves a combination of forward purchasing through ICE cocoa futures, direct origin purchasing from cooperatives in West Africa and South America, and pre-agreed pricing contracts with processing intermediaries like Barry Callebaut and Cargill. In normal market conditions, Hershey maintains a 6-12 month hedge book that provides cost visibility for near-term production planning. However, the current price environment has strained this approach: with cocoa prices having roughly quadrupled from 2022 levels, hedging at current prices locks in historically elevated costs, while leaving positions unhedged exposes the company to further upside risk.
+Hershey purchases approximately 350,000 metric tons of cocoa beans and cocoa-derived ingredients annually, making it one of the top five cocoa buyers in the world.
 
-The margin impact on Hershey is already severe and accelerating. In the most recent quarter, Hershey reported a 450 basis point year-over-year decline in gross margin, with cocoa and cocoa butter costs cited as the primary driver. The company's response has been multi-pronged: retail price increases averaging 8-12% across its portfolio, package size reductions (shrinkflation) on popular products including Hershey's Kisses and Reese's cups, and reformulation efforts to reduce cocoa content in certain products by substituting cocoa butter equivalents (CBEs) and increasing sugar and milk content. These measures have partially offset the cost impact but have not prevented margin erosion, and they carry brand risk if consumers perceive quality degradation.
+The company's procurement strategy involves a combination of forward purchasing through ICE cocoa futures, direct origin purchasing from cooperatives in West Africa and South America, and pre-agreed pricing contracts with processing intermediaries like Barry Callebaut and Cargill.
 
-What makes Hershey uniquely vulnerable compared to peers like Mondelez or Nestle is its product concentration. Chocolate products represent approximately 80% of Hershey's revenue, compared to roughly 30% for Mondelez (which has large non-chocolate businesses in biscuits, gum, and candy) and less than 15% for Nestle (where coffee, pet food, and infant nutrition dominate). This concentration means cocoa price movements hit Hershey's bottom line with far greater force than any competitor, earning HSY its well-deserved reputation as the "cocoa proxy" among institutional investors.
+In normal market conditions, Hershey maintains a 6-12 month hedge book that provides cost visibility for near-term production planning.
 
-Hershey's salty snacks segment -- including SkinnyPop, Pirate's Booty, and Dot's Pretzels -- provides some natural hedge against cocoa prices because these products have zero cocoa content and benefit from consumer trade-down during periods when chocolate becomes more expensive. This segment has been growing at 8-12% annually and now represents roughly 15% of revenue. However, it is not yet large enough to meaningfully offset the cocoa impact on the dominant chocolate business. For the salty snacks segment to become a genuine diversification shield, it would need to reach 25-30% of revenue -- a target that Hershey management has indicated they are pursuing through both organic growth and potential acquisitions.
+### Hedging at Record Prices
+
+The current price environment has strained Hershey's hedging approach. With cocoa prices having roughly quadrupled from 2022 levels, hedging at current prices locks in historically elevated costs.
+
+Leaving positions unhedged exposes the company to further upside risk. This creates a classic commodity risk management dilemma where both hedging and not hedging carry significant financial consequences.
+
+### Margin Impact
+
+The margin impact on Hershey is already severe and accelerating. In the most recent quarter, Hershey reported a 450 basis point year-over-year decline in gross margin, with cocoa and cocoa butter costs cited as the primary driver.
+
+The company's response has been multi-pronged: retail price increases averaging 8-12% across its portfolio, package size reductions (shrinkflation) on popular products including Hershey's Kisses and Reese's cups, and reformulation efforts to reduce cocoa content in certain products.
+
+These measures have partially offset the cost impact but have not prevented margin erosion, and they carry brand risk if consumers perceive quality degradation.
+
+### Concentration Risk
+
+What makes Hershey uniquely vulnerable compared to peers like Mondelez or Nestle is its product concentration. Chocolate products represent approximately 80% of Hershey's revenue.
+
+Compare this to roughly 30% for Mondelez (which has large non-chocolate businesses in biscuits, gum, and candy) and less than 15% for Nestle (where coffee, pet food, and infant nutrition dominate).
+
+This concentration means cocoa price movements hit Hershey's bottom line with far greater force than any competitor, earning HSY its well-deserved reputation as the "cocoa proxy" among institutional investors.
+
+### Salty Snacks as a Hedge
+
+Hershey's salty snacks segment -- including SkinnyPop, Pirate's Booty, and Dot's Pretzels -- provides some natural hedge against cocoa prices because these products have zero cocoa content.
+
+This segment has been growing at 8-12% annually and now represents roughly 15% of revenue. However, it is not yet large enough to meaningfully offset the cocoa impact on the dominant chocolate business.
+
+For the salty snacks segment to become a genuine diversification shield, it would need to reach 25-30% of revenue -- a target Hershey management has indicated they are pursuing.
 
 ## Winners When Cocoa Rises
 
@@ -78,11 +114,15 @@ Hershey's salty snacks segment -- including SkinnyPop, Pirate's Booty, and Dot's
 | **iPath Cocoa (NIB)** | Cocoa Futures ETN | +19.2% | 0.97 |
 | **West African Growers** | Cocoa Farming | +18.0% | 0.93 |
 
-**Why they win:** The Conseil du Cafe-Cacao (CCC) in Ivory Coast and the Ghana Cocoa Board (Cocobod) are the two most powerful institutions in the global cocoa market. Both set farmgate prices for their respective countries' cocoa crops and collect export taxes and levies that scale with international prices. When ICE cocoa futures rise, these national boards capture a direct revenue windfall through higher export duties and increased forward sales revenue. Ivory Coast's cocoa export revenue is projected to exceed $8 billion in the current crop year, up from $4 billion just two years ago.
+**Why they win:** The Conseil du Cafe-Cacao (CCC) in Ivory Coast and the Ghana Cocoa Board (Cocobod) are the two most powerful institutions in the global cocoa market.
 
-For individual West African growers, the farmgate price increases mandated by CCC and Cocobod translate to significantly higher household incomes, though the pass-through is partial (farmers typically receive 50-60% of the FOB export price). The recent political pressure in both countries to increase the farmer share of export value adds a secondary dynamic -- both governments have raised the Living Income Differential (LID), a $400/t premium above the ICE price, though enforcement has been inconsistent.
+Both set farmgate prices for their respective countries' cocoa crops and collect export taxes and levies that scale with international prices. When ICE cocoa futures rise, these national boards capture a direct revenue windfall.
 
-**Key insight:** The NIB ETN provides the most direct publicly tradeable exposure to cocoa prices with a 0.97 correlation, but carries important structural risks. NIB is an exchange-traded note (not a fund), meaning it carries issuer credit risk. Additionally, NIB's AUM is relatively small at approximately $90 million, which can create liquidity issues during volatile periods and can result in premiums or discounts to NAV exceeding 3-5%. For larger institutional positions, direct cocoa futures on ICE or the LIFFE are more appropriate vehicles. The December and March cocoa contracts typically offer the best liquidity.
+Ivory Coast's cocoa export revenue is projected to exceed $8 billion in the current crop year, up from $4 billion just two years ago.
+
+For individual West African growers, the farmgate price increases translate to significantly higher household incomes, though the pass-through is partial (farmers typically receive 50-60% of the FOB export price).
+
+**Key insight:** NIB provides the most direct publicly tradeable cocoa exposure with a 0.97 correlation, but carries structural risks. NIB is an exchange-traded note (not a fund), meaning it carries issuer credit risk. Its AUM of approximately $90 million can create liquidity issues during volatile periods. For larger positions, direct cocoa futures on ICE are more appropriate.
 
 ### Cocoa Traders and Processors
 
@@ -93,11 +133,15 @@ For individual West African growers, the farmgate price increases mandated by CC
 | **Cargill Cocoa (Private)** | Cocoa Processing | +9.0% | 0.75 |
 | **Carob/Alternatives** | Alternatives | +8.0% | 0.58 |
 
-**Why they win:** The cocoa butter market deserves special attention because cocoa butter prices have risen even faster than cocoa bean prices. Cocoa butter is produced during the grinding process as beans are separated into cocoa solids (used for cocoa powder) and cocoa butter (used for chocolate texture and cosmetics). The cocoa butter ratio -- the price of butter expressed as a multiple of bean prices -- has expanded from its typical 2.5x to over 3.0x, indicating that butter demand is outstripping supply even relative to the already-elevated bean market.
+**Why they win:** Cocoa butter prices have risen even faster than cocoa bean prices. The cocoa butter ratio -- the price of butter expressed as a multiple of bean prices -- has expanded from its typical 2.5x to over 3.0x.
 
-Olam Group, one of the three largest cocoa traders globally alongside Cargill and Barry Callebaut, benefits from wider origination margins and increased inventory gains during rising price environments. Trading houses profit from the volatility itself -- their physical trading operations capture wider bid-ask spreads when the market is moving rapidly, and their warehouse financing activities generate higher returns when the value of stored inventory appreciates. Carob and cocoa alternatives see increased interest as chocolate manufacturers explore cost-saving substitutions, though the total addressable market for alternatives remains small relative to traditional cocoa.
+This indicates that butter demand is outstripping supply even relative to the already-elevated bean market, benefiting grinders who can sell butter at premium prices.
 
-**Key insight:** Watch the Ivory Coast and Ghana forward cocoa sales data (published by CCC and Cocobod respectively) as a leading indicator of supply expectations. When these national boards slow their forward sales, it signals that they expect prices to continue rising, which creates further upward pressure on the market. Current data shows that Ivory Coast has sold forward only 40% of its projected 2026/27 crop, well below the historical average of 65% at this point in the season -- a bullish signal for continued price strength.
+Olam Group, one of the three largest cocoa traders globally, benefits from wider origination margins and increased inventory gains during rising price environments.
+
+Carob and cocoa alternatives see increased interest as chocolate manufacturers explore cost-saving substitutions, creating a secondary beneficiary category.
+
+**Key insight:** Watch Ivory Coast and Ghana forward cocoa sales data as a leading indicator. When these boards slow forward sales, it signals they expect prices to continue rising. Current data shows Ivory Coast has sold forward only 40% of its projected 2026/27 crop, well below the historical average of 65%.
 
 ## Losers When Cocoa Rises
 
@@ -111,13 +155,15 @@ Olam Group, one of the three largest cocoa traders globally alongside Cargill an
 | **Barry Callebaut (BARN.SW)** | Chocolate Processing | -8.5% | -0.78 |
 | **Tootsie Roll (TR)** | Confectionery | -7.0% | -0.68 |
 
-**Why they lose:** The craft chocolate segment is devastated by cocoa price surges because these small-batch producers use premium single-origin cocoa beans (typically priced at 2-3x commodity cocoa) and have zero hedging capability and minimal pricing power with their niche customer base. A craft chocolate bar that cost $8 at $3,000/t cocoa now needs to retail at $14+ to maintain margins, pushing deeply into consumer resistance territory. Rocky Mountain Chocolate Factory, as the only publicly traded specialty chocolate franchisor, serves as a barometer for the broader artisan segment, and its shares have declined 25%+ from pre-rally levels.
+**Why they lose:** Craft chocolate makers are devastated by cocoa price surges because they use premium single-origin beans (priced at 2-3x commodity cocoa) and have zero hedging capability.
 
-Hershey absorbs the next-heaviest impact due to its 80% chocolate revenue concentration. Barry Callebaut is a unique case: as the world's largest B2B chocolate processor (supplying chocolate couverture to other manufacturers), it operates on a cost-plus model where raw material costs are theoretically passed through to customers. However, when cocoa prices spike this dramatically, Barry Callebaut's customers push back on pass-throughs, compress purchasing volumes, and reformulate products to reduce chocolate content, creating volume and margin headwinds that its theoretical business model does not fully capture.
+A craft chocolate bar that cost $8 at $3,000/t cocoa now needs to retail at $14+ to maintain margins, pushing into consumer resistance territory.
 
-**Key insight:** Hershey's stock historically oversells during cocoa price spikes because the market extrapolates current spot prices into perpetuity. In reality, Hershey's hedge book provides 6-12 months of cost protection at pre-spike prices, meaning the full P&L impact is deferred. Furthermore, HSY's pricing actions typically offset 50-60% of commodity cost increases within 2-3 quarters. For contrarian investors, HSY at 18-20x forward earnings during a cocoa spike (vs. its typical 23-25x) has historically been a high-probability entry point, provided you have conviction that cocoa prices will eventually normalize -- even partially.
+Hershey absorbs the next-heaviest impact due to its 80% chocolate revenue concentration. Barry Callebaut operates on a cost-plus model but faces volume and margin headwinds when customers push back on pass-throughs.
 
-### Diversified Food and Confectionery Companies
+**Key insight:** Hershey's stock historically oversells during cocoa spikes because the market extrapolates current spot prices into perpetuity. In reality, HSY's hedge book provides 6-12 months of protection, and pricing actions offset 50-60% of cost increases within 2-3 quarters. HSY at 18-20x forward earnings during a cocoa spike has historically been a high-probability entry point.
+
+### Diversified Food and Confectionery
 
 | Asset | Type | Avg Impact (10% Move) | Correlation |
 |-------|------|----------------------|-------------|
@@ -126,13 +172,15 @@ Hershey absorbs the next-heaviest impact due to its 80% chocolate revenue concen
 | **Cocoa Butter Cosmetics** | Beauty | -5.5% | -0.52 |
 | **Nestlé (NSRGY)** | Food/Chocolate | -3.8% | -0.45 |
 | **Shrinkflation Trend** | Consumer Impact | -4.0% | -0.40 |
-| **Restaurants (Chocolate Menu Items)** | Restaurants | -2.5% | -0.28 |
+| **Restaurants (Chocolate Menu)** | Restaurants | -2.5% | -0.28 |
 
-**Why they lose:** Lindt occupies a premium niche where its pricing power is strongest -- Lindt customers are less price-sensitive, and the brand can raise prices more aggressively than mass-market competitors. However, at current cocoa prices, even Lindt faces volume pressure as the absolute price of a box of Lindor truffles reaches levels that deter impulse purchasing. Mondelez is better insulated than Hershey because its Cadbury, Toblerone, and Milka chocolate brands represent roughly 30% of revenue, with the remaining 70% from non-chocolate categories (Oreo, belVita, Halls, Trident).
+**Why they lose:** Lindt occupies a premium niche where pricing power is strongest, but at current cocoa prices even Lindt faces volume pressure as absolute price levels deter impulse purchasing.
 
-Nestle's minimal cocoa exposure through KitKat and Nestle Crunch is dwarfed by its coffee, pet food, and health science divisions, making it the most insulated major food company. Cocoa butter cosmetics companies -- including brands using cocoa butter as a key ingredient in moisturizers, lip balms, and body lotions -- face indirect but meaningful cost pressure from the cocoa butter ratio expansion. Restaurants with chocolate-forward menu items (chocolate lava cakes, hot chocolate beverages, dessert menus) face cost pressure that is difficult to pass through without reprinting menus and risking customer sticker shock.
+Mondelez is better insulated than Hershey because its Cadbury, Toblerone, and Milka brands represent roughly 30% of revenue, with 70% from non-chocolate categories.
 
-**Key insight:** The MDLZ/HSY performance spread during cocoa spikes is one of the most reliable pairs in consumer staples. Because Mondelez has 2.5x more revenue diversification than Hershey, it consistently outperforms HSY by 5-8 percentage points during periods of elevated cocoa prices. This spread has generated positive returns in 9 of the last 10 major cocoa rally periods dating back to 2005, making it a high-conviction relative value trade.
+Nestle's minimal cocoa exposure through KitKat and Nestle Crunch is dwarfed by its diversified portfolio. Cocoa butter cosmetics companies face indirect pressure from the butter ratio expansion.
+
+**Key insight:** The MDLZ/HSY performance spread during cocoa spikes is one of the most reliable pairs in consumer staples. Mondelez consistently outperforms HSY by 5-8 percentage points during elevated cocoa prices. This spread has generated positive returns in 9 of the last 10 major cocoa rally periods since 2005.
 
 ## Impact Correlation Matrix
 
@@ -151,17 +199,25 @@ Nestle's minimal cocoa exposure through KitKat and Nestle Crunch is dwarfed by i
 
 | Date | Event | Price Move | Market Impact | Notes |
 |------|-------|-----------|---------------|-------|
-| Mar 2011 | Ivory Coast civil war | +35% in 6 weeks | HSY -8%, NIB +33% | Export ban disrupted West African supply |
-| Jul 2016 | El Nino drought | +25% over 3 months | HSY -6%, MDLZ -3%, NIB +24% | West African crop stress and yield decline |
-| Mar 2020 | COVID lockdowns | -20% in 4 weeks | HSY -15% (dual hit), NIB -19% | Simultaneous demand and supply disruption |
-| Jan 2024 | CSSVD + drought begins | +110% over 12 months | HSY -22%, MDLZ -10%, NIB +105% | Structural supply crisis emerges |
-| Oct 2024 | Cocoa breaks $8,000/t | +45% from Jan 2024 | HSY -18%, Barry Callebaut -30% | Record highs exceed all forecasts |
-| Feb 2026 | Sustained at $9,800/t | +20% YTD | HSY -10%, RMCF -25%, NIB +18% | Market prices in multi-year deficit |
+| Mar 2011 | Ivory Coast civil war | +35% in 6 weeks | HSY -8%, NIB +33% | Export ban on supply |
+| Jul 2016 | El Nino drought | +25% / 3 months | HSY -6%, MDLZ -3%, NIB +24% | West African crop stress |
+| Mar 2020 | COVID lockdowns | -20% in 4 weeks | HSY -15%, NIB -19% | Dual demand/supply hit |
+| Jan 2024 | CSSVD + drought | +110% / 12 months | HSY -22%, MDLZ -10%, NIB +105% | Structural crisis begins |
+| Oct 2024 | Cocoa breaks $8,000/t | +45% from Jan 2024 | HSY -18%, BARN.SW -30% | Record highs exceeded |
+| Feb 2026 | Sustained $9,800/t | +20% YTD | HSY -10%, RMCF -25%, NIB +18% | Multi-year deficit priced |
 
 ## Key Takeaway
 
-Cocoa's 20% price surge creates the most extreme winner-loser dispersion of any agricultural commodity currently trading. West African cocoa boards capture +20% to +22% revenue gains, while craft chocolate makers face -20% margin destruction that threatens business viability. Among publicly traded equities, Hershey bears the heaviest impact at -11% due to its concentrated chocolate exposure, while Mondelez at -5.5% benefits from portfolio diversification that provides a natural hedge against cocoa-specific risk.
+Cocoa's 20% price surge creates the most extreme winner-loser dispersion of any agricultural commodity currently trading. West African cocoa boards capture +20% to +22% revenue gains, while craft chocolate makers face -20% margin destruction that threatens business viability.
 
-The structural nature of the current cocoa crisis cannot be overstated. Unlike weather-driven commodity spikes that resolve within 1-2 growing seasons, the combination of CSSVD, aging tree demographics, and climate change means the cocoa market is facing a multi-year supply deficit that will not be resolved until at least 2028-2029, when newly planted trees reach productive maturity. For investors, this means traditional mean-reversion strategies may not work on their typical timeline. Hershey stock may appear cheap on a historical P/E basis, but if cocoa prices remain elevated for 2-3 years, the earnings base against which that P/E is calculated will be structurally lower than consensus expects.
+Among publicly traded equities, Hershey bears the heaviest impact at -11% due to its concentrated chocolate exposure, while Mondelez at -5.5% benefits from portfolio diversification.
 
-The most sophisticated approach is to separate the cyclical from the structural. If cocoa eventually normalizes to $5,000-6,000/t (still elevated vs. history but representing a 40-50% decline from current levels), Hershey's earnings recovery would be dramatic -- potentially 30-40% EPS growth from the trough. For investors willing to underwrite that scenario over a 2-3 year horizon, accumulating HSY below $170 (approximately 20x trough earnings) offers compelling risk-reward. The Barry Callebaut/NIB ratio remains the most reliable technical indicator for timing cocoa mean-reversion trades -- when BARN.SW/NIB reaches extreme lows, it has historically marked attractive entry points for the chocolate processing stock as the first derivative play on eventual cocoa price normalization.
+The structural nature of the current cocoa crisis cannot be overstated. Unlike weather-driven spikes that resolve within 1-2 seasons, the combination of CSSVD, aging tree demographics, and climate change means the supply deficit will persist until at least 2028-2029.
+
+For investors, traditional mean-reversion strategies may not work on their typical timeline. Hershey stock may appear cheap on a historical P/E basis, but the earnings base will be structurally lower if cocoa remains elevated for 2-3 years.
+
+**Contrarian opportunity:** If cocoa eventually normalizes to $5,000-6,000/t (still elevated but a 40-50% decline from current levels), Hershey's earnings recovery would be dramatic -- potentially 30-40% EPS growth from the trough.
+
+For investors willing to underwrite that scenario over a 2-3 year horizon, accumulating HSY below $170 (approximately 20x trough earnings) offers compelling risk-reward.
+
+The Barry Callebaut/NIB ratio remains the most reliable technical indicator for timing cocoa mean-reversion trades -- when BARN.SW/NIB reaches extreme lows, it has historically marked attractive entry points for the chocolate processor.

@@ -1,0 +1,88 @@
+---
+layout: default
+title: "Cameco Corporation (CCJ)"
+description: "Commodity exposure analysis for Cameco - the world's largest publicly traded uranium producer and nuclear fuel supplier."
+permalink: /companies/ccj/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Company Hub</span>
+      <span class="badge badge-cyan">CCJ</span>
+    </div>
+    <h1>Cameco Corporation (CCJ)</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Company Overview</h2>
+        <p>Cameco is the world's largest publicly traded uranium producer, headquartered in Saskatoon, Saskatchewan. The company operates the McArthur River/Key Lake complex — the world's highest-grade uranium mine — and the Cigar Lake mine, both in northern Saskatchewan's prolific Athabasca Basin. Cameco also holds a 40% interest in the Inkai joint venture in Kazakhstan. Beyond mining, Cameco provides uranium refining and conversion services through its Port Hope and Blind River facilities in Ontario, and acquired Westinghouse Electric in 2023 (via a consortium with Brookfield), adding nuclear reactor technology and fuel fabrication to its vertically integrated platform.</p>
+
+        <h2>Commodity Exposures</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/uranium/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Uranium</a>
+        </div>
+        <p>Cameco is a pure-play uranium company — uranium concentrate (U3O8) and uranium fuel services account for virtually all revenue. The company operates with a mix of long-term contracts and spot/near-term sales. Approximately 60-70% of annual deliveries are under long-term contracts with utilities, which include both fixed-price and market-related pricing mechanisms. This contract portfolio creates a lag between spot uranium price movements and realized revenue: when spot prices surge, Cameco's average realized price increases gradually over 2-4 years as new contracts are signed at higher levels and legacy contracts roll off. The Westinghouse acquisition added reactor services and fuel assembly revenue that is less commodity-sensitive and more tied to the installed base of nuclear reactors globally.</p>
+
+        <h2>Price Sensitivity</h2>
+        <p>Cameco's stock correlates approximately 0.75-0.85 with spot uranium prices (UxC U3O8 indicator), with the stock typically showing 1.5-2.5x leverage to uranium price moves due to operating and financial leverage. However, the contract mix creates meaningful divergence in any given quarter — in a rapidly rising uranium market, Cameco's realized price lags spot, and vice versa. The company's all-in production cost is approximately $30-35/lb U3O8 (including Inkai), meaning substantial free cash flow generation at spot prices above $60/lb. The McArthur River mine can be idled and restarted based on market conditions, as demonstrated during the 2016-2022 period, giving Cameco strategic supply-side optionality.</p>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">URA</span>
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">URNM</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Stats</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Sector</span>
+          <span style="color:var(--text2)">Uranium Mining</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Primary Exposure</span>
+          <span style="color:var(--accent)">Uranium</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Posts -->
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="posts-grid">
+    {% for post in site.posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'ccj' or tags_str contains 'cameco' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><span class="read-more">Read analysis →</span></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>

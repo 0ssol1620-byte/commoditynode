@@ -1,11 +1,15 @@
 ---
-layout: post
+layout: commodity
 title: "Crude Oil Price Impact: Industries, Stocks & ETFs"
 description: "How WTI crude oil price movements ripple through airlines, energy stocks, and consumer spending."
-categories: [Commodities]
+commodity_slug: "crude-oil"
+symbol: "CL=F"
+sector: "Energy"
+etfs: ["XLE", "USO", "OIH"]
+companies: ["XOM", "CVX", "HAL", "SLB"]
+substitutes: ["Natural Gas", "Renewables", "Nuclear"]
+themes: ["Supply Chain Disruption", "Clean Energy"]
 tags: [crude oil, commodity analysis, supply chain]
-reading_time: 5
-commodity_name: "Crude Oil (WTI)"
 permalink: /commodities/crude-oil/
 ---
 

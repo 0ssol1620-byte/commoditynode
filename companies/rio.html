@@ -1,0 +1,90 @@
+---
+layout: default
+title: "Rio Tinto (RIO)"
+description: "Commodity exposure analysis for Rio Tinto - global mining leader in iron ore, aluminum, and copper."
+permalink: /companies/rio/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Company Hub</span>
+      <span class="badge badge-cyan">RIO</span>
+    </div>
+    <h1>Rio Tinto (RIO)</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Company Overview</h2>
+        <p>Rio Tinto is the world's second-largest mining company by market capitalization, dual-listed in London and Sydney, with operations spanning six continents. The company's iron ore operations in Western Australia's Pilbara region are among the lowest-cost in the world, producing over 330 million tonnes per annum. Beyond iron ore, Rio Tinto is a major aluminum producer (through its integrated bauxite-alumina-smelting chain), a growing copper producer (Oyu Tolgoi in Mongolia, Kennecott in Utah), and produces industrial minerals including borates and titanium dioxide feedstock. The company has systematically divested coal and oil assets to focus on metals essential to the energy transition.</p>
+
+        <h2>Commodity Exposures</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/iron-ore/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Iron Ore</a>
+          <a href="/commodities/aluminum/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Aluminum</a>
+          <a href="/commodities/copper/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Copper</a>
+        </div>
+        <p>Iron ore is the dominant earnings driver, typically contributing 60-70% of group EBITDA. Rio's Pilbara operations have cash costs around $21-23/tonne (FOB), making them among the most profitable mining operations globally. The iron ore price is benchmarked to the Platts 62% Fe CFR China index, with Chinese steel production and infrastructure spending as the key demand variables. Aluminum is the second-largest segment — Rio Tinto operates the full value chain from bauxite mining (Weipa in Australia, Gove) through alumina refining to primary aluminum smelting (Kitimat in Canada, Iceland, New Zealand). LME aluminum prices plus regional premiums drive this segment. Copper is the growth vector: the massive Oyu Tolgoi underground expansion in Mongolia will make Rio one of the world's top five copper producers when it reaches full capacity.</p>
+
+        <h2>Price Sensitivity</h2>
+        <p>Rio Tinto's share price shows approximately 0.72 correlation with the iron ore benchmark price. Each $1/tonne change in the 62% Fe price impacts annual EBITDA by roughly $310 million, reflecting the sheer scale of Pilbara production. For aluminum, each $100/tonne change in the LME price affects EBITDA by approximately $250-300 million. The company pays out 40-60% of earnings as dividends, creating a strong transmission mechanism from commodity prices to shareholder returns — the dividend yield compresses and expands with iron ore cycles, making RIO a favorite of income-oriented commodity investors.</p>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">PICK</span>
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">XME</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Stats</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Sector</span>
+          <span style="color:var(--text2)">Mining</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Primary Exposure</span>
+          <span style="color:var(--accent)">Iron Ore</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Posts -->
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="posts-grid">
+    {% for post in site.posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'rio' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><span class="read-more">Read analysis →</span></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>

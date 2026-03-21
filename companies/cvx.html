@@ -1,0 +1,90 @@
+---
+layout: default
+title: "Chevron (CVX)"
+description: "Commodity exposure analysis for Chevron - crude oil, natural gas, and LNG price sensitivity across integrated operations."
+permalink: /companies/cvx/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Company Hub</span>
+      <span class="badge badge-cyan">CVX</span>
+    </div>
+    <h1>Chevron (CVX)</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Company Overview</h2>
+        <p>Chevron is the second-largest integrated oil and gas company in the United States, with a global footprint spanning upstream exploration, midstream transportation, downstream refining, and a rapidly growing liquefied natural gas (LNG) business. The company's production base includes the Permian Basin, offshore Gulf of Mexico, Australia's Gorgon and Wheatstone LNG projects, and Kazakhstan's Tengiz field. Chevron has positioned itself as a lower-cost operator with a breakeven below $50/barrel Brent, making it relatively resilient across commodity cycles.</p>
+
+        <h2>Commodity Exposures</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/crude-oil/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Crude Oil</a>
+          <a href="/commodities/natural-gas/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Natural Gas</a>
+          <a href="/commodities/lng/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">LNG</a>
+        </div>
+        <p>Crude oil dominates Chevron's earnings profile, with upstream oil production representing roughly 60% of total output by energy-equivalent barrels. Natural gas and LNG have become increasingly important as Chevron's Australian LNG projects reached full capacity. The Gorgon and Wheatstone facilities produce over 25 million tonnes per annum, making Chevron one of the world's largest LNG suppliers. Asian spot LNG prices — benchmarked to JKM — create a distinct price exposure separate from Henry Hub domestic gas pricing. Downstream refining provides the typical integrated hedge: margin expansion during crude price declines.</p>
+
+        <h2>Price Sensitivity</h2>
+        <p>Chevron's stock exhibits approximately 0.80 correlation with Brent crude on a trailing 12-month basis, slightly below ExxonMobil due to greater LNG diversification. Each $1/barrel sustained change in Brent impacts annual cash flow by approximately $350-450 million. The growing LNG portfolio introduces sensitivity to Asian gas premiums and European TTF pricing, which can diverge significantly from crude oil during supply disruptions or seasonal demand swings.</p>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">XLE</span>
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">VDE</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Stats</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Sector</span>
+          <span style="color:var(--text2)">Energy</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Primary Exposure</span>
+          <span style="color:var(--accent)">Crude Oil</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Posts -->
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="posts-grid">
+    {% for post in site.posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'cvx' or tags_str contains 'chevron' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><span class="read-more">Read analysis →</span></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>

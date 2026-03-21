@@ -1,0 +1,89 @@
+---
+layout: default
+title: "Nuclear Renaissance"
+description: "A post-Fukushima uranium supply deficit collides with surging demand from SMRs, AI data centers, and global net-zero commitments."
+permalink: /themes/nuclear-renaissance/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Investment Theme</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Theme Overview</h2>
+        <p>The nuclear energy sector is experiencing its most significant positive inflection point since the 1970s. After a decade of post-Fukushima headwinds that shuttered mines and curtailed exploration spending, primary uranium supply has fallen well below reactor consumption requirements. Meanwhile, demand is accelerating from three converging forces: 60+ reactors under construction globally (led by China and India), the emergence of small modular reactors (SMRs) as a viable technology for AI data center baseload power, and the reclassification of nuclear as "green" by the EU taxonomy and other frameworks essential to net-zero commitments. The uranium contracting cycle is shifting decisively from spot purchases to long-term contracts at prices that incentivize new mine development, signaling a multi-year bull market for the fuel.</p>
+
+        <h2>Related Commodities</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/uranium/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Uranium</a>
+        </div>
+        <p>Uranium (U3O8) is the sole fuel input for nuclear fission reactors. Unlike fossil fuels, uranium's cost represents only 5-10% of the total cost of nuclear-generated electricity, meaning utilities are price-inelastic buyers -- they will contract at almost any price rather than risk fuel supply disruption. This dynamic creates a uniquely favorable supply-demand setup where small production shortfalls can drive outsized price moves. Secondary supply sources (government stockpile drawdowns, underfeeding, megatons-to-megawatts) that masked the primary supply deficit for years are now largely exhausted.</p>
+
+        <h2>Key Companies</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/companies/ccj/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">CCJ (Cameco)</a>
+          <a href="/companies/nxe/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">NXE (NexGen Energy)</a>
+          <a href="/companies/leu/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">LEU (Centrus Energy)</a>
+          <a href="/companies/uec/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">UEC (Uranium Energy Corp)</a>
+        </div>
+
+        <h2>Investment Implications</h2>
+        <p>Nuclear is the rare commodity theme where demand is both policy-driven and technologically necessary -- no credible decarbonization pathway excludes nuclear baseload. Cameco (CCJ) offers the lowest-risk exposure as the world's largest publicly traded uranium producer with long-term contracts providing earnings visibility. NexGen Energy (NXE) represents high-upside development-stage exposure through the Rook I project in Saskatchewan's Athabasca Basin. Centrus Energy (LEU) provides unique leverage to the enrichment bottleneck, where Western capacity is constrained and Russian supply faces sanctions risk. Position sizing should account for the sector's volatility: uranium equities routinely move 2-3x the underlying commodity price.</p>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Theme Details</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Commodities</span>
+          <span style="color:var(--accent)">1</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Horizon</span>
+          <span style="color:var(--text2)">10-20 years</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Themes</a></li>
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Posts -->
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="posts-grid">
+    {% for post in site.posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'uranium' or tags_str contains 'nuclear' or tags_str contains 'nuclear-energy' or tags_str contains 'ccj' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><span class="read-more">Read analysis &rarr;</span></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>

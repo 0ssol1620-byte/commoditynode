@@ -22,6 +22,12 @@ The complexity of the lithium supply chain creates a rich set of second-order ef
 Rising lithium costs directly increase battery pack prices, which represent approximately 30-40% of total EV cost, creating headwinds for automakers trying to achieve price parity with internal combustion vehicles.
 Battery recycling companies see improved economics when virgin lithium is expensive, and lithium-focused ETFs amplify price movements through concentrated positioning.
 This analysis maps these interconnected dynamics with quantified impact estimates across the full lithium ecosystem.
+The correlations presented are derived from rolling 90-day windows spanning the 2020-2026 period, which includes both the historic lithium bull market and the subsequent correction, ensuring the relationships capture the full range of market conditions.
+
+The lithium market differs from most commodities in one important respect: there is no liquid, transparent exchange-traded futures contract for lithium.
+Unlike copper, gold, or crude oil, which trade on major exchanges with real-time price discovery, lithium prices are determined through bilateral contracts between miners and battery manufacturers, with benchmark assessments published by agencies like Fastmarkets and Asian Metal.
+This lack of transparent price discovery increases volatility and makes equity proxies like ALB particularly important for investors seeking liquid exposure to lithium price movements.
+The CME Group launched a lithium futures contract in 2021, but liquidity remains thin compared to established commodity contracts, limiting its usefulness for large institutional positions.
 
 <div class="cn-price-chart" data-symbol="ALB" data-name="Lithium Carbonate (via ALB)"></div>
 
@@ -87,6 +93,11 @@ The financial sensitivity is dramatic.
 Albemarle management has disclosed that every $1,000 per ton change in realized lithium prices impacts annual EBITDA by approximately $180-200 million, translating to roughly $1.50-1.70 per share in annual earnings impact.
 At the current price of $14,500 per ton, a 15% increase ($2,175/t) would add approximately $390-435 million to annual EBITDA, representing a 25-30% improvement in the company's earnings power.
 This extraordinary operating leverage, driven by low marginal production costs and high fixed-cost infrastructure, explains why ALB stock shows a 22% average move for every 15% change in lithium prices, delivering a beta of approximately 1.47x.
+The magnitude of this leverage is among the highest in the mining sector, exceeding even copper miners like Freeport-McMoRan, and reflects the relatively small revenue base of lithium producers compared to the scale of price movements in this volatile commodity.
+
+Albemarle's bromine and catalysts segments, which together contribute approximately 30-35% of total revenue, provide partial diversification away from lithium.
+However, investors should note that during periods of extreme lithium price volatility, the lithium segment dominates stock price movements to such a degree that the other segments become essentially noise in the investment thesis.
+This concentration of value in a single volatile commodity is both the opportunity and the risk of owning ALB.
 
 Competition in the lithium mining space is intensifying but remains concentrated.
 SQM, Albemarle's closest competitor, operates in the same Salar de Atacama under a separate concession and produces both lithium carbonate and lithium hydroxide at similarly low costs.
@@ -275,3 +286,15 @@ The structural demand thesis remains intact, with global lithium demand projecte
 
 Investors should also pay close attention to the emerging competition from alternative battery chemistries, particularly LFP (lithium iron phosphate), which uses less lithium per kWh than NMC formulations, and sodium-ion batteries, which eliminate lithium entirely.
 While sodium-ion is unlikely to displace lithium in high-performance EV applications within the next decade, its adoption in stationary storage and low-cost vehicles could moderate the demand growth trajectory for lithium, adding another variable to an already complex investment equation.
+
+The geographic distribution of lithium processing capacity is another factor that investors should monitor closely.
+China currently controls approximately 65-70% of global lithium refining and conversion capacity, creating a supply chain concentration risk that Western governments are actively working to address.
+The U.S. Inflation Reduction Act and the EU's Critical Raw Materials Act both include provisions to incentivize domestic lithium processing, which could reshape the competitive landscape over the next 5-10 years.
+Albemarle's planned U.S. conversion facility and its existing operations in Kings Mountain, North Carolina, position it to benefit from these reshoring incentives, potentially improving its margin structure for domestically processed lithium.
+
+For tactical trading, the most reliable leading indicators for lithium price direction are Chinese monthly EV sales data (published by the China Passenger Car Association in the first week of each month), battery-grade lithium carbonate inventory levels at major Chinese ports, and Albemarle's own quarterly production and pricing disclosures.
+The lithium market's relative opacity compared to exchange-traded metals like copper or gold means that company-level data often provides more timely signals than market-level indicators, making ALB's earnings calls and production reports essential listening for lithium investors.
+
+The risk-reward profile of lithium equities at current price levels is favorable for patient investors who can withstand continued near-term volatility.
+With lithium prices near the marginal cost of production for higher-cost producers, the downside risk is bounded by the economic rationality of supply curtailment, while the upside potential from the structural demand growth thesis remains substantial.
+Albemarle's low-cost Chilean operations ensure profitability across a wide range of lithium price scenarios, making it the safest entry point in the lithium equity space for investors establishing long-term positions.

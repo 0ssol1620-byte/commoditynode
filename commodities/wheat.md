@@ -1,11 +1,15 @@
 ---
-layout: post
+layout: commodity
 title: "Wheat Price Impact: Food Security, Processors & EM Risk"
 description: "How wheat price spikes ripple through food manufacturers, agri-processors, and emerging markets."
-categories: [Commodities]
+commodity_slug: "wheat"
+symbol: "ZW=F"
+sector: "Agriculture"
+etfs: ["WEAT"]
+companies: ["ADM", "BG", "INGR"]
+substitutes: ["Rice", "Corn", "Barley"]
+themes: ["Food Inflation"]
 tags: [wheat, commodity analysis, supply chain]
-reading_time: 5
-commodity_name: "Wheat"
 permalink: /commodities/wheat/
 ---
 

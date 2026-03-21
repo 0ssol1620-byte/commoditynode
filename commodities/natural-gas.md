@@ -1,11 +1,15 @@
 ---
-layout: post
+layout: commodity
 title: "Natural Gas Price Impact: Utilities, Fertilizers & LNG"
 description: "How Henry Hub natural gas prices affect utilities, fertilizer makers, and LNG exporters."
-categories: [Commodities]
+commodity_slug: "natural-gas"
+symbol: "NG=F"
+sector: "Energy"
+etfs: ["UNG", "BOIL", "FCG"]
+companies: ["EQT", "CHK", "AR", "SWN"]
+substitutes: ["Solar", "Wind", "Nuclear", "Oil"]
+themes: ["Clean Energy", "Food Inflation"]
 tags: [natural gas, commodity analysis, supply chain]
-reading_time: 5
-commodity_name: "Natural Gas"
 permalink: /commodities/natural-gas/
 ---
 

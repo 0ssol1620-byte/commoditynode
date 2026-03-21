@@ -24,6 +24,7 @@ When fuel costs spike, airlines face a difficult choice: absorb the cost and com
 The transmission mechanism flows through online travel agencies like Booking Holdings and Expedia, into hotel chains that depend on air travel to fill rooms, and ultimately into the broader leisure and business travel economy.
 Meanwhile, refiners who produce jet fuel capture expanded crack spreads, creating a clear set of winners on the other side of the trade.
 This analysis maps that full chain of impact with quantified correlations drawn from historical price data.
+The correlations presented below are calculated from rolling 90-day windows across multiple fuel price cycles to ensure statistical robustness.
 
 <div class="cn-price-chart" data-symbol="CL=F" data-name="Jet Fuel (Kerosene-Type)"></div>
 
@@ -94,6 +95,7 @@ Delta's cost-per-available-seat-mile (CASM) excluding fuel has been best-in-clas
 When fuel costs spike, Delta's relatively efficient operations and moderate hedge book give it more flexibility than American Airlines, whose higher debt load and lack of hedging create a double vulnerability.
 United Airlines falls somewhere in between, with selective hedging and strong international revenue that benefits from fuel surcharge mechanisms more common on long-haul routes.
 This spectrum of fuel sensitivity across carriers creates meaningful divergences in stock performance during fuel price volatility.
+These divergences are large enough to support pair trading strategies that profit from relative performance differences regardless of the absolute direction of airline stocks.
 
 It is also worth noting that Delta's ownership stake in the Monroe Energy refinery near Philadelphia, acquired in 2012, was originally conceived as a strategic hedge against jet fuel prices.
 While Monroe's contribution to fuel cost savings has been debated by analysts, the refinery provides Delta with approximately 200,000 barrels per day of refining capacity, with a meaningful portion dedicated to jet fuel production for Delta's East Coast operations.

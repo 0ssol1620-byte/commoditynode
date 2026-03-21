@@ -1,0 +1,89 @@
+---
+layout: default
+title: "Mosaic Company (MOS)"
+description: "Commodity exposure analysis for Mosaic Company - phosphate and potash fertilizer production tied to global agricultural demand."
+permalink: /companies/mos/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Company Hub</span>
+      <span class="badge badge-cyan">MOS</span>
+    </div>
+    <h1>Mosaic Company (MOS)</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Company Overview</h2>
+        <p>The Mosaic Company is one of the world's largest producers of concentrated phosphate and potash crop nutrients. Headquartered in Tampa, Florida, Mosaic operates phosphate mining and processing facilities in Florida and Louisiana, and potash mines in Saskatchewan (Canada) and New Mexico. The company was formed in 2004 through the merger of IMC Global and Cargill's crop nutrition division. Mosaic's products — diammonium phosphate (DAP), monoammonium phosphate (MAP), and muriate of potash (MOP) — are essential inputs for global food production, making the company a second-derivative play on agricultural commodity prices.</p>
+
+        <h2>Commodity Exposures</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/corn/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Corn</a>
+          <a href="/commodities/wheat/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Wheat</a>
+          <a href="/commodities/soybeans/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Soybeans</a>
+        </div>
+        <p>Mosaic's commodity exposure is indirect but powerful — the company does not grow or trade grain, but fertilizer demand is driven by grain prices and planting intentions. When corn, wheat, and soybean prices are high, farmers earn strong incomes and invest more in fertilizer to maximize yields, boosting demand for Mosaic's phosphate and potash products. Conversely, low grain prices reduce farm income and lead farmers to defer or reduce fertilizer applications. The U.S. corn belt is Mosaic's largest domestic market, and global demand is heavily influenced by planting cycles in Brazil, India, and China. Natural gas and ammonia prices affect phosphate production costs, as ammonia is a key input for DAP and MAP manufacturing.</p>
+
+        <h2>Price Sensitivity</h2>
+        <p>Mosaic's earnings correlate approximately 0.55-0.65 with a basket of major grain prices (corn, soybeans, wheat), reflecting the indirect demand linkage through fertilizer purchasing decisions. However, fertilizer supply-demand dynamics create their own cycle — potash supply disruptions (such as the 2022 Belarus/Russia sanctions) or phosphate rock availability can drive fertilizer prices independently of grain markets. Each $50/tonne change in DAP pricing impacts annual phosphate segment EBITDA by approximately $400-500 million. The company has significant operating leverage given the capital-intensive nature of mining operations.</p>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">MOO</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Stats</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Sector</span>
+          <span style="color:var(--text2)">Agriculture / Fertilizers</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Primary Exposure</span>
+          <span style="color:var(--accent)">Corn, Wheat, Soybeans</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Related Posts -->
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="posts-grid">
+    {% for post in site.posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'mos' or tags_str contains 'mosaic' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><span class="read-more">Read analysis →</span></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>

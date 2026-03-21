@@ -1,11 +1,15 @@
 ---
-layout: post
+layout: commodity
 title: "Copper Price Impact: EVs, Mining & Construction"
 description: "How copper price movements signal economic cycles and impact EV makers, miners, and homebuilders."
-categories: [Commodities]
+commodity_slug: "copper"
+symbol: "HG=F"
+sector: "Industrial Metals"
+etfs: ["COPX", "CPER"]
+companies: ["FCX", "SCCO", "TECK"]
+substitutes: ["Aluminum", "Fiber Optics"]
+themes: ["EV Transition", "Infrastructure Boom", "Clean Energy"]
 tags: [copper, commodity analysis, supply chain]
-reading_time: 5
-commodity_name: "Copper"
 permalink: /commodities/copper/
 ---
 

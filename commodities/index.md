@@ -9,6 +9,7 @@ description: "Explore how each commodity's price movements impact industries, st
   <div class="container">
     <div class="post-header-badge">
       <span class="badge badge-cyan">Index</span>
+      <span class="badge badge-gold">{{ site.commodities.size }} Hubs</span>
     </div>
     <h1>Commodity Impact Maps</h1>
     <p class="post-meta-bar">Explore how price movements ripple through industries, stocks, and ETFs.</p>
@@ -17,110 +18,270 @@ description: "Explore how each commodity's price movements impact industries, st
 
 <div class="container" style="padding:48px 24px 80px;">
 
+<!-- Energy -->
 <div class="section-header" data-animate>
   <p class="section-label">Energy</p>
   <h2 class="section-title">Energy Commodities</h2>
 </div>
-
-<div class="commodity-grid" data-animate data-delay="100">
-  <a href="/crude-oil-industry-impact/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">OIL</div>
-    <h3 class="feature-title">Crude Oil</h3>
-    <p class="feature-desc">The most interconnected commodity — traces impact across 12+ industries.</p>
+<div class="commodity-category-grid" data-animate data-delay="100">
+  <a href="/commodities/crude-oil/" class="commodity-category-card">
+    <span class="commodity-category-tag">OIL</span>
+    <div>
+      <div class="commodity-category-name">Crude Oil</div>
+      <div class="commodity-category-sector">Most interconnected — 12+ industries</div>
+    </div>
   </a>
-  <a href="/natural-gas-price-impact/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">GAS</div>
-    <h3 class="feature-title">Natural Gas</h3>
-    <p class="feature-desc">Heating, electricity generation, and chemical feedstock — wide downstream exposure.</p>
+  <a href="/commodities/natural-gas/" class="commodity-category-card">
+    <span class="commodity-category-tag">GAS</span>
+    <div>
+      <div class="commodity-category-name">Natural Gas</div>
+      <div class="commodity-category-sector">Heating, power, chemical feedstock</div>
+    </div>
+  </a>
+  <a href="/commodities/diesel/" class="commodity-category-card">
+    <span class="commodity-category-tag">DSL</span>
+    <div>
+      <div class="commodity-category-name">Diesel</div>
+      <div class="commodity-category-sector">Freight and logistics lifeblood</div>
+    </div>
+  </a>
+  <a href="/commodities/jet-fuel/" class="commodity-category-card">
+    <span class="commodity-category-tag">JET</span>
+    <div>
+      <div class="commodity-category-name">Jet Fuel</div>
+      <div class="commodity-category-sector">20-30% of airline operating costs</div>
+    </div>
+  </a>
+  <a href="/commodities/lng/" class="commodity-category-card">
+    <span class="commodity-category-tag">LNG</span>
+    <div>
+      <div class="commodity-category-name">LNG</div>
+      <div class="commodity-category-sector">Liquefied natural gas exports</div>
+    </div>
+  </a>
+  <a href="/commodities/coal/" class="commodity-category-card">
+    <span class="commodity-category-tag">COAL</span>
+    <div>
+      <div class="commodity-category-name">Coal</div>
+      <div class="commodity-category-sector">Power generation and steelmaking</div>
+    </div>
   </a>
 </div>
 
-<div class="section-header" style="margin-top:48px;" data-animate>
-  <p class="section-label">Metals</p>
-  <h2 class="section-title">Metals &amp; Mining</h2>
+<!-- Precious Metals -->
+<div class="section-header" data-animate>
+  <p class="section-label">Precious Metals</p>
+  <h2 class="section-title">Precious Metals</h2>
+</div>
+<div class="commodity-category-grid" data-animate data-delay="100">
+  <a href="/commodities/gold/" class="commodity-category-card">
+    <span class="commodity-category-tag">Au</span>
+    <div>
+      <div class="commodity-category-name">Gold</div>
+      <div class="commodity-category-sector">Ultimate safe haven</div>
+    </div>
+  </a>
+  <a href="/commodities/silver/" class="commodity-category-card">
+    <span class="commodity-category-tag">Ag</span>
+    <div>
+      <div class="commodity-category-name">Silver</div>
+      <div class="commodity-category-sector">Industrial + precious dual nature</div>
+    </div>
+  </a>
+  <a href="/commodities/platinum/" class="commodity-category-card">
+    <span class="commodity-category-tag">Pt</span>
+    <div>
+      <div class="commodity-category-name">Platinum</div>
+      <div class="commodity-category-sector">Catalysts, jewelry, fuel cells</div>
+    </div>
+  </a>
+  <a href="/commodities/palladium/" class="commodity-category-card">
+    <span class="commodity-category-tag">Pd</span>
+    <div>
+      <div class="commodity-category-name">Palladium</div>
+      <div class="commodity-category-sector">Auto catalytic converters</div>
+    </div>
+  </a>
 </div>
 
-<div class="commodity-grid" data-animate data-delay="100">
-  <a href="/copper-economic-indicator/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">Cu</div>
-    <h3 class="feature-title">Copper</h3>
-    <p class="feature-desc">The economy's pulse — a leading indicator for global industrial activity.</p>
+<!-- Industrial Metals -->
+<div class="section-header" data-animate>
+  <p class="section-label">Industrial</p>
+  <h2 class="section-title">Industrial Metals</h2>
+</div>
+<div class="commodity-category-grid" data-animate data-delay="100">
+  <a href="/commodities/copper/" class="commodity-category-card">
+    <span class="commodity-category-tag">Cu</span>
+    <div>
+      <div class="commodity-category-name">Copper</div>
+      <div class="commodity-category-sector">Dr. Copper — economic bellwether</div>
+    </div>
   </a>
-  <a href="/gold-price-impact-stocks/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">Au</div>
-    <h3 class="feature-title">Gold</h3>
-    <p class="feature-desc">The ultimate safe haven — reacts to inflation, geopolitics, and dollar strength.</p>
+  <a href="/commodities/steel/" class="commodity-category-card">
+    <span class="commodity-category-tag">STL</span>
+    <div>
+      <div class="commodity-category-name">Steel</div>
+      <div class="commodity-category-sector">Construction and auto backbone</div>
+    </div>
   </a>
-  <a href="/silver-price-impact-solar-electronics/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">Ag</div>
-    <h3 class="feature-title">Silver</h3>
-    <p class="feature-desc">Industrial demand meets safe-haven appeal — solar, electronics, and precious metals.</p>
+  <a href="/commodities/aluminum/" class="commodity-category-card">
+    <span class="commodity-category-tag">Al</span>
+    <div>
+      <div class="commodity-category-name">Aluminum</div>
+      <div class="commodity-category-sector">Aerospace, packaging, EVs</div>
+    </div>
   </a>
-  <a href="/palladium-auto-catalysts-impact/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">Pd</div>
-    <h3 class="feature-title">Palladium</h3>
-    <p class="feature-desc">Auto catalysts dominate demand — sensitive to EV transition and supply shocks.</p>
+  <a href="/commodities/iron-ore/" class="commodity-category-card">
+    <span class="commodity-category-tag">Fe</span>
+    <div>
+      <div class="commodity-category-name">Iron Ore</div>
+      <div class="commodity-category-sector">Steel feedstock — China 70%+ demand</div>
+    </div>
+  </a>
+  <a href="/commodities/zinc/" class="commodity-category-card">
+    <span class="commodity-category-tag">Zn</span>
+    <div>
+      <div class="commodity-category-name">Zinc</div>
+      <div class="commodity-category-sector">Galvanizing steel, die-casting</div>
+    </div>
+  </a>
+  <a href="/commodities/nickel/" class="commodity-category-card">
+    <span class="commodity-category-tag">Ni</span>
+    <div>
+      <div class="commodity-category-name">Nickel</div>
+      <div class="commodity-category-sector">Stainless steel + EV batteries</div>
+    </div>
+  </a>
+  <a href="/commodities/tin/" class="commodity-category-card">
+    <span class="commodity-category-tag">Sn</span>
+    <div>
+      <div class="commodity-category-name">Tin</div>
+      <div class="commodity-category-sector">Electronics solder, semiconductors</div>
+    </div>
+  </a>
+  <a href="/commodities/lumber/" class="commodity-category-card">
+    <span class="commodity-category-tag">LBR</span>
+    <div>
+      <div class="commodity-category-name">Lumber</div>
+      <div class="commodity-category-sector">Housing market bellwether</div>
+    </div>
   </a>
 </div>
 
-<div class="section-header" style="margin-top:48px;" data-animate>
+<!-- Battery Metals -->
+<div class="section-header" data-animate>
+  <p class="section-label">Battery Metals</p>
+  <h2 class="section-title">Battery &amp; Energy Transition Metals</h2>
+</div>
+<div class="commodity-category-grid" data-animate data-delay="100">
+  <a href="/commodities/lithium/" class="commodity-category-card">
+    <span class="commodity-category-tag">Li</span>
+    <div>
+      <div class="commodity-category-name">Lithium</div>
+      <div class="commodity-category-sector">EV battery backbone</div>
+    </div>
+  </a>
+  <a href="/commodities/cobalt/" class="commodity-category-card">
+    <span class="commodity-category-tag">Co</span>
+    <div>
+      <div class="commodity-category-name">Cobalt</div>
+      <div class="commodity-category-sector">Critical battery material — DRC 70%+</div>
+    </div>
+  </a>
+  <a href="/commodities/uranium/" class="commodity-category-card">
+    <span class="commodity-category-tag">U</span>
+    <div>
+      <div class="commodity-category-name">Uranium</div>
+      <div class="commodity-category-sector">Nuclear renaissance fuel</div>
+    </div>
+  </a>
+</div>
+
+<!-- Agriculture -->
+<div class="section-header" data-animate>
   <p class="section-label">Agriculture</p>
   <h2 class="section-title">Agricultural Commodities</h2>
 </div>
-
-<div class="commodity-grid" data-animate data-delay="100">
-  <a href="/wheat-price-impact-food/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">WHT</div>
-    <h3 class="feature-title">Wheat</h3>
-    <p class="feature-desc">Global food security indicator — sensitive to weather, geopolitics, and trade policy.</p>
+<div class="commodity-category-grid" data-animate data-delay="100">
+  <a href="/commodities/wheat/" class="commodity-category-card">
+    <span class="commodity-category-tag">WHT</span>
+    <div>
+      <div class="commodity-category-name">Wheat</div>
+      <div class="commodity-category-sector">Global food security indicator</div>
+    </div>
   </a>
-  <a href="/corn-price-ethanol-livestock/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">CRN</div>
-    <h3 class="feature-title">Corn</h3>
-    <p class="feature-desc">Food, feed, and biofuel — among the most policy-sensitive commodities.</p>
+  <a href="/commodities/corn/" class="commodity-category-card">
+    <span class="commodity-category-tag">CRN</span>
+    <div>
+      <div class="commodity-category-name">Corn</div>
+      <div class="commodity-category-sector">Food, feed, and biofuel nexus</div>
+    </div>
   </a>
-  <a href="/coffee-price-starbucks-retail/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">CFE</div>
-    <h3 class="feature-title">Coffee</h3>
-    <p class="feature-desc">From bean to latte — how coffee prices ripple through retail and consumer stocks.</p>
-  </a>
-  <a href="/lumber-housing-homebuilders/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">LBR</div>
-    <h3 class="feature-title">Lumber</h3>
-    <p class="feature-desc">Housing market bellwether — builders, REITs, and construction stocks react fast.</p>
+  <a href="/commodities/soybeans/" class="commodity-category-card">
+    <span class="commodity-category-tag">SOY</span>
+    <div>
+      <div class="commodity-category-name">Soybeans</div>
+      <div class="commodity-category-sector">Crush margins, biodiesel, China trade</div>
+    </div>
   </a>
 </div>
 
+<!-- Soft Commodities -->
+<div class="section-header" data-animate>
+  <p class="section-label">Softs</p>
+  <h2 class="section-title">Soft Commodities</h2>
+</div>
+<div class="commodity-category-grid" data-animate data-delay="100">
+  <a href="/commodities/coffee/" class="commodity-category-card">
+    <span class="commodity-category-tag">CFE</span>
+    <div>
+      <div class="commodity-category-name">Coffee</div>
+      <div class="commodity-category-sector">Bean to latte — retail impact</div>
+    </div>
+  </a>
+  <a href="/commodities/sugar/" class="commodity-category-card">
+    <span class="commodity-category-tag">SGR</span>
+    <div>
+      <div class="commodity-category-name">Sugar</div>
+      <div class="commodity-category-sector">Brazil exports, ethanol diversion</div>
+    </div>
+  </a>
+  <a href="/commodities/cocoa/" class="commodity-category-card">
+    <span class="commodity-category-tag">COC</span>
+    <div>
+      <div class="commodity-category-name">Cocoa</div>
+      <div class="commodity-category-sector">West Africa 70%+ — climate risk</div>
+    </div>
+  </a>
+  <a href="/commodities/cotton/" class="commodity-category-card">
+    <span class="commodity-category-tag">CTN</span>
+    <div>
+      <div class="commodity-category-name">Cotton</div>
+      <div class="commodity-category-sector">Textile industry backbone</div>
+    </div>
+  </a>
+</div>
+
+<!-- Explore More -->
 <div class="section-header" style="margin-top:48px;" data-animate>
-  <p class="section-label">Industrial</p>
-  <h2 class="section-title">Industrial Commodities</h2>
+  <h2 class="section-title">Explore More</h2>
 </div>
-
-<div class="commodity-grid" data-animate data-delay="100">
-  <a href="/steel-price-construction-auto/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">STL</div>
-    <h3 class="feature-title">Steel</h3>
-    <p class="feature-desc">Construction, auto, and infrastructure — steel prices signal industrial health.</p>
+<div class="browse-grid" data-animate data-delay="100">
+  <a href="/industries/" class="browse-card">
+    <div class="browse-label">Industries</div>
+    <div class="browse-count">10 sectors</div>
   </a>
-  <a href="/aluminum-aerospace-beverage/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">Al</div>
-    <h3 class="feature-title">Aluminum</h3>
-    <p class="feature-desc">Aerospace, packaging, and EVs — the lightweight metal with heavy market influence.</p>
+  <a href="/companies/" class="browse-card">
+    <div class="browse-label">Companies</div>
+    <div class="browse-count">18 tickers</div>
   </a>
-  <a href="/lithium-ev-supply-chain/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">Li</div>
-    <h3 class="feature-title">Lithium</h3>
-    <p class="feature-desc">The EV battery backbone — lithium prices shape the entire clean energy transition.</p>
+  <a href="/themes/" class="browse-card">
+    <div class="browse-label">Themes</div>
+    <div class="browse-count">6 themes</div>
   </a>
-  <a href="/uranium-nuclear-energy-stocks/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">U</div>
-    <h3 class="feature-title">Uranium</h3>
-    <p class="feature-desc">Nuclear renaissance — uranium demand surges as clean energy policy accelerates.</p>
-  </a>
-  <a href="/iron-ore-steel-china-infrastructure/" class="feature-card" style="text-decoration:none;display:block;">
-    <div class="feature-icon commodity-tag">Fe</div>
-    <h3 class="feature-title">Iron Ore</h3>
-    <p class="feature-desc">China's infrastructure pulse — iron ore prices predict steel output and global construction cycles.</p>
+  <a href="/reports/" class="browse-card">
+    <div class="browse-label">Reports</div>
+    <div class="browse-count">{{ site.posts.size }} published</div>
   </a>
 </div>
 

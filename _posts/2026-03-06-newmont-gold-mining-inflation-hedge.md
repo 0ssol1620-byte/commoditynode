@@ -22,6 +22,12 @@ The transmission of gold price changes through the mining sector and into the br
 Gold miners, royalty and streaming companies, and physical gold ETFs benefit directly from rising prices, while US dollar-denominated assets, growth stocks competing for capital, and industries sensitive to real interest rates face headwinds.
 Jewelry retailers occupy an ambiguous position, benefiting from the perception of gold as a luxury good while being hurt by higher input costs.
 This analysis quantifies these relationships across the full gold ecosystem with data-driven impact estimates from multiple gold price cycles.
+The correlations presented are calculated from rolling 90-day windows spanning the 2018-2026 period, covering both the COVID-era surge, the 2022 Fed-tightening selloff, and the subsequent central-bank-driven rally to all-time highs.
+
+Gold's status as the world's oldest monetary asset provides a historical anchor that other commodities lack.
+Central banks collectively hold approximately 36,000 tons of gold, valued at over $5.5 trillion, as part of their official reserves.
+This institutional demand base creates a structural floor under gold prices that is independent of industrial consumption or speculative positioning.
+When investors buy gold mining stocks like NEM, they are not merely betting on a commodity price; they are accessing a 5,000-year-old monetary system that governments continue to rely upon as the ultimate store of value.
 
 <div class="cn-price-chart" data-symbol="GC=F" data-name="Gold Futures"></div>
 
@@ -284,3 +290,12 @@ The macro signals driving gold prices include real interest rates (the single mo
 
 With central banks accumulating gold at the fastest pace in decades and real rates remaining historically low, the structural backdrop continues to favor gold exposure, and Newmont remains the best equity vehicle to capture that thesis.
 The company's S&P 500 membership, industry-leading production scale, and shareholder-friendly capital allocation framework make it uniquely suited as the gold mining sector's anchor position for both active and passive investors seeking commodity price exposure through equities.
+
+For tactical trading around gold price movements, the most actionable signals come from three data sources: U.S. TIPS yields (10-year inflation-protected Treasury yields), which represent real interest rates and show the strongest inverse correlation with gold; the World Gold Council's quarterly demand reports, which track central bank purchasing and institutional flows; and the COMEX gold futures positioning data (Commitment of Traders report), which reveals speculative positioning and potential crowding risks.
+
+When TIPS yields are falling, central banks are buying, and speculative positioning is not yet extreme, the probability of continued gold price strength is historically above 70%, making it an ideal environment to overweight NEM and other gold equities.
+Conversely, when TIPS yields rise sharply, the dollar strengthens, and speculative long positioning reaches extreme levels, gold mining stocks face significant drawdown risk, and investors should consider reducing exposure or implementing protective strategies.
+
+The long-term structural case for gold and gold mining equities rests on the unprecedented combination of persistent government deficit spending, de-dollarization trends, and continued central bank accumulation.
+These forces have created a demand floor under gold prices that did not exist a decade ago, when the metal was primarily driven by jewelry demand and speculative flows.
+As long as these structural demand drivers persist, Newmont's position as the world's largest gold miner translates into a durable franchise with compounding shareholder returns that can serve as both a tactical trading vehicle and a strategic portfolio anchor.

@@ -25,8 +25,8 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       </p>
 
       <div class="hero-actions" data-animate data-delay="300">
-        <a href="#latest" class="btn btn-primary">Explore Latest Signals</a>
-        <a href="/reports/" class="btn btn-secondary">Open Research Archive</a>
+        <a href="/commodities/" class="btn btn-primary">Explore Commodities</a>
+        <a href="#signals" class="btn btn-secondary">Top Signals Today</a>
       </div>
 
       <div class="hero-stats" data-animate data-delay="400">
@@ -39,8 +39,8 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
           <span class="label">Published Signals</span>
         </div>
         <div class="hero-stat">
-          <span class="value" data-count="{{ site.tags.size }}" data-suffix=" themes">{{ site.tags.size }} themes</span>
-          <span class="label">Mapped Topics</span>
+          <span class="value" data-count="{{ site.commodities.size }}" data-suffix=" hubs">{{ site.commodities.size }} hubs</span>
+          <span class="label">Commodity Hubs</span>
         </div>
       </div>
       <script>
@@ -59,12 +59,309 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
 <div class="divider"></div>
 
+<!-- ===== TOP COMMODITY SIGNALS ===== -->
+<section class="section" id="signals" aria-labelledby="signals-title">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Market Pulse</p>
+      <h2 class="section-title" id="signals-title">Top Commodity Signals</h2>
+      <p class="section-desc">Biggest movers and key commodity-to-equity transmission paths right now.</p>
+    </header>
+
+    <div class="signals-grid" data-animate data-delay="100">
+      <div class="signal-mover-card" id="signal-oil">
+        <div class="signal-mover-header">
+          <span class="signal-mover-tag">OIL</span>
+          <span class="signal-mover-direction" id="signal-oil-dir">—</span>
+        </div>
+        <div class="signal-mover-name">Crude Oil (WTI)</div>
+        <div class="signal-mover-price" id="signal-oil-price">—</div>
+        <a href="/commodities/crude-oil/" class="signal-mover-link">View hub →</a>
+      </div>
+      <div class="signal-mover-card" id="signal-gold">
+        <div class="signal-mover-header">
+          <span class="signal-mover-tag" style="background:rgba(251,191,36,0.15);color:#fbbf24;">Au</span>
+          <span class="signal-mover-direction" id="signal-gold-dir">—</span>
+        </div>
+        <div class="signal-mover-name">Gold</div>
+        <div class="signal-mover-price" id="signal-gold-price">—</div>
+        <a href="/commodities/gold/" class="signal-mover-link">View hub →</a>
+      </div>
+      <div class="signal-mover-card" id="signal-copper">
+        <div class="signal-mover-header">
+          <span class="signal-mover-tag" style="background:rgba(16,185,129,0.15);color:#10b981;">Cu</span>
+          <span class="signal-mover-direction" id="signal-copper-dir">—</span>
+        </div>
+        <div class="signal-mover-name">Copper</div>
+        <div class="signal-mover-price" id="signal-copper-price">—</div>
+        <a href="/commodities/copper/" class="signal-mover-link">View hub →</a>
+      </div>
+      <div class="signal-mover-card" id="signal-gas">
+        <div class="signal-mover-header">
+          <span class="signal-mover-tag" style="background:rgba(168,85,247,0.15);color:#a855f7;">GAS</span>
+          <span class="signal-mover-direction" id="signal-gas-dir">—</span>
+        </div>
+        <div class="signal-mover-name">Natural Gas</div>
+        <div class="signal-mover-price" id="signal-gas-price">—</div>
+        <a href="/commodities/natural-gas/" class="signal-mover-link">View hub →</a>
+      </div>
+    </div>
+
+    <script>
+    fetch('/assets/data/prices.json').then(r=>r.json()).then(d=>{
+      var map={oil:'crude_oil',gold:'gold',copper:'copper',gas:'natural_gas'};
+      Object.keys(map).forEach(function(k){
+        var c=d[map[k]]; if(!c)return;
+        var sign=c.change_pct>=0?'+':'';
+        var dir=document.getElementById('signal-'+k+'-dir');
+        var price=document.getElementById('signal-'+k+'-price');
+        if(dir){dir.textContent=sign+c.change_pct+'%';dir.className='signal-mover-direction '+(c.change_pct>=0?'up':'down');}
+        if(price){price.textContent='$'+c.price;}
+      });
+    }).catch(function(){});
+    </script>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BIGGEST RIPPLE CHAINS ===== -->
+<section class="section" aria-labelledby="ripple-title">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Supply Chain Intelligence</p>
+      <h2 class="section-title" id="ripple-title">Biggest Ripple Chains</h2>
+      <p class="section-desc">How commodity price shocks propagate through industries and equities.</p>
+    </header>
+
+    <div class="ripple-chains-grid" data-animate data-delay="100">
+      <a href="/commodities/crude-oil/" class="ripple-chain-card" style="text-decoration:none;">
+        <div class="ripple-chain-title">Oil → Airlines → Travel → Consumer</div>
+        <div class="ripple-chain-visual">
+          <span class="ripple-node rn-energy">Oil</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-down">Airlines</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-down">Travel</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-down">Consumer</span>
+        </div>
+        <div class="ripple-chain-desc">Energy price shocks compress airline margins, slow travel demand, and reduce consumer discretionary spending.</div>
+      </a>
+
+      <a href="/commodities/natural-gas/" class="ripple-chain-card" style="text-decoration:none;">
+        <div class="ripple-chain-title">Nat Gas → Fertilizer → Food → Inflation</div>
+        <div class="ripple-chain-visual">
+          <span class="ripple-node rn-energy">Nat Gas</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">Fertilizer</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">Food</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">Inflation</span>
+        </div>
+        <div class="ripple-chain-desc">Natural gas is the primary feedstock for nitrogen fertilizers — price spikes cascade into crop costs and food CPI.</div>
+      </a>
+
+      <a href="/commodities/copper/" class="ripple-chain-card" style="text-decoration:none;">
+        <div class="ripple-chain-title">Copper → Construction → Housing → REITs</div>
+        <div class="ripple-chain-visual">
+          <span class="ripple-node rn-metal">Copper</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">Construction</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">Housing</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">REITs</span>
+        </div>
+        <div class="ripple-chain-desc">Dr. Copper signals industrial activity — elevated prices raise building costs and compress homebuilder margins.</div>
+      </a>
+
+      <a href="/commodities/lithium/" class="ripple-chain-card" style="text-decoration:none;">
+        <div class="ripple-chain-title">Lithium → Battery → EV → Auto</div>
+        <div class="ripple-chain-visual">
+          <span class="ripple-node rn-battery">Lithium</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">Battery</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">EV</span>
+          <span class="ripple-arrow">→</span>
+          <span class="ripple-node rn-up">Auto</span>
+        </div>
+        <div class="ripple-chain-desc">Lithium prices directly impact battery pack costs — the largest single component determining EV profitability.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SECTOR EXPOSURE MATRIX ===== -->
+<section class="section" aria-labelledby="matrix-title">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Cross-Sector View</p>
+      <h2 class="section-title" id="matrix-title">Sector Exposure Matrix</h2>
+      <p class="section-desc">How commodity price increases affect major sectors — at a glance.</p>
+    </header>
+
+    <div class="matrix-wrapper" data-animate data-delay="100">
+      <div class="matrix-scroll">
+        <table class="exposure-matrix">
+          <thead>
+            <tr>
+              <th></th>
+              <th><a href="/commodities/crude-oil/">Oil</a></th>
+              <th><a href="/commodities/natural-gas/">Nat Gas</a></th>
+              <th><a href="/commodities/copper/">Copper</a></th>
+              <th><a href="/commodities/gold/">Gold</a></th>
+              <th><a href="/commodities/lithium/">Lithium</a></th>
+              <th><a href="/commodities/steel/">Steel</a></th>
+              <th><a href="/commodities/wheat/">Wheat</a></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="matrix-sector"><a href="/industries/energy-industry/">Energy</a></td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+            </tr>
+            <tr>
+              <td class="matrix-sector"><a href="/industries/airlines/">Airlines</a></td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+            </tr>
+            <tr>
+              <td class="matrix-sector"><a href="/industries/mining/">Mining</a></td>
+              <td class="matrix-mild-bull">+</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-neutral">-</td>
+            </tr>
+            <tr>
+              <td class="matrix-sector"><a href="/industries/automotive/">Auto/EV</a></td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-mild-bear">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-mild-bear">-</td>
+              <td class="matrix-neutral">-</td>
+            </tr>
+            <tr>
+              <td class="matrix-sector"><a href="/industries/construction/">Construction</a></td>
+              <td class="matrix-mild-bear">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-neutral">-</td>
+            </tr>
+            <tr>
+              <td class="matrix-sector"><a href="/industries/agriculture-industry/">Agriculture</a></td>
+              <td class="matrix-mild-bear">-</td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bull">++</td>
+            </tr>
+            <tr>
+              <td class="matrix-sector"><a href="/industries/consumer-goods/">Consumer</a></td>
+              <td class="matrix-mild-bear">-</td>
+              <td class="matrix-mild-bear">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bear">--</td>
+            </tr>
+            <tr>
+              <td class="matrix-sector"><a href="/industries/technology/">Technology</a></td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-mild-bear">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-mild-bear">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.75rem;color:var(--text3);margin-top:12px;text-align:center;">++ Strong bullish &nbsp; + Mild bullish &nbsp; - Neutral &nbsp; -- Bearish &nbsp; (on price increase)</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== BROWSE BY ===== -->
+<section class="section" aria-labelledby="browse-title">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Navigate</p>
+      <h2 class="section-title" id="browse-title">Browse By</h2>
+      <p class="section-desc">Multiple entry points into the commodity intelligence network.</p>
+    </header>
+
+    <div class="browse-grid" data-animate data-delay="100">
+      <a href="/commodities/" class="browse-card">
+        <div class="browse-icon" style="color:var(--accent);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><line x1="12" y1="12" x2="4" y2="6"/><line x1="12" y1="12" x2="20" y2="6"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/></svg>
+        </div>
+        <div class="browse-label">Commodities</div>
+        <div class="browse-count">{{ site.commodities.size }} hubs</div>
+      </a>
+      <a href="/industries/" class="browse-card">
+        <div class="browse-icon" style="color:var(--gold);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="6" height="14"/><rect x="9" y="3" width="6" height="18"/><rect x="16" y="10" width="6" height="11"/></svg>
+        </div>
+        <div class="browse-label">Industries</div>
+        <div class="browse-count">10 sectors</div>
+      </a>
+      <a href="/companies/" class="browse-card">
+        <div class="browse-icon" style="color:var(--green);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="browse-label">Companies</div>
+        <div class="browse-count">18 tickers</div>
+      </a>
+      <a href="/themes/" class="browse-card">
+        <div class="browse-icon" style="color:var(--purple);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15 8.5 22 9.3 17 14 18.2 21 12 17.8 5.8 21 7 14 2 9.3 9 8.5"/></svg>
+        </div>
+        <div class="browse-label">Themes</div>
+        <div class="browse-count">6 themes</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SIGNAL DASHBOARD ===== -->
 <section class="section" aria-labelledby="market-dashboard-title">
   <div class="container">
     <header class="section-header" data-animate>
       <p class="section-label">Platform View</p>
       <h2 class="section-title" id="market-dashboard-title">Signal Dashboard</h2>
-      <p class="section-desc">A faster way to discover the strongest current commodity-to-equity transmission paths across the site.</p>
+      <p class="section-desc">Discover the strongest commodity-to-equity transmission paths across the site.</p>
     </header>
 
     <div class="signal-dashboard" data-animate data-delay="100">
@@ -81,26 +378,26 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
           <span class="signal-arrow">→</span>
           <span class="signal-node down">Consumer</span>
         </div>
-        <a href="/crude-oil-industry-impact/" class="btn btn-secondary">View Impact Map</a>
+        <a href="/commodities/crude-oil/" class="btn btn-secondary">View Impact Map</a>
       </article>
 
       <article class="signal-panel">
         <p class="signal-panel-label">Browse by Lens</p>
         <ul class="signal-list">
           <li><a href="/commodities/">Commodity hubs</a></li>
-          <li><a href="/reports/">All signal reports</a></li>
-          <li><a href="/tags/energy/">Energy exposures</a></li>
-          <li><a href="/tags/ev/">EV supply chains</a></li>
+          <li><a href="/industries/">Industry exposure</a></li>
+          <li><a href="/companies/">Company analysis</a></li>
+          <li><a href="/themes/">Investment themes</a></li>
         </ul>
       </article>
 
       <article class="signal-panel">
-        <p class="signal-panel-label">Coverage Priorities</p>
+        <p class="signal-panel-label">Coverage Highlights</p>
         <ul class="signal-list signal-list--muted">
           <li>Multi-hop ripple chains</li>
-          <li>Commodity, ETF, and company cross-links</li>
-          <li>Event-driven updates + evergreen maps</li>
-          <li>Shareable OG cards per report</li>
+          <li>Sector exposure matrix</li>
+          <li>Company commodity sensitivity</li>
+          <li>Structural theme analysis</li>
         </ul>
       </article>
     </div>
@@ -140,8 +437,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       <p class="section-label">Latest Analysis</p>
       <h2 class="section-title" id="latest-title">Signal Reports &amp; Impact Maps</h2>
       <p class="section-desc">
-        Filter by commodity complex, then paginate through the latest reports,
-        ripple chains, and company-exposure notes.
+        Curated ripple chains, company-exposure notes, and commodity intelligence.
       </p>
     </header>
 
@@ -237,74 +533,6 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
 <div class="divider"></div>
 
-<!-- ===== WHY COMMODITYNODE ===== -->
-<section class="section" aria-labelledby="features-title">
-  <div class="container">
-    <header class="section-header" data-animate>
-      <p class="section-label">Why CommodityNode</p>
-      <h2 class="section-title" id="features-title">Market Intelligence, Visualized</h2>
-      <p class="section-desc">We map the invisible threads connecting raw materials to your portfolio.</p>
-    </header>
-
-    <div class="features-grid">
-      <div class="feature-card" data-animate data-delay="0">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="3" fill="#22d3ee"/>
-            <circle cx="4"  cy="6"  r="2" fill="#22d3ee" opacity="0.7"/>
-            <circle cx="20" cy="6"  r="2" fill="#22d3ee" opacity="0.7"/>
-            <circle cx="4"  cy="18" r="2" fill="#22d3ee" opacity="0.7"/>
-            <circle cx="20" cy="18" r="2" fill="#22d3ee" opacity="0.7"/>
-            <line x1="12" y1="12" x2="4"  y2="6"  stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
-            <line x1="12" y1="12" x2="20" y2="6"  stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
-            <line x1="12" y1="12" x2="4"  y2="18" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
-            <line x1="12" y1="12" x2="20" y2="18" stroke="#22d3ee" stroke-width="1.5" opacity="0.6"/>
-          </svg>
-        </div>
-        <h3 class="feature-title">Interactive Ripple Graphs</h3>
-        <p class="feature-desc">Drag, zoom, filter depth, and study multi-hop force-directed graphs that reveal commodity-to-industry chains at a glance.</p>
-      </div>
-
-      <div class="feature-card" data-animate data-delay="100">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <polyline points="2,18 8,12 13,16 22,6" stroke="#22d3ee" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-            <polyline points="18,6 22,6 22,10" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3 class="feature-title">Quantified Exposure</h3>
-        <p class="feature-desc">Every report aims to quantify directional impact, tie it to supply-chain structure, and show who wins first, second, and third.</p>
-      </div>
-
-      <div class="feature-card" data-animate data-delay="200">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="9" stroke="#22d3ee" stroke-width="1.8"/>
-            <line x1="12" y1="7" x2="12" y2="12" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/>
-            <line x1="12" y1="12" x2="15.5" y2="15.5" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3 class="feature-title">Timely Coverage</h3>
-        <p class="feature-desc">Published when commodity moves matter most — with evergreen maps that can compound into an institutional-grade archive.</p>
-      </div>
-
-      <div class="feature-card" data-animate data-delay="300">
-        <div class="feature-icon" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="9" stroke="#22d3ee" stroke-width="1.8"/>
-            <ellipse cx="12" cy="12" rx="4" ry="9" stroke="#22d3ee" stroke-width="1.4"/>
-            <line x1="3" y1="12" x2="21" y2="12" stroke="#22d3ee" stroke-width="1.4"/>
-          </svg>
-        </div>
-        <h3 class="feature-title">Cross-Sector Ripples</h3>
-        <p class="feature-desc">From airlines to EV makers to consumer staples, CommodityNode is designed to evolve from single-hop impacts into a market-wide relationship atlas.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
 <!-- ===== CTA STRIP ===== -->
 <section class="section" aria-label="Call to action">
   <div class="container text-center" data-animate>
@@ -316,12 +544,12 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
       Build Your Commodity Exposure Mental Model Faster
     </h2>
     <p class="section-desc" style="margin:0 auto 32px;">
-      Start with the archive, jump into a commodity hub, or follow the RSS feed for new signal reports.
+      Start with a commodity hub, explore an industry, or follow the RSS feed for new signal reports.
     </p>
     <div class="hero-actions" style="justify-content:center;">
-      <a href="/reports/" class="btn btn-primary">Research Archive</a>
-      <a href="/commodities/" class="btn btn-secondary">Commodity Hubs</a>
-      <a href="/feed.xml" class="btn btn-secondary">RSS Feed</a>
+      <a href="/commodities/" class="btn btn-primary">Commodity Hubs</a>
+      <a href="/industries/" class="btn btn-secondary">Industry Analysis</a>
+      <a href="/themes/" class="btn btn-secondary">Investment Themes</a>
     </div>
   </div>
 </section>
