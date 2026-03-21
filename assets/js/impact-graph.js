@@ -4,7 +4,12 @@
    50+ node support with 5 orbital levels */
 (function () {
   'use strict';
-  document.querySelectorAll('#impact-graph').forEach(initGraph);
+
+  function boot() {
+    if (typeof d3 === 'undefined') { setTimeout(boot, 100); return; }
+    document.querySelectorAll('#impact-graph').forEach(initGraph);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 
   function initGraph(container) {
     const rawData = window.COMMODITY_DATA;
@@ -74,6 +79,9 @@
       getAncestors(nodeId).forEach(a => chain.add(a));
       return chain;
     }
+
+    // ── LOADING STATE ──
+    container.innerHTML = '<div style="text-align:center;padding:60px;color:#94a3b8;"><div style="margin-bottom:16px;font-size:2rem;">&#10779;</div>Loading Impact Map...</div>';
 
     // ── DIMENSIONS ──
     const isMob = window.innerWidth < 768;
@@ -600,12 +608,14 @@
     }
 
     // Reset button
-    const resetBtn = svg.append('g').attr('transform', `translate(${W - 44}, 12)`).style('cursor', 'pointer').style('opacity', 0.7);
-    resetBtn.append('rect').attr('width', 32).attr('height', 32).attr('rx', 6)
-      .attr('fill', 'rgba(10,10,26,0.9)').attr('stroke', 'rgba(34,211,238,0.3)').attr('stroke-width', 1);
-    resetBtn.append('text').attr('x', 16).attr('y', 16).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
-      .attr('font-size', '14px').attr('fill', '#22d3ee').text('\u2299');
-    resetBtn.on('click touchend', () => {
+    const resetBtn = svg.append('g').attr('transform', `translate(${W - 56}, 8)`).style('cursor', 'pointer').style('opacity', 0.9).style('pointer-events', 'all');
+    resetBtn.append('rect').attr('width', 44).attr('height', 44).attr('rx', 8)
+      .attr('fill', 'rgba(10,10,26,0.9)').attr('stroke', 'rgba(34,211,238,0.4)').attr('stroke-width', 1);
+    resetBtn.append('text').attr('x', 15).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+      .attr('font-size', '16px').attr('fill', '#22d3ee').text('\u2299');
+    resetBtn.append('text').attr('x', 34).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
+      .attr('font-size', '9px').attr('fill', '#22d3ee').attr('font-family', 'Inter,system-ui,sans-serif').text('Reset');
+    function handleReset() {
       tracedChain = null; collapsedNodes.clear(); typeFilter = 'all'; maxVisibleLevel = Infinity; searchTerm = '';
       controls.selectAll('[data-depth]').classed('is-active', false);
       controls.select('[data-depth="99"]').classed('is-active', true);
@@ -614,8 +624,10 @@
       controls.select('.cn-graph-search').property('value', '');
       updateVisibility();
       fitAll(true);
-    }).on('mouseenter', function() { d3.select(this).style('opacity', 1); })
-      .on('mouseleave', function() { d3.select(this).style('opacity', 0.7); });
+    }
+    resetBtn.on('click', handleReset).on('touchstart', function(e) { e.preventDefault(); handleReset(); })
+      .on('mouseenter', function() { d3.select(this).style('opacity', 1).select('rect').attr('stroke', 'rgba(34,211,238,0.7)'); })
+      .on('mouseleave', function() { d3.select(this).style('opacity', 0.9).select('rect').attr('stroke', 'rgba(34,211,238,0.4)'); });
 
     // ── STAGGERED REVEAL ──
     for (let l = 0; l <= maxLevel; l++) {

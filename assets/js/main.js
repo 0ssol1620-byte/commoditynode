@@ -291,6 +291,16 @@
 
   buildTOC();
 
+  /* ---------- Clickable Post Cards ---------- */
+  document.querySelectorAll('.post-card').forEach(function(card) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      var link = card.querySelector('.post-card-title a');
+      if (link) link.click();
+    });
+  });
+
   /* ---------- Micro-interactions on Cards ---------- */
   document.querySelectorAll('.post-card, .feature-card').forEach(card => {
     card.addEventListener('mousemove', e => {

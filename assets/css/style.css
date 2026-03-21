@@ -65,10 +65,11 @@ body::before {
 body > * { position: relative; z-index: 1; }
 
 /* ---------- Scrollbar ---------- */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent3); }
+* { scrollbar-width: thin; scrollbar-color: rgba(34,211,238,0.15) transparent; }
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: rgba(34,211,238,0.15); border-radius: 3px; }
+*::-webkit-scrollbar-thumb:hover { background: rgba(34,211,238,0.3); }
 
 /* ---------- Typography ---------- */
 h1, h2, h3, h4, h5, h6 {
@@ -754,7 +755,12 @@ code, kbd, pre {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   scrollbar-width: thin;
+  scrollbar-color: rgba(34,211,238,0.2) transparent;
 }
+.toc-sidebar::-webkit-scrollbar { width: 4px; }
+.toc-sidebar::-webkit-scrollbar-track { background: transparent; }
+.toc-sidebar::-webkit-scrollbar-thumb { background: rgba(34,211,238,0.2); border-radius: 4px; }
+.toc-sidebar::-webkit-scrollbar-thumb:hover { background: rgba(34,211,238,0.4); }
 
 .toc-title {
   font-size: 0.75rem;
@@ -965,6 +971,9 @@ code, kbd, pre {
   transition: all var(--transition);
   position: relative;
   overflow: hidden;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
 }
 
 .feature-card::before {
@@ -1584,9 +1593,11 @@ a.feature-card:hover,
   border-color: rgba(34,211,238,0.4) !important;
 }
 
-/* Commodities grid: 3-4 cards per row on desktop */
+/* Commodities / themes grid: 3-4 cards per row on desktop */
 .features-grid {
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+  gap: 24px;
 }
 
 /* Post card title always bright */
@@ -2838,3 +2849,48 @@ a:focus-visible, button:focus-visible {
   .cn-graph-search { width: 120px; }
   .cn-graph-search:focus { width: 150px; }
 }
+
+/* ============================================================
+   Q6: Consistent hover effects on all cards
+   ============================================================ */
+.signal-mover-card:hover,
+.post-card:hover,
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(34,211,238,0.3);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(34,211,238,0.06);
+}
+
+/* ============================================================
+   Q10: Responsive tables in post content
+   ============================================================ */
+.post-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34,211,238,0.15) transparent;
+}
+.post-content table::-webkit-scrollbar { width: 6px; height: 6px; }
+.post-content table::-webkit-scrollbar-track { background: transparent; }
+.post-content table::-webkit-scrollbar-thumb { background: rgba(34,211,238,0.15); border-radius: 3px; }
+.post-content table::-webkit-scrollbar-thumb:hover { background: rgba(34,211,238,0.3); }
+
+/* ============================================================
+   Q1: Post card cursor pointer
+   ============================================================ */
+.post-card { cursor: pointer; }
+
+/* ============================================================
+   Read-more as <a> tag styling
+   ============================================================ */
+a.read-more {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap var(--transition);
+}
+a.read-more:hover { gap: 8px; color: var(--accent2); }

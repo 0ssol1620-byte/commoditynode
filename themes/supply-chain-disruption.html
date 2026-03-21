@@ -83,7 +83,7 @@ permalink: /themes/supply-chain-disruption/
           </div>
           <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
           <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
-          <div class="post-card-footer"><span class="read-more">Read analysis &rarr;</span></div>
+          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
         </div>
       </article>
       {% endif %}

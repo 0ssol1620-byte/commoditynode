@@ -64,7 +64,7 @@ description: "Browse the full CommodityNode archive of Impact Maps, Signal Repor
           </div>
           {% endif %}
           <div class="post-card-footer">
-            <span class="read-more">Open Signal Report &rarr;</span>
+            <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a>
             {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min read</span>{% endif %}
           </div>
         </div>
