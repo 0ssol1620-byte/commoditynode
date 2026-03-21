@@ -2,10 +2,7 @@
 layout: default
 ---
 
-{% assign related_candidates = site.posts | where_exp: "post", "post.url != page.url" %}
 {% assign primary_tag = page.tags | first %}
-{% assign related_by_tag = related_candidates | where_exp: "post", "primary_tag and post.tags contains primary_tag" %}
-{% assign related_by_category = related_candidates | where_exp: "post", "page.categories and post.categories and post.categories[0] == page.categories[0]" %}
 
 <script type="application/ld+json">
 {
@@ -150,28 +147,36 @@ layout: default
 
     <div class="posts-grid">
       {% assign rendered_related = 0 %}
-      {% for post in related_by_tag limit:3 %}
-        {% assign rendered_related = rendered_related | plus: 1 %}
-        <article class="post-card">
-          <div class="post-card-accent"></div>
-          <div class="post-card-body">
-            <div class="post-card-meta">
-              <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
-              {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+      {% for post in site.posts %}
+        {% if rendered_related >= 3 %}{% break %}{% endif %}
+        {% if post.url == page.url %}{% continue %}{% endif %}
+        {% if post.tags contains primary_tag %}
+          {% assign rendered_related = rendered_related | plus: 1 %}
+          <article class="post-card">
+            <div class="post-card-accent"></div>
+            <div class="post-card-body">
+              <div class="post-card-meta">
+                <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+                {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+              </div>
+              <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+              <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
+              <div class="post-card-footer">
+                <span class="read-more">Open signal →</span>
+                {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+              </div>
             </div>
-            <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-            <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
-            <div class="post-card-footer">
-              <span class="read-more">Open signal →</span>
-              {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
-            </div>
-          </div>
-        </article>
+          </article>
+        {% endif %}
       {% endfor %}
 
       {% if rendered_related < 3 %}
-        {% for post in related_by_category limit:3 %}
-          {% if rendered_related < 3 %}
+        {% assign page_category = page.categories | first %}
+        {% for post in site.posts %}
+          {% if rendered_related >= 3 %}{% break %}{% endif %}
+          {% if post.url == page.url %}{% continue %}{% endif %}
+          {% assign post_category = post.categories | first %}
+          {% if post_category == page_category %}
             {% assign rendered_related = rendered_related | plus: 1 %}
             <article class="post-card">
               <div class="post-card-accent"></div>
