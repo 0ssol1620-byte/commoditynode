@@ -157,6 +157,10 @@
       .scaleExtent([0.12, 8])
       .filter(function(event) {
         if (event.ctrlKey) return false;
+        // Exclude reset button and controls from zoom
+        if (event.target.closest && event.target.closest('.cn-reset-btn, .cn-graph-controls')) return false;
+        var el = event.target;
+        while (el && el !== this) { if (el.classList && el.classList.contains('cn-reset-btn')) return false; el = el.parentNode; }
         if (event.type === 'touchstart' || event.type === 'touchmove') return event.touches.length >= 2;
         return !event.button;
       })
@@ -619,7 +623,7 @@
       updateVisibility();
       fitAll(true);
     }
-    const resetBtn = svg.append('g').attr('transform', `translate(${W - 56}, 8)`).style('cursor', 'pointer').style('opacity', 0.9).style('pointer-events', 'all');
+    const resetBtn = svg.append('g').attr('class', 'cn-reset-btn').attr('transform', `translate(${W - 56}, 8)`).style('cursor', 'pointer').style('opacity', 0.9).style('pointer-events', 'all');
     resetBtn.append('rect').attr('width', 44).attr('height', 44).attr('rx', 8)
       .attr('fill', 'rgba(10,10,26,0.9)').attr('stroke', 'rgba(34,211,238,0.4)').attr('stroke-width', 1)
       .style('pointer-events', 'all');
