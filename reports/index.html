@@ -45,7 +45,7 @@ description: "Browse the full CommodityNode archive of Impact Maps, Signal Repor
             {% elsif post.direction == "bearish" %}
             <span class="post-card-direction bearish">&#9660; Bearish</span>
             {% endif %}
-            {% assign post_age = 'now' | date: '%s' | minus: post.date | date: '%s' %}
+            {% assign now_epoch = 'now' | date: '%s' | plus: 0 %}{% assign post_epoch = post.date | date: '%s' | plus: 0 %}{% assign post_age = now_epoch | minus: post_epoch %}
             {% if post_age < 259200 %}
             <span class="post-card-label post-card-label--new">NEW</span>
             {% elsif post.updated %}
