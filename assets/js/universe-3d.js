@@ -753,14 +753,23 @@
     var defaultTarget = new THREE.Vector3(0, 0, 0);
     var isZoomed = false;
 
-    renderer.domElement.addEventListener('click', function (e) {
-      /* Force raycast on click */
+    var touchStartTime = 0;
+    var touchStartPos = { x: 0, y: 0 };
+    renderer.domElement.addEventListener('touchstart', function (e) {
+      touchStartTime = Date.now();
+      if (e.touches.length === 1) {
+        touchStartPos.x = e.touches[0].clientX;
+        touchStartPos.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    function handleClick(clientX, clientY) {
       var rect = renderer.domElement.getBoundingClientRect();
-      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(mouse, camera);
 
-      var hit = getIntersects(e);
+      var hit = getIntersects({ clientX: clientX, clientY: clientY });
       if (hit && hit.type === 'commodity') {
         var c = hit.obj;
         zoomTarget = {
@@ -775,7 +784,21 @@
       } else if (isZoomed) {
         resetView();
       }
+    }
+
+    renderer.domElement.addEventListener('click', function (e) {
+      handleClick(e.clientX, e.clientY);
     });
+
+    renderer.domElement.addEventListener('touchend', function (e) {
+      var elapsed = Date.now() - touchStartTime;
+      if (elapsed > 300) return; // was a drag, not a tap
+      if (e.changedTouches.length !== 1) return;
+      var dx = e.changedTouches[0].clientX - touchStartPos.x;
+      var dy = e.changedTouches[0].clientY - touchStartPos.y;
+      if (Math.abs(dx) > 15 || Math.abs(dy) > 15) return; // was a swipe
+      handleClick(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+    }, { passive: true });
 
     function resetView() {
       zoomTarget = {
