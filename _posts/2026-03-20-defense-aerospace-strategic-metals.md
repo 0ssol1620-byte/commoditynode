@@ -29,31 +29,60 @@ window.COMMODITY_DATA = {
       { id: "rtx", label: "RTX Corporation (RTX)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "155B", sector: "Defense/Aerospace" },
       { id: "gd", label: "General Dynamics (GD)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "78B", sector: "Defense/Marine" },
       { id: "ba", label: "Boeing (BA)", type: "consumer", impact: -3.8, correlation: -0.5, marketCap: "120B", sector: "Commercial Aerospace" },
-      { id: "ati", label: "ATI Inc (ATI)", type: "macro", impact: 12.5, correlation: 0.85, marketCap: "7B", sector: "Specialty Metals" },
-      { id: "mp_def", label: "MP Materials (MP)", type: "producer", impact: 14, correlation: 0.88, marketCap: "4B", sector: "Rare Earth Mining" }
+      { id: "ati", label: "ATI Inc (ATI)", type: "producer", impact: 12.5, correlation: 0.85, marketCap: "7B", sector: "Specialty Metals" },
+      { id: "mp_def", label: "MP Materials (MP)", type: "producer", impact: 14, correlation: 0.88, marketCap: "4B", sector: "Rare Earth Mining" },
+      { id: "hwm", label: "Howmet Aerospace (HWM)", type: "supplier", impact: 8.5, correlation: 0.72, marketCap: "38B", sector: "Aerospace Metals/Parts" },
+      { id: "ita_etf", label: "iShares Aerospace & Defense (ITA)", type: "etf", impact: -1.8, correlation: -0.28, marketCap: "5B", sector: "Defense ETF" },
+      { id: "remx_def", label: "VanEck Rare Earth (REMX)", type: "etf", impact: 13, correlation: 0.86, marketCap: "0.4B", sector: "Rare Earth ETF" },
+      { id: "xme_def", label: "SPDR Metals & Mining (XME)", type: "etf", impact: 6, correlation: 0.6, marketCap: "2B", sector: "Metals ETF" },
+      { id: "lynas_def", label: "Lynas Rare Earths (LYC.AX)", type: "producer", impact: 15, correlation: 0.9, marketCap: "6B", sector: "Rare Earth Mining" },
+      { id: "aa", label: "Alcoa (AA)", type: "producer", impact: 7.8, correlation: 0.72, marketCap: "9B", sector: "Aluminum Production" }
     ]},
     { nodes: [
-      { id: "hwm", label: "Howmet Aerospace (HWM)", type: "supplier", impact: 8.5, correlation: 0.72, marketCap: "38B", sector: "Aerospace Metals/Parts", parentId: "ati" },
       { id: "air", label: "Airbus (AIR.PA)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "120B", sector: "Commercial Aerospace", parentId: "ba" },
       { id: "noc", label: "Northrop Grumman (NOC)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "72B", sector: "Defense/Space", parentId: "lmt" },
       { id: "lhx", label: "L3Harris (LHX)", type: "consumer", impact: -2, correlation: -0.3, marketCap: "45B", sector: "Defense Electronics", parentId: "rtx" },
-      { id: "lynas_def", label: "Lynas Rare Earths (LYC.AX)", type: "producer", impact: 15, correlation: 0.9, marketCap: "6B", sector: "Rare Earth Mining", parentId: "mp_def" },
-      { id: "hei", label: "HEICO Corp (HEI)", type: "consumer", impact: -1.8, correlation: -0.26, marketCap: "28B", sector: "Aerospace Parts", parentId: "hwm" }
-    ]},
-    { nodes: [
-      { id: "tps", label: "TPS Aerospace (Titanium Parts)", type: "supplier", impact: 6.5, correlation: 0.58, sector: "Titanium Components", parentId: "hwm" },
-      { id: "aa", label: "Alcoa (AA)", type: "producer", impact: 7.8, correlation: 0.72, marketCap: "9B", sector: "Aluminum Production", parentId: "ati" },
-      { id: "stld", label: "Steel Dynamics (STLD)", type: "producer", impact: 5.5, correlation: 0.55, marketCap: "18B", sector: "Steel Production", parentId: "gd" },
+      { id: "hei", label: "HEICO Corp (HEI)", type: "consumer", impact: -1.8, correlation: -0.26, marketCap: "28B", sector: "Aerospace Parts", parentId: "hwm" },
       { id: "spr", label: "Spirit AeroSystems (SPR)", type: "consumer", impact: -4.5, correlation: -0.58, marketCap: "8B", sector: "Aerostructures", parentId: "ba" },
+      { id: "stld", label: "Steel Dynamics (STLD)", type: "producer", impact: 5.5, correlation: 0.55, marketCap: "18B", sector: "Steel Production", parentId: "gd" },
+      { id: "pcc", label: "Precision Castparts (BRK.B)", type: "supplier", impact: 7, correlation: 0.65, sector: "Titanium Castings", parentId: "ati" },
+      { id: "crs", label: "Carpenter Technology (CRS)", type: "producer", impact: 10.5, correlation: 0.8, marketCap: "5B", sector: "Specialty Alloys", parentId: "ati" },
       { id: "tdg", label: "TransDigm (TDG)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "68B", sector: "Aerospace Components", parentId: "hei" },
-      { id: "recyclers_def", label: "Metal Recyclers (CMC, SCHN)", type: "substitute", impact: 5, correlation: 0.5, sector: "Metal Recycling", parentId: "stld" }
+      { id: "bwxt", label: "BWX Technologies (BWXT)", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "12B", sector: "Nuclear/Defense", parentId: "noc" },
+      { id: "iluka_def", label: "Iluka Resources (ILU.AX)", type: "producer", impact: 10, correlation: 0.78, marketCap: "3.5B", sector: "Rare Earth/Mineral Sands", parentId: "lynas_def" }
     ]},
     { nodes: [
-      { id: "dod_budget", label: "DoD Budget Pressure", type: "macro", impact: -3, sector: "Fiscal", parentId: "lmt" },
-      { id: "reshoring", label: "Supply Chain Reshoring", type: "macro", impact: 6, sector: "Geopolitical", parentId: "mp_def" },
+      { id: "tps", label: "Titanium Metals Corp (TIE)", type: "supplier", impact: 6.5, correlation: 0.58, sector: "Titanium Components", parentId: "pcc" },
+      { id: "recyclers_def", label: "Metal Recyclers (CMC, SCHN)", type: "substitute", impact: 5, correlation: 0.5, sector: "Metal Recycling", parentId: "stld" },
+      { id: "safran", label: "Safran (SAF.PA)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "85B", sector: "Jet Engines/Equipment", parentId: "air" },
+      { id: "mtu", label: "MTU Aero Engines (MTX.DE)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "16B", sector: "Jet Engines", parentId: "air" },
+      { id: "ktos", label: "Kratos Defense (KTOS)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "4B", sector: "Defense Drones", parentId: "lhx" },
+      { id: "nue_def", label: "Nucor Corp (NUE)", type: "producer", impact: 5, correlation: 0.52, marketCap: "38B", sector: "Steel Production", parentId: "stld" },
+      { id: "hexcel", label: "Hexcel Corp (HXL)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "6B", sector: "Aerospace Composites", parentId: "spr" },
+      { id: "kaiser_al", label: "Kaiser Aluminum (KALU)", type: "producer", impact: 7, correlation: 0.65, marketCap: "3B", sector: "Aerospace Aluminum", parentId: "aa" },
+      { id: "cmc_recycle", label: "Commercial Metals (CMC)", type: "substitute", impact: 4.5, correlation: 0.48, marketCap: "6B", sector: "Steel Recycling", parentId: "recyclers_def" }
+    ]},
+    { nodes: [
+      { id: "dod_budget", label: "DoD Budget Pressure ($850B+)", type: "policy", impact: -3, sector: "Fiscal", parentId: "lmt" },
+      { id: "reshoring", label: "Supply Chain Reshoring (DPA)", type: "policy", impact: 6, sector: "Industrial Policy", parentId: "mp_def" },
       { id: "russia_ti", label: "Russia Titanium Cutoff", type: "macro", impact: 10, sector: "Geopolitical", parentId: "ati" },
       { id: "fixed_price", label: "Fixed-Price Contract Risk", type: "macro", impact: -4, sector: "Contracting", parentId: "rtx" },
-      { id: "nato_spend", label: "NATO Spending Increase", type: "macro", impact: 5, sector: "Geopolitical", parentId: "lmt" }
+      { id: "nato_spend", label: "NATO 2.5% GDP Target", type: "policy", impact: 5, sector: "Defense Spending", parentId: "lmt" },
+      { id: "japan_ti", label: "Japan Titanium Producers (OSAKA Ti)", type: "regional", impact: 9, correlation: 0.72, sector: "Titanium", parentId: "tps" },
+      { id: "ukraine_demand", label: "Ukraine Conflict Munitions Demand", type: "macro", impact: 4, sector: "Geopolitical", parentId: "gd" },
+      { id: "f35_ramp", label: "F-35 Production Rate (140+/yr)", type: "macro", impact: -3.5, sector: "Program Risk", parentId: "lmt" }
+    ]},
+    { nodes: [
+      { id: "china_re_threat", label: "China Rare Earth Weaponization", type: "policy", impact: 12, sector: "Geopolitical", parentId: "reshoring" },
+      { id: "chips_critical", label: "CHIPS Act Critical Minerals", type: "policy", impact: 5, sector: "Industrial Policy", parentId: "reshoring" },
+      { id: "eur_defense", label: "European Defense Fund (€8B)", type: "policy", impact: 3.5, sector: "Defense Spending", parentId: "nato_spend" },
+      { id: "ti_sponge_price", label: "Titanium Sponge Price (+22%)", type: "commodity", impact: 8, correlation: 0.7, sector: "Titanium Market", parentId: "russia_ti" },
+      { id: "al_premium", label: "Aluminum Alloy Premiums", type: "commodity", impact: 5, correlation: 0.55, sector: "Aluminum Market", parentId: "aa" },
+      { id: "steel_tariffs", label: "Steel Section 232 Tariffs", type: "policy", impact: 3, sector: "Trade Policy", parentId: "stld" },
+      { id: "tungsten_link", label: "Tungsten Price Linkage", type: "commodity", impact: 5, correlation: 0.5, sector: "Cross-Commodity", parentId: "ti_sponge_price" },
+      { id: "cobalt_defense", label: "Cobalt Superalloy Demand", type: "commodity", impact: 4.5, correlation: 0.48, sector: "Cross-Commodity", parentId: "ati" },
+      { id: "aus_re_mining", label: "Australia RE Mining Expansion", type: "regional", impact: 8, correlation: 0.7, sector: "Rare Earth Supply", parentId: "iluka_def" },
+      { id: "additive_mfg", label: "Additive Manufacturing (3D Print Ti)", type: "substitute", impact: -2, correlation: -0.2, sector: "Manufacturing Tech", parentId: "tps" }
     ]}
   ]
 };

@@ -29,29 +29,60 @@ window.COMMODITY_DATA = {
       { id: "alb", label: "Albemarle (ALB)", type: "producer", impact: 18.5, correlation: 0.93, marketCap: "12B", sector: "Lithium Mining" },
       { id: "sqm", label: "SQM (SQM)", type: "producer", impact: 16.8, correlation: 0.9, marketCap: "14B", sector: "Lithium Mining" },
       { id: "pll", label: "Piedmont Lithium (PLL)", type: "producer", impact: 22.5, correlation: 0.92, marketCap: "0.5B", sector: "Lithium Development" },
-      { id: "tsla_lit", label: "Tesla (TSLA)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "780B", sector: "EV" }
+      { id: "tsla_lit", label: "Tesla (TSLA)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "780B", sector: "EV" },
+      { id: "pls", label: "Pilbara Minerals (PLS.AX)", type: "producer", impact: 20, correlation: 0.94, marketCap: "8B", sector: "Lithium Mining" },
+      { id: "lac", label: "Lithium Americas (LAC)", type: "producer", impact: 24, correlation: 0.91, marketCap: "1.8B", sector: "Lithium Development" },
+      { id: "lthm", label: "Livent Corp (LTHM)", type: "producer", impact: 17.5, correlation: 0.9, marketCap: "4B", sector: "Lithium Chemicals" },
+      { id: "catl_lit", label: "CATL (300750.SZ)", type: "processor", impact: -5.5, correlation: -0.62, sector: "Battery Manufacturing" },
+      { id: "byddy", label: "BYD Company (BYDDY)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "85B", sector: "EV/Battery" },
+      { id: "licy", label: "Li-Cycle Holdings (LICY)", type: "substitute", impact: 12, correlation: 0.75, marketCap: "0.4B", sector: "Battery Recycling" },
+      { id: "sgml", label: "Sigma Lithium (SGML)", type: "producer", impact: 21, correlation: 0.9, marketCap: "2B", sector: "Lithium Mining" }
     ]},
     { nodes: [
-      { id: "pls", label: "Pilbara Minerals (PLS.AX)", type: "producer", impact: 20, correlation: 0.94, sector: "Lithium Mining", parentId: "alb" },
-      { id: "lac", label: "Lithium Americas (LAC)", type: "producer", impact: 24, correlation: 0.91, marketCap: "1.8B", sector: "Lithium Development", parentId: "pll" },
-      { id: "catl_lit", label: "CATL (300750.SZ)", type: "processor", impact: -5.5, correlation: -0.62, sector: "Battery Manufacturing", parentId: "tsla_lit" },
-      { id: "panasonic_lit", label: "Panasonic (6752.T)", type: "processor", impact: -4.2, correlation: -0.52, sector: "Battery Manufacturing", parentId: "tsla_lit" },
-      { id: "licy", label: "Li-Cycle Holdings (LICY)", type: "substitute", impact: 12, correlation: 0.75, marketCap: "0.4B", sector: "Battery Recycling", parentId: "lit" }
-    ]},
-    { nodes: [
-      { id: "mp_lit", label: "MP Materials (MP)", type: "macro", impact: 4.5, correlation: 0.48, marketCap: "4B", sector: "Critical Minerals", parentId: "pls" },
-      { id: "mining_eq", label: "Epiroc AB (EPIR-B)", type: "producer", impact: 6.2, correlation: 0.58, sector: "Mining Equipment", parentId: "alb" },
+      { id: "panasonic_lit", label: "Panasonic (6752.T)", type: "processor", impact: -4.2, correlation: -0.52, sector: "Battery Manufacturing", parentId: "catl_lit" },
       { id: "rivn", label: "Rivian (RIVN)", type: "consumer", impact: -6.8, correlation: -0.58, marketCap: "12B", sector: "EV Startup", parentId: "tsla_lit" },
       { id: "lcid", label: "Lucid Group (LCID)", type: "consumer", impact: -7.5, correlation: -0.62, marketCap: "6B", sector: "EV Startup", parentId: "rivn" },
-      { id: "aapl_lit", label: "Apple (AAPL)", type: "consumer", impact: -0.8, correlation: -0.15, marketCap: "3200B", sector: "Consumer Electronics", parentId: "panasonic_lit" }
+      { id: "mining_eq", label: "Epiroc AB (EPIR-B)", type: "supplier", impact: 6.2, correlation: 0.58, sector: "Mining Equipment", parentId: "alb" },
+      { id: "min_lit", label: "Mineral Resources (MIN.AX)", type: "producer", impact: 19, correlation: 0.88, marketCap: "6B", sector: "Lithium/Iron Ore", parentId: "pls" },
+      { id: "allkem", label: "Allkem (AKE.AX)", type: "producer", impact: 20.5, correlation: 0.91, marketCap: "5B", sector: "Lithium Mining", parentId: "sqm" },
+      { id: "samsung_sdi", label: "Samsung SDI (006400.KS)", type: "processor", impact: -3.8, correlation: -0.48, sector: "Battery Manufacturing", parentId: "panasonic_lit" },
+      { id: "lg_energy", label: "LG Energy Solution (373220.KS)", type: "processor", impact: -4.5, correlation: -0.55, sector: "Battery Manufacturing", parentId: "catl_lit" },
+      { id: "drxn_lit", label: "ioneer Ltd (INR.AX)", type: "producer", impact: 25, correlation: 0.88, marketCap: "0.6B", sector: "Lithium Development", parentId: "lac" },
+      { id: "wmt_lit", label: "Ganfeng Lithium (1772.HK)", type: "producer", impact: 17, correlation: 0.88, marketCap: "10B", sector: "Lithium Chemicals", parentId: "sqm" }
     ]},
     { nodes: [
+      { id: "mp_lit", label: "MP Materials (MP)", type: "producer", impact: 4.5, correlation: 0.48, marketCap: "4B", sector: "Critical Minerals", parentId: "pls" },
+      { id: "aapl_lit", label: "Apple (AAPL)", type: "consumer", impact: -0.8, correlation: -0.15, marketCap: "3200B", sector: "Consumer Electronics", parentId: "panasonic_lit" },
+      { id: "vw_lit", label: "Volkswagen (VOW3.DE)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "65B", sector: "EV/Auto", parentId: "lg_energy" },
+      { id: "gm_lit", label: "General Motors (GM)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "48B", sector: "EV/Auto", parentId: "byddy" },
+      { id: "ford_lit", label: "Ford Motor (F)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "42B", sector: "EV/Auto", parentId: "gm_lit" },
       { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "10B", sector: "Solar/Storage", parentId: "catl_lit" },
-      { id: "stem_lit", label: "Stem Inc (STEM)", type: "macro", impact: -4, correlation: -0.45, marketCap: "0.8B", sector: "Grid Storage", parentId: "catl_lit" },
-      { id: "ev_demand", label: "Global EV Adoption", type: "macro", impact: 15, sector: "Macro", parentId: "lit" },
-      { id: "chile_lit", label: "Chile Policy / Nationalization", type: "macro", impact: 10, sector: "Macro", parentId: "sqm" },
-      { id: "ira", label: "IRA / Battery Subsidies", type: "macro", impact: 8, sector: "Macro", parentId: "lacy" },
-      { id: "solid_state", label: "Solid-State Battery Tech", type: "macro", impact: -6, sector: "Macro", parentId: "catl_lit" }
+      { id: "stem_lit", label: "Stem Inc (STEM)", type: "consumer", impact: -4, correlation: -0.45, marketCap: "0.8B", sector: "Grid Storage", parentId: "catl_lit" },
+      { id: "tsla_refine", label: "Tesla Lithium Refinery (TX)", type: "processor", impact: 5, correlation: 0.42, sector: "Lithium Processing", parentId: "tsla_lit" },
+      { id: "spodumene", label: "Spodumene Concentrate Index", type: "index", impact: 14, correlation: 0.92, sector: "Lithium Pricing", parentId: "pls" },
+      { id: "lico2_index", label: "Lithium Carbonate Index", type: "index", impact: 14.5, correlation: 0.95, sector: "Lithium Pricing", parentId: "alb" },
+      { id: "hymn_lit", label: "Hyundai Motor (005380.KS)", type: "consumer", impact: -2.8, correlation: -0.35, marketCap: "42B", sector: "EV/Auto", parentId: "samsung_sdi" },
+      { id: "redwood", label: "Redwood Materials (Private)", type: "substitute", impact: 10, correlation: 0.7, sector: "Battery Recycling", parentId: "licy" }
+    ]},
+    { nodes: [
+      { id: "ev_demand", label: "Global EV Adoption (NEV Sales)", type: "macro", impact: 15, correlation: 0.72, sector: "Macro", parentId: "lit" },
+      { id: "chile_lit", label: "Chile Nationalization Policy", type: "policy", impact: 10, correlation: 0.65, sector: "Macro", parentId: "sqm" },
+      { id: "ira", label: "IRA / Battery Subsidies", type: "policy", impact: 8, correlation: 0.58, sector: "Macro", parentId: "lac" },
+      { id: "solid_state", label: "Solid-State Battery Tech", type: "macro", impact: -6, correlation: -0.4, sector: "Macro", parentId: "catl_lit" },
+      { id: "china_ev", label: "China NEV Market (Monthly)", type: "regional", impact: 12, correlation: 0.68, sector: "Macro", parentId: "byddy" },
+      { id: "aus_export", label: "Australia Export Policy", type: "policy", impact: 5, correlation: 0.42, sector: "Macro", parentId: "pls" },
+      { id: "drc_cobalt", label: "DRC Cobalt Supply (Co-Input)", type: "commodity", impact: 4, correlation: 0.4, sector: "Battery Metals", parentId: "catl_lit" },
+      { id: "nickel_lit", label: "Nickel Prices (Co-Input)", type: "commodity", impact: 5, correlation: 0.45, sector: "Battery Metals", parentId: "panasonic_lit" }
+    ]},
+    { nodes: [
+      { id: "sodium_ion", label: "Sodium-Ion Battery (Substitute)", type: "substitute", impact: -5, correlation: -0.35, sector: "Alternative Chemistry", parentId: "solid_state" },
+      { id: "lfp_shift", label: "LFP vs NMC Chemistry Shift", type: "substitute", impact: -3, correlation: -0.28, sector: "Battery Chemistry", parentId: "catl_lit" },
+      { id: "usd_lit", label: "USD / AUD Exchange Rate", type: "fx", impact: -3, correlation: -0.3, sector: "Currency", parentId: "pls" },
+      { id: "clp_lit", label: "Chilean Peso (CLP)", type: "fx", impact: 3.5, correlation: 0.38, sector: "Currency", parentId: "sqm" },
+      { id: "freight_lit", label: "Lithium Concentrate Freight", type: "freight", impact: 2, correlation: 0.22, sector: "Shipping", parentId: "pls" },
+      { id: "eu_battery_reg", label: "EU Battery Regulation", type: "policy", impact: 4, correlation: 0.35, sector: "Regulation", parentId: "ira" },
+      { id: "cobalt_sub", label: "Cobalt-Free Battery (LFP)", type: "substitute", impact: -3, correlation: -0.28, sector: "Battery Chemistry", parentId: "lfp_shift" },
+      { id: "argentina_lit", label: "Argentina Lithium Policy", type: "policy", impact: 5, correlation: 0.42, sector: "Latin America", parentId: "sqm" }
     ]}
   ]
 };

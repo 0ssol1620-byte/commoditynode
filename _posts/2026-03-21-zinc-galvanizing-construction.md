@@ -27,33 +27,63 @@ window.COMMODITY_DATA = {
   commodity: { id: "zinc", label: "Zinc ↑10%", price: "$2,650/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 11, correlation: 0.76, marketCap: "22B", sector: "Diversified Mining" },
-      { id: "glen_z", label: "Glencore (GLEN)", type: "producer", impact: 9, correlation: 0.7, marketCap: "68B", sector: "Mining & Trading" },
-      { id: "boliden", label: "Boliden (BOL.ST)", type: "producer", impact: 13, correlation: 0.8, marketCap: "8B", sector: "Zinc/Copper Mining" },
+      { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 11.0, correlation: 0.76, marketCap: "22B", sector: "Diversified Mining" },
+      { id: "glen_z", label: "Glencore (GLEN)", type: "producer", impact: 9.0, correlation: 0.70, marketCap: "68B", sector: "Mining & Trading" },
+      { id: "boliden", label: "Boliden (BOL.ST)", type: "producer", impact: 13.0, correlation: 0.80, marketCap: "8B", sector: "Zinc/Copper Mining" },
+      { id: "hindustan_z", label: "Hindustan Zinc (500188.BO)", type: "producer", impact: 16.0, correlation: 0.85, marketCap: "18B", sector: "Zinc Mining" },
       { id: "cat_z", label: "Caterpillar (CAT)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "160B", sector: "Construction Equipment" },
-      { id: "vmc", label: "Vulcan Materials (VMC)", type: "consumer", impact: -2, correlation: -0.3, marketCap: "32B", sector: "Construction Materials" }
+      { id: "vmc", label: "Vulcan Materials (VMC)", type: "consumer", impact: -2.0, correlation: -0.30, marketCap: "32B", sector: "Construction Materials" },
+      { id: "nyrstar", label: "Nyrstar (Trafigura)", type: "processor", impact: 18.0, correlation: 0.88, sector: "Zinc Smelting" },
+      { id: "nucor_z", label: "Nucor Corporation (NUE)", type: "consumer", impact: -3.0, correlation: -0.40, marketCap: "38B", sector: "Steel" },
+      { id: "pave_etf", label: "Global X US Infra (PAVE)", type: "etf", impact: -1.5, correlation: -0.25, marketCap: "7B", sector: "ETF" },
+      { id: "xlb_etf", label: "Materials SPDR (XLB)", type: "etf", impact: 1.5, correlation: 0.20, marketCap: "6B", sector: "ETF" },
+      { id: "ivpaf", label: "Ivanhoe Mines (IVN.TO)", type: "producer", impact: 10.0, correlation: 0.72, marketCap: "9B", sector: "Zinc/Copper Mining" },
+      { id: "south32_z", label: "South32 (S32.AX)", type: "producer", impact: 8.0, correlation: 0.65, marketCap: "12B", sector: "Diversified Mining" },
+      { id: "nexa_z", label: "Nexa Resources (NEXA)", type: "producer", impact: 14.0, correlation: 0.82, marketCap: "1.5B", sector: "Zinc Mining" }
     ]},
     { nodes: [
-      { id: "nyrstar", label: "Nyrstar (Trafigura)", type: "processor", impact: 18, correlation: 0.88, sector: "Zinc Smelting", parentId: "glen_z" },
-      { id: "hindustan_z", label: "Hindustan Zinc (500188.BO)", type: "producer", impact: 16, correlation: 0.85, marketCap: "18B", sector: "Zinc Mining", parentId: "teck" },
       { id: "gm_z", label: "General Motors (GM)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "48B", sector: "Automotive", parentId: "cat_z" },
-      { id: "ford_z", label: "Ford Motor (F)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "48B", sector: "Automotive", parentId: "cat_z" }
-    ]},
-    { nodes: [
+      { id: "ford_z", label: "Ford Motor (F)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "48B", sector: "Automotive", parentId: "cat_z" },
       { id: "galvanizers", label: "Galvanizing Industry", type: "processor", impact: -5.5, correlation: -0.58, sector: "Metal Processing", parentId: "nyrstar" },
-      { id: "nucor_z", label: "Nucor Corporation (NUE)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "38B", sector: "Steel", parentId: "glen_z" },
-      { id: "infra_etf", label: "Infrastructure ETFs (PAVE)", type: "negative", impact: -1.5, correlation: -0.25, marketCap: "7B", sector: "ETF", parentId: "vmc" },
-      { id: "zinc_recycle", label: "Zinc Recyclers", type: "substitute", impact: 7, correlation: 0.58, sector: "Recycling", parentId: "hindustan_z" }
+      { id: "zinc_recycle", label: "Zinc Recyclers", type: "substitute", impact: 7.0, correlation: 0.58, sector: "Recycling", parentId: "hindustan_z" },
+      { id: "x_z", label: "U.S. Steel (X)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "8B", sector: "Steel", parentId: "nucor_z" },
+      { id: "clf_z", label: "Cleveland-Cliffs (CLF)", type: "consumer", impact: -3.2, correlation: -0.40, marketCap: "9B", sector: "Steel", parentId: "nucor_z" },
+      { id: "vedl", label: "Vedanta Ltd (VEDL.NS)", type: "producer", impact: 12.0, correlation: 0.78, marketCap: "15B", sector: "Diversified Mining", parentId: "hindustan_z" },
+      { id: "korea_zinc", label: "Korea Zinc (010130.KS)", type: "processor", impact: 10.0, correlation: 0.72, marketCap: "8B", sector: "Zinc Smelting", parentId: "nyrstar" },
+      { id: "zijin_z", label: "Zijin Mining (2899.HK)", type: "producer", impact: 7.0, correlation: 0.58, marketCap: "30B", sector: "Mining", parentId: "glen_z" },
+      { id: "stla_z", label: "Stellantis (STLA)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "55B", sector: "Automotive", parentId: "gm_z" },
+      { id: "tmst_z", label: "TimkenSteel (TMST)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "1B", sector: "Specialty Steel", parentId: "x_z" }
     ]},
     { nodes: [
       { id: "mlm", label: "Martin Marietta (MLM)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "34B", sector: "Construction Materials", parentId: "vmc" },
       { id: "stld", label: "Steel Dynamics (STLD)", type: "consumer", impact: -2.5, correlation: -0.36, marketCap: "18B", sector: "Steel", parentId: "nucor_z" },
-      { id: "transmission", label: "Power Transmission Towers", type: "consumer", impact: -3.5, correlation: -0.42, sector: "Utilities Infrastructure", parentId: "galvanizers" }
+      { id: "transmission", label: "Power Transmission Towers", type: "consumer", impact: -3.5, correlation: -0.42, sector: "Utilities Infrastructure", parentId: "galvanizers" },
+      { id: "de_z", label: "Deere & Company (DE)", type: "consumer", impact: -1.8, correlation: -0.25, marketCap: "120B", sector: "Farm Equipment", parentId: "cat_z" },
+      { id: "ternium_z", label: "Ternium (TX)", type: "consumer", impact: -3.0, correlation: -0.38, marketCap: "6B", sector: "Steel/LatAm", parentId: "clf_z" },
+      { id: "arcelormittal_z", label: "ArcelorMittal (MT)", type: "consumer", impact: -2.8, correlation: -0.35, marketCap: "22B", sector: "Steel", parentId: "x_z" },
+      { id: "zinc_oxide", label: "Zinc Oxide Producers", type: "processor", impact: -4.0, correlation: -0.48, sector: "Chemical Processing", parentId: "galvanizers" },
+      { id: "guardrails", label: "Highway Guardrail Mfg", type: "consumer", impact: -4.5, correlation: -0.50, sector: "Infrastructure", parentId: "transmission" },
+      { id: "aluminum_sub", label: "Aluminum (Substitute)", type: "substitute", impact: 2.5, correlation: 0.30, sector: "Base Metals", parentId: "zinc_recycle" },
+      { id: "battery_zinc", label: "Zinc Battery Producers", type: "consumer", impact: -3.0, correlation: -0.35, sector: "Energy Storage", parentId: "korea_zinc" }
     ]},
     { nodes: [
-      { id: "china_construction", label: "China Construction Cycle", type: "macro", impact: 12, sector: "Macro", parentId: "hindustan_z" },
-      { id: "us_infra", label: "US Infrastructure Bill", type: "macro", impact: 10, sector: "Macro", parentId: "teck" },
-      { id: "mine_closures", label: "Mine Depletion Cycle", type: "macro", impact: 8, sector: "Macro", parentId: "boliden" }
+      { id: "hyg_coating", label: "Anti-Corrosion Coatings", type: "substitute", impact: 3.0, correlation: 0.35, sector: "Coatings", parentId: "galvanizers" },
+      { id: "die_casting", label: "Zinc Die Casting Industry", type: "consumer", impact: -4.0, correlation: -0.45, sector: "Manufacturing", parentId: "zinc_oxide" },
+      { id: "tire_rubber", label: "Tire/Rubber (Zinc Oxide)", type: "consumer", impact: -1.5, correlation: -0.20, sector: "Automotive Parts", parentId: "zinc_oxide" },
+      { id: "fertilizer_zn", label: "Zinc Fertilizer Market", type: "consumer", impact: -2.0, correlation: -0.25, sector: "Agriculture", parentId: "zinc_oxide" },
+      { id: "lme_warehouse", label: "LME Zinc Inventory", type: "index", impact: -6.0, correlation: -0.65, sector: "Market Data", parentId: "glen_z" },
+      { id: "shfe_zinc", label: "SHFE Zinc Inventory", type: "index", impact: -5.5, correlation: -0.60, sector: "Market Data", parentId: "zijin_z" },
+      { id: "solar_mount", label: "Solar Mounting (Galvanized)", type: "consumer", impact: -2.0, correlation: -0.28, sector: "Renewables", parentId: "transmission" },
+      { id: "ship_steel", label: "Shipbuilding Steel", type: "consumer", impact: -2.5, correlation: -0.32, sector: "Marine", parentId: "arcelormittal_z" }
+    ]},
+    { nodes: [
+      { id: "china_construction", label: "China Construction Cycle", type: "macro", impact: 12.0, sector: "Macro", parentId: "hindustan_z" },
+      { id: "us_infra", label: "US Infrastructure Bill", type: "policy", impact: 10.0, sector: "Policy", parentId: "teck" },
+      { id: "mine_closures", label: "Mine Depletion Cycle", type: "macro", impact: 8.0, sector: "Macro", parentId: "boliden" },
+      { id: "india_infra", label: "India Infrastructure Push", type: "policy", impact: 7.0, sector: "Policy", parentId: "vedl" },
+      { id: "tc_rc_squeeze", label: "TC/RC Smelter Squeeze", type: "macro", impact: -5.0, sector: "Macro", parentId: "nyrstar" },
+      { id: "cny_usd", label: "CNY/USD Exchange Rate", type: "fx", impact: 3.0, correlation: 0.35, sector: "FX", parentId: "zijin_z" },
+      { id: "copper_cross", label: "Copper (Cross-Commodity)", type: "commodity", impact: 3.5, correlation: 0.40, sector: "Base Metals", parentId: "teck" }
     ]}
   ]
 };

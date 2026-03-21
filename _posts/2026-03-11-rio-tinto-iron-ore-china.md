@@ -29,31 +29,61 @@ window.COMMODITY_DATA = {
       { id: "rio", label: "Rio Tinto (RIO)", type: "producer", impact: 12, correlation: 0.88, marketCap: "120B", sector: "Iron Ore Mining" },
       { id: "bhp", label: "BHP Group (BHP)", type: "producer", impact: 10.5, correlation: 0.85, marketCap: "150B", sector: "Diversified Mining" },
       { id: "vale", label: "Vale SA (VALE)", type: "producer", impact: 13.5, correlation: 0.9, marketCap: "58B", sector: "Iron Ore Mining" },
-      { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "positive", impact: 9, correlation: 0.72, marketCap: "8B", sector: "Iron Ore/Steel" },
+      { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "producer", impact: 9, correlation: 0.72, marketCap: "8B", sector: "Iron Ore/Steel" },
       { id: "pick", label: "iShares MSCI Mining (PICK)", type: "etf", impact: 7.5, correlation: 0.8, marketCap: "1.2B", sector: "ETF" },
-      { id: "nue_io", label: "Nucor (NUE)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "38B", sector: "Steel Producer" }
+      { id: "fmg", label: "Fortescue Metals (FSUGY)", type: "producer", impact: 14.5, correlation: 0.92, marketCap: "45B", sector: "Iron Ore Mining" },
+      { id: "slx_rio", label: "VanEck Steel ETF (SLX)", type: "etf", impact: 6, correlation: 0.68, marketCap: "0.1B", sector: "ETF" },
+      { id: "xme_rio", label: "SPDR Metals & Mining (XME)", type: "etf", impact: 5.5, correlation: 0.72, marketCap: "2B", sector: "ETF" },
+      { id: "mt_rio", label: "ArcelorMittal (MT)", type: "producer", impact: 8, correlation: 0.82, marketCap: "24B", sector: "Global Steel" },
+      { id: "nue_io", label: "Nucor (NUE)", type: "producer", impact: 4.5, correlation: 0.55, marketCap: "38B", sector: "Steel/EAF" },
+      { id: "stld_rio", label: "Steel Dynamics (STLD)", type: "producer", impact: 4.8, correlation: 0.58, marketCap: "20B", sector: "Steel/EAF" },
+      { id: "x_rio", label: "U.S. Steel (X)", type: "producer", impact: 6.5, correlation: 0.68, marketCap: "7B", sector: "Integrated Steel" }
     ]},
     { nodes: [
       { id: "gogl", label: "Golden Ocean (GOGL)", type: "supplier", impact: 8.5, correlation: 0.72, marketCap: "3B", sector: "Dry Bulk Shipping", parentId: "rio" },
       { id: "sblk", label: "Star Bulk Carriers (SBLK)", type: "supplier", impact: 7.8, correlation: 0.7, marketCap: "2.5B", sector: "Dry Bulk Shipping", parentId: "rio" },
-      { id: "cat_io", label: "Caterpillar (CAT)", type: "producer", impact: 4, correlation: 0.42, marketCap: "175B", sector: "Mining Equipment", parentId: "bhp" },
-      { id: "x_io", label: "U.S. Steel (X)", type: "consumer", impact: -4.5, correlation: -0.45, marketCap: "7B", sector: "Steel Producer", parentId: "nue_io" },
-      { id: "fmg", label: "Fortescue Metals (FSUGY)", type: "producer", impact: 14.5, correlation: 0.92, marketCap: "45B", sector: "Iron Ore Mining", parentId: "vale" }
+      { id: "cat_io", label: "Caterpillar (CAT)", type: "supplier", impact: 4, correlation: 0.42, marketCap: "175B", sector: "Mining Equipment", parentId: "bhp" },
+      { id: "china_mills_rio", label: "China Steel Mills (Baowu)", type: "consumer", impact: -3.5, correlation: -0.45, sector: "Steel Production", parentId: "vale" },
+      { id: "coking_coal", label: "Coking Coal Miners (ARCH)", type: "producer", impact: 6.5, correlation: 0.62, sector: "Metallurgical Coal", parentId: "clf" },
+      { id: "posco_rio", label: "POSCO Holdings (PKX)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "22B", sector: "Steel Production", parentId: "mt_rio" },
+      { id: "jfe_rio", label: "JFE Holdings (5411.T)", type: "consumer", impact: -2.5, correlation: -0.35, sector: "Japanese Steel", parentId: "china_mills_rio" },
+      { id: "schn_rio", label: "Schnitzer Steel (SCHN)", type: "producer", impact: 5.5, correlation: 0.58, marketCap: "1.5B", sector: "Scrap/Steel", parentId: "nue_io" },
+      { id: "dsx_rio", label: "Diana Shipping (DSX)", type: "supplier", impact: 6.5, correlation: 0.68, marketCap: "0.8B", sector: "Dry Bulk Shipping", parentId: "sblk" },
+      { id: "kumba_rio", label: "Kumba Iron Ore (KIO.JO)", type: "producer", impact: 10, correlation: 0.85, marketCap: "8B", sector: "Iron Ore Mining", parentId: "fmg" }
     ]},
     { nodes: [
-      { id: "bdry", label: "Baltic Dry Index", type: "supplier", impact: 10, correlation: 0.75, sector: "Shipping Rates", parentId: "gogl" },
+      { id: "bdry", label: "Breakwave Dry Bulk (BDRY)", type: "etf", impact: 10, correlation: 0.75, sector: "Shipping ETF", parentId: "gogl" },
       { id: "de_io", label: "Deere & Co (DE)", type: "supplier", impact: 2.5, correlation: 0.3, marketCap: "110B", sector: "Heavy Equipment", parentId: "cat_io" },
-      { id: "construction", label: "Construction Industry", type: "consumer", impact: -4, correlation: -0.42, sector: "Construction", parentId: "x_io" },
-      { id: "china_property", label: "China Property Developers", type: "regional", impact: -6, correlation: -0.55, sector: "Real Estate", parentId: "vale" },
-      { id: "coking_coal", label: "Coking Coal Miners", type: "producer", impact: 6.5, correlation: 0.62, sector: "Coal Mining", parentId: "clf" },
-      { id: "steel_cost", label: "Global Steel Production Costs", type: "consumer", impact: -5, correlation: -0.5, sector: "Steel Manufacturing", parentId: "nue_io" }
+      { id: "construction", label: "Construction Industry", type: "consumer", impact: -4, correlation: -0.42, sector: "Construction", parentId: "x_rio" },
+      { id: "china_property", label: "China Property Developers", type: "regional", impact: -6, correlation: -0.55, sector: "Real Estate", parentId: "china_mills_rio" },
+      { id: "steel_cost", label: "Global Steel Production Costs", type: "index", impact: -5, correlation: -0.5, sector: "Steel Manufacturing", parentId: "nue_io" },
+      { id: "vmc_rio", label: "Vulcan Materials (VMC)", type: "supplier", impact: 3, correlation: 0.4, marketCap: "35B", sector: "Aggregates", parentId: "construction" },
+      { id: "uri_rio", label: "United Rentals (URI)", type: "supplier", impact: 2.5, correlation: 0.35, marketCap: "48B", sector: "Equipment Rental", parentId: "cat_io" },
+      { id: "f_rio", label: "Ford Motor (F)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "42B", sector: "Automotive", parentId: "x_rio" },
+      { id: "gm_rio", label: "General Motors (GM)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "48B", sector: "Automotive", parentId: "mt_rio" },
+      { id: "whr_rio", label: "Whirlpool (WHR)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "6B", sector: "Appliances", parentId: "construction" },
+      { id: "aud_fx", label: "Australian Dollar (AUD)", type: "fx", impact: 5.5, correlation: 0.6, sector: "Currency", parentId: "rio" },
+      { id: "brl_fx", label: "Brazilian Real (BRL)", type: "fx", impact: 5, correlation: 0.55, sector: "Currency", parentId: "vale" }
     ]},
     { nodes: [
-      { id: "china_stimulus", label: "China Stimulus Policy", type: "macro", impact: 12, correlation: 0.8, sector: "Macro", parentId: "china_property" },
-      { id: "india_steel", label: "India Steel Demand Growth", type: "macro", impact: 6, correlation: 0.5, sector: "Macro", parentId: "rio" },
-      { id: "green_steel", label: "Green Steel Transition", type: "macro", impact: 4, correlation: 0.35, sector: "Macro", parentId: "bhp" },
-      { id: "aud_fx", label: "Australian Dollar (AUD)", type: "macro", impact: 5.5, correlation: 0.6, sector: "Macro", parentId: "rio" },
-      { id: "brl_fx", label: "Brazilian Real (BRL)", type: "macro", impact: 5, correlation: 0.55, sector: "Macro", parentId: "vale" }
+      { id: "china_stimulus", label: "China Stimulus Policy", type: "policy", impact: 12, correlation: 0.8, sector: "Macro", parentId: "china_property" },
+      { id: "india_steel", label: "India Steel Demand Growth", type: "regional", impact: 6, correlation: 0.5, sector: "Macro", parentId: "mt_rio" },
+      { id: "green_steel", label: "Green Steel / DRI Transition", type: "macro", impact: 4, correlation: 0.35, sector: "Macro", parentId: "bhp" },
+      { id: "china_gdp_rio", label: "China GDP Signal", type: "macro", impact: 3.5, correlation: 0.65, sector: "Macro", parentId: "china_mills_rio" },
+      { id: "simandou", label: "Simandou Project (Guinea)", type: "macro", impact: -3, correlation: -0.3, sector: "New Supply", parentId: "rio" },
+      { id: "infra_iija", label: "IIJA Infrastructure Spending", type: "policy", impact: 4.5, correlation: 0.5, sector: "Macro", parentId: "construction" },
+      { id: "port_stocks_rio", label: "China Port Iron Ore Stocks", type: "index", impact: -4, correlation: -0.5, sector: "Inventory Signal", parentId: "china_stimulus" },
+      { id: "section232_rio", label: "Section 232 Steel Tariffs", type: "policy", impact: 3.5, correlation: 0.4, sector: "Trade Policy", parentId: "x_rio" }
+    ]},
+    { nodes: [
+      { id: "capesize_rio", label: "Capesize Freight Rates", type: "freight", impact: 7, correlation: 0.7, sector: "Shipping", parentId: "gogl" },
+      { id: "copper_xlink", label: "Copper (Cross-Commodity)", type: "commodity", impact: 3, correlation: 0.45, sector: "Industrial Metals", parentId: "bhp" },
+      { id: "coal_xlink", label: "Coking Coal Prices", type: "commodity", impact: 5.5, correlation: 0.6, sector: "Metallurgical Coal", parentId: "coking_coal" },
+      { id: "fxi_rio", label: "iShares China ETF (FXI)", type: "etf", impact: 3, correlation: 0.55, sector: "China Equity", parentId: "china_gdp_rio" },
+      { id: "global_growth_rio", label: "Global Growth Expectations", type: "macro", impact: 2, correlation: 0.45, sector: "Macro", parentId: "pick" },
+      { id: "asean_steel", label: "ASEAN Steel Demand", type: "regional", impact: 3.5, correlation: 0.38, sector: "Emerging Markets", parentId: "india_steel" },
+      { id: "simandou_rio", label: "Simandou Project (Guinea)", type: "macro", impact: -3, correlation: -0.3, sector: "New Supply Risk", parentId: "rio" },
+      { id: "scrap_xlink", label: "Steel Scrap (Cross-Link)", type: "commodity", impact: 4, correlation: 0.5, sector: "Ferrous Scrap", parentId: "schn_rio" }
     ]}
   ]
 };

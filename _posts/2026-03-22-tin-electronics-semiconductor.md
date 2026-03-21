@@ -7,7 +7,7 @@ tags: [tin, semiconductors, electronics, metals, soldering]
 description: 'How tin price movements impact semiconductor companies, electronics manufacturers, PCB makers, and solder supply chains. Full correlation analysis.'
 reading_time: 8
 commodity_name: 'Tin'
-direction: bullish
+direction: bearish
 image: /assets/images/og-tin.png
 ---
 
@@ -27,33 +27,63 @@ window.COMMODITY_DATA = {
   commodity: { id: "tin", label: "Tin ↑10%", price: "$28,500/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "aapl_sn", label: "Apple Inc (AAPL)", type: "consumer", impact: -1.8, correlation: -0.3, marketCap: "3200B", sector: "Consumer Electronics" },
+      { id: "aapl_sn", label: "Apple Inc (AAPL)", type: "consumer", impact: -1.8, correlation: -0.30, marketCap: "3200B", sector: "Consumer Electronics" },
       { id: "tsm", label: "TSMC (TSM)", type: "consumer", impact: -2.5, correlation: -0.38, marketCap: "650B", sector: "Semiconductor Foundry" },
       { id: "intc", label: "Intel Corporation (INTC)", type: "consumer", impact: -2.2, correlation: -0.34, marketCap: "110B", sector: "Semiconductors" },
       { id: "nvda_sn", label: "NVIDIA (NVDA)", type: "consumer", impact: -1.5, correlation: -0.28, marketCap: "2800B", sector: "Semiconductors" },
-      { id: "msc", label: "Minsur S.A. (MINSURI1.LM)", type: "producer", impact: 20, correlation: 0.9, marketCap: "3.5B", sector: "Tin Mining" }
+      { id: "msc", label: "Minsur S.A. (MINSURI1.LM)", type: "producer", impact: 20.0, correlation: 0.90, marketCap: "3.5B", sector: "Tin Mining" },
+      { id: "alphamin", label: "Alphamin Resources (AFM.V)", type: "producer", impact: 24.0, correlation: 0.93, marketCap: "1.2B", sector: "Tin Mining" },
+      { id: "yunnan_tin", label: "Yunnan Tin (000960.SZ)", type: "producer", impact: 22.0, correlation: 0.91, marketCap: "6B", sector: "Tin Mining/Smelting" },
+      { id: "samsung_sn", label: "Samsung Electronics (005930.KS)", type: "consumer", impact: -2.0, correlation: -0.32, marketCap: "380B", sector: "Electronics" },
+      { id: "amkor", label: "Amkor Technology (AMKR)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "7B", sector: "Semiconductor Packaging" },
+      { id: "amd_sn", label: "AMD (AMD)", type: "consumer", impact: -1.2, correlation: -0.22, marketCap: "220B", sector: "Semiconductors" },
+      { id: "malaysia_smelter", label: "Malaysia Smelting (MSC.KL)", type: "processor", impact: 15.0, correlation: 0.82, marketCap: "0.5B", sector: "Tin Smelting" },
+      { id: "metals_x", label: "Metals X (MLX.AX)", type: "producer", impact: 18.0, correlation: 0.85, marketCap: "0.3B", sector: "Tin Mining" }
     ]},
     { nodes: [
-      { id: "alphamin", label: "Alphamin Resources (AFM.V)", type: "producer", impact: 24, correlation: 0.93, marketCap: "1.2B", sector: "Tin Mining", parentId: "msc" },
-      { id: "yunnan_tin", label: "Yunnan Tin (000960.SZ)", type: "producer", impact: 22, correlation: 0.91, marketCap: "6B", sector: "Tin Mining/Smelting", parentId: "msc" },
-      { id: "samsung_sn", label: "Samsung Electronics", type: "consumer", impact: -2, correlation: -0.32, marketCap: "380B", sector: "Electronics", parentId: "aapl_sn" },
-      { id: "amkor", label: "Amkor Technology (AMKR)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "7B", sector: "Semiconductor Packaging", parentId: "tsm" }
-    ]},
-    { nodes: [
-      { id: "solder_mfg", label: "Solder Manufacturers (Indium Corp)", type: "consumer", impact: -6, correlation: -0.62, sector: "Solder Materials", parentId: "alphamin" },
-      { id: "pcb_makers", label: "PCB Makers (TTM Technologies)", type: "processor", impact: -5, correlation: -0.55, marketCap: "2.1B", sector: "PCB Manufacturing", parentId: "amkor" },
-      { id: "ase", label: "ASE Technology (ASX)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "18B", sector: "Semiconductor Packaging", parentId: "tsm" },
-      { id: "tin_recycle", label: "Tin Recyclers/Recovery", type: "substitute", impact: 8, correlation: 0.6, sector: "Recycling", parentId: "yunnan_tin" }
+      { id: "solder_mfg", label: "Solder Manufacturers (Indium Corp)", type: "consumer", impact: -6.0, correlation: -0.62, sector: "Solder Materials", parentId: "alphamin" },
+      { id: "pcb_makers", label: "TTM Technologies (TTMI)", type: "consumer", impact: -5.0, correlation: -0.55, marketCap: "2.1B", sector: "PCB Manufacturing", parentId: "amkor" },
+      { id: "ase", label: "ASE Technology (ASX)", type: "consumer", impact: -4.0, correlation: -0.48, marketCap: "18B", sector: "Semiconductor Packaging", parentId: "tsm" },
+      { id: "tin_recycle", label: "Tin Recyclers/Recovery", type: "substitute", impact: 8.0, correlation: 0.60, sector: "Recycling", parentId: "yunnan_tin" },
+      { id: "pt_timah", label: "PT Timah (TINS.JK)", type: "producer", impact: 19.0, correlation: 0.88, marketCap: "1B", sector: "Tin Mining/Smelting", parentId: "msc" },
+      { id: "bangka_tin", label: "Bangka Belitung (Indonesian)", type: "regional", impact: 16.0, correlation: 0.85, sector: "Tin Mining", parentId: "pt_timah" },
+      { id: "myanmar_wa", label: "Myanmar Wa State Mines", type: "regional", impact: 12.0, correlation: 0.78, sector: "Tin Mining", parentId: "yunnan_tin" },
+      { id: "hon_hai", label: "Hon Hai / Foxconn (2317.TW)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "55B", sector: "EMS/Contract Mfg", parentId: "aapl_sn" },
+      { id: "dell_sn", label: "Dell Technologies (DELL)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "80B", sector: "Computer Hardware", parentId: "aapl_sn" },
+      { id: "hpe_sn", label: "HP Enterprise (HPE)", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "22B", sector: "Server/IT Hardware", parentId: "dell_sn" },
+      { id: "qualcomm_sn", label: "Qualcomm (QCOM)", type: "consumer", impact: -1.0, correlation: -0.18, marketCap: "180B", sector: "Semiconductors", parentId: "tsm" },
+      { id: "broadcom_sn", label: "Broadcom (AVGO)", type: "consumer", impact: -0.8, correlation: -0.15, marketCap: "600B", sector: "Semiconductors", parentId: "tsm" }
     ]},
     { nodes: [
       { id: "flex", label: "Flex Ltd (FLEX)", type: "processor", impact: -3.5, correlation: -0.42, marketCap: "12B", sector: "EMS/Contract Mfg", parentId: "pcb_makers" },
-      { id: "jabil", label: "Jabil Inc (JBL)", type: "processor", impact: -3.2, correlation: -0.4, marketCap: "14B", sector: "EMS/Contract Mfg", parentId: "pcb_makers" },
-      { id: "malaysia_smelter", label: "Malaysia Smelting (MSC.KL)", type: "processor", impact: 15, correlation: 0.82, marketCap: "0.5B", sector: "Tin Smelting", parentId: "yunnan_tin" }
+      { id: "jabil", label: "Jabil Inc (JBL)", type: "processor", impact: -3.2, correlation: -0.40, marketCap: "14B", sector: "EMS/Contract Mfg", parentId: "pcb_makers" },
+      { id: "celestica", label: "Celestica (CLS)", type: "processor", impact: -3.0, correlation: -0.38, marketCap: "8B", sector: "EMS/Contract Mfg", parentId: "pcb_makers" },
+      { id: "at_s", label: "AT&S (ATS.VI)", type: "consumer", impact: -4.5, correlation: -0.50, marketCap: "2B", sector: "PCB/Substrate Mfg", parentId: "ase" },
+      { id: "ibiden", label: "Ibiden (4062.T)", type: "consumer", impact: -4.0, correlation: -0.48, marketCap: "6B", sector: "PCB/Substrate Mfg", parentId: "ase" },
+      { id: "shinko", label: "Shinko Electric (6967.T)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "4B", sector: "IC Substrate", parentId: "ase" },
+      { id: "unimicron", label: "Unimicron (3037.TW)", type: "consumer", impact: -4.2, correlation: -0.48, marketCap: "8B", sector: "PCB Manufacturing", parentId: "pcb_makers" },
+      { id: "tin_plate", label: "Tin Plate / Tinplate Steel", type: "consumer", impact: -3.0, correlation: -0.35, sector: "Packaging", parentId: "malaysia_smelter" },
+      { id: "nippon_steel_sn", label: "Nippon Steel (5401.T)", type: "consumer", impact: -1.5, correlation: -0.20, marketCap: "25B", sector: "Tinplate Steel", parentId: "tin_plate" },
+      { id: "henkel_solder", label: "Henkel (HEN3.DE)", type: "consumer", impact: -2.0, correlation: -0.28, marketCap: "35B", sector: "Solder Paste", parentId: "solder_mfg" }
     ]},
     { nodes: [
-      { id: "ai_demand", label: "AI/Data Center Build-out", type: "macro", impact: 12, sector: "Macro", parentId: "nvda_sn" },
-      { id: "indonesia_reg", label: "Indonesia Smelter Regulations", type: "macro", impact: 14, sector: "Macro", parentId: "msc" },
-      { id: "semicon_cycle", label: "Semiconductor Upcycle", type: "macro", impact: 10, sector: "Macro", parentId: "tsm" }
+      { id: "ev_electronics", label: "EV Power Electronics", type: "consumer", impact: -2.5, correlation: -0.32, sector: "EV Components", parentId: "flex" },
+      { id: "5g_infra", label: "5G Infrastructure Build", type: "consumer", impact: -1.8, correlation: -0.25, sector: "Telecom Equipment", parentId: "jabil" },
+      { id: "automotive_pcb", label: "Automotive PCB Demand", type: "consumer", impact: -2.0, correlation: -0.28, sector: "Automotive Electronics", parentId: "at_s" },
+      { id: "solar_solder", label: "Solar Panel Solder Use", type: "consumer", impact: -2.5, correlation: -0.30, sector: "Renewables", parentId: "solder_mfg" },
+      { id: "can_packaging", label: "Food Can Packaging", type: "consumer", impact: -2.0, correlation: -0.25, sector: "Packaging", parentId: "tin_plate" },
+      { id: "lme_tin_inv", label: "LME Tin Inventory", type: "index", impact: -7.0, correlation: -0.70, sector: "Market Data", parentId: "msc" },
+      { id: "indium_sub", label: "Indium (Substitute Metal)", type: "substitute", impact: 3.0, correlation: 0.35, sector: "Minor Metals", parentId: "tin_recycle" },
+      { id: "lead_free_regs", label: "Lead-Free Solder Mandates", type: "policy", impact: 5.0, sector: "Policy", parentId: "solder_mfg" }
+    ]},
+    { nodes: [
+      { id: "ai_demand", label: "AI/Data Center Build-out", type: "macro", impact: 12.0, sector: "Macro", parentId: "nvda_sn" },
+      { id: "indonesia_reg", label: "Indonesia Smelter Regulations", type: "policy", impact: 14.0, sector: "Policy", parentId: "pt_timah" },
+      { id: "semicon_cycle", label: "Semiconductor Upcycle", type: "macro", impact: 10.0, sector: "Macro", parentId: "tsm" },
+      { id: "myanmar_politics", label: "Myanmar Political Instability", type: "macro", impact: 8.0, sector: "Geopolitics", parentId: "myanmar_wa" },
+      { id: "china_smelter_env", label: "China Environmental Crackdown", type: "policy", impact: 6.0, sector: "Policy", parentId: "yunnan_tin" },
+      { id: "ipc_standards", label: "IPC Soldering Standards", type: "policy", impact: 2.0, sector: "Policy", parentId: "solder_mfg" },
+      { id: "copper_cross_sn", label: "Copper (Cross-Commodity)", type: "commodity", impact: 2.5, correlation: 0.30, sector: "Base Metals", parentId: "msc" }
     ]}
   ]
 };

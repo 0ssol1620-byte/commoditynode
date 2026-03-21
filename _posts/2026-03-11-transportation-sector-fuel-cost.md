@@ -30,30 +30,59 @@ window.COMMODITY_DATA = {
       { id: "dal_t", label: "Delta Air Lines (DAL)", type: "consumer", impact: -9.5, correlation: -0.78, marketCap: "28B", sector: "Airlines" },
       { id: "ual_t", label: "United Airlines (UAL)", type: "consumer", impact: -10.2, correlation: -0.8, marketCap: "22B", sector: "Airlines" },
       { id: "unp", label: "Union Pacific (UNP)", type: "supplier", impact: 2.8, correlation: 0.32, marketCap: "148B", sector: "Railroad" },
-      { id: "vlo_t", label: "Valero Energy (VLO)", type: "processor", impact: 7.5, correlation: 0.72, marketCap: "46B", sector: "Refining" }
+      { id: "vlo_t", label: "Valero Energy (VLO)", type: "processor", impact: 7.5, correlation: 0.72, marketCap: "46B", sector: "Refining" },
+      { id: "aal_t", label: "American Airlines (AAL)", type: "consumer", impact: -12.5, correlation: -0.82, marketCap: "9B", sector: "Airlines" },
+      { id: "mpc_t", label: "Marathon Petroleum (MPC)", type: "processor", impact: 6.8, correlation: 0.68, marketCap: "62B", sector: "Refining" },
+      { id: "csx", label: "CSX Corp (CSX)", type: "supplier", impact: 2.5, correlation: 0.3, marketCap: "68B", sector: "Railroad" },
+      { id: "odfl", label: "Old Dominion (ODFL)", type: "consumer", impact: -5.2, correlation: -0.58, marketCap: "42B", sector: "LTL Trucking" },
+      { id: "luv_t", label: "Southwest Airlines (LUV)", type: "consumer", impact: -8, correlation: -0.72, marketCap: "18B", sector: "Airlines" },
+      { id: "psx_t", label: "Phillips 66 (PSX)", type: "processor", impact: 6.2, correlation: 0.65, marketCap: "55B", sector: "Refining" }
     ]},
     { nodes: [
-      { id: "odfl", label: "Old Dominion (ODFL)", type: "consumer", impact: -5.2, correlation: -0.58, marketCap: "42B", sector: "LTL Trucking", parentId: "iyt" },
-      { id: "xpo", label: "XPO Inc (XPO)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "12B", sector: "LTL Trucking", parentId: "iyt" },
+      { id: "xpo", label: "XPO Inc (XPO)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "12B", sector: "LTL Trucking", parentId: "odfl" },
       { id: "jbht", label: "J.B. Hunt (JBHT)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "20B", sector: "Intermodal / Trucking", parentId: "unp" },
-      { id: "csx", label: "CSX Corp (CSX)", type: "supplier", impact: 2.5, correlation: 0.3, marketCap: "68B", sector: "Railroad", parentId: "unp" },
       { id: "nsc", label: "Norfolk Southern (NSC)", type: "supplier", impact: 2.2, correlation: 0.28, marketCap: "55B", sector: "Railroad", parentId: "csx" },
-      { id: "mpc_t", label: "Marathon Petroleum (MPC)", type: "processor", impact: 6.8, correlation: 0.68, marketCap: "62B", sector: "Refining", parentId: "vlo_t" },
-      { id: "aal_t", label: "American Airlines (AAL)", type: "consumer", impact: -12.5, correlation: -0.82, marketCap: "9B", sector: "Airlines", parentId: "dal_t" }
-    ]},
-    { nodes: [
       { id: "fdx_t", label: "FedEx (FDX)", type: "consumer", impact: -4.2, correlation: -0.5, marketCap: "62B", sector: "Express / Parcel", parentId: "odfl" },
       { id: "ups_t", label: "UPS (UPS)", type: "consumer", impact: -3.8, correlation: -0.46, marketCap: "108B", sector: "Express / Parcel", parentId: "xpo" },
-      { id: "ksu", label: "Kansas City Southern (CP)", type: "supplier", impact: 2, correlation: 0.25, marketCap: "75B", sector: "Railroad", parentId: "nsc" },
-      { id: "epd_t", label: "Enterprise Products (EPD)", type: "supplier", impact: 3.5, correlation: 0.42, marketCap: "64B", sector: "Pipeline (No Fuel)", parentId: "vlo_t" },
-      { id: "luv", label: "Southwest Airlines (LUV)", type: "consumer", impact: -8, correlation: -0.72, marketCap: "18B", sector: "Airlines", parentId: "aal_t" }
+      { id: "saia_t", label: "Saia Inc (SAIA)", type: "consumer", impact: -5.5, correlation: -0.6, marketCap: "10B", sector: "LTL Trucking", parentId: "xpo" },
+      { id: "wern_t", label: "Werner Enterprises (WERN)", type: "consumer", impact: -4.8, correlation: -0.55, marketCap: "3B", sector: "Truckload", parentId: "jbht" },
+      { id: "kn_t", label: "Knight-Swift (KNX)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "8B", sector: "Truckload", parentId: "jbht" },
+      { id: "epd_t", label: "Enterprise Products (EPD)", type: "supplier", impact: 3.5, correlation: 0.42, marketCap: "64B", sector: "Pipeline/Midstream", parentId: "vlo_t" },
+      { id: "dkl_t", label: "Delek Logistics (DKL)", type: "processor", impact: 5.5, correlation: 0.58, marketCap: "2B", sector: "Refining/Logistics", parentId: "mpc_t" }
     ]},
     { nodes: [
-      { id: "consumer_t", label: "Consumer Shipping Costs", type: "macro", impact: -2.5, sector: "Macro", parentId: "fdx_t" },
-      { id: "crack_spread", label: "Crack Spread Dynamics", type: "macro", impact: 5, sector: "Macro", parentId: "vlo_t" },
-      { id: "modal_shift", label: "Modal Shift (Truck→Rail)", type: "macro", impact: 3, sector: "Macro", parentId: "unp" },
-      { id: "fuel_surcharge", label: "Fuel Surcharge Recovery", type: "macro", impact: -1.5, sector: "Macro", parentId: "odfl" },
-      { id: "maersk", label: "Maersk (AMKBY)", type: "macro", impact: -3.5, correlation: -0.38, marketCap: "28B", sector: "Container Shipping", parentId: "ups_t" }
+      { id: "ksu", label: "Canadian Pacific Kansas City (CP)", type: "supplier", impact: 2, correlation: 0.25, marketCap: "75B", sector: "Railroad", parentId: "nsc" },
+      { id: "maersk", label: "Maersk (AMKBY)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "28B", sector: "Container Shipping", parentId: "ups_t" },
+      { id: "zim_t", label: "ZIM Shipping (ZIM)", type: "consumer", impact: -4, correlation: -0.42, marketCap: "3B", sector: "Container Shipping", parentId: "maersk" },
+      { id: "save_t", label: "Spirit Airlines (SAVE)", type: "consumer", impact: -14, correlation: -0.85, marketCap: "2B", sector: "Ultra-Low-Cost Airline", parentId: "aal_t" },
+      { id: "algt_t", label: "Allegiant Travel (ALGT)", type: "consumer", impact: -10, correlation: -0.75, marketCap: "2.5B", sector: "Leisure Airline", parentId: "luv_t" },
+      { id: "amzn_t", label: "Amazon Logistics (AMZN)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "2100B", sector: "E-Commerce Logistics", parentId: "fdx_t" },
+      { id: "chrw_t", label: "C.H. Robinson (CHRW)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "12B", sector: "Freight Brokerage", parentId: "kn_t" },
+      { id: "amlp_t", label: "Alerian MLP ETF (AMLP)", type: "etf", impact: 3, correlation: 0.38, marketCap: "8B", sector: "ETF", parentId: "epd_t" },
+      { id: "crak_t", label: "VanEck Oil Refiners (CRAK)", type: "etf", impact: 5.8, correlation: 0.65, marketCap: "0.3B", sector: "ETF", parentId: "vlo_t" }
+    ]},
+    { nodes: [
+      { id: "consumer_t", label: "Consumer Shipping Costs", type: "macro", impact: -2.5, correlation: -0.3, sector: "Macro", parentId: "fdx_t" },
+      { id: "crack_spread", label: "Crack Spread (3-2-1)", type: "macro", impact: 5, correlation: 0.55, sector: "Macro", parentId: "vlo_t" },
+      { id: "modal_shift", label: "Modal Shift (Truck to Rail)", type: "macro", impact: 3, correlation: 0.35, sector: "Macro", parentId: "unp" },
+      { id: "fuel_surcharge", label: "Fuel Surcharge Recovery Lag", type: "macro", impact: -1.5, correlation: -0.2, sector: "Macro", parentId: "odfl" },
+      { id: "opec_t", label: "OPEC+ Production Policy", type: "policy", impact: 8, correlation: 0.7, sector: "Macro", parentId: "vlo_t" },
+      { id: "gulf_refining", label: "Gulf Coast Refinery Utilization", type: "macro", impact: 5.5, correlation: 0.58, sector: "Macro", parentId: "mpc_t" },
+      { id: "ev_fleet", label: "EV Fleet Adoption", type: "macro", impact: -2, correlation: -0.22, sector: "Macro", parentId: "kn_t" },
+      { id: "red_sea", label: "Red Sea Shipping Disruption", type: "macro", impact: 4, correlation: 0.45, sector: "Macro", parentId: "maersk" }
+    ]},
+    { nodes: [
+      { id: "wti_xlink", label: "WTI Crude Oil (Cross-Link)", type: "commodity", impact: 6, correlation: 0.82, sector: "Energy", parentId: "crack_spread" },
+      { id: "spr_t", label: "Strategic Petroleum Reserve", type: "policy", impact: -3, correlation: -0.35, sector: "Energy Policy", parentId: "opec_t" },
+      { id: "usd_fx_t", label: "USD Index (DXY)", type: "fx", impact: -2.5, correlation: -0.3, sector: "Currency", parentId: "consumer_t" },
+      { id: "nat_gas_alt", label: "Natural Gas (LNG Shipping)", type: "commodity", impact: 3, correlation: 0.35, sector: "Alternative Fuel", parentId: "maersk" },
+      { id: "bdi_t", label: "Baltic Dry Index", type: "freight", impact: 4, correlation: 0.45, sector: "Shipping Rates", parentId: "red_sea" },
+      { id: "inflation_t", label: "Transportation CPI", type: "macro", impact: -3, correlation: -0.35, sector: "Consumer Impact", parentId: "consumer_t" },
+      { id: "jet_crack", label: "Jet Fuel Crack Spread", type: "index", impact: 6, correlation: 0.7, sector: "Refining Margin", parentId: "crack_spread" },
+      { id: "ryder_t", label: "Ryder System (R)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "6B", sector: "Fleet Leasing", parentId: "kn_t" },
+      { id: "dhl_t", label: "DHL / Deutsche Post (DPSGY)", type: "consumer", impact: -2.8, correlation: -0.35, marketCap: "45B", sector: "Global Logistics", parentId: "maersk" },
+      { id: "xle_link", label: "Energy Sector (XLE)", type: "commodity", impact: 5.5, correlation: 0.68, sector: "Energy", parentId: "wti_xlink" },
+      { id: "bunker_fuel", label: "Bunker Fuel (IMO 2020)", type: "commodity", impact: 3.5, correlation: 0.4, sector: "Maritime Fuel", parentId: "nat_gas_alt" }
     ]}
   ]
 };

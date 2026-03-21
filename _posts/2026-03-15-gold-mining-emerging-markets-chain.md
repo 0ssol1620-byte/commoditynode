@@ -28,32 +28,60 @@ window.COMMODITY_DATA = {
       { id: "gld", label: "SPDR Gold (GLD)", type: "etf", impact: 7.8, correlation: 0.99, marketCap: "65B", sector: "ETF" },
       { id: "iau", label: "iShares Gold (IAU)", type: "etf", impact: 7.7, correlation: 0.99, marketCap: "30B", sector: "ETF" },
       { id: "gdx", label: "VanEck Gold Miners (GDX)", type: "etf", impact: 12.5, correlation: 0.88, marketCap: "14B", sector: "ETF" },
-      { id: "dxy_inv", label: "USD Index (Inverse)", type: "macro", impact: 3.2, correlation: -0.45, sector: "Macro" },
-      { id: "real_yields", label: "Real Yields (10Y TIPS)", type: "macro", impact: 2.8, correlation: -0.52, sector: "Macro" }
+      { id: "nem", label: "Newmont (NEM)", type: "producer", impact: 14.2, correlation: 0.85, marketCap: "52B", sector: "Gold Mining" },
+      { id: "gold_barrick", label: "Barrick Gold (GOLD)", type: "producer", impact: 13.5, correlation: 0.83, marketCap: "36B", sector: "Gold Mining" },
+      { id: "aem", label: "Agnico Eagle (AEM)", type: "producer", impact: 15, correlation: 0.87, marketCap: "42B", sector: "Gold Mining" },
+      { id: "kgc", label: "Kinross Gold (KGC)", type: "producer", impact: 14, correlation: 0.82, marketCap: "12B", sector: "Gold Mining" },
+      { id: "gdxj", label: "Junior Miners (GDXJ)", type: "etf", impact: 15, correlation: 0.8, marketCap: "5B", sector: "ETF" },
+      { id: "fnv", label: "Franco-Nevada (FNV)", type: "producer", impact: 10.8, correlation: 0.82, marketCap: "25B", sector: "Royalty/Streaming" },
+      { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 11.5, correlation: 0.84, marketCap: "28B", sector: "Royalty/Streaming" },
+      { id: "slv", label: "iShares Silver (SLV)", type: "etf", impact: 6.5, correlation: 0.72, marketCap: "12B", sector: "ETF" },
+      { id: "dxy_inv", label: "USD Index (Inverse)", type: "fx", impact: 3.2, correlation: -0.45, sector: "FX" }
     ]},
     { nodes: [
-      { id: "nem", label: "Newmont (NEM)", type: "producer", impact: 14.2, correlation: 0.85, marketCap: "52B", sector: "Gold Mining", parentId: "gdx" },
-      { id: "gold_barrick", label: "Barrick Gold (GOLD)", type: "producer", impact: 13.5, correlation: 0.83, marketCap: "36B", sector: "Gold Mining", parentId: "gdx" },
-      { id: "aem", label: "Agnico Eagle (AEM)", type: "producer", impact: 15, correlation: 0.87, marketCap: "42B", sector: "Gold Mining", parentId: "gdx" },
-      { id: "kgc", label: "Kinross Gold (KGC)", type: "producer", impact: 16.8, correlation: 0.82, marketCap: "12B", sector: "Gold Mining", parentId: "gdx" },
-      { id: "gdxj", label: "Junior Miners (GDXJ)", type: "etf", impact: 18.5, correlation: 0.8, marketCap: "5B", sector: "ETF", parentId: "gdx" },
-      { id: "au_physical", label: "Physical Demand (Jewelry/Tech)", type: "macro", impact: -2.5, correlation: -0.3, sector: "Physical", parentId: "gld" }
+      { id: "rgld", label: "Royal Gold (RGLD)", type: "producer", impact: 9.8, correlation: 0.79, marketCap: "9B", sector: "Royalty/Streaming", parentId: "fnv" },
+      { id: "ssrm", label: "SSR Mining (SSRM)", type: "producer", impact: 12.5, correlation: 0.75, marketCap: "3B", sector: "Mid-Tier Mining", parentId: "kgc" },
+      { id: "btg", label: "B2Gold (BTG)", type: "producer", impact: 13, correlation: 0.77, marketCap: "5B", sector: "Mid-Tier Mining", parentId: "gdxj" },
+      { id: "au_physical", label: "Physical Demand (Jewelry/Tech)", type: "macro", impact: -2.5, correlation: -0.3, sector: "Physical", parentId: "gld" },
+      { id: "gold_fields", label: "Gold Fields (GFI)", type: "producer", impact: 14.5, correlation: 0.83, marketCap: "14B", sector: "Gold Mining", parentId: "gdx" },
+      { id: "harmony", label: "Harmony Gold (HMY)", type: "producer", impact: 15, correlation: 0.78, marketCap: "6B", sector: "Gold Mining", parentId: "gdx" },
+      { id: "alamos", label: "Alamos Gold (AGI)", type: "producer", impact: 13.5, correlation: 0.8, marketCap: "8B", sector: "Gold Mining", parentId: "aem" },
+      { id: "endeavour", label: "Endeavour Mining (EDV.TO)", type: "producer", impact: 14, correlation: 0.79, marketCap: "6B", sector: "Gold Mining", parentId: "btg" },
+      { id: "osisko", label: "Osisko Gold Royalties (OR)", type: "producer", impact: 9, correlation: 0.75, marketCap: "3B", sector: "Royalty/Streaming", parentId: "rgld" },
+      { id: "centerra", label: "Centerra Gold (CG.TO)", type: "producer", impact: 12, correlation: 0.72, marketCap: "2B", sector: "Gold Mining", parentId: "kgc" },
+      { id: "sandstorm", label: "Sandstorm Gold (SAND)", type: "producer", impact: 11, correlation: 0.74, marketCap: "2B", sector: "Royalty/Streaming", parentId: "fnv" },
+      { id: "real_yields", label: "Real Yields (10Y TIPS)", type: "macro", impact: 2.8, correlation: -0.52, sector: "Macro", parentId: "gld" }
     ]},
     { nodes: [
-      { id: "fnv", label: "Franco-Nevada (FNV)", type: "producer", impact: 10.8, correlation: 0.82, marketCap: "25B", sector: "Royalty/Streaming", parentId: "nem" },
-      { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 11.5, correlation: 0.84, marketCap: "28B", sector: "Royalty/Streaming", parentId: "gold_barrick" },
-      { id: "rgld", label: "Royal Gold (RGLD)", type: "producer", impact: 9.8, correlation: 0.79, marketCap: "9B", sector: "Royalty/Streaming", parentId: "aem" },
-      { id: "ssrm", label: "SSR Mining (SSRM)", type: "producer", impact: 14.5, correlation: 0.75, marketCap: "3B", sector: "Mid-Tier Mining", parentId: "kgc" },
-      { id: "btg", label: "B2Gold (BTG)", type: "producer", impact: 15.2, correlation: 0.77, marketCap: "5B", sector: "Mid-Tier Mining", parentId: "gdxj" },
-      { id: "sig", label: "Signet Jewelers (SIG)", type: "consumer", impact: -3.5, correlation: -0.32, marketCap: "4B", sector: "Jewelry Retail", parentId: "au_physical" }
+      { id: "sig", label: "Signet Jewelers (SIG)", type: "consumer", impact: -3.5, correlation: -0.32, marketCap: "4B", sector: "Jewelry Retail", parentId: "au_physical" },
+      { id: "tif", label: "Tiffany/LVMH Jewelry", type: "consumer", impact: -1.5, correlation: -0.18, marketCap: "400B", sector: "Luxury Jewelry", parentId: "au_physical" },
+      { id: "pamp", label: "PAMP SA / Valcambi (Private)", type: "processor", impact: 5, correlation: 0.55, sector: "Gold Refining", parentId: "nem" },
+      { id: "sprott_etf", label: "Sprott Physical Gold (PHYS)", type: "etf", impact: 7.5, correlation: 0.98, marketCap: "8B", sector: "ETF", parentId: "gld" },
+      { id: "torex", label: "Torex Gold (TXG.TO)", type: "producer", impact: 13.5, correlation: 0.76, marketCap: "2.5B", sector: "Gold Mining", parentId: "endeavour" },
+      { id: "equinox", label: "Equinox Gold (EQX)", type: "producer", impact: 14.5, correlation: 0.74, marketCap: "3B", sector: "Gold Mining", parentId: "gold_fields" },
+      { id: "mining_equip", label: "Caterpillar Mining (CAT)", type: "supplier", impact: 2.5, correlation: 0.3, marketCap: "170B", sector: "Mining Equipment", parentId: "nem" },
+      { id: "cyanide_supply", label: "Cyanco/Chemours (CC)", type: "supplier", impact: 2, correlation: 0.25, marketCap: "3.5B", sector: "Mining Chemicals", parentId: "gold_barrick" },
+      { id: "perth_mint", label: "Perth Mint / Royal Mint", type: "processor", impact: 4, correlation: 0.48, sector: "Minting/Refining", parentId: "pamp" },
+      { id: "slw_silver", label: "First Majestic Silver (AG)", type: "producer", impact: 10, correlation: 0.68, marketCap: "2.5B", sector: "Silver Mining", parentId: "slv" }
     ]},
     { nodes: [
-      { id: "cb_china", label: "PBOC Gold Reserves", type: "macro", impact: 4.5, sector: "Central Banks", parentId: "fnv" },
-      { id: "cb_india", label: "RBI Gold Reserves", type: "macro", impact: 3.8, sector: "Central Banks", parentId: "wpm" },
-      { id: "eem", label: "EM Equities (EEM)", type: "positive", impact: 2.2, correlation: 0.28, marketCap: "22B", sector: "ETF", parentId: "cb_china" },
-      { id: "em_fx", label: "EM Currencies (Gold-Linked)", type: "macro", impact: 2.8, sector: "Macro", parentId: "cb_india" },
+      { id: "cb_china", label: "PBOC Gold Reserves", type: "policy", impact: 4.5, sector: "Central Banks", parentId: "fnv" },
+      { id: "cb_india", label: "RBI Gold Reserves", type: "policy", impact: 3.8, sector: "Central Banks", parentId: "wpm" },
+      { id: "cb_poland", label: "NBP Poland Gold Buying", type: "policy", impact: 3, sector: "Central Banks", parentId: "rgld" },
+      { id: "cb_turkey", label: "TCMB Turkey Reserves", type: "policy", impact: 2.5, sector: "Central Banks", parentId: "cb_india" },
+      { id: "eem", label: "EM Equities (EEM)", type: "etf", impact: 2.2, correlation: 0.28, marketCap: "22B", sector: "ETF", parentId: "cb_china" },
+      { id: "em_fx", label: "EM Currencies (Gold-Linked)", type: "fx", impact: 2.8, sector: "FX", parentId: "cb_india" },
       { id: "tlt_inv", label: "Treasuries Opportunity Cost", type: "macro", impact: -1.5, correlation: -0.35, marketCap: "50B", sector: "Bonds", parentId: "real_yields" },
       { id: "geopolitics", label: "Geopolitical Risk Premium", type: "macro", impact: 5, sector: "Macro", parentId: "dxy_inv" }
+    ]},
+    { nodes: [
+      { id: "bitcoin_comp", label: "Bitcoin Competition (BTC)", type: "substitute", impact: -2, correlation: -0.15, sector: "Digital Assets", parentId: "gld" },
+      { id: "de_dollar", label: "De-Dollarization Trend", type: "macro", impact: 6, sector: "Geopolitics", parentId: "cb_china" },
+      { id: "fed_rate_gold", label: "Federal Funds Rate", type: "macro", impact: -5, sector: "Macro", parentId: "real_yields" },
+      { id: "inflation_exp", label: "5Y Breakeven Inflation", type: "macro", impact: 4, sector: "Macro", parentId: "tlt_inv" },
+      { id: "zar_gold", label: "South African Rand (ZAR)", type: "fx", impact: -2.5, correlation: -0.3, sector: "FX", parentId: "gold_fields" },
+      { id: "cad_gold", label: "Canadian Dollar (CAD)", type: "fx", impact: 1.5, correlation: 0.2, sector: "FX", parentId: "aem" },
+      { id: "vix_gold", label: "VIX Volatility Index", type: "macro", impact: 3.5, correlation: 0.4, sector: "Risk Sentiment", parentId: "geopolitics" }
     ]}
   ]
 };

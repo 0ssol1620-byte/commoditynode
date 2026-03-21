@@ -7,7 +7,7 @@ tags: [coffee, JO-ETF, SBUX, Starbucks, Dunkin, specialty-coffee, arabica]
 description: "How coffee price spikes impact JO ETF, Starbucks (SBUX), Dunkin (DNKN), specialty roasters, and coffee retailers. Full correlation analysis with historical data."
 reading_time: 7
 commodity_name: "Coffee"
-direction: bullish
+direction: bearish
 image: /assets/images/og-coffee.png
 canonical_url: https://commoditynode.com/coffee-price-starbucks-retail/
 ---
@@ -28,28 +28,60 @@ window.COMMODITY_DATA = {
       { id: "sbux", label: "Starbucks (SBUX)", type: "consumer", impact: -8.5, correlation: -0.72, marketCap: "110B", sector: "Coffee Retail" },
       { id: "mcd_c", label: "McDonald's (MCD)", type: "consumer", impact: -3.5, correlation: -0.48, marketCap: "215B", sector: "Fast Food" },
       { id: "jde", label: "JDE Peet's (JDEP.AS)", type: "consumer", impact: -10, correlation: -0.82, marketCap: "14B", sector: "Coffee Roasting" },
-      { id: "nen_c", label: "Nestlé (NESN.SW)", type: "consumer", impact: -5, correlation: -0.62, marketCap: "300B", sector: "Food & Coffee" }
+      { id: "nen_c", label: "Nestlé (NESN.SW)", type: "consumer", impact: -5, correlation: -0.62, marketCap: "300B", sector: "Food & Coffee" },
+      { id: "kdp_c", label: "Keurig Dr Pepper (KDP)", type: "consumer", impact: -5.5, correlation: -0.58, marketCap: "45B", sector: "Beverages" },
+      { id: "farm_c", label: "Farmer Bros (FARM)", type: "consumer", impact: -12, correlation: -0.85, marketCap: "0.08B", sector: "Coffee Distribution" },
+      { id: "brazil_coffee", label: "Brazilian Growers", type: "producer", impact: 25, correlation: 0.95, sector: "Coffee Production" },
+      { id: "colombia", label: "Colombian Cooperatives", type: "producer", impact: 22, correlation: 0.9, sector: "Coffee Production" },
+      { id: "vietnam_c", label: "Vietnam Robusta Growers", type: "producer", impact: 18, correlation: 0.88, sector: "Robusta Production" },
+      { id: "ethiopia_c", label: "Ethiopian Exporters", type: "producer", impact: 16.5, correlation: 0.86, sector: "Specialty Coffee" }
     ]},
     { nodes: [
-      { id: "brazil_coffee", label: "Brazilian Growers", type: "producer", impact: 25, correlation: 0.95, sector: "Coffee Production", parentId: "jde" },
-      { id: "colombia", label: "Colombian Cooperatives", type: "producer", impact: 22, correlation: 0.9, sector: "Coffee Production", parentId: "jde" },
-      { id: "dunkin_c", label: "Dunkin' (Private)", type: "consumer", impact: -6.5, correlation: -0.68, sector: "Coffee Chain", parentId: "sbux" },
-      { id: "lavazza", label: "Lavazza (Private)", type: "consumer", impact: -8.5, correlation: -0.75, sector: "Coffee Roasting", parentId: "jde" }
+      { id: "dunkin_c", label: "Dunkin' Brands (Private)", type: "consumer", impact: -6.5, correlation: -0.68, sector: "Coffee Chain", parentId: "sbux" },
+      { id: "lavazza", label: "Lavazza (Private)", type: "consumer", impact: -8.5, correlation: -0.75, sector: "Coffee Roasting", parentId: "jde" },
+      { id: "green_traders", label: "Green Coffee Traders", type: "processor", impact: 12.5, correlation: 0.82, sector: "Trading", parentId: "brazil_coffee" },
+      { id: "shipping_c", label: "Santos Port Logistics", type: "supplier", impact: 5, correlation: 0.55, sector: "Logistics", parentId: "brazil_coffee" },
+      { id: "capsules", label: "Nespresso Capsule Makers", type: "consumer", impact: -9, correlation: -0.78, sector: "Coffee Capsules", parentId: "nen_c" },
+      { id: "peets_c", label: "Peet's Coffee (JDE)", type: "consumer", impact: -9.5, correlation: -0.8, sector: "Premium Coffee", parentId: "jde" },
+      { id: "treatt_c", label: "Treatt PLC (TET.L)", type: "consumer", impact: -5, correlation: -0.5, marketCap: "0.6B", sector: "Flavoring", parentId: "nen_c" },
+      { id: "honduras_c", label: "Honduras Coffee Growers", type: "producer", impact: 17, correlation: 0.85, sector: "Coffee Production", parentId: "colombia" },
+      { id: "peru_c", label: "Peru Coffee Cooperatives", type: "producer", impact: 15, correlation: 0.82, sector: "Organic Coffee", parentId: "colombia" },
+      { id: "ice_stocks_c", label: "ICE Certified Stocks", type: "index", impact: -8, correlation: -0.72, sector: "Futures Market", parentId: "jo" }
     ]},
     { nodes: [
-      { id: "shipping_c", label: "Container Shipping", type: "positive", impact: 5, correlation: 0.55, sector: "Logistics", parentId: "brazil_coffee" },
       { id: "roasters", label: "Specialty Roasters", type: "consumer", impact: -12, correlation: -0.88, sector: "Artisan Coffee", parentId: "lavazza" },
-      { id: "cups_c", label: "Packaging (Pactiv Evergreen)", type: "consumer", impact: -2.5, correlation: -0.35, sector: "Packaging", parentId: "sbux" }
+      { id: "cups_c", label: "Pactiv Evergreen (PTVE)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "2B", sector: "Packaging", parentId: "sbux" },
+      { id: "mcd_mccafe", label: "McCafé Division", type: "consumer", impact: -3, correlation: -0.4, sector: "Value Coffee", parentId: "mcd_c" },
+      { id: "wba_c", label: "Walgreens (WBA) Coffee", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "8B", sector: "Retail Coffee", parentId: "kdp_c" },
+      { id: "cosi_c", label: "Costa Coffee (Coca-Cola)", type: "consumer", impact: -5.5, correlation: -0.6, sector: "Coffee Chain", parentId: "dunkin_c" },
+      { id: "tim_c", label: "Tim Hortons (QSR)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "35B", sector: "Coffee Chain", parentId: "dunkin_c" },
+      { id: "indies_c", label: "Independent Cafés", type: "consumer", impact: -14, correlation: -0.88, sector: "Small Business", parentId: "roasters" },
+      { id: "office_coffee", label: "Office Coffee Services", type: "consumer", impact: -7, correlation: -0.7, sector: "B2B Coffee", parentId: "roasters" },
+      { id: "brl_coffee", label: "Brazilian Real (BRL)", type: "fx", impact: 4, correlation: 0.48, sector: "Currency", parentId: "brazil_coffee" },
+      { id: "conab_c", label: "CONAB Crop Reports", type: "index", impact: 10, correlation: 0.72, sector: "Supply Data", parentId: "brazil_coffee" }
     ]},
     { nodes: [
-      { id: "baristas", label: "Café Employment", type: "macro", impact: -3, sector: "Labor", parentId: "dunkin_c" },
-      { id: "office_coffee", label: "Office Coffee Services", type: "macro", impact: -7, correlation: -0.7, sector: "B2B", parentId: "roasters" },
-      { id: "capsules", label: "Nespresso Pods", type: "consumer", impact: -9, correlation: -0.78, sector: "Coffee Capsules", parentId: "nen_c" }
+      { id: "baristas", label: "Café Employment Impact", type: "macro", impact: -3, correlation: -0.32, sector: "Labor", parentId: "dunkin_c" },
+      { id: "consumer_trade", label: "Consumer Trade-Down Effect", type: "macro", impact: -5, correlation: -0.5, sector: "Macro", parentId: "sbux" },
+      { id: "robusta_sub", label: "Robusta Substitution", type: "substitute", impact: 10, correlation: 0.75, sector: "Blend Shifting", parentId: "vietnam_c" },
+      { id: "grocery_shelf", label: "Grocery Coffee (Folgers/Maxwell)", type: "consumer", impact: -6, correlation: -0.62, sector: "Mass Market Coffee", parentId: "kdp_c" },
+      { id: "kcup_c", label: "K-Cup Pod Segment", type: "consumer", impact: -7, correlation: -0.65, sector: "Single-Serve Coffee", parentId: "capsules" },
+      { id: "sugar_cocoa", label: "Sugar & Cocoa (Co-Inputs)", type: "commodity", impact: 3, correlation: 0.35, sector: "Soft Commodities", parentId: "jde" },
+      { id: "cafe_equip", label: "Café Equipment (De'Longhi)", type: "consumer", impact: -3.5, correlation: -0.38, sector: "Equipment", parentId: "indies_c" },
+      { id: "rwand_c", label: "Rwanda Specialty Coffee", type: "producer", impact: 14, correlation: 0.8, sector: "African Specialty", parentId: "ethiopia_c" }
     ]},
     { nodes: [
-      { id: "brazil_drought", label: "Brazil Drought", type: "macro", impact: 18, sector: "Macro", parentId: "brazil_coffee" },
-      { id: "la_nina_c", label: "La Niña Weather", type: "macro", impact: 12, sector: "Macro", parentId: "jo" },
-      { id: "consumer_trade", label: "Consumer Trade-Down", type: "macro", impact: -5, sector: "Macro", parentId: "sbux" }
+      { id: "brazil_drought", label: "Brazil Drought / Frost Risk", type: "macro", impact: 15, correlation: 0.82, sector: "Macro", parentId: "brazil_coffee" },
+      { id: "la_nina_c", label: "La Niña / El Niño Weather", type: "macro", impact: 12, correlation: 0.7, sector: "Macro", parentId: "jo" },
+      { id: "ico_report", label: "ICO Supply-Demand Balance", type: "index", impact: 8, correlation: 0.65, sector: "Macro", parentId: "conab_c" },
+      { id: "shipping_rates_c", label: "Container Freight Rates", type: "freight", impact: 3, correlation: 0.35, sector: "Logistics", parentId: "shipping_c" },
+      { id: "usd_coffee", label: "USD Index (DXY)", type: "fx", impact: -4, correlation: -0.45, sector: "Currency", parentId: "brl_coffee" },
+      { id: "tea_sub", label: "Tea Substitution Effect", type: "substitute", impact: -2, correlation: -0.2, sector: "Beverages", parentId: "consumer_trade" },
+      { id: "luckin_c", label: "Luckin Coffee (LKNCY)", type: "consumer", impact: -6, correlation: -0.58, marketCap: "8B", sector: "China Coffee", parentId: "sbux" },
+      { id: "energy_drink_c", label: "Energy Drinks (MNST/CELH)", type: "substitute", impact: -1.5, correlation: -0.18, sector: "Beverages", parentId: "consumer_trade" },
+      { id: "fair_trade_c", label: "Fair Trade Premium Impact", type: "index", impact: -2, correlation: -0.25, sector: "Sustainability", parentId: "colombia" },
+      { id: "colombian_peso", label: "Colombian Peso (COP)", type: "fx", impact: 3, correlation: 0.35, sector: "Currency", parentId: "colombia" },
+      { id: "vietnam_dong_c", label: "Vietnamese Dong (VND)", type: "fx", impact: 2, correlation: 0.25, sector: "Currency", parentId: "vietnam_c" }
     ]}
   ]
 };

@@ -26,34 +26,70 @@ window.COMMODITY_DATA = {
   commodity: { id: "fertilizer", label: "Fertilizer ↑12%", price: "$520/t DAP", change: "+12%" },
   levels: [
     { nodes: [
-      { id: "mos", label: "Mosaic (MOS)", type: "consumer", impact: 14, correlation: 0.85, marketCap: "12B", sector: "Phosphate/Potash" },
-      { id: "ntr", label: "Nutrien (NTR)", type: "consumer", impact: 12, correlation: 0.82, marketCap: "28B", sector: "Diversified Fertilizer" },
-      { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: 10.5, correlation: 0.78, marketCap: "16B", sector: "Nitrogen Fertilizer" },
-      { id: "ipi", label: "Intrepid Potash (IPI)", type: "producer", impact: 16, correlation: 0.8, marketCap: "0.5B", sector: "Potash" },
+      { id: "mos", label: "Mosaic (MOS)", type: "producer", impact: 14, correlation: 0.85, marketCap: "12B", sector: "Phosphate/Potash" },
+      { id: "ntr", label: "Nutrien (NTR)", type: "producer", impact: 12, correlation: 0.82, marketCap: "28B", sector: "Diversified Fertilizer" },
+      { id: "cf", label: "CF Industries (CF)", type: "producer", impact: 10.5, correlation: 0.78, marketCap: "16B", sector: "Nitrogen Fertilizer" },
+      { id: "ipi", label: "Intrepid Potash (IPI)", type: "producer", impact: 15, correlation: 0.8, marketCap: "0.5B", sector: "Potash" },
       { id: "eqt", label: "EQT Corp (EQT)", type: "producer", impact: 4.5, correlation: 0.45, marketCap: "20B", sector: "Natural Gas" },
-      { id: "adm_fert", label: "ADM (ADM)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "26B", sector: "Ag Processing" }
+      { id: "adm_fert", label: "ADM (ADM)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "26B", sector: "Ag Processing" },
+      { id: "soil", label: "Global X Fertilizers (SOIL)", type: "etf", impact: 11.5, correlation: 0.84, marketCap: "0.1B", sector: "ETF" },
+      { id: "dba_fert", label: "Invesco Agriculture (DBA)", type: "etf", impact: 5.5, correlation: 0.55, marketCap: "0.9B", sector: "ETF" },
+      { id: "lxu", label: "LSB Industries (LXU)", type: "producer", impact: 9.5, correlation: 0.74, marketCap: "1.2B", sector: "Nitrogen Fertilizer" },
+      { id: "ung_fert", label: "UNG Natural Gas ETF", type: "etf", impact: 4, correlation: 0.42, marketCap: "0.5B", sector: "ETF" },
+      { id: "ocp", label: "OCP Group (Morocco)", type: "producer", impact: 13, correlation: 0.83, sector: "Phosphate Mining" },
+      { id: "k_s", label: "K+S AG (SDF.DE)", type: "producer", impact: 11, correlation: 0.76, marketCap: "3.5B", sector: "Potash/Salt" },
+      { id: "yara", label: "Yara International (YAR.OL)", type: "producer", impact: 9, correlation: 0.72, marketCap: "10B", sector: "Nitrogen Fertilizer" },
+      { id: "ctva_fert", label: "Corteva (CTVA)", type: "consumer", impact: 4.8, correlation: 0.52, marketCap: "42B", sector: "Seed/Crop Science" }
     ]},
     { nodes: [
-      { id: "ice", label: "ICL Group (ICL)", type: "consumer", impact: 11, correlation: 0.76, marketCap: "8B", sector: "Specialty Minerals", parentId: "mos" },
+      { id: "ice", label: "ICL Group (ICL)", type: "producer", impact: 11, correlation: 0.76, marketCap: "8B", sector: "Specialty Minerals", parentId: "mos" },
       { id: "fmc", label: "FMC Corp (FMC)", type: "consumer", impact: 5.5, correlation: 0.5, marketCap: "7B", sector: "Crop Protection", parentId: "ntr" },
-      { id: "farmers", label: "U.S. Farm Operators", type: "negative", impact: -8, correlation: -0.72, sector: "Agriculture", parentId: "mos" },
-      { id: "ura_nitrogen", label: "UAN/Urea Markets", type: "consumer", impact: 13, correlation: 0.8, sector: "Nitrogen Pricing", parentId: "cf" },
-      { id: "bg_fert", label: "Bunge (BG)", type: "consumer", impact: -2.5, correlation: -0.3, marketCap: "16B", sector: "Ag Processing", parentId: "adm_fert" }
+      { id: "farmers", label: "U.S. Farm Operators", type: "consumer", impact: -8, correlation: -0.72, sector: "Agriculture", parentId: "mos" },
+      { id: "ura_nitrogen", label: "UAN/Urea Markets", type: "index", impact: 13, correlation: 0.8, sector: "Nitrogen Pricing", parentId: "cf" },
+      { id: "bg_fert", label: "Bunge (BG)", type: "processor", impact: -2.5, correlation: -0.3, marketCap: "16B", sector: "Ag Processing", parentId: "adm_fert" },
+      { id: "sulfur_mkt", label: "Sulfur Markets", type: "commodity", impact: 7.5, correlation: 0.65, sector: "Industrial Chemicals", parentId: "mos" },
+      { id: "ammonia_mkt", label: "Ammonia Price Index", type: "index", impact: 11.5, correlation: 0.78, sector: "Chemical Feedstock", parentId: "cf" },
+      { id: "uralkali", label: "Uralkali (Russia)", type: "producer", impact: 12, correlation: 0.75, sector: "Potash", parentId: "ipi" },
+      { id: "tsn_fert", label: "Tyson Foods (TSN)", type: "consumer", impact: -4.2, correlation: -0.45, marketCap: "22B", sector: "Livestock", parentId: "adm_fert" },
+      { id: "cnhi_fert", label: "CNH Industrial (CNHI)", type: "consumer", impact: 3.5, correlation: 0.38, marketCap: "18B", sector: "Farm Equipment", parentId: "ntr" },
+      { id: "phosphate_rock", label: "Phosphate Rock Index", type: "index", impact: 10.5, correlation: 0.82, sector: "Mining", parentId: "ocp" },
+      { id: "ar_gas", label: "Antero Resources (AR)", type: "producer", impact: 3.8, correlation: 0.4, marketCap: "8B", sector: "Natural Gas", parentId: "eqt" }
     ]},
     { nodes: [
       { id: "de", label: "Deere & Co (DE)", type: "consumer", impact: 3.5, correlation: 0.35, marketCap: "110B", sector: "Farm Equipment", parentId: "farmers" },
       { id: "grain_buyers", label: "Global Grain Buyers", type: "consumer", impact: -5.5, correlation: -0.55, sector: "Food Import", parentId: "farmers" },
-      { id: "wheat_price", label: "Wheat Price Impact", type: "producer", impact: 7, correlation: 0.65, sector: "Grains", parentId: "farmers" },
+      { id: "wheat_price", label: "Wheat Price Impact", type: "commodity", impact: 7, correlation: 0.65, sector: "Grains", parentId: "farmers" },
       { id: "food_processors", label: "Food Processors (GIS, KHC)", type: "consumer", impact: -4, correlation: -0.45, sector: "Packaged Food", parentId: "grain_buyers" },
-      { id: "brazil_ag", label: "Brazilian Agriculture", type: "negative", impact: -6, correlation: -0.58, sector: "Agriculture", parentId: "mos" },
-      { id: "potash_market", label: "Global Potash Market", type: "consumer", impact: 12.5, correlation: 0.82, sector: "Fertilizer", parentId: "ipi" }
+      { id: "brazil_ag", label: "Brazilian Agriculture", type: "regional", impact: -6, correlation: -0.58, sector: "Agriculture", parentId: "mos" },
+      { id: "potash_market", label: "Global Potash Market", type: "index", impact: 12.5, correlation: 0.82, sector: "Fertilizer", parentId: "ipi" },
+      { id: "agco", label: "AGCO Corp (AGCO)", type: "consumer", impact: 3.2, correlation: 0.34, marketCap: "8B", sector: "Farm Equipment", parentId: "cnhi_fert" },
+      { id: "fpi_fert", label: "Farmland Partners (FPI)", type: "regional", impact: 4.5, correlation: 0.48, marketCap: "0.6B", sector: "Farmland REIT", parentId: "farmers" },
+      { id: "corn_price", label: "Corn Price Impact", type: "commodity", impact: 6.5, correlation: 0.6, sector: "Grains", parentId: "farmers" },
+      { id: "india_farmers", label: "Indian Farm Operators", type: "consumer", impact: -7.5, correlation: -0.68, sector: "Agriculture", parentId: "uralkali" },
+      { id: "ppc_fert", label: "Pilgrims Pride (PPC)", type: "consumer", impact: -5.5, correlation: -0.58, marketCap: "8B", sector: "Poultry", parentId: "tsn_fert" },
+      { id: "soy_price", label: "Soybean Price Impact", type: "commodity", impact: 5.8, correlation: 0.55, sector: "Oilseeds", parentId: "bg_fert" }
     ]},
     { nodes: [
       { id: "food_security", label: "Global Food Security", type: "macro", impact: -7, correlation: -0.6, sector: "Macro", parentId: "grain_buyers" },
-      { id: "india_subsidy", label: "India Fertilizer Subsidies", type: "macro", impact: 6, correlation: 0.5, sector: "Macro", parentId: "potash_market" },
-      { id: "russia_sanctions", label: "Russia/Belarus Sanctions", type: "macro", impact: 10, correlation: 0.72, sector: "Macro", parentId: "potash_market" },
+      { id: "india_subsidy", label: "India Fertilizer Subsidies", type: "policy", impact: 6, correlation: 0.5, sector: "Macro", parentId: "potash_market" },
+      { id: "russia_sanctions", label: "Russia/Belarus Sanctions", type: "policy", impact: 10, correlation: 0.72, sector: "Macro", parentId: "potash_market" },
       { id: "nat_gas_cost", label: "Natural Gas Feedstock Cost", type: "macro", impact: 8, correlation: 0.68, sector: "Macro", parentId: "cf" },
-      { id: "consumer_food_prices", label: "Consumer Food Inflation", type: "macro", impact: -4.5, correlation: -0.48, sector: "Macro", parentId: "food_processors" }
+      { id: "consumer_food_prices", label: "Consumer Food Inflation", type: "macro", impact: -4.5, correlation: -0.48, sector: "Macro", parentId: "food_processors" },
+      { id: "china_export_ctrl", label: "China Phosphate Export Controls", type: "policy", impact: 8.5, correlation: 0.7, sector: "Macro", parentId: "ocp" },
+      { id: "gis_fert", label: "General Mills (GIS)", type: "consumer", impact: -3.2, correlation: -0.38, marketCap: "38B", sector: "Packaged Food", parentId: "food_processors" },
+      { id: "khc_fert", label: "Kraft Heinz (KHC)", type: "consumer", impact: -3, correlation: -0.35, marketCap: "42B", sector: "Packaged Food", parentId: "food_processors" },
+      { id: "mcd_fert", label: "McDonald's (MCD)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "210B", sector: "Restaurants", parentId: "food_processors" },
+      { id: "ethanol_demand", label: "Ethanol Mandate / Demand", type: "policy", impact: 4, correlation: 0.42, sector: "Macro", parentId: "corn_price" },
+      { id: "brl_fx", label: "Brazilian Real (BRL/USD)", type: "fx", impact: -3.5, correlation: -0.38, sector: "Currency", parentId: "brazil_ag" },
+      { id: "usda_policy", label: "USDA Planting Intentions", type: "policy", impact: 5, correlation: 0.5, sector: "Macro", parentId: "farmers" }
+    ]},
+    { nodes: [
+      { id: "fao_index", label: "FAO Food Price Index", type: "index", impact: -5, correlation: -0.52, sector: "Macro", parentId: "food_security" },
+      { id: "africa_food", label: "Sub-Saharan Africa Food Import", type: "regional", impact: -6, correlation: -0.55, sector: "Food Import", parentId: "food_security" },
+      { id: "mena_food", label: "MENA Food Security", type: "regional", impact: -5.5, correlation: -0.5, sector: "Food Import", parentId: "grain_buyers" },
+      { id: "lng_export", label: "LNG Export Demand", type: "macro", impact: 3, correlation: 0.32, sector: "Energy", parentId: "nat_gas_cost" },
+      { id: "usd_strength", label: "USD Index (DXY)", type: "fx", impact: -3, correlation: -0.35, sector: "Currency", parentId: "food_security" },
+      { id: "freight_rates", label: "Dry Bulk Freight Rates", type: "freight", impact: 2.5, correlation: 0.28, sector: "Shipping", parentId: "brazil_ag" }
     ]}
   ]
 };

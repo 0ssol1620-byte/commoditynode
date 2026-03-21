@@ -42,29 +42,60 @@ window.COMMODITY_DATA = {
       { id: "agco", label: "AGCO Corp (AGCO)", type: "consumer", impact: 10, correlation: 0.82, marketCap: "9B", sector: "Farm Equipment" },
       { id: "cnhi", label: "CNH Industrial (CNHI)", type: "supplier", impact: 9, correlation: 0.8, marketCap: "18B", sector: "Farm/Construction Equipment" },
       { id: "corn_etf", label: "Teucrium Corn (CORN)", type: "etf", impact: 9.5, correlation: 0.95, marketCap: "0.15B", sector: "ETF" },
-      { id: "tsn", label: "Tyson Foods (TSN)", type: "consumer", impact: -5.5, correlation: -0.62, marketCap: "22B", sector: "Protein/Livestock" }
+      { id: "tsn", label: "Tyson Foods (TSN)", type: "consumer", impact: -5.5, correlation: -0.62, marketCap: "22B", sector: "Protein/Livestock" },
+      { id: "cf", label: "CF Industries (CF)", type: "producer", impact: 8.5, correlation: 0.75, marketCap: "16B", sector: "Nitrogen Fertilizer" },
+      { id: "ctva", label: "Corteva (CTVA)", type: "producer", impact: 7, correlation: 0.72, marketCap: "38B", sector: "Seed/Crop Protection" },
+      { id: "mos", label: "Mosaic Co (MOS)", type: "producer", impact: 7.5, correlation: 0.7, marketCap: "10B", sector: "Phosphate/Potash" },
+      { id: "dba_ag", label: "Invesco Agriculture (DBA)", type: "etf", impact: 6, correlation: 0.7, marketCap: "0.8B", sector: "ETF" },
+      { id: "adm", label: "ADM (ADM)", type: "processor", impact: 4.5, correlation: 0.52, marketCap: "25B", sector: "Grain Processing" },
+      { id: "bg_corn", label: "Bunge Global (BG)", type: "processor", impact: 5, correlation: 0.58, marketCap: "14B", sector: "Grain Trading" },
+      { id: "ntr", label: "Nutrien (NTR)", type: "producer", impact: 6.5, correlation: 0.65, marketCap: "28B", sector: "Fertilizer/Retail" },
+      { id: "pilgrims", label: "Pilgrim's Pride (PPC)", type: "consumer", impact: -6, correlation: -0.65, marketCap: "9B", sector: "Poultry" }
     ]},
     { nodes: [
-      { id: "ctva", label: "Corteva (CTVA)", type: "consumer", impact: 7, correlation: 0.72, marketCap: "38B", sector: "Seed/Crop Protection", parentId: "de" },
-      { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: 8.5, correlation: 0.75, marketCap: "16B", sector: "Nitrogen Fertilizer", parentId: "de" },
-      { id: "mos", label: "Mosaic Co (MOS)", type: "consumer", impact: 7.5, correlation: 0.7, marketCap: "10B", sector: "Phosphate/Potash", parentId: "cf" },
-      { id: "cat_ag", label: "Caterpillar (CAT)", type: "producer", impact: 4, correlation: 0.48, marketCap: "170B", sector: "Construction/Mining", parentId: "cnhi" },
-      { id: "adm", label: "ADM (ADM)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "25B", sector: "Grain Processing", parentId: "tsn" }
-    ]},
-    { nodes: [
-      { id: "ntr", label: "Nutrien (NTR)", type: "consumer", impact: 6.5, correlation: 0.65, marketCap: "28B", sector: "Fertilizer/Retail", parentId: "mos" },
-      { id: "fmc_ag", label: "FMC Corp (FMC)", type: "consumer", impact: 5.5, correlation: 0.58, marketCap: "7B", sector: "Crop Chemicals", parentId: "ctva" },
+      { id: "fmc_ag", label: "FMC Corp (FMC)", type: "producer", impact: 5.5, correlation: 0.58, marketCap: "7B", sector: "Crop Chemicals", parentId: "ctva" },
+      { id: "cat_ag", label: "Caterpillar (CAT)", type: "supplier", impact: 4, correlation: 0.48, marketCap: "170B", sector: "Construction/Mining", parentId: "cnhi" },
       { id: "lw", label: "Lamb Weston (LW)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "8B", sector: "Potato Processing", parentId: "adm" },
-      { id: "pilgrims", label: "Pilgrim's Pride (PPC)", type: "consumer", impact: -6, correlation: -0.65, marketCap: "9B", sector: "Poultry", parentId: "tsn" },
-      { id: "ethanol", label: "Ethanol Producers (GPRE)", type: "substitute", impact: -4.5, correlation: -0.52, marketCap: "1.5B", sector: "Ethanol", parentId: "adm" }
+      { id: "ethanol", label: "Green Plains (GPRE)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "1.5B", sector: "Ethanol", parentId: "adm" },
+      { id: "farmland", label: "Farmland Partners (FPI)", type: "regional", impact: 5, correlation: 0.55, marketCap: "1B", sector: "Farmland REIT", parentId: "de" },
+      { id: "hormel", label: "Hormel Foods (HRL)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "18B", sector: "Meat Products", parentId: "tsn" },
+      { id: "moo_corn", label: "VanEck Agribusiness (MOO)", type: "etf", impact: 5.5, correlation: 0.68, marketCap: "1.2B", sector: "ETF", parentId: "dba_ag" },
+      { id: "trimble", label: "Trimble (TRMB)", type: "supplier", impact: 3.5, correlation: 0.42, marketCap: "15B", sector: "Precision Ag Tech", parentId: "de" },
+      { id: "lnn", label: "Lindsay Corp (LNN)", type: "supplier", impact: 4.5, correlation: 0.52, marketCap: "1.5B", sector: "Irrigation Equipment", parentId: "de" },
+      { id: "titan_mach", label: "Titan Machinery (TITN)", type: "supplier", impact: 8, correlation: 0.72, marketCap: "0.8B", sector: "Equipment Dealer", parentId: "agco" },
+      { id: "calms", label: "Cal-Maine Foods (CALM)", type: "consumer", impact: -4, correlation: -0.5, marketCap: "4B", sector: "Egg Production", parentId: "pilgrims" },
+      { id: "cargill_grain", label: "Cargill (Private)", type: "processor", impact: 5, correlation: 0.55, sector: "Grain Trading", parentId: "bg_corn" }
     ]},
     { nodes: [
-      { id: "farmland", label: "Farmland Values (FPI)", type: "regional", impact: 5, correlation: 0.55, marketCap: "1B", sector: "Farmland REIT", parentId: "de" },
-      { id: "dba_ag", label: "Invesco Agriculture (DBA)", type: "etf", impact: 6, correlation: 0.7, marketCap: "0.8B", sector: "ETF", parentId: "corn_etf" },
-      { id: "hormel", label: "Hormel Foods (HRL)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "18B", sector: "Meat Products", parentId: "pilgrims" },
       { id: "sbux_corn", label: "Starbucks (Milk Costs)", type: "consumer", impact: -1.5, correlation: -0.2, marketCap: "105B", sector: "Restaurants", parentId: "lw" },
+      { id: "kr_corn", label: "Kroger (KR)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "40B", sector: "Grocery", parentId: "hormel" },
+      { id: "wmt_corn", label: "Walmart (WMT)", type: "consumer", impact: -0.8, correlation: -0.12, marketCap: "580B", sector: "Retail", parentId: "kr_corn" },
+      { id: "mcd_corn", label: "McDonald's (MCD)", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "210B", sector: "QSR", parentId: "hormel" },
+      { id: "yum_corn", label: "Yum! Brands (YUM)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "40B", sector: "QSR", parentId: "mcd_corn" },
+      { id: "adm_eth", label: "ADM Ethanol Division", type: "processor", impact: -2.5, correlation: -0.32, sector: "Ethanol Processing", parentId: "ethanol" },
+      { id: "rex_energy", label: "REX Energy (REXR)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "0.8B", sector: "Ethanol Investor", parentId: "ethanol" },
+      { id: "soy_compete", label: "Soybean Acreage Competition", type: "substitute", impact: -3, correlation: -0.35, sector: "Competing Crop", parentId: "corn_etf" },
+      { id: "wheat_compete", label: "Wheat Acreage Competition", type: "substitute", impact: -2, correlation: -0.25, sector: "Competing Crop", parentId: "corn_etf" },
+      { id: "sanderson", label: "Sanderson Farms (SAFM/Cargill)", type: "consumer", impact: -5.5, correlation: -0.62, sector: "Poultry", parentId: "pilgrims" },
+      { id: "ingr_corn", label: "Ingredion (INGR)", type: "processor", impact: 3, correlation: 0.38, marketCap: "8B", sector: "Corn Processing", parentId: "adm" }
+    ]},
+    { nodes: [
       { id: "usda_income", label: "USDA Farm Income Report", type: "macro", impact: 7, sector: "Macro", parentId: "de" },
-      { id: "la_nina_ag", label: "La Niña Weather Pattern", type: "macro", impact: 8, sector: "Macro", parentId: "corn_etf" }
+      { id: "ko_corn", label: "Coca-Cola (HFCS Costs)", type: "consumer", impact: -1, correlation: -0.15, marketCap: "265B", sector: "Beverages", parentId: "ingr_corn" },
+      { id: "pep_corn", label: "PepsiCo (HFCS/Frito-Lay)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "225B", sector: "Beverages/Snacks", parentId: "ingr_corn" },
+      { id: "hsy_corn", label: "Hershey (Corn Syrup)", type: "consumer", impact: -1.5, correlation: -0.2, marketCap: "32B", sector: "Confectionery", parentId: "ingr_corn" },
+      { id: "deere_tech", label: "DE Precision Ag Platform", type: "macro", impact: 4, sector: "Technology", parentId: "de" },
+      { id: "china_corn", label: "China Corn Import Demand", type: "macro", impact: 6, sector: "Demand", parentId: "bg_corn" },
+      { id: "livestock_cycle", label: "Hog/Cattle Cycle Phase", type: "macro", impact: -3, sector: "Demand", parentId: "tsn" },
+      { id: "basis_spread", label: "Corn Basis (Local vs Futures)", type: "index", impact: 3, correlation: 0.35, sector: "Futures Market", parentId: "corn_etf" }
+    ]},
+    { nodes: [
+      { id: "la_nina_ag", label: "La Nina Weather Pattern", type: "macro", impact: 8, sector: "Macro", parentId: "corn_etf" },
+      { id: "ethanol_mandate", label: "RFS Ethanol Mandate", type: "policy", impact: 4, sector: "Policy", parentId: "ethanol" },
+      { id: "usd_corn", label: "USD Strength (DXY)", type: "fx", impact: -4, correlation: -0.48, sector: "FX", parentId: "adm" },
+      { id: "brazil_safrinha", label: "Brazil Safrinha Corn Crop", type: "macro", impact: -5, sector: "Supply", parentId: "bg_corn" },
+      { id: "us_yield_trend", label: "US Corn Yield Trend", type: "macro", impact: -4, sector: "Supply", parentId: "corn_etf" },
+      { id: "drc_freight", label: "Mississippi Barge Rates", type: "freight", impact: 2, correlation: 0.28, sector: "Logistics", parentId: "adm" }
     ]}
   ]
 };

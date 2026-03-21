@@ -25,35 +25,64 @@ window.COMMODITY_DATA = {
   commodity: { id: "copper", label: "Copper ↑14%", price: "$5.70/lb", change: "+14%" },
   levels: [
     { nodes: [
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 19.5, correlation: 0.93, marketCap: "72B", sector: "Copper Mining" },
-      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 16, correlation: 0.89, marketCap: "82B", sector: "Copper Mining" },
-      { id: "copx", label: "Global X Copper Miners (COPX)", type: "etf", impact: 15.5, correlation: 0.91, marketCap: "3B", sector: "ETF" },
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 15, correlation: 0.93, marketCap: "72B", sector: "Copper Mining" },
+      { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 14, correlation: 0.89, marketCap: "82B", sector: "Copper Mining" },
+      { id: "copx", label: "Global X Copper Miners (COPX)", type: "etf", impact: 13.5, correlation: 0.91, marketCap: "3B", sector: "Copper Miners ETF" },
       { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 11.5, correlation: 0.78, marketCap: "27B", sector: "Diversified Mining" },
       { id: "dhi", label: "D.R. Horton (DHI)", type: "consumer", impact: -4.5, correlation: -0.42, marketCap: "42B", sector: "Homebuilders" },
-      { id: "chpt_cu", label: "ChargePoint (CHPT)", type: "consumer", impact: -5.5, correlation: -0.55, marketCap: "2B", sector: "EV Charging" }
+      { id: "chpt_cu", label: "ChargePoint (CHPT)", type: "consumer", impact: -5.5, correlation: -0.55, marketCap: "2B", sector: "EV Charging" },
+      { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "producer", impact: 15, correlation: 0.94, marketCap: "14B", sector: "Copper Development" },
+      { id: "bhp_cu", label: "BHP Group (BHP)", type: "producer", impact: 9, correlation: 0.72, marketCap: "158B", sector: "Diversified Mining" },
+      { id: "cper", label: "United States Copper (CPER)", type: "etf", impact: 12, correlation: 0.98, marketCap: "0.3B", sector: "Copper ETF" },
+      { id: "rio_cu", label: "Rio Tinto (RIO)", type: "producer", impact: 7.5, correlation: 0.65, marketCap: "120B", sector: "Diversified Mining" },
+      { id: "ero", label: "Ero Copper (ERO)", type: "producer", impact: 14.5, correlation: 0.9, marketCap: "3B", sector: "Copper Mining" },
+      { id: "xhb", label: "SPDR Homebuilders (XHB)", type: "etf", impact: -3, correlation: -0.35, marketCap: "2B", sector: "Homebuilders ETF" }
     ]},
     { nodes: [
-      { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "producer", impact: 22, correlation: 0.94, marketCap: "14B", sector: "Copper Development", parentId: "fcx" },
-      { id: "bhp_cu", label: "BHP Group (BHP)", type: "producer", impact: 9, correlation: 0.72, marketCap: "158B", sector: "Diversified Mining", parentId: "scco" },
       { id: "len", label: "Lennar (LEN)", type: "consumer", impact: -3.8, correlation: -0.38, marketCap: "35B", sector: "Homebuilders", parentId: "dhi" },
       { id: "blnk_cu", label: "Blink Charging (BLNK)", type: "consumer", impact: -6.2, correlation: -0.58, marketCap: "0.5B", sector: "EV Charging", parentId: "chpt_cu" },
-      { id: "ero", label: "Ero Copper (ERO)", type: "producer", impact: 24, correlation: 0.9, marketCap: "3B", sector: "Copper Mining", parentId: "copx" },
-      { id: "rio_cu", label: "Rio Tinto (RIO)", type: "producer", impact: 7.5, correlation: 0.65, marketCap: "120B", sector: "Diversified Mining", parentId: "teck" }
+      { id: "evgo_cu", label: "EVgo (EVGO)", type: "consumer", impact: -5.8, correlation: -0.55, marketCap: "1B", sector: "EV Charging", parentId: "chpt_cu" },
+      { id: "fm_cu", label: "First Quantum Minerals (FM.TO)", type: "producer", impact: 13.5, correlation: 0.88, marketCap: "18B", sector: "Copper Mining", parentId: "fcx" },
+      { id: "antofagasta", label: "Antofagasta (ANTO.L)", type: "producer", impact: 12.5, correlation: 0.86, marketCap: "22B", sector: "Copper Mining", parentId: "scco" },
+      { id: "aph_cu", label: "Amphenol (APH)", type: "consumer", impact: -3, correlation: -0.32, marketCap: "80B", sector: "Electrical Connectors", parentId: "copx" },
+      { id: "tel_cu", label: "TE Connectivity (TEL)", type: "consumer", impact: -2.8, correlation: -0.3, marketCap: "45B", sector: "Electrical Connectors", parentId: "copx" },
+      { id: "nue_cu", label: "Nucor Corp (NUE)", type: "consumer", impact: -1.5, correlation: -0.18, marketCap: "38B", sector: "Steel/Construction", parentId: "dhi" },
+      { id: "hudbay", label: "Hudbay Minerals (HBM)", type: "producer", impact: 14, correlation: 0.88, marketCap: "4B", sector: "Copper Mining", parentId: "ero" },
+      { id: "lundin", label: "Lundin Mining (LUN.TO)", type: "producer", impact: 13, correlation: 0.85, marketCap: "9B", sector: "Copper Mining", parentId: "teck" },
+      { id: "pwr_cu", label: "Quanta Services (PWR)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "42B", sector: "Utility Construction", parentId: "chpt_cu" }
     ]},
     { nodes: [
       { id: "wire_mfrs", label: "Wiring & Cable Mfrs", type: "consumer", impact: -7.5, correlation: -0.68, sector: "Electrical Equipment", parentId: "len" },
       { id: "recyclers_cu", label: "Copper Recyclers", type: "substitute", impact: 9, correlation: 0.74, sector: "Recycling", parentId: "ivn" },
       { id: "util_capex", label: "Utility CapEx Budgets", type: "consumer", impact: -4, correlation: -0.42, sector: "Utilities", parentId: "blnk_cu" },
-      { id: "chile_ops", label: "Chilean Operations", type: "producer", impact: 17, correlation: 0.91, sector: "Mining", parentId: "scco" },
-      { id: "elect_mfrs", label: "Electronics Mfrs (APH, TEL)", type: "consumer", impact: -3.5, correlation: -0.35, marketCap: "75B", sector: "Electronics", parentId: "wire_mfrs" },
-      { id: "peru_ops", label: "Peruvian Operations", type: "producer", impact: 15, correlation: 0.86, sector: "Mining", parentId: "bhp_cu" }
+      { id: "chile_ops", label: "Chilean Operations (Codelco)", type: "regional", impact: 14, correlation: 0.91, sector: "Mining", parentId: "scco" },
+      { id: "elect_mfrs", label: "Electronics Mfrs", type: "consumer", impact: -3.5, correlation: -0.35, sector: "Electronics", parentId: "wire_mfrs" },
+      { id: "peru_ops", label: "Peruvian Operations", type: "regional", impact: 13, correlation: 0.86, sector: "Mining", parentId: "bhp_cu" },
+      { id: "zambia_ops", label: "Zambian Copperbelt", type: "regional", impact: 12, correlation: 0.84, sector: "Mining", parentId: "ivn" },
+      { id: "nee_cu", label: "NextEra Energy (NEE)", type: "consumer", impact: -2.5, correlation: -0.28, marketCap: "155B", sector: "Renewable Utility", parentId: "util_capex" },
+      { id: "phm", label: "PulteGroup (PHM)", type: "consumer", impact: -3.5, correlation: -0.36, marketCap: "22B", sector: "Homebuilders", parentId: "len" },
+      { id: "sedg_cu", label: "SolarEdge (SEDG)", type: "consumer", impact: -4, correlation: -0.42, marketCap: "4B", sector: "Solar/Inverters", parentId: "util_capex" }
     ]},
     { nodes: [
-      { id: "china_pmi_cu", label: "China Manufacturing PMI", type: "macro", impact: 6.5, sector: "Macro", parentId: "fcx" },
-      { id: "ev_adoption_cu", label: "Global EV Sales Growth", type: "macro", impact: 7, sector: "Macro", parentId: "chpt_cu" },
-      { id: "infra_spend", label: "Global Infrastructure Spend", type: "macro", impact: 8, sector: "Macro", parentId: "teck" },
-      { id: "housing_starts", label: "U.S. Housing Starts", type: "macro", impact: -3, sector: "Macro", parentId: "dhi" },
-      { id: "green_capex", label: "Green Energy CapEx", type: "macro", impact: 7.5, sector: "Macro", parentId: "copx" }
+      { id: "china_pmi_cu", label: "China Manufacturing PMI", type: "macro", impact: 6.5, sector: "Demand", parentId: "fcx" },
+      { id: "ev_adoption_cu", label: "Global EV Sales Growth", type: "macro", impact: 7, sector: "Demand", parentId: "chpt_cu" },
+      { id: "infra_spend", label: "Global Infrastructure Spend", type: "macro", impact: 8, sector: "Demand", parentId: "teck" },
+      { id: "housing_starts", label: "U.S. Housing Starts", type: "macro", impact: -3, sector: "Demand", parentId: "dhi" },
+      { id: "green_capex", label: "Green Energy CapEx", type: "macro", impact: 7.5, sector: "Demand", parentId: "copx" },
+      { id: "comex_lme", label: "COMEX-LME Premium ($0.22/lb)", type: "index", impact: 5, correlation: 0.6, sector: "Arbitrage", parentId: "cper" },
+      { id: "ore_grades", label: "Declining Ore Grades", type: "macro", impact: 4, sector: "Supply", parentId: "chile_ops" },
+      { id: "nevi_program", label: "US NEVI Program ($4.2B)", type: "policy", impact: -3.5, sector: "Infrastructure Policy", parentId: "chpt_cu" }
+    ]},
+    { nodes: [
+      { id: "usd_clp", label: "USD/CLP Exchange Rate", type: "fx", impact: -3, correlation: -0.35, sector: "Currency", parentId: "chile_ops" },
+      { id: "mine_permits", label: "Mine Permitting Delays (12-15yr)", type: "policy", impact: 5, sector: "Supply Policy", parentId: "ore_grades" },
+      { id: "aluminum_sub", label: "Aluminum Substitution Trend", type: "substitute", impact: -3, correlation: -0.3, sector: "Material Science", parentId: "wire_mfrs" },
+      { id: "grid_modernization", label: "EU Grid Action Plan (€45B)", type: "policy", impact: 6, sector: "Infrastructure Policy", parentId: "infra_spend" },
+      { id: "india_electrify", label: "India Electrification Initiative", type: "macro", impact: 5, sector: "Demand", parentId: "infra_spend" },
+      { id: "scrap_spread", label: "Primary-Scrap Price Spread", type: "index", impact: 4, correlation: 0.5, sector: "Recycling Economics", parentId: "recyclers_cu" },
+      { id: "dc_copper", label: "Data Center Copper Demand", type: "macro", impact: 5, sector: "Demand", parentId: "ev_adoption_cu" },
+      { id: "shfe_inventory", label: "SHFE Copper Inventory", type: "index", impact: -4, correlation: -0.45, sector: "Supply Data", parentId: "china_pmi_cu" },
+      { id: "zinc_cross", label: "Zinc Price Correlation", type: "commodity", impact: 4, correlation: 0.55, sector: "Cross-Commodity", parentId: "comex_lme" }
     ]}
   ]
 };

@@ -47,12 +47,14 @@ defaults:
     values:
       layout: post
       author: CommodityNode Research
-      image: /assets/images/og-default.svg
+      image: /assets/images/og-default.png
   - scope:
       path: ""
       type: "commodities"
     values:
       layout: "commodity"
+
+future: true
 
 exclude:
   - node_modules/

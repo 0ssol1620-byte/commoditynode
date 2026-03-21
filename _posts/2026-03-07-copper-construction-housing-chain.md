@@ -7,7 +7,7 @@ tags: [copper, construction, housing, FCX, DHI, LEN, infrastructure, ev]
 description: 'Mapping the infrastructure chain from copper prices through construction costs to housing affordability, with EV charging and grid modernization adding new demand.'
 reading_time: 9
 commodity_name: 'Copper'
-direction: bullish
+direction: bearish
 image: /assets/images/og-copper.png
 ---
 
@@ -29,30 +29,62 @@ window.COMMODITY_DATA = {
       { id: "scco", label: "Southern Copper (SCCO)", type: "producer", impact: 11.8, correlation: 0.9, marketCap: "78B", sector: "Copper Mining" },
       { id: "teck", label: "Teck Resources (TECK)", type: "producer", impact: 8.5, correlation: 0.78, marketCap: "22B", sector: "Diversified Mining" },
       { id: "copx", label: "Global X Copper Miners (COPX)", type: "etf", impact: 11, correlation: 0.91, marketCap: "2.5B", sector: "ETF" },
+      { id: "cper_c", label: "United States Copper (CPER)", type: "etf", impact: 9.8, correlation: 0.98, marketCap: "0.3B", sector: "ETF" },
       { id: "ivn", label: "Ivanhoe Mines (IVN)", type: "producer", impact: 14, correlation: 0.88, marketCap: "12B", sector: "Copper Mining" },
-      { id: "ero", label: "Ero Copper (ERO)", type: "producer", impact: 13.2, correlation: 0.86, marketCap: "3B", sector: "Copper Mining" }
+      { id: "ero", label: "Ero Copper (ERO)", type: "producer", impact: 13.2, correlation: 0.86, marketCap: "3B", sector: "Copper Mining" },
+      { id: "hbm_c", label: "Hudbay Minerals (HBM)", type: "producer", impact: 13.5, correlation: 0.84, marketCap: "4.2B", sector: "Copper Mining" },
+      { id: "antofagasta_c", label: "Antofagasta PLC (ANTO)", type: "producer", impact: 12.8, correlation: 0.87, marketCap: "22B", sector: "Copper Mining" },
+      { id: "lundin_c", label: "Lundin Mining (LUNMF)", type: "producer", impact: 13, correlation: 0.85, marketCap: "8B", sector: "Copper Mining" },
+      { id: "bhp_c", label: "BHP Group (BHP)", type: "producer", impact: 6, correlation: 0.65, marketCap: "155B", sector: "Diversified Mining" },
+      { id: "rio_c", label: "Rio Tinto (RIO)", type: "producer", impact: 5.5, correlation: 0.6, marketCap: "118B", sector: "Diversified Mining" },
+      { id: "first_quantum", label: "First Quantum (FM.TO)", type: "producer", impact: 15, correlation: 0.88, marketCap: "10B", sector: "Copper Mining" },
+      { id: "cat_c", label: "Caterpillar (CAT)", type: "supplier", impact: 4.5, correlation: 0.5, marketCap: "180B", sector: "Mining Equipment" }
     ]},
     { nodes: [
-      { id: "ati", label: "ATI Inc (ATI)", type: "negative", impact: -3.2, correlation: -0.42, marketCap: "7B", sector: "Specialty Metals" },
-      { id: "pwr", label: "Quanta Services (PWR)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "42B", sector: "Electrical Contractors" },
-      { id: "ame", label: "AMETEK Inc (AME)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "38B", sector: "Electronic Instruments" },
-      { id: "eaton", label: "Eaton Corp (ETN)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "115B", sector: "Power Management" },
-      { id: "wire_mfg", label: "Encore Wire (WIRE)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "5B", sector: "Wire/Cable" },
-      { id: "hubb", label: "Hubbell Inc (HUBB)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "22B", sector: "Electrical Products" }
+      { id: "wire_mfg", label: "Encore Wire (WIRE)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "5B", sector: "Wire/Cable", parentId: "fcx" },
+      { id: "pwr", label: "Quanta Services (PWR)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "42B", sector: "Electrical Contractors", parentId: "fcx" },
+      { id: "eaton", label: "Eaton Corp (ETN)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "115B", sector: "Power Management", parentId: "scco" },
+      { id: "hubb", label: "Hubbell Inc (HUBB)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "22B", sector: "Electrical Products", parentId: "scco" },
+      { id: "ame", label: "AMETEK Inc (AME)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "38B", sector: "Electronic Instruments", parentId: "teck" },
+      { id: "ati", label: "ATI Inc (ATI)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "7B", sector: "Specialty Metals", parentId: "teck" },
+      { id: "gne", label: "Generac Holdings (GNRC)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "8B", sector: "Power Equipment", parentId: "eaton" },
+      { id: "emr_c", label: "Emerson Electric (EMR)", type: "consumer", impact: -1.8, correlation: -0.25, marketCap: "60B", sector: "Automation", parentId: "eaton" },
+      { id: "rok_c", label: "Rockwell Automation (ROK)", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "32B", sector: "Automation", parentId: "ame" },
+      { id: "abb_c", label: "ABB Ltd (ABB)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "68B", sector: "Power Equipment", parentId: "hubb" },
+      { id: "nee_c", label: "NextEra Energy (NEE)", type: "consumer", impact: -2.2, correlation: -0.3, marketCap: "155B", sector: "Utilities", parentId: "pwr" },
+      { id: "scrap_cu", label: "Copper Scrap Recyclers", type: "processor", impact: 8.5, correlation: 0.75, sector: "Recycling", parentId: "fcx" }
     ]},
     { nodes: [
-      { id: "dhi", label: "D.R. Horton (DHI)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "48B", sector: "Homebuilders" },
-      { id: "len", label: "Lennar Corp (LEN)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "38B", sector: "Homebuilders" },
-      { id: "phm", label: "PulteGroup (PHM)", type: "consumer", impact: -3.4, correlation: -0.44, marketCap: "24B", sector: "Homebuilders" },
-      { id: "nvr", label: "NVR Inc (NVR)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "28B", sector: "Homebuilders" },
-      { id: "xhb", label: "SPDR Homebuilders (XHB)", type: "etf", impact: -3, correlation: -0.42, marketCap: "2B", sector: "ETF" }
+      { id: "dhi", label: "D.R. Horton (DHI)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "48B", sector: "Homebuilders", parentId: "wire_mfg" },
+      { id: "len", label: "Lennar Corp (LEN)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "38B", sector: "Homebuilders", parentId: "wire_mfg" },
+      { id: "phm", label: "PulteGroup (PHM)", type: "consumer", impact: -3.4, correlation: -0.44, marketCap: "24B", sector: "Homebuilders", parentId: "wire_mfg" },
+      { id: "nvr", label: "NVR Inc (NVR)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "28B", sector: "Homebuilders", parentId: "wire_mfg" },
+      { id: "tol_c", label: "Toll Brothers (TOL)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "12B", sector: "Homebuilders", parentId: "wire_mfg" },
+      { id: "xhb", label: "SPDR Homebuilders (XHB)", type: "etf", impact: -3, correlation: -0.42, marketCap: "2B", sector: "ETF", parentId: "dhi" },
+      { id: "pave_c", label: "Global X Infra Dev (PAVE)", type: "etf", impact: -1.5, correlation: -0.2, marketCap: "7B", sector: "ETF", parentId: "pwr" },
+      { id: "whr_c", label: "Whirlpool (WHR)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "6B", sector: "Appliances", parentId: "dhi" },
+      { id: "masco_c", label: "Masco Corp (MAS)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "15B", sector: "Home Products", parentId: "len" },
+      { id: "tsla_ev_c", label: "Tesla (TSLA)", type: "consumer", impact: -1.5, correlation: -0.2, marketCap: "780B", sector: "EV", parentId: "wire_mfg" },
+      { id: "rivn_c", label: "Rivian (RIVN)", type: "consumer", impact: -2, correlation: -0.25, marketCap: "15B", sector: "EV", parentId: "wire_mfg" },
+      { id: "itw_c", label: "Illinois Tool Works (ITW)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "78B", sector: "Industrials", parentId: "ame" }
     ]},
     { nodes: [
-      { id: "chpt", label: "ChargePoint (CHPT)", type: "consumer", impact: -4.2, correlation: -0.5, marketCap: "2B", sector: "EV Charging" },
-      { id: "blnk", label: "Blink Charging (BLNK)", type: "consumer", impact: -4.8, correlation: -0.52, marketCap: "0.5B", sector: "EV Charging" },
-      { id: "infra_spend", label: "Infrastructure Spending", type: "macro", impact: -1.5, correlation: -0.25, sector: "Macro" },
-      { id: "housing_afford", label: "Housing Affordability", type: "macro", impact: -2, correlation: -0.35, sector: "Macro" },
-      { id: "grid_mod", label: "Grid Modernization Cost", type: "macro", impact: -1.8, correlation: -0.3, sector: "Macro" }
+      { id: "chpt", label: "ChargePoint (CHPT)", type: "consumer", impact: -4.2, correlation: -0.5, marketCap: "2B", sector: "EV Charging", parentId: "tsla_ev_c" },
+      { id: "blnk", label: "Blink Charging (BLNK)", type: "consumer", impact: -4.8, correlation: -0.52, marketCap: "0.5B", sector: "EV Charging", parentId: "tsla_ev_c" },
+      { id: "evgo_c", label: "EVgo Inc (EVGO)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "1B", sector: "EV Charging", parentId: "tsla_ev_c" },
+      { id: "housing_afford", label: "Housing Affordability Index", type: "macro", impact: -2, correlation: -0.35, sector: "Macro", parentId: "dhi" },
+      { id: "grid_mod", label: "Grid Modernization Cost", type: "macro", impact: -1.8, correlation: -0.3, sector: "Macro", parentId: "nee_c" },
+      { id: "aapl_c", label: "Apple Inc (AAPL)", type: "consumer", impact: -0.8, correlation: -0.1, marketCap: "3.4T", sector: "Electronics", parentId: "ame" },
+      { id: "infra_spend", label: "IIJA Infrastructure Spend", type: "policy", impact: -1.5, correlation: -0.25, sector: "Macro", parentId: "pwr" },
+      { id: "construction_cost", label: "Construction Cost Index", type: "macro", impact: -3, correlation: -0.4, sector: "Macro", parentId: "dhi" }
+    ]},
+    { nodes: [
+      { id: "dxy_cu", label: "USD Index (DXY)", type: "fx", impact: -4.5, correlation: -0.6, sector: "Macro", parentId: "fcx" },
+      { id: "china_pmi_cu", label: "China Manufacturing PMI", type: "macro", impact: 7, correlation: 0.7, sector: "Macro", parentId: "fcx" },
+      { id: "chile_policy", label: "Chile Mining Policy", type: "policy", impact: 5, correlation: 0.45, sector: "Macro", parentId: "scco" },
+      { id: "peru_policy", label: "Peru Mining Permits", type: "policy", impact: 4, correlation: 0.4, sector: "Macro", parentId: "first_quantum" },
+      { id: "ev_demand_cu", label: "EV Copper Demand Growth", type: "macro", impact: 6, correlation: 0.55, sector: "Macro", parentId: "copx" },
+      { id: "lme_cu_stocks", label: "LME Copper Inventory", type: "index", impact: -5, correlation: -0.65, sector: "Macro", parentId: "fcx" }
     ]}
   ]
 };

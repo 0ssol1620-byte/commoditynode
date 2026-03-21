@@ -24,32 +24,63 @@ window.COMMODITY_DATA = {
   commodity: { id: "iron_ore", label: "Iron Ore ↑8%", price: "$120/ton", change: "+8%" },
   levels: [
     { nodes: [
-      { id: "vale", label: "Vale SA (VALE)", type: "producer", impact: 15.5, correlation: 0.91, marketCap: "60B", sector: "Iron Ore Mining" },
-      { id: "bhp_i", label: "BHP Group (BHP)", type: "producer", impact: 12, correlation: 0.88, marketCap: "145B", sector: "Diversified Mining" },
-      { id: "rio_i", label: "Rio Tinto (RIO)", type: "producer", impact: 13.5, correlation: 0.89, marketCap: "110B", sector: "Iron Ore Mining" },
+      { id: "vale", label: "Vale SA (VALE)", type: "producer", impact: 13, correlation: 0.91, marketCap: "60B", sector: "Iron Ore Mining" },
+      { id: "bhp_i", label: "BHP Group (BHP)", type: "producer", impact: 10, correlation: 0.88, marketCap: "145B", sector: "Diversified Mining" },
+      { id: "rio_i", label: "Rio Tinto (RIO)", type: "producer", impact: 11, correlation: 0.89, marketCap: "110B", sector: "Iron Ore Mining" },
+      { id: "fortescue", label: "Fortescue (FMG.AX)", type: "producer", impact: 14.5, correlation: 0.93, marketCap: "55B", sector: "Iron Ore Mining" },
       { id: "x_i", label: "US Steel (X)", type: "consumer", impact: -5.5, correlation: -0.62, marketCap: "7B", sector: "Steel Producer" },
-      { id: "nue_i", label: "Nucor (NUE)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "35B", sector: "Steel Producer" }
+      { id: "nue_i", label: "Nucor (NUE)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "35B", sector: "Steel Producer" },
+      { id: "pick", label: "iShares MSCI Mining (PICK)", type: "etf", impact: 7, correlation: 0.78, marketCap: "1B", sector: "ETF" },
+      { id: "slx", label: "VanEck Steel ETF (SLX)", type: "etf", impact: -2.5, correlation: -0.35, marketCap: "0.1B", sector: "ETF" },
+      { id: "champion", label: "Champion Iron (CIA.TO)", type: "producer", impact: 14, correlation: 0.92, marketCap: "3B", sector: "Iron Ore Mining" },
+      { id: "chinese_steel", label: "Baosteel (600019.SS)", type: "consumer", impact: -6.5, correlation: -0.7, sector: "China Steel" },
+      { id: "stld", label: "Steel Dynamics (STLD)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "18B", sector: "Steel Producer" },
+      { id: "shipping_io", label: "Capesize Shipping (BDRY)", type: "supplier", impact: 10, correlation: 0.78, sector: "Bulk Shipping" },
+      { id: "anglo_io", label: "Anglo American (AAL.L)", type: "producer", impact: 8, correlation: 0.75, marketCap: "35B", sector: "Diversified Mining" }
     ]},
     { nodes: [
-      { id: "fortescue", label: "Fortescue (FMG.AX)", type: "producer", impact: 18, correlation: 0.93, marketCap: "55B", sector: "Iron Ore Mining", parentId: "vale" },
-      { id: "champion", label: "Champion Iron (CIA.TO)", type: "producer", impact: 20, correlation: 0.92, marketCap: "3B", sector: "Iron Ore Mining", parentId: "rio_i" },
-      { id: "chinese_steel", label: "Baosteel (600019.SS)", type: "regional", impact: -6.5, correlation: -0.7, sector: "China Steel", parentId: "x_i" },
-      { id: "shipping_io", label: "Capesize Shipping", type: "supplier", impact: 10, correlation: 0.78, sector: "Bulk Shipping", parentId: "bhp_i" }
+      { id: "labrador_io", label: "Labrador Iron Ore (LIF.TO)", type: "producer", impact: 12, correlation: 0.88, marketCap: "3.5B", sector: "Iron Ore Mining", parentId: "rio_i" },
+      { id: "cliffs", label: "Cleveland-Cliffs (CLF)", type: "consumer", impact: -5, correlation: -0.58, marketCap: "6B", sector: "Iron Ore/Steel", parentId: "x_i" },
+      { id: "anshan_steel", label: "Ansteel Group (000898.SZ)", type: "consumer", impact: -6, correlation: -0.65, sector: "China Steel", parentId: "chinese_steel" },
+      { id: "hesteel", label: "Hesteel Group (000709.SZ)", type: "consumer", impact: -5.5, correlation: -0.62, sector: "China Steel", parentId: "chinese_steel" },
+      { id: "golden_ocean", label: "Golden Ocean (GOGL)", type: "supplier", impact: 9, correlation: 0.72, marketCap: "3B", sector: "Bulk Shipping", parentId: "shipping_io" },
+      { id: "star_bulk", label: "Star Bulk (SBLK)", type: "supplier", impact: 8.5, correlation: 0.7, marketCap: "2.5B", sector: "Bulk Shipping", parentId: "shipping_io" },
+      { id: "safe_bulk", label: "Safe Bulkers (SB)", type: "supplier", impact: 8, correlation: 0.68, marketCap: "0.5B", sector: "Bulk Shipping", parentId: "golden_ocean" },
+      { id: "mineral_res", label: "Mineral Resources (MIN.AX)", type: "producer", impact: 9, correlation: 0.78, marketCap: "7B", sector: "Mining Services", parentId: "fortescue" },
+      { id: "pellets_io", label: "Iron Ore Pellet Premium", type: "index", impact: 12, correlation: 0.85, sector: "Value-Added Ore", parentId: "champion" },
+      { id: "tata_steel", label: "Tata Steel (TATASTEEL.NS)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "20B", sector: "India Steel", parentId: "chinese_steel" },
+      { id: "jfe_steel", label: "JFE Holdings (5411.T)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "8B", sector: "Japan Steel", parentId: "chinese_steel" },
+      { id: "posco", label: "POSCO Holdings (005490.KS)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "18B", sector: "Korea Steel", parentId: "chinese_steel" }
     ]},
     { nodes: [
-      { id: "rail_io", label: "FMG Rail Infrastructure", type: "producer", impact: 8.5, correlation: 0.72, sector: "Mining Infrastructure", parentId: "fortescue" },
-      { id: "pellets_io", label: "Iron Ore Pellets", type: "producer", impact: 12, correlation: 0.85, sector: "Value-Added Ore", parentId: "champion" },
-      { id: "dri_io", label: "DRI/HBI Production", type: "processor", impact: -5, correlation: -0.58, sector: "Direct Reduction", parentId: "chinese_steel" }
+      { id: "rail_io", label: "FMG Rail Infrastructure", type: "supplier", impact: 6, correlation: 0.55, sector: "Mining Infrastructure", parentId: "fortescue" },
+      { id: "dri_io", label: "DRI/HBI Production", type: "processor", impact: -5, correlation: -0.58, sector: "Direct Reduction", parentId: "cliffs" },
+      { id: "ssab", label: "SSAB (SSAB-A.ST)", type: "consumer", impact: -5, correlation: -0.55, marketCap: "7B", sector: "Green Steel", parentId: "dri_io" },
+      { id: "arcelormittal", label: "ArcelorMittal (MT)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "22B", sector: "Global Steel", parentId: "x_i" },
+      { id: "thyssenkrupp", label: "ThyssenKrupp (TKA.DE)", type: "consumer", impact: -5.5, correlation: -0.6, marketCap: "4B", sector: "EU Steel", parentId: "arcelormittal" },
+      { id: "cat_mining", label: "Caterpillar (CAT)", type: "supplier", impact: 3, correlation: 0.35, marketCap: "170B", sector: "Mining Equipment", parentId: "bhp_i" },
+      { id: "komatsu", label: "Komatsu (6301.T)", type: "supplier", impact: 2.5, correlation: 0.3, marketCap: "30B", sector: "Mining Equipment", parentId: "rio_i" },
+      { id: "auto_io", label: "Auto Steel Consumers (GM/F)", type: "consumer", impact: -3, correlation: -0.38, sector: "Automotive", parentId: "nue_i" },
+      { id: "construction_demand", label: "U.S. Infrastructure Bill", type: "macro", impact: 5, sector: "Demand", parentId: "nue_i" },
+      { id: "scrap_alt", label: "Steel Scrap (Alt. Feedstock)", type: "substitute", impact: -4, correlation: -0.42, sector: "Alternative Feed", parentId: "stld" }
     ]},
     { nodes: [
-      { id: "construction_io", label: "Chinese Construction", type: "macro", impact: 9, correlation: 0.82, sector: "Real Estate", parentId: "chinese_steel" },
-      { id: "auto_io", label: "Auto Steel (BWA)", type: "consumer", impact: -4, correlation: -0.5, sector: "Automotive", parentId: "nue_i" },
-      { id: "greensteeel", label: "Green Steel (SSAB)", type: "processor", impact: -6, correlation: -0.62, sector: "Green Steel", parentId: "dri_io" }
+      { id: "construction_io", label: "Chinese Construction Activity", type: "macro", impact: 9, correlation: 0.82, sector: "Real Estate", parentId: "chinese_steel" },
+      { id: "greensteeel", label: "H2 Green Steel (Private)", type: "processor", impact: -5, correlation: -0.52, sector: "Green Steel", parentId: "ssab" },
+      { id: "sdr_io", label: "Sintered Ore Demand (Japan/Korea)", type: "macro", impact: 4, sector: "Demand", parentId: "jfe_steel" },
+      { id: "bdi", label: "Baltic Dry Index", type: "index", impact: 8, correlation: 0.75, sector: "Shipping Index", parentId: "golden_ocean" },
+      { id: "ev_steel", label: "EV Steel Demand (High Strength)", type: "macro", impact: 3, sector: "Demand", parentId: "auto_io" },
+      { id: "india_infra", label: "India Infrastructure Demand", type: "macro", impact: 5, sector: "Demand", parentId: "tata_steel" },
+      { id: "brazil_env", label: "Brazil Environmental Risk (Dams)", type: "macro", impact: 7, sector: "Supply Risk", parentId: "vale" }
     ]},
     { nodes: [
-      { id: "china_stimulus", label: "China Stimulus", type: "macro", impact: 12, sector: "Macro", parentId: "vale" },
-      { id: "evergrande_io", label: "China Property Crisis", type: "macro", impact: -10, sector: "Macro", parentId: "chinese_steel" },
-      { id: "h2_steel", label: "Hydrogen Steelmaking", type: "macro", impact: -7, sector: "Macro", parentId: "greensteeel" }
+      { id: "china_stimulus", label: "China Stimulus Package", type: "policy", impact: 12, sector: "Policy", parentId: "chinese_steel" },
+      { id: "evergrande_io", label: "China Property Crisis", type: "macro", impact: -10, sector: "Macro", parentId: "construction_io" },
+      { id: "h2_steel", label: "Hydrogen Steelmaking", type: "substitute", impact: -7, sector: "Technology", parentId: "greensteeel" },
+      { id: "aud_io", label: "Australian Dollar (AUD)", type: "fx", impact: 3, correlation: 0.35, sector: "FX", parentId: "fortescue" },
+      { id: "brl_io", label: "Brazilian Real (BRL)", type: "fx", impact: 2, correlation: 0.25, sector: "FX", parentId: "vale" },
+      { id: "eu_cbam", label: "EU Carbon Border Tax (CBAM)", type: "policy", impact: -3, sector: "Policy", parentId: "arcelormittal" },
+      { id: "sgx_iron", label: "SGX Iron Ore Futures Volume", type: "index", impact: 4, sector: "Futures Market", parentId: "vale" }
     ]}
   ]
 };

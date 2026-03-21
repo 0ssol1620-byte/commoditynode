@@ -26,32 +26,62 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "remx", label: "VanEck Rare Earth (REMX)", type: "etf", impact: 10.8, correlation: 0.86, marketCap: "0.3B", sector: "ETF" },
-      { id: "mp", label: "MP Materials (MP)", type: "producer", impact: 16.5, correlation: 0.92, marketCap: "4.5B", sector: "Rare Earth Mining" },
-      { id: "lynas", label: "Lynas Rare Earths (LYC.AX)", type: "producer", impact: 18, correlation: 0.94, sector: "Rare Earth Mining" },
-      { id: "lhx", label: "L3Harris Tech (LHX)", type: "positive", impact: 3.2, correlation: 0.35, marketCap: "45B", sector: "Defense" },
-      { id: "tsla_re", label: "Tesla (TSLA)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "780B", sector: "EV" }
+      { id: "mp", label: "MP Materials (MP)", type: "producer", impact: 14.5, correlation: 0.92, marketCap: "4.5B", sector: "Rare Earth Mining" },
+      { id: "lynas", label: "Lynas Rare Earths (LYC.AX)", type: "producer", impact: 15, correlation: 0.94, sector: "Rare Earth Mining" },
+      { id: "lhx", label: "L3Harris Tech (LHX)", type: "producer", impact: 3.2, correlation: 0.35, marketCap: "45B", sector: "Defense" },
+      { id: "tsla_re", label: "Tesla (TSLA)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "780B", sector: "EV" },
+      { id: "iluka", label: "Iluka Resources (ILU.AX)", type: "producer", impact: 12.5, correlation: 0.82, sector: "Mineral Sands/RE" },
+      { id: "ucore", label: "Ucore Rare Metals (UCU.V)", type: "processor", impact: 13, correlation: 0.88, marketCap: "0.1B", sector: "RE Processing" },
+      { id: "ves", label: "Vestas Wind (VWS.CO)", type: "consumer", impact: -4.5, correlation: -0.52, sector: "Wind Turbines" },
+      { id: "arafura", label: "Arafura RE (ARU.AX)", type: "producer", impact: 15, correlation: 0.9, marketCap: "0.5B", sector: "RE Development" },
+      { id: "energy_fuels", label: "Energy Fuels (UUUU)", type: "producer", impact: 10, correlation: 0.72, marketCap: "2B", sector: "RE/Uranium" },
+      { id: "china_northern", label: "China Northern RE (600111.SS)", type: "producer", impact: 11, correlation: 0.82, sector: "RE Mining/Processing" },
+      { id: "neo_perf", label: "Neo Performance (NEO.TO)", type: "processor", impact: 9.5, correlation: 0.75, marketCap: "0.5B", sector: "RE Processing" }
     ]},
     { nodes: [
-      { id: "iluka", label: "Iluka Resources (ILU.AX)", type: "positive", impact: 12.5, correlation: 0.82, sector: "Mineral Sands/RE", parentId: "lynas" },
-      { id: "ucore", label: "Ucore Rare Metals (UCU.V)", type: "processor", impact: 20, correlation: 0.88, marketCap: "0.1B", sector: "RE Processing", parentId: "mp" },
-      { id: "lmt", label: "Lockheed Martin (LMT)", type: "positive", impact: 2.8, correlation: 0.3, marketCap: "120B", sector: "Defense", parentId: "lhx" },
-      { id: "rtx", label: "RTX Corp (RTX)", type: "positive", impact: 2.5, correlation: 0.28, marketCap: "145B", sector: "Defense", parentId: "lhx" },
-      { id: "rivn_re", label: "Rivian (RIVN)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "12B", sector: "EV", parentId: "tsla_re" }
-    ]},
-    { nodes: [
-      { id: "ves", label: "Vestas Wind (VWS.CO)", type: "consumer", impact: -4.5, correlation: -0.52, sector: "Wind Turbines", parentId: "lynas" },
-      { id: "siemg", label: "Siemens Gamesa", type: "consumer", impact: -4, correlation: -0.48, sector: "Wind Turbines", parentId: "ves" },
-      { id: "bwxt_re", label: "BWX Technologies (BWXT)", type: "positive", impact: 2, correlation: 0.25, marketCap: "7B", sector: "Nuclear/Defense", parentId: "lmt" },
-      { id: "ndsn", label: "Nordson Corp (NDSN)", type: "consumer", impact: -1.8, correlation: -0.22, marketCap: "13B", sector: "Precision Electronics", parentId: "tsla_re" },
-      { id: "magnet", label: "Magnet Manufacturers", type: "consumer", impact: -6, correlation: -0.65, sector: "Industrial Components", parentId: "iluka" }
-    ]},
-    { nodes: [
+      { id: "lmt", label: "Lockheed Martin (LMT)", type: "producer", impact: 2.8, correlation: 0.3, marketCap: "120B", sector: "Defense", parentId: "lhx" },
+      { id: "rtx", label: "RTX Corp (RTX)", type: "producer", impact: 2.5, correlation: 0.28, marketCap: "145B", sector: "Defense", parentId: "lhx" },
+      { id: "noc", label: "Northrop Grumman (NOC)", type: "producer", impact: 2.2, correlation: 0.25, marketCap: "70B", sector: "Defense", parentId: "lhx" },
+      { id: "rivn_re", label: "Rivian (RIVN)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "12B", sector: "EV", parentId: "tsla_re" },
+      { id: "lcid_re", label: "Lucid Group (LCID)", type: "consumer", impact: -3, correlation: -0.35, marketCap: "7B", sector: "EV", parentId: "tsla_re" },
+      { id: "siemg", label: "Siemens Gamesa (SGRE)", type: "consumer", impact: -4, correlation: -0.48, sector: "Wind Turbines", parentId: "ves" },
       { id: "ge_re", label: "GE Vernova (GEV)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "55B", sector: "Wind/Power", parentId: "ves" },
-      { id: "hyundai_re", label: "Hyundai Motor", type: "consumer", impact: -2.2, correlation: -0.3, sector: "EV/Auto", parentId: "rivn_re" },
-      { id: "china_re", label: "China Export Controls", type: "macro", impact: 18, sector: "Macro", parentId: "mp" },
-      { id: "dod_re", label: "DoD Stockpiling", type: "macro", impact: 8, sector: "Macro", parentId: "lhx" },
+      { id: "bwxt_re", label: "BWX Technologies (BWXT)", type: "producer", impact: 2, correlation: 0.25, marketCap: "7B", sector: "Nuclear/Defense", parentId: "lmt" },
+      { id: "goldwind", label: "Goldwind (002202.SZ)", type: "consumer", impact: -3.5, correlation: -0.42, sector: "Wind Turbines", parentId: "ves" },
+      { id: "magnet", label: "Shin-Etsu Chemical (4063.T)", type: "consumer", impact: -5, correlation: -0.58, marketCap: "55B", sector: "Magnet Materials", parentId: "lynas" },
+      { id: "tdk_re", label: "TDK Corp (6762.T)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "15B", sector: "Magnets/Electronics", parentId: "neo_perf" },
+      { id: "vacuumschmelze", label: "VAC Magnetics (Private)", type: "consumer", impact: -4.5, correlation: -0.52, sector: "Permanent Magnets", parentId: "magnet" }
+    ]},
+    { nodes: [
+      { id: "hyundai_re", label: "Hyundai Motor (005380.KS)", type: "consumer", impact: -2.2, correlation: -0.3, sector: "EV/Auto", parentId: "rivn_re" },
+      { id: "bmw_re", label: "BMW (BMW.DE)", type: "consumer", impact: -1.8, correlation: -0.25, marketCap: "60B", sector: "EV/Auto", parentId: "rivn_re" },
+      { id: "ndsn", label: "Nordson Corp (NDSN)", type: "consumer", impact: -1.8, correlation: -0.22, marketCap: "13B", sector: "Precision Electronics", parentId: "tsla_re" },
+      { id: "nidec", label: "Nidec Corp (6594.T)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "30B", sector: "EV Motors", parentId: "magnet" },
+      { id: "bosch_re", label: "Bosch (Private)", type: "consumer", impact: -2, correlation: -0.28, sector: "Auto Components", parentId: "tdk_re" },
+      { id: "abb_re", label: "ABB Ltd (ABBN.SW)", type: "consumer", impact: -1.5, correlation: -0.2, marketCap: "90B", sector: "Industrial Motors", parentId: "magnet" },
+      { id: "fanuc_re", label: "Fanuc (6954.T)", type: "consumer", impact: -1.8, correlation: -0.24, marketCap: "32B", sector: "Robotics/Motors", parentId: "nidec" },
+      { id: "urban_mining", label: "Urban Mining Co (Private)", type: "substitute", impact: 6, correlation: 0.5, sector: "RE Recycling", parentId: "ucore" },
+      { id: "mkango", label: "Mkango Resources (MKA.V)", type: "producer", impact: 12, correlation: 0.82, marketCap: "0.06B", sector: "RE Development", parentId: "arafura" },
+      { id: "hastings", label: "Hastings Technology (HAS.AX)", type: "producer", impact: 11, correlation: 0.78, marketCap: "0.3B", sector: "RE Development", parentId: "iluka" }
+    ]},
+    { nodes: [
+      { id: "china_re", label: "China Export Controls", type: "policy", impact: 15, sector: "Policy", parentId: "mp" },
+      { id: "dod_re", label: "DoD Stockpile Program", type: "policy", impact: 8, sector: "Policy", parentId: "lhx" },
       { id: "ev_motor", label: "EV Motor Demand Growth", type: "macro", impact: 10, sector: "Macro", parentId: "remx" },
-      { id: "recyc_re", label: "RE Recycling Tech", type: "macro", impact: -5, sector: "Macro", parentId: "magnet" }
+      { id: "eu_crma", label: "EU Critical Raw Materials Act", type: "policy", impact: 6, sector: "Policy", parentId: "lynas" },
+      { id: "recyc_re", label: "RE Recycling Tech", type: "substitute", impact: -5, sector: "Technology", parentId: "magnet" },
+      { id: "ferrite_alt", label: "Ferrite Magnet Alternatives", type: "substitute", impact: -4, sector: "Technology", parentId: "ves" },
+      { id: "wind_offshore", label: "Offshore Wind Buildout", type: "macro", impact: 7, sector: "Demand", parentId: "siemg" },
+      { id: "ind_motors", label: "Industrial Motor Electrification", type: "macro", impact: 5, sector: "Demand", parentId: "nidec" }
+    ]},
+    { nodes: [
+      { id: "us_china_tensions", label: "US-China Tech Tensions", type: "policy", impact: 12, sector: "Geopolitics", parentId: "china_re" },
+      { id: "myanmar_supply", label: "Myanmar RE Supply Risk", type: "macro", impact: 5, sector: "Supply", parentId: "china_northern" },
+      { id: "japan_stockpile", label: "Japan JOGMEC Stockpiling", type: "policy", impact: 4, sector: "Policy", parentId: "dod_re" },
+      { id: "cny_fx", label: "Chinese Yuan (CNY)", type: "fx", impact: -2.5, correlation: -0.3, sector: "FX", parentId: "china_northern" },
+      { id: "aud_fx", label: "Australian Dollar (AUD)", type: "fx", impact: 2, correlation: 0.25, sector: "FX", parentId: "lynas" },
+      { id: "cobalt_sub", label: "Cobalt-Free Motor Designs", type: "substitute", impact: -3, sector: "Technology", parentId: "recyc_re" },
+      { id: "greenland_re", label: "Greenland Minerals (GGG.AX)", type: "producer", impact: 10, correlation: 0.75, marketCap: "0.1B", sector: "RE Development", parentId: "arafura" }
     ]}
   ]
 };

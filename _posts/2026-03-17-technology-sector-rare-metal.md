@@ -7,7 +7,7 @@ tags: [rare-earth, lithium, cobalt, tin, technology, AAPL, NVDA, INTC, copper]
 description: 'How the technology sector depends on rare earths, cobalt, tin, copper, and lithium — mapping supply chain vulnerabilities from chips to devices.'
 reading_time: 10
 commodity_name: 'Rare Earth'
-direction: bullish
+direction: bearish
 image: /assets/images/og-tin.png
 ---
 
@@ -30,7 +30,15 @@ window.COMMODITY_DATA = {
       { id: "intc", label: "Intel Corp (INTC)", type: "consumer", impact: -2.8, correlation: -0.4, marketCap: "110B", sector: "Semiconductor Fabs" },
       { id: "tsm", label: "TSMC (TSM)", type: "consumer", impact: -2.4, correlation: -0.36, marketCap: "650B", sector: "Semiconductor Foundry" },
       { id: "mp", label: "MP Materials (MP)", type: "producer", impact: 14.5, correlation: 0.88, marketCap: "4B", sector: "Rare Earth Mining" },
-      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 8.2, correlation: 0.78, marketCap: "58B", sector: "Copper Mining" }
+      { id: "fcx", label: "Freeport-McMoRan (FCX)", type: "producer", impact: 8.2, correlation: 0.78, marketCap: "58B", sector: "Copper Mining" },
+      { id: "remx", label: "VanEck Rare Earth ETF (REMX)", type: "etf", impact: 13.5, correlation: 0.86, marketCap: "0.4B", sector: "Rare Earth ETF" },
+      { id: "soxx", label: "iShares Semiconductor (SOXX)", type: "etf", impact: -1.8, correlation: -0.28, marketCap: "12B", sector: "Semiconductor ETF" },
+      { id: "lit", label: "Global X Lithium & Battery (LIT)", type: "etf", impact: 9.5, correlation: 0.75, marketCap: "4B", sector: "Lithium/Battery ETF" },
+      { id: "qcom", label: "Qualcomm (QCOM)", type: "consumer", impact: -1.4, correlation: -0.22, marketCap: "190B", sector: "Semiconductors" },
+      { id: "mu", label: "Micron Technology (MU)", type: "consumer", impact: -2.2, correlation: -0.34, marketCap: "105B", sector: "Memory Chips" },
+      { id: "amd", label: "AMD (AMD)", type: "consumer", impact: -1.5, correlation: -0.24, marketCap: "210B", sector: "Semiconductors" },
+      { id: "glen_co", label: "Glencore Cobalt (GLEN)", type: "producer", impact: 7.5, correlation: 0.7, marketCap: "68B", sector: "Cobalt/Copper Mining" },
+      { id: "samsung", label: "Samsung Electronics", type: "consumer", impact: -2.1, correlation: -0.33, marketCap: "350B", sector: "Consumer Electronics" }
     ]},
     { nodes: [
       { id: "eqix", label: "Equinix (EQIX)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "72B", sector: "Data Centers", parentId: "nvda" },
@@ -38,22 +46,45 @@ window.COMMODITY_DATA = {
       { id: "vale_co", label: "Vale SA (VALE) - Cobalt", type: "producer", impact: 6.8, correlation: 0.65, marketCap: "45B", sector: "Cobalt/Nickel Mining", parentId: "fcx" },
       { id: "lthm", label: "Arcadium Lithium (ALTM)", type: "producer", impact: 12, correlation: 0.85, marketCap: "5B", sector: "Lithium Production", parentId: "mp" },
       { id: "amkr", label: "Amkor Technology (AMKR)", type: "consumer", impact: -3.8, correlation: -0.48, marketCap: "7B", sector: "Chip Packaging", parentId: "tsm" },
-      { id: "hon", label: "Honeywell (HON)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "140B", sector: "Industrial Tech", parentId: "intc" }
+      { id: "hon", label: "Honeywell (HON)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "140B", sector: "Industrial Tech", parentId: "intc" },
+      { id: "lynas", label: "Lynas Rare Earths (LYC.AX)", type: "producer", impact: 15, correlation: 0.9, marketCap: "6B", sector: "Rare Earth Mining", parentId: "mp" },
+      { id: "alb", label: "Albemarle Corp (ALB)", type: "producer", impact: 10.5, correlation: 0.8, marketCap: "12B", sector: "Lithium Production", parentId: "lit" },
+      { id: "hpq", label: "HP Inc (HPQ)", type: "consumer", impact: -2.2, correlation: -0.35, marketCap: "30B", sector: "PC Hardware", parentId: "aapl" },
+      { id: "lrcx", label: "Lam Research (LRCX)", type: "consumer", impact: -1.9, correlation: -0.3, marketCap: "95B", sector: "Semiconductor Equipment", parentId: "tsm" },
+      { id: "umc", label: "United Microelectronics (UMC)", type: "consumer", impact: -2.6, correlation: -0.38, marketCap: "18B", sector: "Semiconductor Foundry", parentId: "tsm" },
+      { id: "amat", label: "Applied Materials (AMAT)", type: "consumer", impact: -1.7, correlation: -0.27, marketCap: "140B", sector: "Semiconductor Equipment", parentId: "intc" }
     ]},
     { nodes: [
       { id: "asx", label: "ASE Technology (ASX)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "18B", sector: "Chip Packaging", parentId: "amkr" },
       { id: "flex", label: "Flex Ltd (FLEX)", type: "processor", impact: -2.8, correlation: -0.38, marketCap: "12B", sector: "Contract Manufacturing", parentId: "dell" },
       { id: "recyclers", label: "E-Waste Recyclers (Umicore)", type: "substitute", impact: 7.5, correlation: 0.62, marketCap: "8B", sector: "Metal Recycling", parentId: "vale_co" },
-      { id: "lynas", label: "Lynas Rare Earths (LYC.AX)", type: "producer", impact: 16, correlation: 0.9, marketCap: "6B", sector: "Rare Earth Mining", parentId: "mp" },
       { id: "dlr", label: "Digital Realty (DLR)", type: "consumer", impact: -1.5, correlation: -0.24, marketCap: "42B", sector: "Data Centers", parentId: "eqix" },
-      { id: "jbl", label: "Jabil Inc (JBL)", type: "processor", impact: -2.6, correlation: -0.36, marketCap: "14B", sector: "Contract Manufacturing", parentId: "dell" }
+      { id: "jbl", label: "Jabil Inc (JBL)", type: "processor", impact: -2.6, correlation: -0.36, marketCap: "14B", sector: "Contract Manufacturing", parentId: "dell" },
+      { id: "foxconn", label: "Hon Hai Precision (2317.TW)", type: "processor", impact: -2.4, correlation: -0.35, marketCap: "52B", sector: "Contract Manufacturing", parentId: "aapl" },
+      { id: "iluka", label: "Iluka Resources (ILU.AX)", type: "producer", impact: 11, correlation: 0.78, marketCap: "3.5B", sector: "Rare Earth/Mineral Sands", parentId: "lynas" },
+      { id: "cmoc", label: "CMOC Group (3993.HK)", type: "producer", impact: 9.5, correlation: 0.72, marketCap: "15B", sector: "Cobalt/Copper Mining", parentId: "glen_co" },
+      { id: "celestica", label: "Celestica (CLS)", type: "processor", impact: -3, correlation: -0.4, marketCap: "8B", sector: "Contract Manufacturing", parentId: "dell" },
+      { id: "sqm", label: "SQM (SQM)", type: "producer", impact: 9, correlation: 0.72, marketCap: "14B", sector: "Lithium Production", parentId: "alb" },
+      { id: "coreweave", label: "Data Center CapEx Surge", type: "consumer", impact: -2, correlation: -0.3, sector: "Cloud Infrastructure", parentId: "dlr" },
+      { id: "xlk", label: "Technology Select SPDR (XLK)", type: "etf", impact: -1.2, correlation: -0.2, marketCap: "62B", sector: "Technology ETF", parentId: "soxx" }
     ]},
     { nodes: [
-      { id: "china_export", label: "China Export Restrictions", type: "macro", impact: 18, sector: "Geopolitical", parentId: "mp" },
+      { id: "china_export", label: "China Export Restrictions", type: "macro", impact: 15, sector: "Geopolitical", parentId: "mp" },
       { id: "ev_demand", label: "EV Battery Metal Demand", type: "macro", impact: 10, sector: "Macro", parentId: "lthm" },
       { id: "ai_infra", label: "AI Infrastructure Build-out", type: "macro", impact: -3, sector: "Macro", parentId: "nvda" },
       { id: "ttm", label: "TTM Technologies (TTMI)", type: "processor", impact: -3.2, correlation: -0.42, marketCap: "2B", sector: "PCB Manufacturing", parentId: "asx" },
-      { id: "drc_supply", label: "DRC Cobalt Supply Risk", type: "macro", impact: 12, sector: "Geopolitical", parentId: "vale_co" }
+      { id: "drc_supply", label: "DRC Cobalt Supply Risk", type: "macro", impact: 12, sector: "Geopolitical", parentId: "vale_co" },
+      { id: "vishay", label: "Vishay Intertechnology (VSH)", type: "consumer", impact: -3, correlation: -0.4, marketCap: "3B", sector: "Passive Components", parentId: "asx" },
+      { id: "corning", label: "Corning Inc (GLW)", type: "consumer", impact: -1.3, correlation: -0.2, marketCap: "35B", sector: "Specialty Glass", parentId: "foxconn" },
+      { id: "tantalum", label: "Tantalum Supply (AMG Advanced)", type: "producer", impact: 8.5, correlation: 0.68, marketCap: "1.5B", sector: "Specialty Metals", parentId: "recyclers" }
+    ]},
+    { nodes: [
+      { id: "usd_tech", label: "USD/CNY Exchange Rate", type: "fx", impact: -3.5, correlation: -0.45, sector: "Currency", parentId: "china_export" },
+      { id: "taiwan_risk", label: "Taiwan Strait Geopolitical Risk", type: "policy", impact: -8, sector: "Geopolitical", parentId: "tsm" },
+      { id: "chips_act", label: "US CHIPS Act Subsidies", type: "policy", impact: 4, sector: "Policy", parentId: "intc" },
+      { id: "cobalt_sub", label: "LFP Battery Substitution", type: "substitute", impact: -5, correlation: -0.4, sector: "Battery Technology", parentId: "ev_demand" },
+      { id: "shipping_tech", label: "Pacific Freight Rates", type: "freight", impact: -1.5, correlation: -0.2, sector: "Logistics", parentId: "foxconn" },
+      { id: "inflation_tech", label: "Core CPI Electronics", type: "macro", impact: -2, sector: "Macro", parentId: "aapl" }
     ]}
   ]
 };

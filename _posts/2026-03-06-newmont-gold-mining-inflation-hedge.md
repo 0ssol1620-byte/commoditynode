@@ -42,29 +42,63 @@ window.COMMODITY_DATA = {
       { id: "nem", label: "Newmont Corp (NEM)", type: "producer", impact: 14.5, correlation: 0.85, marketCap: "58B", sector: "Gold Mining" },
       { id: "gold_barrick", label: "Barrick Gold (GOLD)", type: "producer", impact: 13, correlation: 0.82, marketCap: "36B", sector: "Gold Mining" },
       { id: "aem", label: "Agnico Eagle (AEM)", type: "producer", impact: 12.5, correlation: 0.83, marketCap: "42B", sector: "Gold Mining" },
+      { id: "kgc", label: "Kinross Gold (KGC)", type: "producer", impact: 15, correlation: 0.8, marketCap: "12B", sector: "Gold Mining" },
       { id: "gdx", label: "GDX Gold Miners ETF", type: "etf", impact: 12, correlation: 0.88, marketCap: "14B", sector: "ETF" },
-      { id: "gld", label: "GLD Physical Gold ETF", type: "etf", impact: 8, correlation: 0.99, marketCap: "72B", sector: "ETF" }
+      { id: "gld", label: "GLD Physical Gold ETF", type: "etf", impact: 8, correlation: 0.99, marketCap: "72B", sector: "ETF" },
+      { id: "iau", label: "iShares Gold Trust (IAU)", type: "etf", impact: 7.8, correlation: 0.99, marketCap: "30B", sector: "ETF" },
+      { id: "gdxj", label: "GDXJ Junior Miners ETF", type: "etf", impact: 16, correlation: 0.85, marketCap: "5.5B", sector: "ETF" },
+      { id: "sgol", label: "Aberdeen Physical Gold (SGOL)", type: "etf", impact: 7.9, correlation: 0.99, marketCap: "3B", sector: "ETF" },
+      { id: "au_harmony", label: "Harmony Gold (HMY)", type: "producer", impact: 18, correlation: 0.82, marketCap: "6B", sector: "Gold Mining" },
+      { id: "au_gold_fields", label: "Gold Fields (GFI)", type: "producer", impact: 14, correlation: 0.8, marketCap: "14B", sector: "Gold Mining" },
+      { id: "au_anglogold", label: "AngloGold Ashanti (AU)", type: "producer", impact: 15.5, correlation: 0.81, marketCap: "12B", sector: "Gold Mining" },
+      { id: "eldorado", label: "Eldorado Gold (EGO)", type: "producer", impact: 16.5, correlation: 0.78, marketCap: "4B", sector: "Gold Mining" },
+      { id: "alamos", label: "Alamos Gold (AGI)", type: "producer", impact: 13.5, correlation: 0.79, marketCap: "8B", sector: "Gold Mining" }
     ]},
     { nodes: [
       { id: "fnv", label: "Franco-Nevada (FNV)", type: "producer", impact: 9.5, correlation: 0.8, marketCap: "24B", sector: "Royalty/Streaming" },
       { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 10.5, correlation: 0.82, marketCap: "28B", sector: "Royalty/Streaming" },
       { id: "rgld", label: "Royal Gold (RGLD)", type: "producer", impact: 9, correlation: 0.78, marketCap: "10B", sector: "Royalty/Streaming" },
-      { id: "kgc", label: "Kinross Gold (KGC)", type: "producer", impact: 15, correlation: 0.8, marketCap: "12B", sector: "Gold Mining" },
-      { id: "central_bank", label: "Central Bank Demand", type: "macro", impact: 5, correlation: 0.55, marketCap: "N/A", sector: "Macro" }
+      { id: "or_osisko", label: "Osisko Gold Royalties (OR)", type: "producer", impact: 10, correlation: 0.76, marketCap: "3.5B", sector: "Royalty/Streaming" },
+      { id: "ssrm", label: "SSR Mining (SSRM)", type: "producer", impact: 14.5, correlation: 0.77, marketCap: "3B", sector: "Gold Mining" },
+      { id: "btg", label: "B2Gold Corp (BTG)", type: "producer", impact: 15.5, correlation: 0.79, marketCap: "5B", sector: "Gold Mining" },
+      { id: "central_bank", label: "Central Bank Demand", type: "macro", impact: 5, correlation: 0.55, sector: "Macro" },
+      { id: "sand", label: "Sandstorm Gold (SAND)", type: "producer", impact: 11, correlation: 0.75, marketCap: "1.8B", sector: "Royalty/Streaming" },
+      { id: "iamgold", label: "IAMGOLD Corp (IAG)", type: "producer", impact: 17, correlation: 0.78, marketCap: "3B", sector: "Gold Mining" },
+      { id: "trf", label: "Torex Gold (TXG.TO)", type: "producer", impact: 14, correlation: 0.76, marketCap: "2.5B", sector: "Gold Mining" },
+      { id: "cat_mining", label: "Caterpillar (CAT)", type: "supplier", impact: 3.5, correlation: 0.4, marketCap: "180B", sector: "Mining Equipment" },
+      { id: "slv_proxy", label: "Silver (SLV Proxy)", type: "substitute", impact: 10, correlation: 0.82, marketCap: "12B", sector: "Precious Metals" }
     ]},
     { nodes: [
-      { id: "dxy", label: "USD Index (DXY)", type: "macro", impact: -3.5, correlation: -0.62, marketCap: "N/A", sector: "Macro" },
-      { id: "qqq", label: "Growth Stocks (QQQ)", type: "macro", impact: -2, correlation: -0.28, marketCap: "250B", sector: "Growth Equity" },
-      { id: "jpm", label: "JPMorgan Chase (JPM)", type: "macro", impact: -1.8, correlation: -0.22, marketCap: "620B", sector: "Banking" },
-      { id: "gs", label: "Goldman Sachs (GS)", type: "macro", impact: -1.5, correlation: -0.2, marketCap: "165B", sector: "Banking" },
-      { id: "real_rates", label: "Real Interest Rates", type: "macro", impact: -6, correlation: -0.72, marketCap: "N/A", sector: "Macro" }
+      { id: "dxy", label: "USD Index (DXY)", type: "fx", impact: -3.5, correlation: -0.62, sector: "Macro" },
+      { id: "eurusd", label: "EUR/USD Exchange Rate", type: "fx", impact: 3, correlation: 0.55, sector: "Macro", parentId: "dxy" },
+      { id: "usdcny", label: "USD/CNY Exchange Rate", type: "fx", impact: 2.5, correlation: 0.48, sector: "Macro", parentId: "dxy" },
+      { id: "qqq", label: "Growth Stocks (QQQ)", type: "index", impact: -2, correlation: -0.28, marketCap: "250B", sector: "Growth Equity" },
+      { id: "jpm", label: "JPMorgan Chase (JPM)", type: "consumer", impact: -1.8, correlation: -0.22, marketCap: "620B", sector: "Banking" },
+      { id: "gs", label: "Goldman Sachs (GS)", type: "consumer", impact: -1.5, correlation: -0.2, marketCap: "165B", sector: "Banking" },
+      { id: "real_rates", label: "Real Interest Rates (TIPS)", type: "macro", impact: -6, correlation: -0.72, sector: "Macro" },
+      { id: "xlf", label: "Financial Select SPDR (XLF)", type: "consumer", impact: -1.5, correlation: -0.2, marketCap: "42B", sector: "Banking" },
+      { id: "ms_gold", label: "Morgan Stanley (MS)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "155B", sector: "Banking" },
+      { id: "wfc_gold", label: "Wells Fargo (WFC)", type: "consumer", impact: -1, correlation: -0.15, marketCap: "190B", sector: "Banking" },
+      { id: "bitcoin", label: "Bitcoin (BTC)", type: "substitute", impact: 4, correlation: 0.35, sector: "Digital Assets" },
+      { id: "tlt_gold", label: "20+ Year Treasury (TLT)", type: "macro", impact: 3.5, correlation: 0.42, marketCap: "35B", sector: "Fixed Income" }
     ]},
     { nodes: [
-      { id: "sig", label: "Signet Jewelers (SIG)", type: "consumer", impact: -4.5, correlation: -0.48, marketCap: "4.5B", sector: "Jewelry Retail" },
-      { id: "tif", label: "Tiffany/LVMH (MC)", type: "consumer", impact: -2, correlation: -0.25, marketCap: "380B", sector: "Luxury/Jewelry" },
-      { id: "inflation", label: "CPI Inflation", type: "macro", impact: 4.5, correlation: 0.55, marketCap: "N/A", sector: "Macro" },
-      { id: "gdxj", label: "GDXJ Junior Miners ETF", type: "etf", impact: 16, correlation: 0.85, marketCap: "5.5B", sector: "ETF" },
-      { id: "geopolitical", label: "Geopolitical Risk Index", type: "macro", impact: 3.5, correlation: 0.45, marketCap: "N/A", sector: "Macro" }
+      { id: "sig", label: "Signet Jewelers (SIG)", type: "consumer", impact: -4.5, correlation: -0.48, marketCap: "4.5B", sector: "Jewelry Retail", parentId: "gld" },
+      { id: "tif", label: "Tiffany/LVMH (MC)", type: "consumer", impact: -2, correlation: -0.25, marketCap: "380B", sector: "Luxury/Jewelry", parentId: "gld" },
+      { id: "inflation", label: "CPI Inflation", type: "macro", impact: 4.5, correlation: 0.55, sector: "Macro", parentId: "central_bank" },
+      { id: "geopolitical", label: "Geopolitical Risk Index", type: "macro", impact: 3.5, correlation: 0.45, sector: "Macro", parentId: "central_bank" },
+      { id: "pboc_gold", label: "PBOC Gold Reserves", type: "macro", impact: 5.5, correlation: 0.6, sector: "Macro", parentId: "central_bank" },
+      { id: "rbi_gold", label: "India RBI Gold Buying", type: "macro", impact: 4, correlation: 0.5, sector: "Macro", parentId: "central_bank" },
+      { id: "turkey_cb", label: "Turkey Central Bank Gold", type: "macro", impact: 3, correlation: 0.42, sector: "Macro", parentId: "central_bank" },
+      { id: "comex_pos", label: "COMEX Futures Positioning", type: "index", impact: 6, correlation: 0.65, sector: "Macro", parentId: "gdx" }
+    ]},
+    { nodes: [
+      { id: "platinum", label: "Platinum Price Linkage", type: "substitute", impact: 5, correlation: 0.65, sector: "Precious Metals", parentId: "slv_proxy" },
+      { id: "palladium", label: "Palladium Price Linkage", type: "substitute", impact: 3.5, correlation: 0.48, sector: "Precious Metals", parentId: "slv_proxy" },
+      { id: "copper_gold_ratio", label: "Copper/Gold Ratio", type: "index", impact: -3, correlation: -0.52, sector: "Macro", parentId: "dxy" },
+      { id: "vix_gold", label: "VIX Volatility Index", type: "macro", impact: 4.5, correlation: 0.5, sector: "Macro", parentId: "geopolitical" },
+      { id: "us_deficit", label: "US Fiscal Deficit", type: "policy", impact: 5, correlation: 0.48, sector: "Macro", parentId: "inflation" },
+      { id: "dedollarization", label: "De-Dollarization Trend", type: "macro", impact: 6, correlation: 0.55, sector: "Macro", parentId: "pboc_gold" }
     ]}
   ]
 };

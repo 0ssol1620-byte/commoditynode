@@ -7,7 +7,7 @@ tags: [coffee, agriculture, SBUX, KDP, climate, supply-chain, brazil]
 description: 'Coffee hits $3.05/lb as climate-driven supply stress in Brazil and Vietnam squeezes global inventories — impact on roasters, retailers, and consumer prices.'
 reading_time: 8
 commodity_name: 'Coffee'
-direction: bullish
+direction: bearish
 image: /assets/images/og-coffee.png
 ---
 
@@ -28,32 +28,61 @@ window.COMMODITY_DATA = {
       { id: "sbux", label: "Starbucks (SBUX)", type: "consumer", impact: -8.5, correlation: -0.72, marketCap: "105B", sector: "Coffee Retail" },
       { id: "kdp", label: "Keurig Dr Pepper (KDP)", type: "consumer", impact: -6.5, correlation: -0.65, marketCap: "48B", sector: "Beverage/CPG" },
       { id: "jde", label: "JDE Peet's (JDEP)", type: "consumer", impact: -7, correlation: -0.68, marketCap: "18B", sector: "Coffee/Beverage" },
-      { id: "brazil_growers", label: "Brazilian Growers", type: "positive", impact: 14, correlation: 0.88, sector: "Agriculture" },
-      { id: "softs_etf", label: "iPath Softs (JO)", type: "etf", impact: 12, correlation: 0.95, marketCap: "0.3B", sector: "ETF" },
-      { id: "dnkn", label: "Dunkin' (via Inspire)", type: "consumer", impact: -5.5, correlation: -0.55, marketCap: "28B", sector: "QSR" }
+      { id: "brazil_growers", label: "Brazilian Growers", type: "producer", impact: 14, correlation: 0.88, sector: "Agriculture" },
+      { id: "softs_etf", label: "iPath Softs (JO)", type: "etf", impact: 12, correlation: 0.95, marketCap: "0.3B", sector: "Soft Commodity ETF" },
+      { id: "dnkn", label: "Dunkin' (via Inspire)", type: "consumer", impact: -5.5, correlation: -0.55, marketCap: "28B", sector: "QSR" },
+      { id: "farmer_bros", label: "Farmer Bros (FARM)", type: "consumer", impact: -10.5, correlation: -0.75, marketCap: "0.2B", sector: "Coffee Distribution" },
+      { id: "nestle_coffee", label: "Nestlé Nescafé (NSRGY)", type: "consumer", impact: -5, correlation: -0.55, marketCap: "280B", sector: "Packaged Coffee" },
+      { id: "colombian_growers", label: "Colombian Growers", type: "producer", impact: 12, correlation: 0.82, sector: "Agriculture" },
+      { id: "vietnam_robusta", label: "Vietnam Robusta", type: "producer", impact: 10, correlation: 0.78, sector: "Agriculture" },
+      { id: "dba_cof", label: "Invesco DB Agriculture (DBA)", type: "etf", impact: 5.5, correlation: 0.6, marketCap: "1B", sector: "Agriculture ETF" },
+      { id: "xlp_cof", label: "Consumer Staples SPDR (XLP)", type: "etf", impact: -1.5, correlation: -0.2, marketCap: "18B", sector: "Staples ETF" }
     ]},
     { nodes: [
-      { id: "colombian_growers", label: "Colombian Growers", type: "positive", impact: 12, correlation: 0.82, sector: "Agriculture", parentId: "brazil_growers" },
-      { id: "vietnam_robusta", label: "Vietnam Robusta", type: "positive", impact: 10, correlation: 0.78, sector: "Agriculture", parentId: "brazil_growers" },
-      { id: "farmer_bros", label: "Farmer Bros (FARM)", type: "consumer", impact: -10.5, correlation: -0.75, marketCap: "0.2B", sector: "Coffee Distribution", parentId: "kdp" },
-      { id: "lamb_weston", label: "Restaurant Margins", type: "consumer", impact: -3.5, correlation: -0.35, sector: "Restaurants", parentId: "dnkn" },
+      { id: "green_traders", label: "Green Bean Traders (Neumann, ECOM)", type: "processor", impact: 9, correlation: 0.72, sector: "Commodity Trading", parentId: "softs_etf" },
+      { id: "lamb_weston", label: "Restaurant Sector Margins", type: "consumer", impact: -3.5, correlation: -0.35, sector: "Restaurants", parentId: "dnkn" },
       { id: "newell", label: "Consumer Staples Margins", type: "consumer", impact: -2.8, correlation: -0.3, sector: "CPG", parentId: "kdp" },
-      { id: "green_traders", label: "Green Bean Traders", type: "processor", impact: 9, correlation: 0.72, sector: "Commodity Trading", parentId: "softs_etf" }
-    ]},
-    { nodes: [
-      { id: "ethiopia_origin", label: "Ethiopian Origins", type: "positive", impact: 11, correlation: 0.8, sector: "Agriculture", parentId: "colombian_growers" },
-      { id: "honduras_origin", label: "Honduras/Guatemala", type: "positive", impact: 10.5, correlation: 0.78, sector: "Agriculture", parentId: "colombian_growers" },
+      { id: "ethiopia_origin", label: "Ethiopian Origins", type: "producer", impact: 11, correlation: 0.8, sector: "Agriculture", parentId: "colombian_growers" },
+      { id: "honduras_origin", label: "Honduras/Guatemala", type: "producer", impact: 10.5, correlation: 0.78, sector: "Agriculture", parentId: "colombian_growers" },
       { id: "robusta_sub", label: "Robusta Substitution", type: "processor", impact: 8, correlation: 0.7, sector: "Blending", parentId: "vietnam_robusta" },
-      { id: "packaging", label: "Coffee Packaging Cos", type: "consumer", impact: -3, correlation: -0.28, sector: "Packaging", parentId: "farmer_bros" },
-      { id: "alt_beverages", label: "Tea & Alt Beverages", type: "positive", impact: 3.5, correlation: 0.3, sector: "Beverages", parentId: "sbux" },
-      { id: "shipping_coffee", label: "Dry Bulk Shipping", type: "supplier", impact: 4, correlation: 0.38, sector: "Shipping", parentId: "green_traders" }
+      { id: "peets_coffee", label: "Peet's Coffee (Private)", type: "consumer", impact: -6.5, correlation: -0.62, sector: "Specialty Coffee", parentId: "jde" },
+      { id: "lavazza", label: "Lavazza (Private)", type: "consumer", impact: -6, correlation: -0.6, sector: "European Coffee", parentId: "jde" },
+      { id: "dutch_bros", label: "Dutch Bros (BROS)", type: "consumer", impact: -5.8, correlation: -0.55, marketCap: "5B", sector: "Coffee Retail", parentId: "sbux" },
+      { id: "india_robusta", label: "India Robusta Production", type: "producer", impact: 8, correlation: 0.7, sector: "Agriculture", parentId: "vietnam_robusta" },
+      { id: "mcdonalds_cof", label: "McDonald's Coffee (MCD)", type: "consumer", impact: -2, correlation: -0.22, marketCap: "210B", sector: "QSR", parentId: "dnkn" }
     ]},
     { nodes: [
-      { id: "climate_risk", label: "Climate Risk Premium", type: "macro", impact: -5, sector: "Macro", parentId: "brazil_growers" },
-      { id: "food_cpi", label: "Food CPI Pressure", type: "macro", impact: -3.5, sector: "Macro", parentId: "newell" },
-      { id: "brl_fx", label: "BRL/USD Exchange Rate", type: "macro", impact: 4.5, correlation: 0.45, sector: "Macro", parentId: "brazil_growers" },
-      { id: "consumer_trade", label: "Consumer Trade-Down", type: "macro", impact: -2.5, sector: "Macro", parentId: "dnkn" },
-      { id: "ice_inventory", label: "ICE Certified Inventory", type: "macro", impact: 6, sector: "Macro", parentId: "softs_etf" }
+      { id: "packaging", label: "Coffee Packaging Cos (Sealed Air)", type: "consumer", impact: -3, correlation: -0.28, sector: "Packaging", parentId: "farmer_bros" },
+      { id: "alt_beverages", label: "Tea & Energy Drink Substitution", type: "substitute", impact: 3.5, correlation: 0.3, sector: "Beverages", parentId: "sbux" },
+      { id: "shipping_coffee", label: "Dry Bulk Shipping (SBLK)", type: "supplier", impact: 4, correlation: 0.38, sector: "Shipping", parentId: "green_traders" },
+      { id: "peru_origin", label: "Peruvian Coffee Origins", type: "producer", impact: 10, correlation: 0.76, sector: "Agriculture", parentId: "ethiopia_origin" },
+      { id: "uganda_origin", label: "Uganda Robusta Origins", type: "producer", impact: 8.5, correlation: 0.72, sector: "Agriculture", parentId: "india_robusta" },
+      { id: "roasters", label: "Independent Roasters", type: "consumer", impact: -8, correlation: -0.68, sector: "Specialty Coffee", parentId: "green_traders" },
+      { id: "private_label_cof", label: "Private Label Coffee Shift", type: "substitute", impact: 3, correlation: 0.3, sector: "Retail", parentId: "newell" },
+      { id: "kcup_mfg", label: "K-Cup Manufacturers", type: "consumer", impact: -7, correlation: -0.65, sector: "Single-Serve Coffee", parentId: "kdp" },
+      { id: "costa_origin", label: "Costa Rica Specialty", type: "producer", impact: 10.5, correlation: 0.78, sector: "Agriculture", parentId: "honduras_origin" }
+    ]},
+    { nodes: [
+      { id: "climate_risk", label: "Climate Risk Premium", type: "macro", impact: -5, sector: "Climate", parentId: "brazil_growers" },
+      { id: "food_cpi", label: "Food CPI Pressure", type: "macro", impact: -3.5, sector: "Inflation", parentId: "newell" },
+      { id: "brl_fx", label: "BRL/USD Exchange Rate", type: "fx", impact: 4.5, correlation: 0.45, sector: "Currency", parentId: "brazil_growers" },
+      { id: "consumer_trade", label: "Consumer Trade-Down Behavior", type: "macro", impact: -2.5, sector: "Consumer", parentId: "dnkn" },
+      { id: "ice_inventory", label: "ICE Certified Inventory (800K bags)", type: "index", impact: 6, correlation: 0.6, sector: "Supply Data", parentId: "softs_etf" },
+      { id: "conab_report", label: "Conab Crop Report (52M bags)", type: "macro", impact: 8, sector: "Data Release", parentId: "brazil_growers" },
+      { id: "vnd_fx", label: "VND/USD Exchange Rate", type: "fx", impact: 3, correlation: 0.35, sector: "Currency", parentId: "vietnam_robusta" },
+      { id: "arabica_robusta_spread", label: "Arabica-Robusta Spread ($0.45/lb)", type: "index", impact: 5, correlation: 0.5, sector: "Commodity Spread", parentId: "robusta_sub" }
+    ]},
+    { nodes: [
+      { id: "cftc_coffee", label: "CFTC Net Long (72K contracts)", type: "macro", impact: 4, sector: "Speculative Flows", parentId: "ice_inventory" },
+      { id: "el_nino_coffee", label: "El Nino/La Nina Forecast", type: "macro", impact: 6, sector: "Weather", parentId: "climate_risk" },
+      { id: "biennial_cycle", label: "Biennial Bearing Cycle Disruption", type: "macro", impact: 5, sector: "Agronomy", parentId: "conab_report" },
+      { id: "lab_coffee", label: "Lab-Grown Coffee Development", type: "substitute", impact: 1.5, correlation: 0.1, sector: "Alternative", parentId: "alt_beverages" },
+      { id: "fair_trade", label: "Fair Trade/Sustainability Premiums", type: "macro", impact: 3, sector: "ESG", parentId: "colombian_growers" },
+      { id: "ocean_freight_cof", label: "Container Freight Rates (Asia-US)", type: "freight", impact: -2, correlation: -0.25, sector: "Logistics", parentId: "shipping_coffee" },
+      { id: "sugar_cocoa_cross", label: "Sugar/Cocoa Price Linkage", type: "commodity", impact: 5, correlation: 0.55, sector: "Cross-Commodity", parentId: "softs_etf" },
+      { id: "crop_insurance_cof", label: "Coffee Crop Insurance (Brazil)", type: "macro", impact: 3, sector: "Risk Management", parentId: "biennial_cycle" },
+      { id: "instant_coffee_demand", label: "Instant Coffee Demand Shift", type: "substitute", impact: -3, correlation: -0.3, sector: "Consumer Behavior", parentId: "private_label_cof" },
+      { id: "usd_cop", label: "USD/COP Exchange Rate", type: "fx", impact: 3, correlation: 0.32, sector: "Currency", parentId: "colombian_growers" }
     ]}
   ]
 };

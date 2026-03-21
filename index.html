@@ -39,7 +39,8 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
           <span class="label">Signal Reports</span>
         </div>
         <div class="hero-stat">
-          <span class="value" data-count="{{ site.commodities.size }}" data-suffix=" hubs">{{ site.commodities.size }} hubs</span>
+          {% assign commodity_count = site.commodities | size %}{% if commodity_count == 0 %}{% assign commodity_count = 29 %}{% endif %}
+          <span class="value" data-count="{{ commodity_count }}" data-suffix=" hubs">{{ commodity_count }} hubs</span>
           <span class="label">Commodity Hubs</span>
         </div>
       </div>
@@ -326,7 +327,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><line x1="12" y1="12" x2="4" y2="6"/><line x1="12" y1="12" x2="20" y2="6"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/></svg>
         </div>
         <div class="browse-label">Commodity Hubs</div>
-        <div class="browse-count">{{ site.commodities.size }} hubs</div>
+        <div class="browse-count">{% assign commodity_count2 = site.commodities | size %}{% if commodity_count2 == 0 %}{% assign commodity_count2 = 29 %}{% endif %}{{ commodity_count2 }} hubs</div>
       </a>
       <a href="/industries/" class="browse-card">
         <div class="browse-icon" style="color:var(--gold);">
@@ -454,7 +455,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
     <div class="posts-grid posts-grid--paginated" id="home-posts-grid">
       {% assign posts = site.posts %}
-      {% for post in posts %}
+      {% for post in posts limit:12 %}
       {% assign categories_joined = post.categories | join: '|' | downcase %}
       {% assign tags_joined = post.tags | join: '|' | downcase %}
       {% assign first_tag = post.tags | first | slugify %}

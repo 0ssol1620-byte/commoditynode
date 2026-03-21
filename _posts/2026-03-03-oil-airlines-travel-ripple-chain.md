@@ -29,31 +29,65 @@ window.COMMODITY_DATA = {
       { id: "cvx", label: "Chevron (CVX)", type: "producer", impact: 6.8, correlation: 0.83, marketCap: "310B", sector: "Oil Majors" },
       { id: "vlo", label: "Valero (VLO)", type: "processor", impact: 5.5, correlation: 0.72, marketCap: "46B", sector: "Refining" },
       { id: "mpc", label: "Marathon Petroleum (MPC)", type: "processor", impact: 5.8, correlation: 0.74, marketCap: "58B", sector: "Refining" },
-      { id: "xle", label: "Energy Select (XLE)", type: "etf", impact: 6.5, correlation: 0.9, marketCap: "38B", sector: "ETF" },
-      { id: "psx", label: "Phillips 66 (PSX)", type: "processor", impact: 4.8, correlation: 0.68, marketCap: "52B", sector: "Refining" }
+      { id: "xle", label: "Energy Select (XLE)", type: "etf", impact: 6.5, correlation: 0.90, marketCap: "38B", sector: "ETF" },
+      { id: "psx", label: "Phillips 66 (PSX)", type: "processor", impact: 4.8, correlation: 0.68, marketCap: "52B", sector: "Refining" },
+      { id: "crak", label: "CRAK Refining ETF", type: "etf", impact: 7.2, correlation: 0.78, marketCap: "0.5B", sector: "ETF" },
+      { id: "cop_r", label: "ConocoPhillips (COP)", type: "producer", impact: 8.5, correlation: 0.88, marketCap: "148B", sector: "E&P" },
+      { id: "oxy_r", label: "Occidental (OXY)", type: "producer", impact: 10.5, correlation: 0.86, marketCap: "52B", sector: "E&P" },
+      { id: "slb_r", label: "SLB (SLB)", type: "supplier", impact: 9.8, correlation: 0.85, marketCap: "67B", sector: "Oilfield Services" },
+      { id: "hal_r", label: "Halliburton (HAL)", type: "supplier", impact: 11.2, correlation: 0.88, marketCap: "33B", sector: "Oilfield Services" }
     ]},
     { nodes: [
-      { id: "dal", label: "Delta Air Lines (DAL)", type: "consumer", impact: -6.2, correlation: -0.78, marketCap: "32B", sector: "Airlines" },
-      { id: "ual", label: "United Airlines (UAL)", type: "consumer", impact: -6.8, correlation: -0.8, marketCap: "24B", sector: "Airlines" },
-      { id: "aal", label: "American Airlines (AAL)", type: "consumer", impact: -7.5, correlation: -0.82, marketCap: "10B", sector: "Airlines" },
-      { id: "luv", label: "Southwest Airlines (LUV)", type: "consumer", impact: -5, correlation: -0.7, marketCap: "18B", sector: "Airlines" },
-      { id: "jets", label: "US Global Jets (JETS)", type: "etf", impact: -5.8, correlation: -0.76, marketCap: "1.5B", sector: "ETF" },
-      { id: "save", label: "Spirit Airlines (SAVE)", type: "consumer", impact: -9.2, correlation: -0.85, marketCap: "0.8B", sector: "Airlines" },
-      { id: "jblu", label: "JetBlue Airways (JBLU)", type: "consumer", impact: -7.8, correlation: -0.81, marketCap: "2.5B", sector: "Airlines" }
+      { id: "dal", label: "Delta Air Lines (DAL)", type: "consumer", impact: -6.2, correlation: -0.78, marketCap: "32B", sector: "Airlines", parentId: "xle" },
+      { id: "ual", label: "United Airlines (UAL)", type: "consumer", impact: -6.8, correlation: -0.80, marketCap: "24B", sector: "Airlines", parentId: "xle" },
+      { id: "aal", label: "American Airlines (AAL)", type: "consumer", impact: -7.5, correlation: -0.82, marketCap: "10B", sector: "Airlines", parentId: "xle" },
+      { id: "luv", label: "Southwest Airlines (LUV)", type: "consumer", impact: -5, correlation: -0.70, marketCap: "18B", sector: "Airlines", parentId: "xle" },
+      { id: "jets", label: "US Global Jets (JETS)", type: "etf", impact: -5.8, correlation: -0.76, marketCap: "1.5B", sector: "ETF", parentId: "xle" },
+      { id: "save", label: "Spirit Airlines (SAVE)", type: "consumer", impact: -9.2, correlation: -0.85, marketCap: "0.8B", sector: "Airlines", parentId: "jets" },
+      { id: "jblu", label: "JetBlue Airways (JBLU)", type: "consumer", impact: -7.8, correlation: -0.81, marketCap: "2.5B", sector: "Airlines", parentId: "jets" },
+      { id: "ryaay_r", label: "Ryanair (RYAAY)", type: "consumer", impact: -5.2, correlation: -0.65, marketCap: "22B", sector: "Airlines", parentId: "jets" },
+      { id: "algt_r", label: "Allegiant Travel (ALGT)", type: "consumer", impact: -8.5, correlation: -0.78, marketCap: "1.8B", sector: "Airlines", parentId: "save" },
+      { id: "epd_r", label: "Enterprise Products (EPD)", type: "supplier", impact: 3.5, correlation: 0.50, marketCap: "65B", sector: "Midstream", parentId: "xom" },
+      { id: "et_r", label: "Energy Transfer (ET)", type: "supplier", impact: 4.0, correlation: 0.52, marketCap: "52B", sector: "Midstream", parentId: "cvx" },
+      { id: "pbf_r", label: "PBF Energy (PBF)", type: "processor", impact: 8.0, correlation: 0.75, marketCap: "5B", sector: "Refining", parentId: "vlo" }
     ]},
     { nodes: [
-      { id: "bkng", label: "Booking Holdings (BKNG)", type: "consumer", impact: -3.5, correlation: -0.52, marketCap: "145B", sector: "OTA" },
-      { id: "abnb", label: "Airbnb (ABNB)", type: "consumer", impact: -2.8, correlation: -0.45, marketCap: "78B", sector: "OTA" },
-      { id: "mar", label: "Marriott (MAR)", type: "consumer", impact: -3.2, correlation: -0.5, marketCap: "72B", sector: "Hotels" },
-      { id: "hlt", label: "Hilton (HLT)", type: "consumer", impact: -2.9, correlation: -0.48, marketCap: "55B", sector: "Hotels" },
-      { id: "expe", label: "Expedia (EXPE)", type: "consumer", impact: -3.8, correlation: -0.55, marketCap: "20B", sector: "OTA" }
+      { id: "bkng", label: "Booking Holdings (BKNG)", type: "consumer", impact: -3.5, correlation: -0.52, marketCap: "145B", sector: "OTA", parentId: "dal" },
+      { id: "abnb", label: "Airbnb (ABNB)", type: "consumer", impact: -2.8, correlation: -0.45, marketCap: "78B", sector: "OTA", parentId: "ual" },
+      { id: "mar", label: "Marriott (MAR)", type: "consumer", impact: -3.2, correlation: -0.50, marketCap: "72B", sector: "Hotels", parentId: "dal" },
+      { id: "hlt", label: "Hilton (HLT)", type: "consumer", impact: -2.9, correlation: -0.48, marketCap: "55B", sector: "Hotels", parentId: "ual" },
+      { id: "expe", label: "Expedia (EXPE)", type: "consumer", impact: -3.8, correlation: -0.55, marketCap: "20B", sector: "OTA", parentId: "aal" },
+      { id: "trip_r", label: "TripAdvisor (TRIP)", type: "consumer", impact: -3.5, correlation: -0.48, marketCap: "3.5B", sector: "OTA", parentId: "bkng" },
+      { id: "hyatt_r", label: "Hyatt Hotels (H)", type: "consumer", impact: -2.5, correlation: -0.38, marketCap: "14B", sector: "Hotels", parentId: "mar" },
+      { id: "fdx_r", label: "FedEx (FDX)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "65B", sector: "Logistics", parentId: "luv" },
+      { id: "ups_r", label: "UPS (UPS)", type: "consumer", impact: -4.0, correlation: -0.52, marketCap: "110B", sector: "Logistics", parentId: "luv" },
+      { id: "uber_r", label: "Uber (UBER)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "145B", sector: "Ride-hail", parentId: "aal" },
+      { id: "ba_r", label: "Boeing Co (BA)", type: "consumer", impact: -3.0, correlation: -0.38, marketCap: "132B", sector: "Aerospace", parentId: "dal" },
+      { id: "fro_r", label: "Frontline (FRO)", type: "supplier", impact: 7.5, correlation: 0.70, marketCap: "6B", sector: "Oil Tankers", parentId: "epd_r" }
     ]},
     { nodes: [
-      { id: "ccl", label: "Carnival Corp (CCL)", type: "consumer", impact: -8.5, correlation: -0.8, marketCap: "24B", sector: "Cruise Lines" },
-      { id: "rcl", label: "Royal Caribbean (RCL)", type: "consumer", impact: -7.2, correlation: -0.75, marketCap: "40B", sector: "Cruise Lines" },
-      { id: "nclh", label: "Norwegian Cruise (NCLH)", type: "consumer", impact: -8.8, correlation: -0.82, marketCap: "10B", sector: "Cruise Lines" },
-      { id: "gdp_tourism", label: "Tourism GDP Impact", type: "macro", impact: -1.8, correlation: -0.4, sector: "Macro" },
-      { id: "consumer_conf", label: "Consumer Confidence", type: "macro", impact: -2.2, correlation: -0.38, sector: "Macro" }
+      { id: "ccl", label: "Carnival Corp (CCL)", type: "consumer", impact: -8.5, correlation: -0.80, marketCap: "24B", sector: "Cruise Lines", parentId: "bkng" },
+      { id: "rcl", label: "Royal Caribbean (RCL)", type: "consumer", impact: -7.2, correlation: -0.75, marketCap: "40B", sector: "Cruise Lines", parentId: "abnb" },
+      { id: "nclh", label: "Norwegian Cruise (NCLH)", type: "consumer", impact: -8.8, correlation: -0.82, marketCap: "10B", sector: "Cruise Lines", parentId: "expe" },
+      { id: "wynn_r", label: "Wynn Resorts (WYNN)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "10B", sector: "Gaming/Travel", parentId: "mar" },
+      { id: "mgm_r", label: "MGM Resorts (MGM)", type: "consumer", impact: -2.2, correlation: -0.30, marketCap: "15B", sector: "Gaming/Travel", parentId: "hlt" },
+      { id: "odfl_r", label: "Old Dominion (ODFL)", type: "consumer", impact: -4.2, correlation: -0.52, marketCap: "42B", sector: "Trucking", parentId: "fdx_r" },
+      { id: "xpo_r", label: "XPO Inc (XPO)", type: "consumer", impact: -5.0, correlation: -0.58, marketCap: "12B", sector: "Trucking", parentId: "ups_r" },
+      { id: "gdp_tourism", label: "Tourism GDP Impact", type: "macro", impact: -1.8, correlation: -0.40, sector: "Macro", parentId: "ccl" },
+      { id: "consumer_conf", label: "Consumer Confidence", type: "macro", impact: -2.2, correlation: -0.38, sector: "Macro", parentId: "rcl" },
+      { id: "opec_r", label: "OPEC+ Supply Policy", type: "policy", impact: 7.5, correlation: 0.72, sector: "Macro", parentId: "xom" },
+      { id: "usd_r", label: "USD Index (DXY)", type: "fx", impact: -3.0, correlation: -0.58, sector: "Macro", parentId: "fro_r" },
+      { id: "crack_spread_r", label: "Jet Fuel Crack Spread", type: "index", impact: 7.0, correlation: 0.75, sector: "Refining", parentId: "pbf_r" }
+    ]},
+    { nodes: [
+      { id: "jet_fuel_sub", label: "Jet Fuel (Derivative)", type: "substitute", impact: 9.2, correlation: 0.92, sector: "Energy", parentId: "vlo" },
+      { id: "diesel_sub", label: "Diesel (Derivative)", type: "substitute", impact: 8.5, correlation: 0.88, sector: "Energy", parentId: "mpc" },
+      { id: "gasoline_sub", label: "Gasoline (Derivative)", type: "substitute", impact: 7.8, correlation: 0.85, sector: "Energy", parentId: "psx" },
+      { id: "marine_fuel_r", label: "Marine Bunker Fuel", type: "substitute", impact: 7.5, correlation: 0.82, sector: "Energy", parentId: "ccl" },
+      { id: "natgas_cross", label: "Natural Gas (Cross-Link)", type: "substitute", impact: 4.2, correlation: 0.55, sector: "Energy", parentId: "epd_r" },
+      { id: "saf_cost_r", label: "Sustainable Aviation Fuel", type: "substitute", impact: -1.5, correlation: -0.22, sector: "Sustainability", parentId: "ba_r" },
+      { id: "baltic_dirty", label: "Baltic Dirty Tanker Index", type: "freight", impact: 6.0, correlation: 0.65, sector: "Macro", parentId: "fro_r" },
+      { id: "em_food_inf", label: "EM Food Inflation", type: "macro", impact: 2.5, correlation: 0.40, sector: "Macro", parentId: "gdp_tourism" }
     ]}
   ]
 };

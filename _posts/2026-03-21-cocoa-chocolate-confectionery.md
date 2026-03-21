@@ -7,7 +7,7 @@ tags: [cocoa, chocolate, confectionery, agriculture, HSY, MDLZ]
 description: 'How cocoa price spikes impact Hershey, Mondelez, Nestle, specialty chocolate makers, and the global confectionery supply chain. Full impact analysis with correlation data.'
 reading_time: 8
 commodity_name: "Cocoa"
-direction: bullish
+direction: bearish
 image: /assets/images/og-cocoa.png
 ---
 
@@ -28,34 +28,63 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "hsy", label: "Hershey (HSY)", type: "consumer", impact: -9.5, correlation: -0.82, marketCap: "35B", sector: "Chocolate" },
-      { id: "mdlz", label: "Mondelez (MDLZ)", type: "consumer", impact: -5, correlation: -0.58, marketCap: "95B", sector: "Snacks/Chocolate" },
-      { id: "nsrgy", label: "Nestle (NSRGY)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "280B", sector: "Food/Chocolate" },
+      { id: "mdlz", label: "Mondelez (MDLZ)", type: "consumer", impact: -5.0, correlation: -0.58, marketCap: "95B", sector: "Snacks/Chocolate" },
+      { id: "nsrgy", label: "Nestle (NSRGY)", type: "consumer", impact: -4.0, correlation: -0.48, marketCap: "280B", sector: "Food/Chocolate" },
       { id: "niu_etf", label: "iPath Cocoa (NIB)", type: "etf", impact: 9.6, correlation: 0.97, marketCap: "0.08B", sector: "ETF" },
-      { id: "barry", label: "Barry Callebaut (BARN.SW)", type: "consumer", impact: -7.5, correlation: -0.75, marketCap: "9B", sector: "Chocolate Processing" }
+      { id: "barry", label: "Barry Callebaut (BARN.SW)", type: "consumer", impact: -7.5, correlation: -0.75, marketCap: "9B", sector: "Chocolate Processing" },
+      { id: "west_africa", label: "West African Growers", type: "producer", impact: 15.0, correlation: 0.92, sector: "Cocoa Farming" },
+      { id: "olam", label: "Olam Group", type: "producer", impact: 8.0, correlation: 0.78, marketCap: "4B", sector: "Cocoa Trading" },
+      { id: "tr_cocoa", label: "Tootsie Roll (TR)", type: "consumer", impact: -6.5, correlation: -0.65, marketCap: "3B", sector: "Confectionery" },
+      { id: "lindt", label: "Lindt & Sprungli (LISN.SW)", type: "consumer", impact: -6.0, correlation: -0.62, marketCap: "25B", sector: "Premium Chocolate" },
+      { id: "cargill_cocoa", label: "Cargill Cocoa (Private)", type: "processor", impact: 6.0, correlation: 0.60, sector: "Cocoa Trading" },
+      { id: "dba_cocoa", label: "Invesco DB Ag (DBA)", type: "etf", impact: 2.8, correlation: 0.40, marketCap: "0.9B", sector: "ETF" },
+      { id: "ferrero", label: "Ferrero Group (Private)", type: "consumer", impact: -7.0, correlation: -0.70, sector: "Chocolate" },
+      { id: "mars", label: "Mars Inc (Private)", type: "consumer", impact: -6.0, correlation: -0.62, sector: "Chocolate" }
     ]},
     { nodes: [
-      { id: "rmcf", label: "Rocky Mountain Choc (RMCF)", type: "consumer", impact: -14, correlation: -0.88, marketCap: "0.05B", sector: "Specialty Chocolate", parentId: "hsy" },
-      { id: "lindt", label: "Lindt & Sprungli", type: "consumer", impact: -6, correlation: -0.62, marketCap: "25B", sector: "Premium Chocolate", parentId: "nsrgy" },
-      { id: "west_africa", label: "West African Growers", type: "producer", impact: 15, correlation: 0.92, sector: "Cocoa Farming", parentId: "barry" },
-      { id: "tr_cocoa", label: "Tootsie Roll (TR)", type: "consumer", impact: -6.5, correlation: -0.65, marketCap: "3B", sector: "Confectionery", parentId: "hsy" },
-      { id: "olam", label: "Olam Group", type: "producer", impact: 8, correlation: 0.78, marketCap: "4B", sector: "Cocoa Trading", parentId: "barry" }
+      { id: "rmcf", label: "Rocky Mountain Choc (RMCF)", type: "consumer", impact: -14.0, correlation: -0.88, marketCap: "0.05B", sector: "Specialty Chocolate", parentId: "hsy" },
+      { id: "ivory_coast", label: "Ivory Coast CCC", type: "regional", impact: 18.0, correlation: 0.95, sector: "National Board", parentId: "west_africa" },
+      { id: "ghana_cocobod", label: "Ghana Cocobod", type: "regional", impact: 16.0, correlation: 0.93, sector: "National Board", parentId: "west_africa" },
+      { id: "cocoa_butter", label: "Cocoa Butter Market", type: "processor", impact: 12.0, correlation: 0.88, sector: "Ingredients", parentId: "barry" },
+      { id: "cocoa_powder", label: "Cocoa Powder Market", type: "processor", impact: 10.0, correlation: 0.82, sector: "Ingredients", parentId: "barry" },
+      { id: "confectionery_ret", label: "Confectionery Retailers", type: "consumer", impact: -5.0, correlation: -0.52, sector: "Retail", parentId: "lindt" },
+      { id: "gis_cocoa", label: "General Mills (GIS)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "42B", sector: "Food", parentId: "nsrgy" },
+      { id: "k_cocoa", label: "Kellogg (K)", type: "consumer", impact: -2.2, correlation: -0.28, marketCap: "22B", sector: "Food", parentId: "nsrgy" },
+      { id: "cameroon", label: "Cameroon Cocoa Export", type: "producer", impact: 12.0, correlation: 0.85, sector: "Cocoa Farming", parentId: "west_africa" },
+      { id: "ecuador_cocoa", label: "Ecuador Fine Cocoa", type: "producer", impact: 10.0, correlation: 0.80, sector: "Fine Flavor Cocoa", parentId: "olam" },
+      { id: "callebaut_proc", label: "Blommer Chocolate", type: "processor", impact: -6.5, correlation: -0.62, sector: "Industrial Chocolate", parentId: "barry" },
+      { id: "unilever_cocoa", label: "Unilever (UL)", type: "consumer", impact: -2.0, correlation: -0.25, marketCap: "140B", sector: "Food/Ice Cream", parentId: "nsrgy" }
     ]},
     { nodes: [
-      { id: "ivory_coast", label: "Ivory Coast CCC", type: "regional", impact: 18, correlation: 0.95, sector: "National Board", parentId: "west_africa" },
-      { id: "ghana_cocobod", label: "Ghana Cocobod", type: "regional", impact: 16, correlation: 0.93, sector: "National Board", parentId: "west_africa" },
-      { id: "craft_choc", label: "Craft Chocolate Makers", type: "consumer", impact: -18, correlation: -0.92, sector: "Artisan Chocolate", parentId: "rmcf" },
-      { id: "confectionery_ret", label: "Confectionery Retailers", type: "consumer", impact: -5, correlation: -0.52, sector: "Retail", parentId: "lindt" },
-      { id: "cocoa_butter", label: "Cocoa Butter Market", type: "processor", impact: 12, correlation: 0.88, sector: "Ingredients", parentId: "barry" }
+      { id: "craft_choc", label: "Craft Chocolate Makers", type: "consumer", impact: -18.0, correlation: -0.92, sector: "Artisan Chocolate", parentId: "rmcf" },
+      { id: "nigeria_cocoa", label: "Nigeria Cocoa Board", type: "regional", impact: 11.0, correlation: 0.78, sector: "National Board", parentId: "cameroon" },
+      { id: "cbe_mfg", label: "CBE Manufacturers", type: "substitute", impact: 5.0, correlation: 0.50, sector: "Cocoa Alternatives", parentId: "cocoa_butter" },
+      { id: "cosmetics", label: "Cocoa Butter Cosmetics", type: "consumer", impact: -4.5, correlation: -0.50, sector: "Beauty", parentId: "cocoa_butter" },
+      { id: "sugar_cross", label: "Sugar (Cross-Commodity)", type: "commodity", impact: 2.5, correlation: 0.30, sector: "Soft Commodities", parentId: "hsy" },
+      { id: "palm_oil_cbe", label: "Palm Oil (CBE Input)", type: "commodity", impact: 3.0, correlation: 0.35, sector: "Vegetable Oils", parentId: "cbe_mfg" },
+      { id: "dairy_choc", label: "Dairy/Milk Powder", type: "commodity", impact: 1.5, correlation: 0.18, sector: "Dairy", parentId: "barry" },
+      { id: "sb_brazil", label: "Brazilian Cocoa (Bahia)", type: "producer", impact: 9.0, correlation: 0.75, sector: "Cocoa Farming", parentId: "ecuador_cocoa" },
+      { id: "organic_cocoa", label: "Organic/Fair Trade Cocoa", type: "producer", impact: 8.0, correlation: 0.68, sector: "Specialty Cocoa", parentId: "craft_choc" },
+      { id: "godiva", label: "Godiva (Yildiz)", type: "consumer", impact: -8.0, correlation: -0.72, sector: "Premium Chocolate", parentId: "lindt" },
+      { id: "see_candy", label: "See's Candies (Berkshire)", type: "consumer", impact: -5.5, correlation: -0.55, sector: "Confectionery", parentId: "confectionery_ret" }
     ]},
     { nodes: [
-      { id: "carob_sub", label: "Carob/Substitutes", type: "substitute", impact: 6, correlation: 0.55, sector: "Alternatives", parentId: "craft_choc" },
-      { id: "packaging", label: "Shrinkflation Trend", type: "consumer", impact: -3, correlation: -0.35, sector: "Consumer Impact", parentId: "confectionery_ret" },
-      { id: "cosmetics", label: "Cocoa Butter Cosmetics", type: "consumer", impact: -4.5, correlation: -0.5, sector: "Beauty", parentId: "cocoa_butter" }
+      { id: "carob_sub", label: "Carob/Substitutes", type: "substitute", impact: 6.0, correlation: 0.55, sector: "Alternatives", parentId: "craft_choc" },
+      { id: "shrinkflation", label: "Shrinkflation Trend", type: "macro", impact: -3.0, correlation: -0.35, sector: "Consumer Impact", parentId: "confectionery_ret" },
+      { id: "lab_cocoa", label: "Lab-Grown Cocoa Startups", type: "substitute", impact: 4.0, correlation: 0.38, sector: "FoodTech", parentId: "cbe_mfg" },
+      { id: "child_labor", label: "Child Labor Regulation", type: "policy", impact: 5.0, sector: "Policy", parentId: "ivory_coast" },
+      { id: "icco", label: "ICCO Buffer Stock", type: "macro", impact: -2.0, sector: "Market Structure", parentId: "olam" },
+      { id: "warehouse_stocks", label: "ICE Warehouse Stocks", type: "index", impact: -4.0, correlation: -0.50, sector: "Market Data", parentId: "niu_etf" },
+      { id: "ghc_fx", label: "GHS/USD Cedi Rate", type: "fx", impact: 3.0, correlation: 0.35, sector: "FX", parentId: "ghana_cocobod" },
+      { id: "xof_fx", label: "XOF/EUR CFA Franc", type: "fx", impact: 2.0, correlation: 0.25, sector: "FX", parentId: "ivory_coast" }
     ]},
     { nodes: [
-      { id: "swollen_shoot", label: "Swollen Shoot Virus", type: "macro", impact: 14, sector: "Macro", parentId: "west_africa" },
-      { id: "el_nino_cocoa", label: "El Nino Drought Impact", type: "macro", impact: 10, sector: "Macro", parentId: "ivory_coast" },
-      { id: "aging_trees", label: "Aging Tree Stock", type: "macro", impact: 8, sector: "Macro", parentId: "ghana_cocobod" }
+      { id: "swollen_shoot", label: "Swollen Shoot Virus", type: "macro", impact: 14.0, sector: "Macro", parentId: "west_africa" },
+      { id: "el_nino_cocoa", label: "El Nino Drought Impact", type: "macro", impact: 10.0, sector: "Macro", parentId: "ivory_coast" },
+      { id: "aging_trees", label: "Aging Tree Stock", type: "macro", impact: 8.0, sector: "Macro", parentId: "ghana_cocobod" },
+      { id: "eu_deforestation", label: "EU Deforestation Regulation", type: "policy", impact: 6.0, sector: "Policy", parentId: "barry" },
+      { id: "climate_wa", label: "W. Africa Climate Change", type: "macro", impact: 7.0, sector: "Macro", parentId: "cameroon" },
+      { id: "freight_cocoa", label: "Atlantic Freight Rates", type: "freight", impact: 2.0, correlation: 0.22, sector: "Freight", parentId: "olam" }
     ]}
   ]
 };

@@ -28,33 +28,66 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "pplt", label: "abrdn Platinum (PPLT)", type: "etf", impact: 9.8, correlation: 0.97, marketCap: "1.1B", sector: "ETF" },
-      { id: "impuy", label: "Impala Platinum (IMPUY)", type: "producer", impact: 16, correlation: 0.86, marketCap: "8B", sector: "PGM Mining" },
-      { id: "sbsw", label: "Sibanye-Stillwater (SBSW)", type: "producer", impact: 14, correlation: 0.82, marketCap: "5B", sector: "PGM Mining" },
-      { id: "angpy", label: "Anglo American Plat (ANGPY)", type: "producer", impact: 18, correlation: 0.9, marketCap: "12B", sector: "PGM Mining" },
-      { id: "tm_pt", label: "Toyota Motor (TM)", type: "consumer", impact: -3.5, correlation: -0.48, marketCap: "280B", sector: "Automotive" }
+      { id: "impuy", label: "Impala Platinum (IMPUY)", type: "producer", impact: 16.0, correlation: 0.86, marketCap: "8B", sector: "PGM Mining" },
+      { id: "sbsw", label: "Sibanye-Stillwater (SBSW)", type: "producer", impact: 14.0, correlation: 0.82, marketCap: "5B", sector: "PGM Mining" },
+      { id: "angpy", label: "Anglo American Plat (ANGPY)", type: "producer", impact: 18.0, correlation: 0.90, marketCap: "12B", sector: "PGM Mining" },
+      { id: "tm_pt", label: "Toyota Motor (TM)", type: "consumer", impact: -3.5, correlation: -0.48, marketCap: "280B", sector: "Automotive" },
+      { id: "johnson_m", label: "Johnson Matthey (JMAT.L)", type: "processor", impact: 8.0, correlation: 0.68, marketCap: "5.5B", sector: "PGM Refining" },
+      { id: "plug", label: "Plug Power (PLUG)", type: "consumer", impact: -8.0, correlation: -0.62, marketCap: "3B", sector: "Fuel Cells" },
+      { id: "gld_plat", label: "Gold/Platinum Ratio", type: "index", impact: -5.0, correlation: -0.80, sector: "Precious Metals" },
+      { id: "pall", label: "abrdn Palladium (PALL)", type: "etf", impact: 5.5, correlation: 0.65, marketCap: "0.5B", sector: "ETF" },
+      { id: "northam", label: "Northam Platinum (NHM.JO)", type: "producer", impact: 15.0, correlation: 0.84, marketCap: "4B", sector: "PGM Mining" },
+      { id: "stlx", label: "Stellantis (STLA)", type: "consumer", impact: -2.8, correlation: -0.40, marketCap: "55B", sector: "Automotive" },
+      { id: "vwagy", label: "Volkswagen (VWAGY)", type: "consumer", impact: -2.5, correlation: -0.38, marketCap: "65B", sector: "Automotive" },
+      { id: "glncy", label: "Glencore PGM (GLEN)", type: "producer", impact: 5.0, correlation: 0.50, marketCap: "68B", sector: "Mining & Trading" }
     ]},
     { nodes: [
-      { id: "plug", label: "Plug Power (PLUG)", type: "consumer", impact: -8, correlation: -0.62, marketCap: "3B", sector: "Fuel Cells", parentId: "angpy" },
-      { id: "be", label: "Bloom Energy (BE)", type: "consumer", impact: -5, correlation: -0.48, marketCap: "4.5B", sector: "Fuel Cells", parentId: "angpy" },
-      { id: "fcel", label: "FuelCell Energy (FCEL)", type: "consumer", impact: -7.5, correlation: -0.58, marketCap: "0.8B", sector: "Fuel Cells", parentId: "impuy" },
-      { id: "gm_pt", label: "General Motors (GM)", type: "consumer", impact: -3, correlation: -0.44, marketCap: "48B", sector: "Automotive", parentId: "tm_pt" },
-      { id: "ford_pt", label: "Ford Motor (F)", type: "consumer", impact: -2.8, correlation: -0.42, marketCap: "48B", sector: "Automotive", parentId: "tm_pt" }
-    ]},
-    { nodes: [
-      { id: "basf_pt", label: "BASF Catalysts (BAS.DE)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "42B", sector: "Catalyst Manufacturing", parentId: "gm_pt" },
-      { id: "johnson_m", label: "Johnson Matthey (JMAT.L)", type: "processor", impact: 8, correlation: 0.68, marketCap: "5.5B", sector: "PGM Refining", parentId: "sbsw" },
-      { id: "jewelry_pt", label: "Signet Jewelers (SIG)", type: "consumer", impact: -3.5, correlation: -0.4, marketCap: "4.2B", sector: "Jewelry Retail", parentId: "pplt" },
-      { id: "recyclers_pt", label: "PGM Recyclers", type: "substitute", impact: 7, correlation: 0.6, sector: "Recycling", parentId: "impuy" }
+      { id: "be", label: "Bloom Energy (BE)", type: "consumer", impact: -5.0, correlation: -0.48, marketCap: "4.5B", sector: "Fuel Cells", parentId: "plug" },
+      { id: "fcel", label: "FuelCell Energy (FCEL)", type: "consumer", impact: -7.5, correlation: -0.58, marketCap: "0.8B", sector: "Fuel Cells", parentId: "plug" },
+      { id: "gm_pt", label: "General Motors (GM)", type: "consumer", impact: -3.0, correlation: -0.44, marketCap: "48B", sector: "Automotive", parentId: "tm_pt" },
+      { id: "ford_pt", label: "Ford Motor (F)", type: "consumer", impact: -2.8, correlation: -0.42, marketCap: "48B", sector: "Automotive", parentId: "tm_pt" },
+      { id: "basf_pt", label: "BASF Catalysts (BAS.DE)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "42B", sector: "Catalyst Manufacturing", parentId: "stlx" },
+      { id: "umicore_pt", label: "Umicore (UMI.BR)", type: "processor", impact: 6.5, correlation: 0.60, marketCap: "6B", sector: "PGM Refining", parentId: "johnson_m" },
+      { id: "recyclers_pt", label: "PGM Recyclers", type: "substitute", impact: 7.0, correlation: 0.60, sector: "Recycling", parentId: "impuy" },
+      { id: "jewelry_pt", label: "Signet Jewelers (SIG)", type: "consumer", impact: -3.5, correlation: -0.40, marketCap: "4.2B", sector: "Jewelry Retail", parentId: "pplt" },
+      { id: "tiffany_pt", label: "Tiffany (LVMH)", type: "consumer", impact: -1.5, correlation: -0.20, marketCap: "420B", sector: "Jewelry Luxury", parentId: "pplt" },
+      { id: "honda_pt", label: "Honda Motor (HMC)", type: "consumer", impact: -2.5, correlation: -0.38, marketCap: "50B", sector: "Automotive", parentId: "tm_pt" },
+      { id: "bmw_pt", label: "BMW AG (BMW.DE)", type: "consumer", impact: -2.2, correlation: -0.35, marketCap: "60B", sector: "Automotive", parentId: "vwagy" },
+      { id: "hyundai_pt", label: "Hyundai Motor (HYMTF)", type: "consumer", impact: -2.0, correlation: -0.32, marketCap: "42B", sector: "Automotive", parentId: "stlx" }
     ]},
     { nodes: [
       { id: "ballard", label: "Ballard Power (BLDP)", type: "consumer", impact: -6.5, correlation: -0.55, marketCap: "1.2B", sector: "Fuel Cells", parentId: "plug" },
-      { id: "hyzon", label: "Hyzon Motors (HYZN)", type: "substitute", impact: -7, correlation: -0.52, marketCap: "0.3B", sector: "Hydrogen Trucks", parentId: "fcel" },
-      { id: "heraeus", label: "Heraeus Precious Metals", type: "processor", impact: 6, correlation: 0.58, sector: "PGM Processing", parentId: "johnson_m" }
+      { id: "hyzon", label: "Hyzon Motors (HYZN)", type: "consumer", impact: -7.0, correlation: -0.52, marketCap: "0.3B", sector: "Hydrogen Trucks", parentId: "fcel" },
+      { id: "heraeus", label: "Heraeus Precious Metals", type: "processor", impact: 6.0, correlation: 0.58, sector: "PGM Processing", parentId: "johnson_m" },
+      { id: "nikkiso", label: "Nikkiso (6376.T)", type: "consumer", impact: -4.0, correlation: -0.45, marketCap: "1.5B", sector: "Hydrogen Equipment", parentId: "be" },
+      { id: "cummins_pt", label: "Cummins (CMI)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "38B", sector: "Engine/Fuel Cell", parentId: "gm_pt" },
+      { id: "catalyst_sub", label: "Catalyst Substitution R&D", type: "substitute", impact: -3.0, correlation: -0.30, sector: "Technology", parentId: "basf_pt" },
+      { id: "sa_mines_etf", label: "SA Mining Index (JSE)", type: "etf", impact: 10.0, correlation: 0.75, sector: "ETF", parentId: "angpy" },
+      { id: "denso_pt", label: "Denso Corp (6902.T)", type: "consumer", impact: -2.0, correlation: -0.30, marketCap: "45B", sector: "Auto Parts", parentId: "honda_pt" },
+      { id: "tanaka_pt", label: "Tanaka Holdings", type: "processor", impact: 5.5, correlation: 0.52, sector: "PGM Refining", parentId: "umicore_pt" },
+      { id: "nel_asa", label: "Nel ASA (NEL.OL)", type: "consumer", impact: -5.5, correlation: -0.50, marketCap: "1B", sector: "Hydrogen/Electrolyzer", parentId: "fcel" },
+      { id: "aptiv_pt", label: "Aptiv PLC (APTV)", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "22B", sector: "Auto Technology", parentId: "ford_pt" },
+      { id: "glass_coating", label: "Glass/Coatings Industry", type: "consumer", impact: -2.5, correlation: -0.30, sector: "Industrial", parentId: "recyclers_pt" }
     ]},
     { nodes: [
-      { id: "sa_power", label: "SA Eskom Power Crisis", type: "macro", impact: 10, sector: "Macro", parentId: "impuy" },
-      { id: "hydrogen_policy", label: "Global Hydrogen Policy", type: "macro", impact: 14, sector: "Macro", parentId: "plug" },
-      { id: "diesel_decline", label: "Diesel Vehicle Decline", type: "macro", impact: -8, sector: "Macro", parentId: "tm_pt" }
+      { id: "nikola_pt", label: "Nikola Corp (NKLA)", type: "consumer", impact: -8.0, correlation: -0.60, marketCap: "0.5B", sector: "Hydrogen Trucks", parentId: "hyzon" },
+      { id: "woven_city", label: "Toyota Woven City H2", type: "consumer", impact: -2.0, correlation: -0.25, sector: "Hydrogen Infrastructure", parentId: "tm_pt" },
+      { id: "itm_power", label: "ITM Power (ITM.L)", type: "consumer", impact: -5.0, correlation: -0.48, marketCap: "0.8B", sector: "Electrolyzer", parentId: "nel_asa" },
+      { id: "linde_h2", label: "Linde H2 Division (LIN)", type: "consumer", impact: -1.5, correlation: -0.18, marketCap: "210B", sector: "Industrial Gas/H2", parentId: "ballard" },
+      { id: "continental_pt", label: "Continental AG (CON.DE)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "10B", sector: "Auto Parts", parentId: "bmw_pt" },
+      { id: "iridium_sub", label: "Iridium Substitute Risk", type: "substitute", impact: -4.0, correlation: -0.35, sector: "PGM Substitution", parentId: "catalyst_sub" },
+      { id: "medical_pt", label: "Medical Devices (Pt Use)", type: "consumer", impact: -1.0, correlation: -0.12, sector: "Medical", parentId: "heraeus" },
+      { id: "petroleum_pt", label: "Petroleum Catalysts", type: "consumer", impact: -2.0, correlation: -0.28, sector: "Refining Catalysts", parentId: "basf_pt" }
+    ]},
+    { nodes: [
+      { id: "sa_power", label: "SA Eskom Power Crisis", type: "macro", impact: 10.0, sector: "Macro", parentId: "impuy" },
+      { id: "hydrogen_policy", label: "Global Hydrogen Policy", type: "policy", impact: 14.0, sector: "Policy", parentId: "plug" },
+      { id: "diesel_decline", label: "Diesel Vehicle Decline", type: "macro", impact: -8.0, sector: "Macro", parentId: "tm_pt" },
+      { id: "zar_usd", label: "ZAR/USD Exchange Rate", type: "fx", impact: 4.0, correlation: 0.45, sector: "FX", parentId: "angpy" },
+      { id: "euro7_regs", label: "Euro 7 Emission Standards", type: "policy", impact: 5.0, sector: "Policy", parentId: "vwagy" },
+      { id: "china_ev_policy", label: "China EV Mandates", type: "policy", impact: -6.0, sector: "Policy", parentId: "stlx" },
+      { id: "sa_labor", label: "SA Mining Labor Strikes", type: "macro", impact: 8.0, sector: "Macro", parentId: "sbsw" },
+      { id: "green_hydrogen", label: "Green Hydrogen Subsidies", type: "policy", impact: 6.0, sector: "Policy", parentId: "ballard" }
     ]}
   ]
 };

@@ -7,7 +7,7 @@ tags: [aluminum, AA, CENX, aerospace, beverage-cans, automotive, packaging]
 description: "How aluminum price moves affect Alcoa (AA), Century Aluminum (CENX), aerospace manufacturers, beverage can makers, and auto companies. Correlation analysis."
 reading_time: 7
 commodity_name: "Aluminum"
-direction: bullish
+direction: bearish
 image: /assets/images/og-aluminum.png
 canonical_url: https://commoditynode.com/aluminum-aerospace-beverage/
 ---
@@ -28,28 +28,60 @@ window.COMMODITY_DATA = {
       { id: "cenx", label: "Century Aluminum (CENX)", type: "producer", impact: 18, correlation: 0.92, marketCap: "1B", sector: "Aluminum Producer" },
       { id: "rio_al", label: "Rio Tinto (RIO)", type: "producer", impact: 7.5, correlation: 0.72, marketCap: "110B", sector: "Diversified Mining" },
       { id: "ba_al", label: "Boeing (BA)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "130B", sector: "Aerospace" },
-      { id: "f_al", label: "Ford Motor (F)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "48B", sector: "Automotive" }
+      { id: "f_al", label: "Ford Motor (F)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "48B", sector: "Automotive" },
+      { id: "nhydy_top", label: "Norsk Hydro (NHYDY)", type: "producer", impact: 12, correlation: 0.85, marketCap: "18B", sector: "Aluminum/Energy" },
+      { id: "xme_al", label: "XME Metals ETF", type: "etf", impact: 6.5, correlation: 0.74, marketCap: "1.5B", sector: "ETF" },
+      { id: "bll_top", label: "Ball Corp (BLL)", type: "consumer", impact: -5.5, correlation: -0.6, marketCap: "16B", sector: "Beverage Cans" },
+      { id: "hindalco_top", label: "Hindalco/Novelis (HINDALCO.NS)", type: "producer", impact: 8.5, correlation: 0.72, marketCap: "15B", sector: "Aluminum Integrated" },
+      { id: "cck_top", label: "Crown Holdings (CCK)", type: "consumer", impact: -4.8, correlation: -0.55, marketCap: "10B", sector: "Beverage/Food Cans" },
+      { id: "awc_top", label: "Alumina Ltd (AWC.AX)", type: "processor", impact: 12, correlation: 0.86, marketCap: "3.5B", sector: "Alumina Refining" },
+      { id: "s32_al", label: "South32 (S32.AX)", type: "producer", impact: 7, correlation: 0.65, marketCap: "12B", sector: "Bauxite/Alumina" }
     ]},
     { nodes: [
-      { id: "norsk", label: "Norsk Hydro (NHYDY)", type: "positive", impact: 12, correlation: 0.85, sector: "Aluminum/Energy", parentId: "aa" },
       { id: "rusal", label: "RUSAL (0486.HK)", type: "producer", impact: 16, correlation: 0.9, sector: "Aluminum", parentId: "cenx" },
-      { id: "rolling_mills", label: "Novelis (Hindalco)", type: "consumer", impact: -5, correlation: -0.55, sector: "Aluminum Rolling", parentId: "rio_al" },
-      { id: "airbus_al", label: "Airbus (AIR.PA)", type: "consumer", impact: -3, correlation: -0.38, sector: "Aerospace", parentId: "ba_al" }
+      { id: "rolling_mills", label: "Novelis Rolling Mills", type: "consumer", impact: -5, correlation: -0.55, sector: "Aluminum Rolling", parentId: "hindalco_top" },
+      { id: "airbus_al", label: "Airbus (AIR.PA)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "120B", sector: "Aerospace", parentId: "ba_al" },
+      { id: "arnc_al", label: "Arconic (ARNC)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "3B", sector: "Aluminum Rolling", parentId: "aa" },
+      { id: "nemak_al", label: "Nemak (NEMAK.MX)", type: "consumer", impact: -6, correlation: -0.65, marketCap: "2B", sector: "Auto Parts", parentId: "f_al" },
+      { id: "gm_al", label: "General Motors (GM)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "48B", sector: "Automotive", parentId: "f_al" },
+      { id: "bud_al", label: "AB InBev (BUD)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "130B", sector: "Beverages", parentId: "bll_top" },
+      { id: "ardagh_al", label: "Ardagh Metal Packaging (AMBP)", type: "consumer", impact: -5, correlation: -0.58, marketCap: "2B", sector: "Packaging", parentId: "cck_top" },
+      { id: "recyclers_al", label: "Aluminum Recyclers", type: "substitute", impact: 8, correlation: 0.68, sector: "Recycling", parentId: "cenx" },
+      { id: "bauxite_al", label: "Bauxite Miners (AWCMY)", type: "producer", impact: 10, correlation: 0.82, sector: "Bauxite", parentId: "s32_al" }
     ]},
     { nodes: [
-      { id: "bauxite", label: "Bauxite Mining (AWCMY)", type: "producer", impact: 10, correlation: 0.82, sector: "Bauxite", parentId: "norsk" },
-      { id: "alumina", label: "Alumina Ltd (AWC.AX)", type: "processor", impact: 12, correlation: 0.86, sector: "Alumina Refining", parentId: "rusal" },
-      { id: "cans", label: "Ball Corp (BALL)", type: "consumer", impact: -5.5, correlation: -0.6, marketCap: "16B", sector: "Beverage Cans", parentId: "rolling_mills" }
+      { id: "ko_al", label: "Coca-Cola (KO)", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "280B", sector: "Beverages", parentId: "bud_al" },
+      { id: "pep_al", label: "PepsiCo (PEP)", type: "consumer", impact: -1.3, correlation: -0.22, marketCap: "230B", sector: "Beverages", parentId: "bud_al" },
+      { id: "construction_al", label: "Construction/Facades", type: "consumer", impact: -4, correlation: -0.5, sector: "Construction", parentId: "rolling_mills" },
+      { id: "solar_al", label: "Solar Panel Frames (ENPH)", type: "consumer", impact: -3.5, correlation: -0.4, sector: "Renewable Energy", parentId: "arnc_al" },
+      { id: "lmt_al", label: "Lockheed Martin (LMT)", type: "consumer", impact: -2, correlation: -0.28, marketCap: "125B", sector: "Defense", parentId: "ba_al" },
+      { id: "spr_al", label: "Spirit AeroSystems (SPR)", type: "consumer", impact: -4.2, correlation: -0.48, marketCap: "5B", sector: "Aerostructures", parentId: "airbus_al" },
+      { id: "tsla_al", label: "Tesla (TSLA)", type: "consumer", impact: -1.8, correlation: -0.25, marketCap: "780B", sector: "EV Manufacturing", parentId: "gm_al" },
+      { id: "constellium", label: "Constellium (CSTM)", type: "processor", impact: 5.5, correlation: 0.52, marketCap: "3B", sector: "Aluminum Products", parentId: "arnc_al" },
+      { id: "kaiser_al", label: "Kaiser Aluminum (KALU)", type: "processor", impact: 6, correlation: 0.55, marketCap: "2B", sector: "Aluminum Products", parentId: "rolling_mills" },
+      { id: "tri_al", label: "Trimet Aluminium (Private)", type: "producer", impact: 13, correlation: 0.82, sector: "European Smelting", parentId: "nhydy_top" },
+      { id: "whr_al", label: "Whirlpool (WHR)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "6B", sector: "Appliances", parentId: "construction_al" },
+      { id: "monster_al", label: "Monster Beverage (MNST)", type: "consumer", impact: -1.2, correlation: -0.2, marketCap: "52B", sector: "Beverages", parentId: "bll_top" }
     ]},
     { nodes: [
-      { id: "beverage_al", label: "Coca-Cola (KO)", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "280B", sector: "Beverages", parentId: "cans" },
-      { id: "auto_parts_al", label: "Nemak (NEMAK.MX)", type: "consumer", impact: -6, correlation: -0.65, sector: "Auto Parts", parentId: "f_al" },
-      { id: "construction_al", label: "Construction (facade)", type: "consumer", impact: -4, correlation: -0.5, sector: "Construction", parentId: "rolling_mills" }
+      { id: "midwest_prem", label: "Midwest Premium (US)", type: "index", impact: 6, correlation: 0.7, sector: "Regional Pricing", parentId: "aa" },
+      { id: "lme_warehousing", label: "LME Warehouse Stocks", type: "index", impact: -4, correlation: -0.5, sector: "Inventory", parentId: "cenx" },
+      { id: "ev_demand_al", label: "EV Aluminum Demand Growth", type: "macro", impact: 5, correlation: 0.48, sector: "Macro", parentId: "tsla_al" },
+      { id: "eu_curtail", label: "European Smelter Curtailments", type: "macro", impact: 8, correlation: 0.65, sector: "Macro", parentId: "nhydy_top" },
+      { id: "china_cap_al", label: "China 45M Ton Capacity Cap", type: "policy", impact: 7, correlation: 0.6, sector: "Macro", parentId: "rusal" },
+      { id: "section232_al", label: "Section 232 Tariffs", type: "policy", impact: 5.5, correlation: 0.52, sector: "Macro", parentId: "cenx" },
+      { id: "energy_cost_al", label: "Electricity Costs (Smelting)", type: "macro", impact: 8, correlation: 0.62, sector: "Macro", parentId: "aa" },
+      { id: "auto_prod_al", label: "Auto Production Cycle", type: "macro", impact: -3, correlation: -0.35, sector: "Macro", parentId: "f_al" }
     ]},
     { nodes: [
-      { id: "energy_al", label: "Electricity Costs", type: "macro", impact: 8, sector: "Macro", parentId: "aa" },
-      { id: "china_al", label: "China Capacity Cuts", type: "macro", impact: 7, sector: "Macro", parentId: "cenx" },
-      { id: "recycling_al", label: "Aluminum Recycling", type: "macro", impact: -5, sector: "Macro", parentId: "cans" }
+      { id: "recycling_rate", label: "Aluminum Recycling Rates", type: "substitute", impact: -5, correlation: -0.42, sector: "Sustainability", parentId: "recyclers_al" },
+      { id: "steel_sub", label: "Steel Substitution Risk", type: "substitute", impact: -3, correlation: -0.3, sector: "Substitutes", parentId: "construction_al" },
+      { id: "carbon_fiber", label: "Carbon Fiber Substitution", type: "substitute", impact: -2, correlation: -0.2, sector: "Substitutes", parentId: "ba_al" },
+      { id: "aud_fx_al", label: "Australian Dollar (AUD)", type: "fx", impact: 4, correlation: 0.42, sector: "Currency", parentId: "awc_top" },
+      { id: "cny_fx_al", label: "Chinese Yuan (CNY)", type: "fx", impact: 3, correlation: 0.32, sector: "Currency", parentId: "rusal" },
+      { id: "freight_al", label: "Shipping / Freight Costs", type: "freight", impact: 2.5, correlation: 0.28, sector: "Logistics", parentId: "s32_al" },
+      { id: "plastic_sub", label: "Plastic Packaging Substitution", type: "substitute", impact: -2.5, correlation: -0.25, sector: "Substitutes", parentId: "bll_top" },
+      { id: "copper_cross_al", label: "Copper (Cross-Commodity)", type: "commodity", impact: 3, correlation: 0.4, sector: "Industrial Metals", parentId: "xme_al" }
     ]}
   ]
 };

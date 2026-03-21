@@ -92,6 +92,10 @@ layout: default
 
   <div class="post-layout" id="post-layout">
     <article class="post-content" id="post-article" data-animate>
+      <style>
+        .post-content > p, .post-content > h2, .post-content > h3, .post-content > ul, .post-content > ol, .post-content > blockquote { max-width: 720px; margin-left: auto; margin-right: auto; }
+        .post-content > .cn-price-chart, .post-content > .cn-impact-graph, .post-content > table, .post-content > script, .post-content > div { max-width: 1200px; margin-left: auto; margin-right: auto; }
+      </style>
       {{ content }}
 
       {% if page.tags.size > 0 %}

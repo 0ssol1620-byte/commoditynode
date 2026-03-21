@@ -27,36 +27,63 @@ window.COMMODITY_DATA = {
   commodity: { id: "coal", label: "Coal ↑10%", price: "$135/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "btu", label: "Peabody Energy (BTU)", type: "producer", impact: 15, correlation: 0.92, marketCap: "3.8B", sector: "Coal Mining" },
+      { id: "btu", label: "Peabody Energy (BTU)", type: "producer", impact: 15.0, correlation: 0.92, marketCap: "3.8B", sector: "Coal Mining" },
       { id: "arch", label: "ARCH Resources (ARCH)", type: "producer", impact: 13.5, correlation: 0.89, marketCap: "2.5B", sector: "Coal Mining" },
-      { id: "hcc", label: "Warrior Met Coal (HCC)", type: "producer", impact: 12, correlation: 0.85, marketCap: "3.2B", sector: "Met Coal Mining" },
+      { id: "hcc", label: "Warrior Met Coal (HCC)", type: "producer", impact: 12.0, correlation: 0.85, marketCap: "3.2B", sector: "Met Coal Mining" },
       { id: "x", label: "U.S. Steel (X)", type: "consumer", impact: -5.5, correlation: -0.58, marketCap: "8B", sector: "Steel" },
-      { id: "nue", label: "Nucor Corp (NUE)", type: "positive", impact: 2, correlation: 0.22, marketCap: "42B", sector: "Steel (EAF)" }
+      { id: "nue", label: "Nucor Corp (NUE)", type: "producer", impact: 2.0, correlation: 0.22, marketCap: "42B", sector: "Steel (EAF)" },
+      { id: "unp", label: "Union Pacific (UNP)", type: "supplier", impact: 3.5, correlation: 0.42, marketCap: "148B", sector: "Railroads" },
+      { id: "nsc", label: "Norfolk Southern (NSC)", type: "supplier", impact: 4.0, correlation: 0.48, marketCap: "52B", sector: "Railroads" },
+      { id: "aep", label: "American Elec Power (AEP)", type: "consumer", impact: -4.2, correlation: -0.50, marketCap: "48B", sector: "Utilities" },
+      { id: "icln", label: "ICLN Clean Energy ETF", type: "etf", impact: 5.0, correlation: 0.45, marketCap: "3B", sector: "ETF" },
+      { id: "arlp", label: "Alliance Resource (ARLP)", type: "producer", impact: 14.0, correlation: 0.90, marketCap: "3B", sector: "Coal Mining" },
+      { id: "ceix", label: "CONSOL Energy (CEIX)", type: "producer", impact: 13.0, correlation: 0.87, marketCap: "4B", sector: "Coal Mining" },
+      { id: "coal_india", label: "Coal India (COALINDIA.NS)", type: "producer", impact: 10.0, correlation: 0.75, marketCap: "25B", sector: "Coal Mining" },
+      { id: "whitehaven", label: "Whitehaven Coal (WHC.AX)", type: "producer", impact: 14.5, correlation: 0.90, marketCap: "5B", sector: "Coal Mining" }
     ]},
     { nodes: [
       { id: "clf", label: "Cleveland-Cliffs (CLF)", type: "consumer", impact: -4.8, correlation: -0.52, marketCap: "9B", sector: "Steel", parentId: "x" },
       { id: "vmc", label: "Vulcan Materials (VMC)", type: "consumer", impact: -3.2, correlation: -0.35, marketCap: "35B", sector: "Cement/Aggregates", parentId: "x" },
-      { id: "mlm", label: "Martin Marietta (MLM)", type: "consumer", impact: -3, correlation: -0.33, marketCap: "32B", sector: "Cement/Aggregates", parentId: "x" },
-      { id: "unp", label: "Union Pacific (UNP)", type: "supplier", impact: 3.5, correlation: 0.42, marketCap: "148B", sector: "Railroads", parentId: "btu" },
-      { id: "nsc", label: "Norfolk Southern (NSC)", type: "supplier", impact: 4, correlation: 0.48, marketCap: "52B", sector: "Railroads", parentId: "arch" }
+      { id: "mlm", label: "Martin Marietta (MLM)", type: "consumer", impact: -3.0, correlation: -0.33, marketCap: "32B", sector: "Cement/Aggregates", parentId: "x" },
+      { id: "so", label: "Southern Company (SO)", type: "consumer", impact: -3.0, correlation: -0.38, marketCap: "78B", sector: "Utilities", parentId: "aep" },
+      { id: "xlu", label: "XLU Utilities ETF", type: "etf", impact: -3.5, correlation: -0.42, marketCap: "18B", sector: "ETF", parentId: "aep" },
+      { id: "arcelormittal_c", label: "ArcelorMittal (MT)", type: "consumer", impact: -4.5, correlation: -0.50, marketCap: "22B", sector: "Steel", parentId: "x" },
+      { id: "tata_steel", label: "Tata Steel (TATASTEEL.NS)", type: "consumer", impact: -4.0, correlation: -0.45, marketCap: "18B", sector: "Steel", parentId: "coal_india" },
+      { id: "csx", label: "CSX Corp (CSX)", type: "supplier", impact: 3.0, correlation: 0.38, marketCap: "68B", sector: "Railroads", parentId: "nsc" },
+      { id: "stld_c", label: "Steel Dynamics (STLD)", type: "consumer", impact: 1.5, correlation: 0.18, marketCap: "18B", sector: "Steel (EAF)", parentId: "nue" },
+      { id: "posco_c", label: "POSCO (PKX)", type: "consumer", impact: -3.8, correlation: -0.42, marketCap: "20B", sector: "Steel", parentId: "whitehaven" },
+      { id: "nipsco", label: "NiSource (NI)", type: "consumer", impact: -2.8, correlation: -0.32, marketCap: "14B", sector: "Utilities", parentId: "so" },
+      { id: "bhp_coal", label: "BHP Group (BHP)", type: "producer", impact: 5.0, correlation: 0.48, marketCap: "150B", sector: "Mining", parentId: "whitehaven" }
     ]},
     { nodes: [
-      { id: "xlu", label: "XLU Utilities ETF", type: "etf", impact: -3.5, correlation: -0.42, marketCap: "18B", sector: "ETF", parentId: "clf" },
-      { id: "aep", label: "American Elec Power (AEP)", type: "consumer", impact: -4.2, correlation: -0.5, marketCap: "48B", sector: "Utilities", parentId: "clf" },
-      { id: "so", label: "Southern Company (SO)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "78B", sector: "Utilities", parentId: "vmc" },
-      { id: "icln", label: "ICLN Clean Energy ETF", type: "etf", impact: 5, correlation: 0.45, marketCap: "3B", sector: "ETF", parentId: "xlu" }
-    ]},
-    { nodes: [
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: 4.5, correlation: 0.4, marketCap: "25B", sector: "Solar", parentId: "icln" },
-      { id: "fslr", label: "First Solar (FSLR)", type: "consumer", impact: 4, correlation: 0.38, marketCap: "22B", sector: "Solar", parentId: "icln" },
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "substitute", impact: 4.5, correlation: 0.40, marketCap: "25B", sector: "Solar", parentId: "icln" },
+      { id: "fslr", label: "First Solar (FSLR)", type: "substitute", impact: 4.0, correlation: 0.38, marketCap: "22B", sector: "Solar", parentId: "icln" },
       { id: "nee", label: "NextEra Energy (NEE)", type: "substitute", impact: 3.5, correlation: 0.35, marketCap: "155B", sector: "Renewables", parentId: "icln" },
-      { id: "esg_funds", label: "ESG Fund Flows", type: "macro", impact: 3, sector: "Macro", parentId: "icln" }
+      { id: "cemex", label: "CEMEX (CX)", type: "consumer", impact: -4.0, correlation: -0.45, marketCap: "10B", sector: "Cement", parentId: "vmc" },
+      { id: "heidelberg", label: "Heidelberg Materials (HEI.DE)", type: "consumer", impact: -3.5, correlation: -0.40, marketCap: "15B", sector: "Cement", parentId: "mlm" },
+      { id: "ng_sub", label: "Natural Gas (Substitute)", type: "substitute", impact: -3.0, correlation: -0.35, sector: "Energy", parentId: "so" },
+      { id: "ge_gas", label: "GE Vernova (GEV)", type: "supplier", impact: 2.0, correlation: 0.25, marketCap: "45B", sector: "Power Equipment", parentId: "so" },
+      { id: "caterpillar_coal", label: "Caterpillar (CAT)", type: "supplier", impact: 2.5, correlation: 0.30, marketCap: "160B", sector: "Mining Equipment", parentId: "btu" },
+      { id: "komatsu_c", label: "Komatsu (6301.T)", type: "supplier", impact: 2.2, correlation: 0.28, marketCap: "35B", sector: "Mining Equipment", parentId: "arch" },
+      { id: "alpha_met", label: "Alpha Metallurgical (AMR)", type: "producer", impact: 12.5, correlation: 0.86, marketCap: "2.5B", sector: "Met Coal Mining", parentId: "hcc" }
     ]},
     { nodes: [
-      { id: "carbon_price", label: "Carbon Credit Price", type: "macro", impact: 5.5, sector: "Macro", parentId: "enph" },
-      { id: "electricity", label: "Electricity Price Index", type: "macro", impact: -4, sector: "Macro", parentId: "aep" },
-      { id: "steel_price", label: "HRC Steel Price", type: "macro", impact: 3.5, sector: "Macro", parentId: "x" },
-      { id: "coal_to_gas", label: "Coal-to-Gas Switching", type: "macro", impact: 2.5, sector: "Macro", parentId: "so" }
+      { id: "esg_funds", label: "ESG Fund Flows", type: "macro", impact: 3.0, sector: "Macro", parentId: "icln" },
+      { id: "ntpc_india", label: "NTPC Ltd (NTPC.NS)", type: "consumer", impact: -3.5, correlation: -0.40, marketCap: "35B", sector: "Power Generation", parentId: "coal_india" },
+      { id: "eskom_sa", label: "Eskom (SA Utility)", type: "consumer", impact: -4.0, correlation: -0.45, sector: "Power Generation", parentId: "bhp_coal" },
+      { id: "j_power", label: "J-Power (9513.T)", type: "consumer", impact: -3.0, correlation: -0.35, marketCap: "5B", sector: "Power Generation", parentId: "whitehaven" },
+      { id: "kepco_c", label: "KEPCO (015760.KS)", type: "consumer", impact: -3.5, correlation: -0.38, marketCap: "12B", sector: "Power Generation", parentId: "posco_c" },
+      { id: "barge_freight", label: "Inland Barge Freight", type: "freight", impact: 2.5, correlation: 0.30, sector: "Freight", parentId: "unp" },
+      { id: "capesize_rate", label: "Capesize Freight Rate", type: "freight", impact: 3.0, correlation: 0.35, sector: "Freight", parentId: "whitehaven" },
+      { id: "met_thermal_spread", label: "Met-Thermal Coal Spread", type: "index", impact: 4.0, correlation: 0.48, sector: "Coal Market", parentId: "hcc" }
+    ]},
+    { nodes: [
+      { id: "carbon_price", label: "Carbon Credit Price", type: "policy", impact: 5.5, sector: "Policy", parentId: "enph" },
+      { id: "electricity", label: "Electricity Price Index", type: "macro", impact: -4.0, sector: "Macro", parentId: "aep" },
+      { id: "steel_price", label: "HRC Steel Price", type: "index", impact: 3.5, correlation: 0.42, sector: "Steel Market", parentId: "x" },
+      { id: "coal_to_gas", label: "Coal-to-Gas Switching", type: "macro", impact: 2.5, sector: "Macro", parentId: "so" },
+      { id: "china_import_quota", label: "China Coal Import Quota", type: "policy", impact: 8.0, sector: "Policy", parentId: "coal_india" },
+      { id: "eu_cbam", label: "EU CBAM (Carbon Border)", type: "policy", impact: 4.0, sector: "Policy", parentId: "arcelormittal_c" }
     ]}
   ]
 };

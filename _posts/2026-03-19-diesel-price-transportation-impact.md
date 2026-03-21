@@ -33,26 +33,59 @@ window.COMMODITY_DATA = {
       { id: "jbht", label: "J.B. Hunt (JBHT)", type: "consumer", impact: -7.8, correlation: -0.76, marketCap: "20B", sector: "Trucking" },
       { id: "de", label: "Deere & Co (DE)", type: "consumer", impact: -4.5, correlation: -0.58, marketCap: "120B", sector: "Farm Equipment" },
       { id: "adm", label: "Archer-Daniels (ADM)", type: "consumer", impact: -3.8, correlation: -0.52, marketCap: "30B", sector: "Agri-Processing" },
-      { id: "vntr", label: "Valero Energy (VLO)", type: "processor", impact: 6.5, correlation: 0.72, marketCap: "50B", sector: "Refining" }
+      { id: "vntr", label: "Valero Energy (VLO)", type: "processor", impact: 6.5, correlation: 0.72, marketCap: "50B", sector: "Refining" },
+      { id: "iyt", label: "iShares Transportation (IYT)", type: "etf", impact: -5.5, correlation: -0.7, marketCap: "1.5B", sector: "Transportation ETF" },
+      { id: "mpc_d", label: "Marathon Petroleum (MPC)", type: "processor", impact: 5.8, correlation: 0.68, marketCap: "60B", sector: "Refining" },
+      { id: "unp", label: "Union Pacific (UNP)", type: "consumer", impact: -3.5, correlation: -0.48, marketCap: "140B", sector: "Rail" },
+      { id: "ksu", label: "Kansas City Southern (KSU)", type: "consumer", impact: -3.2, correlation: -0.45, marketCap: "28B", sector: "Rail" },
+      { id: "csx_d", label: "CSX Corp (CSX)", type: "consumer", impact: -3, correlation: -0.42, marketCap: "65B", sector: "Rail" },
+      { id: "ups_d", label: "UPS (UPS)", type: "consumer", impact: -4.2, correlation: -0.62, marketCap: "110B", sector: "Logistics" }
     ]},
     { nodes: [
       { id: "werner", label: "Werner Enterprises (WERN)", type: "consumer", impact: -9.2, correlation: -0.82, marketCap: "3B", sector: "Trucking", parentId: "xpo" },
       { id: "saia", label: "Saia Inc (SAIA)", type: "consumer", impact: -8, correlation: -0.77, marketCap: "8B", sector: "LTL", parentId: "odfl" },
       { id: "agco", label: "AGCO Corp (AGCO)", type: "consumer", impact: -5, correlation: -0.61, marketCap: "10B", sector: "Farm Equipment", parentId: "de" },
       { id: "bunge", label: "Bunge Global (BG)", type: "processor", impact: -3.2, correlation: -0.48, marketCap: "14B", sector: "Grain Trading", parentId: "adm" },
-      { id: "psx", label: "Phillips 66 (PSX)", type: "processor", impact: 5.8, correlation: 0.68, marketCap: "52B", sector: "Refining", parentId: "vntr" }
+      { id: "psx", label: "Phillips 66 (PSX)", type: "processor", impact: 5.8, correlation: 0.68, marketCap: "52B", sector: "Refining", parentId: "vntr" },
+      { id: "kntk", label: "Knight-Swift (KNX)", type: "consumer", impact: -8.8, correlation: -0.8, marketCap: "10B", sector: "Trucking", parentId: "jbht" },
+      { id: "sndr", label: "Schneider National (SNDR)", type: "consumer", impact: -8.2, correlation: -0.78, marketCap: "5B", sector: "Trucking", parentId: "jbht" },
+      { id: "cnhi", label: "CNH Industrial (CNHI)", type: "consumer", impact: -4.2, correlation: -0.55, marketCap: "18B", sector: "Farm Equipment", parentId: "de" },
+      { id: "hyln", label: "Hyliion (HYLN)", type: "substitute", impact: 5, correlation: 0.42, marketCap: "0.8B", sector: "Electric Trucking", parentId: "xpo" },
+      { id: "dkng_diesel", label: "Delek US Holdings (DK)", type: "processor", impact: 5.2, correlation: 0.65, marketCap: "2B", sector: "Refining", parentId: "mpc_d" },
+      { id: "matx", label: "Matson Inc (MATX)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "4B", sector: "Ocean Shipping", parentId: "iyt" }
     ]},
     { nodes: [
-      { id: "amzn_log", label: "Amazon Logistics", type: "consumer", impact: -2.5, correlation: -0.41, marketCap: "2T", sector: "E-commerce", parentId: "werner" },
+      { id: "amzn_log", label: "Amazon Logistics (AMZN)", type: "consumer", impact: -2.5, correlation: -0.41, marketCap: "2T", sector: "E-commerce", parentId: "werner" },
       { id: "fedex", label: "FedEx Corp (FDX)", type: "consumer", impact: -5.5, correlation: -0.67, marketCap: "65B", sector: "Parcel Delivery", parentId: "saia" },
-      { id: "crop_ins", label: "Crop input costs ↑", type: "negative", impact: -4, sector: "Agriculture", parentId: "agco" },
-      { id: "food_mfg", label: "Food CPI inflation", type: "consumer", impact: -2, sector: "Consumer", parentId: "bunge" },
-      { id: "diesel_arb", label: "Diesel–gasoline spread", type: "processor", impact: 3.5, sector: "Refining", parentId: "psx" }
+      { id: "crop_ins", label: "Crop Input Costs", type: "consumer", impact: -4, sector: "Agriculture", parentId: "agco" },
+      { id: "food_mfg", label: "Food CPI Inflation", type: "macro", impact: -2, sector: "Consumer", parentId: "bunge" },
+      { id: "diesel_arb", label: "Diesel-Gasoline Spread", type: "index", impact: 3.5, correlation: 0.45, sector: "Refining", parentId: "psx" },
+      { id: "wmt_log", label: "Walmart Logistics (WMT)", type: "consumer", impact: -1.5, correlation: -0.22, marketCap: "480B", sector: "Retail Logistics", parentId: "amzn_log" },
+      { id: "cat_d", label: "Caterpillar (CAT)", type: "consumer", impact: -3, correlation: -0.42, marketCap: "160B", sector: "Construction Equipment", parentId: "cnhi" },
+      { id: "tgt_log", label: "Target Logistics (TGT)", type: "consumer", impact: -1.8, correlation: -0.25, marketCap: "58B", sector: "Retail Logistics", parentId: "fedex" },
+      { id: "dkl", label: "Delek Logistics (DKL)", type: "supplier", impact: 3, correlation: 0.4, marketCap: "2.5B", sector: "Fuel Distribution", parentId: "dkng_diesel" },
+      { id: "nktr", label: "Nikola Corp (NKLA)", type: "substitute", impact: 4, correlation: 0.35, marketCap: "0.5B", sector: "Hydrogen Trucking", parentId: "hyln" }
     ]},
     { nodes: [
-      { id: "consumer_d", label: "Consumer Staples ↑", type: "macro", impact: -1.5, sector: "Macro", parentId: "food_mfg" },
-      { id: "cpi_d", label: "Core CPI inflation", type: "macro", impact: -2.2, sector: "Macro", parentId: "crop_ins" },
-      { id: "reshoring", label: "Nearshoring demand", type: "macro", impact: 2, sector: "Industrial", parentId: "diesel_arb" }
+      { id: "consumer_d", label: "Consumer Staples Inflation", type: "macro", impact: -1.5, sector: "Consumer", parentId: "food_mfg" },
+      { id: "cpi_d", label: "Core CPI Pressure", type: "macro", impact: -2.2, sector: "Inflation", parentId: "crop_ins" },
+      { id: "reshoring", label: "Nearshoring Demand", type: "macro", impact: 2, sector: "Industrial", parentId: "diesel_arb" },
+      { id: "dhl_global", label: "DHL Group (DHL.DE)", type: "consumer", impact: -4, correlation: -0.52, marketCap: "45B", sector: "Global Logistics", parentId: "fedex" },
+      { id: "zim_d", label: "ZIM Integrated (ZIM)", type: "consumer", impact: -5, correlation: -0.58, marketCap: "3B", sector: "Container Shipping", parentId: "matx" },
+      { id: "dsx_d", label: "Diana Shipping (DSX)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "0.4B", sector: "Dry Bulk Shipping", parentId: "matx" },
+      { id: "pcar", label: "PACCAR Inc (PCAR)", type: "supplier", impact: -2.5, correlation: -0.32, marketCap: "52B", sector: "Truck Manufacturing", parentId: "kntk" },
+      { id: "cummins", label: "Cummins Inc (CMI)", type: "supplier", impact: -2, correlation: -0.28, marketCap: "40B", sector: "Diesel Engines", parentId: "pcar" }
+    ]},
+    { nodes: [
+      { id: "opec_diesel", label: "OPEC+ Production Cuts", type: "policy", impact: 6, sector: "Supply Policy", parentId: "vntr" },
+      { id: "refinery_util", label: "US Refinery Utilization Rate", type: "macro", impact: 4, sector: "Supply", parentId: "psx" },
+      { id: "eia_inventory", label: "EIA Distillate Inventories", type: "macro", impact: -5, sector: "Supply Data", parentId: "diesel_arb" },
+      { id: "carbon_tax", label: "Carbon Tax / ETS Impact", type: "policy", impact: 3, sector: "Policy", parentId: "dhl_global" },
+      { id: "hwy_spending", label: "US Highway Spending (IIJA)", type: "policy", impact: 2, sector: "Infrastructure", parentId: "reshoring" },
+      { id: "fuel_surcharge", label: "Fuel Surcharge Lag (30-60d)", type: "macro", impact: -3, sector: "Pricing Mechanism", parentId: "odfl" },
+      { id: "natgas_diesel", label: "Natural Gas-Diesel Spread", type: "commodity", impact: 4, correlation: 0.5, sector: "Cross-Commodity", parentId: "refinery_util" },
+      { id: "ev_truck_sub", label: "Electric Truck TCO Advantage", type: "substitute", impact: 3, correlation: 0.3, sector: "Electrification", parentId: "hyln" },
+      { id: "dot_hours", label: "DOT Hours of Service Rules", type: "policy", impact: -1.5, sector: "Regulation", parentId: "fuel_surcharge" }
     ]}
   ]
 };

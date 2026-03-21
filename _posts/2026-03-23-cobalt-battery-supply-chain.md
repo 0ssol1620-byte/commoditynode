@@ -27,34 +27,65 @@ window.COMMODITY_DATA = {
   commodity: { id: "cobalt", label: "Cobalt ↑10%", price: "$33,000/ton", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "glen_co", label: "Glencore (GLEN)", type: "producer", impact: 8, correlation: 0.68, marketCap: "68B", sector: "Mining & Trading" },
-      { id: "cmclf", label: "China Moly (CMCLF)", type: "producer", impact: 18, correlation: 0.88, marketCap: "12B", sector: "Cobalt/Moly Mining" },
+      { id: "glen_co", label: "Glencore (GLEN)", type: "producer", impact: 8.0, correlation: 0.68, marketCap: "68B", sector: "Mining & Trading" },
+      { id: "cmclf", label: "China Moly (CMCLF)", type: "producer", impact: 18.0, correlation: 0.88, marketCap: "12B", sector: "Cobalt/Moly Mining" },
       { id: "tsla_co", label: "Tesla (TSLA)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "700B", sector: "EV" },
       { id: "nio_co", label: "NIO Inc (NIO)", type: "consumer", impact: -5.5, correlation: -0.55, marketCap: "12B", sector: "EV" },
-      { id: "rivn_co", label: "Rivian (RIVN)", type: "consumer", impact: -6, correlation: -0.58, marketCap: "18B", sector: "EV" }
+      { id: "rivn_co", label: "Rivian (RIVN)", type: "consumer", impact: -6.0, correlation: -0.58, marketCap: "18B", sector: "EV" },
+      { id: "catl_co", label: "CATL (300750.SZ)", type: "processor", impact: -5.5, correlation: -0.58, sector: "Battery Manufacturing" },
+      { id: "lg_chem", label: "LG Energy Solution (373220.KS)", type: "processor", impact: -5.0, correlation: -0.55, marketCap: "80B", sector: "Battery Manufacturing" },
+      { id: "umicore_co", label: "Umicore (UMI.BR)", type: "processor", impact: 7.0, correlation: 0.60, marketCap: "6B", sector: "Cobalt Refining" },
+      { id: "eramet", label: "Eramet (ERA.PA)", type: "producer", impact: 10.0, correlation: 0.72, marketCap: "3.5B", sector: "Mining" },
+      { id: "fortune_min", label: "Fortune Minerals (FT.TO)", type: "producer", impact: 25.0, correlation: 0.90, marketCap: "0.1B", sector: "Cobalt Development" },
+      { id: "cobalt_27", label: "Electra Battery (ELBM.V)", type: "producer", impact: 22.0, correlation: 0.85, marketCap: "0.2B", sector: "Cobalt Refining" },
+      { id: "lit_etf", label: "Global X Lithium (LIT)", type: "etf", impact: -2.5, correlation: -0.30, marketCap: "3B", sector: "ETF" },
+      { id: "batt_etf", label: "Amplify Lithium Battery (BATT)", type: "etf", impact: -2.0, correlation: -0.25, marketCap: "0.2B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "katanga", label: "Katanga/Mutanda Mines", type: "producer", impact: 22, correlation: 0.92, sector: "DRC Cobalt Mining", parentId: "glen_co" },
-      { id: "eramet", label: "Eramet (ERA.PA)", type: "producer", impact: 10, correlation: 0.72, marketCap: "3.5B", sector: "Mining", parentId: "cmclf" },
-      { id: "catl_co", label: "CATL (300750.SZ)", type: "processor", impact: -5.5, correlation: -0.58, sector: "Battery Manufacturing", parentId: "tsla_co" },
-      { id: "lg_chem", label: "LG Energy Solution", type: "processor", impact: -5, correlation: -0.55, sector: "Battery Manufacturing", parentId: "nio_co" }
+      { id: "katanga", label: "Katanga/Mutanda Mines", type: "producer", impact: 22.0, correlation: 0.92, sector: "DRC Cobalt Mining", parentId: "glen_co" },
+      { id: "panasonic_co", label: "Panasonic (6752.T)", type: "processor", impact: -3.8, correlation: -0.45, marketCap: "25B", sector: "Battery Manufacturing", parentId: "tsla_co" },
+      { id: "xpev_co", label: "XPeng (XPEV)", type: "consumer", impact: -5.0, correlation: -0.52, marketCap: "10B", sector: "EV", parentId: "nio_co" },
+      { id: "byd_co", label: "BYD Company (BYDDF)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "95B", sector: "EV", parentId: "catl_co" },
+      { id: "cobalt_recycle", label: "Li-Cycle Holdings (LICY)", type: "substitute", impact: 9.0, correlation: 0.65, marketCap: "0.5B", sector: "Battery Recycling", parentId: "katanga" },
+      { id: "redwood_mat", label: "Redwood Materials (Private)", type: "substitute", impact: 8.0, correlation: 0.60, sector: "Battery Recycling", parentId: "umicore_co" },
+      { id: "sdk_co", label: "SK Innovation (096770.KS)", type: "processor", impact: -4.5, correlation: -0.50, marketCap: "10B", sector: "Battery Manufacturing", parentId: "lg_chem" },
+      { id: "samsung_sdi", label: "Samsung SDI (006400.KS)", type: "processor", impact: -4.2, correlation: -0.48, marketCap: "30B", sector: "Battery Manufacturing", parentId: "lg_chem" },
+      { id: "erg_africa", label: "ERG Africa Mining", type: "producer", impact: 15.0, correlation: 0.82, sector: "DRC Mining", parentId: "cmclf" },
+      { id: "huayou", label: "Huayou Cobalt (603799.SS)", type: "processor", impact: 12.0, correlation: 0.78, marketCap: "8B", sector: "Cobalt Processing", parentId: "cmclf" },
+      { id: "tenke", label: "Tenke Fungurume Mine", type: "producer", impact: 20.0, correlation: 0.90, sector: "DRC Cobalt/Copper", parentId: "cmclf" },
+      { id: "lucid_co", label: "Lucid Group (LCID)", type: "consumer", impact: -6.5, correlation: -0.60, marketCap: "8B", sector: "EV", parentId: "rivn_co" }
     ]},
     { nodes: [
       { id: "aapl_co", label: "Apple Inc (AAPL)", type: "consumer", impact: -1.2, correlation: -0.22, marketCap: "3200B", sector: "Consumer Electronics", parentId: "catl_co" },
-      { id: "samsung_co", label: "Samsung Electronics", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "380B", sector: "Consumer Electronics", parentId: "lg_chem" },
-      { id: "umicore_co", label: "Umicore (UMI.BR)", type: "processor", impact: 7, correlation: 0.6, marketCap: "6B", sector: "Cobalt Refining", parentId: "glen_co" },
-      { id: "cobalt_recycle", label: "Battery Recyclers (LICY)", type: "substitute", impact: 9, correlation: 0.65, sector: "Battery Recycling", parentId: "katanga" }
+      { id: "samsung_co", label: "Samsung Electronics (005930.KS)", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "380B", sector: "Consumer Electronics", parentId: "lg_chem" },
+      { id: "aerospace_co", label: "Aerospace Superalloys (PCC)", type: "consumer", impact: -2.5, correlation: -0.35, sector: "Aerospace", parentId: "eramet" },
+      { id: "gm_co", label: "General Motors (GM)", type: "consumer", impact: -3.0, correlation: -0.38, marketCap: "48B", sector: "EV/Auto", parentId: "tsla_co" },
+      { id: "ford_co", label: "Ford Motor (F)", type: "consumer", impact: -2.8, correlation: -0.35, marketCap: "48B", sector: "EV/Auto", parentId: "tsla_co" },
+      { id: "vwagy_co", label: "Volkswagen (VWAGY)", type: "consumer", impact: -2.5, correlation: -0.32, marketCap: "65B", sector: "EV/Auto", parentId: "sdk_co" },
+      { id: "bmw_co", label: "BMW AG (BMW.DE)", type: "consumer", impact: -2.2, correlation: -0.30, marketCap: "60B", sector: "EV/Auto", parentId: "samsung_sdi" },
+      { id: "nickel_cross", label: "Nickel (Cross-Commodity)", type: "commodity", impact: 5.0, correlation: 0.55, sector: "Battery Metals", parentId: "glen_co" },
+      { id: "lithium_cross", label: "Lithium (Cross-Commodity)", type: "commodity", impact: 3.5, correlation: 0.40, sector: "Battery Metals", parentId: "catl_co" },
+      { id: "first_cobalt", label: "Jervois Global (JRV.AX)", type: "producer", impact: 28.0, correlation: 0.88, marketCap: "0.15B", sector: "Cobalt Mining", parentId: "fortune_min" },
+      { id: "cathode_mfg", label: "Cathode Active Material Makers", type: "processor", impact: -4.0, correlation: -0.45, sector: "Battery Materials", parentId: "huayou" }
     ]},
     { nodes: [
-      { id: "xpev_co", label: "XPeng (XPEV)", type: "consumer", impact: -5, correlation: -0.52, marketCap: "10B", sector: "EV", parentId: "nio_co" },
-      { id: "panasonic_co", label: "Panasonic (6752.T)", type: "processor", impact: -3.8, correlation: -0.45, sector: "Battery Manufacturing", parentId: "tsla_co" },
-      { id: "aerospace_co", label: "Aerospace Superalloys", type: "consumer", impact: -2.5, correlation: -0.35, sector: "Aerospace", parentId: "eramet" },
-      { id: "fortune_min", label: "Fortune Minerals (FT.TO)", type: "producer", impact: 25, correlation: 0.9, marketCap: "0.1B", sector: "Cobalt Development", parentId: "cmclf" }
+      { id: "ev_charging", label: "EV Charging Networks", type: "consumer", impact: -1.5, correlation: -0.18, sector: "EV Infrastructure", parentId: "tsla_co" },
+      { id: "medical_cobalt", label: "Medical Devices (Co-60)", type: "consumer", impact: -1.0, correlation: -0.12, sector: "Medical", parentId: "aerospace_co" },
+      { id: "paint_pigments", label: "Cobalt Blue Pigments", type: "consumer", impact: -2.0, correlation: -0.25, sector: "Chemicals", parentId: "umicore_co" },
+      { id: "solid_state", label: "Solid-State Battery R&D", type: "substitute", impact: -3.0, correlation: -0.30, sector: "Battery Technology", parentId: "panasonic_co" },
+      { id: "qsc_co", label: "QuantumScape (QS)", type: "substitute", impact: -4.0, correlation: -0.38, marketCap: "5B", sector: "Solid-State Battery", parentId: "solid_state" },
+      { id: "cob_hydroxide", label: "Cobalt Hydroxide Spot", type: "index", impact: 9.0, correlation: 0.88, sector: "Cobalt Market", parentId: "katanga" },
+      { id: "mbx_price", label: "Fastmarkets MB Price", type: "index", impact: 10.0, correlation: 0.95, sector: "Cobalt Pricing", parentId: "glen_co" },
+      { id: "indonesian_ni_co", label: "Indonesian Ni/Co HPAL", type: "producer", impact: 8.0, correlation: 0.62, sector: "Nickel-Cobalt", parentId: "huayou" }
     ]},
     { nodes: [
-      { id: "drc_risk", label: "DRC Political/Supply Risk", type: "macro", impact: 20, sector: "Macro", parentId: "katanga" },
-      { id: "cobalt_free", label: "Cobalt-Free Battery Tech (LFP)", type: "macro", impact: -15, sector: "Macro", parentId: "catl_co" },
-      { id: "ev_growth_co", label: "Global EV Sales Growth", type: "macro", impact: 12, sector: "Macro", parentId: "glen_co" }
+      { id: "drc_risk", label: "DRC Political/Supply Risk", type: "macro", impact: 20.0, sector: "Macro", parentId: "katanga" },
+      { id: "cobalt_free", label: "Cobalt-Free Battery Tech (LFP)", type: "macro", impact: -15.0, sector: "Macro", parentId: "catl_co" },
+      { id: "ev_growth_co", label: "Global EV Sales Growth", type: "macro", impact: 12.0, sector: "Macro", parentId: "glen_co" },
+      { id: "drc_mining_code", label: "DRC Mining Code Revisions", type: "policy", impact: 8.0, sector: "Policy", parentId: "tenke" },
+      { id: "eu_battery_reg", label: "EU Battery Regulation", type: "policy", impact: 5.0, sector: "Policy", parentId: "umicore_co" },
+      { id: "child_labor_co", label: "ASM/Child Labor Scrutiny", type: "policy", impact: 6.0, sector: "Policy", parentId: "katanga" },
+      { id: "china_refining_dom", label: "China Refining Dominance", type: "macro", impact: 4.0, sector: "Geopolitics", parentId: "huayou" }
     ]}
   ]
 };

@@ -7,7 +7,7 @@ tags: [lng, natural-gas, LNG, utilities, chemicals, fertilizer, energy]
 description: 'Interactive analysis of how LNG and natural gas price movements impact utilities (NEE, DUK, SO), chemical producers (DOW, LYB), fertilizer companies (NTR, MOS, CF), and LNG exporters.'
 reading_time: 8
 commodity_name: 'LNG'
-direction: bullish
+direction: bearish
 image: /assets/images/og-lng.png
 ---
 
@@ -28,35 +28,62 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "lng_exp", label: "Cheniere Energy (LNG)", type: "producer", impact: 9.5, correlation: 0.88, marketCap: "45B", sector: "LNG Export" },
-      { id: "tell", label: "Tellurian Inc (TELL)", type: "producer", impact: 14, correlation: 0.91, marketCap: "2.5B", sector: "LNG Export" },
+      { id: "tell", label: "Tellurian Inc (TELL)", type: "producer", impact: 14.0, correlation: 0.91, marketCap: "2.5B", sector: "LNG Export" },
       { id: "nee", label: "NextEra Energy (NEE)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "155B", sector: "Utilities" },
-      { id: "duk", label: "Duke Energy (DUK)", type: "consumer", impact: -4, correlation: -0.48, marketCap: "82B", sector: "Utilities" },
-      { id: "so", label: "Southern Company (SO)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "78B", sector: "Utilities" }
+      { id: "duk", label: "Duke Energy (DUK)", type: "consumer", impact: -4.0, correlation: -0.48, marketCap: "82B", sector: "Utilities" },
+      { id: "so", label: "Southern Company (SO)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "78B", sector: "Utilities" },
+      { id: "eqt", label: "EQT Corp (EQT)", type: "producer", impact: 12.0, correlation: 0.90, marketCap: "18B", sector: "Gas Producer" },
+      { id: "ar", label: "Antero Resources (AR)", type: "producer", impact: 11.0, correlation: 0.86, marketCap: "8B", sector: "Gas Producer" },
+      { id: "dow", label: "Dow Inc (DOW)", type: "consumer", impact: -6.5, correlation: -0.68, marketCap: "38B", sector: "Chemicals" },
+      { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: 8.5, correlation: 0.82, marketCap: "16B", sector: "Fertilizer" },
+      { id: "ung", label: "United States NG Fund (UNG)", type: "etf", impact: 9.8, correlation: 0.96, marketCap: "0.5B", sector: "ETF" },
+      { id: "xlu", label: "XLU Utilities ETF", type: "etf", impact: -3.2, correlation: -0.40, marketCap: "18B", sector: "ETF" },
+      { id: "nfg", label: "National Fuel Gas (NFG)", type: "producer", impact: 8.5, correlation: 0.78, marketCap: "6B", sector: "Gas Producer" },
+      { id: "swn", label: "Southwestern Energy (SWN)", type: "producer", impact: 13.0, correlation: 0.88, marketCap: "7B", sector: "Gas Producer" }
     ]},
     { nodes: [
-      { id: "dow", label: "Dow Inc (DOW)", type: "consumer", impact: -6.5, correlation: -0.68, marketCap: "38B", sector: "Chemicals", parentId: "lng_exp" },
-      { id: "lyb", label: "LyondellBasell (LYB)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "28B", sector: "Chemicals", parentId: "lng_exp" },
-      { id: "ntr", label: "Nutrien Ltd (NTR)", type: "consumer", impact: 7.2, correlation: 0.75, marketCap: "32B", sector: "Fertilizer", parentId: "tell" },
-      { id: "mos", label: "Mosaic Co (MOS)", type: "consumer", impact: 5.8, correlation: 0.64, marketCap: "12B", sector: "Fertilizer", parentId: "tell" },
-      { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: 8.5, correlation: 0.82, marketCap: "16B", sector: "Fertilizer", parentId: "tell" }
+      { id: "lyb", label: "LyondellBasell (LYB)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "28B", sector: "Chemicals", parentId: "dow" },
+      { id: "ntr", label: "Nutrien Ltd (NTR)", type: "consumer", impact: 7.2, correlation: 0.75, marketCap: "32B", sector: "Fertilizer", parentId: "cf" },
+      { id: "mos", label: "Mosaic Co (MOS)", type: "consumer", impact: 5.8, correlation: 0.64, marketCap: "12B", sector: "Fertilizer", parentId: "cf" },
+      { id: "apd", label: "Air Products (APD)", type: "consumer", impact: -3.5, correlation: -0.40, marketCap: "62B", sector: "Industrial Gas", parentId: "dow" },
+      { id: "wm_energy", label: "Williams Companies (WMB)", type: "supplier", impact: 6.0, correlation: 0.65, marketCap: "48B", sector: "Gas Pipeline", parentId: "lng_exp" },
+      { id: "kmi", label: "Kinder Morgan (KMI)", type: "supplier", impact: 5.5, correlation: 0.60, marketCap: "42B", sector: "Gas Pipeline", parentId: "eqt" },
+      { id: "et", label: "Energy Transfer (ET)", type: "supplier", impact: 5.0, correlation: 0.55, marketCap: "50B", sector: "Gas Pipeline", parentId: "ar" },
+      { id: "emn", label: "Eastman Chemical (EMN)", type: "consumer", impact: -4.0, correlation: -0.48, marketCap: "11B", sector: "Chemicals", parentId: "dow" },
+      { id: "olin", label: "Olin Corp (OLN)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "6B", sector: "Chemicals", parentId: "lyb" },
+      { id: "shel_lng", label: "Shell LNG (SHEL)", type: "producer", impact: 4.0, correlation: 0.50, marketCap: "210B", sector: "LNG/Oil Major", parentId: "lng_exp" },
+      { id: "tte_lng", label: "TotalEnergies LNG (TTE)", type: "producer", impact: 3.8, correlation: 0.48, marketCap: "160B", sector: "LNG/Oil Major", parentId: "lng_exp" },
+      { id: "aep", label: "American Elec Power (AEP)", type: "consumer", impact: -4.2, correlation: -0.50, marketCap: "48B", sector: "Utilities", parentId: "duk" }
     ]},
     { nodes: [
-      { id: "xlu", label: "XLU Utilities ETF", type: "etf", impact: -3.2, correlation: -0.4, marketCap: "18B", sector: "ETF", parentId: "nee" },
-      { id: "eqt", label: "EQT Corp (EQT)", type: "producer", impact: 12, correlation: 0.9, marketCap: "18B", sector: "Gas Producer", parentId: "lng_exp" },
-      { id: "ar", label: "Antero Resources (AR)", type: "producer", impact: 11, correlation: 0.86, marketCap: "8B", sector: "Gas Producer", parentId: "lng_exp" },
-      { id: "apd", label: "Air Products (APD)", type: "consumer", impact: -3.5, correlation: -0.4, marketCap: "62B", sector: "Industrial Gas", parentId: "dow" }
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "substitute", impact: 5.5, correlation: 0.48, marketCap: "25B", sector: "Solar", parentId: "nee" },
+      { id: "fslr", label: "First Solar (FSLR)", type: "substitute", impact: 4.8, correlation: 0.42, marketCap: "22B", sector: "Solar", parentId: "nee" },
+      { id: "dd", label: "DuPont (DD)", type: "consumer", impact: -3.2, correlation: -0.38, marketCap: "35B", sector: "Chemicals", parentId: "emn" },
+      { id: "ce", label: "Celanese Corp (CE)", type: "consumer", impact: -4.2, correlation: -0.50, marketCap: "14B", sector: "Chemicals", parentId: "lyb" },
+      { id: "ura_gas", label: "Uranium (Nuclear Sub)", type: "substitute", impact: 3.0, correlation: 0.30, sector: "Nuclear Energy", parentId: "xlu" },
+      { id: "glng", label: "Golar LNG (GLNG)", type: "supplier", impact: 8.0, correlation: 0.72, marketCap: "4B", sector: "LNG Shipping", parentId: "shel_lng" },
+      { id: "flng", label: "Flex LNG (FLNG)", type: "supplier", impact: 7.5, correlation: 0.68, marketCap: "3B", sector: "LNG Shipping", parentId: "tte_lng" },
+      { id: "linde_gas", label: "Linde PLC (LIN)", type: "consumer", impact: -2.5, correlation: -0.30, marketCap: "210B", sector: "Industrial Gas", parentId: "apd" },
+      { id: "yara", label: "Yara International (YAR.OL)", type: "consumer", impact: -5.0, correlation: -0.55, marketCap: "10B", sector: "Fertilizer", parentId: "ntr" },
+      { id: "iff_gas", label: "IFF (IFF)", type: "consumer", impact: -2.0, correlation: -0.25, marketCap: "22B", sector: "Chemicals/Ingredients", parentId: "dd" }
     ]},
     { nodes: [
       { id: "residential", label: "Residential Heating", type: "macro", impact: -4.5, sector: "Macro", parentId: "duk" },
       { id: "industrial", label: "Industrial Production", type: "macro", impact: -2.8, sector: "Macro", parentId: "dow" },
-      { id: "food_prices", label: "Food Price Index", type: "macro", impact: -3, sector: "Macro", parentId: "ntr" },
-      { id: "renewables", label: "Renewable Competitiveness", type: "macro", impact: 4, sector: "Macro", parentId: "nee" }
+      { id: "food_prices", label: "Food Price Index", type: "macro", impact: -3.0, sector: "Macro", parentId: "ntr" },
+      { id: "renewables", label: "Renewable Competitiveness", type: "macro", impact: 4.0, sector: "Macro", parentId: "nee" },
+      { id: "ammonia", label: "Ammonia Price Index", type: "index", impact: 6.0, correlation: 0.70, sector: "Fertilizer Input", parentId: "cf" },
+      { id: "methanol", label: "Methanol Price Index", type: "index", impact: 5.0, correlation: 0.60, sector: "Chemical Input", parentId: "dow" },
+      { id: "japan_jkm", label: "JKM Asian LNG Price", type: "index", impact: 8.0, correlation: 0.82, sector: "LNG Pricing", parentId: "shel_lng" },
+      { id: "ttf_eu", label: "TTF European Gas Price", type: "index", impact: 7.5, correlation: 0.78, sector: "LNG Pricing", parentId: "tte_lng" }
     ]},
     { nodes: [
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: 5.5, correlation: 0.48, marketCap: "25B", sector: "Solar", parentId: "renewables" },
-      { id: "fslr", label: "First Solar (FSLR)", type: "consumer", impact: 4.8, correlation: 0.42, marketCap: "22B", sector: "Solar", parentId: "renewables" },
-      { id: "eu_gas", label: "EU Gas Storage", type: "macro", impact: -3.5, sector: "Macro", parentId: "residential" },
-      { id: "ammonia", label: "Ammonia Price Index", type: "macro", impact: 6, sector: "Macro", parentId: "cf" }
+      { id: "eu_gas", label: "EU Gas Storage Policy", type: "policy", impact: -3.5, sector: "Policy", parentId: "ttf_eu" },
+      { id: "lng_permit", label: "US LNG Export Permits", type: "policy", impact: 6.0, sector: "Policy", parentId: "lng_exp" },
+      { id: "carbon_eu", label: "EU Carbon Price (ETS)", type: "policy", impact: 3.0, sector: "Policy", parentId: "enph" },
+      { id: "qatar_expansion", label: "Qatar NFE Expansion", type: "macro", impact: -5.0, sector: "Supply Growth", parentId: "tell" },
+      { id: "russian_pipe", label: "Russian Pipeline Disruption", type: "macro", impact: 8.0, sector: "Geopolitics", parentId: "ttf_eu" },
+      { id: "freight_lng", label: "LNG Tanker Freight Rates", type: "freight", impact: 3.0, correlation: 0.35, sector: "Freight", parentId: "glng" }
     ]}
   ]
 };

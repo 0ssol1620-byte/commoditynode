@@ -25,31 +25,65 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "slv", label: "iShares Silver (SLV)", type: "etf", impact: 11.8, correlation: 0.97, marketCap: "12B", sector: "ETF" },
-      { id: "silj", label: "ETFMG Silver Miners", type: "etf", impact: 20.5, correlation: 0.82, marketCap: "0.5B", sector: "ETF" },
+      { id: "pslv", label: "Sprott Physical Silver (PSLV)", type: "etf", impact: 11.9, correlation: 0.98, marketCap: "5B", sector: "ETF" },
+      { id: "silj", label: "ETFMG Silver Miners (SILJ)", type: "etf", impact: 20.5, correlation: 0.82, marketCap: "0.5B", sector: "ETF" },
       { id: "paas", label: "Pan American Silver (PAAS)", type: "producer", impact: 22, correlation: 0.88, marketCap: "8B", sector: "Silver Mining" },
       { id: "hl", label: "Hecla Mining (HL)", type: "producer", impact: 25, correlation: 0.86, marketCap: "4B", sector: "Silver Mining" },
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "25B", sector: "Solar" }
+      { id: "first_majestic", label: "First Majestic (AG)", type: "producer", impact: 30, correlation: 0.92, marketCap: "3B", sector: "Silver Mining" },
+      { id: "mag_s", label: "MAG Silver (MAG)", type: "producer", impact: 28, correlation: 0.91, marketCap: "1.5B", sector: "Silver Mining" },
+      { id: "fresnillo", label: "Fresnillo (FRES.L)", type: "producer", impact: 20, correlation: 0.85, marketCap: "5B", sector: "Silver/Gold Mining" },
+      { id: "coeur", label: "Coeur Mining (CDE)", type: "producer", impact: 26, correlation: 0.87, marketCap: "3.5B", sector: "Silver Mining" },
+      { id: "ssrm_s", label: "SSR Mining (SSRM)", type: "producer", impact: 18, correlation: 0.78, marketCap: "3B", sector: "Silver/Gold Mining" },
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: -4.5, correlation: -0.52, marketCap: "25B", sector: "Solar" },
+      { id: "endeavour_s", label: "Endeavour Silver (EXK)", type: "producer", impact: 29, correlation: 0.89, marketCap: "1.2B", sector: "Silver Mining" },
+      { id: "silvercrest", label: "SilverCrest Metals (SILV)", type: "producer", impact: 27, correlation: 0.88, marketCap: "2B", sector: "Silver Mining" },
+      { id: "fortuna_s", label: "Fortuna Silver (FSM)", type: "producer", impact: 23, correlation: 0.84, marketCap: "4B", sector: "Silver Mining" }
     ]},
     { nodes: [
-      { id: "fresnillo", label: "Fresnillo (FRES.L)", type: "producer", impact: 20, correlation: 0.85, sector: "Silver/Gold Mining", parentId: "paas" },
-      { id: "mag_s", label: "MAG Silver (MAG)", type: "producer", impact: 28, correlation: 0.91, sector: "Silver Mining", parentId: "hl" },
-      { id: "first_majestic", label: "First Majestic (AG)", type: "producer", impact: 30, correlation: 0.92, sector: "Silver Mining", parentId: "paas" },
-      { id: "solar_mfg", label: "First Solar (FSLR)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "20B", sector: "Solar Panels", parentId: "enph" }
-    ]},
-    { nodes: [
+      { id: "solar_mfg", label: "First Solar (FSLR)", type: "consumer", impact: -3.8, correlation: -0.45, marketCap: "20B", sector: "Solar Panels", parentId: "enph" },
+      { id: "sedg", label: "SolarEdge (SEDG)", type: "consumer", impact: -4.2, correlation: -0.48, marketCap: "5B", sector: "Solar Inverters", parentId: "enph" },
+      { id: "jks_s", label: "JinkoSolar (JKS)", type: "consumer", impact: -5, correlation: -0.55, marketCap: "3B", sector: "Solar Panels", parentId: "enph" },
+      { id: "csiq_s", label: "Canadian Solar (CSIQ)", type: "consumer", impact: -4.5, correlation: -0.5, marketCap: "2.5B", sector: "Solar Panels", parentId: "enph" },
+      { id: "wpm_s", label: "Wheaton Precious (WPM)", type: "producer", impact: 14, correlation: 0.8, marketCap: "28B", sector: "Streaming", parentId: "paas" },
+      { id: "aem_s", label: "Agnico Eagle (AEM)", type: "producer", impact: 10, correlation: 0.7, marketCap: "42B", sector: "Gold/Silver Mining", parentId: "hl" },
+      { id: "nem_s", label: "Newmont Corp (NEM)", type: "producer", impact: 8, correlation: 0.65, marketCap: "58B", sector: "Gold Mining", parentId: "hl" },
       { id: "silver_refine", label: "Silver Refiners", type: "processor", impact: 8.5, correlation: 0.72, sector: "Refining", parentId: "fresnillo" },
-      { id: "photovoltaic", label: "Solar Cell Makers", type: "consumer", impact: -5.5, correlation: -0.6, sector: "Technology", parentId: "solar_mfg" },
-      { id: "electronics_s", label: "Electronics Components", type: "consumer", impact: -2, correlation: -0.28, sector: "Technology", parentId: "mag_s" }
+      { id: "gdx_s", label: "GDX Gold Miners ETF", type: "etf", impact: 8, correlation: 0.7, marketCap: "14B", sector: "ETF", parentId: "paas" },
+      { id: "tan_s", label: "Invesco Solar ETF (TAN)", type: "etf", impact: -3.5, correlation: -0.4, marketCap: "2B", sector: "ETF", parentId: "enph" },
+      { id: "gld_s", label: "GLD Physical Gold ETF", type: "etf", impact: 6.5, correlation: 0.82, marketCap: "72B", sector: "ETF", parentId: "slv" },
+      { id: "scrap_silver", label: "Silver Scrap Recyclers", type: "processor", impact: 7, correlation: 0.65, sector: "Recycling", parentId: "silver_refine" }
     ]},
     { nodes: [
-      { id: "jewelry_s", label: "Tiffany/LVMH", type: "consumer", impact: -3.5, correlation: -0.42, sector: "Luxury", parentId: "silver_refine" },
-      { id: "photographic", label: "Kodak (KODK)", type: "substitute", impact: -6, correlation: -0.62, sector: "Photography", parentId: "electronics_s" },
-      { id: "medical_s", label: "Medical Device Cos", type: "negative", impact: -2.5, correlation: -0.32, sector: "Medical", parentId: "electronics_s" }
+      { id: "photovoltaic", label: "Solar Cell Makers (China)", type: "consumer", impact: -5.5, correlation: -0.6, sector: "Technology", parentId: "solar_mfg" },
+      { id: "electronics_s", label: "Electronics Components", type: "consumer", impact: -2, correlation: -0.28, sector: "Technology", parentId: "silver_refine" },
+      { id: "te_conn", label: "TE Connectivity (TEL)", type: "consumer", impact: -1.5, correlation: -0.2, marketCap: "45B", sector: "Connectors", parentId: "electronics_s" },
+      { id: "apt_s", label: "Amphenol (APH)", type: "consumer", impact: -1.2, correlation: -0.18, marketCap: "72B", sector: "Connectors", parentId: "electronics_s" },
+      { id: "run_s", label: "Sunrun Inc (RUN)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "4B", sector: "Solar Installation", parentId: "solar_mfg" },
+      { id: "nova_s", label: "Sunnova (NOVA)", type: "consumer", impact: -3.8, correlation: -0.44, marketCap: "1.5B", sector: "Solar Installation", parentId: "solar_mfg" },
+      { id: "maxn_s", label: "Maxeon Solar (MAXN)", type: "consumer", impact: -5.8, correlation: -0.58, marketCap: "0.5B", sector: "Solar Panels", parentId: "photovoltaic" },
+      { id: "brazing_alloy", label: "Brazing/Soldering Industry", type: "consumer", impact: -2.5, correlation: -0.32, sector: "Manufacturing", parentId: "silver_refine" },
+      { id: "auto_catalyst_s", label: "Automotive Catalysts", type: "consumer", impact: -1.8, correlation: -0.22, sector: "Auto Parts", parentId: "electronics_s" },
+      { id: "water_purif_s", label: "Water Purification (Silver)", type: "consumer", impact: -1.5, correlation: -0.2, sector: "Water Treatment", parentId: "silver_refine" },
+      { id: "mirror_coating", label: "Mirror/Coating Mfg", type: "consumer", impact: -1.2, correlation: -0.18, sector: "Manufacturing", parentId: "silver_refine" },
+      { id: "jewelry_s", label: "Tiffany/LVMH (MC)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "380B", sector: "Luxury", parentId: "silver_refine" }
     ]},
     { nodes: [
-      { id: "solar_demand_s", label: "Solar Boom", type: "macro", impact: 10, sector: "Macro", parentId: "enph" },
-      { id: "gold_ratio", label: "Gold/Silver Ratio", type: "macro", impact: 8, sector: "Macro", parentId: "slv" },
-      { id: "industrial_s", label: "Industrial Demand", type: "macro", impact: 7, sector: "Macro", parentId: "paas" }
+      { id: "photographic", label: "Photography/Kodak (KODK)", type: "consumer", impact: -6, correlation: -0.62, marketCap: "0.3B", sector: "Photography", parentId: "electronics_s" },
+      { id: "medical_s", label: "Medical Device Silver Use", type: "consumer", impact: -2.5, correlation: -0.32, sector: "Medical", parentId: "electronics_s" },
+      { id: "sig_s", label: "Signet Jewelers (SIG)", type: "consumer", impact: -3, correlation: -0.38, marketCap: "4.5B", sector: "Jewelry Retail", parentId: "jewelry_s" },
+      { id: "5g_demand", label: "5G Infrastructure Demand", type: "macro", impact: 5, correlation: 0.45, sector: "Technology", parentId: "electronics_s" },
+      { id: "ev_silver", label: "EV Silver Demand", type: "macro", impact: 4, correlation: 0.4, sector: "Auto", parentId: "auto_catalyst_s" },
+      { id: "solar_demand_s", label: "Global Solar Installations", type: "macro", impact: 10, correlation: 0.65, sector: "Macro", parentId: "enph" },
+      { id: "gold_ratio", label: "Gold/Silver Ratio", type: "index", impact: 8, correlation: 0.7, sector: "Macro", parentId: "slv" },
+      { id: "industrial_s", label: "Industrial Demand Index", type: "macro", impact: 7, correlation: 0.6, sector: "Macro", parentId: "paas" }
+    ]},
+    { nodes: [
+      { id: "dxy_s", label: "USD Index (DXY)", type: "fx", impact: -3.5, correlation: -0.55, sector: "Macro", parentId: "slv" },
+      { id: "comex_silver", label: "COMEX Silver Inventory", type: "index", impact: -6, correlation: -0.7, sector: "Macro", parentId: "slv" },
+      { id: "india_import_s", label: "India Silver Imports", type: "macro", impact: 5.5, correlation: 0.5, sector: "Macro", parentId: "silver_refine" },
+      { id: "platinum_sub", label: "Platinum Price Linkage", type: "substitute", impact: 4, correlation: 0.55, sector: "Precious Metals", parentId: "slv" },
+      { id: "copper_sub_s", label: "Copper Substitution Risk", type: "substitute", impact: -3, correlation: -0.35, sector: "Industrial Metals", parentId: "electronics_s" },
+      { id: "inflation_s", label: "CPI Inflation Hedge", type: "macro", impact: 4.5, correlation: 0.48, sector: "Macro", parentId: "slv" }
     ]}
   ]
 };

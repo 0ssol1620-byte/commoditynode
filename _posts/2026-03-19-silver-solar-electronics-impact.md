@@ -27,36 +27,64 @@ window.COMMODITY_DATA = {
   commodity: { id: "silver", label: "Silver ↑10%", price: "$28.50/oz", change: "+10%" },
   levels: [
     { nodes: [
-      { id: "paas", label: "Pan American Silver (PAAS)", type: "producer", impact: 16, correlation: 0.88, marketCap: "9B", sector: "Silver Mining" },
-      { id: "hl", label: "Hecla Mining (HL)", type: "producer", impact: 18, correlation: 0.9, marketCap: "4B", sector: "Silver Mining" },
-      { id: "slv", label: "iShares Silver (SLV)", type: "etf", impact: 9.5, correlation: 0.99, marketCap: "12B", sector: "ETF" },
+      { id: "paas", label: "Pan American Silver (PAAS)", type: "producer", impact: 14, correlation: 0.88, marketCap: "9B", sector: "Silver Mining" },
+      { id: "hl", label: "Hecla Mining (HL)", type: "producer", impact: 15, correlation: 0.9, marketCap: "4B", sector: "Silver Mining" },
+      { id: "slv", label: "iShares Silver (SLV)", type: "etf", impact: 9.5, correlation: 0.99, marketCap: "12B", sector: "Physical Silver ETF" },
       { id: "fslr", label: "First Solar (FSLR)", type: "consumer", impact: -2, correlation: -0.25, marketCap: "22B", sector: "Solar" },
-      { id: "ag", label: "First Majestic (AG)", type: "producer", impact: 20, correlation: 0.92, marketCap: "3B", sector: "Silver Mining" }
+      { id: "ag", label: "First Majestic (AG)", type: "producer", impact: 15, correlation: 0.92, marketCap: "3B", sector: "Silver Mining" },
+      { id: "pslv", label: "Sprott Silver (PSLV)", type: "etf", impact: 9.3, correlation: 0.98, marketCap: "5B", sector: "Physical Silver ETF" },
+      { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 12, correlation: 0.82, marketCap: "22B", sector: "Streaming/Royalty" },
+      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: -2.5, correlation: -0.3, marketCap: "15B", sector: "Solar Inverters" },
+      { id: "cde", label: "Coeur Mining (CDE)", type: "producer", impact: 14.5, correlation: 0.88, marketCap: "3.5B", sector: "Silver/Gold Mining" },
+      { id: "sil", label: "Global X Silver Miners (SIL)", type: "etf", impact: 13, correlation: 0.9, marketCap: "1B", sector: "Silver Miners ETF" },
+      { id: "mag", label: "MAG Silver (MAG)", type: "producer", impact: 14.8, correlation: 0.9, marketCap: "2.5B", sector: "Silver Mining" },
+      { id: "sedg", label: "SolarEdge (SEDG)", type: "consumer", impact: -3, correlation: -0.32, marketCap: "4B", sector: "Solar Tech" }
     ]},
     { nodes: [
-      { id: "wpm", label: "Wheaton Precious (WPM)", type: "producer", impact: 12, correlation: 0.82, marketCap: "22B", sector: "Streaming/Royalty", parentId: "paas" },
-      { id: "enph", label: "Enphase Energy (ENPH)", type: "consumer", impact: -2.5, correlation: -0.3, marketCap: "15B", sector: "Solar Inverters", parentId: "fslr" },
-      { id: "sedg", label: "SolarEdge (SEDG)", type: "consumer", impact: -3, correlation: -0.32, marketCap: "4B", sector: "Solar Tech", parentId: "fslr" },
-      { id: "aapl", label: "Apple (AAPL)", type: "consumer", impact: -0.5, correlation: -0.08, marketCap: "3200B", sector: "Electronics", parentId: "slv" },
-      { id: "silver_etf2", label: "Sprott Silver (PSLV)", type: "etf", impact: 9.3, correlation: 0.98, marketCap: "5B", sector: "ETF", parentId: "slv" }
+      { id: "aapl_ag", label: "Apple (AAPL)", type: "consumer", impact: -0.5, correlation: -0.08, marketCap: "3200B", sector: "Electronics", parentId: "slv" },
+      { id: "solar_paste", label: "Silver Paste Mfrs (Heraeus)", type: "supplier", impact: 8, correlation: 0.7, sector: "Solar Materials", parentId: "enph" },
+      { id: "jewelry", label: "Silver Jewelry Retailers (TIF, SIG)", type: "consumer", impact: -5.5, correlation: -0.58, sector: "Jewelry Retail", parentId: "wpm" },
+      { id: "connectors", label: "Electrical Connectors (APH)", type: "consumer", impact: -3, correlation: -0.35, sector: "Electronics", parentId: "aapl_ag" },
+      { id: "mexico_mines", label: "Mexican Silver Mines", type: "regional", impact: 14, correlation: 0.88, sector: "Mining", parentId: "ag" },
+      { id: "peru_mines", label: "Peruvian Silver Mines", type: "regional", impact: 12, correlation: 0.84, sector: "Mining", parentId: "paas" },
+      { id: "coin_dealers", label: "Bullion Coin Dealers", type: "consumer", impact: 6, correlation: 0.65, sector: "Numismatics", parentId: "pslv" },
+      { id: "sivr", label: "Aberdeen Silver ETF (SIVR)", type: "etf", impact: 9.2, correlation: 0.98, marketCap: "1.5B", sector: "Physical Silver ETF", parentId: "slv" },
+      { id: "endeavour", label: "Endeavour Silver (EXK)", type: "producer", impact: 14, correlation: 0.88, marketCap: "1.5B", sector: "Silver Mining", parentId: "ag" },
+      { id: "fortuna", label: "Fortuna Silver Mines (FSM)", type: "producer", impact: 13.5, correlation: 0.86, marketCap: "2B", sector: "Silver Mining", parentId: "paas" }
     ]},
     { nodes: [
-      { id: "solar_paste", label: "Silver Paste Mfrs (Heraeus)", type: "positive", impact: 8, correlation: 0.7, sector: "Solar Materials", parentId: "enph" },
-      { id: "jewelry", label: "Silver Jewelry Retailers", type: "consumer", impact: -5.5, correlation: -0.58, sector: "Jewelry Retail", parentId: "wpm" },
-      { id: "connectors", label: "Electrical Connectors", type: "consumer", impact: -3, correlation: -0.35, sector: "Electronics", parentId: "aapl" },
-      { id: "coin_dealers", label: "Bullion Coin Dealers", type: "macro", impact: 6, correlation: 0.65, sector: "Numismatics", parentId: "slv" },
-      { id: "mexico_mines", label: "Mexican Silver Mines", type: "producer", impact: 15, correlation: 0.88, sector: "Mining", parentId: "ag" }
-    ]},
-    { nodes: [
-      { id: "pv_cells", label: "PV Cell Manufacturers", type: "consumer", impact: -4, correlation: -0.45, sector: "Solar Mfg", parentId: "solar_paste" },
+      { id: "pv_cells", label: "PV Cell Manufacturers (JKS, CSIQ)", type: "consumer", impact: -4, correlation: -0.45, sector: "Solar Manufacturing", parentId: "solar_paste" },
       { id: "brazing", label: "Brazing Alloy Producers", type: "consumer", impact: -3.5, correlation: -0.4, sector: "Industrial", parentId: "connectors" },
-      { id: "recycling", label: "Silver Recycling", type: "substitute", impact: 7, correlation: 0.68, sector: "Recycling", parentId: "jewelry" },
-      { id: "photography", label: "Film Photography (Fuji)", type: "substitute", impact: -2, correlation: -0.22, sector: "Imaging", parentId: "connectors" }
+      { id: "recycling", label: "Silver Recycling Industry", type: "substitute", impact: 7, correlation: 0.68, sector: "Recycling", parentId: "jewelry" },
+      { id: "photography", label: "Film Photography (Fuji, Kodak)", type: "consumer", impact: -2, correlation: -0.22, sector: "Imaging", parentId: "connectors" },
+      { id: "fresnillo", label: "Fresnillo PLC (FRES.L)", type: "producer", impact: 14.5, correlation: 0.88, marketCap: "6B", sector: "Silver/Gold Mining", parentId: "mexico_mines" },
+      { id: "buenaventura_ag", label: "Buenaventura (BVN)", type: "producer", impact: 12, correlation: 0.82, marketCap: "5B", sector: "Silver/Gold Mining", parentId: "peru_mines" },
+      { id: "signet", label: "Signet Jewelers (SIG)", type: "consumer", impact: -4, correlation: -0.45, marketCap: "4B", sector: "Jewelry Retail", parentId: "jewelry" },
+      { id: "5g_demand", label: "5G/Electronics Silver Demand", type: "consumer", impact: -2.5, correlation: -0.3, sector: "Electronics", parentId: "aapl_ag" },
+      { id: "goldsilver_ratio", label: "Gold/Silver Ratio (82:1)", type: "index", impact: 5, correlation: 0.5, sector: "Precious Metals", parentId: "wpm" }
     ]},
     { nodes: [
-      { id: "fed_rates", label: "Fed Rate Expectations", type: "macro", impact: 8, sector: "Macro", parentId: "slv" },
-      { id: "solar_mandate", label: "Solar Installation Mandates", type: "macro", impact: 6, sector: "Macro", parentId: "fslr" },
-      { id: "gold_ratio", label: "Gold/Silver Ratio", type: "macro", impact: 5, sector: "Macro", parentId: "wpm" }
+      { id: "jks", label: "JinkoSolar (JKS)", type: "consumer", impact: -4.5, correlation: -0.48, marketCap: "4B", sector: "Solar Panel Mfg", parentId: "pv_cells" },
+      { id: "csiq", label: "Canadian Solar (CSIQ)", type: "consumer", impact: -4.2, correlation: -0.46, marketCap: "3B", sector: "Solar Panel Mfg", parentId: "pv_cells" },
+      { id: "medical_ag", label: "Medical Device Silver Use", type: "consumer", impact: -1.5, correlation: -0.18, sector: "Medical", parentId: "brazing" },
+      { id: "water_purify", label: "Silver Water Purification", type: "consumer", impact: -1, correlation: -0.12, sector: "Water Treatment", parentId: "brazing" },
+      { id: "sandstorm_ag", label: "Sandstorm Gold (SAND)", type: "producer", impact: 8, correlation: 0.7, marketCap: "2B", sector: "Royalty/Streaming", parentId: "wpm" },
+      { id: "tif_jewelry", label: "Tiffany (LVMH)", type: "consumer", impact: -2.5, correlation: -0.3, marketCap: "12B", sector: "Luxury Jewelry", parentId: "signet" }
+    ]},
+    { nodes: [
+      { id: "fed_rates", label: "Fed Rate Expectations", type: "policy", impact: 8, sector: "Monetary Policy", parentId: "slv" },
+      { id: "solar_mandate", label: "Solar Installation Mandates", type: "policy", impact: 6, sector: "Energy Policy", parentId: "fslr" },
+      { id: "gold_ratio_macro", label: "Gold/Silver Mean Reversion", type: "macro", impact: 5, sector: "Precious Metals", parentId: "goldsilver_ratio" },
+      { id: "comex_inventory", label: "COMEX Silver Inventory", type: "macro", impact: -5, sector: "Supply Data", parentId: "slv" },
+      { id: "india_import", label: "India Silver Import Demand", type: "macro", impact: 6, sector: "Physical Demand", parentId: "coin_dealers" },
+      { id: "usd_mxn", label: "USD/MXN Exchange Rate", type: "fx", impact: -2.5, correlation: -0.3, sector: "Currency", parentId: "mexico_mines" },
+      { id: "copper_paste_sub", label: "Copper Paste Solar Substitution", type: "substitute", impact: -4, correlation: -0.35, sector: "Solar Technology", parentId: "solar_mandate" },
+      { id: "hjt_tech", label: "HJT Cell Silver Loading", type: "macro", impact: 5, sector: "Solar Technology", parentId: "solar_mandate" },
+      { id: "mine_supply_ag", label: "Global Silver Mine Supply (26Koz)", type: "macro", impact: -3, sector: "Supply", parentId: "slv" },
+      { id: "topcon_cells", label: "TOPCon Cell Silver Demand", type: "macro", impact: 4.5, sector: "Solar Technology", parentId: "pv_cells" },
+      { id: "central_bank_ag", label: "Central Bank Silver Reserves", type: "macro", impact: 3, sector: "Official Sector", parentId: "pslv" },
+      { id: "ev_silver", label: "EV Silver Use (Contacts/Sensors)", type: "consumer", impact: -1.5, correlation: -0.18, sector: "Automotive", parentId: "connectors" },
+      { id: "platinum_cross", label: "Platinum/Palladium Correlation", type: "commodity", impact: 4, correlation: 0.45, sector: "Cross-Commodity", parentId: "goldsilver_ratio" }
     ]}
   ]
 };

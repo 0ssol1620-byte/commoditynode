@@ -7,7 +7,7 @@ tags: [natural-gas, fertilizer, agriculture, wheat, MOS, CF, NTR, food]
 description: 'How natural gas price spikes cascade through fertilizer production to crop prices and ultimately to consumer food inflation — the hidden inflation pipeline.'
 reading_time: 10
 commodity_name: 'Natural Gas'
-direction: bullish
+direction: bearish
 image: /assets/images/og-natural-gas.png
 ---
 
@@ -26,34 +26,69 @@ window.COMMODITY_DATA = {
   levels: [
     { nodes: [
       { id: "eqt", label: "EQT Corporation (EQT)", type: "producer", impact: 10.5, correlation: 0.88, marketCap: "22B", sector: "Gas Production" },
-      { id: "ar", label: "Antero Resources (AR)", type: "producer", impact: 11.2, correlation: 0.9, marketCap: "9B", sector: "Gas Production" },
+      { id: "ar", label: "Antero Resources (AR)", type: "producer", impact: 11.2, correlation: 0.90, marketCap: "9B", sector: "Gas Production" },
       { id: "swn", label: "SWN Energy (SWN)", type: "producer", impact: 12, correlation: 0.91, marketCap: "7B", sector: "Gas Production" },
       { id: "tell", label: "Tellurian (TELL)", type: "producer", impact: 8.5, correlation: 0.75, marketCap: "1.5B", sector: "LNG Export" },
       { id: "ung", label: "US Natural Gas Fund (UNG)", type: "etf", impact: 13.8, correlation: 0.95, marketCap: "0.8B", sector: "ETF" },
-      { id: "lng_ch", label: "Cheniere Energy (LNG)", type: "producer", impact: 6.2, correlation: 0.65, marketCap: "42B", sector: "LNG Export" }
-    ]},
-    { nodes: [
+      { id: "lng_ch", label: "Cheniere Energy (LNG)", type: "producer", impact: 6.2, correlation: 0.65, marketCap: "42B", sector: "LNG Export" },
+      { id: "rrc_f", label: "Range Resources (RRC)", type: "producer", impact: 14.5, correlation: 0.90, marketCap: "7B", sector: "Gas Production" },
+      { id: "chk_f", label: "Chesapeake Energy (CHK)", type: "producer", impact: 13, correlation: 0.88, marketCap: "10B", sector: "Gas Production" },
+      { id: "ctra_f", label: "Coterra Energy (CTRA)", type: "producer", impact: 9.5, correlation: 0.80, marketCap: "20B", sector: "Gas/Oil E&P" },
       { id: "cf", label: "CF Industries (CF)", type: "consumer", impact: -4.5, correlation: -0.55, marketCap: "16B", sector: "Nitrogen Fertilizer" },
-      { id: "mos", label: "Mosaic Company (MOS)", type: "negative", impact: -3.2, correlation: -0.42, marketCap: "11B", sector: "Potash/Phosphate" },
-      { id: "ntr", label: "Nutrien (NTR)", type: "consumer", impact: -3.8, correlation: -0.48, marketCap: "28B", sector: "Diversified Fertilizer" },
-      { id: "uan", label: "CVR Partners (UAN)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "1.2B", sector: "Nitrogen Fertilizer" },
-      { id: "iff_fert", label: "ICL Group (ICL)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "8B", sector: "Specialty Fertilizer" }
+      { id: "fcg_f", label: "FCG Gas Producers ETF", type: "etf", impact: 11.5, correlation: 0.88, marketCap: "0.5B", sector: "ETF" },
+      { id: "dba", label: "Invesco DB Agriculture (DBA)", type: "etf", impact: 3.5, correlation: 0.40, marketCap: "0.9B", sector: "ETF" }
     ]},
     { nodes: [
-      { id: "adm", label: "ADM (ADM)", type: "processor", impact: -2.8, correlation: -0.38, marketCap: "25B", sector: "Grain Trading" },
-      { id: "bg", label: "Bunge Global (BG)", type: "processor", impact: -2.5, correlation: -0.35, marketCap: "14B", sector: "Grain Trading" },
-      { id: "wheat_f", label: "Wheat Futures (ZW=F)", type: "producer", impact: 5.2, correlation: 0.48, sector: "Crops" },
-      { id: "corn_f", label: "Corn Futures (ZC=F)", type: "producer", impact: 4.8, correlation: 0.45, sector: "Crops" },
-      { id: "dba", label: "Invesco DB Agriculture (DBA)", type: "etf", impact: 3.5, correlation: 0.4, marketCap: "0.9B", sector: "ETF" },
-      { id: "de_ag", label: "Deere & Co (DE)", type: "consumer", impact: -2, correlation: -0.3, marketCap: "115B", sector: "Farm Equipment" }
+      { id: "wmb_f", label: "Williams Companies (WMB)", type: "supplier", impact: 5.5, correlation: 0.58, marketCap: "50B", sector: "Pipelines", parentId: "eqt" },
+      { id: "kmi_f", label: "Kinder Morgan (KMI)", type: "supplier", impact: 5.0, correlation: 0.55, marketCap: "22B", sector: "Pipelines", parentId: "ar" },
+      { id: "epd_f", label: "Enterprise Products (EPD)", type: "supplier", impact: 3.8, correlation: 0.52, marketCap: "65B", sector: "Midstream", parentId: "swn" },
+      { id: "mos", label: "Mosaic Company (MOS)", type: "consumer", impact: -3.2, correlation: -0.42, marketCap: "11B", sector: "Potash/Phosphate", parentId: "cf" },
+      { id: "ntr", label: "Nutrien (NTR)", type: "consumer", impact: -3.8, correlation: -0.48, marketCap: "28B", sector: "Diversified Fertilizer", parentId: "cf" },
+      { id: "uan", label: "CVR Partners (UAN)", type: "consumer", impact: -5.8, correlation: -0.62, marketCap: "1.2B", sector: "Nitrogen Fertilizer", parentId: "cf" },
+      { id: "iff_fert", label: "ICL Group (ICL)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "8B", sector: "Specialty Fertilizer", parentId: "mos" },
+      { id: "et_f", label: "Energy Transfer (ET)", type: "supplier", impact: 4.2, correlation: 0.55, marketCap: "52B", sector: "Midstream", parentId: "rrc_f" },
+      { id: "am_f", label: "Antero Midstream (AM)", type: "supplier", impact: 6.0, correlation: 0.62, marketCap: "7B", sector: "Midstream", parentId: "ar" },
+      { id: "dtm_f", label: "DTMidstream (DTM)", type: "supplier", impact: 4.8, correlation: 0.55, marketCap: "9B", sector: "Midstream", parentId: "chk_f" },
+      { id: "sempra_f", label: "Sempra Energy (SRE)", type: "consumer", impact: -3.5, correlation: -0.45, marketCap: "48B", sector: "Utilities", parentId: "lng_ch" },
+      { id: "ammonia_idx", label: "Ammonia Price Index", type: "index", impact: 9.5, correlation: 0.82, sector: "Fertilizer", parentId: "cf" }
     ]},
     { nodes: [
-      { id: "kr", label: "Kroger (KR)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "38B", sector: "Grocery Retail" },
-      { id: "gis", label: "General Mills (GIS)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "35B", sector: "Packaged Food" },
-      { id: "khc", label: "Kraft Heinz (KHC)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "42B", sector: "Packaged Food" },
-      { id: "mcd", label: "McDonald's (MCD)", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "215B", sector: "Fast Food" },
-      { id: "food_cpi", label: "Food CPI Impact", type: "macro", impact: 2.2, correlation: 0.42, sector: "Macro" },
-      { id: "emerging_mkts", label: "EM Food Inflation", type: "macro", impact: 3.5, correlation: 0.5, sector: "Macro" }
+      { id: "adm", label: "ADM (ADM)", type: "processor", impact: -2.8, correlation: -0.38, marketCap: "25B", sector: "Grain Trading", parentId: "ntr" },
+      { id: "bg", label: "Bunge Global (BG)", type: "processor", impact: -2.5, correlation: -0.35, marketCap: "14B", sector: "Grain Trading", parentId: "mos" },
+      { id: "wheat_f", label: "Wheat Futures (ZW=F)", type: "index", impact: 5.2, correlation: 0.48, sector: "Crops", parentId: "cf" },
+      { id: "corn_f", label: "Corn Futures (ZC=F)", type: "index", impact: 4.8, correlation: 0.45, sector: "Crops", parentId: "ntr" },
+      { id: "soybean_f", label: "Soybean Futures (ZS=F)", type: "index", impact: 3.8, correlation: 0.38, sector: "Crops", parentId: "mos" },
+      { id: "de_ag", label: "Deere & Co (DE)", type: "supplier", impact: -2, correlation: -0.30, marketCap: "115B", sector: "Farm Equipment", parentId: "adm" },
+      { id: "agco_f", label: "AGCO Corp (AGCO)", type: "supplier", impact: -1.5, correlation: -0.25, marketCap: "10B", sector: "Farm Equipment", parentId: "bg" },
+      { id: "lyb_f", label: "LyondellBasell (LYB)", type: "consumer", impact: -5.5, correlation: -0.58, marketCap: "28B", sector: "Chemicals", parentId: "uan" },
+      { id: "dow_f", label: "Dow Inc (DOW)", type: "consumer", impact: -4.8, correlation: -0.52, marketCap: "40B", sector: "Chemicals", parentId: "lyb_f" },
+      { id: "basfy_f", label: "BASF SE (BASFY)", type: "consumer", impact: -6.5, correlation: -0.62, marketCap: "42B", sector: "Chemicals", parentId: "lyb_f" },
+      { id: "flng_f", label: "Flex LNG (FLNG)", type: "supplier", impact: 7.0, correlation: 0.65, marketCap: "2.8B", sector: "LNG Shipping", parentId: "lng_ch" },
+      { id: "urea_idx", label: "Urea Price Index", type: "index", impact: 7.5, correlation: 0.72, sector: "Fertilizer", parentId: "ammonia_idx" }
+    ]},
+    { nodes: [
+      { id: "kr", label: "Kroger (KR)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "38B", sector: "Grocery Retail", parentId: "wheat_f" },
+      { id: "gis", label: "General Mills (GIS)", type: "consumer", impact: -2.5, correlation: -0.35, marketCap: "35B", sector: "Packaged Food", parentId: "wheat_f" },
+      { id: "khc", label: "Kraft Heinz (KHC)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "42B", sector: "Packaged Food", parentId: "corn_f" },
+      { id: "mcd", label: "McDonald's (MCD)", type: "consumer", impact: -1.5, correlation: -0.25, marketCap: "215B", sector: "Fast Food", parentId: "wheat_f" },
+      { id: "pep_f", label: "PepsiCo (PEP)", type: "consumer", impact: -1.8, correlation: -0.28, marketCap: "225B", sector: "Snacks/Beverages", parentId: "corn_f" },
+      { id: "tsn_f", label: "Tyson Foods (TSN)", type: "consumer", impact: -3.5, correlation: -0.42, marketCap: "22B", sector: "Meat Processing", parentId: "corn_f" },
+      { id: "cag_f", label: "ConAgra Brands (CAG)", type: "consumer", impact: -2.2, correlation: -0.32, marketCap: "16B", sector: "Packaged Food", parentId: "soybean_f" },
+      { id: "flo_f", label: "Flowers Foods (FLO)", type: "consumer", impact: -3.2, correlation: -0.40, marketCap: "4B", sector: "Bakery", parentId: "wheat_f" },
+      { id: "food_cpi", label: "Food CPI Impact", type: "macro", impact: 2.2, correlation: 0.42, sector: "Macro", parentId: "kr" },
+      { id: "emerging_mkts", label: "EM Food Inflation", type: "macro", impact: 3.5, correlation: 0.50, sector: "Macro", parentId: "food_cpi" },
+      { id: "duke_f", label: "Duke Energy (DUK)", type: "consumer", impact: -3.0, correlation: -0.40, marketCap: "78B", sector: "Utilities", parentId: "sempra_f" },
+      { id: "so_f", label: "Southern Company (SO)", type: "consumer", impact: -2.8, correlation: -0.38, marketCap: "88B", sector: "Utilities", parentId: "duke_f" }
+    ]},
+    { nodes: [
+      { id: "henry_hub_f", label: "Henry Hub Forward Curve", type: "index", impact: 8.5, correlation: 0.85, sector: "Futures", parentId: "ung" },
+      { id: "europe_ttf", label: "Europe TTF Gas Price", type: "substitute", impact: 7.5, correlation: 0.62, sector: "Energy", parentId: "lng_ch" },
+      { id: "usd_f", label: "USD Index (DXY)", type: "fx", impact: -2.5, correlation: -0.50, sector: "Macro", parentId: "flng_f" },
+      { id: "crude_cross_f", label: "Crude Oil (Cross-Link)", type: "substitute", impact: 4.5, correlation: 0.55, sector: "Energy", parentId: "ctra_f" },
+      { id: "coal_sub_f", label: "Thermal Coal (Substitute)", type: "substitute", impact: 5.5, correlation: 0.60, sector: "Energy", parentId: "europe_ttf" },
+      { id: "usda_plantings", label: "USDA Plantings Report", type: "policy", impact: -3.0, correlation: -0.40, sector: "Agriculture", parentId: "wheat_f" },
+      { id: "eia_storage_f", label: "EIA Storage Report", type: "index", impact: -6.0, correlation: -0.70, sector: "Macro", parentId: "henry_hub_f" },
+      { id: "winter_demand", label: "Winter Heating Demand", type: "macro", impact: 12, correlation: 0.78, sector: "Macro", parentId: "eia_storage_f" }
     ]}
   ]
 };
