@@ -2925,36 +2925,75 @@ a.read-more {
 }
 a.read-more:hover { gap: 8px; color: var(--accent2); }
 
-/* ---------- Impact Preview (Homepage) ---------- */
-.impact-preview-tabs {
+/* ---------- 3D Universe (Homepage) ---------- */
+.universe-controls {
   display: flex;
-  gap: 8px;
-  margin-bottom: 24px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
 }
-.impact-tab {
+.universe-control-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(7,10,18,0.6);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+.universe-control-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text3);
+  white-space: nowrap;
+}
+.universe-filter {
   appearance: none;
   background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.08);
   color: var(--text2);
-  padding: 10px 20px;
+  padding: 6px 14px;
   border-radius: 999px;
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   cursor: pointer;
   transition: all 0.2s;
 }
-.impact-tab:hover {
-  border-color: rgba(34,211,238,0.3);
+.universe-filter:hover { border-color: rgba(34,211,238,0.25); color: var(--text); }
+.universe-filter.is-active { background: rgba(34,211,238,0.12); border-color: rgba(34,211,238,0.35); color: #22d3ee; }
+.universe-search {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  padding: 6px 14px;
   color: var(--text);
+  font: inherit;
+  font-size: 0.82rem;
+  outline: none;
+  min-width: 200px;
 }
-.impact-tab.is-active {
-  background: rgba(34,211,238,0.12);
-  border-color: rgba(34,211,238,0.4);
+.universe-search:focus { border-color: rgba(34,211,238,0.4); }
+.universe-reset-btn {
+  appearance: none;
+  background: rgba(10,10,26,0.8);
+  border: 1px solid rgba(34,211,238,0.3);
+  border-radius: 8px;
   color: #22d3ee;
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: auto;
 }
-.impact-preview-graph {
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--border);
+.universe-reset-btn:hover { border-color: rgba(34,211,238,0.6); box-shadow: 0 0 12px rgba(34,211,238,0.2); }
+.universe-container { position: relative; }
+@media (max-width: 768px) {
+  #universe-canvas { height: 450px !important; }
+  .universe-controls { gap: 8px; }
+  .universe-search { min-width: 150px; }
 }

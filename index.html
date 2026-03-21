@@ -60,182 +60,42 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
 <div class="divider"></div>
 
-<!-- ===== FEATURED IMPACT MAP ===== -->
+<!-- ===== 3D UNIVERSE IMPACT MAP ===== -->
 <section class="section" id="impact-preview" aria-labelledby="impact-preview-title">
   <div class="container">
     <header class="section-header" data-animate>
-      <p class="section-label">Interactive Intelligence</p>
-      <h2 class="section-title" id="impact-preview-title">Explore an Impact Map</h2>
-      <p class="section-desc">See how a single commodity price move ripples through industries, companies, and ETFs — visualized as an orbital network.</p>
+      <p class="section-label">3D Impact Universe</p>
+      <h2 class="section-title" id="impact-preview-title">The Commodity Universe</h2>
+      <p class="section-desc">28 commodities and their entire impact network — explore by rotating, zooming, and clicking any star.</p>
     </header>
 
-    <div class="impact-preview-tabs" data-animate data-delay="100">
-      <button class="impact-tab is-active" data-commodity="oil">Crude Oil</button>
-      <button class="impact-tab" data-commodity="gold">Gold</button>
-      <button class="impact-tab" data-commodity="copper">Copper</button>
-      <button class="impact-tab" data-commodity="natgas">Natural Gas</button>
+    <div class="universe-controls" data-animate data-delay="100">
+      <div class="universe-control-group">
+        <span class="universe-control-label">Filter</span>
+        <button class="universe-filter is-active" data-filter="all">All</button>
+        <button class="universe-filter" data-filter="energy">Energy</button>
+        <button class="universe-filter" data-filter="precious">Precious</button>
+        <button class="universe-filter" data-filter="industrial">Industrial</button>
+        <button class="universe-filter" data-filter="agriculture">Agriculture</button>
+      </div>
+      <div class="universe-control-group">
+        <input type="text" class="universe-search" placeholder="Search commodities or companies..." aria-label="Search">
+      </div>
+      <button class="universe-reset-btn">&#8857; Reset View</button>
     </div>
 
-    <div class="impact-preview-graph" data-animate data-delay="200">
-      <div id="impact-graph" style="min-height:500px;width:100%;background:rgba(5,5,14,0.8);border-radius:16px;position:relative;"></div>
+    <div class="universe-container" data-animate data-delay="200">
+      <div id="universe-canvas" style="width:100%;height:600px;border-radius:16px;overflow:hidden;background:#050510;position:relative;cursor:grab;"></div>
+      <div id="universe-tooltip" style="display:none;position:absolute;background:rgba(13,13,20,0.95);border:1px solid rgba(34,211,238,0.3);border-radius:10px;padding:12px 16px;pointer-events:none;z-index:20;color:#e2e8f0;font-size:0.85rem;max-width:240px;"></div>
+      <div id="universe-hint" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);color:rgba(148,163,184,0.6);font-size:0.8rem;pointer-events:none;">Drag to rotate · Scroll to zoom · Click a star to explore</div>
     </div>
 
-    <div class="impact-preview-cta" data-animate data-delay="300" style="text-align:center;margin-top:24px;">
-      <a href="/crude-oil-industry-impact/" class="btn btn-primary" id="impact-preview-link">Open Full Impact Map &rarr;</a>
-      <p style="color:var(--text3);font-size:0.85rem;margin-top:8px;">81 Signal Reports with 50+ node orbital graphs</p>
+    <div style="text-align:center;margin-top:24px;" data-animate data-delay="300">
+      <a href="/commodities/" class="btn btn-primary">Explore All Commodity Hubs &rarr;</a>
+      <p style="color:var(--text3);font-size:0.85rem;margin-top:8px;">28 Commodity Hubs · 81 Signal Reports · 4000+ Impact Nodes</p>
     </div>
   </div>
 </section>
-
-<script>
-window.HOME_GRAPHS = {
-  oil: {
-    commodity: { id: 'crude_oil', label: 'Crude Oil \u219110%', price: '85/bbl', change: '+10%' },
-    levels: [
-      { nodes: [
-        { id:'xle', label:'XLE ETF', type:'etf', impact:8.2, correlation:0.92, sector:'Energy' },
-        { id:'xom', label:'ExxonMobil (XOM)', type:'producer', impact:9.0, correlation:0.89, sector:'Oil Major' },
-        { id:'hal', label:'Halliburton (HAL)', type:'supplier', impact:14.0, correlation:0.91, sector:'Oilfield Services' },
-        { id:'jets', label:'JETS Airlines ETF', type:'etf', impact:-7.1, correlation:-0.81, sector:'Airlines' },
-        { id:'aal', label:'American Airlines', type:'consumer', impact:-11.0, correlation:-0.79, sector:'Airlines' }
-      ]},
-      { nodes: [
-        { id:'slb', label:'SLB (SLB)', type:'supplier', impact:12.0, correlation:0.88, sector:'Oilfield Services', parentId:'hal' },
-        { id:'vlo', label:'Valero (VLO)', type:'processor', impact:5.2, correlation:0.66, sector:'Refining', parentId:'xom' },
-        { id:'dal', label:'Delta (DAL)', type:'consumer', impact:-9.0, correlation:-0.76, sector:'Airlines', parentId:'jets' },
-        { id:'ups', label:'UPS', type:'consumer', impact:-4.0, correlation:-0.62, sector:'Logistics', parentId:'jets' },
-        { id:'tsla_oil', label:'Tesla (TSLA)', type:'producer', impact:5.0, correlation:0.42, sector:'EV', parentId:'xle' }
-      ]},
-      { nodes: [
-        { id:'dow', label:'Dow Inc (DOW)', type:'consumer', impact:-4.5, correlation:-0.52, sector:'Chemicals', parentId:'vlo' },
-        { id:'fdx', label:'FedEx (FDX)', type:'consumer', impact:-3.5, correlation:-0.48, sector:'Logistics', parentId:'ups' },
-        { id:'luv', label:'Southwest (LUV)', type:'consumer', impact:-8.0, correlation:-0.72, sector:'Airlines', parentId:'dal' },
-        { id:'dxy', label:'US Dollar (DXY)', type:'fx', impact:-2.0, correlation:-0.35, sector:'FX', parentId:'xle' },
-        { id:'opec', label:'OPEC Policy', type:'policy', impact:0, correlation:0.15, sector:'Geopolitics', parentId:'xom' }
-      ]}
-    ]
-  },
-  gold: {
-    commodity: { id: 'gold', label: 'Gold \u219110%', price: '2000/oz', change: '+10%' },
-    levels: [
-      { nodes: [
-        { id:'gld', label:'GLD ETF', type:'etf', impact:9.8, correlation:0.99, sector:'ETF' },
-        { id:'gdx', label:'GDX Miners ETF', type:'etf', impact:14.0, correlation:0.88, sector:'ETF' },
-        { id:'nem', label:'Newmont (NEM)', type:'producer', impact:15.0, correlation:0.85, sector:'Gold Mining' },
-        { id:'gold_bar', label:'Barrick Gold (GOLD)', type:'producer', impact:16.0, correlation:0.87, sector:'Gold Mining' },
-        { id:'slv', label:'Silver (SLV)', type:'commodity', impact:7.0, correlation:0.75, sector:'Precious Metals' }
-      ]},
-      { nodes: [
-        { id:'aem', label:'Agnico Eagle (AEM)', type:'producer', impact:14.0, correlation:0.83, sector:'Gold Mining', parentId:'gdx' },
-        { id:'wpm', label:'Wheaton PM (WPM)', type:'producer', impact:12.0, correlation:0.80, sector:'Streaming', parentId:'gdx' },
-        { id:'dxy_g', label:'US Dollar (DXY)', type:'fx', impact:-4.0, correlation:-0.45, sector:'FX', parentId:'gld' },
-        { id:'tlt', label:'Bonds (TLT)', type:'etf', impact:3.0, correlation:0.35, sector:'Fixed Income', parentId:'gld' },
-        { id:'btc_g', label:'Bitcoin (BTC)', type:'commodity', impact:3.5, correlation:0.30, sector:'Crypto', parentId:'gld' }
-      ]},
-      { nodes: [
-        { id:'cpi', label:'CPI Inflation', type:'macro', impact:2.0, correlation:0.40, sector:'Macro', parentId:'gld' },
-        { id:'fed', label:'Fed Policy', type:'policy', impact:-3.0, correlation:-0.50, sector:'Central Bank', parentId:'dxy_g' },
-        { id:'em', label:'Emerging Markets', type:'regional', impact:4.0, correlation:0.35, sector:'Regional', parentId:'nem' },
-        { id:'jewelry', label:'Jewelry Demand', type:'consumer', impact:1.5, correlation:0.20, sector:'Consumer', parentId:'gold_bar' },
-        { id:'cb', label:'Central Bank Buying', type:'policy', impact:5.0, correlation:0.55, sector:'Sovereign', parentId:'gld' }
-      ]}
-    ]
-  },
-  copper: {
-    commodity: { id: 'copper', label: 'Copper \u219110%', price: '4.70/lb', change: '+10%' },
-    levels: [
-      { nodes: [
-        { id:'copx', label:'COPX ETF', type:'etf', impact:12.0, correlation:0.90, sector:'ETF' },
-        { id:'fcx', label:'Freeport-McMoRan', type:'producer', impact:14.0, correlation:0.88, sector:'Copper Mining' },
-        { id:'scco', label:'Southern Copper', type:'producer', impact:13.0, correlation:0.86, sector:'Copper Mining' },
-        { id:'bhp_cu', label:'BHP Group', type:'producer', impact:5.0, correlation:0.55, sector:'Diversified Mining' },
-        { id:'construction', label:'Construction Sector', type:'consumer', impact:-4.0, correlation:-0.45, sector:'Construction' }
-      ]},
-      { nodes: [
-        { id:'teck', label:'Teck Resources', type:'producer', impact:10.0, correlation:0.78, sector:'Copper Mining', parentId:'copx' },
-        { id:'ivpaf', label:'Ivanhoe Mines', type:'producer', impact:18.0, correlation:0.82, sector:'Copper Mining', parentId:'fcx' },
-        { id:'caterpillar', label:'Caterpillar (CAT)', type:'consumer', impact:-2.0, correlation:-0.25, sector:'Equipment', parentId:'construction' },
-        { id:'ev_cu', label:'EV Charging Infra', type:'consumer', impact:-3.5, correlation:-0.38, sector:'EV', parentId:'fcx' },
-        { id:'china_cu', label:'China PMI', type:'macro', impact:3.0, correlation:0.42, sector:'Macro', parentId:'bhp_cu' }
-      ]},
-      { nodes: [
-        { id:'grid', label:'Power Grid Buildout', type:'consumer', impact:-2.5, correlation:-0.30, sector:'Utilities', parentId:'ev_cu' },
-        { id:'aluminum_cu', label:'Aluminum (Substitute)', type:'substitute', impact:-2.0, correlation:-0.15, sector:'Metals', parentId:'construction' },
-        { id:'chile', label:'Chile Supply Risk', type:'regional', impact:4.0, correlation:0.50, sector:'Geopolitics', parentId:'scco' },
-        { id:'lme', label:'LME Inventory', type:'index', impact:-2.5, correlation:-0.40, sector:'Exchange', parentId:'copx' },
-        { id:'renewable', label:'Renewable Energy', type:'consumer', impact:-3.0, correlation:-0.32, sector:'Clean Energy', parentId:'grid' }
-      ]}
-    ]
-  },
-  natgas: {
-    commodity: { id: 'natgas', label: 'Natural Gas \u219110%', price: '2.94/MMBtu', change: '+10%' },
-    levels: [
-      { nodes: [
-        { id:'ung', label:'UNG ETF', type:'etf', impact:9.5, correlation:0.95, sector:'ETF' },
-        { id:'eqt', label:'EQT Corp (EQT)', type:'producer', impact:16.0, correlation:0.88, sector:'Gas Producer' },
-        { id:'lng_co', label:'Cheniere (LNG)', type:'processor', impact:8.0, correlation:0.72, sector:'LNG Export' },
-        { id:'xlu', label:'XLU Utilities ETF', type:'etf', impact:-4.0, correlation:-0.55, sector:'Utilities' },
-        { id:'cf', label:'CF Industries (CF)', type:'consumer', impact:-8.0, correlation:-0.65, sector:'Fertilizer' }
-      ]},
-      { nodes: [
-        { id:'ar', label:'Antero Resources', type:'producer', impact:18.0, correlation:0.85, sector:'Gas Producer', parentId:'eqt' },
-        { id:'ntr', label:'Nutrien (NTR)', type:'consumer', impact:-6.0, correlation:-0.58, sector:'Fertilizer', parentId:'cf' },
-        { id:'dow_ng', label:'Dow Chemical', type:'consumer', impact:-5.0, correlation:-0.52, sector:'Chemicals', parentId:'cf' },
-        { id:'nee', label:'NextEra (NEE)', type:'consumer', impact:-3.0, correlation:-0.40, sector:'Utilities', parentId:'xlu' },
-        { id:'europe', label:'EU Gas Crisis', type:'regional', impact:6.0, correlation:0.60, sector:'Geopolitics', parentId:'lng_co' }
-      ]},
-      { nodes: [
-        { id:'henry', label:'Henry Hub Index', type:'index', impact:10.0, correlation:0.98, sector:'Benchmark', parentId:'eqt' },
-        { id:'coal_ng', label:'Coal (Substitute)', type:'substitute', impact:5.0, correlation:0.45, sector:'Energy', parentId:'xlu' },
-        { id:'food_ng', label:'Food Prices', type:'macro', impact:-3.0, correlation:-0.35, sector:'Inflation', parentId:'ntr' },
-        { id:'winter', label:'Winter Demand', type:'macro', impact:4.0, correlation:0.50, sector:'Seasonal', parentId:'ung' },
-        { id:'solar_ng', label:'Solar Alternative', type:'substitute', impact:-2.0, correlation:-0.20, sector:'Clean Energy', parentId:'nee' }
-      ]}
-    ]
-  }
-};
-window.COMMODITY_DATA = window.HOME_GRAPHS.oil;
-</script>
-
-<script>
-(function() {
-  var linkMap = {
-    oil: '/crude-oil-industry-impact/',
-    gold: '/gold-price-impact-stocks/',
-    copper: '/copper-economic-indicator/',
-    natgas: '/natural-gas-price-impact/'
-  };
-  var currentCommodity = 'oil';
-
-  function initHomeGraph(commodity) {
-    var el = document.getElementById('impact-graph');
-    if (!el || typeof d3 === 'undefined') return;
-    window.COMMODITY_DATA = window.HOME_GRAPHS[commodity];
-    el.innerHTML = '';
-    el.style.height = '';
-    if (window.CommodityNodeGraph && window.CommodityNodeGraph.init) {
-      window.CommodityNodeGraph.init(el);
-    }
-    var link = document.getElementById('impact-preview-link');
-    if (link) link.href = linkMap[commodity];
-  }
-
-  document.querySelectorAll('.impact-tab').forEach(function(tab) {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.impact-tab').forEach(function(t) { t.classList.remove('is-active'); });
-      tab.classList.add('is-active');
-      currentCommodity = tab.dataset.commodity;
-      initHomeGraph(currentCommodity);
-    });
-  });
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(function() { initHomeGraph('oil'); }, 500); });
-  } else {
-    setTimeout(function() { initHomeGraph('oil'); }, 500);
-  }
-})();
-</script>
 
 <div class="divider"></div>
 
