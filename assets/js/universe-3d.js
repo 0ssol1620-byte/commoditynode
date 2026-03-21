@@ -260,7 +260,7 @@
     'varying vec3 vColor;',
     'void main() {',
     '  vColor = starColor;',
-    '  vOpacity = 0.4 + 0.6 * (0.5 + 0.5 * sin(time * (0.3 + randomOffset * 0.7) + randomOffset * 6.283));',
+    '  vOpacity = 0.5 + 0.5 * (0.5 + 0.5 * sin(time * (0.05 + randomOffset * 0.15) + randomOffset * 6.283));',
     '  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);',
     '  gl_PointSize = size * (200.0 / -mvPosition.z);',
     '  gl_Position = projectionMatrix * mvPosition;',

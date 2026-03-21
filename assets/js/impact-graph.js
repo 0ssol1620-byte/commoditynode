@@ -122,8 +122,8 @@
     container.innerHTML = '';
 
     // ── ORBITAL RADII ──
-    const baseRadii = [0, 150, 280, 400, 500, 600];
-    const radii = baseRadii.map(r => isMob ? r * 0.65 : r);
+    const baseRadii = [0, 120, 220, 320, 400, 480];
+    const radii = baseRadii.map(r => isMob ? r * 0.7 : r);
     const maxLevel = Math.max(...nodes.map(n => n.level));
 
     // ── SVG SETUP ──
@@ -199,8 +199,8 @@
       try {
         const b = g.node().getBBox();
         if (!b.width) return;
-        const pad = 60;
-        const sc = Math.min(isMob ? 0.95 : 0.88, Math.min((W-pad*2)/b.width, (H-pad*2)/b.height));
+        const pad = 30;
+        const sc = Math.min(1.0, Math.min((W-pad*2)/b.width, (H-pad*2)/b.height));
         const tx = (W - b.width*sc)/2 - b.x*sc;
         const ty = (H - b.height*sc)/2 - b.y*sc;
         const t = d3.zoomIdentity.translate(tx, ty).scale(sc);
@@ -570,7 +570,11 @@
     }
 
     // ── CONTROLS ──
-    const controls = d3.select(container).append('div').attr('class','cn-graph-controls');
+    // Insert controls BEFORE the graph container (outside the canvas)
+    const controlsDiv = document.createElement('div');
+    controlsDiv.className = 'cn-graph-controls';
+    container.parentNode.insertBefore(controlsDiv, container);
+    const controls = d3.select(controlsDiv);
     const presentTypes = new Set(nodes.map(n => n.type).filter(t => t !== 'commodity'));
     const typeLabels = {
       etf:'ETFs', producer:'Producers', processor:'Processors', positive:'Positive', negative:'Negative',
