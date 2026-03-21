@@ -86,7 +86,8 @@
 
     // ── DIMENSIONS ──
     const isMob = window.innerWidth < 768;
-    const W = container.offsetWidth || 700;
+    // Wait for layout to settle so offsetWidth is correct
+    const W = (container.getBoundingClientRect().width) || container.offsetWidth || (isMob ? window.innerWidth : 700);
     const H = isMob ? 520 : 640;
     container.style.height = H + 'px';
     container.style.position = 'relative';
