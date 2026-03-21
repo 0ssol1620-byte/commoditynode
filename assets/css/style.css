@@ -263,7 +263,9 @@ code, kbd, pre {
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.35;
+  opacity: 0.2;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -619,15 +621,7 @@ code, kbd, pre {
 }
 
 .post-card--featured .post-card-visual {
-  flex: 1;
-  min-height: 200px;
-  background: linear-gradient(135deg, var(--bg3), var(--bg4));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5rem;
-  position: relative;
-  overflow: hidden;
+  display: none;
 }
 
 .post-card--featured .post-card-visual::before {
@@ -1331,7 +1325,12 @@ hr {
 }
 @media (max-width: 768px) {
   .toc-sidebar { display: none; }
-  .post-content { width: 100%; max-width: 100%; }
+  .post-layout { display: block !important; }
+  .post-content { width: 100% !important; max-width: 100% !important; display: block !important; }
+  .article-summary-card { grid-template-columns: 1fr !important; }
+  .summary-metrics { grid-template-columns: 1fr !important; }
+  #impact-graph { width: 100% !important; min-width: 0 !important; }
+  .cn-price-chart { width: 100% !important; }
 }
 
 @media (max-width: 768px) {
