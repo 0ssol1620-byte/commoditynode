@@ -11,6 +11,29 @@ substitutes: ["Gold", "Platinum", "Copper"]
 themes: ["Clean Energy"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "silver", "label": "Silver (SI)"},
+  "levels": [
+    {"nodes": [
+      {"id":"slv","label":"SLV ETF","type":"etf","impact":9,"correlation":0.95,"sector":"Precious Metals"},
+      {"id":"paas","label":"Pan American Silver","type":"producer","impact":14,"correlation":0.85,"sector":"Mining"},
+      {"id":"ag","label":"First Majestic (AG)","type":"producer","impact":15,"correlation":0.88,"sector":"Mining"},
+      {"id":"wpm","label":"Wheaton Precious (WPM)","type":"producer","impact":11,"correlation":0.82,"sector":"Streaming"},
+      {"id":"gdxj_si","label":"GDXJ Junior Miners","type":"etf","impact":10,"correlation":0.75,"sector":"Mining"}
+    ]},
+    {"nodes": [
+      {"id":"mag","label":"MAG Silver (MAG)","type":"producer","impact":12,"correlation":0.80,"sector":"Mining","parentId":"paas"},
+      {"id":"solar_si","label":"Solar Panel Mfg","type":"consumer","impact":6,"correlation":0.55,"sector":"Clean Energy","parentId":"slv"},
+      {"id":"electronics_si","label":"Electronics Sector","type":"consumer","impact":4,"correlation":0.45,"sector":"Tech","parentId":"slv"},
+      {"id":"gld_cross","label":"Gold (Cross-Link)","type":"commodity","impact":8,"correlation":0.82,"sector":"Precious Metals","parentId":"slv"},
+      {"id":"jewelry_si","label":"Jewelry Demand","type":"consumer","impact":3,"correlation":0.40,"sector":"Consumer","parentId":"slv"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Silver occupies a unique position among commodities with a dual identity as both a precious metal and an industrial workhorse. Over 50% of annual silver demand comes from industrial applications including solar panel manufacturing, electronics, and medical devices, making it far more economically sensitive than gold. The silver/gold ratio serves as a widely watched indicator of relative value and risk appetite across metals markets. Annual mine production is approximately 830 million ounces, but the market has been in persistent deficit as industrial demand growth outpaces supply additions.

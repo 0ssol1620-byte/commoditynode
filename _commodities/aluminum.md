@@ -11,6 +11,29 @@ substitutes: ["Steel", "Carbon Fiber", "Plastics"]
 themes: ["EV Transition", "Clean Energy"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "aluminum", "label": "Aluminum (ALI)"},
+  "levels": [
+    {"nodes": [
+      {"id":"jju","label":"JJU Aluminum ETN","type":"etf","impact":9,"correlation":0.88,"sector":"Metals"},
+      {"id":"aa","label":"Alcoa (AA)","type":"producer","impact":14,"correlation":0.90,"sector":"Mining"},
+      {"id":"cenx","label":"Century Aluminum (CENX)","type":"producer","impact":15,"correlation":0.88,"sector":"Smelting"},
+      {"id":"arnc","label":"Arconic (ARNC)","type":"processor","impact":8,"correlation":0.72,"sector":"Rolling"},
+      {"id":"rio_al","label":"Rio Tinto (RIO)","type":"producer","impact":7,"correlation":0.68,"sector":"Mining"}
+    ]},
+    {"nodes": [
+      {"id":"ba_al","label":"Boeing (BA)","type":"consumer","impact":-4,"correlation":-0.45,"sector":"Aerospace","parentId":"arnc"},
+      {"id":"can_mfg","label":"Beverage Can Mfg","type":"consumer","impact":-3,"correlation":-0.40,"sector":"Packaging","parentId":"aa"},
+      {"id":"ev_al","label":"EV Lightweighting","type":"consumer","impact":5,"correlation":0.50,"sector":"Automotive","parentId":"jju"},
+      {"id":"energy_cost","label":"Energy Costs (Input)","type":"macro","impact":-8,"correlation":-0.65,"sector":"Power","parentId":"cenx"},
+      {"id":"copper_sub","label":"Copper (Substitute)","type":"substitute","impact":-4,"correlation":-0.35,"sector":"Industrial Metals","parentId":"jju"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Aluminum is the world's most widely used non-ferrous metal, prized for its lightweight strength, corrosion resistance, and infinite recyclability. Production is extremely energy-intensive, with electricity representing 30-40% of smelting costs, making aluminum prices highly sensitive to global energy markets. China dominates production with over 55% of global output, while Western smelters increasingly face competitiveness challenges from high energy costs. Global demand exceeds 70 million tonnes annually and continues to grow at 3-4% per year, driven by transportation lightweighting and renewable energy infrastructure buildout.

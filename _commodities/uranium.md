@@ -11,6 +11,29 @@ substitutes: ["Solar", "Wind", "Natural Gas"]
 themes: ["Nuclear Renaissance", "Clean Energy"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "uranium", "label": "Uranium (URA)"},
+  "levels": [
+    {"nodes": [
+      {"id":"ura","label":"URA ETF","type":"etf","impact":10,"correlation":0.90,"sector":"Nuclear"},
+      {"id":"urnm","label":"URNM ETF","type":"etf","impact":12,"correlation":0.92,"sector":"Nuclear"},
+      {"id":"ccj","label":"Cameco (CCJ)","type":"producer","impact":14,"correlation":0.88,"sector":"Mining"},
+      {"id":"nxe","label":"NexGen Energy (NXE)","type":"producer","impact":15,"correlation":0.85,"sector":"Mining"},
+      {"id":"uec","label":"Uranium Energy (UEC)","type":"producer","impact":13,"correlation":0.82,"sector":"Mining"}
+    ]},
+    {"nodes": [
+      {"id":"leu","label":"Centrus Energy (LEU)","type":"processor","impact":11,"correlation":0.78,"sector":"Enrichment","parentId":"ccj"},
+      {"id":"dnn","label":"Denison Mines (DNN)","type":"producer","impact":12,"correlation":0.80,"sector":"Mining","parentId":"nxe"},
+      {"id":"sput","label":"Sprott Physical Uranium","type":"etf","impact":9,"correlation":0.85,"sector":"Physical","parentId":"ura"},
+      {"id":"kazatom","label":"Kazatomprom","type":"producer","impact":10,"correlation":0.82,"sector":"Mining","parentId":"ccj"},
+      {"id":"smr_demand","label":"SMR Demand Growth","type":"consumer","impact":7,"correlation":0.60,"sector":"Nuclear","parentId":"urnm"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Uranium is the fuel that powers approximately 10% of global electricity generation through 440+ commercial nuclear reactors worldwide. The market operates on unique 10-year contracting cycles between utilities and miners, creating a disconnect between spot and long-term contract prices. Post-Fukushima mine closures and production curtailments have created a structural supply deficit that is tightening as reactor restarts and new builds accelerate globally. Global primary mine production covers only about 75% of annual reactor requirements, with the deficit filled by secondary supplies (government inventories, recycled material) that are steadily depleting.

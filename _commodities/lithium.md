@@ -11,6 +11,29 @@ substitutes: ["Sodium-ion", "Solid-state", "Hydrogen Fuel Cells"]
 themes: ["EV Transition", "Clean Energy"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "lithium", "label": "Lithium"},
+  "levels": [
+    {"nodes": [
+      {"id":"lit","label":"LIT ETF","type":"etf","impact":10,"correlation":0.88,"sector":"Battery Metals"},
+      {"id":"alb","label":"Albemarle (ALB)","type":"producer","impact":14,"correlation":0.90,"sector":"Mining"},
+      {"id":"sqm","label":"SQM (SQM)","type":"producer","impact":13,"correlation":0.88,"sector":"Mining"},
+      {"id":"pll","label":"Piedmont Lithium (PLL)","type":"producer","impact":12,"correlation":0.82,"sector":"Mining"},
+      {"id":"lthm","label":"Livent (LTHM)","type":"producer","impact":13,"correlation":0.86,"sector":"Mining"}
+    ]},
+    {"nodes": [
+      {"id":"tsla_li","label":"Tesla (TSLA)","type":"consumer","impact":6,"correlation":0.60,"sector":"EV","parentId":"lit"},
+      {"id":"catl_li","label":"CATL","type":"consumer","impact":7,"correlation":0.65,"sector":"Batteries","parentId":"alb"},
+      {"id":"lges","label":"LG Energy Solution","type":"consumer","impact":6,"correlation":0.58,"sector":"Batteries","parentId":"sqm"},
+      {"id":"panasonic_li","label":"Panasonic","type":"consumer","impact":5,"correlation":0.52,"sector":"Batteries","parentId":"alb"},
+      {"id":"grid_storage","label":"Grid Storage","type":"consumer","impact":5,"correlation":0.48,"sector":"Utilities","parentId":"lit"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Lithium is the lightest metal on the periodic table and the irreplaceable element in virtually all modern rechargeable batteries. EV adoption has transformed lithium from a niche industrial chemical into one of the most strategically important commodities in the world. The "lithium triangle" of Chile, Argentina, and Bolivia holds over 50% of global reserves, while Australia leads in hard-rock spodumene mining production. Global demand has grown from under 300,000 tonnes of lithium carbonate equivalent (LCE) in 2020 to over 900,000 tonnes, with projections exceeding 2 million tonnes by 2030.

@@ -11,6 +11,29 @@ substitutes: ["Aluminum", "Carbon Fiber", "Engineered Wood"]
 themes: ["Infrastructure Boom"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "steel", "label": "Steel (HRC)"},
+  "levels": [
+    {"nodes": [
+      {"id":"slx","label":"SLX Steel ETF","type":"etf","impact":9,"correlation":0.85,"sector":"Metals"},
+      {"id":"nue","label":"Nucor (NUE)","type":"producer","impact":12,"correlation":0.88,"sector":"Steel"},
+      {"id":"stld","label":"Steel Dynamics (STLD)","type":"producer","impact":11,"correlation":0.86,"sector":"Steel"},
+      {"id":"x","label":"U.S. Steel (X)","type":"producer","impact":14,"correlation":0.82,"sector":"Steel"},
+      {"id":"clf","label":"Cleveland-Cliffs (CLF)","type":"producer","impact":13,"correlation":0.84,"sector":"Steel"}
+    ]},
+    {"nodes": [
+      {"id":"rs","label":"Reliance Steel (RS)","type":"processor","impact":6,"correlation":0.65,"sector":"Distribution","parentId":"nue"},
+      {"id":"auto_steel","label":"Auto Manufacturers","type":"consumer","impact":-5,"correlation":-0.55,"sector":"Automotive","parentId":"clf"},
+      {"id":"construction","label":"Construction Sector","type":"consumer","impact":-4,"correlation":-0.50,"sector":"Building","parentId":"slx"},
+      {"id":"mt","label":"ArcelorMittal (MT)","type":"producer","impact":10,"correlation":0.78,"sector":"Steel","parentId":"x"},
+      {"id":"iron_ore","label":"Iron Ore (Cross-Link)","type":"commodity","impact":7,"correlation":0.70,"sector":"Mining","parentId":"clf"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Steel is the foundational material of modern infrastructure, with global production exceeding 1.8 billion tonnes annually. China produces over 50% of the world's steel, making Chinese economic policy and construction activity the single largest price driver. The market divides into flat-rolled (automotive, appliances), long products (construction rebar), and specialty grades, each with distinct supply-demand dynamics. The industry is undergoing a structural shift toward electric arc furnace (EAF) production from blast furnace/basic oxygen furnace (BOF) routes, driven by carbon reduction targets and scrap availability.

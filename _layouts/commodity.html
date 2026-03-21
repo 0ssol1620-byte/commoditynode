@@ -35,6 +35,8 @@ layout: default
   <div class="cn-price-chart" data-symbol="{{ page.symbol }}" data-name="{{ page.title }}" style="margin-bottom:40px;"></div>
   {% endif %}
 
+  <div id="impact-graph"></div>
+
   <div class="post-layout">
     <!-- Main Content -->
     <article class="post-body-container">
@@ -181,3 +183,5 @@ layout: default
   </div>
 </section>
 {% endif %}
+
+<script src='{{ "/assets/js/impact-graph.js?v=1774079386" | relative_url }}' defer></script>
