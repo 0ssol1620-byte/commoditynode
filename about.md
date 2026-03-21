@@ -38,8 +38,8 @@ description: "CommodityNode maps how commodity price movements ripple through gl
   <li><strong>Zero paywalls</strong> — Open access, always</li>
 </ul>
 
-<h2>Disclaimer</h2>
-<p>CommodityNode publishes informational analysis only. Nothing here constitutes financial advice. Always consult a licensed financial advisor before making investment decisions. Past commodity price movements do not predict future performance. <a href="/methodology/">Read our full methodology</a>.</p>
+<h2>Methodology</h2>
+<p>Every impact score, correlation figure, and sensitivity estimate is backed by historical data and transparent calculation logic. We show our work — because research you can't verify isn't research. <a href="/methodology/">Read our full methodology &rarr;</a></p>
 
 </div>
 </div>
