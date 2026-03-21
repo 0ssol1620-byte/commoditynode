@@ -7,7 +7,7 @@ tags: [silver, solar, electronics, precious-metals, SLV, PAAS]
 description: 'How silver price increases impact miners like Pan American Silver and Hecla, solar manufacturers, electronics companies, and SLV ETF. Full supply chain correlation analysis.'
 reading_time: 8
 commodity_name: "Silver"
-image: /assets/images/og-silver-solar-electronics-impact.png
+image: /assets/images/og-silver.png
 ---
 
 Silver occupies a unique position among precious metals as both a monetary asset and a critical industrial input. When silver prices push toward $28.50 per ounce, the effects span an unusually broad set of industries -- from photovoltaic cell manufacturers in China to jewelry retailers in Manhattan and bullion vaults in London. Silver's dual nature as a store of value and an industrial commodity makes its price dynamics more complex than gold and its impact chain more diverse.

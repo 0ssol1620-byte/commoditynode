@@ -7,7 +7,7 @@ tags: [cotton, textile, apparel, agriculture, fashion]
 description: 'How cotton price increases impact Nike, VF Corp, Hanesbrands, apparel retailers, fast fashion, and the global textile supply chain. Full correlation analysis.'
 reading_time: 8
 commodity_name: "Cotton"
-image: /assets/images/og-cotton-textile-apparel-impact.png
+image: /assets/images/og-cotton.png
 ---
 
 Cotton is the backbone of the global apparel industry, and when prices push toward $0.82 per pound on the ICE Cotton No.2 contract, the effects ripple through every level of the fashion supply chain. From vertically integrated textile mills in Bangladesh to branded apparel giants like Nike and VF Corporation, cotton cost movements reshape margins, pricing strategies, and competitive dynamics across the industry.

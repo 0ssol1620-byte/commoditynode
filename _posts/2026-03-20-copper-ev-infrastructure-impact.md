@@ -7,7 +7,7 @@ tags: [copper, ev, infrastructure, construction, FCX, SCCO]
 description: 'How copper price surges impact Freeport-McMoRan, Southern Copper, EV charging networks, construction, utilities, and renewable energy infrastructure. Full correlation analysis.'
 reading_time: 8
 commodity_name: "Copper"
-image: /assets/images/og-copper-ev-infrastructure-impact.png
+image: /assets/images/og-copper.png
 ---
 
 Copper is often called "Dr. Copper" for its reputation as a barometer of global economic health, but in the current cycle it has taken on a new role: the essential metal of the energy transition. When copper prices push toward $4.25 per pound on the COMEX, the implications extend far beyond traditional mining stocks. Electric vehicles require three to four times more copper than internal combustion engine vehicles, EV charging stations are copper-intensive, and renewable energy installations use five times more copper per megawatt than fossil fuel power plants.

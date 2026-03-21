@@ -7,7 +7,7 @@ tags: [sugar, ethanol, food, agriculture, confectionery]
 description: 'How sugar price spikes impact ethanol producers, confectionery giants like Hershey and Mondelez, beverage companies, and global food manufacturers. Full correlation analysis.'
 reading_time: 8
 commodity_name: "Sugar"
-image: /assets/images/og-sugar-ethanol-food-impact.png
+image: /assets/images/og-sugar.png
 ---
 
 Sugar is one of the most politically and economically interconnected commodities on the planet. Traded on the ICE exchange as Sugar No.11, the raw sugar contract reflects a tug-of-war between Brazil's ethanol industry, India's export policies, and the insatiable global appetite for sweetened products. When sugar prices surge toward $0.24 per pound, the ripple effects extend from Sao Paulo ethanol plants to Hershey, Pennsylvania chocolate factories.

@@ -7,7 +7,7 @@ tags: [cocoa, chocolate, confectionery, agriculture, HSY, MDLZ]
 description: 'How cocoa price spikes impact Hershey, Mondelez, Nestle, specialty chocolate makers, and the global confectionery supply chain. Full impact analysis with correlation data.'
 reading_time: 8
 commodity_name: "Cocoa"
-image: /assets/images/og-cocoa-chocolate-confectionery.png
+image: /assets/images/og-cocoa.png
 ---
 
 Cocoa has experienced one of the most dramatic commodity rallies in modern history, with prices surging past $8,500 per metric ton on the ICE exchange. Driven by severe crop disease in West Africa, aging tree stocks, and adverse weather in Ghana and Ivory Coast, the cocoa market has entered uncharted territory. For chocolate and confectionery companies, this is not a temporary disruption -- it is a structural reset of their cost base.

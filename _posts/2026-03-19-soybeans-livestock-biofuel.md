@@ -7,7 +7,7 @@ tags: [soybeans, livestock, biofuel, agriculture, ADM, BG, SOYB]
 description: 'How a soybean price surge impacts ADM, Bunge, Tyson Foods, biofuel producers, and food manufacturers. Full supply chain correlation analysis with winners and losers.'
 reading_time: 8
 commodity_name: "Soybeans"
-image: /assets/images/og-soybeans-livestock-biofuel.png
+image: /assets/images/og-soybeans.png
 ---
 
 Soybeans are among the most versatile commodities in global agriculture, serving as a linchpin for animal feed, cooking oil, biofuel feedstock, and processed food ingredients. When soybean prices move sharply, the effects cascade through a remarkably wide network of industries -- from hog farms in Iowa to biodiesel refineries in Brazil and cereal factories in Michigan.
