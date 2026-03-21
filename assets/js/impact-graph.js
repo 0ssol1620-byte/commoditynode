@@ -631,7 +631,7 @@
       .attr('font-size', '16px').attr('fill', '#22d3ee').text('\u2299').style('pointer-events', 'all');
     resetBtn.append('text').attr('x', 34).attr('y', 22).attr('text-anchor', 'middle').attr('dominant-baseline', 'middle')
       .attr('font-size', '9px').attr('fill', '#22d3ee').attr('font-family', 'Inter,system-ui,sans-serif').text('Reset').style('pointer-events', 'all');
-    resetBtn.on('click.reset', handleReset).on('touchstart.reset', function(e) { e.preventDefault(); e.stopPropagation(); handleReset(); })
+    resetBtn.on('click.reset', function(e) { e.stopPropagation(); e.preventDefault(); handleReset(); }).on('touchstart.reset', function(e) { e.preventDefault(); e.stopPropagation(); handleReset(); }).on('mousedown.reset', function(e) { e.stopPropagation(); }).on('pointerdown.reset', function(e) { e.stopPropagation(); })
       .on('mouseenter', function() { d3.select(this).style('opacity', 1).select('rect').attr('stroke', 'rgba(34,211,238,0.7)'); })
       .on('mouseleave', function() { d3.select(this).style('opacity', 0.9).select('rect').attr('stroke', 'rgba(34,211,238,0.4)'); });
 
