@@ -271,8 +271,8 @@ code, kbd, pre {
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 720px;
-  padding: 36px 32px;
+  max-width: 100%;
+  padding: 36px 0;
 }
 
 .hero-badge {
@@ -2924,3 +2924,37 @@ a.read-more {
   transition: gap var(--transition);
 }
 a.read-more:hover { gap: 8px; color: var(--accent2); }
+
+/* ---------- Impact Preview (Homepage) ---------- */
+.impact-preview-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.impact-tab {
+  appearance: none;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text2);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.impact-tab:hover {
+  border-color: rgba(34,211,238,0.3);
+  color: var(--text);
+}
+.impact-tab.is-active {
+  background: rgba(34,211,238,0.12);
+  border-color: rgba(34,211,238,0.4);
+  color: #22d3ee;
+}
+.impact-preview-graph {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}

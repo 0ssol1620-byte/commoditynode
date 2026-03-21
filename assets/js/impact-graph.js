@@ -750,4 +750,6 @@
     // Auto-fit
     setTimeout(() => { fitAll(false); updateVisibility(); }, maxLevel * 140 + 800);
   }
+
+  window.CommodityNodeGraph = { init: function(el) { initGraph(el); } };
 })();
