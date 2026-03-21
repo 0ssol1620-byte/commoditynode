@@ -357,7 +357,7 @@
 
     /* Camera */
     var camera = new THREE.PerspectiveCamera(60, width / height, 1, 5000);
-    camera.position.set(0, 0, 800);
+    camera.position.set(0, 0, 550);
 
     /* Renderer */
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
