@@ -6,11 +6,22 @@
   'use strict';
 
   function boot() {
-    if (typeof d3 === 'undefined') { setTimeout(boot, 100); return; }
-    if (!window.COMMODITY_DATA) { setTimeout(boot, 200); return; }
-    document.querySelectorAll('#impact-graph').forEach(initGraph);
+    if (typeof d3 === 'undefined') { setTimeout(boot, 50); return; }
+    if (!window.COMMODITY_DATA) { setTimeout(boot, 50); return; }
+    document.querySelectorAll('#impact-graph').forEach(function(el) {
+      // Wait until element has actual width before rendering
+      if (el.getBoundingClientRect().width > 0) {
+        initGraph(el);
+      } else {
+        var ro = new ResizeObserver(function(entries) {
+          var w = entries[0].contentRect.width;
+          if (w > 0) { ro.disconnect(); initGraph(el); }
+        });
+        ro.observe(el);
+      }
+    });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function() { setTimeout(boot, 200); }); else setTimeout(boot, 200);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 
   function initGraph(container) {
     const rawData = window.COMMODITY_DATA;
