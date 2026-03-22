@@ -69,7 +69,19 @@ layout: default
     // Update banner UI
     var banner = document.getElementById('commodity-price-banner');
     banner.style.display = 'block';
-    document.getElementById('banner-price').textContent = '$' + c.price;
+    var priceStr = (c.unit && c.unit.toLowerCase().indexOf('cents') !== -1) ? c.price + '¢' : '$' + c.price;
+    document.getElementById('banner-price').textContent = priceStr;
+    var unitLabel = '';
+    if(c.unit){
+      var u = c.unit.replace(/^\$\/?/,'').replace(/^cents\/?/i,'');
+      if(u) unitLabel = '/' + u;
+    }
+    if(unitLabel){
+      var unitEl = document.createElement('span');
+      unitEl.textContent = unitLabel;
+      unitEl.style.cssText = 'font-size:0.75rem;color:var(--text3);margin-left:4px;font-weight:400;';
+      document.getElementById('banner-price').appendChild(unitEl);
+    }
     var sign = c.change_pct >= 0 ? '+' : '';
     var changeEl = document.getElementById('banner-change');
     changeEl.textContent = sign + c.change_pct + '%';
@@ -78,12 +90,13 @@ layout: default
     // 52w estimates: +/-15% from current as reasonable range
     var high = (c.price * 1.15).toFixed(2);
     var low = (c.price * 0.85).toFixed(2);
-    if(c.high_52w) high = c.high_52w;
-    if(c.low_52w) low = c.low_52w;
-    document.getElementById('banner-52h').textContent = '$' + high;
-    document.getElementById('banner-52l').textContent = '$' + low;
-    if(c.updated){
-      var dt = new Date(c.updated);
+    if(c.high_52w !== undefined && c.high_52w !== null) high = c.high_52w;
+    if(c.low_52w !== undefined && c.low_52w !== null) low = c.low_52w;
+    var isCents = (c.unit && c.unit.toLowerCase().indexOf('cents') !== -1);
+    document.getElementById('banner-52h').textContent = isCents ? high + '¢' : '$' + high;
+    document.getElementById('banner-52l').textContent = isCents ? low + '¢' : '$' + low;
+    if(c.updated_at){
+      var dt = new Date(c.updated_at);
       document.getElementById('banner-updated').textContent = dt.toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
     }
 
@@ -91,7 +104,7 @@ layout: default
     if(!window.COMMODITY_DATA) window.COMMODITY_DATA = {};
     window.COMMODITY_DATA.livePrice = c.price;
     window.COMMODITY_DATA.liveChange = c.change_pct;
-    window.COMMODITY_DATA.liveUpdated = c.updated;
+    window.COMMODITY_DATA.liveUpdated = c.updated_at;
     window.COMMODITY_DATA.allPrices = d;
 
     // Dispatch event so impact-graph.js and price-chart.js can react

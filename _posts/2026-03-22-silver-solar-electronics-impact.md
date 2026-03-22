@@ -10,6 +10,7 @@ direction: bullish
 sensitivity: High
 confidence: High
 read_time: 7
+image: /assets/images/og/silver-solar-electronics-impact.png
 ---
 
 Silver crossed $69/oz this week, a level not seen since the 2021 retail trading frenzy — but this time the driver is fundamentally different. The 2021 move was speculative. The 2026 move is structural.

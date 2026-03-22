@@ -27,6 +27,7 @@ impact_nodes:
     label: "Commodity Funds"
     type: "finance"
     change: -6.5
+image: /assets/images/og/coffee-price-crash-brazil-surplus.png
 ---
 
 Arabica coffee futures posted one of their sharpest single-session declines in recent memory, dropping **9.8%** to 276 cents/lb — levels not seen since mid-2024. The catalyst: Brazil's national crop agency Conab released February 2026 projections showing overall coffee production surging **17.2% year-on-year** to a record **66.2 million bags**, with Arabica output alone jumping **23.2% to 44.1 million bags**.

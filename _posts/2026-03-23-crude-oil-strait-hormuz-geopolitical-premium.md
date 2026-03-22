@@ -27,6 +27,7 @@ impact_nodes:
     label: "Middle East Producers"
     type: "region"
     change: -11.2
+image: /assets/images/og/crude-oil-strait-hormuz-geopolitical-premium.png
 ---
 
 WTI crude traded at **$98.23/barrel** Monday morning, up 2.17% in the session — a modest daily move that obscures a violent month. From $82/barrel in early March, oil surged past $100 before pulling back as strategic reserve releases dampened the spike. The story of March 2026 crude is the story of the Strait of Hormuz.

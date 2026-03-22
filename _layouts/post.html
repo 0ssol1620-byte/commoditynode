@@ -194,6 +194,7 @@ layout: default
           {% endif %}
         {% endfor %}
       {% endif %}
+      {% assign primary_tag = page.tags | first %}
       {% comment %} Second pass: match by primary tag {% endcomment %}
       {% for post in site.posts %}
         {% if rendered_related >= 3 %}{% break %}{% endif %}

@@ -8,7 +8,7 @@
 (function(){
   if(sessionStorage.getItem('cn_alert_dismissed')) return;
   fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
-    var names = {crude_oil:'Crude Oil',gold:'Gold',silver:'Silver',copper:'Copper',natural_gas:'Natural Gas',wheat:'Wheat',corn:'Corn',uranium:'Uranium'};
+    var names = {crude_oil:"Crude Oil",gold:"Gold",copper:"Copper",natural_gas:"Natural Gas",wheat:"Wheat",lithium:"Lithium ETF",silver:"Silver",corn:"Corn",uranium:"Uranium",aluminum:"Aluminum",coffee:"Coffee",lumber:"Lumber",palladium:"Palladium",steel:"Steel"};
     var best = null, bestAbs = 0;
     for(var k in d){
       if(!d.hasOwnProperty(k)) continue;
