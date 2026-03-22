@@ -1,0 +1,42 @@
+<!-- Price Alert Banner — shows biggest mover if abs(change) > 3% -->
+<div id="price-alert-banner" style="display:none;position:relative;padding:14px 48px 14px 24px;border-radius:var(--radius-sm);margin:0 auto;max-width:1280px;font-size:0.9rem;font-weight:600;cursor:pointer;transition:opacity 0.3s;" role="alert">
+  <span id="price-alert-text"></span>
+  <button id="price-alert-dismiss" aria-label="Dismiss alert" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:inherit;font-size:1.2rem;cursor:pointer;opacity:0.7;padding:4px 8px;">&times;</button>
+</div>
+
+<script>
+(function(){
+  if(sessionStorage.getItem('cn_alert_dismissed')) return;
+  fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
+    var names = {crude_oil:'Crude Oil',gold:'Gold',silver:'Silver',copper:'Copper',natural_gas:'Natural Gas',wheat:'Wheat',corn:'Corn',uranium:'Uranium'};
+    var best = null, bestAbs = 0;
+    for(var k in d){
+      if(!d.hasOwnProperty(k)) continue;
+      var abs = Math.abs(d[k].change_pct);
+      if(abs > bestAbs){ bestAbs = abs; best = k; }
+    }
+    if(!best || bestAbs < 3) return;
+    var c = d[best];
+    var name = names[best] || best.replace(/_/g,' ');
+    var sign = c.change_pct >= 0 ? '+' : '';
+    var isUp = c.change_pct >= 0;
+    var slug = best.replace(/_/g, '-');
+
+    var banner = document.getElementById('price-alert-banner');
+    banner.style.display = 'block';
+    banner.style.background = isUp ? 'rgba(16,185,129,0.12)' : 'rgba(244,63,94,0.12)';
+    banner.style.border = '1px solid ' + (isUp ? 'rgba(16,185,129,0.3)' : 'rgba(244,63,94,0.3)');
+    banner.style.color = isUp ? '#10b981' : '#f43f5e';
+
+    var emoji = isUp ? '\uD83D\uDFE2' : '\uD83D\uDD34';
+    document.getElementById('price-alert-text').innerHTML = emoji + ' <strong>' + name + ' ' + sign + c.change_pct + '%</strong> — <a href="/commodities/' + slug + '/" style="color:inherit;text-decoration:underline;">View Impact Map &rarr;</a>';
+
+    document.getElementById('price-alert-dismiss').addEventListener('click', function(e){
+      e.stopPropagation();
+      banner.style.opacity = '0';
+      setTimeout(function(){ banner.style.display = 'none'; }, 300);
+      sessionStorage.setItem('cn_alert_dismissed', '1');
+    });
+  }).catch(function(){});
+})();
+</script>

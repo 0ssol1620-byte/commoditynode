@@ -11,6 +11,63 @@ substitutes: ["Lead-free Alternatives", "Conductive Adhesives"]
 themes: ["Supply Chain Disruption"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "tin", "label": "Tin (LME)"},
+  "levels": [
+    {"nodes": [
+      {"id":"jjm_sn","label":"JJM Industrial Metals ETF","type":"etf","impact":5,"correlation":0.50,"sector":"Industrial Metals"},
+      {"id":"xme_sn","label":"XME Metals Mining ETF","type":"etf","impact":4,"correlation":0.40,"sector":"Mining"},
+      {"id":"mtrn","label":"Materion Corp (MTRN)","type":"supplier","impact":4,"correlation":0.35,"sector":"Specialty Metals"},
+      {"id":"tin_index","label":"Tin Futures Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"bll","label":"Ball Corp (BLL)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Packaging"},
+      {"id":"cck","label":"Crown Holdings (CCK)","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Packaging"},
+      {"id":"intc_sn","label":"Intel (INTC)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Semiconductors"},
+      {"id":"avgo_sn","label":"Broadcom (AVGO)","type":"consumer","impact":-1,"correlation":-0.10,"sector":"Semiconductors"},
+      {"id":"txn_sn","label":"Texas Instruments (TXN)","type":"consumer","impact":-1,"correlation":-0.10,"sector":"Semiconductors"},
+      {"id":"bhp_sn","label":"BHP Group (BHP)","type":"producer","impact":3,"correlation":0.30,"sector":"Diversified Mining"},
+      {"id":"teck_sn","label":"Teck Resources (TECK)","type":"producer","impact":4,"correlation":0.35,"sector":"Diversified Mining"}
+    ]},
+    {"nodes": [
+      {"id":"soxx_sn","label":"SOXX Semiconductor ETF","type":"etf","impact":-2,"correlation":-0.18,"sector":"Semiconductors","parentId":"intc_sn"},
+      {"id":"aapl_sn","label":"Apple (AAPL)","type":"consumer","impact":-1,"correlation":-0.08,"sector":"Consumer Electronics","parentId":"avgo_sn"},
+      {"id":"msft_sn","label":"Microsoft (MSFT)","type":"consumer","impact":-1,"correlation":-0.05,"sector":"Technology","parentId":"avgo_sn"},
+      {"id":"solder_mfg","label":"Solder Manufacturing","type":"consumer","impact":-5,"correlation":-0.45,"sector":"Electronics Mfg","parentId":"intc_sn"},
+      {"id":"pkg_sn","label":"Packaging Corp (PKG)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Packaging","parentId":"bll"},
+      {"id":"can_mfg_sn","label":"Can Manufacturing","type":"consumer","impact":-4,"correlation":-0.30,"sector":"Packaging","parentId":"cck"},
+      {"id":"glncy_sn","label":"Glencore (GLNCY)","type":"producer","impact":5,"correlation":0.45,"sector":"Trading","parentId":"bhp_sn"},
+      {"id":"fcx_sn","label":"Freeport-McMoRan (FCX)","type":"producer","impact":3,"correlation":0.28,"sector":"Mining","parentId":"bhp_sn"},
+      {"id":"pcb_mfg","label":"PCB Manufacturing","type":"consumer","impact":-4,"correlation":-0.35,"sector":"Electronics","parentId":"solder_mfg"},
+      {"id":"flex_sn","label":"Flex Ltd (FLEX)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"EMS","parentId":"solder_mfg"},
+      {"id":"jbl_sn","label":"Jabil Inc (JBL)","type":"consumer","impact":-2,"correlation":-0.17,"sector":"EMS","parentId":"solder_mfg"}
+    ]},
+    {"nodes": [
+      {"id":"samsung_sn","label":"Samsung (SSNLF)","type":"consumer","impact":-1,"correlation":-0.08,"sector":"Electronics","parentId":"soxx_sn"},
+      {"id":"automotive_sn","label":"Auto Electronics","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Automotive","parentId":"pcb_mfg"},
+      {"id":"ev_electronics","label":"EV Electronics Demand","type":"consumer","impact":3,"correlation":0.20,"sector":"EV","parentId":"automotive_sn"},
+      {"id":"dxy_sn","label":"US Dollar (DXY)","type":"fx","impact":-5,"correlation":-0.42,"sector":"Forex","parentId":"tin_index"},
+      {"id":"idr_sn","label":"Indonesian Rupiah (IDR)","type":"fx","impact":5,"correlation":0.40,"sector":"Forex","parentId":"tin_index"},
+      {"id":"indonesia_policy","label":"Indonesia Export Policy","type":"policy","impact":8,"correlation":0.55,"sector":"Trade Policy","parentId":"idr_sn"},
+      {"id":"myanmar_supply","label":"Myanmar Supply Risk","type":"policy","impact":6,"correlation":0.45,"sector":"Geopolitics","parentId":"tin_index"},
+      {"id":"lme_tin_stocks","label":"LME Tin Stocks","type":"macro","impact":-6,"correlation":-0.55,"sector":"Supply Data","parentId":"tin_index"},
+      {"id":"lead_free","label":"Lead-Free Solder Regs","type":"policy","impact":5,"correlation":0.35,"sector":"Regulation","parentId":"solder_mfg"},
+      {"id":"recycling_sn","label":"Tin Recycling","type":"processor","impact":-3,"correlation":-0.20,"sector":"Recycling","parentId":"can_mfg_sn"},
+      {"id":"copper_sub_sn","label":"Copper (Substitute)","type":"substitute","impact":-3,"correlation":-0.20,"sector":"Base Metals","parentId":"mtrn"}
+    ]},
+    {"nodes": [
+      {"id":"5g_demand","label":"5G Infrastructure","type":"macro","impact":4,"correlation":0.30,"sector":"Telecom","parentId":"pcb_mfg"},
+      {"id":"ai_chips","label":"AI Chip Demand","type":"macro","impact":3,"correlation":0.25,"sector":"Technology","parentId":"soxx_sn"},
+      {"id":"china_solder","label":"China Solder Demand","type":"macro","impact":5,"correlation":0.40,"sector":"Manufacturing","parentId":"solder_mfg"},
+      {"id":"conflict_minerals","label":"Conflict Mineral Regs","type":"policy","impact":4,"correlation":0.30,"sector":"Regulation","parentId":"myanmar_supply"},
+      {"id":"pewter","label":"Pewter/Alloys","type":"consumer","impact":2,"correlation":0.15,"sector":"Specialty","parentId":"mtrn"},
+      {"id":"tin_plate","label":"Tin Plate (Food Cans)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Food Packaging","parentId":"can_mfg_sn"},
+      {"id":"global_electronics","label":"Global Electronics Cycle","type":"macro","impact":5,"correlation":0.38,"sector":"Macro","parentId":"soxx_sn"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Tin is the smallest major base metal market by production volume, which contributes to its outsized price volatility relative to peers. Approximately 50% of global tin demand comes from solder used in electronics manufacturing -- every printed circuit board, semiconductor package, and electronic connection point requires tin-based solder. Indonesia and China together dominate global production, and regulatory actions in either country (export restrictions, mining moratoriums) can rapidly tighten supply in this thin market. Annual global production is only about 300,000 tonnes, making tin easily the most supply-constrained of the major base metals.

@@ -28,7 +28,79 @@ layout: default
   </div>
 </header>
 
-<div class="container" style="padding-top:48px;padding-bottom:80px;">
+<!-- Live Price Banner -->
+<div class="container" style="padding-top:24px;">
+  <div id="commodity-price-banner" style="display:none;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:20px 28px;margin-bottom:8px;">
+    <div style="display:flex;align-items:center;flex-wrap:wrap;gap:24px;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div>
+          <div style="font-size:0.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">{{ page.title }} Price</div>
+          <span id="banner-price" style="font-size:1.75rem;font-weight:800;color:var(--text);font-family:'JetBrains Mono',monospace;">—</span>
+        </div>
+        <div id="banner-change-wrap" style="display:flex;align-items:center;gap:6px;">
+          <span id="banner-change" style="font-size:1.1rem;font-weight:700;font-family:'JetBrains Mono',monospace;padding:4px 10px;border-radius:6px;">—</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:32px;">
+        <div>
+          <div style="font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;">52w High</div>
+          <span id="banner-52h" style="font-size:1rem;font-weight:600;color:var(--green);font-family:'JetBrains Mono',monospace;">—</span>
+        </div>
+        <div>
+          <div style="font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;">52w Low</div>
+          <span id="banner-52l" style="font-size:1rem;font-weight:600;color:var(--red);font-family:'JetBrains Mono',monospace;">—</span>
+        </div>
+        <div>
+          <div style="font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;">Updated</div>
+          <span id="banner-updated" style="font-size:0.85rem;color:var(--text2);">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var slug = "{{ commodity_slug }}";
+  var key = slug.replace(/-/g, '_');
+  fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
+    var c = d[key]; if(!c) return;
+
+    // Update banner UI
+    var banner = document.getElementById('commodity-price-banner');
+    banner.style.display = 'block';
+    document.getElementById('banner-price').textContent = '$' + c.price;
+    var sign = c.change_pct >= 0 ? '+' : '';
+    var changeEl = document.getElementById('banner-change');
+    changeEl.textContent = sign + c.change_pct + '%';
+    changeEl.style.background = c.change_pct >= 0 ? 'rgba(16,185,129,0.15)' : 'rgba(244,63,94,0.15)';
+    changeEl.style.color = c.change_pct >= 0 ? '#10b981' : '#f43f5e';
+    // 52w estimates: +/-15% from current as reasonable range
+    var high = (c.price * 1.15).toFixed(2);
+    var low = (c.price * 0.85).toFixed(2);
+    if(c.high_52w) high = c.high_52w;
+    if(c.low_52w) low = c.low_52w;
+    document.getElementById('banner-52h').textContent = '$' + high;
+    document.getElementById('banner-52l').textContent = '$' + low;
+    if(c.updated){
+      var dt = new Date(c.updated);
+      document.getElementById('banner-updated').textContent = dt.toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+    }
+
+    // Inject live data into window.COMMODITY_DATA so impact graph can use it
+    if(!window.COMMODITY_DATA) window.COMMODITY_DATA = {};
+    window.COMMODITY_DATA.livePrice = c.price;
+    window.COMMODITY_DATA.liveChange = c.change_pct;
+    window.COMMODITY_DATA.liveUpdated = c.updated;
+    window.COMMODITY_DATA.allPrices = d;
+
+    // Dispatch event so impact-graph.js and price-chart.js can react
+    window.dispatchEvent(new CustomEvent('commodity-price-loaded', {detail: {key: key, data: c, allPrices: d}}));
+  }).catch(function(){});
+})();
+</script>
+
+<div class="container" style="padding-top:24px;padding-bottom:80px;">
 
   <!-- Price Chart -->
   {% if page.symbol %}

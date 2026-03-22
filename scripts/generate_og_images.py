@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
-"""Generate OG images for CommodityNode posts."""
-import os, math, random
+"""Generate OG images for CommodityNode commodity hubs and posts."""
+import os, math, random, glob, json, re, textwrap
 from PIL import Image, ImageDraw, ImageFont
 
-OUTPUT_DIR = os.path.join(os.path.dirname(__file__), '..', 'assets', 'images')
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_DIR = os.path.join(SCRIPT_DIR, '..')
+OUTPUT_DIR = os.path.join(PROJECT_DIR, 'assets', 'images')
+OG_POST_DIR = os.path.join(OUTPUT_DIR, 'og')
+POSTS_DIR = os.path.join(PROJECT_DIR, '_posts')
+PRICES_PATH = os.path.join(PROJECT_DIR, 'assets', 'data', 'prices.json')
 
 COMMODITIES = {
     'crude-oil':    {'label': 'Crude Oil', 'ticker': 'WTI', 'color': (234, 88, 12),  'accent': (251, 146, 60)},
@@ -141,12 +146,145 @@ def generate_og(key, info):
     final.save(out_path, 'PNG', optimize=True)
     print(f"  ✓ og-{key}.png")
 
+def parse_front_matter(filepath):
+    """Extract YAML front matter from a Jekyll post."""
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+    m = re.match(r'^---\s*\n(.*?)\n---', content, re.DOTALL)
+    if not m:
+        return {}
+    fm = {}
+    for line in m.group(1).split('\n'):
+        if ':' in line:
+            key, val = line.split(':', 1)
+            key = key.strip()
+            val = val.strip().strip('"').strip("'")
+            fm[key] = val
+    return fm
+
+
+def generate_post_og(slug, title, commodity_tag, price_data):
+    """Generate a 1200x630 OG image for a post."""
+    # Find commodity info for coloring
+    tag_slug = commodity_tag.lower().replace(' ', '-') if commodity_tag else ''
+    info = COMMODITIES.get(tag_slug, COMMODITIES['default'])
+    color = info['color']
+    accent = info['accent']
+
+    img = Image.new('RGBA', (W, H), (5, 5, 8, 255))
+    draw = ImageDraw.Draw(img, 'RGBA')
+
+    # Background gradient
+    for x in range(W):
+        factor = max(0, 1 - x / 900)
+        r = int(color[0] * factor * 0.3 + 5)
+        g = int(color[1] * factor * 0.3 + 5)
+        b = int(color[2] * factor * 0.3 + 8)
+        for y in range(H):
+            yfactor = 1 - abs(y - H // 2) / (H // 2) * 0.3
+            draw.point((x, y), fill=(
+                min(255, int(r * yfactor)),
+                min(255, int(g * yfactor)),
+                min(255, int(b * yfactor)),
+                255
+            ))
+
+    draw.rectangle([(0, 0), (W, 4)], fill=(*accent, 255))
+    make_node_pattern(draw, color, accent, seed=hash(slug) % 1000)
+
+    for x in range(700):
+        alpha = int(180 * (1 - x / 700))
+        draw.line([(x, 0), (x, H)], fill=(5, 5, 8, alpha))
+
+    try:
+        font_title = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 44)
+        font_med = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 30)
+        font_sm = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 22)
+        font_xs = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20)
+    except Exception:
+        font_title = font_med = font_sm = font_xs = ImageFont.load_default()
+
+    # Brand
+    draw.text((48, 40), "CommodityNode", font=font_sm, fill=(*accent, 255))
+
+    # Commodity badge
+    if commodity_tag:
+        badge = commodity_tag.upper()
+        bbox = draw.textbbox((0, 0), badge, font=font_xs)
+        bw = bbox[2] - bbox[0] + 24
+        bh = bbox[3] - bbox[1] + 12
+        draw.rounded_rectangle([(48, 85), (48 + bw, 85 + bh)], radius=6, fill=(*accent, 40), outline=(*accent, 120))
+        draw.text((48 + 12, 85 + 6), badge, font=font_xs, fill=(*accent, 255))
+
+    # Title (word-wrapped)
+    wrapped = textwrap.wrap(title, width=32)
+    y_pos = 140
+    for line in wrapped[:3]:
+        draw.text((48, y_pos), line, font=font_title, fill=(255, 255, 255, 255))
+        y_pos += 52
+
+    # Price data if available
+    price_key = tag_slug.replace('-', '_')
+    if price_data and price_key in price_data:
+        p = price_data[price_key]
+        price_str = f"${p['price']}"
+        sign = '+' if p['change_pct'] >= 0 else ''
+        change_str = f"{sign}{p['change_pct']}%"
+        change_color = (16, 185, 129, 255) if p['change_pct'] >= 0 else (244, 63, 94, 255)
+        draw.text((48, y_pos + 20), price_str, font=font_med, fill=(240, 240, 245, 255))
+        bbox_p = draw.textbbox((0, 0), price_str, font=font_med)
+        pw = bbox_p[2] - bbox_p[0]
+        draw.text((48 + pw + 12, y_pos + 24), change_str, font=font_sm, fill=change_color)
+
+    # Bottom bar
+    draw.rectangle([(0, H - 60), (W, H)], fill=(10, 10, 18, 220))
+    draw.text((48, H - 40), "commoditynode.com", font=font_xs, fill=(80, 80, 100, 255))
+    draw.text((W - 200, H - 40), "Signal Report", font=font_xs, fill=(*accent, 180))
+
+    final = img.convert('RGB')
+    out_path = os.path.join(OG_POST_DIR, f'{slug}.png')
+    final.save(out_path, 'PNG', optimize=True)
+    print(f"  ✓ og/posts/{slug}.png")
+
+
 if __name__ == '__main__':
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    print(f"Generating {len(COMMODITIES)} OG images...")
+    os.makedirs(OG_POST_DIR, exist_ok=True)
+
+    # Load price data
+    price_data = {}
+    if os.path.exists(PRICES_PATH):
+        with open(PRICES_PATH) as f:
+            price_data = json.load(f)
+
+    # Generate commodity hub OG images
+    print(f"Generating {len(COMMODITIES)} commodity OG images...")
     for key, info in COMMODITIES.items():
         try:
             generate_og(key, info)
         except Exception as e:
             print(f"  ✗ {key}: {e}")
-    print("Done!")
+
+    # Generate post OG images
+    posts = sorted(glob.glob(os.path.join(POSTS_DIR, '*.md')))
+    print(f"\nGenerating {len(posts)} post OG images...")
+    for post_path in posts:
+        try:
+            fm = parse_front_matter(post_path)
+            title = fm.get('title', os.path.basename(post_path))
+            # Derive slug from filename: YYYY-MM-DD-slug.md -> slug
+            basename = os.path.basename(post_path).replace('.md', '')
+            slug = re.sub(r'^\d{4}-\d{2}-\d{2}-', '', basename)
+            # Get commodity tag (first tag)
+            tags_raw = fm.get('tags', '')
+            commodity_tag = ''
+            if tags_raw.startswith('['):
+                tags = [t.strip().strip('"').strip("'") for t in tags_raw.strip('[]').split(',')]
+                commodity_tag = tags[0] if tags else ''
+            else:
+                commodity_tag = tags_raw.split(',')[0].strip() if tags_raw else ''
+            generate_post_og(slug, title, commodity_tag, price_data)
+        except Exception as e:
+            print(f"  ✗ {os.path.basename(post_path)}: {e}")
+
+    print("\nDone!")

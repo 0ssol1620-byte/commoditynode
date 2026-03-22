@@ -153,21 +153,56 @@ layout: default
     </aside>
   </div>
 
+  <!-- Newsletter -->
+  <div style="margin-top:48px;" data-animate>
+    {% include newsletter.html %}
+  </div>
+
   <section class="related-posts section" aria-labelledby="related-posts-title">
     <div class="section-header" data-animate>
       <p class="section-label">Continue Exploring</p>
-      <h2 class="section-title" id="related-posts-title">Related Impact Maps</h2>
+      <h2 class="section-title" id="related-posts-title">Related Reports</h2>
       <p class="section-desc">Follow adjacent commodity, sector, and company exposure chains from this Signal Report.</p>
     </div>
 
     <div class="posts-grid">
       {% assign rendered_related = 0 %}
+      {% assign rendered_urls = '' %}
+      {% comment %} First pass: match by commodity_name front matter {% endcomment %}
+      {% if page.commodity_name %}
+        {% for post in site.posts %}
+          {% if rendered_related >= 3 %}{% break %}{% endif %}
+          {% if post.url == page.url %}{% continue %}{% endif %}
+          {% if post.commodity_name == page.commodity_name %}
+            {% assign rendered_related = rendered_related | plus: 1 %}
+            {% assign rendered_urls = rendered_urls | append: post.url | append: '|' %}
+            <article class="post-card" data-animate>
+              <div class="post-card-accent"></div>
+              <div class="post-card-body">
+                <div class="post-card-meta">
+                  <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+                  {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
+                </div>
+                <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                <p class="post-card-excerpt">{{ post.description | strip_html | truncate: 100 }}</p>
+                <div class="post-card-footer">
+                  <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a>
+                  {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+                </div>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+      {% comment %} Second pass: match by primary tag {% endcomment %}
       {% for post in site.posts %}
         {% if rendered_related >= 3 %}{% break %}{% endif %}
         {% if post.url == page.url %}{% continue %}{% endif %}
+        {% if rendered_urls contains post.url %}{% continue %}{% endif %}
         {% if post.tags contains primary_tag %}
           {% assign rendered_related = rendered_related | plus: 1 %}
-          <article class="post-card">
+          {% assign rendered_urls = rendered_urls | append: post.url | append: '|' %}
+          <article class="post-card" data-animate>
             <div class="post-card-accent"></div>
             <div class="post-card-body">
               <div class="post-card-meta">
@@ -175,7 +210,7 @@ layout: default
                 {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
               </div>
               <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-              <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
+              <p class="post-card-excerpt">{{ post.description | strip_html | truncate: 100 }}</p>
               <div class="post-card-footer">
                 <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a>
                 {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
@@ -184,16 +219,17 @@ layout: default
           </article>
         {% endif %}
       {% endfor %}
-
+      {% comment %} Third pass: match by category {% endcomment %}
       {% if rendered_related < 3 %}
         {% assign page_category = page.categories | first %}
         {% for post in site.posts %}
           {% if rendered_related >= 3 %}{% break %}{% endif %}
           {% if post.url == page.url %}{% continue %}{% endif %}
+          {% if rendered_urls contains post.url %}{% continue %}{% endif %}
           {% assign post_category = post.categories | first %}
           {% if post_category == page_category %}
             {% assign rendered_related = rendered_related | plus: 1 %}
-            <article class="post-card">
+            <article class="post-card" data-animate>
               <div class="post-card-accent"></div>
               <div class="post-card-body">
                 <div class="post-card-meta">
@@ -201,7 +237,7 @@ layout: default
                   {% for cat in post.categories limit:1 %}<span class="post-category">{{ cat }}</span>{% endfor %}
                 </div>
                 <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-                <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
+                <p class="post-card-excerpt">{{ post.description | strip_html | truncate: 100 }}</p>
                 <div class="post-card-footer">
                   <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a>
                   {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
