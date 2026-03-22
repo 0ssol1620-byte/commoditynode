@@ -20,15 +20,15 @@ COMMODITIES = {
     "copper":      {"symbol": "HG=F",  "name": "Copper",           "unit": "$/lb"},
     "natural_gas": {"symbol": "NG=F",  "name": "Natural Gas",      "unit": "$/MMBtu"},
     "wheat":       {"symbol": "ZW=F",  "name": "Wheat",            "unit": "cents/bushel"},
-    "lithium":     {"symbol": "LTHM",  "name": "Lithium (proxy)",  "unit": "$/share"},
+    "lithium":     {"symbol": "LIT",   "name": "Lithium ETF",      "unit": "$/share"},
     "silver":      {"symbol": "SI=F",  "name": "Silver",           "unit": "$/oz"},
     "corn":        {"symbol": "ZC=F",  "name": "Corn",             "unit": "cents/bushel"},
     "uranium":     {"symbol": "CCJ",   "name": "Uranium (proxy)",  "unit": "$/share"},
     "aluminum":    {"symbol": "AA",    "name": "Aluminum (proxy)", "unit": "$/share"},
     "coffee":      {"symbol": "KC=F",  "name": "Coffee",           "unit": "cents/lb"},
-    "lumber":      {"symbol": "LBS=F", "name": "Lumber",           "unit": "$/1000 board ft"},
+    "lumber":      {"symbol": "WY",    "name": "Lumber (proxy)",   "unit": "$/share"},
     "palladium":   {"symbol": "PA=F",  "name": "Palladium",        "unit": "$/oz"},
-    "steel":       {"symbol": "X",     "name": "Steel (proxy)",    "unit": "$/share"},
+    "steel":       {"symbol": "NUE",   "name": "Steel (proxy)",    "unit": "$/share"},
 }
 
 CHART_SYMBOLS = {
