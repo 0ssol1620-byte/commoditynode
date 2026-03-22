@@ -29,6 +29,20 @@ COMMODITIES = {
     "lumber":      {"symbol": "WY",    "name": "Lumber (proxy)",   "unit": "$/share"},
     "palladium":   {"symbol": "PA=F",  "name": "Palladium",        "unit": "$/oz"},
     "steel":       {"symbol": "NUE",   "name": "Steel (proxy)",    "unit": "$/share"},
+    "zinc":        {"symbol": "TECK",  "name": "Zinc (TECK proxy)",    "unit": "$/share"},
+    "tin":         {"symbol": "MP",    "name": "Tin (MP proxy)",       "unit": "$/share"},
+    "sugar":       {"symbol": "SB=F",  "name": "Sugar",                "unit": "cents/lb"},
+    "soybeans":    {"symbol": "ZS=F",  "name": "Soybeans",             "unit": "cents/bushel"},
+    "platinum":    {"symbol": "PL=F",  "name": "Platinum",             "unit": "$/oz"},
+    "nickel":      {"symbol": "VALE",  "name": "Nickel (VALE proxy)",  "unit": "$/share"},
+    "lng":         {"symbol": "LNG",   "name": "LNG (Cheniere proxy)", "unit": "$/share"},
+    "jet_fuel":    {"symbol": "ALK",   "name": "Jet Fuel (ALK proxy)", "unit": "$/share"},
+    "iron_ore":    {"symbol": "RIO",   "name": "Iron Ore (RIO proxy)", "unit": "$/share"},
+    "diesel":      {"symbol": "HO=F",  "name": "Diesel (Heating Oil)", "unit": "$/gallon"},
+    "cotton":      {"symbol": "CT=F",  "name": "Cotton",               "unit": "cents/lb"},
+    "cocoa":       {"symbol": "CC=F",  "name": "Cocoa",                "unit": "$/tonne"},
+    "cobalt":      {"symbol": "SQM",   "name": "Cobalt (SQM proxy)",   "unit": "$/share"},
+    "coal":        {"symbol": "BTU",   "name": "Coal (BTU proxy)",     "unit": "$/share"},
 }
 
 CHART_SYMBOLS = {
@@ -108,6 +122,8 @@ def main():
             sign = "+" if price_data["change_pct"] > 0 else ""
             print(f"  {info['name']}: ${price_data['price']} ({sign}{price_data['change_pct']}%)")
     with open("_data/prices.json", "w") as f:
+        json.dump(prices, f, indent=2)
+    with open("assets/data/prices.json", "w") as f:
         json.dump(prices, f, indent=2)
     print(f"Updated {len(prices)} commodity prices")
 

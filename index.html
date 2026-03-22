@@ -45,14 +45,16 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
         </div>
       </div>
       <script>
-      fetch('/assets/data/prices.json').then(r=>r.json()).then(d=>{
-        const oil=d.crude_oil; if(!oil)return;
-        const el=document.getElementById('hero-wti-change');
-        if(!el)return;
-        const sign=oil.change_pct>=0?'+':'';
-        el.textContent=sign+oil.change_pct+'%';
-        el.className='value '+(oil.change_pct>=0?'positive':'negative');
-      }).catch(()=>{const e=document.getElementById('hero-wti-change');if(e)e.textContent='+0.00%';});
+      document.addEventListener('DOMContentLoaded', function(){
+        fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
+          var oil=d.crude_oil; if(!oil)return;
+          var el=document.getElementById('hero-wti-change');
+          if(!el)return;
+          var sign=oil.change_pct>=0?'+':'';
+          el.textContent=sign+oil.change_pct.toFixed(2)+'%';
+          el.className='value '+(oil.change_pct>=0?'positive':'negative');
+        }).catch(function(){var e=document.getElementById('hero-wti-change');if(e)e.textContent='+0.00%';});
+      });
       </script>
     </div>
   </div>

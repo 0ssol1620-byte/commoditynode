@@ -54,6 +54,11 @@ defaults:
     values:
       layout: "commodity"
 
+feed:
+  title: "CommodityNode Signal Reports"
+  description: "Commodity price impact analysis for markets, supply chains, and equities"
+  path: "feed.xml"
+
 future: true
 
 exclude:
