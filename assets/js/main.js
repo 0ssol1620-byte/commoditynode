@@ -91,16 +91,34 @@
   /* ---------- Scroll-Triggered Animations ---------- */
   const animatedEls = document.querySelectorAll('[data-animate]');
   if (animatedEls.length) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -48px 0px' });
+    // Force-show post-content immediately — never hide article body text
+    animatedEls.forEach(el => {
+      if (el.tagName === 'ARTICLE' || el.classList.contains('post-content') || el.id === 'post-article') {
+        el.classList.add('animated');
+      }
+    });
 
-    animatedEls.forEach(el => observer.observe(el));
+    const remainingEls = Array.from(animatedEls).filter(el =>
+      el.tagName !== 'ARTICLE' && !el.classList.contains('post-content') && el.id !== 'post-article'
+    );
+
+    if (remainingEls.length) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+
+      remainingEls.forEach(el => observer.observe(el));
+
+      // Fallback: force-show all animated elements after 2s (mobile in-app browser safety net)
+      setTimeout(() => {
+        remainingEls.forEach(el => el.classList.add('animated'));
+      }, 2000);
+    }
   }
 
   /* ---------- Number Counter ---------- */
