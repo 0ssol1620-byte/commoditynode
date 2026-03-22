@@ -11,6 +11,65 @@ substitutes: ["Sustainable Aviation Fuel", "Electric Aircraft"]
 themes: ["Supply Chain Disruption"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "jet_fuel", "label": "Jet Fuel (Kerosene)"},
+  "levels": [
+    {"nodes": [
+      {"id":"jets","label":"JETS Airlines ETF","type":"etf","impact":-8,"correlation":-0.78,"sector":"Airlines"},
+      {"id":"dal_jf","label":"Delta Air Lines (DAL)","type":"consumer","impact":-7,"correlation":-0.70,"sector":"Airlines"},
+      {"id":"ual_jf","label":"United Airlines (UAL)","type":"consumer","impact":-8,"correlation":-0.75,"sector":"Airlines"},
+      {"id":"aal_jf","label":"American Airlines (AAL)","type":"consumer","impact":-9,"correlation":-0.80,"sector":"Airlines"},
+      {"id":"luv_jf","label":"Southwest Airlines (LUV)","type":"consumer","impact":-7,"correlation":-0.68,"sector":"Airlines"},
+      {"id":"jf_index","label":"Jet Fuel Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"vlo_jf","label":"Valero (VLO)","type":"processor","impact":6,"correlation":0.55,"sector":"Refining"},
+      {"id":"mpc_jf","label":"Marathon Petro (MPC)","type":"processor","impact":6,"correlation":0.52,"sector":"Refining"},
+      {"id":"ba_jf","label":"Boeing (BA)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Aircraft Mfg"},
+      {"id":"rtx_jf","label":"RTX Corp (RTX)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Aerospace"},
+      {"id":"xle_jf","label":"XLE Energy ETF","type":"etf","impact":5,"correlation":0.55,"sector":"Energy"},
+      {"id":"uso_jf","label":"USO Oil Fund","type":"etf","impact":7,"correlation":0.80,"sector":"Crude Link"}
+    ]},
+    {"nodes": [
+      {"id":"algt","label":"Allegiant Travel (ALGT)","type":"consumer","impact":-8,"correlation":-0.72,"sector":"Airlines","parentId":"jets"},
+      {"id":"jblu","label":"JetBlue (JBLU)","type":"consumer","impact":-8,"correlation":-0.70,"sector":"Airlines","parentId":"jets"},
+      {"id":"ha","label":"Hawaiian Airlines (HA)","type":"consumer","impact":-7,"correlation":-0.65,"sector":"Airlines","parentId":"jets"},
+      {"id":"bkng","label":"Booking Holdings (BKNG)","type":"consumer","impact":-3,"correlation":-0.28,"sector":"Travel","parentId":"dal_jf"},
+      {"id":"expe","label":"Expedia Group (EXPE)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Travel","parentId":"dal_jf"},
+      {"id":"abnb_jf","label":"Airbnb (ABNB)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Travel","parentId":"bkng"},
+      {"id":"eadsy","label":"Airbus (EADSY)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Aircraft Mfg","parentId":"ba_jf"},
+      {"id":"ge_jf","label":"GE Aerospace (GE)","type":"supplier","impact":-2,"correlation":-0.15,"sector":"Engines","parentId":"ba_jf"},
+      {"id":"tps","label":"TPS Aerospace (TDG)","type":"supplier","impact":-2,"correlation":-0.12,"sector":"Parts","parentId":"rtx_jf"},
+      {"id":"pbf_jf","label":"PBF Energy (PBF)","type":"processor","impact":5,"correlation":0.48,"sector":"Refining","parentId":"vlo_jf"},
+      {"id":"dino_jf","label":"HF Sinclair (DINO)","type":"processor","impact":5,"correlation":0.45,"sector":"Refining","parentId":"mpc_jf"},
+      {"id":"crack_jf","label":"Jet Crack Spread","type":"index","impact":8,"correlation":0.85,"sector":"Refining Margin","parentId":"jf_index"}
+    ]},
+    {"nodes": [
+      {"id":"mar_jf","label":"Marriott (MAR)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Hotels","parentId":"bkng"},
+      {"id":"hlt_jf","label":"Hilton (HLT)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Hotels","parentId":"bkng"},
+      {"id":"ccl_jf","label":"Carnival Corp (CCL)","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Cruise","parentId":"expe"},
+      {"id":"rcl_jf","label":"Royal Caribbean (RCL)","type":"consumer","impact":-3,"correlation":-0.20,"sector":"Cruise","parentId":"expe"},
+      {"id":"dxy_jf","label":"US Dollar (DXY)","type":"fx","impact":-4,"correlation":-0.40,"sector":"Forex","parentId":"jf_index"},
+      {"id":"crude_input","label":"WTI Crude (Input)","type":"commodity","impact":8,"correlation":0.88,"sector":"Energy","parentId":"uso_jf"},
+      {"id":"saf","label":"Sustainable Aviation Fuel","type":"substitute","impact":-3,"correlation":-0.15,"sector":"Clean Energy","parentId":"jf_index"},
+      {"id":"hedging","label":"Airline Fuel Hedging","type":"macro","impact":-4,"correlation":-0.35,"sector":"Risk Mgmt","parentId":"dal_jf"},
+      {"id":"pax_demand","label":"Passenger Demand","type":"macro","impact":4,"correlation":0.30,"sector":"Travel","parentId":"jets"},
+      {"id":"cargo_demand","label":"Air Cargo Demand","type":"macro","impact":3,"correlation":0.25,"sector":"Logistics","parentId":"ual_jf"},
+      {"id":"opec_jf","label":"OPEC+ Supply Policy","type":"policy","impact":6,"correlation":0.50,"sector":"Supply Policy","parentId":"crude_input"}
+    ]},
+    {"nodes": [
+      {"id":"tourism_cycle","label":"Global Tourism Cycle","type":"macro","impact":4,"correlation":0.30,"sector":"Travel","parentId":"pax_demand"},
+      {"id":"fleet_efficiency","label":"Fleet Fuel Efficiency","type":"macro","impact":-3,"correlation":-0.20,"sector":"Technology","parentId":"ba_jf"},
+      {"id":"electric_aircraft","label":"Electric Aircraft","type":"substitute","impact":-2,"correlation":-0.10,"sector":"Future Tech","parentId":"saf"},
+      {"id":"saf_mandate","label":"SAF Blending Mandate","type":"policy","impact":3,"correlation":0.20,"sector":"Regulation","parentId":"saf"},
+      {"id":"geopolitical_risk","label":"Geopolitical Risk","type":"policy","impact":5,"correlation":0.40,"sector":"Geopolitics","parentId":"opec_jf"},
+      {"id":"seasonal_travel","label":"Seasonal Travel Demand","type":"macro","impact":5,"correlation":0.38,"sector":"Seasonal","parentId":"pax_demand"},
+      {"id":"refinery_margin","label":"Refinery Margin Cycle","type":"macro","impact":5,"correlation":0.42,"sector":"Refining","parentId":"crack_jf"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Jet fuel (kerosene-type Jet-A) represents 20-30% of airline operating costs, making it the single largest variable expense for commercial carriers. Unlike many commodities with diverse end uses, jet fuel demand is almost exclusively driven by commercial and military aviation. The jet fuel crack spread from crude oil reflects refinery yield economics and regional supply-demand balances, with Gulf Coast and Singapore benchmarks serving as primary pricing references. Global jet fuel consumption exceeds 8 million barrels per day and has surpassed pre-pandemic levels, driven by Asia-Pacific travel recovery and secular growth in air cargo.

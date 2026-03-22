@@ -11,6 +11,67 @@ substitutes: ["Palladium", "Rhodium"]
 themes: ["EV Transition", "Clean Energy"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "platinum", "label": "Platinum (NYMEX)"},
+  "levels": [
+    {"nodes": [
+      {"id":"pplt","label":"PPLT Platinum ETF","type":"etf","impact":9,"correlation":0.90,"sector":"Precious Metals"},
+      {"id":"sbsw_pt","label":"Sibanye-Stillwater (SBSW)","type":"producer","impact":10,"correlation":0.82,"sector":"PGM Mining"},
+      {"id":"impuy_pt","label":"Impala Platinum (IMPUY)","type":"producer","impact":11,"correlation":0.85,"sector":"PGM Mining"},
+      {"id":"angpy","label":"Anglo Amer Platinum (ANGPY)","type":"producer","impact":10,"correlation":0.83,"sector":"PGM Mining"},
+      {"id":"pt_index","label":"Platinum Futures Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"xme_pt","label":"XME Metals Mining ETF","type":"etf","impact":4,"correlation":0.38,"sector":"Mining"},
+      {"id":"gm_pt","label":"General Motors (GM)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Auto Catalysts"},
+      {"id":"tm_pt","label":"Toyota Motor (TM)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Auto Catalysts"},
+      {"id":"f_pt","label":"Ford Motor (F)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Auto Catalysts"},
+      {"id":"plug_pt","label":"Plug Power (PLUG)","type":"consumer","impact":4,"correlation":0.30,"sector":"Hydrogen"},
+      {"id":"be_pt","label":"Bloom Energy (BE)","type":"consumer","impact":3,"correlation":0.25,"sector":"Fuel Cells"},
+      {"id":"gld_related","label":"Gold (Related)","type":"commodity","impact":6,"correlation":0.65,"sector":"Precious Metals"}
+    ]},
+    {"nodes": [
+      {"id":"stla_pt","label":"Stellantis (STLA)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Automotive","parentId":"gm_pt"},
+      {"id":"hmc_pt","label":"Honda Motor (HMC)","type":"consumer","impact":-2,"correlation":-0.14,"sector":"Automotive","parentId":"tm_pt"},
+      {"id":"catalyst_mfg","label":"Catalytic Converter Mfg","type":"consumer","impact":-5,"correlation":-0.45,"sector":"Auto Parts","parentId":"gm_pt"},
+      {"id":"basf_pt","label":"BASF (BAS.DE)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Catalysts/Chemicals","parentId":"catalyst_mfg"},
+      {"id":"jm_pt","label":"Johnson Matthey (JMPLY)","type":"processor","impact":5,"correlation":0.42,"sector":"PGM Refining","parentId":"sbsw_pt"},
+      {"id":"jewelry_pt","label":"Jewelry Demand","type":"consumer","impact":3,"correlation":0.25,"sector":"Luxury","parentId":"pt_index"},
+      {"id":"tif_pt","label":"Tiffany (LVMUY)","type":"consumer","impact":2,"correlation":0.15,"sector":"Luxury","parentId":"jewelry_pt"},
+      {"id":"sig_pt","label":"Signet Jewelers (SIG)","type":"consumer","impact":2,"correlation":0.18,"sector":"Jewelry Retail","parentId":"jewelry_pt"},
+      {"id":"fcel_pt","label":"FuelCell Energy (FCEL)","type":"consumer","impact":3,"correlation":0.22,"sector":"Fuel Cells","parentId":"plug_pt"},
+      {"id":"hydr_etf","label":"Hydrogen ETF (HDRO)","type":"etf","impact":3,"correlation":0.25,"sector":"Clean Energy","parentId":"be_pt"},
+      {"id":"palladium_sub","label":"Palladium (Substitute)","type":"substitute","impact":-5,"correlation":-0.40,"sector":"PGMs","parentId":"catalyst_mfg"},
+      {"id":"recycling_pt","label":"PGM Recycling","type":"processor","impact":-4,"correlation":-0.30,"sector":"Recycling","parentId":"jm_pt"}
+    ]},
+    {"nodes": [
+      {"id":"zar_pt","label":"South African Rand (ZAR)","type":"fx","impact":6,"correlation":0.52,"sector":"Forex","parentId":"sbsw_pt"},
+      {"id":"dxy_pt","label":"US Dollar (DXY)","type":"fx","impact":-5,"correlation":-0.45,"sector":"Forex","parentId":"pt_index"},
+      {"id":"sa_power","label":"SA Power Crisis (Eskom)","type":"macro","impact":7,"correlation":0.50,"sector":"Supply Risk","parentId":"zar_pt"},
+      {"id":"sa_mining_policy","label":"SA Mining Policy","type":"policy","impact":6,"correlation":0.45,"sector":"Regulation","parentId":"zar_pt"},
+      {"id":"diesel_catalyst","label":"Diesel Catalyst Demand","type":"consumer","impact":3,"correlation":0.25,"sector":"Auto Emissions","parentId":"catalyst_mfg"},
+      {"id":"ev_threat_pt","label":"EV Adoption (Threat)","type":"macro","impact":-6,"correlation":-0.45,"sector":"Auto Transition","parentId":"gm_pt"},
+      {"id":"hydrogen_economy","label":"Hydrogen Economy Growth","type":"macro","impact":5,"correlation":0.38,"sector":"Clean Energy","parentId":"plug_pt"},
+      {"id":"investment_demand","label":"Investment Demand","type":"macro","impact":5,"correlation":0.40,"sector":"Finance","parentId":"pplt"},
+      {"id":"glass_mfg","label":"Glass Manufacturing","type":"consumer","impact":2,"correlation":0.15,"sector":"Industrial","parentId":"pt_index"},
+      {"id":"medical_pt","label":"Medical Devices","type":"consumer","impact":2,"correlation":0.12,"sector":"Healthcare","parentId":"pt_index"},
+      {"id":"wpic_data","label":"WPIC Supply/Demand Data","type":"macro","impact":5,"correlation":0.40,"sector":"Data Release","parentId":"pt_index"},
+      {"id":"rhodium_related","label":"Rhodium (Related)","type":"commodity","impact":5,"correlation":0.55,"sector":"PGMs","parentId":"palladium_sub"}
+    ]},
+    {"nodes": [
+      {"id":"euro_emission","label":"Euro 7 Emission Std","type":"policy","impact":5,"correlation":0.35,"sector":"Regulation","parentId":"diesel_catalyst"},
+      {"id":"china_auto_pt","label":"China Auto Catalyst","type":"macro","impact":5,"correlation":0.38,"sector":"Demand","parentId":"catalyst_mfg"},
+      {"id":"fcev_growth","label":"FCEV Market Growth","type":"macro","impact":4,"correlation":0.28,"sector":"Hydrogen","parentId":"hydrogen_economy"},
+      {"id":"pt_deficit","label":"Platinum Market Deficit","type":"macro","impact":6,"correlation":0.48,"sector":"Supply/Demand","parentId":"wpic_data"},
+      {"id":"mining_depth","label":"SA Mining Depth Challenge","type":"macro","impact":5,"correlation":0.35,"sector":"Supply","parentId":"sa_mining_policy"},
+      {"id":"pt_gold_ratio","label":"Platinum/Gold Ratio","type":"macro","impact":4,"correlation":0.35,"sector":"Relative Value","parentId":"gld_related"},
+      {"id":"autocatalyst_recov","label":"Autocatalyst Recovery","type":"processor","impact":-3,"correlation":-0.22,"sector":"Recycling","parentId":"recycling_pt"},
+      {"id":"green_hydrogen","label":"Green Hydrogen Policy","type":"policy","impact":4,"correlation":0.30,"sector":"Clean Energy","parentId":"fcev_growth"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Platinum is a rare precious metal with a unique demand profile spanning auto catalysts, jewelry, and emerging hydrogen economy applications. South Africa produces over 70% of global platinum supply, making the market acutely sensitive to South African mining conditions including electricity reliability (Eskom load-shedding), labor relations, and geological challenges in aging Bushveld Complex mines. Platinum has traded at a persistent discount to palladium since 2015, reversing a historical premium relationship. Annual mine production is approximately 6 million ounces, with the market in structural deficit as mine supply declines against stable-to-growing demand.

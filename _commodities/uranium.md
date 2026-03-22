@@ -16,18 +16,57 @@ window.COMMODITY_DATA = {
   "commodity": {"id": "uranium", "label": "Uranium (URA)"},
   "levels": [
     {"nodes": [
-      {"id":"ura","label":"URA ETF","type":"etf","impact":10,"correlation":0.90,"sector":"Nuclear"},
-      {"id":"urnm","label":"URNM ETF","type":"etf","impact":12,"correlation":0.92,"sector":"Nuclear"},
-      {"id":"ccj","label":"Cameco (CCJ)","type":"producer","impact":14,"correlation":0.88,"sector":"Mining"},
-      {"id":"nxe","label":"NexGen Energy (NXE)","type":"producer","impact":15,"correlation":0.85,"sector":"Mining"},
-      {"id":"uec","label":"Uranium Energy (UEC)","type":"producer","impact":13,"correlation":0.82,"sector":"Mining"}
+      {"id":"ura","label":"URA Uranium ETF","type":"etf","impact":9,"correlation":0.88,"sector":"Uranium"},
+      {"id":"urnm","label":"URNM Uranium Miners ETF","type":"etf","impact":10,"correlation":0.90,"sector":"Uranium Mining"},
+      {"id":"ccj","label":"Cameco (CCJ)","type":"producer","impact":10,"correlation":0.85,"sector":"Uranium Mining"},
+      {"id":"nxe","label":"NexGen Energy (NXE)","type":"producer","impact":12,"correlation":0.90,"sector":"Uranium Dev"},
+      {"id":"uec","label":"Uranium Energy (UEC)","type":"producer","impact":12,"correlation":0.92,"sector":"Uranium Mining"},
+      {"id":"leu","label":"Centrus Energy (LEU)","type":"processor","impact":10,"correlation":0.82,"sector":"Enrichment"},
+      {"id":"dnn","label":"Denison Mines (DNN)","type":"producer","impact":11,"correlation":0.88,"sector":"Uranium Dev"},
+      {"id":"u_index","label":"Uranium Spot Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"sput","label":"Sprott Physical Uranium","type":"etf","impact":9,"correlation":0.92,"sector":"Physical Uranium"},
+      {"id":"kazatom","label":"Kazatomprom (KAP.IL)","type":"producer","impact":9,"correlation":0.78,"sector":"Uranium Mining"},
+      {"id":"nee_u","label":"NextEra Energy (NEE)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Utilities"},
+      {"id":"ceg","label":"Constellation Energy (CEG)","type":"consumer","impact":4,"correlation":0.35,"sector":"Nuclear Utility"}
     ]},
     {"nodes": [
-      {"id":"leu","label":"Centrus Energy (LEU)","type":"processor","impact":11,"correlation":0.78,"sector":"Enrichment","parentId":"ccj"},
-      {"id":"dnn","label":"Denison Mines (DNN)","type":"producer","impact":12,"correlation":0.80,"sector":"Mining","parentId":"nxe"},
-      {"id":"sput","label":"Sprott Physical Uranium","type":"etf","impact":9,"correlation":0.85,"sector":"Physical","parentId":"ura"},
-      {"id":"kazatom","label":"Kazatomprom","type":"producer","impact":10,"correlation":0.82,"sector":"Mining","parentId":"ccj"},
-      {"id":"smr_demand","label":"SMR Demand Growth","type":"consumer","impact":7,"correlation":0.60,"sector":"Nuclear","parentId":"urnm"}
+      {"id":"smr_demand","label":"SMR Technology","type":"macro","impact":6,"correlation":0.45,"sector":"Next-Gen Nuclear","parentId":"u_index"},
+      {"id":"bwxt","label":"BWX Technologies (BWXT)","type":"supplier","impact":5,"correlation":0.42,"sector":"Nuclear Components","parentId":"ceg"},
+      {"id":"gev","label":"GE Vernova (GEV)","type":"supplier","impact":4,"correlation":0.32,"sector":"Nuclear Turbines","parentId":"ceg"},
+      {"id":"fli","label":"Fission Uranium (FCU)","type":"producer","impact":10,"correlation":0.85,"sector":"Uranium Dev","parentId":"nxe"},
+      {"id":"boss","label":"Boss Energy (BQSSF)","type":"producer","impact":10,"correlation":0.82,"sector":"Uranium Mining","parentId":"ura"},
+      {"id":"so_u","label":"Southern Co (SO)","type":"consumer","impact":3,"correlation":0.22,"sector":"Nuclear Utility","parentId":"nee_u"},
+      {"id":"duk_u","label":"Duke Energy (DUK)","type":"consumer","impact":3,"correlation":0.20,"sector":"Nuclear Utility","parentId":"nee_u"},
+      {"id":"edf","label":"EDF (France)","type":"consumer","impact":3,"correlation":0.22,"sector":"Nuclear Utility","parentId":"kazatom"},
+      {"id":"conversion","label":"Conversion Services (UF6)","type":"processor","impact":7,"correlation":0.65,"sector":"Nuclear Fuel Cycle","parentId":"leu"},
+      {"id":"enrichment","label":"Enrichment SWU Market","type":"commodity","impact":8,"correlation":0.78,"sector":"Nuclear Fuel Cycle","parentId":"leu"},
+      {"id":"nuclear_etf","label":"NLR Nuclear ETF","type":"etf","impact":6,"correlation":0.58,"sector":"Nuclear","parentId":"ura"},
+      {"id":"ai_power","label":"AI Data Center Power","type":"macro","impact":6,"correlation":0.45,"sector":"Power Demand","parentId":"ceg"}
+    ]},
+    {"nodes": [
+      {"id":"dxy_u","label":"US Dollar (DXY)","type":"fx","impact":-4,"correlation":-0.38,"sector":"Forex","parentId":"u_index"},
+      {"id":"kzt_u","label":"Kazakh Tenge (KZT)","type":"fx","impact":4,"correlation":0.32,"sector":"Forex","parentId":"kazatom"},
+      {"id":"cad_u","label":"Canadian Dollar (CAD)","type":"fx","impact":4,"correlation":0.35,"sector":"Forex","parentId":"ccj"},
+      {"id":"nuclear_renaissance","label":"Nuclear Renaissance","type":"macro","impact":7,"correlation":0.55,"sector":"Policy","parentId":"u_index"},
+      {"id":"china_nuclear","label":"China Nuclear Buildout","type":"macro","impact":7,"correlation":0.50,"sector":"Demand","parentId":"u_index"},
+      {"id":"nrc_licensing","label":"NRC Licensing","type":"policy","impact":5,"correlation":0.38,"sector":"Regulation","parentId":"smr_demand"},
+      {"id":"russia_enrichment","label":"Russia Enrichment Ban","type":"policy","impact":8,"correlation":0.55,"sector":"Geopolitics","parentId":"leu"},
+      {"id":"solar_sub_u","label":"Solar (Substitute)","type":"substitute","impact":-3,"correlation":-0.20,"sector":"Clean Energy","parentId":"u_index"},
+      {"id":"wind_sub_u","label":"Wind (Substitute)","type":"substitute","impact":-3,"correlation":-0.18,"sector":"Clean Energy","parentId":"u_index"},
+      {"id":"natgas_sub_u","label":"Natural Gas (Substitute)","type":"substitute","impact":-4,"correlation":-0.25,"sector":"Power Gen","parentId":"u_index"},
+      {"id":"secondary_supply","label":"Secondary Supply","type":"macro","impact":-5,"correlation":-0.40,"sector":"Supply","parentId":"u_index"},
+      {"id":"contracting","label":"Utility Contracting Cycle","type":"macro","impact":6,"correlation":0.48,"sector":"Demand","parentId":"ceg"}
+    ]},
+    {"nodes": [
+      {"id":"smr_projects","label":"SMR Project Pipeline","type":"macro","impact":5,"correlation":0.38,"sector":"Development","parentId":"smr_demand"},
+      {"id":"lifetime_extensions","label":"Plant Lifetime Extensions","type":"policy","impact":5,"correlation":0.38,"sector":"Demand","parentId":"nuclear_renaissance"},
+      {"id":"cop28_pledge","label":"COP28 Nuclear Pledge","type":"policy","impact":5,"correlation":0.35,"sector":"Climate Policy","parentId":"nuclear_renaissance"},
+      {"id":"megatons_megawatts","label":"HEU Downblending","type":"macro","impact":-4,"correlation":-0.30,"sector":"Secondary Supply","parentId":"secondary_supply"},
+      {"id":"kazakhstan_isr","label":"Kazakhstan ISR Output","type":"regional","impact":6,"correlation":0.48,"sector":"Supply","parentId":"kazatom"},
+      {"id":"australia_u","label":"Australia Uranium","type":"regional","impact":5,"correlation":0.40,"sector":"Supply","parentId":"boss"},
+      {"id":"niger_supply","label":"Niger Supply Risk","type":"regional","impact":4,"correlation":0.30,"sector":"Geopolitics","parentId":"u_index"},
+      {"id":"inventory_drawdown","label":"Utility Inventory Drawdown","type":"macro","impact":5,"correlation":0.40,"sector":"Supply","parentId":"contracting"},
+      {"id":"us_production","label":"US Uranium Production","type":"regional","impact":5,"correlation":0.42,"sector":"Domestic Supply","parentId":"uec"}
     ]}
   ]
 };

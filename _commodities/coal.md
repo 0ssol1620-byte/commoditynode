@@ -11,6 +11,66 @@ substitutes: ["Natural Gas", "Solar", "Nuclear", "Wind"]
 themes: ["Clean Energy"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "coal", "label": "Coal (Newcastle)"},
+  "levels": [
+    {"nodes": [
+      {"id":"kol","label":"KOL Coal ETF","type":"etf","impact":9,"correlation":0.85,"sector":"Coal"},
+      {"id":"btu","label":"Peabody Energy (BTU)","type":"producer","impact":12,"correlation":0.90,"sector":"Coal Mining"},
+      {"id":"arch","label":"Arch Resources (ARCH)","type":"producer","impact":11,"correlation":0.88,"sector":"Coal Mining"},
+      {"id":"arlp","label":"Alliance Resource (ARLP)","type":"producer","impact":10,"correlation":0.85,"sector":"Coal Mining"},
+      {"id":"ceix","label":"CONSOL Energy (CEIX)","type":"producer","impact":11,"correlation":0.87,"sector":"Coal Mining"},
+      {"id":"hnrg","label":"Hallador Energy (HNRG)","type":"producer","impact":9,"correlation":0.80,"sector":"Coal Mining"},
+      {"id":"coal_index","label":"Coal Futures Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"so_coal","label":"Southern Co (SO)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Utilities"},
+      {"id":"duk_coal","label":"Duke Energy (DUK)","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Utilities"},
+      {"id":"aep_coal","label":"AEP (AEP)","type":"consumer","impact":-3,"correlation":-0.20,"sector":"Utilities"},
+      {"id":"xlu_coal","label":"XLU Utilities ETF","type":"etf","impact":-2,"correlation":-0.18,"sector":"Utilities"},
+      {"id":"nue_coal","label":"Nucor (NUE)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Met Coal User"}
+    ]},
+    {"nodes": [
+      {"id":"csx_coal","label":"CSX Corp (CSX)","type":"supplier","impact":5,"correlation":0.45,"sector":"Rail Transport","parentId":"btu"},
+      {"id":"nsc_coal","label":"Norfolk Southern (NSC)","type":"supplier","impact":5,"correlation":0.42,"sector":"Rail Transport","parentId":"btu"},
+      {"id":"unp_coal","label":"Union Pacific (UNP)","type":"supplier","impact":4,"correlation":0.35,"sector":"Rail Transport","parentId":"arch"},
+      {"id":"cat_coal","label":"Caterpillar (CAT)","type":"supplier","impact":4,"correlation":0.32,"sector":"Mining Equipment","parentId":"btu"},
+      {"id":"joy_coal","label":"Komatsu (KMTUY)","type":"supplier","impact":3,"correlation":0.28,"sector":"Mining Equipment","parentId":"cat_coal"},
+      {"id":"mt_coal","label":"ArcelorMittal (MT)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Steel","parentId":"nue_coal"},
+      {"id":"x_coal","label":"US Steel (X)","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Steel","parentId":"nue_coal"},
+      {"id":"icln_coal","label":"ICLN Clean Energy ETF","type":"etf","impact":-5,"correlation":-0.40,"sector":"Clean Energy","parentId":"coal_index"},
+      {"id":"tan_coal","label":"TAN Solar ETF","type":"etf","impact":-4,"correlation":-0.35,"sector":"Solar","parentId":"icln_coal"},
+      {"id":"natgas_comp","label":"Natural Gas (Competitor)","type":"substitute","impact":-6,"correlation":-0.50,"sector":"Energy","parentId":"coal_index"},
+      {"id":"eqt_coal","label":"EQT Corp (EQT)","type":"producer","impact":-4,"correlation":-0.35,"sector":"Nat Gas","parentId":"natgas_comp"},
+      {"id":"nee_coal","label":"NextEra Energy (NEE)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Renewables","parentId":"icln_coal"}
+    ]},
+    {"nodes": [
+      {"id":"dxy_coal","label":"US Dollar (DXY)","type":"fx","impact":-4,"correlation":-0.38,"sector":"Forex","parentId":"coal_index"},
+      {"id":"aud_coal","label":"Australian Dollar (AUD)","type":"fx","impact":5,"correlation":0.45,"sector":"Forex","parentId":"btu"},
+      {"id":"idr_coal","label":"Indonesian Rupiah (IDR)","type":"fx","impact":4,"correlation":0.35,"sector":"Forex","parentId":"coal_index"},
+      {"id":"china_demand_coal","label":"China Coal Demand","type":"macro","impact":7,"correlation":0.55,"sector":"Industrial","parentId":"coal_index"},
+      {"id":"india_power","label":"India Power Demand","type":"macro","impact":6,"correlation":0.45,"sector":"Utilities","parentId":"so_coal"},
+      {"id":"carbon_price","label":"Carbon Credit Price","type":"policy","impact":-6,"correlation":-0.48,"sector":"ESG","parentId":"icln_coal"},
+      {"id":"epa_regs","label":"EPA Emission Rules","type":"policy","impact":-5,"correlation":-0.40,"sector":"Regulation","parentId":"carbon_price"},
+      {"id":"shipping_coal","label":"Dry Bulk Shipping (GNK)","type":"freight","impact":4,"correlation":0.35,"sector":"Shipping","parentId":"btu"},
+      {"id":"bdi_coal","label":"Baltic Dry Index","type":"freight","impact":4,"correlation":0.38,"sector":"Shipping","parentId":"shipping_coal"},
+      {"id":"met_coal","label":"Met Coal Premium","type":"commodity","impact":8,"correlation":0.75,"sector":"Steelmaking","parentId":"nue_coal"},
+      {"id":"thermal_coal","label":"Thermal Coal Index","type":"commodity","impact":9,"correlation":0.92,"sector":"Power Gen","parentId":"coal_index"},
+      {"id":"coal_to_gas","label":"Coal-to-Gas Switching","type":"macro","impact":-5,"correlation":-0.42,"sector":"Energy Trans","parentId":"natgas_comp"}
+    ]},
+    {"nodes": [
+      {"id":"china_import_policy","label":"China Import Policy","type":"policy","impact":7,"correlation":0.50,"sector":"Trade Policy","parentId":"china_demand_coal"},
+      {"id":"australia_export","label":"Australia Export Volume","type":"regional","impact":6,"correlation":0.48,"sector":"Supply","parentId":"aud_coal"},
+      {"id":"indonesia_export","label":"Indonesia Export Policy","type":"policy","impact":6,"correlation":0.45,"sector":"Trade Policy","parentId":"idr_coal"},
+      {"id":"plant_retirements","label":"Coal Plant Retirements","type":"macro","impact":-5,"correlation":-0.38,"sector":"Utilities","parentId":"epa_regs"},
+      {"id":"ccus_tech","label":"CCUS Technology","type":"macro","impact":3,"correlation":0.20,"sector":"Clean Coal","parentId":"carbon_price"},
+      {"id":"winter_demand","label":"Winter Heating Demand","type":"macro","impact":5,"correlation":0.40,"sector":"Seasonal","parentId":"thermal_coal"},
+      {"id":"global_steel_cycle","label":"Global Steel Cycle","type":"macro","impact":5,"correlation":0.38,"sector":"Industrial","parentId":"met_coal"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Coal remains the largest single source of electricity generation globally, despite accelerating energy transition pressures in Western markets. The commodity splits into two distinct markets: thermal coal for power generation and metallurgical (coking) coal for steelmaking. China and India together consume over 65% of global coal production, and their demand trajectory will determine the commodity's long-term outlook far more than Western phase-out policies. Global production exceeds 8 billion tonnes annually, and despite peak-coal narratives in the West, total output continues to set records driven by Asian growth.

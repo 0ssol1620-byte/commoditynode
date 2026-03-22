@@ -16,18 +16,57 @@ window.COMMODITY_DATA = {
   "commodity": {"id": "steel", "label": "Steel (HRC)"},
   "levels": [
     {"nodes": [
-      {"id":"slx","label":"SLX Steel ETF","type":"etf","impact":9,"correlation":0.85,"sector":"Metals"},
-      {"id":"nue","label":"Nucor (NUE)","type":"producer","impact":12,"correlation":0.88,"sector":"Steel"},
-      {"id":"stld","label":"Steel Dynamics (STLD)","type":"producer","impact":11,"correlation":0.86,"sector":"Steel"},
-      {"id":"x","label":"U.S. Steel (X)","type":"producer","impact":14,"correlation":0.82,"sector":"Steel"},
-      {"id":"clf","label":"Cleveland-Cliffs (CLF)","type":"producer","impact":13,"correlation":0.84,"sector":"Steel"}
+      {"id":"slx","label":"SLX Steel ETF","type":"etf","impact":9,"correlation":0.85,"sector":"Steel"},
+      {"id":"nue","label":"Nucor (NUE)","type":"producer","impact":10,"correlation":0.85,"sector":"Steel"},
+      {"id":"stld","label":"Steel Dynamics (STLD)","type":"producer","impact":10,"correlation":0.83,"sector":"Steel"},
+      {"id":"x","label":"US Steel (X)","type":"producer","impact":11,"correlation":0.88,"sector":"Steel"},
+      {"id":"clf","label":"Cleveland-Cliffs (CLF)","type":"producer","impact":12,"correlation":0.90,"sector":"Steel"},
+      {"id":"mt","label":"ArcelorMittal (MT)","type":"producer","impact":9,"correlation":0.78,"sector":"Global Steel"},
+      {"id":"rs","label":"Reliance Steel (RS)","type":"producer","impact":8,"correlation":0.72,"sector":"Steel Distribution"},
+      {"id":"steel_index","label":"Steel Futures Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"xme_st","label":"XME Metals Mining ETF","type":"etf","impact":6,"correlation":0.58,"sector":"Mining"},
+      {"id":"gm_st","label":"General Motors (GM)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Automotive"},
+      {"id":"cat_st","label":"Caterpillar (CAT)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Equipment"},
+      {"id":"dhi_st","label":"DR Horton (DHI)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Construction"}
     ]},
     {"nodes": [
-      {"id":"rs","label":"Reliance Steel (RS)","type":"processor","impact":6,"correlation":0.65,"sector":"Distribution","parentId":"nue"},
-      {"id":"auto_steel","label":"Auto Manufacturers","type":"consumer","impact":-5,"correlation":-0.55,"sector":"Automotive","parentId":"clf"},
-      {"id":"construction","label":"Construction Sector","type":"consumer","impact":-4,"correlation":-0.50,"sector":"Building","parentId":"slx"},
-      {"id":"mt","label":"ArcelorMittal (MT)","type":"producer","impact":10,"correlation":0.78,"sector":"Steel","parentId":"x"},
-      {"id":"iron_ore","label":"Iron Ore (Cross-Link)","type":"commodity","impact":7,"correlation":0.70,"sector":"Mining","parentId":"clf"}
+      {"id":"auto_steel","label":"Auto Steel Demand","type":"consumer","impact":-4,"correlation":-0.35,"sector":"Automotive","parentId":"gm_st"},
+      {"id":"construction","label":"Construction Steel","type":"consumer","impact":-4,"correlation":-0.32,"sector":"Construction","parentId":"dhi_st"},
+      {"id":"iron_ore","label":"Iron Ore (Input)","type":"commodity","impact":7,"correlation":0.70,"sector":"Raw Material","parentId":"clf"},
+      {"id":"scrap_steel","label":"Scrap Steel Market","type":"commodity","impact":6,"correlation":0.60,"sector":"Recycled Input","parentId":"nue"},
+      {"id":"f_st","label":"Ford Motor (F)","type":"consumer","impact":-2,"correlation":-0.20,"sector":"Automotive","parentId":"auto_steel"},
+      {"id":"tm_st","label":"Toyota Motor (TM)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Automotive","parentId":"auto_steel"},
+      {"id":"len_st","label":"Lennar Corp (LEN)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Homebuilding","parentId":"construction"},
+      {"id":"pave_st","label":"PAVE Infrastructure ETF","type":"etf","impact":4,"correlation":0.35,"sector":"Infrastructure","parentId":"construction"},
+      {"id":"ternium","label":"Ternium (TX)","type":"producer","impact":8,"correlation":0.72,"sector":"LatAm Steel","parentId":"mt"},
+      {"id":"pka","label":"POSCO (PKX)","type":"producer","impact":7,"correlation":0.65,"sector":"Asian Steel","parentId":"mt"},
+      {"id":"vale_st","label":"Vale SA (VALE)","type":"supplier","impact":5,"correlation":0.48,"sector":"Iron Ore","parentId":"iron_ore"},
+      {"id":"cmi_st","label":"Commercial Metals (CMC)","type":"producer","impact":9,"correlation":0.78,"sector":"Rebar/Long Products","parentId":"nue"}
+    ]},
+    {"nodes": [
+      {"id":"coking_coal_st","label":"Coking Coal (Input)","type":"commodity","impact":6,"correlation":0.55,"sector":"Steelmaking","parentId":"clf"},
+      {"id":"dxy_st","label":"US Dollar (DXY)","type":"fx","impact":-4,"correlation":-0.40,"sector":"Forex","parentId":"steel_index"},
+      {"id":"cny_st","label":"Chinese Yuan (CNY)","type":"fx","impact":4,"correlation":0.35,"sector":"Forex","parentId":"steel_index"},
+      {"id":"china_steel_output","label":"China Steel Output","type":"macro","impact":-6,"correlation":-0.50,"sector":"Supply","parentId":"cny_st"},
+      {"id":"section232_st","label":"Section 232 Tariffs","type":"policy","impact":6,"correlation":0.48,"sector":"Trade Policy","parentId":"steel_index"},
+      {"id":"eu_safeguard","label":"EU Steel Safeguard","type":"policy","impact":4,"correlation":0.32,"sector":"Trade Policy","parentId":"mt"},
+      {"id":"de_st","label":"Deere & Co (DE)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Equipment","parentId":"cat_st"},
+      {"id":"hd_st","label":"Home Depot (HD)","type":"consumer","impact":-1,"correlation":-0.10,"sector":"Retail","parentId":"construction"},
+      {"id":"eaf_trend","label":"EAF Steel Trend","type":"macro","impact":4,"correlation":0.30,"sector":"Technology","parentId":"scrap_steel"},
+      {"id":"green_steel_st","label":"Green Steel Transition","type":"macro","impact":3,"correlation":0.22,"sector":"ESG","parentId":"eaf_trend"},
+      {"id":"aluminum_sub","label":"Aluminum (Substitute)","type":"substitute","impact":-3,"correlation":-0.25,"sector":"Light Metals","parentId":"steel_index"},
+      {"id":"carbon_fiber_sub","label":"Carbon Fiber (Substitute)","type":"substitute","impact":-2,"correlation":-0.15,"sector":"Advanced Materials","parentId":"steel_index"}
+    ]},
+    {"nodes": [
+      {"id":"china_property_st","label":"China Property Crisis","type":"macro","impact":-5,"correlation":-0.40,"sector":"Demand","parentId":"china_steel_output"},
+      {"id":"infrastructure_bill","label":"Infrastructure Spending","type":"policy","impact":5,"correlation":0.40,"sector":"US Policy","parentId":"pave_st"},
+      {"id":"india_steel","label":"India Steel Growth","type":"macro","impact":5,"correlation":0.38,"sector":"Emerging Markets","parentId":"mt"},
+      {"id":"auto_cycle_st","label":"Global Auto Cycle","type":"macro","impact":4,"correlation":0.30,"sector":"Demand","parentId":"auto_steel"},
+      {"id":"hrc_price","label":"HRC Steel Price","type":"commodity","impact":9,"correlation":0.92,"sector":"Flat Products","parentId":"steel_index"},
+      {"id":"rebar_price","label":"Rebar Price","type":"commodity","impact":8,"correlation":0.85,"sector":"Long Products","parentId":"cmi_st"},
+      {"id":"energy_cost_st","label":"Energy Cost (EAF)","type":"macro","impact":-4,"correlation":-0.32,"sector":"Power","parentId":"eaf_trend"},
+      {"id":"shipping_st","label":"Steel Freight (Dry Bulk)","type":"freight","impact":4,"correlation":0.30,"sector":"Shipping","parentId":"vale_st"},
+      {"id":"anti_dumping","label":"Anti-Dumping Duties","type":"policy","impact":5,"correlation":0.38,"sector":"Trade Policy","parentId":"section232_st"}
     ]}
   ]
 };

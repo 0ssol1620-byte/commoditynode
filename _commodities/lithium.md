@@ -16,18 +16,57 @@ window.COMMODITY_DATA = {
   "commodity": {"id": "lithium", "label": "Lithium"},
   "levels": [
     {"nodes": [
-      {"id":"lit","label":"LIT ETF","type":"etf","impact":10,"correlation":0.88,"sector":"Battery Metals"},
-      {"id":"alb","label":"Albemarle (ALB)","type":"producer","impact":14,"correlation":0.90,"sector":"Mining"},
-      {"id":"sqm","label":"SQM (SQM)","type":"producer","impact":13,"correlation":0.88,"sector":"Mining"},
-      {"id":"pll","label":"Piedmont Lithium (PLL)","type":"producer","impact":12,"correlation":0.82,"sector":"Mining"},
-      {"id":"lthm","label":"Livent (LTHM)","type":"producer","impact":13,"correlation":0.86,"sector":"Mining"}
+      {"id":"lit","label":"LIT Lithium ETF","type":"etf","impact":9,"correlation":0.85,"sector":"Battery Metals"},
+      {"id":"alb","label":"Albemarle (ALB)","type":"producer","impact":10,"correlation":0.88,"sector":"Lithium"},
+      {"id":"sqm","label":"SQM (SQM)","type":"producer","impact":9,"correlation":0.82,"sector":"Lithium"},
+      {"id":"pll","label":"Piedmont Lithium (PLL)","type":"producer","impact":12,"correlation":0.90,"sector":"Lithium"},
+      {"id":"lthm","label":"Arcadium Lithium (ALTM)","type":"producer","impact":11,"correlation":0.88,"sector":"Lithium"},
+      {"id":"batt","label":"BATT Battery ETF","type":"etf","impact":7,"correlation":0.65,"sector":"Battery Metals"},
+      {"id":"lac","label":"Lithium Americas (LAC)","type":"producer","impact":12,"correlation":0.90,"sector":"Lithium"},
+      {"id":"sgml","label":"Sigma Lithium (SGML)","type":"producer","impact":11,"correlation":0.88,"sector":"Lithium"},
+      {"id":"li_index","label":"Lithium Price Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"tsla_li","label":"Tesla (TSLA)","type":"consumer","impact":-4,"correlation":-0.35,"sector":"EV"},
+      {"id":"rivn_li","label":"Rivian (RIVN)","type":"consumer","impact":-5,"correlation":-0.40,"sector":"EV"},
+      {"id":"lcid_li","label":"Lucid Group (LCID)","type":"consumer","impact":-5,"correlation":-0.42,"sector":"EV"}
     ]},
     {"nodes": [
-      {"id":"tsla_li","label":"Tesla (TSLA)","type":"consumer","impact":6,"correlation":0.60,"sector":"EV","parentId":"lit"},
-      {"id":"catl_li","label":"CATL","type":"consumer","impact":7,"correlation":0.65,"sector":"Batteries","parentId":"alb"},
-      {"id":"lges","label":"LG Energy Solution","type":"consumer","impact":6,"correlation":0.58,"sector":"Batteries","parentId":"sqm"},
-      {"id":"panasonic_li","label":"Panasonic","type":"consumer","impact":5,"correlation":0.52,"sector":"Batteries","parentId":"alb"},
-      {"id":"grid_storage","label":"Grid Storage","type":"consumer","impact":5,"correlation":0.48,"sector":"Utilities","parentId":"lit"}
+      {"id":"catl_li","label":"CATL Battery","type":"consumer","impact":-4,"correlation":-0.35,"sector":"Batteries","parentId":"tsla_li"},
+      {"id":"lges","label":"LG Energy Sol","type":"consumer","impact":-3,"correlation":-0.28,"sector":"Batteries","parentId":"tsla_li"},
+      {"id":"panasonic_li","label":"Panasonic (PCRFY)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Batteries","parentId":"tsla_li"},
+      {"id":"samsung_sdi","label":"Samsung SDI","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Batteries","parentId":"batt"},
+      {"id":"grid_storage","label":"Grid Storage Demand","type":"consumer","impact":5,"correlation":0.40,"sector":"Energy Storage","parentId":"li_index"},
+      {"id":"gm_li","label":"General Motors (GM)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Automotive","parentId":"tsla_li"},
+      {"id":"f_li","label":"Ford Motor (F)","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Automotive","parentId":"tsla_li"},
+      {"id":"bmwyy_li","label":"BMW (BMWYY)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Automotive","parentId":"gm_li"},
+      {"id":"mp_li","label":"MP Materials (MP)","type":"supplier","impact":4,"correlation":0.32,"sector":"Critical Minerals","parentId":"lit"},
+      {"id":"livent_prod","label":"Lithium Hydroxide Mkt","type":"commodity","impact":9,"correlation":0.92,"sector":"Battery Grade","parentId":"li_index"},
+      {"id":"spodumene","label":"Spodumene Concentrate","type":"commodity","impact":8,"correlation":0.85,"sector":"Hard Rock","parentId":"li_index"},
+      {"id":"enph_li","label":"Enphase Energy (ENPH)","type":"consumer","impact":3,"correlation":0.25,"sector":"Solar Storage","parentId":"grid_storage"}
+    ]},
+    {"nodes": [
+      {"id":"lfp_chem","label":"LFP Battery Chemistry","type":"macro","impact":4,"correlation":0.30,"sector":"Battery Tech","parentId":"catl_li"},
+      {"id":"sodium_ion","label":"Sodium-Ion (Substitute)","type":"substitute","impact":-5,"correlation":-0.35,"sector":"Battery Alt","parentId":"li_index"},
+      {"id":"solid_state_li","label":"Solid-State Battery","type":"substitute","impact":-4,"correlation":-0.28,"sector":"Future Tech","parentId":"sodium_ion"},
+      {"id":"dxy_li","label":"US Dollar (DXY)","type":"fx","impact":-4,"correlation":-0.40,"sector":"Forex","parentId":"li_index"},
+      {"id":"clp_li","label":"Chilean Peso (CLP)","type":"fx","impact":5,"correlation":0.45,"sector":"Forex","parentId":"sqm"},
+      {"id":"aud_li","label":"Australian Dollar (AUD)","type":"fx","impact":4,"correlation":0.38,"sector":"Forex","parentId":"pll"},
+      {"id":"brl_li","label":"Brazilian Real (BRL)","type":"fx","impact":4,"correlation":0.35,"sector":"Forex","parentId":"sgml"},
+      {"id":"chile_policy","label":"Chile Lithium Policy","type":"policy","impact":7,"correlation":0.50,"sector":"Resource Nationalism","parentId":"sqm"},
+      {"id":"ev_adoption_li","label":"Global EV Adoption","type":"macro","impact":7,"correlation":0.55,"sector":"Demand","parentId":"tsla_li"},
+      {"id":"ira_incentives","label":"IRA Battery Incentives","type":"policy","impact":6,"correlation":0.45,"sector":"US Policy","parentId":"lac"},
+      {"id":"china_ev","label":"China EV Market","type":"macro","impact":6,"correlation":0.48,"sector":"Demand","parentId":"catl_li"},
+      {"id":"recycling_li","label":"Lithium Recycling","type":"processor","impact":-4,"correlation":-0.30,"sector":"Recycling","parentId":"lthm"}
+    ]},
+    {"nodes": [
+      {"id":"gigafactory_li","label":"Gigafactory Pipeline","type":"macro","impact":5,"correlation":0.38,"sector":"Manufacturing","parentId":"ev_adoption_li"},
+      {"id":"drc_cobalt_li","label":"Cobalt (Related)","type":"commodity","impact":5,"correlation":0.50,"sector":"Battery Metals","parentId":"batt"},
+      {"id":"nickel_related_li","label":"Nickel (Related)","type":"commodity","impact":5,"correlation":0.48,"sector":"Battery Metals","parentId":"batt"},
+      {"id":"australia_hard_rock","label":"Australia Hard Rock","type":"regional","impact":6,"correlation":0.50,"sector":"Supply","parentId":"spodumene"},
+      {"id":"argentina_brine","label":"Argentina Brine","type":"regional","impact":5,"correlation":0.42,"sector":"Supply","parentId":"sqm"},
+      {"id":"dbs_standard","label":"DBS Battery Standard","type":"policy","impact":4,"correlation":0.28,"sector":"Regulation","parentId":"ira_incentives"},
+      {"id":"mining_esg","label":"Mining ESG Pressure","type":"policy","impact":4,"correlation":0.25,"sector":"ESG","parentId":"chile_policy"},
+      {"id":"li_spot_vs_contract","label":"Spot vs Contract Price","type":"macro","impact":6,"correlation":0.70,"sector":"Pricing","parentId":"li_index"},
+      {"id":"hydrogen_fc_alt","label":"Hydrogen Fuel Cell Alt","type":"substitute","impact":-3,"correlation":-0.18,"sector":"Alternative","parentId":"sodium_ion"}
     ]}
   ]
 };

@@ -11,6 +11,63 @@ substitutes: ["LFP Chemistry", "High-Nickel NMC"]
 themes: ["EV Transition", "Supply Chain Disruption"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "cobalt", "label": "Cobalt"},
+  "levels": [
+    {"nodes": [
+      {"id":"batt_co","label":"BATT Battery ETF","type":"etf","impact":5,"correlation":0.45,"sector":"Battery Metals"},
+      {"id":"lit_co","label":"LIT Lithium Battery ETF","type":"etf","impact":4,"correlation":0.38,"sector":"Battery Metals"},
+      {"id":"glncy_co","label":"Glencore (GLNCY)","type":"producer","impact":8,"correlation":0.70,"sector":"Diversified Mining"},
+      {"id":"cmclf","label":"CMOC Group (CMCLF)","type":"producer","impact":10,"correlation":0.80,"sector":"Cobalt Mining"},
+      {"id":"cobalt_index","label":"Cobalt Price Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"tsla_co","label":"Tesla (TSLA)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"EV"},
+      {"id":"aapl_co","label":"Apple (AAPL)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Consumer Electronics"},
+      {"id":"vale_co","label":"Vale SA (VALE)","type":"producer","impact":4,"correlation":0.35,"sector":"Diversified Mining"},
+      {"id":"bhp_co","label":"BHP Group (BHP)","type":"producer","impact":3,"correlation":0.28,"sector":"Diversified Mining"},
+      {"id":"xme_co","label":"XME Metals Mining ETF","type":"etf","impact":4,"correlation":0.38,"sector":"Mining"}
+    ]},
+    {"nodes": [
+      {"id":"catl_co","label":"CATL Battery","type":"consumer","impact":-4,"correlation":-0.35,"sector":"Batteries","parentId":"tsla_co"},
+      {"id":"panasonic_co","label":"Panasonic (PCRFY)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Batteries","parentId":"tsla_co"},
+      {"id":"samsung_sdi_co","label":"Samsung SDI","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Batteries","parentId":"aapl_co"},
+      {"id":"gm_co","label":"General Motors (GM)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Automotive","parentId":"tsla_co"},
+      {"id":"rivn_co","label":"Rivian (RIVN)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"EV","parentId":"tsla_co"},
+      {"id":"hon_co","label":"Honeywell (HON)","type":"consumer","impact":-1,"correlation":-0.10,"sector":"Aerospace","parentId":"aapl_co"},
+      {"id":"superalloys","label":"Superalloy Sector","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Aerospace","parentId":"bhp_co"},
+      {"id":"ivn_co","label":"Ivanhoe Mines (IVN)","type":"producer","impact":7,"correlation":0.55,"sector":"Mining","parentId":"glncy_co"},
+      {"id":"erg_co","label":"ERG Africa (Mining)","type":"producer","impact":8,"correlation":0.65,"sector":"Cobalt Mining","parentId":"cmclf"},
+      {"id":"freeport_co","label":"Freeport Cobalt","type":"processor","impact":5,"correlation":0.40,"sector":"Processing","parentId":"glncy_co"},
+      {"id":"umicore","label":"Umicore (UMICY)","type":"processor","impact":4,"correlation":0.32,"sector":"Refining","parentId":"freeport_co"}
+    ]},
+    {"nodes": [
+      {"id":"lfp_threat","label":"LFP Chemistry (Threat)","type":"substitute","impact":-7,"correlation":-0.50,"sector":"Battery Tech","parentId":"catl_co"},
+      {"id":"high_ni_nmc","label":"High-Nickel NMC","type":"substitute","impact":-5,"correlation":-0.38,"sector":"Battery Tech","parentId":"panasonic_co"},
+      {"id":"drc_risk","label":"DRC Political Risk","type":"policy","impact":8,"correlation":0.55,"sector":"Geopolitics","parentId":"cmclf"},
+      {"id":"child_labor","label":"ESG Supply Chain Risk","type":"policy","impact":5,"correlation":0.35,"sector":"ESG","parentId":"drc_risk"},
+      {"id":"dxy_co","label":"US Dollar (DXY)","type":"fx","impact":-4,"correlation":-0.38,"sector":"Forex","parentId":"cobalt_index"},
+      {"id":"cdf_co","label":"Congolese Franc (CDF)","type":"fx","impact":5,"correlation":0.35,"sector":"Forex","parentId":"drc_risk"},
+      {"id":"ev_adoption_co","label":"Global EV Adoption","type":"macro","impact":6,"correlation":0.45,"sector":"EV Demand","parentId":"tsla_co"},
+      {"id":"recycling_co","label":"Cobalt Recycling","type":"processor","impact":-4,"correlation":-0.30,"sector":"Recycling","parentId":"umicore"},
+      {"id":"nickel_related_co","label":"Nickel (Related)","type":"commodity","impact":6,"correlation":0.60,"sector":"Battery Metals","parentId":"lit_co"},
+      {"id":"lithium_related_co","label":"Lithium (Related)","type":"commodity","impact":5,"correlation":0.50,"sector":"Battery Metals","parentId":"lit_co"},
+      {"id":"ba_co","label":"Boeing (BA)","type":"consumer","impact":-1,"correlation":-0.08,"sector":"Aerospace","parentId":"superalloys"},
+      {"id":"ge_co","label":"GE Aerospace (GE)","type":"consumer","impact":-1,"correlation":-0.08,"sector":"Aerospace","parentId":"superalloys"}
+    ]},
+    {"nodes": [
+      {"id":"solid_state","label":"Solid-State Batteries","type":"substitute","impact":-4,"correlation":-0.25,"sector":"Future Tech","parentId":"lfp_threat"},
+      {"id":"artisanal_mining","label":"Artisanal Mining Reform","type":"policy","impact":4,"correlation":0.28,"sector":"Regulation","parentId":"child_labor"},
+      {"id":"china_refining","label":"China Cobalt Refining","type":"processor","impact":5,"correlation":0.40,"sector":"Processing","parentId":"freeport_co"},
+      {"id":"battery_recyc_mandate","label":"Battery Recycling Mandate","type":"policy","impact":3,"correlation":0.22,"sector":"Regulation","parentId":"recycling_co"},
+      {"id":"grid_storage_co","label":"Grid Storage Demand","type":"macro","impact":4,"correlation":0.30,"sector":"Energy Storage","parentId":"ev_adoption_co"},
+      {"id":"smartphone_demand","label":"Smartphone Demand","type":"macro","impact":3,"correlation":0.22,"sector":"Electronics","parentId":"samsung_sdi_co"},
+      {"id":"defense_alloys","label":"Defense Superalloys","type":"consumer","impact":2,"correlation":0.15,"sector":"Defense","parentId":"superalloys"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Cobalt is one of the most geopolitically concentrated commodities in the world, with the Democratic Republic of Congo producing over 70% of global mine supply. The metal is essential for battery cathode stability in NMC (nickel manganese cobalt) chemistries, but its supply chain -- including artisanal mining concerns in the DRC and Chinese dominance of refining -- has made it a focal point for ethical sourcing scrutiny. Critically, cobalt is primarily produced as a by-product of copper and nickel mining, meaning its supply responds to those metals' economics rather than its own price signals. Annual global production is approximately 200,000 tonnes, a tiny market relative to its strategic importance.

@@ -11,6 +11,64 @@ substitutes: ["Platinum", "Rhodium"]
 themes: ["EV Transition"]
 ---
 
+<script>
+window.COMMODITY_DATA = {
+  "commodity": {"id": "palladium", "label": "Palladium (NYMEX)"},
+  "levels": [
+    {"nodes": [
+      {"id":"pall","label":"PALL Palladium ETF","type":"etf","impact":9,"correlation":0.90,"sector":"Precious Metals"},
+      {"id":"sbsw_pd","label":"Sibanye-Stillwater (SBSW)","type":"producer","impact":10,"correlation":0.82,"sector":"PGM Mining"},
+      {"id":"impuy_pd","label":"Impala Platinum (IMPUY)","type":"producer","impact":9,"correlation":0.78,"sector":"PGM Mining"},
+      {"id":"pd_index","label":"Palladium Futures Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"xme_pd","label":"XME Metals Mining ETF","type":"etf","impact":4,"correlation":0.35,"sector":"Mining"},
+      {"id":"gm_pd","label":"General Motors (GM)","type":"consumer","impact":-3,"correlation":-0.25,"sector":"Auto Catalysts"},
+      {"id":"f_pd","label":"Ford Motor (F)","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Auto Catalysts"},
+      {"id":"tm_pd","label":"Toyota Motor (TM)","type":"consumer","impact":-3,"correlation":-0.20,"sector":"Auto Catalysts"},
+      {"id":"stla_pd","label":"Stellantis (STLA)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Automotive"},
+      {"id":"gld_pd","label":"Gold (Related)","type":"commodity","impact":5,"correlation":0.55,"sector":"Precious Metals"},
+      {"id":"pt_related","label":"Platinum (Related)","type":"commodity","impact":6,"correlation":0.60,"sector":"PGMs"}
+    ]},
+    {"nodes": [
+      {"id":"catalyst_pd","label":"Gasoline Catalyst Demand","type":"consumer","impact":-6,"correlation":-0.55,"sector":"Auto Parts","parentId":"gm_pd"},
+      {"id":"hmc_pd","label":"Honda Motor (HMC)","type":"consumer","impact":-2,"correlation":-0.18,"sector":"Automotive","parentId":"tm_pd"},
+      {"id":"bmwyy_pd","label":"BMW (BMWYY)","type":"consumer","impact":-2,"correlation":-0.15,"sector":"Automotive","parentId":"stla_pd"},
+      {"id":"basf_pd","label":"BASF Catalysts (BAS.DE)","type":"consumer","impact":-3,"correlation":-0.22,"sector":"Catalysts","parentId":"catalyst_pd"},
+      {"id":"jm_pd","label":"Johnson Matthey (JMPLY)","type":"processor","impact":5,"correlation":0.42,"sector":"PGM Refining","parentId":"sbsw_pd"},
+      {"id":"norilsk_pd","label":"Nornickel (NILSY)","type":"producer","impact":10,"correlation":0.80,"sector":"Palladium Mining","parentId":"pd_index"},
+      {"id":"electronics_pd","label":"Electronics Demand","type":"consumer","impact":2,"correlation":0.15,"sector":"Electronics","parentId":"pd_index"},
+      {"id":"dental_pd","label":"Dental Applications","type":"consumer","impact":2,"correlation":0.12,"sector":"Healthcare","parentId":"pd_index"},
+      {"id":"recycling_pd","label":"PGM Recycling","type":"processor","impact":-5,"correlation":-0.35,"sector":"Recycling","parentId":"jm_pd"},
+      {"id":"angpy_pd","label":"Anglo Amer Platinum (ANGPY)","type":"producer","impact":8,"correlation":0.72,"sector":"PGM Mining","parentId":"sbsw_pd"},
+      {"id":"pt_substitution","label":"Platinum Substitution","type":"substitute","impact":-6,"correlation":-0.48,"sector":"PGMs","parentId":"catalyst_pd"}
+    ]},
+    {"nodes": [
+      {"id":"zar_pd","label":"South African Rand (ZAR)","type":"fx","impact":5,"correlation":0.45,"sector":"Forex","parentId":"sbsw_pd"},
+      {"id":"rub_pd","label":"Russian Ruble (RUB)","type":"fx","impact":5,"correlation":0.42,"sector":"Forex","parentId":"norilsk_pd"},
+      {"id":"dxy_pd","label":"US Dollar (DXY)","type":"fx","impact":-5,"correlation":-0.45,"sector":"Forex","parentId":"pd_index"},
+      {"id":"russia_supply","label":"Russia Supply Risk","type":"policy","impact":8,"correlation":0.55,"sector":"Geopolitics","parentId":"norilsk_pd"},
+      {"id":"ev_threat_pd","label":"EV Adoption (Threat)","type":"macro","impact":-8,"correlation":-0.60,"sector":"Auto Transition","parentId":"gm_pd"},
+      {"id":"ice_peak","label":"ICE Vehicle Peak","type":"macro","impact":-7,"correlation":-0.55,"sector":"Auto Transition","parentId":"ev_threat_pd"},
+      {"id":"sa_supply_pd","label":"SA Supply Risk","type":"macro","impact":6,"correlation":0.45,"sector":"Supply","parentId":"impuy_pd"},
+      {"id":"china_auto_pd","label":"China Auto Demand","type":"macro","impact":5,"correlation":0.40,"sector":"Demand","parentId":"catalyst_pd"},
+      {"id":"auto_cycle_pd","label":"Global Auto Cycle","type":"macro","impact":5,"correlation":0.38,"sector":"Demand","parentId":"gm_pd"},
+      {"id":"sanctions_pd","label":"Russia Sanctions","type":"policy","impact":7,"correlation":0.50,"sector":"Geopolitics","parentId":"russia_supply"},
+      {"id":"emission_std_pd","label":"Emission Standards","type":"policy","impact":5,"correlation":0.38,"sector":"Regulation","parentId":"catalyst_pd"}
+    ]},
+    {"nodes": [
+      {"id":"hybrid_demand","label":"Hybrid Vehicle Demand","type":"macro","impact":4,"correlation":0.30,"sector":"Automotive","parentId":"china_auto_pd"},
+      {"id":"three_way_cat","label":"Three-Way Catalyst Tech","type":"consumer","impact":3,"correlation":0.22,"sector":"Technology","parentId":"emission_std_pd"},
+      {"id":"pd_deficit","label":"Palladium Market Deficit","type":"macro","impact":6,"correlation":0.48,"sector":"Supply/Demand","parentId":"pd_index"},
+      {"id":"thrifting_pd","label":"Thrifting (Catalyst)","type":"macro","impact":-4,"correlation":-0.30,"sector":"Demand Reduction","parentId":"catalyst_pd"},
+      {"id":"russia_stockpile","label":"Russia State Stockpile","type":"policy","impact":5,"correlation":0.38,"sector":"Supply","parentId":"sanctions_pd"},
+      {"id":"lease_rates","label":"Palladium Lease Rates","type":"macro","impact":5,"correlation":0.42,"sector":"Finance","parentId":"pd_deficit"},
+      {"id":"pd_pt_ratio","label":"Palladium/Platinum Ratio","type":"macro","impact":4,"correlation":0.32,"sector":"Relative Value","parentId":"pt_related"},
+      {"id":"china_6b","label":"China 6b Emissions Std","type":"policy","impact":4,"correlation":0.30,"sector":"Regulation","parentId":"china_auto_pd"}
+    ]}
+  ]
+};
+</script>
+<div id="impact-graph"></div>
+
 ## Overview
 
 Palladium is one of the most concentrated commodity markets in the world, with over 80% of demand coming from gasoline vehicle catalytic converters and roughly 80% of supply sourced from just two countries: Russia and South Africa. This dual concentration creates extreme price sensitivity to both auto production cycles and geopolitical disruptions. The metal traded above $3,000/oz in 2022 before EV transition concerns triggered a structural repricing. Annual mine production is approximately 7 million ounces, making palladium a tiny market where modest demand or supply shifts create outsized price volatility.

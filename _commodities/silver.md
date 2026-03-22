@@ -16,18 +16,57 @@ window.COMMODITY_DATA = {
   "commodity": {"id": "silver", "label": "Silver (SI)"},
   "levels": [
     {"nodes": [
-      {"id":"slv","label":"SLV ETF","type":"etf","impact":9,"correlation":0.95,"sector":"Precious Metals"},
-      {"id":"paas","label":"Pan American Silver","type":"producer","impact":14,"correlation":0.85,"sector":"Mining"},
-      {"id":"ag","label":"First Majestic (AG)","type":"producer","impact":15,"correlation":0.88,"sector":"Mining"},
-      {"id":"wpm","label":"Wheaton Precious (WPM)","type":"producer","impact":11,"correlation":0.82,"sector":"Streaming"},
-      {"id":"gdxj_si","label":"GDXJ Junior Miners","type":"etf","impact":10,"correlation":0.75,"sector":"Mining"}
+      {"id":"slv","label":"SLV Silver ETF","type":"etf","impact":9,"correlation":0.92,"sector":"Precious Metals"},
+      {"id":"sivr","label":"SIVR Silver ETF","type":"etf","impact":9,"correlation":0.90,"sector":"Precious Metals"},
+      {"id":"paas","label":"Pan American Silver (PAAS)","type":"producer","impact":10,"correlation":0.82,"sector":"Silver Mining"},
+      {"id":"ag","label":"First Majestic (AG)","type":"producer","impact":12,"correlation":0.88,"sector":"Silver Mining"},
+      {"id":"wpm","label":"Wheaton Precious (WPM)","type":"producer","impact":8,"correlation":0.75,"sector":"Streaming"},
+      {"id":"hl","label":"Hecla Mining (HL)","type":"producer","impact":11,"correlation":0.85,"sector":"Silver Mining"},
+      {"id":"cde","label":"Coeur Mining (CDE)","type":"producer","impact":11,"correlation":0.84,"sector":"Silver Mining"},
+      {"id":"gdxj_si","label":"GDXJ Junior Miners ETF","type":"etf","impact":7,"correlation":0.68,"sector":"Mining"},
+      {"id":"si_index","label":"Silver Futures Index","type":"index","impact":10,"correlation":0.99,"sector":"Commodities"},
+      {"id":"gld_cross","label":"Gold (Related)","type":"commodity","impact":7,"correlation":0.80,"sector":"Precious Metals"},
+      {"id":"solar_si","label":"Solar Silver Demand","type":"consumer","impact":5,"correlation":0.40,"sector":"Solar"},
+      {"id":"electronics_si","label":"Electronics Demand","type":"consumer","impact":3,"correlation":0.25,"sector":"Industrial"},
+      {"id":"jewelry_si","label":"Jewelry/Silverware","type":"consumer","impact":3,"correlation":0.22,"sector":"Luxury"}
     ]},
     {"nodes": [
-      {"id":"mag","label":"MAG Silver (MAG)","type":"producer","impact":12,"correlation":0.80,"sector":"Mining","parentId":"paas"},
-      {"id":"solar_si","label":"Solar Panel Mfg","type":"consumer","impact":6,"correlation":0.55,"sector":"Clean Energy","parentId":"slv"},
-      {"id":"electronics_si","label":"Electronics Sector","type":"consumer","impact":4,"correlation":0.45,"sector":"Tech","parentId":"slv"},
-      {"id":"gld_cross","label":"Gold (Cross-Link)","type":"commodity","impact":8,"correlation":0.82,"sector":"Precious Metals","parentId":"slv"},
-      {"id":"jewelry_si","label":"Jewelry Demand","type":"consumer","impact":3,"correlation":0.40,"sector":"Consumer","parentId":"slv"}
+      {"id":"mag","label":"MAG Silver (MAG)","type":"producer","impact":10,"correlation":0.82,"sector":"Silver Mining","parentId":"ag"},
+      {"id":"ssrm","label":"SSR Mining (SSRM)","type":"producer","impact":8,"correlation":0.70,"sector":"Mining","parentId":"paas"},
+      {"id":"eza","label":"South Africa ETF (EZA)","type":"etf","impact":3,"correlation":0.25,"sector":"Regional","parentId":"paas"},
+      {"id":"fslr_si","label":"First Solar (FSLR)","type":"consumer","impact":3,"correlation":0.22,"sector":"Solar","parentId":"solar_si"},
+      {"id":"enph_si","label":"Enphase Energy (ENPH)","type":"consumer","impact":2,"correlation":0.18,"sector":"Solar","parentId":"solar_si"},
+      {"id":"tan_si","label":"TAN Solar ETF","type":"etf","impact":3,"correlation":0.25,"sector":"Solar","parentId":"solar_si"},
+      {"id":"gld_etf","label":"GLD Gold ETF","type":"etf","impact":6,"correlation":0.72,"sector":"Precious Metals","parentId":"gld_cross"},
+      {"id":"nem_si","label":"Newmont (NEM)","type":"producer","impact":5,"correlation":0.55,"sector":"Gold/Silver","parentId":"gld_cross"},
+      {"id":"dbs_si","label":"Deutsche Bank Silver","type":"etf","impact":7,"correlation":0.78,"sector":"Silver","parentId":"slv"},
+      {"id":"semi_si","label":"Semiconductors (SOXX)","type":"consumer","impact":2,"correlation":0.15,"sector":"Electronics","parentId":"electronics_si"},
+      {"id":"silver_coins","label":"Silver Coin/Bar Demand","type":"consumer","impact":5,"correlation":0.42,"sector":"Investment","parentId":"si_index"},
+      {"id":"tif_si","label":"Tiffany/LVMH (LVMUY)","type":"consumer","impact":2,"correlation":0.15,"sector":"Luxury","parentId":"jewelry_si"}
+    ]},
+    {"nodes": [
+      {"id":"dxy_si","label":"US Dollar (DXY)","type":"fx","impact":-6,"correlation":-0.55,"sector":"Forex","parentId":"si_index"},
+      {"id":"mxn_si","label":"Mexican Peso (MXN)","type":"fx","impact":5,"correlation":0.42,"sector":"Forex","parentId":"paas"},
+      {"id":"inr_si","label":"Indian Rupee (INR)","type":"fx","impact":4,"correlation":0.35,"sector":"Forex","parentId":"si_index"},
+      {"id":"fed_rate_si","label":"Fed Interest Rate","type":"policy","impact":-7,"correlation":-0.58,"sector":"Monetary Policy","parentId":"dxy_si"},
+      {"id":"inflation_hedge","label":"Inflation Hedge Demand","type":"macro","impact":6,"correlation":0.50,"sector":"Investment","parentId":"slv"},
+      {"id":"india_demand","label":"India Silver Demand","type":"macro","impact":5,"correlation":0.40,"sector":"Demand","parentId":"inr_si"},
+      {"id":"solar_growth","label":"Global Solar Buildout","type":"macro","impact":6,"correlation":0.45,"sector":"Clean Energy","parentId":"solar_si"},
+      {"id":"mine_supply","label":"Global Mine Supply","type":"macro","impact":-5,"correlation":-0.42,"sector":"Supply","parentId":"si_index"},
+      {"id":"silver_deficit","label":"Silver Market Deficit","type":"macro","impact":7,"correlation":0.55,"sector":"Supply/Demand","parentId":"mine_supply"},
+      {"id":"copper_related_si","label":"Copper (Related)","type":"commodity","impact":5,"correlation":0.50,"sector":"Base Metals","parentId":"si_index"},
+      {"id":"platinum_related","label":"Platinum (Related)","type":"commodity","impact":4,"correlation":0.45,"sector":"Precious Metals","parentId":"gld_cross"},
+      {"id":"photovoltaic","label":"Photovoltaic Paste","type":"consumer","impact":5,"correlation":0.38,"sector":"Solar Mfg","parentId":"fslr_si"}
+    ]},
+    {"nodes": [
+      {"id":"gold_silver_ratio","label":"Gold/Silver Ratio","type":"macro","impact":5,"correlation":0.45,"sector":"Relative Value","parentId":"gld_cross"},
+      {"id":"comex_inventories","label":"COMEX Inventories","type":"macro","impact":-5,"correlation":-0.45,"sector":"Supply Data","parentId":"si_index"},
+      {"id":"cftc_positioning","label":"CFTC Net Positioning","type":"macro","impact":5,"correlation":0.42,"sector":"Sentiment","parentId":"silver_coins"},
+      {"id":"mexico_mining","label":"Mexico Mining Policy","type":"policy","impact":5,"correlation":0.38,"sector":"Supply","parentId":"mxn_si"},
+      {"id":"5g_silver","label":"5G Silver Demand","type":"macro","impact":3,"correlation":0.22,"sector":"Technology","parentId":"electronics_si"},
+      {"id":"ev_silver","label":"EV Silver Demand","type":"macro","impact":4,"correlation":0.30,"sector":"Auto","parentId":"solar_growth"},
+      {"id":"peru_mining","label":"Peru Mining Output","type":"regional","impact":4,"correlation":0.32,"sector":"Supply","parentId":"mine_supply"},
+      {"id":"wsb_silver","label":"Retail Investor Demand","type":"macro","impact":4,"correlation":0.28,"sector":"Sentiment","parentId":"silver_coins"}
     ]}
   ]
 };
