@@ -36,7 +36,9 @@
   function drawChart(canvas, candles) {
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
-    const W = rect.width, H = rect.height;
+    // Fallback for mobile in-app browsers where rect.width can be 0
+    const W = rect.width || canvas.offsetWidth || canvas.parentElement?.offsetWidth || canvas.parentElement?.getBoundingClientRect().width || window.innerWidth || 360;
+    const H = rect.height || canvas.offsetHeight || canvas.parentElement?.offsetHeight || 300;
     canvas.width  = W * dpr;
     canvas.height = H * dpr;
     const ctx = canvas.getContext('2d');
@@ -311,6 +313,22 @@
   window.addEventListener('load', () => {
     document.querySelectorAll('.cn-price-chart:not([data-ci])').forEach(initChart);
   });
+  // Extra retry for mobile in-app browsers (Threads, Instagram) where layout settles late
+  setTimeout(() => {
+    document.querySelectorAll('.cn-price-chart').forEach(el => {
+      const canvas = el.querySelector('canvas');
+      if (canvas) {
+        const rect = canvas.getBoundingClientRect();
+        if (!rect.width || canvas.width === 0) {
+          el.removeAttribute('data-ci');
+          initChart(el);
+        }
+      } else {
+        el.removeAttribute('data-ci');
+        initChart(el);
+      }
+    });
+  }, 1500);
 
   window.CommodityNodeChart = { init, initChart };
 })();

@@ -39,6 +39,8 @@
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else setTimeout(boot, 0);
+  // Extra retry for mobile in-app browsers (Threads/Instagram) — layout settles after 1.5s
+  window.addEventListener('load', () => setTimeout(boot, 1500));
 
   function initGraph(container) {
     const rawData = window.COMMODITY_DATA;
@@ -114,8 +116,20 @@
 
     // ── DIMENSIONS ──
     const isMob = window.innerWidth < 768;
-    // Wait for layout to settle so offsetWidth is correct
-    const W = (container.getBoundingClientRect().width) || container.offsetWidth || (isMob ? window.innerWidth : 700);
+    // Force layout recalculation before measuring (fixes mobile Threads in-app browser)
+    container.style.display = 'block';
+    container.style.width = '100%';
+    container.style.minWidth = '0';
+    // Multiple fallbacks for width measurement
+    let W = container.getBoundingClientRect().width
+         || container.offsetWidth
+         || container.clientWidth
+         || container.parentElement?.getBoundingClientRect().width
+         || container.parentElement?.offsetWidth
+         || window.innerWidth
+         || (isMob ? 360 : 700);
+    // Clamp to reasonable values
+    if (W < 50) W = isMob ? (window.screen?.width || 360) : 700;
     const H = isMob ? 520 : 640;
     container.style.height = H + 'px';
     container.style.position = 'relative';
