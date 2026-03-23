@@ -20,7 +20,7 @@
   }
   // Wait for page content to be ready (graphs, charts)
   function checkContentReady() {
-    var minTime = 1800; // show loader at least 1.8s
+    var minTime = 600; // show loader at least 0.6s
     var elapsed = Date.now() - _loaderStart;
     // Check if main content areas exist and have rendered
     var graph = document.getElementById('impact-graph');
@@ -28,7 +28,7 @@
     var charts = document.querySelectorAll('.cn-price-chart canvas');
     var isPostPage = !!document.getElementById('post-article');
     // For post pages: wait until graph or chart is rendered (or timeout)
-    if (isPostPage && !graphHasSvg && elapsed < 5000) {
+    if (isPostPage && !graphHasSvg && elapsed < 2000) {
       setTimeout(checkContentReady, 200);
       return;
     }
@@ -38,7 +38,7 @@
   }
   window.addEventListener("load", function() { setTimeout(checkContentReady, 100); });
   // Hard cap at 6s
-  setTimeout(hideLoader, 6000);
+  setTimeout(hideLoader, 3000);
 
   /* ---------- Page Transition ---------- */
   const transitionEl = document.getElementById('page-transition');
