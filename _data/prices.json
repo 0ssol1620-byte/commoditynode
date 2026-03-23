@@ -13,10 +13,10 @@
     "symbol": "GC=F",
     "name": "Gold",
     "unit": "$/oz",
-    "price": 3100,
-    "change_pct": -0.82,
-    "high_52w": 3500,
-    "low_52w": 2300,
+    "price": 4137.4,
+    "change_pct": -4.79,
+    "high_52w": 5586.2,
+    "low_52w": 2949.7,
     "updated_at": "2026-03-23T07:24:25.115Z"
   },
   "copper": {
@@ -283,10 +283,10 @@
     "symbol": "ZR=F",
     "name": "Rough Rice",
     "unit": "$/cwt",
-    "price": 13.87,
+    "price": 11.1,
     "change_pct": -0.43,
     "high_52w": 18.5,
-    "low_52w": 11.2,
+    "low_52w": 9.5,
     "updated_at": "2026-03-23T07:24:25.115Z"
   },
   "oats": {
