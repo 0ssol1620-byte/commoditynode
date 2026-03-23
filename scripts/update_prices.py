@@ -182,7 +182,7 @@ def main():
         chart_data[symbol] = {"name": name}
         for pk, (period, interval) in period_map.items():
             candles = fetch_candles(symbol, period, interval)
-            chart_data[symbol][pk] = candles
+            chart_data[symbol][pk] = {"candles": candles}
             print(f"   {pk}: {len(candles)} candles")
         time.sleep(0.3)
 
