@@ -104,6 +104,14 @@ def fetch_price(symbol):
             prev = valid[-2]
         if price and prev and prev != 0:
             chg = round((price - prev) / prev * 100, 2)
+            # 롤오버 감지: ±15% 초과 시 closes 배열로 재계산
+            if abs(chg) > 15:
+                valid_closes = [c for c in closes if c is not None and c > 0]
+                nearby = [c for c in valid_closes if abs(c - price) / price < 0.15]
+                if len(nearby) >= 2:
+                    chg = round((price - nearby[-2]) / nearby[-2] * 100, 2)
+                else:
+                    chg = 0.0  # 롤오버로 판단, 0으로 처리
         else:
             chg = 0.0
         high_52w = meta.get("fiftyTwoWeekHigh") or round(price * 1.2, 2)
