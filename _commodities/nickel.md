@@ -5,7 +5,7 @@ image: "/assets/images/og-nickel.png"
 title: "Nickel Price Impact: EV Batteries, Stainless Steel & Supply Chain"
 description: "How nickel price changes cascade through EV battery cathodes, stainless steel production, and key producers in Indonesia and Russia."
 commodity_slug: "nickel"
-symbol: "NIC=F"
+symbol: "JJN"
 sector: "Industrial Metals"
 etfs: ["JJN"]
 companies: ["BHP", "VALE", "GLNCY"]

@@ -4,7 +4,7 @@ image: "/assets/images/og-default.png"
 title: "Ethanol"
 description: "Fuel ethanol as a corn-derived biofuel blended into the US gasoline supply under federal renewable fuel mandates."
 commodity_slug: "ethanol"
-symbol: "PEIX"
+symbol: "REX"
 sector: "Energy/Agriculture"
 etfs: ["DBA", "XLE"]
 companies: ["PEIX", "ADM", "GPRE"]

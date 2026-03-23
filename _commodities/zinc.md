@@ -5,7 +5,7 @@ image: "/assets/images/og-zinc.png"
 title: "Zinc"
 description: "Zinc as a construction cycle indicator through its dominant galvanizing steel applications."
 commodity_slug: "zinc"
-symbol: "ZINC"
+symbol: "ZNC=F"
 sector: "Industrial Metals"
 etfs: ["JJM"]
 companies: ["BHP", "GLNCY", "TECK"]

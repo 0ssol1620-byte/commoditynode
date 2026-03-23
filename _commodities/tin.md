@@ -5,7 +5,7 @@ image: "/assets/images/og-tin.png"
 title: "Tin"
 description: "Tin's essential role in electronics solder and semiconductor packaging with high volatility."
 commodity_slug: "tin"
-symbol: "TIN"
+symbol: "ZNC=F"
 sector: "Industrial Metals"
 etfs: ["JJM"]
 companies: ["MINSUR", "YTL"]
