@@ -118,8 +118,8 @@ async function updatePrices() {
       const low52  = Math.min(...lows);
 
       // 이상값 필터: 일간 변동률 ±25% 초과 시 기존값 유지
-      const safePct = (Math.abs(changePct) > 25 && existing[key])
-        ? existing[key].change_pct
+      const safePct = (Math.abs(changePct) > 25 && prices[key])
+        ? prices[key].change_pct
         : changePct;
 
       prices[key] = {

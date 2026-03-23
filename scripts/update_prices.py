@@ -55,24 +55,7 @@ COMMODITIES = {
     "ethanol":       {"symbol": "REX",   "name": "Ethanol (REX proxy)",  "unit": "$/share"},
 }
 
-CHART_SYMBOLS = {
-    "CL=F": "Crude Oil (WTI)",
-    "GC=F": "Gold",
-    "HG=F": "Copper",
-    "NG=F": "Natural Gas",
-    "SI=F": "Silver",
-    "ZW=F": "Wheat",
-    "ZC=F": "Corn",
-    "KC=F": "Coffee",
-    "PA=F": "Palladium",
-    "ALB":  "Lithium (ALB)",
-    "SLX":  "Steel (SLX)",
-    "URA":  "Uranium (URA)",
-    "VALE": "Iron Ore (VALE)",
-    "BTU":  "Coal (BTU)",
-    "GLD":  "Gold ETF",
-    "USO":  "Oil ETF",
-}
+CHART_SYMBOLS = {info["symbol"]: info["name"] for info in COMMODITIES.values()}
 
 PERIODS = {
     "1M": {"period": "1mo",  "interval": "1d"},
@@ -91,23 +74,28 @@ def yahoo_fetch(symbol, range_="2d", interval="1d"):
 
 def fetch_price(symbol):
     try:
-        data = yahoo_fetch(symbol, "5d", "1d")
+        data = yahoo_fetch(symbol, "2d", "1d")
         result = data["chart"]["result"]
         if not result:
             return None
         meta = result[0]["meta"]
         price = meta.get("regularMarketPrice")
-        prev = meta.get("chartPreviousClose") or meta.get("previousClose")
+        # 일간 변동률: previousClose (직전 거래일 종가) 우선 사용
+        prev = meta.get("previousClose") or meta.get("regularMarketPreviousClose")
         closes = result[0].get("indicators", {}).get("quote", [{}])[0].get("close", [])
         valid = [c for c in closes if c is not None]
-        if len(valid) >= 2 and not prev:
+        # previousClose 없으면 closes 배열에서 직전 값 사용
+        if not prev and len(valid) >= 2:
             prev = valid[-2]
+        # chartPreviousClose는 range 시작점이라 일간용으로 부정확 — fallback만
+        if not prev:
+            prev = meta.get("chartPreviousClose")
         if price and prev and prev != 0:
             chg = round((price - prev) / prev * 100, 2)
-            # 롤오버 감지: ±15% 초과 시 closes 배열로 재계산
-            if abs(chg) > 15:
+            # 선물 롤오버 감지: ±10% 초과 시 의심
+            if abs(chg) > 10:
                 valid_closes = [c for c in closes if c is not None and c > 0]
-                nearby = [c for c in valid_closes if abs(c - price) / price < 0.15]
+                nearby = [c for c in valid_closes if abs(c - price) / price < 0.10]
                 if len(nearby) >= 2:
                     chg = round((price - nearby[-2]) / nearby[-2] * 100, 2)
                 else:
