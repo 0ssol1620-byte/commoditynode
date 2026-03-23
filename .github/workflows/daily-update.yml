@@ -2,12 +2,15 @@ name: Daily Commodity Price Update
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 9AM KST = 0:00 UTC
-  workflow_dispatch:
+    - cron: '0 0 * * *'  # 매일 KST 09:00 (UTC 00:00)
+  workflow_dispatch:      # 수동 트리거도 가능
 
 jobs:
   update-prices:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -16,19 +19,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install yfinance requests
-
-      - name: Create assets/data directory
-        run: mkdir -p assets/data
-
       - name: Update commodity prices and chart data
         run: python scripts/update_prices.py
 
       - name: Commit and push if changed
         run: |
-          git config user.email "action@github.com"
-          git config user.name "GitHub Action"
-          git add -A
-          git diff --quiet && git diff --staged --quiet || git commit -m "📊 Auto-update: prices + charts $(date +'%Y-%m-%d')"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "GitHub Actions"
+          git add assets/data/prices.json _data/prices.json assets/data/chart-data.json
+          git diff --staged --quiet || git commit -m "📊 Auto-update: commodity prices $(date +'%Y-%m-%d')"
           git push
