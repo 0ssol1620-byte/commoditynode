@@ -272,14 +272,14 @@
     // Fallback static data
     if (!tickerData.length) {
       tickerData = [
-        { name:'Crude Oil', price:'$93.99', change:'-2.31%', up:false },
-        { name:'Gold',      price:'$4,996', change:'-0.09%', up:false },
-        { name:'Copper',    price:'$5.73',  change:'+0.02%', up:true  },
-        { name:'Nat. Gas',  price:'$2.94',  change:'-3.17%', up:false },
-        { name:'Silver',    price:'$79.79', change:'+0.33%', up:true  },
-        { name:'Wheat',     price:'$591.8', change:'+0.34%', up:true  },
-        { name:'Corn',      price:'$453.0', change:'-0.22%', up:false },
-        { name:'Palladium', price:'$1,048', change:'-1.22%', up:false },
+        { name:'Crude Oil', price:'$100.77', change:'+0.42%', up:true  },
+        { name:'Gold',      price:'$3,100',  change:'-0.82%', up:false },
+        { name:'Copper',    price:'$5.27',   change:'+4.01%', up:true  },
+        { name:'Nat. Gas',  price:'$3.12',   change:'+1.76%', up:true  },
+        { name:'Silver',    price:'$61.95',  change:'-1.93%', up:false },
+        { name:'Wheat',     price:'$603.5',  change:'+10.1%', up:true  },
+        { name:'Corn',      price:'$471.75', change:'+1.56%', up:true  },
+        { name:'Palladium', price:'$1,345',  change:'-0.51%', up:false },
       ];
     }
 

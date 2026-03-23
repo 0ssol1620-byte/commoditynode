@@ -116,10 +116,15 @@ async function updatePrices() {
       const high52 = Math.max(...highs);
       const low52  = Math.min(...lows);
 
+      // 이상값 필터: 일간 변동률 ±25% 초과 시 기존값 유지
+      const safePct = (Math.abs(changePct) > 25 && existing[key])
+        ? existing[key].change_pct
+        : changePct;
+
       prices[key] = {
         symbol, name, unit,
         price: +price.toFixed(2),
-        change_pct: changePct,
+        change_pct: safePct,
         high_52w: +high52.toFixed(2),
         low_52w: +low52.toFixed(2),
         updated_at: now,
