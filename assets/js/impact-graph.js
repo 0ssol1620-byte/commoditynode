@@ -45,6 +45,8 @@
   function initGraph(container) {
     const rawData = window.COMMODITY_DATA;
     if (!rawData) return;
+    if (container.dataset.cnInit) return;
+    container.dataset.cnInit = '1';
 
     let levels;
     if (rawData.levels) { levels = rawData.levels; }
@@ -212,7 +214,7 @@
     function fitAll(animate) {
       try {
         const b = g.node().getBBox();
-        if (!b.width) return;
+        if (!b || b.width <= 0 || b.height <= 0) return;
         const pad = 0;
         const sc = Math.min(1.6, Math.min((W-pad*2)/b.width, (H-pad*2)/b.height));
         const tx = (W - b.width*sc)/2 - b.x*sc;
@@ -595,7 +597,7 @@
       consumer:'Consumers', supplier:'Suppliers', macro:'Macro', policy:'Policy',
       substitute:'Substitutes', regional:'Regional', fx:'FX', freight:'Freight', index:'Index'
     };
-    const typeButtons = Array.from(presentTypes).slice(0, 6).map(t =>
+    const typeButtons = Array.from(presentTypes).map(t =>
       `<button type="button" data-type="${t}">${typeLabels[t] || t}</button>`
     ).join('');
 
@@ -719,6 +721,7 @@
     setTimeout(impactPulse, maxLevel * 140 + 900);
 
     // ── PARTICLE ANIMATION ──
+    var _particleRafId = null;
     function particleTick() {
       particleEls.each(function(d) {
         d.t = (d.t + d.spd) % 1;
@@ -732,9 +735,10 @@
           .attr('cx', (1-t)*(1-t)*sx + 2*(1-t)*t*qx + t*t*tx)
           .attr('cy', (1-t)*(1-t)*sy + 2*(1-t)*t*qy + t*t*ty);
       });
-      requestAnimationFrame(particleTick);
+      _particleRafId = requestAnimationFrame(particleTick);
     }
-    setTimeout(particleTick, maxLevel * 140 + 400);
+    setTimeout(function() { _particleRafId = requestAnimationFrame(particleTick); }, maxLevel * 140 + 400);
+    window.addEventListener('beforeunload', function() { if (_particleRafId) cancelAnimationFrame(_particleRafId); });
 
     // ── LEGEND ──
     const legendItems = [

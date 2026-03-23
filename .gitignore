@@ -3,3 +3,6 @@ _site/
 .sass-cache/
 *.gem
 Gemfile.lock
+
+# Threads automation scripts (private)
+scripts/threads-*.js

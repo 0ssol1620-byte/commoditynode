@@ -104,7 +104,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 
     <div style="text-align:center;margin-top:24px;" data-animate data-delay="300">
       <a href="/commodities/" class="btn btn-primary">Explore All Commodity Hubs &rarr;</a>
-      <p style="color:var(--text3);font-size:0.85rem;margin-top:8px;">28 Commodity Hubs · 81 Signal Reports · 4000+ Impact Nodes</p>
+      <p style="color:var(--text3);font-size:0.85rem;margin-top:8px;">{{ site.commodities | size | default: 46 }} Commodity Hubs &middot; {{ site.posts.size }} Signal Reports &middot; 5000+ Impact Nodes</p>
     </div>
   </div>
 </section>
@@ -437,7 +437,7 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <div class="browse-label">Companies</div>
-        <div class="browse-count">18 tickers</div>
+        <div class="browse-count">19 tickers</div>
       </a>
       <a href="/themes/" class="browse-card">
         <div class="browse-icon" style="color:var(--purple);">

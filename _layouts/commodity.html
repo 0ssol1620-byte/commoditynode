@@ -90,11 +90,12 @@ layout: default
     // 52w estimates: +/-15% from current as reasonable range
     var high = (c.price * 1.15).toFixed(2);
     var low = (c.price * 0.85).toFixed(2);
-    if(c.high_52w !== undefined && c.high_52w !== null) high = c.high_52w;
-    if(c.low_52w !== undefined && c.low_52w !== null) low = c.low_52w;
+    var highIsEst = true, lowIsEst = true;
+    if(c.high_52w !== undefined && c.high_52w !== null) { high = c.high_52w; highIsEst = false; }
+    if(c.low_52w !== undefined && c.low_52w !== null) { low = c.low_52w; lowIsEst = false; }
     var isCents = (c.unit && c.unit.toLowerCase().indexOf('cents') !== -1);
-    document.getElementById('banner-52h').textContent = isCents ? high + '¢' : '$' + high;
-    document.getElementById('banner-52l').textContent = isCents ? low + '¢' : '$' + low;
+    document.getElementById('banner-52h').textContent = (isCents ? high + '¢' : '$' + high) + (highIsEst ? ' (est.)' : '');
+    document.getElementById('banner-52l').textContent = (isCents ? low + '¢' : '$' + low) + (lowIsEst ? ' (est.)' : '');
     if(c.updated_at){
       var dt = new Date(c.updated_at);
       document.getElementById('banner-updated').textContent = dt.toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
