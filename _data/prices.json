@@ -110,8 +110,8 @@
     "updated_at": "2026-03-23T15:03:43.360782+00:00"
   },
   "lumber": {
-    "symbol": "LBS=F",
-    "name": "Lumber",
+    "symbol": "WY",
+    "name": "Lumber (Weyerhaeuser)",
     "unit": "$/share",
     "price": 380.6,
     "change_pct": -1.12,
@@ -190,8 +190,8 @@
     "updated_at": "2026-03-23T15:03:46.140157+00:00"
   },
   "nickel": {
-    "symbol": "JJN",
-    "name": "Nickel (JJN ETN)",
+    "symbol": "VALE",
+    "name": "Nickel (VALE proxy)",
     "unit": "$/share",
     "price": 28.4,
     "change_pct": 0.0,

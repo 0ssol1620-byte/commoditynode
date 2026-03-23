@@ -5,7 +5,7 @@ image: "/assets/images/og-lumber.png"
 title: "Lumber Price Impact: Housing Market, Homebuilders & Construction"
 description: "How lumber price swings signal housing market cycles and impact homebuilders, REITs, and construction supply chains."
 commodity_slug: "lumber"
-symbol: "LBS=F"
+symbol: "WY"
 sector: "Industrial Metals"
 etfs: ["WOOD"]
 companies: ["WY", "RYN", "LPX"]
