@@ -237,6 +237,38 @@ layout: default
   </div>
 </div>
 
+<!-- Related Commodities -->
+{% if page.substitutes %}
+<section class="related-posts section" style="padding-top:0;">
+  <div class="container">
+    <div class="section-header" data-animate>
+      <p class="section-label">Related</p>
+      <h2 class="section-title">Related Commodities</h2>
+      <p class="section-desc">Substitutes and alternatives that move in similar or opposite patterns.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;" data-animate>
+      {% for sub in page.substitutes %}
+        {% assign sub_slug = sub | slugify %}
+        {% assign found = false %}
+        {% for c in site.commodities %}
+          {% assign c_slug = c.name | remove: '.md' %}
+          {% if c_slug == sub_slug %}
+            {% assign found = true %}
+            <a href="{{ c.url | relative_url }}" style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+              <span style="font-size:0.9rem;font-weight:600;color:var(--text);">{{ c.title | split: ':' | first | split: 'Price Impact' | first | strip }}</span>
+              <span style="font-size:0.75rem;color:var(--text3);">&rarr;</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+        {% unless found %}
+          <span style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);font-size:0.9rem;color:var(--text2);">{{ sub }}</span>
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <!-- Full Signal Reports Grid -->
 {% if related_posts.size > 0 %}
 <section class="related-posts section" aria-labelledby="commodity-reports-title">
