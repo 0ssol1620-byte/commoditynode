@@ -1,8 +1,8 @@
 ---
 layout: commodity
 image: "/assets/images/og-coal.png"
-title: "Coal"
-description: "Coal's divergent outlook between Asian demand growth and Western energy transition decline."
+title: "Coal Price Impact: Power Generation, Steel & Energy Transition"
+description: "How thermal and metallurgical coal prices affect power utilities, steel producers, and the renewable energy transition trade."
 commodity_slug: "coal"
 symbol: "BTU"
 sector: "Energy"

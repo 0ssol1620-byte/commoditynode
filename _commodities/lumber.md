@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/mbf"
 image: "/assets/images/og-lumber.png"
-title: "Lumber"
-description: "Lumber as a housing market bellwether with volatile supply-demand dynamics."
+title: "Lumber Price Impact: Housing Market, Homebuilders & Construction"
+description: "How lumber price swings signal housing market cycles and impact homebuilders, REITs, and construction supply chains."
 commodity_slug: "lumber"
 symbol: "LBS=F"
 sector: "Industrial Metals"

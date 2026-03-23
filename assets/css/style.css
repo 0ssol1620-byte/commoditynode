@@ -1397,6 +1397,8 @@ hr {
 
 @media (max-width: 600px) {
   .price-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+  .live-prices { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .price-grid { min-width: 320px; }
 }
 
 /* ── TradingView Chart Container ── */

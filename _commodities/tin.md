@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/mt"
 image: "/assets/images/og-tin.png"
-title: "Tin"
-description: "Tin's essential role in electronics solder and semiconductor packaging with high volatility."
+title: "Tin Price Impact: Semiconductors, Electronics & Soldering Supply Chain"
+description: "How tin price spikes ripple through semiconductor packaging, electronics manufacturers, and global PCB production."
 commodity_slug: "tin"
 symbol: "ZNC=F"
 sector: "Industrial Metals"

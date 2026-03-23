@@ -289,4 +289,13 @@ description: "Explore how each commodity's price movements impact industries, st
   </a>
 </div>
 
+
+<div style="text-align:center;padding:48px 24px 0;">
+  <p style="color:var(--text2);margin-bottom:20px;font-size:0.95rem;">Get weekly commodity signal reports delivered to your inbox.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:16px;">
+    <a href="/commodities/gold/" class="btn btn-primary">Gold Impact Map</a>
+    <a href="/commodities/crude-oil/" class="btn btn-secondary">Oil Impact Map</a>
+    <a href="/commodities/copper/" class="btn btn-secondary">Copper Impact Map</a>
+  </div>
+</div>
 </div>

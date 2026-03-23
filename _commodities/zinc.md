@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/mt"
 image: "/assets/images/og-zinc.png"
-title: "Zinc"
-description: "Zinc as a construction cycle indicator through its dominant galvanizing steel applications."
+title: "Zinc Price Impact: Galvanized Steel, Construction & Infrastructure"
+description: "How zinc price movements affect galvanized steel producers, construction companies, and infrastructure spending cycles."
 commodity_slug: "zinc"
 symbol: "ZNC=F"
 sector: "Industrial Metals"
