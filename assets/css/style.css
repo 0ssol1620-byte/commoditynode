@@ -2988,7 +2988,7 @@ a.read-more:hover { gap: 8px; color: var(--accent2); }
   margin-left: auto;
 }
 .universe-reset-btn:hover { border-color: rgba(34,211,238,0.6); box-shadow: 0 0 12px rgba(34,211,238,0.2); }
-.universe-container { position: relative; }
+.universe-container { position: relative; overflow: hidden; max-width: 100%; }
 @media (max-width: 768px) {
   #universe-canvas { height: 450px !important; }
   .universe-controls { gap: 8px; flex-wrap: wrap; overflow-x: hidden; max-width: 100%; }
