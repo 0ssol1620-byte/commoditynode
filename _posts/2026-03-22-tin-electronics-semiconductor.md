@@ -19,7 +19,7 @@ What makes tin particularly interesting for tech-focused investors is its invers
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="SN=F" data-name="Tin (LME)"></div>
+<div class="cn-price-chart" data-symbol="ZNC=F" data-name="Zinc/Tin (ZNC=F)"></div>
 <div id="impact-graph"></div>
 
 <script>

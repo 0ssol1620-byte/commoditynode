@@ -17,7 +17,7 @@ The current nickel price of $18,500 per tonne — up 12% year-to-date — reflec
 
 This bottleneck has profound implications that cascade through the entire EV supply chain. From Indonesian mines to Chinese refineries to Korean and Japanese cathode plants to Tesla's Gigafactories, every link in the chain is operating with thin buffers and long lead times. A 12% nickel price increase doesn't just raise battery costs — it forces automakers to reconsider vehicle trim strategies, battery chemistry choices, and pricing models. The ripple chain from nickel to the consumer's driveway is one of the most consequential in the energy transition.
 
-<div class="cn-price-chart" data-symbol="NI=F" data-name="Nickel (LME)"></div>
+<div class="cn-price-chart" data-symbol="JJN" data-name="Nickel (JJN)"></div>
 <div id="impact-graph"></div>
 
 <script>

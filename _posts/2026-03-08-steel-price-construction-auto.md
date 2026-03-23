@@ -16,7 +16,7 @@ Steel is the backbone of the modern economy — and its price movements expose f
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="NUE" data-name="Nucor (NUE)"></div>
+<div class="cn-price-chart" data-symbol="SLX" data-name="Steel (SLX ETF)"></div>
 <div id="impact-graph"></div>
 
 <script>

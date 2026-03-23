@@ -19,7 +19,7 @@ For investors, nickel offers exposure to both the EV revolution and traditional 
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="NI=F" data-name="Nickel (LME)"></div>
+<div class="cn-price-chart" data-symbol="JJN" data-name="Nickel (JJN)"></div>
 <div id="impact-graph"></div>
 
 <script>

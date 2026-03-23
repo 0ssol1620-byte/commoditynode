@@ -17,7 +17,7 @@ SLX holds a focused portfolio of global steelmakers and iron ore producers, with
 
 The current steel market is particularly interesting because of the tension between the massive infrastructure spending pipeline from the IIJA (Infrastructure Investment and Jobs Act) and the cyclical slowdown in commercial construction. Steelmaker margins depend on the spread between HRC prices and input costs, primarily scrap and iron ore, making the interplay between raw material markets and finished steel pricing the key variable for SLX performance.
 
-<div class="cn-price-chart" data-symbol="HRC=F" data-name="Hot-Rolled Coil Steel"></div>
+<div class="cn-price-chart" data-symbol="SLX" data-name="Hot-Rolled Coil Steel"></div>
 <div id="impact-graph"></div>
 
 <script>

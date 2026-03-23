@@ -17,7 +17,7 @@ Steel is not a single commodity but a family of products with distinct supply-de
 
 The current steel cycle is particularly interesting because it is being driven by a confluence of factors that historically do not align: massive government infrastructure spending through the IIJA and IRA programs, a reshoring wave that is creating new domestic manufacturing capacity, and Section 232 tariffs that continue to limit import competition. For steel consumers -- automakers, homebuilders, appliance manufacturers, and construction companies -- these same forces mean persistently elevated input costs with limited ability to source cheaper alternatives. This analysis quantifies the winners and losers across the steel supply chain.
 
-<div class="cn-price-chart" data-symbol="HRC=F" data-name="Hot-Rolled Coil Steel"></div>
+<div class="cn-price-chart" data-symbol="SLX" data-name="Hot-Rolled Coil Steel"></div>
 
 <div id="impact-graph"></div>
 

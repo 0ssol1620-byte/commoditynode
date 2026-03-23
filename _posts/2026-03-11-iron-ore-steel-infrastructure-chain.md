@@ -17,7 +17,7 @@ The propagation mechanism is driven by China's unique economic structure. Chines
 
 What makes this chain particularly valuable for global macro investors is its leading indicator properties. Iron ore prices tend to move 2-4 weeks ahead of Chinese economic data releases (PMI, fixed asset investment, property starts) because the physical commodity market responds to real orders before statisticians compile surveys. The iron ore price in January often tells you more about China's Q1 GDP than any economist forecast. Understanding this chain means having a front-row seat to the economic trajectory of the nation that drives a third of global growth.
 
-<div class="cn-price-chart" data-symbol="TIO=F" data-name="Iron Ore (62% Fe)"></div>
+<div class="cn-price-chart" data-symbol="VALE" data-name="Iron Ore (62% Fe)"></div>
 <div id="impact-graph"></div>
 
 <script>

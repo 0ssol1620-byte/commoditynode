@@ -17,7 +17,7 @@ What makes the construction sector's commodity exposure particularly treacherous
 
 This analysis maps the construction sector's three-commodity triangle, identifying which sub-industries win, which lose, and how the interaction effects between steel, copper, and lumber create compounding dynamics that simple single-commodity analysis misses.
 
-<div class="cn-price-chart" data-symbol="HRC=F" data-name="Hot-Rolled Coil Steel"></div>
+<div class="cn-price-chart" data-symbol="SLX" data-name="Hot-Rolled Coil Steel"></div>
 <div id="impact-graph"></div>
 
 <script>

@@ -19,7 +19,7 @@ What makes coal particularly interesting from an investment perspective is the s
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="MTF=F" data-name="Coal (Newcastle)"></div>
+<div class="cn-price-chart" data-symbol="BTU" data-name="Coal (BTU)"></div>
 <div id="impact-graph"></div>
 
 <script>

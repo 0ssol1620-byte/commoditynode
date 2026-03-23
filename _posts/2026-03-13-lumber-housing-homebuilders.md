@@ -16,7 +16,7 @@ Lumber's pandemic surge from $350 to $1,700 per thousand board feet — a 386% e
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="WFG" data-name="West Fraser Timber"></div>
+<div class="cn-price-chart" data-symbol="LBS=F" data-name="Lumber (LBS=F)"></div>
 <div id="impact-graph"></div>
 
 <script>

@@ -19,7 +19,7 @@ For investors, cobalt represents both a high-risk, high-reward mining play and a
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="CO=F" data-name="Cobalt"></div>
+<div class="cn-price-chart" data-symbol="GLNCY" data-name="Cobalt (GLNCY)"></div>
 <div id="impact-graph"></div>
 
 <script>

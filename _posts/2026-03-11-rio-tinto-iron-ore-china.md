@@ -17,7 +17,7 @@ The iron ore market is dominated by three producers -- Rio Tinto, BHP, and Vale 
 
 For investors, iron ore miners offer a unique combination of high dividend yields, operational leverage to commodity prices, and macro exposure to the Chinese and global industrial cycles. Rio Tinto's dividend policy of returning 40-60% of underlying earnings to shareholders has made it one of the highest-yielding large-cap mining stocks in the world, with dividends fluctuating dramatically with iron ore prices. Understanding the full supply chain -- from mine to blast furnace to finished steel product -- is essential for positioning around iron ore price cycles and the companies that profit from them.
 
-<div class="cn-price-chart" data-symbol="TIO=F" data-name="Iron Ore (62% Fe)"></div>
+<div class="cn-price-chart" data-symbol="VALE" data-name="Iron Ore (62% Fe)"></div>
 
 <div id="impact-graph"></div>
 

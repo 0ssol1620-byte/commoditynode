@@ -16,7 +16,7 @@ Aluminum is everywhere — in your soda can, your car doors, the wings of every 
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="AA" data-name="Alcoa (AA)"></div>
+<div class="cn-price-chart" data-symbol="ALI=F" data-name="Aluminum (ALI=F)"></div>
 <div id="impact-graph"></div>
 
 <script>

@@ -16,7 +16,7 @@ Lithium is the defining commodity of the EV revolution. Its price went from $6,0
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="LTHM" data-name="Lithium Americas"></div>
+<div class="cn-price-chart" data-symbol="ALB" data-name="Lithium Americas"></div>
 <div id="impact-graph"></div>
 
 <script>

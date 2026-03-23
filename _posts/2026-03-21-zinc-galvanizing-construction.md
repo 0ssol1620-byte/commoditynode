@@ -19,7 +19,7 @@ On the supply side, zinc mining faces structural challenges. Several major mines
 
 ## The Impact Map
 
-<div class="cn-price-chart" data-symbol="ZN=F" data-name="Zinc (LME)"></div>
+<div class="cn-price-chart" data-symbol="ZNC=F" data-name="Zinc (ZNC=F)"></div>
 <div id="impact-graph"></div>
 
 <script>
