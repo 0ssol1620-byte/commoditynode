@@ -1,7 +1,8 @@
 ---
 layout: commodity
-title: "Aluminum"
-description: "Aluminum's role in aerospace, EV lightweighting, and energy-intensive smelting economics."
+image: "/assets/images/og-aluminum.png"
+title: "Aluminum Price Impact: Aerospace, Beverage Cans & Auto Industry"
+description: "How aluminum price movements affect aerospace manufacturers, beverage companies, automotive supply chains, and producers like Alcoa and Century Aluminum."
 commodity_slug: "aluminum"
 symbol: "ALI=F"
 sector: "Industrial Metals"

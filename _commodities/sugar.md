@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-sugar.png"
 title: "Sugar"
 description: "Sugar's unique economics driven by ethanol diversion, government subsidies, and climate risk."
 commodity_slug: "sugar"

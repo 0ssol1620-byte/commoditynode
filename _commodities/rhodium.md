@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Rhodium"
 description: "Rhodium's extreme scarcity, catalytic converter dominance, and South African supply concentration."
 commodity_slug: "rhodium"

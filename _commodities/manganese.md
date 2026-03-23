@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Manganese Price Impact: Industries, Stocks & ETFs"
 description: "How manganese price movements ripple through steelmakers, EV battery producers, and mining companies."
 commodity_slug: "manganese"

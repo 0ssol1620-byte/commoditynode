@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-coal.png"
 title: "Coal"
 description: "Coal's divergent outlook between Asian demand growth and Western energy transition decline."
 commodity_slug: "coal"

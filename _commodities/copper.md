@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-copper.png"
 title: "Copper Price Impact: EVs, Mining & Construction"
 description: "How copper price movements signal economic cycles and impact EV makers, miners, and homebuilders."
 commodity_slug: "copper"

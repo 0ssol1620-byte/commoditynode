@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Rare Earth Elements"
 description: "Rare earth elements powering permanent magnets for EV motors, wind turbines, and defense systems, with extreme Chinese supply chain dominance."
 commodity_slug: "rare-earth"

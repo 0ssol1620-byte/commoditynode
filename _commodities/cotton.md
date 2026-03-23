@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-cotton.png"
 title: "Cotton"
 description: "Cotton's textile industry dynamics, weather sensitivity, and polyester competition."
 commodity_slug: "cotton"

@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Hydrogen"
 description: "Hydrogen's role as a clean energy carrier, electrolyzer economics, and the green vs grey transition."
 commodity_slug: "hydrogen"

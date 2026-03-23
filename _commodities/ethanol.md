@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Ethanol"
 description: "Fuel ethanol as a corn-derived biofuel blended into the US gasoline supply under federal renewable fuel mandates."
 commodity_slug: "ethanol"

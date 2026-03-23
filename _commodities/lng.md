@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-lng.png"
 title: "LNG"
 description: "Liquefied natural gas and the geopolitical reshaping of global energy trade routes."
 commodity_slug: "lng"

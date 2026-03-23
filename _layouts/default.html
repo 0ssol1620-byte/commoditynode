@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% if page.title %}{% unless page.title == 'Home' %}{{ page.title }} — {% endunless %}{% endif %}{{ site.title }}</title>
+  <title>{% if page.title %}{% unless page.title == 'Home' %}{{ page.title }} | {% endunless %}{% endif %}{{ site.title }}{% if page.title == 'Home' or page.title == blank %} — Commodity Price Impact Maps{% endif %}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
   <meta name="theme-color" content="#050508">
 
@@ -199,6 +199,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js" defer></script>

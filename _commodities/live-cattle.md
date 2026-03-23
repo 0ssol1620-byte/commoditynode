@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Live Cattle"
 description: "Live cattle as the cornerstone of the US beef market driven by cattle cycle dynamics and drought risk."
 commodity_slug: "live-cattle"

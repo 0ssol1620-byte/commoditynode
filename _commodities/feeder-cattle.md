@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Feeder Cattle"
 description: "Feeder cattle as weaned calves entering feedlots, driven by the cattle cycle, corn costs, and drought conditions."
 commodity_slug: "feeder-cattle"

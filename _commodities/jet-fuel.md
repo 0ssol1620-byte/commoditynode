@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-jet-fuel.png"
 title: "Jet Fuel"
 description: "Jet fuel's outsized impact on airline operating costs and hedging strategies."
 commodity_slug: "jet-fuel"

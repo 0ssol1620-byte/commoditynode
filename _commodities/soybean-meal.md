@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Soybean Meal"
 description: "Soybean meal as the dominant global protein source in animal feed, driving the soy crush spread and livestock economics."
 commodity_slug: "soybean-meal"

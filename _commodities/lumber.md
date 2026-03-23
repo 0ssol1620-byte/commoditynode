@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-lumber.png"
 title: "Lumber"
 description: "Lumber as a housing market bellwether with volatile supply-demand dynamics."
 commodity_slug: "lumber"

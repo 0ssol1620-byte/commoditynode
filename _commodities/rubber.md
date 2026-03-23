@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Rubber"
 description: "Natural rubber's tire industry dominance, Southeast Asian supply concentration, and synthetic substitution dynamics."
 commodity_slug: "rubber"

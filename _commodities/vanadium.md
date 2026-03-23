@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Vanadium"
 description: "Vanadium's dual role in high-strength steel alloys and grid-scale redox flow batteries, with Chinese supply dominance."
 commodity_slug: "vanadium"

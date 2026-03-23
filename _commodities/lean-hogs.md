@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Lean Hogs"
 description: "Lean hogs as a globally significant protein commodity dominated by Chinese demand and disease risk."
 commodity_slug: "lean-hogs"

@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-crude-oil.png"
 title: "Crude Oil Price Impact: Industries, Stocks & ETFs"
 description: "How WTI crude oil price movements ripple through airlines, energy stocks, and consumer spending."
 commodity_slug: "crude-oil"

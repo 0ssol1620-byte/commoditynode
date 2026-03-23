@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-cocoa.png"
 title: "Cocoa"
 description: "Cocoa's West African production concentration and climate change threat to global chocolate supply."
 commodity_slug: "cocoa"

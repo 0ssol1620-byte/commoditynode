@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-default.png"
 title: "Graphite"
 description: "Graphite as the dominant anode material in lithium-ion batteries, with Chinese processing dominance and EV-driven demand growth."
 commodity_slug: "graphite"

@@ -1,7 +1,8 @@
 ---
 layout: commodity
-title: "Cobalt"
-description: "Cobalt's critical role in batteries, DRC supply concentration, and ethical sourcing pressures."
+image: "/assets/images/og-cobalt.png"
+title: "Cobalt Price Impact: EV Batteries, Supply Chain Risk & Mining Stocks"
+description: "How cobalt price shifts cascade through EV battery manufacturers, smartphone supply chains, DRC geopolitical risk, and companies like Glencore and CATL."
 commodity_slug: "cobalt"
 symbol: "GLNCY"
 sector: "Battery Metals"

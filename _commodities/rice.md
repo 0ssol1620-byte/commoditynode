@@ -1,7 +1,8 @@
 ---
 layout: commodity
-title: "Rice Price Impact: Industries, Stocks & ETFs"
-description: "How rough rice futures ripple through global food security, agribusiness, Asian economies, and fertilizer supply chains."
+image: "/assets/images/og-default.png"
+title: "Rice Price Impact: Food Security, Asian Economies & Agribusiness"
+description: "How rough rice price movements affect Asian food security, export economies in India, Thailand and Vietnam, agribusiness companies, and global food inflation."
 commodity_slug: "rice"
 symbol: "ZR=F"
 sector: "Agriculture"

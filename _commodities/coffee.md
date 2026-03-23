@@ -1,5 +1,6 @@
 ---
 layout: commodity
+image: "/assets/images/og-coffee.png"
 title: "Coffee"
 description: "Coffee as the world's second-most traded commodity with climate-vulnerable supply chains."
 commodity_slug: "coffee"

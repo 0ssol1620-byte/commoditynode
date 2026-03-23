@@ -1,7 +1,8 @@
 ---
 layout: commodity
-title: "Steel"
-description: "Steel as the backbone of construction, autos, and infrastructure spending cycles."
+image: "/assets/images/og-steel.png"
+title: "Steel Price Impact: Construction, Auto Industry & Industrial Stocks"
+description: "How steel price changes ripple through construction, automotive, appliances, and industrial companies including Nucor, Steel Dynamics and ArcelorMittal."
 commodity_slug: "steel"
 symbol: "SLX"
 sector: "Industrial Metals"

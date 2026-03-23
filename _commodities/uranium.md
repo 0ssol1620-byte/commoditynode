@@ -1,7 +1,8 @@
 ---
 layout: commodity
-title: "Uranium"
-description: "Uranium's nuclear renaissance driven by SMR technology and post-Fukushima supply deficits."
+image: "/assets/images/og-uranium.png"
+title: "Uranium Price Impact: Nuclear Reactors, Mining Stocks & Energy Policy"
+description: "How uranium price movements ripple through nuclear utilities, mining companies like CCJ and NexGen, clean energy policy, and uranium ETFs like URA."
 commodity_slug: "uranium"
 symbol: "URA"
 sector: "Battery Metals"
