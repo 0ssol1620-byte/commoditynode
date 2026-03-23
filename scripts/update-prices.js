@@ -8,6 +8,7 @@ const https = require('https');
 
 const PRICES_PATH = path.join(__dirname, '..', 'assets', 'data', 'prices.json');
 const CHART_PATH  = path.join(__dirname, '..', 'assets', 'data', 'chart-data.json');
+const DATA_PRICES_PATH = path.join(__dirname, '..', '_data', 'prices.json');
 
 const SYMBOLS = {
   crude_oil:     { symbol: 'CL=F',  name: 'Crude Oil',          unit: '$/barrel' },
@@ -173,6 +174,7 @@ async function updatePrices() {
   // Write files
   fs.writeFileSync(PRICES_PATH, JSON.stringify(prices, null, 2) + '\n');
   fs.writeFileSync(CHART_PATH, JSON.stringify(chartData) + '\n');
+  fs.writeFileSync(DATA_PRICES_PATH, JSON.stringify(prices, null, 2) + '\n'); // Jekyll _data sync
 
   console.log(`\nDone: ${updated} updated, ${failed} failed`);
   console.log(`  prices.json: ${Object.keys(prices).length} commodities`);

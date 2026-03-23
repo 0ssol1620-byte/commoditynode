@@ -2257,6 +2257,7 @@ a:focus-visible, button:focus-visible {
 }
 
 .cn-graph-control-group {
+  overflow-x: auto;
   display: inline-flex;
   align-items: center;
   gap: 8px;
