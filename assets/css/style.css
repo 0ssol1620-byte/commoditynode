@@ -2996,8 +2996,9 @@ a.read-more:hover { gap: 8px; color: var(--accent2); }
   .universe-search { min-width: 120px; max-width: 160px; }
 }
 @media (max-width: 480px) {
-  .universe-controls { flex-direction: column; align-items: flex-start; }
-  .universe-control-group { width: 100%; }
+  .universe-controls { flex-direction: column; align-items: flex-start; max-width: 100%; overflow: hidden; }
+  .universe-control-group { width: 100%; max-width: 100%; }
+  .universe-controls select, .universe-controls input, .universe-controls button { max-width: 100%; width: 100%; box-sizing: border-box; }
 }
 
 /* Mobile table scroll safety */
