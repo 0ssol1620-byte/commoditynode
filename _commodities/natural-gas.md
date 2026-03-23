@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/MMBtu"
 image: "/assets/images/og-natural-gas.png"
 title: "Natural Gas Price Impact: Utilities, Fertilizers & LNG"
 description: "How Henry Hub natural gas prices affect utilities, fertilizer makers, and LNG exporters."

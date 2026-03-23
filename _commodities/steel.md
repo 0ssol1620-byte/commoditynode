@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/ton"
 image: "/assets/images/og-steel.png"
 title: "Steel Price Impact: Construction, Auto Industry & Industrial Stocks"
 description: "How steel price changes ripple through construction, automotive, appliances, and industrial companies including Nucor, Steel Dynamics and ArcelorMittal."

@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "cents/lb"
 image: "/assets/images/og-default.png"
 title: "Soybean Oil"
 description: "Soybean oil as a dual-use commodity bridging food markets and renewable diesel feedstock demand."

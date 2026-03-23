@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "cents/bushel"
 image: "/assets/images/og-soybeans.png"
 title: "Soybeans"
 description: "Soybean crush economics and the US-Brazil-China trade triangle that drives global pricing."

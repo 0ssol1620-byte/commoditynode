@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/oz"
 image: "/assets/images/og-palladium.png"
 title: "Palladium"
 description: "Palladium's auto catalyst dominance and the structural demand threat from EV adoption."

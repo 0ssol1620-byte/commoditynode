@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/mbf"
 image: "/assets/images/og-lumber.png"
 title: "Lumber"
 description: "Lumber as a housing market bellwether with volatile supply-demand dynamics."

@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "cents/bushel"
 image: "/assets/images/og-wheat.png"
 title: "Wheat Price Impact: Food Security, Processors & EM Risk"
 description: "How wheat price spikes ripple through food manufacturers, agri-processors, and emerging markets."

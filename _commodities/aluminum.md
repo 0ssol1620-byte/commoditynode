@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/mt"
 image: "/assets/images/og-aluminum.png"
 title: "Aluminum Price Impact: Aerospace, Beverage Cans & Auto Industry"
 description: "How aluminum price movements affect aerospace manufacturers, beverage companies, automotive supply chains, and producers like Alcoa and Century Aluminum."

@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/oz"
 image: "/assets/images/og-platinum.png"
 title: "Platinum"
 description: "Platinum's pivot from diesel catalysts to hydrogen fuel cell applications."

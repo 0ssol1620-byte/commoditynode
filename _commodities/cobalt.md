@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/ton"
 image: "/assets/images/og-cobalt.png"
 title: "Cobalt Price Impact: EV Batteries, Supply Chain Risk & Mining Stocks"
 description: "How cobalt price shifts cascade through EV battery manufacturers, smartphone supply chains, DRC geopolitical risk, and companies like Glencore and CATL."

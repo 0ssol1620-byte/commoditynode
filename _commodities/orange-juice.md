@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "cents/lb"
 image: "/assets/images/og-default.png"
 title: "Orange Juice Price Impact: Industries, Stocks & ETFs"
 description: "How FCOJ futures ripple through beverage companies, Florida agriculture, Brazilian exports, and vitamin supplement markets."

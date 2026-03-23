@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/mt"
 image: "/assets/images/og-tin.png"
 title: "Tin"
 description: "Tin's essential role in electronics solder and semiconductor packaging with high volatility."

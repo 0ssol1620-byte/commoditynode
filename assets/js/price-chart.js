@@ -15,9 +15,11 @@
     } catch(e) { console.warn('chart-data:', e.message); return null; }
   }
 
-  function fmt(p) {
+  function fmt(p, unit) {
     if (p == null || isNaN(p)) return '—';
     const n = +p;
+    const isCents = unit && unit.toLowerCase().includes('cents');
+    if (isCents) return n.toFixed(2) + '¢';
     if (n >= 10000) return '$' + (n/1000).toFixed(1) + 'k';
     if (n >= 1000)  return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
     return '$' + n.toFixed(n < 10 ? 3 : 2);
@@ -223,6 +225,7 @@
     el.dataset.ci = '1';
     const symbol = el.dataset.symbol;
     const name   = el.dataset.name || symbol;
+    const unit   = el.dataset.unit || '';
     if (!symbol) return;
 
     el.innerHTML = `
@@ -265,7 +268,7 @@
         const pEl = el.querySelector('.cn-price');
         const cEl = el.querySelector('.cn-change');
         const uEl = el.querySelector('.cn-updated');
-        if (pEl) pEl.textContent = fmt(last);
+        if (pEl) pEl.textContent = fmt(last, unit);
         if (cEl) { cEl.textContent=(isUp?'+':'')+chg+'%'; cEl.className='cn-change '+(isUp?'up':'down'); }
         if (uEl) uEl.textContent = fmtDate(candles[candles.length-1].x);
 

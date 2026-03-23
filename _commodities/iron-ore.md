@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/ton"
 image: "/assets/images/og-iron-ore.png"
 title: "Iron Ore"
 description: "Iron ore as the essential steel feedstock driven by China's 70%+ consumption share."

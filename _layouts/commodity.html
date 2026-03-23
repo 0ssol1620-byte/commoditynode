@@ -141,7 +141,7 @@ layout: default
 
   <!-- Price Chart -->
   {% if page.symbol %}
-  <div class="cn-price-chart" data-symbol="{{ page.symbol }}" data-name="{{ page.title }}" style="margin-bottom:40px;"></div>
+  <div class="cn-price-chart" data-symbol="{{ page.symbol }}" data-name="{{ page.title }}" data-unit="{{ page.unit | default: '' }}" style="margin-bottom:40px;"></div>
   {% endif %}
 
 

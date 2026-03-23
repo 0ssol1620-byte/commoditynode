@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "cents/cwt"
 image: "/assets/images/og-default.png"
 title: "Rice Price Impact: Food Security, Asian Economies & Agribusiness"
 description: "How rough rice price movements affect Asian food security, export economies in India, Thailand and Vietnam, agribusiness companies, and global food inflation."

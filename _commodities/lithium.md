@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/ton"
 image: "/assets/images/og-lithium.png"
 title: "Lithium Price Impact: EV Supply Chain, Battery Costs & Mining Stocks"
 description: "How lithium price moves affect EV manufacturers, battery pack costs, Albemarle, SQM, and the transition to lower-cost LFP battery chemistry."

@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/oz"
 image: "/assets/images/og-gold.png"
 title: "Gold Price Impact: Miners, Dollar & Safe Haven Flows"
 description: "How gold price movements reflect inflation, currency, and risk sentiment across global markets."

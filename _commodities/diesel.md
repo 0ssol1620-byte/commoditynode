@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/gallon"
 image: "/assets/images/og-diesel.png"
 title: "Diesel"
 description: "Diesel as the lifeblood of freight, logistics, and agricultural operations."

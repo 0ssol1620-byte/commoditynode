@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "cents/bushel"
 image: "/assets/images/og-corn.png"
 title: "Corn Price Impact: Ethanol, Livestock & Food Supply"
 description: "How corn prices cascade through ethanol producers, livestock operations, and food manufacturers."

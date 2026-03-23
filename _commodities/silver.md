@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/oz"
 image: "/assets/images/og-silver.png"
 title: "Silver"
 description: "Silver's dual role as precious metal and industrial input for solar panels and electronics."
