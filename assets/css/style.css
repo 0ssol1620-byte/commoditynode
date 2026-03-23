@@ -1853,7 +1853,7 @@ a:focus-visible, button:focus-visible {
 /* ════════════════════════════════════
    TICKER — ensure animation works
    ════════════════════════════════════ */
-.ticker-bar { overflow: hidden; position: relative; }
+.ticker-bar { overflow: hidden; position: relative; min-height: 36px; display: flex; align-items: center; }
 .ticker-track {
   display: inline-flex !important;
   animation: ticker-scroll 40s linear infinite;

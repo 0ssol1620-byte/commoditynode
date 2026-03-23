@@ -249,7 +249,8 @@
       resize();
       initNodes();
       if (animFrame) cancelAnimationFrame(animFrame);
-      drawFrame();
+      lastTime = performance.now();
+      animFrame = requestAnimationFrame(drawFrame);
     }
 
     window.addEventListener('resize', () => { resize(); initNodes(); });
