@@ -158,6 +158,67 @@ layout: default
     {% include newsletter.html %}
   </div>
 
+  <!-- Auto-link commodity keywords in post body -->
+  <script>
+  (function(){
+    var defined = {
+      "crude oil":"/commodities/crude-oil/","natural gas":"/commodities/natural-gas/",
+      "gold":"/commodities/gold/","silver":"/commodities/silver/",
+      "copper":"/commodities/copper/","lithium":"/commodities/lithium/",
+      "uranium":"/commodities/uranium/","coffee":"/commodities/coffee/",
+      "cocoa":"/commodities/cocoa/","wheat":"/commodities/wheat/",
+      "corn":"/commodities/corn/","coal":"/commodities/coal/",
+      "diesel":"/commodities/diesel/","aluminum":"/commodities/aluminum/",
+      "nickel":"/commodities/nickel/","cobalt":"/commodities/cobalt/",
+      "zinc":"/commodities/zinc/","palladium":"/commodities/palladium/",
+      "platinum":"/commodities/platinum/","sugar":"/commodities/sugar/",
+      "cotton":"/commodities/cotton/","rice":"/commodities/rice/",
+      "hydrogen":"/commodities/hydrogen/","rubber":"/commodities/rubber/"
+    };
+    var linked = {};
+    var container = document.querySelector('.post-content');
+    if (!container) return;
+    // Sort keywords longest-first to avoid partial matches
+    var keywords = Object.keys(defined).sort(function(a,b){return b.length - a.length;});
+    function walk(node) {
+      if (node.nodeType === 3) { // text node
+        for (var i = 0; i < keywords.length; i++) {
+          var kw = keywords[i];
+          if (linked[kw]) continue;
+          var regex = new RegExp('\\b(' + kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')\\b', 'i');
+          var match = regex.exec(node.textContent);
+          if (match) {
+            var span = document.createElement('span');
+            var before = node.textContent.substring(0, match.index);
+            var after = node.textContent.substring(match.index + match[0].length);
+            var a = document.createElement('a');
+            a.href = defined[kw];
+            a.textContent = match[0];
+            a.style.cssText = 'color:var(--accent);text-decoration:underline dotted;';
+            span.appendChild(document.createTextNode(before));
+            span.appendChild(a);
+            span.appendChild(document.createTextNode(after));
+            node.parentNode.replaceChild(span, node);
+            linked[kw] = true;
+            // Continue walking the 'after' text node for other keywords
+            walk(span.lastChild);
+            return;
+          }
+        }
+      } else if (node.nodeType === 1) {
+        var tag = node.tagName.toLowerCase();
+        // Skip headings and existing links
+        if (tag === 'a' || tag === 'h1' || tag === 'h2' || tag === 'h3' || tag === 'h4' || tag === 'h5' || tag === 'h6') return;
+        var children = Array.prototype.slice.call(node.childNodes);
+        for (var j = 0; j < children.length; j++) {
+          walk(children[j]);
+        }
+      }
+    }
+    walk(container);
+  })();
+  </script>
+
   <section class="related-posts section" aria-labelledby="related-posts-title">
     <div class="section-header" data-animate>
       <p class="section-label">Continue Exploring</p>

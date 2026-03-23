@@ -8,7 +8,7 @@
 (function(){
   if(sessionStorage.getItem('cn_alert_dismissed')) return;
   fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
-    var names = {crude_oil:"Crude Oil",gold:"Gold",copper:"Copper",natural_gas:"Natural Gas",wheat:"Wheat",lithium:"Lithium ETF",silver:"Silver",corn:"Corn",uranium:"Uranium",aluminum:"Aluminum",coffee:"Coffee",lumber:"Lumber",palladium:"Palladium",steel:"Steel",zinc:"Zinc",tin:"Tin",sugar:"Sugar",soybeans:"Soybeans",platinum:"Platinum",nickel:"Nickel",lng:"LNG",jet_fuel:"Jet Fuel",iron_ore:"Iron Ore",diesel:"Diesel",cotton:"Cotton",cocoa:"Cocoa",cobalt:"Cobalt",coal:"Coal"};
+    var names = {crude_oil:"Crude Oil",gold:"Gold",copper:"Copper",natural_gas:"Natural Gas",wheat:"Wheat",lithium:"Lithium ETF",silver:"Silver",corn:"Corn",uranium:"Uranium",aluminum:"Aluminum",coffee:"Coffee",lumber:"Lumber",palladium:"Palladium",steel:"Steel",zinc:"Zinc",tin:"Tin",sugar:"Sugar",soybeans:"Soybeans",platinum:"Platinum",nickel:"Nickel",lng:"LNG",jet_fuel:"Jet Fuel",iron_ore:"Iron Ore",diesel:"Diesel",cotton:"Cotton",cocoa:"Cocoa",cobalt:"Cobalt",coal:"Coal",rice:"Rice",oats:"Oats",orange_juice:"Orange Juice",soybean_oil:"Soybean Oil",soybean_meal:"Soybean Meal",live_cattle:"Live Cattle",feeder_cattle:"Feeder Cattle",lean_hogs:"Lean Hogs",potash:"Potash",ammonia:"Ammonia",manganese:"Manganese",vanadium:"Vanadium",graphite:"Graphite",rare_earth:"Rare Earth",rhodium:"Rhodium",hydrogen:"Hydrogen",rubber:"Rubber",ethanol:"Ethanol"};
     var best = null, bestAbs = 0;
     for(var k in d){
       if(!d.hasOwnProperty(k)) continue;

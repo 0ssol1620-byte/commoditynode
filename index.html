@@ -270,6 +270,11 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
               <th><a href="/commodities/lithium/">Lithium</a></th>
               <th><a href="/commodities/steel/">Steel</a></th>
               <th><a href="/commodities/wheat/">Wheat</a></th>
+              <th><a href="/commodities/coffee/">Coffee</a></th>
+              <th><a href="/commodities/silver/">Silver</a></th>
+              <th><a href="/commodities/uranium/">Uranium</a></th>
+              <th><a href="/commodities/cocoa/">Cocoa</a></th>
+              <th><a href="/commodities/rice/">Rice</a></th>
             </tr>
           </thead>
           <tbody>
@@ -282,10 +287,20 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
               <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
             </tr>
             <tr>
               <td class="matrix-sector"><a href="/industries/airlines/">Airlines</a></td>
               <td class="matrix-bear">--</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
@@ -302,6 +317,11 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
               <td class="matrix-bull">++</td>
               <td class="matrix-bull">++</td>
               <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
             </tr>
             <tr>
               <td class="matrix-sector"><a href="/industries/automotive/">Auto/EV</a></td>
@@ -311,6 +331,11 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
               <td class="matrix-neutral">-</td>
               <td class="matrix-bear">--</td>
               <td class="matrix-mild-bear">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
             </tr>
             <tr>
@@ -322,6 +347,11 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
               <td class="matrix-neutral">-</td>
               <td class="matrix-bear">--</td>
               <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
             </tr>
             <tr>
               <td class="matrix-sector"><a href="/industries/agriculture-industry/">Agriculture</a></td>
@@ -331,6 +361,11 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
               <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bull">++</td>
               <td class="matrix-bull">++</td>
             </tr>
             <tr>
@@ -342,6 +377,11 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
               <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
               <td class="matrix-bear">--</td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bear">--</td>
+              <td class="matrix-bear">--</td>
             </tr>
             <tr>
               <td class="matrix-sector"><a href="/industries/technology/">Technology</a></td>
@@ -350,6 +390,11 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
               <td class="matrix-mild-bear">-</td>
               <td class="matrix-neutral">-</td>
               <td class="matrix-mild-bear">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-neutral">-</td>
+              <td class="matrix-bull">++</td>
+              <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
               <td class="matrix-neutral">-</td>
             </tr>
@@ -417,11 +462,11 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
     </header>
 
     <div class="signal-dashboard" data-animate data-delay="100">
-      <article class="signal-panel signal-panel--featured">
+      <article class="signal-panel signal-panel--featured" id="featured-ripple-panel">
         <p class="signal-panel-label">Featured Ripple Chain</p>
-        <h3>Crude Oil &rarr; Airlines &rarr; Logistics &rarr; Consumer Spending</h3>
-        <p>Energy price shocks remain the clearest live example of first-order and second-order exposure chains on the platform.</p>
-        <div class="signal-chain">
+        <h3 id="featured-ripple-title">Crude Oil &rarr; Airlines &rarr; Logistics &rarr; Consumer Spending</h3>
+        <p id="featured-ripple-desc">Energy price shocks remain the clearest live example of first-order and second-order exposure chains on the platform.</p>
+        <div class="signal-chain" id="featured-ripple-chain">
           <span class="signal-node up">Crude Oil</span>
           <span class="signal-arrow">&rarr;</span>
           <span class="signal-node down">Airlines</span>
@@ -430,8 +475,45 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
           <span class="signal-arrow">&rarr;</span>
           <span class="signal-node down">Consumer</span>
         </div>
-        <a href="/commodities/crude-oil/" class="btn btn-secondary">View Impact Map</a>
+        <a href="/commodities/crude-oil/" class="btn btn-secondary" id="featured-ripple-link">View Impact Map</a>
       </article>
+      <script>
+      (function(){
+        var chains = {
+          crude_oil:   {nodes:["Crude Oil","Airlines","Logistics","Consumer Spending"], url:"/commodities/crude-oil/",  desc:"Energy price shocks compress airline margins, slow logistics, and reduce consumer discretionary spending."},
+          gold:        {nodes:["Gold","USD Index","Bond Yields","Risk Sentiment"],      url:"/commodities/gold/",       desc:"Gold surges signal risk-off sentiment — the USD weakens, bond yields shift, and portfolio hedging accelerates."},
+          coffee:      {nodes:["Coffee","Cafes & QSR","Packaged Goods","Consumer Spending"], url:"/commodities/coffee/", desc:"Coffee price spikes raise costs for cafes and packaged goods, squeezing margins across the consumer sector."},
+          copper:      {nodes:["Copper","Construction","EVs & Electronics","Manufacturing"],  url:"/commodities/copper/", desc:"Dr. Copper signals industrial activity — price moves ripple through construction, EVs, and manufacturing."},
+          natural_gas: {nodes:["Natural Gas","Utilities","Chemicals","Fertilizers"],    url:"/commodities/natural-gas/", desc:"Natural gas price shocks cascade through utility bills, chemical feedstock costs, and fertilizer prices."},
+          coal:        {nodes:["Coal","Power Generation","Steel Mills","Industrial Output"], url:"/commodities/coal/",   desc:"Coal price moves impact power generation costs, steel production economics, and broader industrial output."},
+          uranium:     {nodes:["Uranium","Nuclear Plants","Grid Stability","Energy Transition"], url:"/commodities/uranium/", desc:"Uranium price shifts affect nuclear economics, grid reliability planning, and the pace of energy transition."}
+        };
+        fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
+          var topKey=null, topAbs=0;
+          Object.keys(d).forEach(function(k){
+            var abs=Math.abs(d[k].change_pct||0);
+            if(abs>topAbs){topAbs=abs;topKey=k;}
+          });
+          if(!topKey||topAbs<2) return; // keep default if move < 2%
+          var chain=chains[topKey]||chains.crude_oil;
+          var titleEl=document.getElementById('featured-ripple-title');
+          var descEl=document.getElementById('featured-ripple-desc');
+          var chainEl=document.getElementById('featured-ripple-chain');
+          var linkEl=document.getElementById('featured-ripple-link');
+          if(!titleEl||!chainEl) return;
+          titleEl.innerHTML=chain.nodes.join(' &rarr; ');
+          if(descEl) descEl.textContent=chain.desc;
+          if(linkEl) linkEl.href=chain.url;
+          var dir=d[topKey].change_pct>=0?'up':'down';
+          var html='';
+          chain.nodes.forEach(function(n,i){
+            if(i>0) html+='<span class="signal-arrow">&rarr;</span>';
+            html+='<span class="signal-node '+(i===0?(dir):dir)+'">' + n + '</span>';
+          });
+          chainEl.innerHTML=html;
+        }).catch(function(){});
+      })();
+      </script>
 
       <article class="signal-panel">
         <p class="signal-panel-label">Browse by Lens</p>
