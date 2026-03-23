@@ -2997,3 +2997,14 @@ a.read-more:hover { gap: 8px; color: var(--accent2); }
   .universe-controls { flex-direction: column; align-items: flex-start; }
   .universe-control-group { width: 100%; }
 }
+
+/* Mobile table scroll safety */
+@media (max-width: 768px) {
+  .live-prices .price-grid,
+  .matrix-wrapper,
+  .signals-grid,
+  .ripple-chains-grid {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

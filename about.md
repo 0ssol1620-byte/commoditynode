@@ -41,6 +41,39 @@ description: "CommodityNode maps how commodity price movements ripple through gl
 <h2>Methodology</h2>
 <p>Every impact score, correlation figure, and sensitivity estimate is backed by historical data and transparent calculation logic. We show our work — because research you can't verify isn't research. <a href="/methodology/">Read our full methodology &rarr;</a></p>
 
+<h2>Who It's For</h2>
+<p>CommodityNode is built for investors, analysts, and anyone who wants to understand the second-order effects of commodity price movements:</p>
+<ul>
+  <li><strong>Equity investors</strong> — Understand which stocks benefit or suffer when oil, gold, or copper moves</li>
+  <li><strong>Portfolio managers</strong> — Map commodity exposure across industries and sectors</li>
+  <li><strong>Macro traders</strong> — Track ripple chains from raw materials to currencies, rates, and risk sentiment</li>
+  <li><strong>Supply chain professionals</strong> — Monitor input cost pressures before they hit earnings</li>
+  <li><strong>Journalists & researchers</strong> — Find the real-world connections behind commodity price headlines</li>
+</ul>
+
+<h2>Coverage</h2>
+<p>We cover <strong>46 commodity hubs</strong> spanning Energy, Metals, Agriculture, and Soft commodities — each with an interactive Impact Map, live price data, and curated Signal Reports. Our analysis spans:</p>
+<ul>
+  <li>Energy: Crude Oil, Natural Gas, LNG, Coal, Diesel, Jet Fuel, Ethanol</li>
+  <li>Precious Metals: Gold, Silver, Platinum, Palladium, Rhodium</li>
+  <li>Industrial Metals: Copper, Aluminum, Steel, Zinc, Nickel, Tin, Iron Ore, Cobalt, Lithium, Manganese</li>
+  <li>Agriculture: Wheat, Corn, Soybeans, Coffee, Sugar, Cotton, Rice, Cocoa, Lumber</li>
+  <li>Critical Materials: Uranium, Rare Earth, Graphite, Vanadium, Potash</li>
+</ul>
+
+<h2>Why It's Free</h2>
+<p>Good financial research shouldn't require a Bloomberg terminal subscription. CommodityNode is and will remain <strong>free and open access</strong>. We're supported by advertising revenue and believe open information makes markets more efficient for everyone.</p>
+
+<div style="margin-top:40px;padding:28px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);text-align:center;">
+  <p style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Ready to explore?</p>
+  <p style="color:var(--text2);margin-bottom:20px;">Start with our most-visited commodity impact maps.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+    <a href="/commodities/gold/" class="btn btn-primary">Gold Impact Map</a>
+    <a href="/commodities/crude-oil/" class="btn btn-secondary">Oil Impact Map</a>
+    <a href="/commodities/copper/" class="btn btn-secondary">Copper Impact Map</a>
+  </div>
+</div>
+
 </div>
 </div>
 </div>

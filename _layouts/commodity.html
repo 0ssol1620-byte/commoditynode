@@ -133,7 +133,13 @@ layout: default
 
     // Dispatch event so impact-graph.js and price-chart.js can react
     window.dispatchEvent(new CustomEvent('commodity-price-loaded', {detail: {key: key, data: c, allPrices: d}}));
-  }).catch(function(){});
+  }).catch(function(){
+    var banner = document.getElementById('commodity-price-banner');
+    if(banner){
+      banner.style.display = 'block';
+      banner.innerHTML = '<div style="text-align:center;padding:12px;color:var(--text3);font-size:0.9rem;">Live price data temporarily unavailable. Please check back later.</div>';
+    }
+  });
 })();
 </script>
 
@@ -312,6 +318,19 @@ layout: default
           </div>
           <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
           <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
+          <div class="post-card-footer">
+            <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a>
+            {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 28 }}</p>
           <div class="post-card-footer">
             <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a>
             {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min</span>{% endif %}

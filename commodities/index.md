@@ -18,6 +18,10 @@ description: "Explore how each commodity's price movements impact industries, st
 
 <div class="container" style="padding:48px 24px 80px;">
 
+<p style="color:var(--text2);font-size:1rem;line-height:1.7;max-width:720px;margin:0 auto 40px;">
+  Each commodity hub maps the full ripple chain — from price movement to affected industries, companies, and ETFs. Click any commodity to explore its interactive Impact Map, live price data, and Signal Reports.
+</p>
+
 <!-- Energy -->
 <div class="section-header" data-animate>
   <p class="section-label">Energy</p>

@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/oz"
 image: "/assets/images/og-silver.png"
-title: "Silver"
-description: "Silver's dual role as precious metal and industrial input for solar panels and electronics."
+title: "Silver Price Impact: Solar, Electronics & Industrial Demand"
+description: "How silver price movements impact solar panel manufacturers, electronics makers, and precious metal portfolios."
 commodity_slug: "silver"
 symbol: "SI=F"
 sector: "Precious Metals"
