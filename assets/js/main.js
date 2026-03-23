@@ -186,14 +186,18 @@
       }));
     }
 
-    function drawFrame() {
+    let lastTime = performance.now();
+
+    function drawFrame(now) {
+      const dt = Math.min((now - lastTime) / 1000, 0.1); // delta in seconds, cap at 100ms
+      lastTime = now;
       ctx.clearRect(0, 0, W, H);
 
-      // Update
+      // Update (time-based: consistent speed regardless of frame rate)
       nodes.forEach(n => {
-        n.x += n.vx;
-        n.y += n.vy;
-        n.pulse += 0.02;
+        n.x += n.vx * dt * 60; // normalize to ~60fps feel
+        n.y += n.vy * dt * 60;
+        n.pulse += dt * 1.2; // ~0.02 per frame at 60fps
         if (n.x < 0 || n.x > W) n.vx *= -1;
         if (n.y < 0 || n.y > H) n.vy *= -1;
       });
@@ -288,6 +292,9 @@
             <span class="change ${t.up ? 'up' : 'down'}">${t.up ? '▲' : '▼'} ${t.change}</span>
           </span>
         `).join('');
+        // Scale ticker duration by item count (base: 10 items = 40s)
+        const dur = Math.max(30, tickerData.length * 4);
+        track.style.animationDuration = dur + 's';
       }).catch(() => {});
       return; // early return, ticker will be built async
     }
@@ -300,6 +307,9 @@
         <span class="change ${t.up ? 'up' : 'down'}">${t.up ? '▲' : '▼'} ${t.change}</span>
       </span>
     `).join('');
+    // Scale ticker duration by item count (base: 10 items = 40s)
+    const duration = Math.max(30, tickerData.length * 4);
+    track.style.animationDuration = duration + 's';
   }
 
   // Build after DOM is ready so price-grid cards exist
