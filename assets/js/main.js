@@ -269,18 +269,27 @@
       if (name && price) tickerData.push({ name, price, change: change || '', up });
     });
 
-    // Fallback static data
+    // Fallback: fetch prices.json for non-home pages
     if (!tickerData.length) {
-      tickerData = [
-        { name:'Crude Oil', price:'$100.77', change:'+0.42%', up:true  },
-        { name:'Gold',      price:'$3,100',  change:'-0.82%', up:false },
-        { name:'Copper',    price:'$5.27',   change:'+4.01%', up:true  },
-        { name:'Nat. Gas',  price:'$3.12',   change:'+1.76%', up:true  },
-        { name:'Silver',    price:'$61.95',  change:'-1.93%', up:false },
-        { name:'Wheat',     price:'$603.5',  change:'+10.1%', up:true  },
-        { name:'Corn',      price:'$471.75', change:'+1.56%', up:true  },
-        { name:'Palladium', price:'$1,345',  change:'-0.51%', up:false },
-      ];
+      fetch('/assets/data/prices.json').then(r => r.json()).then(prices => {
+        const fmt = (p, u) => (u && u.toLowerCase().includes('cents')) ? p + '¢' : '$' + p;
+        const tickerKeys = ['crude_oil','gold','copper','natural_gas','silver','wheat','corn','palladium','uranium','coffee'];
+        tickerData = tickerKeys.filter(k => prices[k]).map(k => {
+          const c = prices[k];
+          const up = c.change_pct >= 0;
+          const sign = up ? '+' : '';
+          return { name: c.name, price: fmt(c.price, c.unit), change: sign + c.change_pct + '%', up };
+        });
+        const items2 = [...tickerData, ...tickerData];
+        track.innerHTML = items2.map(t => `
+          <span class="ticker-item">
+            <span class="name">${t.name}</span>
+            <span class="price">${t.price}</span>
+            <span class="change ${t.up ? 'up' : 'down'}">${t.up ? '▲' : '▼'} ${t.change}</span>
+          </span>
+        `).join('');
+      }).catch(() => {});
+      return; // early return, ticker will be built async
     }
 
     const items = [...tickerData, ...tickerData];
@@ -490,7 +499,7 @@
 
   /* ---------- Smooth reveal for first visit ---------- */
   document.documentElement.style.opacity = '0';
-  document.documentElement.style.transition = 'opacity 0.4s ease';
+  document.documentElement.style.transition = 'opacity 0.2s ease';
   window.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(() => {
       document.documentElement.style.opacity = '1';
