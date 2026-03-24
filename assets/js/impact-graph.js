@@ -587,12 +587,10 @@
     }
 
     // ── CONTROLS ──
-    // Insert controls BEFORE graph but INSIDE post-body-container (prevents sidebar overlap)
+    // Insert controls BEFORE graph, inside same parent (prevents sidebar overlap)
     const controlsDiv = document.createElement('div');
     controlsDiv.className = 'cn-graph-controls';
-    // Find the closest parent that constrains width (post-body-container or post-content)
-    const constrainedParent = container.closest('.post-body-container') || container.closest('.post-content') || container.parentNode;
-    constrainedParent.insertBefore(controlsDiv, container);
+    container.parentNode.insertBefore(controlsDiv, container);
     const controls = d3.select(controlsDiv);
     const presentTypes = new Set(nodes.map(n => n.type).filter(t => t !== 'commodity'));
     const typeLabels = {

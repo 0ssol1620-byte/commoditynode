@@ -807,7 +807,8 @@ code, kbd, pre {
   line-height: 1.85;
   color: var(--text2);
   min-width: 0;
-  max-width: none;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .post-content > * + * { margin-top: 1.4em; }
@@ -2255,10 +2256,16 @@ a:focus-visible, button:focus-visible {
   top: auto;
   left: auto;
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
   z-index: 6;
   margin-bottom: 16px;
+  box-sizing: border-box;
+}
+/* Ensure controls don't overflow parent on commodity hub pages */
+.post-content .cn-graph-controls {
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .cn-graph-control-group {
