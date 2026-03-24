@@ -138,7 +138,7 @@
     container.innerHTML = '';
 
     // ── ORBITAL RADII ──
-    const baseRadii = [0, 110, 200, 290, 370, 440];
+    const baseRadii = [0, 95, 175, 250, 320, 385];
     const radii = baseRadii.map(r => isMob ? r * 0.7 : r);
     const maxLevel = Math.max(...nodes.map(n => n.level));
 
@@ -215,8 +215,9 @@
       try {
         const b = g.node().getBBox();
         if (!b || b.width <= 0 || b.height <= 0) return;
-        const pad = 0;
-        const sc = Math.min(1.6, Math.min((W-pad*2)/b.width, (H-pad*2)/b.height));
+        const pad = 20;
+        // Scale up more to fill space — min 0.9, max 2.2 (was 1.6)
+        const sc = Math.max(0.9, Math.min(2.2, Math.min((W-pad*2)/b.width, (H-pad*2)/b.height)));
         const tx = (W - b.width*sc)/2 - b.x*sc;
         const ty = (H - b.height*sc)/2 - b.y*sc;
         const t = d3.zoomIdentity.translate(tx, ty).scale(sc);
