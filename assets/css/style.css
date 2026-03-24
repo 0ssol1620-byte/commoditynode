@@ -2250,22 +2250,19 @@ a:focus-visible, button:focus-visible {
 }
 
 .cn-graph-controls {
+  width: 100%;
   max-width: 100%;
   overflow-x: auto;
+  overflow-y: visible;
   position: relative;
   top: auto;
   left: auto;
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Prevent expanding beyond parent width */
   z-index: 6;
   margin-bottom: 16px;
   box-sizing: border-box;
-}
-/* Ensure controls don't overflow parent on commodity hub pages */
-.post-content .cn-graph-controls {
-  max-width: 100%;
-  overflow-x: auto;
 }
 
 .cn-graph-control-group {
