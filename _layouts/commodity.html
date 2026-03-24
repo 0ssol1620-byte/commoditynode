@@ -92,6 +92,14 @@ layout: default
     // Update banner UI
     var banner = document.getElementById('commodity-price-banner');
     banner.style.display = 'block';
+
+    // No market data for commodities without tradeable symbols
+    if (c.no_data || c.price === 0 || !c.price) {
+      banner.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:0.9rem;">No publicly traded price data available for this commodity. See impact analysis below.</div>';
+      window.dispatchEvent(new CustomEvent('commodity-price-loaded', {detail: {key: key, data: c, allPrices: d}}));
+      return;
+    }
+
     var priceStr = (c.unit && c.unit.toLowerCase().indexOf('cents') !== -1) ? c.price + '¢' : '$' + c.price;
     document.getElementById('banner-price').textContent = priceStr;
     var unitLabel = '';
@@ -145,8 +153,9 @@ layout: default
 
 <div class="container" style="padding-top:24px;padding-bottom:80px;">
 
-  <!-- Price Chart -->
-  {% if page.symbol %}
+  <!-- Price Chart — only show for commodities with tradeable symbols -->
+  {% assign sym_trimmed = page.symbol | strip %}
+  {% if sym_trimmed != "" and sym_trimmed != nil %}
   <div class="cn-price-chart" data-symbol="{{ page.symbol }}" data-name="{{ page.title }}" data-unit="{{ page.unit | default: '' }}" style="margin-bottom:40px;"></div>
   {% endif %}
 

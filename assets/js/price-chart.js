@@ -253,6 +253,14 @@
     const allData = await getData();
     let period = '3M';
 
+    // If no data at all or symbol not in chart data, show unavailable immediately
+    if (!allData || !allData[symbol]) {
+      loading.querySelector('span').textContent = 'Price data temporarily unavailable';
+      loading.querySelector('.cn-loading-spinner').style.display = 'none';
+      loading.style.display = 'flex';
+      return;
+    }
+
     function render(p) {
       loading.style.display = 'flex';
       canvas.style.opacity  = '0';

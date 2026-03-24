@@ -458,5 +458,93 @@
     "high_52w": 41.79,
     "low_52w": 16.73,
     "updated_at": "2026-03-24T02:30:53.424011+00:00"
+  },
+  "gallium": {
+    "symbol": "",
+    "name": "Gallium",
+    "unit": "$/kg",
+    "price": 0,
+    "change_pct": 0,
+    "high_52w": 0,
+    "low_52w": 0,
+    "updated_at": "2026-03-25T00:00:00Z",
+    "no_data": true
+  },
+  "germanium": {
+    "symbol": "",
+    "name": "Germanium",
+    "unit": "$/kg",
+    "price": 0,
+    "change_pct": 0,
+    "high_52w": 0,
+    "low_52w": 0,
+    "updated_at": "2026-03-25T00:00:00Z",
+    "no_data": true
+  },
+  "tungsten": {
+    "symbol": "",
+    "name": "Tungsten",
+    "unit": "$/kg",
+    "price": 0,
+    "change_pct": 0,
+    "high_52w": 0,
+    "low_52w": 0,
+    "updated_at": "2026-03-25T00:00:00Z",
+    "no_data": true
+  },
+  "chromium": {
+    "symbol": "",
+    "name": "Chromium",
+    "unit": "$/tonne",
+    "price": 0,
+    "change_pct": 0,
+    "high_52w": 0,
+    "low_52w": 0,
+    "updated_at": "2026-03-25T00:00:00Z",
+    "no_data": true
+  },
+  "molybdenum": {
+    "symbol": "",
+    "name": "Molybdenum",
+    "unit": "$/lb",
+    "price": 0,
+    "change_pct": 0,
+    "high_52w": 0,
+    "low_52w": 0,
+    "updated_at": "2026-03-25T00:00:00Z",
+    "no_data": true
+  },
+  "silicon": {
+    "symbol": "",
+    "name": "Silicon",
+    "unit": "$/tonne",
+    "price": 0,
+    "change_pct": 0,
+    "high_52w": 0,
+    "low_52w": 0,
+    "updated_at": "2026-03-25T00:00:00Z",
+    "no_data": true
+  },
+  "helium": {
+    "symbol": "",
+    "name": "Helium",
+    "unit": "$/MCF",
+    "price": 0,
+    "change_pct": 0,
+    "high_52w": 0,
+    "low_52w": 0,
+    "updated_at": "2026-03-25T00:00:00Z",
+    "no_data": true
+  },
+  "phosphate": {
+    "symbol": "MOS",
+    "name": "Phosphate (Mosaic proxy)",
+    "unit": "$/share",
+    "price": 0,
+    "change_pct": 0,
+    "high_52w": 0,
+    "low_52w": 0,
+    "updated_at": "2026-03-25T00:00:00Z",
+    "no_data": true
   }
 }

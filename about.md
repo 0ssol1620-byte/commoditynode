@@ -77,3 +77,5 @@ description: "CommodityNode maps how commodity price movements ripple through gl
 </div>
 </div>
 </div>
+
+{% include newsletter.html %}
