@@ -587,10 +587,10 @@
     }
 
     // ── CONTROLS ──
-    // Insert controls BEFORE the graph container (outside the canvas)
+    // Insert controls INSIDE the graph container (prevents sidebar overlap)
     const controlsDiv = document.createElement('div');
     controlsDiv.className = 'cn-graph-controls';
-    container.parentNode.insertBefore(controlsDiv, container);
+    container.insertBefore(controlsDiv, container.firstChild);
     const controls = d3.select(controlsDiv);
     const presentTypes = new Set(nodes.map(n => n.type).filter(t => t !== 'commodity'));
     const typeLabels = {
