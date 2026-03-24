@@ -123,7 +123,80 @@
     { id:'lng', name:'LNG', category:'energy', size:9, color:'#fb7185',
       link:'/lng-natural-gas-global-trade/',
       nodes:[{name:'Cheniere',type:'processor'},{name:'EU Market',type:'regional'},{name:'Utilities',type:'consumer'},
-             {name:'Shipping',type:'consumer'}]}
+             {name:'Shipping',type:'consumer'}]},
+    // ── New critical minerals & materials ──
+    { id:'gallium', name:'Gallium', category:'industrial', size:8, color:'#c084fc',
+      nodes:[{name:'5G/GaN Chips',type:'consumer'},{name:'LED Industry',type:'consumer'},{name:'China Export Ban',type:'policy'},
+             {name:'Defense/Radar',type:'consumer'}]},
+    { id:'germanium', name:'Germanium', category:'industrial', size:7, color:'#d8b4fe',
+      nodes:[{name:'Fiber Optics',type:'consumer'},{name:'IR Optics',type:'consumer'},{name:'China Controls',type:'policy'},
+             {name:'Zinc Refining',type:'producer'}]},
+    { id:'tungsten', name:'Tungsten', category:'industrial', size:8, color:'#94a3b8',
+      nodes:[{name:'Carbide Tools',type:'consumer'},{name:'Defense/AP Rounds',type:'consumer'},{name:'China 80%',type:'regional'},
+             {name:'Mining Drills',type:'consumer'}]},
+    { id:'chromium', name:'Chromium', category:'industrial', size:8, color:'#67e8f9',
+      nodes:[{name:'Stainless Steel',type:'consumer'},{name:'South Africa',type:'regional'},{name:'Construction',type:'consumer'},
+             {name:'Auto Industry',type:'consumer'}]},
+    { id:'molybdenum', name:'Molybdenum', category:'industrial', size:7, color:'#a1a1aa',
+      nodes:[{name:'Alloy Steel',type:'consumer'},{name:'Oil Drilling',type:'consumer'},{name:'FCX Byproduct',type:'producer'},
+             {name:'Pipeline Steel',type:'consumer'}]},
+    { id:'silicon', name:'Silicon', category:'industrial', size:9, color:'#fcd34d',
+      nodes:[{name:'Solar Wafers',type:'consumer'},{name:'Semiconductors',type:'consumer'},{name:'China 80%',type:'regional'},
+             {name:'Aluminum Alloys',type:'consumer'}]},
+    { id:'helium', name:'Helium', category:'energy', size:7, color:'#e0f2fe',
+      nodes:[{name:'MRI Machines',type:'consumer'},{name:'Semiconductor Fabs',type:'consumer'},{name:'US Reserve Depleted',type:'policy'},
+             {name:'Rockets/Space',type:'consumer'}]},
+    { id:'phosphate', name:'Phosphate', category:'agriculture', size:9, color:'#4ade80',
+      nodes:[{name:'Mosaic (MOS)',type:'producer'},{name:'OCP Morocco',type:'producer'},{name:'Fertilizer NPK',type:'consumer'},
+             {name:'Food Security',type:'macro'}]},
+    // ── Existing commodities not yet in universe ──
+    { id:'rare-earth', name:'Rare Earth', category:'industrial', size:9, color:'#e879f9',
+      nodes:[{name:'MP Materials',type:'producer'},{name:'EV Magnets',type:'consumer'},{name:'Wind Turbines',type:'consumer'},
+             {name:'China Processing',type:'regional'},{name:'Defense',type:'consumer'}]},
+    { id:'hydrogen', name:'Hydrogen', category:'energy', size:7, color:'#22d3ee',
+      nodes:[{name:'PLUG Power',type:'producer'},{name:'Fuel Cells',type:'consumer'},{name:'Green H2',type:'macro'},
+             {name:'Electrolyzers',type:'consumer'}]},
+    { id:'rubber', name:'Rubber', category:'agriculture', size:7, color:'#34d399',
+      nodes:[{name:'Goodyear',type:'consumer'},{name:'Tire Industry',type:'consumer'},{name:'Thailand/Indonesia',type:'regional'},
+             {name:'Auto Industry',type:'consumer'}]},
+    { id:'vanadium', name:'Vanadium', category:'industrial', size:7, color:'#818cf8',
+      nodes:[{name:'Steel Alloys',type:'consumer'},{name:'Redox Batteries',type:'consumer'},{name:'Rio Tinto',type:'producer'},
+             {name:'Energy Storage',type:'consumer'}]},
+    { id:'rhodium', name:'Rhodium', category:'precious', size:7, color:'#fbbf24',
+      nodes:[{name:'Catalytic Converters',type:'consumer'},{name:'Sibanye',type:'producer'},{name:'South Africa',type:'regional'},
+             {name:'Auto Emissions',type:'policy'}]},
+    { id:'manganese', name:'Manganese', category:'industrial', size:7, color:'#fb923c',
+      nodes:[{name:'Steel Production',type:'consumer'},{name:'EV Batteries',type:'consumer'},{name:'South Africa',type:'regional'},
+             {name:'VALE',type:'producer'}]},
+    { id:'graphite', name:'Graphite', category:'industrial', size:8, color:'#71717a',
+      nodes:[{name:'EV Anodes',type:'consumer'},{name:'China 90%',type:'regional'},{name:'Refractories',type:'consumer'},
+             {name:'Pencils/Lubricants',type:'consumer'}]},
+    { id:'ammonia', name:'Ammonia', category:'agriculture', size:7, color:'#06b6d4',
+      nodes:[{name:'CF Industries',type:'producer'},{name:'Fertilizer',type:'consumer'},{name:'Nat Gas Input',type:'supplier'},
+             {name:'Green Ammonia',type:'macro'}]},
+    { id:'ethanol', name:'Ethanol', category:'energy', size:7, color:'#84cc16',
+      nodes:[{name:'REX Energy',type:'producer'},{name:'Corn Input',type:'supplier'},{name:'Gasoline Blend',type:'consumer'},
+             {name:'Brazil',type:'regional'}]},
+    { id:'potash', name:'Potash', category:'agriculture', size:8, color:'#2dd4bf',
+      nodes:[{name:'Nutrien (NTR)',type:'producer'},{name:'Mosaic',type:'producer'},{name:'Fertilizer NPK',type:'consumer'},
+             {name:'Belarus/Russia',type:'regional'}]},
+    { id:'oats', name:'Oats', category:'agriculture', size:6, color:'#a3e635',
+      nodes:[{name:'Livestock Feed',type:'consumer'},{name:'Food Products',type:'consumer'},{name:'Canada',type:'regional'}]},
+    { id:'rice', name:'Rice', category:'agriculture', size:8, color:'#86efac',
+      nodes:[{name:'Asia Demand',type:'regional'},{name:'India Export Ban',type:'policy'},{name:'Food Security',type:'macro'},
+             {name:'Irrigation',type:'consumer'}]},
+    { id:'orange-juice', name:'Orange Juice', category:'agriculture', size:6, color:'#fdba74',
+      nodes:[{name:'Florida/Brazil',type:'regional'},{name:'Citrus Greening',type:'macro'},{name:'Beverage',type:'consumer'}]},
+    { id:'soybean-oil', name:'Soybean Oil', category:'agriculture', size:6, color:'#bef264',
+      nodes:[{name:'Biodiesel',type:'consumer'},{name:'Food Industry',type:'consumer'},{name:'ADM',type:'processor'}]},
+    { id:'soybean-meal', name:'Soybean Meal', category:'agriculture', size:6, color:'#a3e635',
+      nodes:[{name:'Livestock Feed',type:'consumer'},{name:'Protein Demand',type:'macro'},{name:'Bunge',type:'processor'}]},
+    { id:'live-cattle', name:'Live Cattle', category:'agriculture', size:7, color:'#f97316',
+      nodes:[{name:'JBS/Tyson',type:'processor'},{name:'Beef Prices',type:'macro'},{name:'Feed Costs',type:'supplier'}]},
+    { id:'feeder-cattle', name:'Feeder Cattle', category:'agriculture', size:6, color:'#fb923c',
+      nodes:[{name:'Ranchers',type:'producer'},{name:'Corn/Feed',type:'supplier'},{name:'Drought Risk',type:'macro'}]},
+    { id:'lean-hogs', name:'Lean Hogs', category:'agriculture', size:6, color:'#f472b6',
+      nodes:[{name:'Pork Processors',type:'processor'},{name:'China Import',type:'regional'},{name:'Feed Costs',type:'supplier'}]}
   ];
 
   /* ---- Cluster centres ---- */
@@ -763,6 +836,8 @@
       }
     }, { passive: true });
 
+    var zoomedCommodityId = null;
+
     function handleClick(clientX, clientY) {
       var rect = renderer.domElement.getBoundingClientRect();
       mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
@@ -772,12 +847,33 @@
       var hit = getIntersects({ clientX: clientX, clientY: clientY });
       if (hit && hit.type === 'commodity') {
         var c = hit.obj;
+        var commodityData = c.userData;
+
+        if (isZoomed && zoomedCommodityId === commodityData.id) {
+          // Already zoomed on this commodity — navigate to hub page
+          var slug = commodityData.id;
+          // Try commodity hub page first, fall back to link property
+          var hubUrl = '/commodities/' + slug + '/';
+          window.location.href = hubUrl;
+          return;
+        }
+
+        // First click: zoom in + show hint
         zoomTarget = {
           pos: new THREE.Vector3(c.x, c.y, c.z + 80),
           look: new THREE.Vector3(c.x, c.y, c.z)
         };
         isZoomed = true;
+        zoomedCommodityId = commodityData.id;
         controls.autoRotate = false;
+
+        // Show "click again to explore" hint
+        var hint = document.getElementById('universe-hint');
+        if (hint) {
+          hint.textContent = '🔍 ' + commodityData.name + ' — click again to explore hub';
+          hint.style.opacity = '1';
+          hint.style.color = '#22d3ee';
+        }
       } else if (hit && hit.type === 'satellite') {
         var link = hit.obj.userData.parentLink;
         if (link) window.location.href = link;
@@ -806,6 +902,12 @@
         look: defaultTarget.clone()
       };
       isZoomed = false;
+      zoomedCommodityId = null;
+      var hint = document.getElementById('universe-hint');
+      if (hint) {
+        hint.textContent = 'Drag to rotate · Scroll to zoom · Click a star to explore';
+        hint.style.color = 'rgba(148,163,184,0.6)';
+      }
       setTimeout(function () {
         zoomTarget = null;
         controls.autoRotate = true;
