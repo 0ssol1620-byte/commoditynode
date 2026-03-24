@@ -216,8 +216,9 @@
         const b = g.node().getBBox();
         if (!b || b.width <= 0 || b.height <= 0) return;
         const pad = 20;
-        // Scale to fit — closer default zoom for better readability
-        const sc = Math.max(1.0, Math.min(2.0, Math.min((W-pad*2)/b.width, (H-pad*2)/b.height)));
+        // Scale to fit — zoom out slightly from max for breathing room
+        const rawSc = Math.min((W-pad*2)/b.width, (H-pad*2)/b.height);
+        const sc = Math.max(0.85, Math.min(1.6, rawSc * 0.88));
         const tx = (W - b.width*sc)/2 - b.x*sc;
         const ty = (H - b.height*sc)/2 - b.y*sc;
         const t = d3.zoomIdentity.translate(tx, ty).scale(sc);
@@ -277,7 +278,7 @@
       }).strength(0.3))
       .force('charge', d3.forceManyBody().strength(d => d.level === 0 ? -1000 : -250 - nodes.length * 1.0))
       .force('collide', d3.forceCollide(d => nodeR(d) + 30))
-      .force('center', d3.forceCenter(cx, cy).strength(0.04))
+      .force('center', d3.forceCenter(cx, cy).strength(0.08))
       .force('radial', d3.forceRadial(d => {
         if (d.level === 0) return 0;
         return radii[Math.min(d.level, 5)] || radii[radii.length-1];
