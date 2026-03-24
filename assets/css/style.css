@@ -699,8 +699,11 @@ code, kbd, pre {
 /* ---------- Post Layout ---------- */
 .post-body-container {
   max-width: 1380px;
+  min-width: 0;
+  width: 100%;
   margin: 0 auto;
   padding: 0 24px 80px;
+  overflow-x: hidden;
 }
 
 .post-header {
@@ -808,7 +811,8 @@ code, kbd, pre {
   color: var(--text2);
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .post-content > * + * { margin-top: 1.4em; }
