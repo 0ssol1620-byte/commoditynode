@@ -2262,11 +2262,12 @@ a:focus-visible, button:focus-visible {
   top: auto;
   left: auto;
   display: flex;
-  gap: 8px;
-  flex-wrap: nowrap; /* Prevent expanding beyond parent width */
+  gap: 6px;
+  flex-wrap: wrap;
   z-index: 6;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   box-sizing: border-box;
+  padding: 8px 0;
 }
 
 .cn-graph-control-group {
