@@ -299,3 +299,6 @@ description: "Explore how each commodity's price movements impact industries, st
   </div>
 </div>
 </div>
+<div class="container" style="padding:40px 24px;">
+  {% include newsletter.html %}
+</div>
