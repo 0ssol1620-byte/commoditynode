@@ -70,6 +70,13 @@ description: "Explore how each commodity's price movements impact industries, st
       <div class="commodity-category-sector">Power generation and steelmaking</div>
     </div>
   </a>
+  <a href="/commodities/helium/" class="commodity-category-card">
+    <span class="commodity-category-tag">He</span>
+    <div>
+      <div class="commodity-category-name">Helium</div>
+      <div class="commodity-category-sector">MRI, semiconductors & aerospace</div>
+    </div>
+  </a>
 </div>
 
 <!-- Precious Metals -->
@@ -170,6 +177,34 @@ description: "Explore how each commodity's price movements impact industries, st
       <div class="commodity-category-sector">Housing market bellwether</div>
     </div>
   </a>
+  <a href="/commodities/tungsten/" class="commodity-category-card">
+    <span class="commodity-category-tag">W</span>
+    <div>
+      <div class="commodity-category-name">Tungsten</div>
+      <div class="commodity-category-sector">Hardest metal — defense & tooling</div>
+    </div>
+  </a>
+  <a href="/commodities/chromium/" class="commodity-category-card">
+    <span class="commodity-category-tag">Cr</span>
+    <div>
+      <div class="commodity-category-name">Chromium</div>
+      <div class="commodity-category-sector">Stainless steel & corrosion resistance</div>
+    </div>
+  </a>
+  <a href="/commodities/molybdenum/" class="commodity-category-card">
+    <span class="commodity-category-tag">Mo</span>
+    <div>
+      <div class="commodity-category-name">Molybdenum</div>
+      <div class="commodity-category-sector">High-strength alloys & catalysts</div>
+    </div>
+  </a>
+  <a href="/commodities/silicon/" class="commodity-category-card">
+    <span class="commodity-category-tag">Si</span>
+    <div>
+      <div class="commodity-category-name">Silicon</div>
+      <div class="commodity-category-sector">Semiconductors & solar cells</div>
+    </div>
+  </a>
 </div>
 
 <!-- Battery Metals -->
@@ -199,6 +234,20 @@ description: "Explore how each commodity's price movements impact industries, st
       <div class="commodity-category-sector">Nuclear renaissance fuel</div>
     </div>
   </a>
+  <a href="/commodities/gallium/" class="commodity-category-card">
+    <span class="commodity-category-tag">Ga</span>
+    <div>
+      <div class="commodity-category-name">Gallium</div>
+      <div class="commodity-category-sector">Semiconductors & 5G chips — China 98%</div>
+    </div>
+  </a>
+  <a href="/commodities/germanium/" class="commodity-category-card">
+    <span class="commodity-category-tag">Ge</span>
+    <div>
+      <div class="commodity-category-name">Germanium</div>
+      <div class="commodity-category-sector">Fiber optics & infrared sensors</div>
+    </div>
+  </a>
 </div>
 
 <!-- Agriculture -->
@@ -226,6 +275,13 @@ description: "Explore how each commodity's price movements impact industries, st
     <div>
       <div class="commodity-category-name">Soybeans</div>
       <div class="commodity-category-sector">Crush margins, biodiesel, China trade</div>
+    </div>
+  </a>
+  <a href="/commodities/phosphate/" class="commodity-category-card">
+    <span class="commodity-category-tag">PO₄</span>
+    <div>
+      <div class="commodity-category-name">Phosphate</div>
+      <div class="commodity-category-sector">Fertilizer backbone — food security</div>
     </div>
   </a>
 </div>

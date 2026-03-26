@@ -413,3 +413,13 @@ want steady energy exposure with dividend income and reduced drawdown risk,
 XLE remains the institutional standard. And if you believe the E&P capex cycle
 is about to inflect higher, OIH may offer the best risk-reward of the three
 over a 6-12 month horizon.
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

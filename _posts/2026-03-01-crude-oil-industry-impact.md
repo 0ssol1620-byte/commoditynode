@@ -151,3 +151,13 @@ window.COMMODITY_DATA = {
 Crude oil's 10% move generates an average **8.2% response in XLE**, with oilfield services companies (HAL, SLB) amplifying that to **12-14%**. Airlines bear the heaviest cost burden, with JETS ETF dropping **7.1%** on average. For traders: the oil-airline inverse relationship is one of the most reliable macro trades in commodities.
 
 **Position sizing note:** The XLE/JETS pair trade has delivered consistent risk-adjusted returns during sustained oil trends. Consider 2:1 weighting (XLE long vs JETS short) during uptrend phases.
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

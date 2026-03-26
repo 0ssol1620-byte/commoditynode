@@ -321,3 +321,13 @@ The Pioneer Natural Resources integration also introduces a subtle shift in XOM'
 Pioneer's Permian Basin assets are among the lowest-cost production sources in the world, with breakeven prices below $40/bbl.
 This cost structure means XOM's weighted average breakeven has declined, extending the range of oil prices at which the company generates positive free cash flow.
 The practical implication is that while XOM's upside beta to oil remains strong, its downside risk in moderate oil price declines is now lower than historical averages would suggest, creating an even more favorable asymmetric return profile.
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

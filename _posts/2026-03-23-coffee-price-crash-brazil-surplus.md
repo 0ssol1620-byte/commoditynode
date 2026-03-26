@@ -4,6 +4,7 @@ title: "Coffee's 10% Crash: Brazil's Record Harvest Ends a 3-Year Bull Run"
 date: 2026-03-23
 categories: [agriculture, commodities]
 tags: [coffee, arabica, brazil, vietnam, supply-surplus, agriculture]
+description: "Brazil's record 66.2M bag harvest crashes arabica coffee futures 10%. Analysis of the supply surplus ending a 3-year bull run and its ripple effects on cafes, packaged food, and farming economies."
 excerpt: "Arabica coffee futures plunged nearly 10% as Brazil's Conab projected a record 66.2 million bag harvest — a 17% year-on-year surge. After three years of supply deficits driving prices to all-time highs, the commodity cycle is turning."
 commodity: coffee
 impact_nodes:

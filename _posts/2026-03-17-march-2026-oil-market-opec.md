@@ -198,3 +198,13 @@ On the demand side, the International Energy Agency's March Oil Market Report re
 The March 2026 oil rally has a different character than the demand-driven spikes of 2022. This is fundamentally a supply-side story, driven by OPEC+ discipline that has exceeded market expectations for four consecutive meetings. The structural decline in U.S. shale growth rates means that the traditional safety valve of Permian production surging in response to higher prices is less effective than in prior cycles. This gives OPEC+ more pricing power and extends the duration of the rally.
 
 For positioning, the highest-conviction plays are in oilfield services (HAL, SLB) and upstream E&P (COP, PXD), where the earnings leverage to $86 oil is substantial and largely unhedged. On the short side, airlines face the most acute margin pressure, particularly AAL, which lacks both hedging protection and balance sheet cushion. The critical watch item for the next two weeks is U.S. refinery utilization data: if turnaround season is shorter than expected and refineries return earlier, product supply could ease the inflationary pressure from crude. If turnarounds extend due to the unplanned outages that have plagued the Gulf Coast this month, $90 oil becomes a real possibility before the end of March.
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

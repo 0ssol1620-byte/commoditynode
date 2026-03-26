@@ -108,3 +108,9 @@ Chemical manufacturers using gas as feedstock face cost inflation that compresse
 ## Trading Note
 
 Natural gas exhibits the highest seasonal volatility of all major commodities. Winter storage draws (Oct-Mar) and summer cooling demand create predictable trading windows. Monitor the EIA weekly storage report every Thursday at 10:30 AM ET. The storage deficit or surplus relative to the five-year average is the most watched fundamental indicator. Weather model forecasts (GFS, European) for temperature deviations drive short-term price movements, with cold winter outlooks capable of moving prices 5-10% in a single session.
+
+## Latest Signal Reports
+- [Natural Gas Storage Glut & Price Collapse](/natural-gas-storage-glut-price-collapse/)
+- [LNG & Natural Gas Global Trade](/lng-natural-gas-global-trade/)
+- [Utilities Sector: Natural Gas & Coal](/utilities-sector-natural-gas-coal/)
+- [Natural Gas Price Impact Analysis](/natural-gas-price-impact/)

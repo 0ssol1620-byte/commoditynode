@@ -108,3 +108,9 @@ Jewelry manufacturers and retailers face demand destruction as higher prices pus
 ## Trading Note
 
 The gold/silver ratio (historically averaging ~60-65:1) is a key spread trade. When the ratio exceeds 80-90, silver is historically cheap relative to gold -- suggesting a long silver / short gold position with mean-reversion potential. COMEX positioning data, GLD ETF tonnage flows, and central bank purchase reports from the World Gold Council provide the key demand-side indicators. The gold/real yield relationship (inverted 10-year TIPS yield) remains the most reliable fundamental framework for directional positioning.
+
+## Latest Signal Reports
+- [Gold Price Regime Change](/gold-price-regime-change/)
+- [Gold Breaks $5,000: Mining Stocks Impact](/gold-breaks-5000-mining-stocks/)
+- [Gold Mining, Emerging Markets Chain](/gold-mining-emerging-markets-chain/)
+- [GDX vs GLD: Mining vs Physical Gold](/gdx-vs-gld-gold-mining-physical/)

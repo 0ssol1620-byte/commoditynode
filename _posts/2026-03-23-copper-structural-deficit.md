@@ -69,3 +69,14 @@ Either way, we're short copper.
 The copper thesis doesn't require a commodities bull market. It just requires the energy transition to continue — at any pace.
 
 Full impact map: [commoditynode.com/commodities/copper/](https://commoditynode.com/commodities/copper/)
+
+---
+
+## Related Copper Reports
+- [Copper as Economic Indicator](/copper-economic-indicator/)
+- [Freeport-McMoRan: Copper Bellwether](/freeport-mcmoran-copper-bellwether/)
+- [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
+- [COPX: Copper Mining ETF Analysis](/copx-copper-mining-etf/)
+- [Copper Hits $5.70: EV Infrastructure](/copper-hits-570-ev-infrastructure/)
+- [Copper EV Infrastructure Impact](/copper-ev-infrastructure-impact/)
+- [Copper Structural Deficit](/copper-structural-deficit/)

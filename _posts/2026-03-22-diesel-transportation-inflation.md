@@ -4,6 +4,7 @@ title: "Diesel at $3.8/Gallon: The Inflation Tax Most Economists Ignore"
 date: 2026-03-22
 categories: [Signal Report, Energy]
 tags: [diesel, transportation, inflation, trucking, logistics]
+description: "Diesel at $3.80/gallon is the hidden inflation tax driving consumer prices higher. Analysis of how diesel costs ripple through trucking, logistics, and food supply chains — the CPI mechanism economists overlook."
 excerpt: "Diesel prices are the most direct transmission mechanism between commodity costs and consumer prices — yet most inflation analysis focuses on gasoline. Here's why that's wrong."
 commodity: crude_oil
 direction: bearish
@@ -80,3 +81,13 @@ Diesel is crude oil's derivative, and crude oil is priced in dollars globally. A
 The current dollar weakening trend — driven by Federal Reserve rate cut expectations and growing US fiscal deficits — provides a structural tailwind for diesel prices independent of physical supply and demand.
 
 *Data: EIA Diesel Fuel Prices, OPIS crack spread data, ATA Trucking Tonnage Index*
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

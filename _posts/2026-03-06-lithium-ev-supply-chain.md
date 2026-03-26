@@ -142,3 +142,12 @@ window.COMMODITY_DATA = {
 Lithium's extreme volatility creates extreme opportunity. When lithium rises 30%, LIT delivers **+22%** and pure-plays like LTHM average **+32%**. EV makers face the opposite: Rivian drops **-8%** on average and even Tesla sees **-5%** pressure. 
 
 **Cycle watch:** Lithium bottomed in early 2024 around $12,000/ton. With EV penetration accelerating toward 25-30% of global auto sales, structural demand growth should support prices — but mine expansions in Chile, Argentina, and Australia create periodic oversupply risk.
+
+---
+
+## Related Lithium Reports
+- [Albemarle: Lithium EV Battery Play](/albemarle-lithium-ev-battery/)
+- [Lithium EV Supply Chain](/lithium-ev-supply-chain/)
+- [Lithium EV Battery Auto Chain](/lithium-ev-battery-auto-chain/)
+- [LIT: Lithium Battery ETF](/lit-lithium-battery-etf/)
+- [Lithium Surplus-to-Deficit Pivot](/lithium-surplus-deficit-pivot/)

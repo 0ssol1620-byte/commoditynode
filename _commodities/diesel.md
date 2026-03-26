@@ -3,7 +3,7 @@ layout: commodity
 unit: "$/gallon"
 image: "/assets/images/og-diesel.png"
 title: "Diesel"
-description: "Diesel as the lifeblood of freight, logistics, and agricultural operations."
+description: "Diesel price impact analysis: how diesel costs ripple through freight, trucking, logistics, and agricultural operations. Track the hidden inflation transmission mechanism that drives consumer prices across every sector of the economy."
 commodity_slug: "diesel"
 symbol: "HO=F"
 sector: "Energy"

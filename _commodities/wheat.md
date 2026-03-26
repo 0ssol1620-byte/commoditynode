@@ -108,3 +108,8 @@ Flour millers and bakeries face margin compression when wheat costs rise faster 
 ## Trading Note
 
 The Russia-Ukraine conflict removed 28% of global wheat export capacity from 2022. Monitor Black Sea shipping lanes, Ukrainian port activity, and Russian export quota announcements as leading indicators. The USDA WASDE report and weekly crop progress ratings during the U.S. growing season are primary fundamental catalysts. SRW/HRW/HRS wheat spreads reflect quality premiums and regional supply conditions. The Kansas City-Chicago wheat spread specifically signals hard red winter versus soft red winter supply dynamics and protein premium trends.
+
+## Latest Signal Reports
+- [Food Price Disconnect: Wheat to Bread](/food-price-disconnect-wheat-bread/)
+- [Wheat & Flour Consumer Staples Chain](/wheat-flour-consumer-staples-chain/)
+- [Wheat Price Impact on Food Security](/wheat-price-impact-food/)

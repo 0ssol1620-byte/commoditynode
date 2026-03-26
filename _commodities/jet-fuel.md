@@ -2,7 +2,7 @@
 layout: commodity
 image: "/assets/images/og-jet-fuel.png"
 title: "Jet Fuel"
-description: "Jet fuel's outsized impact on airline operating costs and hedging strategies."
+description: "Jet fuel price impact analysis: how aviation fuel costs affect airline profitability, ticket prices, and hedging strategies. Jet fuel represents 20-30% of airline operating costs, making it the single largest variable expense in commercial aviation."
 commodity_slug: "jet-fuel"
 symbol: "CL=F"
 sector: "Energy"

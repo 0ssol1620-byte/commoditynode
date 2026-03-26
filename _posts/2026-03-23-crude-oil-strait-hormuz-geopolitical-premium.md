@@ -4,6 +4,7 @@ title: "Oil's Geopolitical Premium: How the Strait of Hormuz Became the World's 
 date: 2026-03-23
 categories: [energy, geopolitics]
 tags: [crude-oil, opec, hormuz, iran, geopolitics, energy-security]
+description: "Strait of Hormuz disruptions push WTI crude to $98/barrel. Analysis of the geopolitical risk premium, IEA's 400M-barrel strategic reserve release, and cascading impacts on airlines, shipping, and defense stocks."
 excerpt: "WTI crude rebounded to $98/barrel as Strait of Hormuz disruptions threatened 20% of global seaborne oil flows. The IEA responded with a 400-million-barrel strategic reserve release — the largest coordinated intervention since the 2022 Ukraine crisis."
 commodity: crude_oil
 impact_nodes:
@@ -83,3 +84,13 @@ If the Strait reopens to normal traffic within weeks, a rapid reversion toward $
 - US strategic petroleum reserve levels — currently at historic lows post-2022 drawdown
 
 The oil market in March 2026 is a lesson in how quickly energy security assumptions can shatter. The Strait of Hormuz has always been a theoretical vulnerability. This month, it became an operational one.
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

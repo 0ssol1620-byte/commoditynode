@@ -4,3 +4,10 @@ Sitemap: https://commoditynode.com/sitemap.xml
 
 # Block low-value pages
 Disallow: /page/
+Disallow: /AUDIT_REPORT/
+Disallow: /CRON_SETUP/
+Disallow: /ROADMAP/
+Disallow: /SEO_AUDIT/
+Disallow: /assets/data/
+Disallow: /assets/images/
+Disallow: /tags/

@@ -190,3 +190,14 @@ The COMEX-LME premium has widened to $0.22/lb, the largest since the 2022 supply
 Copper at $5.70 is not a spike -- it is the new floor in a market where demand growth from electrification is structurally outpacing supply growth from depleting mines. The "green premium" embedded in copper pricing reflects the reality that the energy transition requires roughly 5 million additional tonnes of annual copper production by 2035, and the industry is on track to deliver perhaps 2 million tonnes. This gap will not close through recycling or substitution alone. It will close through higher prices that incentivize new mine development, and the lead time for new greenfield mines is 12-15 years, meaning the deficit persists through the remainder of this decade at minimum.
 
 For positioning, the copper miners (FCX, IVN, ERO) offer the best risk-reward, with FCX providing the most liquid large-cap exposure and IVN offering the highest beta through its production ramp. On the short side, EV charging companies face the most acute margin pressure, but the position sizing needs to be modest given the high short interest already embedded in BLNK and CHPT. The key data points to watch are China's March PMI data (due March 31), COMEX warehouse inventory trends, and the Q1 earnings season starting in mid-April, when miners will report record cash flows and potentially announce special dividends or accelerated buybacks. Any pullback toward $5.20-5.40 should be viewed as a buying opportunity in quality miners rather than a trend reversal.
+
+---
+
+## Related Copper Reports
+- [Copper as Economic Indicator](/copper-economic-indicator/)
+- [Freeport-McMoRan: Copper Bellwether](/freeport-mcmoran-copper-bellwether/)
+- [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
+- [COPX: Copper Mining ETF Analysis](/copx-copper-mining-etf/)
+- [Copper Hits $5.70: EV Infrastructure](/copper-hits-570-ev-infrastructure/)
+- [Copper EV Infrastructure Impact](/copper-ev-infrastructure-impact/)
+- [Copper Structural Deficit](/copper-structural-deficit/)

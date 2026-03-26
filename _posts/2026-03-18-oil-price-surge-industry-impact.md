@@ -147,3 +147,13 @@ Container shipping fuel (bunker oil) prices rise proportionally. Maersk, ZIM Int
 Oil price surges create a clear divergence: **energy producers and alternatives win, while energy consumers lose**. The magnitude of impact depends on each industry's energy cost as a percentage of revenue.
 
 Smart investors don't just react to oil prices — they map the entire ripple effect and position accordingly.
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

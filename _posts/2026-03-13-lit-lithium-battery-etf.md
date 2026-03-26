@@ -182,3 +182,12 @@ A critical nuance for LIT investors is the time lag between lithium spot prices 
 LIT delivers approximately +10.5% for every 15% lithium price increase, making it an effective but moderated supply chain play. The ETF's internal tension between winning miners (+18-24%) and losing downstream companies (-3.5 to -7.5%) creates a natural dampening effect. Investors seeking maximum upside from lithium price conviction should consider direct positions in ALB, SQM, or development-stage names like PLL and LAC, which offer 1.5-2.3x leverage relative to lithium prices.
 
 The critical monitoring variables for LIT positioning are global EV sales data (particularly China monthly NEV registrations), lithium spot prices on the Fastmarkets and Asian Metal platforms, and battery factory construction timelines that signal future demand. The IRA's domestic content requirements have created a structural pull for North American lithium production, benefiting LAC's Thacker Pass project and PLL's North Carolina operations. Long-term, the transition to solid-state batteries could reduce lithium intensity per kWh, but this technology remains 5-8 years from commercial scale and should not factor into near-term LIT positioning.
+
+---
+
+## Related Lithium Reports
+- [Albemarle: Lithium EV Battery Play](/albemarle-lithium-ev-battery/)
+- [Lithium EV Supply Chain](/lithium-ev-supply-chain/)
+- [Lithium EV Battery Auto Chain](/lithium-ev-battery-auto-chain/)
+- [LIT: Lithium Battery ETF](/lit-lithium-battery-etf/)
+- [Lithium Surplus-to-Deficit Pivot](/lithium-surplus-deficit-pivot/)

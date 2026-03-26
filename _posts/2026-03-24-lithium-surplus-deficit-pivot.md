@@ -116,3 +116,12 @@ The lithium deficit thesis is now consensus among commodity analysts (Goldman, M
 **Risk to the bull case:** Chinese lepidolite and African DRC supply could ramp faster than expected. Indonesia's nickel laterite-to-lithium projects (acid leaching) remain a wildcard for 2027+ supply. And any global recession that slows EV adoption below 20 million units rebalances the market quickly.
 
 **Bottom line:** Lithium's 57% bounce is not a dead cat — it's the market repricing a structural shift from surplus to deficit. The deficit window is at least 18-24 months wide. Position accordingly, but respect the $30K/ton level as resistance where Chinese converter demand historically pulls back.
+
+---
+
+## Related Lithium Reports
+- [Albemarle: Lithium EV Battery Play](/albemarle-lithium-ev-battery/)
+- [Lithium EV Supply Chain](/lithium-ev-supply-chain/)
+- [Lithium EV Battery Auto Chain](/lithium-ev-battery-auto-chain/)
+- [LIT: Lithium Battery ETF](/lit-lithium-battery-etf/)
+- [Lithium Surplus-to-Deficit Pivot](/lithium-surplus-deficit-pivot/)

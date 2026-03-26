@@ -194,3 +194,12 @@ The third and fourth links reveal the strategic implications. EV automakers abso
 The lithium-to-EV-to-auto ripple chain is the defining commodity supply chain of the energy transition. A 15% lithium price move produces 18-25% gains for miners, 4-6% margin pressure on battery manufacturers, 3-7% headwinds for EV automakers (with enormous dispersion based on scale and integration), and a measurable slowdown in the pace of EV adoption. The chain also creates a counterintuitive feedback loop: high lithium prices benefit ICE incumbents and sustain oil demand, partially self-correcting the very transition that drives lithium demand.
 
 For investors, the lithium chain offers a rich menu of trades depending on your view of the transition's pace and lithium's supply-demand balance. Bullish on lithium? Own the miners, particularly developers with high-grade deposits. Bearish? Short the most leveraged EV names or battery startups with the weakest balance sheets. The key structural insight is that the lithium market is still maturing and will remain more volatile than established commodity markets for years to come. This volatility is not noise; it is signal, propagating through each link of the chain and creating windows of opportunity at every stage for investors who track the ripple.
+
+---
+
+## Related Lithium Reports
+- [Albemarle: Lithium EV Battery Play](/albemarle-lithium-ev-battery/)
+- [Lithium EV Supply Chain](/lithium-ev-supply-chain/)
+- [Lithium EV Battery Auto Chain](/lithium-ev-battery-auto-chain/)
+- [LIT: Lithium Battery ETF](/lit-lithium-battery-etf/)
+- [Lithium Surplus-to-Deficit Pivot](/lithium-surplus-deficit-pivot/)

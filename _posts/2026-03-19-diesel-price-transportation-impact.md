@@ -112,3 +112,13 @@ window.COMMODITY_DATA = {
 ## Key Takeaway
 
 Diesel is a multiplier commodity. Its price shock doesn't stay in energy — it infiltrates every physical supply chain, pushing inflation through transportation, food production, and manufacturing. When diesel spikes, watch trucking margin reports first (ODFL, JBHT quarterly calls), then agri-input costs, then consumer staples pricing. The lag between the diesel move and the downstream earnings impact is typically 6–10 weeks.
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

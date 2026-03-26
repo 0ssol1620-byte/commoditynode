@@ -93,3 +93,8 @@ Budget-oriented coffee brands and private-label roasters face the sharpest margi
 ## Trading Note
 
 The Arabica/Robusta price spread reflects quality premiums and substitution dynamics in blending. Certified ICE warehouse stocks serve as a visible supply indicator, though they represent a small fraction of total global inventories. Monitor Brazilian real (BRL) exchange rates alongside coffee prices, as a weak BRL incentivizes Brazilian farmer selling even at lower dollar-denominated prices. USDA and ICO crop forecasts are the primary fundamental catalysts for position adjustments. The commitment of traders (COT) report reveals speculative positioning extremes that often precede major reversals.
+
+## Latest Signal Reports
+- [Coffee's 10% Crash: Brazil Surplus](/coffee-price-crash-brazil-surplus/)
+- [Coffee at $3.05: Climate Supply Stress](/coffee-305-climate-supply-stress/)
+- [Coffee Price & Starbucks Retail Impact](/coffee-price-starbucks-retail/)

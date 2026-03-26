@@ -196,3 +196,13 @@ The third and fourth links complete the chain. As airlines raise fares and add f
 The oil-to-airlines-to-travel ripple chain remains one of the most reliable and tradeable sequences in commodity markets. A 10% crude oil move produces predictable impacts: oil producers gain 5-7%, airlines lose 5-9% with enormous dispersion between carriers, travel platforms lose 3-4%, and cruise lines lose 7-9%. The chain moves quickly, typically propagating from crude to airline stocks within 24-48 hours and to travel names within one to two weeks.
 
 For investors, the key is recognizing where you are in the chain and which link offers the best risk-reward. In the early stages of an oil spike, shorting airlines (particularly ultra-low-cost carriers and American Airlines) or buying JETS puts provides the most direct expression. As the spike persists, travel platforms and cruise lines become increasingly attractive short candidates. Conversely, when oil prices peak and begin reversing, the same chain unwinds in order: airlines recover first, then travel platforms, then cruise lines. This sequencing creates a rolling set of opportunities for active commodity-aware investors who understand the mechanics of the classic ripple chain.
+
+---
+
+## Related Oil & Energy Reports
+- [Crude Oil Industry Impact](/crude-oil-industry-impact/)
+- [Oil's Geopolitical Premium: Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: Inflation Tax](/diesel-transportation-inflation/)
+- [XLE vs XOP: Oil ETF Comparison](/xle-vs-xop-oil-etf-comparison/)

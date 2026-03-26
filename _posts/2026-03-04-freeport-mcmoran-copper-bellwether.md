@@ -320,3 +320,14 @@ Combining these indicators with FCX's operational metrics, including quarterly p
 The copper market's fundamental supply-demand dynamics make FCX one of the most compelling long-term commodity equity holdings for investors with a multi-year time horizon.
 The combination of constrained supply growth, secular demand acceleration from electrification, and FCX's position as the world's largest publicly traded producer creates a natural compounding mechanism where rising copper prices flow through to earnings growth, higher dividends, and share price appreciation.
 For investors willing to tolerate the cyclical volatility inherent in mining stocks, FCX offers an unmatched combination of scale, cost efficiency, and copper price leverage.
+
+---
+
+## Related Copper Reports
+- [Copper as Economic Indicator](/copper-economic-indicator/)
+- [Freeport-McMoRan: Copper Bellwether](/freeport-mcmoran-copper-bellwether/)
+- [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
+- [COPX: Copper Mining ETF Analysis](/copx-copper-mining-etf/)
+- [Copper Hits $5.70: EV Infrastructure](/copper-hits-570-ev-infrastructure/)
+- [Copper EV Infrastructure Impact](/copper-ev-infrastructure-impact/)
+- [Copper Structural Deficit](/copper-structural-deficit/)

@@ -1,3 +1,7 @@
+---
+sitemap: false
+---
+
 # CommodityNode Automated Daily Updates
 
 ## Prerequisites

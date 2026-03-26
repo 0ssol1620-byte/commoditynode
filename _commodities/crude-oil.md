@@ -108,3 +108,9 @@ Airlines face the most acute margin compression among major industries. Consumer
 ## Trading Note
 
 The 10-day correlation between crude and XLE is historically 0.82-0.88. During geopolitical shocks (Russia-Ukraine, Middle East escalation), the correlation briefly spikes to 0.95+ before reverting. Consider 2:1 weighting (XLE long / JETS short) during uptrend phases. The EIA weekly petroleum status report (Wednesday 10:30 AM ET) and OPEC monthly oil market report are the primary data catalysts. Managed money positioning on NYMEX indicates speculative sentiment extremes that often precede reversals.
+
+## Latest Signal Reports
+- [Oil's Geopolitical Premium: Strait of Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
+- [Oil Price Surge: Industry Impact Analysis](/oil-price-surge-industry-impact/)
+- [March 2026 Oil Market & OPEC Update](/march-2026-oil-market-opec/)
+- [Diesel at $3.8/Gallon: The Inflation Tax](/diesel-transportation-inflation/)

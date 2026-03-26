@@ -68,3 +68,7 @@ exclude:
   - Gemfile.lock
   - README.md
   - .gitignore
+  - AUDIT_REPORT.md
+  - CRON_SETUP.md
+  - ROADMAP.md
+  - SEO_AUDIT.md

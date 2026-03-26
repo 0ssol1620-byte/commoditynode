@@ -418,3 +418,14 @@ pairing. The most actionable framework for COPX investors is to scale into
 positions during China PMI-driven pullbacks and take partial profits during
 parabolic rallies driven by supply disruptions — the structural demand story
 provides a floor, while cyclical swings create the entry and exit points.
+
+---
+
+## Related Copper Reports
+- [Copper as Economic Indicator](/copper-economic-indicator/)
+- [Freeport-McMoRan: Copper Bellwether](/freeport-mcmoran-copper-bellwether/)
+- [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
+- [COPX: Copper Mining ETF Analysis](/copx-copper-mining-etf/)
+- [Copper Hits $5.70: EV Infrastructure](/copper-hits-570-ev-infrastructure/)
+- [Copper EV Infrastructure Impact](/copper-ev-infrastructure-impact/)
+- [Copper Structural Deficit](/copper-structural-deficit/)

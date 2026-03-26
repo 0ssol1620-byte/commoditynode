@@ -1,3 +1,7 @@
+---
+sitemap: false
+---
+
 # CommodityNode — Realistic Roadmap
 **Updated: 2026-03-24**
 

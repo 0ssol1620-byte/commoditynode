@@ -127,3 +127,14 @@ window.COMMODITY_DATA = {
 A 10% copper price move generates +15% to +20% returns for pure-play miners through operating leverage, with FCX (+18.0%) and IVN (+20.0%) offering the highest beta. The COPX ETF provides diversified exposure at +14.0%. On the downside, EV charging companies face -5.0% to -6.0% headwinds as station deployment costs increase, while wiring and cable manufacturers absorb the heaviest blow at -7.0%. The structural copper deficit driven by electrification and constrained mine supply suggests these dynamics will persist for years.
 
 **Contrarian opportunity:** During copper price corrections driven by China demand fears (typically triggered by weak PMI data), FCX often sells off 20-30% despite its world-class asset base. These pullbacks have historically been excellent buying opportunities because the structural supply deficit reasserts itself within 2-3 quarters. The FCX/HG ratio at extreme lows has been one of the most reliable contrarian signals in the mining sector. Conversely, EV charging stocks that have been pressured by high copper costs can see relief rallies when copper corrects -- the CHPT/HG inverse relationship offers a mean-reversion opportunity for tactical traders.
+
+---
+
+## Related Copper Reports
+- [Copper as Economic Indicator](/copper-economic-indicator/)
+- [Freeport-McMoRan: Copper Bellwether](/freeport-mcmoran-copper-bellwether/)
+- [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
+- [COPX: Copper Mining ETF Analysis](/copx-copper-mining-etf/)
+- [Copper Hits $5.70: EV Infrastructure](/copper-hits-570-ev-infrastructure/)
+- [Copper EV Infrastructure Impact](/copper-ev-infrastructure-impact/)
+- [Copper Structural Deficit](/copper-structural-deficit/)

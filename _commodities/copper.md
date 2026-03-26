@@ -108,3 +108,9 @@ Construction firms face rising input costs across wiring, plumbing, and HVAC sys
 ## Trading Note
 
 The copper/gold ratio is a powerful risk-on/risk-off indicator. A rising ratio signals risk appetite; falling ratio signals defensive positioning. Track the HG/GC spread daily during macro regime shifts. LME and COMEX warehouse inventory levels signal physical market tightness, while the futures curve structure (contango vs. backwardation) indicates near-term supply-demand balance. Chinese bonded warehouse stocks provide an additional data point for the world's largest consumer market.
+
+## Latest Signal Reports
+- [Copper Hits $5.70: EV Infrastructure Demand](/copper-hits-570-ev-infrastructure/)
+- [Copper Structural Deficit Analysis](/copper-structural-deficit/)
+- [Copper as Economic Indicator](/copper-economic-indicator/)
+- [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
