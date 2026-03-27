@@ -104,3 +104,18 @@ Lithium lacks a liquid futures market outside China, making spot price indices (
 - [Lithium EV Supply Chain Analysis](/lithium-ev-supply-chain/)
 - [Lithium EV Battery Auto Chain](/lithium-ev-battery-auto-chain/)
 - [Albemarle: Lithium EV Battery Play](/albemarle-lithium-ev-battery/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| Albemarle (ALB) | +14.0% | 0.82 | Lithium Producer |
+| SQM (SQM) | +12.0% | 0.78 | Lithium Producer |
+| Pilbara Minerals (PLS.AX) | +16.0% | 0.85 | Spodumene Mining |
+| Arcadium Lithium (ALTM) | +13.0% | 0.80 | Lithium Chemicals |
+| LIT ETF | +10.0% | 0.75 | Battery Tech ETF |
+| Tesla (TSLA) | −2.5% | −0.30 | EV Manufacturer |
+| NIO (NIO) | −4.0% | −0.38 | EV Manufacturer |
+| CATL (300750.SZ) | −2.0% | −0.25 | Battery Manufacturing |
+| BYD (BYDDF) | −1.5% | −0.20 | EV/Battery Integrated |
+| Cobalt Price | +5.0% | 0.55 | Co-movement |

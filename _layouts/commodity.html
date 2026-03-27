@@ -167,6 +167,26 @@ layout: default
         {{ content }}
       </div>
 
+      <!-- Static Impact Summary for crawlers (noscript fallback) -->
+      <noscript>
+      <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);">
+        <h2 style="font-size:1.25rem;margin-bottom:16px;">Impact Map Summary</h2>
+        <p>This commodity's interactive impact map shows how price movements ripple through related ETFs, producers, consumers, and macro factors. Enable JavaScript to view the full interactive visualization, or browse the related Signal Reports below for detailed analysis of each impact channel.</p>
+        {% if page.etfs %}
+        <h3 style="font-size:1.1rem;margin-top:20px;">Key ETFs</h3>
+        <ul>{% for etf in page.etfs %}<li>{{ etf }}</li>{% endfor %}</ul>
+        {% endif %}
+        {% if page.companies %}
+        <h3 style="font-size:1.1rem;margin-top:20px;">Key Companies</h3>
+        <ul>{% for company in page.companies %}<li>{{ company }}</li>{% endfor %}</ul>
+        {% endif %}
+        {% if page.substitutes %}
+        <h3 style="font-size:1.1rem;margin-top:20px;">Substitutes &amp; Alternatives</h3>
+        <ul>{% for sub in page.substitutes %}<li>{{ sub }}</li>{% endfor %}</ul>
+        {% endif %}
+      </div>
+      </noscript>
+
       <!-- Substitutes & Alternatives -->
       {% if page.substitutes %}
       <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);" data-animate>

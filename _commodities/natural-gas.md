@@ -114,3 +114,18 @@ Natural gas exhibits the highest seasonal volatility of all major commodities. W
 - [LNG & Natural Gas Global Trade](/lng-natural-gas-global-trade/)
 - [Utilities Sector: Natural Gas & Coal](/utilities-sector-natural-gas-coal/)
 - [Natural Gas Price Impact Analysis](/natural-gas-price-impact/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| UNG Natural Gas ETF | +9.5% | 0.97 | Natural Gas |
+| EQT Corporation (EQT) | +12.0% | 0.82 | Gas Producer |
+| Antero Resources (AR) | +14.0% | 0.85 | Gas Producer |
+| Cheniere Energy (LNG) | +5.0% | 0.55 | LNG Export |
+| CF Industries (CF) | −6.0% | −0.65 | Fertilizer (input cost) |
+| Mosaic (MOS) | −4.0% | −0.50 | Fertilizer (input cost) |
+| Residential Utilities | −3.0% | −0.40 | Utility Costs |
+| Industrial Gas Users | −2.5% | −0.35 | Manufacturing |
+| Coal Price | +3.5% | 0.50 | Fuel Substitution |
+| Electricity Price | +4.0% | 0.58 | Power Generation |

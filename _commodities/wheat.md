@@ -113,3 +113,18 @@ The Russia-Ukraine conflict removed 28% of global wheat export capacity from 202
 - [Food Price Disconnect: Wheat to Bread](/food-price-disconnect-wheat-bread/)
 - [Wheat & Flour Consumer Staples Chain](/wheat-flour-consumer-staples-chain/)
 - [Wheat Price Impact on Food Security](/wheat-price-impact-food/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| WEAT Wheat ETF | +9.5% | 0.97 | Wheat Futures |
+| ADM (ADM) | +4.0% | 0.45 | Grain Trading |
+| Bunge (BG) | +3.5% | 0.42 | Grain Processing |
+| General Mills (GIS) | −2.5% | −0.30 | Food Manufacturing |
+| Tyson Foods (TSN) | −3.0% | −0.35 | Livestock/Feed Cost |
+| Corn Price | +6.0% | 0.72 | Agricultural Co-movement |
+| Soybean Price | +4.0% | 0.55 | Agricultural Co-movement |
+| Fertilizer Prices | +3.0% | 0.40 | Input Cost |
+| Food CPI | +1.5% | 0.25 | Macro/Inflation |
+| Global Food Security Index | −2.0% | −0.30 | Geopolitical |

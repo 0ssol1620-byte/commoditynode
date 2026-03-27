@@ -53,6 +53,10 @@ defaults:
       type: "commodities"
     values:
       layout: "commodity"
+  - scope:
+      path: "tags"
+    values:
+      sitemap: false
 
 feed:
   title: "CommodityNode Signal Reports"
@@ -72,3 +76,7 @@ exclude:
   - CRON_SETUP.md
   - ROADMAP.md
   - SEO_AUDIT.md
+  - DEV_TODO.md
+  - QUALITY_REPORT.md
+  - logs/
+  - scripts/

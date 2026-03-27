@@ -101,3 +101,18 @@ The gold/silver ratio is the primary spread indicator for silver traders. Histor
 
 ## Latest Signal Reports
 - [Silver Price Impact: Solar & Electronics](/silver-price-impact-solar-electronics/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| SLV Silver ETF | +9.7% | 0.99 | Precious Metals |
+| SIL Silver Miners ETF | +16.0% | 0.85 | Silver Mining |
+| First Majestic (AG) | +20.0% | 0.82 | Silver Mining |
+| Pan American Silver (PAAS) | +15.0% | 0.80 | Silver Mining |
+| Wheaton Precious (WPM) | +8.0% | 0.72 | Royalty/Streaming |
+| Gold Price (GLD) | +6.0% | 0.80 | Co-movement |
+| Solar Industry (TAN) | −1.5% | −0.18 | Industrial Demand |
+| Electronics Sector | −1.0% | −0.12 | Industrial Demand |
+| USD Index (DXY) | −3.0% | −0.42 | Macro/FX |
+| Copper Price | +4.0% | 0.55 | Industrial Co-movement |

@@ -2,15 +2,21 @@
 layout: post
 title: "Natural Gas Storage Glut — Winners and Losers Update"
 date: 2026-03-27
-categories: [Energy, Analysis]
+categories: [Energy, Market Brief]
 tags: [natural-gas, storage, fertilizer, chemicals, shale]
 description: "US natural gas at $2.90/MMBtu with storage 18% above the five-year average. The glut is real — but it creates clear winners (chemicals, fertilizers, industrial gas consumers) and equally clear losers (shale producers, LNG pre-FID projects)."
-reading_time: 7
+reading_time: 5
 commodity_name: "Natural Gas"
 direction: bearish
 image: /assets/images/og-natgas-storage.png
 canonical_url: https://commoditynode.com/natural-gas-storage-glut-winners-losers/
 ---
+
+<div style="background:rgba(239,68,68,0.06);border-left:4px solid rgba(239,68,68,0.6);padding:20px 24px;margin-bottom:32px;border-radius:0 8px 8px 0;">
+<p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:#ef4444;margin-bottom:6px;">Market Brief — Bearish</p>
+<p style="font-size:1.3rem;font-weight:800;margin-bottom:8px;">Henry Hub: $2.90/MMBtu | Storage: +18% vs 5yr avg | Direction: Oversupplied</p>
+<p style="color:var(--text2);font-size:0.9rem;margin:0;">Rebalancing timeline: Q4 2026 at earliest. Positions: long fertilizer/chemicals, avoid gas producers.</p>
+</div>
 
 Henry Hub natural gas settled at **$2.90/MMBtu** in late March 2026 — down **31% from its October 2025 peak** of $4.20 and sitting uncomfortably close to the marginal cost of production for a significant portion of the US shale gas industry. The culprit is straightforward: **working gas in underground storage reached 2,050 Bcf** as of the March 21 EIA report, **18% above the five-year average** and the highest end-of-winter level since 2020. The US natural gas market is oversupplied, and the path to rebalancing is measured in quarters, not weeks.
 

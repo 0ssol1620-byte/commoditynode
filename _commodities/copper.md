@@ -114,3 +114,18 @@ The copper/gold ratio is a powerful risk-on/risk-off indicator. A rising ratio s
 - [Copper Structural Deficit Analysis](/copper-structural-deficit/)
 - [Copper as Economic Indicator](/copper-economic-indicator/)
 - [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| COPX Copper Miners ETF | +14.0% | 0.90 | Copper Mining |
+| Freeport-McMoRan (FCX) | +16.0% | 0.88 | Copper Mining |
+| Southern Copper (SCCO) | +13.0% | 0.85 | Copper Mining |
+| BHP Group (BHP) | +6.0% | 0.62 | Diversified Mining |
+| Rio Tinto (RIO) | +5.5% | 0.58 | Diversified Mining |
+| Nucor (NUE) | +3.0% | 0.42 | Steel (co-movement) |
+| Caterpillar (CAT) | +4.0% | 0.50 | Construction Equipment |
+| Housing Starts | +2.5% | 0.38 | Construction |
+| China PMI | +3.0% | 0.45 | Macro/Demand |
+| USD Index (DXY) | −2.8% | −0.40 | Macro/FX |

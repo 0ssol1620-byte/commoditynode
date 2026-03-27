@@ -114,3 +114,18 @@ The gold/silver ratio (historically averaging ~60-65:1) is a key spread trade. W
 - [Gold Breaks $5,000: Mining Stocks Impact](/gold-breaks-5000-mining-stocks/)
 - [Gold Mining, Emerging Markets Chain](/gold-mining-emerging-markets-chain/)
 - [GDX vs GLD: Mining vs Physical Gold](/gdx-vs-gld-gold-mining-physical/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| GLD Gold ETF | +9.8% | 0.99 | Precious Metals |
+| GDX Gold Miners ETF | +18.0% | 0.88 | Gold Mining |
+| GDXJ Junior Miners ETF | +22.0% | 0.82 | Junior Mining |
+| Newmont (NEM) | +16.0% | 0.85 | Gold Mining |
+| Barrick Gold (GOLD) | +17.0% | 0.84 | Gold Mining |
+| Agnico Eagle (AEM) | +15.0% | 0.83 | Gold Mining |
+| Wheaton Precious (WPM) | +12.0% | 0.80 | Royalty/Streaming |
+| Franco-Nevada (FNV) | +10.0% | 0.78 | Royalty/Streaming |
+| USD Index (DXY) | −3.5% | −0.45 | Macro/FX |
+| Real Yields (TIP) | −2.0% | −0.35 | Macro/Rates |

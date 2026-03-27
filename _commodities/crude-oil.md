@@ -114,3 +114,18 @@ The 10-day correlation between crude and XLE is historically 0.82-0.88. During g
 - [Oil Price Surge: Industry Impact Analysis](/oil-price-surge-industry-impact/)
 - [March 2026 Oil Market & OPEC Update](/march-2026-oil-market-opec/)
 - [Diesel at $3.8/Gallon: The Inflation Tax](/diesel-transportation-inflation/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| XLE Energy ETF | +8.0% | 0.85 | Energy |
+| USO Oil Fund | +9.0% | 0.95 | Commodities |
+| OIH Services ETF | +10.0% | 0.88 | Oilfield Services |
+| ExxonMobil (XOM) | +7.0% | 0.82 | Integrated Oil |
+| Chevron (CVX) | +7.0% | 0.80 | Integrated Oil |
+| ConocoPhillips (COP) | +9.0% | 0.85 | E&P |
+| Halliburton (HAL) | +12.0% | 0.88 | Oilfield Services |
+| JETS Airlines ETF | −7.0% | −0.75 | Airlines |
+| American Airlines (AAL) | −9.0% | −0.78 | Airlines |
+| Delta Air Lines (DAL) | −8.0% | −0.72 | Airlines |

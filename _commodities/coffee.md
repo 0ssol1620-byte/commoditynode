@@ -98,3 +98,18 @@ The Arabica/Robusta price spread reflects quality premiums and substitution dyna
 - [Coffee's 10% Crash: Brazil Surplus](/coffee-price-crash-brazil-surplus/)
 - [Coffee at $3.05: Climate Supply Stress](/coffee-305-climate-supply-stress/)
 - [Coffee Price & Starbucks Retail Impact](/coffee-price-starbucks-retail/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| Starbucks (SBUX) | −3.5% | −0.42 | Coffee Retail |
+| Nestlé (NSRGY) | −1.5% | −0.22 | Consumer Staples |
+| JDE Peet's (JDEP) | −2.5% | −0.35 | Coffee/Tea |
+| Keurig Dr Pepper (KDP) | −2.0% | −0.30 | Beverages |
+| JO Coffee ETN | +9.5% | 0.95 | Coffee Futures |
+| Brazilian Real (BRL) | +3.0% | 0.40 | Producer Currency |
+| Sugar Price | +2.5% | 0.35 | Agricultural Co-movement |
+| Cocoa Price | +2.0% | 0.30 | Agricultural Co-movement |
+| Shipping/Freight | +1.5% | 0.20 | Transport Costs |
+| Restaurant Sector | −1.0% | −0.15 | Input Cost Pressure |

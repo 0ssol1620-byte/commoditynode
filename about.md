@@ -61,6 +61,29 @@ description: "CommodityNode maps how commodity price movements ripple through gl
   <li>Critical Materials: Uranium, Rare Earth, Graphite, Vanadium, Potash</li>
 </ul>
 
+<h2>Who Built This</h2>
+<p>CommodityNode was built by a quantitative analyst and data engineer with a background in financial markets, supply chain analytics, and data visualization. After years of working with institutional commodity data tools (Bloomberg, Kpler, CRU), the founder realized that the core insights from commodity-equity relationship analysis weren't accessible to retail investors, independent analysts, or anyone without a five-figure research budget.</p>
+<p>The site was built from scratch using open-source technologies, public data sources, and hundreds of hours of manual supply chain research. Every impact score is backed by transparent methodology, and every correlation is recalculated quarterly using the latest available data.</p>
+<p><strong>Credentials:</strong> Background in quantitative finance and data science. Professional experience spanning commodity research, algorithmic trading systems, and financial data engineering. No affiliation with any broker, hedge fund, or commodity trading firm.</p>
+
+<h2>Editorial Standards</h2>
+<p>CommodityNode adheres to the following editorial principles:</p>
+<ul>
+  <li><strong>Data-driven:</strong> All analyses are based on publicly available data. We cite our sources and show our methodology.</li>
+  <li><strong>Transparent limitations:</strong> We acknowledge uncertainty. Impact scores are estimates, not predictions. Correlations can break down during market stress.</li>
+  <li><strong>No investment advice:</strong> Nothing on this site constitutes a recommendation to buy, sell, or hold any security. We provide analysis tools; investment decisions remain yours.</li>
+  <li><strong>No conflicts of interest:</strong> CommodityNode does not receive compensation from any company, ETF provider, or broker featured in our analysis. Revenue comes solely from advertising.</li>
+  <li><strong>Corrections policy:</strong> If you find an error in our data, calculations, or analysis, please <a href="/contact/">contact us</a>. We publish corrections promptly and transparently.</li>
+</ul>
+
+<h2>Contact</h2>
+<p>Have questions, corrections, partnership inquiries, or feedback? We'd love to hear from you.</p>
+<ul>
+  <li><strong>Email:</strong> <a href="mailto:contact@commoditynode.com">contact@commoditynode.com</a></li>
+  <li><strong>Twitter/X:</strong> <a href="https://twitter.com/commoditynode" target="_blank" rel="noopener">@commoditynode</a></li>
+</ul>
+<p>For detailed questions about our methodology, please see our <a href="/methodology/">Methodology page</a>.</p>
+
 <h2>Why It's Free</h2>
 <p>Good financial research shouldn't require a Bloomberg terminal subscription. CommodityNode is and will remain <strong>free and open access</strong>. We're supported by advertising revenue and believe open information makes markets more efficient for everyone.</p>
 

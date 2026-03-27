@@ -2,12 +2,21 @@ User-agent: *
 Allow: /
 Sitemap: https://commoditynode.com/sitemap.xml
 
-# Block low-value pages
+# Block low-value / thin pages
 Disallow: /page/
+Disallow: /tags/
 Disallow: /AUDIT_REPORT/
 Disallow: /CRON_SETUP/
 Disallow: /ROADMAP/
 Disallow: /SEO_AUDIT/
+Disallow: /DEV_TODO/
+Disallow: /QUALITY_REPORT/
 Disallow: /assets/data/
 Disallow: /assets/images/
-Disallow: /tags/
+
+# Allow specific crawlers full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /

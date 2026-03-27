@@ -103,3 +103,18 @@ The uranium spot/term price spread is the key indicator of market tightness. Whe
 - [Uranium Resurgence: Policy & Supply](/uranium-resurgence-policy-supply/)
 - [Uranium & Nuclear Energy Stocks](/uranium-nuclear-energy-stocks/)
 - [Cameco: Uranium & Nuclear Energy](/cameco-uranium-nuclear-energy/)
+
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| Cameco (CCJ) | +14.0% | 0.82 | Uranium Mining |
+| Sprott Uranium Trust (U.UN) | +9.5% | 0.95 | Physical Uranium |
+| NexGen Energy (NXE) | +18.0% | 0.78 | Uranium Developer |
+| Denison Mines (DNN) | +16.0% | 0.75 | Uranium Developer |
+| Energy Fuels (UUUU) | +15.0% | 0.72 | Uranium/REE Producer |
+| Global X Uranium ETF (URA) | +12.0% | 0.88 | Uranium ETF |
+| Nuclear Utility Costs | −2.0% | −0.25 | Power Generation |
+| SMR Companies | +4.0% | 0.45 | Nuclear Technology |
+| Natural Gas (substitution) | −3.0% | −0.35 | Fuel Competition |
+| Kazatomprom (KAP) | +11.0% | 0.80 | Uranium Mining |

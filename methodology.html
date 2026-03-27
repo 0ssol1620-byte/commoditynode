@@ -81,6 +81,55 @@ description: "How CommodityNode calculates impact scores, correlation data, sens
       <li><strong>Policy</strong> (pink) — regulatory, tariff, or government policy factors</li>
     </ul>
 
+    <h2>Data Sources — Complete List</h2>
+    <p>CommodityNode integrates data from the following sources, updated on the schedules noted:</p>
+    <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9rem;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border);text-align:left;">
+          <th style="padding:8px 12px;color:var(--text3);">Source</th>
+          <th style="padding:8px 12px;color:var(--text3);">Data Type</th>
+          <th style="padding:8px 12px;color:var(--text3);">Update Frequency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">Yahoo Finance API</td><td style="padding:8px 12px;">Commodity, equity, ETF prices (historical & real-time)</td><td style="padding:8px 12px;">Daily</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">FRED (Federal Reserve Economic Data)</td><td style="padding:8px 12px;">CPI, employment, interest rates, money supply</td><td style="padding:8px 12px;">Monthly</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">US Bureau of Labor Statistics (BLS)</td><td style="padding:8px 12px;">Producer Price Index, Consumer Price Index subcategories</td><td style="padding:8px 12px;">Monthly</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">SEC EDGAR Filings</td><td style="padding:8px 12px;">10-K, 10-Q — revenue breakdowns, cost structures, hedging disclosures</td><td style="padding:8px 12px;">Quarterly/Annual</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">EIA (US Energy Information Administration)</td><td style="padding:8px 12px;">Oil/gas storage, production, consumption, trade flows</td><td style="padding:8px 12px;">Weekly</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">USDA (US Dept of Agriculture)</td><td style="padding:8px 12px;">Crop reports, WASDE supply/demand estimates, export data</td><td style="padding:8px 12px;">Monthly</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">IEA (International Energy Agency)</td><td style="padding:8px 12px;">Global oil/gas supply-demand balances, energy outlooks</td><td style="padding:8px 12px;">Monthly</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">World Bureau of Metal Statistics</td><td style="padding:8px 12px;">Metal supply-demand balances, production data</td><td style="padding:8px 12px;">Monthly</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">LME (London Metal Exchange)</td><td style="padding:8px 12px;">Metal warehouse stocks, settlement prices</td><td style="padding:8px 12px;">Daily</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">COMEX / CME Group</td><td style="padding:8px 12px;">Futures prices, open interest, COT positioning data</td><td style="padding:8px 12px;">Weekly</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">World Gold Council</td><td style="padding:8px 12px;">Central bank purchases, gold demand/supply data</td><td style="padding:8px 12px;">Quarterly</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;">World Nuclear Association</td><td style="padding:8px 12px;">Reactor pipeline, uranium supply-demand</td><td style="padding:8px 12px;">Semi-annual</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Correlation Calculation — Technical Detail</h2>
+    <p>Our Pearson correlation coefficients are computed as follows:</p>
+    <ol>
+      <li><strong>Data preparation:</strong> Weekly closing prices for both the commodity and the related asset, aligned to Friday close. Missing data points are forward-filled (last observation carried forward). Weeks with holidays in either market are excluded.</li>
+      <li><strong>Return calculation:</strong> Log returns — ln(P<sub>t</sub>/P<sub>t-1</sub>) — to normalize for compounding effects and ensure statistical stationarity.</li>
+      <li><strong>Window:</strong> Rolling 156-week (3-year) window, recalculated quarterly. We use a 3-year window as a balance between statistical significance (minimum ~100 observations) and recency (capturing recent structural shifts).</li>
+      <li><strong>Significance test:</strong> T-test with H₀: ρ = 0. We display correlations only when p-value < 0.05. The t-statistic is computed as t = r√(n-2) / √(1-r²), where r is the sample correlation and n is the number of observations.</li>
+      <li><strong>Lag testing:</strong> For Level 2+ nodes, we test correlations at 0, 1, 2, and 4-week lags and report the lag with the strongest statistically significant relationship. This captures delayed transmission effects (e.g., oil → refiner margins have a 1-2 week lag).</li>
+    </ol>
+
+    <h2>Node Graph Layout Logic</h2>
+    <p>Impact maps use D3.js force-directed graph simulation with the following configuration:</p>
+    <ul>
+      <li><strong>Center force:</strong> The commodity node is pinned at the canvas center with a strong gravitational pull (forceCenter).</li>
+      <li><strong>Radial force:</strong> Nodes are assigned to concentric rings based on their level (1-6). A radial force pushes each node toward its assigned ring radius, creating the ripple-ring visual structure.</li>
+      <li><strong>Link force:</strong> Edges between connected nodes exert spring forces that keep parent-child relationships visually proximate.</li>
+      <li><strong>Collision force:</strong> Nodes repel each other at short range to prevent label overlap.</li>
+      <li><strong>Charge force:</strong> A mild electrostatic repulsion (forceManyBody) ensures even distribution within each ring.</li>
+      <li><strong>Node sizing:</strong> Node radius is proportional to |impact|, so high-impact nodes are visually larger.</li>
+      <li><strong>Color encoding:</strong> Node type determines color (see Node Types above). Edge opacity is proportional to |correlation|.</li>
+    </ul>
+    <p>The simulation runs for 300 ticks on page load. Users can drag nodes to adjust layout; dragged nodes are pinned to their new position.</p>
+
     <h2>Ripple Chain Methodology</h2>
     <p>Ripple Chains trace multi-hop impact paths from a commodity shock to downstream effects. Each hop represents a documented transmission mechanism:</p>
     <ul>

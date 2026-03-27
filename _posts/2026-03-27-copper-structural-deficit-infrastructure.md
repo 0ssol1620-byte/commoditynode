@@ -12,9 +12,22 @@ image: /assets/images/og-copper-deficit.png
 canonical_url: https://commoditynode.com/copper-structural-deficit-infrastructure/
 ---
 
+<div style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.2);border-radius:12px;padding:28px;margin-bottom:32px;">
+<p style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:8px;">Investment Case Summary</p>
+<p style="font-size:1.1rem;font-weight:700;margin-bottom:12px;">Copper is the most structurally undersupplied major commodity in the world.</p>
+<table style="width:100%;font-size:0.85rem;">
+<tr><td style="color:var(--text3);padding:4px 0;">Thesis</td><td>Structural deficit widening through 2030 — demand +4-5%/yr vs. supply +1%/yr</td></tr>
+<tr><td style="color:var(--text3);padding:4px 0;">Target Price</td><td>$5.50-6.00/lb (incentive price for greenfield supply response)</td></tr>
+<tr><td style="color:var(--text3);padding:4px 0;">Time Horizon</td><td>18-36 months</td></tr>
+<tr><td style="color:var(--text3);padding:4px 0;">Conviction</td><td>HIGH — demand drivers are mandate-backed and multi-year</td></tr>
+<tr><td style="color:var(--text3);padding:4px 0;">Primary Risk</td><td>China hard landing (30% of global demand)</td></tr>
+<tr><td style="color:var(--text3);padding:4px 0;">Top Pick</td><td>Freeport-McMoRan (FCX) — largest pure-play, 8.5x EV/EBITDA</td></tr>
+</table>
+</div>
+
 The copper market is sleepwalking into the largest structural deficit in its history. Demand growth is accelerating across **every major infrastructure vector simultaneously** — electric vehicles, AI data centers, solar and wind generation, grid modernization, and defense electrification. Meanwhile, the supply side is stuck in first gear: mine production grew just **0.8% in 2025**, permitting timelines stretch **12-18 years** for new greenfield projects, and ore grades at existing mines continue their decades-long decline. The math doesn't work. And the market is only beginning to figure that out.
 
-## Overview
+## The Thesis
 
 Copper sits at the intersection of every transformative trend in the global economy. It is the metal of electrification — irreplaceable in motors, wiring, transformers, power electronics, and energy storage systems. There is no substitute at scale for copper's combination of electrical conductivity, thermal performance, ductility, and corrosion resistance. Aluminum can replace it in some applications at a 40% efficiency penalty, but in high-density power systems — exactly the systems the world is building right now — copper is non-negotiable.
 
