@@ -196,7 +196,31 @@
     { id:'feeder-cattle', name:'Feeder Cattle', category:'agriculture', size:6, color:'#fb923c',
       nodes:[{name:'Ranchers',type:'producer'},{name:'Corn/Feed',type:'supplier'},{name:'Drought Risk',type:'macro'}]},
     { id:'lean-hogs', name:'Lean Hogs', category:'agriculture', size:6, color:'#f472b6',
-      nodes:[{name:'Pork Processors',type:'processor'},{name:'China Import',type:'regional'},{name:'Feed Costs',type:'supplier'}]}
+      nodes:[{name:'Pork Processors',type:'processor'},{name:'China Import',type:'regional'},{name:'Feed Costs',type:'supplier'}]},
+    { id:'antimony', name:'Antimony', category:'industrial', size:8, color:'#dc2626',
+      link:'/commodities/antimony/',
+      nodes:[{name:'US Antimony',type:'producer'},{name:'Flame Retardants',type:'consumer'},{name:'Ammunition',type:'consumer'},
+             {name:'China Export Ctrl',type:'policy'},{name:'Lead-Acid Battery',type:'consumer'},{name:'Perpetua Resources',type:'producer'}]},
+    { id:'indium', name:'Indium', category:'industrial', size:7, color:'#a78bfa',
+      link:'/commodities/indium/',
+      nodes:[{name:'ITO Coatings',type:'consumer'},{name:'Korea Zinc',type:'producer'},{name:'Samsung Display',type:'consumer'},
+             {name:'CIGS Solar',type:'consumer'},{name:'Zinc (By-product)',type:'commodity'},{name:'LG Display',type:'consumer'}]},
+    { id:'neon', name:'Neon', category:'industrial', size:8, color:'#06b6d4',
+      link:'/commodities/neon/',
+      nodes:[{name:'DUV Lithography',type:'consumer'},{name:'TSMC',type:'consumer'},{name:'ASML',type:'supplier'},
+             {name:'Air Liquide',type:'producer'},{name:'Ukraine Supply',type:'regional'},{name:'Chip Fabs',type:'consumer'}]},
+    { id:'iridium', name:'Iridium', category:'precious', size:7, color:'#eab308',
+      link:'/commodities/iridium/',
+      nodes:[{name:'PEM Electrolyzers',type:'consumer'},{name:'Sibanye-Stillwater',type:'producer'},{name:'Green Hydrogen',type:'consumer'},
+             {name:'Anglo Platinum',type:'producer'},{name:'South Africa',type:'regional'},{name:'Plug Power',type:'consumer'}]},
+    { id:'titanium', name:'Titanium', category:'industrial', size:9, color:'#64748b',
+      link:'/commodities/titanium/',
+      nodes:[{name:'Boeing',type:'consumer'},{name:'Airbus',type:'consumer'},{name:'VSMPO-AVISMA',type:'producer'},
+             {name:'F-35 Program',type:'consumer'},{name:'Medical Implants',type:'consumer'},{name:'Howmet Aerospace',type:'producer'}]},
+    { id:'water', name:'Water', category:'agriculture', size:10, color:'#0ea5e9',
+      link:'/commodities/water/',
+      nodes:[{name:'Agriculture',type:'consumer'},{name:'NQH2O Index',type:'index'},{name:'Xylem',type:'supplier'},
+             {name:'Desalination',type:'supplier'},{name:'Mining Water',type:'consumer'},{name:'Drought Risk',type:'macro'}]}
   ];
 
   /* ---- Cluster centres ---- */

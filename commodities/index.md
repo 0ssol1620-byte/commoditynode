@@ -205,6 +205,27 @@ description: "Explore how each commodity's price movements impact industries, st
       <div class="commodity-category-sector">Semiconductors & solar cells</div>
     </div>
   </a>
+  <a href="/commodities/antimony/" class="commodity-category-card">
+    <span class="commodity-category-tag">Sb</span>
+    <div>
+      <div class="commodity-category-name">Antimony</div>
+      <div class="commodity-category-sector">Defense, flame retardants — China 80%+</div>
+    </div>
+  </a>
+  <a href="/commodities/titanium/" class="commodity-category-card">
+    <span class="commodity-category-tag">Ti</span>
+    <div>
+      <div class="commodity-category-name">Titanium</div>
+      <div class="commodity-category-sector">Aerospace, defense & medical implants</div>
+    </div>
+  </a>
+  <a href="/commodities/neon/" class="commodity-category-card">
+    <span class="commodity-category-tag">Ne</span>
+    <div>
+      <div class="commodity-category-name">Neon</div>
+      <div class="commodity-category-sector">Semiconductor lithography laser gas</div>
+    </div>
+  </a>
 </div>
 
 <!-- Battery Metals -->
@@ -248,6 +269,20 @@ description: "Explore how each commodity's price movements impact industries, st
       <div class="commodity-category-sector">Fiber optics & infrared sensors</div>
     </div>
   </a>
+  <a href="/commodities/indium/" class="commodity-category-card">
+    <span class="commodity-category-tag">In</span>
+    <div>
+      <div class="commodity-category-name">Indium</div>
+      <div class="commodity-category-sector">ITO touchscreens & thin-film solar</div>
+    </div>
+  </a>
+  <a href="/commodities/iridium/" class="commodity-category-card">
+    <span class="commodity-category-tag">Ir</span>
+    <div>
+      <div class="commodity-category-name">Iridium</div>
+      <div class="commodity-category-sector">PEM electrolyzers & green hydrogen</div>
+    </div>
+  </a>
 </div>
 
 <!-- Agriculture -->
@@ -282,6 +317,13 @@ description: "Explore how each commodity's price movements impact industries, st
     <div>
       <div class="commodity-category-name">Phosphate</div>
       <div class="commodity-category-sector">Fertilizer backbone — food security</div>
+    </div>
+  </a>
+  <a href="/commodities/water/" class="commodity-category-card">
+    <span class="commodity-category-tag">H₂O</span>
+    <div>
+      <div class="commodity-category-name">Water</div>
+      <div class="commodity-category-sector">CME futures — climate scarcity trade</div>
     </div>
   </a>
 </div>
