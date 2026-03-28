@@ -5,7 +5,7 @@ image: "/assets/images/og-tin.png"
 title: "Tin Price Impact: Semiconductors, Electronics & Soldering Supply Chain"
 description: "How tin price spikes ripple through semiconductor packaging, electronics manufacturers, and global PCB production."
 commodity_slug: "tin"
-symbol: "ZNC=F"
+symbol: ""
 sector: "Industrial Metals"
 etfs: ["JJM"]
 companies: ["MINSUR", "YTL"]

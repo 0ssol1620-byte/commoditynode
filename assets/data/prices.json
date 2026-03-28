@@ -140,24 +140,26 @@
     "updated_at": "2026-03-28T20:14:40.755945+00:00"
   },
   "zinc": {
-    "symbol": "ZNC=F",
+    "symbol": "",
     "name": "Zinc",
     "unit": "$/share",
     "price": 2530.0,
     "change_pct": 10.14,
     "high_52w": 2530.0,
     "low_52w": 2297.0,
-    "updated_at": "2026-03-28T20:14:41.252774+00:00"
+    "updated_at": "2026-03-28T20:14:41.252774+00:00",
+    "no_data": true
   },
   "tin": {
-    "symbol": "ZNC=F",
+    "symbol": "",
     "name": "Tin (ZNC proxy)",
     "unit": "$/share",
     "price": 2530.0,
     "change_pct": 10.14,
     "high_52w": 2530.0,
     "low_52w": 2297.0,
-    "updated_at": "2026-03-28T20:14:41.856941+00:00"
+    "updated_at": "2026-03-28T20:14:41.856941+00:00",
+    "no_data": true
   },
   "sugar": {
     "symbol": "SB=F",
