@@ -34,7 +34,7 @@
     "name": "Natural Gas",
     "unit": "$/MMBtu",
     "price": 3.025,
-    "change_pct": 0.87,
+    "change_pct": 3.2,
     "high_52w": 7.83,
     "low_52w": 2.62,
     "updated_at": "2026-03-28T20:14:35.605249+00:00"
@@ -104,7 +104,7 @@
     "name": "Coffee",
     "unit": "cents/lb",
     "price": 270.5,
-    "change_pct": 0.0,
+    "change_pct": -1.93,
     "high_52w": 437.95,
     "low_52w": 278.65,
     "updated_at": "2026-03-28T20:14:39.216227+00:00"
@@ -124,7 +124,7 @@
     "name": "Palladium",
     "unit": "$/oz",
     "price": 1406.1,
-    "change_pct": 4.83,
+    "change_pct": 3.7,
     "high_52w": 2169.9,
     "low_52w": 876.6,
     "updated_at": "2026-03-28T20:14:40.236404+00:00"
@@ -216,7 +216,7 @@
     "name": "Jet Fuel (HO proxy)",
     "unit": "$/gallon",
     "price": 4.236,
-    "change_pct": -0.88,
+    "change_pct": 5.2,
     "high_52w": 4.71,
     "low_52w": 1.93,
     "updated_at": "2026-03-28T20:14:44.683918+00:00"
@@ -236,7 +236,7 @@
     "name": "Diesel (Heating Oil)",
     "unit": "$/gallon",
     "price": 4.236,
-    "change_pct": -0.88,
+    "change_pct": 5.2,
     "high_52w": 4.71,
     "low_52w": 1.93,
     "updated_at": "2026-03-28T20:14:45.681823+00:00"
@@ -256,7 +256,7 @@
     "name": "Cocoa",
     "unit": "$/tonne",
     "price": 3450.0,
-    "change_pct": 9.04,
+    "change_pct": 0.03,
     "high_52w": 11280.0,
     "low_52w": 2798.0,
     "updated_at": "2026-03-28T20:14:46.641183+00:00"
@@ -286,7 +286,7 @@
     "name": "Rice",
     "unit": "cents/cwt",
     "price": 11.09,
-    "change_pct": 0.0,
+    "change_pct": 1.09,
     "high_52w": 1383.0,
     "low_52w": 10.96,
     "updated_at": "2026-03-28T20:14:48.092749+00:00"
@@ -306,7 +306,7 @@
     "name": "Orange Juice",
     "unit": "cents/lb",
     "price": 170.0,
-    "change_pct": -5.76,
+    "change_pct": -2.13,
     "high_52w": 344.3,
     "low_52w": 132.5,
     "updated_at": "2026-03-28T20:14:49.058143+00:00"
