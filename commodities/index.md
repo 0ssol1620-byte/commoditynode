@@ -2,7 +2,7 @@
 layout: default
 title: Commodities
 permalink: /commodities/
-description: "Explore how each commodity's price movements impact industries, stocks, and ETFs."
+description: "Explore how each commodity's price movements ripple through industries, stocks, and ETFs. Interactive impact maps for 60+ commodities — from crude oil to rare earths."
 ---
 
 <div class="post-header">

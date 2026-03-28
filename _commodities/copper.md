@@ -3,7 +3,7 @@ layout: commodity
 unit: "$/lb"
 image: "/assets/images/og-copper.png"
 title: "Copper Price Impact: EVs, Mining & Construction"
-description: "How copper price movements signal economic cycles and impact EV makers, miners, and homebuilders."
+description: "How copper price movements signal economic cycles and impact EV makers, miners, homebuilders, and infrastructure. Interactive impact map with real-time correlations."
 commodity_slug: "copper"
 symbol: "HG=F"
 sector: "Industrial Metals"

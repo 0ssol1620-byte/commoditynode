@@ -77,6 +77,21 @@ Chinese gallium refiners (Chinalco subsidiaries, East Hope Group) benefit from t
 
 Compound semiconductor foundries face raw material cost inflation and allocation uncertainty. 5G equipment makers (Ericsson, Nokia, Samsung Networks) absorb higher component costs as RF chip prices rise. LED manufacturers dependent on GaAs substrates face margin compression. Consumer electronics OEMs ultimately bear pass-through costs on smartphones, data center optics, and display technologies. Western defense contractors face supply security risks for critical electronic warfare and radar systems.
 
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| Gallium Price Index | +10.0% | 0.99 | Critical Minerals |
+| REMX Rare Earth ETF | +4.0% | 0.35 | Critical Minerals |
+| SMH Semiconductor ETF | −3.0% | −0.20 | Semiconductors |
+| Chinalco (Aluminum/Gallium) | +9.0% | 0.75 | Aluminum/Gallium |
+| China Mineral (CMC) | +8.0% | 0.70 | Gallium Refining |
+| Intel (INTC) | −3.0% | −0.22 | Semiconductors |
+| TSMC (TSM) | −2.0% | −0.15 | Semiconductors |
+| Wolfspeed (CREE) | −5.0% | −0.40 | Wide Bandgap |
+| ams-OSRAM | −4.0% | −0.32 | LED/Optoelectronics |
+| Germanium (Related) | +7.0% | 0.65 | Critical Minerals |
+
 ## Trading Note
 
 Gallium has no exchange-traded futures contract; prices are assessed by Asian Metal, Argus, and Fastmarkets. Monitor China's MOFCOM export license approvals for real-time supply signals — license denials or delays directly move spot prices. Track global aluminum production data as a leading indicator for potential gallium by-product availability. The REMX ETF provides indirect exposure through rare earth and critical mineral miners. Wolfspeed (CREE) and Skyworks (SWKS) share prices inversely correlate with gallium price spikes. Watch for Japan and South Korea strategic reserve releases as a price ceiling mechanism during supply crises.

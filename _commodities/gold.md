@@ -3,7 +3,7 @@ layout: commodity
 unit: "$/oz"
 image: "/assets/images/og-gold.png"
 title: "Gold Price Impact: Miners, Dollar & Safe Haven Flows"
-description: "How gold price movements reflect inflation, currency, and risk sentiment across global markets."
+description: "How gold price movements reflect inflation hedging, currency dynamics, and risk sentiment across global markets. Impact map for miners, ETFs, and macro factors."
 commodity_slug: "gold"
 symbol: "GC=F"
 sector: "Precious Metals"

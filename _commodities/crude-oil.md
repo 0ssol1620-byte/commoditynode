@@ -3,7 +3,7 @@ layout: commodity
 unit: "$/barrel"
 image: "/assets/images/og-crude-oil.png"
 title: "Crude Oil Price Impact: Industries, Stocks & ETFs"
-description: "How WTI crude oil price movements ripple through airlines, energy stocks, and consumer spending."
+description: "How WTI crude oil price movements ripple through airlines, energy stocks, refiners, and consumer spending. Interactive impact map with correlations and sensitivity scores."
 commodity_slug: "crude-oil"
 symbol: "CL=F"
 sector: "Energy"

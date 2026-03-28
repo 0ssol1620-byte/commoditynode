@@ -78,6 +78,21 @@ Water infrastructure companies (Xylem, Pentair, Mueller Water, IDEX) benefit fro
 
 Water-intensive agricultural operations face rising input costs that compress margins, particularly almond and pistachio orchards, rice paddies, and feedlot operations in the Western U.S. Mining companies in water-scarce regions face higher operating costs, project delays, and potential regulatory restrictions. Municipalities face pressure to raise water rates, creating political and affordability challenges. Food companies face supply chain disruptions from drought-driven crop failures. Data centers -- increasingly large water consumers for cooling -- face siting constraints in water-stressed areas. Hydroelectric power generators face reduced output during drought periods.
 
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| NQH2O Water Index | +10.0% | 0.99 | Commodities |
+| PHO Water ETF | +5.0% | 0.45 | Water |
+| CGW Global Water ETF | +4.0% | 0.40 | Water |
+| American Water Works (AWK) | +6.0% | 0.50 | Utilities |
+| Xylem (XYL) | +5.0% | 0.42 | Water Tech |
+| Agriculture Sector | −7.0% | −0.55 | Agriculture |
+| Mining Water Use | −4.0% | −0.30 | Mining |
+| Municipal Utilities | −3.0% | −0.25 | Utilities |
+| Veolia (VEOEY) | +5.0% | 0.42 | Water Treatment |
+| Desalination Sector | +5.0% | 0.40 | Water Tech |
+
 ## Trading Note
 
 CME NQH2O futures provide limited but growing price discovery for California water rights. The contract settles financially against the Nasdaq Veles California Water Index, which tracks transaction prices across five water markets. Monitor the U.S. Drought Monitor weekly updates and NOAA seasonal precipitation forecasts for supply indicators. California Department of Water Resources snowpack surveys (April 1 benchmark) set the tone for the water year. Colorado River Bureau of Reclamation projections drive allocation decisions for seven basin states. Track agricultural planting intentions reports (USDA Prospective Plantings) for demand indicators. Water ETF flows (PHO, CGW) indicate institutional positioning on scarcity themes. The Ogallala Aquifer depletion rate and Central Valley subsidence data provide long-term structural signals. Municipal water rate case filings at state public utility commissions indicate utility investment intensity.

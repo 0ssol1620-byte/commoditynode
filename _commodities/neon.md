@@ -78,6 +78,21 @@ Industrial gas companies (Air Liquide, Linde, Nippon Sanso) that invested in neo
 
 Semiconductor manufacturers (TSMC, Samsung, Intel, SK Hynix, Micron) face direct input cost increases that are difficult to pass through on contractual chip pricing. Chip equipment makers see potential fab utilization reductions that defer tool purchases. Fabless semiconductor companies face delivery delays and potentially higher foundry pricing. Automotive OEMs remain vulnerable to chip supply disruptions triggered by gas shortages. Consumer electronics brands face component availability constraints during severe neon disruptions.
 
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| Neon Gas Price Index | +10.0% | 0.99 | Commodities |
+| SOXX Semiconductor ETF | −4.0% | −0.30 | Semiconductors |
+| SMH VanEck Chip ETF | −4.0% | −0.28 | Semiconductors |
+| ASML Holdings | −3.0% | −0.22 | Lithography |
+| Applied Materials (AMAT) | −2.0% | −0.18 | Chip Equipment |
+| TSMC (TSM) | −5.0% | −0.35 | Foundry |
+| Ingas (Ukraine) | +9.0% | 0.75 | Noble Gas |
+| Cryoin (Ukraine) | +8.0% | 0.70 | Noble Gas |
+| Air Liquide (AI.PA) | +5.0% | 0.40 | Industrial Gas |
+| Linde plc (LIN) | +5.0% | 0.38 | Industrial Gas |
+
 ## Trading Note
 
 Neon does not trade on commodity exchanges -- pricing is based on bilateral contracts and spot market assessments from gasworld and Industrial Gas Analytics. Monitor Ukrainian industrial gas production status and steel mill operations for traditional supply indicators. Track Chinese neon export volumes and pricing as the marginal supply source. Semiconductor industry fab utilization rates (reported by TSMC, Samsung quarterly) indicate demand intensity. ASML DUV tool shipments versus EUV tool shipments track the structural demand trajectory. Monitor Air Liquide and Linde earnings calls for gas supply commentary. The neon recycling adoption rate at major fabs is the most important variable for long-term demand modeling.

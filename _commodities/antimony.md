@@ -78,6 +78,21 @@ US Antimony Corporation (UAMY) and Perpetua Resources (PPTA) benefit directly fr
 
 Flame retardant manufacturers (BASF, Lanxess, ICL) face direct input cost inflation with limited ability to pass through quickly in formula-based contracts. Electronics and automotive companies absorb higher component costs for fire-rated materials. Ammunition manufacturers including Olin Corporation and Vista Outdoor face margin pressure on military and civilian cartridge production. Lead-acid battery producers (EnerSys, GS Yuasa) see alloy costs rise, particularly for industrial deep-cycle products. PET plastic producers face catalyst cost increases that affect polyester fiber and packaging margins.
 
+## Key Impact Relationships
+
+| Node | Impact (±10% Move) | Correlation | Sector |
+|------|-------------------|-------------|--------|
+| Antimony Price Index | +10.0% | 0.99 | Commodities |
+| REMX Rare Earth ETF | +4.0% | 0.35 | Critical Minerals |
+| US Antimony (UAMY) | +10.0% | 0.85 | Mining |
+| Hsikwang Shan (China) | +8.0% | 0.70 | Mining |
+| Mandalay Resources | +6.0% | 0.55 | Mining |
+| Flame Retardant Sector | −5.0% | −0.40 | Chemicals |
+| Lead-Acid Battery Sector | −3.0% | −0.25 | Energy Storage |
+| Ammunition Alloys | −4.0% | −0.30 | Defense |
+| XME Metals Mining ETF | +3.0% | 0.28 | Mining |
+| US DoD Stockpile | +6.0% | 0.45 | Defense |
+
 ## Trading Note
 
 Antimony does not trade on major commodity exchanges -- pricing is based on Metal Bulletin and Asian Metals assessments for antimony metal and antimony trioxide. Monitor China's Ministry of Commerce export permit announcements for supply-side disruptions. The Perpetua Resources project timeline is a key Western supply catalyst. Track U.S. Defense Production Act invocations and DLA stockpile purchase announcements for demand signals. The antimony/lead price ratio indicates battery alloy substitution economics. Chinese domestic antimony prices in RMB/ton often lead international markets by 2-4 weeks.

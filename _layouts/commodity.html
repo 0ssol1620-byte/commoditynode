@@ -171,19 +171,39 @@ layout: default
       <noscript>
       <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);">
         <h2 style="font-size:1.25rem;margin-bottom:16px;">Impact Map Summary</h2>
-        <p>This commodity's interactive impact map shows how price movements ripple through related ETFs, producers, consumers, and macro factors. Enable JavaScript to view the full interactive visualization, or browse the related Signal Reports below for detailed analysis of each impact channel.</p>
-        {% if page.etfs %}
-        <h3 style="font-size:1.1rem;margin-top:20px;">Key ETFs</h3>
-        <ul>{% for etf in page.etfs %}<li>{{ etf }}</li>{% endfor %}</ul>
-        {% endif %}
-        {% if page.companies %}
-        <h3 style="font-size:1.1rem;margin-top:20px;">Key Companies</h3>
-        <ul>{% for company in page.companies %}<li>{{ company }}</li>{% endfor %}</ul>
-        {% endif %}
-        {% if page.substitutes %}
-        <h3 style="font-size:1.1rem;margin-top:20px;">Substitutes &amp; Alternatives</h3>
-        <ul>{% for sub in page.substitutes %}<li>{{ sub }}</li>{% endfor %}</ul>
-        {% endif %}
+        <p>This commodity's interactive impact map shows how price movements ripple through related ETFs, producers, consumers, and macro factors. Enable JavaScript to view the full interactive visualization, or browse the Key Impact Relationships table and Signal Reports below for detailed analysis.</p>
+        <table style="width:100%;border-collapse:collapse;font-size:0.85rem;margin:16px 0;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--border);text-align:left;">
+              <th style="padding:6px 10px;">Category</th>
+              <th style="padding:6px 10px;">Assets</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if page.etfs %}
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 10px;font-weight:600;">Key ETFs</td>
+              <td style="padding:6px 10px;">{% for etf in page.etfs %}{{ etf }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
+            </tr>
+            {% endif %}
+            {% if page.companies %}
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 10px;font-weight:600;">Key Companies</td>
+              <td style="padding:6px 10px;">{% for company in page.companies %}{{ company }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
+            </tr>
+            {% endif %}
+            {% if page.substitutes %}
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:6px 10px;font-weight:600;">Substitutes</td>
+              <td style="padding:6px 10px;">{% for sub in page.substitutes %}{{ sub }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
+            </tr>
+            {% endif %}
+            <tr>
+              <td style="padding:6px 10px;font-weight:600;">Sector</td>
+              <td style="padding:6px 10px;">{{ page.sector }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       </noscript>
 
