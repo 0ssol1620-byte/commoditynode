@@ -12,6 +12,7 @@
     var best = null, bestAbs = 0;
     for(var k in d){
       if(!d.hasOwnProperty(k)) continue;
+      if(d[k].no_data || d[k].price === 0 || !d[k].price) continue; // Skip commodities without real data
       var abs = Math.abs(d[k].change_pct);
       if(abs > bestAbs){ bestAbs = abs; best = k; }
     }
