@@ -77,6 +77,20 @@ description: "Explore how each commodity's price movements ripple through indust
       <div class="commodity-category-sector">MRI, semiconductors & aerospace</div>
     </div>
   </a>
+  <a href="/commodities/ethanol/" class="commodity-category-card">
+    <span class="commodity-category-tag">ETH</span>
+    <div>
+      <div class="commodity-category-name">Ethanol</div>
+      <div class="commodity-category-sector">Biofuel blending & corn demand</div>
+    </div>
+  </a>
+  <a href="/commodities/hydrogen/" class="commodity-category-card">
+    <span class="commodity-category-tag">H₂</span>
+    <div>
+      <div class="commodity-category-name">Hydrogen</div>
+      <div class="commodity-category-sector">Clean energy transition fuel</div>
+    </div>
+  </a>
 </div>
 
 <!-- Precious Metals -->
@@ -111,6 +125,13 @@ description: "Explore how each commodity's price movements ripple through indust
     <div>
       <div class="commodity-category-name">Palladium</div>
       <div class="commodity-category-sector">Auto catalytic converters</div>
+    </div>
+  </a>
+  <a href="/commodities/rhodium/" class="commodity-category-card">
+    <span class="commodity-category-tag">Rh</span>
+    <div>
+      <div class="commodity-category-name">Rhodium</div>
+      <div class="commodity-category-sector">Rarest PGM — autocatalysts & glass</div>
     </div>
   </a>
 </div>
@@ -226,6 +247,34 @@ description: "Explore how each commodity's price movements ripple through indust
       <div class="commodity-category-sector">Semiconductor lithography laser gas</div>
     </div>
   </a>
+  <a href="/commodities/manganese/" class="commodity-category-card">
+    <span class="commodity-category-tag">Mn</span>
+    <div>
+      <div class="commodity-category-name">Manganese</div>
+      <div class="commodity-category-sector">Steel alloys & EV battery cathodes</div>
+    </div>
+  </a>
+  <a href="/commodities/vanadium/" class="commodity-category-card">
+    <span class="commodity-category-tag">V</span>
+    <div>
+      <div class="commodity-category-name">Vanadium</div>
+      <div class="commodity-category-sector">Steel rebar & grid-scale batteries</div>
+    </div>
+  </a>
+  <a href="/commodities/graphite/" class="commodity-category-card">
+    <span class="commodity-category-tag">GRA</span>
+    <div>
+      <div class="commodity-category-name">Graphite</div>
+      <div class="commodity-category-sector">EV battery anodes — China 65%+</div>
+    </div>
+  </a>
+  <a href="/commodities/rare-earth/" class="commodity-category-card">
+    <span class="commodity-category-tag">REE</span>
+    <div>
+      <div class="commodity-category-name">Rare Earth</div>
+      <div class="commodity-category-sector">EV motors, wind turbines, defense</div>
+    </div>
+  </a>
 </div>
 
 <!-- Battery Metals -->
@@ -319,6 +368,55 @@ description: "Explore how each commodity's price movements ripple through indust
       <div class="commodity-category-sector">Fertilizer backbone — food security</div>
     </div>
   </a>
+  <a href="/commodities/rice/" class="commodity-category-card">
+    <span class="commodity-category-tag">RCE</span>
+    <div>
+      <div class="commodity-category-name">Rice</div>
+      <div class="commodity-category-sector">Staple for 3.5B people — Asia food security</div>
+    </div>
+  </a>
+  <a href="/commodities/oats/" class="commodity-category-card">
+    <span class="commodity-category-tag">OAT</span>
+    <div>
+      <div class="commodity-category-name">Oats</div>
+      <div class="commodity-category-sector">Feed grain & health food market</div>
+    </div>
+  </a>
+  <a href="/commodities/soybean-meal/" class="commodity-category-card">
+    <span class="commodity-category-tag">SBM</span>
+    <div>
+      <div class="commodity-category-name">Soybean Meal</div>
+      <div class="commodity-category-sector">Animal feed protein — crush product</div>
+    </div>
+  </a>
+  <a href="/commodities/soybean-oil/" class="commodity-category-card">
+    <span class="commodity-category-tag">SBO</span>
+    <div>
+      <div class="commodity-category-name">Soybean Oil</div>
+      <div class="commodity-category-sector">Cooking oil & biodiesel feedstock</div>
+    </div>
+  </a>
+  <a href="/commodities/phosphate/" class="commodity-category-card">
+    <span class="commodity-category-tag">PO₄</span>
+    <div>
+      <div class="commodity-category-name">Phosphate</div>
+      <div class="commodity-category-sector">Fertilizer backbone — food security</div>
+    </div>
+  </a>
+  <a href="/commodities/potash/" class="commodity-category-card">
+    <span class="commodity-category-tag">KCl</span>
+    <div>
+      <div class="commodity-category-name">Potash</div>
+      <div class="commodity-category-sector">Potassium fertilizer — crop yields</div>
+    </div>
+  </a>
+  <a href="/commodities/ammonia/" class="commodity-category-card">
+    <span class="commodity-category-tag">NH₃</span>
+    <div>
+      <div class="commodity-category-name">Ammonia</div>
+      <div class="commodity-category-sector">Nitrogen fertilizer & clean fuel</div>
+    </div>
+  </a>
   <a href="/commodities/water/" class="commodity-category-card">
     <span class="commodity-category-tag">H₂O</span>
     <div>
@@ -360,6 +458,49 @@ description: "Explore how each commodity's price movements ripple through indust
     <div>
       <div class="commodity-category-name">Cotton</div>
       <div class="commodity-category-sector">Textile industry backbone</div>
+    </div>
+  </a>
+  <a href="/commodities/orange-juice/" class="commodity-category-card">
+    <span class="commodity-category-tag">OJ</span>
+    <div>
+      <div class="commodity-category-name">Orange Juice</div>
+      <div class="commodity-category-sector">Florida freeze & Brazil supply</div>
+    </div>
+  </a>
+  <a href="/commodities/rubber/" class="commodity-category-card">
+    <span class="commodity-category-tag">RBR</span>
+    <div>
+      <div class="commodity-category-name">Rubber</div>
+      <div class="commodity-category-sector">Tires, auto parts & SE Asia supply</div>
+    </div>
+  </a>
+</div>
+
+<!-- Livestock -->
+<div class="section-header" data-animate>
+  <p class="section-label">Livestock</p>
+  <h2 class="section-title">Livestock Commodities</h2>
+</div>
+<div class="commodity-category-grid" data-animate data-delay="100">
+  <a href="/commodities/live-cattle/" class="commodity-category-card">
+    <span class="commodity-category-tag">LC</span>
+    <div>
+      <div class="commodity-category-name">Live Cattle</div>
+      <div class="commodity-category-sector">Beef market — consumer staple</div>
+    </div>
+  </a>
+  <a href="/commodities/feeder-cattle/" class="commodity-category-card">
+    <span class="commodity-category-tag">FC</span>
+    <div>
+      <div class="commodity-category-name">Feeder Cattle</div>
+      <div class="commodity-category-sector">Feed costs & rancher margins</div>
+    </div>
+  </a>
+  <a href="/commodities/lean-hogs/" class="commodity-category-card">
+    <span class="commodity-category-tag">LH</span>
+    <div>
+      <div class="commodity-category-name">Lean Hogs</div>
+      <div class="commodity-category-sector">Pork industry & China demand</div>
     </div>
   </a>
 </div>
