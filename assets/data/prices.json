@@ -254,7 +254,7 @@
     "name": "Cocoa",
     "unit": "$/tonne",
     "price": 3450.0,
-    "change_pct": 9.04,
+    "change_pct": 0.0,
     "high_52w": 11280.0,
     "low_52w": 2798.0,
     "updated_at": "2026-03-29T02:49:08.358599+00:00"
@@ -454,7 +454,7 @@
     "name": "Ethanol (REX proxy)",
     "unit": "$/share",
     "price": 47.73,
-    "change_pct": 8.28,
+    "change_pct": 0.0,
     "high_52w": 47.74,
     "low_52w": 16.73,
     "updated_at": "2026-03-29T02:49:17.469673+00:00"

@@ -193,6 +193,20 @@
       return;
     }
 
+    // 로고 클릭시 모달 유지 — 페이지 이동 막고 홈으로 navigate
+    var logo = document.querySelector('a.logo');
+    if (logo) {
+      logo.addEventListener('click', function (e) {
+        var modal = document.querySelector('.cl-modalBackdrop, .cl-modal, [data-clerk-modal]');
+        if (modal) {
+          e.preventDefault();
+          window.Clerk.closeSignIn && window.Clerk.closeSignIn();
+          window.Clerk.closeSignUp && window.Clerk.closeSignUp();
+          window.location.href = logo.href;
+        }
+      });
+    }
+
     window.Clerk.load({
       appearance: {
         baseTheme: undefined,
@@ -252,10 +266,17 @@
     });
   }
 
-  // Wait for DOM
+  // Wait for DOM + Clerk script load
+  function waitForClerk(cb, tries) {
+    tries = tries || 0;
+    if (window.Clerk && window.Clerk.load) { cb(); return; }
+    if (tries > 40) { cb(); return; } // 4초 타임아웃
+    setTimeout(function () { waitForClerk(cb, tries + 1); }, 100);
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', function () { waitForClerk(init); });
   } else {
-    init();
+    waitForClerk(init);
   }
 })();
