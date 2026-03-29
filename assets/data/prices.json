@@ -7,7 +7,7 @@
     "change_pct": 5.46,
     "high_52w": 119.48,
     "low_52w": 54.98,
-    "updated_at": "2026-03-28T20:14:34.175867+00:00"
+    "updated_at": "2026-03-29T02:48:56.831580+00:00"
   },
   "gold": {
     "symbol": "GC=F",
@@ -17,7 +17,7 @@
     "change_pct": 3.4,
     "high_52w": 5586.2,
     "low_52w": 2949.7,
-    "updated_at": "2026-03-28T20:14:34.639824+00:00"
+    "updated_at": "2026-03-29T02:48:57.321785+00:00"
   },
   "copper": {
     "symbol": "HG=F",
@@ -27,17 +27,17 @@
     "change_pct": 0.89,
     "high_52w": 6.51,
     "low_52w": 4.1,
-    "updated_at": "2026-03-28T20:14:35.101336+00:00"
+    "updated_at": "2026-03-29T02:48:57.772748+00:00"
   },
   "natural_gas": {
     "symbol": "NG=F",
     "name": "Natural Gas",
     "unit": "$/MMBtu",
     "price": 3.025,
-    "change_pct": 3.2,
+    "change_pct": 0.87,
     "high_52w": 7.83,
     "low_52w": 2.62,
-    "updated_at": "2026-03-28T20:14:35.605249+00:00"
+    "updated_at": "2026-03-29T02:48:58.214868+00:00"
   },
   "wheat": {
     "symbol": "ZW=F",
@@ -47,7 +47,7 @@
     "change_pct": 0.12,
     "high_52w": 635.0,
     "low_52w": 492.25,
-    "updated_at": "2026-03-28T20:14:36.108886+00:00"
+    "updated_at": "2026-03-29T02:48:58.674114+00:00"
   },
   "lithium": {
     "symbol": "ALB",
@@ -57,7 +57,7 @@
     "change_pct": 2.84,
     "high_52w": 206.0,
     "low_52w": 49.43,
-    "updated_at": "2026-03-28T20:14:36.649062+00:00"
+    "updated_at": "2026-03-29T02:48:59.202143+00:00"
   },
   "silver": {
     "symbol": "SI=F",
@@ -67,7 +67,7 @@
     "change_pct": 3.14,
     "high_52w": 121.3,
     "low_52w": 28.31,
-    "updated_at": "2026-03-28T20:14:37.160048+00:00"
+    "updated_at": "2026-03-29T02:48:59.673982+00:00"
   },
   "corn": {
     "symbol": "ZC=F",
@@ -77,7 +77,7 @@
     "change_pct": -1.07,
     "high_52w": 490.75,
     "low_52w": 368.75,
-    "updated_at": "2026-03-28T20:14:37.673219+00:00"
+    "updated_at": "2026-03-29T02:49:00.122118+00:00"
   },
   "uranium": {
     "symbol": "URA",
@@ -87,7 +87,7 @@
     "change_pct": -0.15,
     "high_52w": 62.28,
     "low_52w": 19.5,
-    "updated_at": "2026-03-28T20:14:38.194913+00:00"
+    "updated_at": "2026-03-29T02:49:00.605192+00:00"
   },
   "aluminum": {
     "symbol": "ALI=F",
@@ -97,17 +97,17 @@
     "change_pct": 0.91,
     "high_52w": 3464.0,
     "low_52w": 2155.0,
-    "updated_at": "2026-03-28T20:14:38.699219+00:00"
+    "updated_at": "2026-03-29T02:49:01.025254+00:00"
   },
   "coffee": {
     "symbol": "KC=F",
     "name": "Coffee",
     "unit": "cents/lb",
     "price": 270.5,
-    "change_pct": -1.93,
+    "change_pct": 0.0,
     "high_52w": 437.95,
-    "low_52w": 220.0,
-    "updated_at": "2026-03-28T20:14:39.216227+00:00"
+    "low_52w": 278.65,
+    "updated_at": "2026-03-29T02:49:01.503912+00:00"
   },
   "lumber": {
     "symbol": "LBS=F",
@@ -117,17 +117,17 @@
     "change_pct": -1.12,
     "high_52w": 395.7,
     "low_52w": 335.0,
-    "updated_at": "2026-03-28T20:14:39.727263+00:00"
+    "updated_at": "2026-03-29T02:49:02.009548+00:00"
   },
   "palladium": {
     "symbol": "PA=F",
     "name": "Palladium",
     "unit": "$/oz",
     "price": 1406.1,
-    "change_pct": 3.7,
+    "change_pct": 4.83,
     "high_52w": 2169.9,
     "low_52w": 876.6,
-    "updated_at": "2026-03-28T20:14:40.236404+00:00"
+    "updated_at": "2026-03-29T02:49:02.469020+00:00"
   },
   "steel": {
     "symbol": "SLX",
@@ -137,29 +137,27 @@
     "change_pct": -0.47,
     "high_52w": 103.0,
     "low_52w": 51.69,
-    "updated_at": "2026-03-28T20:14:40.755945+00:00"
+    "updated_at": "2026-03-29T02:49:02.957139+00:00"
   },
   "zinc": {
-    "symbol": "",
+    "symbol": "ZNC=F",
     "name": "Zinc",
     "unit": "$/share",
-    "price": 0,
-    "change_pct": 0.0,
+    "price": 2530.0,
+    "change_pct": 10.14,
     "high_52w": 2530.0,
     "low_52w": 2297.0,
-    "updated_at": "2026-03-28T20:14:41.252774+00:00",
-    "no_data": true
+    "updated_at": "2026-03-29T02:49:03.392902+00:00"
   },
   "tin": {
-    "symbol": "",
+    "symbol": "ZNC=F",
     "name": "Tin (ZNC proxy)",
     "unit": "$/share",
-    "price": 0,
-    "change_pct": 0.0,
+    "price": 2530.0,
+    "change_pct": 10.14,
     "high_52w": 2530.0,
     "low_52w": 2297.0,
-    "updated_at": "2026-03-28T20:14:41.856941+00:00",
-    "no_data": true
+    "updated_at": "2026-03-29T02:49:03.818573+00:00"
   },
   "sugar": {
     "symbol": "SB=F",
@@ -169,7 +167,7 @@
     "change_pct": -0.76,
     "high_52w": 19.72,
     "low_52w": 13.61,
-    "updated_at": "2026-03-28T20:14:42.318667+00:00"
+    "updated_at": "2026-03-29T02:49:04.254561+00:00"
   },
   "soybeans": {
     "symbol": "ZS=F",
@@ -179,7 +177,7 @@
     "change_pct": -1.24,
     "high_52w": 1223.25,
     "low_52w": 960.75,
-    "updated_at": "2026-03-28T20:14:42.781164+00:00"
+    "updated_at": "2026-03-29T02:49:04.698842+00:00"
   },
   "platinum": {
     "symbol": "PL=F",
@@ -189,7 +187,7 @@
     "change_pct": 2.65,
     "high_52w": 2852.4,
     "low_52w": 884.5,
-    "updated_at": "2026-03-28T20:14:43.283859+00:00"
+    "updated_at": "2026-03-29T02:49:05.127429+00:00"
   },
   "nickel": {
     "symbol": "JJN",
@@ -199,7 +197,7 @@
     "change_pct": 0.0,
     "high_52w": 42.4,
     "low_52w": 27.05,
-    "updated_at": "2026-03-28T20:14:43.749863+00:00"
+    "updated_at": "2026-03-29T02:49:05.618160+00:00"
   },
   "lng": {
     "symbol": "LNG",
@@ -209,17 +207,17 @@
     "change_pct": 1.89,
     "high_52w": 299.49,
     "low_52w": 186.2,
-    "updated_at": "2026-03-28T20:14:44.219139+00:00"
+    "updated_at": "2026-03-29T02:49:06.056932+00:00"
   },
   "jet_fuel": {
     "symbol": "HO=F",
     "name": "Jet Fuel (HO proxy)",
     "unit": "$/gallon",
     "price": 4.236,
-    "change_pct": 5.2,
+    "change_pct": -0.88,
     "high_52w": 4.71,
     "low_52w": 1.93,
-    "updated_at": "2026-03-28T20:14:44.683918+00:00"
+    "updated_at": "2026-03-29T02:49:06.549318+00:00"
   },
   "iron_ore": {
     "symbol": "VALE",
@@ -229,17 +227,17 @@
     "change_pct": 0.54,
     "high_52w": 17.72,
     "low_52w": 8.06,
-    "updated_at": "2026-03-28T20:14:45.178493+00:00"
+    "updated_at": "2026-03-29T02:49:06.992108+00:00"
   },
   "diesel": {
     "symbol": "HO=F",
     "name": "Diesel (Heating Oil)",
     "unit": "$/gallon",
     "price": 4.236,
-    "change_pct": 5.2,
+    "change_pct": -0.88,
     "high_52w": 4.71,
     "low_52w": 1.93,
-    "updated_at": "2026-03-28T20:14:45.681823+00:00"
+    "updated_at": "2026-03-29T02:49:07.432533+00:00"
   },
   "cotton": {
     "symbol": "CT=F",
@@ -249,17 +247,17 @@
     "change_pct": 0.48,
     "high_52w": 73.5,
     "low_52w": 60.71,
-    "updated_at": "2026-03-28T20:14:46.178308+00:00"
+    "updated_at": "2026-03-29T02:49:07.872379+00:00"
   },
   "cocoa": {
     "symbol": "CC=F",
     "name": "Cocoa",
     "unit": "$/tonne",
     "price": 3450.0,
-    "change_pct": 0.03,
+    "change_pct": 9.04,
     "high_52w": 11280.0,
     "low_52w": 2798.0,
-    "updated_at": "2026-03-28T20:14:46.641183+00:00"
+    "updated_at": "2026-03-29T02:49:08.358599+00:00"
   },
   "cobalt": {
     "symbol": "GLNCY",
@@ -269,7 +267,7 @@
     "change_pct": 0.85,
     "high_52w": 14.67,
     "low_52w": 5.74,
-    "updated_at": "2026-03-28T20:14:47.114147+00:00"
+    "updated_at": "2026-03-29T02:49:08.846160+00:00"
   },
   "coal": {
     "symbol": "BTU",
@@ -279,17 +277,17 @@
     "change_pct": 5.53,
     "high_52w": 41.14,
     "low_52w": 9.61,
-    "updated_at": "2026-03-28T20:14:47.584232+00:00"
+    "updated_at": "2026-03-29T02:49:09.281072+00:00"
   },
   "rice": {
     "symbol": "ZR=F",
     "name": "Rice",
     "unit": "cents/cwt",
     "price": 11.09,
-    "change_pct": 1.09,
-    "high_52w": 14.5,
+    "change_pct": 0.0,
+    "high_52w": 1383.0,
     "low_52w": 10.96,
-    "updated_at": "2026-03-28T20:14:48.092749+00:00"
+    "updated_at": "2026-03-29T02:49:09.715485+00:00"
   },
   "oats": {
     "symbol": "ZO=F",
@@ -299,17 +297,17 @@
     "change_pct": 0.66,
     "high_52w": 403.5,
     "low_52w": 272.0,
-    "updated_at": "2026-03-28T20:14:48.552048+00:00"
+    "updated_at": "2026-03-29T02:49:10.116778+00:00"
   },
   "orange_juice": {
     "symbol": "OJ=F",
     "name": "Orange Juice",
     "unit": "cents/lb",
     "price": 170.0,
-    "change_pct": -2.13,
+    "change_pct": -5.76,
     "high_52w": 344.3,
     "low_52w": 132.5,
-    "updated_at": "2026-03-28T20:14:49.058143+00:00"
+    "updated_at": "2026-03-29T02:49:10.574981+00:00"
   },
   "soybean_oil": {
     "symbol": "ZL=F",
@@ -319,7 +317,7 @@
     "change_pct": -0.9,
     "high_52w": 69.24,
     "low_52w": 41.5,
-    "updated_at": "2026-03-28T20:14:49.522490+00:00"
+    "updated_at": "2026-03-29T02:49:11.006984+00:00"
   },
   "soybean_meal": {
     "symbol": "ZM=F",
@@ -329,7 +327,7 @@
     "change_pct": -2.11,
     "high_52w": 335.5,
     "low_52w": 258.6,
-    "updated_at": "2026-03-28T20:14:49.987768+00:00"
+    "updated_at": "2026-03-29T02:49:11.462242+00:00"
   },
   "live_cattle": {
     "symbol": "LE=F",
@@ -339,7 +337,7 @@
     "change_pct": 1.56,
     "high_52w": 247.75,
     "low_52w": 197.75,
-    "updated_at": "2026-03-28T20:14:50.446880+00:00"
+    "updated_at": "2026-03-29T02:49:11.901208+00:00"
   },
   "feeder_cattle": {
     "symbol": "GF=F",
@@ -349,7 +347,7 @@
     "change_pct": -1.02,
     "high_52w": 381.02,
     "low_52w": 273.1,
-    "updated_at": "2026-03-28T20:14:50.962745+00:00"
+    "updated_at": "2026-03-29T02:49:12.302141+00:00"
   },
   "lean_hogs": {
     "symbol": "HE=F",
@@ -359,7 +357,7 @@
     "change_pct": 0.0,
     "high_52w": 113.7,
     "low_52w": 77.35,
-    "updated_at": "2026-03-28T20:14:51.463517+00:00"
+    "updated_at": "2026-03-29T02:49:12.792845+00:00"
   },
   "potash": {
     "symbol": "NTR",
@@ -369,7 +367,7 @@
     "change_pct": 2.66,
     "high_52w": 85.36,
     "low_52w": 45.78,
-    "updated_at": "2026-03-28T20:14:51.933268+00:00"
+    "updated_at": "2026-03-29T02:49:13.288923+00:00"
   },
   "ammonia": {
     "symbol": "CF",
@@ -379,7 +377,7 @@
     "change_pct": 2.93,
     "high_52w": 137.44,
     "low_52w": 67.34,
-    "updated_at": "2026-03-28T20:14:52.464484+00:00"
+    "updated_at": "2026-03-29T02:49:13.785696+00:00"
   },
   "manganese": {
     "symbol": "VALE",
@@ -389,7 +387,7 @@
     "change_pct": 0.54,
     "high_52w": 17.72,
     "low_52w": 8.06,
-    "updated_at": "2026-03-28T20:14:52.999173+00:00"
+    "updated_at": "2026-03-29T02:49:14.144849+00:00"
   },
   "vanadium": {
     "symbol": "RIO",
@@ -399,7 +397,7 @@
     "change_pct": 0.99,
     "high_52w": 101.53,
     "low_52w": 51.67,
-    "updated_at": "2026-03-28T20:14:53.599242+00:00"
+    "updated_at": "2026-03-29T02:49:14.644193+00:00"
   },
   "graphite": {
     "symbol": "MP",
@@ -409,7 +407,7 @@
     "change_pct": 0.19,
     "high_52w": 100.25,
     "low_52w": 18.64,
-    "updated_at": "2026-03-28T20:14:54.115874+00:00"
+    "updated_at": "2026-03-29T02:49:15.076655+00:00"
   },
   "rare_earth": {
     "symbol": "MP",
@@ -419,7 +417,7 @@
     "change_pct": 0.19,
     "high_52w": 100.25,
     "low_52w": 18.64,
-    "updated_at": "2026-03-28T20:14:54.617942+00:00"
+    "updated_at": "2026-03-29T02:49:15.557821+00:00"
   },
   "rhodium": {
     "symbol": "SBSW",
@@ -429,7 +427,7 @@
     "change_pct": 2.85,
     "high_52w": 21.29,
     "low_52w": 3.18,
-    "updated_at": "2026-03-28T20:14:55.098082+00:00"
+    "updated_at": "2026-03-29T02:49:16.021950+00:00"
   },
   "hydrogen": {
     "symbol": "PLUG",
@@ -439,7 +437,7 @@
     "change_pct": -3.11,
     "high_52w": 4.58,
     "low_52w": 0.69,
-    "updated_at": "2026-03-28T20:14:55.560840+00:00"
+    "updated_at": "2026-03-29T02:49:16.455952+00:00"
   },
   "rubber": {
     "symbol": "GT",
@@ -449,7 +447,7 @@
     "change_pct": -2.72,
     "high_52w": 12.03,
     "low_52w": 6.14,
-    "updated_at": "2026-03-28T20:14:56.092903+00:00"
+    "updated_at": "2026-03-29T02:49:17.021780+00:00"
   },
   "ethanol": {
     "symbol": "REX",
@@ -459,6 +457,6 @@
     "change_pct": 8.28,
     "high_52w": 47.74,
     "low_52w": 16.73,
-    "updated_at": "2026-03-28T20:14:56.592634+00:00"
+    "updated_at": "2026-03-29T02:49:17.469673+00:00"
   }
 }
