@@ -237,18 +237,19 @@
         var user = window.Clerk.user;
         if (user) {
           buildUserMenu(user);
+          var meter = getMeter();
           if (isPostPage()) {
-            var meter = getMeter();
             var isNewView = !sessionStorage.getItem('cn_viewed_' + location.pathname);
             if (isNewView) {
               meter = incrementMeter();
               sessionStorage.setItem('cn_viewed_' + location.pathname, '1');
             }
-            updateMeterBadge(meter);
             if (meter.count > FREE_REPORTS_PER_MONTH) {
               blurTradingNote('meter');
             }
           }
+          // 모든 페이지에서 뱃지 표시
+          updateMeterBadge(meter);
         } else {
           buildAuthButtons();
           if (isPostPage()) {

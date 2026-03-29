@@ -216,7 +216,8 @@
   }
 
   .clerk-meter-badge {
-    display: none;
+    font-size: 0.62rem;
+    padding: 2px 6px;
   }
 
   .cn-blur-cta {
