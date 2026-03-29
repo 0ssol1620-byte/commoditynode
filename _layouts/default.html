@@ -36,6 +36,16 @@
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2322d3ee'/><circle cx='16' cy='16' r='4' fill='%23050508'/><circle cx='8' cy='10' r='2.5' fill='%23050508'/><circle cx='24' cy='10' r='2.5' fill='%23050508'/><circle cx='8' cy='22' r='2.5' fill='%23050508'/><circle cx='24' cy='22' r='2.5' fill='%23050508'/><line x1='16' y1='16' x2='8' y2='10' stroke='%23050508' stroke-width='1.5'/><line x1='16' y1='16' x2='24' y2='10' stroke='%23050508' stroke-width='1.5'/><line x1='16' y1='16' x2='8' y2='22' stroke='%23050508' stroke-width='1.5'/><line x1='16' y1='16' x2='24' y2='22' stroke='%23050508' stroke-width='1.5'/></svg>">
 
+  <!-- Clerk Auth -->
+  <script
+    async
+    crossorigin="anonymous"
+    data-clerk-publishable-key="pk_test_ZGlzdGluY3QtbXV0dC0yMi5jbGVyay5hY2NvdW50cy5kZXYk"
+    src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"
+    type="text/javascript"
+  ></script>
+  <link rel="stylesheet" href="{{ '/assets/css/clerk-auth.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9573862786626060" crossorigin="anonymous"></script>
 </head>
@@ -96,6 +106,8 @@
           <a href="{{ '/reports/' | relative_url }}" {% if page.url contains '/reports' %}class="active"{% endif %}>Reports</a>
           <a href="{{ '/about/' | relative_url }}"       {% if page.url contains '/about' %}class="active"{% endif %}>About</a>
         </nav>
+
+        <div id="clerk-auth-area" class="clerk-auth-area"></div>
 
         <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span></span><span></span><span></span>
@@ -207,6 +219,7 @@
   <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   <script src="{{ '/assets/js/price-chart.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   <script src="{{ '/assets/js/universe-3d.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  <script src="{{ '/assets/js/clerk-auth.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 
   <!-- Scroll to Top -->
   <button id="scroll-top" aria-label="Scroll to top" style="position:fixed;bottom:24px;right:24px;width:40px;height:40px;background:rgba(10,10,20,0.92);border:1px solid rgba(34,211,238,0.3);border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:50;transition:all 0.25s ease;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,0.4);" onclick="window.scrollTo({top:0,behavior:'smooth'})">
