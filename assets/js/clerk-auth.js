@@ -68,7 +68,7 @@
     wrap.innerHTML =
       '<div class="clerk-user-menu">' +
         '<div class="clerk-meter-badge" id="clerk-meter-badge"></div>' +
-        '<div class="clerk-avatar-wrap" id="clerk-avatar-wrap">' +
+        '<div class="clerk-avatar-wrap" id="clerk-avatar-wrap" title="Account settings" style="cursor:pointer;">' +
           (avatar
             ? '<img class="clerk-avatar" src="' + avatar + '" alt="' + name + '" />'
             : '<div class="clerk-avatar clerk-avatar-fallback">' + name.charAt(0).toUpperCase() + '</div>') +
@@ -76,6 +76,9 @@
         '<button class="clerk-btn clerk-btn-ghost clerk-btn-sm" id="clerk-signout">Sign Out</button>' +
       '</div>';
 
+    document.getElementById('clerk-avatar-wrap').addEventListener('click', function () {
+      if (window.Clerk) window.Clerk.openUserProfile();
+    });
     document.getElementById('clerk-signout').addEventListener('click', function () {
       if (window.Clerk) window.Clerk.signOut().then(function () { location.reload(); });
     });
