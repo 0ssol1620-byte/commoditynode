@@ -225,10 +225,10 @@
 
   /* ---- Cluster centres ---- */
   var CLUSTERS = {
-    energy:     { x:-450, y:50,   z:-100 },
-    precious:   { x:450,  y:150,  z:100  },
-    industrial: { x:50,   y:450,  z:-200 },
-    agriculture:{ x:-50,  y:-450, z:150  }
+    energy:     { x:-250, y:30,   z:-60  },
+    precious:   { x:250,  y:80,   z:60   },
+    industrial: { x:30,   y:250,  z:-120 },
+    agriculture:{ x:-30,  y:-250, z:80   }
   };
 
   /* ---- Node-type colours ---- */
@@ -454,7 +454,7 @@
 
     /* Camera */
     var camera = new THREE.PerspectiveCamera(60, width / height, 1, 5000);
-    camera.position.set(0, 0, 900);
+    camera.position.set(0, 0, 680);
 
     /* Renderer */
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -570,9 +570,9 @@
 
     UNIVERSE_DATA.forEach(function (d) {
       var cluster = CLUSTERS[d.category];
-      var cx = cluster.x + rand(-120, 120);
-      var cy = cluster.y + rand(-120, 120);
-      var cz = cluster.z + rand(-120, 120);
+      var cx = cluster.x + rand(-180, 180);
+      var cy = cluster.y + rand(-180, 180);
+      var cz = cluster.z + rand(-180, 180);
 
       var group = new THREE.Group();
       group.position.set(cx, cy, cz);

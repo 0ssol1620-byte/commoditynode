@@ -229,8 +229,32 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
+  .clerk-auth-area {
+    gap: 4px;
+    margin-right: 4px;
+  }
+  /* 모바일: Sign Out 텍스트 숨기고 아이콘만 */
+  .clerk-auth-area .clerk-btn-ghost.clerk-btn-sm {
+    font-size: 0;
+    padding: 5px 8px;
+    min-width: 28px;
+  }
+  .clerk-auth-area .clerk-btn-ghost.clerk-btn-sm::after {
+    content: '↩';
+    font-size: 0.8rem;
+  }
+  .clerk-meter-badge {
+    font-size: 0.58rem;
+    padding: 2px 5px;
+    min-width: 40px;
+  }
+  /* 비로그인시 Sign Up만, Sign In 숨김 */
   .clerk-auth-area .clerk-btn-ghost:not(.clerk-btn-sm) {
     display: none;
+  }
+  .clerk-btn-primary {
+    font-size: 0.7rem;
+    padding: 5px 10px;
   }
 }
