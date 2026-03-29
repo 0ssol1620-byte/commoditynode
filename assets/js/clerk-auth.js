@@ -44,44 +44,90 @@
 
   function buildAuthButtons() {
     var wrap = document.getElementById('clerk-auth-area');
-    if (!wrap) return;
+    if (wrap) {
+      wrap.innerHTML =
+        '<button class="clerk-btn clerk-btn-ghost" id="clerk-signin">Sign In</button>' +
+        '<button class="clerk-btn clerk-btn-primary" id="clerk-signup">Sign Up Free</button>';
+      document.getElementById('clerk-signin').addEventListener('click', function () {
+        if (window.Clerk) window.Clerk.openSignIn();
+      });
+      document.getElementById('clerk-signup').addEventListener('click', function () {
+        if (window.Clerk) window.Clerk.openSignUp();
+      });
+    }
 
-    wrap.innerHTML =
-      '<button class="clerk-btn clerk-btn-ghost" id="clerk-signin">Sign In</button>' +
-      '<button class="clerk-btn clerk-btn-primary" id="clerk-signup">Sign Up Free</button>';
+    // 모바일 nav 안 버튼
+    var navWrap = document.getElementById('clerk-auth-nav');
+    if (navWrap) {
+      navWrap.innerHTML =
+        '<button class="clerk-btn clerk-btn-primary" id="clerk-signup-nav">Sign Up Free</button>' +
+        '<button class="clerk-btn clerk-btn-ghost" id="clerk-signin-nav">Sign In</button>';
+      document.getElementById('clerk-signup-nav').addEventListener('click', function () {
+        if (window.Clerk) window.Clerk.openSignUp();
+      });
+      document.getElementById('clerk-signin-nav').addEventListener('click', function () {
+        if (window.Clerk) window.Clerk.openSignIn();
+      });
+    }
 
-    document.getElementById('clerk-signin').addEventListener('click', function () {
-      if (window.Clerk) window.Clerk.openSignIn();
-    });
-    document.getElementById('clerk-signup').addEventListener('click', function () {
-      if (window.Clerk) window.Clerk.openSignUp();
-    });
+    // 모바일 아바타 영역 비우기
+    var mobileWrap = document.getElementById('clerk-auth-area-mobile');
+    if (mobileWrap) mobileWrap.innerHTML = '';
   }
 
   function buildUserMenu(user) {
-    var wrap = document.getElementById('clerk-auth-area');
-    if (!wrap) return;
-
     var avatar = user.imageUrl || '';
     var name = user.firstName || user.username || 'User';
+    var initial = name.charAt(0).toUpperCase();
+    var avatarHtml = avatar
+      ? '<img class="clerk-avatar" src="' + avatar + '" alt="' + name + '" />'
+      : '<div class="clerk-avatar clerk-avatar-fallback">' + initial + '</div>';
 
-    wrap.innerHTML =
-      '<div class="clerk-user-menu">' +
-        '<div class="clerk-meter-badge" id="clerk-meter-badge"></div>' +
-        '<div class="clerk-avatar-wrap" id="clerk-avatar-wrap" title="Account settings" style="cursor:pointer;">' +
-          (avatar
-            ? '<img class="clerk-avatar" src="' + avatar + '" alt="' + name + '" />'
-            : '<div class="clerk-avatar clerk-avatar-fallback">' + name.charAt(0).toUpperCase() + '</div>') +
+    // 데스크탑 헤더
+    var wrap = document.getElementById('clerk-auth-area');
+    if (wrap) {
+      wrap.innerHTML =
+        '<div class="clerk-user-menu">' +
+          '<div class="clerk-meter-badge" id="clerk-meter-badge"></div>' +
+          '<div class="clerk-avatar-wrap" id="clerk-avatar-wrap" title="Account settings" style="cursor:pointer;">' +
+            avatarHtml +
+          '</div>' +
+          '<button class="clerk-btn clerk-btn-ghost clerk-btn-sm" id="clerk-signout">Sign Out</button>' +
+        '</div>';
+      document.getElementById('clerk-avatar-wrap').addEventListener('click', function () {
+        if (window.Clerk) window.Clerk.openUserProfile();
+      });
+      document.getElementById('clerk-signout').addEventListener('click', function () {
+        if (window.Clerk) window.Clerk.signOut().then(function () { location.reload(); });
+      });
+    }
+
+    // 모바일 햄버거 옆 아바타
+    var mobileWrap = document.getElementById('clerk-auth-area-mobile');
+    if (mobileWrap) {
+      mobileWrap.innerHTML =
+        '<div class="clerk-avatar-wrap" id="clerk-avatar-wrap-mobile" title="Account settings" style="cursor:pointer;">' +
+          avatarHtml +
+        '</div>';
+      document.getElementById('clerk-avatar-wrap-mobile').addEventListener('click', function () {
+        if (window.Clerk) window.Clerk.openUserProfile();
+      });
+    }
+
+    // 모바일 nav 안
+    var navWrap = document.getElementById('clerk-auth-nav');
+    if (navWrap) {
+      navWrap.innerHTML =
+        '<div class="clerk-meter-badge" id="clerk-meter-badge-nav"></div>' +
+        '<div class="clerk-user-info">' +
+          avatarHtml +
+          '<span>' + name + '</span>' +
         '</div>' +
-        '<button class="clerk-btn clerk-btn-ghost clerk-btn-sm" id="clerk-signout">Sign Out</button>' +
-      '</div>';
-
-    document.getElementById('clerk-avatar-wrap').addEventListener('click', function () {
-      if (window.Clerk) window.Clerk.openUserProfile();
-    });
-    document.getElementById('clerk-signout').addEventListener('click', function () {
-      if (window.Clerk) window.Clerk.signOut().then(function () { location.reload(); });
-    });
+        '<button class="clerk-btn clerk-btn-ghost" id="clerk-signout-nav">Sign Out</button>';
+      document.getElementById('clerk-signout-nav').addEventListener('click', function () {
+        if (window.Clerk) window.Clerk.signOut().then(function () { location.reload(); });
+      });
+    }
   }
 
   /* ---------- Trading Note Blur ---------- */
@@ -172,13 +218,15 @@
   }
 
   function updateMeterBadge(meter) {
-    var badge = document.getElementById('clerk-meter-badge');
-    if (!badge) return;
-    badge.textContent = meter.count + '/' + FREE_REPORTS_PER_MONTH + ' free';
-    badge.title = meter.count + ' of ' + FREE_REPORTS_PER_MONTH + ' free reports used this month';
-    if (meter.count >= FREE_REPORTS_PER_MONTH) {
-      badge.classList.add('cn-meter-full');
-    }
+    var text = meter.count + '/' + FREE_REPORTS_PER_MONTH + ' free';
+    var title = meter.count + ' of ' + FREE_REPORTS_PER_MONTH + ' free reports used this month';
+    ['clerk-meter-badge', 'clerk-meter-badge-nav'].forEach(function(id) {
+      var badge = document.getElementById(id);
+      if (!badge) return;
+      badge.textContent = text;
+      badge.title = title;
+      if (meter.count >= FREE_REPORTS_PER_MONTH) badge.classList.add('cn-meter-full');
+    });
   }
 
   /* ---------- Main Init ---------- */
