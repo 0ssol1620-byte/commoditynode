@@ -1,0 +1,87 @@
+---
+layout: default
+title: "Emerging Market Commodities"
+description: "Urbanization, industrialization, and rising middle-class consumption in emerging economies are creating structural commodity demand growth."
+permalink: /themes/emerging-markets/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Investment Theme</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Theme Overview</h2>
+        <div class='cn-price-chart' data-symbol='HG=F' data-name='Copper'></div>
+        <p>Emerging markets housing 85% of the world's population are at various stages of industrialization and urbanization that drive commodity-intensive growth. India is adding the equivalent of a new Chicago every year in urban population. Southeast Asian nations are building highway, rail, and port infrastructure. Africa's population is projected to double by 2050, requiring massive housing, energy, and water infrastructure. This urbanization requires steel, copper, cement, aluminum, and energy commodities in quantities that replicate (at larger scale) the commodity supercycle that China's development drove from 2000-2015. India alone consumed 100 million tonnes of steel in 2023 versus China's 200 million tonnes at a similar stage of development, suggesting enormous room for growth.</p>
+
+        <h2>Related Commodities</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/copper/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Copper</a>
+          <a href="/commodities/steel/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Steel</a>
+          <a href="/commodities/crude-oil/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Crude Oil</a>
+          <a href="/commodities/aluminum/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Aluminum</a>
+        </div>
+
+        <h2>Key Companies</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/companies/bhp/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">BHP (BHP Group)</a>
+          <a href="/companies/rio/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">RIO (Rio Tinto)</a>
+          <a href="/companies/vale/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">VALE (Vale)</a>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Theme Details</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Commodities</span>
+          <span style="color:var(--accent)">4</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Horizon</span>
+          <span style="color:var(--text2)">10-30 years</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Themes</a></li>
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="posts-grid">
+    {% for post in site.posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'emerging-markets' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>

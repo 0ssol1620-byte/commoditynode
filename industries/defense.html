@@ -1,0 +1,84 @@
+---
+layout: default
+title: "Defense"
+description: "Defense manufacturing requires specialized metals including titanium, tungsten, rare earths, and advanced composites with petroleum-derived resins."
+permalink: /industries/defense/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Industry Hub</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Industry Overview</h2>
+        <div class='cn-price-chart' data-symbol='ALI=F' data-name='Aluminum'></div>
+        <p>Defense manufacturing is one of the most metals-intensive industries, requiring specialized alloys and materials that create unique commodity dependencies. Fighter jets consume titanium for airframes and engine components, with the F-35 program alone representing significant titanium demand. Tungsten is critical for armor-piercing munitions and ballistic protection. Rare earth elements power precision-guided weapons, radar systems, and electronic warfare equipment -- with China controlling 60%+ of global rare earth processing, this creates a geopolitical supply vulnerability. The global defense rearming cycle, with NATO nations targeting 2-3% GDP defense spending, is creating sustained demand growth for these strategic metals.</p>
+
+        <h2>Commodity Exposure</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/aluminum/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Aluminum</a>
+          <a href="/commodities/copper/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Copper</a>
+          <a href="/commodities/uranium/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Uranium</a>
+          <a href="/commodities/steel/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Steel</a>
+        </div>
+
+        <h2>Key Companies</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/companies/lmt/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">LMT (Lockheed Martin)</a>
+          <a href="/companies/noc/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">NOC (Northrop Grumman)</a>
+          <a href="/companies/gd/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">GD (General Dynamics)</a>
+        </div>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:20px;color:#8b5cf6;font-size:0.85rem;">ITA (iShares U.S. Aerospace & Defense ETF)</span>
+          <span style="display:inline-block;padding:6px 14px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:20px;color:#8b5cf6;font-size:0.85rem;">PPA (Invesco Aerospace & Defense ETF)</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Links</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Commodities</a></li>
+        <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Industries</a></li>
+        <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+        <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Themes</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    {% assign all_posts = site.posts %}
+    <div class="posts-grid">
+    {% for post in all_posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'defense' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% include newsletter.html %}

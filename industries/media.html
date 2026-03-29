@@ -1,0 +1,82 @@
+---
+layout: default
+title: "Media & Entertainment"
+description: "Media companies face commodity exposure through energy costs for data centers, paper for publishing, and metals for electronic devices."
+permalink: /industries/media/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Industry Hub</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Industry Overview</h2>
+        <div class='cn-price-chart' data-symbol='NG=F' data-name='Natural Gas'></div>
+        <p>Media and entertainment's commodity exposure has shifted dramatically in the digital era. Traditional media (newspapers, magazines) consumed massive quantities of paper and ink, but the digital transition has replaced that with voracious electricity demand for streaming, cloud computing, and content delivery networks. Netflix alone consumes enough electricity to power over 40,000 homes. The semiconductor content in consumer devices (TVs, smartphones, gaming consoles) creates indirect exposure to silicon, copper, gold, and rare earth elements. Theme park operations (Disney, Universal) have direct exposure to energy, steel, and construction commodities. The AI revolution in content creation is driving additional data center power demand.</p>
+
+        <h2>Commodity Exposure</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/natural-gas/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Natural Gas</a>
+          <a href="/commodities/copper/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Copper</a>
+          <a href="/commodities/silver/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Silver</a>
+        </div>
+
+        <h2>Key Companies</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/companies/dis/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">DIS (Walt Disney)</a>
+          <a href="/companies/nflx/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">NFLX (Netflix)</a>
+          <a href="/companies/cmcsa/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">CMCSA (Comcast)</a>
+        </div>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:20px;color:#8b5cf6;font-size:0.85rem;">XLC (Communication Services Select Sector SPDR)</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Links</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Commodities</a></li>
+        <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Industries</a></li>
+        <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+        <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Themes</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    {% assign all_posts = site.posts %}
+    <div class="posts-grid">
+    {% for post in all_posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'media' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% include newsletter.html %}

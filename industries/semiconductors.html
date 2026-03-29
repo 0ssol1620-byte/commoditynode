@@ -1,0 +1,84 @@
+---
+layout: default
+title: "Semiconductors"
+description: "Chip fabrication requires ultra-pure silicon, copper interconnects, gold wire bonding, and rare earth elements for advanced packaging."
+permalink: /industries/semiconductors/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Industry Hub</span>
+    </div>
+    <h1>{{ page.title }}</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Industry Overview</h2>
+        <div class='cn-price-chart' data-symbol='HG=F' data-name='Copper'></div>
+        <p>Semiconductor manufacturing is surprisingly commodity-intensive despite producing tiny chips. Each wafer fab consumes enormous quantities of ultra-pure water, electricity (often natural gas-derived), and specialty chemicals. Copper has replaced aluminum as the primary interconnect material in advanced nodes, while gold remains essential for wire bonding in packaging. The industry's explosive growth driven by AI is creating unprecedented demand for power (natural gas, uranium) and cooling infrastructure (copper for heat exchangers). A single large fab consumes as much electricity as a small city.</p>
+
+        <h2>Commodity Exposure</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/copper/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Copper</a>
+          <a href="/commodities/gold/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Gold</a>
+          <a href="/commodities/silver/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Silver</a>
+          <a href="/commodities/natural-gas/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Natural Gas</a>
+        </div>
+
+        <h2>Key Companies</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/companies/nvidia/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">NVDA (NVIDIA)</a>
+          <a href="/companies/tsmc/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">TSM (TSMC)</a>
+          <a href="/companies/intel/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">INTC (Intel)</a>
+        </div>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:20px;color:#8b5cf6;font-size:0.85rem;">SMH (VanEck Semiconductor ETF)</span>
+          <span style="display:inline-block;padding:6px 14px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:20px;color:#8b5cf6;font-size:0.85rem;">SOXX (iShares Semiconductor ETF)</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Links</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Commodities</a></li>
+        <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Industries</a></li>
+        <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+        <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Themes</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    {% assign all_posts = site.posts %}
+    <div class="posts-grid">
+    {% for post in all_posts %}
+      {% assign tags_str = post.tags | join: ',' | downcase %}
+      {% if tags_str contains 'semiconductor' %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
+        </div>
+      </article>
+      {% endif %}
+    {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% include newsletter.html %}
