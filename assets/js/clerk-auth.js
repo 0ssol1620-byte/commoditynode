@@ -229,38 +229,41 @@
         }
       }
     }).then(function () {
-      var user = window.Clerk.user;
 
-      if (user) {
-        // Logged in
-        buildUserMenu(user);
-
-        if (isPostPage()) {
-          // Metering
-          var meter = getMeter();
-          var isNewView = !sessionStorage.getItem('cn_viewed_' + location.pathname);
-          if (isNewView) {
-            meter = incrementMeter();
-            sessionStorage.setItem('cn_viewed_' + location.pathname, '1');
+      function renderAuth() {
+        var user = window.Clerk.user;
+        if (user) {
+          buildUserMenu(user);
+          if (isPostPage()) {
+            var meter = getMeter();
+            var isNewView = !sessionStorage.getItem('cn_viewed_' + location.pathname);
+            if (isNewView) {
+              meter = incrementMeter();
+              sessionStorage.setItem('cn_viewed_' + location.pathname, '1');
+            }
+            updateMeterBadge(meter);
+            if (meter.count > FREE_REPORTS_PER_MONTH) {
+              blurTradingNote('meter');
+            }
           }
-          updateMeterBadge(meter);
-
-          // If over limit, blur
-          if (meter.count > FREE_REPORTS_PER_MONTH) {
-            blurTradingNote('meter');
+        } else {
+          buildAuthButtons();
+          if (isPostPage()) {
+            blurTradingNote('login');
           }
-        }
-      } else {
-        // Not logged in
-        buildAuthButtons();
-
-        if (isPostPage()) {
-          blurTradingNote('login');
         }
       }
+
+      // 초기 렌더
+      renderAuth();
+
+      // 세션 변경 이벤트 감지 (로그인/로그아웃 즉시 반영)
+      window.Clerk.addListener(function (resources) {
+        renderAuth();
+      });
+
     }).catch(function (err) {
       console.warn('[CommodityNode] Clerk load error:', err);
-      // Graceful fallback
       var authArea = document.getElementById('clerk-auth-area');
       if (authArea) authArea.style.display = 'none';
     });
