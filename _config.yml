@@ -57,6 +57,10 @@ defaults:
       path: "tags"
     values:
       sitemap: false
+  - scope:
+      path: "social"
+    values:
+      sitemap: false
 
 feed:
   title: "CommodityNode Signal Reports"
@@ -78,5 +82,8 @@ exclude:
   - SEO_AUDIT.md
   - DEV_TODO.md
   - QUALITY_REPORT.md
+  - FINAL_AUDIT.md
+  - FINAL_CHECK.md
   - logs/
   - scripts/
+  - social/
