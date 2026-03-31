@@ -410,16 +410,11 @@ permalink: /simulator/
           {% if user_signed_in %}
           <div class="sim-impact-grid" id="sim-company-impact"></div>
           {% else %}
-          <div class="sim-pro-blur">
+          <div class="sim-pro-blur" id="sim-company-blur-wrapper">
             <div class="sim-blur-content">
-              <div class="sim-impact-grid">
-                <div class="sim-impact-card"><span class="sim-impact-name">Loading...</span><span class="sim-impact-value up">+0.0%</span></div>
-                <div class="sim-impact-card"><span class="sim-impact-name">Loading...</span><span class="sim-impact-value down">-0.0%</span></div>
-                <div class="sim-impact-card"><span class="sim-impact-name">Loading...</span><span class="sim-impact-value up">+0.0%</span></div>
-                <div class="sim-impact-card"><span class="sim-impact-name">Loading...</span><span class="sim-impact-value down">-0.0%</span></div>
-              </div>
+              <div class="sim-impact-grid" id="sim-company-impact"></div>
             </div>
-            <div class="sim-pro-overlay">
+            <div class="sim-pro-overlay" id="sim-company-overlay">
               <div class="sim-pro-cta">
                 <h3>Pro Feature</h3>
                 <p>Company-level sensitivity analysis<br>requires a Pro account.</p>
@@ -915,14 +910,11 @@ function checkAdminAccess() {
     return ADMIN_EMAILS.indexOf(e.emailAddress) >= 0;
   });
   if (isAdmin) {
-    // Pro blur 제거
-    var blur = document.querySelector('.sim-pro-blur');
-    if (blur) {
-      var overlay = blur.querySelector('.sim-pro-overlay');
-      var content = blur.querySelector('.sim-blur-content');
-      if (overlay) overlay.style.display = 'none';
-      if (content) { content.style.filter = 'none'; content.style.pointerEvents = 'auto'; }
-    }
+    // Pro overlay 제거
+    var overlay = document.getElementById('sim-company-overlay');
+    var content = document.querySelector('#sim-company-blur-wrapper .sim-blur-content');
+    if (overlay) overlay.style.display = 'none';
+    if (content) { content.style.filter = 'none'; content.style.pointerEvents = 'auto'; }
     // company impact grid 렌더링
     renderImpact();
   }
