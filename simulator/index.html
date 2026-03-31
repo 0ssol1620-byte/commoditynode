@@ -859,7 +859,25 @@ window.toggleScenario = function(id, impact, checkbox){
   renderChart();
   renderStats();
   renderImpact();
+  showSimulatorCTA();
 };
+
+function showSimulatorCTA() {
+  var existing = document.getElementById('sim-portfolio-cta');
+  if (existing) { existing.style.display = 'block'; return; }
+  var cta = document.createElement('div');
+  cta.id = 'sim-portfolio-cta';
+  cta.style.cssText = 'margin-top:32px;padding:28px;background:linear-gradient(135deg,rgba(34,211,238,0.06),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.2);border-radius:16px;text-align:center;';
+  cta.innerHTML = '<div style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#22d3ee;margin-bottom:12px">Next Step</div>'
+    + '<h3 style="font-size:1.2rem;color:#e2e8f0;margin-bottom:10px">Want to test your actual portfolio?</h3>'
+    + '<p style="color:#94a3b8;font-size:0.88rem;margin-bottom:20px;max-width:420px;margin-left:auto;margin-right:auto;">Enter your real holdings and run stress tests across all 6 commodity scenarios. See exactly which positions are most at risk — before the market moves.</p>'
+    + '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">'
+    + '<a href="/stress-test/" style="padding:12px 24px;background:linear-gradient(135deg,#22d3ee,#a855f7);border-radius:10px;color:#050508;font-weight:800;font-size:0.88rem;text-decoration:none;">Run Portfolio Stress Test →</a>'
+    + '<button onclick="if(window.Clerk)window.Clerk.openSignUp()" style="padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e2e8f0;font-weight:600;font-size:0.88rem;cursor:pointer;">Unlock Company Data — Pro</button>'
+    + '</div>';
+  var target = document.querySelector('.sim-scenario-panel') || document.querySelector('.sim-main-grid');
+  if (target) target.parentNode.insertBefore(cta, target.nextSibling);
+}
 
 function calcScenarioAdjustment(){
   return Object.values(state.scenarios).reduce(function(sum, v){ return sum + v; }, 0);

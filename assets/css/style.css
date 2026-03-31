@@ -3082,3 +3082,144 @@ a.read-more:hover { gap: 8px; color: var(--accent2); }
     -webkit-overflow-scrolling: touch;
   }
 }
+
+/* ============================================================
+   User Journey Optimization — New Styles
+   ============================================================ */
+
+/* Hero Dynamic Headline */
+.hero-dynamic {
+  background: linear-gradient(135deg, rgba(34,211,238,0.06), rgba(168,85,247,0.06));
+  border: 1px solid rgba(34,211,238,0.15);
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin: 24px auto 0;
+  max-width: 700px;
+  text-align: center;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+.hero-commodity { color: #e2e8f0; font-weight: 700; }
+.hero-change.up { color: #10b981; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+.hero-change.down { color: #f43f5e; font-weight: 800; font-family: 'JetBrains Mono', monospace; }
+.hero-implication { color: #94a3b8; font-style: italic; }
+
+/* Today's Insights Section */
+.todays-insights {
+  background: rgba(5,5,8,0.8);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 20px 0;
+}
+.insights-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.insights-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #22d3ee;
+}
+.insights-time { font-size: 0.75rem; color: #475569; }
+.insights-list { display: flex; flex-direction: column; gap: 10px; }
+.insight-row {
+  display: grid;
+  grid-template-columns: 140px 80px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  background: rgba(15,15,25,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+.insight-ticker { color: #e2e8f0; font-weight: 700; }
+.insight-chg { font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.insight-chg.up { color: #10b981; }
+.insight-chg.down { color: #f43f5e; }
+.insight-text { color: #94a3b8; }
+@media(max-width:768px) {
+  .insight-row { grid-template-columns: 1fr 60px; grid-template-rows: auto auto; }
+  .insight-text { grid-column: 1 / -1; }
+}
+
+/* Trading Note Overlay (improved) */
+.trading-note-overlay {
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(5,5,8,0.85); backdrop-filter:blur(8px);
+  border-radius:12px; padding:32px; text-align:center;
+}
+.tno-inner { max-width:360px; }
+.tno-social-proof {
+  background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.2);
+  border-radius:8px; padding:8px 14px; font-size:0.8rem; color:#10b981;
+  margin-bottom:16px; display:inline-block;
+}
+.tno-btn { width:100%; margin-top:16px; }
+.tno-small { font-size:0.72rem; color:#475569; margin-top:10px; }
+
+/* Pricing Page — Urgency + Social Proof */
+.pricing-urgency-bar { padding:14px 24px; text-align:center; font-size:0.88rem; }
+.pricing-urgency-bar.critical { background:rgba(239,68,68,0.1); border-bottom:1px solid rgba(239,68,68,0.2); color:#ef4444; }
+.urgency-info { color:#94a3b8; }
+.urgency-bar-track { height:4px; background:rgba(255,255,255,0.08); border-radius:2px; margin:8px auto; max-width:200px; }
+.urgency-bar-fill { height:100%; background:#22d3ee; border-radius:2px; transition:width 0.5s; }
+
+.social-proof-strip {
+  display:flex; gap:0; justify-content:center; margin-top:32px;
+  background:rgba(15,15,25,0.6); border:1px solid rgba(255,255,255,0.07);
+  border-radius:14px; overflow:hidden; flex-wrap:wrap;
+}
+.sp-item { padding:20px 28px; text-align:center; }
+.sp-num { display:block; font-size:1.5rem; font-weight:800; color:#22d3ee; font-family:'JetBrains Mono',monospace; }
+.sp-label { font-size:0.75rem; color:#64748b; margin-top:4px; display:block; }
+.sp-divider { width:1px; background:rgba(255,255,255,0.06); }
+
+.billing-toggle { display:flex; gap:4px; background:rgba(255,255,255,0.05); border-radius:10px; padding:4px; margin:0 auto 40px; width:fit-content; }
+.billing-btn { padding:8px 20px; border-radius:8px; border:none; background:transparent; color:#94a3b8; font-size:0.85rem; font-weight:600; cursor:pointer; transition:all 0.2s; }
+.billing-btn.active { background:rgba(34,211,238,0.15); color:#22d3ee; }
+.save-badge { background:#10b981; color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700; }
+
+.next-report-teaser { padding:60px 0; }
+.teaser-card {
+  background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(34,211,238,0.05));
+  border:1px solid rgba(168,85,247,0.2); border-radius:20px;
+  padding:40px; max-width:640px; margin:0 auto; text-align:center;
+}
+.teaser-badge {
+  display:inline-block; background:rgba(239,68,68,0.15); color:#ef4444;
+  border:1px solid rgba(239,68,68,0.3); border-radius:6px; padding:4px 12px;
+  font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:16px;
+}
+.teaser-card h3 { font-size:1.3rem; color:#e2e8f0; margin-bottom:12px; }
+.teaser-card p { color:#94a3b8; font-size:0.9rem; line-height:1.7; margin-bottom:16px; }
+.teaser-meta { color:#475569; font-size:0.78rem; display:flex; gap:8px; justify-content:center; margin-bottom:24px; }
+.teaser-cta {
+  padding:14px 28px; background:linear-gradient(135deg,#a855f7,#22d3ee);
+  border:none; border-radius:10px; color:#050508; font-weight:800; font-size:0.9rem; cursor:pointer;
+}
+
+.cost-of-missing { padding:60px 0; border-top:1px solid rgba(255,255,255,0.05); }
+.cost-of-missing h2 { text-align:center; font-size:1.8rem; color:#e2e8f0; margin-bottom:32px; }
+.cost-of-missing h2 em { color:#ef4444; font-style:normal; }
+.cost-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px; max-width:900px; margin:0 auto 32px;
+}
+.cost-item {
+  background:rgba(239,68,68,0.05); border:1px solid rgba(239,68,68,0.12);
+  border-radius:12px; padding:24px;
+}
+.cost-scenario { color:#94a3b8; font-size:0.88rem; margin-bottom:10px; line-height:1.5; }
+.cost-impact { font-weight:700; font-size:0.95rem; font-family:'JetBrains Mono',monospace; }
+.cost-impact.loss { color:#ef4444; }
+.cost-conclusion { text-align:center; color:#94a3b8; font-size:0.95rem; max-width:500px; margin:0 auto; }
+
+@media(max-width:768px) {
+  .social-proof-strip { gap:0; }
+  .sp-item { padding:16px 16px; }
+  .sp-divider { display:none; }
+}

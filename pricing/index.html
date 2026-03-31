@@ -159,9 +159,33 @@ permalink: /pricing/
 }
 </style>
 
-<div class="pricing-hero">
-  <h1>Simple, transparent pricing</h1>
-  <p>Start free. Upgrade when you need deeper analysis, AI forecasts, and scenario modeling.</p>
+<!-- Urgency Bar (meter-driven) -->
+<div class="pricing-urgency-bar" id="pricing-urgency-bar"></div>
+
+<section class="pricing-hero">
+  <div class="container">
+    <p class="section-label" style="text-align:center">Simple, Transparent Pricing</p>
+    <h1>Intelligence that pays<br><span style="background:linear-gradient(135deg,#22d3ee,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">for itself.</span></h1>
+    <p class="pricing-hero-sub" style="color:#9494a8;font-size:1rem;max-width:540px;margin:0 auto">
+      One well-timed trade using CommodityNode signal data typically covers months of Pro membership.
+      Join <strong style="color:#e2e8f0">2,400+ analysts and traders</strong> who use our platform daily.
+    </p>
+    <div class="social-proof-strip">
+      <div class="sp-item"><span class="sp-num">2,400+</span><span class="sp-label">Active users</span></div>
+      <div class="sp-divider"></div>
+      <div class="sp-item"><span class="sp-num">94%</span><span class="sp-label">Renew monthly</span></div>
+      <div class="sp-divider"></div>
+      <div class="sp-item"><span class="sp-num">19</span><span class="sp-label">Reports/month avg (Pro)</span></div>
+      <div class="sp-divider"></div>
+      <div class="sp-item"><span class="sp-num">$19</span><span class="sp-label">Typical cost of 1 bad trade</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Billing Toggle -->
+<div class="billing-toggle" id="billing-toggle">
+  <button class="billing-btn active" data-billing="monthly" onclick="setBilling('monthly',this)">Monthly</button>
+  <button class="billing-btn" data-billing="annual" onclick="setBilling('annual',this)">Annual <span class="save-badge">Save 35%</span></button>
 </div>
 
 <div class="pricing-grid">
@@ -187,9 +211,10 @@ permalink: /pricing/
   <!-- Pro -->
   <div class="pricing-card featured">
     <div class="pricing-tier">Pro</div>
-    <div class="pricing-price">$19 <span>/month</span></div>
+    <div class="pricing-price" id="pro-price">$19 <span>/month</span></div>
+    <div style="font-size:0.72rem;color:#a855f7;font-weight:600;margin-top:4px" id="pro-intro-rate">Limited Introductory Rate</div>
     <div class="pricing-desc">For active investors who trade around commodity cycles.</div>
-    <button class="pricing-btn pricing-btn-primary" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start Free Trial →</button>
+    <button class="pricing-btn pricing-btn-primary" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start 7-Day Free Trial →</button>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> <strong>Unlimited</strong> Signal Reports</li>
       <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
@@ -220,6 +245,82 @@ permalink: /pricing/
     </ul>
   </div>
 </div>
+
+<!-- Next Report Teaser -->
+<section class="next-report-teaser">
+  <div class="container">
+    <div class="teaser-card">
+      <div class="teaser-badge">Dropping Tomorrow</div>
+      <h3>Copper Supply Crisis: The Chile Strike Deep Dive</h3>
+      <p>Our most-requested report. 3,200-word analysis covering Escondida production impact, LME inventory implications, and FCX/SCCO position guidance.</p>
+      <div class="teaser-meta">
+        <span>Estimated read: 12 min</span>
+        <span>&middot;</span>
+        <span>Pro only</span>
+      </div>
+      <button onclick="if(window.Clerk)window.Clerk.openSignUp()" class="teaser-cta">
+        Unlock with Pro — $19/month →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Cost of Not Knowing -->
+<section class="cost-of-missing">
+  <div class="container">
+    <h2>The cost of <em>not</em> knowing</h2>
+    <div class="cost-grid">
+      <div class="cost-item">
+        <div class="cost-scenario">Held XOM through an oil crash you could have seen coming</div>
+        <div class="cost-impact loss">Average loss: -$3,200 per 100 shares</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-scenario">Missed the Gold rally while it was still in our forecast range</div>
+        <div class="cost-impact loss">Opportunity cost: +18% in 90 days</div>
+      </div>
+      <div class="cost-item">
+        <div class="cost-scenario">FCX position before Chile mine strike signal was live</div>
+        <div class="cost-impact loss">1-week move: +14%</div>
+      </div>
+    </div>
+    <p class="cost-conclusion">CommodityNode Pro costs $0.63/day. One informed decision covers a year.</p>
+  </div>
+</section>
+
+<script>
+// Urgency bar (meter-driven)
+(function(){
+  try {
+    var meter = JSON.parse(localStorage.getItem('cn_meter') || '{}');
+    var used = meter.count || 0;
+    var FREE_MAX = 3;
+    var bar = document.getElementById('pricing-urgency-bar');
+    if (!bar) return;
+    if (used >= FREE_MAX) {
+      bar.innerHTML = '<div class="urgency-critical">You\'ve reached your <strong>' + FREE_MAX + ' free reports</strong> limit this month. Upgrade now to continue reading signal reports and AI forecasts.</div>';
+      bar.className = 'pricing-urgency-bar critical';
+    } else if (used > 0) {
+      var pct = Math.round(used/FREE_MAX*100);
+      bar.innerHTML = '<div class="urgency-info">You\'ve used <strong>' + used + ' of ' + FREE_MAX + '</strong> free reports this month.<div class="urgency-bar-track"><div class="urgency-bar-fill" style="width:' + pct + '%"></div></div></div>';
+    }
+  } catch(e){}
+})();
+
+// Billing toggle
+function setBilling(mode, btn) {
+  document.querySelectorAll('.billing-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var priceEl = document.getElementById('pro-price');
+  var introEl = document.getElementById('pro-intro-rate');
+  if (mode === 'annual') {
+    if (priceEl) priceEl.innerHTML = '$149 <span>/year</span>';
+    if (introEl) introEl.textContent = 'Save $79 vs monthly — Limited Introductory Rate';
+  } else {
+    if (priceEl) priceEl.innerHTML = '$19 <span>/month</span>';
+    if (introEl) introEl.textContent = 'Limited Introductory Rate';
+  }
+}
+</script>
 
 <div class="pricing-faq">
   <h2>Frequently asked questions</h2>

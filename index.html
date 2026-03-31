@@ -30,6 +30,13 @@ image: "/assets/images/og-default.png"
         <a href="#signals" class="btn btn-secondary">Top Signals Today</a>
       </div>
 
+      <!-- Dynamic Market Intelligence Headline -->
+      <div class="hero-dynamic" id="hero-dynamic">
+        <div class="hero-dynamic-inner" id="hero-dynamic-headline">
+          Loading market intelligence...
+        </div>
+      </div>
+
       <div class="hero-stats" data-animate data-delay="400">
         <div class="hero-stat">
           <span class="value positive" id="hero-wti-change">&mdash;</span>
@@ -46,18 +53,92 @@ image: "/assets/images/og-default.png"
         </div>
       </div>
       <script>
+      function getImplication(key, pct) {
+        var map = {
+          crude_oil: pct > 0 ? 'Energy stocks surging. DAL, UPS under pressure.' : 'Airlines rally. Energy producers face headwinds.',
+          gold: pct > 0 ? 'Safe-haven demand rising. NEM, GOLD in focus.' : 'Risk appetite returning. Miners under pressure.',
+          copper: pct > 0 ? 'Industrial recovery signal. FCX, VALE leading.' : 'China slowdown concern. Mining stocks vulnerable.',
+          natural_gas: pct > 0 ? 'Utilities cost spike. Fertilizer producers pressured.' : 'Heating cost relief. Industrial margins improve.',
+          wheat: pct > 0 ? 'Food inflation risk. ADM, Bunge in focus.' : 'Grain supply ease. Agri stocks stabilize.',
+          silver: pct > 0 ? 'Industrial + safe-haven demand converging.' : 'Gold-Silver ratio widening. Watch for reversal.',
+          lithium: pct > 0 ? 'EV supply chain cost rising. Tesla margin risk.' : 'Battery cost deflation. EV adoption accelerator.',
+          uranium: pct > 0 ? 'Nuclear energy demand surging. CCJ outperforming.' : 'Utility sector repricing. Watch spot vs contract.',
+          coffee: pct > 0 ? 'SBUX input costs rising. Consumer margins squeezed.' : 'Coffee input relief. Cafe chains benefit.',
+          corn: pct > 0 ? 'Ethanol, feed cost rising. Livestock sector pressured.' : 'Food cost deflation. Consumer staples benefit.',
+          coal: pct > 0 ? 'Power generation costs rising. Steel mills pressured.' : 'Energy cost relief. Industrial margins improve.',
+          cotton: pct > 0 ? 'Apparel input costs rising. Retail margins squeezed.' : 'Textile cost relief. Fast fashion benefits.'
+        };
+        return map[key] || (pct > 0 ? 'Bullish momentum building. Monitor related equities.' : 'Bearish pressure emerging. Risk management active.');
+      }
+
+      function buildInsights(data) {
+        var sorted = Object.entries(data)
+          .filter(function(e){ return e[1].change_pct !== undefined && e[1].change_pct !== 0; })
+          .sort(function(a,b){ return Math.abs(b[1].change_pct) - Math.abs(a[1].change_pct); })
+          .slice(0, 3);
+        var list = document.getElementById('insights-list');
+        if (!list) return;
+        list.innerHTML = sorted.map(function(e){
+          var key = e[0], d = e[1];
+          var dir = d.change_pct > 0 ? 'up' : 'down';
+          var sign = d.change_pct > 0 ? '+' : '';
+          var impl = getImplication(key, d.change_pct);
+          return '<div class="insight-row">'
+            + '<span class="insight-ticker">' + (d.name || key) + '</span>'
+            + '<span class="insight-chg ' + dir + '">' + sign + d.change_pct.toFixed(1) + '%</span>'
+            + '<span class="insight-text">' + impl + '</span>'
+            + '</div>';
+        }).join('');
+        var timeEl = document.getElementById('insights-time');
+        if (timeEl) timeEl.textContent = 'Updated ' + new Date().toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'});
+      }
+
       document.addEventListener('DOMContentLoaded', function(){
         fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
-          var oil=d.crude_oil; if(!oil)return;
-          var el=document.getElementById('hero-wti-change');
-          if(!el)return;
-          var sign=oil.change_pct>=0?'+':'';
-          el.textContent=sign+oil.change_pct.toFixed(2)+'%';
-          el.className='value '+(oil.change_pct>=0?'positive':'negative');
+          var oil=d.crude_oil; if(oil){
+            var el=document.getElementById('hero-wti-change');
+            if(el){
+              var sign=oil.change_pct>=0?'+':'';
+              el.textContent=sign+oil.change_pct.toFixed(2)+'%';
+              el.className='value '+(oil.change_pct>=0?'positive':'negative');
+            }
+          }
+          // Dynamic hero headline - TOP 1 mover
+          var top = null, maxAbs = 0;
+          Object.entries(d).forEach(function(e){
+            if (Math.abs(e[1].change_pct) > maxAbs) {
+              maxAbs = Math.abs(e[1].change_pct);
+              top = { key: e[0], name: e[1].name, change_pct: e[1].change_pct };
+            }
+          });
+          if (top) {
+            var dir = top.change_pct > 0 ? 'up' : 'down';
+            var s = top.change_pct > 0 ? '+' : '';
+            var impl = getImplication(top.key, top.change_pct);
+            var headline = document.getElementById('hero-dynamic-headline');
+            if (headline) {
+              headline.innerHTML = '<span class="hero-commodity">' + top.name + '</span> '
+                + '<span class="hero-change ' + dir + '">' + s + top.change_pct.toFixed(1) + '%</span> today. '
+                + '<span class="hero-implication">' + impl + '</span>';
+            }
+          }
+          // Build insights section
+          buildInsights(d);
         }).catch(function(){var e=document.getElementById('hero-wti-change');if(e)e.textContent='+0.00%';});
       });
       </script>
     </div>
+  </div>
+</section>
+
+<!-- Today's Key Insights -->
+<section class="todays-insights" id="todays-insights">
+  <div class="container">
+    <div class="insights-header">
+      <span class="insights-label">Live Intelligence</span>
+      <span class="insights-time" id="insights-time">Updated just now</span>
+    </div>
+    <div class="insights-list" id="insights-list"></div>
   </div>
 </section>
 

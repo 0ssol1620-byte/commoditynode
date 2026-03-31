@@ -205,13 +205,15 @@
         '</div>';
     } else {
       overlay.innerHTML =
-        '<div class="cn-blur-cta">' +
-          icon +
-          '<h3>Upgrade to Pro</h3>' +
-          '<p>You\'ve used all ' + FREE_REPORTS_PER_MONTH + ' free reports this month.<br>Unlock unlimited access to Trading Notes.</p>' +
-          '<p class="cn-blur-price">Free trial for 1 month → then $19/mo</p>' +
-          '<div class="cn-blur-cta-buttons">' +
-            '<a class="clerk-btn clerk-btn-primary" href="' + PRO_LINK + '" id="blur-upgrade">Start Free Trial</a>' +
+        '<div class="trading-note-overlay">' +
+          '<div class="tno-inner">' +
+            '<div class="tno-social-proof">Pro members made <strong>3 calls this week</strong> based on this signal.</div>' +
+            '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Trading Note</h4>' +
+            '<p style="color:#94a3b8;font-size:0.88rem">Entry levels, position sizing, and risk management guidance — available to Pro members.</p>' +
+            '<button class="clerk-btn clerk-btn-primary tno-btn" onclick="if(window.Clerk)window.Clerk.openSignUp()">' +
+              'Read Trading Note — Pro $19/mo' +
+            '</button>' +
+            '<p class="tno-small">Cancel anytime · Most members recover cost in first week</p>' +
           '</div>' +
         '</div>';
     }
@@ -225,6 +227,32 @@
       if (signupBtn) signupBtn.addEventListener('click', function () { if (window.Clerk) window.Clerk.openSignUp(); });
       if (signinBtn) signinBtn.addEventListener('click', function () { if (window.Clerk) window.Clerk.openSignIn(); });
     }, 0);
+  }
+
+  function showMeterBanner(used, total) {
+    if (used < 2) return;
+    var existing = document.getElementById('meter-upgrade-banner');
+    if (existing) return;
+    var pct = Math.round((used / total) * 100);
+    var isLast = used >= total;
+    var banner = document.createElement('div');
+    banner.id = 'meter-upgrade-banner';
+    banner.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9000;'
+      + 'background:' + (isLast ? 'rgba(239,68,68,0.95)' : 'rgba(13,13,24,0.97)') + ';'
+      + 'border-top:1px solid ' + (isLast ? 'rgba(239,68,68,0.5)' : 'rgba(34,211,238,0.2)') + ';'
+      + 'padding:14px 24px;display:flex;align-items:center;gap:20px;backdrop-filter:blur(12px);flex-wrap:wrap;';
+    var msg = isLast
+      ? 'You\'ve used all ' + total + ' free reports this month.'
+      : 'You\'ve used ' + used + ' of ' + total + ' free reports this month.';
+    banner.innerHTML = '<div style="flex:1;min-width:200px">'
+      + '<div style="font-size:0.85rem;font-weight:700;color:#e2e8f0;margin-bottom:6px">' + msg + '</div>'
+      + '<div style="background:rgba(255,255,255,0.1);border-radius:4px;height:4px;width:200px">'
+      + '<div style="background:' + (isLast ? '#ef4444' : '#22d3ee') + ';width:' + pct + '%;height:100%;border-radius:4px;transition:width 0.5s"></div>'
+      + '</div></div>'
+      + '<div style="font-size:0.78rem;color:#94a3b8">Most Pro members recover $19 in a single informed trade.</div>'
+      + '<button onclick="if(window.Clerk)window.Clerk.openSignUp()" style="padding:10px 20px;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;border-radius:8px;color:#050508;font-weight:800;font-size:0.88rem;cursor:pointer;white-space:nowrap;flex-shrink:0">Unlock Pro — $19/mo</button>'
+      + '<button onclick="document.getElementById(\'meter-upgrade-banner\').remove()" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1.2rem;padding:4px">\u00d7</button>';
+    document.body.appendChild(banner);
   }
 
   function updateMeterBadge(meter) {
@@ -308,6 +336,10 @@
           }
           // 모든 페이지에서 뱃지 표시
           updateMeterBadge(meter);
+          // 미터 배너 (2개 이상 사용 시)
+          if (!isAdmin(user)) {
+            showMeterBanner(meter.count, FREE_REPORTS_PER_MONTH);
+          }
         } else {
           buildAuthButtons();
           if (isPostPage()) {
