@@ -1,0 +1,165 @@
+---
+layout: default
+title: "Supply Disruption Tracker"
+description: "Real-time monitoring of geopolitical risks and supply disruptions affecting commodity markets. Track critical events impacting oil, metals, agriculture, and energy."
+permalink: /disruptions/
+noindex: false
+---
+
+<style>
+.disrupt-hero{padding:60px 0 40px;text-align:center}
+.disrupt-hero h1{font-size:2.4rem;font-weight:800;color:#e2e8f0;margin-bottom:12px}
+.disrupt-hero h1 span{color:#f43f5e}
+.disrupt-hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto}
+.summary-bar{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:28px 0 36px}
+.summary-pill{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px;background:rgba(15,15,25,0.8);border:1px solid rgba(255,255,255,0.08);font-size:0.85rem;font-weight:600;color:#e2e8f0}
+.summary-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.filter-bar{display:flex;gap:8px;justify-content:center;margin-bottom:32px;flex-wrap:wrap}
+.filter-btn{padding:8px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:#94a3b8;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.filter-btn.active{border-color:#22d3ee;color:#22d3ee;background:rgba(34,211,238,0.08)}
+.filter-btn:hover{border-color:#22d3ee;color:#22d3ee}
+.disruption-grid{display:grid;gap:20px;max-width:900px;margin:0 auto}
+.disruption-card{background:rgba(15,15,25,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:24px;transition:all 0.25s;position:relative;overflow:hidden}
+.disruption-card:hover{border-color:rgba(34,211,238,0.25);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.disruption-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
+.disruption-card.critical::before{background:#ef4444}
+.disruption-card.high::before{background:#f97316}
+.disruption-card.medium::before{background:#eab308}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.severity-badge{padding:4px 12px;border-radius:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em}
+.severity-badge.critical{background:rgba(239,68,68,0.15);color:#ef4444;border:1px solid rgba(239,68,68,0.3)}
+.severity-badge.high{background:rgba(249,115,22,0.15);color:#f97316;border:1px solid rgba(249,115,22,0.3)}
+.severity-badge.medium{background:rgba(234,179,8,0.15);color:#eab308;border:1px solid rgba(234,179,8,0.3)}
+.card-date{color:#64748b;font-size:0.8rem;margin-left:auto}
+.card-title{font-size:1.15rem;font-weight:700;color:#e2e8f0;margin-bottom:10px}
+.card-desc{color:#94a3b8;font-size:0.9rem;line-height:1.6;margin-bottom:14px}
+.card-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.commodity-tag{padding:4px 10px;border-radius:6px;background:rgba(34,211,238,0.08);color:#22d3ee;font-size:0.78rem;font-weight:600;text-decoration:none;transition:background 0.2s}
+.commodity-tag:hover{background:rgba(34,211,238,0.18)}
+.impact-est{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.impact-label{color:#64748b;font-size:0.8rem}
+.impact-value{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.95rem}
+.impact-value.up{color:#10b981}
+.impact-value.down{color:#f43f5e}
+.impact-value.mixed{color:#eab308}
+.monitor-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;border:1px solid rgba(34,211,238,0.25);background:rgba(34,211,238,0.06);color:#22d3ee;font-size:0.82rem;font-weight:600;text-decoration:none;transition:all 0.2s;cursor:pointer}
+.monitor-btn:hover{background:rgba(34,211,238,0.15)}
+.risk-heatmap{margin-top:48px}
+.risk-heatmap h2{font-size:1.3rem;font-weight:700;color:#e2e8f0;text-align:center;margin-bottom:24px}
+.risk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;max-width:900px;margin:0 auto}
+.risk-item{display:flex;flex-direction:column;align-items:center;padding:14px 10px;border-radius:10px;background:rgba(15,15,25,0.6);border:1px solid rgba(255,255,255,0.06);transition:all 0.2s}
+.risk-item:hover{border-color:rgba(34,211,238,0.2)}
+.risk-name{font-size:0.8rem;color:#e2e8f0;font-weight:600;margin-bottom:6px;text-align:center}
+.risk-level{font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:3px 10px;border-radius:5px}
+.risk-level.elevated{background:rgba(239,68,68,0.15);color:#ef4444}
+.risk-level.high-risk{background:rgba(249,115,22,0.15);color:#f97316}
+.risk-level.moderate{background:rgba(234,179,8,0.15);color:#eab308}
+.risk-level.low{background:rgba(16,185,129,0.1);color:#10b981}
+@media(max-width:768px){
+  .disrupt-hero h1{font-size:1.6rem}
+  .disruption-card{padding:18px}
+  .risk-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+}
+</style>
+
+<section class="disrupt-hero">
+  <div class="container">
+    <p class="section-label" data-animate>Geopolitical Intelligence</p>
+    <h1 data-animate>Supply <span>Disruption</span> Tracker</h1>
+    <p data-animate data-delay="100">Real-time monitoring of geopolitical risks affecting commodity markets</p>
+    <div class="summary-bar" data-animate data-delay="200">
+      <div class="summary-pill"><div class="summary-dot" style="background:#ef4444"></div>Critical: 2</div>
+      <div class="summary-pill"><div class="summary-dot" style="background:#f97316"></div>High: 4</div>
+      <div class="summary-pill"><div class="summary-dot" style="background:#eab308"></div>Medium: 4</div>
+      <div class="summary-pill"><div class="summary-dot" style="background:#64748b"></div>Monitoring: 10 events</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="filter-bar" data-animate>
+      <button class="filter-btn active" data-severity="all">All Events</button>
+      <button class="filter-btn" data-severity="critical">🔴 Critical</button>
+      <button class="filter-btn" data-severity="high">🟠 High</button>
+      <button class="filter-btn" data-severity="medium">🟡 Medium</button>
+    </div>
+
+    <div class="disruption-grid" id="disruption-grid"></div>
+
+    <div class="risk-heatmap" data-animate>
+      <h2>🗺️ Commodity Risk Heat Map</h2>
+      <div class="risk-grid" id="risk-grid"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+
+  var events = [
+    {severity:'critical',title:'Iran–Strait of Hormuz Tension',desc:'Escalating military posturing near the Strait of Hormuz threatens ~21% of global oil transit. Insurance premiums on Gulf tankers have surged 300%. IRGC naval exercises include live-fire drills near shipping lanes.',commodities:[{name:'Crude Oil',slug:'crude-oil'},{name:'LNG',slug:'lng'},{name:'Fertilizers',slug:'ammonia'}],impact:'+15~22%',impactDir:'up',date:'2026-03'},
+    {severity:'critical',title:'US-China Tariff War Escalation (145%)',desc:'Retaliatory tariffs on Chinese metals exports reach 145%. Rare earth export controls tighten, threatening EV and semiconductor supply chains globally. Copper import costs surge on both sides.',commodities:[{name:'Copper',slug:'copper'},{name:'Lithium',slug:'lithium'},{name:'Rare Earth',slug:'rare-earth'}],impact:'-8~15%',impactDir:'down',date:'2026-03'},
+    {severity:'high',title:'Black Sea Wheat Corridor Risk',desc:'Renewed conflict near Ukrainian grain export terminals disrupts the Black Sea corridor. Global wheat futures spike as 25% of world wheat exports face bottleneck. Insurance costs for Black Sea shipping triple.',commodities:[{name:'Wheat',slug:'wheat'},{name:'Corn',slug:'corn'},{name:'Sunflower Oil',slug:'soybeans'}],impact:'+10~19%',impactDir:'up',date:'2026-03'},
+    {severity:'high',title:'Kazakhstan Uranium Production Shortfall',desc:'Kazatomprom announces 15% production cut due to sulfuric acid supply issues and regulatory delays. Kazakhstan produces ~43% of global uranium. Spot prices breach $95/lb.',commodities:[{name:'Uranium',slug:'uranium'}],impact:'+12~18%',impactDir:'up',date:'2026-02'},
+    {severity:'high',title:'Chile Copper Mine Strike Wave',desc:'Workers at Escondida and Collahuasi mines (10% of global supply) begin indefinite strike over wage disputes. Chile copper output drops 8% month-over-month. LME copper stocks at 15-year lows.',commodities:[{name:'Copper',slug:'copper'},{name:'Silver',slug:'silver'}],impact:'+8~14%',impactDir:'up',date:'2026-03'},
+    {severity:'high',title:'DXY Dollar Weakness Below 100',desc:'Dollar index falls below 100 for first time since 2022 as Fed signals multiple rate cuts. Commodity prices broadly supported by weaker dollar. Gold breaks all-time highs.',commodities:[{name:'Gold',slug:'gold'},{name:'Silver',slug:'silver'},{name:'All Commodities',slug:''}],impact:'+5~11%',impactDir:'up',date:'2026-03'},
+    {severity:'medium',title:'Brazil Coffee Crop Damage (Drought)',desc:'Severe drought in Minas Gerais destroys 12% of arabica crop. Brazil supplies 35% of global coffee. ICE coffee futures hit 3-year highs.',commodities:[{name:'Coffee',slug:'coffee'},{name:'Sugar',slug:'sugar'}],impact:'+6~10%',impactDir:'up',date:'2026-02'},
+    {severity:'medium',title:'Indonesia Nickel Export Policy Shift',desc:'Indonesia tightens nickel ore export ban, redirecting supply to domestic smelters. Global nickel supply deficit widens. EV battery raw material costs increase.',commodities:[{name:'Nickel',slug:'nickel'},{name:'EV Batteries',slug:'lithium'}],impact:'+5~9%',impactDir:'up',date:'2026-01'},
+    {severity:'medium',title:'Fed Rate Cut Expectations (3x in 2026)',desc:'Markets pricing in three 25bp cuts by year-end. Lower rates historically bullish for precious metals and growth-linked commodities like copper.',commodities:[{name:'Gold',slug:'gold'},{name:'Silver',slug:'silver'},{name:'Copper',slug:'copper'}],impact:'+4~8%',impactDir:'up',date:'2026-03'},
+    {severity:'medium',title:'Australia LNG Labor Dispute',desc:'Chevron's Gorgon and Wheatstone LNG workers threaten prolonged strikes. Australia exports 22% of global LNG. Asian spot LNG prices spike on supply uncertainty.',commodities:[{name:'LNG',slug:'lng'},{name:'Natural Gas',slug:'natural-gas'}],impact:'+7~12%',impactDir:'up',date:'2026-02'}
+  ];
+
+  var riskMap = [
+    {name:'Crude Oil',level:'elevated'},{name:'Gold',level:'moderate'},{name:'Copper',level:'elevated'},
+    {name:'Silver',level:'moderate'},{name:'Natural Gas',level:'high-risk'},{name:'Wheat',level:'elevated'},
+    {name:'Corn',level:'moderate'},{name:'Uranium',level:'elevated'},{name:'Lithium',level:'high-risk'},
+    {name:'Coffee',level:'moderate'},{name:'Nickel',level:'high-risk'},{name:'LNG',level:'elevated'},
+    {name:'Sugar',level:'low'},{name:'Soybeans',level:'low'},{name:'Platinum',level:'low'},
+    {name:'Aluminum',level:'moderate'},{name:'Palladium',level:'low'},{name:'Rare Earth',level:'elevated'}
+  ];
+
+  function renderEvents(filter){
+    var grid=document.getElementById('disruption-grid');
+    var html='';
+    events.forEach(function(ev){
+      if(filter!=='all'&&ev.severity!==filter) return;
+      html+='<div class="disruption-card '+ev.severity+'">';
+      html+='<div class="card-header"><span class="severity-badge '+ev.severity+'">'+ev.severity+'</span><span class="card-date">'+ev.date+'</span></div>';
+      html+='<div class="card-title">'+ev.title+'</div>';
+      html+='<div class="card-desc">'+ev.desc+'</div>';
+      html+='<div class="card-tags">';
+      ev.commodities.forEach(function(c){
+        if(c.slug) html+='<a href="/commodities/'+c.slug+'/" class="commodity-tag">'+c.name+'</a>';
+        else html+='<span class="commodity-tag">'+c.name+'</span>';
+      });
+      html+='</div>';
+      html+='<div class="impact-est"><span class="impact-label">Price Impact Estimate:</span><span class="impact-value '+ev.impactDir+'">'+ev.impact+'</span></div>';
+      html+='<span class="monitor-btn">Monitor Impact →</span>';
+      html+='</div>';
+    });
+    grid.innerHTML=html;
+  }
+
+  function renderRiskMap(){
+    var grid=document.getElementById('risk-grid');
+    var html='';
+    riskMap.forEach(function(r){
+      html+='<div class="risk-item"><div class="risk-name">'+r.name+'</div><span class="risk-level '+r.level+'">'+r.level.replace('-',' ')+'</span></div>';
+    });
+    grid.innerHTML=html;
+  }
+
+  renderEvents('all');
+  renderRiskMap();
+
+  document.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
+      this.classList.add('active');
+      renderEvents(this.dataset.severity);
+    });
+  });
+})();
+</script>

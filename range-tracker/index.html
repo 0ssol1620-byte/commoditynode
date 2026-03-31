@@ -1,0 +1,144 @@
+---
+layout: default
+title: "52-Week Range Tracker"
+description: "Visualize where each commodity trades relative to its 52-week high and low. Identify potential breakouts, oversold conditions, and trading opportunities."
+permalink: /range-tracker/
+noindex: false
+---
+
+<style>
+.range-hero{padding:60px 0 40px;text-align:center}
+.range-hero h1{font-size:2.4rem;font-weight:800;color:#e2e8f0;margin-bottom:12px}
+.range-hero h1 span{color:#22d3ee}
+.range-hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto}
+.insight-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:28px auto 36px;max-width:900px}
+.insight-pill{background:rgba(15,15,25,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 20px;text-align:center}
+.insight-pill .count{font-size:1.8rem;font-weight:800;font-family:'JetBrains Mono',monospace}
+.insight-pill .count.red{color:#ef4444}
+.insight-pill .count.green{color:#10b981}
+.insight-pill .count.orange{color:#f97316}
+.insight-pill .label{color:#94a3b8;font-size:0.82rem;margin-top:4px}
+.sort-bar{display:flex;gap:8px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+.sort-btn{padding:7px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:#94a3b8;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s}
+.sort-btn.active,.sort-btn:hover{border-color:#22d3ee;color:#22d3ee;background:rgba(34,211,238,0.08)}
+.range-list{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.range-row{display:grid;grid-template-columns:180px 100px 1fr 80px 80px;align-items:center;gap:12px;padding:14px 18px;background:rgba(15,15,25,0.7);border:1px solid rgba(255,255,255,0.06);border-radius:10px;transition:all 0.2s}
+.range-row:hover{border-color:rgba(34,211,238,0.2);background:rgba(15,15,25,0.9)}
+.range-name{font-weight:700;color:#e2e8f0;font-size:0.92rem}
+.range-name small{display:block;color:#64748b;font-weight:400;font-size:0.75rem}
+.range-price{font-family:'JetBrains Mono',monospace;font-weight:700;color:#e2e8f0;font-size:0.92rem}
+.range-bar-wrapper{position:relative;height:28px;display:flex;align-items:center}
+.range-bar-bg{width:100%;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;position:relative;overflow:visible}
+.range-bar-fill{height:100%;border-radius:3px;transition:width 0.6s ease}
+.range-dot{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid #050508;box-shadow:0 0 8px rgba(0,0,0,0.5);transition:left 0.6s ease}
+.range-labels{display:flex;justify-content:space-between;font-size:0.65rem;color:#64748b;margin-top:2px;font-family:'JetBrains Mono',monospace}
+.range-pct{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.88rem;text-align:right}
+.range-change{font-family:'JetBrains Mono',monospace;font-size:0.82rem;text-align:right}
+.range-change.up{color:#10b981}
+.range-change.down{color:#f43f5e}
+@media(max-width:768px){
+  .range-hero h1{font-size:1.6rem}
+  .range-row{grid-template-columns:120px 70px 1fr 60px;gap:8px;padding:10px 12px}
+  .range-pct{display:none}
+  .range-name{font-size:0.82rem}
+}
+</style>
+
+<section class="range-hero">
+  <div class="container">
+    <p class="section-label" data-animate>Technical Analysis</p>
+    <h1 data-animate>52-Week <span>Range Tracker</span></h1>
+    <p data-animate data-delay="100">Where each commodity trades relative to its 52-week high and low</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="insight-summary" id="insight-summary" data-animate data-delay="150"></div>
+
+    <div class="sort-bar" data-animate data-delay="200">
+      <button class="sort-btn active" data-sort="position">By Position</button>
+      <button class="sort-btn" data-sort="name">By Name</button>
+      <button class="sort-btn" data-sort="high">Nearest High</button>
+      <button class="sort-btn" data-sort="low">Nearest Low</button>
+    </div>
+
+    <div class="range-list" id="range-list" data-animate data-delay="250"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+
+  var items = [];
+
+  function getColor(pct){
+    if(pct>=90) return '#ef4444';
+    if(pct>=70) return '#f97316';
+    if(pct>=30) return '#22d3ee';
+    if(pct>=10) return '#a855f7';
+    return '#10b981';
+  }
+
+  function getPctLabel(pct){
+    if(pct>=90) return {color:'#ef4444'};
+    if(pct>=70) return {color:'#f97316'};
+    if(pct>=30) return {color:'#22d3ee'};
+    if(pct>=10) return {color:'#a855f7'};
+    return {color:'#10b981'};
+  }
+
+  function render(sortBy){
+    var sorted = items.slice();
+    if(sortBy==='name') sorted.sort(function(a,b){return a.name.localeCompare(b.name);});
+    else if(sortBy==='high') sorted.sort(function(a,b){return b.pct-a.pct;});
+    else if(sortBy==='low') sorted.sort(function(a,b){return a.pct-b.pct;});
+    else sorted.sort(function(a,b){return b.pct-a.pct;});
+
+    var html='';
+    sorted.forEach(function(item){
+      var c=getColor(item.pct);
+      var pc=getPctLabel(item.pct);
+      var chSign=item.change>=0?'+':'';
+      var chClass=item.change>=0?'up':'down';
+      html+='<div class="range-row">';
+      html+='<div class="range-name">'+item.name+'<small>'+item.symbol+'</small></div>';
+      html+='<div class="range-price">$'+item.price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>';
+      html+='<div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:'+item.pct+'%;background:'+c+';opacity:0.35"></div><div class="range-dot" style="left:'+item.pct+'%;background:'+c+'"></div></div><div class="range-labels"><span>$'+item.low52.toLocaleString()+'</span><span>$'+item.high52.toLocaleString()+'</span></div></div></div>';
+      html+='<div class="range-pct" style="color:'+pc.color+'">'+item.pct.toFixed(1)+'%</div>';
+      html+='<div class="range-change '+chClass+'">'+chSign+item.change.toFixed(2)+'%</div>';
+      html+='</div>';
+    });
+    document.getElementById('range-list').innerHTML=html;
+
+    // Insights
+    var nearHigh=items.filter(function(i){return i.pct>=90;}).length;
+    var nearLow=items.filter(function(i){return i.pct<=10;}).length;
+    var breakout=items.filter(function(i){return i.pct>=85&&i.pct<=95;}).length;
+    document.getElementById('insight-summary').innerHTML=
+      '<div class="insight-pill"><div class="count red">'+nearHigh+'</div><div class="label">Near 52W High (>90%)</div></div>'+
+      '<div class="insight-pill"><div class="count green">'+nearLow+'</div><div class="label">Near 52W Low (<10%)</div></div>'+
+      '<div class="insight-pill"><div class="count orange">'+breakout+'</div><div class="label">Potential Breakout Zone (85–95%)</div></div>';
+  }
+
+  fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(data){
+    Object.keys(data).forEach(function(k){
+      var d=data[k];
+      if(!d.price||!d.high_52w||!d.low_52w) return;
+      var range=d.high_52w-d.low_52w;
+      var pct=range>0?(d.price-d.low_52w)/range*100:50;
+      items.push({key:k,name:d.name,symbol:d.symbol,price:d.price,high52:d.high_52w,low52:d.low_52w,pct:Math.max(0,Math.min(100,pct)),change:d.change_pct||0});
+    });
+    render('position');
+  });
+
+  document.querySelectorAll('.sort-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      document.querySelectorAll('.sort-btn').forEach(function(b){b.classList.remove('active');});
+      this.classList.add('active');
+      render(this.dataset.sort);
+    });
+  });
+})();
+</script>
