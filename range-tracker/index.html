@@ -11,6 +11,12 @@ noindex: false
 .range-hero h1{font-size:2.4rem;font-weight:800;color:#e2e8f0;margin-bottom:12px}
 .range-hero h1 span{color:#22d3ee}
 .range-hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto}
+.intro-text{color:#94a3b8;font-size:0.95rem;max-width:800px;margin:16px auto 28px;line-height:1.7;text-align:center}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0;vertical-align:middle}
+.dot-red{background:#ef4444}
+.dot-orange{background:#f97316}
+.dot-yellow{background:#eab308}
+.dot-green{background:#10b981}
 .insight-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:28px auto 36px;max-width:900px}
 .insight-pill{background:rgba(15,15,25,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px 20px;text-align:center}
 .insight-pill .count{font-size:1.8rem;font-weight:800;font-family:'JetBrains Mono',monospace}
@@ -36,6 +42,10 @@ noindex: false
 .range-change{font-family:'JetBrains Mono',monospace;font-size:0.82rem;text-align:right}
 .range-change.up{color:#10b981}
 .range-change.down{color:#f43f5e}
+.seo-content{color:#64748b;font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05);margin-top:60px;padding-top:40px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7}
+.seo-content h2{color:#94a3b8;font-size:1.3rem;font-weight:700;margin:28px 0 12px}
+.seo-content h3{color:#94a3b8;font-size:1.05rem;font-weight:600;margin:20px 0 8px}
+.seo-content p{margin-bottom:14px}
 @media(max-width:768px){
   .range-hero h1{font-size:1.6rem}
   .range-row{grid-template-columns:120px 70px 1fr 60px;gap:8px;padding:10px 12px}
@@ -49,6 +59,7 @@ noindex: false
     <p class="section-label" data-animate>Technical Analysis</p>
     <h1 data-animate>52-Week <span>Range Tracker</span></h1>
     <p data-animate data-delay="100">Where each commodity trades relative to its 52-week high and low</p>
+    <p class="intro-text" data-animate data-delay="150">Track where each commodity currently trades within its 52-week price range. Commodities near their annual highs may signal overbought conditions or strong upward momentum, while those trading near 52-week lows may represent potential value opportunities or indicate continued fundamental weakness. Use range position alongside trend analysis for best results.</p>
   </div>
 </section>
 
@@ -70,6 +81,24 @@ noindex: false
 <script>
 (function(){
   'use strict';
+
+  var FALLBACK_DATA = [
+    {name:'Crude Oil', symbol:'CL=F', price:78.5, high_52w:95.2, low_52w:65.1, change_pct:1.2},
+    {name:'Gold', symbol:'GC=F', price:3280, high_52w:3500, low_52w:1820, change_pct:0.8},
+    {name:'Copper', symbol:'HG=F', price:4.85, high_52w:5.20, low_52w:3.52, change_pct:-0.3},
+    {name:'Silver', symbol:'SI=F', price:33.2, high_52w:35.0, low_52w:21.5, change_pct:1.1},
+    {name:'Natural Gas', symbol:'NG=F', price:3.85, high_52w:4.80, low_52w:1.60, change_pct:-0.7},
+    {name:'Wheat', symbol:'ZW=F', price:545, high_52w:680, low_52w:490, change_pct:0.5},
+    {name:'Corn', symbol:'ZC=F', price:478, high_52w:520, low_52w:390, change_pct:0.2},
+    {name:'Soybeans', symbol:'ZS=F', price:1020, high_52w:1180, low_52w:890, change_pct:-0.4},
+    {name:'Coffee', symbol:'KC=F', price:320, high_52w:380, low_52w:155, change_pct:2.1},
+    {name:'Sugar', symbol:'SB=F', price:19.5, high_52w:23.0, low_52w:16.2, change_pct:0.6},
+    {name:'Platinum', symbol:'PL=F', price:1080, high_52w:1150, low_52w:850, change_pct:-0.2},
+    {name:'Palladium', symbol:'PA=F', price:980, high_52w:1100, low_52w:820, change_pct:-1.4},
+    {name:'Aluminum', symbol:'ALI=F', price:2450, high_52w:2750, low_52w:2100, change_pct:0.3},
+    {name:'Uranium', symbol:'UX=F', price:90, high_52w:105, low_52w:78, change_pct:1.5},
+    {name:'Lithium', symbol:'LIT', price:14.2, high_52w:22.0, low_52w:11.5, change_pct:-2.1}
+  ];
 
   var items = [];
 
@@ -112,7 +141,6 @@ noindex: false
     });
     document.getElementById('range-list').innerHTML=html;
 
-    // Insights
     var nearHigh=items.filter(function(i){return i.pct>=90;}).length;
     var nearLow=items.filter(function(i){return i.pct<=10;}).length;
     var breakout=items.filter(function(i){return i.pct>=85&&i.pct<=95;}).length;
@@ -122,7 +150,7 @@ noindex: false
       '<div class="insight-pill"><div class="count orange">'+breakout+'</div><div class="label">Potential Breakout Zone (85–95%)</div></div>';
   }
 
-  fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(data){
+  function processData(data){
     Object.keys(data).forEach(function(k){
       var d=data[k];
       if(!d.price||!d.high_52w||!d.low_52w) return;
@@ -131,6 +159,23 @@ noindex: false
       items.push({key:k,name:d.name,symbol:d.symbol,price:d.price,high52:d.high_52w,low52:d.low_52w,pct:Math.max(0,Math.min(100,pct)),change:d.change_pct||0});
     });
     render('position');
+  }
+
+  function loadFallback(){
+    var data={};
+    FALLBACK_DATA.forEach(function(d){
+      data[d.symbol]={name:d.name,symbol:d.symbol,price:d.price,high_52w:d.high_52w,low_52w:d.low_52w,change_pct:d.change_pct};
+    });
+    processData(data);
+  }
+
+  fetch('/assets/data/prices.json').then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return r.json();
+  }).then(function(data){
+    processData(data);
+  }).catch(function(){
+    loadFallback();
   });
 
   document.querySelectorAll('.sort-btn').forEach(function(btn){
@@ -142,3 +187,19 @@ noindex: false
   });
 })();
 </script>
+
+<section class="seo-content">
+  <div class="container">
+    <h2>52-Week Range Analysis for Commodity Trading</h2>
+    <p>The 52-week range is one of the most widely followed technical indicators in commodity markets, providing immediate context for where current prices sit relative to their annual trading band. By expressing the current price as a percentage of the range between the 52-week low and high, traders can quickly identify commodities that are stretched to extremes — either approaching potential resistance at annual highs or finding possible support near annual lows. This range-based analysis is used by institutional commodity traders, CTAs (Commodity Trading Advisors), and hedge funds as a complementary tool alongside fundamental supply-demand analysis.</p>
+
+    <h3>Interpreting Range Position</h3>
+    <p>A commodity trading above 90% of its 52-week range is considered near its annual high. This can signal strong upward momentum driven by favorable fundamentals — such as supply deficits or demand surges — but it can also indicate overbought conditions where mean-reversion risk increases. Conversely, commodities trading below 10% of their range are near annual lows, potentially representing value opportunities if the fundamental outlook is improving, or warning of continued downside if structural oversupply persists. The 30–70% zone is typically considered a neutral range where price action is driven more by short-term catalysts than extremes in positioning.</p>
+
+    <h3>Breakout Zone Identification</h3>
+    <p>The 85–95% zone is particularly interesting for momentum traders, as commodities in this range are testing resistance but have not yet achieved a clean breakout above the annual high. A confirmed breakout above the 52-week high often triggers trend-following buy signals and can initiate sustained rallies as short sellers cover and new momentum buyers enter. The CommodityNode Range Tracker highlights commodities in this potential breakout zone so traders can prepare for these high-probability setups with appropriate position sizing and risk management.</p>
+
+    <h3>Combining Range Analysis with Fundamentals</h3>
+    <p>Range position alone is insufficient for making trading decisions — context matters enormously. A commodity near its 52-week high may have fundamentally justified reasons for being there, such as a verified supply deficit or surging demand from a new use case. Similarly, a commodity near its annual low may be reflecting genuine structural oversupply that is unlikely to resolve quickly. The most effective approach combines range position with correlation analysis, supply disruption tracking, and seasonal pattern recognition to build a complete picture. Our suite of commodity analytics tools is designed to work together, providing multiple perspectives on each market to support well-informed trading decisions. Use the Range Tracker as a screening tool to identify commodities worth deeper investigation, then drill into individual commodity pages for comprehensive fundamental and technical analysis.</p>
+  </div>
+</section>

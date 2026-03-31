@@ -11,6 +11,11 @@ noindex: false
 .stress-hero h1{font-size:2.4rem;font-weight:800;color:#e2e8f0;margin-bottom:12px}
 .stress-hero h1 span{color:#a855f7}
 .stress-hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0;vertical-align:middle}
+.dot-red{background:#ef4444}
+.dot-orange{background:#f97316}
+.dot-yellow{background:#eab308}
+.dot-green{background:#10b981}
 .stress-container{max-width:900px;margin:0 auto}
 .step-card{background:rgba(15,15,25,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:28px;margin-bottom:24px}
 .step-label{display:flex;align-items:center;gap:10px;margin-bottom:18px}
@@ -59,6 +64,10 @@ noindex: false
 .pro-blur .blur-overlay h3{color:#e2e8f0;font-size:1.2rem;margin-bottom:8px}
 .pro-blur .blur-overlay p{color:#94a3b8;font-size:0.9rem;margin-bottom:16px}
 .pro-blur .blur-overlay .signin-btn{padding:10px 24px;border-radius:8px;border:none;background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;font-weight:700;cursor:pointer}
+.seo-content{color:#64748b;font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05);margin-top:60px;padding-top:40px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7}
+.seo-content h2{color:#94a3b8;font-size:1.3rem;font-weight:700;margin:28px 0 12px}
+.seo-content h3{color:#94a3b8;font-size:1.05rem;font-weight:600;margin:20px 0 8px}
+.seo-content p{margin-bottom:14px}
 @media(max-width:768px){
   .stress-hero h1{font-size:1.6rem}
   .stock-result{grid-template-columns:80px 70px 80px 1fr;font-size:0.82rem}
@@ -94,29 +103,31 @@ noindex: false
     <div class="step-card" data-animate data-delay="100">
       <div class="step-label"><div class="step-num">2</div><div class="step-title">Select Scenarios</div></div>
       <div class="scenario-grid" id="scenario-grid">
-        <label class="scenario-opt"><input type="checkbox" value="oil_shock"><div class="scenario-info"><div class="scenario-name">🛢️ Oil Shock +30%</div><div class="scenario-desc">Iran crisis disrupts Strait of Hormuz</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="gold_rally"><div class="scenario-info"><div class="scenario-name">🥇 Gold Rally +20%</div><div class="scenario-desc">Safe haven surge amid geopolitical risk</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="copper_crash"><div class="scenario-info"><div class="scenario-name">🔻 Copper Crash -25%</div><div class="scenario-desc">China economic slowdown fears</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="wheat_spike"><div class="scenario-info"><div class="scenario-name">🌾 Wheat Spike +40%</div><div class="scenario-desc">Black Sea corridor collapse</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="commodity_bull"><div class="scenario-info"><div class="scenario-name">📈 Broad Commodity Bull +15%</div><div class="scenario-desc">Synchronized global demand surge</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="stagflation"><div class="scenario-info"><div class="scenario-name">🔥 Stagflation Scenario</div><div class="scenario-desc">Oil +25%, Gold +15%, Copper -10%, Wheat +20%</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="oil_shock"><div class="scenario-info"><div class="scenario-name">Oil Shock +30%</div><div class="scenario-desc">Iran crisis disrupts Strait of Hormuz</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="gold_rally"><div class="scenario-info"><div class="scenario-name">Gold Rally +20%</div><div class="scenario-desc">Safe haven surge amid geopolitical risk</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="copper_crash"><div class="scenario-info"><div class="scenario-name">Copper Crash -25%</div><div class="scenario-desc">China economic slowdown fears</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="wheat_spike"><div class="scenario-info"><div class="scenario-name">Wheat Spike +40%</div><div class="scenario-desc">Black Sea corridor collapse</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="commodity_bull"><div class="scenario-info"><div class="scenario-name">Broad Commodity Bull +15%</div><div class="scenario-desc">Synchronized global demand surge</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="stagflation"><div class="scenario-info"><div class="scenario-name">Stagflation Scenario</div><div class="scenario-desc">Oil +25%, Gold +15%, Copper -10%, Wheat +20%</div></div></label>
       </div>
     </div>
 
     <!-- Step 3 -->
     <div class="step-card" data-animate data-delay="200">
       <div class="step-label"><div class="step-num">3</div><div class="step-title">Run Analysis</div></div>
-      <button class="run-btn" id="run-btn" onclick="runStressTest()">⚡ Run Stress Test</button>
+      <button class="run-btn" id="run-btn" onclick="runStressTest()">Run Stress Test</button>
     </div>
 
     <!-- Results -->
     <div class="results-section" id="results-section">
       <div class="step-card pro-blur" id="results-card">
         <div class="step-label"><div class="step-num" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:#10b981">✓</div><div class="step-title">Stress Test Results</div></div>
-        <div class="result-summary" id="result-summary"></div>
-        <div class="stock-results" id="stock-results"></div>
-        <div class="blur-overlay" id="blur-overlay" style="display:none">
-          <h3>🔒 Sign In to View Results</h3>
+        <div id="results-content">
+          <div class="result-summary" id="result-summary"></div>
+          <div class="stock-results" id="stock-results"></div>
+        </div>
+        <div class="blur-overlay" id="results-overlay" style="display:none">
+          <h3>Sign In to View Results</h3>
           <p>Free accounts get full stress test access</p>
           <button class="signin-btn" onclick="if(window.Clerk)Clerk.openSignIn()">Sign In Free</button>
         </div>
@@ -129,7 +140,6 @@ noindex: false
 (function(){
   'use strict';
 
-  // Sensitivity: ticker -> {commodity: beta}
   var SENSITIVITIES = {
     XOM:{crude_oil:1.8,natural_gas:0.9},CVX:{crude_oil:1.6,natural_gas:0.8},
     COP:{crude_oil:1.5,natural_gas:0.7},OXY:{crude_oil:1.9,natural_gas:0.5},
@@ -170,10 +180,8 @@ noindex: false
     document.getElementById('alloc-summary').innerHTML='Total allocation: <span>'+total+'%</span> (remaining: '+(100-total)+'%)';
   };
 
-  // Event delegation for alloc updates
   document.getElementById('portfolio-rows').addEventListener('input',function(){updateAlloc();});
 
-  // Scenario styling
   document.querySelectorAll('.scenario-opt input').forEach(function(cb){
     cb.addEventListener('change',function(){
       this.closest('.scenario-opt').classList.toggle('selected',this.checked);
@@ -196,7 +204,6 @@ noindex: false
     });
     if(!selectedScenarios.length){alert('Select at least one scenario');return;}
 
-    // Merge scenario commodity shocks
     var shocks={};
     selectedScenarios.forEach(function(s){
       var sc=SCENARIOS[s];
@@ -206,7 +213,6 @@ noindex: false
       });
     });
 
-    // Calculate per-stock impact
     var baseValue=100000;
     var results=[];
     var totalImpactPct=0;
@@ -228,7 +234,6 @@ noindex: false
     var totalDollar=baseValue*(totalImpactPct/100);
     var sign=totalImpactPct>=0?'+':'';
 
-    // Render
     var sumHtml='<div class="result-metric"><div class="val" style="color:#e2e8f0">$100,000</div><div class="lbl">Base Portfolio Value</div></div>';
     sumHtml+='<div class="result-metric"><div class="val '+(totalImpactPct>=0?'positive':'negative')+'">'+sign+'$'+Math.abs(totalDollar).toLocaleString(undefined,{maximumFractionDigits:0})+'</div><div class="lbl">Scenario Impact</div></div>';
     sumHtml+='<div class="result-metric"><div class="val '+(totalImpactPct>=0?'positive':'negative')+'">'+sign+totalImpactPct.toFixed(1)+'%</div><div class="lbl">Portfolio Change</div></div>';
@@ -252,39 +257,40 @@ noindex: false
 
     document.getElementById('results-section').classList.add('visible');
     document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
-
-    // Pro blur check
-    checkAuth();
   };
 
-  function checkAuth(){
-    var overlay=document.getElementById('blur-overlay');
-    var card=document.getElementById('results-card');
-    if(window.Clerk&&window.Clerk.user){
-      var emails=window.Clerk.user.emailAddresses||[];
-      var isAdmin=false;
-      for(var i=0;i<emails.length;i++){
-        if(emails[i].emailAddress==='0ssol1620@gmail.com') isAdmin=true;
-      }
-      overlay.style.display='none';
-      card.style.filter='none';
-    } else {
-      overlay.style.display='flex';
-    }
-  }
-
-  // Re-check after Clerk loads
-  if(window.Clerk){
-    window.Clerk.addListener(function(){checkAuth();});
-  } else {
-    document.addEventListener('DOMContentLoaded',function(){
-      var iv=setInterval(function(){
-        if(window.Clerk&&window.Clerk.addListener){
-          window.Clerk.addListener(function(){checkAuth();});
-          clearInterval(iv);
+  function checkStressAccess() {
+    if (!window.Clerk) { setTimeout(checkStressAccess, 600); return; }
+    var check = setInterval(function() {
+      if (window.Clerk.user) {
+        var admin = (window.Clerk.user.emailAddresses||[]).some(function(e){return e.emailAddress==='0ssol1620@gmail.com';});
+        if (admin) {
+          var ov = document.getElementById('results-overlay');
+          var ct = document.getElementById('results-content');
+          if(ov) ov.style.display='none';
+          if(ct){ct.style.filter='none';ct.style.pointerEvents='auto';}
         }
-      },500);
-    });
+        clearInterval(check);
+      }
+    }, 500);
+    setTimeout(function(){clearInterval(check);}, 6000);
   }
+  document.addEventListener('DOMContentLoaded', checkStressAccess);
 })();
 </script>
+
+<section class="seo-content">
+  <div class="container">
+    <h2>Portfolio Stress Testing: Commodity Risk Analysis</h2>
+    <p>Portfolio stress testing is a critical risk management practice that models how a portfolio would perform under hypothetical adverse market conditions. In commodity-linked equity portfolios, stress testing is particularly important because commodity price shocks can have outsized, non-linear effects on stock prices. A 30% spike in crude oil prices, for example, creates simultaneous winners (energy producers like XOM, COP) and losers (airlines like DAL, logistics firms like UPS) — and the magnitude of impact varies significantly based on each company's commodity exposure, hedging strategy, and cost structure.</p>
+
+    <h3>Understanding Commodity-Equity Sensitivity</h3>
+    <p>The CommodityNode Stress Test uses commodity-equity sensitivity coefficients (betas) to model how individual stocks respond to commodity price changes. These betas are derived from historical regression analysis of stock returns against commodity price movements, capturing both direct and indirect exposure. For instance, Freeport-McMoRan (FCX) has a copper beta of approximately 2.2, meaning a 10% copper price move historically produces a roughly 22% move in FCX shares. Tesla (TSLA) has negative betas to lithium, copper, and aluminum because these are input costs — rising raw material prices compress margins and weigh on the stock.</p>
+
+    <h3>Scenario Design and Selection</h3>
+    <p>Effective stress testing requires realistic scenario design based on plausible market events. Our pre-built scenarios are calibrated to historical precedents: the Oil Shock +30% scenario mirrors the 2019 Saudi Aramco attack price impact; the Copper Crash -25% reflects the 2015 China slowdown selloff; the Stagflation scenario combines the inflationary commodity environment of 2022 with selective industrial weakness. Traders can select multiple scenarios simultaneously to model compound risk — for example, combining an oil shock with a gold rally to simulate a Middle East conflict scenario with flight-to-safety dynamics.</p>
+
+    <h3>Interpreting Stress Test Results</h3>
+    <p>The stress test output provides portfolio-level impact metrics alongside individual stock breakdowns, allowing traders to identify specific positions driving risk concentration. A portfolio with heavily correlated commodity exposure — such as holding multiple copper miners — will show amplified stress test impacts compared to a diversified portfolio. Use the results to identify positions that require hedging, adjust allocation weights to reduce concentration risk, and evaluate whether your portfolio is appropriately positioned for current geopolitical and macroeconomic risks. The stress test is most valuable when used regularly as market conditions evolve, not just as a one-time exercise. Re-run scenarios periodically as your portfolio composition changes and new commodity risks emerge.</p>
+  </div>
+</section>

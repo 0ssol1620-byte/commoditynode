@@ -11,11 +11,16 @@ noindex: false
 .corr-hero h1{font-size:2.4rem;font-weight:800;color:#e2e8f0;margin-bottom:12px}
 .corr-hero h1 span{color:#22d3ee}
 .corr-hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0;vertical-align:middle}
+.dot-red{background:#ef4444}
+.dot-orange{background:#f97316}
+.dot-yellow{background:#eab308}
+.dot-green{background:#10b981}
 .period-toggle{display:flex;gap:8px;justify-content:center;margin:24px 0 32px}
 .period-btn{padding:8px 20px;border-radius:8px;border:1px solid rgba(34,211,238,0.25);background:rgba(34,211,238,0.06);color:#94a3b8;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s}
 .period-btn.active,.period-btn:hover{background:rgba(34,211,238,0.15);color:#22d3ee;border-color:#22d3ee}
-.heatmap-wrapper{overflow-x:auto;margin:0 auto;max-width:100%;padding-bottom:16px}
-.heatmap-table{border-collapse:separate;border-spacing:2px;margin:0 auto;font-size:0.72rem}
+.heatmap-wrapper{overflow-x:auto;margin:0 auto;max-width:100%;padding-bottom:16px;-webkit-overflow-scrolling:touch;scroll-behavior:smooth}
+.heatmap-table{border-collapse:separate;border-spacing:2px;margin:0 auto;font-size:0.72rem;min-width:720px}
 .heatmap-table th{padding:6px 4px;color:#94a3b8;font-weight:600;font-size:0.7rem;text-align:center;white-space:nowrap;background:transparent}
 .heatmap-table th.row-header{text-align:right;padding-right:8px;min-width:80px}
 .heatmap-cell{width:52px;height:44px;text-align:center;vertical-align:middle;border-radius:4px;font-weight:600;font-family:'JetBrains Mono',monospace;font-size:0.72rem;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;position:relative}
@@ -26,7 +31,6 @@ noindex: false
 .insight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:40px}
 .insight-card{background:rgba(15,15,25,0.8);border:1px solid rgba(34,211,238,0.12);border-radius:14px;padding:24px;backdrop-filter:blur(8px)}
 .insight-card h3{font-size:1rem;font-weight:700;color:#e2e8f0;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.insight-card h3 .icon{font-size:1.2rem}
 .insight-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
 .insight-item:last-child{border-bottom:none}
 .insight-pair{color:#e2e8f0;font-weight:600;font-size:0.9rem}
@@ -39,6 +43,10 @@ noindex: false
 .legend{display:flex;gap:16px;justify-content:center;margin:20px 0 8px;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:#94a3b8}
 .legend-swatch{width:16px;height:12px;border-radius:3px}
+.seo-content{color:#64748b;font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05);margin-top:60px;padding-top:40px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7}
+.seo-content h2{color:#94a3b8;font-size:1.3rem;font-weight:700;margin:28px 0 12px}
+.seo-content h3{color:#94a3b8;font-size:1.05rem;font-weight:600;margin:20px 0 8px}
+.seo-content p{margin-bottom:14px}
 @media(max-width:768px){
   .corr-hero h1{font-size:1.6rem}
   .heatmap-table{font-size:0.6rem}
@@ -80,7 +88,7 @@ noindex: false
     <div class="insight-grid" id="insight-grid" data-animate data-delay="200"></div>
 
     <div class="trader-insight" id="trader-insight" data-animate data-delay="300">
-      <h3>💡 What This Means for Traders</h3>
+      <h3>What This Means for Traders</h3>
       <p id="trader-text">Loading correlation insights...</p>
     </div>
   </div>
@@ -157,7 +165,6 @@ noindex: false
       }
     }
 
-    // Build table
     var table=document.getElementById('corr-matrix');
     var html='<thead><tr><th></th>';
     for(var i=0;i<n;i++) html+='<th>'+COMMODITIES[i].short+'</th>';
@@ -174,12 +181,11 @@ noindex: false
     html+='</tbody>';
     table.innerHTML=html;
 
-    // Tooltips
     var tooltip=document.getElementById('corr-tooltip');
     table.querySelectorAll('.heatmap-cell').forEach(function(cell){
       cell.addEventListener('mouseenter',function(e){
         var ci=+this.dataset.i, cj=+this.dataset.j, cv=+this.dataset.v;
-        tooltip.innerHTML='<div class="pair">'+COMMODITIES[ci].name+' ↔ '+COMMODITIES[cj].name+'</div><div style="font-size:1.1rem;font-weight:800;color:'+(cv>=0?'#10b981':'#f43f5e')+'">'+cv.toFixed(4)+'</div><div class="strength">'+strengthLabel(cv)+'</div>';
+        tooltip.innerHTML='<div class="pair">'+COMMODITIES[ci].name+' / '+COMMODITIES[cj].name+'</div><div style="font-size:1.1rem;font-weight:800;color:'+(cv>=0?'#10b981':'#f43f5e')+'">'+cv.toFixed(4)+'</div><div class="strength">'+strengthLabel(cv)+'</div>';
         tooltip.style.display='block';
       });
       cell.addEventListener('mousemove',function(e){
@@ -189,25 +195,23 @@ noindex: false
       cell.addEventListener('mouseleave',function(){tooltip.style.display='none';});
     });
 
-    // Insights
     pairs.sort(function(a,b){return b.v-a.v;});
     var topPos=pairs.slice(0,3);
     var topNeg=pairs.slice(-3).reverse();
 
-    var insightHtml='<div class="insight-card"><h3><span class="icon">📈</span> Strongest Positive Correlations</h3>';
+    var insightHtml='<div class="insight-card"><h3>Strongest Positive Correlations</h3>';
     topPos.forEach(function(p){
-      insightHtml+='<div class="insight-item"><span class="insight-pair">'+COMMODITIES[p.i].name+' ↔ '+COMMODITIES[p.j].name+'</span><span class="insight-val positive">'+p.v.toFixed(3)+'</span></div>';
+      insightHtml+='<div class="insight-item"><span class="insight-pair">'+COMMODITIES[p.i].name+' / '+COMMODITIES[p.j].name+'</span><span class="insight-val positive">'+p.v.toFixed(3)+'</span></div>';
     });
     insightHtml+='</div>';
 
-    insightHtml+='<div class="insight-card"><h3><span class="icon">📉</span> Strongest Negative Correlations</h3>';
+    insightHtml+='<div class="insight-card"><h3>Strongest Negative Correlations</h3>';
     topNeg.forEach(function(p){
-      insightHtml+='<div class="insight-item"><span class="insight-pair">'+COMMODITIES[p.i].name+' ↔ '+COMMODITIES[p.j].name+'</span><span class="insight-val negative">'+p.v.toFixed(3)+'</span></div>';
+      insightHtml+='<div class="insight-item"><span class="insight-pair">'+COMMODITIES[p.i].name+' / '+COMMODITIES[p.j].name+'</span><span class="insight-val negative">'+p.v.toFixed(3)+'</span></div>';
     });
     insightHtml+='</div>';
     document.getElementById('insight-grid').innerHTML=insightHtml;
 
-    // Trader insight
     var text='Over the past '+currentPeriod+' trading days, ';
     if(topPos.length) text+=COMMODITIES[topPos[0].i].name+' and '+COMMODITIES[topPos[0].j].name+' show the strongest positive correlation ('+topPos[0].v.toFixed(2)+'), meaning they tend to move together — a long position in both offers limited diversification. ';
     if(topNeg.length&&topNeg[0].v<-0.3) text+='Meanwhile, '+COMMODITIES[topNeg[0].i].name+' and '+COMMODITIES[topNeg[0].j].name+' are inversely correlated ('+topNeg[0].v.toFixed(2)+'), making them natural hedging pairs. ';
@@ -215,7 +219,6 @@ noindex: false
     document.getElementById('trader-text').textContent=text;
   }
 
-  // Load data
   fetch('/assets/data/forecast.json').then(function(r){return r.json()}).then(function(data){
     COMMODITIES.forEach(function(c){
       if(data[c.key]&&data[c.key].history&&data[c.key].history.prices){
@@ -225,7 +228,6 @@ noindex: false
     buildMatrix();
   }).catch(function(e){console.error('Failed to load forecast data',e);});
 
-  // Period toggle
   document.querySelectorAll('.period-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
       document.querySelectorAll('.period-btn').forEach(function(b){b.classList.remove('active');});
@@ -236,3 +238,22 @@ noindex: false
   });
 })();
 </script>
+
+<section class="seo-content">
+  <div class="container">
+    <h2>Commodity Correlation Analysis: A Comprehensive Guide</h2>
+    <p>Understanding how commodities move in relation to one another is a cornerstone of effective portfolio management, risk mitigation, and trading strategy development. The CommodityNode Correlation Matrix provides a visual, interactive representation of Pearson rolling correlations across 15 major commodity markets, updated with real market data and adjustable across 30, 60, and 90-day lookback windows. This tool empowers traders to identify diversification opportunities, detect regime changes, and build more resilient commodity portfolios.</p>
+
+    <h3>What Is Pearson Correlation in Commodity Markets?</h3>
+    <p>Pearson correlation measures the linear relationship between two variables on a scale from -1.0 to +1.0. A correlation of +1.0 means two commodities move in perfect lockstep, while -1.0 indicates they move in exactly opposite directions. Values near zero suggest no meaningful linear relationship. In commodity markets, correlations are driven by shared macro factors such as the US dollar, global growth expectations, inflation, and monetary policy, as well as sector-specific drivers like weather patterns, supply chain logistics, and geopolitical events.</p>
+
+    <h3>Why Rolling Correlations Matter</h3>
+    <p>Static, long-term correlations can be misleading because commodity relationships shift over time in response to changing macro regimes. A 30-day rolling correlation captures the most recent market dynamics, revealing short-term convergences or divergences that may signal trading opportunities. The 60-day and 90-day windows smooth out noise and highlight more persistent structural relationships. Comparing across timeframes helps traders distinguish between temporary dislocations and genuine regime changes. For example, a gold-oil correlation that shifts from positive to negative over 30 days while remaining positive over 90 days may signal a short-term divergence trade rather than a permanent structural change.</p>
+
+    <h3>Key Commodity Correlations to Watch</h3>
+    <p>Several commodity pairs exhibit well-documented correlation patterns that traders monitor closely. Gold and silver typically show strong positive correlation (0.7–0.9) due to shared safe-haven demand and monetary policy sensitivity. Crude oil and natural gas have historically shown moderate positive correlation, though this relationship has weakened as the US shale revolution increased domestic gas supply independently of oil market dynamics. The copper-gold ratio is widely followed as a barometer of economic growth expectations — when copper outperforms gold, it signals risk-on sentiment and optimism about industrial demand. Agricultural commodities like wheat, corn, and soybeans tend to correlate positively due to shared weather patterns, substitution effects, and overlapping growing seasons.</p>
+
+    <h3>Using Correlations for Portfolio Construction</h3>
+    <p>Effective commodity portfolio construction requires balancing exposure across correlated and uncorrelated assets. Holding heavily correlated positions amplifies both upside and downside risk, while including negatively correlated assets provides natural hedging. Traders can use this matrix to identify which commodities offer genuine diversification benefits and which simply duplicate existing exposure. Correlation breakdowns — when historically correlated commodities suddenly diverge — often represent the most profitable trading opportunities, as mean reversion tends to reassert over medium-term timeframes. Monitoring correlation regime changes alongside fundamental supply-demand analysis provides a powerful framework for commodity market decision-making.</p>
+  </div>
+</section>

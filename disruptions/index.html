@@ -14,6 +14,11 @@ noindex: false
 .summary-bar{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:28px 0 36px}
 .summary-pill{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px;background:rgba(15,15,25,0.8);border:1px solid rgba(255,255,255,0.08);font-size:0.85rem;font-weight:600;color:#e2e8f0}
 .summary-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0;vertical-align:middle}
+.dot-red{background:#ef4444}
+.dot-orange{background:#f97316}
+.dot-yellow{background:#eab308}
+.dot-green{background:#10b981}
 .filter-bar{display:flex;gap:8px;justify-content:center;margin-bottom:32px;flex-wrap:wrap}
 .filter-btn{padding:8px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:#94a3b8;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s}
 .filter-btn.active{border-color:#22d3ee;color:#22d3ee;background:rgba(34,211,238,0.08)}
@@ -47,7 +52,7 @@ noindex: false
 .risk-heatmap{margin-top:48px}
 .risk-heatmap h2{font-size:1.3rem;font-weight:700;color:#e2e8f0;text-align:center;margin-bottom:24px}
 .risk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;max-width:900px;margin:0 auto}
-.risk-item{display:flex;flex-direction:column;align-items:center;padding:14px 10px;border-radius:10px;background:rgba(15,15,25,0.6);border:1px solid rgba(255,255,255,0.06);transition:all 0.2s}
+.risk-item{display:flex;flex-direction:column;align-items:center;min-height:80px;padding:16px 12px;border-radius:10px;background:rgba(15,15,25,0.6);border:1px solid rgba(255,255,255,0.06);transition:all 0.2s}
 .risk-item:hover{border-color:rgba(34,211,238,0.2)}
 .risk-name{font-size:0.8rem;color:#e2e8f0;font-weight:600;margin-bottom:6px;text-align:center}
 .risk-level{font-size:0.72rem;font-weight:700;text-transform:uppercase;padding:3px 10px;border-radius:5px}
@@ -55,6 +60,10 @@ noindex: false
 .risk-level.high-risk{background:rgba(249,115,22,0.15);color:#f97316}
 .risk-level.moderate{background:rgba(234,179,8,0.15);color:#eab308}
 .risk-level.low{background:rgba(16,185,129,0.1);color:#10b981}
+.seo-content{color:#64748b;font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05);margin-top:60px;padding-top:40px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7}
+.seo-content h2{color:#94a3b8;font-size:1.3rem;font-weight:700;margin:28px 0 12px}
+.seo-content h3{color:#94a3b8;font-size:1.05rem;font-weight:600;margin:20px 0 8px}
+.seo-content p{margin-bottom:14px}
 @media(max-width:768px){
   .disrupt-hero h1{font-size:1.6rem}
   .disruption-card{padding:18px}
@@ -80,16 +89,298 @@ noindex: false
   <div class="container">
     <div class="filter-bar" data-animate>
       <button class="filter-btn active" data-severity="all">All Events</button>
-      <button class="filter-btn" data-severity="critical">🔴 Critical</button>
-      <button class="filter-btn" data-severity="high">🟠 High</button>
-      <button class="filter-btn" data-severity="medium">🟡 Medium</button>
+      <button class="filter-btn" data-severity="critical"><span class="dot dot-red"></span>Critical</button>
+      <button class="filter-btn" data-severity="high"><span class="dot dot-orange"></span>High</button>
+      <button class="filter-btn" data-severity="medium"><span class="dot dot-yellow"></span>Medium</button>
     </div>
 
-    <div class="disruption-grid" id="disruption-grid"></div>
+    <div class="disruption-grid" id="disruption-grid">
+
+      <div class="disruption-card critical" data-severity="critical">
+        <div class="card-header">
+          <span class="severity-badge critical">Critical</span>
+          <span class="card-date">2026-03</span>
+        </div>
+        <div class="card-title">Iran–Strait of Hormuz Tension</div>
+        <div class="card-desc">
+          Escalating military posturing near the Strait of Hormuz threatens approximately 21% of global oil
+          transit capacity. Insurance premiums on Gulf tankers have surged 300% as IRGC naval exercises
+          include live-fire drills near major shipping lanes. The US Fifth Fleet has increased patrol
+          operations while tanker operators reroute vessels around the Cape of Good Hope, adding
+          12–14 days to voyage times and $2–3M per trip in additional fuel costs. Goldman Sachs
+          estimates sustained closure would push Brent crude above $120/barrel within 30 days.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/crude-oil/" class="commodity-tag">Crude Oil</a>
+          <a href="/commodities/natural-gas/" class="commodity-tag">LNG</a>
+          <span class="commodity-tag">Fertilizers</span>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+15~22%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card critical" data-severity="critical">
+        <div class="card-header">
+          <span class="severity-badge critical">Critical</span>
+          <span class="card-date">2026-03</span>
+        </div>
+        <div class="card-title">US-China Tariff War Escalation (145%)</div>
+        <div class="card-desc">
+          Retaliatory tariffs on Chinese metals exports have reached 145%, sending shockwaves across
+          global supply chains. China has tightened rare earth export controls, directly threatening EV
+          battery production and semiconductor manufacturing worldwide. Copper import costs surge on
+          both sides as re-routing through third countries adds 15–20% to landed costs. The WTO has
+          declared the tariff levels "unprecedented in modern trade history." Industry analysts warn
+          that sustained escalation could permanently restructure global metals supply chains, with
+          reshoring costs estimated at $800B over the next decade.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/copper/" class="commodity-tag">Copper</a>
+          <a href="/commodities/lithium/" class="commodity-tag">Lithium</a>
+          <span class="commodity-tag">Rare Earth</span>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value down">-8~15%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card high" data-severity="high">
+        <div class="card-header">
+          <span class="severity-badge high">High</span>
+          <span class="card-date">2026-03</span>
+        </div>
+        <div class="card-title">Black Sea Wheat Corridor Risk</div>
+        <div class="card-desc">
+          Renewed conflict near Ukrainian grain export terminals has severely disrupted the Black Sea
+          corridor, threatening 25% of world wheat exports. Global wheat futures have spiked as port
+          operations at Odessa and Mykolaiv face intermittent closures. Insurance costs for Black Sea
+          shipping have tripled, with several major shipping lines suspending service entirely. The UN
+          grain deal framework remains under pressure as Russia demands sanctions relief in exchange
+          for continued corridor access. Food security agencies warn of price contagion spreading to
+          corn, barley, and sunflower oil markets.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/wheat/" class="commodity-tag">Wheat</a>
+          <a href="/commodities/corn/" class="commodity-tag">Corn</a>
+          <a href="/commodities/soybeans/" class="commodity-tag">Sunflower Oil</a>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+10~19%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card high" data-severity="high">
+        <div class="card-header">
+          <span class="severity-badge high">High</span>
+          <span class="card-date">2026-02</span>
+        </div>
+        <div class="card-title">Kazakhstan Uranium Production Shortfall</div>
+        <div class="card-desc">
+          Kazatomprom, the world's largest uranium producer, has announced a 15% production cut due to
+          persistent sulfuric acid supply constraints and regulatory delays. Kazakhstan produces roughly
+          43% of the global uranium supply, making any output disruption highly significant. Spot prices
+          have breached $95/lb as utilities scramble to secure long-term contracts. The shortfall comes
+          at a critical time as 62 new nuclear reactors are under construction globally, intensifying
+          demand pressure. Analysts project spot uranium could reach $110/lb if production issues
+          persist through Q3.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/uranium/" class="commodity-tag">Uranium</a>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+12~18%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card high" data-severity="high">
+        <div class="card-header">
+          <span class="severity-badge high">High</span>
+          <span class="card-date">2026-03</span>
+        </div>
+        <div class="card-title">Chile Copper Mine Strike Wave</div>
+        <div class="card-desc">
+          Workers at Escondida and Collahuasi mines — representing roughly 10% of global copper supply —
+          have begun an indefinite strike over wage disputes and working conditions. Chile's copper output
+          has dropped 8% month-over-month, driving LME copper stocks to 15-year lows. The strike comes
+          amid already-tight global copper markets, with refined copper deficit projected at 500,000
+          tonnes for 2026. Silver production, a significant byproduct of copper mining, is also affected.
+          Negotiations remain stalled as unions reject the latest 4.5% wage increase offer.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/copper/" class="commodity-tag">Copper</a>
+          <a href="/commodities/silver/" class="commodity-tag">Silver</a>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+8~14%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card high" data-severity="high">
+        <div class="card-header">
+          <span class="severity-badge high">High</span>
+          <span class="card-date">2026-03</span>
+        </div>
+        <div class="card-title">DXY Dollar Weakness Below 100</div>
+        <div class="card-desc">
+          The Dollar Index has fallen below 100 for the first time since 2022 as the Federal Reserve
+          signals multiple rate cuts in response to slowing economic growth. A weaker dollar broadly
+          supports commodity prices by making dollar-denominated goods cheaper for foreign buyers. Gold
+          has broken all-time highs above $3,400/oz while silver trades at multi-year highs. Emerging
+          market central banks have accelerated gold purchases, with China, India, and Poland leading
+          buyers. The DXY weakness is expected to persist through H2 2026 as the rate differential
+          between the US and other major economies narrows.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/gold/" class="commodity-tag">Gold</a>
+          <a href="/commodities/silver/" class="commodity-tag">Silver</a>
+          <span class="commodity-tag">All Commodities</span>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+5~11%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card medium" data-severity="medium">
+        <div class="card-header">
+          <span class="severity-badge medium">Medium</span>
+          <span class="card-date">2026-02</span>
+        </div>
+        <div class="card-title">Brazil Coffee Crop Damage (Drought)</div>
+        <div class="card-desc">
+          Severe drought conditions in Minas Gerais have destroyed an estimated 12% of the arabica coffee
+          crop, with damage reports continuing to emerge from Sul de Minas and Cerrado regions. Brazil
+          supplies approximately 35% of global coffee, making any production shortfall highly impactful.
+          ICE coffee futures have surged to 3-year highs as roasters scramble to secure forward supplies.
+          Meteorologists project below-normal rainfall through June, raising concerns about the upcoming
+          flowering season. Sugar production in the same regions has also been affected, with mills
+          reporting 8% lower cane yields.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/coffee/" class="commodity-tag">Coffee</a>
+          <a href="/commodities/sugar/" class="commodity-tag">Sugar</a>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+6~10%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card medium" data-severity="medium">
+        <div class="card-header">
+          <span class="severity-badge medium">Medium</span>
+          <span class="card-date">2026-01</span>
+        </div>
+        <div class="card-title">Indonesia Nickel Export Policy Shift</div>
+        <div class="card-desc">
+          Indonesia has tightened its nickel ore export ban, mandating that all raw nickel ore be processed
+          domestically before export. The policy redirects supply to domestic smelters, widening the global
+          nickel supply deficit and increasing EV battery raw material costs. Indonesia controls roughly
+          48% of global nickel reserves and 37% of mined production. The new regulations have caught
+          several Chinese-owned smelters off-guard, with processing backlogs building. Stainless steel
+          producers in Japan and South Korea report 20% longer lead times for nickel deliveries.
+        </div>
+        <div class="card-tags">
+          <span class="commodity-tag">Nickel</span>
+          <a href="/commodities/lithium/" class="commodity-tag">EV Batteries</a>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+5~9%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card medium" data-severity="medium">
+        <div class="card-header">
+          <span class="severity-badge medium">Medium</span>
+          <span class="card-date">2026-03</span>
+        </div>
+        <div class="card-title">Fed Rate Cut Expectations (3x in 2026)</div>
+        <div class="card-desc">
+          Markets are now pricing in three 25-basis-point rate cuts by year-end, a significant shift from
+          the "higher for longer" narrative that dominated 2025. Lower interest rates are historically
+          bullish for precious metals — reducing the opportunity cost of holding non-yielding assets —
+          and supportive of growth-linked commodities like copper and aluminum. The Fed's dovish pivot
+          has already driven a 12% rally in gold year-to-date. Real yields on 10-year TIPS have
+          declined to 0.8%, their lowest level since early 2023, further supporting the precious
+          metals complex.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/gold/" class="commodity-tag">Gold</a>
+          <a href="/commodities/silver/" class="commodity-tag">Silver</a>
+          <a href="/commodities/copper/" class="commodity-tag">Copper</a>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+4~8%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+      <div class="disruption-card medium" data-severity="medium">
+        <div class="card-header">
+          <span class="severity-badge medium">Medium</span>
+          <span class="card-date">2026-02</span>
+        </div>
+        <div class="card-title">Australia LNG Labor Dispute</div>
+        <div class="card-desc">
+          Workers at Chevron's Gorgon and Wheatstone LNG facilities in Western Australia have threatened
+          prolonged strikes over roster changes and pay conditions. Australia exports approximately 22%
+          of global LNG supply, making any disruption significant for Asian spot markets. Asian spot LNG
+          prices have already spiked 15% on the supply uncertainty, with Japanese and Korean utilities
+          activating contingency contracts. The dispute mirrors the September 2023 industrial action
+          that briefly drove LNG prices up 30%. The Fair Work Commission is mediating, but unions have
+          rejected the latest proposed enterprise agreement.
+        </div>
+        <div class="card-tags">
+          <a href="/commodities/natural-gas/" class="commodity-tag">LNG</a>
+          <a href="/commodities/natural-gas/" class="commodity-tag">Natural Gas</a>
+        </div>
+        <div class="impact-est">
+          <span class="impact-label">Price Impact Estimate:</span>
+          <span class="impact-value up">+7~12%</span>
+        </div>
+        <span class="monitor-btn">Monitor Impact →</span>
+      </div>
+
+    </div>
 
     <div class="risk-heatmap" data-animate>
-      <h2>🗺️ Commodity Risk Heat Map</h2>
-      <div class="risk-grid" id="risk-grid"></div>
+      <h2>Commodity Risk Heat Map</h2>
+      <div class="risk-grid">
+        <div class="risk-item"><div class="risk-name">Crude Oil</div><span class="risk-level elevated">Elevated</span></div>
+        <div class="risk-item"><div class="risk-name">Gold</div><span class="risk-level moderate">Moderate</span></div>
+        <div class="risk-item"><div class="risk-name">Copper</div><span class="risk-level elevated">Elevated</span></div>
+        <div class="risk-item"><div class="risk-name">Silver</div><span class="risk-level moderate">Moderate</span></div>
+        <div class="risk-item"><div class="risk-name">Natural Gas</div><span class="risk-level high-risk">High Risk</span></div>
+        <div class="risk-item"><div class="risk-name">Wheat</div><span class="risk-level elevated">Elevated</span></div>
+        <div class="risk-item"><div class="risk-name">Corn</div><span class="risk-level moderate">Moderate</span></div>
+        <div class="risk-item"><div class="risk-name">Uranium</div><span class="risk-level elevated">Elevated</span></div>
+        <div class="risk-item"><div class="risk-name">Lithium</div><span class="risk-level high-risk">High Risk</span></div>
+        <div class="risk-item"><div class="risk-name">Coffee</div><span class="risk-level moderate">Moderate</span></div>
+        <div class="risk-item"><div class="risk-name">Nickel</div><span class="risk-level high-risk">High Risk</span></div>
+        <div class="risk-item"><div class="risk-name">LNG</div><span class="risk-level elevated">Elevated</span></div>
+        <div class="risk-item"><div class="risk-name">Sugar</div><span class="risk-level low">Low</span></div>
+        <div class="risk-item"><div class="risk-name">Soybeans</div><span class="risk-level low">Low</span></div>
+        <div class="risk-item"><div class="risk-name">Platinum</div><span class="risk-level low">Low</span></div>
+        <div class="risk-item"><div class="risk-name">Aluminum</div><span class="risk-level moderate">Moderate</span></div>
+        <div class="risk-item"><div class="risk-name">Palladium</div><span class="risk-level low">Low</span></div>
+        <div class="risk-item"><div class="risk-name">Rare Earth</div><span class="risk-level elevated">Elevated</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -97,69 +388,40 @@ noindex: false
 <script>
 (function(){
   'use strict';
-
-  var events = [
-    {severity:'critical',title:'Iran–Strait of Hormuz Tension',desc:'Escalating military posturing near the Strait of Hormuz threatens ~21% of global oil transit. Insurance premiums on Gulf tankers have surged 300%. IRGC naval exercises include live-fire drills near shipping lanes.',commodities:[{name:'Crude Oil',slug:'crude-oil'},{name:'LNG',slug:'lng'},{name:'Fertilizers',slug:'ammonia'}],impact:'+15~22%',impactDir:'up',date:'2026-03'},
-    {severity:'critical',title:'US-China Tariff War Escalation (145%)',desc:'Retaliatory tariffs on Chinese metals exports reach 145%. Rare earth export controls tighten, threatening EV and semiconductor supply chains globally. Copper import costs surge on both sides.',commodities:[{name:'Copper',slug:'copper'},{name:'Lithium',slug:'lithium'},{name:'Rare Earth',slug:'rare-earth'}],impact:'-8~15%',impactDir:'down',date:'2026-03'},
-    {severity:'high',title:'Black Sea Wheat Corridor Risk',desc:'Renewed conflict near Ukrainian grain export terminals disrupts the Black Sea corridor. Global wheat futures spike as 25% of world wheat exports face bottleneck. Insurance costs for Black Sea shipping triple.',commodities:[{name:'Wheat',slug:'wheat'},{name:'Corn',slug:'corn'},{name:'Sunflower Oil',slug:'soybeans'}],impact:'+10~19%',impactDir:'up',date:'2026-03'},
-    {severity:'high',title:'Kazakhstan Uranium Production Shortfall',desc:'Kazatomprom announces 15% production cut due to sulfuric acid supply issues and regulatory delays. Kazakhstan produces ~43% of global uranium. Spot prices breach $95/lb.',commodities:[{name:'Uranium',slug:'uranium'}],impact:'+12~18%',impactDir:'up',date:'2026-02'},
-    {severity:'high',title:'Chile Copper Mine Strike Wave',desc:'Workers at Escondida and Collahuasi mines (10% of global supply) begin indefinite strike over wage disputes. Chile copper output drops 8% month-over-month. LME copper stocks at 15-year lows.',commodities:[{name:'Copper',slug:'copper'},{name:'Silver',slug:'silver'}],impact:'+8~14%',impactDir:'up',date:'2026-03'},
-    {severity:'high',title:'DXY Dollar Weakness Below 100',desc:'Dollar index falls below 100 for first time since 2022 as Fed signals multiple rate cuts. Commodity prices broadly supported by weaker dollar. Gold breaks all-time highs.',commodities:[{name:'Gold',slug:'gold'},{name:'Silver',slug:'silver'},{name:'All Commodities',slug:''}],impact:'+5~11%',impactDir:'up',date:'2026-03'},
-    {severity:'medium',title:'Brazil Coffee Crop Damage (Drought)',desc:'Severe drought in Minas Gerais destroys 12% of arabica crop. Brazil supplies 35% of global coffee. ICE coffee futures hit 3-year highs.',commodities:[{name:'Coffee',slug:'coffee'},{name:'Sugar',slug:'sugar'}],impact:'+6~10%',impactDir:'up',date:'2026-02'},
-    {severity:'medium',title:'Indonesia Nickel Export Policy Shift',desc:'Indonesia tightens nickel ore export ban, redirecting supply to domestic smelters. Global nickel supply deficit widens. EV battery raw material costs increase.',commodities:[{name:'Nickel',slug:'nickel'},{name:'EV Batteries',slug:'lithium'}],impact:'+5~9%',impactDir:'up',date:'2026-01'},
-    {severity:'medium',title:'Fed Rate Cut Expectations (3x in 2026)',desc:'Markets pricing in three 25bp cuts by year-end. Lower rates historically bullish for precious metals and growth-linked commodities like copper.',commodities:[{name:'Gold',slug:'gold'},{name:'Silver',slug:'silver'},{name:'Copper',slug:'copper'}],impact:'+4~8%',impactDir:'up',date:'2026-03'},
-    {severity:'medium',title:'Australia LNG Labor Dispute',desc:'Chevron's Gorgon and Wheatstone LNG workers threaten prolonged strikes. Australia exports 22% of global LNG. Asian spot LNG prices spike on supply uncertainty.',commodities:[{name:'LNG',slug:'lng'},{name:'Natural Gas',slug:'natural-gas'}],impact:'+7~12%',impactDir:'up',date:'2026-02'}
-  ];
-
-  var riskMap = [
-    {name:'Crude Oil',level:'elevated'},{name:'Gold',level:'moderate'},{name:'Copper',level:'elevated'},
-    {name:'Silver',level:'moderate'},{name:'Natural Gas',level:'high-risk'},{name:'Wheat',level:'elevated'},
-    {name:'Corn',level:'moderate'},{name:'Uranium',level:'elevated'},{name:'Lithium',level:'high-risk'},
-    {name:'Coffee',level:'moderate'},{name:'Nickel',level:'high-risk'},{name:'LNG',level:'elevated'},
-    {name:'Sugar',level:'low'},{name:'Soybeans',level:'low'},{name:'Platinum',level:'low'},
-    {name:'Aluminum',level:'moderate'},{name:'Palladium',level:'low'},{name:'Rare Earth',level:'elevated'}
-  ];
-
-  function renderEvents(filter){
-    var grid=document.getElementById('disruption-grid');
-    var html='';
-    events.forEach(function(ev){
-      if(filter!=='all'&&ev.severity!==filter) return;
-      html+='<div class="disruption-card '+ev.severity+'">';
-      html+='<div class="card-header"><span class="severity-badge '+ev.severity+'">'+ev.severity+'</span><span class="card-date">'+ev.date+'</span></div>';
-      html+='<div class="card-title">'+ev.title+'</div>';
-      html+='<div class="card-desc">'+ev.desc+'</div>';
-      html+='<div class="card-tags">';
-      ev.commodities.forEach(function(c){
-        if(c.slug) html+='<a href="/commodities/'+c.slug+'/" class="commodity-tag">'+c.name+'</a>';
-        else html+='<span class="commodity-tag">'+c.name+'</span>';
-      });
-      html+='</div>';
-      html+='<div class="impact-est"><span class="impact-label">Price Impact Estimate:</span><span class="impact-value '+ev.impactDir+'">'+ev.impact+'</span></div>';
-      html+='<span class="monitor-btn">Monitor Impact →</span>';
-      html+='</div>';
-    });
-    grid.innerHTML=html;
-  }
-
-  function renderRiskMap(){
-    var grid=document.getElementById('risk-grid');
-    var html='';
-    riskMap.forEach(function(r){
-      html+='<div class="risk-item"><div class="risk-name">'+r.name+'</div><span class="risk-level '+r.level+'">'+r.level.replace('-',' ')+'</span></div>';
-    });
-    grid.innerHTML=html;
-  }
-
-  renderEvents('all');
-  renderRiskMap();
-
+  var grid = document.getElementById('disruption-grid');
+  var cards = grid.querySelectorAll('.disruption-card');
   document.querySelectorAll('.filter-btn').forEach(function(btn){
-    btn.addEventListener('click',function(){
+    btn.addEventListener('click', function(){
       document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active');});
       this.classList.add('active');
-      renderEvents(this.dataset.severity);
+      var sev = this.dataset.severity;
+      cards.forEach(function(card){
+        if(sev === 'all' || card.dataset.severity === sev){
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     });
   });
 })();
 </script>
+
+<section class="seo-content">
+  <div class="container">
+    <h2>Understanding Supply Disruptions in Commodity Markets</h2>
+    <p>Supply disruptions represent one of the most powerful drivers of commodity price movements, often creating sudden and dramatic shifts that cascade across interconnected markets. From geopolitical conflicts that close critical shipping corridors to natural disasters that devastate crop-producing regions, these events introduce uncertainty that financial markets must rapidly price in. The CommodityNode Supply Disruption Tracker monitors these events in real time, providing commodity traders, portfolio managers, and risk analysts with actionable intelligence on threats to global supply chains.</p>
+
+    <h3>Geopolitical Risk and Energy Markets</h3>
+    <p>Energy commodities are particularly susceptible to geopolitical disruptions due to the geographic concentration of production and the criticality of a handful of maritime chokepoints. The Strait of Hormuz, through which approximately 21% of global oil transits daily, remains the single most significant bottleneck in the energy supply chain. Tensions in the Persian Gulf region historically produce asymmetric price responses — even the threat of disruption can drive insurance premiums higher, increase shipping costs, and cause speculative buying that amplifies spot price moves. Similarly, the Strait of Malacca handles roughly 25% of global seaborne trade, and any disruption would cascade across crude oil, LNG, and refined product markets simultaneously.</p>
+
+    <h3>Agricultural Disruptions and Food Security</h3>
+    <p>Agricultural commodity disruptions differ fundamentally from energy disruptions in their seasonality and irreversibility. A drought during a critical growing period cannot be offset by simply increasing production — the crop is lost, and markets must wait until the next planting cycle. The Black Sea region, responsible for roughly 25% of global wheat exports, has experienced repeated disruptions due to geopolitical conflict, with cascading effects on corn, barley, and sunflower oil prices. Brazil's dominance in coffee (35% of global production) and sugar makes any weather event in key producing states like Minas Gerais and Sao Paulo a market-moving occurrence.</p>
+
+    <h3>Metals Supply Concentration Risk</h3>
+    <p>The metals complex faces unique supply concentration risks that amplify the impact of disruptions. Chile produces 27% of the world's copper, Kazakhstan 43% of uranium, Indonesia 48% of nickel reserves, and China dominates rare earth processing at over 60% of global capacity. This geographic concentration means that a single regulatory change, labor dispute, or export policy shift in one country can materially alter the global supply-demand balance. The ongoing US-China trade tensions have highlighted the vulnerability of supply chains that depend heavily on Chinese processing capacity, particularly for critical minerals essential to the energy transition.</p>
+
+    <h3>How to Use the Disruption Tracker</h3>
+    <p>Each disruption event on this tracker is classified by severity — Critical, High, or Medium — based on the estimated magnitude of supply impact, the number of commodities affected, and the probability of escalation. Price impact estimates are derived from historical analogues and current market positioning. Traders should use the severity filter to focus on the events most relevant to their portfolio exposure, and monitor the Risk Heat Map for a cross-commodity view of where supply risk is currently concentrated. Combining disruption intelligence with technical analysis and correlation data from our other tools provides a comprehensive framework for commodity market decision-making.</p>
+  </div>
+</section>

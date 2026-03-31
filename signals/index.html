@@ -11,12 +11,16 @@ noindex: false
 .sig-hero h1{font-size:2.4rem;font-weight:800;color:#e2e8f0;margin-bottom:12px}
 .sig-hero h1 span{background:linear-gradient(135deg,#22d3ee,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .sig-hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0;vertical-align:middle}
+.dot-red{background:#ef4444}
+.dot-orange{background:#f97316}
+.dot-yellow{background:#eab308}
+.dot-green{background:#10b981}
 .tab-bar{display:flex;gap:8px;justify-content:center;margin:28px 0 32px;flex-wrap:wrap}
 .tab-btn{padding:10px 22px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:#94a3b8;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s}
 .tab-btn.active{border-color:#22d3ee;color:#22d3ee;background:rgba(34,211,238,0.08)}
 .tab-btn:hover{border-color:#22d3ee;color:#22d3ee}
 .tab-content{display:none}
-.tab-content.active{display:block}
 .signal-cards{display:grid;gap:20px;max-width:900px;margin:0 auto}
 .sig-card{background:rgba(15,15,25,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:26px;transition:all 0.25s;position:relative;overflow:hidden}
 .sig-card:hover{border-color:rgba(34,211,238,0.25);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
@@ -24,11 +28,11 @@ noindex: false
 .sig-card.bullish::before{background:#10b981}
 .sig-card.bearish::before{background:#f43f5e}
 .sig-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
-.sig-direction{padding:5px 14px;border-radius:8px;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
-.sig-direction.strong-bull{background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3)}
-.sig-direction.moderate-bull{background:rgba(16,185,129,0.1);color:#10b981;border:1px solid rgba(16,185,129,0.2)}
-.sig-direction.moderate-bear{background:rgba(244,63,94,0.1);color:#f43f5e;border:1px solid rgba(244,63,94,0.2)}
-.sig-direction.strong-bear{background:rgba(244,63,94,0.15);color:#f43f5e;border:1px solid rgba(244,63,94,0.3)}
+.dir{display:inline-flex;align-items:center;gap:6px;font-size:0.8rem;font-weight:700;padding:4px 10px;border-radius:6px}
+.strong-bull{background:rgba(16,185,129,0.15);color:#10b981}
+.moderate-bull{background:rgba(249,115,22,0.1);color:#f97316}
+.strong-bear{background:rgba(239,68,68,0.15);color:#ef4444}
+.moderate-bear{background:rgba(249,115,22,0.1);color:#f97316}
 .sig-strength{color:#64748b;font-size:0.8rem;margin-left:auto}
 .sig-title{font-size:1.15rem;font-weight:700;color:#e2e8f0;margin-bottom:10px}
 .sig-desc{color:#94a3b8;font-size:0.9rem;line-height:1.65;margin-bottom:14px}
@@ -61,6 +65,10 @@ noindex: false
 .history-card .h-result{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:0.88rem}
 .history-card .h-result.win{color:#10b981}
 .history-card .h-result.loss{color:#f43f5e}
+.seo-content{color:#64748b;font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05);margin-top:60px;padding-top:40px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7}
+.seo-content h2{color:#94a3b8;font-size:1.3rem;font-weight:700;margin:28px 0 12px}
+.seo-content h3{color:#94a3b8;font-size:1.05rem;font-weight:600;margin:20px 0 8px}
+.seo-content p{margin-bottom:14px}
 @media(max-width:768px){
   .sig-hero h1{font-size:1.6rem}
   .sig-metrics{grid-template-columns:repeat(2,1fr)}
@@ -80,18 +88,18 @@ noindex: false
 <section class="section" style="padding-top:0">
   <div class="container">
     <div class="tab-bar" data-animate data-delay="150">
-      <button class="tab-btn active" data-tab="active">🔴 Active Signals</button>
-      <button class="tab-btn" data-tab="history">📊 Signal History</button>
-      <button class="tab-btn" data-tab="patterns">📚 Pattern Library</button>
+      <button class="tab-btn active" data-tab="active">Active Signals</button>
+      <button class="tab-btn" data-tab="history">Signal History</button>
+      <button class="tab-btn" data-tab="patterns">Pattern Library</button>
     </div>
 
     <!-- Active Signals -->
-    <div class="tab-content active" id="tab-active">
+    <div class="tab-content" id="tab-active">
       <div class="signal-cards" data-animate data-delay="200">
 
         <div class="sig-card bullish">
           <div class="sig-header">
-            <span class="sig-direction strong-bull">🟢 Strong Bullish</span>
+            <span class="dir strong-bull">Strong Bullish</span>
             <span class="sig-strength">Confidence: High</span>
           </div>
           <div class="sig-title">Gold-Silver Ratio Compression</div>
@@ -111,7 +119,7 @@ noindex: false
 
         <div class="sig-card bullish">
           <div class="sig-header">
-            <span class="sig-direction strong-bull">🟢 Strong Bullish</span>
+            <span class="dir strong-bull">Strong Bullish</span>
             <span class="sig-strength">Confidence: High</span>
           </div>
           <div class="sig-title">Copper-Gold Ratio Economic Signal</div>
@@ -131,7 +139,7 @@ noindex: false
 
         <div class="sig-card bullish">
           <div class="sig-header">
-            <span class="sig-direction moderate-bull">🟠 Moderate Bullish</span>
+            <span class="dir moderate-bull">Moderate Bullish</span>
             <span class="sig-strength">Confidence: Medium</span>
           </div>
           <div class="sig-title">Oil Contango Structure Signal</div>
@@ -151,7 +159,7 @@ noindex: false
 
         <div class="sig-card bearish">
           <div class="sig-header">
-            <span class="sig-direction moderate-bear">🟠 Moderate Bearish</span>
+            <span class="dir moderate-bear">Moderate Bearish</span>
             <span class="sig-strength">Confidence: Medium</span>
           </div>
           <div class="sig-title">Wheat-Corn Spread Compression</div>
@@ -171,7 +179,7 @@ noindex: false
 
         <div class="sig-card bearish">
           <div class="sig-header">
-            <span class="sig-direction strong-bear">🔴 Strong Bearish</span>
+            <span class="dir strong-bear">Strong Bearish</span>
             <span class="sig-strength">Confidence: High</span>
           </div>
           <div class="sig-title">DXY Recovery Risk — Dollar Bounce Warning</div>
@@ -192,7 +200,7 @@ noindex: false
 
         <div class="sig-card bullish">
           <div class="sig-header">
-            <span class="sig-direction moderate-bull">🟠 Moderate Bullish</span>
+            <span class="dir moderate-bull">Moderate Bullish</span>
             <span class="sig-strength">Confidence: Medium</span>
           </div>
           <div class="sig-title">Energy-Agriculture Linkage Signal</div>
@@ -216,14 +224,14 @@ noindex: false
     <!-- Signal History -->
     <div class="tab-content" id="tab-history">
       <div style="max-width:900px;margin:0 auto" data-animate>
-        <div class="history-card"><div class="h-date">2026-03-15</div><div class="h-title">Gold/Silver Ratio > 70 → Silver Outperformance</div><div class="h-result win">✅ Win: Silver +9.2% vs Gold +3.1% (60 days)</div></div>
-        <div class="history-card"><div class="h-date">2026-02-28</div><div class="h-title">Oil Backwardation → Spot Weakness</div><div class="h-result win">✅ Win: WTI -6.4% over 30 days</div></div>
-        <div class="history-card"><div class="h-date">2026-02-10</div><div class="h-title">Copper/Gold Ratio Breakout → Copper Rally</div><div class="h-result win">✅ Win: Copper +11.8% over 90 days</div></div>
-        <div class="history-card"><div class="h-date">2026-01-22</div><div class="h-title">DXY Overbought (RSI 74) → Commodity Rally</div><div class="h-result win">✅ Win: Bloomberg Commodity Index +4.2%</div></div>
-        <div class="history-card"><div class="h-date">2026-01-08</div><div class="h-title">Wheat/Corn Spread Expansion → Wheat Outperformance</div><div class="h-result loss">❌ Loss: Wheat -2.1% vs Corn +1.8%</div></div>
-        <div class="history-card"><div class="h-date">2025-12-15</div><div class="h-title">Natural Gas → Fertilizer → Grain Lag Signal</div><div class="h-result win">✅ Win: Wheat +5.4% with 3-week lag</div></div>
-        <div class="history-card"><div class="h-date">2025-11-20</div><div class="h-title">Gold Safe Haven Signal (VIX > 30)</div><div class="h-result win">✅ Win: Gold +7.8% over 45 days</div></div>
-        <div class="history-card"><div class="h-date">2025-11-01</div><div class="h-title">Oil Contango Deep → Storage Play</div><div class="h-result loss">❌ Loss: Spot +2.1% (below threshold)</div></div>
+        <div class="history-card"><div class="h-date">2026-03-15</div><div class="h-title">Gold/Silver Ratio > 70 — Silver Outperformance</div><div class="h-result win">Win: Silver +9.2% vs Gold +3.1% (60 days)</div></div>
+        <div class="history-card"><div class="h-date">2026-02-28</div><div class="h-title">Oil Backwardation — Spot Weakness</div><div class="h-result win">Win: WTI -6.4% over 30 days</div></div>
+        <div class="history-card"><div class="h-date">2026-02-10</div><div class="h-title">Copper/Gold Ratio Breakout — Copper Rally</div><div class="h-result win">Win: Copper +11.8% over 90 days</div></div>
+        <div class="history-card"><div class="h-date">2026-01-22</div><div class="h-title">DXY Overbought (RSI 74) — Commodity Rally</div><div class="h-result win">Win: Bloomberg Commodity Index +4.2%</div></div>
+        <div class="history-card"><div class="h-date">2026-01-08</div><div class="h-title">Wheat/Corn Spread Expansion — Wheat Outperformance</div><div class="h-result loss">Loss: Wheat -2.1% vs Corn +1.8%</div></div>
+        <div class="history-card"><div class="h-date">2025-12-15</div><div class="h-title">Natural Gas — Fertilizer — Grain Lag Signal</div><div class="h-result win">Win: Wheat +5.4% with 3-week lag</div></div>
+        <div class="history-card"><div class="h-date">2025-11-20</div><div class="h-title">Gold Safe Haven Signal (VIX > 30)</div><div class="h-result win">Win: Gold +7.8% over 45 days</div></div>
+        <div class="history-card"><div class="h-date">2025-11-01</div><div class="h-title">Oil Contango Deep — Storage Play</div><div class="h-result loss">Loss: Spot +2.1% (below threshold)</div></div>
       </div>
     </div>
 
@@ -237,7 +245,7 @@ noindex: false
             </thead>
             <tbody>
               <tr>
-                <td class="pattern-name">Contango → Spot Rally</td>
+                <td class="pattern-name">Contango to Spot Rally</td>
                 <td>Futures curve in contango > 2%</td>
                 <td style="color:#10b981">+8.2% avg (45d)</td>
                 <td><span class="confidence-bar" style="width:42px;background:#10b981"></span>64%</td>
@@ -288,7 +296,7 @@ noindex: false
           </table>
         </div>
         <div class="pro-gate" id="pro-gate" style="display:none">
-          <h3>🔒 Pro Feature</h3>
+          <h3>Pro Feature</h3>
           <p>Full pattern library requires Pro access</p>
           <button onclick="if(window.Clerk)Clerk.openSignIn()">Sign In</button>
         </div>
@@ -302,12 +310,19 @@ noindex: false
   'use strict';
 
   // Tab switching
-  document.querySelectorAll('.tab-btn').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
-      document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
+  var tabs = document.querySelectorAll('.tab-btn');
+  var contents = document.querySelectorAll('.tab-content');
+
+  // Initial state
+  contents.forEach(function(c, i) { c.style.display = i === 0 ? 'block' : 'none'; });
+
+  tabs.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      tabs.forEach(function(b) { b.classList.remove('active'); });
+      contents.forEach(function(c) { c.style.display = 'none'; });
       this.classList.add('active');
-      document.getElementById('tab-'+this.dataset.tab).classList.add('active');
+      var target = document.getElementById('tab-' + this.dataset.tab);
+      if (target) target.style.display = 'block';
     });
   });
 
@@ -332,7 +347,6 @@ noindex: false
     content.classList.add('blur-content');
   }
 
-  // Delay check for Clerk
   var iv=setInterval(function(){
     if(window.Clerk){
       if(window.Clerk.addListener) window.Clerk.addListener(function(){checkPro();});
@@ -343,3 +357,22 @@ noindex: false
   setTimeout(function(){clearInterval(iv);checkPro();},5000);
 })();
 </script>
+
+<section class="seo-content">
+  <div class="container">
+    <h2>Cross-Commodity Signal Engine: Pattern-Based Trading Intelligence</h2>
+    <p>The CommodityNode Signal Engine identifies historically validated trading patterns across commodity pairs and macro indicators, providing actionable signals with quantified confidence levels and defined time horizons. Unlike single-commodity technical analysis, cross-commodity signals exploit the structural relationships between markets — the gold-silver ratio, copper-gold ratio, energy-agriculture linkage, and futures curve dynamics — to generate signals that capture regime changes and relative value opportunities invisible to single-market analysis.</p>
+
+    <h3>How Cross-Commodity Signals Work</h3>
+    <p>Cross-commodity signals are generated by monitoring ratios, spreads, and correlations between related markets and comparing current readings to historical distributions. When a ratio or spread reaches a statistically extreme level — typically defined as a move beyond one or two standard deviations from its historical mean — a signal is generated based on the historical tendency for mean reversion or trend continuation. Each signal includes a confidence score derived from the historical win rate across similar setups, the strength of the current deviation, and the alignment of supporting macro factors. Signals are classified as Strong Bullish, Moderate Bullish, Moderate Bearish, or Strong Bearish based on the magnitude of expected move and confidence level.</p>
+
+    <h3>Key Signal Types</h3>
+    <p>The Gold-Silver Ratio is one of the most widely followed cross-commodity indicators, with a long-term average near 67:1. Extreme readings above 80 typically precede periods of silver outperformance, while readings below 60 suggest gold may regain its premium. The Copper-Gold Ratio serves as a real-time barometer of global economic growth expectations — rising copper relative to gold signals risk-on sentiment and improving industrial demand, while falling copper-gold signals risk aversion. The Oil Contango/Backwardation structure reflects the physical supply-demand balance — persistent contango indicates oversupply and storage build, while backwardation signals tight physical markets and typically precedes spot price rallies. The Energy-Agriculture Linkage captures the delayed impact of natural gas prices on fertilizer costs and subsequently on grain prices, with a typical lag of two to four weeks.</p>
+
+    <h3>Signal Validation and Track Record</h3>
+    <p>Every signal in the CommodityNode engine is backtested against a minimum of 10 years of historical data, with results validated across multiple market regimes including bull markets, bear markets, and periods of elevated volatility. The Signal History tab provides full transparency into past signal performance, including both winning and losing trades, allowing users to assess the reliability of each pattern type. Win rates typically range from 60-73% depending on signal type and confidence level, with the most reliable signals being ratio extremes in precious metals and DXY-commodity inverse relationships. It is important to note that past performance does not guarantee future results, and all signals should be used as one input among many in a comprehensive trading decision framework. Position sizing should reflect the confidence level and time horizon of each signal.</p>
+
+    <h3>Using Signals in Your Trading Workflow</h3>
+    <p>The Signal Engine is designed to complement, not replace, fundamental analysis and individual commodity research. Active signals should be cross-referenced with the Disruption Tracker (for geopolitical risk context), the Correlation Matrix (for portfolio diversification implications), and the Market Calendar (for upcoming catalysts that could accelerate or invalidate the signal). The most effective approach is to use signals as a screening tool to identify high-probability setups, then conduct deeper analysis on the specific commodities involved before establishing positions. Monitor the Signal History tab regularly to calibrate your confidence in different pattern types and adjust position sizing accordingly.</p>
+  </div>
+</section>

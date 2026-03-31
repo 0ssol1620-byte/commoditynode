@@ -11,6 +11,11 @@ noindex: false
 .cal-hero h1{font-size:2.4rem;font-weight:800;color:#e2e8f0;margin-bottom:12px}
 .cal-hero h1 span{color:#22d3ee}
 .cal-hero p{color:#94a3b8;font-size:1.05rem;max-width:640px;margin:0 auto}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0;vertical-align:middle}
+.dot-red{background:#ef4444}
+.dot-orange{background:#f97316}
+.dot-yellow{background:#eab308}
+.dot-green{background:#10b981}
 .cal-layout{display:grid;grid-template-columns:1fr 320px;gap:28px;max-width:1100px;margin:0 auto}
 .cal-main{min-width:0}
 .cal-sidebar{display:flex;flex-direction:column;gap:20px}
@@ -61,7 +66,6 @@ noindex: false
 .legend-bar{display:flex;gap:14px;justify-content:center;margin-bottom:20px;flex-wrap:wrap}
 .legend-entry{display:flex;align-items:center;gap:5px;font-size:0.75rem;color:#94a3b8}
 .legend-dot{width:8px;height:8px;border-radius:50%}
-/* Modal */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
 .modal-overlay.visible{display:flex}
 .modal-content{background:#0d0d18;border:1px solid rgba(34,211,238,0.2);border-radius:16px;padding:32px;max-width:500px;width:90%;position:relative;max-height:80vh;overflow-y:auto}
@@ -73,6 +77,10 @@ noindex: false
 .modal-impact{background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);border-radius:10px;padding:14px;margin-bottom:16px}
 .modal-impact h4{color:#22d3ee;font-size:0.85rem;margin-bottom:6px}
 .modal-impact p{color:#94a3b8;font-size:0.85rem;line-height:1.5}
+.seo-content{color:#64748b;font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05);margin-top:60px;padding-top:40px;max-width:900px;margin-left:auto;margin-right:auto;line-height:1.7}
+.seo-content h2{color:#94a3b8;font-size:1.3rem;font-weight:700;margin:28px 0 12px}
+.seo-content h3{color:#94a3b8;font-size:1.05rem;font-weight:600;margin:20px 0 8px}
+.seo-content p{margin-bottom:14px}
 @media(max-width:900px){
   .cal-layout{grid-template-columns:1fr}
   .cal-sidebar{order:-1}
@@ -108,19 +116,19 @@ noindex: false
           <button id="next-month">Next →</button>
         </div>
         <div class="cal-grid" id="cal-grid"></div>
-        <h3 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:16px">📋 Events This Month</h3>
+        <h3 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:16px">Events This Month</h3>
         <div class="events-list" id="events-list"></div>
       </div>
 
       <div class="cal-sidebar">
         <div class="sidebar-card">
-          <h3>⏰ Upcoming in 7 Days</h3>
+          <h3>Upcoming in 7 Days</h3>
           <div id="upcoming-7d"></div>
         </div>
         <div class="sidebar-card">
-          <h3>🌿 Seasonal Patterns</h3>
-          <div class="seasonal-item"><div class="season">Q2 Spring Planting</div><div class="desc">Grain planting season → Wheat/Corn volatility increases as weather uncertainty peaks</div></div>
-          <div class="seasonal-item"><div class="season">Apr–Jun Hurricane Prep</div><div class="desc">Hurricane season preparation → Natural Gas premium builds on Gulf Coast supply risk</div></div>
+          <h3>Seasonal Patterns</h3>
+          <div class="seasonal-item"><div class="season">Q2 Spring Planting</div><div class="desc">Grain planting season — Wheat/Corn volatility increases as weather uncertainty peaks</div></div>
+          <div class="seasonal-item"><div class="season">Apr–Jun Hurricane Prep</div><div class="desc">Hurricane season preparation — Natural Gas premium builds on Gulf Coast supply risk</div></div>
           <div class="seasonal-item"><div class="season">Q2 India Wedding Season</div><div class="desc">Strong gold demand from India wedding season traditionally supports prices Apr–Jun</div></div>
           <div class="seasonal-item"><div class="season">Summer Driving Season</div><div class="desc">US gasoline demand peaks May–Sep, supporting crude oil and refining margins</div></div>
         </div>
@@ -142,7 +150,6 @@ noindex: false
   'use strict';
 
   var EVENTS = [
-    // April 2026
     {date:'2026-04-01',title:'EIA Weekly Crude Oil Inventory',type:'data',commodities:['Oil'],desc:'Weekly US crude oil inventory report from the Energy Information Administration. Draws typically bullish, builds bearish.',impact:'Inventory draws >3M barrels historically push oil +1.2% same day'},
     {date:'2026-04-02',title:'USDA Crop Progress Report',type:'data',commodities:['Wheat','Corn'],desc:'Weekly crop condition ratings for major US growing regions. Key indicator for grain market sentiment.',impact:'Below-average crop ratings have historically pushed wheat +2.1% within a week'},
     {date:'2026-04-07',title:'OPEC+ Monitoring Committee Meeting',type:'critical',commodities:['Crude Oil'],desc:'Monthly Joint Ministerial Monitoring Committee reviews production quotas and compliance. Key for oil price direction.',impact:'Surprise production cuts have averaged +4.8% oil price impact within 48 hours'},
@@ -153,21 +160,19 @@ noindex: false
     {date:'2026-04-23',title:'Brazil Coffee Harvest Peak Season',type:'seasonal',commodities:['Coffee'],desc:'Peak harvesting period for Brazilian arabica coffee begins. Crop quality and volume data emerge.',impact:'Harvest shortfalls have historically pushed ICE Coffee +8-12% within 2 weeks'},
     {date:'2026-04-28',title:'Fed FOMC Meeting Decision',type:'critical',commodities:['Gold','Silver','All Commodities'],desc:'Federal Open Market Committee rate decision and press conference. Most impactful recurring event for commodity markets.',impact:'FOMC rate holds with dovish guidance average Gold +2.3%, Silver +3.1%'},
     {date:'2026-04-30',title:'USDA World Agricultural Supply & Demand',type:'critical',commodities:['Wheat','Corn','Soybeans'],desc:'WASDE report — most important monthly release for agricultural commodity markets. Global supply/demand estimates.',impact:'Surprise yield downgrades average +5-7% move in affected grain futures'},
-    // May 2026
     {date:'2026-05-05',title:'EIA Weekly Crude Oil Inventory',type:'data',commodities:['Oil'],desc:'Weekly US crude oil inventory report. Summer driving season demand begins to show in data.',impact:'Draw season typically begins in May, supporting crude prices'},
     {date:'2026-05-12',title:'USDA WASDE Report',type:'critical',commodities:['Wheat','Corn','Soybeans'],desc:'May WASDE includes first official USDA yield projections for the new crop year. Historically highest-volatility WASDE.',impact:'May WASDE has produced >3% limit moves in corn 4 of last 10 years'},
     {date:'2026-05-14',title:'US PPI Data Release',type:'data',commodities:['All Commodities'],desc:'Producer Price Index — leading indicator for CPI. Commodity input costs drive headline PPI.',impact:'PPI surprises correlate with broad commodity basket moves of ±1.5%'},
     {date:'2026-05-20',title:'Copper LME Week Begins',type:'critical',commodities:['Copper'],desc:'London Metal Exchange Week brings together global copper market participants. Major announcements on supply/demand.',impact:'LME Week has historically produced ±4-6% copper moves on supply announcements'},
     {date:'2026-05-26',title:'Memorial Day — US Markets Closed',type:'policy',commodities:['All Markets'],desc:'US markets closed for Memorial Day. Thin liquidity in pre-holiday session Friday.',impact:'Pre-holiday sessions tend to see reduced volume and wider spreads'},
     {date:'2026-05-28',title:'OPEC+ Full Ministerial Meeting',type:'critical',commodities:['Crude Oil','Natural Gas'],desc:'Full OPEC+ meeting — production quota decisions for H2 2026. Most important oil meeting of Q2.',impact:'Quota changes average ±$4-6/barrel move within first week'},
-    // June 2026
     {date:'2026-06-03',title:'EIA Weekly Crude Oil Inventory',type:'data',commodities:['Oil'],desc:'Peak driving season inventory data.',impact:'Summer draws typically intensify in June'},
     {date:'2026-06-10',title:'US CPI Data Release',type:'data',commodities:['Gold','Silver'],desc:'June CPI release ahead of FOMC meeting — critical for rate cut expectations.',impact:'CPI-FOMC combo weeks see gold volatility +40% above normal'},
     {date:'2026-06-16',title:'Fed FOMC Meeting & Dot Plot',type:'critical',commodities:['Gold','Silver','Copper'],desc:'FOMC rate decision + updated Summary of Economic Projections (dot plot). Q2 key event.',impact:'Dot plot shifts of >50bp from market pricing average Gold ±3.5%'},
     {date:'2026-06-24',title:'USDA Acreage & Grain Stocks Report',type:'critical',commodities:['Wheat','Corn','Soybeans'],desc:'June planted acreage report and quarterly grain stocks. Major market-moving release for grains.',impact:'Acreage surprises >2M acres from estimates average 5-8% limit moves'}
   ];
 
-  var currentYear=2026, currentMonthIdx=3; // April=3
+  var currentYear=2026, currentMonthIdx=3;
 
   var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 
@@ -196,7 +201,6 @@ noindex: false
       html+='<div class="cal-day-header">'+d+'</div>';
     });
 
-    // Previous month padding
     var prevDays=daysInMonth(currentYear,currentMonthIdx-1);
     for(var i=startDay-1;i>=0;i--){
       html+='<div class="cal-day other-month"><div class="day-num">'+(prevDays-i)+'</div></div>';
@@ -217,7 +221,6 @@ noindex: false
       html+='</div>';
     }
 
-    // Fill remaining
     var totalCells=startDay+days;
     var remaining=7-(totalCells%7);
     if(remaining<7){
@@ -228,7 +231,6 @@ noindex: false
 
     document.getElementById('cal-grid').innerHTML=html;
 
-    // Events list
     var listHtml='';
     monthEvents.forEach(function(ev){
       var parts=ev.date.split('-');
@@ -240,7 +242,6 @@ noindex: false
     });
     document.getElementById('events-list').innerHTML=listHtml||'<p style="color:#64748b;font-size:0.9rem">No events scheduled for this month.</p>';
 
-    // Upcoming 7 days
     var today=new Date();
     var in7=new Date(today.getTime()+7*86400000);
     var todayStr=today.toISOString().substring(0,10);
@@ -258,12 +259,12 @@ noindex: false
     if(!ev) return;
     var html='<div class="event-type-badge '+ev.type+'" style="display:inline-block;margin-bottom:12px">'+ev.type+'</div>';
     html+='<div class="modal-title">'+ev.title+'</div>';
-    html+='<div class="modal-date">📅 '+ev.date+'</div>';
+    html+='<div class="modal-date">Date: '+ev.date+'</div>';
     html+='<div class="modal-desc">'+ev.desc+'</div>';
     html+='<div style="margin-bottom:12px">';
     ev.commodities.forEach(function(c){html+='<span class="commodity-mini-tag" style="margin-right:6px">'+c+'</span>';});
     html+='</div>';
-    html+='<div class="modal-impact"><h4>📊 Historical Impact</h4><p>'+ev.impact+'</p></div>';
+    html+='<div class="modal-impact"><h4>Historical Impact</h4><p>'+ev.impact+'</p></div>';
     document.getElementById('modal-body').innerHTML=html;
     document.getElementById('event-modal').classList.add('visible');
   };
@@ -274,6 +275,10 @@ noindex: false
 
   document.getElementById('event-modal').addEventListener('click',function(e){
     if(e.target===this) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
   });
 
   document.getElementById('prev-month').addEventListener('click',function(){
@@ -290,3 +295,22 @@ noindex: false
   renderCalendar();
 })();
 </script>
+
+<section class="seo-content">
+  <div class="container">
+    <h2>Commodity Market Calendar: Essential Events for Traders</h2>
+    <p>Successful commodity trading requires awareness of the key events, data releases, and seasonal patterns that drive price movements across energy, metals, and agricultural markets. The CommodityNode Market Calendar aggregates the most important recurring events — from OPEC+ ministerial meetings and USDA crop reports to Fed interest rate decisions and LME inventory announcements — into a single, navigable interface. Understanding when these events occur and their historical price impact enables traders to position ahead of volatility, manage risk around data releases, and capitalize on predictable seasonal patterns.</p>
+
+    <h3>Critical Market Events</h3>
+    <p>Certain events consistently produce outsized price moves across commodity markets. OPEC+ production decisions directly impact crude oil prices and have knock-on effects across the energy complex, including natural gas, refined products, and petrochemicals. The USDA World Agricultural Supply and Demand Estimates (WASDE) report is the single most important monthly release for grain and oilseed markets, with surprise yield or acreage revisions capable of triggering limit-up or limit-down moves in corn, wheat, and soybeans futures. Federal Reserve interest rate decisions affect commodities through the dollar channel — rate cuts weaken the dollar and broadly support commodity prices, while hawkish surprises tend to pressure the complex. These critical events are highlighted in red on the calendar to ensure traders never miss a market-moving release.</p>
+
+    <h3>Data Releases and Their Impact</h3>
+    <p>Weekly and monthly data releases form the backbone of fundamental commodity analysis. The EIA Weekly Petroleum Status Report, published every Wednesday, provides the most timely snapshot of US crude oil supply and demand, with inventory draws or builds of more than 3 million barrels typically generating same-day price reactions of 1–2%. The EIA Natural Gas Storage Report, released Thursdays, drives short-term natural gas trading as the market compares actual injections or withdrawals against analyst consensus and the five-year average. Consumer and Producer Price Index releases affect commodity markets indirectly by shaping inflation expectations and monetary policy outlooks. The World Gold Council quarterly demand reports provide critical insight into central bank buying patterns that have increasingly dominated gold market dynamics.</p>
+
+    <h3>Seasonal Patterns in Commodity Markets</h3>
+    <p>Commodity markets exhibit well-documented seasonal patterns driven by agricultural growing cycles, weather patterns, and demand seasonality. Spring planting season in the Northern Hemisphere (April–May) creates heightened volatility in grain markets as weather uncertainty peaks and the USDA releases its first crop condition ratings. The summer driving season (May–September) traditionally supports crude oil and gasoline prices as US fuel demand peaks. India's wedding season (April–June) drives strong physical gold demand. Hurricane season (June–November) creates risk premiums in natural gas and crude oil markets, particularly for Gulf of Mexico production. Understanding these seasonal tendencies allows traders to anticipate periods of elevated volatility and align positions with historically favorable periods.</p>
+
+    <h3>Using the Calendar Effectively</h3>
+    <p>The most effective approach to calendar-based trading involves cross-referencing event dates with current market positioning, technical setups, and fundamental context. A WASDE report in a market that is already overbought and near 52-week highs carries different implications than the same report in an oversold market. Use the calendar alongside our Range Tracker and Correlation Matrix to build a complete picture of market conditions heading into key events. Click on any event for detailed historical impact analysis and the specific commodities most likely to be affected. Set up your watchlist accordingly and ensure position sizes are appropriate for the expected volatility around major releases.</p>
+  </div>
+</section>
