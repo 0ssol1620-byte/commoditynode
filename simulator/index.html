@@ -1,0 +1,899 @@
+---
+layout: default
+title: "Commodity Scenario Simulator — CommodityNode"
+description: "Interactive commodity price scenario simulator. Model the impact of crude oil, gold, copper, and 60+ commodity price shocks on industries, companies, and portfolios."
+permalink: /simulator/
+---
+
+<style>
+/* Simulator-specific styles */
+.sim-hero {
+  background: linear-gradient(135deg, rgba(34,211,238,0.06) 0%, rgba(168,85,247,0.04) 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 60px 0 48px;
+}
+.sim-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34,211,238,0.1);
+  border: 1px solid rgba(34,211,238,0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.72rem;
+  color: #22d3ee;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.sim-hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #f0f0f5;
+  margin-bottom: 12px;
+}
+.sim-hero p {
+  color: #9494a8;
+  font-size: 1rem;
+  max-width: 560px;
+}
+
+/* Commodity Selector */
+.sim-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  margin: 24px 0;
+}
+.sim-commodity-btn {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  color: var(--text2);
+}
+.sim-commodity-btn:hover {
+  border-color: rgba(34,211,238,0.3);
+  background: rgba(34,211,238,0.05);
+}
+.sim-commodity-btn.active {
+  border-color: #22d3ee;
+  background: rgba(34,211,238,0.1);
+  color: #f0f0f5;
+}
+.sim-commodity-btn .btn-name {
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: block;
+}
+.sim-commodity-btn .btn-price {
+  font-size: 0.7rem;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.sim-commodity-btn .btn-change {
+  font-size: 0.68rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.up { color: #10b981; }
+.down { color: #f43f5e; }
+.neutral { color: #9494a8; }
+
+/* Main chart area */
+.sim-chart-container {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.sim-chart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.sim-chart-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f0f0f5;
+}
+.sim-chart-subtitle {
+  font-size: 0.78rem;
+  color: #9494a8;
+  margin-top: 2px;
+}
+.sim-period-btns {
+  display: flex;
+  gap: 4px;
+}
+.sim-period-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+  color: #9494a8;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sim-period-btn.active, .sim-period-btn:hover {
+  border-color: rgba(34,211,238,0.4);
+  color: #22d3ee;
+  background: rgba(34,211,238,0.06);
+}
+
+/* Forecast stats */
+.sim-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+.sim-stat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.sim-stat-label {
+  font-size: 0.7rem;
+  color: #9494a8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.sim-stat-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #f0f0f5;
+  letter-spacing: -0.02em;
+}
+.sim-stat-change {
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Scenario panel */
+.sim-scenario-panel {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 24px 0;
+}
+.sim-scenario-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f0f0f5;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sim-scenario-desc {
+  font-size: 0.75rem;
+  color: #9494a8;
+  margin-bottom: 20px;
+}
+.sim-scenario-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.sim-scenario-item:last-child { border-bottom: none; }
+.sim-toggle {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.sim-toggle input { opacity: 0; width: 0; height: 0; }
+.sim-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.sim-toggle input:checked + .sim-toggle-slider {
+  background: #22d3ee;
+}
+.sim-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+.sim-toggle input:checked + .sim-toggle-slider::before {
+  transform: translateX(16px);
+}
+.sim-scenario-info { flex: 1; }
+.sim-scenario-name { font-size: 0.82rem; font-weight: 600; color: #f0f0f5; }
+.sim-scenario-impact { font-size: 0.72rem; color: #9494a8; margin-top: 2px; }
+.sim-scenario-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.badge-up { background: rgba(16,185,129,0.15); color: #10b981; }
+.badge-down { background: rgba(244,63,94,0.15); color: #f43f5e; }
+
+/* Impact table */
+.sim-impact-section { margin: 24px 0; }
+.sim-impact-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f0f0f5;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.sim-impact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.sim-impact-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.sim-impact-name { font-size: 0.78rem; color: #9494a8; }
+.sim-impact-value { font-size: 0.85rem; font-weight: 700; }
+
+/* Pro blur overlay */
+.sim-pro-blur {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.sim-pro-blur .sim-blur-content {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
+.sim-pro-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(5,5,8,0.7);
+  backdrop-filter: blur(2px);
+  border-radius: 16px;
+  border: 1px solid rgba(34,211,238,0.15);
+}
+.sim-pro-cta {
+  text-align: center;
+  padding: 32px;
+}
+.sim-pro-cta h3 { font-size: 1.1rem; font-weight: 700; color: #f0f0f5; margin-bottom: 8px; }
+.sim-pro-cta p { font-size: 0.82rem; color: #9494a8; margin-bottom: 20px; }
+
+/* Legend */
+.sim-legend {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.sim-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  color: #9494a8;
+}
+.sim-legend-dot {
+  width: 10px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .sim-stats-row { grid-template-columns: 1fr 1fr; }
+  .sim-impact-grid { grid-template-columns: 1fr; }
+  .sim-selector-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+
+<section class="sim-hero">
+  <div class="container">
+    <div class="sim-hero-badge">
+      <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#22d3ee"/></svg>
+      Live Forecast Engine
+    </div>
+    <h1>Commodity Scenario<br>Simulator</h1>
+    <p>Model how commodity price shocks ripple through industries, companies, and portfolios. Powered by Amazon Chronos-2 AI forecasting.</p>
+  </div>
+</section>
+
+<div class="container" style="padding: 40px 24px 80px;">
+
+  <!-- Commodity Selector -->
+  <div>
+    <h2 style="font-size:0.8rem;font-weight:700;color:#9494a8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Select Commodity</h2>
+    <div class="sim-selector-grid" id="sim-selector"></div>
+  </div>
+
+  <!-- Main Chart -->
+  <div class="sim-chart-container">
+    <div class="sim-chart-header">
+      <div>
+        <div class="sim-chart-title" id="sim-chart-title">Loading...</div>
+        <div class="sim-chart-subtitle">Historical prices + Chronos-2 AI forecast with 80% confidence interval</div>
+      </div>
+      <div class="sim-period-btns">
+        <button class="sim-period-btn active" data-period="3m" onclick="setPeriod('3m',this)">3M</button>
+        <button class="sim-period-btn" data-period="6m" onclick="setPeriod('6m',this)">6M</button>
+        <button class="sim-period-btn" data-period="1y" onclick="setPeriod('1y',this)">1Y</button>
+      </div>
+    </div>
+    <div style="position:relative;height:320px;">
+      <canvas id="sim-chart"></canvas>
+    </div>
+    <div class="sim-legend">
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#22d3ee"></div>Historical</div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#a855f7;border-top:2px dashed #a855f7"></div>AI Forecast (Chronos-2)</div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:rgba(168,85,247,0.2);width:16px;height:10px;border-radius:3px"></div>80% Confidence</div>
+    </div>
+  </div>
+
+  <!-- Stats Row -->
+  <div class="sim-stats-row">
+    <div class="sim-stat-card">
+      <div class="sim-stat-label">Current Price</div>
+      <div class="sim-stat-value" id="stat-current">—</div>
+      <div class="sim-stat-change neutral" id="stat-current-sub">Loading...</div>
+    </div>
+    <div class="sim-stat-card">
+      <div class="sim-stat-label">30-Day Forecast</div>
+      <div class="sim-stat-value" id="stat-30d">—</div>
+      <div class="sim-stat-change" id="stat-30d-change">—</div>
+    </div>
+    <div class="sim-stat-card">
+      <div class="sim-stat-label">90-Day Forecast</div>
+      <div class="sim-stat-value" id="stat-90d">—</div>
+      <div class="sim-stat-change" id="stat-90d-change">—</div>
+    </div>
+  </div>
+
+  <!-- Layout: Scenario + Impact -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:8px 0;" class="sim-main-grid">
+
+    <!-- Scenario Panel -->
+    <div class="sim-scenario-panel">
+      <div class="sim-scenario-title">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        Geopolitical Scenarios
+      </div>
+      <div class="sim-scenario-desc">Toggle real-world events to model price impact</div>
+      <div id="sim-scenarios"></div>
+    </div>
+
+    <!-- Impact Panel -->
+    <div>
+      <div class="sim-impact-section">
+        <div class="sim-impact-title">Industry Impact</div>
+        <div class="sim-impact-grid" id="sim-industry-impact"></div>
+      </div>
+      <div class="sim-impact-section" style="margin-top:16px;">
+        <div class="sim-impact-title">Company Sensitivity</div>
+        <div id="sim-company-impact-wrapper">
+          {% if user_signed_in %}
+          <div class="sim-impact-grid" id="sim-company-impact"></div>
+          {% else %}
+          <div class="sim-pro-blur">
+            <div class="sim-blur-content">
+              <div class="sim-impact-grid">
+                <div class="sim-impact-card"><span class="sim-impact-name">Loading...</span><span class="sim-impact-value up">+0.0%</span></div>
+                <div class="sim-impact-card"><span class="sim-impact-name">Loading...</span><span class="sim-impact-value down">-0.0%</span></div>
+                <div class="sim-impact-card"><span class="sim-impact-name">Loading...</span><span class="sim-impact-value up">+0.0%</span></div>
+                <div class="sim-impact-card"><span class="sim-impact-name">Loading...</span><span class="sim-impact-value down">-0.0%</span></div>
+              </div>
+            </div>
+            <div class="sim-pro-overlay">
+              <div class="sim-pro-cta">
+                <h3>Pro Feature</h3>
+                <p>Company-level sensitivity analysis<br>requires a Pro account.</p>
+                <button class="clerk-btn clerk-btn-primary" onclick="if(window.Clerk)window.Clerk.openSignUp()">Unlock with Pro →</button>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+'use strict';
+
+// ── Data ──────────────────────────────────────────────────────────────────
+var SCENARIOS = {
+  crude_oil: [
+    { id:'iran',    name:'Iran-Strait of Hormuz closure',    impact:+18, dir:'up',   desc:'20% of global oil transit at risk' },
+    { id:'opec',    name:'OPEC+ supply cut 1M bbl/day',      impact:+8,  dir:'up',   desc:'Additional 1M barrel/day reduction' },
+    { id:'usd',     name:'USD weakens -5% (DXY drop)',        impact:+6,  dir:'up',   desc:'Dollar weakness lifts commodity prices' },
+    { id:'demand',  name:'China demand slowdown -8%',         impact:-12, dir:'down', desc:'Chinese industrial activity contracts' },
+    { id:'shale',   name:'US shale output +500K bbl/day',     impact:-5,  dir:'down', desc:'Permian Basin production surge' }
+  ],
+  gold: [
+    { id:'fed',     name:'Fed cuts rates 3x in 2025',         impact:+9,  dir:'up',   desc:'Real rates fall, gold premium rises' },
+    { id:'cb',      name:'Central banks buy 1,200t',          impact:+7,  dir:'up',   desc:'BRICS nations accelerate de-dollarization' },
+    { id:'iran',    name:'Iran conflict escalates',           impact:+12, dir:'up',   desc:'Safe haven demand spike' },
+    { id:'usd',     name:'USD weakens -8% (DXY <95)',         impact:+11, dir:'up',   desc:'Inverse correlation with dollar' },
+    { id:'risk_on', name:'Risk-on rally (S&P +20%)',          impact:-8,  dir:'down', desc:'Capital rotates out of safe havens' }
+  ],
+  copper: [
+    { id:'ai',      name:'$500B AI data center buildout',     impact:+14, dir:'up',   desc:'Each hyperscale DC needs 30K+ tonnes copper' },
+    { id:'tariff',  name:'US-China tariffs +25%',             impact:-9,  dir:'down', desc:'40% of copper smelting is in China' },
+    { id:'chile',   name:'Chilean mine strike (30 days)',     impact:+11, dir:'up',   desc:'Chile = 28% of global supply' },
+    { id:'ev',      name:'EV adoption +40% YoY',             impact:+8,  dir:'up',   desc:'EVs use 3-4x copper vs ICE vehicles' },
+    { id:'china',   name:'China construction slowdown',      impact:-10, dir:'down', desc:'China = 54% of global copper demand' }
+  ],
+  silver: [
+    { id:'solar',   name:'Solar capacity +200GW global',     impact:+13, dir:'up',   desc:'120mg silver per solar cell' },
+    { id:'gold_up', name:'Gold rally above $5,000',          impact:+18, dir:'up',   desc:'Silver beta to gold ~1.3x' },
+    { id:'ev',      name:'EV battery demand surge',          impact:+7,  dir:'up',   desc:'Silver used in EV charging infrastructure' },
+    { id:'india',   name:'India import duty removed',        impact:+6,  dir:'up',   desc:'India = largest silver jewelry market' },
+    { id:'supply',  name:'Mexico silver output +15%',        impact:-5,  dir:'down', desc:'Mexico = 25% of global silver supply' }
+  ],
+  natural_gas: [
+    { id:'russia',  name:'Russia supply cut to Europe -50%', impact:+22, dir:'up',   desc:'Pipeline gas replacement demand spikes' },
+    { id:'winter',  name:'Severe winter demand surge',       impact:+15, dir:'up',   desc:'Heating demand 20% above seasonal norm' },
+    { id:'lng',     name:'US LNG export capacity +30%',      impact:-8,  dir:'down', desc:'New terminals increase global supply' },
+    { id:'ai_pow',  name:'Data center power demand +40%',    impact:+10, dir:'up',   desc:'AI infrastructure drives electricity demand' },
+    { id:'warm',    name:'Warm winter — 10°C above norm',    impact:-14, dir:'down', desc:'Reduced heating demand, storage builds' }
+  ],
+  wheat: [
+    { id:'ukraine', name:'Ukraine crop -30% (war damage)',   impact:+16, dir:'up',   desc:'Ukraine = 10% of global wheat exports' },
+    { id:'india',   name:'India export ban renewed',         impact:+11, dir:'up',   desc:'India = 2nd largest wheat producer' },
+    { id:'drought', name:'Black Sea drought — worst in 15y', impact:+19, dir:'up',   desc:'Russia/Ukraine output drops 20% combined' },
+    { id:'aus',     name:'Australia record harvest',         impact:-9,  dir:'down', desc:'Southern hemisphere offsets northern shortfall' },
+    { id:'demand',  name:'Global wheat demand -5% (substitution)', impact:-6, dir:'down', desc:'Rice/corn substitution reduces demand' }
+  ]
+};
+
+var INDUSTRY_IMPACTS = {
+  crude_oil: [
+    {name:'Airlines',        base:-1.2, unit:'margin %'},
+    {name:'Shipping',        base:-0.8, unit:'cost %'},
+    {name:'Chemicals',       base:-1.1, unit:'margin %'},
+    {name:'Energy Sector',   base:+1.8, unit:'revenue %'},
+    {name:'Consumer Goods',  base:-0.5, unit:'margin %'},
+    {name:'Agriculture',     base:-0.6, unit:'cost %'}
+  ],
+  gold: [
+    {name:'Mining',          base:+1.5, unit:'revenue %'},
+    {name:'Jewelry',         base:-0.8, unit:'cost %'},
+    {name:'Electronics',     base:-0.3, unit:'cost %'},
+    {name:'Central Banks',   base:+2.0, unit:'reserve %'},
+    {name:'ETF Inflows',     base:+1.2, unit:'AUM %'},
+    {name:'Currency',        base:-0.6, unit:'USD impact'}
+  ],
+  copper: [
+    {name:'Semiconductors',  base:-0.8, unit:'margin %'},
+    {name:'EV/Auto',         base:-1.5, unit:'cost %'},
+    {name:'Construction',    base:-1.1, unit:'cost %'},
+    {name:'Renewable Energy',base:-0.9, unit:'cost %'},
+    {name:'Mining',          base:+1.8, unit:'revenue %'},
+    {name:'Electronics',     base:-0.7, unit:'cost %'}
+  ],
+  silver: [
+    {name:'Solar Energy',    base:-1.2, unit:'cost %'},
+    {name:'Electronics',     base:-0.5, unit:'cost %'},
+    {name:'Mining',          base:+1.6, unit:'revenue %'},
+    {name:'Jewelry',         base:-0.9, unit:'cost %'},
+    {name:'EV/Battery',      base:-0.4, unit:'cost %'},
+    {name:'Photography',     base:-0.3, unit:'cost %'}
+  ],
+  natural_gas: [
+    {name:'Utilities',       base:-1.4, unit:'cost %'},
+    {name:'Fertilizers',     base:-2.1, unit:'cost %'},
+    {name:'Chemicals',       base:-1.5, unit:'cost %'},
+    {name:'Steel/Metals',    base:-0.8, unit:'cost %'},
+    {name:'LNG Exporters',   base:+1.9, unit:'revenue %'},
+    {name:'Power Gen',       base:-1.2, unit:'margin %'}
+  ],
+  wheat: [
+    {name:'Food Processing', base:-1.3, unit:'cost %'},
+    {name:'Restaurants',     base:-0.6, unit:'margin %'},
+    {name:'Agriculture',     base:+1.4, unit:'revenue %'},
+    {name:'Fertilizers',     base:+0.8, unit:'demand %'},
+    {name:'Retail/Grocery',  base:-0.4, unit:'margin %'},
+    {name:'Emerging Markets',base:-1.8, unit:'food cost %'}
+  ]
+};
+
+var COMPANY_IMPACTS = {
+  crude_oil: [{n:'ExxonMobil (XOM)',v:+1.8},{n:'Chevron (CVX)',v:+1.6},{n:'Delta Air Lines (DAL)',v:-1.3},{n:'UPS (UPS)',v:-0.9}],
+  gold:      [{n:'Newmont (NEM)',v:+2.1},{n:'Barrick (GOLD)',v:+2.0},{n:'GLD ETF',v:+1.0},{n:'Tiffany/LVMH',v:-0.8}],
+  copper:    [{n:'Freeport-McMoRan (FCX)',v:+2.2},{n:'Southern Copper (SCCO)',v:+2.0},{n:'TSMC (TSM)',v:-0.9},{n:'Tesla (TSLA)',v:-1.1}],
+  silver:    [{n:'Pan American (PAAS)',v:+2.0},{n:'First Majestic (AG)',v:+2.3},{n:'SunPower (SPWR)',v:-1.2},{n:'Apple (AAPL)',v:-0.3}],
+  natural_gas:[{n:'EQT Corp (EQT)',v:+1.9},{n:'Cheniere (LNG)',v:+1.6},{n:'Duke Energy (DUK)',v:-1.1},{n:'CF Industries (CF)',v:-1.8}],
+  wheat:     [{n:'ADM (ADM)',v:+0.9},{n:'Bunge (BG)',v:+0.8},{n:"McDonald's (MCD)",v:-0.5},{n:'Flowers Foods (FLO)',v:-1.1}]
+};
+
+// ── State ─────────────────────────────────────────────────────────────────
+var state = {
+  commodity: 'crude_oil',
+  period: '3m',
+  scenarios: {},
+  forecastData: null,
+  chart: null
+};
+
+// ── Fetch forecast data ───────────────────────────────────────────────────
+function loadForecast() {
+  fetch('/assets/data/forecast.json?v=' + Date.now())
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      state.forecastData = d;
+      renderSelector();
+      selectCommodity(state.commodity);
+    })
+    .catch(function(e){
+      console.warn('Forecast data unavailable:', e);
+      renderSelector();
+      selectCommodity(state.commodity);
+    });
+}
+
+// ── Selector ──────────────────────────────────────────────────────────────
+var SELECTOR_ITEMS = [
+  {key:'crude_oil', name:'Crude Oil', icon:'🛢️'},
+  {key:'gold',      name:'Gold',      icon:'🥇'},
+  {key:'copper',    name:'Copper',    icon:'🔶'},
+  {key:'silver',    name:'Silver',    icon:'⚪'},
+  {key:'natural_gas',name:'Nat Gas',  icon:'🔥'},
+  {key:'wheat',     name:'Wheat',     icon:'🌾'},
+  {key:'corn',      name:'Corn',      icon:'🌽'},
+  {key:'soybeans',  name:'Soybeans',  icon:'🫘'},
+  {key:'coffee',    name:'Coffee',    icon:'☕'},
+  {key:'sugar',     name:'Sugar',     icon:'🍬'},
+  {key:'platinum',  name:'Platinum',  icon:'💎'},
+  {key:'uranium',   name:'Uranium',   icon:'⚛️'},
+  {key:'lithium',   name:'Lithium',   icon:'🔋'},
+  {key:'aluminum',  name:'Aluminum',  icon:'🔩'},
+  {key:'palladium', name:'Palladium', icon:'⚗️'}
+];
+
+function renderSelector(){
+  var el = document.getElementById('sim-selector');
+  if(!el) return;
+  el.innerHTML = SELECTOR_ITEMS.map(function(item){
+    var d = state.forecastData && state.forecastData[item.key];
+    var price = d ? fmtPrice(d.current_price, item.key) : '—';
+    var chg = d ? d.change_90d_pct : null;
+    var chgClass = chg === null ? 'neutral' : chg >= 0 ? 'up' : 'down';
+    var chgStr = chg === null ? '90d: —' : '90d: ' + (chg >= 0 ? '+' : '') + chg + '%';
+    return '<button class="sim-commodity-btn' + (item.key===state.commodity?' active':'') + '" onclick="selectCommodity(\''+item.key+'\')">'
+      + '<span class="btn-name">' + item.icon + ' ' + item.name + '</span>'
+      + '<span class="btn-price">' + price + '</span>'
+      + '<span class="btn-change ' + chgClass + '">' + chgStr + '</span>'
+      + '</button>';
+  }).join('');
+}
+
+function fmtPrice(v, key) {
+  if(v == null) return '—';
+  if(key === 'wheat' || key === 'corn' || key === 'soybeans' || key === 'coffee' || key === 'sugar' || key === 'cotton' || key === 'orange_juice')
+    return v.toFixed(2) + '¢';
+  if(v >= 10000) return '$' + (v/1000).toFixed(1) + 'k';
+  if(v >= 1000) return '$' + v.toLocaleString('en-US',{maximumFractionDigits:0});
+  return '$' + v.toFixed(2);
+}
+
+// ── Select commodity ──────────────────────────────────────────────────────
+window.selectCommodity = function(key){
+  state.commodity = key;
+  state.scenarios = {};
+  var btns = document.querySelectorAll('.sim-commodity-btn');
+  btns.forEach(function(b){ b.classList.remove('active'); });
+  SELECTOR_ITEMS.forEach(function(item, i){
+    if(item.key === key) btns[i] && btns[i].classList.add('active');
+  });
+  renderChart();
+  renderStats();
+  renderScenarios();
+  renderImpact();
+};
+
+// ── Chart ─────────────────────────────────────────────────────────────────
+window.setPeriod = function(p, btn){
+  state.period = p;
+  document.querySelectorAll('.sim-period-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderChart();
+};
+
+function getHistorySlice(hist){
+  var n = state.period === '3m' ? 63 : state.period === '6m' ? 126 : 252;
+  var dates = hist.dates.slice(-n);
+  var prices = hist.prices.slice(-n);
+  return {dates: dates, prices: prices};
+}
+
+function renderChart(){
+  var key = state.commodity;
+  var itemMeta = SELECTOR_ITEMS.find(function(i){ return i.key===key; }) || {name:key};
+  document.getElementById('sim-chart-title').textContent = itemMeta.name + ' — Price History & AI Forecast';
+
+  var canvas = document.getElementById('sim-chart');
+  if(!canvas) return;
+
+  var d = state.forecastData && state.forecastData[key];
+
+  // Build scenario-adjusted forecast
+  var scenarioAdj = calcScenarioAdjustment();
+
+  var histLabels = [], histPrices = [];
+  var fcstLabels = [], fcstMedian = [], fcstP10 = [], fcstP90 = [];
+
+  if(d && d.history && d.forecast){
+    var h = getHistorySlice(d.history);
+    histLabels = h.dates;
+    histPrices = h.prices;
+
+    var fcLen = 90;
+    fcstLabels = d.forecast.dates.slice(0, fcLen);
+    var adj = 1 + scenarioAdj/100;
+    fcstMedian = d.forecast.median.slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstP10    = d.forecast.p10.slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstP90    = d.forecast.p90.slice(0, fcLen).map(function(v){ return v * adj; });
+  } else {
+    // Demo data
+    var base = {crude_oil:71, gold:3200, copper:4.5, silver:32, natural_gas:2.8, wheat:550}[key] || 100;
+    for(var i=0; i<63; i++){
+      var dt = new Date(); dt.setDate(dt.getDate()-63+i);
+      histLabels.push(dt.toISOString().split('T')[0]);
+      base += (Math.random()-0.48)*base*0.015;
+      histPrices.push(+base.toFixed(3));
+    }
+    var adj2 = 1 + scenarioAdj/100;
+    for(var j=0; j<90; j++){
+      var fd = new Date(); fd.setDate(fd.getDate()+j+1);
+      fcstLabels.push(fd.toISOString().split('T')[0]);
+      base += (Math.random()-0.47)*base*0.012;
+      var adjBase = base * adj2;
+      fcstMedian.push(+adjBase.toFixed(3));
+      fcstP10.push(+(adjBase*0.92).toFixed(3));
+      fcstP90.push(+(adjBase*1.08).toFixed(3));
+    }
+  }
+
+  // Connector point
+  var connLabel = histLabels[histLabels.length-1];
+  var connPrice = histPrices[histPrices.length-1];
+
+  var histDataset = histLabels.map(function(l,i){ return {x:l, y:histPrices[i]}; });
+  var fcstDataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstMedian[i]}; }));
+  var bandDataset = [{x:connLabel, y:connPrice, y2:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstP10[i], y2:fcstP90[i]}; }));
+
+  if(state.chart){ state.chart.destroy(); }
+
+  var ctx = canvas.getContext('2d');
+  var gradient = ctx.createLinearGradient(0,0,0,300);
+  gradient.addColorStop(0,'rgba(168,85,247,0.25)');
+  gradient.addColorStop(1,'rgba(168,85,247,0.0)');
+
+  state.chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      datasets: [
+        {
+          label: 'Historical',
+          data: histDataset,
+          borderColor: '#22d3ee',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.3,
+          parsing: {xAxisKey:'x', yAxisKey:'y'}
+        },
+        {
+          label: 'AI Forecast',
+          data: fcstDataset,
+          borderColor: '#a855f7',
+          borderWidth: 2,
+          borderDash: [6,4],
+          pointRadius: 0,
+          tension: 0.3,
+          parsing: {xAxisKey:'x', yAxisKey:'y'}
+        },
+        {
+          label: 'Confidence Band',
+          data: bandDataset,
+          borderColor: 'transparent',
+          backgroundColor: gradient,
+          fill: {
+            target: {value: bandDataset.map(function(d){ return d.y2; })}
+          },
+          pointRadius: 0,
+          parsing: {xAxisKey:'x', yAxisKey:'y'},
+          type: 'line'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 400 },
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: {
+          type: 'category',
+          ticks: {
+            color: '#5a5a7a',
+            maxTicksLimit: 8,
+            maxRotation: 0,
+            font: { size: 10 }
+          },
+          grid: { color: 'rgba(255,255,255,0.04)' }
+        },
+        y: {
+          ticks: {
+            color: '#5a5a7a',
+            font: { size: 10 },
+            callback: function(v){ return fmtPrice(v, key); }
+          },
+          grid: { color: 'rgba(255,255,255,0.04)' }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(13,13,20,0.95)',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#9494a8',
+          bodyColor: '#f0f0f5',
+          callbacks: {
+            label: function(ctx){
+              if(ctx.dataset.label === 'Confidence Band') return null;
+              return ctx.dataset.label + ': ' + fmtPrice(ctx.parsed.y, key);
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────
+function renderStats(){
+  var key = state.commodity;
+  var d = state.forecastData && state.forecastData[key];
+  var adj = 1 + calcScenarioAdjustment()/100;
+  var itemMeta = SELECTOR_ITEMS.find(function(i){ return i.key===key; }) || {name:key};
+
+  var cur  = d ? d.current_price : null;
+  var f30  = d ? d.forecast_30d * adj : null;
+  var f90  = d ? d.forecast_90d * adj : null;
+  var c30  = cur && f30 ? (f30-cur)/cur*100 : null;
+  var c90  = cur && f90 ? (f90-cur)/cur*100 : null;
+
+  document.getElementById('stat-current').textContent = cur ? fmtPrice(cur, key) : '—';
+  document.getElementById('stat-current-sub').textContent = 'Live price · ' + itemMeta.name;
+  document.getElementById('stat-30d').textContent = f30 ? fmtPrice(f30, key) : '—';
+  document.getElementById('stat-90d').textContent = f90 ? fmtPrice(f90, key) : '—';
+
+  function setChange(el, pct){
+    if(!el) return;
+    if(pct === null){ el.textContent = '—'; el.className = 'sim-stat-change neutral'; return; }
+    var sign = pct >= 0 ? '+' : '';
+    el.textContent = sign + pct.toFixed(1) + '% vs today';
+    el.className = 'sim-stat-change ' + (pct >= 0 ? 'up' : 'down');
+  }
+  setChange(document.getElementById('stat-30d-change'), c30);
+  setChange(document.getElementById('stat-90d-change'), c90);
+}
+
+// ── Scenarios ────────────────────────────────────────────────────────────
+function renderScenarios(){
+  var key = state.commodity;
+  var scens = SCENARIOS[key] || SCENARIOS['crude_oil'];
+  var el = document.getElementById('sim-scenarios');
+  if(!el) return;
+  el.innerHTML = scens.map(function(s){
+    var checked = state.scenarios[s.id] ? 'checked' : '';
+    var badgeClass = s.dir === 'up' ? 'badge-up' : 'badge-down';
+    var sign = s.dir === 'up' ? '+' : '';
+    return '<div class="sim-scenario-item">'
+      + '<label class="sim-toggle"><input type="checkbox" ' + checked + ' onchange="toggleScenario(\''+s.id+'\','+s.impact+',this)"><span class="sim-toggle-slider"></span></label>'
+      + '<div class="sim-scenario-info"><div class="sim-scenario-name">' + s.name + '</div><div class="sim-scenario-impact">' + s.desc + '</div></div>'
+      + '<span class="sim-scenario-badge ' + badgeClass + '">' + sign + s.impact + '%</span>'
+      + '</div>';
+  }).join('');
+}
+
+window.toggleScenario = function(id, impact, checkbox){
+  if(checkbox.checked){
+    state.scenarios[id] = impact;
+  } else {
+    delete state.scenarios[id];
+  }
+  renderChart();
+  renderStats();
+  renderImpact();
+};
+
+function calcScenarioAdjustment(){
+  return Object.values(state.scenarios).reduce(function(sum, v){ return sum + v; }, 0);
+}
+
+// ── Impact ────────────────────────────────────────────────────────────────
+function renderImpact(){
+  var key = state.commodity;
+  var scenAdj = calcScenarioAdjustment();
+  var industries = INDUSTRY_IMPACTS[key] || INDUSTRY_IMPACTS['crude_oil'];
+  var multiplier = 1 + Math.abs(scenAdj)/200;
+
+  var industryEl = document.getElementById('sim-industry-impact');
+  if(industryEl){
+    industryEl.innerHTML = industries.map(function(item){
+      var v = item.base * multiplier;
+      var sign = v >= 0 ? '+' : '';
+      var cls = v >= 0 ? 'up' : 'down';
+      return '<div class="sim-impact-card">'
+        + '<span class="sim-impact-name">' + item.name + '</span>'
+        + '<span class="sim-impact-value ' + cls + '">' + sign + v.toFixed(1) + '% ' + item.unit + '</span>'
+        + '</div>';
+    }).join('');
+  }
+
+  var companyEl = document.getElementById('sim-company-impact');
+  if(companyEl){
+    var companies = COMPANY_IMPACTS[key] || COMPANY_IMPACTS['crude_oil'];
+    companyEl.innerHTML = companies.map(function(item){
+      var v = item.v * multiplier;
+      var sign = v >= 0 ? '+' : '';
+      var cls = v >= 0 ? 'up' : 'down';
+      return '<div class="sim-impact-card">'
+        + '<span class="sim-impact-name">' + item.n + '</span>'
+        + '<span class="sim-impact-value ' + cls + '">' + sign + v.toFixed(1) + '%</span>'
+        + '</div>';
+    }).join('');
+  }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+loadForecast();
+
+// Mobile grid adjustment
+if(window.innerWidth < 640){
+  var grid = document.querySelector('.sim-main-grid');
+  if(grid) grid.style.gridTemplateColumns = '1fr';
+}
+
+})();
+</script>

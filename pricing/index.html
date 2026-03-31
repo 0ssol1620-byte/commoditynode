@@ -1,0 +1,242 @@
+---
+layout: default
+title: "Pricing — CommodityNode Pro"
+description: "Unlock unlimited Signal Reports, AI price forecasts, and the Scenario Simulator. CommodityNode Pro starts at $19/month."
+permalink: /pricing/
+---
+
+<style>
+.pricing-hero {
+  text-align: center;
+  padding: 72px 24px 48px;
+  background: linear-gradient(180deg, rgba(34,211,238,0.04) 0%, transparent 100%);
+}
+.pricing-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #f0f0f5;
+  margin-bottom: 12px;
+}
+.pricing-hero p {
+  color: #9494a8;
+  font-size: 1rem;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 900px;
+  margin: 48px auto 0;
+  padding: 0 24px;
+}
+.pricing-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 28px 24px;
+  position: relative;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.pricing-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.15);
+}
+.pricing-card.featured {
+  border-color: rgba(34,211,238,0.4);
+  background: rgba(34,211,238,0.04);
+}
+.pricing-card.featured::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #22d3ee;
+  color: #050508;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.pricing-tier {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #9494a8;
+  margin-bottom: 8px;
+}
+.pricing-price {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #f0f0f5;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.pricing-price span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #9494a8;
+}
+.pricing-desc {
+  font-size: 0.8rem;
+  color: #9494a8;
+  margin: 12px 0 20px;
+  min-height: 36px;
+}
+.pricing-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  margin-bottom: 24px;
+}
+.pricing-btn-primary {
+  background: linear-gradient(135deg, #22d3ee, #06b6d4);
+  color: #050508;
+  box-shadow: 0 4px 20px rgba(34,211,238,0.3);
+}
+.pricing-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(34,211,238,0.4); }
+.pricing-btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #9494a8;
+}
+.pricing-btn-ghost:hover { border-color: rgba(34,211,238,0.3); color: #f0f0f5; }
+.pricing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #9494a8;
+}
+.pricing-features li.yes { color: #d4d4e8; }
+.pricing-features li.no { opacity: 0.4; }
+.feat-check { color: #22d3ee; font-size: 0.9rem; flex-shrink:0; margin-top:1px; }
+.feat-x { color: #5a5a7a; font-size: 0.9rem; flex-shrink:0; margin-top:1px; }
+
+.pricing-faq {
+  max-width: 640px;
+  margin: 72px auto 0;
+  padding: 0 24px 80px;
+}
+.pricing-faq h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #f0f0f5;
+  text-align: center;
+  margin-bottom: 32px;
+}
+.faq-item {
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding: 18px 0;
+}
+.faq-q { font-size: 0.88rem; font-weight: 600; color: #f0f0f5; margin-bottom: 8px; }
+.faq-a { font-size: 0.8rem; color: #9494a8; line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+}
+</style>
+
+<div class="pricing-hero">
+  <h1>Simple, transparent pricing</h1>
+  <p>Start free. Upgrade when you need deeper analysis, AI forecasts, and scenario modeling.</p>
+</div>
+
+<div class="pricing-grid">
+  <!-- Free -->
+  <div class="pricing-card">
+    <div class="pricing-tier">Free</div>
+    <div class="pricing-price">$0 <span>/month</span></div>
+    <div class="pricing-desc">Essential commodity intelligence for curious investors.</div>
+    <button class="pricing-btn pricing-btn-ghost" onclick="if(window.Clerk)window.Clerk.openSignUp()">Get Started Free</button>
+    <ul class="pricing-features">
+      <li class="yes"><span class="feat-check">✓</span> 3 Signal Reports / month</li>
+      <li class="yes"><span class="feat-check">✓</span> Commodity price charts</li>
+      <li class="yes"><span class="feat-check">✓</span> Impact matrix (60 commodities)</li>
+      <li class="yes"><span class="feat-check">✓</span> Node Universe explorer</li>
+      <li class="yes"><span class="feat-check">✓</span> Weekly newsletter</li>
+      <li class="no"><span class="feat-x">✗</span> Trading Notes (blurred)</li>
+      <li class="no"><span class="feat-x">✗</span> AI forecast (Chronos-2)</li>
+      <li class="no"><span class="feat-x">✗</span> Scenario Simulator</li>
+      <li class="no"><span class="feat-x">✗</span> Company sensitivity</li>
+    </ul>
+  </div>
+
+  <!-- Pro -->
+  <div class="pricing-card featured">
+    <div class="pricing-tier">Pro</div>
+    <div class="pricing-price">$19 <span>/month</span></div>
+    <div class="pricing-desc">For active investors who trade around commodity cycles.</div>
+    <button class="pricing-btn pricing-btn-primary" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start Free Trial →</button>
+    <ul class="pricing-features">
+      <li class="yes"><span class="feat-check">✓</span> <strong>Unlimited</strong> Signal Reports</li>
+      <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>AI Forecast (Chronos-2)</strong> — 90 days</li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Scenario Simulator</strong> — all events</li>
+      <li class="yes"><span class="feat-check">✓</span> Company sensitivity analysis</li>
+      <li class="yes"><span class="feat-check">✓</span> 60 commodities covered</li>
+      <li class="yes"><span class="feat-check">✓</span> Priority email support</li>
+      <li class="yes"><span class="feat-check">✓</span> Weekly Pro briefing</li>
+    </ul>
+  </div>
+
+  <!-- Enterprise -->
+  <div class="pricing-card">
+    <div class="pricing-tier">Enterprise</div>
+    <div class="pricing-price">$99 <span>/month</span></div>
+    <div class="pricing-desc">For funds, analysts, and teams needing data exports and API access.</div>
+    <button class="pricing-btn pricing-btn-ghost" onclick="window.location='/contact/'">Contact Us</button>
+    <ul class="pricing-features">
+      <li class="yes"><span class="feat-check">✓</span> Everything in Pro</li>
+      <li class="yes"><span class="feat-check">✓</span> CSV / JSON data export</li>
+      <li class="yes"><span class="feat-check">✓</span> API access (forecast data)</li>
+      <li class="yes"><span class="feat-check">✓</span> Portfolio stress test</li>
+      <li class="yes"><span class="feat-check">✓</span> Custom commodity alerts</li>
+      <li class="yes"><span class="feat-check">✓</span> 5 team seats</li>
+      <li class="yes"><span class="feat-check">✓</span> Dedicated analyst support</li>
+      <li class="yes"><span class="feat-check">✓</span> Custom report requests</li>
+    </ul>
+  </div>
+</div>
+
+<div class="pricing-faq">
+  <h2>Frequently asked questions</h2>
+  <div class="faq-item">
+    <div class="faq-q">How accurate is the AI forecast?</div>
+    <div class="faq-a">We use Amazon Chronos-2, a state-of-the-art time series foundation model that achieves 90%+ win rates vs. traditional models like ARIMA and Prophet. Forecasts include 80% confidence intervals so you can assess the uncertainty range. Updated daily with fresh market data.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Can I cancel anytime?</div>
+    <div class="faq-a">Yes. Cancel anytime from your account settings. You keep access until the end of your billing period. No questions asked.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">What commodities are covered?</div>
+    <div class="faq-a">60+ commodities including energy (crude oil, natural gas, LNG), precious metals (gold, silver, platinum), industrial metals (copper, aluminum, nickel), agriculture (wheat, corn, soybeans, coffee), and critical materials (lithium, uranium, cobalt).</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Is this financial advice?</div>
+    <div class="faq-a">No. CommodityNode provides research and analytical tools for informational purposes only. All forecasts and analysis should be treated as one input among many in your investment process. Please read our full disclaimer on the methodology page.</div>
+  </div>
+</div>
