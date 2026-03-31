@@ -67,7 +67,7 @@ def forecast_with_chronos(closes, prediction_length=90):
         )
         context = torch.tensor(closes.values[-200:], dtype=torch.float32).unsqueeze(0)
         forecast = pipeline.predict(
-            context=context,
+            inputs=context,
             prediction_length=prediction_length,
             num_samples=20,
         )

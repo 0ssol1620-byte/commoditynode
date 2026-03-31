@@ -270,6 +270,7 @@ permalink: /simulator/
   position: relative;
   border-radius: 16px;
   overflow: hidden;
+  min-height: 180px;
 }
 .sim-pro-blur .sim-blur-content {
   filter: blur(6px);
@@ -698,7 +699,11 @@ function renderChart(){
 
   var histDataset = histLabels.map(function(l,i){ return {x:l, y:histPrices[i]}; });
   var fcstDataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstMedian[i]}; }));
-  var bandDataset = [{x:connLabel, y:connPrice, y2:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstP10[i], y2:fcstP90[i]}; }));
+  // P10 lower band dataset
+  var bandP10Dataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstP10[i]}; }));
+  // P90 upper band dataset
+  var bandP90Dataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstP90[i]}; }));
+  var bandDataset = bandP90Dataset; // keep for compat
 
   if(state.chart){ state.chart.destroy(); }
 
@@ -731,16 +736,28 @@ function renderChart(){
           parsing: {xAxisKey:'x', yAxisKey:'y'}
         },
         {
-          label: 'Confidence Band',
-          data: bandDataset,
-          borderColor: 'transparent',
-          backgroundColor: gradient,
-          fill: {
-            target: {value: bandDataset.map(function(d){ return d.y2; })}
-          },
+          label: 'P90 Upper',
+          data: bandP90Dataset,
+          borderColor: 'rgba(168,85,247,0.25)',
+          borderWidth: 1,
+          borderDash: [3,3],
+          backgroundColor: 'rgba(168,85,247,0.1)',
+          fill: '+1',
           pointRadius: 0,
-          parsing: {xAxisKey:'x', yAxisKey:'y'},
-          type: 'line'
+          tension: 0.3,
+          parsing: {xAxisKey:'x', yAxisKey:'y'}
+        },
+        {
+          label: 'P10 Lower',
+          data: bandP10Dataset,
+          borderColor: 'rgba(168,85,247,0.25)',
+          borderWidth: 1,
+          borderDash: [3,3],
+          backgroundColor: 'rgba(168,85,247,0.1)',
+          fill: false,
+          pointRadius: 0,
+          tension: 0.3,
+          parsing: {xAxisKey:'x', yAxisKey:'y'}
         }
       ]
     },
@@ -779,7 +796,7 @@ function renderChart(){
           bodyColor: '#f0f0f5',
           callbacks: {
             label: function(ctx){
-              if(ctx.dataset.label === 'Confidence Band') return null;
+              if(ctx.dataset.label === 'P90 Upper' || ctx.dataset.label === 'P10 Lower') return null;
               return ctx.dataset.label + ': ' + fmtPrice(ctx.parsed.y, key);
             }
           }
