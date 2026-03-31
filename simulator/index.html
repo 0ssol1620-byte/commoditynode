@@ -738,26 +738,28 @@ function renderChart(){
         {
           label: 'P90 Upper',
           data: bandP90Dataset,
-          borderColor: 'rgba(168,85,247,0.25)',
+          borderColor: 'rgba(168,85,247,0.2)',
           borderWidth: 1,
-          borderDash: [3,3],
-          backgroundColor: 'rgba(168,85,247,0.1)',
-          fill: '+1',
+          borderDash: [4,3],
+          backgroundColor: 'rgba(168,85,247,0.12)',
+          fill: false,
           pointRadius: 0,
           tension: 0.3,
-          parsing: {xAxisKey:'x', yAxisKey:'y'}
+          parsing: {xAxisKey:'x', yAxisKey:'y'},
+          order: 3
         },
         {
           label: 'P10 Lower',
           data: bandP10Dataset,
-          borderColor: 'rgba(168,85,247,0.25)',
+          borderColor: 'rgba(168,85,247,0.2)',
           borderWidth: 1,
-          borderDash: [3,3],
-          backgroundColor: 'rgba(168,85,247,0.1)',
-          fill: false,
+          borderDash: [4,3],
+          backgroundColor: 'rgba(168,85,247,0.12)',
+          fill: '-1',
           pointRadius: 0,
           tension: 0.3,
-          parsing: {xAxisKey:'x', yAxisKey:'y'}
+          parsing: {xAxisKey:'x', yAxisKey:'y'},
+          order: 4
         }
       ]
     },
@@ -903,8 +905,41 @@ function renderImpact(){
   }
 }
 
+// ── Admin check ──────────────────────────────────────────────────────────
+var ADMIN_EMAILS = ['0ssol1620@gmail.com'];
+function checkAdminAccess() {
+  if (!window.Clerk || !window.Clerk.user) return;
+  var user = window.Clerk.user;
+  var emails = user.emailAddresses || [];
+  var isAdmin = emails.some(function(e) {
+    return ADMIN_EMAILS.indexOf(e.emailAddress) >= 0;
+  });
+  if (isAdmin) {
+    // Pro blur 제거
+    var blur = document.querySelector('.sim-pro-blur');
+    if (blur) {
+      var overlay = blur.querySelector('.sim-pro-overlay');
+      var content = blur.querySelector('.sim-blur-content');
+      if (overlay) overlay.style.display = 'none';
+      if (content) { content.style.filter = 'none'; content.style.pointerEvents = 'auto'; }
+    }
+    // company impact grid 렌더링
+    renderImpact();
+  }
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────
 loadForecast();
+// Admin 체크는 Clerk 로드 후
+document.addEventListener('DOMContentLoaded', function() {
+  var checkTimer = setInterval(function() {
+    if (window.Clerk && window.Clerk.user) {
+      checkAdminAccess();
+      clearInterval(checkTimer);
+    }
+  }, 500);
+  setTimeout(function() { clearInterval(checkTimer); }, 5000);
+});
 
 // Mobile grid adjustment
 if(window.innerWidth < 640){

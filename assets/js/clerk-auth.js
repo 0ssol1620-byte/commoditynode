@@ -8,6 +8,16 @@
 
   /* ---------- Constants ---------- */
   var FREE_REPORTS_PER_MONTH = 3;
+  var ADMIN_EMAILS = ['0ssol1620@gmail.com'];
+
+  function isAdmin(user) {
+    if (!user) return false;
+    var emails = user.emailAddresses || [];
+    for (var i = 0; i < emails.length; i++) {
+      if (ADMIN_EMAILS.indexOf(emails[i].emailAddress) >= 0) return true;
+    }
+    return false;
+  }
   var METER_KEY = 'cn_meter';
   var PRO_LINK = '#'; // Paddle payment link placeholder
 
@@ -292,7 +302,7 @@
               meter = incrementMeter();
               sessionStorage.setItem('cn_viewed_' + location.pathname, '1');
             }
-            if (meter.count > FREE_REPORTS_PER_MONTH) {
+            if (meter.count > FREE_REPORTS_PER_MONTH && !isAdmin(user)) {
               blurTradingNote('meter');
             }
           }
