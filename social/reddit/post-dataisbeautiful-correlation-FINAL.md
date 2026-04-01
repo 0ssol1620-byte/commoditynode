@@ -5,63 +5,35 @@
 ---
 
 # TITLE
-[OC] Commodity correlation matrix — 90-day rolling Pearson coefficients across 15 major commodities (April 2026)
+[OC] 90-day rolling Pearson correlations across 15 commodity markets — some of these surprised me
 
 ---
 
 # POST BODY
 
-**What you're looking at:**
+Calculated from daily closing prices over the last 90 trading days. A few things I didn't expect:
 
-Pearson correlation coefficients calculated from the last 90 trading days of daily price data for 15 major commodities. Values range from -1 (perfect inverse relationship) to +1 (perfect positive relationship). Calculated using a rolling window so it reflects current market regime, not long-term averages.
+Crude oil and palladium are at -0.82. Makes sense in hindsight — palladium is an autocatalyst metal, so higher EV adoption (which tracks with oil demand pessimism) reduces ICE vehicle demand. But seeing it this negative in the current data was still a bit striking.
 
----
+Soybeans and coffee at -0.85 is interesting. Both Brazil-heavy supply chains, but the drought that hammered coffee in Minas Gerais didn't hit soy the same way. So they've been diverging.
 
-**Most interesting patterns right now:**
+Crude oil and wheat at +0.91 is higher than usual — fertilizer cost passthrough (nat gas → ammonia → grain input costs) seems to be particularly tight right now.
 
-**Strong positive correlations (green, >0.7):**
-- **Silver ↔ Platinum: 0.93** — both PGMs with industrial + precious metal demand overlap
-- **Silver ↔ Palladium: 0.85** — autocatalyst demand linkage
-- **Crude Oil ↔ Wheat: 0.91** — fertilizer cost passthrough (natural gas → ammonia → grain prices). This is higher than usual, suggesting current energy-agriculture linkage is particularly tight.
-- **Wheat ↔ Corn: 0.80** — feed substitution and shared weather/logistics exposure
-- **Copper ↔ Silver: 0.68** — industrial demand correlation
+Gold and crude at -0.18 is notable because they usually move together. Right now they're diverging: gold bullish on dollar/rate expectations, crude bearish on demand. Rare uncorrelated pair if you're building a commodity portfolio.
 
-**Strong negative correlations (red, < -0.6):**
-- **Crude Oil ↔ Copper: -0.67** — counter-intuitive but reflects current macro split: oil bearish (demand destruction from tariffs), copper roughly neutral (Chile strike premium offsetting demand concerns)
-- **Crude Oil ↔ Palladium: -0.82** — Palladium used in catalytic converters; higher EV adoption (which tracks with oil bearishness) reduces ICE vehicle demand and thus palladium demand... but current reading may also reflect Russian supply dynamics
-- **Soybeans ↔ Coffee: -0.85** — interesting divergence; Brazil drought damaged coffee but soybean supply from Brazil has been relatively strong this season
+Built with numpy/matplotlib. 90-day window, no smoothing.
 
 ---
 
-**What this means for portfolio construction:**
+# FIRST COMMENT
+Interactive version with 30/60/90-day toggle: https://commoditynode.com/correlation/
 
-If you're building a commodity-exposed portfolio and want genuine diversification right now:
-- Gold + Crude Oil are nearly uncorrelated (-0.18) — rare, as they usually move together
-- Gold + Sugar is -0.67 — one of the better hedging pairs in the current regime
-- Silver and the PGMs are highly correlated — holding multiple gives you concentration, not diversification
-
----
-
-**Methodology:**
-
+Code:
 ```python
-import numpy as np
-
 def pearson(x, y, n=90):
     x, y = np.array(x[-n:]), np.array(y[-n:])
     mx, my = x.mean(), y.mean()
     num = ((x - mx) * (y - my)).sum()
-    den = np.sqrt(((x - mx)**2).sum() * ((y - my)**2).sum())
+    den = np.sqrt(((x-mx)**2).sum() * ((y-my)**2).sum())
     return 0 if den == 0 else num / den
 ```
-
-Data: yfinance daily closing prices. 90-day rolling window. No smoothing applied.
-
-Note: 90-day correlations are point-in-time and can shift significantly with macro regime changes. Long-term (5yr) correlations would look quite different.
-
----
-
-# FIRST COMMENT:
-Interactive version with 30D/60D/90D toggle: https://commoditynode.com/correlation/
-
-Made with matplotlib, data from yfinance. Happy to share full code.

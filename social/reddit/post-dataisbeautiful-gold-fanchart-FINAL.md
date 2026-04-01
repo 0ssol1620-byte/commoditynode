@@ -5,54 +5,25 @@
 ---
 
 # TITLE
-[OC] Gold price fan chart — historical data + Amazon Chronos-2 AI probabilistic forecast with 50% and 80% confidence bands (April 2026)
+[OC] Gold price fan chart — 90 days of history + 60-day AI forecast with probability bands
 
 ---
 
 # POST BODY
 
-**What is a fan chart?**
+Dark band = 50% probability range (P25–P75). Light band = 80% range (P10–P90). Cyan line = median forecast.
 
-A fan chart shows a probabilistic forecast where the shaded bands represent the range of outcomes at different confidence levels:
-- **Dark purple band:** 50% confidence interval (P25–P75) — there's a 50% probability the price will land within this range
-- **Light purple band:** 80% confidence interval (P10–P90) — 80% probability range
-- **Cyan line:** Median forecast (most likely single path)
-- **Gray line:** Actual historical price data (last 90 days shown)
+Model is Amazon Chronos-2, fed 5 years of daily GC=F futures data. The bands widen faster than historical vol alone would suggest — the model is pricing in genuine regime uncertainty, not just extrapolating recent volatility.
 
----
+Median target by early June: ~$4,900. But the 80% band runs from ~$4,000 to ~$6,000, which tells you the model basically doesn't know — it's just giving you the distribution.
 
-**Current reading:**
+The sharp drop from $5,200+ in early March to $4,400 by late March is real (Turkey central bank sold ~50T in March apparently). The model's training data includes that, which is probably why the upper band is wide — it's seen this kind of volatility before.
 
-- Today's price: **$4,712/oz**
-- 30-day median target: **$4,829 (+2.5%)**
-- 60-day median target: **$4,896 (+4.0%)**
-- 80% confidence range by June 2026: **$4,023 (bear) to $6,032 (bull)**
+Built in Python, data from yfinance. Interactive version with 30/60/90-day toggles in the link below.
 
 ---
 
-**The wide bands are intentional:**
+# FIRST COMMENT
+Interactive version: https://commoditynode.com
 
-Gold has had extraordinary volatility over the past 6 months. The model correctly captures this uncertainty — note how the bands widen faster than historical volatility alone would predict. This reflects regime uncertainty: the model is assigning probability mass to both a dollar recovery scenario (which would pressure gold back toward $4,000) and a continued safe-haven demand surge scenario.
-
----
-
-**Why is the median bullish?**
-
-The model picks up three persistent signals in the 5-year training data:
-1. Dollar index below 100 correlates strongly with gold appreciation (rolling correlation ~-0.70)
-2. Post-2022 central bank buying patterns — structural demand floor that didn't exist pre-2022
-3. Real yields (inflation-adjusted) — still negative in real terms despite nominal rate levels
-
----
-
-**Tools:**
-- Python 3.12, matplotlib
-- Data: yfinance (GC=F futures, 5yr daily)
-- Model: Amazon Chronos-2 (October 2025 release) via `chronos-forecasting` library v2.2.2
-
----
-
-# FIRST COMMENT:
-Interactive version with tab switching (Gold/Copper/Crude Oil) and 30D/60D/90D horizon selector: https://commoditynode.com
-
-Source code for the chart available if anyone wants it — happy to share.
+Source code available if anyone wants it — just ask.
