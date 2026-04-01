@@ -3685,3 +3685,90 @@ html { scroll-behavior: smooth; }
   .fc-chart-canvas-wrap { height: 240px; }
   .forecast-pro-inner { flex-direction: column; }
 }
+
+/* ===== COMMODITY FORECAST SECTION ===== */
+.commodity-forecast-section {
+  background: rgba(10,10,20,0.85);
+  border: 1px solid rgba(34,211,238,0.12);
+  border-radius: 18px;
+  padding: 24px 28px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+}
+.cf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.cf-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.cf-subtitle { font-size: 0.73rem; color: #475569; }
+.cf-legend { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.cf-leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: #64748b; }
+.cf-leg-line { display: inline-block; width: 22px; height: 2px; border-radius: 2px; }
+.cf-leg-line.hist { background: #64748b; }
+.cf-leg-line.med  { background: #22d3ee; box-shadow: 0 0 6px rgba(34,211,238,0.4); }
+.cf-leg-band { display: inline-block; width: 22px; height: 10px; border-radius: 3px; background: rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.35); }
+.cf-chart-wrap { position: relative; height: 260px; margin-bottom: 20px; }
+.cf-chart-wrap canvas { width: 100% !important; height: 100% !important; }
+.cf-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.cf-metric {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.cf-metric.highlight {
+  background: linear-gradient(135deg, rgba(34,211,238,0.07), rgba(168,85,247,0.07));
+  border-color: rgba(34,211,238,0.2);
+}
+.cf-metric-label { font-size: 0.67rem; color: #475569; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 5px; font-weight: 600; }
+.cf-metric-val { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800; color: #f1f5f9; }
+.cf-metric-val.up { color: #10b981; }
+.cf-metric-val.down { color: #f43f5e; }
+.cf-metric-chg { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; margin-top: 2px; }
+.cf-no-data { text-align: center; padding: 24px; color: #475569; font-size: 0.88rem; }
+.cf-sim-link { color: #22d3ee; text-decoration: none; font-weight: 600; }
+@media(max-width: 640px) {
+  .cf-metrics { grid-template-columns: repeat(2, 1fr); }
+  .cf-chart-wrap { height: 200px; }
+}
+
+/* ===== COMMODITY SIMULATOR CTA ===== */
+.commodity-sim-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(168,85,247,0.05);
+  border: 1px solid rgba(168,85,247,0.15);
+  border-radius: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.commodity-sim-text { font-size: 0.88rem; color: #94a3b8; }
+.commodity-sim-btn {
+  padding: 8px 18px;
+  background: linear-gradient(135deg, #a855f7, #22d3ee);
+  border-radius: 8px;
+  color: #050508;
+  font-weight: 700;
+  font-size: 0.82rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.commodity-sim-btn:hover { opacity: 0.88; }

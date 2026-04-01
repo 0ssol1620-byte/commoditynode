@@ -159,6 +159,52 @@ layout: default
   <div class="cn-price-chart" data-symbol="{{ page.symbol }}" data-name="{{ page.title }}" data-unit="{{ page.unit | default: '' }}" style="margin-bottom:40px;"></div>
   {% endif %}
 
+  <!-- AI Forecast Mini Chart -->
+  <div class="commodity-forecast-section" id="commodity-forecast-section">
+    <div class="cf-header">
+      <div>
+        <div class="cf-title">AI Price Forecast — 90 Days</div>
+        <div class="cf-subtitle">Powered by time series AI model · Updated daily</div>
+      </div>
+      <div class="cf-legend">
+        <span class="cf-leg-item"><span class="cf-leg-line hist"></span>Historical</span>
+        <span class="cf-leg-item"><span class="cf-leg-line med"></span>AI Forecast</span>
+        <span class="cf-leg-item"><span class="cf-leg-band"></span>P10–P90</span>
+      </div>
+    </div>
+    <div class="cf-chart-wrap">
+      <canvas id="commodity-fc-canvas"></canvas>
+    </div>
+    <div class="cf-metrics" id="cf-metrics">
+      <div class="cf-metric">
+        <div class="cf-metric-label">Current</div>
+        <div class="cf-metric-val" id="cf-current">—</div>
+      </div>
+      <div class="cf-metric highlight">
+        <div class="cf-metric-label">90-Day Target</div>
+        <div class="cf-metric-val" id="cf-target">—</div>
+        <div class="cf-metric-chg" id="cf-chg">—</div>
+      </div>
+      <div class="cf-metric">
+        <div class="cf-metric-label">Upside (P90)</div>
+        <div class="cf-metric-val up" id="cf-p90">—</div>
+      </div>
+      <div class="cf-metric">
+        <div class="cf-metric-label">Downside (P10)</div>
+        <div class="cf-metric-val down" id="cf-p10">—</div>
+      </div>
+    </div>
+    <div class="cf-no-data" id="cf-no-data" style="display:none">
+      <p>AI forecast not available for this commodity yet.</p>
+      <a href="/simulator/" class="cf-sim-link">View forecasts in Simulator →</a>
+    </div>
+  </div>
+
+  <!-- Simulator CTA -->
+  <div class="commodity-sim-cta">
+    <span class="commodity-sim-text">Want to model a price shock scenario?</span>
+    <a href="/simulator/" class="commodity-sim-btn">Open Scenario Simulator →</a>
+  </div>
 
   <div class="post-layout">
     <!-- Main Content -->
@@ -388,3 +434,123 @@ layout: default
   </div>
 </section>
 {% endif %}
+
+<!-- AI Forecast Chart Script -->
+<script>
+(function() {
+  'use strict';
+  var SLUG_MAP = {
+    'crude-oil': 'crude_oil', 'gold': 'gold', 'copper': 'copper',
+    'silver': 'silver', 'natural-gas': 'natural_gas', 'wheat': 'wheat',
+    'corn': 'corn', 'soybeans': 'soybeans', 'coffee': 'coffee',
+    'sugar': 'sugar', 'platinum': 'platinum', 'uranium': 'uranium',
+    'lithium': 'lithium', 'aluminum': 'aluminum', 'palladium': 'palladium',
+    'coal': 'coal', 'cotton': 'cotton', 'cocoa': 'cocoa', 'lng': 'natural_gas'
+  };
+  var pageSlug = '{{ page.commodity_slug }}';
+  var fcKey = SLUG_MAP[pageSlug];
+  if (!fcKey) {
+    var noData = document.getElementById('cf-no-data');
+    var section = document.getElementById('commodity-forecast-section');
+    if (noData) noData.style.display = 'block';
+    if (section) { var cw = section.querySelector('.cf-chart-wrap'); if(cw) cw.style.display = 'none'; }
+    if (section) { var cm = section.querySelector('.cf-metrics'); if(cm) cm.style.display = 'none'; }
+    return;
+  }
+
+  var META = {
+    crude_oil: { unit: '$', dec: 2 }, gold: { unit: '$', dec: 0 },
+    copper: { unit: '$', dec: 3 }, silver: { unit: '$', dec: 2 },
+    natural_gas: { unit: '$', dec: 3 }, wheat: { unit: '', dec: 0 },
+    corn: { unit: '', dec: 0 }, soybeans: { unit: '', dec: 0 },
+    coffee: { unit: '', dec: 2 }, sugar: { unit: '', dec: 2 },
+    platinum: { unit: '$', dec: 0 }, uranium: { unit: '$', dec: 2 },
+    lithium: { unit: '$', dec: 2 }, aluminum: { unit: '$', dec: 0 },
+    palladium: { unit: '$', dec: 0 }
+  };
+
+  function fmt(v, meta) {
+    if (v == null) return '\u2014';
+    var m = meta || { unit: '$', dec: 2 };
+    return m.unit + Number(v).toLocaleString('en-US', { minimumFractionDigits: m.dec, maximumFractionDigits: m.dec });
+  }
+
+  fetch('/assets/data/forecast.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var d = data[fcKey];
+      if (!d || !d.forecast) {
+        document.getElementById('cf-no-data').style.display = 'block';
+        return;
+      }
+      var meta = META[fcKey] || { unit: '$', dec: 2 };
+      var histDates  = (d.history.dates || []).slice(-60);
+      var histPrices = (d.history.prices || []).slice(-60);
+      var fcDates    = d.forecast.dates   || [];
+      var fcMedian   = d.forecast.median  || [];
+      var fcP10      = d.forecast.p10     || [];
+      var fcP90      = d.forecast.p90     || [];
+      var joinPrice  = histPrices[histPrices.length - 1];
+
+      var allLabels = histDates.concat(fcDates);
+      var histLine  = histPrices.concat(fcDates.map(function() { return null; }));
+      var medLine   = histDates.slice(0,-1).map(function(){return null;}).concat([joinPrice]).concat(fcMedian);
+      var p90Line   = histDates.slice(0,-1).map(function(){return null;}).concat([joinPrice]).concat(fcP90);
+      var p10Line   = histDates.slice(0,-1).map(function(){return null;}).concat([joinPrice]).concat(fcP10);
+
+      var canvas = document.getElementById('commodity-fc-canvas');
+      if (!canvas) return;
+      if (typeof Chart === 'undefined') {
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
+        s.onload = function() { drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90, fcP10); };
+        document.head.appendChild(s);
+      } else {
+        drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90, fcP10);
+      }
+    })
+    .catch(function(e) { console.warn('Forecast load error', e); });
+
+  function drawChart(canvas, labels, histLine, medLine, p90Line, p10Line, meta, d, fcP90, fcP10) {
+    new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          { label:'P90', data:p90Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0.12)', fill:'+1', pointRadius:0, tension:0.3, order:4 },
+          { label:'P10', data:p10Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0)', fill:false, pointRadius:0, tension:0.3, order:5 },
+          { label:'Historical', data:histLine, borderColor:'#64748b', backgroundColor:'transparent', borderWidth:1.5, pointRadius:0, tension:0.2, order:2 },
+          { label:'AI Forecast', data:medLine, borderColor:'#22d3ee', backgroundColor:'transparent', borderWidth:2, pointRadius:0, tension:0.3, order:1 }
+        ]
+      },
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        interaction:{ mode:'index', intersect:false },
+        plugins:{
+          legend:{display:false},
+          tooltip:{
+            backgroundColor:'rgba(13,13,24,0.95)', borderColor:'rgba(34,211,238,0.3)', borderWidth:1,
+            titleColor:'#94a3b8', bodyColor:'#e2e8f0',
+            callbacks:{ label:function(ctx){ if(ctx.parsed.y===null||ctx.dataset.label==='P90'||ctx.dataset.label==='P10') return null; return ctx.dataset.label+': '+fmt(ctx.parsed.y, meta); } }
+          }
+        },
+        scales:{
+          x:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#475569', maxTicksLimit:7, maxRotation:0, callback:function(v){ var l=this.getLabelForValue(v); if(!l) return ''; var dt=new Date(l); return (dt.getMonth()+1)+'/'+dt.getDate(); }} },
+          y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#475569', callback:function(v){ return fmt(v,meta); }} }
+        }
+      }
+    });
+
+    var el = function(id){ return document.getElementById(id); };
+    if(el('cf-current')) el('cf-current').textContent = fmt(d.current_price, meta);
+    if(el('cf-target'))  el('cf-target').textContent  = fmt(d.forecast_90d, meta);
+    var pct = d.change_90d_pct || 0;
+    if(el('cf-chg')) {
+      el('cf-chg').textContent = (pct>=0?'+':'')+pct.toFixed(1)+'%';
+      el('cf-chg').style.color = pct>=0?'#10b981':'#f43f5e';
+    }
+    if(el('cf-p90')&&fcP90.length) el('cf-p90').textContent = fmt(fcP90[fcP90.length-1], meta);
+    if(el('cf-p10')&&fcP10.length) el('cf-p10').textContent = fmt(fcP10[fcP10.length-1], meta);
+  }
+})();
+</script>
