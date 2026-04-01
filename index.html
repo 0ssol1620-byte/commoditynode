@@ -246,14 +246,21 @@ image: "/assets/images/og-default.png"
     <header class="section-header" data-animate>
       <p class="section-label">AI Price Intelligence</p>
       <h2 class="section-title">What our AI sees coming</h2>
-      <p class="section-desc">90-day price forecasts with confidence intervals — powered by Amazon's Chronos-2 time series model, updated daily.</p>
+      <p class="section-desc">Price forecasts with fan chart confidence bands — powered by Amazon Chronos-2, updated daily.</p>
     </header>
 
-    <!-- 상품 선택 탭 -->
-    <div class="forecast-tabs" data-animate>
-      <button class="forecast-tab active" data-commodity="gold">Gold</button>
-      <button class="forecast-tab" data-commodity="copper">Copper</button>
-      <button class="forecast-tab" data-commodity="crude_oil">Crude Oil</button>
+    <!-- 상품 선택 + 기간 선택 -->
+    <div class="forecast-top-bar" data-animate>
+      <div class="forecast-tabs">
+        <button class="forecast-tab active" data-commodity="gold">Gold</button>
+        <button class="forecast-tab" data-commodity="copper">Copper</button>
+        <button class="forecast-tab" data-commodity="crude_oil">Crude Oil</button>
+      </div>
+      <div class="forecast-horizon-tabs">
+        <button class="horizon-tab active" data-days="30">30D</button>
+        <button class="horizon-tab" data-days="60">60D</button>
+        <button class="horizon-tab" data-days="90">90D</button>
+      </div>
     </div>
 
     <!-- 메인 레이아웃: 차트 + 사이드 메트릭 -->
@@ -269,7 +276,8 @@ image: "/assets/images/og-default.png"
           <div class="forecast-legend">
             <span class="fc-legend-item"><span class="fc-legend-line history"></span>Historical</span>
             <span class="fc-legend-item"><span class="fc-legend-line median"></span>AI Median</span>
-            <span class="fc-legend-item"><span class="fc-legend-band"></span>P25–P75 Band</span>
+            <span class="fc-legend-item"><span class="fc-legend-fan fc-fan-50"></span>50% range</span>
+            <span class="fc-legend-item"><span class="fc-legend-fan fc-fan-80"></span>80% range</span>
           </div>
         </div>
         <div class="fc-chart-canvas-wrap">
@@ -286,7 +294,7 @@ image: "/assets/images/og-default.png"
         </div>
 
         <div class="fc-metric-card highlight">
-          <div class="fc-metric-label">90-Day Forecast</div>
+          <div class="fc-metric-label" id="fc-90d-label">90-Day Forecast</div>
           <div class="fc-metric-val" id="fc-90d">$4,855</div>
           <div class="fc-metric-change up" id="fc-change">+5.1%</div>
         </div>
@@ -364,68 +372,101 @@ image: "/assets/images/og-default.png"
     });
   }
 
-  function renderForecastChart(key) {
+  var currentHorizon = 30;
+
+  function renderForecastChart(key, horizonDays) {
     if (!forecastData) return;
     var d = forecastData[key];
     if (!d) return;
     var meta = COMMODITY_META[key] || { name: key, unit: '$', decimals: 2 };
-
+    if (horizonDays !== undefined) currentHorizon = horizonDays;
     currentCommodity = key;
 
-    var histDates  = (d.history.dates || []).slice(-60);
-    var histPrices = (d.history.prices || []).slice(-60);
-    var fcDates    = d.forecast.dates  || [];
-    var fcMedian   = d.forecast.median || [];
-    var fcP10      = d.forecast.p10    || [];   // P25 (차트 밴드용)
-    var fcP90      = d.forecast.p90    || [];   // P75 (차트 밴드용)
-    var fcP10ext   = d.forecast.p10_extreme || fcP10;  // P10 (메트릭 패널 downside)
-    var fcP90ext   = d.forecast.p90_extreme || fcP90;  // P90 (메트릭 패널 upside)
+    var histLen = 45; // 히스토리 45일 표시 (예측과 비율 균형)
+    var fcLen   = currentHorizon; // 30 / 60 / 90
 
-    var joinPrice  = histPrices[histPrices.length - 1];
-    var allLabels  = histDates.concat(fcDates);
+    var histDates  = (d.history.dates  || []).slice(-histLen);
+    var histPrices = (d.history.prices || []).slice(-histLen);
+    var fcDates    = (d.forecast.dates  || []).slice(0, fcLen);
+    var fcMedian   = (d.forecast.median || []).slice(0, fcLen);
+    // 팬 차트용 밴드 (P25/P75 차트, P10/P90 extreme)
+    var fcP25 = (d.forecast.p10         || []).slice(0, fcLen);
+    var fcP75 = (d.forecast.p90         || []).slice(0, fcLen);
+    var fcP10 = (d.forecast.p10_extreme || fcP25).slice(0, fcLen);
+    var fcP90 = (d.forecast.p90_extreme || fcP75).slice(0, fcLen);
 
+    var joinPrice = histPrices[histPrices.length - 1];
+    var allLabels = histDates.concat(fcDates);
+    var nullHist  = histDates.slice(0, -1).map(function() { return null; });
+
+    // 히스토리 라인 (예측 구간은 null)
     var histLine = histPrices.concat(fcDates.map(function() { return null; }));
 
-    var medianLine = histDates.slice(0, -1).map(function() { return null; })
-      .concat([joinPrice]).concat(fcMedian);
+    // 예측 라인들 (히스토리 구간은 null + 연결점)
+    function makeFcLine(arr) {
+      return nullHist.concat([joinPrice]).concat(arr);
+    }
 
-    var p90Line = histDates.slice(0, -1).map(function() { return null; })
-      .concat([joinPrice]).concat(fcP90);
-
-    var p10Line = histDates.slice(0, -1).map(function() { return null; })
-      .concat([joinPrice]).concat(fcP10);
+    var medianLine = makeFcLine(fcMedian);
+    var p25Line    = makeFcLine(fcP25);
+    var p75Line    = makeFcLine(fcP75);
+    var p10Line    = makeFcLine(fcP10);
+    var p90Line    = makeFcLine(fcP90);
 
     var ctx = document.getElementById('fc-chart');
     if (!ctx) return;
-
     if (fcChart) { fcChart.destroy(); fcChart = null; }
+
+    // 예측 시작 수직선 위치
+    var splitIdx = histDates.length - 1;
 
     fcChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: allLabels,
         datasets: [
+          // ── 팬 차트: 80% 외곽 (P10~P90, 연한 보라) ──
           {
-            label: 'P90', data: p90Line,
-            borderColor: 'rgba(168,85,247,0.0)',
-            backgroundColor: 'rgba(168,85,247,0.12)',
-            fill: '+1', pointRadius: 0, tension: 0.3, order: 4
+            label: '80% Upper', data: p90Line,
+            borderColor: 'transparent',
+            backgroundColor: 'rgba(139,92,246,0.10)',
+            fill: '+1', pointRadius: 0, tension: 0.35, order: 6
           },
           {
-            label: 'P10', data: p10Line,
-            borderColor: 'rgba(168,85,247,0.0)',
-            backgroundColor: 'rgba(168,85,247,0.0)',
-            fill: false, pointRadius: 0, tension: 0.3, order: 5
+            label: '80% Lower', data: p10Line,
+            borderColor: 'transparent',
+            backgroundColor: 'transparent',
+            fill: false, pointRadius: 0, tension: 0.35, order: 7
           },
+          // ── 팬 차트: 50% 내부 (P25~P75, 진한 보라) ──
+          {
+            label: '50% Upper', data: p75Line,
+            borderColor: 'transparent',
+            backgroundColor: 'rgba(139,92,246,0.22)',
+            fill: '+1', pointRadius: 0, tension: 0.35, order: 4
+          },
+          {
+            label: '50% Lower', data: p25Line,
+            borderColor: 'transparent',
+            backgroundColor: 'transparent',
+            fill: false, pointRadius: 0, tension: 0.35, order: 5
+          },
+          // ── 히스토리 라인 ──
           {
             label: 'Historical', data: histLine,
-            borderColor: '#94a3b8', backgroundColor: 'transparent',
-            borderWidth: 1.5, pointRadius: 0, tension: 0.2, order: 2
+            borderColor: '#64748b',
+            backgroundColor: 'transparent',
+            borderWidth: 2, pointRadius: 0, tension: 0.15, order: 2
           },
+          // ── AI Median ── (굵고 밝은 청록)
           {
             label: 'AI Median', data: medianLine,
-            borderColor: '#22d3ee', backgroundColor: 'transparent',
-            borderWidth: 2, borderDash: [], pointRadius: 0, tension: 0.3, order: 1
+            borderColor: '#22d3ee',
+            backgroundColor: 'transparent',
+            borderWidth: 2.5,
+            pointRadius: 0, tension: 0.35, order: 1,
+            shadowColor: 'rgba(34,211,238,0.4)',
+            shadowBlur: 8,
           }
         ]
       },
@@ -433,28 +474,36 @@ image: "/assets/images/og-default.png"
         responsive: true,
         maintainAspectRatio: false,
         interaction: { mode: 'index', intersect: false },
+        animation: { duration: 400, easing: 'easeOutQuart' },
         plugins: {
           legend: { display: false },
           tooltip: {
-            backgroundColor: 'rgba(13,13,24,0.95)',
-            borderColor: 'rgba(34,211,238,0.3)',
+            backgroundColor: 'rgba(10,10,20,0.96)',
+            borderColor: 'rgba(34,211,238,0.25)',
             borderWidth: 1,
-            titleColor: '#94a3b8',
+            titleColor: '#64748b',
             bodyColor: '#e2e8f0',
+            padding: 12,
             callbacks: {
-              label: function(c) {
-                if (c.parsed.y === null) return null;
-                if (c.dataset.label === 'P90' || c.dataset.label === 'P10') return null;
-                return c.dataset.label + ': ' + fmt(c.parsed.y, meta);
+              label: function(ctx) {
+                if (ctx.parsed.y === null) return null;
+                var lbl = ctx.dataset.label;
+                if (lbl === '80% Upper' || lbl === '80% Lower' ||
+                    lbl === '50% Upper' || lbl === '50% Lower') return null;
+                return ' ' + lbl + ': ' + fmt(ctx.parsed.y, meta);
               }
             }
-          }
+          },
+          // 예측 시작 수직선
+          annotation: undefined
         },
         scales: {
           x: {
-            grid: { color: 'rgba(255,255,255,0.04)' },
+            grid: { color: 'rgba(255,255,255,0.03)' },
             ticks: {
-              color: '#475569', maxTicksLimit: 8, maxRotation: 0,
+              color: '#334155',
+              maxTicksLimit: 8,
+              maxRotation: 0,
               callback: function(val) {
                 var label = this.getLabelForValue(val);
                 if (!label) return '';
@@ -474,21 +523,53 @@ image: "/assets/images/og-default.png"
       }
     });
 
+    // 수직 구분선 — canvas afterDraw로 직접 그리기
+    var origAfterDraw = fcChart.options.animation.onComplete;
+    fcChart.options.plugins.afterDraw = undefined;
+    Chart.register({
+      id: 'splitLine_' + Date.now(),
+      afterDraw: function(chart) {
+        if (chart !== fcChart) return;
+        var ctx2 = chart.ctx;
+        var xAxis = chart.scales.x;
+        var yAxis = chart.scales.y;
+        var x = xAxis.getPixelForValue(splitIdx);
+        ctx2.save();
+        ctx2.strokeStyle = 'rgba(34,211,238,0.2)';
+        ctx2.lineWidth = 1;
+        ctx2.setLineDash([4, 4]);
+        ctx2.beginPath();
+        ctx2.moveTo(x, yAxis.top);
+        ctx2.lineTo(x, yAxis.bottom);
+        ctx2.stroke();
+        // "Forecast →" 라벨
+        ctx2.fillStyle = 'rgba(34,211,238,0.4)';
+        ctx2.font = '600 11px Inter, sans-serif';
+        ctx2.fillText('Forecast ▶', x + 6, yAxis.top + 16);
+        ctx2.restore();
+      }
+    });
+
+    // 메트릭 패널 업데이트
     var el = function(id) { return document.getElementById(id); };
     if (el('fc-name'))    el('fc-name').textContent    = meta.name;
     if (el('fc-current')) el('fc-current').textContent = fmt(d.current_price, meta);
-    if (el('fc-90d'))     el('fc-90d').textContent     = fmt(d.forecast_90d, meta);
 
-    var chgPct = d.change_90d_pct || 0;
+    var targetIdx = fcLen - 1;
+    var targetPrice = fcMedian[targetIdx];
+    if (el('fc-90d'))    el('fc-90d').textContent    = fmt(targetPrice, meta);
+    if (el('fc-90d-label')) el('fc-90d-label').textContent = fcLen + '-Day Forecast';
+
+    var pctChange = (targetPrice - d.current_price) / d.current_price * 100;
     var chgEl = el('fc-change');
     if (chgEl) {
-      chgEl.textContent = (chgPct >= 0 ? '+' : '') + chgPct.toFixed(1) + '%';
-      chgEl.className = 'fc-metric-change ' + (chgPct >= 0 ? 'up' : 'down');
+      chgEl.textContent = (pctChange >= 0 ? '+' : '') + pctChange.toFixed(1) + '%';
+      chgEl.className = 'fc-metric-change ' + (pctChange >= 0 ? 'up' : 'down');
     }
 
-    // 메트릭 패널: P10/P90 extreme 값 표시 (더 넓은 범위)
-    var lastP90 = fcP90ext[fcP90ext.length - 1];
-    var lastP10 = fcP10ext[fcP10ext.length - 1];
+    // P10/P90 extreme 메트릭
+    var lastP90 = fcP90[fcLen - 1];
+    var lastP10 = fcP10[fcLen - 1];
     if (el('fc-p90') && lastP90) el('fc-p90').textContent = fmt(lastP90, meta);
     if (el('fc-p10') && lastP10) el('fc-p10').textContent = fmt(lastP10, meta);
   }
@@ -523,7 +604,7 @@ image: "/assets/images/og-default.png"
   }
 
   window._fcSwitch = function(key) {
-    renderForecastChart(key);
+    renderForecastChart(key, currentHorizon);
     document.querySelectorAll('.forecast-tab').forEach(function(btn) {
       btn.classList.toggle('active', btn.dataset.commodity === key);
     });
@@ -533,9 +614,21 @@ image: "/assets/images/og-default.png"
   };
 
   document.addEventListener('DOMContentLoaded', function() {
+    // 원자재 탭
     document.querySelectorAll('.forecast-tab').forEach(function(btn) {
       btn.addEventListener('click', function() {
         window._fcSwitch(this.dataset.commodity);
+      });
+    });
+    // 기간 토글 탭
+    document.querySelectorAll('.horizon-tab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        currentHorizon = parseInt(this.dataset.days, 10);
+        document.querySelectorAll('.horizon-tab').forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        renderForecastChart(currentCommodity, currentHorizon);
+        var lbl = document.getElementById('fc-90d-label');
+        if (lbl) lbl.textContent = currentHorizon + '-Day Forecast';
       });
     });
   });
