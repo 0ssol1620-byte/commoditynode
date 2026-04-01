@@ -157,6 +157,8 @@ permalink: /pricing/
 @media (max-width: 768px) {
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
 }
+.plan-billed { font-size:0.72rem; font-weight:600; margin-top:4px; color:#64748b; }
+.plan-billed-pro { color:#a855f7; }
 </style>
 
 <!-- Urgency Bar (meter-driven) -->
@@ -212,7 +214,7 @@ permalink: /pricing/
   <div class="pricing-card featured">
     <div class="pricing-tier">Pro</div>
     <div class="pricing-price"><span id="pro-price">$19</span> <span id="pro-sub">/month</span></div>
-    <div style="font-size:0.72rem;color:#a855f7;font-weight:600;margin-top:4px" id="pro-billed">Billed monthly · Cancel anytime</div>
+    <div class="plan-billed plan-billed-pro" id="pro-billed">Billed monthly · Cancel anytime</div>
     <div class="pricing-desc">For active investors who trade around commodity cycles.</div>
     <button class="pricing-btn pricing-btn-primary" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start 7-Day Free Trial →</button>
     <ul class="pricing-features">
@@ -231,7 +233,7 @@ permalink: /pricing/
   <div class="pricing-card">
     <div class="pricing-tier">Enterprise</div>
     <div class="pricing-price"><span id="ent-price">$99</span> <span>/month</span></div>
-    <div style="font-size:0.72rem;color:#64748b;font-weight:600;margin-top:4px" id="ent-billed">Billed monthly · Cancel anytime</div>
+    <div class="plan-billed" id="ent-billed">Billed monthly · Cancel anytime</div>
     <div class="pricing-desc">For funds, analysts, and teams needing data exports and API access.</div>
     <button class="pricing-btn pricing-btn-ghost" onclick="window.location='/contact/'">Contact Us</button>
     <ul class="pricing-features">

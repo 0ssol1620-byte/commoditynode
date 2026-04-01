@@ -101,6 +101,13 @@ noindex: false
 .sig-modal-cta { width:100%; padding:14px; background:linear-gradient(135deg,#22d3ee,#a855f7); border:none; border-radius:12px; color:#050508; font-weight:800; font-size:0.95rem; cursor:pointer; letter-spacing:0.02em; transition:opacity 0.2s; }
 .sig-modal-cta:hover { opacity:0.9; }
 .sig-modal-fine { text-align:center; color:#334155; font-size:0.72rem; margin-top:10px; }
+
+.sig-history-wrap { max-width:900px; margin:0 auto; }
+/* Signal table inline style replacements */
+.td-up { color: #10b981; }
+.td-warn { color: #eab308; }
+.confidence-bar.cb-green { background: #10b981; }
+.confidence-bar.cb-yellow { background: #eab308; }
 </style>
 
 <section class="sig-hero">
@@ -249,7 +256,7 @@ noindex: false
 
     <!-- Signal History -->
     <div class="tab-content" id="tab-history">
-      <div style="max-width:900px;margin:0 auto" data-animate>
+      <div class="sig-history-wrap" data-animate>
         <div class="history-card"><div class="h-date">2026-03-15</div><div class="h-title">Gold/Silver Ratio > 70 — Silver Outperformance</div><div class="h-result win">Win: Silver +9.2% vs Gold +3.1% (60 days)</div></div>
         <div class="history-card"><div class="h-date">2026-02-28</div><div class="h-title">Oil Backwardation — Spot Weakness</div><div class="h-result win">Win: WTI -6.4% over 30 days</div></div>
         <div class="history-card"><div class="h-date">2026-02-10</div><div class="h-title">Copper/Gold Ratio Breakout — Copper Rally</div><div class="h-result win">Win: Copper +11.8% over 90 days</div></div>
@@ -273,50 +280,50 @@ noindex: false
               <tr>
                 <td class="pattern-name">Contango to Spot Rally</td>
                 <td>Futures curve in contango > 2%</td>
-                <td style="color:#10b981">+8.2% avg (45d)</td>
-                <td><span class="confidence-bar" style="width:42px;background:#10b981"></span>64%</td>
+                <td class="td-up">+8.2% avg (45d)</td>
+                <td><span class="confidence-bar cb-green" style="width:42px"></span>64%</td>
               </tr>
               <tr>
                 <td class="pattern-name">Gold/Silver Ratio Extreme</td>
                 <td>Ratio > 80 or < 60</td>
-                <td style="color:#10b981">+12.1% spread (60d)</td>
-                <td><span class="confidence-bar" style="width:47px;background:#10b981"></span>71%</td>
+                <td class="td-up">+12.1% spread (60d)</td>
+                <td><span class="confidence-bar cb-green" style="width:47px"></span>71%</td>
               </tr>
               <tr>
                 <td class="pattern-name">Oil-Copper Divergence</td>
                 <td>30d correlation < -0.5</td>
-                <td style="color:#10b981">+9.7% convergence (90d)</td>
-                <td><span class="confidence-bar" style="width:45px;background:#10b981"></span>68%</td>
+                <td class="td-up">+9.7% convergence (90d)</td>
+                <td><span class="confidence-bar cb-green" style="width:45px"></span>68%</td>
               </tr>
               <tr>
                 <td class="pattern-name">Dollar Inverse Regime</td>
                 <td>DXY RSI < 30 or > 70</td>
-                <td style="color:#10b981">+6.5% commodity basket</td>
-                <td><span class="confidence-bar" style="width:49px;background:#10b981"></span>73%</td>
+                <td class="td-up">+6.5% commodity basket</td>
+                <td><span class="confidence-bar cb-green" style="width:49px"></span>73%</td>
               </tr>
               <tr>
                 <td class="pattern-name">Energy-Agriculture Lag</td>
                 <td>Nat Gas +10% in 30d</td>
-                <td style="color:#10b981">+4.8% grains (2-4w lag)</td>
-                <td><span class="confidence-bar" style="width:44px;background:#eab308"></span>66%</td>
+                <td class="td-up">+4.8% grains (2-4w lag)</td>
+                <td><span class="confidence-bar cb-yellow" style="width:44px"></span>66%</td>
               </tr>
               <tr>
                 <td class="pattern-name">Precious Metals Safe Haven</td>
                 <td>VIX > 28 sustained 5+ days</td>
-                <td style="color:#10b981">+7.3% gold (45d)</td>
-                <td><span class="confidence-bar" style="width:46px;background:#10b981"></span>69%</td>
+                <td class="td-up">+7.3% gold (45d)</td>
+                <td><span class="confidence-bar cb-green" style="width:46px"></span>69%</td>
               </tr>
               <tr>
                 <td class="pattern-name">Grain Planting Season Vol</td>
                 <td>Apr-May, USDA report weeks</td>
-                <td style="color:#eab308">±6.2% corn/wheat</td>
-                <td><span class="confidence-bar" style="width:40px;background:#eab308"></span>62%</td>
+                <td class="td-warn">±6.2% corn/wheat</td>
+                <td><span class="confidence-bar cb-yellow" style="width:40px"></span>62%</td>
               </tr>
               <tr>
                 <td class="pattern-name">Uranium Supply Squeeze</td>
                 <td>Spot > term contract price</td>
-                <td style="color:#10b981">+18.4% (180d)</td>
-                <td><span class="confidence-bar" style="width:43px;background:#10b981"></span>65%</td>
+                <td class="td-up">+18.4% (180d)</td>
+                <td><span class="confidence-bar cb-green" style="width:43px"></span>65%</td>
               </tr>
             </tbody>
           </table>
