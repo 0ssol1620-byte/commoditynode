@@ -150,13 +150,13 @@
     "updated_at": "2026-04-01T02:56:41.786337+00:00"
   },
   "tin": {
-    "symbol": "ZNC=F",
-    "name": "Tin (ZNC proxy)",
-    "unit": "$/share",
-    "price": 2530.0,
-    "change_pct": 10.14,
-    "high_52w": 2530.0,
-    "low_52w": 2297.0,
+    "symbol": "LTIN",
+    "name": "Tin",
+    "unit": "$/tonne",
+    "price": 28150,
+    "change_pct": 0.3,
+    "high_52w": 35000,
+    "low_52w": 24000,
     "updated_at": "2026-04-01T02:56:42.096276+00:00"
   },
   "sugar": {

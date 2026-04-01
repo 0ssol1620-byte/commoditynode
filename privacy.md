@@ -16,10 +16,12 @@ description: "CommodityNode privacy policy — how we collect, use, and protect 
 <h2>Overview</h2>
 <p>CommodityNode ("we", "us", "our") is committed to protecting your privacy. This policy explains what information we collect, how we use it, and your choices.</p>
 <h2>Information We Collect</h2>
-<p><strong>Automatically collected:</strong></p>
+<p><strong>Free users (no account required):</strong></p>
 <ul><li>Basic server logs (page URLs, timestamps, referrers, IP addresses)</li><li>Browser type and device type for analytics purposes</li></ul>
-<p><strong>We do not collect:</strong></p>
-<ul><li>Account registrations (no sign-up required)</li><li>Payment information</li><li>Personal profile data</li></ul>
+<p><strong>Pro subscribers (account required):</strong></p>
+<ul><li>Email address for account creation and billing</li><li>Payment information processed by Stripe (we do not store card details)</li><li>Account preferences and usage data</li></ul>
+<p><strong>We do not collect from free users:</strong></p>
+<ul><li>Personal profile data</li><li>Payment information</li><li>Account registrations (no sign-up required for free access)</li></ul>
 <h2>Analytics</h2>
 <p>We use Google Analytics (GA4) to understand aggregate traffic patterns. This collects anonymized usage data. You can opt out via <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out</a>.</p>
 <h2>Cookies</h2>

@@ -396,13 +396,6 @@ description: "Explore how each commodity's price movements ripple through indust
       <div class="commodity-category-sector">Cooking oil & biodiesel feedstock</div>
     </div>
   </a>
-  <a href="/commodities/phosphate/" class="commodity-category-card">
-    <span class="commodity-category-tag">PO₄</span>
-    <div>
-      <div class="commodity-category-name">Phosphate</div>
-      <div class="commodity-category-sector">Fertilizer backbone — food security</div>
-    </div>
-  </a>
   <a href="/commodities/potash/" class="commodity-category-card">
     <span class="commodity-category-tag">KCl</span>
     <div>

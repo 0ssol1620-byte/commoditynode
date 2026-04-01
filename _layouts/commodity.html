@@ -87,7 +87,17 @@ layout: default
   var slug = "{{ commodity_slug }}";
   var key = slug.replace(/-/g, '_');
   fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
-    var c = d[key]; if(!c) return;
+    var c = d[key];
+    if (!c) {
+      var banner = document.getElementById('commodity-price-banner');
+      if (banner) {
+        banner.style.display = 'block';
+        banner.innerHTML = '<div style="display:flex;align-items:center;gap:12px;padding:12px 0;">'
+          + '<div style="color:var(--text3);font-size:0.85rem;">Live price data not available for this commodity. '
+          + '<a href="/methodology/" style="color:var(--accent);">See our coverage →</a></div></div>';
+      }
+      return;
+    }
 
     // Update banner UI
     var banner = document.getElementById('commodity-price-banner');
@@ -450,11 +460,13 @@ layout: default
   var pageSlug = '{{ page.commodity_slug }}';
   var fcKey = SLUG_MAP[pageSlug];
   if (!fcKey) {
-    var noData = document.getElementById('cf-no-data');
     var section = document.getElementById('commodity-forecast-section');
-    if (noData) noData.style.display = 'block';
-    if (section) { var cw = section.querySelector('.cf-chart-wrap'); if(cw) cw.style.display = 'none'; }
-    if (section) { var cm = section.querySelector('.cf-metrics'); if(cm) cm.style.display = 'none'; }
+    if (section) {
+      section.innerHTML = '<div style="padding:20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;text-align:center;">'
+        + '<p style="color:var(--text3);font-size:0.88rem;margin-bottom:12px;">AI price forecast coming soon for this commodity.</p>'
+        + '<a href="/simulator/" style="color:var(--accent);font-size:0.85rem;font-weight:600;">View forecasts in Scenario Simulator →</a>'
+        + '</div>';
+    }
     return;
   }
 

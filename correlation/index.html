@@ -101,7 +101,10 @@ noindex: false
     </div>
 
     <div class="heatmap-wrapper" data-animate data-delay="100">
-      <table class="heatmap-table" id="corr-matrix"></table>
+      <div id="corr-loading" style="text-align:center;padding:40px;color:var(--text3);font-size:0.88rem;">
+        Loading 90-day correlation data...
+      </div>
+      <table class="heatmap-table" id="corr-matrix" style="display:none"></table>
     </div>
 
     <div class="corr-tooltip" id="corr-tooltip"></div>
@@ -110,7 +113,7 @@ noindex: false
 
     <div class="trader-insight" id="trader-insight" data-animate data-delay="300">
       <h3>What This Means for Traders</h3>
-      <p id="trader-text">Loading correlation insights...</p>
+      <p id="trader-text">Calculating correlations from live market data...</p>
     </div>
   </div>
 </section>
@@ -238,6 +241,9 @@ noindex: false
     if(topNeg.length&&topNeg[0].v<-0.3) text+='Meanwhile, '+COMMODITIES[topNeg[0].i].name+' and '+COMMODITIES[topNeg[0].j].name+' are inversely correlated ('+topNeg[0].v.toFixed(2)+'), making them natural hedging pairs. ';
     text+='Consider using negatively correlated pairs to reduce portfolio volatility, and watch for correlation regime shifts that may signal macro trend changes.';
     document.getElementById('trader-text').textContent=text;
+
+    document.getElementById('corr-loading').style.display = 'none';
+    document.getElementById('corr-matrix').style.display = '';
   }
 
   fetch('/assets/data/forecast.json').then(function(r){return r.json()}).then(function(data){

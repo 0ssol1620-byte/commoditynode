@@ -35,7 +35,7 @@ description: "CommodityNode maps how commodity price movements ripple through gl
   <li><strong>D3.js</strong> — Force-directed graphs, real-time layout</li>
   <li><strong>Chart.js</strong> — Premium candlestick price charts</li>
   <li><strong>Jekyll</strong> — Fast, static, GitHub Pages hosted</li>
-  <li><strong>Zero paywalls</strong> — Open access, always</li>
+  <li><strong>Free to start</strong> — Core analysis open access, advanced AI tools with Pro</li>
 </ul>
 
 <h2>Methodology</h2>
@@ -52,7 +52,7 @@ description: "CommodityNode maps how commodity price movements ripple through gl
 </ul>
 
 <h2>Coverage</h2>
-<p>We cover <strong>46 commodity hubs</strong> spanning Energy, Metals, Agriculture, and Soft commodities — each with an interactive Impact Map, live price data, and curated Signal Reports. Our analysis spans:</p>
+<p>We cover <strong>60 commodity hubs</strong> spanning Energy, Metals, Agriculture, and Soft commodities — each with an interactive Impact Map, live price data, and curated Signal Reports. Our analysis spans:</p>
 <ul>
   <li>Energy: Crude Oil, Natural Gas, LNG, Coal, Diesel, Jet Fuel, Ethanol</li>
   <li>Precious Metals: Gold, Silver, Platinum, Palladium, Rhodium</li>
@@ -72,7 +72,7 @@ description: "CommodityNode maps how commodity price movements ripple through gl
   <li><strong>Data-driven:</strong> All analyses are based on publicly available data. We cite our sources and show our methodology.</li>
   <li><strong>Transparent limitations:</strong> We acknowledge uncertainty. Impact scores are estimates, not predictions. Correlations can break down during market stress.</li>
   <li><strong>No investment advice:</strong> Nothing on this site constitutes a recommendation to buy, sell, or hold any security. We provide analysis tools; investment decisions remain yours.</li>
-  <li><strong>No conflicts of interest:</strong> CommodityNode does not receive compensation from any company, ETF provider, or broker featured in our analysis. Revenue comes solely from advertising.</li>
+  <li><strong>No conflicts of interest:</strong> CommodityNode does not receive compensation from any company, ETF provider, or broker featured in our analysis. Revenue comes from a combination of advertising and Pro subscriptions.</li>
   <li><strong>Corrections policy:</strong> If you find an error in our data, calculations, or analysis, please <a href="/contact/">contact us</a>. We publish corrections promptly and transparently.</li>
 </ul>
 
@@ -84,8 +84,9 @@ description: "CommodityNode maps how commodity price movements ripple through gl
 </ul>
 <p>For detailed questions about our methodology, please see our <a href="/methodology/">Methodology page</a>.</p>
 
-<h2>Why It's Free</h2>
-<p>Good financial research shouldn't require a Bloomberg terminal subscription. CommodityNode is and will remain <strong>free and open access</strong>. We're supported by advertising revenue and believe open information makes markets more efficient for everyone.</p>
+<h2>Free to Start</h2>
+<p>CommodityNode's core content — commodity impact maps, signal reports, and market analysis — is free and open to everyone. We believe good financial research shouldn't require a Bloomberg terminal.</p>
+<p>Advanced features — AI price forecasts, the Scenario Simulator, Portfolio Stress Test, and unlimited signal reports — are available with a <a href="/pricing/">Pro subscription</a>. This keeps the platform sustainable while the core mission stays accessible.</p>
 
 <div style="margin-top:40px;padding:28px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);text-align:center;">
   <p style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Ready to explore?</p>
