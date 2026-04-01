@@ -47,6 +47,22 @@ noindex: false
 .seo-content h2{color:#94a3b8;font-size:1.3rem;font-weight:700;margin:28px 0 12px}
 .seo-content h3{color:#94a3b8;font-size:1.05rem;font-weight:600;margin:20px 0 8px}
 .seo-content p{margin-bottom:14px}
+.heatmap-scroll-hint {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #475569;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  background: rgba(34,211,238,0.05);
+  border: 1px solid rgba(34,211,238,0.1);
+  border-radius: 6px;
+  width: fit-content;
+}
+@media(max-width: 800px) {
+  .heatmap-scroll-hint { display: flex; }
+}
 @media(max-width:768px){
   .corr-hero h1{font-size:1.6rem}
   .heatmap-table{font-size:0.6rem}
@@ -77,6 +93,11 @@ noindex: false
       <div class="legend-item"><div class="legend-swatch" style="background:rgba(244,63,94,0.4)"></div>Weak Negative (-0.7–-0.3)</div>
       <div class="legend-item"><div class="legend-swatch" style="background:#f43f5e"></div>Strong Negative (-1.0–-0.7)</div>
       <div class="legend-item"><div class="legend-swatch" style="background:#22d3ee"></div>Self (1.00)</div>
+    </div>
+
+    <div class="heatmap-scroll-hint" id="heatmap-hint">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Scroll to see full matrix
     </div>
 
     <div class="heatmap-wrapper" data-animate data-delay="100">

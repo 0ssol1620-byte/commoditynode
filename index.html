@@ -6,7 +6,7 @@ image: "/assets/images/og-default.png"
 ---
 
 <!-- Scroll Progress Indicator -->
-<div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#22d3ee,#a855f7);width:0%;z-index:9999;transition:width 0.1s;pointer-events:none;"></div>
+<div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#22d3ee,#a855f7);width:0%;z-index:9998;transition:width 0.1s;pointer-events:none;"></div>
 
 <!-- ===== HERO ===== -->
 <section class="hero" aria-label="Hero">
@@ -272,7 +272,9 @@ image: "/assets/images/og-default.png"
             <span class="fc-legend-item"><span class="fc-legend-band"></span>P10–P90 Band</span>
           </div>
         </div>
-        <canvas id="fc-chart" style="width:100%;height:280px;"></canvas>
+        <div class="fc-chart-canvas-wrap">
+          <canvas id="fc-chart"></canvas>
+        </div>
       </div>
 
       <!-- 사이드 메트릭 패널 -->
@@ -501,12 +503,16 @@ image: "/assets/images/og-default.png"
       var dir = pct >= 0 ? 'up' : 'down';
       var sign = pct >= 0 ? '+' : '';
       return '<div class="fc-summary-item" data-commodity="' + k + '" onclick="window._fcSwitch && window._fcSwitch(\'' + k + '\')">'
+        + '<div class="fc-sum-header">'
         + '<div class="fc-sum-name">' + meta.name + '</div>'
-        + '<div class="fc-sum-current">' + fmt(d.current_price, meta) + '</div>'
-        + '<div class="fc-sum-arrow">\u2192</div>'
-        + '<div class="fc-sum-forecast">' + fmt(d.forecast_90d, meta) + '</div>'
-        + '<div class="fc-sum-chg ' + dir + '">' + sign + pct.toFixed(1) + '%</div>'
-        + '<div class="fc-sum-label">90d forecast</div>'
+        + '<div class="fc-sum-badge ' + dir + '">' + sign + pct.toFixed(1) + '%</div>'
+        + '</div>'
+        + '<div class="fc-sum-prices">'
+        + '<span class="fc-sum-current">' + fmt(d.current_price, meta) + '</span>'
+        + '<span class="fc-sum-arrow">→</span>'
+        + '<span class="fc-sum-forecast">' + fmt(d.forecast_90d, meta) + '</span>'
+        + '</div>'
+        + '<div class="fc-sum-label">90-day AI forecast</div>'
         + '</div>';
     }).join('');
 

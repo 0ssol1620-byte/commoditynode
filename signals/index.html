@@ -75,6 +75,32 @@ noindex: false
   .pattern-table{font-size:0.78rem}
   .pattern-table th,.pattern-table td{padding:10px 8px}
 }
+
+/* Signal Pro Modal */
+.sig-modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:10000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px); }
+.sig-modal-box { background:#0d0d18; border:1px solid rgba(34,211,238,0.2); border-radius:20px; padding:36px; max-width:460px; width:100%; position:relative; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+.sig-modal-close { position:absolute; top:14px; right:14px; background:none; border:none; color:#475569; font-size:1.4rem; cursor:pointer; line-height:1; padding:4px 8px; border-radius:6px; transition:color 0.2s; }
+.sig-modal-close:hover { color:#94a3b8; }
+.sig-modal-header { text-align:center; margin-bottom:24px; }
+.sig-modal-tag { display:inline-block; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#a855f7; background:rgba(168,85,247,0.1); border:1px solid rgba(168,85,247,0.2); border-radius:6px; padding:4px 12px; margin-bottom:12px; }
+.sig-modal-title { font-size:1.3rem; color:#f1f5f9; font-weight:800; margin-bottom:8px; letter-spacing:-0.02em; }
+.sig-modal-desc { color:#64748b; font-size:0.88rem; line-height:1.6; }
+.sig-modal-stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+.sig-stat-card { border-radius:12px; padding:18px; text-align:center; }
+.sig-stat-card.green { background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2); }
+.sig-stat-card.cyan  { background:rgba(34,211,238,0.06); border:1px solid rgba(34,211,238,0.15); }
+.sig-stat-val { font-family:'JetBrains Mono',monospace; font-size:1.8rem; font-weight:800; margin-bottom:4px; }
+.sig-stat-card.green .sig-stat-val { color:#10b981; }
+.sig-stat-card.cyan  .sig-stat-val { color:#22d3ee; }
+.sig-stat-label { font-size:0.72rem; color:#475569; font-weight:600; }
+.sig-modal-features { background:rgba(168,85,247,0.05); border:1px solid rgba(168,85,247,0.12); border-radius:12px; padding:16px; margin-bottom:20px; }
+.sig-modal-features-title { font-size:0.78rem; color:#a855f7; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; }
+.sig-modal-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:7px; }
+.sig-modal-list li { color:#cbd5e1; font-size:0.85rem; padding-left:18px; position:relative; }
+.sig-modal-list li::before { content:'✓'; position:absolute; left:0; color:#10b981; font-weight:700; }
+.sig-modal-cta { width:100%; padding:14px; background:linear-gradient(135deg,#22d3ee,#a855f7); border:none; border-radius:12px; color:#050508; font-weight:800; font-size:0.95rem; cursor:pointer; letter-spacing:0.02em; transition:opacity 0.2s; }
+.sig-modal-cta:hover { opacity:0.9; }
+.sig-modal-fine { text-align:center; color:#334155; font-size:0.72rem; margin-top:10px; }
 </style>
 
 <section class="sig-hero">
@@ -359,38 +385,38 @@ noindex: false
 </script>
 
 <!-- Signal Pro Modal -->
-<div id="signal-pro-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:10000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)">
-  <div style="background:#0d0d18;border:1px solid rgba(34,211,238,0.25);border-radius:20px;padding:40px;max-width:480px;width:100%;position:relative">
-    <button onclick="closeSignalModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#64748b;font-size:1.4rem;cursor:pointer">&times;</button>
-    <div style="text-align:center;margin-bottom:28px">
-      <div style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#a855f7;margin-bottom:10px">Pro Analysis</div>
-      <h3 style="font-size:1.4rem;color:#e2e8f0;margin-bottom:8px" id="signal-modal-name">Signal Analysis</h3>
-      <p style="color:#94a3b8;font-size:0.9rem">Full historical backtesting, entry/exit levels, and position sizing guidance.</p>
+<div id="signal-pro-modal" class="sig-modal-backdrop">
+  <div class="sig-modal-box">
+    <button onclick="closeSignalModal()" class="sig-modal-close">&times;</button>
+    <div class="sig-modal-header">
+      <div class="sig-modal-tag">Pro Analysis</div>
+      <h3 class="sig-modal-title" id="signal-modal-name">Signal Analysis</h3>
+      <p class="sig-modal-desc">Full historical backtesting, entry/exit levels, and position sizing guidance.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px">
-      <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:10px;padding:16px;text-align:center">
-        <div style="font-size:1.6rem;font-weight:800;color:#10b981;font-family:'JetBrains Mono',monospace" id="signal-modal-winrate">71%</div>
-        <div style="font-size:0.75rem;color:#64748b;margin-top:4px">Historical Win Rate</div>
+    <div class="sig-modal-stats">
+      <div class="sig-stat-card green">
+        <div class="sig-stat-val" id="signal-modal-winrate">71%</div>
+        <div class="sig-stat-label">Historical Win Rate</div>
       </div>
-      <div style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.15);border-radius:10px;padding:16px;text-align:center">
-        <div style="font-size:1.6rem;font-weight:800;color:#22d3ee;font-family:'JetBrains Mono',monospace" id="signal-modal-horizon">60d</div>
-        <div style="font-size:0.75rem;color:#64748b;margin-top:4px">Time Horizon</div>
+      <div class="sig-stat-card cyan">
+        <div class="sig-stat-val" id="signal-modal-horizon">60d</div>
+        <div class="sig-stat-label">Time Horizon</div>
       </div>
     </div>
-    <div style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.15);border-radius:10px;padding:16px;margin-bottom:24px">
-      <div style="font-size:0.8rem;color:#a855f7;font-weight:700;margin-bottom:8px">What Pro unlocks:</div>
-      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
-        <li style="color:#cbd5e1;font-size:0.85rem">&check; Full backtested entry &amp; exit levels</li>
-        <li style="color:#cbd5e1;font-size:0.85rem">&check; Historical precedent analysis (2010–2025)</li>
-        <li style="color:#cbd5e1;font-size:0.85rem">&check; Position sizing recommendation</li>
-        <li style="color:#cbd5e1;font-size:0.85rem">&check; All 8 Pattern Library strategies</li>
-        <li style="color:#cbd5e1;font-size:0.85rem">&check; New signal alerts via email</li>
+    <div class="sig-modal-features">
+      <div class="sig-modal-features-title">What Pro unlocks:</div>
+      <ul class="sig-modal-list">
+        <li>Full backtested entry &amp; exit levels</li>
+        <li>Historical precedent analysis (2010–2025)</li>
+        <li>Position sizing recommendation</li>
+        <li>All 8 Pattern Library strategies</li>
+        <li>New signal alerts via email</li>
       </ul>
     </div>
-    <button onclick="if(window.Clerk)window.Clerk.openSignUp()" style="width:100%;padding:14px;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;border-radius:10px;color:#050508;font-weight:800;font-size:0.95rem;cursor:pointer;letter-spacing:0.02em">
+    <button onclick="if(window.Clerk)window.Clerk.openSignUp()" class="sig-modal-cta">
       Unlock Pro Analysis — $19/month
     </button>
-    <p style="text-align:center;color:#475569;font-size:0.75rem;margin-top:12px">Cancel anytime. Most members recover cost in first week.</p>
+    <p class="sig-modal-fine">Cancel anytime. Most members recover cost in first week.</p>
   </div>
 </div>
 

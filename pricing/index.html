@@ -211,8 +211,8 @@ permalink: /pricing/
   <!-- Pro -->
   <div class="pricing-card featured">
     <div class="pricing-tier">Pro</div>
-    <div class="pricing-price" id="pro-price">$19 <span>/month</span></div>
-    <div style="font-size:0.72rem;color:#a855f7;font-weight:600;margin-top:4px" id="pro-intro-rate">Limited Introductory Rate</div>
+    <div class="pricing-price"><span id="pro-price">$19</span> <span id="pro-sub">/month</span></div>
+    <div style="font-size:0.72rem;color:#a855f7;font-weight:600;margin-top:4px" id="pro-billed">Billed monthly · Cancel anytime</div>
     <div class="pricing-desc">For active investors who trade around commodity cycles.</div>
     <button class="pricing-btn pricing-btn-primary" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start 7-Day Free Trial →</button>
     <ul class="pricing-features">
@@ -230,7 +230,8 @@ permalink: /pricing/
   <!-- Enterprise -->
   <div class="pricing-card">
     <div class="pricing-tier">Enterprise</div>
-    <div class="pricing-price">$99 <span>/month</span></div>
+    <div class="pricing-price"><span id="ent-price">$99</span> <span>/month</span></div>
+    <div style="font-size:0.72rem;color:#64748b;font-weight:600;margin-top:4px" id="ent-billed">Billed monthly · Cancel anytime</div>
     <div class="pricing-desc">For funds, analysts, and teams needing data exports and API access.</div>
     <button class="pricing-btn pricing-btn-ghost" onclick="window.location='/contact/'">Contact Us</button>
     <ul class="pricing-features">
@@ -250,7 +251,7 @@ permalink: /pricing/
 <section class="next-report-teaser">
   <div class="container">
     <div class="teaser-card">
-      <div class="teaser-badge">Dropping Tomorrow</div>
+      <div class="teaser-badge" id="teaser-drop-badge">Dropping Tomorrow</div>
       <h3>Copper Supply Crisis: The Chile Strike Deep Dive</h3>
       <p>Our most-requested report. 3,200-word analysis covering Escondida production impact, LME inventory implications, and FCX/SCCO position guidance.</p>
       <div class="teaser-meta">
@@ -310,16 +311,31 @@ permalink: /pricing/
 function setBilling(mode, btn) {
   document.querySelectorAll('.billing-btn').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
-  var priceEl = document.getElementById('pro-price');
-  var introEl = document.getElementById('pro-intro-rate');
-  if (mode === 'annual') {
-    if (priceEl) priceEl.innerHTML = '$149 <span>/year</span>';
-    if (introEl) introEl.textContent = 'Save $79 vs monthly — Limited Introductory Rate';
-  } else {
-    if (priceEl) priceEl.innerHTML = '$19 <span>/month</span>';
-    if (introEl) introEl.textContent = 'Limited Introductory Rate';
-  }
+  var isAnnual = mode === 'annual';
+
+  // Pro 카드 가격 업데이트
+  var proPrice = document.getElementById('pro-price');
+  var proSub = document.getElementById('pro-sub');
+  var proBilled = document.getElementById('pro-billed');
+  if (proPrice) proPrice.textContent = isAnnual ? '$12' : '$19';
+  if (proSub) proSub.textContent = isAnnual ? '/month' : '/month';
+  if (proBilled) proBilled.textContent = isAnnual ? 'Billed annually ($149/yr) · Save $79' : 'Billed monthly · Cancel anytime';
+
+  // Enterprise 카드 가격 업데이트
+  var entPrice = document.getElementById('ent-price');
+  var entBilled = document.getElementById('ent-billed');
+  if (entPrice) entPrice.textContent = isAnnual ? '$79' : '$99';
+  if (entBilled) entBilled.textContent = isAnnual ? 'Billed annually · Save $189' : 'Billed monthly · Cancel anytime';
 }
+
+// 동적 날짜 배지
+(function() {
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var el = document.getElementById('teaser-drop-badge');
+  if (el) el.textContent = 'Dropping ' + months[tomorrow.getMonth()] + ' ' + tomorrow.getDate();
+})();
 </script>
 
 <div class="pricing-faq">
