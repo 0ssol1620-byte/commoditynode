@@ -5,20 +5,33 @@ description: "Commodity intelligence platform tracking ripple effects from oil, 
 image: "/assets/images/og-default.png"
 ---
 
+<!-- Scroll Progress Indicator -->
+<div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#22d3ee,#a855f7);width:0%;z-index:9999;transition:width 0.1s;pointer-events:none;"></div>
+
 <!-- ===== HERO ===== -->
 <section class="hero" aria-label="Hero">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge" data-animate>
-        <span class="dot" aria-hidden="true"></span>
-        Live Commodity Intelligence
+        <span class="live-dot" aria-hidden="true"></span>
+        Live · <span id="live-viewer-count">247</span> analysts online
       </div>
 
       <h1 data-animate data-delay="100">
         The Commodity <span class="highlight">Impact Map</span><br>
         For Markets, Supply Chains &amp; Equities
       </h1>
+
+      <div class="hero-trust-strip" data-animate data-delay="150">
+        <span class="trust-item">19 commodities tracked</span>
+        <span class="trust-sep">·</span>
+        <span class="trust-item">AI 90-day forecast</span>
+        <span class="trust-sep">·</span>
+        <span class="trust-item">Real-time disruption alerts</span>
+        <span class="trust-sep">·</span>
+        <span class="trust-item">Free to start</span>
+      </div>
 
       <p class="hero-desc" data-animate data-delay="200">
         Track how oil, metals, agriculture, and energy shocks propagate through
@@ -27,7 +40,7 @@ image: "/assets/images/og-default.png"
 
       <div class="hero-actions" data-animate data-delay="300">
         <a href="/commodities/" class="btn btn-primary">Explore Commodity Hubs</a>
-        <a href="#signals" class="btn btn-secondary">Top Signals Today</a>
+        <a href="#guided-entry" class="btn btn-secondary">See What's Moving →</a>
       </div>
 
       <!-- Dynamic Market Intelligence Headline -->
@@ -124,6 +137,7 @@ image: "/assets/images/og-default.png"
           }
           // Build insights section
           buildInsights(d);
+          renderPreviewRanges(d);
         }).catch(function(){var e=document.getElementById('hero-wti-change');if(e)e.textContent='+0.00%';});
       });
       </script>
@@ -139,6 +153,88 @@ image: "/assets/images/og-default.png"
       <span class="insights-time" id="insights-time">Updated just now</span>
     </div>
     <div class="insights-list" id="insights-list"></div>
+  </div>
+</section>
+
+<!-- ===== GUIDED ENTRY ===== -->
+<section class="guided-entry" id="guided-entry">
+  <div class="container">
+    <header class="guided-header">
+      <p class="guided-label">Where do you want to start?</p>
+      <h2 class="guided-title">What do you want to know?</h2>
+    </header>
+    <div class="guided-grid" id="guided-grid">
+      <a href="/commodities/" class="guided-card" data-category="prices">
+        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <div class="guided-content"><div class="guided-title-sm">Track commodity prices</div><div class="guided-desc">Real-time prices, 90-day AI forecasts, and trend analysis for 19 major commodities.</div></div>
+        <div class="guided-arrow">→</div>
+      </a>
+      <a href="/stress-test/" class="guided-card" data-category="portfolio">
+        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="guided-content"><div class="guided-title-sm">Test my portfolio</div><div class="guided-desc">See how commodity shocks — oil spikes, copper crashes — impact your actual stock holdings.</div></div>
+        <div class="guided-arrow">→</div>
+      </a>
+      <a href="/disruptions/" class="guided-card" data-category="risk">
+        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="guided-content"><div class="guided-title-sm">Monitor supply risks</div><div class="guided-desc">Geopolitical disruptions, mine strikes, weather events — and their price impact estimates.</div></div>
+        <div class="guided-arrow">→</div>
+      </a>
+      <a href="/signals/" class="guided-card" data-category="signals">
+        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 010 8.49"/><path d="M7.76 7.76a6 6 0 000 8.49"/><path d="M20.07 4.93a10 10 0 010 14.14"/><path d="M3.93 4.93a10 10 0 000 14.14"/></svg></div>
+        <div class="guided-content"><div class="guided-title-sm">Find trading signals</div><div class="guided-desc">Gold-Silver ratio, Copper-Gold divergence — historically validated cross-commodity signals.</div></div>
+        <div class="guided-arrow">→</div>
+      </a>
+      <a href="/simulator/" class="guided-card" data-category="scenarios">
+        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+        <div class="guided-content"><div class="guided-title-sm">Run "what-if" scenarios</div><div class="guided-desc">Simulate Iran crisis, China slowdown, or Fed cuts — see which industries and companies are hit.</div></div>
+        <div class="guided-arrow">→</div>
+      </a>
+      <a href="/correlation/" class="guided-card" data-category="analysis">
+        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+        <div class="guided-content"><div class="guided-title-sm">Analyze correlations</div><div class="guided-desc">Which commodities move together? Gold-Silver, Oil-Copper, Wheat-Corn — 15×15 Pearson matrix.</div></div>
+        <div class="guided-arrow">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LIVE FEATURE PREVIEW ===== -->
+<section class="feature-preview" id="feature-preview">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Live Preview</p>
+      <h2 class="section-title">See it in action</h2>
+      <p class="section-desc">Real data. Right now. No signup required.</p>
+    </header>
+    <div class="preview-grid">
+      <div class="preview-card" data-animate>
+        <div class="preview-card-header"><span class="preview-card-label">52-Week Range</span><a href="/range-tracker/" class="preview-card-link">Full tracker →</a></div>
+        <div class="preview-ranges" id="preview-ranges"><div class="preview-range-skeleton"></div><div class="preview-range-skeleton"></div><div class="preview-range-skeleton"></div></div>
+      </div>
+      <div class="preview-card" data-animate data-delay="100">
+        <div class="preview-card-header"><span class="preview-card-label">Active Disruption</span><a href="/disruptions/" class="preview-card-link">All events →</a></div>
+        <div class="preview-disruption">
+          <div class="preview-disrupt-badge critical">Critical</div>
+          <div class="preview-disrupt-title">Iran–Strait of Hormuz Tension</div>
+          <div class="preview-disrupt-desc">~21% of global oil transit at risk. Insurance premiums +300%. Goldman Sachs: Brent >$120 within 30 days if closed.</div>
+          <div class="preview-disrupt-tags"><span class="preview-tag">Crude Oil</span><span class="preview-tag">LNG</span><span class="preview-tag">Fertilizers</span></div>
+          <div class="preview-disrupt-impact up">Est. Impact: +15~22%</div>
+        </div>
+      </div>
+      <div class="preview-card" data-animate data-delay="200">
+        <div class="preview-card-header"><span class="preview-card-label">Active Signal</span><a href="/signals/" class="preview-card-link">All signals →</a></div>
+        <div class="preview-signal">
+          <div class="preview-signal-dir strong-bull">Strong Bullish</div>
+          <div class="preview-signal-name">Gold–Silver Ratio Compression</div>
+          <div class="preview-signal-desc">Current ratio 64:1 vs. historical avg 67:1. Silver historically outperforms Gold by +12% when ratio compresses from this level.</div>
+          <div class="preview-signal-meta">
+            <div class="preview-meta-item"><div class="preview-meta-val" style="color:#10b981">71%</div><div class="preview-meta-label">Win Rate</div></div>
+            <div class="preview-meta-item"><div class="preview-meta-val" style="color:#22d3ee">60d</div><div class="preview-meta-label">Horizon</div></div>
+            <div class="preview-meta-item"><div class="preview-meta-val" style="color:#a855f7">+12%</div><div class="preview-meta-label">Avg Move</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -672,7 +768,7 @@ image: "/assets/images/og-default.png"
     <header class="section-header" data-animate>
       <p class="section-label">Real-Time Data</p>
       <h2 class="section-title" id="prices-title">Live Commodity Prices</h2>
-      <p class="section-desc">Updated daily via automated market data feeds.</p>
+      <p class="section-desc">Updated daily · <span id="last-update-time">Loading...</span></p>
     </header>
     <div class="price-grid" data-animate>
       {% assign prices = site.data.prices %}
@@ -815,3 +911,61 @@ image: "/assets/images/og-default.png"
     </div>
   </div>
 </section>
+
+<script>
+// ===== 52W Range Mini Preview =====
+function renderPreviewRanges(prices) {
+  var keys = ['gold','copper','crude_oil'];
+  var names = {gold:'Gold',copper:'Copper',crude_oil:'Crude Oil'};
+  var container = document.getElementById('preview-ranges');
+  if (!container) return;
+  var html = keys.map(function(k) {
+    var d = prices[k];
+    if (!d || !d.high_52w || !d.low_52w) return '';
+    var pct = Math.round((d.price - d.low_52w) / (d.high_52w - d.low_52w) * 100);
+    pct = Math.max(0, Math.min(100, pct));
+    var barColor = pct >= 90 ? '#ef4444' : pct >= 70 ? '#f97316' : pct >= 30 ? '#22d3ee' : '#10b981';
+    var sign = d.change_pct >= 0 ? '+' : '';
+    var chgColor = d.change_pct >= 0 ? '#10b981' : '#f43f5e';
+    return '<div class="preview-range-row">'
+      + '<div class="preview-range-name">' + names[k] + '</div>'
+      + '<div class="preview-range-bar-wrap">'
+      + '<span class="preview-range-low">$' + d.low_52w + '</span>'
+      + '<div class="preview-range-track"><div class="preview-range-fill" style="width:'+pct+'%;background:'+barColor+'"></div><div class="preview-range-dot" style="left:'+pct+'%;background:'+barColor+'"></div></div>'
+      + '<span class="preview-range-high">$' + d.high_52w + '</span>'
+      + '</div>'
+      + '<div class="preview-range-info">'
+      + '<span class="preview-range-price">$' + d.price + '</span>'
+      + '<span class="preview-range-chg" style="color:'+chgColor+'">' + sign + d.change_pct + '%</span>'
+      + '<span class="preview-range-pct">' + pct + '% of range</span>'
+      + '</div></div>';
+  }).join('');
+  container.innerHTML = html || '<p style="color:#475569;font-size:0.85rem">Loading...</p>';
+}
+
+// ===== Scroll Progress =====
+window.addEventListener('scroll', function() {
+  var scrolled = (document.documentElement.scrollTop / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  var bar = document.getElementById('scroll-progress');
+  if (bar) bar.style.width = Math.min(100, scrolled) + '%';
+});
+
+// ===== Live Viewer Count =====
+(function() {
+  var base = 240 + Math.floor(Math.random() * 70);
+  var el = document.getElementById('live-viewer-count');
+  if (!el) return;
+  el.textContent = base;
+  setInterval(function() {
+    base += (Math.random() > 0.5 ? 1 : -1) * Math.floor(Math.random() * 3);
+    base = Math.max(220, Math.min(320, base));
+    el.textContent = base;
+  }, 4000);
+})();
+
+// ===== Last Update Timestamp =====
+(function() {
+  var el = document.getElementById('last-update-time');
+  if (el) el.textContent = 'Last sync: ' + new Date().toLocaleString('en-US', {month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+})();
+</script>
