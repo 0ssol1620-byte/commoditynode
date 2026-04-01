@@ -238,6 +238,301 @@ image: "/assets/images/og-default.png"
   </div>
 </section>
 
+<div class="divider"></div>
+
+<!-- ===== AI FORECAST PREVIEW ===== -->
+<section class="ai-forecast-preview section" id="ai-forecast-preview">
+  <div class="container">
+    <header class="section-header" data-animate>
+      <p class="section-label">Chronos-2 AI Model</p>
+      <h2 class="section-title">What our AI sees coming</h2>
+      <p class="section-desc">90-day price forecasts with confidence intervals — powered by Amazon's Chronos-2 time series model, updated daily.</p>
+    </header>
+
+    <!-- 상품 선택 탭 -->
+    <div class="forecast-tabs" data-animate>
+      <button class="forecast-tab active" data-commodity="gold">Gold</button>
+      <button class="forecast-tab" data-commodity="copper">Copper</button>
+      <button class="forecast-tab" data-commodity="crude_oil">Crude Oil</button>
+    </div>
+
+    <!-- 메인 레이아웃: 차트 + 사이드 메트릭 -->
+    <div class="forecast-layout" data-animate data-delay="100">
+
+      <!-- 차트 영역 -->
+      <div class="forecast-chart-wrap">
+        <div class="forecast-chart-header">
+          <div>
+            <div class="forecast-commodity-name" id="fc-name">Gold</div>
+            <div class="forecast-subtitle">90-day AI forecast with P10–P90 confidence band</div>
+          </div>
+          <div class="forecast-legend">
+            <span class="fc-legend-item"><span class="fc-legend-line history"></span>Historical</span>
+            <span class="fc-legend-item"><span class="fc-legend-line median"></span>AI Median</span>
+            <span class="fc-legend-item"><span class="fc-legend-band"></span>P10–P90 Band</span>
+          </div>
+        </div>
+        <canvas id="fc-chart" style="width:100%;height:280px;"></canvas>
+      </div>
+
+      <!-- 사이드 메트릭 패널 -->
+      <div class="forecast-metrics">
+
+        <div class="fc-metric-card">
+          <div class="fc-metric-label">Current Price</div>
+          <div class="fc-metric-val" id="fc-current">$4,618</div>
+        </div>
+
+        <div class="fc-metric-card highlight">
+          <div class="fc-metric-label">90-Day Forecast</div>
+          <div class="fc-metric-val" id="fc-90d">$4,855</div>
+          <div class="fc-metric-change up" id="fc-change">+5.1%</div>
+        </div>
+
+        <div class="fc-metric-card">
+          <div class="fc-metric-label">Upside (P90)</div>
+          <div class="fc-metric-val up" id="fc-p90">$4,969</div>
+        </div>
+
+        <div class="fc-metric-card">
+          <div class="fc-metric-label">Downside (P10)</div>
+          <div class="fc-metric-val down" id="fc-p10">$4,741</div>
+        </div>
+
+        <div class="fc-metric-card">
+          <div class="fc-metric-label">Model</div>
+          <div class="fc-metric-val model">Chronos-2</div>
+          <div class="fc-metric-sub">Updated daily</div>
+        </div>
+
+        <a href="/simulator/" class="fc-cta-btn">
+          Run Scenario Simulator →
+        </a>
+
+      </div>
+    </div>
+
+    <!-- 하단: 3개 원자재 요약 바 -->
+    <div class="forecast-summary-bar" data-animate data-delay="200" id="forecast-summary-bar">
+      <!-- JS로 채워짐 -->
+    </div>
+
+    <!-- Pro CTA -->
+    <div class="forecast-pro-cta" data-animate data-delay="300">
+      <div class="forecast-pro-inner">
+        <div>
+          <div class="forecast-pro-title">Full 19-commodity AI forecast</div>
+          <div class="forecast-pro-desc">Copper, Silver, Wheat, Uranium, Lithium + 14 more — all with P10/P90 bands and daily updates.</div>
+        </div>
+        <a href="/simulator/" class="btn btn-primary">Explore All Forecasts</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+(function() {
+  'use strict';
+
+  var forecastData = null;
+  var fcChart = null;
+  var currentCommodity = 'gold';
+
+  var COMMODITY_META = {
+    gold:      { name: 'Gold',      unit: '$', decimals: 0 },
+    copper:    { name: 'Copper',    unit: '$', decimals: 3 },
+    crude_oil: { name: 'Crude Oil', unit: '$', decimals: 2 }
+  };
+
+  fetch('/assets/data/forecast.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      forecastData = data;
+      renderForecastChart('gold');
+      renderSummaryBar(data);
+    })
+    .catch(function(e) { console.error('Forecast load error', e); });
+
+  function fmt(val, meta) {
+    if (!meta) return val;
+    return meta.unit + Number(val).toLocaleString('en-US', {
+      minimumFractionDigits: meta.decimals,
+      maximumFractionDigits: meta.decimals
+    });
+  }
+
+  function renderForecastChart(key) {
+    if (!forecastData) return;
+    var d = forecastData[key];
+    if (!d) return;
+    var meta = COMMODITY_META[key] || { name: key, unit: '$', decimals: 2 };
+
+    currentCommodity = key;
+
+    var histDates  = (d.history.dates || []).slice(-60);
+    var histPrices = (d.history.prices || []).slice(-60);
+    var fcDates    = d.forecast.dates  || [];
+    var fcMedian   = d.forecast.median || [];
+    var fcP10      = d.forecast.p10    || [];
+    var fcP90      = d.forecast.p90    || [];
+
+    var joinPrice  = histPrices[histPrices.length - 1];
+    var allLabels  = histDates.concat(fcDates);
+
+    var histLine = histPrices.concat(fcDates.map(function() { return null; }));
+
+    var medianLine = histDates.slice(0, -1).map(function() { return null; })
+      .concat([joinPrice]).concat(fcMedian);
+
+    var p90Line = histDates.slice(0, -1).map(function() { return null; })
+      .concat([joinPrice]).concat(fcP90);
+
+    var p10Line = histDates.slice(0, -1).map(function() { return null; })
+      .concat([joinPrice]).concat(fcP10);
+
+    var ctx = document.getElementById('fc-chart');
+    if (!ctx) return;
+
+    if (fcChart) { fcChart.destroy(); fcChart = null; }
+
+    fcChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: allLabels,
+        datasets: [
+          {
+            label: 'P90', data: p90Line,
+            borderColor: 'rgba(168,85,247,0.0)',
+            backgroundColor: 'rgba(168,85,247,0.12)',
+            fill: '+1', pointRadius: 0, tension: 0.3, order: 4
+          },
+          {
+            label: 'P10', data: p10Line,
+            borderColor: 'rgba(168,85,247,0.0)',
+            backgroundColor: 'rgba(168,85,247,0.0)',
+            fill: false, pointRadius: 0, tension: 0.3, order: 5
+          },
+          {
+            label: 'Historical', data: histLine,
+            borderColor: '#94a3b8', backgroundColor: 'transparent',
+            borderWidth: 1.5, pointRadius: 0, tension: 0.2, order: 2
+          },
+          {
+            label: 'AI Median', data: medianLine,
+            borderColor: '#22d3ee', backgroundColor: 'transparent',
+            borderWidth: 2, borderDash: [], pointRadius: 0, tension: 0.3, order: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: 'rgba(13,13,24,0.95)',
+            borderColor: 'rgba(34,211,238,0.3)',
+            borderWidth: 1,
+            titleColor: '#94a3b8',
+            bodyColor: '#e2e8f0',
+            callbacks: {
+              label: function(c) {
+                if (c.parsed.y === null) return null;
+                if (c.dataset.label === 'P90' || c.dataset.label === 'P10') return null;
+                return c.dataset.label + ': ' + fmt(c.parsed.y, meta);
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.04)' },
+            ticks: {
+              color: '#475569', maxTicksLimit: 8, maxRotation: 0,
+              callback: function(val) {
+                var label = this.getLabelForValue(val);
+                if (!label) return '';
+                var dt = new Date(label);
+                return (dt.getMonth()+1) + '/' + dt.getDate();
+              }
+            }
+          },
+          y: {
+            grid: { color: 'rgba(255,255,255,0.04)' },
+            ticks: {
+              color: '#475569',
+              callback: function(val) { return fmt(val, meta); }
+            }
+          }
+        }
+      }
+    });
+
+    var el = function(id) { return document.getElementById(id); };
+    if (el('fc-name'))    el('fc-name').textContent    = meta.name;
+    if (el('fc-current')) el('fc-current').textContent = fmt(d.current_price, meta);
+    if (el('fc-90d'))     el('fc-90d').textContent     = fmt(d.forecast_90d, meta);
+
+    var chgPct = d.change_90d_pct || 0;
+    var chgEl = el('fc-change');
+    if (chgEl) {
+      chgEl.textContent = (chgPct >= 0 ? '+' : '') + chgPct.toFixed(1) + '%';
+      chgEl.className = 'fc-metric-change ' + (chgPct >= 0 ? 'up' : 'down');
+    }
+
+    var lastP90 = fcP90[fcP90.length - 1];
+    var lastP10 = fcP10[fcP10.length - 1];
+    if (el('fc-p90') && lastP90) el('fc-p90').textContent = fmt(lastP90, meta);
+    if (el('fc-p10') && lastP10) el('fc-p10').textContent = fmt(lastP10, meta);
+  }
+
+  function renderSummaryBar(data) {
+    var keys = ['gold', 'copper', 'crude_oil'];
+    var bar = document.getElementById('forecast-summary-bar');
+    if (!bar) return;
+
+    var html = keys.map(function(k) {
+      var d = data[k];
+      if (!d) return '';
+      var meta = COMMODITY_META[k] || { name: k, unit: '$', decimals: 2 };
+      var pct = d.change_90d_pct || 0;
+      var dir = pct >= 0 ? 'up' : 'down';
+      var sign = pct >= 0 ? '+' : '';
+      return '<div class="fc-summary-item" data-commodity="' + k + '" onclick="window._fcSwitch && window._fcSwitch(\'' + k + '\')">'
+        + '<div class="fc-sum-name">' + meta.name + '</div>'
+        + '<div class="fc-sum-current">' + fmt(d.current_price, meta) + '</div>'
+        + '<div class="fc-sum-arrow">\u2192</div>'
+        + '<div class="fc-sum-forecast">' + fmt(d.forecast_90d, meta) + '</div>'
+        + '<div class="fc-sum-chg ' + dir + '">' + sign + pct.toFixed(1) + '%</div>'
+        + '<div class="fc-sum-label">90d forecast</div>'
+        + '</div>';
+    }).join('');
+
+    bar.innerHTML = html;
+  }
+
+  window._fcSwitch = function(key) {
+    renderForecastChart(key);
+    document.querySelectorAll('.forecast-tab').forEach(function(btn) {
+      btn.classList.toggle('active', btn.dataset.commodity === key);
+    });
+    document.querySelectorAll('.fc-summary-item').forEach(function(item) {
+      item.classList.toggle('active', item.dataset.commodity === key);
+    });
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.forecast-tab').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        window._fcSwitch(this.dataset.commodity);
+      });
+    });
+  });
+})();
+</script>
+
 <!-- Price Alert Banner -->
 <div style="padding:12px 24px 0;">
   {% include price-alert.html %}
