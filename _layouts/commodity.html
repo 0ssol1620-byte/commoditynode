@@ -488,8 +488,10 @@ layout: default
       var histPrices = (d.history.prices || []).slice(-60);
       var fcDates    = d.forecast.dates   || [];
       var fcMedian   = d.forecast.median  || [];
-      var fcP10      = d.forecast.p10     || [];
-      var fcP90      = d.forecast.p90     || [];
+      var fcP10      = d.forecast.p10     || [];  // P25 차트용
+      var fcP90      = d.forecast.p90     || [];  // P75 차트용
+      var fcP10ext   = d.forecast.p10_extreme || fcP10;  // P10 메트릭용
+      var fcP90ext   = d.forecast.p90_extreme || fcP90;  // P90 메트릭용
       var joinPrice  = histPrices[histPrices.length - 1];
 
       var allLabels = histDates.concat(fcDates);
@@ -549,8 +551,8 @@ layout: default
       el('cf-chg').textContent = (pct>=0?'+':'')+pct.toFixed(1)+'%';
       el('cf-chg').style.color = pct>=0?'#10b981':'#f43f5e';
     }
-    if(el('cf-p90')&&fcP90.length) el('cf-p90').textContent = fmt(fcP90[fcP90.length-1], meta);
-    if(el('cf-p10')&&fcP10.length) el('cf-p10').textContent = fmt(fcP10[fcP10.length-1], meta);
+    if(el('cf-p90')&&fcP90ext.length) el('cf-p90').textContent = fmt(fcP90ext[fcP90ext.length-1], meta);
+    if(el('cf-p10')&&fcP10ext.length) el('cf-p10').textContent = fmt(fcP10ext[fcP10ext.length-1], meta);
   }
 })();
 </script>

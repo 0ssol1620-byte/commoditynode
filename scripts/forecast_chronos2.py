@@ -124,7 +124,10 @@ def forecast_with_chronos2(closes_dict, prediction_length=90):
         pred_df = pipeline.predict_df(
             context_df,
             prediction_length=prediction_length,
-            quantile_levels=[0.1, 0.5, 0.9],
+            # P25~P75 (IQR 50%) + median
+            # P10/P90은 너무 극단적 → 차트 y축 망가짐
+            # P25~P75가 실용적 투자 참고 범위로 적합
+            quantile_levels=[0.1, 0.25, 0.5, 0.75, 0.9],
             id_column="id",
             timestamp_column="timestamp",
             target="target",
@@ -139,9 +142,13 @@ def forecast_with_chronos2(closes_dict, prediction_length=90):
                 continue
 
             median = item_pred["predictions"].values
-            p10    = item_pred["0.1"].values
-            p90    = item_pred["0.9"].values
-            results[key] = (median, p10, p90)
+            # 차트용: P25~P75 (좁은 밴드 — 시각화에 적합)
+            p10    = item_pred["0.25"].values   # 차트 하단 밴드
+            p90    = item_pred["0.75"].values   # 차트 상단 밴드
+            # 저장용: P10/P90도 따로 보관 (메트릭 패널에서 extreme 범위 표시)
+            p10_extreme = item_pred["0.1"].values
+            p90_extreme = item_pred["0.9"].values
+            results[key] = (median, p10, p90, p10_extreme, p90_extreme)
 
         return results
 
@@ -208,7 +215,11 @@ def run():
         if fc_result is None:
             continue
 
-        median, p10, p90 = fc_result
+        if len(fc_result) == 5:
+            median, p10, p90, p10_extreme, p90_extreme = fc_result
+        else:
+            median, p10, p90 = fc_result
+            p10_extreme, p90_extreme = p10, p90
 
         # 영업일 기준 예측 날짜
         last_date = closes.index[-1]
@@ -232,10 +243,14 @@ def run():
             "change_90d_pct": round((forecast_90d - current_price) / current_price * 100, 2),
             "model":          "amazon/chronos-2" if CHRONOS2_AVAILABLE else "linear-fallback",
             "forecast": {
-                "dates":  [d.strftime('%Y-%m-%d') for d in future_dates],
-                "median": [round(float(v), 4) for v in median],
-                "p10":    [round(float(v), 4) for v in p10],
-                "p90":    [round(float(v), 4) for v in p90],
+                "dates":   [d.strftime('%Y-%m-%d') for d in future_dates],
+                "median":  [round(float(v), 4) for v in median],
+                # 차트용 밴드: P25~P75 (시각화에 적합한 좁은 범위)
+                "p10":     [round(float(v), 4) for v in p10],
+                "p90":     [round(float(v), 4) for v in p90],
+                # 극단 범위: P10/P90 (메트릭 패널 upside/downside용)
+                "p10_extreme": [round(float(v), 4) for v in p10_extreme],
+                "p90_extreme": [round(float(v), 4) for v in p90_extreme],
             },
             # 히스토리: 최근 180일 (차트 표시용)
             "history": {

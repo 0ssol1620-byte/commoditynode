@@ -264,12 +264,12 @@ image: "/assets/images/og-default.png"
         <div class="forecast-chart-header">
           <div>
             <div class="forecast-commodity-name" id="fc-name">Gold</div>
-            <div class="forecast-subtitle">90-day AI forecast with P10–P90 confidence band</div>
+            <div class="forecast-subtitle">90-day AI forecast with P25–P75 confidence band (IQR)</div>
           </div>
           <div class="forecast-legend">
             <span class="fc-legend-item"><span class="fc-legend-line history"></span>Historical</span>
             <span class="fc-legend-item"><span class="fc-legend-line median"></span>AI Median</span>
-            <span class="fc-legend-item"><span class="fc-legend-band"></span>P10–P90 Band</span>
+            <span class="fc-legend-item"><span class="fc-legend-band"></span>P25–P75 Band</span>
           </div>
         </div>
         <div class="fc-chart-canvas-wrap">
@@ -376,8 +376,10 @@ image: "/assets/images/og-default.png"
     var histPrices = (d.history.prices || []).slice(-60);
     var fcDates    = d.forecast.dates  || [];
     var fcMedian   = d.forecast.median || [];
-    var fcP10      = d.forecast.p10    || [];
-    var fcP90      = d.forecast.p90    || [];
+    var fcP10      = d.forecast.p10    || [];   // P25 (차트 밴드용)
+    var fcP90      = d.forecast.p90    || [];   // P75 (차트 밴드용)
+    var fcP10ext   = d.forecast.p10_extreme || fcP10;  // P10 (메트릭 패널 downside)
+    var fcP90ext   = d.forecast.p90_extreme || fcP90;  // P90 (메트릭 패널 upside)
 
     var joinPrice  = histPrices[histPrices.length - 1];
     var allLabels  = histDates.concat(fcDates);
@@ -484,8 +486,9 @@ image: "/assets/images/og-default.png"
       chgEl.className = 'fc-metric-change ' + (chgPct >= 0 ? 'up' : 'down');
     }
 
-    var lastP90 = fcP90[fcP90.length - 1];
-    var lastP10 = fcP10[fcP10.length - 1];
+    // 메트릭 패널: P10/P90 extreme 값 표시 (더 넓은 범위)
+    var lastP90 = fcP90ext[fcP90ext.length - 1];
+    var lastP10 = fcP10ext[fcP10ext.length - 1];
     if (el('fc-p90') && lastP90) el('fc-p90').textContent = fmt(lastP90, meta);
     if (el('fc-p10') && lastP10) el('fc-p10').textContent = fmt(lastP10, meta);
   }
