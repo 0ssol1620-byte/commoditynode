@@ -33,8 +33,17 @@
   <meta name="twitter:title"      content="{{ page.title | default: site.title }}">
   <meta name="twitter:description" content="{{ page.description | default: site.description }}">
   <meta name="twitter:image"      content="{{ page.image | default: "/assets/images/og-default.png" | absolute_url }}">
+  {% if page.date %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  {% endif %}
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2322d3ee'/><circle cx='16' cy='16' r='4' fill='%23050508'/><circle cx='8' cy='10' r='2.5' fill='%23050508'/><circle cx='24' cy='10' r='2.5' fill='%23050508'/><circle cx='8' cy='22' r='2.5' fill='%23050508'/><circle cx='24' cy='22' r='2.5' fill='%23050508'/><line x1='16' y1='16' x2='8' y2='10' stroke='%23050508' stroke-width='1.5'/><line x1='16' y1='16' x2='24' y2='10' stroke='%23050508' stroke-width='1.5'/><line x1='16' y1='16' x2='8' y2='22' stroke='%23050508' stroke-width='1.5'/><line x1='16' y1='16' x2='24' y2='22' stroke='%23050508' stroke-width='1.5'/></svg>">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <!-- Clerk Auth -->
   <script

@@ -1,0 +1,16 @@
+{
+  "name": "CommodityNode",
+  "short_name": "CommodityNode",
+  "description": "Interactive analysis of how commodity price movements ripple through global industries, ETFs, and stocks.",
+  "icons": [
+    {"src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
+    {"src": "/favicon.png", "sizes": "32x32", "type": "image/png"},
+    {"src": "/favicon-48x48.png", "sizes": "48x48", "type": "image/png"},
+    {"src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"}
+  ],
+  "theme_color": "#22d3ee",
+  "background_color": "#050508",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}

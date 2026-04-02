@@ -123,7 +123,7 @@
   "lumber": {
     "symbol": "LBS=F",
     "name": "Lumber",
-    "unit": "$/share",
+    "unit": "$/1000 board ft",
     "price": 380.6,
     "change_pct": -1.12,
     "high_52w": 395.7,
@@ -156,7 +156,7 @@
   "zinc": {
     "symbol": "ZNC=F",
     "name": "Zinc",
-    "unit": "$/share",
+    "unit": "$/tonne",
     "price": 2530.0,
     "change_pct": 10.14,
     "high_52w": 2530.0,
@@ -173,7 +173,7 @@
     "high_52w": 35000,
     "low_52w": 24000,
     "updated_at": "2026-04-01T02:56:42.096276+00:00",
-    "proxy_type": "etf_proxy"
+    "proxy_type": "estimated"
   },
   "sugar": {
     "symbol": "SB=F",

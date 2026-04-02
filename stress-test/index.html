@@ -257,23 +257,32 @@ noindex: false
 
     document.getElementById('results-section').classList.add('visible');
     document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
+    // Re-check access whenever results are shown
+    checkStressAccess();
   };
 
-  function checkStressAccess() {
+  window.checkStressAccess = function checkStressAccess() {
     if (!window.Clerk) { setTimeout(checkStressAccess, 600); return; }
+    // Wait for Clerk to fully initialize
+    var attempts = 0;
     var check = setInterval(function() {
-      if (window.Clerk.user) {
-        var admin = (window.Clerk.user.emailAddresses||[]).some(function(e){return e.emailAddress==='0ssol1620@gmail.com';});
-        if (admin) {
-          var ov = document.getElementById('results-overlay');
-          var ct = document.getElementById('results-content');
+      attempts++;
+      var user = window.Clerk.user;
+      if (user !== undefined || attempts > 12) {
+        clearInterval(check);
+        var ov = document.getElementById('results-overlay');
+        var ct = document.getElementById('results-content');
+        if (user) {
+          // Any signed-in user gets access
           if(ov) ov.style.display='none';
           if(ct){ct.style.filter='none';ct.style.pointerEvents='auto';}
+        } else {
+          // Show sign-in gate over blurred results
+          if(ov) ov.style.display='flex';
+          if(ct){ct.style.filter='blur(6px)';ct.style.pointerEvents='none';}
         }
-        clearInterval(check);
       }
     }, 500);
-    setTimeout(function(){clearInterval(check);}, 6000);
   }
   document.addEventListener('DOMContentLoaded', checkStressAccess);
 })();
