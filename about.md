@@ -43,6 +43,27 @@ no_loader: true
 <h2>Methodology</h2>
 <p>Every impact score, correlation figure, and sensitivity estimate is backed by historical data and transparent calculation logic. We show our work — because research you can't verify isn't research. <a href="/methodology/">Read our full methodology &rarr;</a></p>
 
+<h2>Why Trust CommodityNode?</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:16px 0 24px;">
+  <div style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:10px;padding:16px;">
+    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Transparent Methodology</div>
+    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Every impact score and correlation is calculated from historical data with documented logic. We show our work.</p>
+  </div>
+  <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:10px;padding:16px;">
+    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">No Conflict of Interest</div>
+    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">We don't manage money, run a fund, or receive payments to cover specific commodities. Analysis is independent.</p>
+  </div>
+  <div style="background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.1);border-radius:10px;padding:16px;">
+    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Clear Caveats</div>
+    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Every forecast includes confidence ranges. Every signal states its historical win rate and time horizon. Not financial advice.</p>
+  </div>
+  <div style="background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.1);border-radius:10px;padding:16px;">
+    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Living Documentation</div>
+    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Methodology evolves as we improve models. Version history is tracked and major changes are disclosed in posts.</p>
+  </div>
+</div>
+<p>Read the full <a href="/methodology/">Methodology →</a></p>
+
 <h2>Who It's For</h2>
 <p>CommodityNode is built for investors, analysts, and anyone who wants to understand the second-order effects of commodity price movements:</p>
 <ul>

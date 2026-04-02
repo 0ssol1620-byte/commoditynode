@@ -44,6 +44,17 @@ description: "Get in touch with the CommodityNode team for tips, corrections, pa
       <li><strong>Newsletter:</strong> Weekly Signal Report digest delivered to your inbox</li>
     </ul>
     <p style="font-size:0.85rem;color:var(--text3);margin-top:16px;">Response times may be slower during major market events when we're heads-down on analysis.</p>
+
+    <hr>
+    <h2>Enterprise &amp; Team Access</h2>
+    <p>Looking for team seats, API access, custom data exports, or a dedicated onboarding call? We offer enterprise plans starting at $149/month for up to 5 seats.</p>
+    <p>Email us at <strong>enterprise [at] commoditynode [dot] com</strong> with:</p>
+    <ul>
+      <li>Your team size and primary use case</li>
+      <li>Which commodity sectors matter most to your work</li>
+      <li>Preferred onboarding timeline</li>
+    </ul>
+    <p><a href="/enterprise/">Learn more about Enterprise →</a></p>
   </div>
 
   <div data-animate data-delay="200">
@@ -64,7 +75,8 @@ description: "Get in touch with the CommodityNode team for tips, corrections, pa
             <option value="">Select a topic...</option>
             <option value="tip">News Tip</option>
             <option value="correction">Data Correction</option>
-            <option value="partnership">Partnership</option>
+            <option value="partnership">Partnership / Enterprise</option>
+            <option value="enterprise">Enterprise Demo Request</option>
             <option value="feedback">Feedback</option>
             <option value="other">Other</option>
           </select>
