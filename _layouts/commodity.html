@@ -42,6 +42,8 @@ layout: default
       {% endif %}
       {% if related_posts.size > 0 %}
       <span class="badge" style="background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.3);">{{ related_posts.size }} Signal Reports</span>
+      {% else %}
+      <span class="badge" style="background:rgba(100,116,139,0.12);color:#64748b;border-color:rgba(100,116,139,0.2);">Coverage Expanding</span>
       {% endif %}
       {% assign sym_check = page.symbol | strip %}
       {% if sym_check == "" or sym_check == nil %}
