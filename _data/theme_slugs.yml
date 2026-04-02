@@ -1,0 +1,42 @@
+# Theme name → actual page slug mapping
+# Only entries that exist in /themes/ are listed
+
+"EV Transition": ev-transition
+"EV Battery Supply Chain": ev-transition
+"EV Motors": ev-transition
+"EV Batteries": ev-transition
+"Battery Metals": battery-metals
+"Nuclear Renaissance": nuclear-renaissance
+"Clean Energy Transition": clean-energy
+"Clean Energy": clean-energy
+"Carbon Transition": carbon-transition
+"Renewable Fuels": clean-energy
+"Food Security": food-security
+"Food Inflation": food-inflation
+"Inflation Hedge": inflation-hedge
+"Infrastructure Boom": infrastructure-boom
+"Infrastructure Spending": infrastructure-boom
+"Defense Rearming": defense-rearming
+"Defense Spending": defense-rearming
+"Defense Supply Chain": defense-rearming
+"Defense Reshoring": defense-rearming
+"Defense Optics": defense-rearming
+"Geopolitical Risk": geopolitical-risk
+"China Export Controls": geopolitical-risk
+"China Supply Dominance": geopolitical-risk
+"China Dominance": geopolitical-risk
+"Deglobalization": deglobalization
+"Supply Chain Disruption": supply-chain-disruption
+"Aerospace Supply Chain": supply-chain-disruption
+"Critical Minerals": rare-earth
+"Rare Earth": rare-earth
+"Semiconductor Supply Chain": supply-chain-disruption
+"CHIPS Act": infrastructure-boom
+"AI Power Demand": ai-power-demand
+"Water Scarcity": water-scarcity
+"Climate Change": water-scarcity
+"Resource Scarcity": water-scarcity
+"Emerging Markets": emerging-markets
+"Agritech": agritech
+"Space Economy": space-economy
+"Circular Economy": circular-economy

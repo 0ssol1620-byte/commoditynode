@@ -10,6 +10,7 @@ companies: ["MOS", "NTR", "OCP", "ICL"]
 substitutes: ["Organic Fertilizers", "Precision Agriculture"]
 themes: ["Food Security", "Morocco Reserve Dominance", "Population Growth"]
 tags: ["phosphate", "fertilizer", "NPK", "food security", "morocco", "OCP", "phosphoric acid", "agriculture"]
+image: /assets/images/og-phosphate.png
 ---
 
 <script>

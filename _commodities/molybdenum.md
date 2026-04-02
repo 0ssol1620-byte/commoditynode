@@ -10,6 +10,7 @@ companies: ["FCX", "SCCO"]
 substitutes: ["Vanadium Alloys", "Niobium Alloys"]
 themes: ["Oil & Gas Capex Cycle", "Copper Mine By-Product", "Infrastructure Spending"]
 tags: ["molybdenum", "alloy steel", "oil drilling", "HSLA steel", "copper by-product", "pipeline"]
+image: /assets/images/og-molybdenum.png
 ---
 
 <script>

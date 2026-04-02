@@ -10,7 +10,7 @@ commodity: crude_oil
 direction: bearish
 sensitivity: High
 confidence: High
-read_time: 6
+reading_time: 6
 image: /assets/images/og/diesel-transportation-inflation.png
 ---
 

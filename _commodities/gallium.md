@@ -10,6 +10,7 @@ companies: ["INTC", "CREE", "TSM"]
 substitutes: ["Silicon Carbide (SiC)", "Indium Phosphide"]
 themes: ["China Export Controls", "CHIPS Act", "5G Rollout"]
 tags: ["gallium", "semiconductors", "5G", "critical minerals", "china export ban", "GaAs", "GaN"]
+image: /assets/images/og-gallium.png
 ---
 
 <script>

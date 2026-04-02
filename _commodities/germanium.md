@@ -10,6 +10,7 @@ companies: ["UMICORE", "TECK"]
 substitutes: ["Silicon Photonics", "Zinc Selenide IR"]
 themes: ["China Export Controls", "Defense Optics", "Fiber Broadband Expansion"]
 tags: ["germanium", "fiber optics", "infrared", "critical minerals", "china export controls", "defense optics"]
+image: /assets/images/og-germanium.png
 ---
 
 <script>

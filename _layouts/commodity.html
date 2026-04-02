@@ -43,6 +43,14 @@ layout: default
       {% if related_posts.size > 0 %}
       <span class="badge" style="background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.3);">{{ related_posts.size }} Signal Reports</span>
       {% endif %}
+      {% assign sym_check = page.symbol | strip %}
+      {% if sym_check == "" or sym_check == nil %}
+      <span class="badge" style="background:rgba(100,116,139,0.15);color:#64748b;border-color:rgba(100,116,139,0.2);" title="No publicly traded symbol — proxy or index data used">No Live Symbol</span>
+      {% elsif page.symbol contains "=F" %}
+      <span class="badge" style="background:rgba(34,211,238,0.08);color:#22d3ee;border-color:rgba(34,211,238,0.2);" title="Direct commodity futures contract">Futures</span>
+      {% else %}
+      <span class="badge" style="background:rgba(234,179,8,0.08);color:#eab308;border-color:rgba(234,179,8,0.2);" title="Proxy via ETF or equity — not a direct commodity price">Proxy: {{ page.symbol }}</span>
+      {% endif %}
     </div>
     <h1>{{ page.title }}</h1>
     {% if page.description %}
@@ -293,8 +301,12 @@ layout: default
         <h2 style="font-size:1.25rem;margin-bottom:16px;">Structural Themes</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
           {% for theme in page.themes %}
-          {% assign theme_slug = theme | slugify %}
-          <a href="/themes/{{ theme_slug }}/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">{{ theme }}</a>
+          {% assign theme_slug_mapped = site.data.theme_slugs[theme] %}
+          {% if theme_slug_mapped %}
+          <a href="/themes/{{ theme_slug_mapped }}/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">{{ theme }}</a>
+          {% else %}
+          <span style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.15);border-radius:20px;color:rgba(251,191,36,0.6);font-size:0.85rem;">{{ theme }}</span>
+          {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -346,7 +358,12 @@ layout: default
         <p class="toc-title">Key Companies</p>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
           {% for company in page.companies %}
-          <a href="/companies/{{ company | downcase }}/" style="display:inline-block;padding:4px 10px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);border-radius:14px;color:#fbbf24;font-size:0.75rem;font-family:'JetBrains Mono',monospace;text-decoration:none;">{{ company }}</a>
+          {% assign company_slug_mapped = site.data.company_slugs[company] %}
+          {% if company_slug_mapped %}
+          <a href="/companies/{{ company_slug_mapped }}/" style="display:inline-block;padding:4px 10px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);border-radius:14px;color:#fbbf24;font-size:0.75rem;font-family:'JetBrains Mono',monospace;text-decoration:none;">{{ company }}</a>
+          {% else %}
+          <span style="display:inline-block;padding:4px 10px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:14px;color:rgba(251,191,36,0.5);font-size:0.75rem;font-family:'JetBrains Mono',monospace;">{{ company }}</span>
+          {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -366,6 +383,25 @@ layout: default
           </li>
           {% endfor %}
         </ul>
+      </div>
+      {% else %}
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Coverage Status</p>
+        <div style="margin-top:8px;padding:12px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:8px;">
+          <p style="font-size:0.75rem;color:var(--text3);margin-bottom:8px;">Signal reports coming soon for this commodity.</p>
+          <a href="/commodities/" style="font-size:0.75rem;color:var(--accent);text-decoration:none;">Browse all commodity hubs →</a>
+        </div>
+        {% if page.themes %}
+        <div style="margin-top:10px;">
+          <p style="font-size:0.72rem;color:var(--text3);margin-bottom:6px;">Explore related themes:</p>
+          {% for theme in page.themes limit:3 %}
+          {% assign theme_slug_mapped2 = site.data.theme_slugs[theme] %}
+          {% if theme_slug_mapped2 %}
+          <a href="/themes/{{ theme_slug_mapped2 }}/" style="display:inline-block;font-size:0.72rem;color:#fbbf24;margin-right:8px;text-decoration:none;">{{ theme }} →</a>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
       {% endif %}
 

@@ -3,7 +3,7 @@ layout: post
 title: "Building CommodityNode: What I Learned Mapping 60 Commodity Supply Chains"
 date: 2026-03-28
 categories: [Behind the Scenes]
-tags: [commoditynode, methodology, data, visualization, building]
+tags: [commoditynode, methodology, data, visualization, building, crude-oil, gold, copper]
 description: "The story behind CommodityNode — why I built it, what went wrong, what I learned about commodity markets by trying to map all of them, and the design decisions that shaped the site."
 reading_time: 11
 image: /assets/images/og-default.png

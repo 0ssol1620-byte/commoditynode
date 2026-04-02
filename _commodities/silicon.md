@@ -10,6 +10,7 @@ companies: ["ENPH", "FSLR", "WFG"]
 substitutes: ["Thin-Film Solar (CdTe)", "Perovskite Solar Cells"]
 themes: ["Solar Energy Transition", "Semiconductor Expansion", "China Polysilicon Dominance"]
 tags: ["silicon", "polysilicon", "solar", "semiconductor wafer", "metallurgical silicon", "aluminum alloy"]
+image: /assets/images/og-silicon.png
 ---
 
 <script>

@@ -3,7 +3,7 @@ layout: post
 title: "How to Read a Commodity Impact Map — A Beginner's Guide"
 date: 2026-03-28
 categories: [Guide]
-tags: [tutorial, beginner, impact-map, methodology]
+tags: [tutorial, beginner, impact-map, methodology, crude-oil, gold]
 description: "A step-by-step walkthrough of how to read CommodityNode's interactive impact maps — what the nodes mean, how to interpret correlation scores, and how to turn the visualization into actionable insight."
 reading_time: 12
 image: /assets/images/og-default.png

@@ -3,7 +3,7 @@ layout: post
 title: "Why Commodity Correlations Break Down During Crises — And What That Tells You"
 date: 2026-03-28
 categories: [Research]
-tags: [correlations, crisis, macro, risk-management, methodology]
+tags: [correlations, crisis, macro, risk-management, methodology, gold, crude-oil, copper]
 description: "Academic research and empirical data show that commodity-equity correlations are unstable during market stress. Understanding when and why they break reveals more about portfolio risk than any single correlation coefficient."
 reading_time: 13
 image: /assets/images/og-default.png

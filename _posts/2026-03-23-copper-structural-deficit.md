@@ -7,6 +7,7 @@ tags: [copper, EV, infrastructure, investing, mining]
 description: "Copper is the nervous system of the modern economy. And we're running out of it. Here's the structural supply deficit — and the trades that follow."
 image: "/assets/images/og-copper.png"
 author: CommodityNode Research
+reading_time: 5
 ---
 
 Copper isn't just a metal. It's the economy's nervous system.

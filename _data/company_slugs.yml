@@ -1,0 +1,56 @@
+# Company ticker / name → actual page slug mapping
+# Only entries that exist in /companies/ are listed
+# Anything not here will render as plain text badge (no link)
+
+AA: aa
+ADM: adm
+ALB: alb
+AMD: amd
+DAL: dal
+ANG: ang
+BHP: bhp
+BP: bp
+BG: bunge
+BYD: byd
+CCJ: ccj
+CF: cf
+CVX: cvx
+DE: de
+DOW: dow
+FCX: fcx
+Ford: ford
+GM: gm
+HAL: hal
+HSY: hsy
+INTC: intel
+IVN: ivn
+KO: coca-cola
+LYB: lyondell
+MOS: mos
+NEM: nem
+NUE: nue
+NVDA: nvidia
+PG: pg
+RIO: rio
+RIVIAN: rivian
+SBUX: sbux
+SHELL: shell
+SLB: slb
+SAMSUNG: samsung
+TECK: teck
+TSLA: tsla
+TSMC: tsmc
+TTE: totalenergies
+UAL: united
+UNI: unilever
+WPM: wpm
+XOM: xom
+KFT: kraft
+AAPL: apple
+ASML: asml
+BASF: basf
+CON: constellation
+DUKE: duke
+NEXTERA: nextera
+AAL: american-airlines
+LUV: southwest

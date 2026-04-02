@@ -10,6 +10,7 @@ companies: ["SBSW", "GLNCY"]
 substitutes: ["Nickel-Free Stainless", "Aluminum Alloys"]
 themes: ["Stainless Steel Demand", "South Africa Energy Crisis", "Infrastructure Spending"]
 tags: ["chromium", "ferrochrome", "stainless steel", "south africa", "construction", "automotive"]
+image: /assets/images/og-chromium.png
 ---
 
 <script>

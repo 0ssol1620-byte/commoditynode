@@ -10,6 +10,7 @@ companies: ["HAYN", "SBSW"]
 substitutes: ["Ceramics Cutting Tools", "Molybdenum Alloys"]
 themes: ["China Supply Dominance", "Defense Spending", "Industrial Reshoring"]
 tags: ["tungsten", "cemented carbide", "defense", "cutting tools", "china supply", "industrial metals", "APT"]
+image: /assets/images/og-tungsten.png
 ---
 
 <script>
