@@ -38,7 +38,7 @@
   }
   window.addEventListener("load", function() { setTimeout(checkContentReady, 100); });
   // Hard cap at 6s
-  setTimeout(hideLoader, 3000);
+  setTimeout(hideLoader, 1500);
 
   /* ---------- Page Transition ---------- */
   const transitionEl = document.getElementById('page-transition');

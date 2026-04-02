@@ -7,7 +7,8 @@
     "change_pct": 1.36,
     "high_52w": 119.48,
     "low_52w": 54.98,
-    "updated_at": "2026-04-01T02:56:37.416106+00:00"
+    "updated_at": "2026-04-01T02:56:37.416106+00:00",
+    "proxy_type": "futures"
   },
   "gold": {
     "symbol": "GC=F",
@@ -17,7 +18,8 @@
     "change_pct": 1.33,
     "high_52w": 5586.2,
     "low_52w": 2949.7,
-    "updated_at": "2026-04-01T02:56:37.735139+00:00"
+    "updated_at": "2026-04-01T02:56:37.735139+00:00",
+    "proxy_type": "futures"
   },
   "copper": {
     "symbol": "HG=F",
@@ -27,7 +29,8 @@
     "change_pct": 1.15,
     "high_52w": 6.51,
     "low_52w": 4.1,
-    "updated_at": "2026-04-01T02:56:38.019431+00:00"
+    "updated_at": "2026-04-01T02:56:38.019431+00:00",
+    "proxy_type": "futures"
   },
   "natural_gas": {
     "symbol": "NG=F",
@@ -37,7 +40,8 @@
     "change_pct": -0.49,
     "high_52w": 7.83,
     "low_52w": 2.62,
-    "updated_at": "2026-04-01T02:56:38.328533+00:00"
+    "updated_at": "2026-04-01T02:56:38.328533+00:00",
+    "proxy_type": "futures"
   },
   "wheat": {
     "symbol": "ZW=F",
@@ -47,7 +51,8 @@
     "change_pct": 0.65,
     "high_52w": 635.0,
     "low_52w": 492.25,
-    "updated_at": "2026-04-01T02:56:38.636591+00:00"
+    "updated_at": "2026-04-01T02:56:38.636591+00:00",
+    "proxy_type": "futures"
   },
   "lithium": {
     "symbol": "ALB",
@@ -57,7 +62,8 @@
     "change_pct": 1.3,
     "high_52w": 206.0,
     "low_52w": 49.43,
-    "updated_at": "2026-04-01T02:56:38.979060+00:00"
+    "updated_at": "2026-04-01T02:56:38.979060+00:00",
+    "proxy_type": "equity_proxy"
   },
   "silver": {
     "symbol": "SI=F",
@@ -67,7 +73,8 @@
     "change_pct": -0.23,
     "high_52w": 121.3,
     "low_52w": 28.31,
-    "updated_at": "2026-04-01T02:56:39.289286+00:00"
+    "updated_at": "2026-04-01T02:56:39.289286+00:00",
+    "proxy_type": "futures"
   },
   "corn": {
     "symbol": "ZC=F",
@@ -77,7 +84,8 @@
     "change_pct": 0.22,
     "high_52w": 490.75,
     "low_52w": 368.75,
-    "updated_at": "2026-04-01T02:56:39.597726+00:00"
+    "updated_at": "2026-04-01T02:56:39.597726+00:00",
+    "proxy_type": "futures"
   },
   "uranium": {
     "symbol": "URA",
@@ -87,7 +95,8 @@
     "change_pct": 6.93,
     "high_52w": 62.28,
     "low_52w": 19.5,
-    "updated_at": "2026-04-01T02:56:39.919002+00:00"
+    "updated_at": "2026-04-01T02:56:39.919002+00:00",
+    "proxy_type": "etf_proxy"
   },
   "aluminum": {
     "symbol": "ALI=F",
@@ -97,7 +106,8 @@
     "change_pct": -1.28,
     "high_52w": 3464.0,
     "low_52w": 2155.0,
-    "updated_at": "2026-04-01T02:56:40.226658+00:00"
+    "updated_at": "2026-04-01T02:56:40.226658+00:00",
+    "proxy_type": "futures"
   },
   "coffee": {
     "symbol": "KC=F",
@@ -107,7 +117,8 @@
     "change_pct": 1.81,
     "high_52w": 437.95,
     "low_52w": 278.65,
-    "updated_at": "2026-04-01T02:56:40.536901+00:00"
+    "updated_at": "2026-04-01T02:56:40.536901+00:00",
+    "proxy_type": "futures"
   },
   "lumber": {
     "symbol": "LBS=F",
@@ -117,7 +128,8 @@
     "change_pct": -1.12,
     "high_52w": 395.7,
     "low_52w": 335.0,
-    "updated_at": "2026-04-01T02:56:40.844122+00:00"
+    "updated_at": "2026-04-01T02:56:40.844122+00:00",
+    "proxy_type": "futures"
   },
   "palladium": {
     "symbol": "PA=F",
@@ -127,7 +139,8 @@
     "change_pct": 0.77,
     "high_52w": 2169.9,
     "low_52w": 876.6,
-    "updated_at": "2026-04-01T02:56:41.151692+00:00"
+    "updated_at": "2026-04-01T02:56:41.151692+00:00",
+    "proxy_type": "futures"
   },
   "steel": {
     "symbol": "SLX",
@@ -137,7 +150,8 @@
     "change_pct": 3.72,
     "high_52w": 103.0,
     "low_52w": 51.69,
-    "updated_at": "2026-04-01T02:56:41.476954+00:00"
+    "updated_at": "2026-04-01T02:56:41.476954+00:00",
+    "proxy_type": "etf_proxy"
   },
   "zinc": {
     "symbol": "ZNC=F",
@@ -147,7 +161,8 @@
     "change_pct": 10.14,
     "high_52w": 2530.0,
     "low_52w": 2297.0,
-    "updated_at": "2026-04-01T02:56:41.786337+00:00"
+    "updated_at": "2026-04-01T02:56:41.786337+00:00",
+    "proxy_type": "futures"
   },
   "tin": {
     "symbol": "LTIN",
@@ -157,7 +172,8 @@
     "change_pct": 0.3,
     "high_52w": 35000,
     "low_52w": 24000,
-    "updated_at": "2026-04-01T02:56:42.096276+00:00"
+    "updated_at": "2026-04-01T02:56:42.096276+00:00",
+    "proxy_type": "etf_proxy"
   },
   "sugar": {
     "symbol": "SB=F",
@@ -167,7 +183,8 @@
     "change_pct": -0.26,
     "high_52w": 19.63,
     "low_52w": 13.61,
-    "updated_at": "2026-04-01T02:56:42.402851+00:00"
+    "updated_at": "2026-04-01T02:56:42.402851+00:00",
+    "proxy_type": "futures"
   },
   "soybeans": {
     "symbol": "ZS=F",
@@ -177,7 +194,8 @@
     "change_pct": 0.19,
     "high_52w": 1223.25,
     "low_52w": 960.75,
-    "updated_at": "2026-04-01T02:56:42.709425+00:00"
+    "updated_at": "2026-04-01T02:56:42.709425+00:00",
+    "proxy_type": "futures"
   },
   "platinum": {
     "symbol": "PL=F",
@@ -187,7 +205,8 @@
     "change_pct": 0.52,
     "high_52w": 2852.4,
     "low_52w": 884.5,
-    "updated_at": "2026-04-01T02:56:43.015735+00:00"
+    "updated_at": "2026-04-01T02:56:43.015735+00:00",
+    "proxy_type": "futures"
   },
   "nickel": {
     "symbol": "JJN",
@@ -197,7 +216,8 @@
     "change_pct": 0.0,
     "high_52w": 42.4,
     "low_52w": 27.05,
-    "updated_at": "2026-04-01T02:56:43.324689+00:00"
+    "updated_at": "2026-04-01T02:56:43.324689+00:00",
+    "proxy_type": "etf_proxy"
   },
   "lng": {
     "symbol": "LNG",
@@ -207,7 +227,8 @@
     "change_pct": -3.36,
     "high_52w": 300.89,
     "low_52w": 186.2,
-    "updated_at": "2026-04-01T02:56:43.672710+00:00"
+    "updated_at": "2026-04-01T02:56:43.672710+00:00",
+    "proxy_type": "equity_proxy"
   },
   "jet_fuel": {
     "symbol": "HO=F",
@@ -217,7 +238,8 @@
     "change_pct": -0.85,
     "high_52w": 4.84,
     "low_52w": 1.93,
-    "updated_at": "2026-04-01T02:56:43.980448+00:00"
+    "updated_at": "2026-04-01T02:56:43.980448+00:00",
+    "proxy_type": "futures"
   },
   "iron_ore": {
     "symbol": "VALE",
@@ -227,7 +249,8 @@
     "change_pct": 5.36,
     "high_52w": 17.72,
     "low_52w": 8.06,
-    "updated_at": "2026-04-01T02:56:44.345093+00:00"
+    "updated_at": "2026-04-01T02:56:44.345093+00:00",
+    "proxy_type": "equity_proxy"
   },
   "diesel": {
     "symbol": "HO=F",
@@ -237,7 +260,8 @@
     "change_pct": -0.85,
     "high_52w": 4.84,
     "low_52w": 1.93,
-    "updated_at": "2026-04-01T02:56:44.652895+00:00"
+    "updated_at": "2026-04-01T02:56:44.652895+00:00",
+    "proxy_type": "futures"
   },
   "cotton": {
     "symbol": "CT=F",
@@ -247,7 +271,8 @@
     "change_pct": 0.97,
     "high_52w": 73.5,
     "low_52w": 60.71,
-    "updated_at": "2026-04-01T02:56:44.970438+00:00"
+    "updated_at": "2026-04-01T02:56:44.970438+00:00",
+    "proxy_type": "futures"
   },
   "cocoa": {
     "symbol": "CC=F",
@@ -257,7 +282,8 @@
     "change_pct": 3.68,
     "high_52w": 11280.0,
     "low_52w": 2798.0,
-    "updated_at": "2026-04-01T02:56:45.275975+00:00"
+    "updated_at": "2026-04-01T02:56:45.275975+00:00",
+    "proxy_type": "futures"
   },
   "cobalt": {
     "symbol": "GLNCY",
@@ -267,7 +293,8 @@
     "change_pct": 5.12,
     "high_52w": 15.18,
     "low_52w": 5.74,
-    "updated_at": "2026-04-01T02:56:45.624580+00:00"
+    "updated_at": "2026-04-01T02:56:45.624580+00:00",
+    "proxy_type": "equity_proxy"
   },
   "coal": {
     "symbol": "BTU",
@@ -277,7 +304,8 @@
     "change_pct": -7.65,
     "high_52w": 41.14,
     "low_52w": 9.61,
-    "updated_at": "2026-04-01T02:56:45.938194+00:00"
+    "updated_at": "2026-04-01T02:56:45.938194+00:00",
+    "proxy_type": "equity_proxy"
   },
   "rice": {
     "symbol": "ZR=F",
@@ -287,7 +315,8 @@
     "change_pct": 0.0,
     "high_52w": 1383.0,
     "low_52w": 11.34,
-    "updated_at": "2026-04-01T02:56:46.249883+00:00"
+    "updated_at": "2026-04-01T02:56:46.249883+00:00",
+    "proxy_type": "futures"
   },
   "oats": {
     "symbol": "ZO=F",
@@ -297,7 +326,8 @@
     "change_pct": -1.69,
     "high_52w": 403.5,
     "low_52w": 272.0,
-    "updated_at": "2026-04-01T02:56:46.558696+00:00"
+    "updated_at": "2026-04-01T02:56:46.558696+00:00",
+    "proxy_type": "futures"
   },
   "orange_juice": {
     "symbol": "OJ=F",
@@ -307,7 +337,8 @@
     "change_pct": 5.55,
     "high_52w": 344.3,
     "low_52w": 132.5,
-    "updated_at": "2026-04-01T02:56:46.869325+00:00"
+    "updated_at": "2026-04-01T02:56:46.869325+00:00",
+    "proxy_type": "futures"
   },
   "soybean_oil": {
     "symbol": "ZL=F",
@@ -317,7 +348,8 @@
     "change_pct": -0.3,
     "high_52w": 69.68,
     "low_52w": 43.83,
-    "updated_at": "2026-04-01T02:56:47.208992+00:00"
+    "updated_at": "2026-04-01T02:56:47.208992+00:00",
+    "proxy_type": "futures"
   },
   "soybean_meal": {
     "symbol": "ZM=F",
@@ -327,7 +359,8 @@
     "change_pct": 0.38,
     "high_52w": 335.5,
     "low_52w": 258.6,
-    "updated_at": "2026-04-01T02:56:47.514950+00:00"
+    "updated_at": "2026-04-01T02:56:47.514950+00:00",
+    "proxy_type": "futures"
   },
   "live_cattle": {
     "symbol": "LE=F",
@@ -337,7 +370,8 @@
     "change_pct": 1.57,
     "high_52w": 247.75,
     "low_52w": 197.75,
-    "updated_at": "2026-04-01T02:56:47.822047+00:00"
+    "updated_at": "2026-04-01T02:56:47.822047+00:00",
+    "proxy_type": "futures"
   },
   "feeder_cattle": {
     "symbol": "GF=F",
@@ -347,7 +381,8 @@
     "change_pct": 0.86,
     "high_52w": 381.02,
     "low_52w": 273.1,
-    "updated_at": "2026-04-01T02:56:48.134169+00:00"
+    "updated_at": "2026-04-01T02:56:48.134169+00:00",
+    "proxy_type": "futures"
   },
   "lean_hogs": {
     "symbol": "HE=F",
@@ -357,7 +392,8 @@
     "change_pct": 0.0,
     "high_52w": 113.7,
     "low_52w": 77.35,
-    "updated_at": "2026-04-01T02:56:48.441738+00:00"
+    "updated_at": "2026-04-01T02:56:48.441738+00:00",
+    "proxy_type": "futures"
   },
   "potash": {
     "symbol": "NTR",
@@ -367,7 +403,8 @@
     "change_pct": -1.42,
     "high_52w": 85.36,
     "low_52w": 45.78,
-    "updated_at": "2026-04-01T02:56:48.757781+00:00"
+    "updated_at": "2026-04-01T02:56:48.757781+00:00",
+    "proxy_type": "equity_proxy"
   },
   "ammonia": {
     "symbol": "CF",
@@ -377,7 +414,8 @@
     "change_pct": -5.64,
     "high_52w": 141.96,
     "low_52w": 67.34,
-    "updated_at": "2026-04-01T02:56:49.092099+00:00"
+    "updated_at": "2026-04-01T02:56:49.092099+00:00",
+    "proxy_type": "equity_proxy"
   },
   "manganese": {
     "symbol": "VALE",
@@ -387,7 +425,8 @@
     "change_pct": 5.36,
     "high_52w": 17.72,
     "low_52w": 8.06,
-    "updated_at": "2026-04-01T02:56:49.455986+00:00"
+    "updated_at": "2026-04-01T02:56:49.455986+00:00",
+    "proxy_type": "equity_proxy"
   },
   "vanadium": {
     "symbol": "RIO",
@@ -397,7 +436,8 @@
     "change_pct": 5.03,
     "high_52w": 101.53,
     "low_52w": 51.67,
-    "updated_at": "2026-04-01T02:56:49.806991+00:00"
+    "updated_at": "2026-04-01T02:56:49.806991+00:00",
+    "proxy_type": "equity_proxy"
   },
   "graphite": {
     "symbol": "MP",
@@ -407,7 +447,8 @@
     "change_pct": 5.86,
     "high_52w": 100.25,
     "low_52w": 18.64,
-    "updated_at": "2026-04-01T02:56:50.118124+00:00"
+    "updated_at": "2026-04-01T02:56:50.118124+00:00",
+    "proxy_type": "equity_proxy"
   },
   "rare_earth": {
     "symbol": "MP",
@@ -417,7 +458,8 @@
     "change_pct": 5.86,
     "high_52w": 100.25,
     "low_52w": 18.64,
-    "updated_at": "2026-04-01T02:56:50.430989+00:00"
+    "updated_at": "2026-04-01T02:56:50.430989+00:00",
+    "proxy_type": "equity_proxy"
   },
   "rhodium": {
     "symbol": "SBSW",
@@ -427,7 +469,8 @@
     "change_pct": 10.59,
     "high_52w": 21.29,
     "low_52w": 3.18,
-    "updated_at": "2026-04-01T02:56:50.753481+00:00"
+    "updated_at": "2026-04-01T02:56:50.753481+00:00",
+    "proxy_type": "equity_proxy"
   },
   "hydrogen": {
     "symbol": "PLUG",
@@ -437,7 +480,8 @@
     "change_pct": 5.61,
     "high_52w": 4.58,
     "low_52w": 0.69,
-    "updated_at": "2026-04-01T02:56:51.057781+00:00"
+    "updated_at": "2026-04-01T02:56:51.057781+00:00",
+    "proxy_type": "equity_proxy"
   },
   "rubber": {
     "symbol": "GT",
@@ -447,7 +491,8 @@
     "change_pct": 5.41,
     "high_52w": 12.03,
     "low_52w": 6.14,
-    "updated_at": "2026-04-01T02:56:51.481558+00:00"
+    "updated_at": "2026-04-01T02:56:51.481558+00:00",
+    "proxy_type": "equity_proxy"
   },
   "ethanol": {
     "symbol": "REX",
@@ -457,6 +502,7 @@
     "change_pct": -4.35,
     "high_52w": 48.66,
     "low_52w": 16.73,
-    "updated_at": "2026-04-01T02:56:51.788029+00:00"
+    "updated_at": "2026-04-01T02:56:51.788029+00:00",
+    "proxy_type": "equity_proxy"
   }
 }
