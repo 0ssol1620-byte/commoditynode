@@ -1,4 +1,5 @@
 ---
+no_loader: true
 layout: default
 title: Methodology
 permalink: /methodology/
@@ -37,6 +38,26 @@ description: "How CommodityNode calculates impact scores, correlation data, sens
       <li><strong>Supply chain data:</strong> Corporate supply chain disclosures, Bloomberg supply chain mapping, and industry association data</li>
       <li><strong>Macro data:</strong> Federal Reserve (FRED), BLS, and central bank publications for inflation, employment, and monetary policy context</li>
     </ul>
+
+    <h2>Data Types</h2>
+    <p>CommodityNode uses three types of price data:</p>
+    <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin:16px 0;">
+    <table style="width:100%;border-collapse:collapse;font-size:0.9rem;min-width:540px;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border);text-align:left;">
+          <th style="padding:8px 12px;color:var(--text3);">Type</th>
+          <th style="padding:8px 12px;color:var(--text3);">Description</th>
+          <th style="padding:8px 12px;color:var(--text3);">Examples</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;"><strong>Direct Futures</strong></td><td style="padding:8px 12px;">Exchange-traded commodity futures</td><td style="padding:8px 12px;">Crude Oil (CL=F), Gold (GC=F), Copper (HG=F)</td></tr>
+        <tr style="border-bottom:1px solid var(--border);"><td style="padding:8px 12px;"><strong>ETF Proxy</strong></td><td style="padding:8px 12px;">ETF tracking commodity sector</td><td style="padding:8px 12px;">Uranium (URA), Steel (SLX)</td></tr>
+        <tr><td style="padding:8px 12px;"><strong>Equity Proxy</strong></td><td style="padding:8px 12px;">Individual company stock as indirect indicator</td><td style="padding:8px 12px;">Lithium via Albemarle (ALB), Iron Ore via Vale (VALE)</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>Proxy prices reflect the performance of the proxy asset, not the underlying commodity spot/futures price directly. They may diverge from commodity prices due to company-specific factors, currency effects, or fund composition. All proxy assets are clearly labeled on their respective hub pages.</p>
 
     <h2>Correlation Methodology</h2>
     <p>Correlation values displayed on each node represent the <strong>Pearson correlation coefficient</strong> between the asset's weekly returns and the commodity's weekly price changes over a rolling 3-year window.</p>

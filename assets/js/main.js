@@ -15,12 +15,12 @@
     var loader = document.getElementById("page-loader");
     if (loader) {
       loader.style.opacity = "0";
-      setTimeout(function() { loader.style.display = "none"; }, 500);
+      setTimeout(function() { loader.style.display = "none"; }, 300);
     }
   }
   // Wait for page content to be ready (graphs, charts)
   function checkContentReady() {
-    var minTime = 600; // show loader at least 0.6s
+    var minTime = 300; // show loader at least 0.3s
     var elapsed = Date.now() - _loaderStart;
     // Check if main content areas exist and have rendered
     var graph = document.getElementById('impact-graph');

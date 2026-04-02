@@ -53,6 +53,7 @@
 
 <!-- AdSense Auto Ads (managed by Google automatically) -->
 
+{% unless page.no_loader %}
 <div id="page-loader" style="position:fixed;inset:0;background:#050510;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s ease;">
   <div style="position:relative;width:80px;height:80px;margin-bottom:20px;">
     <svg width="80" height="80" viewBox="0 0 80 80">
@@ -68,6 +69,7 @@
   <div style="color:#22d3ee;font-family:Inter,system-ui,sans-serif;font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;opacity:0.8;">CommodityNode</div>
   <div style="color:#475569;font-size:0.75rem;margin-top:6px;letter-spacing:0.05em;">Loading Intelligence...</div>
 </div>
+{% endunless %}
 
   <div id="page-transition" class="page-transition" aria-hidden="true"></div>
 
@@ -225,6 +227,9 @@
     </div>
   </footer>
 
+  <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  <script src="{{ '/assets/js/clerk-auth.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  {% if page.layout == 'commodity' or page.layout == 'post' or page.url == '/' %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js" defer></script>
@@ -234,10 +239,9 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js" defer></script>
   <script src="{{ '/assets/js/impact-graph.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
-  <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   <script src="{{ '/assets/js/price-chart.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   <script src="{{ '/assets/js/universe-3d.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
-  <script src="{{ '/assets/js/clerk-auth.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  {% endif %}
 
   <!-- Nav Dropdown -->
   <script>

@@ -7,52 +7,55 @@ import json, os, time, urllib.request
 from datetime import datetime, timezone
 
 COMMODITIES = {
-    "crude_oil":     {"symbol": "CL=F",  "name": "Crude Oil",             "unit": "$/barrel"},
-    "gold":          {"symbol": "GC=F",  "name": "Gold",                  "unit": "$/oz"},
-    "copper":        {"symbol": "HG=F",  "name": "Copper",                "unit": "$/lb"},
-    "natural_gas":   {"symbol": "NG=F",  "name": "Natural Gas",           "unit": "$/MMBtu"},
-    "wheat":         {"symbol": "ZW=F",  "name": "Wheat",                 "unit": "cents/bushel"},
-    "lithium":       {"symbol": "ALB",   "name": "Lithium (ALB)",         "unit": "$/share"},
-    "silver":        {"symbol": "SI=F",  "name": "Silver",                "unit": "$/oz"},
-    "corn":          {"symbol": "ZC=F",  "name": "Corn",                  "unit": "cents/bushel"},
-    "uranium":       {"symbol": "URA",   "name": "Uranium (URA ETF)",     "unit": "$/share"},
-    "aluminum":      {"symbol": "ALI=F", "name": "Aluminum",              "unit": "$/tonne"},
-    "coffee":        {"symbol": "KC=F",  "name": "Coffee",                "unit": "cents/lb"},
-    "lumber":        {"symbol": "LBS=F", "name": "Lumber",                "unit": "$/share"},
-    "palladium":     {"symbol": "PA=F",  "name": "Palladium",             "unit": "$/oz"},
-    "steel":         {"symbol": "SLX",   "name": "Steel (SLX ETF)",       "unit": "$/share"},
-    "zinc":          {"symbol": "ZNC=F", "name": "Zinc",                  "unit": "$/share"},
-    "tin":           {"symbol": "ZNC=F", "name": "Tin (ZNC proxy)",       "unit": "$/share"},
-    "sugar":         {"symbol": "SB=F",  "name": "Sugar",                 "unit": "cents/lb"},
-    "soybeans":      {"symbol": "ZS=F",  "name": "Soybeans",              "unit": "cents/bushel"},
-    "platinum":      {"symbol": "PL=F",  "name": "Platinum",              "unit": "$/oz"},
-    "nickel":        {"symbol": "JJN",   "name": "Nickel (JJN ETN)",      "unit": "$/share"},
-    "lng":           {"symbol": "LNG",   "name": "LNG (Cheniere)",        "unit": "$/share"},
-    "jet_fuel":      {"symbol": "HO=F",  "name": "Jet Fuel (HO proxy)",  "unit": "$/gallon"},
-    "iron_ore":      {"symbol": "VALE",  "name": "Iron Ore (VALE)",       "unit": "$/share"},
-    "diesel":        {"symbol": "HO=F",  "name": "Diesel (Heating Oil)",  "unit": "$/gallon"},
-    "cotton":        {"symbol": "CT=F",  "name": "Cotton",                "unit": "cents/lb"},
-    "cocoa":         {"symbol": "CC=F",  "name": "Cocoa",                 "unit": "$/tonne"},
-    "cobalt":        {"symbol": "GLNCY", "name": "Cobalt (Glencore)",     "unit": "$/share"},
-    "coal":          {"symbol": "BTU",   "name": "Coal (BTU)",            "unit": "$/share"},
-    "rice":          {"symbol": "ZR=F",  "name": "Rice",                  "unit": "cents/cwt"},
-    "oats":          {"symbol": "ZO=F",  "name": "Oats",                  "unit": "cents/bushel"},
-    "orange_juice":  {"symbol": "OJ=F",  "name": "Orange Juice",          "unit": "cents/lb"},
-    "soybean_oil":   {"symbol": "ZL=F",  "name": "Soybean Oil",           "unit": "cents/lb"},
-    "soybean_meal":  {"symbol": "ZM=F",  "name": "Soybean Meal",         "unit": "$/short ton"},
-    "live_cattle":   {"symbol": "LE=F",  "name": "Live Cattle",           "unit": "cents/lb"},
-    "feeder_cattle": {"symbol": "GF=F",  "name": "Feeder Cattle",         "unit": "cents/lb"},
-    "lean_hogs":     {"symbol": "HE=F",  "name": "Lean Hogs",             "unit": "cents/lb"},
-    "potash":        {"symbol": "NTR",   "name": "Potash (NTR)",          "unit": "$/share"},
-    "ammonia":       {"symbol": "CF",    "name": "Ammonia (CF proxy)",    "unit": "$/share"},
-    "manganese":     {"symbol": "VALE",  "name": "Manganese (VALE proxy)","unit": "$/share"},
-    "vanadium":      {"symbol": "RIO",   "name": "Vanadium (RIO proxy)",  "unit": "$/share"},
-    "graphite":      {"symbol": "MP",    "name": "Graphite (MP proxy)",   "unit": "$/share"},
-    "rare_earth":    {"symbol": "MP",    "name": "Rare Earth (MP proxy)", "unit": "$/share"},
-    "rhodium":       {"symbol": "SBSW",  "name": "Rhodium (SBSW proxy)", "unit": "$/share"},
-    "hydrogen":      {"symbol": "PLUG",  "name": "Hydrogen (PLUG proxy)","unit": "$/share"},
-    "rubber":        {"symbol": "GT",    "name": "Rubber (GT proxy)",     "unit": "$/share"},
-    "ethanol":       {"symbol": "REX",   "name": "Ethanol (REX proxy)",  "unit": "$/share"},
+    # Direct futures
+    "crude_oil":     {"symbol": "CL=F",  "name": "Crude Oil",             "unit": "$/barrel",     "proxy_type": "futures"},
+    "gold":          {"symbol": "GC=F",  "name": "Gold",                  "unit": "$/oz",         "proxy_type": "futures"},
+    "copper":        {"symbol": "HG=F",  "name": "Copper",                "unit": "$/lb",         "proxy_type": "futures"},
+    "natural_gas":   {"symbol": "NG=F",  "name": "Natural Gas",           "unit": "$/MMBtu",      "proxy_type": "futures"},
+    "wheat":         {"symbol": "ZW=F",  "name": "Wheat",                 "unit": "cents/bushel",  "proxy_type": "futures"},
+    "silver":        {"symbol": "SI=F",  "name": "Silver",                "unit": "$/oz",         "proxy_type": "futures"},
+    "corn":          {"symbol": "ZC=F",  "name": "Corn",                  "unit": "cents/bushel",  "proxy_type": "futures"},
+    "aluminum":      {"symbol": "ALI=F", "name": "Aluminum",              "unit": "$/tonne",      "proxy_type": "futures"},
+    "coffee":        {"symbol": "KC=F",  "name": "Coffee",                "unit": "cents/lb",     "proxy_type": "futures"},
+    "lumber":        {"symbol": "LBS=F", "name": "Lumber",                "unit": "$/1000bf",     "proxy_type": "futures"},
+    "palladium":     {"symbol": "PA=F",  "name": "Palladium",             "unit": "$/oz",         "proxy_type": "futures"},
+    "zinc":          {"symbol": "ZNC=F", "name": "Zinc",                  "unit": "$/tonne",      "proxy_type": "futures"},
+    "sugar":         {"symbol": "SB=F",  "name": "Sugar",                 "unit": "cents/lb",     "proxy_type": "futures"},
+    "soybeans":      {"symbol": "ZS=F",  "name": "Soybeans",              "unit": "cents/bushel",  "proxy_type": "futures"},
+    "platinum":      {"symbol": "PL=F",  "name": "Platinum",              "unit": "$/oz",         "proxy_type": "futures"},
+    "cotton":        {"symbol": "CT=F",  "name": "Cotton",                "unit": "cents/lb",     "proxy_type": "futures"},
+    "cocoa":         {"symbol": "CC=F",  "name": "Cocoa",                 "unit": "$/tonne",      "proxy_type": "futures"},
+    "rice":          {"symbol": "ZR=F",  "name": "Rice",                  "unit": "cents/cwt",    "proxy_type": "futures"},
+    "oats":          {"symbol": "ZO=F",  "name": "Oats",                  "unit": "cents/bushel",  "proxy_type": "futures"},
+    "orange_juice":  {"symbol": "OJ=F",  "name": "Orange Juice",          "unit": "cents/lb",     "proxy_type": "futures"},
+    "soybean_oil":   {"symbol": "ZL=F",  "name": "Soybean Oil",           "unit": "cents/lb",     "proxy_type": "futures"},
+    "soybean_meal":  {"symbol": "ZM=F",  "name": "Soybean Meal",         "unit": "$/short ton",   "proxy_type": "futures"},
+    "live_cattle":   {"symbol": "LE=F",  "name": "Live Cattle",           "unit": "cents/lb",     "proxy_type": "futures"},
+    "feeder_cattle": {"symbol": "GF=F",  "name": "Feeder Cattle",         "unit": "cents/lb",     "proxy_type": "futures"},
+    "lean_hogs":     {"symbol": "HE=F",  "name": "Lean Hogs",             "unit": "cents/lb",     "proxy_type": "futures"},
+    "jet_fuel":      {"symbol": "HO=F",  "name": "Jet Fuel (HO proxy)",  "unit": "$/gallon",     "proxy_type": "futures"},
+    "diesel":        {"symbol": "HO=F",  "name": "Diesel (Heating Oil)",  "unit": "$/gallon",     "proxy_type": "futures"},
+    # ETF proxy
+    "uranium":       {"symbol": "URA",   "name": "Uranium (URA ETF)",     "unit": "$/share",      "proxy_type": "etf_proxy"},
+    "steel":         {"symbol": "SLX",   "name": "Steel (SLX ETF)",       "unit": "$/share",      "proxy_type": "etf_proxy"},
+    "nickel":        {"symbol": "JJN",   "name": "Nickel (JJN ETN)",      "unit": "$/share",      "proxy_type": "etf_proxy"},
+    # Equity proxy
+    "lithium":       {"symbol": "ALB",   "name": "Lithium (ALB)",         "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "tin":           {"symbol": "JJN",   "name": "Tin (JJN proxy)",       "unit": "$/share",      "proxy_type": "etf_proxy"},
+    "iron_ore":      {"symbol": "VALE",  "name": "Iron Ore (VALE)",       "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "cobalt":        {"symbol": "GLNCY", "name": "Cobalt (Glencore)",     "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "coal":          {"symbol": "BTU",   "name": "Coal (BTU)",            "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "lng":           {"symbol": "LNG",   "name": "LNG (Cheniere)",        "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "potash":        {"symbol": "NTR",   "name": "Potash (NTR)",          "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "ammonia":       {"symbol": "CF",    "name": "Ammonia (CF proxy)",    "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "manganese":     {"symbol": "VALE",  "name": "Manganese (VALE proxy)","unit": "$/share",      "proxy_type": "equity_proxy"},
+    "vanadium":      {"symbol": "RIO",   "name": "Vanadium (RIO proxy)",  "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "graphite":      {"symbol": "MP",    "name": "Graphite (MP proxy)",   "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "rare_earth":    {"symbol": "MP",    "name": "Rare Earth (MP proxy)", "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "rhodium":       {"symbol": "SBSW",  "name": "Rhodium (SBSW proxy)", "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "hydrogen":      {"symbol": "PLUG",  "name": "Hydrogen (PLUG proxy)","unit": "$/share",       "proxy_type": "equity_proxy"},
+    "rubber":        {"symbol": "GT",    "name": "Rubber (GT proxy)",     "unit": "$/share",      "proxy_type": "equity_proxy"},
+    "ethanol":       {"symbol": "REX",   "name": "Ethanol (REX proxy)",  "unit": "$/share",       "proxy_type": "equity_proxy"},
 }
 
 CHART_SYMBOLS = {info["symbol"]: info["name"] for info in COMMODITIES.values()}
@@ -151,7 +154,10 @@ def main():
         print(f"📊 {info['name']} ({info['symbol']})...")
         data = fetch_price(info["symbol"])
         if data:
-            prices[key] = {**info, **data}
+            entry = {**info, **data}
+            if "proxy_type" in info:
+                entry["proxy_type"] = info["proxy_type"]
+            prices[key] = entry
             sign = "+" if data["change_pct"] >= 0 else ""
             print(f"   ${data['price']} ({sign}{data['change_pct']}%)")
         time.sleep(0.25)

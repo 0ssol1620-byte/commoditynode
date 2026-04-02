@@ -123,6 +123,18 @@ layout: default
       unitEl.style.cssText = 'font-size:0.75rem;color:var(--text3);margin-left:4px;font-weight:400;';
       document.getElementById('banner-price').appendChild(unitEl);
     }
+    // proxy type badge
+    if (c.proxy_type && c.proxy_type !== 'futures') {
+      var proxyBadge = document.createElement('span');
+      var badgeText = c.proxy_type === 'etf_proxy' ? 'ETF Proxy' : 
+                      c.proxy_type === 'equity_proxy' ? 'Equity Proxy' : 'Proxy';
+      proxyBadge.style.cssText = 'display:inline-flex;align-items:center;gap:4px;padding:3px 8px;'
+        + 'background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.2);'
+        + 'border-radius:5px;font-size:0.68rem;color:#eab308;font-weight:600;margin-left:10px;cursor:help;';
+      proxyBadge.textContent = badgeText;
+      proxyBadge.title = 'This price reflects a proxy asset (' + (c.symbol||'') + '), not a direct commodity futures price. See methodology for details.';
+      document.getElementById('banner-price').parentElement.appendChild(proxyBadge);
+    }
     var sign = c.change_pct >= 0 ? '+' : '';
     var changeEl = document.getElementById('banner-change');
     changeEl.textContent = sign + c.change_pct + '%';
@@ -517,15 +529,15 @@ layout: default
       if (typeof Chart === 'undefined') {
         var s = document.createElement('script');
         s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
-        s.onload = function() { drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90, fcP10); };
+        s.onload = function() { drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext); };
         document.head.appendChild(s);
       } else {
-        drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90, fcP10);
+        drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext);
       }
     })
     .catch(function(e) { console.warn('Forecast load error', e); });
 
-  function drawChart(canvas, labels, histLine, medLine, p90Line, p10Line, meta, d, fcP90, fcP10) {
+  function drawChart(canvas, labels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext) {
     new Chart(canvas, {
       type: 'line',
       data: {

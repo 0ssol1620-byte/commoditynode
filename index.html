@@ -15,7 +15,7 @@ image: "/assets/images/og-default.png"
     <div class="hero-content">
       <div class="hero-badge" data-animate>
         <span class="live-dot" aria-hidden="true"></span>
-        Live · <span id="live-viewer-count">247</span> analysts online
+        Live Market Intelligence
       </div>
 
       <h1 data-animate data-delay="100">
@@ -331,7 +331,7 @@ image: "/assets/images/og-default.png"
     <div class="forecast-pro-cta" data-animate data-delay="300">
       <div class="forecast-pro-inner">
         <div>
-          <div class="forecast-pro-title">Full 19-commodity AI forecast</div>
+          <div class="forecast-pro-title">AI price forecasts for 19 major commodities</div>
           <div class="forecast-pro-desc">Copper, Silver, Wheat, Uranium, Lithium + 14 more — all with P10/P90 bands and daily updates.</div>
         </div>
         <a href="/range-tracker/" class="btn btn-primary">View All Forecasts →</a>
@@ -1346,19 +1346,6 @@ window.addEventListener('scroll', function() {
   var bar = document.getElementById('scroll-progress');
   if (bar) bar.style.width = Math.min(100, scrolled) + '%';
 });
-
-// ===== Live Viewer Count =====
-(function() {
-  var base = 240 + Math.floor(Math.random() * 70);
-  var el = document.getElementById('live-viewer-count');
-  if (!el) return;
-  el.textContent = base;
-  setInterval(function() {
-    base += (Math.random() > 0.5 ? 1 : -1) * Math.floor(Math.random() * 3);
-    base = Math.max(220, Math.min(320, base));
-    el.textContent = base;
-  }, 4000);
-})();
 
 // ===== Last Update Timestamp =====
 (function() {

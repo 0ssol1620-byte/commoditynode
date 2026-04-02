@@ -19,7 +19,7 @@
     return false;
   }
   var METER_KEY = 'cn_meter';
-  var PRO_LINK = '#'; // Paddle payment link placeholder
+  var PRO_LINK = '/pricing/';
 
   /* ---------- Helpers ---------- */
   function currentMonth() {

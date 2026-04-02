@@ -1,4 +1,5 @@
 ---
+no_loader: true
 layout: default
 title: Privacy Policy
 description: "CommodityNode privacy policy — how we collect, use, and protect your data."

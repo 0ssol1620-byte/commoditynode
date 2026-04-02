@@ -1,8 +1,10 @@
 ---
+no_loader: true
 layout: default
 title: About CommodityNode
 description: "CommodityNode maps how commodity price movements ripple through global industries, stocks, and ETFs with interactive Impact Maps and Signal Reports."
 ---
+no_loader: true
 
 <div class="post-header">
   <div class="container">

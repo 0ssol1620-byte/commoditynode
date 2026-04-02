@@ -1,4 +1,5 @@
 ---
+no_loader: true
 layout: default
 title: "Terms of Service"
 description: "CommodityNode Terms of Service — rules governing your use of our commodity intelligence platform, subscriptions, refunds, and data usage policies."

@@ -1,4 +1,5 @@
 ---
+no_loader: true
 layout: default
 title: Contact
 description: "Get in touch with the CommodityNode team for tips, corrections, partnerships, or feedback."
