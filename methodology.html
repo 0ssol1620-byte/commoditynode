@@ -163,6 +163,36 @@ description: "How CommodityNode calculates impact scores, correlation data, sens
     </ul>
     <p>Ripple Chain strength diminishes with each hop. We typically see 60–80% of the signal transmitted at Hop 1, 30–50% at Hop 2, and 10–25% at Hop 3+.</p>
 
+  </div>
+</div>
+
+<section class="section" style="padding:48px 0 60px;">
+  <div class="container" style="max-width:800px;">
+    <h2 style="font-size:1.3rem;font-weight:700;color:#e2e8f0;margin-bottom:20px;">Transparency &amp; Limitations</h2>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="padding:16px;background:rgba(255,255,255,0.02);border-left:3px solid #22d3ee;border-radius:0 8px 8px 0;">
+        <strong style="color:#e2e8f0;">Historical Backtesting Bias</strong>
+        <p style="color:#94a3b8;font-size:0.88rem;margin:6px 0 0;line-height:1.6;">Correlation coefficients and sensitivity betas are calculated from historical data and may not reflect future relationships, particularly during structural breaks or regime changes.</p>
+      </div>
+      <div style="padding:16px;background:rgba(255,255,255,0.02);border-left:3px solid #fbbf24;border-radius:0 8px 8px 0;">
+        <strong style="color:#e2e8f0;">Proxy Symbol Limitations</strong>
+        <p style="color:#94a3b8;font-size:0.88rem;margin:6px 0 0;line-height:1.6;">26 of our 60 commodity hubs use ETF or equity proxies rather than direct futures prices. These proxies introduce basis risk and may not perfectly track the underlying commodity. All proxy hubs display a "Proxy" badge.</p>
+      </div>
+      <div style="padding:16px;background:rgba(255,255,255,0.02);border-left:3px solid #a855f7;border-radius:0 8px 8px 0;">
+        <strong style="color:#e2e8f0;">Not Financial Advice</strong>
+        <p style="color:#94a3b8;font-size:0.88rem;margin:6px 0 0;line-height:1.6;">All content on CommodityNode is for informational and educational purposes only. Signal Reports and forecasts are analytical tools, not investment recommendations. Always conduct your own due diligence.</p>
+      </div>
+      <div style="padding:16px;background:rgba(255,255,255,0.02);border-left:3px solid #10b981;border-radius:0 8px 8px 0;">
+        <strong style="color:#e2e8f0;">Data Freshness</strong>
+        <p style="color:#94a3b8;font-size:0.88rem;margin:6px 0 0;line-height:1.6;">Price data is updated daily via automated scripts. AI forecasts are recalculated weekly. Correlation matrices refresh on a 30/60/90-day rolling basis. All data displays its last-updated timestamp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="methodology-section">
+
     <div class="disclaimer-box">
       <h3>Disclaimer</h3>
       <p>CommodityNode provides research signals and analytical tools for educational and informational purposes only. Nothing on this site constitutes financial advice, investment recommendations, or trading signals.</p>
