@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Potash (potassium chloride, KCl) is one of three essential macronutrients for crop production -- there is no substitute for the potassium it delivers to plant biology. Global production is concentrated in Saskatchewan, Canada (Nutrien, Mosaic) and the former Soviet bloc (Uralkali in Russia, Belaruskali in Belarus), making supply acutely sensitive to geopolitical disruption. A **+10% move in potash prices** drives an average **+8.5% response in IPI** and **+7% in NTR and MOS**. Annual global potash demand exceeds 70 million tonnes, with Brazil, China, India, and the United States as the largest importers. The 2022 Russia-Belarus sanctions removed roughly 40% of global export capacity from freely tradable markets, triggering a price spike that tripled benchmark potash from $230/tonne to over $700/tonne before normalizing.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Nutrien operates the world's largest potash mines in Saskatchewan and controls roughly 20% of global capacity. Mosaic and Intrepid Potash provide additional North American supply. ICL and K+S serve European and specialty markets. These producers have significant operating leverage -- marginal costs sit near $120-150/tonne, so price moves above that threshold flow almost entirely to earnings. Farm equipment makers like Deere and AGCO see indirect benefit: higher crop prices driven by fertilizer scarcity incentivize acreage expansion and equipment investment.
 
@@ -87,14 +87,14 @@ Potash (potassium chloride, KCl) is one of three essential macronutrients for cr
 
 **Tertiary -- Macro and Second-Order Effects:** Potash price spikes feed directly into food inflation with an 8-12 month lag as higher fertilizer costs translate to reduced application rates, lower crop yields, and eventually higher grain prices. The FAO Food Price Index has shown 0.50 correlation to potash prices over rolling 12-month periods. Developing nations in Africa and South Asia face acute food security risk when potash becomes unaffordable. India's fertilizer subsidy program, which costs the government $20+ billion annually, balloons during potash rallies, straining fiscal balances.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Potash producers with low-cost Saskatchewan or Dead Sea operations benefit most from price rallies, particularly Nutrien and ICL with their vertically integrated retail distribution. Canadian rail operators see volume growth and pricing power. Nations with domestic potash reserves (Canada, Israel, Jordan) gain strategic trade leverage. Organic fertilizer companies attract investment as conventional fertilizer costs spike.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Farmers in import-dependent nations face margin compression when potash prices rise, particularly in Brazil, India, and Sub-Saharan Africa. Food consumers globally bear the downstream cost through higher grain and protein prices. Crop input distributors face demand destruction as farmers reduce application rates. Countries reliant on Russian and Belarusian potash (much of Southeast Asia and Latin America) face acute supply disruption during sanctions regimes.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The NTR-to-corn ratio provides a mean-reverting signal: when NTR outperforms corn futures by more than 1.5 standard deviations, fertilizer producers are overpriced relative to crop economics and tend to revert. The MOS/NTR pair trade offers exposure to phosphate-vs-potash dynamics. Quarterly USDA planted acreage reports and Brazilian Conab crop surveys are the primary demand catalysts. Watch Canpotex (the Canadian export cartel) contract negotiations with China and India -- these benchmark deals set global potash pricing for six-month periods and often move the entire fertilizer complex.

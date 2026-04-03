@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Chromium is the essential alloying element in stainless steel — all stainless grades require a minimum 10.5% chromium content, with the ubiquitous 304 grade containing 18%. This single application consumes over 70% of global chromium production, making chromium demand a direct proxy for stainless steel output. South Africa holds the world's largest chromite ore reserves (~70%) and is the leading ferrochrome producer, followed by Kazakhstan (Kazchrome/ERG) and India. Annual global chromite production is approximately 40 million tonnes. The market is priced via ferrochrome benchmark quarterly contracts between producers and stainless mills. South Africa's structural energy crisis (Eskom load shedding) and logistics failures (Transnet rail) create persistent supply-side volatility, while Chinese stainless demand — led by Tsingshan Group — dominates the consumption side.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary — Stainless Steel Production Chain:** Ferrochrome is the single largest input cost in stainless steel after nickel, typically representing 20-25% of 304 grade production cost. Quarterly benchmark ferrochrome prices are negotiated between South African producers (Samancor, Glencore Alloys) and European stainless mills (Outokumpu, Acerinox, Aperam). Chinese stainless producers increasingly use integrated UG2 chrome-from-PGM tailings and imported South African charge chrome.
 
@@ -70,14 +70,14 @@ Chromium is the essential alloying element in stainless steel — all stainless 
 
 **Tertiary — Construction and Automotive Demand:** Stainless steel consumption tracks global construction activity (facades, structural, kitchen/bath), automotive production (exhaust systems, trim), and industrial equipment. China's infrastructure stimulus policies directly drive ferrochrome demand through stainless steel consumption. Substitution toward 200-series nickel-free stainless (using manganese instead of nickel) still requires chromium, limiting downside demand risk.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 South African ferrochrome producers (Samancor, Glencore Alloys) benefit from price spikes driven by their own supply constraints. Kazchrome (ERG Group) gains market share when South African supply is disrupted. Indian ferrochrome producers (Tata Steel Mining, IMFA) capture incremental demand from supply diversification. Chrome ore miners in Turkey and Albania benefit from direct-shipping ore demand when ferrochrome capacity is constrained.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Stainless steel producers globally face margin compression as ferrochrome costs rise — Outokumpu, Acerinox, and Aperam have limited ability to pass through costs in competitive markets. Construction and infrastructure projects face higher material costs. Automotive manufacturers absorb stainless steel cost inflation in exhaust systems and structural components. South African ferrochrome smelters themselves suffer from load shedding-driven production losses despite higher prices.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Ferrochrome is traded via quarterly benchmark contracts (European) and spot markets (Chinese). Monitor Eskom's load shedding stage announcements for immediate South African supply impact — Stage 4+ directly curtails smelter operations. Track China's monthly stainless steel production data (ISSF/SMM) as the dominant demand driver. The ferrochrome/nickel price ratio indicates relative stainless steel input cost dynamics. South African Rand weakness lowers ferrochrome production costs in dollar terms, creating a natural hedge for SA producers. Watch for Chinese stainless steel inventory levels at Wuxi and Foshan warehouses as demand health indicators. POSCO and Outokumpu quarterly earnings provide direct ferrochrome cost commentary.

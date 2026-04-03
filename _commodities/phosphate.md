@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Phosphate rock is one of the three essential plant macronutrients (N-P-K) with no substitute in agriculture — without phosphorus, crops simply cannot grow. Morocco's OCP Group controls roughly 70% of global economically recoverable phosphate reserves, creating the most extreme single-country resource concentration of any major commodity. Annual global phosphate rock production is approximately 220 million tonnes. Phosphate rock is processed into phosphoric acid, which is then used to manufacture DAP (diammonium phosphate) and MAP (monoammonium phosphate) fertilizers. Unlike nitrogen fertilizers (derived from natural gas) or potash (mined as KCl), phosphate supply is geologically constrained with no synthetic production pathway. The "peak phosphorus" debate — whether economically recoverable reserves will be depleted within 100-300 years — adds a long-term scarcity premium. China, the world's second-largest producer, periodically imposes export restrictions to prioritize domestic food security.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary — Global Fertilizer Supply Chain:** Phosphate rock → phosphoric acid → DAP/MAP represents a concentrated processing chain. OCP (Morocco), Mosaic (U.S.), Nutrien (Canada), ICL (Israel), and PhosAgro (Russia) control the majority of global phosphate fertilizer trade. India and Brazil are the world's largest importers, making their agricultural sectors directly exposed to phosphate price volatility.
 
@@ -70,14 +70,14 @@ Phosphate rock is one of the three essential plant macronutrients (N-P-K) with n
 
 **Tertiary — Emerging Demand and Resource Scarcity:** LFP (lithium iron phosphate) battery chemistry is creating new demand for phosphoric acid outside traditional fertilizer markets. Precision agriculture and variable-rate application technology can reduce phosphate fertilizer use per hectare by 15-25%, acting as a demand-side efficiency substitute. The finite nature of phosphate reserves drives long-term strategic positioning by Morocco and resource-importing nations.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 OCP Group benefits from monopolistic reserve control and is investing $13B+ in capacity expansion to capture growing African and Asian demand. Mosaic (MOS) leverages integrated phosphate mining and fertilizer production in Florida and Brazil. Nutrien benefits from phosphate diversification alongside potash and nitrogen. Ma'aden (Saudi Arabia) captures Middle Eastern demand growth through its Wa'ad Al Shamaal phosphate complex. LFP battery growth creates incremental phosphoric acid demand outside the fertilizer cycle.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Fertilizer importing nations (India, Brazil, Southeast Asia, Sub-Saharan Africa) bear direct cost inflation with limited domestic alternatives. Smallholder farmers in developing countries face affordability crises during price spikes, reducing application rates and crop yields. Food companies and livestock producers absorb higher feed costs. Countries dependent on Chinese phosphate imports face supply uncertainty during export restriction periods.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Phosphate rock is traded via CRU and Argus price assessments, with DAP/MAP futures available on CME. Mosaic (MOS) is the most liquid equity proxy for phosphate exposure. Monitor China's MOFCOM phosphate export tariff and quota announcements — any restriction immediately tightens seaborne supply. Track India's fertilizer subsidy budget allocations as a demand-side price support indicator. OCP's production and export data (published quarterly) provides supply-side visibility. The DAP-phosphate rock spread indicates processing margin health. Watch global grain prices (corn, soybeans, wheat) as a leading indicator for farmer fertilizer purchasing power and application rates. Sulfur price movements matter — sulfuric acid is the key input for phosphoric acid production, so sulfur spikes compress phosphate processor margins.

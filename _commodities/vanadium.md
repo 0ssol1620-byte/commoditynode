@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Vanadium occupies a unique position in the commodity landscape as both an essential steel alloying element and a promising energy storage metal. Approximately 90% of global vanadium consumption goes into steel, primarily as ferrovanadium (FeV) added to high-strength low-alloy (HSLA) steels used in rebar, pipelines, and structural applications. The remaining 10% flows into chemical applications and, increasingly, vanadium redox flow batteries (VRFBs). China dominates the market, producing over 55% of global supply primarily as a co-product of iron ore processing at facilities like Pangang Group in Sichuan province. Annual global production is roughly 100,000 tonnes of V2O5 equivalent, making it a small but strategically important market with high price volatility.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Largo Inc (LGO) is the only publicly traded pure-play vanadium producer, operating the Maracas Menchen mine in Brazil. Bushveld Minerals in South Africa provides additional primary production exposure. Among diversified miners, Rio Tinto and Glencore produce vanadium as a by-product of titanium slag and other operations. On the demand side, steelmakers such as ArcelorMittal (MT) and Nucor (NUE) are the largest consumers, with vanadium intensity per tonne of steel rising as construction standards tighten -- particularly China's rebar standards (GB/T 1499) that mandate higher vanadium content.
 
@@ -87,14 +87,14 @@ Vanadium occupies a unique position in the commodity landscape as both an essent
 
 **Tertiary -- Macro and Second-Order Effects:** China's dual role as the largest producer and consumer creates a self-referencing market where domestic policy decisions -- such as environmental shutdowns of stone-coal vanadium plants or changes to rebar standards -- can swing global prices 30-50% within months. Substitution threats from molybdenum, niobium, and chromium in steel applications provide a soft ceiling on prices, while lithium-ion battery competition caps VRFB adoption rates. Critical mineral designation in the US and EU is driving policy support for non-Chinese supply development.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Vanadium price surges disproportionately benefit Largo Inc (LGO) and Bushveld Minerals, whose revenues are almost entirely vanadium-derived. VRFB manufacturers benefit indirectly from higher vanadium visibility and the associated investment flows into energy storage, though their input costs also rise. AMG Advanced Metallurgy captures value through its specialty alloys and processing operations. South African and Brazilian producers gain margin expansion when the rand and real weaken against the dollar simultaneously.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Steelmakers absorb vanadium cost inflation directly, particularly in markets where rebar and structural steel pricing is competitive and cost pass-through is limited. VRFB developers face a paradox where higher vanadium prices increase battery system costs and slow adoption relative to lithium-ion alternatives. Aerospace companies using titanium-vanadium alloys see incremental materials cost pressure. Construction companies in price-sensitive emerging markets may downgrade steel specifications or delay projects when ferrovanadium costs spike.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Vanadium trades in an opaque physical market with pricing set by assessments from Fastmarkets and Asian Metal. There is no liquid futures contract, so exposure is typically obtained through equities (Largo, Bushveld) or diversified mining ETFs (PICK, XME). Monitor China's rebar standard enforcement and environmental inspection campaigns as primary price catalysts. The vanadium-to-ferrovanadium conversion spread indicates processing margins and downstream demand health. VRFB deployment announcements provide leading indicators for the structural demand growth thesis, but steel consumption remains the dominant price driver in the near term.

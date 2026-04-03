@@ -80,11 +80,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Soybean oil is the most consumed edible oil in the United States and the most consequential dual-use agricultural commodity in global markets. Produced as a co-product of the soybean crush alongside soybean meal, its pricing is shaped by both food demand and the rapidly expanding renewable diesel industry. The crush spread -- the margin between soybean prices and the combined value of oil and meal -- drives processor profitability for ADM, Bunge, and regional cooperatives. Since 2020, renewable diesel capacity buildouts have fundamentally shifted soybean oil demand, with biofuel consumption now rivaling food use in the United States. The Renewable Fuel Standard (RFS) and Inflation Reduction Act clean fuel credits create policy-driven demand that amplifies price volatility beyond traditional agricultural supply-demand fundamentals.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Oilseed Crushers and Renewable Diesel:** Archer-Daniels-Midland and Bunge operate the largest crushing networks and benefit directly from high crush margins. When soybean oil prices rise, crush margins typically expand, incentivizing greater soybean processing. Renewable diesel producers like HF Sinclair and Green Plains compete for soybean oil feedstock, creating a price floor that did not exist a decade ago. RIN credit values and EPA Renewable Volume Obligations directly influence the economics of soybean oil-to-diesel conversion.
 
@@ -92,14 +92,14 @@ Soybean oil is the most consumed edible oil in the United States and the most co
 
 **Tertiary -- Currency, Weather, and Policy:** The Brazilian real and Argentine peso significantly influence export competitiveness of South American soybeans. La Nina drought cycles in Argentina routinely disrupt global soybean oil supply, as the country is the top exporter of soy products. China's massive crush industry imports raw soybeans and processes them domestically, making Chinese demand a critical swing factor. IRA clean fuel tax credits and EPA regulatory decisions create binary policy risk events for the entire soybean oil complex.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Oilseed processors with integrated crush capacity -- ADM, Bunge, and AG Processing -- capture the most direct upside from soybean oil rallies through expanding crush margins. Renewable diesel producers benefit when policy support keeps biofuel blending mandates high. Brazilian and Argentine soybean farmers see windfall revenues during global supply tightness. Palm oil producers in Southeast Asia gain market share when soybean oil prices make palm a more competitive substitute in food applications.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Food manufacturers and restaurant chains absorb margin compression when soybean oil prices spike, as consumer resistance limits pass-through. Smaller independent frying oil distributors lack hedging sophistication and face acute margin pressure. Renewable diesel facilities face feedstock cost squeezes when soybean oil prices rise faster than RIN credit values or diesel prices. Livestock producers see higher feed costs through soybean meal price increases that accompany aggressive crush operations.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The USDA WASDE report is the primary monthly catalyst for soybean oil positioning. Monitor the board crush margin (ZS vs. ZL + ZM) as the key indicator of processor economics and crushing incentives. The oil share -- soybean oil's percentage of total crush product value -- has risen dramatically with renewable diesel demand and serves as a structural indicator. RIN credit prices and EPA regulatory announcements create event-driven volatility. Indonesian palm oil export policy is the most impactful external supply shock to watch, and the CFTC commitment of traders report reveals speculative positioning extremes in ZL futures.

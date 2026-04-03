@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Iridium is the rarest stable element used in industrial applications and has become the critical bottleneck for green hydrogen production at scale. As a platinum group metal (PGM), iridium is produced almost exclusively as a minor by-product of platinum and palladium mining in South Africa's Bushveld Complex, with global annual production of merely 7-8 tonnes. This makes iridium one of the scarcest commercially traded metals on Earth. The primary demand driver is proton exchange membrane (PEM) electrolysis, where iridium oxide serves as the anode catalyst -- currently, there is no commercially proven substitute that matches iridium's performance in the acidic PEM environment. With governments worldwide targeting hundreds of gigawatts of electrolyzer capacity by 2030, iridium supply represents a fundamental constraint on green hydrogen deployment speed.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- PEM Electrolyzers and Green Hydrogen:** PEM electrolyzers use iridium oxide coatings on the oxygen evolution reaction (OER) anode, consuming approximately 1-2 grams of iridium per kilowatt of electrolyzer capacity. With global electrolyzer deployment targets exceeding 100 GW by 2030, the implied iridium demand would consume multiples of current annual production. This creates an unprecedented supply-demand mismatch. Companies like Plug Power, Nel ASA, ITM Power, and Siemens Energy face direct cost and availability constraints. The industry is aggressively working to reduce iridium loading through thinner catalyst layers and novel deposition techniques, but even 90% reduction scenarios strain available supply at projected deployment rates.
 
@@ -70,14 +70,14 @@ Iridium is the rarest stable element used in industrial applications and has bec
 
 **Tertiary -- Substitution and Technology Pathways:** Anion exchange membrane (AEM) electrolysis represents the most promising substitute technology, using nickel or cobalt-based catalysts instead of iridium. However, AEM technology remains at early commercial stage with lower durability and efficiency than PEM systems. Alkaline electrolyzers avoid iridium entirely but sacrifice the dynamic response characteristics that make PEM preferred for renewable energy integration. Iridium recycling from spent catalysts and electronic components can supplement primary supply, but current recycling volumes are minimal relative to projected demand growth.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 PGM miners (Sibanye-Stillwater, Impala Platinum, Anglo American Platinum) benefit from iridium price rallies with zero marginal production cost since iridium is a by-product. PGM processors (Heraeus, Johnson Matthey, Tanaka) capture margin on refining and fabricating iridium catalysts. AEM electrolyzer developers gain competitive positioning against iridium-dependent PEM technology. Iridium recyclers see dramatically improved economics. Alkaline electrolyzer manufacturers benefit as the technology avoids PGM dependency entirely.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 PEM electrolyzer manufacturers (Plug Power, Nel ASA, ITM Power, Siemens Energy) face direct cost escalation and potential deployment delays. Green hydrogen project developers see higher capital costs that reduce project economics and subsidy effectiveness. Governments with aggressive hydrogen strategies (EU, Japan, South Korea) face potential timeline slippage on decarbonization targets. Fuel cell manufacturers using PGM catalysts face parallel material cost pressure. Traditional iridium applications (spark plugs, crucibles, OLED compounds) face availability constraints as hydrogen demand absorbs supply.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Iridium trades through dealer markets with Johnson Matthey and Heraeus base prices published daily. The metal is too illiquid for futures trading, with annual production value under $2 billion. Monitor South African mining production data and Eskom load-shedding schedules for supply indicators. Track electrolyzer order books and deployment announcements from Plug Power, Nel, and ITM Power for demand signals. EU and US hydrogen subsidy policy (EU REPowerEU, US IRA Section 45V) directly influences PEM electrolyzer deployment pace. The iridium loading reduction rate (grams per kilowatt) at commercial PEM systems is the most critical variable for supply-demand modeling. Monitor AEM electrolyzer commercial milestones as the primary substitution threat.

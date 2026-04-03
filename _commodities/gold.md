@@ -85,11 +85,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Gold operates as the world's premier safe-haven asset -- inversely correlated with the U.S. dollar, real interest rates, and equity volatility. A **+5% gold move** signals elevated inflation expectations or systemic financial stress. Annual mine production is approximately 3,600 tonnes, but above-ground stocks exceeding 200,000 tonnes mean that gold supply is essentially infinite at the right price -- the market is driven by the willingness to hold versus sell existing metal. Central bank purchases, particularly from China, India, and Turkey, have structurally increased since 2022, adding a new demand pillar alongside jewelry and investment.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** GDX and individual miners (Newmont, Barrick) exhibit 2-3x leverage to gold prices due to fixed production costs. A 10% gold rally can generate 20-30% EPS expansion for major producers. Agnico Eagle Mines (AEM) and Kinross Gold (KGC) provide additional pure-play exposure with different geographic risk profiles. Royalty and streaming companies (Franco-Nevada, Wheaton Precious Metals) offer leveraged gold exposure with lower operating risk than miners.
 
@@ -97,15 +97,15 @@ Gold operates as the world's premier safe-haven asset -- inversely correlated wi
 
 **Tertiary -- Macro and Second-Order Effects:** Gold maintains a -0.70 rolling correlation with DXY. Dollar strength consistently pressures gold. Monitor Fed Funds futures for rate trajectory as the primary gold driver. TIPS bonds and gold often move together during stagflationary regimes. When real yields are negative, gold's opportunity cost disappears -- the strongest bull case. Gold's role in the global monetary system gives it unique reflexive properties where rising prices attract momentum capital, creating self-reinforcing rallies.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Gold miners with high operating leverage and long mine lives benefit most from sustained price increases. Newmont (NEM) and Barrick Gold (GOLD) are the largest producers. Streaming and royalty companies capture price upside without cost inflation. Central banks holding gold reserves see balance sheet appreciation. Physical gold dealers and coin shops see increased retail demand and wider premiums during price rallies.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Jewelry manufacturers and retailers face demand destruction as higher prices push consumers toward lower-karat or smaller pieces. Industrial users of gold in electronics and dentistry absorb cost increases on a small-volume but essential input. Short sellers and gold bears face mark-to-market losses during sustained rallies. The U.S. dollar's relative attractiveness as a reserve asset diminishes when gold rallies signal loss of confidence in fiat currencies.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The gold/silver ratio (historically averaging ~60-65:1) is a key spread trade. When the ratio exceeds 80-90, silver is historically cheap relative to gold -- suggesting a long silver / short gold position with mean-reversion potential. COMEX positioning data, GLD ETF tonnage flows, and central bank purchase reports from the World Gold Council provide the key demand-side indicators. The gold/real yield relationship (inverted 10-year TIPS yield) remains the most reliable fundamental framework for directional positioning.
 

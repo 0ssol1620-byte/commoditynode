@@ -76,11 +76,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Ammonia (NH3) is the world's most-produced inorganic chemical at roughly 180 million tonnes annually -- and 80% of it goes directly into nitrogen fertilizers that underpin global food production. The Haber-Bosch process consumes natural gas as both feedstock and fuel, making ammonia prices structurally tethered to gas markets: a **+10% move in Henry Hub** typically drives **+7-9% in CF Industries** within 30 days. Beyond fertilizer, ammonia is emerging as a zero-carbon fuel for maritime shipping and a hydrogen carrier for long-distance clean energy transport. European producers like Yara and BASF face existential cost disadvantage when TTF gas prices spike, creating a two-tier global cost structure where Middle Eastern and U.S. Gulf Coast producers operate at $150-200/tonne while European plants see costs exceed $600/tonne.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** CF Industries, the largest publicly traded nitrogen producer, operates low-cost plants on U.S. Gulf Coast natural gas and captures the full spread between Henry Hub-linked costs and global ammonia prices. CVR Partners (UAN) and LSB Industries offer higher-beta exposure with smaller scale and less hedging. Yara International and OCI NV provide global diversification. These companies exhibit operating leverage of 2-3x on ammonia price moves above cash cost, making earnings highly volatile in both directions.
 
@@ -88,14 +88,14 @@ Ammonia (NH3) is the world's most-produced inorganic chemical at roughly 180 mil
 
 **Tertiary -- Macro and Second-Order Effects:** Ammonia costs feed into corn, wheat, and rice production economics with a one-season lag. When nitrogen fertilizer prices doubled in 2022, U.S. farmers reduced application rates by 10-15%, contributing to lower yields and higher grain prices. The green ammonia opportunity -- producing NH3 via electrolysis-powered hydrogen instead of natural gas -- could reshape the cost curve by the 2030s. Companies like Plug Power and FuelCell Energy are piloting green ammonia plants, while the IMO's tightening emissions standards position ammonia as a leading candidate for zero-carbon shipping fuel.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 U.S. Gulf Coast nitrogen producers with locked-in Henry Hub gas supply benefit most when global ammonia prices rise on international gas spikes. Middle Eastern producers (SABIC, QAFCO) enjoy structurally low feedstock costs at $1-2/MMBtu. Green hydrogen companies see accelerated investment timelines as conventional ammonia becomes expensive. Agricultural equipment makers benefit indirectly as high crop prices incentivize planting expansion.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 European chemical producers face margin destruction and forced curtailments when TTF gas prices spike. Import-dependent nations -- India, Brazil, and Sub-Saharan Africa -- absorb higher nitrogen costs that directly reduce crop yields and exacerbate food insecurity. Farmers operating on thin margins face a squeeze between rising input costs and uncertain crop prices. Livestock producers see feed cost inflation as grain prices respond to reduced fertilizer application.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The CF Industries-to-natural gas ratio is the key mean-reverting signal for ammonia equities: when CF/NG exceeds 2 standard deviations above the 5-year mean, nitrogen producer margins are peaking. The TTF-Henry Hub gas spread directly predicts European plant shutdowns -- margins turn negative for Yara when TTF exceeds $30/MMBtu equivalent. USDA quarterly grain stocks reports and China's fertilizer export license announcements are the primary demand-side catalysts. The Tampa CFR ammonia benchmark, settled monthly between Yara and Mosaic, sets the global reference price and moves the entire nitrogen complex.

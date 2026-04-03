@@ -85,11 +85,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Copper is called "Dr. Copper" for its Ph.D. in economics -- its price leads global industrial production by 3-6 months. A sustained **+10% copper move** signals accelerating global growth and triggers a cascade through mining, EVs, and infrastructure stocks. Global demand exceeds 25 million tonnes annually, and the electrification megatrend is projected to create a structural supply deficit by the end of the decade as new mine development lags demand growth. Chile and Peru produce roughly 40% of global mined copper, concentrating supply risk in a narrow geographic corridor.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Freeport-McMoRan (FCX) has ~85% revenue exposure to copper prices. A 10% copper move translates to ~12-15% FCX earnings impact after accounting for operating leverage. COPX ETF offers diversified mining exposure. Southern Copper (SCCO) and Teck Resources provide additional pure-play exposure to copper fundamentals. Codelco, Chile's state-owned producer and the world's largest, sets the tone for global supply but is not directly investable.
 
@@ -97,15 +97,15 @@ Copper is called "Dr. Copper" for its Ph.D. in economics -- its price leads glob
 
 **Tertiary -- Macro and Second-Order Effects:** New home wiring, commercial HVAC, and plumbing represent 43% of U.S. copper demand. Homebuilder margins (XHB, DHI, LEN) compress when copper exceeds $4.50/lb. Grid modernization and renewable energy buildout (wind farms, solar installations, battery storage interconnection) are creating a structural demand layer that did not exist a decade ago. Data center construction for AI infrastructure requires massive copper wiring and cooling systems, adding an emerging demand channel.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Copper miners with long-life, low-cost assets benefit most from sustained price increases. Freeport-McMoRan, Southern Copper, and BHP capture direct margin expansion. Copper recyclers and scrap dealers profit as higher prices incentivize collection and processing. Copper-producing nations (Chile, Peru, Zambia, DRC) collect increased royalties and tax revenues that boost fiscal positions and fund social programs.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Construction firms face rising input costs across wiring, plumbing, and HVAC systems. EV manufacturers absorb higher battery and motor costs that pressure vehicle margins. Utilities investing in grid expansion and transmission upgrades see capital expenditure inflation. Electronics manufacturers face component cost increases in circuit boards and connectors. Homebuilders pass through costs to buyers, potentially dampening housing affordability.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The copper/gold ratio is a powerful risk-on/risk-off indicator. A rising ratio signals risk appetite; falling ratio signals defensive positioning. Track the HG/GC spread daily during macro regime shifts. LME and COMEX warehouse inventory levels signal physical market tightness, while the futures curve structure (contango vs. backwardation) indicates near-term supply-demand balance. Chinese bonded warehouse stocks provide an additional data point for the world's largest consumer market.
 

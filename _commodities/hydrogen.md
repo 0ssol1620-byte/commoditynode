@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Hydrogen is the most abundant element in the universe and is emerging as a critical energy carrier for decarbonizing sectors that batteries cannot easily reach. Today, approximately 95 million tonnes of hydrogen are produced annually, with over 95% derived from natural gas (grey hydrogen) or coal (brown hydrogen) without carbon capture. Green hydrogen -- produced via electrolysis powered by renewable electricity -- currently accounts for less than 1% of production but is the focus of massive policy support and capital investment. The Inflation Reduction Act's production tax credit of up to $3/kg and the EU's REPowerEU target of 10 million tonnes of domestic green hydrogen by 2030 are reshaping the industry's economics. The key challenge remains cost: green hydrogen costs $4-7/kg versus $1-2/kg for grey, though the gap is narrowing as electrolyzer costs decline and renewable electricity prices fall.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Plug Power (PLUG) and NEL ASA are leading PEM and alkaline electrolyzer manufacturers scaling gigawatt-level production. Industrial gas incumbents Air Products (APD) and Linde (LIN) are investing billions in integrated green hydrogen mega-projects, leveraging existing distribution infrastructure. Bloom Energy (BE) and FuelCell Energy (FCEL) focus on stationary fuel cell power systems, while Ballard Power (BLDP) targets heavy-duty transport applications. Cummins (CMI) spans both electrolyzer manufacturing and hydrogen engine development, positioning across the value chain.
 
@@ -87,14 +87,14 @@ Hydrogen is the most abundant element in the universe and is emerging as a criti
 
 **Tertiary -- Macro and Second-Order Effects:** Carbon pricing mechanisms (EU ETS, potential US carbon border adjustments) improve green hydrogen's competitiveness by raising grey hydrogen costs. Hydrogen pipeline infrastructure and geological storage (salt caverns) are critical enablers that require decades of development. The natural gas price directly sets the floor for grey hydrogen costs, meaning LNG price spikes temporarily improve the green hydrogen business case. Water availability for electrolysis is an underappreciated constraint in arid regions pursuing large-scale projects.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Electrolyzer manufacturers benefit from exponential order book growth as government subsidies de-risk project economics. Air Products and Linde capture margin on hydrogen distribution and long-term offtake contracts. Platinum group metal miners benefit from increased catalyst demand in PEM electrolyzers and fuel cells. Renewable energy developers gain incremental demand from dedicated hydrogen production facilities. Countries with abundant cheap renewables -- Australia, Chile, the Middle East -- position as future green hydrogen exporters.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Natural gas producers face long-term demand erosion as green hydrogen displaces grey hydrogen in refining and ammonia production. Pure-play hydrogen startups with negative cash flows face dilution risk if the cost curve declines slower than projected. Battery electric vehicle manufacturers face competitive pressure from hydrogen fuel cell vehicles in heavy transport segments. Incumbent grey hydrogen producers without carbon capture face stranded asset risk as carbon prices rise and green mandates expand.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Hydrogen lacks a standardized commodity benchmark; track project-level offtake contract pricing and electrolyzer cost surveys from BNEF and IEA. The HDRO ETF provides diversified exposure to the hydrogen value chain. Monitor IRA guidance updates and EU delegated act definitions of "green hydrogen" for regulatory catalysts. Natural gas futures (Henry Hub, TTF) serve as a grey hydrogen cost proxy. Watch quarterly earnings from PLUG, APD, and LIN for order backlog and project commissioning data. Electrolyzer cost per kilowatt is the industry's most important metric -- a decline below $300/kW would make green hydrogen competitive with grey in most regions without subsidies.

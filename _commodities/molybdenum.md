@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Molybdenum is a refractory metal prized for its ability to enhance steel strength, corrosion resistance, and high-temperature performance. Approximately 70% of molybdenum is consumed as a ferroalloy additive in steel — particularly HSLA (high-strength low-alloy) structural steel, OCTG (oil country tubular goods) drill pipe, and 316 stainless steel. Critically, about half of global moly supply comes as a by-product of copper mining, primarily from porphyry copper deposits in Chile, Peru, and the U.S. This by-product dynamic means moly supply responds to copper economics rather than its own price signals, creating structural supply inelasticity. Primary molybdenum mines (Freeport's Climax mine, Jinduicheng in China) provide the marginal swing supply. Annual global production is approximately 300,000 tonnes of contained molybdenum.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary — Oil & Gas Tubular Steel:** OCTG pipe for deep-water and sour-gas drilling requires 0.5-1.5% molybdenum content for hydrogen sulfide corrosion resistance. Tenaris, Vallourec, and other tubular manufacturers are direct moly consumers. Oil and gas capex cycles drive 25-30% of total moly demand, making it one of the most energy-correlated industrial metals.
 
@@ -70,14 +70,14 @@ Molybdenum is a refractory metal prized for its ability to enhance steel strengt
 
 **Tertiary — Substitution and Infrastructure:** Vanadium and niobium can substitute for molybdenum in some HSLA steel applications, particularly in structural plate and rebar. However, moly is irreplaceable in high-temperature and corrosion-resistant applications. Global infrastructure spending programs (bridges, pipelines, power plants) drive structural steel demand and thus moly consumption.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Freeport-McMoRan benefits doubly — as both copper and moly prices rise, its porphyry deposits generate outsized cash flow from the moly credit. Primary moly miners (Jinduicheng, Thompson Creek/Centerra) see the most leverage to moly price increases. Chile's Codelco earns significant moly by-product revenue. Ferromoly processors and roasters benefit from spread expansion during supply tightness.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 OCTG pipe manufacturers (Tenaris, Vallourec) face input cost inflation that compresses margins on long-term drilling contracts. Stainless steel producers absorb moly cost increases in 316 grade production. Oil & gas operators face higher casing and completion costs per well. Construction and infrastructure projects face HSLA steel price inflation. Petroleum refiners face higher catalyst costs for hydrodesulfurization units that require moly-based catalysts.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Molybdenum oxide is traded OTC with prices assessed by CRU, Platts, and Fastmarkets. The LME lists a molybdenum contract but liquidity remains thin. Monitor Freeport-McMoRan quarterly reports for Climax mine production and moly by-product credit data — FCX is the single most important moly supply indicator. Track global rig count (Baker Hughes) as a leading demand indicator for OCTG moly consumption. The moly/copper price ratio signals by-product supply economics. Watch Chilean copper production data for supply-side impacts — any major porphyry mine disruption simultaneously affects both copper and moly markets. China's moly concentrate export data provides visibility into the world's second-largest producing region.

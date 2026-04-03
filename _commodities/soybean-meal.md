@@ -76,11 +76,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Soybean meal is the world's dominant protein source in animal feed, accounting for over 65% of global protein meal consumption. Produced as a co-product of soybean crushing alongside soybean oil, meal typically represents 75-80% of the value in the crush process. The soy crush spread -- buying soybeans and selling the resulting meal and oil -- is one of the most actively traded agricultural processing margins. Global production is concentrated in the US, Brazil, and Argentina, with China as the overwhelmingly dominant importer, purchasing roughly 60% of all internationally traded soybeans to process domestically. Annual global soybean meal production exceeds 260 million metric tons, feeding the poultry, swine, aquaculture, and dairy industries worldwide.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** ADM and Bunge are the largest publicly traded soybean crushers, with margins directly tied to crush spread economics. Poultry integrators like Pilgrim's Pride and Sanderson Farms face soybean meal as their largest variable input cost, with feed representing 60-70% of total production costs. Tyson Foods carries exposure across chicken, pork, and beef segments. Corteva provides the seed genetics and crop protection inputs that drive soybean yields, benefiting from expanded acreage.
 
@@ -88,14 +88,14 @@ Soybean meal is the world's dominant protein source in animal feed, accounting f
 
 **Tertiary -- Macro and Second-Order Effects:** US-China trade relations remain the single largest geopolitical risk factor, as demonstrated by the 2018-2019 tariff disruptions that redirected global soy trade flows. China's hog herd rebuilding after African Swine Fever drives incremental meal demand of 5-10 million tons annually. Brazilian Real depreciation makes Brazilian soybeans cheaper on global markets, pressuring US export competitiveness. The expansion of renewable diesel and biodiesel demand for soybean oil is altering the crush economics, with oil values rising and potentially subsidizing meal production.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Soybean crushers benefit from widening crush spreads, particularly when meal demand is robust and bean supplies are ample. Fertilizer suppliers Mosaic and Nutrien gain from expanded soybean acreage. Brazilian farmers benefit from currency weakness that enhances their competitive position. Renewable diesel producers capture value from rising soy oil demand, indirectly supporting crush volumes and meal availability.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Poultry and hog producers face direct margin compression when meal prices spike, as feed represents the majority of variable costs. Aquaculture operations in Asia face rising feed costs that cannot easily be passed through to fish prices. US soybean exporters lose market share when the dollar strengthens or trade tensions redirect Chinese buying to Brazil. Argentine crushers face policy risk from export tax adjustments that can abruptly alter processing economics.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The USDA WASDE and quarterly Grain Stocks reports are the primary fundamental catalysts for soybean meal positioning. Monitor the board crush spread (November soybeans vs. December meal and oil) as a forward indicator of processor margins and likely throughput decisions. Brazilian planting progress (September-November) and Argentine growing season weather (December-March) set the tone for Southern Hemisphere supply expectations. CFTC Commitment of Traders data reveals speculative positioning extremes in ZM futures. The protein premium -- the price ratio of meal to oil in the crush -- reflects whether the market is being driven by feed demand (bullish meal) or biofuel demand (bullish oil), each requiring different trading strategies.

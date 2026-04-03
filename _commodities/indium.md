@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Indium is the invisible element behind every touchscreen, flat-panel display, and many thin-film solar cells. Roughly 70% of global indium consumption goes into indium tin oxide (ITO) coatings -- the transparent conductive layer that makes capacitive touchscreens work on smartphones, tablets, laptops, and automotive displays. The metal is almost exclusively produced as a by-product of zinc refining, meaning its supply is inextricably linked to zinc market economics rather than indium's own price signals. Global primary production is approximately 900 tonnes annually, with China responsible for roughly 60% of refined output. South Korea's Korea Zinc, Japan's Dowa Holdings, and Belgium's Nyrstar are other significant producers. The by-product nature creates a fundamental supply inelasticity -- even if indium prices double, zinc miners won't increase production just for indium recovery.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Display and ITO Manufacturing:** ITO sputtering targets are the dominant use case, consumed by display panel manufacturers including Samsung Display, LG Display, BOE Technology, and Japan Display. ITO coatings are deposited on glass substrates to create the transparent electrodes that enable touch sensitivity and pixel addressing in LCDs. The display industry's transition from LCD to OLED partially reduces indium intensity per panel, but the proliferation of screens (automotive, smart home, wearables) partially offsets this substitution effect. Display manufacturers face direct cost pressure when indium prices rise, particularly on large-format panels where ITO consumption per unit is highest.
 
@@ -70,14 +70,14 @@ Indium is the invisible element behind every touchscreen, flat-panel display, an
 
 **Tertiary -- Supply Chain and Substitution:** The zinc by-product constraint means indium supply responds to zinc market conditions, not indium demand signals. Zinc mine closures or curtailments directly reduce indium availability regardless of indium market conditions. Recycling from spent ITO sputtering targets recovers approximately 30% of indium used in manufacturing, but end-of-life recycling from consumer electronics remains economically challenging due to the thin coating layers involved. Silver nanowire and fluorine-doped tin oxide (FTO) alternatives exist but face performance and cost barriers for large-scale display applications.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Korea Zinc and other zinc refiners with indium recovery circuits benefit from price rallies with minimal marginal cost increase. Specialized processors like Indium Corporation and Dowa Holdings capture margin expansion on refined indium products. Indium recyclers see improved economics for sputtering target recovery. First Solar (CdTe technology) gains competitive advantage over CIGS competitors when indium prices rise. OLED display manufacturers gain relative positioning as their technology uses less indium than LCD alternatives.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 LCD display manufacturers (Samsung Display, LG Display, BOE) face direct ITO material cost inflation on high-volume panel production. Consumer electronics brands (Apple, Samsung, Xiaomi) absorb higher display component costs. CIGS solar manufacturers face cell cost increases that reduce competitiveness versus crystalline silicon. Automotive display suppliers face margin pressure as vehicle screen sizes and counts increase. Lead-free solder cost increases affect electronics assembly margins across the industry.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Indium lacks exchange-traded contracts -- pricing is based on Metal Bulletin and Asian Metals spot assessments. Monitor zinc mine production data and refinery operating rates as the primary supply indicator. The zinc/indium production ratio varies by ore body, making specific refinery disruptions more impactful than aggregate zinc data. Track display panel pricing and production data from Omdia and DSCC for demand signals. ITO sputtering target inventories at major depositors indicate near-term supply-demand balance. China's indium export data provides a monthly supply flow indicator. The OLED penetration rate in smartphones and TVs is the most important structural demand variable for indium's long-term outlook.

@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Fuel ethanol is the single largest value-added use of US corn, consuming roughly 40% of the domestic crop to produce over 15 billion gallons annually. The Renewable Fuel Standard (RFS) mandates blending of 10-15% ethanol into the gasoline supply, creating a policy-driven floor under demand that ties agricultural markets directly to energy prices. The US is the world's largest ethanol producer, followed by Brazil, where sugarcane-based ethanol serves as a direct fuel substitute. Ethanol margins are primarily a function of the corn-to-ethanol crush spread -- the difference between ethanol selling prices and corn input costs -- making producers like Green Plains, Alto Ingredients, and ADM highly sensitive to movements in both commodity markets simultaneously.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Pure-play ethanol producers (GPRE, PEIX, REX) carry the most concentrated exposure, with margins collapsing when corn prices spike without corresponding ethanol price increases. ADM operates a diversified agricultural platform but remains the largest US ethanol producer by capacity. Refiners like Valero and Marathon Petroleum are major ethanol blenders and purchasers of RIN credits, making their compliance costs directly tied to ethanol market dynamics.
 
@@ -87,14 +87,14 @@ Fuel ethanol is the single largest value-added use of US corn, consuming roughly
 
 **Tertiary -- Macro and Second-Order Effects:** Rising EV adoption poses a long-term structural threat to gasoline blending demand. California's LCFS carbon credit program provides incremental revenue for low-carbon ethanol producers. US ethanol exports to Canada, Brazil, and India create trade flow dynamics influenced by dollar strength and foreign biofuel mandates. Emerging sustainable aviation fuel (SAF) pathways could open a new demand channel for ethanol-to-jet conversion.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Ethanol producers benefit from widening crush spreads when corn prices decline relative to gasoline-linked ethanol prices. DDGS buyers in the livestock sector gain access to cheaper protein feed during periods of high ethanol production. Farm equipment manufacturers like Deere see increased corn acreage driven by ethanol demand pull. RIN credit holders profit when EPA maintains or increases blending mandates.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Ethanol producers face severe margin compression when corn prices surge due to drought or export demand while gasoline prices remain flat. Refiners without blending capacity must purchase RIN credits at elevated prices to meet compliance obligations, increasing operating costs. Livestock producers face higher feed costs when ethanol demand competes for corn supply. Long-term, the sector faces existential risk from declining gasoline consumption as electric vehicle penetration accelerates.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The corn-ethanol crush spread is the primary profitability indicator for pure-play producers. Monitor weekly EIA ethanol production and inventory reports for supply signals, and USDA crop progress reports for corn yield expectations that drive input cost forecasts. RIN credit prices serve as a leading indicator of regulatory sentiment -- watch for EPA proposed rulemaking on annual blending volumes and small refinery exemption decisions. Seasonal patterns are pronounced, with production typically peaking ahead of summer driving season gasoline demand. Brazilian sugarcane harvest timing (April-November) creates periodic competition in export markets.

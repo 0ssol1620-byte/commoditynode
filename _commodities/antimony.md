@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Antimony is one of the most strategically important yet least discussed critical minerals in global commodity markets. China dominates over 80% of worldwide antimony production, creating a supply concentration risk that rivals rare earths. The metal serves three primary end-use markets: flame retardants (accounting for roughly 40% of consumption through antimony trioxide), lead-acid battery hardening alloys, and military applications including ammunition and armor-piercing projectiles. The U.S. Department of Defense has classified antimony as a critical mineral, and the Defense Logistics Agency maintains strategic stockpiles. Annual global production is approximately 83,000 tonnes, with Hunan province in China producing the majority through state-linked mining operations. In 2023-2024, China imposed export controls on antimony, sending prices to multi-decade highs and exposing the West's dependence on Chinese supply for both civilian and military applications.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Defense and Flame Retardants:** Antimony trioxide (ATO) is the dominant synergist in halogenated flame retardant systems used in electronics, textiles, automotive interiors, and construction materials. Roughly 40% of antimony consumption flows through this channel. When antimony prices spike, flame retardant manufacturers face margin compression or must pass costs to downstream industries including consumer electronics and automotive. The defense channel is equally critical -- antimony hardens lead in small-caliber ammunition, is used in tracer rounds, and appears in night-vision optics and infrared sensors. U.S. military consumption creates inelastic demand that cannot easily substitute away.
 
@@ -70,11 +70,11 @@ Antimony is one of the most strategically important yet least discussed critical
 
 **Tertiary -- Geopolitical and Substitution Dynamics:** China's willingness to weaponize antimony exports -- as demonstrated by the 2024 export permit requirements -- has elevated antimony to a frontline commodity in the U.S.-China strategic competition. The Perpetua Resources Stibnite Gold Project in Idaho represents the only significant antimony development project in the U.S., and has received Department of Defense funding. Substitution with aluminum trihydrate (ATH) in flame retardants is technically possible but requires reformulation and compromises fire safety performance, limiting rapid switching.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 US Antimony Corporation (UAMY) and Perpetua Resources (PPTA) benefit directly from antimony price rallies and Western reshoring efforts. Defense contractors with antimony-intensive ammunition lines see strategic importance increase, potentially unlocking government procurement support. Tajikistan and other non-Chinese producers gain market share as buyers diversify. Recyclers of lead-acid batteries and electronic waste capture higher value for recovered antimony. Companies developing ATH and non-halogenated flame retardant alternatives gain commercial traction during supply disruptions.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Flame retardant manufacturers (BASF, Lanxess, ICL) face direct input cost inflation with limited ability to pass through quickly in formula-based contracts. Electronics and automotive companies absorb higher component costs for fire-rated materials. Ammunition manufacturers including Olin Corporation and Vista Outdoor face margin pressure on military and civilian cartridge production. Lead-acid battery producers (EnerSys, GS Yuasa) see alloy costs rise, particularly for industrial deep-cycle products. PET plastic producers face catalyst cost increases that affect polyester fiber and packaging margins.
 
@@ -93,6 +93,6 @@ Flame retardant manufacturers (BASF, Lanxess, ICL) face direct input cost inflat
 | XME Metals Mining ETF | +3.0% | 0.28 | Mining |
 | US DoD Stockpile | +6.0% | 0.45 | Defense |
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Antimony does not trade on major commodity exchanges -- pricing is based on Metal Bulletin and Asian Metals assessments for antimony metal and antimony trioxide. Monitor China's Ministry of Commerce export permit announcements for supply-side disruptions. The Perpetua Resources project timeline is a key Western supply catalyst. Track U.S. Defense Production Act invocations and DLA stockpile purchase announcements for demand signals. The antimony/lead price ratio indicates battery alloy substitution economics. Chinese domestic antimony prices in RMB/ton often lead international markets by 2-4 weeks.

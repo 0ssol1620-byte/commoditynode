@@ -85,11 +85,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Crude oil is the world's most traded commodity -- a price swing in WTI reverberates through airlines, chemicals, shipping, and consumer spending simultaneously. A **+10% move in crude** generates an average **+8.2% response in XLE** and a **-7.1% drop in the JETS ETF**. Global consumption exceeds 100 million barrels per day, with OPEC+ production decisions, U.S. shale output, and Chinese demand growth forming the three pillars of the supply-demand balance. The WTI-Brent spread reflects regional logistics and export dynamics, while the futures curve structure signals market expectations for future supply adequacy.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Integrated majors like ExxonMobil and Chevron see direct revenue expansion. Oilfield services (Halliburton, SLB) amplify the move -- with leverage factors of 1.3-1.5x crude's percentage change. U.S. shale producers in the Permian Basin (Pioneer, Diamondback) respond to price signals with a 3-6 month drilling lag, creating a supply feedback loop that moderates extreme price moves. OPEC+ spare capacity, concentrated in Saudi Arabia and UAE, acts as the market's strategic buffer.
 
@@ -97,15 +97,15 @@ Crude oil is the world's most traded commodity -- a price swing in WTI reverbera
 
 **Tertiary -- Macro and Second-Order Effects:** Jet fuel represents 20-30% of airline operating costs. AAL, which hedges less than Delta, shows the highest beta to crude. The XLE/JETS pair trade has delivered consistent risk-adjusted returns during sustained oil trends. Consumer spending contracts during prolonged crude rallies as gasoline prices erode disposable income, with a rule-of-thumb impact of $0.01/gallon costing U.S. consumers roughly $1.4 billion annually. Petrodollar recycling from oil-exporting nations influences global capital flows and sovereign wealth fund investment.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Exploration and production companies with low breakeven costs benefit most from price rallies, particularly U.S. shale operators and Middle Eastern national oil companies. Oilfield services firms see activity expansion and pricing power. Oil-exporting nations (Saudi Arabia, UAE, Norway, Canada) enjoy improved fiscal balances and political leverage. Pipeline operators and tanker companies benefit from higher throughput volumes.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Airlines face the most acute margin compression among major industries. Consumer discretionary spending declines as gasoline prices rise. Chemical manufacturers and plastics producers absorb higher feedstock costs. Oil-importing nations (India, Japan, Turkey) face trade balance deterioration and currency pressure. Transportation and logistics companies pass through fuel surcharges but absorb timing lags.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The 10-day correlation between crude and XLE is historically 0.82-0.88. During geopolitical shocks (Russia-Ukraine, Middle East escalation), the correlation briefly spikes to 0.95+ before reverting. Consider 2:1 weighting (XLE long / JETS short) during uptrend phases. The EIA weekly petroleum status report (Wednesday 10:30 AM ET) and OPEC monthly oil market report are the primary data catalysts. Managed money positioning on NYMEX indicates speculative sentiment extremes that often precede reversals.
 

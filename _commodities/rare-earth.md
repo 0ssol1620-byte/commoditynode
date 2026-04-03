@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Rare earth elements -- particularly neodymium, praseodymium, dysprosium, and terbium -- are indispensable for the permanent magnets that power EV traction motors, direct-drive wind turbines, guided missiles, and countless electronic devices. Despite the name, rare earths are geologically abundant but economically concentrated: China controls over 60% of global mining, 85% of separation and processing, and 90% of finished magnet production. NdFeB (neodymium-iron-boron) permanent magnets are the strongest commercially available magnets, and no substitute offers equivalent performance in the compact, high-torque applications that define modern electrification. Global rare earth oxide production is approximately 350,000 tonnes annually, but the high-value magnet rare earths (NdPr oxide and heavy REE) represent the strategic bottleneck.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** MP Materials operates the Mountain Pass mine in California, the only scaled rare earth mine in the Western hemisphere, and is investing in downstream oxide separation and magnet manufacturing. Lynas Rare Earths (LYC.AX / LYSCF) operates the Mt Weld mine in Australia and a separation plant in Malaysia, making it the largest non-Chinese rare earth producer. EV manufacturers -- Tesla, GM, Ford, Rivian, NIO -- consume growing volumes of NdFeB magnets for permanent magnet synchronous motors (PMSMs), which deliver 5-10% greater efficiency than induction motor alternatives. Wind turbine OEMs like GE Vernova and Vestas use direct-drive generators containing 600+ kg of rare earth magnets per MW.
 
@@ -87,14 +87,14 @@ Rare earth elements -- particularly neodymium, praseodymium, dysprosium, and ter
 
 **Tertiary -- Macro and Second-Order Effects:** China's willingness to use rare earth export controls as a geopolitical tool -- demonstrated during the 2010 Japan dispute and escalating in 2023-2024 -- has elevated supply chain security to a national priority for the US, EU, Japan, and Australia. The US Department of Defense is funding strategic stockpiles and domestic processing capacity. Grain boundary diffusion technology reduces dysprosium usage per magnet by 50% or more, partially mitigating heavy REE supply risk. Emerging demand from robotics, drones, and electric aviation is expanding the addressable market for high-performance magnets beyond current projections.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 MP Materials (MP) and Lynas (LYSCF) are the primary beneficiaries of both higher rare earth prices and Western supply chain diversification spending. Government funding, offtake agreements with automakers (MP's deal with GM), and strategic importance create a multi-layered value proposition beyond commodity price exposure. Chinese rare earth producers (Northern Rare Earth, China Rare Earth Group) benefit from pricing power and vertical integration into magnets. Nations with undeveloped REE deposits -- Greenland, Brazil, India, Canada -- attract exploration investment and geopolitical attention.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 EV manufacturers face motor cost inflation when NdPr prices rise, with each vehicle containing 2-4 kg of rare earth magnets worth $200-500 at current prices. Wind turbine developers see higher nacelle costs that erode project economics, particularly for offshore direct-drive designs. Defense contractors face supply chain vulnerability and may need to qualify alternative suppliers at significant time and cost. Consumer electronics companies absorb incremental component costs across haptic motors, speakers, and hard drive magnets. Ferrite magnet and induction motor alternatives gain relative competitiveness but sacrifice performance.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Rare earth pricing is referenced through Asian Metal, Fastmarkets, and Shanghai Metal Market assessments, with no liquid Western futures contract. MP Materials and Lynas share prices serve as the most accessible equity proxies. Monitor China's rare earth production quotas (issued semi-annually), export license decisions, and environmental enforcement actions as primary supply catalysts. The NdPr-to-dysprosium price ratio indicates light versus heavy REE market dynamics and magnet cost composition shifts. Defense authorization bills and DOD rare earth procurement announcements signal policy-driven demand. Track EV motor architecture decisions (permanent magnet vs induction) from major automakers as the single most important long-term demand variable.

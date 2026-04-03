@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Steel is the foundational material of modern infrastructure, with global production exceeding 1.8 billion tonnes annually. China produces over 50% of the world's steel, making Chinese economic policy and construction activity the single largest price driver. The market divides into flat-rolled (automotive, appliances), long products (construction rebar), and specialty grades, each with distinct supply-demand dynamics. The industry is undergoing a structural shift toward electric arc furnace (EAF) production from blast furnace/basic oxygen furnace (BOF) routes, driven by carbon reduction targets and scrap availability.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Rebar and structural steel represent the largest demand segment globally. U.S. infrastructure legislation, Chinese property sector health, and emerging market urbanization drive multi-year demand cycles. Nucor and Steel Dynamics benefit from their mini-mill model with lower fixed costs and greater pricing flexibility than integrated producers like U.S. Steel. Cleveland-Cliffs operates blast furnaces serving automotive flat-rolled demand, with cost structures more sensitive to iron ore and met coal prices.
 
@@ -87,14 +87,14 @@ Steel is the foundational material of modern infrastructure, with global product
 
 **Tertiary -- Macro and Second-Order Effects:** Oil and gas pipelines, wind turbine towers, and marine vessels consume specialty steel grades. Energy transition infrastructure (offshore wind foundations, hydrogen pipeline networks) is emerging as a significant growth channel for steel plate and tubular products. Green steel produced using hydrogen-based direct reduction (H2-DRI) is attracting premium pricing from ESG-conscious buyers, with SSAB, ArcelorMittal, and Nucor investing in low-carbon production pathways. Steel overcapacity in China creates persistent dump risk that depresses global prices and triggers trade remedy investigations.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 U.S. mini-mill operators (Nucor, Steel Dynamics) benefit from trade protection and low-cost EAF production during domestic price rallies. Scrap dealers and recyclers see margin improvement when steel prices elevate scrap collection values. Iron ore miners and met coal producers benefit from upstream demand when blast furnace utilization rises. Infrastructure contractors benefit from project pipeline expansion that accompanies government stimulus programs.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Automakers, appliance manufacturers, and construction firms face direct input cost inflation during steel price rallies. Downstream fabricators and manufacturers with fixed-price contracts absorb margin compression. Consumers pay higher prices for vehicles, appliances, and housing. Integrated steelmakers with high fixed costs face severe earnings pressure during downturns when Chinese overcapacity depresses global pricing below their breakeven levels.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Monitor China's Purchasing Managers Index (PMI), U.S. steel capacity utilization rates, and the HRC (hot-rolled coil) futures curve for directional signals. The spread between U.S. domestic HRC prices and global benchmarks reflects tariff effectiveness and import competition. Scrap steel prices serve as a floor indicator for mini-mill production costs. The CME HRC futures contract has grown in liquidity, providing hedging capability for steel buyers and speculative exposure for traders. Chinese rebar futures on the Shanghai Futures Exchange offer a window into the world's largest steel market.

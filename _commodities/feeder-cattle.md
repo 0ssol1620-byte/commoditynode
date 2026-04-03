@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Feeder cattle are weaned calves weighing 600-900 pounds that enter feedlots to be grain-finished to slaughter weight of approximately 1,300 pounds. The CME feeder cattle futures contract (GF) cash-settles against the CME Feeder Cattle Index, which aggregates auction market and direct trade prices across the US. The feeder cattle market sits at the intersection of two powerful forces: the multi-year cattle cycle that determines available supply, and corn prices that drive the cost of gain in the feedlot. With the US cattle herd near multi-decade lows following years of drought-induced liquidation, feeder cattle prices have reached historically elevated levels as tight supply meets resilient beef demand from both domestic consumers and export markets in Japan, Korea, and China.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Cow-calf ranchers are the primary beneficiaries of high feeder cattle prices, as calves are their principal revenue source. Feedlot operators face a cost squeeze -- they buy feeder cattle at elevated prices and must sell finished cattle (live cattle futures LE) at prices sufficient to cover both the purchase cost and corn-based feed expenses. Meatpackers Tyson, JBS, Cargill, and National Beef operate as the primary buyers of finished cattle, with processing margins inversely related to cattle prices. The concentration of packing capacity among four firms creates market structure tensions with cattle producers.
 
@@ -87,14 +87,14 @@ Feeder cattle are weaned calves weighing 600-900 pounds that enter feedlots to b
 
 **Tertiary -- Macro and Second-Order Effects:** Drought conditions in the Southern Plains and Southwest directly force rancher liquidation by destroying pasture and hay supplies, creating a paradox where short-term oversupply from forced selling leads to multi-year undersupply as the breeding herd shrinks. US beef export demand, particularly from Japan under favorable trade agreements, provides price support independent of domestic consumption trends. The plant-based meat movement has had minimal measurable impact on beef demand, while overall protein consumption per capita continues to rise.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Cow-calf ranchers with established herds benefit directly from elevated feeder cattle prices during tight supply phases of the cattle cycle. Ranch land values appreciate alongside cattle prices. Veterinary pharmaceutical companies like Zoetis see steady demand for animal health products across the cycle. Meatpackers benefit during periods of excess cattle supply when procurement costs decline and processing margins expand.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Feedlot operators face margin compression from the dual pressure of high feeder cattle purchase prices and elevated corn feed costs. Meatpackers see margins squeezed during tight cattle supply periods when they must compete aggressively for available animals. Retail beef consumers face higher prices passed through from packers. New entrants attempting to build cow-calf herds during high price periods face steep startup costs and multi-year payback timelines, with replacement heifer prices at historic premiums.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The monthly USDA Cattle on Feed report (released on the third Friday) is the single most important data release, with cattle placements data serving as a forward indicator of feedlot supply. Monitor the feeder cattle/corn price ratio as a profitability proxy for feedlot placement decisions -- when the ratio is high, feedlots are incentivized to place aggressively. The US Drought Monitor provides weekly updates on pasture conditions that influence rancher selling decisions. Seasonal patterns show feeder cattle prices typically peaking in March-April when placements slow ahead of spring grazing season, then declining into the fall weaning season when large volumes of calves enter the market. Basis risk between CME futures and regional cash markets can be substantial, particularly in drought-affected areas where forced selling creates localized supply gluts.

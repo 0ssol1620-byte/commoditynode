@@ -85,11 +85,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Natural gas pricing sits at the intersection of weather, LNG exports, and industrial demand. A **+15% seasonal spike** in Henry Hub prices creates immediate winners in E&P stocks while pressuring chemical manufacturers and utility margins. U.S. production exceeds 100 Bcf/d, making the country the world's largest natural gas producer. The growing linkage between domestic Henry Hub prices and international benchmarks (TTF, JKM) through LNG exports has fundamentally changed how the U.S. gas market functions, connecting American wellhead economics to global energy security dynamics.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** EQT, Range Resources, and Coterra see near-linear earnings leverage to Henry Hub. FCG ETF typically moves 0.75-0.90x the percentage change in nat gas. Appalachian producers (EQT, Southwestern Energy) and Haynesville operators (Chesapeake, Comstock Resources) are the most gas-weighted E&P companies in the U.S. Associated gas production from Permian Basin oil wells adds supply that is insensitive to gas prices, creating a persistent overhang that moderates price rallies.
 
@@ -97,15 +97,15 @@ Natural gas pricing sits at the intersection of weather, LNG exports, and indust
 
 **Tertiary -- Macro and Second-Order Effects:** Sabine Pass and Corpus Christi liquefaction plants benefit when global LNG prices (JKM, TTF) diverge from Henry Hub -- creating arbitrage opportunities. Rising domestic gas prices feed through to electricity costs for residential and commercial consumers. Natural gas price spikes during winter cold snaps create heating cost burdens for lower-income households, generating political pressure for price controls or utility rate relief. Data center power demand growth is creating a new structural demand channel that favors gas-fired generation for baseload reliability.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Gas-focused E&P companies with low breakeven costs and unhedged production capture direct price upside. EQT Corp, Range Resources (AR), and Southwestern Energy (SWN) are the purest plays. LNG exporters (Cheniere Energy) benefit when international prices rise relative to domestic Henry Hub. Midstream operators earn higher throughput fees and processing margins during production growth periods.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Chemical manufacturers using gas as feedstock face cost inflation that compresses margins. Dow Inc. and Eastman Chemical are particularly exposed. Fertilizer producers (CF Industries) see input costs rise, though they can pass through some increases to farmers. Electric utilities face fuel cost increases that may exceed regulatory rate recovery timelines. Residential and commercial consumers pay higher heating and cooling bills, reducing discretionary spending.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Natural gas exhibits the highest seasonal volatility of all major commodities. Winter storage draws (Oct-Mar) and summer cooling demand create predictable trading windows. Monitor the EIA weekly storage report every Thursday at 10:30 AM ET. The storage deficit or surplus relative to the five-year average is the most watched fundamental indicator. Weather model forecasts (GFS, European) for temperature deviations drive short-term price movements, with cold winter outlooks capable of moving prices 5-10% in a single session.
 

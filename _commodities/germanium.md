@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Germanium is a rare semiconductor metalloid produced almost entirely as a by-product of zinc refining and coal fly ash processing. China controls approximately 60% of global germanium production, with the remainder split between Canada, Belgium, and Russia. In August 2023, China imposed export licensing requirements on germanium alongside gallium, signaling strategic resource leverage. Annual global production is roughly 130 tonnes — an extremely thin market. Germanium's key applications span fiber optic cables (GeO₂ dopant for refractive index), infrared thermal imaging lenses (transparent to 8-12μm wavelengths), multi-junction satellite solar cells, and PET plastic catalysts. Its dual military-civilian use makes it a high-priority item on every major nation's critical minerals list.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary — Fiber Optics and Telecom Infrastructure:** Germanium dioxide is the essential dopant in single-mode optical fiber cores, with no commercially viable substitute at scale. Corning and other fiber manufacturers consume roughly 30% of global germanium. As 5G backhaul, FTTH (fiber-to-the-home), and submarine cable deployments accelerate globally, germanium demand from telecom alone is growing 4-6% annually.
 
@@ -70,14 +70,14 @@ Germanium is a rare semiconductor metalloid produced almost entirely as a by-pro
 
 **Tertiary — Substitution Dynamics and Supply Diversification:** Silicon photonics is gradually displacing germanium-doped fiber in short-reach data center interconnects, but long-haul telecom fiber remains germanium-dependent. Zinc selenide can substitute for germanium in some IR applications but with inferior performance. Western governments are investing in germanium recycling from optical scrap and spent fiber, aiming to reduce Chinese dependency.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Yunnan Germanium and other Chinese producers benefit from export control-driven pricing power and strategic leverage. Teck Resources, which produces germanium as a zinc by-product at its Trail smelter in Canada, gains from Western reshoring demand. Umicore's germanium recycling operations in Belgium become strategically critical. Companies developing silicon photonics alternatives (Intel, Cisco) benefit from increased adoption urgency.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Fiber optic manufacturers (Corning, Prysmian, Furukawa) face raw material cost escalation with limited pass-through ability in competitive telecom markets. Defense contractors dependent on germanium IR optics (Teledyne FLIR, L3Harris, Leonardo DRS) face supply allocation uncertainty. Satellite manufacturers absorb higher multi-junction solar cell costs. Broadband expansion programs globally face higher infrastructure costs as fiber cable prices rise.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Germanium has no liquid futures market; prices are assessed via Asian Metal, Minor Metals Trade Association, and Fastmarkets. Monitor China MOFCOM germanium export license data monthly — any tightening immediately impacts spot prices. Track zinc smelter production as a leading supply indicator since germanium is extracted from zinc residues. Teck Resources quarterly reports provide visibility into Western germanium output. The germanium/gallium price ratio serves as a gauge of China's critical mineral policy intensity. Watch US National Defense Stockpile (NDS) purchase announcements for demand-side price support signals.

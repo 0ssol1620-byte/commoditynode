@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Gallium is a critical mineral with no stand-alone mining — it is extracted exclusively as a by-product of aluminum refining (bauxite) and zinc processing. China controls over 95% of global gallium production, making it one of the most geographically concentrated supply chains in the world. In July 2023, China imposed export controls on gallium and germanium, weaponizing its supply dominance in response to U.S. semiconductor restrictions. Gallium arsenide (GaAs) and gallium nitride (GaN) compound semiconductors are essential for 5G RF front-end modules, LEDs, power electronics, and military radar systems. Annual global demand is roughly 600 tonnes — a minuscule market with outsized strategic importance. The U.S. CHIPS Act and EU Critical Raw Materials Act are driving diversification efforts, but building non-Chinese refining capacity requires years.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary — Compound Semiconductor Supply Chain:** GaAs wafers power virtually all smartphone RF front-end chips and fiber-optic laser diodes. GaN devices are critical for 5G base stations, EV fast chargers, and military electronic warfare systems. Gallium supply disruption directly threatens Wolfspeed, Skyworks, Qorvo, and II-VI's production pipelines. Wafer fabricators face 6-12 month inventory cycles, creating delayed but severe impact from sustained supply cuts.
 
@@ -70,11 +70,11 @@ Gallium is a critical mineral with no stand-alone mining — it is extracted exc
 
 **Tertiary — Geopolitical Escalation and Substitution:** China's gallium export controls established a precedent for critical mineral weaponization, prompting allied nations to accelerate stockpiling and domestic refining programs. Silicon carbide (SiC) is substituting for GaN in some power electronics applications, but no viable substitute exists for GaAs in high-frequency RF applications. Defense procurement agencies are securing dedicated gallium supply chains outside Chinese control.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Chinese gallium refiners (Chinalco subsidiaries, East Hope Group) benefit from tighter export quotas that elevate domestic pricing power and create a geopolitical leverage asset. Non-Chinese gallium recyclers and secondary producers gain strategic importance and government subsidies. SiC manufacturers (Wolfspeed, STMicroelectronics) capture displaced demand in power electronics where GaN substitution stalls. Nations with bauxite reserves outside China (Australia, Guinea, India) attract investment for integrated alumina-gallium refining.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Compound semiconductor foundries face raw material cost inflation and allocation uncertainty. 5G equipment makers (Ericsson, Nokia, Samsung Networks) absorb higher component costs as RF chip prices rise. LED manufacturers dependent on GaAs substrates face margin compression. Consumer electronics OEMs ultimately bear pass-through costs on smartphones, data center optics, and display technologies. Western defense contractors face supply security risks for critical electronic warfare and radar systems.
 
@@ -93,6 +93,6 @@ Compound semiconductor foundries face raw material cost inflation and allocation
 | ams-OSRAM | −4.0% | −0.32 | LED/Optoelectronics |
 | Germanium (Related) | +7.0% | 0.65 | Critical Minerals |
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Gallium has no exchange-traded futures contract; prices are assessed by Asian Metal, Argus, and Fastmarkets. Monitor China's MOFCOM export license approvals for real-time supply signals — license denials or delays directly move spot prices. Track global aluminum production data as a leading indicator for potential gallium by-product availability. The REMX ETF provides indirect exposure through rare earth and critical mineral miners. Wolfspeed (CREE) and Skyworks (SWKS) share prices inversely correlate with gallium price spikes. Watch for Japan and South Korea strategic reserve releases as a price ceiling mechanism during supply crises.

@@ -85,11 +85,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Corn sits at the nexus of food, fuel, and feed. The U.S. produces 32% of global corn supply, with 40% going to ethanol, 36% to livestock feed, and 12% to food/industrial uses -- creating multisector price transmission. Global production exceeds 1.2 billion tonnes annually, making corn the most-produced grain on Earth. China is the second-largest producer and an increasingly important swing importer, with purchase decisions capable of moving global prices by 10-15% within weeks. Weather during the critical July pollination window in the U.S. Corn Belt is the single highest-impact variable for annual supply.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** A sustained corn rally above $5/bushel squeezes ethanol producer margins. Green Plains and Rex Energy show 15-20% earnings leverage to corn prices in either direction. ADM, Bunge, and Cargill operate massive grain origination and merchandising networks where trading volumes and margins expand during volatile price environments. Corteva Agriscience and CF Industries supply seed and nitrogen fertilizer to corn farmers, benefiting from acreage expansion decisions during high-price periods.
 
@@ -97,14 +97,14 @@ Corn sits at the nexus of food, fuel, and feed. The U.S. produces 32% of global 
 
 **Tertiary -- Macro and Second-Order Effects:** High corn prices incentivize acreage shifts from soybeans, creating a negative feedback loop on soy supply. Monitor USDA planting intentions reports (March/April) for the season's biggest market-moving event. Corn price spikes feed into livestock production costs, ultimately raising retail meat prices and contributing to food CPI inflation. In developing nations where corn is a dietary staple (Mexico, sub-Saharan Africa), sustained price increases create food security concerns and political instability risk.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Corn farmers with unhedged production capture direct price upside during rallies. Grain merchandisers like ADM and Bunge profit from higher trading volumes and basis volatility. Seed and fertilizer companies (Corteva, CF Industries, Deere) benefit from farmer profitability that drives increased input spending. Farmland owners and REITs see asset appreciation as elevated crop values translate into higher rental rates and land prices.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Ethanol producers face margin compression when corn costs rise faster than gasoline blending economics justify. Livestock operators -- particularly poultry and hog producers -- absorb feed cost increases that cannot be immediately passed through. Cereal and snack food manufacturers (General Mills, PepsiCo) see ingredient cost inflation. Consumers in corn-dependent economies face higher food prices across meat, dairy, sweeteners, and processed foods.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The corn/soybean price ratio (typically 2.3-2.7:1) drives farmer planting decisions. When below 2.3, farmers shift to soybeans -- bullish corn signal. When above 2.7, corn acreage expands -- bearish corn signal. The USDA WASDE report and weekly crop progress reports during the growing season are the primary fundamental catalysts. Monitor the CBOT December/March spread for harvest pressure dynamics and U.S. export pace versus USDA projections for demand confirmation.

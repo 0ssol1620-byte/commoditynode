@@ -76,11 +76,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Oats are a small but strategically important grain, sitting at the intersection of animal feed, breakfast cereals, and the fast-growing plant-based food movement. Canada dominates global production with roughly 35% of world output, followed by Russia, Australia, and Scandinavia. A **+20% move in oat futures** directly pressures margins at General Mills (Cheerios alone consumes an estimated 2-3% of U.S. oat supply), PepsiCo's Quaker division, and Oatly, whose entire business model depends on oat procurement costs. Oat futures are among the thinnest agricultural contracts on the CBOT, with daily volume often below 2,000 contracts, making them susceptible to outsized moves on supply shocks. The 2021 Canadian drought demonstrated this vulnerability, driving oat prices above $7/bushel for the first time in history.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Cereal and Food Producers:** General Mills, PepsiCo (Quaker Oats), and Post Holdings are the largest commercial oat consumers. GIS sources oats primarily from Canadian and northern U.S. farms, making Canadian crop conditions the dominant input cost variable. Oatly and SunOpta represent the newer demand channel -- oat milk has grown from negligible market share to roughly 20% of U.S. plant-based milk sales since 2018. Feed-grade oats remain important for horse and cattle diets, linking oat prices to broader livestock economics.
 
@@ -88,14 +88,14 @@ Oats are a small but strategically important grain, sitting at the intersection 
 
 **Tertiary -- Trends and Substitution Effects:** The plant-based food trend creates structural demand growth independent of price -- oat milk sales have compounded at 30%+ annually. FDA-approved heart-health claims for beta-glucan in oats provide regulatory tailwind for premium pricing. Starbucks sources oat milk for lattes globally, creating food-service demand. Wheat and barley serve as partial substitutes in both feed and food applications, providing a price ceiling through substitution economics.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Canadian oat farmers and exporters benefit directly from price appreciation, supporting the Canadian dollar on the margin. Fertilizer and farm equipment companies see increased input spending during high-price environments. Companies with vertically integrated oat sourcing gain competitive advantage over rivals dependent on spot markets. Health food brands that can pass through costs to premium-paying consumers maintain margins better than commodity cereal makers.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Oatly faces an existential margin squeeze during oat price spikes -- as a single-ingredient company, it lacks the diversification buffer of PepsiCo or General Mills. Cereal manufacturers absorb cost increases or risk volume declines from price-sensitive consumers trading down to store brands. Animal feed buyers shift to alternative grains, potentially disrupting horse and equine nutrition markets. Budget-conscious consumers reduce consumption of premium oat-based products during inflationary periods.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Oat futures liquidity is extremely thin -- daily volume often represents less than 5% of corn or wheat contracts. This creates significant slippage risk for institutional-sized positions. Monitor the Canadian Grain Commission's weekly grain statistics and the USDA WASDE report for supply estimates. Prairie drought conditions (visible via the Canadian Drought Monitor) are the primary weather catalyst. The DBA ETF provides only minimal oat exposure within its broader agriculture basket. For directional oat plays, consider GIS or OTLY as equity proxies -- GIS offers hedged downside with modest correlation, while OTLY provides high-beta inverse exposure to oat input costs.

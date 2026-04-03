@@ -58,11 +58,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Tungsten possesses the highest melting point of any metal (3,422°C) and exceptional hardness, making it irreplaceable in cemented carbide cutting tools, armor-piercing munitions, and high-temperature industrial applications. China dominates the tungsten market, controlling over 80% of global mine production and an even higher share of downstream APT (ammonium paratungstate) processing. Annual global production is approximately 80,000 tonnes of tungsten content. The market is priced via APT benchmarks assessed in China and Europe. Tungsten's strategic importance spans civilian manufacturing (every machined metal part requires tungsten carbide tools) and military applications (kinetic energy penetrators, counterweights for missiles). Supply concentration in China, combined with historical export quotas, makes tungsten a perennial supply security concern for Western industrial and defense sectors.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary — Cemented Carbide and Machining:** Roughly 60% of tungsten consumption goes into cemented tungsten carbide (WC-Co) cutting inserts, drill bits, and wear-resistant parts. Sandvik, Kennametal, Mitsubishi Materials, and ISCAR collectively dominate the ~$20B global cutting tool market. Any tungsten price spike directly inflates tooling costs across automotive, aerospace, and general machining — a universal industrial input cost multiplier.
 
@@ -70,14 +70,14 @@ Tungsten possesses the highest melting point of any metal (3,422°C) and excepti
 
 **Tertiary — Recycling and Substitution:** Approximately 30% of tungsten supply in Western markets comes from recycling hard scrap (spent carbide inserts, drill bits). This high recycling rate partially insulates Western manufacturers from Chinese supply disruptions. Ceramic cutting tools and cermets can substitute in some machining operations but with inferior performance in interrupted cutting and heavy roughing applications.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Chinese tungsten producers (Xiamen Tungsten, China Minmetals, Jiangxi Tungsten) benefit from monopolistic pricing power and government-managed production quotas. European producers like Wolfram Bergbau (Austria) and Almonty Industries (Portugal, South Korea) gain strategic premium from non-Chinese supply status. Tungsten recyclers capture margin expansion when primary prices rise. Defense contractors with secured tungsten supply chains gain competitive advantage in munitions procurement.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Cutting tool manufacturers (Kennametal, Sandvik, Mitsubishi Materials) face raw material cost inflation that squeezes margins in competitive markets. Automotive and aerospace manufacturers absorb higher machining costs across entire production lines. Oil and gas drilling operators face costlier drill bits and downhole tools. Small and medium manufacturers in Western countries are most exposed to supply disruptions with limited ability to stockpile.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Tungsten is traded OTC via APT (ammonium paratungstate) price assessments from Argus and Fastmarkets, with separate European and Chinese benchmark prices. The European-China APT price spread indicates supply flow dynamics and export control tightness. Monitor China's tungsten mining quotas (announced biannually by MOFCOM/MLR) as the key supply-side variable. Kennametal (KMT) quarterly earnings provide real-time commentary on tungsten cost pass-through and demand conditions. Track global manufacturing PMI as a leading demand indicator. Watch for U.S. and EU critical mineral designation policy changes that could trigger strategic stockpile purchases.

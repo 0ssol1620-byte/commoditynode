@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Manganese is the fourth most-used metal in the world by tonnage, with over 90% consumed in steelmaking as a desulfurizing and strengthening agent -- every tonne of steel requires 7-10 kg of manganese. There are no exchange-traded futures for manganese, making equity proxies like South32 (the world's largest pure-play manganese miner) and ferroalloy pricing benchmarks the primary trading instruments. South Africa holds 70% of global reserves and produces roughly 35% of ore output, with Gabon and Australia as the other key suppliers. A **+10% move in manganese ore prices** generates approximately **+9% in South32** and **+6-7% in steel equities** like Nucor and ArcelorMittal. The emerging demand catalyst is EV batteries: manganese-rich NMC (nickel-manganese-cobalt) cathode chemistries are gaining market share as automakers seek to reduce cobalt and nickel content while maintaining energy density.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** South32 spun out of BHP in 2015 and operates the Groote Eylandt mine in Australia plus South African manganese operations, making it the highest-beta listed exposure. Eramet controls COMILOG in Gabon, the world's second-largest manganese mine. On the demand side, integrated steelmakers (ArcelorMittal, Nucor, US Steel, Steel Dynamics) consume manganese through ferromanganese and silicomanganese alloy intermediaries. These alloys are produced in dedicated smelters -- primarily in China, India, and South Africa -- that face their own energy cost constraints.
 
@@ -87,14 +87,14 @@ Manganese is the fourth most-used metal in the world by tonnage, with over 90% c
 
 **Tertiary -- Macro and Second-Order Effects:** China's PMI and property sector health are the dominant demand signals -- Chinese steel mills consume over 50% of global manganese. South Africa's Transnet rail and port infrastructure is notoriously unreliable, with Eskom power crises and rail vandalism periodically constraining exports and spiking prices. The LFP (lithium iron phosphate) battery chemistry competes directly with manganese-containing NMC for EV market share, creating a technology substitution risk on the battery demand side. U.S. and European infrastructure spending bills provide a multi-year structural tailwind for steel-intensive construction projects.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Pure-play manganese miners (South32, Eramet) capture the most operating leverage from price increases. Diversified miners with manganese exposure (BHP, Vale) benefit at the portfolio level. Ferroalloy producers with captive power sources gain margin advantage over competitors facing energy constraints. EV battery cathode innovators working on high-manganese chemistries could unlock new demand channels that structurally tighten the market.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Steelmakers absorb manganese cost increases as a raw material input, compressing margins when ore prices spike faster than finished steel prices can adjust. Stainless steel producers face substitution risk as buyers switch to manganese-lean grades. South African mining operations suffer from Eskom load-shedding, rail disruptions, and rand volatility. Chinese ferroalloy smelters face margin compression when ore prices rise but domestic alloy prices are capped by weak steel demand.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Without exchange-traded futures, manganese exposure is best accessed through South32 (S32.AX) for pure-play upside or the PICK and XME ETFs for diversified metals exposure. The China Portside Manganese Ore Price Index (37% grade and 44% grade benchmarks) is the key pricing reference -- available from CRU and Fastmarkets. Chinese port inventory levels above 6 million tonnes signal oversupply, while draws below 4.5 million tonnes indicate tightness. Monitor Transnet quarterly throughput reports for South African export capacity constraints and China's monthly PMI for steel demand signals. The NMC-vs-LFP market share split in quarterly EV battery installation data provides a forward indicator of manganese demand trajectory.

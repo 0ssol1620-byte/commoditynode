@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Natural rubber is a critical agricultural commodity produced from the latex of Hevea brasiliensis rubber trees, with global output of approximately 14 million tonnes annually. Southeast Asia dominates production: Thailand (35%), Indonesia (25%), and Vietnam (8%) collectively account for nearly 70% of world supply, mostly from smallholder farms with trees requiring seven years to reach maturity. Tires consume over 70% of natural rubber production, making the auto industry the primary demand driver. Unlike many commodities, natural rubber cannot be fully replaced by synthetic alternatives (made from petroleum-derived butadiene) in high-performance applications -- truck tires, aircraft tires, and heavy equipment tires require natural rubber's superior elasticity and heat resistance. The SICOM contract on Singapore Exchange and TOCOM in Tokyo are the primary pricing benchmarks.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Goodyear (GT), Michelin (MGDDY), and Bridgestone (BRDCY) are the world's largest tire manufacturers and the most direct beneficiaries or victims of rubber price movements. Raw material costs represent 30-40% of tire production expenses, with natural rubber the single largest input. Auto OEMs -- GM, Ford, Toyota -- face indirect exposure through original equipment tire pricing and replacement market dynamics. LyondellBasell (LYB) and Lanxess (LNXSF) produce synthetic rubber (styrene-butadiene rubber, polybutadiene) that competes with natural rubber in passenger tire applications.
 
@@ -87,14 +87,14 @@ Natural rubber is a critical agricultural commodity produced from the latex of H
 
 **Tertiary -- Macro and Second-Order Effects:** Monsoon patterns directly affect tapping seasons, with heavy rains halting latex collection for months during wintering periods. South American Leaf Blight (SALB) remains the rubber industry's greatest biological threat -- if the fungus ever reaches Southeast Asian plantations, the impact on global supply would be catastrophic. Electric vehicles are an emerging positive for rubber demand, as EVs weigh 20-30% more than equivalent ICE vehicles, increasing tire wear rates and replacement frequency. Alternative rubber sources including guayule (desert shrub) and Russian dandelion (TKS) are in pilot stages but remain decades from commercial scale.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Tire manufacturers benefit from rubber price declines, as cheaper raw materials expand gross margins while retail tire prices adjust slowly downward. Synthetic rubber producers gain when natural rubber prices spike, as buyers substitute where technically feasible. Southeast Asian producing countries see improved trade balances and rural incomes during rubber rallies, supporting local currencies and consumer spending. Recycled rubber processors benefit from higher virgin rubber prices improving their competitive economics.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Tire manufacturers suffer during rubber price spikes, facing margin compression when retail price pass-through lags input cost increases. Automakers absorb higher original equipment tire costs. Medical glove manufacturers face raw material inflation on concentrated latex. Smallholder rubber farmers face income volatility and may abandon tapping during prolonged price downturns, reducing future supply elasticity. Construction and mining companies see higher operating costs through off-the-road (OTR) tire expenses.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Natural rubber trades on SICOM (Singapore), TOCOM (Tokyo), and Shanghai Futures Exchange. The TSR20 grade is the international benchmark for technically specified rubber. Monitor Thai Meteorological Department forecasts for monsoon timing and intensity, as wintering season supply disruptions drive seasonal price patterns. Track China auto sales data (CPCA monthly) as the dominant marginal demand signal. The crude oil price influences synthetic rubber costs and sets a substitution price ceiling for natural rubber. Watch IRSG quarterly bulletins for global supply-demand balances. The Thai baht and Indonesian rupiah correlate inversely with dollar-denominated rubber prices, as local currency weakness incentivizes producer selling. EV adoption rates represent a structural positive worth monitoring through monthly registration data.

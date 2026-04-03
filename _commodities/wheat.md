@@ -85,11 +85,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Wheat feeds 35% of the world's population and is grown on more land area than any other food crop. Supply shocks -- from drought in Australia, war in Ukraine, or export bans in India -- create violent price dislocations with immediate food security implications. Global production averages 780 million tonnes annually, with Russia, the EU, China, India, and the U.S. as the largest producers. The Black Sea region (Russia and Ukraine combined) accounts for roughly 30% of global wheat exports, making geopolitical risk in the region a permanent feature of wheat market analysis.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** ADM and Bunge profit from volatility through merchandising margins and physical commodity spreads. Their earnings are positively correlated with wheat volatility, not just directional price moves. Ingredion and Ardent Mills process wheat into flour for commercial and industrial baking operations. U.S. wheat farmers across the hard red winter (Kansas, Oklahoma), hard red spring (North Dakota, Montana), and soft red winter (Ohio, Illinois) belts produce distinct classes serving different end-use markets.
 
@@ -97,15 +97,15 @@ Wheat feeds 35% of the world's population and is grown on more land area than an
 
 **Tertiary -- Macro and Second-Order Effects:** Food-importing nations (Egypt, Indonesia, Philippines) face currency pressure and social instability risks when wheat exceeds $700/bushel. Sovereign credit spreads widen in these markets. The Arab Spring of 2011 was partially triggered by wheat price spikes, illustrating the connection between grain prices and political stability. Wheat price rallies feed directly into bread and pasta prices globally, contributing to food CPI and influencing central bank monetary policy in food-sensitive economies. Feed wheat competes with corn in livestock rations, creating cross-commodity substitution dynamics.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Wheat farmers with unhedged production capture full price upside during rallies. Grain trading companies (ADM, Bunge, Cargill) benefit from widening basis spreads and elevated trading volumes. Fertilizer and seed companies see increased input spending from profitable farmers. Agricultural equipment manufacturers (Deere, AGCO) benefit from farmer confidence and capital investment cycles. Wheat-exporting nations (Australia, Canada, France) enjoy improved trade balances.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Flour millers and bakeries face margin compression when wheat costs rise faster than product prices can adjust. Food manufacturers (General Mills, Grupo Bimbo) absorb ingredient cost inflation. Emerging market governments face fiscal pressure from bread subsidies and social safety net costs. Consumers in wheat-dependent diets (Middle East, North Africa, Central Asia) face direct food cost inflation. Livestock producers using feed wheat see ration costs increase.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The Russia-Ukraine conflict removed 28% of global wheat export capacity from 2022. Monitor Black Sea shipping lanes, Ukrainian port activity, and Russian export quota announcements as leading indicators. The USDA WASDE report and weekly crop progress ratings during the U.S. growing season are primary fundamental catalysts. SRW/HRW/HRS wheat spreads reflect quality premiums and regional supply conditions. The Kansas City-Chicago wheat spread specifically signals hard red winter versus soft red winter supply dynamics and protein premium trends.
 

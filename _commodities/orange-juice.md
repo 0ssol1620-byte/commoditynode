@@ -76,11 +76,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Frozen concentrated orange juice (FCOJ) is one of the most volatile soft commodities, driven by an unusually concentrated supply base and persistent biological threats. Brazil's Sao Paulo state produces over 60% of the world's orange juice, while Florida -- once the dominant U.S. source -- has seen production collapse by over 75% since 2004 due to citrus greening disease (Huanglongbing/HLB) and successive hurricanes. FCOJ futures have surged past **$5.00/lb in 2024-2025**, levels previously unimaginable, as the global citrus crop faces structural decline. A **+10% move in OJ futures** compresses margins at Tropicana (PepsiCo) and Minute Maid (Coca-Cola) by an estimated 3-5%, forcing either retail price increases or reformulation with cheaper juices. The market trades on ICE with moderate liquidity, making it responsive to weather headlines and USDA crop reports.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Beverage Companies and Processors:** PepsiCo's Tropicana and Coca-Cola's Minute Maid are the two largest branded OJ buyers in the world. Brazilian processors Cutrale and Citrosuco control an estimated 50%+ of global FCOJ processing capacity, giving them significant pricing power. Monster Beverage and Constellation Brands face secondary exposure through citrus-flavored product lines. When OJ prices spike, beverage companies face the choice of absorbing costs, raising shelf prices, or quietly reducing juice content percentages.
 
@@ -88,14 +88,14 @@ Frozen concentrated orange juice (FCOJ) is one of the most volatile soft commodi
 
 **Tertiary -- Weather, Disease, and Substitution:** Hurricane season (June-November) poses catastrophic risk to Florida's remaining citrus groves -- Hurricane Ian (2022) alone destroyed an estimated 10-15% of the surviving crop. Brazilian frost events in July-August can damage the Sao Paulo citrus belt and trigger 20%+ single-day price spikes. Consumer substitution into apple juice, other citrus beverages, and vitamin C supplements accelerates when OJ prices remain elevated. The Brazilian Real exchange rate affects export competitiveness -- a weaker BRL reduces dollar-denominated OJ costs for importers.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Brazilian processors Cutrale and Citrosuco benefit from pricing power in a supply-constrained market. Surviving Florida growers with healthy trees enjoy premium pricing. Crop protection companies (FMC, Corteva) see demand for HLB management chemicals. Apple juice and alternative beverage producers gain market share through substitution. Vitamin supplement makers capture consumers seeking cheaper vitamin C sources than orange juice.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 PepsiCo and Coca-Cola face persistent input cost inflation on their juice brands, with limited ability to pass through the full increase without destroying demand. Grocery retailers absorb margin pressure on juice aisle products. Florida's citrus industry faces existential decline -- the state's orange production has fallen from 240 million boxes (1998) to under 20 million. Consumers pay record retail prices for orange juice, accelerating the long-term shift away from juice consumption among health-conscious buyers concerned about sugar content.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 FCOJ futures trade on ICE with open interest typically between 10,000-20,000 contracts -- thin by agricultural commodity standards. The USDA Citrus Crop Production Report (monthly during season) is the primary data catalyst. Monitor Brazilian weather services (INMET) for frost warnings during the June-August Sao Paulo winter. Hurricane track forecasts from the National Hurricane Center drive intraday volatility during storm season. The JJA and DBA ETFs provide minimal OJ-specific exposure. For equity proxies, PEP and KO offer modest inverse correlation -- but juice is a small fraction of their total revenue, diluting the signal. The structural supply deficit from citrus greening means the long-term price trend remains upward until a disease cure or significant new planting regions emerge.

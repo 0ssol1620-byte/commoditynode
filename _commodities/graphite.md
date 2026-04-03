@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Graphite is the single largest component by weight in lithium-ion battery anodes, typically comprising 50-60% of cell mass. Every EV battery requires roughly 50-100 kg of processed graphite, making it one of the most volume-intensive critical minerals in the energy transition. The market splits between natural graphite (mined as flake graphite, then processed into spherical graphite for batteries) and synthetic graphite (manufactured from petroleum coke at high temperatures). China dominates both segments, controlling over 65% of natural graphite mining, 80% of synthetic graphite production, and virtually all spherical graphite processing. Annual global production exceeds 1.3 million tonnes, but battery-grade material represents a fast-growing premium segment with widening supply-demand deficits.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Syrah Resources operates the Balama mine in Mozambique, the largest integrated natural graphite mine outside China, and is developing active anode material processing in Louisiana with DOE funding. Nouveau Monde Graphite (NMG) is building an integrated mine-to-anode operation in Quebec. GrafTech International (EAF) is the leading Western producer of synthetic graphite electrodes used in electric arc furnace steelmaking. Tesla, CATL, and LG Energy Solution are the primary battery-grade graphite consumers through their cell manufacturing operations.
 
@@ -87,14 +87,14 @@ Graphite is the single largest component by weight in lithium-ion battery anodes
 
 **Tertiary -- Macro and Second-Order Effects:** China's December 2023 export controls on graphite products sent shockwaves through battery supply chains and accelerated Western efforts to build domestic processing capacity. The US Critical Minerals List and EU Critical Raw Materials Act have prioritized graphite, unlocking government financing for projects like Syrah's Vidalia facility and NMG's Becancour plant. Silicon anode technology, which blends silicon with graphite to increase energy density, represents both a partial substitute and a potential demand modifier -- reducing graphite content per cell while enabling larger batteries. Nuclear reactors use graphite as a moderator, providing niche but stable demand.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Graphite price increases benefit non-Chinese producers disproportionately as supply chain diversification premiums widen. Syrah Resources (SYAAF) and Nouveau Monde Graphite (NMG) capture both commodity price upside and strategic value as Western governments fund alternatives to Chinese supply. GrafTech International benefits from graphite electrode pricing power in tight markets. Nations with graphite deposits outside China -- Mozambique, Canada, Tanzania, Madagascar -- gain geopolitical significance and attract foreign direct investment.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Battery cell manufacturers face direct anode material cost inflation, with graphite representing 15-20% of cell bill-of-materials cost. EV automakers including Tesla, GM, and Ford see battery pack costs rise, threatening price parity targets with internal combustion vehicles. Synthetic graphite producers outside China face margin pressure from high energy costs during petroleum coke price spikes. Refractories manufacturers in the steel industry compete with battery applications for supply, facing allocation risk during shortages.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Graphite lacks exchange-traded futures, with pricing referenced through Benchmark Minerals, Fastmarkets, and CRU assessments. Monitor China's export license decisions and environmental inspection campaigns as primary supply-side catalysts. The natural-versus-synthetic graphite price spread indicates substitution dynamics and energy cost pass-through. Syrah Resources' Balama production reports provide the best publicly available proxy for non-Chinese supply conditions. Track IRA-qualifying anode material milestones for policy-driven demand signals. The ratio of battery-grade spherical graphite to flake graphite prices indicates processing margin health and midstream capacity constraints.

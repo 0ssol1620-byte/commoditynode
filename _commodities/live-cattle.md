@@ -79,11 +79,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Live cattle futures represent the most valuable livestock market in the United States, with the domestic beef industry generating over $80 billion in annual farm cash receipts. Unlike grain markets that can adjust supply within a single growing season, the cattle market operates on a biological production cycle of approximately 10 years from herd expansion to contraction. This extended cycle creates prolonged periods of tight supply and elevated prices followed by overproduction and price declines. The US cattle herd has been in a contraction phase driven by persistent drought across the Southern Plains, pushing the national herd to multi-decade lows and live cattle futures to record highs. With fewer heifers being retained for breeding, the supply tightness is structural and will take years to reverse even under favorable conditions.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Meatpackers and Beef Cutout:** Tyson Foods, JBS, and the major packers operate on the inverse side of live cattle prices -- when cattle costs rise, packer margins compress unless wholesale beef cutout values rise proportionally. The Choice-Select spread reflects quality grading premiums and consumer willingness to pay for premium cuts. Feeder cattle prices amplify live cattle moves, as feedlot operators adjust placement decisions based on expected fed cattle prices and corn costs. The packer-to-feedlot power dynamic is central to this market, with four firms controlling over 80% of US beef processing.
 
@@ -91,14 +91,14 @@ Live cattle futures represent the most valuable livestock market in the United S
 
 **Tertiary -- Drought, Feed Costs, and Cycle Dynamics:** The US Drought Monitor directly correlates to forced herd liquidation, as ranchers sell breeding stock when pasture conditions deteriorate. Feed corn prices set the variable cost floor for feedlot operations, with high corn prices discouraging placements and extending marketing weights. The cattle cycle's current contraction phase means heifer retention rates are the key forward indicator -- when ranchers begin holding back heifers from slaughter, it signals the start of herd rebuilding but further tightens near-term beef supply.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Cow-calf ranchers with surviving herds capture historic per-head profits during tight supply phases. Feedlot operators in Nebraska and Kansas benefit when the cattle-corn price ratio favors aggressive placements. Chicken and pork producers gain market share as consumers trade down from expensive beef. Brazilian beef exporters (JBS, Marfrig) gain in Asian markets where US supply constraints create openings. Premium steakhouse chains with pricing power, like Texas Roadhouse, can pass through costs to affluent consumers.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Meatpackers face severe margin compression when live cattle prices outpace their ability to raise wholesale beef cutout values. Fast-food chains dependent on ground beef patties absorb cost increases that erode unit-level economics. Grocery retailers see beef department margins shrink as they subsidize prices to maintain foot traffic. Ranchers forced to liquidate during drought realize losses on breeding stock that took years to develop. Leather and byproduct markets face supply constraints that raise input costs for footwear and automotive upholstery manufacturers.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The USDA Cattle on Feed report (released monthly) is the primary fundamental catalyst, with placements and marketings data driving short-term price action. The biannual USDA Cattle Inventory report sets the structural supply outlook. Monitor the fed cattle-to-corn ratio as a key indicator of feedlot profitability and future placement decisions. The Choice-Select spread reflects consumer demand strength. Commitment of traders data shows that managed money positioning in live cattle has reached historic net-long extremes during the current cycle, creating risk of sharp corrections on any bearish surprise. Weekly boxed beef cutout values and packer margins provide real-time demand visibility.

@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Uranium is the fuel that powers approximately 10% of global electricity generation through 440+ commercial nuclear reactors worldwide. The market operates on unique 10-year contracting cycles between utilities and miners, creating a disconnect between spot and long-term contract prices. Post-Fukushima mine closures and production curtailments have created a structural supply deficit that is tightening as reactor restarts and new builds accelerate globally. Global primary mine production covers only about 75% of annual reactor requirements, with the deficit filled by secondary supplies (government inventories, recycled material) that are steadily depleting.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Cameco and Kazatomprom control a dominant share of global uranium production. Uranium enrichment (Centrus Energy/LEU) and fuel fabrication add value between mine and reactor. Unlike oil or gas, uranium fuel costs represent only 5-10% of nuclear plant operating expenses, meaning utilities are price-insensitive buyers who prioritize supply security over cost. This inelasticity supports higher prices once long-term contracts roll over. NexGen Energy (NXE) and Uranium Energy Corp (UEC) represent development-stage companies with large undeveloped deposits.
 
@@ -87,15 +87,15 @@ Uranium is the fuel that powers approximately 10% of global electricity generati
 
 **Tertiary -- Macro and Second-Order Effects:** Sprott Physical Uranium Trust and other physical holding vehicles have become significant market participants, purchasing and sequestering material from the spot market. This financialization of uranium has tightened available spot supply and created a reflexive dynamic where rising prices attract more investment capital into physical funds, further reducing available material. Government nuclear energy policies, reactor license extensions, and new build commitments drive long-term demand expectations and investment sentiment across the uranium value chain.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Uranium miners with permitted, near-production assets benefit most from price rallies. Cameco (CCJ) captures direct margin expansion on its Saskatchewan operations. Kazatomprom benefits from its position as the world's lowest-cost producer. Development-stage companies (NexGen, Uranium Energy Corp, Denison Mines) see share price appreciation as higher prices bring their projects closer to economic viability. Physical uranium fund investors (Sprott) benefit from NAV appreciation.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Nuclear utilities face higher fuel procurement costs as legacy low-price contracts expire and are replaced at current market rates. Enrichment-dependent utilities face additional cost pressure from constrained SWU (separative work unit) capacity. Countries pursuing nuclear expansion face higher construction costs as uranium price increases compound with steel, concrete, and labor inflation. Anti-nuclear jurisdictions that shut down reactors face energy cost regret as replacement power costs exceed nuclear operating costs.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The uranium spot/term price spread is the key indicator of market tightness. When spot prices approach or exceed long-term contract levels, it signals that uncovered utility demand is pulling material from the spot market. Monitor the World Nuclear Association's reactor pipeline, Kazatomprom production guidance, and U.S. DOE enrichment inventories as fundamental drivers. URA and URNM ETFs provide liquid exposure but trade at significant premiums to NAV during bull markets. Numerco's daily spot price updates and TradeTech's weekly contract indicators provide the highest-frequency price data in this opaque market.
 

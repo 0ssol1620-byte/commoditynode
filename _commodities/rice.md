@@ -77,11 +77,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Rice is the staple food for over 3.5 billion people and the most important crop in Asia, where 90% of global production and consumption occurs. Unlike corn or wheat, rice is predominantly consumed as a food grain rather than as animal feed or industrial input, making price spikes acutely political. A **+15% move in rough rice futures** can trigger export bans from India (40% of global trade), panic buying across Southeast Asia, and food inflation protests in import-dependent nations like the Philippines and Bangladesh. The market is highly fragmented -- five countries (India, Thailand, Vietnam, Indonesia, China) account for over 70% of global output -- yet trade volumes are thin relative to production, meaning small supply disruptions create outsized price moves. El Nino events, which reduce monsoon rainfall across South and Southeast Asia, are the single largest weather catalyst for rice prices.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Agribusiness:** Global grain traders ADM and Bunge handle significant rice volumes alongside their broader commodity portfolios. Wilmar International and Olam Group are the dominant processors in Asia. Fertilizer demand for paddy cultivation drives revenue for Mosaic, CF Industries, and Yara, with nitrogen-based fertilizers being particularly critical for rice yields. India's periodic export restrictions -- most recently a blanket ban on non-basmati white rice in 2023 -- remain the single largest supply-side policy risk.
 
@@ -89,14 +89,14 @@ Rice is the staple food for over 3.5 billion people and the most important crop 
 
 **Tertiary -- Macro and Currency Effects:** The Thai Baht, Indian Rupee, and Vietnamese Dong all show meaningful sensitivity to rice export revenues. Emerging market food inflation -- rice constitutes 20-40% of calorie intake in much of Asia and Sub-Saharan Africa -- can force central bank tightening and fiscal subsidy expansion simultaneously. China's strategic rice reserves, estimated at 50-65 million tonnes, function as a global price stabilizer when released but represent a demand shock when replenished.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Agribusiness traders with global logistics networks (ADM, Bunge, Wilmar) benefit from elevated prices and increased trade flow volatility. Fertilizer producers see stronger demand during high-price environments that incentivize yield maximization. Exporting nations -- particularly Thailand and Vietnam -- enjoy improved trade balances and stronger currencies when prices rise. Dry bulk shippers benefit from increased long-haul trade as importers seek alternative sources during supply disruptions.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Import-dependent nations (Philippines, Bangladesh, much of Sub-Saharan Africa) face food security crises and fiscal strain from subsidy costs during price spikes. Grocery retailers and food service companies see margin pressure. Asian food processors like CP Foods face higher input costs. Consumers across the developing world bear the most direct burden -- rice price spikes are regressive, disproportionately affecting the lowest-income households who spend 30-50% of income on food.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Rice futures are thinly traded compared to corn or wheat, with lower liquidity creating wider bid-ask spreads and greater slippage risk. Monitor India's Directorate General of Foreign Trade announcements for export policy shifts -- these have historically moved prices 8-15% within days. The USDA World Agricultural Supply and Demand Estimates (WASDE) report provides the benchmark supply-demand forecast. El Nino declarations by NOAA (typically June-August) are the primary weather catalyst. The DBA and RJA ETFs provide indirect exposure but rice weighting is modest within these broad agriculture baskets.

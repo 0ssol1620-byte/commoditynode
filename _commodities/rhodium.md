@@ -75,11 +75,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Rhodium is the rarest and most expensive of the platinum group metals, with annual global production of roughly one million ounces -- a fraction of gold or platinum output. Over 80% of rhodium demand comes from three-way catalytic converters in gasoline vehicles, where it uniquely converts nitrogen oxides (NOx) into harmless nitrogen gas. South Africa's Bushveld Complex supplies more than 80% of the world's rhodium, creating extreme geographic concentration risk. Unlike gold or silver, rhodium has no significant futures market, and physical supply is dominated by a handful of South African miners. This illiquidity has produced extraordinary price swings: rhodium traded below $1,000/oz in 2016, surged past $29,000 in 2021, and has since corrected sharply. The metal is always mined as a co-product alongside platinum and palladium, meaning its supply cannot be independently ramped in response to price signals.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Direct Producers and Consumers:** Sibanye-Stillwater (SBSW), Impala Platinum (IMPUY), and Anglo American Platinum (ANGPY) are the dominant producers, with rhodium revenue providing crucial margin uplift during price spikes. On the demand side, global automakers -- GM, Ford, Toyota, Stellantis -- are captive consumers through their catalytic converter requirements. Tightening emissions standards (Euro 7, China VI-b) increase rhodium loadings per vehicle, supporting structural demand even as unit sales fluctuate.
 
@@ -87,14 +87,14 @@ Rhodium is the rarest and most expensive of the platinum group metals, with annu
 
 **Tertiary -- Macro and Second-Order Effects:** The accelerating transition to battery electric vehicles represents a long-term existential threat to rhodium demand, as EVs require no catalytic converters. However, hybrid vehicles -- which still need catalysts -- are growing faster than pure EVs in many markets, providing a demand bridge. Platinum and palladium substitution research has intensified, with some automakers developing tri-metal catalysts that reduce rhodium loadings. The glass industry uses rhodium in bushings for fiberglass production, a small but price-inelastic demand segment.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 Rhodium price spikes disproportionately benefit South African PGM miners, particularly Sibanye-Stillwater and Impala Platinum, where rhodium can represent 20-30% of PGM basket revenue despite being a minor volume component. PGM recyclers see improved economics as higher prices justify processing lower-grade scrap material. South African government mining royalties increase with PGM basket prices, supporting fiscal revenues.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Automakers absorb higher catalytic converter costs during rhodium rallies, with per-vehicle catalyst costs potentially rising by hundreds of dollars. Catalytic converter manufacturers face margin compression when spot procurement is required. Consumers in emerging markets may defer vehicle purchases as sticker prices rise, dampening auto sales growth. The glass and chemical industries face input cost inflation on an irreplaceable catalyst material.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 Rhodium has no liquid exchange-traded futures contract; pricing is set by Johnson Matthey and BASF reference prices. The SPPP ETF provides partial PGM basket exposure but does not purely track rhodium. Monitor Sibanye-Stillwater quarterly results for PGM production and basket price guidance. Eskom load-shedding schedules serve as a real-time supply disruption indicator. Watch Euro 7 implementation timelines and China emissions policy for demand signals. The rhodium/palladium price ratio indicates substitution pressure -- when rhodium trades at extreme premiums, automakers accelerate reformulation efforts. EV penetration rates in Europe and China are the most critical long-term demand variable; track monthly registration data from ACEA and CPCA.

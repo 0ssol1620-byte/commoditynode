@@ -79,11 +79,11 @@ window.COMMODITY_DATA = {
 </script>
 <div id="impact-graph"></div>
 
-## Overview
+## What Is This Commodity and What Drives Its Price?
 
 Lean hog futures represent the benchmark pricing mechanism for the US pork industry, the world's third-largest pork producer behind China and the European Union. Pork is the most consumed meat globally, with China alone accounting for approximately half of worldwide consumption. The 2018-2019 African Swine Fever outbreak devastated China's hog herd by an estimated 40-50%, triggering a global pork price shock and massive import demand surge that reshaped international trade flows. While China has partially rebuilt its herd through industrialization of its hog farming sector, ASF remains an endemic threat across Asia and has spread to Europe, creating persistent supply risk. US lean hog futures reflect domestic supply-demand fundamentals but are increasingly influenced by Chinese import patterns, making the HE contract a proxy for global protein market dynamics.
 
-## Key Impact Channels
+## How Does a Price Move Ripple Through Industries and Stocks?
 
 **Primary -- Pork Processors and Cutout Values:** Smithfield Foods (owned by WH Group, China's largest pork company), Tyson Foods, and Hormel operate on the buy side of live hogs and face margin compression when hog prices rise faster than wholesale pork cutout values. The pork cutout -- decomposed into primal cuts including loin, butt, rib, ham, and belly -- drives processor revenue. Pork bellies, the raw material for bacon, are the most volatile primal and exhibit strong seasonal patterns with summer grilling demand. Hormel's branded products (SPAM, Applegate) provide some insulation through pricing power, while commodity-focused processors absorb full input cost volatility.
 
@@ -91,14 +91,14 @@ Lean hog futures represent the benchmark pricing mechanism for the US pork indus
 
 **Tertiary -- Chinese Demand, Disease Risk, and Policy:** China's import demand is the single largest external variable in the lean hog market. ASF outbreaks or policy shifts in Chinese hog production can move US futures by 10-15% within weeks. The ongoing development of ASF vaccines represents a potential game-changer for global pork supply stability. Domestically, California's Proposition 12 animal welfare standards have created a two-tier market for pork, raising compliance costs for producers selling into the state. USDA packing plant processing capacity constraints create bottlenecks during peak slaughter periods.
 
-## Winners
+## Which Companies and ETFs Benefit When the Price Rises?
 
 US hog producers in Iowa and the Midwest capture direct upside from price rallies, particularly during periods of tight supply or Chinese import surges. Smithfield's parent company WH Group benefits from its unique position straddling both US production and Chinese distribution. Chicken producers including Pilgrim's Pride and Sanderson Farms gain market share when pork prices rise and consumers substitute. Brazilian pork exporters (BRF, JBS) benefit from increased Asian demand that exceeds US export capacity.
 
-## Losers
+## Which Companies and Sectors Are Hurt by a Price Increase?
 
 Pork processors face margin compression when live hog prices outpace wholesale cutout values and slaughter capacity utilization falls. Fast-food chains and grocery retailers absorb cost increases on pork products, particularly during summer bacon price spikes. Producers in regions affected by Proposition 12 face higher compliance costs and reduced market access. Chinese consumers bear the ultimate burden of pork price inflation, which carries significant political sensitivity in China and has historically prompted government intervention through strategic pork reserves.
 
-## Trading Note
+## What Should Traders Watch When Analyzing This Market?
 
 The quarterly USDA Hogs and Pigs report is the most important fundamental catalyst, with breeding herd and pig crop data setting supply expectations for the following 6-9 months. Weekly slaughter data and pork cutout values provide real-time demand signals. Monitor pork belly primal values for seasonal trading opportunities, as the belly-to-cutout ratio exhibits reliable patterns around summer grilling season. Cold storage inventory levels from the USDA indicate demand absorption rates. China's monthly pork import data and any ASF outbreak reports are critical external catalysts. The commitment of traders report reveals managed money positioning that tends to reach extremes at seasonal price peaks and troughs.

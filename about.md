@@ -4,7 +4,24 @@ layout: default
 title: About CommodityNode
 description: "CommodityNode maps how commodity price movements ripple through global industries, stocks, and ETFs with interactive Impact Maps and Signal Reports."
 ---
-no_loader: true
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About CommodityNode",
+  "url": "https://commoditynode.com/about/",
+  "description": "CommodityNode is an independent commodity intelligence platform mapping how raw material price movements ripple through industries, stocks, and ETFs.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "CommodityNode",
+    "url": "https://commoditynode.com",
+    "email": "contact@commoditynode.com",
+    "sameAs": ["https://www.threads.com/@commoditynode"],
+    "knowsAbout": ["Commodity Markets", "Financial Analysis", "Supply Chain Risk", "Portfolio Management"]
+  }
+}
+</script>
 
 <div class="post-header">
   <div class="container">
