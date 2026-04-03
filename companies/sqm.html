@@ -1,0 +1,99 @@
+---
+layout: default
+title: "SQM - Sociedad Química y Minera (SQM)"
+description: "Commodity exposure analysis for SQM — Chile's state-linked lithium giant producing from the world's highest-quality brine resource in the Atacama Desert."
+permalink: /companies/sqm/
+---
+
+<header class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-gold">Company Hub</span>
+      <span class="badge badge-cyan">SQM</span>
+    </div>
+    <h1>SQM — Sociedad Química y Minera (SQM)</h1>
+    <p class="post-meta-bar">{{ page.description }}</p>
+  </div>
+</header>
+
+<div class="container" style="padding:48px 24px 80px;">
+  <div class="post-layout">
+    <div class="post-body-container">
+      <div class="post-content">
+        <h2>Company Overview</h2>
+        <p style="font-size:0.8rem;color:var(--text3);margin-bottom:8px;">📈 Albemarle (ALB) — proxy for lithium market sentiment</p>
+        <div class='cn-price-chart' data-symbol='ALB' data-name='Albemarle (Lithium Proxy)'></div>
+        <p>SQM is Chile's state-linked lithium giant, producing from the Salar de Atacama — the world's highest-quality lithium brine resource located in northern Chile's Atacama Desert. SQM holds a license to extract from roughly 80,000 hectares of the Atacama salar, where natural evaporation concentrates lithium to levels far exceeding global average brine grades. The company produces approximately 25% of global lithium supply and operates under a long-term contract with Chile's government extending through 2030 and beyond. SQM also produces iodine, potassium nitrate, and industrial chemicals, providing revenue diversification beyond lithium.</p>
+
+        <h2>Commodity Exposures</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <a href="/commodities/lithium/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Lithium</a>
+          <a href="/commodities/potash/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Potash</a>
+        </div>
+        <p>Lithium carbonate and lithium hydroxide account for the majority of SQM's revenue in high-price environments. Potassium nitrate (a specialty fertilizer for drip irrigation systems) and iodine (used in medical contrast agents and industrial applications) provide meaningful base revenue that stabilizes cash flows when lithium prices fall. SQM's Atacama brine has among the world's lowest lithium production costs — reportedly below $3,000/tonne — giving the company extraordinary profitability when lithium carbonate trades at $20,000-80,000/tonne as it did during the 2021-2022 EV boom.</p>
+
+        <h2>Price Sensitivity</h2>
+        <p>SQM has near-direct leverage to lithium carbonate and hydroxide prices, as its ultra-low cost structure means virtually all price changes flow to the bottom line. The company provides maximum upside in lithium bull markets. Key structural risks include: Chile's nationalization policy (the government has progressively increased royalties and tightened production terms), currency exposure to the Chilean peso vs. USD, and environmental constraints on water usage in the Atacama. Chinese pricing power in the lithium market — through CATL and BYD buying leverage — creates competitive risk when Chinese domestic lithium production expands.</p>
+
+        <h2>Related ETFs</h2>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">LIT</span>
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">REMX</span>
+        </div>
+      </div>
+    </div>
+
+    <aside class="toc-sidebar">
+      <p class="toc-title">Quick Stats</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Sector</span>
+          <span style="color:var(--text2)">Lithium & Specialty Chemicals</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Primary Exposure</span>
+          <span style="color:var(--accent)">Lithium</span>
+        </div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+        <p class="toc-title">Explore More</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align:center;padding:40px 24px;margin-top:32px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);">
+    <p style="font-size:1rem;font-weight:700;margin-bottom:8px;">Track Lithium Price Impact</p>
+    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">SQM moves with lithium. See the full second-order ripple chain.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+      <a href="/commodities/lithium/" class="btn btn-primary">Lithium Impact Map &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Related Posts -->
+  {% assign ticker_lower = "sqm" | downcase %}
+  {% assign company_posts = site.posts | where_exp: "post", "post.tags contains ticker_lower" %}
+  {% if company_posts.size > 0 %}
+  <section class="section" style="margin-top:48px;">
+    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="posts-grid">
+    {% for post in company_posts limit:6 %}
+      <article class="post-card" data-animate>
+        <div class="post-card-accent"></div>
+        <div class="post-card-body">
+          <div class="post-card-meta"><time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time></div>
+          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
+          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
+        </div>
+      </article>
+    {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
