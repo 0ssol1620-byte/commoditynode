@@ -1,7 +1,7 @@
 ---
 layout: commodity
 unit: "cents/bushel"
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-oats.png"
 title: "Oats Price Impact: Industries, Stocks & ETFs"
 description: "How oat futures ripple through cereal makers, oat milk brands, animal feed, and the plant-based food trend."
 commodity_slug: "oats"

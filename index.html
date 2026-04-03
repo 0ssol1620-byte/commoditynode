@@ -24,7 +24,7 @@ image: "/assets/images/og-default.png"
       </h1>
 
       <div class="hero-trust-strip" data-animate data-delay="150">
-        <span class="trust-item">60 commodity hubs</span>
+        <span class="trust-item">{{ site.commodities | size | default: 60 }}+ commodity hubs</span>
         <span class="trust-sep">·</span>
         <span class="trust-item">AI 90-day forecast</span>
         <span class="trust-sep">·</span>
@@ -679,7 +679,7 @@ image: "/assets/images/og-default.png"
 
     <div style="text-align:center;margin-top:24px;" data-animate data-delay="300">
       <a href="/commodities/" class="btn btn-primary">Explore All Commodity Hubs &rarr;</a>
-      <p style="color:var(--text3);font-size:0.85rem;margin-top:8px;">{{ site.commodities | size | default: 60 }} Commodity Hubs &middot; {{ site.posts.size }} Signal Reports &middot; 7000+ Impact Nodes</p>
+      <p style="color:var(--text3);font-size:0.85rem;margin-top:8px;">{{ site.commodities | size | default: 60 }} Commodity Hubs &middot; {{ site.posts.size }} Signal Reports &middot; Impact relationships across 60+ commodities</p>
     </div>
   </div>
 </section>
