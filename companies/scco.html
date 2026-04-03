@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Southern Copper (SCCO)"
-description: "Commodity exposure analysis for Southern Copper — Western Hemisphere's largest copper producer with ultra-low-cost operations in Peru and Mexico."
+description: "Western Hemisphere's largest copper producer with world's lowest-quartile costs. Operations in Peru and Mexico with massive expansion pipeline under Grupo Mexico ownership."
 permalink: /companies/scco/
 ---
 
@@ -21,20 +21,19 @@ permalink: /companies/scco/
     <div class="post-body-container">
       <div class="post-content">
         <h2>Company Overview</h2>
-        <p style="font-size:0.8rem;color:var(--text3);margin-bottom:8px;">📈 Copper Futures Price (HG=F) — SCCO's primary revenue driver</p>
         <div class='cn-price-chart' data-symbol='HG=F' data-name='Copper'></div>
-        <p>Southern Copper is the Western Hemisphere's largest copper producer, operating low-cost mines at Cuajone, Toquepala, and Buenavista del Cobre in Peru and Mexico. A subsidiary of Grupo Mexico, Southern Copper produces approximately 9% of global copper supply with among the world's lowest all-in sustaining costs (AISC) at roughly $0.85/lb. The company holds one of the largest copper reserve bases globally, with a massive expansion pipeline including the Tía María and Los Chancas projects in Peru that could significantly increase production capacity over the coming decade.</p>
+        <p>Southern Copper operates Cuajone and Toquepala in Peru and the massive Buenavista del Cobre mine in Mexico. As a Grupo Mexico subsidiary, SCCO benefits from scale and an AISC of approximately $0.85/lb — well below the industry average of ~$2.50/lb. This creates substantial free cash flow across copper price cycles. Molybdenum, silver, and zinc are meaningful by-products contributing 15-20% of total revenue. The Tía María project in Peru represents potential 120,000 tonne/year copper addition.</p>
 
         <h2>Commodity Exposures</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
           <a href="/commodities/copper/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Copper</a>
           <a href="/commodities/molybdenum/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Molybdenum</a>
           <a href="/commodities/silver/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Silver</a>
+          <a href="/commodities/zinc/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Zinc</a>
         </div>
-        <p>Copper dominates Southern Copper's revenue, accounting for approximately 80% of sales. Molybdenum, a specialty metal used in high-strength steel alloys and petroleum refining catalysts, provides a meaningful by-product credit that further reduces effective copper production costs. Silver and zinc are also produced as by-products. The ultra-low cost structure means SCCO generates substantial free cash flow across nearly all copper price environments, making it one of the most profitable copper miners globally on a per-pound basis.</p>
 
         <h2>Price Sensitivity</h2>
-        <p>SCCO exhibits extremely high copper leverage due to its low-cost structure. Because fixed costs are already covered at relatively low copper prices, incremental price increases flow almost entirely to the bottom line. This operating leverage means small copper price moves translate into large EPS impact — typically 1.5-2x the percentage change in copper price. Molybdenum provides a meaningful secondary revenue stream, with each $5/lb change in molybdenum price adding approximately $200M to annual revenue. The company's Peruvian operations face periodic community opposition and permitting risks that can delay expansion projects.</p>
+        <p>SCCO's extremely low cost structure creates exceptional operating leverage. Each $0.10/lb increase in copper adds approximately $300M to EBITDA. Molybdenum is a significant credit: each $5/lb change in moly price adds ~$200M annually. The company trades at a premium to peers due to reserve quality and lowest-quartile cost position. SCCO typically pays 90%+ of free cash flow as dividends, making it a high-yield copper play in bull markets.</p>
 
         <h2>Related ETFs</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
@@ -67,34 +66,12 @@ permalink: /companies/scco/
     </aside>
   </div>
 
-  <!-- CTA -->
   <div style="text-align:center;padding:40px 24px;margin-top:32px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);">
     <p style="font-size:1rem;font-weight:700;margin-bottom:8px;">Track Copper Price Impact</p>
-    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">Southern Copper moves with copper. See the full second-order ripple chain.</p>
+    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">SCCO exposure moves with Copper. See the full ripple chain.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
       <a href="/commodities/copper/" class="btn btn-primary">Copper Impact Map &rarr;</a>
+      <a href="/commodities/molybdenum/" class="btn btn-secondary">Molybdenum Impact Map</a>
     </div>
   </div>
-
-  <!-- Related Posts -->
-  {% assign ticker_lower = "scco" | downcase %}
-  {% assign company_posts = site.posts | where_exp: "post", "post.tags contains ticker_lower" %}
-  {% if company_posts.size > 0 %}
-  <section class="section" style="margin-top:48px;">
-    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
-    <div class="posts-grid">
-    {% for post in company_posts limit:6 %}
-      <article class="post-card" data-animate>
-        <div class="post-card-accent"></div>
-        <div class="post-card-body">
-          <div class="post-card-meta"><time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time></div>
-          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
-          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
-        </div>
-      </article>
-    {% endfor %}
-    </div>
-  </section>
-  {% endif %}
 </div>

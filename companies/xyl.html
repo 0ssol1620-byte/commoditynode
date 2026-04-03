@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Xylem (XYL)"
-description: "Commodity exposure analysis for Xylem — leading global water technology company providing pumps, sensors, and smart water management solutions."
+description: "Leading global water technology company providing pumps, sensors, and treatment systems. Dominant US player after acquiring Evoqua in 2023. Serves 150+ countries."
 permalink: /companies/xyl/
 ---
 
@@ -21,18 +21,16 @@ permalink: /companies/xyl/
     <div class="post-body-container">
       <div class="post-content">
         <h2>Company Overview</h2>
-        <p style="font-size:0.8rem;color:var(--text3);margin-bottom:8px;">📈 PHO (Water ETF) — benchmark for water technology sector performance</p>
-        <div class='cn-price-chart' data-symbol='PHO' data-name='Water ETF (PHO)'></div>
-        <p>Xylem is the leading global water technology company, providing pumps, sensors, treatment systems, and smart water management infrastructure to utilities, industrial, commercial, and residential customers in over 150 countries. The company generates approximately $7 billion in annual revenue and became the dominant US water technology company following its 2023 acquisition of Evoqua Water Technologies. Xylem's product portfolio spans the entire water cycle — from intake through treatment, distribution, use, and wastewater — making it a pure-play on global water infrastructure spending.</p>
+        <div class='cn-price-chart' data-symbol='PHO' data-name='Water Infrastructure (PHO proxy)'></div>
+        <p>Xylem provides pumps, sensors, monitoring equipment, treatment solutions, and digital infrastructure for water utilities and industrial customers across 150+ countries. The 2023 acquisition of Evoqua Water Technologies for $7.5B created the dominant US water treatment company, adding advanced wastewater and industrial water purification. Xylem's digital segment — smart meters, network sensors, cloud-based analytics — is growing rapidly as utilities seek to reduce non-revenue water loss and optimize energy consumption. Revenue is approximately $7B annually post-Evoqua.</p>
 
         <h2>Commodity Exposures</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
           <a href="/commodities/water/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Water</a>
         </div>
-        <p>Xylem is not a commodity producer but rather a solutions provider that benefits from water scarcity and infrastructure investment trends. As water scarcity intensifies globally — driven by climate change, population growth, and industrial demand — utilities and industries invest in more efficient water infrastructure, smart monitoring systems, and advanced treatment technologies. Xylem's digital water network monitoring and analytics business (AMI — Advanced Metering Infrastructure) is growing rapidly, driven by utility modernization programs. The Evoqua acquisition added industrial water treatment capabilities for pharmaceutical, power, and food &amp; beverage sectors.</p>
 
         <h2>Price Sensitivity</h2>
-        <p>Xylem's revenue is driven by water infrastructure spending cycles rather than water commodity prices directly. Key demand drivers include: (1) US infrastructure legislation (IIJA water funding), (2) European water directive compliance spending, (3) industrial facility capital expenditure, and (4) utility modernization programs. Water scarcity awareness accelerates all of these spending categories. The company's aftermarket services (replacement parts, maintenance contracts, digital subscriptions) provide recurring revenue that smooths the capital project cycle. Steel and copper are meaningful input costs for pumps and treatment equipment, making materials inflation a margin risk.</p>
+        <p>Xylem's revenue is driven by water infrastructure spending cycles, regulatory mandates, and water stress conditions globally. Direct commodity price exposure is minimal as a technology provider — the company is not a commodity producer. Indirect commodity exposure includes steel, copper, and electronics in manufactured products. The long-term growth drivers are compelling: aging US water infrastructure, tightening water quality regulations, and climate change intensifying water stress globally. Utility capex cycles typically run 10-20 year replacement timelines.</p>
 
         <h2>Related ETFs</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
@@ -65,34 +63,11 @@ permalink: /companies/xyl/
     </aside>
   </div>
 
-  <!-- CTA -->
   <div style="text-align:center;padding:40px 24px;margin-top:32px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);">
     <p style="font-size:1rem;font-weight:700;margin-bottom:8px;">Track Water Price Impact</p>
-    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">Xylem moves with water infrastructure spending. See the full second-order ripple chain.</p>
+    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">XYL exposure moves with Water. See the full ripple chain.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
       <a href="/commodities/water/" class="btn btn-primary">Water Impact Map &rarr;</a>
     </div>
   </div>
-
-  <!-- Related Posts -->
-  {% assign ticker_lower = "xyl" | downcase %}
-  {% assign company_posts = site.posts | where_exp: "post", "post.tags contains ticker_lower" %}
-  {% if company_posts.size > 0 %}
-  <section class="section" style="margin-top:48px;">
-    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
-    <div class="posts-grid">
-    {% for post in company_posts limit:6 %}
-      <article class="post-card" data-animate>
-        <div class="post-card-accent"></div>
-        <div class="post-card-body">
-          <div class="post-card-meta"><time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time></div>
-          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
-          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
-        </div>
-      </article>
-    {% endfor %}
-    </div>
-  </section>
-  {% endif %}
 </div>

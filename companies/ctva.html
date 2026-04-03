@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Corteva (CTVA)"
-description: "Commodity exposure analysis for Corteva — world's largest pure-play seed and crop protection company benefiting from grain price cycles."
+description: "World's largest pure-play seed and crop protection company spun out of DowDuPont in 2019. Operates Pioneer seed brand with ~20% of global corn seed market."
 permalink: /companies/ctva/
 ---
 
@@ -21,9 +21,8 @@ permalink: /companies/ctva/
     <div class="post-body-container">
       <div class="post-content">
         <h2>Company Overview</h2>
-        <p style="font-size:0.8rem;color:var(--text3);margin-bottom:8px;">📈 Corn Futures Price (ZC=F) — a key demand indicator for Corteva's seed business</p>
         <div class='cn-price-chart' data-symbol='ZC=F' data-name='Corn'></div>
-        <p>Corteva is the world's largest pure-play seed and crop protection company, spun out of DowDuPont in 2019. The company operates the iconic Pioneer seed brand — commanding approximately 20% of the global corn seed market — alongside a diversified crop protection chemicals business. Unlike commodity producers, Corteva benefits from high grain prices because farmers earn more and reinvest in premium inputs like advanced seed varieties and crop protection products. The company's R&D pipeline focuses on drought-resistant, high-yield seed genetics and next-generation crop protection solutions.</p>
+        <p>Corteva holds approximately 20% of the global corn seed market through the Pioneer brand and significant soybean, canola, and sunflower positions. Unlike commodity agricultural companies, Corteva benefits from high grain prices — elevated farmer economics drive reinvestment in premium seeds with higher trait values for yield, disease resistance, and drought tolerance. The crop protection segment provides recurring chemical revenue. Corteva's R&D pipeline includes next-generation biotech traits that command premium pricing and extending patent protection.</p>
 
         <h2>Commodity Exposures</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
@@ -31,10 +30,9 @@ permalink: /companies/ctva/
           <a href="/commodities/soybeans/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Soybeans</a>
           <a href="/commodities/wheat/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Wheat</a>
         </div>
-        <p>Corteva's commodity exposure is indirect but powerful — the company sells inputs to farmers, so its revenue correlates positively with grain prices. When corn, soybean, and wheat prices are high, farmers earn more and are willing to pay premium prices for advanced seed technology and crop protection chemicals. The corn seed business is the largest revenue contributor, followed by crop protection (herbicides, insecticides, fungicides) and soybean/wheat seeds. Corteva is also exposed to grain demand for ethanol and biofuel, which drives planted acreage and seed demand.</p>
 
         <h2>Price Sensitivity</h2>
-        <p>Corteva benefits from high commodity prices as farmers reinvest profits into premium agricultural inputs. The relationship is positively correlated — unlike processors who face margin pressure from rising commodity costs. However, the correlation is lagged: seed purchasing decisions are made months before planting, so current grain prices influence next season's input spending. In low grain price environments, farmers trade down to cheaper seed varieties and reduce crop protection spending, pressuring Corteva's margins. Drought-resistant seed varieties provide pricing power in climate-stressed regions, creating a structural growth tailwind.</p>
+        <p>Corteva's earnings are positively correlated with grain prices — a differentiated dynamic versus processors. When corn and soybean prices are elevated, farmer economics improve and seed pricing power increases. The crop protection business faces generic competition as older patents expire but is partially offset by new product launches. Currency exposure is significant at ~45% international revenue. Corteva guides to mid-single-digit revenue growth and expanding margins as mix shifts toward higher-value genetic products.</p>
 
         <h2>Related ETFs</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
@@ -49,7 +47,7 @@ permalink: /companies/ctva/
       <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
           <span style="color:var(--text3)">Sector</span>
-          <span style="color:var(--text2)">Agriculture / Seeds</span>
+          <span style="color:var(--text2)">Agriculture / Seeds & Crop Protection</span>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
           <span style="color:var(--text3)">Primary Exposure</span>
@@ -67,34 +65,12 @@ permalink: /companies/ctva/
     </aside>
   </div>
 
-  <!-- CTA -->
   <div style="text-align:center;padding:40px 24px;margin-top:32px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);">
     <p style="font-size:1rem;font-weight:700;margin-bottom:8px;">Track Corn Price Impact</p>
-    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">Corteva moves with corn. See the full second-order ripple chain.</p>
+    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">CTVA exposure moves with Corn. See the full ripple chain.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
       <a href="/commodities/corn/" class="btn btn-primary">Corn Impact Map &rarr;</a>
+      <a href="/commodities/soybeans/" class="btn btn-secondary">Soybeans Impact Map</a>
     </div>
   </div>
-
-  <!-- Related Posts -->
-  {% assign ticker_lower = "ctva" | downcase %}
-  {% assign company_posts = site.posts | where_exp: "post", "post.tags contains ticker_lower" %}
-  {% if company_posts.size > 0 %}
-  <section class="section" style="margin-top:48px;">
-    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
-    <div class="posts-grid">
-    {% for post in company_posts limit:6 %}
-      <article class="post-card" data-animate>
-        <div class="post-card-accent"></div>
-        <div class="post-card-body">
-          <div class="post-card-meta"><time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time></div>
-          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
-          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
-        </div>
-      </article>
-    {% endfor %}
-    </div>
-  </section>
-  {% endif %}
 </div>

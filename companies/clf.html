@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Cleveland-Cliffs (CLF)"
-description: "Commodity exposure analysis for Cleveland-Cliffs — US's largest flat-rolled steel producer with unique vertical integration into iron ore."
+description: "US largest flat-rolled steel producer and largest iron ore pellet producer. Uniquely integrated from mine to finished steel supplying ~50% of US automotive steel market."
 permalink: /companies/clf/
 ---
 
@@ -21,9 +21,8 @@ permalink: /companies/clf/
     <div class="post-body-container">
       <div class="post-content">
         <h2>Company Overview</h2>
-        <p style="font-size:0.8rem;color:var(--text3);margin-bottom:8px;">📈 SLX (Steel ETF) — benchmark for Cleveland-Cliffs' steel market exposure</p>
-        <div class='cn-price-chart' data-symbol='SLX' data-name='Steel ETF'></div>
-        <p>Cleveland-Cliffs is the US's largest flat-rolled steel producer and the country's largest iron ore pellet producer, formed through the combination of the former AK Steel, ArcelorMittal USA, and Stelco Canada. Unlike most US steelmakers who rely on scrap in electric arc furnaces, Cliffs operates blast furnaces fed by its own iron ore pellets from Minnesota and Michigan mines — a unique integrated model that provides cost stability but also capital intensity. The company supplies approximately 50% of the US automotive steel market, making it the dominant flat-rolled steel supplier to Ford, GM, and Stellantis.</p>
+        <div class='cn-price-chart' data-symbol='SLX' data-name='Steel (SLX proxy)'></div>
+        <p>Cleveland-Cliffs is the US's largest flat-rolled steel producer and the only integrated steel company to control its own iron ore supply through Great Lakes mining operations in Michigan and Minnesota. The company produces iron ore pellets, converts them to hot-rolled coil at blast furnace facilities, and supplies premium automotive steel. This integration provides cost stability during raw material price spikes that hurt EAF competitors. CLF supplies approximately 50% of US automotive steel — creating high sensitivity to vehicle production rates.</p>
 
         <h2>Commodity Exposures</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
@@ -31,10 +30,9 @@ permalink: /companies/clf/
           <a href="/commodities/iron-ore/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Iron Ore</a>
           <a href="/commodities/coal/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Coal</a>
         </div>
-        <p>Steel selling prices are the dominant earnings driver for Cleveland-Cliffs. The company's integrated model means iron ore pellet costs are largely internalized — Cliffs mines its own ore and pelletizes it for its blast furnaces, providing a cost advantage over mills that purchase pellets on the open market. Coking coal is a purchased input for blast furnace steelmaking. The company also produces hot-briquetted iron (HBI) at its Toledo, Ohio facility — a blast furnace alternative that can be charged into electric arc furnaces, bridging the gap between integrated and mini-mill steelmaking.</p>
 
         <h2>Price Sensitivity</h2>
-        <p>Steel price movements are the primary earnings driver, with the hot-rolled coil (HRC) benchmark most relevant for CLF's flat-rolled product mix. US automotive steel demand is the key volume driver — slowing auto production directly impacts Cliffs' order book. The company's blast furnace model creates high fixed costs and significant operating leverage: when steel prices rise above breakeven, incremental revenue flows largely to EBITDA. Iron ore pellet prices are a secondary factor; natural gas costs matter for the DRI/HBI Toledo facility. Import competition and tariff policy are important structural factors for US steel pricing.</p>
+        <p>Steel prices are the dominant earnings driver — a $100/tonne HRC (hot-rolled coil) price change impacts EBITDA by approximately $800M at current volumes. Iron ore pellet self-sufficiency reduces raw material cost volatility, though natural gas and metallurgical coal remain significant inputs. Automotive production rates and multi-year supply contracts create some revenue stability. CLF's significant debt load amplifies earnings sensitivity in steel price downturns.</p>
 
         <h2>Related ETFs</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
@@ -67,34 +65,12 @@ permalink: /companies/clf/
     </aside>
   </div>
 
-  <!-- CTA -->
   <div style="text-align:center;padding:40px 24px;margin-top:32px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);">
     <p style="font-size:1rem;font-weight:700;margin-bottom:8px;">Track Steel Price Impact</p>
-    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">Cleveland-Cliffs moves with steel. See the full second-order ripple chain.</p>
+    <p style="color:var(--text2);margin-bottom:20px;font-size:0.9rem;">CLF exposure moves with Steel. See the full ripple chain.</p>
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
       <a href="/commodities/steel/" class="btn btn-primary">Steel Impact Map &rarr;</a>
+      <a href="/commodities/iron-ore/" class="btn btn-secondary">Iron Ore Impact Map</a>
     </div>
   </div>
-
-  <!-- Related Posts -->
-  {% assign ticker_lower = "clf" | downcase %}
-  {% assign company_posts = site.posts | where_exp: "post", "post.tags contains ticker_lower" %}
-  {% if company_posts.size > 0 %}
-  <section class="section" style="margin-top:48px;">
-    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
-    <div class="posts-grid">
-    {% for post in company_posts limit:6 %}
-      <article class="post-card" data-animate>
-        <div class="post-card-accent"></div>
-        <div class="post-card-body">
-          <div class="post-card-meta"><time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %d, %Y" }}</time></div>
-          <h3 class="post-card-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-          <p class="post-card-excerpt">{{ post.description | strip_html | truncatewords: 20 }}</p>
-          <div class="post-card-footer"><a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a></div>
-        </div>
-      </article>
-    {% endfor %}
-    </div>
-  </section>
-  {% endif %}
 </div>
