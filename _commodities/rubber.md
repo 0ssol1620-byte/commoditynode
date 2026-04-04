@@ -1,7 +1,7 @@
 ---
 layout: commodity
 image: "/assets/images/og-copper.png"
-title: "Rubber"
+title: "Rubber Price Impact: Auto, Tires & Industrial Supply Chain"
 description: "Natural rubber's tire industry dominance, Southeast Asian supply concentration, and synthetic substitution dynamics."
 commodity_slug: "rubber"
 symbol: "GT"

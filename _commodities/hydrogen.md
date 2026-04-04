@@ -1,7 +1,7 @@
 ---
 layout: commodity
 image: "/assets/images/og-natural-gas.png"
-title: "Hydrogen"
+title: "Hydrogen Price Impact: Green Energy, Electrolyzers & Fuel Cells"
 description: "Hydrogen's role as a clean energy carrier, electrolyzer economics, and the green vs grey transition."
 commodity_slug: "hydrogen"
 symbol: "PLUG"
