@@ -456,10 +456,7 @@
 
     /* Scene */
     var scene = new THREE.Scene();
-    // Remove solid background for transparent renderer
-    // Use fog instead for depth
-    scene.background = null;
-    scene.fog = new THREE.FogExp2(0x020208, 0.00035);
+    scene.background = new THREE.Color(0x050510);
 
     /* Camera */
     var camera = new THREE.PerspectiveCamera(60, width / height, 1, 5000);
@@ -469,7 +466,6 @@
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x020208, 1);
     renderer.toneMapping = THREE.ReinhardToneMapping;
     renderer.toneMappingExposure = 1.5;
     container.appendChild(renderer.domElement);
@@ -511,28 +507,6 @@
     /* ---- Lighting ---- */
     var ambientLight = new THREE.AmbientLight(0x111122, 0.3);
     scene.add(ambientLight);
-
-    /* ---- Nebula Clouds (volumetric feel) ---- */
-    var nebulaColors = ['#0a1a3a', '#0d1f1a', '#1a0d2e', '#0a1520', '#1a1205', '#050d1a'];
-    for (var ni = 0; ni < 6; ni++) {
-      var nMat = new THREE.SpriteMaterial({
-        map: makeGlowTexture(0.12),
-        color: new THREE.Color(nebulaColors[ni]),
-        transparent: true,
-        opacity: 0.6,
-        depthWrite: false,
-        blending: THREE.AdditiveBlending
-      });
-      var nSprite = new THREE.Sprite(nMat);
-      nSprite.position.set(
-        (Math.random() - 0.5) * 1200,
-        (Math.random() - 0.5) * 800,
-        -500 + Math.random() * -500
-      );
-      var nSize = 400 + Math.random() * 600;
-      nSprite.scale.set(nSize, nSize, 1);
-      scene.add(nSprite);
-    }
 
     /* ---- Enhanced Star Field ---- */
     var starCount = isMobile ? 2000 : 5000;
