@@ -71,4 +71,8 @@ Options market activity is telling: call open interest on USO (United States Oil
 
 The Hormuz crisis is a reminder that commodity markets remain hostage to geography. The world's most critical energy chokepoint has been tested, and the global economy is now pricing the possibility that it fails.
 
+---
+
+*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+
 *This report is for informational purposes only and does not constitute investment advice. Commodity markets are highly volatile and past performance does not indicate future results. Consult a qualified financial advisor before making investment decisions.*

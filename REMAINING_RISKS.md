@@ -13,3 +13,15 @@
 5. **No `/reports/` page verified.** The zero-post fallback links to `/reports/` — ensure this page exists.
 
 6. **96 posts missing `canonical_url`** — confirmed NOT a real issue since jekyll-seo-tag auto-generates canonical from `url` + `page.url`. But if SEO plugin config changes, this could resurface.
+
+## Session: 2026-04-04 Content Phase
+
+7. **8 zero-related-post commodities now have signal reports:** ammonia, hydrogen, manganese, potash, rice, rubber, soybean-meal, soybean-oil. Each has one post with `commodity_name` front matter matching the commodity slug. These posts use `og-default.png` or closest available OG image — custom OG images for these commodities should be created.
+
+8. **3 short posts expanded:** copper-structural-deficit (was 551 words), diesel-transportation-inflation (was 749 words), coffee-price-crash-brazil-surplus (was 777 words). All now include Market Context, Key Risk Factors, and What to Watch sections.
+
+9. **Simulator CTA added to 5 recent posts** (2026-04-04 batch) linking to `/simulator/`. Also present in all 8 new signal report posts.
+
+10. **`/reports/` page confirmed existing** — no action needed.
+
+11. **Missing OG images for new commodities:** ammonia, hydrogen, manganese, potash, rice, rubber, soybean-meal, soybean-oil all lack dedicated `og-{commodity}.png` files. Using `og-default.png`, `og-natural-gas.png`, `og-soybeans.png`, or `og-wheat.png` as proxies.

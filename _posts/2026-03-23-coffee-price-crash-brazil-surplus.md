@@ -78,4 +78,17 @@ The pattern is textbook commodity cycle: multi-year supply deficit → price spi
 - **Currency risk** — a weakening Brazilian Real amplifies farmer incentives to sell dollar-denominated exports, accelerating supply flow
 - **Climate wildcard** — late-season frost events (June–July in Brazil) remain the primary upside risk
 
+## Market Context
+
+The coffee crash is occurring within a broader commodity correction narrative. Multiple agricultural commodities that spiked during 2022-2025 — driven by supply disruptions, logistics costs, and speculative positioning — are now reverting as supply conditions normalize. Cocoa, orange juice, and now coffee are all experiencing variants of the same cycle.
+
+For the broader food inflation picture, coffee's decline is unambiguously positive. Coffee is a direct consumer purchase with high price visibility, meaning falling futures will eventually translate to lower retail prices and contribute to headline CPI moderation. The transmission lag is typically 6-12 months due to roaster hedging and retailer pricing cycles.
+
+## Key Risk Factors
+
+- **Late frost in Brazil:** June-July frosts in Minas Gerais or São Paulo could damage the 2027 crop and reverse the bearish sentiment overnight. This is the single most important risk to the surplus thesis.
+- **Speculative overshoot:** Managed money positioning has swung from record longs to accelerating liquidation. If the market overshoots to the downside, a technical reversal could be sharp.
+- **Logistics disruptions:** Brazilian port congestion during peak soybean and coffee export season (April-June) could delay physical deliveries and create temporary price support.
+- **Vietnamese Robusta quality issues:** Any quality or supply concerns from Vietnam's harvest would tighten the Robusta market and provide indirect support to Arabica.
+
 The coffee bull market that enriched producers and punished consumers for three years appears to be over. The question now is how far the correction runs.

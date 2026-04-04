@@ -83,4 +83,8 @@ The tiered structure — maintaining the 50% commodity rate while reducing deriv
 
 **Domestic steel capacity utilization:** The ultimate test of the tariffs' industrial policy goals is whether US steel production capacity utilization — currently approximately 77% — rises toward the 85%+ levels the administration has targeted. Higher utilization would validate the protectionist strategy; stagnant utilization would suggest the tariffs are primarily enriching producers without achieving reshoring objectives.
 
+---
+
+*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+
 *This report is for informational purposes only and does not constitute investment advice. Commodity markets are highly volatile and past performance does not indicate future results. Consult a qualified financial advisor before making investment decisions.*

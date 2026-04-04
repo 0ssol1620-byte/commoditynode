@@ -79,4 +79,8 @@ Gold's near-term outlook is genuinely binary, and the two scenarios produce dram
 
 The current setup favors short-term caution. The Warsh nomination is a genuine regime change for monetary policy expectations, and regime changes tend to produce sustained trends, not one-day moves. But gold bears must respect the geopolitical wildcard — if the Iran crisis produces a true supply-side shock to the global economy, all the dollar strength in the world won't prevent a flight to the oldest safe haven in human history.
 
+---
+
+*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+
 *This report is for informational purposes only and does not constitute investment advice. Commodity markets are highly volatile and past performance does not indicate future results. Consult a qualified financial advisor before making investment decisions.*

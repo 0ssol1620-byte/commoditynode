@@ -70,6 +70,27 @@ Either way, we're short copper.
 
 The copper thesis doesn't require a commodities bull market. It just requires the energy transition to continue — at any pace.
 
+## Market Context
+
+Copper's structural deficit story is playing out against a complex macro backdrop in early 2026. The Federal Reserve's monetary policy trajectory, US-China trade tensions, and shifting global supply chains all intersect with copper's fundamental supply-demand imbalance.
+
+China's copper demand has been more resilient than headline GDP figures suggest. The country's grid investment — a $90+ billion annual program to modernize transmission and distribution networks — is copper-intensive and largely policy-driven rather than market-cycle sensitive. Even as property construction weakens, grid and renewable energy buildout provide offsetting demand.
+
+India is emerging as the next structural copper demand growth story. The country's per-capita copper consumption remains a fraction of China's, and the combination of urbanization, electrification, and manufacturing investment (including semiconductor fab construction) suggests decades of demand growth ahead.
+
+## Key Risk Factors
+
+- **China demand uncertainty:** While grid investment is resilient, a broader Chinese economic slowdown could reduce industrial copper consumption in construction and manufacturing
+- **DRC political risk:** The Democratic Republic of Congo has rapidly become the world's third-largest copper producer, but political instability, artisanal mining conflicts, and export policy changes create supply risk
+- **Interest rate sensitivity:** Copper carries significant inventory financing costs; sustained high interest rates increase the carry cost of physical copper and can suppress speculative demand
+- **Recycling technology improvements:** Advanced recycling and urban mining technologies could accelerate secondary copper supply, partially offsetting the primary supply deficit
+
+## What to Watch
+
+1. **Chile and Peru monthly copper production data (Cochilco, MINEM)** — the two largest producers accounting for ~35% of global output; any disruption here moves the market
+2. **LME and SHFE copper warehouse stocks** — exchange inventory levels are the most visible indicator of physical market tightness
+3. **Global EV sales monthly data** — each percentage point of EV penetration growth translates directly to incremental copper demand
+
 Full impact map: [commoditynode.com/commodities/copper/](https://commoditynode.com/commodities/copper/)
 
 ---

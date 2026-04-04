@@ -71,4 +71,6 @@ The key risk to monitor is a breakthrough in ITO alternatives. If graphene or si
 
 ---
 
+*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+
 *This analysis is for informational purposes only and does not constitute investment advice. Commodity markets involve significant risk. Past performance is not indicative of future results. Always conduct your own due diligence before making investment decisions.*

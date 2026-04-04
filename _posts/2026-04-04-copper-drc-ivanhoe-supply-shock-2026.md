@@ -75,4 +75,8 @@ Copper at $5.56 per pound in early April 2026 — up 15.8% year-over-year — al
 
 The copper market is entering a period of structural scarcity that mine supply cannot address in the near or medium term. The Ivanhoe disruption is a catalyst, but the underlying story is a decade of underinvestment colliding with exponential demand growth from electrification. Copper's best days may be ahead.
 
+---
+
+*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+
 *This report is for informational purposes only and does not constitute investment advice. Commodity markets are highly volatile and past performance does not indicate future results. Consult a qualified financial advisor before making investment decisions.*

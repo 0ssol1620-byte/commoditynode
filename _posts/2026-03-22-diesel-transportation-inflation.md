@@ -81,6 +81,25 @@ Diesel is crude oil's derivative, and crude oil is priced in dollars globally. A
 
 The current dollar weakening trend — driven by Federal Reserve rate cut expectations and growing US fiscal deficits — provides a structural tailwind for diesel prices independent of physical supply and demand.
 
+## Market Context
+
+The diesel price dynamics of early 2026 are unfolding against a backdrop of tightening refining capacity globally. Several older, less efficient refineries in Europe and the US East Coast have been shuttered or converted to renewable fuel production over the past three years, permanently reducing distillate production capacity. Meanwhile, new refining capacity additions have been concentrated in the Middle East and Asia — regions that serve local markets first and export the remainder.
+
+The seasonal pattern matters here: diesel demand peaks in winter (heating oil overlap) and during spring planting and summer freight seasons. The Q2 2026 setup combines post-winter inventory drawdowns with the beginning of agricultural and construction activity, creating a demand pull that typically supports crack spreads through June.
+
+## Key Risk Factors
+
+- **Refinery outages:** Unplanned maintenance at major distillate-producing refineries (particularly US Gulf Coast facilities) can create acute regional diesel shortages within days
+- **Geopolitical disruption:** Any escalation in the Middle East that restricts crude oil flows through the Strait of Hormuz would disproportionately impact diesel relative to gasoline due to the distillate-heavy crude slate of Gulf producers
+- **Regulatory costs:** IMO 2020 low-sulfur shipping fuel requirements continue to compete for distillate supply, structurally elevating diesel demand above pre-2020 trends
+- **Recession risk:** A sharp economic downturn would reduce freight volumes and construction activity, collapsing diesel demand and crack spreads
+
+## What to Watch
+
+1. **EIA Weekly Petroleum Status Report (distillate stocks and production)** — the most timely indicator of US diesel supply-demand balance
+2. **ATA Truck Tonnage Index (monthly)** — freight volume directly correlates with diesel consumption; declining tonnage signals demand weakness
+3. **Gulf Coast 2-1-1 crack spread** — the refiner's margin for producing diesel and gasoline from crude; a real-time measure of diesel economics
+
 *Data: EIA Diesel Fuel Prices, OPIS crack spread data, ATA Trucking Tonnage Index*
 
 ---
