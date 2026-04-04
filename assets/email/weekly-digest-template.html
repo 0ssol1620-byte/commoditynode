@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CommodityNode Weekly Signal Digest</title>
+<style>
+  body { margin:0; padding:0; background:#0a0a0f; font-family:'Helvetica Neue',Arial,sans-serif; }
+  .wrapper { max-width:600px; margin:0 auto; background:#0a0a0f; }
+
+  /* Header */
+  .header { background:linear-gradient(135deg,#0d1117 0%,#111827 100%); border-bottom:1px solid rgba(34,211,238,0.2); padding:32px 40px; text-align:center; }
+  .logo-text { font-size:22px; font-weight:800; color:#e2e8f0; letter-spacing:-0.5px; }
+  .logo-dot { color:#22d3ee; }
+  .header-sub { font-size:11px; color:#64748b; text-transform:uppercase; letter-spacing:0.15em; margin-top:6px; }
+
+  /* Date badge */
+  .date-bar { background:#111827; border-bottom:1px solid rgba(255,255,255,0.05); padding:10px 40px; text-align:center; }
+  .date-badge { display:inline-block; background:rgba(34,211,238,0.1); border:1px solid rgba(34,211,238,0.2); border-radius:20px; padding:4px 14px; font-size:11px; color:#22d3ee; font-weight:600; letter-spacing:0.05em; }
+
+  /* Body */
+  .body { padding:36px 40px; }
+
+  /* Section title */
+  .section-label { font-size:10px; color:#22d3ee; text-transform:uppercase; letter-spacing:0.15em; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+  .section-label::after { content:''; flex:1; height:1px; background:rgba(34,211,238,0.15); }
+
+  /* Signal card */
+  .signal-card { background:#111827; border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:20px 24px; margin-bottom:12px; }
+  .signal-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .signal-name { font-size:15px; font-weight:700; color:#e2e8f0; }
+  .signal-badge { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; }
+  .badge-bull { background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); }
+  .badge-bear { background:rgba(244,63,94,0.15); color:#f43f5e; border:1px solid rgba(244,63,94,0.3); }
+  .badge-neutral { background:rgba(234,179,8,0.15); color:#eab308; border:1px solid rgba(234,179,8,0.3); }
+  .signal-meta { font-size:11px; color:#475569; margin-bottom:8px; }
+  .signal-text { font-size:13px; color:#94a3b8; line-height:1.6; }
+
+  /* Divider */
+  .divider { height:1px; background:rgba(255,255,255,0.05); margin:28px 0; }
+
+  /* Events section */
+  .event-row { display:flex; align-items:flex-start; gap:16px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.04); }
+  .event-row:last-child { border-bottom:none; }
+  .event-date { min-width:48px; text-align:center; background:#1e293b; border-radius:6px; padding:6px 4px; }
+  .event-day { font-size:18px; font-weight:800; color:#e2e8f0; line-height:1; }
+  .event-month { font-size:9px; color:#64748b; text-transform:uppercase; letter-spacing:0.1em; }
+  .event-name { font-size:13px; font-weight:600; color:#cbd5e1; margin-bottom:2px; }
+  .event-desc { font-size:11px; color:#475569; }
+
+  /* Pro CTA */
+  .pro-box { background:linear-gradient(135deg,rgba(34,211,238,0.05) 0%,rgba(168,85,247,0.05) 100%); border:1px solid rgba(34,211,238,0.15); border-radius:12px; padding:28px 32px; text-align:center; margin:28px 0; }
+  .pro-title { font-size:18px; font-weight:800; color:#e2e8f0; margin-bottom:8px; }
+  .pro-desc { font-size:13px; color:#64748b; line-height:1.6; margin-bottom:20px; }
+  .pro-features { list-style:none; padding:0; margin:0 0 20px 0; text-align:left; display:inline-block; }
+  .pro-features li { font-size:12px; color:#94a3b8; padding:3px 0; }
+  .pro-features li::before { content:'✓ '; color:#22d3ee; font-weight:700; }
+  .cta-btn { display:inline-block; background:linear-gradient(135deg,#22d3ee,#a855f7); color:#050508; font-weight:800; font-size:14px; padding:14px 32px; border-radius:8px; text-decoration:none; }
+  .cta-sub { font-size:11px; color:#475569; margin-top:10px; }
+
+  /* Footer */
+  .footer { background:#080808; border-top:1px solid rgba(255,255,255,0.05); padding:28px 40px; text-align:center; }
+  .footer-logo { font-size:14px; font-weight:700; color:#334155; margin-bottom:10px; }
+  .footer-links { margin-bottom:14px; }
+  .footer-links a { color:#475569; font-size:11px; text-decoration:none; margin:0 8px; }
+  .footer-text { font-size:10px; color:#1e293b; line-height:1.7; }
+  .unsubscribe { color:#22d3ee !important; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-text">Commodity<span class="logo-dot">Node</span></div>
+    <div class="header-sub">Weekly Signal Digest</div>
+  </div>
+
+  <!-- Date bar -->
+  <div class="date-bar">
+    <span class="date-badge">*|DATE:l, F j, Y|*</span>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <p style="font-size:14px;color:#64748b;line-height:1.7;margin:0 0 28px 0;">
+      This week's 3 most actionable commodity signals, key supply disruptions, and events to watch. 
+      Takes 2 minutes to read.
+    </p>
+
+    <!-- Top 3 Signals -->
+    <div class="section-label">🔥 Top 3 Signals This Week</div>
+
+    <!-- Signal 1 -->
+    <div class="signal-card">
+      <div class="signal-top">
+        <span class="signal-name">Crude Oil (WTI)</span>
+        <span class="signal-badge badge-bull">BULLISH</span>
+      </div>
+      <div class="signal-meta">WTI · $XX.XX · Updated Monday</div>
+      <div class="signal-text">
+        OPEC+ supply cuts holding firm while U.S. inventory draws accelerate. 
+        Seasonal demand pickup expected through Q2. Key resistance at $XX — break above targets $XX.
+      </div>
+    </div>
+
+    <!-- Signal 2 -->
+    <div class="signal-card">
+      <div class="signal-top">
+        <span class="signal-name">Gold</span>
+        <span class="signal-badge badge-bull">BULLISH</span>
+      </div>
+      <div class="signal-meta">XAUUSD · $X,XXX · Updated Monday</div>
+      <div class="signal-text">
+        Central bank buying continues at record pace. Dollar weakness + rate cut expectations 
+        providing dual tailwind. Watch for breakout above $X,XXX psychological level.
+      </div>
+    </div>
+
+    <!-- Signal 3 -->
+    <div class="signal-card">
+      <div class="signal-top">
+        <span class="signal-name">Copper</span>
+        <span class="signal-badge badge-neutral">NEUTRAL</span>
+      </div>
+      <div class="signal-meta">HG=F · $X.XX · Updated Monday</div>
+      <div class="signal-text">
+        China demand data mixed — construction sector weak but EV/grid infrastructure 
+        driving long-term support. Supply tightness from Chile remains structural bull case.
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Events This Week -->
+    <div class="section-label">📅 Key Events to Watch</div>
+
+    <div class="event-row">
+      <div class="event-date">
+        <div class="event-day">07</div>
+        <div class="event-month">Apr</div>
+      </div>
+      <div>
+        <div class="event-name">EIA Weekly Petroleum Status Report</div>
+        <div class="event-desc">U.S. crude inventory change — key for WTI direction</div>
+      </div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-date">
+        <div class="event-day">09</div>
+        <div class="event-month">Apr</div>
+      </div>
+      <div>
+        <div class="event-name">USDA WASDE Report</div>
+        <div class="event-desc">Monthly supply/demand for corn, wheat, soybeans</div>
+      </div>
+    </div>
+
+    <div class="event-row">
+      <div class="event-date">
+        <div class="event-day">10</div>
+        <div class="event-month">Apr</div>
+      </div>
+      <div>
+        <div class="event-name">U.S. CPI (March)</div>
+        <div class="event-desc">Inflation print — direct impact on gold, energy spreads</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Pro CTA -->
+    <div class="pro-box">
+      <div class="pro-title">Go Deeper with Pro</div>
+      <div class="pro-desc">
+        These signals only scratch the surface. Pro members get entry levels, 
+        position sizing, and full company impact analysis.
+      </div>
+      <ul class="pro-features">
+        <li>Full Trading Notes (entry + risk levels)</li>
+        <li>AI 90-Day Price Forecast</li>
+        <li>Company Sensitivity Analysis</li>
+        <li>Unlimited Signal Reports</li>
+        <li>Extended Correlation Matrix (60/90D)</li>
+      </ul>
+      <a href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="cta-btn">
+        Start 7-Day Free Trial →
+      </a>
+      <div class="cta-sub">$19/month · Cancel anytime · No credit card hassle</div>
+    </div>
+
+    <p style="font-size:13px;color:#475569;text-align:center;line-height:1.7;">
+      Questions? Hit reply — I read every email.<br>
+      <span style="color:#334155;">— The CommodityNode Team</span>
+    </p>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-logo">CommodityNode</div>
+    <div class="footer-links">
+      <a href="https://commoditynode.com">Website</a>
+      <a href="https://commoditynode.com/simulator/">Simulator</a>
+      <a href="https://commoditynode.com/pricing/">Pricing</a>
+    </div>
+    <div class="footer-text">
+      You're receiving this because you subscribed at commoditynode.com.<br>
+      <a href="*|UNSUB|*" class="unsubscribe">Unsubscribe</a> · 
+      <a href="*|UPDATE_PROFILE|*" style="color:#475569;text-decoration:none;">Update preferences</a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
