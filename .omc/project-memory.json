@@ -325,21 +325,21 @@
   },
   "hotPaths": [
     {
-      "path": "simulator/index.html",
-      "accessCount": 22,
-      "lastAccessed": 1775283721902,
+      "path": "stress-test/index.html",
+      "accessCount": 28,
+      "lastAccessed": 1775297556611,
       "type": "file"
     },
     {
       "path": "range-tracker/index.html",
-      "accessCount": 13,
-      "lastAccessed": 1775283613816,
+      "accessCount": 24,
+      "lastAccessed": 1775297571283,
       "type": "file"
     },
     {
-      "path": "stress-test/index.html",
-      "accessCount": 13,
-      "lastAccessed": 1775283616533,
+      "path": "simulator/index.html",
+      "accessCount": 22,
+      "lastAccessed": 1775283721902,
       "type": "file"
     },
     {
@@ -349,15 +349,21 @@
       "type": "file"
     },
     {
+      "path": "assets/js/clerk-auth.js",
+      "accessCount": 8,
+      "lastAccessed": 1775297378139,
+      "type": "file"
+    },
+    {
       "path": "",
       "accessCount": 2,
       "lastAccessed": 1775283028764,
       "type": "directory"
     },
     {
-      "path": "assets/js/clerk-auth.js",
+      "path": "vercel.json",
       "accessCount": 2,
-      "lastAccessed": 1775283451360,
+      "lastAccessed": 1775297364447,
       "type": "file"
     },
     {
@@ -370,6 +376,48 @@
       "path": "_layouts/default.html",
       "accessCount": 1,
       "lastAccessed": 1775278128869,
+      "type": "file"
+    },
+    {
+      "path": "api/_auth.js",
+      "accessCount": 1,
+      "lastAccessed": 1775297274313,
+      "type": "file"
+    },
+    {
+      "path": "api/prices.js",
+      "accessCount": 1,
+      "lastAccessed": 1775297279796,
+      "type": "file"
+    },
+    {
+      "path": "api/data.js",
+      "accessCount": 1,
+      "lastAccessed": 1775297293372,
+      "type": "file"
+    },
+    {
+      "path": "api/export.js",
+      "accessCount": 1,
+      "lastAccessed": 1775297301941,
+      "type": "file"
+    },
+    {
+      "path": "api/webhook/lemon-squeezy.js",
+      "accessCount": 1,
+      "lastAccessed": 1775297325081,
+      "type": "file"
+    },
+    {
+      "path": "api/keys.js",
+      "accessCount": 1,
+      "lastAccessed": 1775297340961,
+      "type": "file"
+    },
+    {
+      "path": "api-keys/index.html",
+      "accessCount": 1,
+      "lastAccessed": 1775297656821,
       "type": "file"
     }
   ],

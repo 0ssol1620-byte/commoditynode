@@ -265,7 +265,7 @@ permalink: /pricing/
     <div class="pricing-price"><span id="pro-price">$19</span> <span id="pro-sub">/month</span></div>
     <div class="plan-billed plan-billed-pro" id="pro-billed">Billed monthly · Cancel anytime</div>
     <div class="pricing-desc">For active investors who trade around commodity cycles.</div>
-    <button class="pricing-btn pricing-btn-primary" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start 7-Day Free Trial →</button>
+    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:block;text-align:center;">Start 7-Day Free Trial →</a>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> <strong>Unlimited</strong> Signal Reports<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Stay informed across all commodity themes without report limits</span></li>
       <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
@@ -358,11 +358,18 @@ permalink: /pricing/
   } catch(e){}
 })();
 
+var PRO_MONTHLY_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71';
+var PRO_ANNUAL_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/b7c7444b-606f-49c0-a6ab-8f78f653702f';
+
 // Billing toggle
 function setBilling(mode, btn) {
   document.querySelectorAll('.billing-btn').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   var isAnnual = mode === 'annual';
+
+  // Pro CTA 버튼 URL 업데이트
+  var proBtn = document.getElementById('pro-cta-btn');
+  if (proBtn) proBtn.href = isAnnual ? PRO_ANNUAL_URL : PRO_MONTHLY_URL;
 
   // Pro 카드 가격 업데이트
   var proPrice = document.getElementById('pro-price');

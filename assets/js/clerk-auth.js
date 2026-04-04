@@ -35,6 +35,8 @@
 
   var METER_KEY = 'cn_meter';
   var PRO_LINK = '/pricing/';
+  var PRO_MONTHLY_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71';
+  var PRO_ANNUAL_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/b7c7444b-606f-49c0-a6ab-8f78f653702f';
 
   /* ---------- Helpers ---------- */
   function currentMonth() {
@@ -91,7 +93,7 @@
           + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Extended Correlation Lookback (60/90D)</li>'
           + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> All 39 Range Tracker Markets</li>'
         + '</ul>'
-        + '<a href="' + PRO_LINK + '" style="display:block;text-align:center;padding:14px 20px;border-radius:10px;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;font-weight:800;font-size:0.95rem;text-decoration:none;margin-bottom:10px;transition:opacity 0.2s;" onmouseover="this.style.opacity=\'0.9\'" onmouseout="this.style.opacity=\'1\'">Unlock Pro — Start 7-Day Free Trial &rarr;</a>'
+        + '<a href="' + PRO_MONTHLY_URL + '" style="display:block;text-align:center;padding:14px 20px;border-radius:10px;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;font-weight:800;font-size:0.95rem;text-decoration:none;margin-bottom:10px;transition:opacity 0.2s;" onmouseover="this.style.opacity=\'0.9\'" onmouseout="this.style.opacity=\'1\'">Unlock Pro — Start 7-Day Free Trial &rarr;</a>'
         + '<button id="cn-pro-modal-later" style="display:block;width:100%;text-align:center;background:none;border:none;color:#64748b;font-size:0.82rem;cursor:pointer;padding:8px;">Maybe later</button>'
       + '</div>';
 
@@ -274,7 +276,7 @@
             '<div class="tno-social-proof">Pro members made <strong>3 calls this week</strong> based on this signal.</div>' +
             '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Unlock Full Trading Note</h4>' +
             '<p style="color:#94a3b8;font-size:0.88rem">Entry levels, position sizing, and risk management guidance — available to Pro members.</p>' +
-            '<a href="' + PRO_LINK + '" class="clerk-btn clerk-btn-primary tno-btn" style="display:inline-block;text-decoration:none;margin-top:4px;">' +
+            '<a href="' + PRO_MONTHLY_URL + '" class="clerk-btn clerk-btn-primary tno-btn" style="display:inline-block;text-decoration:none;margin-top:4px;">' +
               'Start 7-Day Free Trial &rarr;' +
             '</a>' +
             '<p class="tno-small">$19/mo · Cancel anytime · Most members recover cost in first week</p>' +
@@ -288,7 +290,7 @@
             '<div class="tno-social-proof">Pro members made <strong>3 calls this week</strong> based on this signal.</div>' +
             '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Trading Note</h4>' +
             '<p style="color:#94a3b8;font-size:0.88rem">Entry levels, position sizing, and risk management guidance — available to Pro members.</p>' +
-            '<a href="' + PRO_LINK + '" class="clerk-btn clerk-btn-primary tno-btn" style="display:inline-block;text-decoration:none;">' +
+            '<a href="' + PRO_MONTHLY_URL + '" class="clerk-btn clerk-btn-primary tno-btn" style="display:inline-block;text-decoration:none;">' +
               'Read Trading Note — Start 7-Day Free Trial' +
             '</a>' +
             '<p class="tno-small">Cancel anytime · Most members recover cost in first week</p>' +
@@ -328,7 +330,7 @@
       + '<div style="background:' + (isLast ? '#ef4444' : '#22d3ee') + ';width:' + pct + '%;height:100%;border-radius:4px;transition:width 0.5s"></div>'
       + '</div></div>'
       + '<div style="font-size:0.78rem;color:#94a3b8">Most Pro members recover $19 in a single informed trade.</div>'
-      + '<a href="' + PRO_LINK + '" style="padding:10px 20px;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;border-radius:8px;color:#050508;font-weight:800;font-size:0.88rem;cursor:pointer;white-space:nowrap;flex-shrink:0;text-decoration:none;display:inline-block;">Start 7-Day Free Trial</a>'
+      + '<a href="' + PRO_MONTHLY_URL + '" style="padding:10px 20px;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;border-radius:8px;color:#050508;font-weight:800;font-size:0.88rem;cursor:pointer;white-space:nowrap;flex-shrink:0;text-decoration:none;display:inline-block;">Start 7-Day Free Trial</a>'
       + '<button onclick="document.getElementById(\'meter-upgrade-banner\').remove()" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1.2rem;padding:4px">\u00d7</button>';
     document.body.appendChild(banner);
   }
