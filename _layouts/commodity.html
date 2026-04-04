@@ -71,7 +71,7 @@ layout: default
     <h1>{{ page.title }}</h1>
     {% if page.description %}
     <p class="post-meta-bar">{{ page.description }}</p>
-    <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data updated daily · Hub last reviewed: <time datetime="{{ site.time | date: '%Y-%m-%d' }}">{{ site.time | date: "%b %Y" }}</time></p>
+    <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data: daily auto-update · Analysis published: <time datetime="{{ site.time | date: '%Y-%m-%d' }}">{{ site.time | date: "%b %d, %Y" }}</time></p>
     {% endif %}
   </div>
 </header>
@@ -163,7 +163,7 @@ layout: default
     var sign = c.change_pct >= 0 ? '+' : '';
     var changeEl = document.getElementById('banner-change');
     changeEl.textContent = sign + c.change_pct + '%';
-    changeEl.style.background = c.change_pct >= 0 ? 'rgba(16,185,129,0.15)' : 'rgba(244,63,94,0.15)';
+    changeEl.style.background = c.change_pct >= 0 ? 'rgba(16,185,129,0.2)' : 'rgba(244,63,94,0.2)';
     changeEl.style.color = c.change_pct >= 0 ? '#10b981' : '#f43f5e';
     // 52w estimates: +/-15% from current as reasonable range
     var high = (c.price * 1.15).toFixed(2);
