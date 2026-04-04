@@ -6,9 +6,9 @@ commodity_slug: "helium"
 symbol: ""
 sector: "Noble Gases/Tech"
 etfs: ["SMH", "IHI"]
-companies: ["APD", "LIN", "RIO"]
+companies: ["RIO"]
 substitutes: ["Hydrogen Cooling", "Nitrogen (Partial)"]
-themes: ["US Federal Helium Reserve Depletion", "Semiconductor Fab Expansion", "MRI Demand Growth"]
+themes: ["Supply Chain Disruption"]
 tags: ["helium", "noble gas", "semiconductor", "MRI", "cryogenics", "strategic reserve", "aerospace"]
 image: /assets/images/og-helium.png
 ---

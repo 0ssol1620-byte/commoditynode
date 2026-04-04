@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-natural-gas.png"
 title: "Hydrogen"
 description: "Hydrogen's role as a clean energy carrier, electrolyzer economics, and the green vs grey transition."
 commodity_slug: "hydrogen"
 symbol: "PLUG"
 sector: "Energy/Clean"
 etfs: ["HDRO", "ICLN"]
-companies: ["PLUG", "BE", "FCEL"]
+companies: []
 substitutes: ["Batteries", "Natural Gas", "Biofuels"]
-themes: ["Clean Energy Transition", "Industrial Decarbonization"]
+themes: ["Clean Energy", "Carbon Transition"]
 tags: [hydrogen, clean energy, electrolysis, fuel cells, decarbonization, supply chain]
 ---
 

@@ -8,7 +8,7 @@ commodity_slug: "soybeans"
 symbol: "ZS=F"
 sector: "Agriculture"
 etfs: ["SOYB"]
-companies: ["ADM", "BG", "CTVA", "MOS"]
+companies: ["ADM", "CTVA", "MOS"]
 substitutes: ["Canola", "Sunflower", "Palm Oil"]
 themes: ["Food Inflation"]
 ---

@@ -8,9 +8,9 @@ commodity_slug: "antimony"
 symbol: "SBMMF"
 sector: "Critical Minerals/Defense"
 etfs: ["REMX"]
-companies: ["SBMMF", "UEC"]
+companies: ["UEC"]
 substitutes: ["Tin Alloys", "Aluminum Trihydrate"]
-themes: ["Critical Minerals", "Defense Supply Chain"]
+themes: ["Rare Earth", "Defense Rearming"]
 ---
 
 <script>

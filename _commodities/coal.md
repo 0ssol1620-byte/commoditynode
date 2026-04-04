@@ -7,7 +7,7 @@ commodity_slug: "coal"
 symbol: "BTU"
 sector: "Energy"
 etfs: ["KOL"]
-companies: ["BTU", "ARCH", "ARLP", "CEIX"]
+companies: []
 substitutes: ["Natural Gas", "Solar", "Nuclear", "Wind"]
 themes: ["Clean Energy"]
 ---

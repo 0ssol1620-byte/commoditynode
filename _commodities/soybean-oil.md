@@ -1,16 +1,16 @@
 ---
 layout: commodity
 unit: "cents/lb"
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-soybeans.png"
 title: "Soybean Oil"
 description: "Soybean oil as a dual-use commodity bridging food markets and renewable diesel feedstock demand."
 commodity_slug: "soybean-oil"
 symbol: "ZL=F"
 sector: "Agriculture"
 etfs: ["SOYB", "DBA"]
-companies: ["ADM", "BG", "GPRE"]
+companies: ["ADM"]
 substitutes: ["Palm Oil", "Canola Oil", "Sunflower Oil"]
-themes: ["Renewable Diesel", "Food Inflation"]
+themes: ["Carbon Transition", "Food Inflation"]
 ---
 
 <script>

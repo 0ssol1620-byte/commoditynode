@@ -20,7 +20,7 @@ description: "CommodityNode privacy policy — how we collect, use, and protect 
 <p><strong>Free users (no account required):</strong></p>
 <ul><li>Basic server logs (page URLs, timestamps, referrers, IP addresses)</li><li>Browser type and device type for analytics purposes</li></ul>
 <p><strong>Pro subscribers (account required):</strong></p>
-<ul><li>Email address for account creation and billing</li><li>Payment information processed by Stripe (we do not store card details)</li><li>Account preferences and usage data</li></ul>
+<ul><li>Email address for account creation and billing</li><li>Payment information processed by our payment provider (we do not store card details)</li><li>Account preferences and usage data</li></ul>
 <p><strong>We do not collect from free users:</strong></p>
 <ul><li>Personal profile data</li><li>Payment information</li><li>Account registrations (no sign-up required for free access)</li></ul>
 <h2>Analytics</h2>

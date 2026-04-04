@@ -6,9 +6,9 @@ commodity_slug: "tungsten"
 symbol: ""
 sector: "Industrial Metals/Defense"
 etfs: ["XME", "ITA"]
-companies: ["HAYN", "SBSW"]
+companies: ["SBSW"]
 substitutes: ["Ceramics Cutting Tools", "Molybdenum Alloys"]
-themes: ["China Supply Dominance", "Defense Spending", "Industrial Reshoring"]
+themes: ["US-China Tariff War", "Defense Rearming", "Deglobalization"]
 tags: ["tungsten", "cemented carbide", "defense", "cutting tools", "china supply", "industrial metals", "APT"]
 image: /assets/images/og-tungsten.png
 ---

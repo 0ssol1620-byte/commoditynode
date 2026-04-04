@@ -8,7 +8,7 @@ commodity_slug: "gold"
 symbol: "GC=F"
 sector: "Precious Metals"
 etfs: ["GLD", "GDX", "IAU", "GDXJ"]
-companies: ["NEM", "GOLD", "AEM", "KGC"]
+companies: ["NEM"]
 substitutes: ["Silver", "Bitcoin", "Treasury Bonds"]
 themes: ["Clean Energy"]
 tags: [gold, commodity analysis, supply chain]

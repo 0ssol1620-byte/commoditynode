@@ -8,7 +8,7 @@ commodity_slug: "uranium"
 symbol: "URA"
 sector: "Battery Metals"
 etfs: ["URA", "URNM"]
-companies: ["CCJ", "NXE", "LEU", "UEC"]
+companies: ["CCJ", "UEC"]
 substitutes: ["Solar", "Wind", "Natural Gas"]
 themes: ["Nuclear Renaissance", "Clean Energy"]
 ---

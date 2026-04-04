@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-lithium.png"
 title: "Graphite"
 description: "Graphite as the dominant anode material in lithium-ion batteries, with Chinese processing dominance and EV-driven demand growth."
 commodity_slug: "graphite"
@@ -9,7 +9,7 @@ sector: "Metals/EV"
 etfs: ["LIT", "REMX"]
 companies: ["MP", "ALB", "SQM"]
 substitutes: ["Silicon Anodes", "Synthetic Graphite", "Lithium Titanate"]
-themes: ["EV Battery Supply Chain", "Critical Minerals"]
+themes: ["Battery Metals", "Rare Earth"]
 tags: [graphite, EV batteries, anode material, critical minerals, china processing, synthetic graphite, supply chain]
 ---
 

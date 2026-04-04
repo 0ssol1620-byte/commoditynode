@@ -8,7 +8,7 @@ commodity_slug: "steel"
 symbol: "SLX"
 sector: "Industrial Metals"
 etfs: ["SLX"]
-companies: ["NUE", "STLD", "X", "CLF"]
+companies: ["NUE", "CLF"]
 substitutes: ["Aluminum", "Carbon Fiber", "Engineered Wood"]
 themes: ["Infrastructure Boom"]
 ---

@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-palladium.png"
 title: "Rhodium"
 description: "Rhodium's extreme scarcity, catalytic converter dominance, and South African supply concentration."
 commodity_slug: "rhodium"
@@ -9,7 +9,7 @@ sector: "Metals/Auto"
 etfs: ["PPLT", "SPPP"]
 companies: ["SBSW", "IMPUY", "ANGPY"]
 substitutes: ["Palladium", "Platinum", "Catalytic Alternatives"]
-themes: ["Auto Emissions", "PGM Supply Deficit"]
+themes: ["Carbon Transition", "Supply Chain Disruption"]
 tags: [rhodium, pgm, catalytic converters, south africa, emissions, supply chain]
 ---
 

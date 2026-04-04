@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-corn.png"
 title: "Ethanol"
 description: "Fuel ethanol as a corn-derived biofuel blended into the US gasoline supply under federal renewable fuel mandates."
 commodity_slug: "ethanol"
 symbol: "REX"
 sector: "Energy/Agriculture"
 etfs: ["DBA", "XLE"]
-companies: ["PEIX", "ADM", "GPRE"]
+companies: ["ADM"]
 substitutes: ["Gasoline", "Methanol", "Biodiesel"]
-themes: ["Renewable Fuels", "Corn Demand"]
+themes: ["Carbon Transition", "Food Inflation"]
 tags: [ethanol, biofuel, corn, RFS, renewable fuel, supply chain]
 ---
 

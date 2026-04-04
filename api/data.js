@@ -4,6 +4,8 @@ var fs = require('fs');
 var path = require('path');
 var auth = require('./_auth');
 
+// Basic in-memory rate limiting — sufficient for moderate traffic.
+// For production scale, upgrade to Redis-backed counters (e.g. @upstash/ratelimit).
 var RATE_LIMIT = 1000; // requests per day (tracked per key in-memory for now)
 var rateCounts = {};
 
@@ -22,7 +24,7 @@ function getRateLimit(key) {
 
 module.exports = async function handler(req, res) {
   if (auth.handleOptions(req, res)) return;
-  auth.setCors(res);
+  auth.setCors(req, res);
 
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });

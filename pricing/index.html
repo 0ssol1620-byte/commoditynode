@@ -17,8 +17,13 @@ permalink: /pricing/
     },
     {
       "@type": "Question",
-      "name": "Can I cancel anytime?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Cancel anytime from your account settings. You keep access until the end of your billing period. No questions asked." }
+      "name": "How do I cancel?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Cancel anytime from your account settings. No questions asked. You keep access until the end of your billing period." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there a billing portal?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, manage your subscription at any time through your account. View invoices, update payment methods, or change your plan — all self-serve." }
     },
     {
       "@type": "Question",
@@ -38,7 +43,12 @@ permalink: /pricing/
     {
       "@type": "Question",
       "name": "What happens after the 7-day free trial?",
-      "acceptedAnswer": { "@type": "Answer", "text": "After the trial, your account continues at $19/month (or $149/year if you chose annual). You can cancel anytime before the trial ends with no charge. Your data and saved scenarios are preserved if you resubscribe." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Your account continues at $19/month (or $149/year if you chose annual). Cancel anytime before the trial ends — no charge. Your data and saved scenarios are preserved if you resubscribe." }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Enterprise work?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Contact us for team seats, API access, and custom data exports. We'll respond within 24 hours. Enterprise includes everything in Pro plus dedicated support and custom integrations." }
     },
     {
       "@type": "Question",
@@ -267,12 +277,12 @@ permalink: /pricing/
     <div class="pricing-desc">For active investors who trade around commodity cycles.</div>
     <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:block;text-align:center;">Start 7-Day Free Trial →</a>
     <ul class="pricing-features">
-      <li class="yes"><span class="feat-check">✓</span> <strong>Unlimited</strong> Signal Reports<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Stay informed across all commodity themes without report limits</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Make faster multi-commodity decisions</strong> without hitting a wall<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Unlimited Signal Reports across all 60 commodity hubs</span></li>
       <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
-      <li class="yes"><span class="feat-check">✓</span> <strong>AI Price Forecast</strong> — 90 days<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">90-day scenario projections before consensus catches up</span></li>
-      <li class="yes"><span class="feat-check">✓</span> <strong>Scenario Simulator</strong> — all events<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Model your portfolio exposure before OPEC, WASDE, and Fed events</span></li>
-      <li class="yes"><span class="feat-check">✓</span> Company sensitivity analysis</li>
-      <li class="yes"><span class="feat-check">✓</span> 60 commodity hubs with impact analysis, 19 with live AI price forecasts</li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>See scenario ranges before consensus catches up</strong> — not after<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">AI 90-day price forecast with confidence intervals, updated daily</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Stress-test your exposure</strong> before the market reprices<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Full Scenario Simulator — model OPEC, WASDE, and Fed events</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Know which stocks move</strong> before earnings do<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Company sensitivity analysis across all commodity hubs</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Full market context</strong> across energy, metals, and agriculture<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">60 commodity hubs with impact analysis, 19 with live AI price forecasts</span></li>
       <li class="yes"><span class="feat-check">✓</span> Priority email support</li>
       <li class="yes"><span class="feat-check">✓</span> Weekly Pro briefing</li>
     </ul>
@@ -289,7 +299,7 @@ permalink: /pricing/
       <li class="yes"><span class="feat-check">✓</span> Everything in Pro</li>
       <li class="yes"><span class="feat-check">✓</span> CSV / JSON data export<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Download clean datasets for your own models</span></li>
       <li class="yes"><span class="feat-check">✓</span> API access (forecast data)<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Integrate signals directly into your trading systems</span></li>
-      <li class="yes"><span class="feat-check">✓</span> Portfolio stress test<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Model worst-case commodity shocks before they hit your book</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Quantify tail risk</strong> before it hits your portfolio<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Full stress test breakdown across your commodity exposure</span></li>
       <li class="yes"><span class="feat-check">✓</span> Custom commodity alerts<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Get notified when key thresholds are hit, before the news cycle</span></li>
       <li class="yes"><span class="feat-check">✓</span> 5 team seats<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Share access across your research desk</span></li>
       <li class="yes"><span class="feat-check">✓</span> Dedicated analyst support</li>
@@ -403,8 +413,12 @@ function setBilling(mode, btn) {
     <div class="faq-a">Our proprietary AI forecast engine uses state-of-the-art time series models to generate 90-day price projections. Forecasts include 80% confidence intervals so you can assess the uncertainty range. Updated daily with fresh market data.</div>
   </div>
   <div class="faq-item">
-    <div class="faq-q">Can I cancel anytime?</div>
-    <div class="faq-a">Yes. Cancel anytime from your account settings. You keep access until the end of your billing period. No questions asked.</div>
+    <div class="faq-q">How do I cancel?</div>
+    <div class="faq-a">Cancel anytime from your account settings. No questions asked. You keep access until the end of your billing period.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Is there a billing portal?</div>
+    <div class="faq-a">Yes, manage your subscription at any time through your account. View invoices, update payment methods, or change your plan — all self-serve.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">What commodities are covered?</div>
@@ -419,8 +433,12 @@ function setBilling(mode, btn) {
     <div class="faq-a">Free gives you access to all 60 commodity hubs, public Signal Reports, and the basic Impact Map. Pro unlocks unlimited Signal Reports (free tier limits to recent reports), the AI 90-day price forecast, full Scenario Simulator with company sensitivity analysis, and trading notes on each signal.</div>
   </div>
   <div class="faq-item">
-    <div class="faq-q">What happens after the 7-day free trial?</div>
-    <div class="faq-a">After the trial, your account continues at $19/month (or $149/year if you chose annual). You can cancel anytime before the trial ends with no charge. Your data and saved scenarios are preserved if you resubscribe.</div>
+    <div class="faq-q">What happens after the 7-day trial?</div>
+    <div class="faq-a">Your account continues at $19/month (or $149/year if you chose annual). Cancel anytime before the trial ends — no charge. Your data and saved scenarios are preserved if you resubscribe.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">How does Enterprise work?</div>
+    <div class="faq-a">Contact us for team seats, API access, and custom data exports. We'll respond within 24 hours. Enterprise includes everything in Pro plus dedicated support and custom integrations.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">Is this suitable for individual investors, not just professionals?</div>

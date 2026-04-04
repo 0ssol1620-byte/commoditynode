@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-corn.png"
 title: "Potash Price Impact: Industries, Stocks & ETFs"
 description: "How potash (KCl) price movements ripple through fertilizer producers, agribusiness, and global food security."
 commodity_slug: "potash"
 symbol: "NTR"
 sector: "Agriculture/Chemicals"
 etfs: ["MOS", "MOO"]
-companies: ["NTR", "MOS", "IPI"]
+companies: ["NTR", "MOS"]
 substitutes: ["Organic Fertilizers", "Compost", "Nitrogen Fixation"]
-themes: ["Food Security", "Fertilizer Crisis"]
+themes: ["Food Security"]
 tags: [potash, commodity analysis, fertilizer, food security]
 ---
 

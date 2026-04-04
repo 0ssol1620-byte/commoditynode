@@ -8,7 +8,7 @@ commodity_slug: "cotton"
 symbol: "CT=F"
 sector: "Soft Commodities"
 etfs: ["BAL"]
-companies: ["LEVI", "GPS", "PVH"]
+companies: []
 substitutes: ["Polyester", "Nylon", "Rayon"]
 themes: ["Supply Chain Disruption"]
 ---

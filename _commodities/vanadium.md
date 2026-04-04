@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-steel.png"
 title: "Vanadium"
 description: "Vanadium's dual role in high-strength steel alloys and grid-scale redox flow batteries, with Chinese supply dominance."
 commodity_slug: "vanadium"
 symbol: "RIO"
 sector: "Metals"
 etfs: ["PICK", "XME"]
-companies: ["RIO", "GLEN.L", "AMG"]
+companies: ["RIO"]
 substitutes: ["Molybdenum", "Titanium", "Chromium"]
-themes: ["Grid-Scale Energy Storage", "Steel Alloys"]
+themes: ["Clean Energy", "Infrastructure Boom"]
 tags: [vanadium, steel alloys, energy storage, VRFB, china supply, critical minerals, supply chain]
 ---
 

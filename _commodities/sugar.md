@@ -8,7 +8,7 @@ commodity_slug: "sugar"
 symbol: "SB=F"
 sector: "Soft Commodities"
 etfs: ["CANE", "SGG"]
-companies: ["ASR", "AGRO"]
+companies: []
 substitutes: ["HFCS", "Stevia", "Aspartame"]
 themes: ["Food Inflation"]
 ---

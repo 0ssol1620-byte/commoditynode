@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-corn.png"
 title: "Lean Hogs"
 description: "Lean hogs as a globally significant protein commodity dominated by Chinese demand and disease risk."
 commodity_slug: "lean-hogs"
 symbol: "HE=F"
 sector: "Agriculture/Livestock"
 etfs: ["COW", "DBA"]
-companies: ["TSN", "SFD", "HRL"]
+companies: ["TSN"]
 substitutes: ["Chicken", "Beef", "Plant-Based Meat"]
-themes: ["Chinese Demand", "ASF Disease Risk"]
+themes: ["Emerging Markets"]
 ---
 
 <script>

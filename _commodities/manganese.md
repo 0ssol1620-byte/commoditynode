@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-steel.png"
 title: "Manganese Price Impact: Industries, Stocks & ETFs"
 description: "How manganese price movements ripple through steelmakers, EV battery producers, and mining companies."
 commodity_slug: "manganese"
@@ -9,7 +9,7 @@ sector: "Metals"
 etfs: ["PICK", "XME"]
 companies: ["VALE", "BHP", "SCCO"]
 substitutes: ["Chromium", "Nickel", "Molybdenum"]
-themes: ["Steel Production", "EV Batteries"]
+themes: ["Infrastructure Boom", "Battery Metals"]
 tags: [manganese, commodity analysis, steel, EV batteries]
 ---
 

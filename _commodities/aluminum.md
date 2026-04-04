@@ -8,7 +8,7 @@ commodity_slug: "aluminum"
 symbol: "ALI=F"
 sector: "Industrial Metals"
 etfs: ["JJU"]
-companies: ["AA", "CENX", "ARNC"]
+companies: ["AA"]
 substitutes: ["Steel", "Carbon Fiber", "Plastics"]
 themes: ["EV Transition", "Clean Energy"]
 ---

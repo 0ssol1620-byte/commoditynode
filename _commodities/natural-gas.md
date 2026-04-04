@@ -8,7 +8,7 @@ commodity_slug: "natural-gas"
 symbol: "NG=F"
 sector: "Energy"
 etfs: ["UNG", "BOIL", "FCG"]
-companies: ["EQT", "CHK", "AR", "SWN"]
+companies: []
 substitutes: ["Solar", "Wind", "Nuclear", "Oil"]
 themes: ["Clean Energy", "Food Inflation"]
 tags: [natural gas, commodity analysis, supply chain]

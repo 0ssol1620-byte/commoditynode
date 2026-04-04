@@ -8,7 +8,7 @@ commodity_slug: "silver"
 symbol: "SI=F"
 sector: "Precious Metals"
 etfs: ["SLV", "SIVR"]
-companies: ["PAAS", "AG", "WPM", "MAG"]
+companies: ["PAAS", "WPM"]
 substitutes: ["Gold", "Platinum", "Copper"]
 themes: ["Clean Energy"]
 ---

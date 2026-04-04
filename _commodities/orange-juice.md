@@ -1,16 +1,16 @@
 ---
 layout: commodity
 unit: "cents/lb"
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-coffee.png"
 title: "Orange Juice Price Impact: Industries, Stocks & ETFs"
 description: "How FCOJ futures ripple through beverage companies, Florida agriculture, Brazilian exports, and vitamin supplement markets."
 commodity_slug: "orange-juice"
 symbol: "OJ=F"
 sector: "Agriculture"
 etfs: ["JJA", "DBA"]
-companies: ["PEP", "KO", "MNST"]
+companies: ["PEP"]
 substitutes: ["Apple Juice", "Other Citrus", "Vitamin Supplements"]
-themes: ["Citrus Greening Disease", "Florida Agriculture"]
+themes: []
 tags: [orange juice, commodity analysis, citrus, beverages]
 ---
 

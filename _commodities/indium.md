@@ -8,9 +8,9 @@ commodity_slug: "indium"
 symbol: "FRES.L"
 sector: "Critical Minerals/Tech"
 etfs: ["REMX"]
-companies: ["FRES.L", "TEC.PA"]
+companies: []
 substitutes: ["Fluorine-doped Tin Oxide", "Silver Nanowires"]
-themes: ["Display Technology", "Solar Energy"]
+themes: ["Clean Energy"]
 ---
 
 <script>

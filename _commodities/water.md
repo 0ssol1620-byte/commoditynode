@@ -10,7 +10,7 @@ sector: "Agriculture/Utilities"
 etfs: ["PHO", "CGW"]
 companies: ["AWK", "XYL"]
 substitutes: ["Desalination", "Water Recycling"]
-themes: ["Climate Change", "Resource Scarcity"]
+themes: ["Water Scarcity"]
 ---
 
 <script>

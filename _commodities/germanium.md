@@ -6,9 +6,9 @@ commodity_slug: "germanium"
 symbol: ""
 sector: "Critical Minerals/Tech"
 etfs: ["REMX"]
-companies: ["UMICORE", "TECK"]
+companies: ["TECK"]
 substitutes: ["Silicon Photonics", "Zinc Selenide IR"]
-themes: ["China Export Controls", "Defense Optics", "Fiber Broadband Expansion"]
+themes: ["US-China Tariff War", "Defense Rearming"]
 tags: ["germanium", "fiber optics", "infrared", "critical minerals", "china export controls", "defense optics"]
 image: /assets/images/og-germanium.png
 ---

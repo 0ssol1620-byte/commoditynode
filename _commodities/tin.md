@@ -8,7 +8,7 @@ commodity_slug: "tin"
 symbol: ""
 sector: "Industrial Metals"
 etfs: ["JJM"]
-companies: ["MINSUR", "YTL"]
+companies: []
 substitutes: ["Lead-free Alternatives", "Conductive Adhesives"]
 themes: ["Supply Chain Disruption"]
 ---

@@ -7,7 +7,7 @@ commodity_slug: "lng"
 symbol: "LNG"
 sector: "Energy"
 etfs: ["FCG"]
-companies: ["LNG", "TTE", "SHEL", "CQP"]
+companies: []
 substitutes: ["Pipeline Gas", "Nuclear", "Coal"]
 themes: ["Clean Energy", "Supply Chain Disruption"]
 ---

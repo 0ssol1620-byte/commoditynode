@@ -8,7 +8,7 @@ commodity_slug: "coffee"
 symbol: "KC=F"
 sector: "Soft Commodities"
 etfs: ["JO"]
-companies: ["SBUX", "KDP", "DNKN"]
+companies: ["SBUX"]
 substitutes: ["Tea", "Energy Drinks"]
 themes: ["Food Inflation"]
 ---

@@ -8,7 +8,7 @@ commodity_slug: "diesel"
 symbol: "HO=F"
 sector: "Energy"
 etfs: ["UGA"]
-companies: ["VLO", "MPC", "PSX"]
+companies: []
 substitutes: ["Biodiesel", "Electric Trucks", "LNG"]
 themes: ["Supply Chain Disruption"]
 ---

@@ -4,15 +4,26 @@
  * Shared auth/CORS helpers for CommodityNode API functions
  */
 
-function setCors(res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+function setCors(req, res) {
+  // Restrict CORS to known origins (upgrade to Redis-backed allowlist for production)
+  var allowedOrigins = [
+    'https://commoditynode.com',
+    'https://www.commoditynode.com',
+    'http://localhost:4000',
+    'http://localhost:3000'
+  ];
+  var origin = req && req.headers && req.headers.origin;
+  if (allowedOrigins.indexOf(origin) >= 0) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-api-key, Authorization');
 }
 
 function handleOptions(req, res) {
   if (req.method === 'OPTIONS') {
-    setCors(res);
+    setCors(req, res);
     res.status(204).end();
     return true;
   }

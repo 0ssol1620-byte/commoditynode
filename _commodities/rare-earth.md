@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-lithium.png"
 title: "Rare Earth Elements"
 description: "Rare earth elements powering permanent magnets for EV motors, wind turbines, and defense systems, with extreme Chinese supply chain dominance."
 commodity_slug: "rare-earth"
 symbol: "MP"
 sector: "Metals/Technology"
 etfs: ["REMX", "PICK"]
-companies: ["MP", "LYC.AX", "LYSCF"]
+companies: ["MP"]
 substitutes: ["Ferrite Magnets", "Induction Motors", "Recycled REE"]
-themes: ["EV Motors", "Defense Supply Chain", "China Dominance"]
+themes: ["EV Transition", "Defense Rearming", "US-China Tariff War"]
 tags: [rare earth, neodymium, permanent magnets, EV motors, wind turbines, defense, china dominance, critical minerals, supply chain]
 ---
 

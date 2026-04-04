@@ -6,9 +6,9 @@ commodity_slug: "phosphate"
 symbol: "MOS"
 sector: "Agriculture/Fertilizer"
 etfs: ["MOO", "DBA"]
-companies: ["MOS", "NTR", "OCP", "ICL"]
+companies: ["MOS", "NTR"]
 substitutes: ["Organic Fertilizers", "Precision Agriculture"]
-themes: ["Food Security", "Morocco Reserve Dominance", "Population Growth"]
+themes: ["Food Security", "Geopolitical Risk"]
 tags: ["phosphate", "fertilizer", "NPK", "food security", "morocco", "OCP", "phosphoric acid", "agriculture"]
 image: /assets/images/og-phosphate.png
 ---

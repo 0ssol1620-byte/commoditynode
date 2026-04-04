@@ -8,7 +8,7 @@ commodity_slug: "wheat"
 symbol: "ZW=F"
 sector: "Agriculture"
 etfs: ["WEAT"]
-companies: ["ADM", "BG", "INGR"]
+companies: ["ADM", "INGR"]
 substitutes: ["Rice", "Corn", "Barley"]
 themes: ["Food Inflation"]
 tags: [wheat, commodity analysis, supply chain]

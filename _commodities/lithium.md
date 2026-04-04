@@ -8,7 +8,7 @@ commodity_slug: "lithium"
 symbol: "ALB"
 sector: "Battery Metals"
 etfs: ["LIT", "BATT"]
-companies: ["ALB", "SQM", "LTHM", "PLL"]
+companies: ["ALB", "SQM"]
 substitutes: ["Sodium-ion", "Solid-state", "Hydrogen Fuel Cells"]
 themes: ["EV Transition", "Clean Energy"]
 ---

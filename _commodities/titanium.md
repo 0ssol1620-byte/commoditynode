@@ -8,9 +8,9 @@ commodity_slug: "titanium"
 symbol: "TIE"
 sector: "Aerospace/Defense"
 etfs: ["ITA", "XAR"]
-companies: ["TIE", "HWM"]
+companies: []
 substitutes: ["Advanced Aluminum Alloys", "Carbon Fiber Composites"]
-themes: ["Aerospace Supply Chain", "Defense Reshoring"]
+themes: ["Defense Rearming"]
 ---
 
 <script>

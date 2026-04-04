@@ -7,7 +7,7 @@ commodity_slug: "jet-fuel"
 symbol: "CL=F"
 sector: "Energy"
 etfs: ["JETS"]
-companies: ["DAL", "UAL", "AAL", "LUV"]
+companies: ["DAL"]
 substitutes: ["Sustainable Aviation Fuel", "Electric Aircraft"]
 themes: ["Supply Chain Disruption"]
 ---

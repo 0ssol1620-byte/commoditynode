@@ -8,7 +8,7 @@ commodity_slug: "cobalt"
 symbol: "GLNCY"
 sector: "Battery Metals"
 etfs: ["BATT"]
-companies: ["GLNCY", "CMCLF"]
+companies: ["GLNCY"]
 substitutes: ["LFP Chemistry", "High-Nickel NMC"]
 themes: ["EV Transition", "Supply Chain Disruption"]
 ---

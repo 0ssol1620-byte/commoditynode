@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-copper.png"
 title: "Rubber"
 description: "Natural rubber's tire industry dominance, Southeast Asian supply concentration, and synthetic substitution dynamics."
 commodity_slug: "rubber"
 symbol: "GT"
 sector: "Agriculture/Industrial"
 etfs: ["DBA", "MOO"]
-companies: ["GT", "CTB", "BWA"]
+companies: []
 substitutes: ["Synthetic Rubber", "Silicone", "Recycled Rubber"]
-themes: ["Auto Industry", "Southeast Asian Agriculture"]
+themes: ["EV Transition", "Emerging Markets"]
 tags: [rubber, tires, agriculture, southeast asia, automotive, supply chain]
 ---
 

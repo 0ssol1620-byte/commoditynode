@@ -10,7 +10,7 @@ sector: "PGM/Clean Energy"
 etfs: ["PPLT"]
 companies: ["SBSW", "IMPUY"]
 substitutes: ["Ruthenium Catalysts", "AEM Electrolyzers"]
-themes: ["Green Hydrogen", "Clean Energy Transition"]
+themes: ["Clean Energy"]
 ---
 
 <script>

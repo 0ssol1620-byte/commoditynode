@@ -8,9 +8,9 @@ commodity_slug: "oats"
 symbol: "ZO=F"
 sector: "Agriculture"
 etfs: ["DBA", "RJA"]
-companies: ["GIS", "POST", "PEP"]
+companies: ["PEP"]
 substitutes: ["Wheat", "Barley", "Quinoa"]
-themes: ["Health Food Trends", "Plant-Based"]
+themes: []
 tags: [oats, commodity analysis, plant-based, health food]
 ---
 

@@ -8,9 +8,9 @@ commodity_slug: "neon"
 symbol: "SOXX"
 sector: "Noble Gases/Semiconductor"
 etfs: ["SOXX", "SMH"]
-companies: ["ASML", "AMAT"]
+companies: ["ASML"]
 substitutes: ["Fluorine-based Lasers", "EUV Direct"]
-themes: ["Semiconductor Supply Chain", "Geopolitical Risk"]
+themes: ["Supply Chain Disruption", "Geopolitical Risk"]
 ---
 
 <script>

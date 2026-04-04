@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-corn.png"
 title: "Live Cattle"
 description: "Live cattle as the cornerstone of the US beef market driven by cattle cycle dynamics and drought risk."
 commodity_slug: "live-cattle"
 symbol: "LE=F"
 sector: "Agriculture/Livestock"
 etfs: ["COW", "DBA"]
-companies: ["TSN", "JBSAY", "PPC"]
+companies: ["TSN", "JBSAY"]
 substitutes: ["Chicken", "Pork", "Plant-Based Meat"]
-themes: ["Protein Demand", "Drought Impact"]
+themes: ["Food Security"]
 ---
 
 <script>

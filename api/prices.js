@@ -6,7 +6,7 @@ var auth = require('./_auth');
 
 module.exports = async function handler(req, res) {
   if (auth.handleOptions(req, res)) return;
-  auth.setCors(res);
+  auth.setCors(req, res);
 
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });

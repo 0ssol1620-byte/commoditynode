@@ -8,7 +8,7 @@ commodity_slug: "lumber"
 symbol: "WY"
 sector: "Industrial Metals"
 etfs: ["WOOD"]
-companies: ["WY", "RYN", "LPX"]
+companies: []
 substitutes: ["Steel Framing", "Concrete", "Engineered Wood"]
 themes: ["Infrastructure Boom"]
 ---

@@ -1,16 +1,16 @@
 ---
 layout: commodity
 unit: "cents/cwt"
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-wheat.png"
 title: "Rice Price Impact: Food Security, Asian Economies & Agribusiness"
 description: "How rough rice price movements affect Asian food security, export economies in India, Thailand and Vietnam, agribusiness companies, and global food inflation."
 commodity_slug: "rice"
 symbol: "ZR=F"
 sector: "Agriculture"
 etfs: ["RJA", "DBA"]
-companies: ["ADM", "BG", "INGR"]
+companies: ["ADM", "INGR"]
 substitutes: ["Wheat", "Corn", "Cassava"]
-themes: ["Food Security", "Asian Demand"]
+themes: ["Food Security", "Emerging Markets"]
 tags: [rice, commodity analysis, food security, agriculture]
 ---
 

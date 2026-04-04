@@ -1,15 +1,15 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-corn.png"
 title: "Feeder Cattle"
 description: "Feeder cattle as weaned calves entering feedlots, driven by the cattle cycle, corn costs, and drought conditions."
 commodity_slug: "feeder-cattle"
 symbol: "GF=F"
 sector: "Agriculture/Livestock"
 etfs: ["COW", "DBA"]
-companies: ["TSN", "JBSAY", "CVGW"]
+companies: ["TSN", "JBSAY"]
 substitutes: ["Live Cattle", "Dairy Calves", "Imported Beef"]
-themes: ["Cattle Cycle", "Drought Impact"]
+themes: ["Food Security"]
 tags: [feeder cattle, cattle cycle, feedlot, beef, livestock, supply chain]
 ---
 

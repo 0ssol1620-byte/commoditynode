@@ -6,9 +6,9 @@ commodity_slug: "silicon"
 symbol: ""
 sector: "Critical Minerals/Solar"
 etfs: ["TAN", "SMH", "REMX"]
-companies: ["ENPH", "FSLR", "WFG"]
+companies: []
 substitutes: ["Thin-Film Solar (CdTe)", "Perovskite Solar Cells"]
-themes: ["Solar Energy Transition", "Semiconductor Expansion", "China Polysilicon Dominance"]
+themes: ["Clean Energy", "AI Power Demand", "US-China Tariff War"]
 tags: ["silicon", "polysilicon", "solar", "semiconductor wafer", "metallurgical silicon", "aluminum alloy"]
 image: /assets/images/og-silicon.png
 ---

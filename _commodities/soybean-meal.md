@@ -1,16 +1,16 @@
 ---
 layout: commodity
 unit: "cents/short ton"
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-soybeans.png"
 title: "Soybean Meal"
 description: "Soybean meal as the dominant global protein source in animal feed, driving the soy crush spread and livestock economics."
 commodity_slug: "soybean-meal"
 symbol: "ZM=F"
 sector: "Agriculture"
 etfs: ["SOYB", "DBA"]
-companies: ["ADM", "BG", "CTVA"]
+companies: ["ADM", "CTVA"]
 substitutes: ["Canola Meal", "Fish Meal", "DDGS"]
-themes: ["Animal Feed", "Crush Spread"]
+themes: ["Food Security"]
 tags: [soybean meal, animal feed, crush spread, protein meal, supply chain]
 ---
 

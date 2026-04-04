@@ -6,9 +6,9 @@ commodity_slug: "gallium"
 symbol: ""
 sector: "Critical Minerals/Tech"
 etfs: ["REMX", "SMH"]
-companies: ["INTC", "CREE", "TSM"]
+companies: []
 substitutes: ["Silicon Carbide (SiC)", "Indium Phosphide"]
-themes: ["China Export Controls", "CHIPS Act", "5G Rollout"]
+themes: ["US-China Tariff War", "Supply Chain Disruption"]
 tags: ["gallium", "semiconductors", "5G", "critical minerals", "china export ban", "GaAs", "GaN"]
 image: /assets/images/og-gallium.png
 ---

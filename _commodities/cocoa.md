@@ -7,7 +7,7 @@ commodity_slug: "cocoa"
 symbol: "CC=F"
 sector: "Soft Commodities"
 etfs: ["NIB"]
-companies: ["HSY", "MDLZ", "NSRGY", "TR"]
+companies: ["HSY", "MDLZ"]
 substitutes: ["Carob", "Compound Chocolate"]
 themes: ["Food Inflation"]
 ---

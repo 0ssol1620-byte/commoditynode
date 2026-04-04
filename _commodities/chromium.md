@@ -8,7 +8,7 @@ sector: "Industrial Metals"
 etfs: ["SLX", "XME"]
 companies: ["SBSW", "GLNCY"]
 substitutes: ["Nickel-Free Stainless", "Aluminum Alloys"]
-themes: ["Stainless Steel Demand", "South Africa Energy Crisis", "Infrastructure Spending"]
+themes: ["Emerging Markets", "Infrastructure Boom"]
 tags: ["chromium", "ferrochrome", "stainless steel", "south africa", "construction", "automotive"]
 image: /assets/images/og-chromium.png
 ---
