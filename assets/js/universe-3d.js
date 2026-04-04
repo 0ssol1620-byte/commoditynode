@@ -248,17 +248,22 @@
 
   function makeLabel(text, color) {
     var canvas = document.createElement('canvas');
-    canvas.width = 256; canvas.height = 64;
+    canvas.width = 512; canvas.height = 128;
     var ctx = canvas.getContext('2d');
-    ctx.font = 'bold 24px Inter, system-ui, sans-serif';
+    ctx.font = 'bold 36px DM Sans, -apple-system, sans-serif';
     ctx.fillStyle = color || '#e2e8f0';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(text, 128, 32);
+    // Text shadow for depth
+    ctx.shadowColor = 'rgba(0,0,0,0.8)';
+    ctx.shadowBlur = 8;
+    ctx.fillText(text, 256, 64);
+    // Reset shadow
+    ctx.shadowBlur = 0;
     var texture = new THREE.CanvasTexture(canvas);
     var material = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.85 });
     var sprite = new THREE.Sprite(material);
-    sprite.scale.set(40, 10, 1);
+    sprite.scale.set(60, 15, 1);
     return sprite;
   }
 
@@ -357,7 +362,8 @@
     'varying vec3 vColor;',
     'void main() {',
     '  vColor = starColor;',
-    '  vOpacity = 0.6 + randomOffset * 0.4;',
+    '  float twinkle = 0.5 + 0.5 * sin(time * (1.5 + randomOffset * 3.0) + randomOffset * 6.28);',
+    '  vOpacity = (0.4 + randomOffset * 0.4) * twinkle;',
     '  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);',
     '  gl_PointSize = size * (200.0 / -mvPosition.z);',
     '  gl_Position = projectionMatrix * mvPosition;',
@@ -450,7 +456,10 @@
 
     /* Scene */
     var scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x050510);
+    // Remove solid background for transparent renderer
+    // Use fog instead for depth
+    scene.background = null;
+    scene.fog = new THREE.FogExp2(0x020208, 0.00035);
 
     /* Camera */
     var camera = new THREE.PerspectiveCamera(60, width / height, 1, 5000);
@@ -460,6 +469,7 @@
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x020208, 1);
     renderer.toneMapping = THREE.ReinhardToneMapping;
     renderer.toneMappingExposure = 1.5;
     container.appendChild(renderer.domElement);
@@ -476,9 +486,9 @@
         composer.addPass(renderPass);
         var bloomPass = new THREE.UnrealBloomPass(
           new THREE.Vector2(width, height),
-          1.2,   /* strength */
-          0.8,   /* radius */
-          0.2    /* threshold */
+          1.8,   /* strength - more dramatic */
+          0.6,   /* radius */
+          0.1    /* threshold - lower for more bloom */
         );
         composer.addPass(bloomPass);
         useBloom = true;
@@ -494,7 +504,7 @@
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.2;
+    controls.autoRotateSpeed = 0.3;
     controls.minDistance = 100;
     controls.maxDistance = 2000;
 
@@ -502,8 +512,30 @@
     var ambientLight = new THREE.AmbientLight(0x111122, 0.3);
     scene.add(ambientLight);
 
+    /* ---- Nebula Clouds (volumetric feel) ---- */
+    var nebulaColors = ['#0a1a3a', '#0d1f1a', '#1a0d2e', '#0a1520', '#1a1205', '#050d1a'];
+    for (var ni = 0; ni < 6; ni++) {
+      var nMat = new THREE.SpriteMaterial({
+        map: makeGlowTexture(0.12),
+        color: new THREE.Color(nebulaColors[ni]),
+        transparent: true,
+        opacity: 0.6,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
+      });
+      var nSprite = new THREE.Sprite(nMat);
+      nSprite.position.set(
+        (Math.random() - 0.5) * 1200,
+        (Math.random() - 0.5) * 800,
+        -500 + Math.random() * -500
+      );
+      var nSize = 400 + Math.random() * 600;
+      nSprite.scale.set(nSize, nSize, 1);
+      scene.add(nSprite);
+    }
+
     /* ---- Enhanced Star Field ---- */
-    var starCount = isMobile ? 1500 : 3000;
+    var starCount = isMobile ? 2000 : 5000;
     var starPositions = new Float32Array(starCount * 3);
     var starSizes = new Float32Array(starCount);
     var starOffsets = new Float32Array(starCount);
@@ -663,9 +695,11 @@
         var rKey = Math.round(orbitR);
         if (!orbitRadii[rKey]) orbitRadii[rKey] = orbitR;
 
+        var inclination = rand(-0.6, 0.6); // random orbital inclination
         var satObj = {
           mesh: sMesh, satGlow: satGlowSprite, parentObj: cObj,
           angle: angle, speed: speed, orbitR: orbitR,
+          inclination: inclination,
           nodeData: n, connMesh: connMesh, nColor: nColor
         };
         satellites.push(satObj);
@@ -1028,11 +1062,13 @@
       }
 
       /* Star field twinkle (shader uniform) */
-      // starMat.uniforms.time.value = elapsed; // disabled twinkle
+      starMat.uniforms.time.value = elapsed;
 
       /* Commodity pulse + shader time update */
       commodityMeshes.forEach(function (c, ci) {
-        var s = 1 + Math.sin(elapsed * 1.5 + ci * 0.8) * 0.08;
+        var pulseRate = 1.2 + (ci % 5) * 0.3; // 1.2~2.4 varied
+        var pulseAmp = 0.06 + (ci % 3) * 0.02; // 0.06~0.10
+        var s = 1 + Math.sin(elapsed * pulseRate + ci * 1.2) * pulseAmp;
         c.mesh.scale.set(s, s, s);
 
         /* Update shader time */
@@ -1053,8 +1089,8 @@
       satellites.forEach(function (sat) {
         sat.angle += sat.speed;
         var sx = Math.cos(sat.angle) * sat.orbitR;
-        var sz = Math.sin(sat.angle) * sat.orbitR;
-        var sy = Math.sin(sat.angle * 0.7) * sat.orbitR * 0.3;
+        var sz = Math.sin(sat.angle) * sat.orbitR * Math.cos(sat.inclination);
+        var sy = Math.sin(sat.angle) * sat.orbitR * Math.sin(sat.inclination);
         sat.mesh.position.set(sx, sy, sz);
 
         /* Update satellite glow position */
@@ -1069,8 +1105,8 @@
           sat.connMesh.userData.lineGeo.attributes.position.needsUpdate = true;
 
           /* Pulsing opacity for flowing energy effect */
-          var pulse = 0.15 + Math.sin(elapsed * 3.0 + sat.angle) * 0.1;
-          sat.connMesh.material.opacity = Math.max(0.05, pulse);
+          var pulse = 0.12 + Math.abs(Math.sin(elapsed * 2.5 + sat.angle * 2.0)) * 0.2;
+          sat.connMesh.material.opacity = pulse;
         }
       });
 
