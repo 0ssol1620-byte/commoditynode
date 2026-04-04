@@ -1,0 +1,377 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1775278082709,
+  "projectRoot": "/home/phillip/.openclaw/workspace/commoditynode",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Ruby",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "Gemfile"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "bundler",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "assets",
+      "scripts"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "_commodities": {
+      "path": "_commodities",
+      "purpose": null,
+      "fileCount": 60,
+      "lastAccessed": 1775278082699,
+      "keyFiles": [
+        "aluminum.md",
+        "ammonia.md",
+        "antimony.md",
+        "chromium.md",
+        "coal.md"
+      ]
+    },
+    "_data": {
+      "path": "_data",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1775278082700,
+      "keyFiles": [
+        "company_slugs.yml",
+        "prices.json",
+        "theme_slugs.yml"
+      ]
+    },
+    "_includes": {
+      "path": "_includes",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1775278082701,
+      "keyFiles": [
+        "google-analytics.html",
+        "newsletter.html",
+        "price-alert.html"
+      ]
+    },
+    "_layouts": {
+      "path": "_layouts",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1775278082702,
+      "keyFiles": [
+        "commodity.html",
+        "default.html",
+        "post.html",
+        "simple.html",
+        "tag.html"
+      ]
+    },
+    "_pages": {
+      "path": "_pages",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082702,
+      "keyFiles": [
+        "sitemap-supplement.xml"
+      ]
+    },
+    "_posts": {
+      "path": "_posts",
+      "purpose": null,
+      "fileCount": 133,
+      "lastAccessed": 1775278082702,
+      "keyFiles": [
+        "2026-03-01-crude-oil-industry-impact.md",
+        "2026-03-02-delta-air-lines-jet-fuel-sensitivity.md",
+        "2026-03-02-gold-price-impact-stocks.md",
+        "2026-03-03-copper-economic-indicator.md",
+        "2026-03-03-exxonmobil-oil-price-proxy.md"
+      ]
+    },
+    "about": {
+      "path": "about",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082703,
+      "keyFiles": [
+        "editorial-team.md"
+      ]
+    },
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1775278082703,
+      "keyFiles": []
+    },
+    "calendar": {
+      "path": "calendar",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082703,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "commodities": {
+      "path": "commodities",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082703,
+      "keyFiles": [
+        "index.md"
+      ]
+    },
+    "companies": {
+      "path": "companies",
+      "purpose": null,
+      "fileCount": 74,
+      "lastAccessed": 1775278082704,
+      "keyFiles": [
+        "aa.html",
+        "adm.html",
+        "alb.html",
+        "amd.html",
+        "american-airlines.html"
+      ]
+    },
+    "correlation": {
+      "path": "correlation",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082704,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "disruptions": {
+      "path": "disruptions",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082704,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "enterprise": {
+      "path": "enterprise",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082704,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "industries": {
+      "path": "industries",
+      "purpose": null,
+      "fileCount": 31,
+      "lastAccessed": 1775278082704,
+      "keyFiles": [
+        "aerospace.html",
+        "agriculture-industry.html",
+        "agriculture-processing.html",
+        "airlines.html",
+        "automotive.html"
+      ]
+    },
+    "logs": {
+      "path": "logs",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082705,
+      "keyFiles": []
+    },
+    "pricing": {
+      "path": "pricing",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082705,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "range-tracker": {
+      "path": "range-tracker",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082705,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "reports": {
+      "path": "reports",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082705,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 21,
+      "lastAccessed": 1775278082705,
+      "keyFiles": [
+        "audit-2026-03-27.js",
+        "auto_post.py",
+        "create_posts.py",
+        "diversify-types-2.js",
+        "diversify-types.js"
+      ]
+    },
+    "signals": {
+      "path": "signals",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082705,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "simulator": {
+      "path": "simulator",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082706,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "social": {
+      "path": "social",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1775278082706,
+      "keyFiles": [
+        "README.md",
+        "STRATEGY.md"
+      ]
+    },
+    "stress-test": {
+      "path": "stress-test",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1775278082706,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "tags": {
+      "path": "tags",
+      "purpose": null,
+      "fileCount": 59,
+      "lastAccessed": 1775278082706,
+      "keyFiles": [
+        "agriculture.md",
+        "airlines.md",
+        "aluminum.md",
+        "automotive.md",
+        "battery.md"
+      ]
+    },
+    "themes": {
+      "path": "themes",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1775278082706,
+      "keyFiles": [
+        "agritech.html",
+        "ai-power-demand.html",
+        "battery-metals.html",
+        "carbon-transition.html",
+        "circular-economy.html"
+      ]
+    },
+    "assets/data": {
+      "path": "assets/data",
+      "purpose": "Data files",
+      "fileCount": 3,
+      "lastAccessed": 1775278082707,
+      "keyFiles": [
+        "chart-data.json",
+        "forecast.json",
+        "prices.json"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "simulator/index.html",
+      "accessCount": 22,
+      "lastAccessed": 1775283721902,
+      "type": "file"
+    },
+    {
+      "path": "range-tracker/index.html",
+      "accessCount": 13,
+      "lastAccessed": 1775283613816,
+      "type": "file"
+    },
+    {
+      "path": "stress-test/index.html",
+      "accessCount": 13,
+      "lastAccessed": 1775283616533,
+      "type": "file"
+    },
+    {
+      "path": "correlation/index.html",
+      "accessCount": 12,
+      "lastAccessed": 1775283540258,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 2,
+      "lastAccessed": 1775283028764,
+      "type": "directory"
+    },
+    {
+      "path": "assets/js/clerk-auth.js",
+      "accessCount": 2,
+      "lastAccessed": 1775283451360,
+      "type": "file"
+    },
+    {
+      "path": "assets/css/style.css",
+      "accessCount": 1,
+      "lastAccessed": 1775278125044,
+      "type": "file"
+    },
+    {
+      "path": "_layouts/default.html",
+      "accessCount": 1,
+      "lastAccessed": 1775278128869,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
