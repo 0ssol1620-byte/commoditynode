@@ -40,7 +40,6 @@ window.COMMODITY_DATA = {
 };
 </script>
 
-{% include commodity-hub.html %}
 
 ## About Ethylene
 
