@@ -7,10 +7,10 @@ commodity_slug: "ethylene"
 symbol: "DOW"
 sector: "Chemicals/Energy"
 etfs: ["XLB", "IYM"]
-companies: ["DOW", "LYB", "WLK"]
+companies: ["DOW"]
 substitutes: ["Propylene", "Bio-based Ethylene", "Recycled Plastics"]
 industries: ["chemicals", "packaging"]
-themes: ["Petrochemical Margins"]
+themes: ["Carbon Transition"]
 tags: [ethylene, petrochemicals, polyethylene, plastics, cracker margins, natural gas, naphtha, supply chain]
 image: /assets/images/og-natural-gas.png
 ---
