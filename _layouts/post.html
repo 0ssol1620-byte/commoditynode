@@ -12,13 +12,17 @@ layout: default
   "description": "{{ page.description | default: site.description | escape }}",
   "datePublished": "{{ page.date | date_to_xmlschema }}",
   "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
-  "author": { "@type": "Organization", "name": "CommodityNode", "url": "https://commoditynode.com" },
+  "author": { "@type": "Organization", "name": "CommodityNode Research", "url": "https://commoditynode.com/about/editorial-team/" },
   "publisher": {
     "@type": "Organization", "name": "CommodityNode",
     "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/logo.svg" }
   },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },
-  "image": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}"
+  "image": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".post-content p:first-of-type", ".post-meta-bar"]
+  }
 }
 </script>
 
