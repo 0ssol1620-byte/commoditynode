@@ -8,6 +8,7 @@ description: "Gold has plunged 20% from its all-time high of $5,603. Dollar stre
 reading_time: 13
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "Gold"
 ---
 
 **Q: Gold just dropped 20% from its all-time high. Should I panic?**

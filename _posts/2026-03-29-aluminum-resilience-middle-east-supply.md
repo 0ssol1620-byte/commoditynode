@@ -8,6 +8,7 @@ description: "Aluminum is the most energy-intensive major metal to produce — 1
 reading_time: 13
 image: /assets/images/og-aluminum.png
 author: CommodityNode Research
+commodity_name: "Aluminum"
 ---
 
 There's a metal you interact with a dozen times a day without thinking about it. It's in the can you drink from, the car you drive, the building you work in, the phone in your pocket, and — if you flew recently — the aircraft that carried you at 35,000 feet. Aluminum is the world's most produced non-ferrous metal, and it's so ubiquitous that we've stopped noticing it.

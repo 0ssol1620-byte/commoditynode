@@ -69,7 +69,7 @@ layout: default
       <span class="badge" style="background:rgba(234,179,8,0.08);color:#eab308;border-color:rgba(234,179,8,0.2);" title="Proxy via ETF or equity — not a direct commodity price">Proxy: {{ page.symbol }}</span>
       {% endif %}
     </div>
-    <h1>{{ page.title }}</h1>
+    <h1>{{ page.title }}{% assign sym_strip = page.symbol | strip %}{% if sym_strip == "" or sym_strip == nil %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(100,116,139,0.15);color:#64748b;border:1px solid rgba(100,116,139,0.3);margin-left:8px;vertical-align:middle;">Analysis Only</span>{% elsif page.proxy_type == "futures" %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3);margin-left:8px;vertical-align:middle;">Direct Market Price</span>{% elsif page.proxy_type == "etf_proxy" or page.proxy_type == "equity_proxy" %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);margin-left:8px;vertical-align:middle;">Proxy Asset Benchmark</span>{% endif %}</h1>
     {% if page.description %}
     <p class="post-meta-bar">{{ page.description }}</p>
     <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data: daily auto-update · Analysis published: <time datetime="{{ site.time | date: '%Y-%m-%d' }}">{{ site.time | date: "%b %d, %Y" }}</time></p>
@@ -480,6 +480,17 @@ layout: default
 </section>
 
 <!-- Full Signal Reports Grid -->
+{% if related_posts.size == 0 %}
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div style="background:#111827;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:24px;text-align:center;margin-top:24px;">
+      <p style="color:#64748b;font-size:0.9rem;margin:0 0 8px;">Signal reports for this commodity are in development.</p>
+      <p style="color:#475569;font-size:0.82rem;margin:0;">Explore related commodities or <a href="/reports/" style="color:#22d3ee;">browse all reports →</a></p>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 {% if related_posts.size > 0 %}
 <section class="related-posts section" aria-labelledby="commodity-reports-title">
   <div class="container">

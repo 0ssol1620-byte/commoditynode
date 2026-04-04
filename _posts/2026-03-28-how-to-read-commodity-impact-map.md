@@ -8,6 +8,7 @@ description: "A step-by-step walkthrough of how to read CommodityNode's interact
 reading_time: 12
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "General"
 ---
 
 I remember the first time I stared at a commodity impact map. It looked like a constellation chart drawn by someone who'd had too much coffee — nodes everywhere, lines connecting things I didn't understand, numbers floating in space. "What am I even looking at?" I thought.

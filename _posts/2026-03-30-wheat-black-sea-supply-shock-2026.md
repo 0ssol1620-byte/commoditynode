@@ -8,6 +8,7 @@ description: "The 2026 Black Sea wheat disruption is structurally different from
 reading_time: 12
 image: /assets/images/og-wheat.png
 author: CommodityNode Research
+commodity_name: "Wheat"
 ---
 
 The Black Sea is disrupting global wheat markets again. And if you think 2026 is a replay of 2022, you're dangerously wrong.

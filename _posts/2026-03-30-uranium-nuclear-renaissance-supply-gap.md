@@ -8,6 +8,7 @@ description: "40 reactors under construction, 15 years of mine underinvestment, 
 reading_time: 14
 image: /assets/images/og-uranium.png
 author: CommodityNode Research
+commodity_name: "Uranium"
 ---
 
 Nuclear power is having its moment. After decades of post-Fukushima decline, political hostility, and investor indifference, the atom is suddenly fashionable again. Governments from Washington to Beijing are extending reactor lifetimes, approving new builds, and declaring nuclear essential to decarbonization targets. Tech giants are signing power purchase agreements with nuclear plants to feed their AI data centers. Even Germany — which shut down its last reactor in 2023 — is debating a reversal.

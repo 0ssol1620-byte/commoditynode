@@ -8,6 +8,7 @@ description: "Silver just crashed below $70 to $68.20, down 5.75% in a single we
 reading_time: 12
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "Silver"
 ---
 
 Silver is having an identity crisis. And that crisis is creating one of the most interesting setups in commodity markets right now.

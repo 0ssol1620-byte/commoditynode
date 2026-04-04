@@ -8,6 +8,7 @@ description: "Looking back at 2025, five commodity signals gave advance warning 
 reading_time: 14
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "General"
 ---
 
 Hindsight is the only perfect analyst. But some signals were flashing so clearly in 2025 that you didn't need hindsight — you just needed to know where to look.

@@ -8,6 +8,7 @@ description: "When wheat prices spike 40%, bread prices rise 8%. Where does the 
 reading_time: 15
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "General"
 ---
 
 Maria runs a small bakery in suburban Chicago. In March 2022, when Russia invaded Ukraine and wheat futures spiked 40% in two weeks, her flour supplier called with an apologetic price increase: 22%. Maria absorbed it for three weeks, then raised her bread prices by 15%. Her customers grumbled but kept coming. By the time the wheat rally faded six months later, her flour costs had normalized — but her bread prices hadn't come back down.

@@ -8,6 +8,7 @@ description: "Copper is the nervous system of the modern economy. And we're runn
 image: "/assets/images/og-copper.png"
 author: CommodityNode Research
 reading_time: 5
+commodity_name: "Copper"
 ---
 
 Copper isn't just a metal. It's the economy's nervous system.

@@ -8,6 +8,7 @@ description: "Lithium carbonate has collapsed from $80,000 to $9,200 per tonne â
 reading_time: 13
 image: /assets/images/og-lithium.png
 author: CommodityNode Research
+commodity_name: "Lithium"
 ---
 
 Lithium carbonate equivalent (LCE) is trading at $9,200 per tonne. In November 2022, it was $80,000.

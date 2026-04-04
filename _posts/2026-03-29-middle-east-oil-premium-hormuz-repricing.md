@@ -8,6 +8,7 @@ description: "Iran-US tensions have pushed Brent crude toward $95 as the Strait 
 reading_time: 12
 image: /assets/images/og-crude-oil.png
 author: CommodityNode Research
+commodity_name: "Crude Oil"
 ---
 
 The oil price in 2026 is no longer set by supply and demand alone. It's set by a narrow strip of water between Iran and Oman.

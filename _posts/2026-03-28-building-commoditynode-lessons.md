@@ -8,6 +8,7 @@ description: "The story behind CommodityNode — why I built it, what went wrong
 reading_time: 11
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "General"
 ---
 
 I didn't set out to build a commodity analysis platform. I set out to answer a single question: *"If oil goes up 10%, what happens to my portfolio?"*

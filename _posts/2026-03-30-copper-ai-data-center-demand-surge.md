@@ -8,6 +8,7 @@ description: "AI data centers are consuming copper at rates the mining industry 
 reading_time: 14
 image: /assets/images/og-copper.png
 author: CommodityNode Research
+commodity_name: "Copper"
 ---
 
 The AI revolution has a copper problem. And almost nobody in the AI space is talking about it.

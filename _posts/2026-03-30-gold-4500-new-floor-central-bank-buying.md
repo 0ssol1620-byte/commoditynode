@@ -8,6 +8,7 @@ description: "Gold's parabolic move to $4,500 is backed by record central bank b
 reading_time: 13
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "Gold"
 ---
 
 Gold just touched $4,500 per ounce. Let that sink in for a moment.

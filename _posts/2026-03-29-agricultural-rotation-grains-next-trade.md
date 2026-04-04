@@ -8,6 +8,7 @@ description: "While everyone watches oil and gold, a quieter rotation is buildin
 reading_time: 11
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "Wheat"
 ---
 
 ## The Investment Case for Agriculture Commodities in 2026

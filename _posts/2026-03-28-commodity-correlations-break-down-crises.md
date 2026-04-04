@@ -8,6 +8,7 @@ description: "Academic research and empirical data show that commodity-equity co
 reading_time: 13
 image: /assets/images/og-gold.png
 author: CommodityNode Research
+commodity_name: "General"
 ---
 
 ## Abstract

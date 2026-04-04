@@ -8,6 +8,7 @@ description: "Gold has broken through $4,000/oz and isn't looking back. Here's t
 reading_time: 10
 image: "/assets/images/og-gold.png"
 author: CommodityNode Research
+commodity_name: "Gold"
 ---
 
 ## The Number That Changed Everything
