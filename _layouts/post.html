@@ -57,15 +57,16 @@ layout: default
     <p class="post-standfirst">{{ page.description | default: site.description }}</p>
     <div class="post-meta-bar">
       <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: "%B %d, %Y" }}</time>
-      <span class="separator" aria-hidden="true"></span>
-      <span class="live-dot">Live Analysis</span>
+      {% if page.reading_time %}
+      <span class="separator" aria-hidden="true">·</span>
+      <span>{{ page.reading_time }} min read</span>
+      {% endif %}
       {% if primary_tag %}
-      <span class="separator" aria-hidden="true"></span>
+      <span class="separator" aria-hidden="true">·</span>
       <span>Primary theme: {{ primary_tag }}</span>
       {% endif %}
     </div>
     <div class="data-confidence-bar">
-      <span class="confidence-item">Data as of: <strong>{{ page.date | date: "%B %d, %Y" }}</strong></span>
       <span class="confidence-item">Sources: <strong>Yahoo Finance, SEC filings, industry reports</strong></span>
     </div>
   </div>
@@ -75,7 +76,7 @@ layout: default
   <div class="article-summary-card" data-animate>
     <div>
       <p class="summary-kicker">Signal Snapshot</p>
-      <h2>{{ page.commodity_name | default: primary_tag | default: 'Commodity' }} Exposure Summary</h2>
+      <h2>{{ page.commodity_name | default: primary_tag | default: 'Commodity' | capitalize }} Exposure Summary</h2>
       <p>{{ page.description | default: site.description }}</p>
     </div>
     <div class="summary-metrics" aria-label="Article quick stats">

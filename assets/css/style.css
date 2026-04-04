@@ -374,14 +374,11 @@ code, kbd, pre {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
   letter-spacing: -0.04em;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  line-height: 1.05;
+  font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+  line-height: 1.12;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #ffffff 20%, #e0f7ff 60%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(34,211,238,0.15));
+  color: #f0f0f5;
+  text-wrap: balance;
 }
 
 .hero h1 .highlight {
@@ -1607,7 +1604,6 @@ hr {
   color: #e4e4e7;
   pointer-events: none;
   max-width: 220px;
-  backdrop-filter: blur(8px);
   box-shadow: 0 8px 32px rgba(0,0,0,0.4);
   z-index: 100;
 }
@@ -2043,10 +2039,6 @@ a:focus-visible, button:focus-visible {
 /* ════════════════════════════════════════════════
    HERO — wider, more impactful
    ════════════════════════════════════════════════ */
-.hero h1 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-}
-
 /* ════════════════════════════════════════════════
    POST HEADER — gradient accent line
    ════════════════════════════════════════════════ */
@@ -3061,7 +3053,8 @@ a.read-more:hover { gap: 8px; color: var(--accent2); }
   outline: none;
   min-width: 200px;
 }
-.universe-search:focus { border-color: rgba(34,211,238,0.4); }
+.universe-search { transition: border-color 0.2s; }
+.universe-search:focus { border-color: rgba(34,211,238,0.4); outline: none; }
 .universe-reset-btn {
   appearance: none;
   background: rgba(10,10,26,0.8);
