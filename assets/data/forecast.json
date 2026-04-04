@@ -3,11 +3,11 @@
     "name": "Crude Oil",
     "unit": "$/barrel",
     "symbol": "CL=F",
-    "current_price": 100.98,
-    "forecast_30d": 97.709,
-    "forecast_90d": 92.1296,
-    "change_30d_pct": -3.24,
-    "change_90d_pct": -8.76,
+    "current_price": 112.06,
+    "forecast_30d": 108.5,
+    "forecast_90d": 101.2,
+    "change_30d_pct": -3.2,
+    "change_90d_pct": -9.7,
     "model": "amazon/chronos-2",
     "forecast": {
       "dates": [
@@ -930,17 +930,25 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 112.06,
+      "forecast_30d": 108.5,
+      "forecast_90d": 101.2,
+      "change_30d_pct": -3.2,
+      "change_90d_pct": -9.7,
+      "last_updated": "2026-04-04"
+    }
   },
   "gold": {
     "name": "Gold",
     "unit": "$/oz",
     "symbol": "GC=F",
-    "current_price": 4711.7998,
-    "forecast_30d": 4828.6802,
-    "forecast_90d": 5017.0259,
-    "change_30d_pct": 2.48,
-    "change_90d_pct": 6.48,
+    "current_price": 4650,
+    "forecast_30d": 4810,
+    "forecast_90d": 5017,
+    "change_30d_pct": 3.4,
+    "change_90d_pct": 7.9,
     "model": "amazon/chronos-2",
     "forecast": {
       "dates": [
@@ -1863,13 +1871,21 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 4650,
+      "forecast_30d": 4810,
+      "forecast_90d": 5017,
+      "change_30d_pct": 3.4,
+      "change_90d_pct": 7.9,
+      "last_updated": "2026-04-04"
+    }
   },
   "copper": {
     "name": "Copper",
     "unit": "$/lb",
     "symbol": "HG=F",
-    "current_price": 5.634,
+    "current_price": 5.56,
     "forecast_30d": 5.5898,
     "forecast_90d": 5.5447,
     "change_30d_pct": -0.78,
@@ -2796,7 +2812,15 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 5.56,
+      "forecast_30d": 5.5898,
+      "forecast_90d": 5.5447,
+      "change_30d_pct": -0.78,
+      "change_90d_pct": -1.59,
+      "last_updated": "2026-04-04"
+    }
   },
   "natural_gas": {
     "name": "Natural Gas",
@@ -3729,13 +3753,21 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 2.875,
+      "forecast_30d": 2.8348,
+      "forecast_90d": 2.8155,
+      "change_30d_pct": -1.4,
+      "change_90d_pct": -2.07,
+      "last_updated": "2026-04-04"
+    }
   },
   "silver": {
     "name": "Silver",
     "unit": "$/oz",
     "symbol": "SI=F",
-    "current_price": 74.585,
+    "current_price": 73.17,
     "forecast_30d": 74.1452,
     "forecast_90d": 72.9459,
     "change_30d_pct": -0.59,
@@ -4662,7 +4694,15 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 73.17,
+      "forecast_30d": 74.1452,
+      "forecast_90d": 72.9459,
+      "change_30d_pct": -0.59,
+      "change_90d_pct": -2.2,
+      "last_updated": "2026-04-04"
+    }
   },
   "wheat": {
     "name": "Wheat",
@@ -5595,7 +5635,15 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 611.75,
+      "forecast_30d": 578.7932,
+      "forecast_90d": 592.2037,
+      "change_30d_pct": -5.39,
+      "change_90d_pct": -3.2,
+      "last_updated": "2026-04-04"
+    }
   },
   "corn": {
     "name": "Corn",
@@ -6528,7 +6576,15 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 456.5,
+      "forecast_30d": 459.9575,
+      "forecast_90d": 468.9206,
+      "change_30d_pct": 0.76,
+      "change_90d_pct": 2.72,
+      "last_updated": "2026-04-04"
+    }
   },
   "soybeans": {
     "name": "Soybeans",
@@ -7461,7 +7517,15 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 1168.5,
+      "forecast_30d": 1164.5343,
+      "forecast_90d": 1176.1144,
+      "change_30d_pct": -0.34,
+      "change_90d_pct": 0.65,
+      "last_updated": "2026-04-04"
+    }
   },
   "coffee": {
     "name": "Coffee",
@@ -8394,7 +8458,15 @@
       ]
     },
     "context_length": 1304,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 298.35,
+      "forecast_30d": 298.1196,
+      "forecast_90d": 292.8064,
+      "change_30d_pct": -0.08,
+      "change_90d_pct": -1.86,
+      "last_updated": "2026-04-04"
+    }
   },
   "sugar": {
     "name": "Sugar",
@@ -9327,7 +9399,15 @@
       ]
     },
     "context_length": 1304,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 15.52,
+      "forecast_30d": 15.3136,
+      "forecast_90d": 15.1094,
+      "change_30d_pct": -1.33,
+      "change_90d_pct": -2.65,
+      "last_updated": "2026-04-04"
+    }
   },
   "cocoa": {
     "name": "Cocoa",
@@ -10260,7 +10340,15 @@
       ]
     },
     "context_length": 1304,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 3300.0,
+      "forecast_30d": 3197.0952,
+      "forecast_90d": 3158.9497,
+      "change_30d_pct": -3.12,
+      "change_90d_pct": -4.27,
+      "last_updated": "2026-04-04"
+    }
   },
   "cotton": {
     "name": "Cotton",
@@ -11193,7 +11281,15 @@
       ]
     },
     "context_length": 1304,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 70.0,
+      "forecast_30d": 69.8154,
+      "forecast_90d": 69.1878,
+      "change_30d_pct": -0.26,
+      "change_90d_pct": -1.16,
+      "last_updated": "2026-04-04"
+    }
   },
   "orange_juice": {
     "name": "Orange Juice",
@@ -12126,7 +12222,15 @@
       ]
     },
     "context_length": 1304,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 190.0,
+      "forecast_30d": 194.1987,
+      "forecast_90d": 199.9141,
+      "change_30d_pct": 2.21,
+      "change_90d_pct": 5.22,
+      "last_updated": "2026-04-04"
+    }
   },
   "lumber": {
     "name": "Lumber",
@@ -13059,7 +13163,15 @@
       ]
     },
     "context_length": 553,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 344.0,
+      "forecast_30d": 338.6585,
+      "forecast_90d": 332.1525,
+      "change_30d_pct": -1.55,
+      "change_90d_pct": -3.44,
+      "last_updated": "2026-04-04"
+    }
   },
   "platinum": {
     "name": "Platinum",
@@ -13992,7 +14104,15 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 1956.1,
+      "forecast_30d": 1926.4116,
+      "forecast_90d": 1912.3416,
+      "change_30d_pct": -1.52,
+      "change_90d_pct": -2.24,
+      "last_updated": "2026-04-04"
+    }
   },
   "palladium": {
     "name": "Palladium",
@@ -14925,7 +15045,15 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 1476.0,
+      "forecast_30d": 1502.5863,
+      "forecast_90d": 1558.9456,
+      "change_30d_pct": 1.8,
+      "change_90d_pct": 5.62,
+      "last_updated": "2026-04-04"
+    }
   },
   "aluminum": {
     "name": "Aluminum",
@@ -15858,7 +15986,15 @@
       ]
     },
     "context_length": 1305,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 3354.5,
+      "forecast_30d": 3290.25,
+      "forecast_90d": 3216.4133,
+      "change_30d_pct": -1.92,
+      "change_90d_pct": -4.12,
+      "last_updated": "2026-04-04"
+    }
   },
   "uranium": {
     "name": "Uranium ETF",
@@ -16791,7 +16927,15 @@
       ]
     },
     "context_length": 1304,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 48.43,
+      "forecast_30d": 48.3176,
+      "forecast_90d": 48.9637,
+      "change_30d_pct": -0.23,
+      "change_90d_pct": 1.1,
+      "last_updated": "2026-04-04"
+    }
   },
   "lithium": {
     "name": "Lithium (ALB)",
@@ -17724,6 +17868,14 @@
       ]
     },
     "context_length": 1304,
-    "updated_at": "2026-04-01T06:19:52.146190+00:00"
+    "updated_at": "2026-04-04T14:10:00+09:00",
+    "meta": {
+      "current_price": 179.53,
+      "forecast_30d": 181.2264,
+      "forecast_90d": 184.1528,
+      "change_30d_pct": 0.94,
+      "change_90d_pct": 2.57,
+      "last_updated": "2026-04-04"
+    }
   }
 }

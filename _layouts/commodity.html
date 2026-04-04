@@ -12,6 +12,7 @@ layout: default
   "publisher": { "@type": "Organization", "name": "CommodityNode", "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/og-default.png" } },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },
   "image": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}",
+  "datePublished": "{{ site.time | date_to_xmlschema }}",
   "dateModified": "{{ site.time | date_to_xmlschema }}"
 }
 </script>

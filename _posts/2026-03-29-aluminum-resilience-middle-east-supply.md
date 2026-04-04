@@ -6,7 +6,7 @@ categories: [Industrial Metals, Analysis]
 tags: [aluminum, middle-east, aerospace, construction, energy]
 description: "Aluminum is the most energy-intensive major metal to produce — 15,000 kWh per tonne — and the Middle East accounts for a growing share of global smelting capacity. As Hormuz tensions disrupt energy markets, aluminum's supply chain is more vulnerable than investors realize. Here's a deep dive into the metal that touches everything from aircraft to beer cans."
 reading_time: 13
-image: /assets/images/og-default.png
+image: /assets/images/og-aluminum.png
 author: CommodityNode Research
 ---
 

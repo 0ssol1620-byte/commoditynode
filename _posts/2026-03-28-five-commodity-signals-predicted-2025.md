@@ -6,7 +6,7 @@ categories: [Analysis]
 tags: [commodities, signals, macro, gold, copper, natural-gas, lithium, uranium]
 description: "Looking back at 2025, five commodity signals gave advance warning of every major market rotation. Here's what they were, why they worked, and what the same framework says about 2026."
 reading_time: 14
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 

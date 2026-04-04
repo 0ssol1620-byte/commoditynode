@@ -6,7 +6,7 @@ categories: [Deep Dive]
 tags: [wheat, corn, soybeans, food, agriculture, inflation, supply-chain]
 description: "When wheat prices spike 40%, bread prices rise 8%. Where does the other 32% go? A deep investigation into how commodity prices transmit — and don't transmit — through the food supply chain."
 reading_time: 15
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 

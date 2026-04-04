@@ -6,7 +6,7 @@ categories: [Agriculture, Analysis]
 tags: [wheat, corn, soybeans, agriculture, food-inflation, grain]
 description: "While everyone watches oil and gold, a quieter rotation is building in agriculture commodities. The UN FAO Food Price Index is climbing, soybean oil just spiked 3.3%, and climate disruptions are threatening grain yields. Here's the investment case for the agricultural commodity cycle."
 reading_time: 11
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 

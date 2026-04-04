@@ -6,7 +6,7 @@ categories: [Precious Metals, Analysis]
 tags: [gold, correction, central-bank, dollar, federal-reserve]
 description: "Gold has plunged 20% from its all-time high of $5,603. Dollar strength, Fed rate holds, and profit-taking have collided — but central bank buying hasn't stopped. We answer the question every gold investor is asking: is this the end, or the buying opportunity of the decade?"
 reading_time: 13
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 

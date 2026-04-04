@@ -6,7 +6,7 @@ categories: [Energy, Geopolitics]
 tags: [crude-oil, iran, hormuz, geopolitics, airlines, energy]
 description: "Iran-US tensions have pushed Brent crude toward $95 as the Strait of Hormuz — the chokepoint for 20% of the world's seaborne oil — becomes the most dangerous waterway on Earth. Here's how the risk premium is cascading through every sector of the global economy."
 reading_time: 12
-image: /assets/images/og-default.png
+image: /assets/images/og-crude-oil.png
 author: CommodityNode Research
 ---
 

@@ -6,7 +6,7 @@ categories: [Behind the Scenes]
 tags: [commoditynode, methodology, data, visualization, building, crude-oil, gold, copper]
 description: "The story behind CommodityNode — why I built it, what went wrong, what I learned about commodity markets by trying to map all of them, and the design decisions that shaped the site."
 reading_time: 11
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 

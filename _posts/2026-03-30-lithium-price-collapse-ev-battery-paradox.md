@@ -6,7 +6,7 @@ categories: [Energy Metals, Analysis]
 tags: [lithium, EV, batteries, China, mining, supply-glut, energy-transition]
 description: "Lithium carbonate has collapsed from $80,000 to $9,200 per tonne — a 88% crash. Chinese oversupply flooded the market while EV demand keeps growing 25% annually. The paradox: the metal most essential to the energy transition is being priced for extinction."
 reading_time: 13
-image: /assets/images/og-default.png
+image: /assets/images/og-lithium.png
 author: CommodityNode Research
 ---
 

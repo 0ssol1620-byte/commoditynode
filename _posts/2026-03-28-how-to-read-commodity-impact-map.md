@@ -6,7 +6,7 @@ categories: [Guide]
 tags: [tutorial, beginner, impact-map, methodology, crude-oil, gold]
 description: "A step-by-step walkthrough of how to read CommodityNode's interactive impact maps — what the nodes mean, how to interpret correlation scores, and how to turn the visualization into actionable insight."
 reading_time: 12
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 

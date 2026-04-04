@@ -34,8 +34,8 @@
   --glow-gold: 0 0 20px rgba(251,191,36,0.3), 0 0 60px rgba(251,191,36,0.1);
   --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
   --amber-bright: #F59E0B;
-  --font-display: 'IBM Plex Serif', Georgia, serif;
-  --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+  --font-display: 'Syne', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
@@ -45,7 +45,7 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
@@ -77,7 +77,7 @@ body > * { position: relative; z-index: 1; }
 
 /* ---------- Typography ---------- */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+  font-family: 'DM Sans', -apple-system, sans-serif;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -135,7 +135,7 @@ code, kbd, pre {
   gap: 10px;
   text-decoration: none;
   color: var(--text);
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -169,7 +169,7 @@ code, kbd, pre {
 .main-nav a {
   color: var(--text2);
   text-decoration: none;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   padding: 8px 14px;
@@ -348,7 +348,7 @@ code, kbd, pre {
   border: 1px solid rgba(34,211,238,0.25);
   border-radius: 100px;
   padding: 6px 16px;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--accent);
@@ -371,7 +371,7 @@ code, kbd, pre {
 }
 
 .hero h1 {
-  font-family: 'IBM Plex Serif', Georgia, serif;
+  font-family: 'Syne', Georgia, serif;
   font-weight: 600;
   letter-spacing: -0.02em;
   font-size: clamp(1.8rem, 4.5vw, 3.2rem);
@@ -439,7 +439,7 @@ code, kbd, pre {
   gap: 8px;
   padding: 12px 24px;
   border-radius: var(--radius-sm);
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -524,7 +524,7 @@ code, kbd, pre {
 }
 
 .section-label {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -545,7 +545,7 @@ code, kbd, pre {
 }
 
 .section-title {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   color: var(--text);
   margin-bottom: 16px;
@@ -626,7 +626,7 @@ code, kbd, pre {
 }
 
 .post-card-title {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 1.15rem;
   font-weight: 700;
   margin-bottom: 12px;
@@ -1288,7 +1288,7 @@ code, kbd, pre {
   align-items: center;
   padding: 3px 10px;
   border-radius: 100px;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.08em;

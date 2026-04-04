@@ -6,7 +6,7 @@ categories: [Precious Metals, Analysis]
 tags: [silver, solar, industrial, gold-silver-ratio, precious-metals]
 description: "Silver just crashed below $70 to $68.20, down 5.75% in a single week. But the selloff is driven by precious metal contagion from gold's correction — not by any deterioration in silver's industrial fundamentals. With 43% of demand coming from solar and electronics, the gold silver ratio at 64:1, and a structural supply deficit, silver may be the most mispriced metal on the planet."
 reading_time: 12
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 

@@ -1,6 +1,6 @@
 title: CommodityNode
 tagline: "Where Raw Materials Meet Markets"
-description: "Interactive analysis of how commodity price movements ripple through global industries, ETFs, and stocks. Real-time impact maps for crude oil, gold, copper, lithium, and more."
+description: "Track commodity price movements with AI-powered forecasts. Real-time impact analysis for gold, oil, copper, uranium and 60+ commodities — with company sensitivity scores and supply disruption alerts."
 url: "https://commoditynode.com"
 baseurl: ""
 
@@ -11,6 +11,7 @@ author:
 
 lang: en
 timezone: America/New_York
+title_separator: "|"
 logo: /assets/images/logo.svg
 
 twitter:

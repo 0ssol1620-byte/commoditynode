@@ -6,7 +6,7 @@ categories: [Energy, Analysis]
 tags: [uranium, nuclear, energy-transition, Kazatomprom, Cameco, supply-deficit, SMR]
 description: "40 reactors under construction, 15 years of mine underinvestment, and secondary supply sources drying up. Uranium's structural deficit is the most overlooked crisis in energy markets, with spot prices still 40% below the incentive price for new mines."
 reading_time: 14
-image: /assets/images/og-default.png
+image: /assets/images/og-uranium.png
 author: CommodityNode Research
 ---
 

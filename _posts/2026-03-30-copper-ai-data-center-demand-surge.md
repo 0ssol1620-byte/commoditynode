@@ -6,7 +6,7 @@ categories: [Industrial Metals, Analysis]
 tags: [copper, AI, data-centers, mining, super-cycle, infrastructure, energy-transition]
 description: "AI data centers are consuming copper at rates the mining industry never planned for. With 2.5 million tonnes of incremental demand by 2030 and no new mega-mines coming online, copper's structural deficit is becoming the bottleneck for the entire AI revolution."
 reading_time: 14
-image: /assets/images/og-default.png
+image: /assets/images/og-copper.png
 author: CommodityNode Research
 ---
 

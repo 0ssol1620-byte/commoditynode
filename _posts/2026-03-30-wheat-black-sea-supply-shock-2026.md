@@ -6,7 +6,7 @@ categories: [Agriculture, Analysis]
 tags: [wheat, black-sea, food-security, supply-shock, agriculture, grain, Russia, Ukraine]
 description: "The 2026 Black Sea wheat disruption is structurally different from 2022. Lower global inventories, Indian export restrictions, Australian drought, and fragile logistics are creating a supply shock with fewer safety valves and higher stakes for global food security."
 reading_time: 12
-image: /assets/images/og-default.png
+image: /assets/images/og-wheat.png
 author: CommodityNode Research
 ---
 

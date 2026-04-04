@@ -8,7 +8,7 @@ description: 'REMX rare earth ETF exposure to EV motors, wind turbines, and defe
 reading_time: 9
 commodity_name: 'Rare Earth'
 direction: bullish
-image: /assets/images/og-default.png
+image: /assets/images/og-lithium.png
 ---
 
 The VanEck Rare Earth/Strategic Metals ETF (REMX) occupies a unique position in the commodity investment landscape. Unlike traditional metal ETFs that track a single well-defined market, REMX provides exposure to a constellation of obscure but strategically critical elements: neodymium, praseodymium, dysprosium, terbium, and others that most investors have never heard of but that are essential to modern technology. These rare earth elements are the hidden backbone of permanent magnets used in EV motors, wind turbines, missile guidance systems, and consumer electronics.

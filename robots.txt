@@ -3,9 +3,10 @@ Allow: /
 Sitemap: https://commoditynode.com/sitemap.xml
 
 # Block low-value / non-content pages
-Disallow: /page/
 Disallow: /tags/
-Disallow: /assets/
 Disallow: /social/
 Disallow: /logs/
 Disallow: /scripts/
+
+# Allow assets (CSS, JS, images) for proper rendering
+Allow: /assets/

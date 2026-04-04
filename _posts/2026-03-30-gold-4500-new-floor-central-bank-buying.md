@@ -6,7 +6,7 @@ categories: [Precious Metals, Analysis]
 tags: [gold, central-banks, real-rates, dollar, technical-analysis, monetary-policy]
 description: "Gold's parabolic move to $4,500 is backed by record central bank buying of 1,280 tonnes in 2025, negative real rates, and accelerating de-dollarization. But blow-off tops look exactly like structural breakouts — until they don't."
 reading_time: 13
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 

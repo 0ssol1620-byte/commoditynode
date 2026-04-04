@@ -6,7 +6,7 @@ categories: [Research]
 tags: [correlations, crisis, macro, risk-management, methodology, gold, crude-oil, copper]
 description: "Academic research and empirical data show that commodity-equity correlations are unstable during market stress. Understanding when and why they break reveals more about portfolio risk than any single correlation coefficient."
 reading_time: 13
-image: /assets/images/og-default.png
+image: /assets/images/og-gold.png
 author: CommodityNode Research
 ---
 
