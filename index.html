@@ -137,7 +137,7 @@ image: "/assets/images/og-default.png"
           // Build insights section
           buildInsights(d);
           renderPreviewRanges(d);
-        }).catch(function(){var e=document.getElementById('hero-wti-change');if(e)e.textContent='+0.00%';});
+        }).catch(function(){var e=document.getElementById('hero-wti-change');if(e){e.textContent='—';e.className='value';} });
       });
       </script>
     </div>
