@@ -3255,7 +3255,7 @@ html { scroll-behavior: smooth; }
   display: flex;
   gap: 10px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin: 16px 0;
 }
