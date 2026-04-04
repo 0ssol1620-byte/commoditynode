@@ -1002,11 +1002,26 @@
 
     function setGroupOpacity(group, opacity) {
       group.traverse(function (child) {
-        if (child.material) {
-          if (child.material.opacity !== undefined) child.material.opacity = opacity;
-          child.material.transparent = true;
+        if (!child.material) return;
+        var mat = child.material;
+        /* Skip ShaderMaterial (star core) — opacity is baked into the shader */
+        if (mat.isShaderMaterial) {
+          /* Fade shader stars using toneMappingExposure is not straightforward;
+             instead we scale the group itself via userData dim flag */
+          return;
         }
+        /* For sprites/lines/phong: store base opacity first time, then scale it */
+        if (mat._baseOpacity === undefined) {
+          mat._baseOpacity = mat.opacity !== undefined ? mat.opacity : 1;
+        }
+        var targetOpacity = opacity < 1 ? mat._baseOpacity * opacity : mat._baseOpacity;
+        mat.opacity = targetOpacity;
+        mat.transparent = true;
       });
+      /* Scale down point lights too */
+      if (group.userData._pointLight) {
+        group.userData._pointLight.intensity = opacity < 1 ? 0.05 : 0.5;
+      }
     }
 
     /* ---- Resize ---- */
