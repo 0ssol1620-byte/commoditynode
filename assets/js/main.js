@@ -103,11 +103,21 @@
     );
 
     if (remainingEls.length) {
+      // Staggered reveal: siblings entering together get incremental delays
+      let lastBatchTime = 0;
+      let staggerIndex = 0;
       const observer = new IntersectionObserver((entries) => {
+        const now = performance.now();
+        // Reset stagger if this is a new batch (>200ms since last)
+        if (now - lastBatchTime > 200) staggerIndex = 0;
+        lastBatchTime = now;
         entries.forEach(entry => {
           if (entry.isIntersecting) {
+            const delay = staggerIndex * 80; // 80ms stagger between siblings
+            entry.target.style.transitionDelay = delay + 'ms';
             entry.target.classList.add('animated');
             observer.unobserve(entry.target);
+            staggerIndex++;
           }
         });
       }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
