@@ -2,5 +2,13 @@
   "buildCommand": "bundle exec jekyll build",
   "outputDirectory": "_site",
   "installCommand": "bundle install",
-  "framework": null
+  "framework": null,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ],
+  "env": {
+    "ENTERPRISE_API_KEYS": "@enterprise-api-keys",
+    "LEMON_SQUEEZY_WEBHOOK_SECRET": "@lemon-squeezy-webhook-secret",
+    "CLERK_SECRET_KEY": "@clerk-secret-key"
+  }
 }

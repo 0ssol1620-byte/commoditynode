@@ -1,0 +1,365 @@
+---
+layout: default
+title: "API Key Management"
+description: "Manage your CommodityNode Enterprise API keys. Access real-time commodity data programmatically."
+permalink: /api-keys/
+noindex: true
+---
+
+<style>
+.api-hero{padding:60px 0 40px;text-align:center}
+.api-hero h1{font-size:2.2rem;font-weight:800;color:#e2e8f0;margin-bottom:12px}
+.api-hero h1 span{color:#22d3ee}
+.api-hero p{color:#94a3b8;font-size:1rem;max-width:600px;margin:0 auto}
+.api-container{max-width:800px;margin:0 auto;padding:0 0 80px}
+.api-card{background:rgba(15,15,25,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:28px;margin-bottom:24px}
+.api-card h2{font-size:1.05rem;font-weight:700;color:#e2e8f0;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.api-card h2 .badge{font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:4px;background:rgba(34,211,238,0.12);color:#22d3ee;text-transform:uppercase;letter-spacing:0.08em}
+.key-display{display:flex;align-items:center;gap:10px;background:rgba(5,5,8,0.6);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:0.9rem;color:#e2e8f0;margin-bottom:16px;word-break:break-all}
+.key-display .key-val{flex:1;color:#22d3ee}
+.copy-btn{padding:6px 14px;border-radius:6px;border:1px solid rgba(34,211,238,0.3);background:rgba(34,211,238,0.07);color:#22d3ee;font-size:0.78rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.2s;flex-shrink:0}
+.copy-btn:hover{background:rgba(34,211,238,0.18)}
+.gen-btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:8px;border:none;background:linear-gradient(135deg,#22d3ee,#0ea5e9);color:#050508;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.2s}
+.gen-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(34,211,238,0.3)}
+.gen-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.warn-box{background:rgba(234,179,8,0.07);border:1px solid rgba(234,179,8,0.2);border-radius:8px;padding:12px 16px;color:#ca8a04;font-size:0.82rem;margin-top:12px;display:none}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px}
+.info-pill{background:rgba(5,5,8,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:16px;text-align:center}
+.info-pill .val{font-size:1.4rem;font-weight:800;font-family:'JetBrains Mono',monospace;color:#22d3ee}
+.info-pill .lbl{color:#64748b;font-size:0.78rem;margin-top:4px}
+.code-tabs{display:flex;gap:6px;margin-bottom:0;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:0}
+.code-tab{padding:8px 16px;font-size:0.8rem;font-weight:600;color:#64748b;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s}
+.code-tab.active{color:#22d3ee;border-bottom-color:#22d3ee}
+.code-block{display:none;background:rgba(5,5,8,0.7);border:1px solid rgba(255,255,255,0.06);border-radius:0 0 10px 10px;padding:20px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#a8b4c8;white-space:pre;overflow-x:auto;line-height:1.7}
+.code-block.active{display:block}
+.code-block .kw{color:#22d3ee}
+.code-block .str{color:#a3e635}
+.code-block .cm{color:#475569}
+.gate-msg{text-align:center;padding:80px 20px}
+.gate-msg h2{color:#e2e8f0;font-size:1.5rem;font-weight:800;margin-bottom:10px}
+.gate-msg p{color:#94a3b8;font-size:0.9rem;margin-bottom:24px}
+.gate-msg a{padding:12px 28px;border-radius:10px;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;font-weight:800;font-size:0.9rem;text-decoration:none;display:inline-block}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#10b981;display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.new-key-reveal{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.25);border-radius:10px;padding:16px;margin-top:14px;display:none}
+.new-key-reveal .nk-label{font-size:0.72rem;font-weight:700;color:#10b981;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+.new-key-reveal .nk-val{font-family:'JetBrains Mono',monospace;font-size:0.88rem;color:#10b981;word-break:break-all;margin-bottom:12px}
+</style>
+
+<!-- Gate: shown while loading -->
+<div id="api-loading" style="text-align:center;padding:80px 20px;color:#64748b;font-size:0.9rem">
+  Loading...
+</div>
+
+<!-- Gate: not enterprise -->
+<div id="api-gate" style="display:none">
+  <div class="gate-msg">
+    <div style="font-size:2.5rem;margin-bottom:12px">🔑</div>
+    <h2>Enterprise Feature</h2>
+    <p>API key management is available on the Enterprise plan.<br>Upgrade to access programmatic commodity data.</p>
+    <a href="/pricing/">View Enterprise Plans</a>
+  </div>
+</div>
+
+<!-- Main content: enterprise users -->
+<div id="api-content" style="display:none">
+  <section class="api-hero">
+    <div class="container">
+      <p class="section-label">Enterprise</p>
+      <h1>API <span>Key Management</span></h1>
+      <p>Access CommodityNode data programmatically. Your API key grants access to real-time prices, historical candles, and forecasts.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container api-container">
+
+      <!-- Rate Limits -->
+      <div class="api-card">
+        <h2>Rate Limits <span class="badge">Enterprise</span></h2>
+        <div class="info-grid">
+          <div class="info-pill"><div class="val">1,000</div><div class="lbl">Requests / Day</div></div>
+          <div class="info-pill"><div class="val">3,600s</div><div class="lbl">Cache TTL (/api/prices)</div></div>
+          <div class="info-pill"><div class="val">CSV + JSON</div><div class="lbl">Export Formats</div></div>
+          <div class="info-pill"><div class="val">CORS</div><div class="lbl">Cross-Origin Enabled</div></div>
+        </div>
+        <p style="color:#64748b;font-size:0.82rem;margin:0">Rate limit headers: <code style="color:#94a3b8">X-RateLimit-Limit</code>, <code style="color:#94a3b8">X-RateLimit-Remaining</code>, <code style="color:#94a3b8">X-RateLimit-Used</code> on every response.</p>
+      </div>
+
+      <!-- Current Key -->
+      <div class="api-card">
+        <h2>Your API Key <span class="badge" id="key-status-badge" style="background:rgba(100,116,139,0.15);color:#64748b">Loading</span></h2>
+        <div class="key-display" id="key-display">
+          <span class="key-val" id="key-val">Loading...</span>
+          <button class="copy-btn" id="copy-btn" onclick="copyKey()" style="display:none">Copy</button>
+        </div>
+        <button class="gen-btn" id="gen-btn" onclick="generateKey()">
+          <span id="gen-btn-text">Generate New Key</span>
+        </button>
+        <div class="warn-box" id="warn-box">
+          Generating a new key will invalidate your existing key immediately. Any integrations using the old key will stop working.
+        </div>
+        <div class="new-key-reveal" id="new-key-reveal">
+          <div class="nk-label"><span class="status-dot"></span>New Key Generated — Copy it now!</div>
+          <div class="nk-val" id="new-key-val"></div>
+          <button class="copy-btn" onclick="copyNewKey()" style="font-size:0.82rem">Copy Full Key</button>
+          <p style="color:#64748b;font-size:0.75rem;margin:10px 0 0">This key will not be shown again in full. Store it securely.</p>
+        </div>
+      </div>
+
+      <!-- Available Endpoints -->
+      <div class="api-card">
+        <h2>Available Endpoints</h2>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:rgba(5,5,8,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:14px 16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+              <span style="font-size:0.7rem;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(16,185,129,0.12);color:#10b981">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#e2e8f0">/api/data?symbol=CL=F&period=3M</code>
+            </div>
+            <div style="color:#64748b;font-size:0.8rem">Historical OHLCV candle data. Periods: 1M, 3M, 6M, 1Y</div>
+          </div>
+          <div style="background:rgba(5,5,8,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:14px 16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+              <span style="font-size:0.7rem;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(16,185,129,0.12);color:#10b981">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#e2e8f0">/api/data?type=prices</code>
+            </div>
+            <div style="color:#64748b;font-size:0.8rem">All current commodity prices</div>
+          </div>
+          <div style="background:rgba(5,5,8,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:14px 16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+              <span style="font-size:0.7rem;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(16,185,129,0.12);color:#10b981">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#e2e8f0">/api/data?type=forecast&symbol=crude_oil</code>
+            </div>
+            <div style="color:#64748b;font-size:0.8rem">Commodity forecast data</div>
+          </div>
+          <div style="background:rgba(5,5,8,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:14px 16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+              <span style="font-size:0.7rem;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(16,185,129,0.12);color:#10b981">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#e2e8f0">/api/export?symbol=CL=F&period=1Y&format=csv</code>
+            </div>
+            <div style="color:#64748b;font-size:0.8rem">Download OHLCV data as CSV or JSON file</div>
+          </div>
+          <div style="background:rgba(5,5,8,0.5);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:14px 16px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+              <span style="font-size:0.7rem;font-weight:700;padding:2px 7px;border-radius:4px;background:rgba(16,185,129,0.12);color:#10b981">GET</span>
+              <code style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:#e2e8f0">/api/prices</code>
+            </div>
+            <div style="color:#64748b;font-size:0.8rem">Public prices endpoint — no auth required, cached 1h</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Examples -->
+      <div class="api-card">
+        <h2>Code Examples</h2>
+        <div class="code-tabs">
+          <div class="code-tab active" onclick="switchTab('curl')">cURL</div>
+          <div class="code-tab" onclick="switchTab('python')">Python</div>
+          <div class="code-tab" onclick="switchTab('js')">JavaScript</div>
+        </div>
+
+        <div class="code-block active" id="tab-curl"><span class="cm"># Fetch crude oil candles (3-month period)</span>
+curl -H <span class="str">"x-api-key: YOUR_API_KEY"</span> \
+  <span class="str">"https://commoditynode.com/api/data?symbol=CL%3DF&period=3M"</span>
+
+<span class="cm"># Download as CSV</span>
+curl -H <span class="str">"x-api-key: YOUR_API_KEY"</span> \
+  <span class="str">"https://commoditynode.com/api/export?symbol=CL%3DF&period=1Y&format=csv"</span> \
+  -o crude_oil_1y.csv
+
+<span class="cm"># All current prices (no auth)</span>
+curl <span class="str">"https://commoditynode.com/api/prices"</span></div>
+
+        <div class="code-block" id="tab-python"><span class="kw">import</span> requests
+
+API_KEY = <span class="str">"YOUR_API_KEY"</span>
+BASE = <span class="str">"https://commoditynode.com"</span>
+headers = {<span class="str">"x-api-key"</span>: API_KEY}
+
+<span class="cm"># Fetch crude oil 3M candles</span>
+r = requests.get(
+    f<span class="str">"{BASE}/api/data"</span>,
+    headers=headers,
+    params={<span class="str">"symbol"</span>: <span class="str">"CL=F"</span>, <span class="str">"period"</span>: <span class="str">"3M"</span>}
+)
+data = r.json()
+<span class="kw">print</span>(f<span class="str">"Got {len(data['candles'])} candles for {data['name']}"</span>)
+
+<span class="cm"># Check rate limit remaining</span>
+<span class="kw">print</span>(r.headers.get(<span class="str">"X-RateLimit-Remaining"</span>))
+
+<span class="cm"># Download CSV</span>
+r2 = requests.get(
+    f<span class="str">"{BASE}/api/export"</span>,
+    headers=headers,
+    params={<span class="str">"symbol"</span>: <span class="str">"GC=F"</span>, <span class="str">"period"</span>: <span class="str">"1Y"</span>, <span class="str">"format"</span>: <span class="str">"csv"</span>}
+)
+<span class="kw">with open</span>(<span class="str">"gold_1y.csv"</span>, <span class="str">"wb"</span>) <span class="kw">as</span> f:
+    f.write(r2.content)</div>
+
+        <div class="code-block" id="tab-js"><span class="kw">const</span> API_KEY = <span class="str">'YOUR_API_KEY'</span>;
+<span class="kw">const</span> BASE = <span class="str">'https://commoditynode.com'</span>;
+
+<span class="cm">// Fetch crude oil candles</span>
+<span class="kw">const</span> res = <span class="kw">await</span> fetch(
+  `${BASE}/api/data?symbol=CL%3DF&period=3M`,
+  { headers: { <span class="str">'x-api-key'</span>: API_KEY } }
+);
+<span class="kw">const</span> data = <span class="kw">await</span> res.json();
+console.log(`${data.name}: ${data.candles.length} candles`);
+console.log(<span class="str">'Remaining:'</span>, res.headers.get(<span class="str">'X-RateLimit-Remaining'</span>));
+
+<span class="cm">// All prices (public, no key needed)</span>
+<span class="kw">const</span> prices = <span class="kw">await</span> fetch(`${BASE}/api/prices`)
+  .then(r => r.json());
+console.log(prices.crude_oil?.price);</div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var fullKey = null;
+  var newFullKey = null;
+
+  function showContent(isEnterprise) {
+    document.getElementById('api-loading').style.display = 'none';
+    if (!isEnterprise) {
+      document.getElementById('api-gate').style.display = '';
+    } else {
+      document.getElementById('api-content').style.display = '';
+      loadKeyInfo();
+    }
+  }
+
+  async function loadKeyInfo() {
+    var token = await getClerkToken();
+    if (!token) {
+      setKeyDisplay('(Could not authenticate)', false);
+      return;
+    }
+    try {
+      var res = await fetch('/api/keys', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      var data = await res.json();
+      if (res.ok && data.has_key) {
+        setKeyDisplay(data.key_preview, false);
+        document.getElementById('key-status-badge').textContent = 'Active';
+        document.getElementById('key-status-badge').style.background = 'rgba(16,185,129,0.12)';
+        document.getElementById('key-status-badge').style.color = '#10b981';
+      } else {
+        setKeyDisplay('No key generated yet', false);
+        document.getElementById('key-status-badge').textContent = 'None';
+      }
+    } catch(e) {
+      setKeyDisplay('Error loading key', false);
+    }
+  }
+
+  function setKeyDisplay(val, showCopy) {
+    document.getElementById('key-val').textContent = val;
+    document.getElementById('copy-btn').style.display = showCopy ? '' : 'none';
+  }
+
+  async function getClerkToken() {
+    try {
+      if (window.Clerk && window.Clerk.session) {
+        return await window.Clerk.session.getToken();
+      }
+    } catch(e) {}
+    return null;
+  }
+
+  window.generateKey = async function() {
+    var btn = document.getElementById('gen-btn');
+    var warnBox = document.getElementById('warn-box');
+
+    // First click shows warning
+    if (warnBox.style.display !== 'block' && fullKey === null) {
+      warnBox.style.display = 'block';
+      document.getElementById('gen-btn-text').textContent = 'Confirm — Generate New Key';
+      return;
+    }
+
+    btn.disabled = true;
+    document.getElementById('gen-btn-text').textContent = 'Generating...';
+    warnBox.style.display = 'none';
+
+    var token = await getClerkToken();
+    if (!token) {
+      alert('Authentication error. Please refresh and try again.');
+      btn.disabled = false;
+      document.getElementById('gen-btn-text').textContent = 'Generate New Key';
+      return;
+    }
+
+    try {
+      var res = await fetch('/api/keys', {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      var data = await res.json();
+      if (res.ok && data.key) {
+        newFullKey = data.key;
+        setKeyDisplay(data.key.slice(0, 10) + '...' + data.key.slice(-4), false);
+        document.getElementById('key-status-badge').textContent = 'Active';
+        document.getElementById('key-status-badge').style.background = 'rgba(16,185,129,0.12)';
+        document.getElementById('key-status-badge').style.color = '#10b981';
+        document.getElementById('new-key-val').textContent = data.key;
+        document.getElementById('new-key-reveal').style.display = '';
+        document.getElementById('gen-btn-text').textContent = 'Generate New Key';
+      } else {
+        alert('Error: ' + (data.message || data.error || 'Unknown error'));
+        document.getElementById('gen-btn-text').textContent = 'Generate New Key';
+      }
+    } catch(e) {
+      alert('Request failed. Please try again.');
+      document.getElementById('gen-btn-text').textContent = 'Generate New Key';
+    }
+    btn.disabled = false;
+  };
+
+  window.copyKey = function() {
+    if (!fullKey) return;
+    navigator.clipboard.writeText(fullKey).then(function() {
+      document.getElementById('copy-btn').textContent = 'Copied!';
+      setTimeout(function() { document.getElementById('copy-btn').textContent = 'Copy'; }, 2000);
+    });
+  };
+
+  window.copyNewKey = function() {
+    if (!newFullKey) return;
+    navigator.clipboard.writeText(newFullKey).then(function() {
+      var btn = document.querySelector('#new-key-reveal .copy-btn');
+      if (btn) { btn.textContent = 'Copied!'; setTimeout(function() { btn.textContent = 'Copy Full Key'; }, 2000); }
+    });
+  };
+
+  window.switchTab = function(tab) {
+    document.querySelectorAll('.code-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.code-block').forEach(function(b) { b.classList.remove('active'); });
+    var el = document.getElementById('tab-' + tab);
+    if (el) el.classList.add('active');
+    var tabs = document.querySelectorAll('.code-tab');
+    var idx = ['curl','python','js'].indexOf(tab);
+    if (tabs[idx]) tabs[idx].classList.add('active');
+  };
+
+  // Wait for Clerk auth
+  document.addEventListener('cn:authready', function() {
+    showContent(window.CNAuth && window.CNAuth.isEnterprise());
+  });
+
+  // Fallback if cn:authready already fired
+  setTimeout(function() {
+    if (document.getElementById('api-loading').style.display !== 'none') {
+      showContent(window.CNAuth && window.CNAuth.isEnterprise());
+    }
+  }, 3000);
+})();
+</script>

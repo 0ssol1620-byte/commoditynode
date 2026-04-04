@@ -26,6 +26,13 @@
     return meta.plan === 'pro' || meta.plan === 'enterprise';
   }
 
+  function isEnterprise(user) {
+    if (!user) return false;
+    if (isAdmin(user)) return true;
+    var meta = user.publicMetadata || {};
+    return meta.plan === 'enterprise';
+  }
+
   var METER_KEY = 'cn_meter';
   var PRO_LINK = '/pricing/';
 
@@ -354,6 +361,7 @@
     // Expose global API early so pages can reference it
     window.CNAuth = {
       isPro: function () { return isPro(window.Clerk && window.Clerk.user); },
+      isEnterprise: function () { return isEnterprise(window.Clerk && window.Clerk.user); },
       showProModal: showProModal
     };
 
