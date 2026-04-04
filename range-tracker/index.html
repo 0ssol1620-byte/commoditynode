@@ -52,6 +52,12 @@ noindex: false
   .range-pct{display:none}
   .range-name{font-size:0.82rem}
 }
+.range-pro-gate{position:relative;margin-top:4px}
+.range-pro-gate-rows{filter:blur(5px);pointer-events:none;user-select:none}
+.range-pro-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(5,5,8,0.3) 0%,rgba(5,5,8,0.92) 40%,rgba(5,5,8,0.98) 100%);border-radius:10px;z-index:5;padding:24px;text-align:center}
+.range-pro-overlay h4{color:#e2e8f0;font-size:1rem;font-weight:700;margin-bottom:8px}
+.range-pro-overlay p{color:#94a3b8;font-size:0.82rem;margin-bottom:16px}
+.range-pro-overlay a{padding:10px 24px;border-radius:8px;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;font-weight:800;font-size:0.88rem;text-decoration:none;display:inline-block}
 </style>
 
 <section class="range-hero">
@@ -69,9 +75,9 @@ noindex: false
 
     <div class="sort-bar" data-animate data-delay="200">
       <button class="sort-btn active" data-sort="position">By Position</button>
-      <button class="sort-btn" data-sort="name">By Name</button>
-      <button class="sort-btn" data-sort="high">Nearest High</button>
-      <button class="sort-btn" data-sort="low">Nearest Low</button>
+      <button class="sort-btn" data-sort="name">By Name <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button class="sort-btn" data-sort="high">Nearest High <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button class="sort-btn" data-sort="low">Nearest Low <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
     </div>
 
     <div class="range-list" id="range-list" data-animate data-delay="250"></div>
@@ -130,14 +136,17 @@ noindex: false
     if(sortBy==='name')     sorted.sort(function(a,b){return a.name.localeCompare(b.name);});
     else if(sortBy==='high') sorted.sort(function(a,b){return b.pct-a.pct;});
     else if(sortBy==='low')  sorted.sort(function(a,b){return a.pct-b.pct;});
-    else                     sorted.sort(function(a,b){return b.pct-a.pct;}); // position
+    else                     sorted.sort(function(a,b){return b.pct-a.pct;});
 
-    var html='';
-    sorted.forEach(function(item){
+    var isProUser = window.CNAuth && window.CNAuth.isPro();
+    var freeItems = isProUser ? sorted : sorted.slice(0, 10);
+    var lockedItems = isProUser ? [] : sorted.slice(10);
+
+    function rowHtml(item){
       var c=getColor(item.pct);
       var chSign=item.change>=0?'+':'';
       var chClass=item.change>=0?'up':'down';
-      html+='<div class="range-row">';
+      var html='<div class="range-row">';
       html+='<div class="range-name">'+item.name+'<small>'+item.symbol+'</small></div>';
       html+='<div class="range-price">'+fmtPrice(item.price)+'</div>';
       html+='<div class="range-bar-wrapper"><div style="width:100%">';
@@ -150,7 +159,23 @@ noindex: false
       html+='<div class="range-pct" style="color:'+c+'">'+item.pct.toFixed(1)+'%</div>';
       html+='<div class="range-change '+chClass+'">'+chSign+item.change.toFixed(2)+'%</div>';
       html+='</div>';
-    });
+      return html;
+    }
+
+    var html = freeItems.map(rowHtml).join('');
+
+    if(lockedItems.length > 0){
+      var lockedHtml = lockedItems.map(rowHtml).join('');
+      html += '<div class="range-pro-gate">'
+        + '<div class="range-pro-gate-rows">' + lockedHtml + '</div>'
+        + '<div class="range-pro-overlay">'
+          + '<h4>+' + lockedItems.length + ' More Commodities</h4>'
+          + '<p>Pro members track all ' + items.length + ' commodity markets with full sorting and filtering.</p>'
+          + '<a href="/pricing/">See All Markets — Start 7-Day Free Trial &rarr;</a>'
+        + '</div>'
+        + '</div>';
+    }
+
     document.getElementById('range-list').innerHTML=html||'<div style="text-align:center;padding:40px;color:#64748b">No data available</div>';
 
     var nearHigh=items.filter(function(i){return i.pct>=90;}).length;
@@ -250,9 +275,19 @@ noindex: false
 
   document.querySelectorAll('.sort-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
+      var sortKey = this.dataset.sort;
+      if(sortKey !== 'position'){
+        var isProUser = window.CNAuth && window.CNAuth.isPro();
+        if(!isProUser){
+          if(window.CNAuth && window.CNAuth.showProModal){
+            window.CNAuth.showProModal('Sort & Filter', 'Pro members can sort all 39 commodity markets by name, nearest 52-week high, or nearest 52-week low.');
+          }
+          return;
+        }
+      }
       document.querySelectorAll('.sort-btn').forEach(function(b){b.classList.remove('active');});
       this.classList.add('active');
-      render(this.dataset.sort);
+      render(sortKey);
     });
   });
 })();

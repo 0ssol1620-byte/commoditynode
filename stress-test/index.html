@@ -120,16 +120,21 @@ noindex: false
 
     <!-- Results -->
     <div class="results-section" id="results-section">
-      <div class="step-card pro-blur" id="results-card">
-        <div class="step-label"><div class="step-num" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:#10b981">✓</div><div class="step-title">Stress Test Results</div></div>
-        <div id="results-content">
-          <div class="result-summary" id="result-summary"></div>
-          <div class="stock-results" id="stock-results"></div>
-        </div>
-        <div class="blur-overlay" id="results-overlay" style="display:none">
-          <h3>Sign In to View Results</h3>
-          <p>Free accounts get full stress test access</p>
-          <button class="signin-btn" onclick="if(window.Clerk)Clerk.openSignIn()">Sign In Free</button>
+      <div class="step-card" id="results-card">
+        <div class="step-label"><div class="step-num" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:#10b981">&#10003;</div><div class="step-title">Stress Test Results</div></div>
+        <!-- Summary always visible (free teaser) -->
+        <div class="result-summary" id="result-summary"></div>
+        <!-- Per-stock breakdown: Pro-only -->
+        <div class="pro-blur" id="stock-results-gate" style="margin-top:16px">
+          <div id="results-content-inner">
+            <div style="font-size:0.8rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Per-Stock Breakdown</div>
+            <div class="stock-results" id="stock-results"></div>
+          </div>
+          <div class="blur-overlay" id="results-overlay" style="display:none">
+            <h3>Pro Feature</h3>
+            <p>See how each stock in your portfolio responds to the selected commodity shocks.</p>
+            <a href="/pricing/" class="signin-btn" style="text-decoration:none;display:inline-block;padding:10px 24px;">Start 7-Day Free Trial &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -340,28 +345,34 @@ noindex: false
   };
 
   window.checkStressAccess = function checkStressAccess() {
-    if (!window.Clerk) { setTimeout(checkStressAccess, 600); return; }
-    // Wait for Clerk to fully initialize
-    var attempts = 0;
-    var check = setInterval(function() {
-      attempts++;
-      var user = window.Clerk.user;
-      if (user !== undefined || attempts > 12) {
-        clearInterval(check);
-        var ov = document.getElementById('results-overlay');
-        var ct = document.getElementById('results-content');
-        if (user) {
-          // Any signed-in user gets access
-          if(ov) ov.style.display='none';
-          if(ct){ct.style.filter='none';ct.style.pointerEvents='auto';}
+    if (!window.CNAuth) { setTimeout(checkStressAccess, 300); return; }
+    var ov = document.getElementById('results-overlay');
+    var inner = document.getElementById('results-content-inner');
+    if (window.CNAuth.isPro()) {
+      // Pro: show full breakdown
+      if(ov) ov.style.display='none';
+      if(inner){inner.style.filter='none';inner.style.pointerEvents='auto';}
+    } else {
+      var user = window.Clerk && window.Clerk.user;
+      if(ov){
+        ov.style.display='flex';
+        // Customize overlay based on login state
+        var h3 = ov.querySelector('h3');
+        var p = ov.querySelector('p');
+        var btn = ov.querySelector('a.signin-btn, button.signin-btn');
+        if(!user) {
+          if(h3) h3.textContent = 'Sign In to See Breakdown';
+          if(p) p.textContent = 'Free accounts see the portfolio summary. Sign in to start your Pro trial.';
+          if(btn) { btn.textContent = 'Sign In Free'; btn.removeAttribute('href'); btn.onclick = function(){ if(window.Clerk) window.Clerk.openSignIn(); }; }
         } else {
-          // Show sign-in gate over blurred results
-          if(ov) ov.style.display='flex';
-          if(ct){ct.style.filter='blur(6px)';ct.style.pointerEvents='none';}
+          if(h3) h3.textContent = 'Pro Feature';
+          if(p) p.textContent = 'See exactly how each position responds to the commodity shock.';
+          if(btn) { btn.textContent = 'Start 7-Day Free Trial \u2192'; btn.setAttribute('href', '/pricing/'); }
         }
       }
-    }, 500);
-  }
+      if(inner){inner.style.filter='blur(8px)';inner.style.pointerEvents='none';}
+    }
+  };
   document.addEventListener('DOMContentLoaded', checkStressAccess);
 })();
 </script>

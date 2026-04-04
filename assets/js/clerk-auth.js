@@ -1,6 +1,6 @@
 /* ============================================================
    CommodityNode — Clerk Auth System
-   Sign in/up, Trading Note blur, Report metering
+   Sign in/up, Trading Note blur, Report metering, Pro gating
    ============================================================ */
 
 (function () {
@@ -18,6 +18,14 @@
     }
     return false;
   }
+
+  function isPro(user) {
+    if (!user) return false;
+    if (isAdmin(user)) return true;
+    var meta = user.publicMetadata || {};
+    return meta.plan === 'pro' || meta.plan === 'enterprise';
+  }
+
   var METER_KEY = 'cn_meter';
   var PRO_LINK = '/pricing/';
 
@@ -48,6 +56,44 @@
     m.count += 1;
     setMeter(m);
     return m;
+  }
+
+  /* ---------- Pro Modal ---------- */
+
+  function showProModal(featureName, description) {
+    var existing = document.getElementById('cn-pro-modal');
+    if (existing) existing.remove();
+
+    var modal = document.createElement('div');
+    modal.id = 'cn-pro-modal';
+    modal.style.cssText = 'position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(5,5,8,0.88);backdrop-filter:blur(16px);padding:20px;animation:cnFadeIn 0.2s ease;';
+
+    modal.innerHTML =
+      '<style>@keyframes cnFadeIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}</style>'
+      + '<div style="background:#0d0d14;border:1px solid rgba(34,211,238,0.2);border-radius:20px;padding:36px 32px;max-width:460px;width:100%;position:relative;box-shadow:0 32px 80px rgba(0,0,0,0.7);">'
+        + '<button id="cn-pro-modal-close" style="position:absolute;top:14px;right:16px;background:none;border:none;color:#64748b;cursor:pointer;font-size:1.4rem;line-height:1;padding:4px;">&times;</button>'
+        + '<div style="font-size:2rem;margin-bottom:10px;">🔒</div>'
+        + '<div style="font-size:0.72rem;font-weight:700;color:#22d3ee;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Pro Feature</div>'
+        + '<h3 style="color:#e2e8f0;font-size:1.25rem;font-weight:800;margin-bottom:8px;">' + (featureName || 'Upgrade to Pro') + '</h3>'
+        + (description ? '<p style="color:#94a3b8;font-size:0.88rem;margin-bottom:20px;line-height:1.65;">' + description + '</p>' : '<div style="margin-bottom:20px"></div>')
+        + '<ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:9px;">'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Unlimited Signal Reports</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> AI 90-Day Price Forecast</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Full Scenario Simulator</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Company Sensitivity Analysis</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Extended Correlation Lookback (60/90D)</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> All 39 Range Tracker Markets</li>'
+        + '</ul>'
+        + '<a href="' + PRO_LINK + '" style="display:block;text-align:center;padding:14px 20px;border-radius:10px;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;font-weight:800;font-size:0.95rem;text-decoration:none;margin-bottom:10px;transition:opacity 0.2s;" onmouseover="this.style.opacity=\'0.9\'" onmouseout="this.style.opacity=\'1\'">Unlock Pro — Start 7-Day Free Trial &rarr;</a>'
+        + '<button id="cn-pro-modal-later" style="display:block;width:100%;text-align:center;background:none;border:none;color:#64748b;font-size:0.82rem;cursor:pointer;padding:8px;">Maybe later</button>'
+      + '</div>';
+
+    document.body.appendChild(modal);
+
+    function closeModal() { modal.remove(); }
+    document.getElementById('cn-pro-modal-close').addEventListener('click', closeModal);
+    document.getElementById('cn-pro-modal-later').addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
   }
 
   /* ---------- DOM Builders ---------- */
@@ -93,11 +139,14 @@
       ? '<img class="clerk-avatar" src="' + avatar + '" alt="' + name + '" />'
       : '<div class="clerk-avatar clerk-avatar-fallback">' + initial + '</div>';
 
+    var proBadge = isPro(user) ? '<span style="font-size:0.65rem;font-weight:800;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;padding:2px 7px;border-radius:20px;margin-right:6px;vertical-align:middle;">PRO</span>' : '';
+
     // 데스크탑 헤더
     var wrap = document.getElementById('clerk-auth-area');
     if (wrap) {
       wrap.innerHTML =
         '<div class="clerk-user-menu">' +
+          proBadge +
           '<div class="clerk-meter-badge" id="clerk-meter-badge"></div>' +
           '<div class="clerk-avatar-wrap" id="clerk-avatar-wrap" title="Account settings" style="cursor:pointer;">' +
             avatarHtml +
@@ -143,21 +192,18 @@
   /* ---------- Trading Note Blur ---------- */
 
   function findTradingNoteSection() {
-    // Strategy: find an h2/h3 that contains "Trading Note" and blur everything after it
     var headings = document.querySelectorAll('.post-content h2, .post-content h3');
     for (var i = 0; i < headings.length; i++) {
       if (/trading\s*note/i.test(headings[i].textContent)) {
         return headings[i];
       }
     }
-    // Also check by ID
     return document.getElementById('trading-note');
   }
 
   function collectSectionElements(heading) {
-    // Collect heading + all siblings until next same-level heading or end
     var elements = [heading];
-    var level = heading.tagName; // H2 or H3
+    var level = heading.tagName;
     var sibling = heading.nextElementSibling;
     while (sibling) {
       if (sibling.tagName === level || (level === 'H2' && sibling.tagName === 'H2') || (level === 'H3' && sibling.tagName === 'H2')) {
@@ -203,16 +249,41 @@
             '<button class="clerk-btn clerk-btn-ghost" id="blur-signin">Already have an account? Sign In</button>' +
           '</div>' +
         '</div>';
+    } else if (reason === 'pro-teaser') {
+      // Extract first ~90 chars as teaser
+      var teaser = '';
+      for (var i = 0; i < elements.length; i++) {
+        if (elements[i] === heading) continue;
+        var txt = elements[i].textContent.trim();
+        if (txt.length > 0) {
+          teaser = txt.length > 90 ? txt.substring(0, 90) + '…' : txt;
+          break;
+        }
+      }
+      overlay.innerHTML =
+        '<div class="trading-note-overlay">' +
+          '<div class="tno-inner">' +
+            (teaser ? '<p style="color:#cbd5e1;font-size:0.88rem;margin-bottom:14px;font-style:italic;opacity:0.8;border-left:2px solid rgba(34,211,238,0.4);padding-left:12px;">&ldquo;' + teaser + '&rdquo;</p>' : '') +
+            '<div class="tno-social-proof">Pro members made <strong>3 calls this week</strong> based on this signal.</div>' +
+            '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Unlock Full Trading Note</h4>' +
+            '<p style="color:#94a3b8;font-size:0.88rem">Entry levels, position sizing, and risk management guidance — available to Pro members.</p>' +
+            '<a href="' + PRO_LINK + '" class="clerk-btn clerk-btn-primary tno-btn" style="display:inline-block;text-decoration:none;margin-top:4px;">' +
+              'Start 7-Day Free Trial &rarr;' +
+            '</a>' +
+            '<p class="tno-small">$19/mo · Cancel anytime · Most members recover cost in first week</p>' +
+          '</div>' +
+        '</div>';
     } else {
+      // 'meter' fallback (kept for safety but no longer triggered)
       overlay.innerHTML =
         '<div class="trading-note-overlay">' +
           '<div class="tno-inner">' +
             '<div class="tno-social-proof">Pro members made <strong>3 calls this week</strong> based on this signal.</div>' +
             '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Trading Note</h4>' +
             '<p style="color:#94a3b8;font-size:0.88rem">Entry levels, position sizing, and risk management guidance — available to Pro members.</p>' +
-            '<button class="clerk-btn clerk-btn-primary tno-btn" onclick="if(window.Clerk)window.Clerk.openSignUp()">' +
-              'Read Trading Note — Pro $19/mo' +
-            '</button>' +
+            '<a href="' + PRO_LINK + '" class="clerk-btn clerk-btn-primary tno-btn" style="display:inline-block;text-decoration:none;">' +
+              'Read Trading Note — Start 7-Day Free Trial' +
+            '</a>' +
             '<p class="tno-small">Cancel anytime · Most members recover cost in first week</p>' +
           '</div>' +
         '</div>';
@@ -245,12 +316,12 @@
       ? 'You\'ve used all ' + total + ' free reports this month.'
       : 'You\'ve used ' + used + ' of ' + total + ' free reports this month.';
     banner.innerHTML = '<div style="flex:1;min-width:200px">'
-      + '<div style="font-size:0.85rem;font-weight:700;color:#e2e8f0;margin-bottom:6px">' + msg + '</div>'
+      + '<div style="font-size:0.85rem;font-weight:700;color:#e2e8f0;margin-bottom:6px;">' + msg + '</div>'
       + '<div style="background:rgba(255,255,255,0.1);border-radius:4px;height:4px;width:200px">'
       + '<div style="background:' + (isLast ? '#ef4444' : '#22d3ee') + ';width:' + pct + '%;height:100%;border-radius:4px;transition:width 0.5s"></div>'
       + '</div></div>'
       + '<div style="font-size:0.78rem;color:#94a3b8">Most Pro members recover $19 in a single informed trade.</div>'
-      + '<button onclick="if(window.Clerk)window.Clerk.openSignUp()" style="padding:10px 20px;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;border-radius:8px;color:#050508;font-weight:800;font-size:0.88rem;cursor:pointer;white-space:nowrap;flex-shrink:0">Unlock Pro — $19/mo</button>'
+      + '<a href="' + PRO_LINK + '" style="padding:10px 20px;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;border-radius:8px;color:#050508;font-weight:800;font-size:0.88rem;cursor:pointer;white-space:nowrap;flex-shrink:0;text-decoration:none;display:inline-block;">Start 7-Day Free Trial</a>'
       + '<button onclick="document.getElementById(\'meter-upgrade-banner\').remove()" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1.2rem;padding:4px">\u00d7</button>';
     document.body.appendChild(banner);
   }
@@ -274,15 +345,19 @@
   }
 
   function init() {
-    // Wait for Clerk to be available
     if (!window.Clerk) {
-      // Clerk script failed to load — graceful fallback, show content as-is
       var authArea = document.getElementById('clerk-auth-area');
       if (authArea) authArea.style.display = 'none';
       return;
     }
 
-    // 로고 클릭시 모달 유지 — 페이지 이동 막고 홈으로 navigate
+    // Expose global API early so pages can reference it
+    window.CNAuth = {
+      isPro: function () { return isPro(window.Clerk && window.Clerk.user); },
+      showProModal: showProModal
+    };
+
+    // 로고 클릭시 모달 유지
     var logo = document.querySelector('a.logo');
     if (logo) {
       logo.addEventListener('click', function (e) {
@@ -323,22 +398,22 @@
         var user = window.Clerk.user;
         if (user) {
           buildUserMenu(user);
-          var meter = getMeter();
           if (isPostPage()) {
-            var isNewView = !sessionStorage.getItem('cn_viewed_' + location.pathname);
-            if (isNewView) {
-              meter = incrementMeter();
-              sessionStorage.setItem('cn_viewed_' + location.pathname, '1');
+            if (!isPro(user) && !isAdmin(user)) {
+              // Track meter for free users
+              var meter = getMeter();
+              var isNewView = !sessionStorage.getItem('cn_viewed_' + location.pathname);
+              if (isNewView) {
+                meter = incrementMeter();
+                sessionStorage.setItem('cn_viewed_' + location.pathname, '1');
+              }
+              // Blur trading note with Pro teaser
+              blurTradingNote('pro-teaser');
+              // Show meter badge + banner for free users
+              updateMeterBadge(meter);
+              showMeterBanner(meter.count, FREE_REPORTS_PER_MONTH);
             }
-            if (meter.count > FREE_REPORTS_PER_MONTH && !isAdmin(user)) {
-              blurTradingNote('meter');
-            }
-          }
-          // 모든 페이지에서 뱃지 표시
-          updateMeterBadge(meter);
-          // 미터 배너 (2개 이상 사용 시)
-          if (!isAdmin(user)) {
-            showMeterBanner(meter.count, FREE_REPORTS_PER_MONTH);
+            // Pro/admin: full access, no blur, no meter
           }
         } else {
           buildAuthButtons();
@@ -348,11 +423,12 @@
         }
       }
 
-      // 초기 렌더
+      // Fire auth-ready event so page scripts can react
+      document.dispatchEvent(new CustomEvent('cn:authready'));
+
       renderAuth();
 
-      // 세션 변경 이벤트 감지 (로그인/로그아웃 즉시 반영)
-      window.Clerk.addListener(function (resources) {
+      window.Clerk.addListener(function () {
         renderAuth();
       });
 
@@ -363,11 +439,10 @@
     });
   }
 
-  // Wait for DOM + Clerk script load
   function waitForClerk(cb, tries) {
     tries = tries || 0;
     if (window.Clerk && window.Clerk.load) { cb(); return; }
-    if (tries > 40) { cb(); return; } // 4초 타임아웃
+    if (tries > 40) { cb(); return; }
     setTimeout(function () { waitForClerk(cb, tries + 1); }, 100);
   }
 

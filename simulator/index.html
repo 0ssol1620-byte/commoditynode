@@ -414,10 +414,18 @@ permalink: /simulator/
       <div class="sim-stat-value" id="stat-30d">—</div>
       <div class="sim-stat-change" id="stat-30d-change">—</div>
     </div>
-    <div class="sim-stat-card">
-      <div class="sim-stat-label">90-Day Forecast</div>
-      <div class="sim-stat-value" id="stat-90d">—</div>
-      <div class="sim-stat-change" id="stat-90d-change">—</div>
+    <div class="sim-stat-card sim-pro-blur" id="stat-90d-gate" style="padding:0;overflow:hidden;min-height:80px">
+      <div style="padding:14px 16px;filter:blur(4px);pointer-events:none;user-select:none" id="stat-90d-content">
+        <div class="sim-stat-label">90-Day Forecast</div>
+        <div class="sim-stat-value" id="stat-90d">—</div>
+        <div class="sim-stat-change" id="stat-90d-change">—</div>
+      </div>
+      <div class="sim-pro-overlay" id="stat-90d-overlay" style="border-radius:10px">
+        <div style="text-align:center;padding:8px 12px">
+          <div style="font-size:0.65rem;font-weight:800;color:#22d3ee;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Pro</div>
+          <a href="/pricing/" style="font-size:0.78rem;color:#e2e8f0;text-decoration:none;font-weight:600;white-space:nowrap">Unlock 90-Day &rarr;</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -443,22 +451,18 @@ permalink: /simulator/
       <div class="sim-impact-section" style="margin-top:16px;">
         <div class="sim-impact-title">Company Sensitivity</div>
         <div id="sim-company-impact-wrapper">
-          {% if user_signed_in %}
-          <div class="sim-impact-grid" id="sim-company-impact"></div>
-          {% else %}
           <div class="sim-pro-blur" id="sim-company-blur-wrapper">
-            <div class="sim-blur-content">
+            <div class="sim-blur-content" id="sim-company-blur-content" style="filter:blur(6px);pointer-events:none;user-select:none">
               <div class="sim-impact-grid" id="sim-company-impact"></div>
             </div>
             <div class="sim-pro-overlay" id="sim-company-overlay">
               <div class="sim-pro-cta">
-                <h3>Pro Feature</h3>
-                <p>Free accounts unlock: company sensitivity,<br>export, and scenario save.</p>
-                <button class="clerk-btn clerk-btn-primary" onclick="if(window.Clerk)window.Clerk.openSignUp()">Sign Up Free to Unlock →</button>
+                <h3>Company Sensitivity</h3>
+                <p>See how 15+ individual stocks respond to this commodity shock — beta coefficients from historical regression.</p>
+                <a href="/pricing/" class="clerk-btn clerk-btn-primary" style="text-decoration:none;display:inline-block;">Start 7-Day Free Trial &rarr;</a>
               </div>
             </div>
           </div>
-          {% endif %}
         </div>
       </div>
     </div>
@@ -1339,38 +1343,62 @@ function renderImpact(){
   }
 }
 
-// ── Admin check ──────────────────────────────────────────────────────────
-var ADMIN_EMAILS = ['0ssol1620@gmail.com'];
-function checkAdminAccess() {
-  if (!window.Clerk || !window.Clerk.user) return;
-  var user = window.Clerk.user;
-  var emails = user.emailAddresses || [];
-  var isAdmin = emails.some(function(e) {
-    return ADMIN_EMAILS.indexOf(e.emailAddress) >= 0;
-  });
-  if (isAdmin) {
-    // Pro overlay 제거
-    var overlay = document.getElementById('sim-company-overlay');
-    var content = document.querySelector('#sim-company-blur-wrapper .sim-blur-content');
-    if (overlay) overlay.style.display = 'none';
-    if (content) { content.style.filter = 'none'; content.style.pointerEvents = 'auto'; }
-    // company impact grid 렌더링
-    renderImpact();
+// ── Pro access check ──────────────────────────────────────────────────────
+function checkProAccess() {
+  var isProUser = window.CNAuth && window.CNAuth.isPro();
+
+  // Company sensitivity gate
+  var companyOverlay = document.getElementById('sim-company-overlay');
+  var companyContent = document.getElementById('sim-company-blur-content');
+  if (companyOverlay && companyContent) {
+    if (isProUser) {
+      companyContent.style.filter = 'none';
+      companyContent.style.pointerEvents = 'auto';
+      companyContent.style.userSelect = 'auto';
+      companyOverlay.style.display = 'none';
+    } else {
+      companyContent.style.filter = 'blur(6px)';
+      companyContent.style.pointerEvents = 'none';
+      companyOverlay.style.display = 'flex';
+    }
+  }
+
+  // 90-day stat card gate
+  var stat90Overlay = document.getElementById('stat-90d-overlay');
+  var stat90Content = document.getElementById('stat-90d-content');
+  if (stat90Overlay && stat90Content) {
+    if (isProUser) {
+      stat90Content.style.filter = 'none';
+      stat90Content.style.pointerEvents = 'auto';
+      stat90Overlay.style.display = 'none';
+    } else {
+      stat90Content.style.filter = 'blur(4px)';
+      stat90Content.style.pointerEvents = 'none';
+      stat90Overlay.style.display = 'flex';
+    }
   }
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
 loadForecast();
-// Admin 체크는 Clerk 로드 후
-document.addEventListener('DOMContentLoaded', function() {
-  var checkTimer = setInterval(function() {
-    if (window.Clerk && window.Clerk.user) {
-      checkAdminAccess();
-      clearInterval(checkTimer);
-    }
-  }, 500);
-  setTimeout(function() { clearInterval(checkTimer); }, 5000);
+// Pro check: listen for clerk-auth ready event, with polling fallback
+document.addEventListener('cn:authready', function() {
+  checkProAccess();
+  if (window.Clerk) {
+    window.Clerk.addListener(function() { checkProAccess(); });
+  }
 });
+// Fallback poll in case event fired before this script ran
+(function() {
+  var attempts = 0;
+  var t = setInterval(function() {
+    attempts++;
+    if (window.CNAuth || attempts > 30) {
+      clearInterval(t);
+      checkProAccess();
+    }
+  }, 200);
+})();
 
 // Mobile grid adjustment
 if(window.innerWidth < 640){
