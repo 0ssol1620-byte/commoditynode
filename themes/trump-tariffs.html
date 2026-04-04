@@ -132,7 +132,7 @@ permalink: /themes/trump-tariffs/
     </aside>
   </div>
 
-  {% assign tariff_posts = site.posts | where_exp: "post", "post.tags contains 'tariffs' or post.tags contains 'trade-war' or post.tags contains 'steel'" %}
+  {% assign tariff_posts = site.posts | where_exp: "post", "post.tags contains 'tariffs'" %}
   {% if tariff_posts.size > 0 %}
   <section class="section" style="margin-top:48px;">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
