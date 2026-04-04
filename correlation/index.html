@@ -75,7 +75,7 @@ noindex: false
   <div class="container">
     <p class="section-label" data-animate>Advanced Analytics</p>
     <h1 data-animate>Commodity <span>Correlation Matrix</span></h1>
-    <p data-animate data-delay="100">30-day rolling Pearson correlation between 15 major commodities</p>
+    <p data-animate data-delay="100">Rolling Pearson correlation between 20 major commodities — calculated from live candle data</p>
     <div class="period-toggle" data-animate data-delay="200">
       <button class="period-btn active" data-period="30">30D</button>
       <button class="period-btn" data-period="60">60D</button>
@@ -143,46 +143,62 @@ noindex: false
 (function(){
   'use strict';
 
+  // 20 commodities sourced from chart-data.json 1Y candles
   var COMMODITIES = [
-    {key:'crude_oil',name:'Crude Oil',short:'Oil'},
-    {key:'gold',name:'Gold',short:'Gold'},
-    {key:'copper',name:'Copper',short:'Cu'},
-    {key:'silver',name:'Silver',short:'Ag'},
-    {key:'natural_gas',name:'Nat Gas',short:'Gas'},
-    {key:'wheat',name:'Wheat',short:'Wht'},
-    {key:'corn',name:'Corn',short:'Corn'},
-    {key:'soybeans',name:'Soybeans',short:'Soy'},
-    {key:'coffee',name:'Coffee',short:'Cof'},
-    {key:'sugar',name:'Sugar',short:'Sug'},
-    {key:'platinum',name:'Platinum',short:'Pt'},
-    {key:'uranium',name:'Uranium',short:'U'},
-    {key:'lithium',name:'Lithium',short:'Li'},
-    {key:'aluminum',name:'Aluminum',short:'Al'},
-    {key:'palladium',name:'Palladium',short:'Pd'}
+    {key:'CL=F', name:'Crude Oil',   short:'Oil'},
+    {key:'GC=F', name:'Gold',        short:'Gold'},
+    {key:'HG=F', name:'Copper',      short:'Cu'},
+    {key:'SI=F', name:'Silver',      short:'Ag'},
+    {key:'NG=F', name:'Nat Gas',     short:'Gas'},
+    {key:'ZW=F', name:'Wheat',       short:'Wht'},
+    {key:'ZC=F', name:'Corn',        short:'Corn'},
+    {key:'ZS=F', name:'Soybeans',    short:'Soy'},
+    {key:'KC=F', name:'Coffee',      short:'Cof'},
+    {key:'SB=F', name:'Sugar',       short:'Sug'},
+    {key:'PL=F', name:'Platinum',    short:'Pt'},
+    {key:'URA',  name:'Uranium',     short:'U'},
+    {key:'ALB',  name:'Lithium',     short:'Li'},
+    {key:'ALI=F',name:'Aluminum',    short:'Al'},
+    {key:'PA=F', name:'Palladium',   short:'Pd'},
+    {key:'CT=F', name:'Cotton',      short:'Ctn'},
+    {key:'CC=F', name:'Cocoa',       short:'Cco'},
+    {key:'HO=F', name:'Heating Oil', short:'HO'},
+    {key:'BTU',  name:'Coal',        short:'Coal'},
+    {key:'NTR',  name:'Potash',      short:'Pot'}
   ];
 
-  var historyData = {};
-  var currentPeriod = 30;
+  var logReturnData = {}; // key → array of log returns from 1Y candle closes
+  var currentPeriod = 30; // number of candles to use
 
-  function pearson(x, y, n) {
-    var len = Math.min(x.length, y.length, n);
-    var xs = x.slice(-len), ys = y.slice(-len);
-    var mx = 0, my = 0;
-    for(var i=0;i<len;i++){mx+=xs[i];my+=ys[i];}
-    mx/=len; my/=len;
-    var num=0, dx=0, dy=0;
-    for(var i=0;i<len;i++){
-      var a=xs[i]-mx, b=ys[i]-my;
-      num+=a*b; dx+=a*a; dy+=b*b;
+  function computeLogReturns(closes){
+    var lr=[];
+    for(var i=1;i<closes.length;i++){
+      var p=closes[i-1], c=closes[i];
+      lr.push((p>0&&c>0)?Math.log(c/p):0);
     }
-    var den=Math.sqrt(dx*dy);
-    return den===0?0:num/den;
+    return lr;
+  }
+
+  function pearson(a, b, n){
+    var len=Math.min(a.length,b.length,n);
+    if(len<4) return 0;
+    var xa=a.slice(-len), xb=b.slice(-len);
+    var ma=0, mb=0;
+    for(var i=0;i<len;i++){ma+=xa[i];mb+=xb[i];}
+    ma/=len; mb/=len;
+    var num=0, da=0, db=0;
+    for(var i=0;i<len;i++){
+      var ea=xa[i]-ma, eb=xb[i]-mb;
+      num+=ea*eb; da+=ea*ea; db+=eb*eb;
+    }
+    var den=Math.sqrt(da*db);
+    return den<1e-12?0:Math.max(-1,Math.min(1,num/den));
   }
 
   function getCellColor(v){
     if(v>=0.999) return {bg:'#22d3ee',text:'#050508'};
-    if(v>=0.7) return {bg:'rgba(16,185,129,'+(.5+.5*(v-.7)/.3)+')',text:'#fff'};
-    if(v>=0.3) return {bg:'rgba(16,185,129,'+(.15+.35*(v-.3)/.4)+')',text:'#e2e8f0'};
+    if(v>=0.7)  return {bg:'rgba(16,185,129,'+(.5+.5*(v-.7)/.3)+')',text:'#fff'};
+    if(v>=0.3)  return {bg:'rgba(16,185,129,'+(.15+.35*(v-.3)/.4)+')',text:'#e2e8f0'};
     if(v>=-0.3) return {bg:'#1e1e2e',text:'#64748b'};
     if(v>=-0.7) return {bg:'rgba(244,63,94,'+(.15+.35*(-.3-v)/.4)+')',text:'#e2e8f0'};
     return {bg:'rgba(244,63,94,'+(.5+.5*(-.7-v)/.3)+')',text:'#fff'};
@@ -195,31 +211,41 @@ noindex: false
     return 'Weak / Neutral';
   }
 
+  function activeCommodities(){
+    return COMMODITIES.filter(function(c){
+      return logReturnData[c.key]&&logReturnData[c.key].length>=4;
+    });
+  }
+
   function buildMatrix(){
-    var n = COMMODITIES.length;
-    var matrix = [];
-    var pairs = [];
+    var comms=activeCommodities();
+    var n=comms.length;
+    if(n===0){
+      document.getElementById('corr-loading').textContent='No data available.';
+      return;
+    }
+
+    var matrix=[], pairs=[];
     for(var i=0;i<n;i++){
       matrix[i]=[];
       for(var j=0;j<n;j++){
         if(i===j){matrix[i][j]=1;continue;}
-        var a=historyData[COMMODITIES[i].key], b=historyData[COMMODITIES[j].key];
-        if(!a||!b){matrix[i][j]=0;continue;}
-        matrix[i][j]=pearson(a,b,currentPeriod);
+        var a=logReturnData[comms[i].key], b=logReturnData[comms[j].key];
+        matrix[i][j]=(!a||!b)?0:pearson(a,b,currentPeriod);
         if(j>i) pairs.push({i:i,j:j,v:matrix[i][j]});
       }
     }
 
     var table=document.getElementById('corr-matrix');
     var html='<thead><tr><th></th>';
-    for(var i=0;i<n;i++) html+='<th>'+COMMODITIES[i].short+'</th>';
+    comms.forEach(function(c){html+='<th>'+c.short+'</th>';});
     html+='</tr></thead><tbody>';
     for(var i=0;i<n;i++){
-      html+='<tr><th class="row-header">'+COMMODITIES[i].short+'</th>';
+      html+='<tr><th class="row-header">'+comms[i].short+'</th>';
       for(var j=0;j<n;j++){
         var v=matrix[i][j];
-        var c=getCellColor(v);
-        html+='<td class="heatmap-cell" data-i="'+i+'" data-j="'+j+'" data-v="'+v.toFixed(4)+'" style="background:'+c.bg+';color:'+c.text+'">'+v.toFixed(2)+'</td>';
+        var col=getCellColor(v);
+        html+='<td class="heatmap-cell" data-i="'+i+'" data-j="'+j+'" data-v="'+v.toFixed(4)+'" style="background:'+col.bg+';color:'+col.text+'">'+v.toFixed(2)+'</td>';
       }
       html+='</tr>';
     }
@@ -228,9 +254,11 @@ noindex: false
 
     var tooltip=document.getElementById('corr-tooltip');
     table.querySelectorAll('.heatmap-cell').forEach(function(cell){
-      cell.addEventListener('mouseenter',function(e){
+      cell.addEventListener('mouseenter',function(){
         var ci=+this.dataset.i, cj=+this.dataset.j, cv=+this.dataset.v;
-        tooltip.innerHTML='<div class="pair">'+COMMODITIES[ci].name+' / '+COMMODITIES[cj].name+'</div><div style="font-size:1.1rem;font-weight:800;color:'+(cv>=0?'#10b981':'#f43f5e')+'">'+cv.toFixed(4)+'</div><div class="strength">'+strengthLabel(cv)+'</div>';
+        tooltip.innerHTML='<div class="pair">'+comms[ci].name+' / '+comms[cj].name+'</div>'+
+          '<div style="font-size:1.1rem;font-weight:800;color:'+(cv>=0?'#10b981':'#f43f5e')+'">'+cv.toFixed(4)+'</div>'+
+          '<div class="strength">'+strengthLabel(cv)+'</div>';
         tooltip.style.display='block';
       });
       cell.addEventListener('mousemove',function(e){
@@ -242,39 +270,57 @@ noindex: false
 
     pairs.sort(function(a,b){return b.v-a.v;});
     var topPos=pairs.slice(0,3);
-    var topNeg=pairs.slice(-3).reverse();
+    var topNeg=pairs.filter(function(p){return p.v<0;}).sort(function(a,b){return a.v-b.v;}).slice(0,3);
 
     var insightHtml='<div class="insight-card"><h3>Strongest Positive Correlations</h3>';
     topPos.forEach(function(p){
-      insightHtml+='<div class="insight-item"><span class="insight-pair">'+COMMODITIES[p.i].name+' / '+COMMODITIES[p.j].name+'</span><span class="insight-val positive">'+p.v.toFixed(3)+'</span></div>';
+      insightHtml+='<div class="insight-item"><span class="insight-pair">'+comms[p.i].name+' / '+comms[p.j].name+'</span><span class="insight-val positive">'+p.v.toFixed(3)+'</span></div>';
     });
-    insightHtml+='</div>';
-
-    insightHtml+='<div class="insight-card"><h3>Strongest Negative Correlations</h3>';
+    insightHtml+='</div><div class="insight-card"><h3>Strongest Negative Correlations</h3>';
     topNeg.forEach(function(p){
-      insightHtml+='<div class="insight-item"><span class="insight-pair">'+COMMODITIES[p.i].name+' / '+COMMODITIES[p.j].name+'</span><span class="insight-val negative">'+p.v.toFixed(3)+'</span></div>';
+      insightHtml+='<div class="insight-item"><span class="insight-pair">'+comms[p.i].name+' / '+comms[p.j].name+'</span><span class="insight-val negative">'+p.v.toFixed(3)+'</span></div>';
     });
     insightHtml+='</div>';
     document.getElementById('insight-grid').innerHTML=insightHtml;
 
-    var text='Over the past '+currentPeriod+' trading days, ';
-    if(topPos.length) text+=COMMODITIES[topPos[0].i].name+' and '+COMMODITIES[topPos[0].j].name+' show the strongest positive correlation ('+topPos[0].v.toFixed(2)+'), meaning they tend to move together — a long position in both offers limited diversification. ';
-    if(topNeg.length&&topNeg[0].v<-0.3) text+='Meanwhile, '+COMMODITIES[topNeg[0].i].name+' and '+COMMODITIES[topNeg[0].j].name+' are inversely correlated ('+topNeg[0].v.toFixed(2)+'), making them natural hedging pairs. ';
-    text+='Consider using negatively correlated pairs to reduce portfolio volatility, and watch for correlation regime shifts that may signal macro trend changes.';
+    // Approximate calendar days: weekly candles × 7
+    var approxDays=Math.min(currentPeriod,comms.reduce(function(mn,c){
+      return Math.min(mn,(logReturnData[c.key]||[]).length);
+    },999))*7;
+    var text='Over the past ~'+approxDays+' days ('+currentPeriod+' weekly candles), ';
+    if(topPos.length) text+=comms[topPos[0].i].name+' and '+comms[topPos[0].j].name+
+      ' show the strongest positive correlation ('+topPos[0].v.toFixed(2)+'), meaning they tend to move together — a long position in both offers limited diversification. ';
+    if(topNeg.length&&topNeg[0].v<-0.2) text+='Meanwhile, '+comms[topNeg[0].i].name+' and '+comms[topNeg[0].j].name+
+      ' are inversely correlated ('+topNeg[0].v.toFixed(2)+'), making them potential hedging pairs. ';
+    text+='Log-return Pearson calculated from 1-year weekly OHLCV candle data.';
     document.getElementById('trader-text').textContent=text;
 
-    document.getElementById('corr-loading').style.display = 'none';
-    document.getElementById('corr-matrix').style.display = '';
+    document.getElementById('corr-loading').style.display='none';
+    document.getElementById('corr-matrix').style.display='';
   }
 
-  fetch('/assets/data/forecast.json').then(function(r){return r.json()}).then(function(data){
-    COMMODITIES.forEach(function(c){
-      if(data[c.key]&&data[c.key].history&&data[c.key].history.prices){
-        historyData[c.key]=data[c.key].history.prices;
-      }
+  document.getElementById('corr-loading').textContent='Loading correlation data from candle history...';
+
+  fetch('/assets/data/chart-data.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      COMMODITIES.forEach(function(c){
+        var d=data[c.key];
+        if(!d||!d['1Y']||!d['1Y'].candles) return;
+        var candles=d['1Y'].candles;
+        if(candles.length<5) return;
+        // Skip flat/stale data
+        var totalVol=candles.reduce(function(s,c){return s+c.v;},0);
+        if(totalVol===0) return;
+        var closes=candles.map(function(c){return c.c;});
+        logReturnData[c.key]=computeLogReturns(closes);
+      });
+      buildMatrix();
+    })
+    .catch(function(e){
+      document.getElementById('corr-loading').textContent='Failed to load data. Please refresh.';
+      console.error(e);
     });
-    buildMatrix();
-  }).catch(function(e){console.error('Failed to load forecast data',e);});
 
   document.querySelectorAll('.period-btn').forEach(function(btn){
     btn.addEventListener('click',function(){

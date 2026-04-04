@@ -140,21 +140,91 @@ noindex: false
 (function(){
   'use strict';
 
+  // Commodity-equity beta coefficients (realistic empirical estimates).
+  // Formula: stockImpact% = beta * commodityShock%
+  // e.g. XOM beta 0.75 crude_oil → oil +30% → XOM +22.5%
   var SENSITIVITIES = {
-    XOM:{crude_oil:1.8,natural_gas:0.9},CVX:{crude_oil:1.6,natural_gas:0.8},
-    COP:{crude_oil:1.5,natural_gas:0.7},OXY:{crude_oil:1.9,natural_gas:0.5},
-    FCX:{copper:2.2,gold:0.3},NEM:{gold:2.1,silver:0.4},GOLD:{gold:1.9,silver:0.3},
-    TSLA:{lithium:-0.8,copper:-1.1,aluminum:-0.5},
-    ADM:{wheat:0.9,corn:0.8,soybeans:0.7},DE:{wheat:0.6,corn:0.5},
-    MOS:{natural_gas:-1.8,wheat:0.6},DAL:{crude_oil:-1.3},UAL:{crude_oil:-1.2},
-    UPS:{crude_oil:-0.9},FDX:{crude_oil:-0.8},
-    SBUX:{coffee:-0.8},HSY:{cocoa:-1.2,sugar:-0.4},
-    VALE:{copper:1.4,nickel:1.1},BHP:{copper:1.5,iron_ore:1.4},
-    RIO:{copper:1.4,aluminum:0.8},AA:{aluminum:2.0,natural_gas:-0.9},
-    CCJ:{uranium:2.3},NXE:{uranium:1.8},
-    WEAT:{wheat:1.0},CORN:{corn:1.0},GLD:{gold:1.0},SLV:{silver:1.0},
-    USO:{crude_oil:1.0},UNG:{natural_gas:1.0}
+    // Energy producers (positive crude oil beta)
+    XOM: {crude_oil:0.75,natural_gas:0.30},
+    CVX: {crude_oil:0.70,natural_gas:0.28},
+    COP: {crude_oil:0.72,natural_gas:0.25},
+    OXY: {crude_oil:0.85,natural_gas:0.20},
+    XLE: {crude_oil:0.65,natural_gas:0.22},
+    BP:  {crude_oil:0.62,natural_gas:0.28},
+    SLB: {crude_oil:0.78,natural_gas:0.18},
+    HAL: {crude_oil:0.80,natural_gas:0.15},
+    DVN: {crude_oil:0.82,natural_gas:0.35},
+    EOG: {crude_oil:0.78,natural_gas:0.30},
+    // Gold & precious metals miners
+    NEM:  {gold:1.10,silver:0.20},
+    GOLD: {gold:1.05,silver:0.18},
+    GDX:  {gold:1.20,silver:0.25},
+    GDXJ: {gold:1.45,silver:0.35},
+    AEM:  {gold:1.15,silver:0.22},
+    KGC:  {gold:1.25,silver:0.20},
+    WPM:  {gold:0.90,silver:0.45},
+    // Copper & base metals miners
+    FCX:  {copper:0.95,gold:0.12},
+    SCCO: {copper:0.90,silver:0.10},
+    VALE: {copper:0.55,natural_gas:0.10},
+    BHP:  {copper:0.58,natural_gas:0.12},
+    RIO:  {copper:0.55,aluminum:0.30},
+    GLNCY:{copper:0.60,natural_gas:0.15},
+    // Airlines (negative crude oil beta — higher oil = higher costs)
+    DAL: {crude_oil:-0.52},
+    UAL: {crude_oil:-0.55},
+    AAL: {crude_oil:-0.58},
+    LUV: {crude_oil:-0.45},
+    // Logistics (moderate negative crude oil)
+    UPS: {crude_oil:-0.30},
+    FDX: {crude_oil:-0.28},
+    // Automakers (negative to input-cost commodities)
+    TSLA: {lithium:-0.40,copper:-0.30,aluminum:-0.18},
+    F:    {lithium:-0.35,copper:-0.25,aluminum:-0.15},
+    GM:   {lithium:-0.32,copper:-0.22,aluminum:-0.14},
+    // Agriculture
+    ADM: {wheat:0.45,corn:0.40,soybeans:0.35},
+    BG:  {wheat:0.50,corn:0.35,soybeans:0.40},
+    DE:  {wheat:0.28,corn:0.24},
+    MOS: {natural_gas:-0.65,wheat:0.28},
+    NTR: {natural_gas:-0.55,wheat:0.25},
+    // Consumer staples (negative grain betas — higher food costs hurt margins)
+    MCD: {wheat:-0.12,corn:-0.08},
+    PG:  {wheat:-0.15,corn:-0.10},
+    KR:  {wheat:-0.18,corn:-0.12},
+    GIS: {wheat:-0.22,corn:-0.15},
+    KHC: {wheat:-0.20,corn:-0.14},
+    // Food & beverage
+    SBUX:{coffee:-0.35},
+    HSY: {cocoa:-0.55,sugar:-0.20},
+    KO:  {sugar:-0.12,corn:-0.08},
+    PEP: {sugar:-0.10,corn:-0.07},
+    // Aluminum
+    AA:  {aluminum:0.85,natural_gas:-0.40},
+    CENX:{aluminum:0.90,natural_gas:-0.42},
+    // Uranium / nuclear
+    CCJ: {uranium:0.95},
+    NXE: {uranium:0.88},
+    UEC: {uranium:1.05},
+    CEG: {uranium:0.40},
+    // Commodity ETFs (direct 1:1 or near-1:1)
+    GLD:  {gold:1.00},
+    SLV:  {silver:1.00},
+    USO:  {crude_oil:0.85},
+    UNG:  {natural_gas:0.85},
+    WEAT: {wheat:1.00},
+    CORN: {corn:1.00},
+    SOYB: {soybeans:1.00},
+    PDBC: {crude_oil:0.35,gold:0.15,copper:0.18,wheat:0.10,natural_gas:0.14},
+    URA:  {uranium:1.05},
+    // Steel
+    NUE:  {natural_gas:-0.22,copper:0.35},
+    X:    {natural_gas:-0.28,copper:0.30},
+    MT:   {natural_gas:-0.25,copper:0.32}
   };
+
+  // Default beta applied to EVERY selected commodity for unknown tickers
+  var DEFAULT_BETA = 0.15;
 
   var SCENARIOS = {
     oil_shock:{crude_oil:30,natural_gas:10},
@@ -217,13 +287,21 @@ noindex: false
     var results=[];
     var totalImpactPct=0;
     portfolio.forEach(function(pos){
-      var sens=SENSITIVITIES[pos.ticker]||{};
+      var sens=SENSITIVITIES[pos.ticker]||null;
       var stockImpact=0;
-      Object.keys(sens).forEach(function(commodity){
-        if(shocks[commodity]){
-          stockImpact+=sens[commodity]*(shocks[commodity]/10);
-        }
-      });
+      if(sens){
+        // Known ticker: sum beta × shock% for each commodity
+        Object.keys(sens).forEach(function(commodity){
+          if(shocks[commodity]){
+            stockImpact+=sens[commodity]*shocks[commodity];
+          }
+        });
+      } else {
+        // Unknown ticker: apply default 0.15 beta to every selected commodity shock
+        Object.keys(shocks).forEach(function(commodity){
+          stockImpact+=DEFAULT_BETA*shocks[commodity];
+        });
+      }
       var dollarImpact=baseValue*(pos.weight/100)*(stockImpact/100);
       totalImpactPct+=(pos.weight/100)*stockImpact;
       results.push({ticker:pos.ticker,weight:pos.weight,impact:stockImpact,dollar:dollarImpact});

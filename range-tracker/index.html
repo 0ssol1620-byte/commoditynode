@@ -100,25 +100,11 @@ noindex: false
 (function(){
   'use strict';
 
-  var FALLBACK_DATA = [
-    {name:'Crude Oil', symbol:'CL=F', price:78.5, high_52w:95.2, low_52w:65.1, change_pct:1.2},
-    {name:'Gold', symbol:'GC=F', price:3280, high_52w:3500, low_52w:1820, change_pct:0.8},
-    {name:'Copper', symbol:'HG=F', price:4.85, high_52w:5.20, low_52w:3.52, change_pct:-0.3},
-    {name:'Silver', symbol:'SI=F', price:33.2, high_52w:35.0, low_52w:21.5, change_pct:1.1},
-    {name:'Natural Gas', symbol:'NG=F', price:3.85, high_52w:4.80, low_52w:1.60, change_pct:-0.7},
-    {name:'Wheat', symbol:'ZW=F', price:545, high_52w:680, low_52w:490, change_pct:0.5},
-    {name:'Corn', symbol:'ZC=F', price:478, high_52w:520, low_52w:390, change_pct:0.2},
-    {name:'Soybeans', symbol:'ZS=F', price:1020, high_52w:1180, low_52w:890, change_pct:-0.4},
-    {name:'Coffee', symbol:'KC=F', price:320, high_52w:380, low_52w:155, change_pct:2.1},
-    {name:'Sugar', symbol:'SB=F', price:19.5, high_52w:23.0, low_52w:16.2, change_pct:0.6},
-    {name:'Platinum', symbol:'PL=F', price:1080, high_52w:1150, low_52w:850, change_pct:-0.2},
-    {name:'Palladium', symbol:'PA=F', price:980, high_52w:1100, low_52w:820, change_pct:-1.4},
-    {name:'Aluminum', symbol:'ALI=F', price:2450, high_52w:2750, low_52w:2100, change_pct:0.3},
-    {name:'Uranium', symbol:'UX=F', price:90, high_52w:105, low_52w:78, change_pct:1.5},
-    {name:'Lithium', symbol:'LIT', price:14.2, high_52w:22.0, low_52w:11.5, change_pct:-2.1}
-  ];
-
   var items = [];
+  var currentSort = 'position';
+
+  // Skip symbols with stale/flat data (volume=0, all candles identical)
+  var SKIP_SYMBOLS = {'LBS=F':1, 'ZNC=F':1, 'JJN':1};
 
   function getColor(pct){
     if(pct>=90) return '#ef4444';
@@ -128,73 +114,139 @@ noindex: false
     return '#10b981';
   }
 
-  function getPctLabel(pct){
-    if(pct>=90) return {color:'#ef4444'};
-    if(pct>=70) return {color:'#f97316'};
-    if(pct>=30) return {color:'#22d3ee'};
-    if(pct>=10) return {color:'#a855f7'};
-    return {color:'#10b981'};
+  function fmtPrice(v){
+    if(v===undefined||v===null) return '—';
+    if(v>=10000) return '$'+(v/1000).toFixed(1)+'k';
+    if(v>=1000) return '$'+v.toLocaleString(undefined,{maximumFractionDigits:0});
+    if(v>=100)  return '$'+v.toFixed(2);
+    if(v>=10)   return '$'+v.toFixed(2);
+    if(v>=1)    return '$'+v.toFixed(3);
+    return '$'+v.toFixed(4);
   }
 
   function render(sortBy){
+    currentSort = sortBy;
     var sorted = items.slice();
-    if(sortBy==='name') sorted.sort(function(a,b){return a.name.localeCompare(b.name);});
+    if(sortBy==='name')     sorted.sort(function(a,b){return a.name.localeCompare(b.name);});
     else if(sortBy==='high') sorted.sort(function(a,b){return b.pct-a.pct;});
-    else if(sortBy==='low') sorted.sort(function(a,b){return a.pct-b.pct;});
-    else sorted.sort(function(a,b){return b.pct-a.pct;});
+    else if(sortBy==='low')  sorted.sort(function(a,b){return a.pct-b.pct;});
+    else                     sorted.sort(function(a,b){return b.pct-a.pct;}); // position
 
     var html='';
     sorted.forEach(function(item){
       var c=getColor(item.pct);
-      var pc=getPctLabel(item.pct);
       var chSign=item.change>=0?'+':'';
       var chClass=item.change>=0?'up':'down';
       html+='<div class="range-row">';
       html+='<div class="range-name">'+item.name+'<small>'+item.symbol+'</small></div>';
-      html+='<div class="range-price">$'+item.price.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>';
-      html+='<div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:'+item.pct+'%;background:'+c+';opacity:0.35"></div><div class="range-dot" style="left:'+item.pct+'%;background:'+c+'"></div></div><div class="range-labels"><span>$'+item.low52.toLocaleString()+'</span><span>$'+item.high52.toLocaleString()+'</span></div></div></div>';
-      html+='<div class="range-pct" style="color:'+pc.color+'">'+item.pct.toFixed(1)+'%</div>';
+      html+='<div class="range-price">'+fmtPrice(item.price)+'</div>';
+      html+='<div class="range-bar-wrapper"><div style="width:100%">';
+      html+='<div class="range-bar-bg">';
+      html+='<div class="range-bar-fill" style="width:'+item.pct.toFixed(1)+'%;background:'+c+';opacity:0.35"></div>';
+      html+='<div class="range-dot" style="left:'+item.pct.toFixed(1)+'%;background:'+c+'"></div>';
+      html+='</div>';
+      html+='<div class="range-labels"><span>'+fmtPrice(item.low52)+'</span><span>'+fmtPrice(item.high52)+'</span></div>';
+      html+='</div></div>';
+      html+='<div class="range-pct" style="color:'+c+'">'+item.pct.toFixed(1)+'%</div>';
       html+='<div class="range-change '+chClass+'">'+chSign+item.change.toFixed(2)+'%</div>';
       html+='</div>';
     });
-    document.getElementById('range-list').innerHTML=html;
+    document.getElementById('range-list').innerHTML=html||'<div style="text-align:center;padding:40px;color:#64748b">No data available</div>';
 
     var nearHigh=items.filter(function(i){return i.pct>=90;}).length;
-    var nearLow=items.filter(function(i){return i.pct<=10;}).length;
+    var nearLow =items.filter(function(i){return i.pct<=10;}).length;
     var breakout=items.filter(function(i){return i.pct>=85&&i.pct<=95;}).length;
     document.getElementById('insight-summary').innerHTML=
-      '<div class="insight-pill"><div class="count red">'+nearHigh+'</div><div class="label">Near 52W High (>90%)</div></div>'+
-      '<div class="insight-pill"><div class="count green">'+nearLow+'</div><div class="label">Near 52W Low (<10%)</div></div>'+
-      '<div class="insight-pill"><div class="count orange">'+breakout+'</div><div class="label">Potential Breakout Zone (85–95%)</div></div>';
+      '<div class="insight-pill"><div class="count red">'+nearHigh+'</div><div class="label">Near 52W High (&gt;90%)</div></div>'+
+      '<div class="insight-pill"><div class="count green">'+nearLow+'</div><div class="label">Near 52W Low (&lt;10%)</div></div>'+
+      '<div class="insight-pill"><div class="count orange">'+breakout+'</div><div class="label">Potential Breakout Zone (85–95%)</div></div>'+
+      '<div class="insight-pill"><div class="count" style="color:#22d3ee">'+items.length+'</div><div class="label">Markets Tracked</div></div>';
   }
 
-  function processData(data){
-    Object.keys(data).forEach(function(k){
-      var d=data[k];
-      if(!d.price||!d.high_52w||!d.low_52w) return;
-      var range=d.high_52w-d.low_52w;
-      var pct=range>0?(d.price-d.low_52w)/range*100:50;
-      items.push({key:k,name:d.name,symbol:d.symbol,price:d.price,high52:d.high_52w,low52:d.low_52w,pct:Math.max(0,Math.min(100,pct)),change:d.change_pct||0});
+  function processChartData(data){
+    items=[];
+    Object.keys(data).forEach(function(sym){
+      if(SKIP_SYMBOLS[sym]) return;
+      var d=data[sym];
+      if(!d||!d['1Y']||!d['1Y'].candles) return;
+      var candles=d['1Y'].candles;
+      if(candles.length<2) return;
+
+      // Skip flat/stale data (all candles same price, volume=0)
+      var totalVol=candles.reduce(function(s,c){return s+c.v;},0);
+      if(totalVol===0) return;
+
+      var high52=candles.reduce(function(m,c){return Math.max(m,c.h);},-Infinity);
+      var low52 =candles.reduce(function(m,c){return Math.min(m,c.l);}, Infinity);
+      var current=candles[candles.length-1].c;
+      var prevClose=candles[candles.length-2].c;
+      var changePct=prevClose>0?(current-prevClose)/prevClose*100:0;
+      var range=high52-low52;
+      var pct=range>0?(current-low52)/range*100:50;
+
+      // Sanity: skip if high is >20x the current price (bad data)
+      if(high52>current*20) return;
+
+      items.push({
+        symbol:sym,
+        name:d.name||sym,
+        price:current,
+        high52:high52,
+        low52:low52,
+        pct:Math.max(0,Math.min(100,pct)),
+        change:changePct
+      });
     });
-    render('position');
+    if(items.length===0){loadFallback();return;}
+    render(currentSort);
   }
 
   function loadFallback(){
-    var data={};
-    FALLBACK_DATA.forEach(function(d){
-      data[d.symbol]={name:d.name,symbol:d.symbol,price:d.price,high_52w:d.high_52w,low_52w:d.low_52w,change_pct:d.change_pct};
+    var FB=[
+      {name:'Crude Oil',symbol:'CL=F',price:78.5,high52:95.2,low52:65.1,change:-0.3},
+      {name:'Gold',symbol:'GC=F',price:3280,high52:3500,low52:1820,change:0.8},
+      {name:'Copper',symbol:'HG=F',price:4.85,high52:5.20,low52:3.52,change:-0.3},
+      {name:'Silver',symbol:'SI=F',price:33.2,high52:35.0,low52:21.5,change:1.1},
+      {name:'Natural Gas',symbol:'NG=F',price:3.85,high52:4.80,low52:1.60,change:-0.7},
+      {name:'Wheat',symbol:'ZW=F',price:545,high52:680,low52:490,change:0.5},
+      {name:'Corn',symbol:'ZC=F',price:478,high52:520,low52:390,change:0.2},
+      {name:'Soybeans',symbol:'ZS=F',price:1020,high52:1180,low52:890,change:-0.4},
+      {name:'Coffee',symbol:'KC=F',price:320,high52:380,low52:155,change:2.1},
+      {name:'Sugar',symbol:'SB=F',price:19.5,high52:23.0,low52:16.2,change:0.6},
+      {name:'Platinum',symbol:'PL=F',price:1080,high52:1150,low52:850,change:-0.2},
+      {name:'Palladium',symbol:'PA=F',price:980,high52:1100,low52:820,change:-1.4},
+      {name:'Aluminum',symbol:'ALI=F',price:2450,high52:2750,low52:2100,change:0.3},
+      {name:'Uranium',symbol:'URA',price:52,high52:65,low52:20,change:1.5},
+      {name:'Lithium',symbol:'ALB',price:80,high52:130,low52:48,change:-2.1}
+    ];
+    items=[];
+    FB.forEach(function(d){
+      var range=d.high52-d.low52;
+      var pct=range>0?(d.price-d.low52)/range*100:50;
+      items.push({symbol:d.symbol,name:d.name,price:d.price,high52:d.high52,low52:d.low52,pct:Math.max(0,Math.min(100,pct)),change:d.change});
     });
-    processData(data);
+    render(currentSort);
   }
 
-  fetch('/assets/data/prices.json').then(function(r){
-    if(!r.ok) throw new Error('HTTP '+r.status);
-    return r.json();
-  }).then(function(data){
-    processData(data);
-  }).catch(function(){
-    loadFallback();
-  });
+  // Show loading state
+  document.getElementById('range-list').innerHTML=
+    '<div style="text-align:center;padding:48px;color:#64748b;font-size:0.88rem">'+
+    '<div style="width:20px;height:20px;border:2px solid rgba(34,211,238,0.2);border-top-color:#22d3ee;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px"></div>'+
+    'Loading 52-week range data from live market history...</div>';
+  document.getElementById('insight-summary').innerHTML='';
+
+  // Add spinner keyframe if needed
+  if(!document.getElementById('range-spin-style')){
+    var s=document.createElement('style');
+    s.id='range-spin-style';
+    s.textContent='@keyframes spin{to{transform:rotate(360deg)}}';
+    document.head.appendChild(s);
+  }
+
+  fetch('/assets/data/chart-data.json')
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(processChartData)
+    .catch(function(){loadFallback();});
 
   document.querySelectorAll('.sort-btn').forEach(function(btn){
     btn.addEventListener('click',function(){

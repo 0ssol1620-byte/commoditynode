@@ -513,9 +513,73 @@ var SCENARIOS = {
     { id:'drought', name:'Black Sea drought — worst in 15y', impact:+19, dir:'up',   desc:'Russia/Ukraine output drops 20% combined' },
     { id:'aus',     name:'Australia record harvest',         impact:-9,  dir:'down', desc:'Southern hemisphere offsets northern shortfall' },
     { id:'demand',  name:'Global wheat demand -5% (substitution)', impact:-6, dir:'down', desc:'Rice/corn substitution reduces demand' }
+  ],
+  corn: [
+    { id:'drought', name:'Midwest drought — worst in 30 years', impact:+18, dir:'up',   desc:'Iowa/Illinois yields down 25%' },
+    { id:'demand',  name:'China corn import surge +30%',         impact:+12, dir:'up',   desc:'Chinese ethanol mandate expansion' },
+    { id:'harvest', name:'Record South American harvest',        impact:-10, dir:'down', desc:'Brazil/Argentina offset Northern shortfall' },
+    { id:'ethanol', name:'US RFS ethanol mandate raised 15%',    impact:+8,  dir:'up',   desc:'More corn diverted to ethanol production' },
+    { id:'sub',     name:'Feed substitution (cheap wheat)',      impact:-6,  dir:'down', desc:'Poultry/hog sector switches feed grain' }
+  ],
+  soybeans: [
+    { id:'china',   name:'China bans US soy imports',          impact:-18, dir:'down', desc:'China = 60% of global soy trade volume' },
+    { id:'drought', name:'La Niña crushes Brazil crop -20%',   impact:+16, dir:'up',   desc:'Brazil = 33% of global soy supply' },
+    { id:'biofuel', name:'SAF biodiesel mandates tripled',     impact:+10, dir:'up',   desc:'Soybean oil for sustainable aviation fuel' },
+    { id:'gmo',     name:'EU approves new GMO soy varieties',  impact:-7,  dir:'down', desc:'Yield improvements reduce import need' },
+    { id:'arg',     name:'Argentina removes export taxes',     impact:-8,  dir:'down', desc:'Argentine supply surge to global markets' }
+  ],
+  coffee: [
+    { id:'frost',   name:'Brazil frost destroys 15% crop',   impact:+22, dir:'up',   desc:'Brazil = 38% of global coffee supply' },
+    { id:'drought', name:'Vietnam drought — Robusta -20%',   impact:+15, dir:'up',   desc:'Vietnam = 18% of global supply' },
+    { id:'colombia',name:'Colombia record harvest +12%',     impact:-10, dir:'down', desc:'Higher Arabica supply offsets demand' },
+    { id:'demand',  name:'Global demand -8% (recession)',    impact:-6,  dir:'down', desc:'Consumer trades down to cheaper alternatives' },
+    { id:'inventory',name:'ICO inventory surplus report',    impact:-9,  dir:'down', desc:'12-month inventory above 5-year average' }
+  ],
+  sugar: [
+    { id:'india',   name:'India bans sugar exports',          impact:+18, dir:'up',   desc:'India = 19% of global supply' },
+    { id:'brazil',  name:'Brazil drought crushes cane crop',  impact:+14, dir:'up',   desc:'Brazil = 22% of global sugar supply' },
+    { id:'biofuel', name:'Brazil shifts cane to ethanol',     impact:+10, dir:'up',   desc:'Sugarcane diverted from sugar to biofuel' },
+    { id:'thai',    name:'Thailand record harvest +20%',      impact:-9,  dir:'down', desc:'3rd largest exporter adds supply' },
+    { id:'diet',    name:'Global sugar tax implementation',   impact:-8,  dir:'down', desc:'Demand reduction across 40+ countries' }
+  ],
+  platinum: [
+    { id:'sabotage',name:'Bushveld Complex mine sabotage',    impact:+25, dir:'up',   desc:'South Africa = 72% of global platinum' },
+    { id:'hydrogen',name:'Hydrogen fuel cell boom +200GW',    impact:+18, dir:'up',   desc:'PEM electrolyzers require platinum catalyst' },
+    { id:'sub',     name:'Platinum-to-palladium substitution',impact:+12, dir:'up',   desc:'Auto industry accelerates catalyst switch' },
+    { id:'ev',      name:'ICE engine phase-out by 2030',      impact:-15, dir:'down', desc:'EV displacement reduces catalytic converter demand' },
+    { id:'recession',name:'Global industrial recession',      impact:-10, dir:'down', desc:'Reduced industrial and jewelry demand' }
+  ],
+  uranium: [
+    { id:'reactors',name:'100 new nuclear reactors announced',impact:+30, dir:'up',   desc:'Japan, S. Korea, France expand fleets' },
+    { id:'kazakh',  name:'Kazakhstan output cut 15%',         impact:+20, dir:'up',   desc:'Kazakhstan = 43% of global production' },
+    { id:'smr',     name:'First SMR commercial deployment',   impact:+14, dir:'up',   desc:'US Small Modular Reactor demand catalyst' },
+    { id:'germany', name:'Germany reverses nuclear phaseout', impact:+12, dir:'up',   desc:'3 closed German nuclear plants restart' },
+    { id:'incident',name:'Major nuclear incident in US/EU',   impact:-35, dir:'down', desc:'Public opposition forces policy reversal' }
+  ],
+  lithium: [
+    { id:'ev',      name:'EV adoption hits 30% global share', impact:+20, dir:'up',   desc:'Battery demand outpaces mining expansion' },
+    { id:'chile',   name:'Chile nationalizes lithium mines',  impact:+18, dir:'up',   desc:'Chile = 26% of global lithium reserves' },
+    { id:'battery', name:'Solid-state battery breakthrough',  impact:-25, dir:'down', desc:'Lower lithium intensity per kWh battery' },
+    { id:'africa',  name:'DRC mega lithium deposit found',    impact:-15, dir:'down', desc:'New supply source reduces Chilean premium' },
+    { id:'recycling',name:'Li-ion recycling capacity doubles',impact:-10, dir:'down', desc:'Secondary supply reduces primary mine demand' }
+  ],
+  aluminum: [
+    { id:'energy',  name:'European energy crisis — smelter closures', impact:+22, dir:'up',   desc:'Electricity = 60% of aluminum cost' },
+    { id:'china',   name:'China reduces aluminum export rebates',      impact:+14, dir:'up',   desc:'China = 57% of global production' },
+    { id:'tariff',  name:'US Section 232 tariffs doubled to 25%',      impact:+10, dir:'up',   desc:'Import barriers boost domestic pricing' },
+    { id:'aerospace',name:'Aerospace demand surge (737 ramp-up)',      impact:+8,  dir:'up',   desc:'Aviation recovery boosts aerospace demand' },
+    { id:'scrap',   name:'Global scrap recycling capacity +30%',       impact:-8,  dir:'down', desc:'Secondary aluminum reduces primary demand' }
+  ],
+  palladium: [
+    { id:'russia',  name:'Russia restricts palladium exports', impact:+30, dir:'up',   desc:'Russia = 40% of global palladium supply' },
+    { id:'ev',      name:'EV market share hits 25% globally',  impact:-20, dir:'down', desc:'Less catalytic converter demand (ICE decline)' },
+    { id:'sub',     name:'Platinum substitutes palladium',     impact:-18, dir:'down', desc:'$1,000 price premium makes substitution economic' },
+    { id:'recycling',name:'Autocatalyst recycling +40%',       impact:-12, dir:'down', desc:'Secondary supply recovery from end-of-life vehicles' },
+    { id:'jewelry', name:'Palladium jewelry surge in Asia',    impact:+8,  dir:'up',   desc:'Korean/Chinese jewelry market trend shift' }
   ]
 };
 
+// base = impact per 10% commodity move (signed). Display scales by scenAdj/10.
 var INDUSTRY_IMPACTS = {
   crude_oil: [
     {name:'Airlines',        base:-1.2, unit:'margin %'},
@@ -526,25 +590,25 @@ var INDUSTRY_IMPACTS = {
     {name:'Agriculture',     base:-0.6, unit:'cost %'}
   ],
   gold: [
-    {name:'Mining',          base:+1.5, unit:'revenue %'},
+    {name:'Gold Mining',     base:+1.5, unit:'revenue %'},
     {name:'Jewelry',         base:-0.8, unit:'cost %'},
     {name:'Electronics',     base:-0.3, unit:'cost %'},
     {name:'Central Banks',   base:+2.0, unit:'reserve %'},
     {name:'ETF Inflows',     base:+1.2, unit:'AUM %'},
-    {name:'Currency',        base:-0.6, unit:'USD impact'}
+    {name:'USD / FX',        base:-0.6, unit:'USD impact'}
   ],
   copper: [
     {name:'Semiconductors',  base:-0.8, unit:'margin %'},
     {name:'EV/Auto',         base:-1.5, unit:'cost %'},
     {name:'Construction',    base:-1.1, unit:'cost %'},
     {name:'Renewable Energy',base:-0.9, unit:'cost %'},
-    {name:'Mining',          base:+1.8, unit:'revenue %'},
+    {name:'Copper Mining',   base:+1.8, unit:'revenue %'},
     {name:'Electronics',     base:-0.7, unit:'cost %'}
   ],
   silver: [
     {name:'Solar Energy',    base:-1.2, unit:'cost %'},
     {name:'Electronics',     base:-0.5, unit:'cost %'},
-    {name:'Mining',          base:+1.6, unit:'revenue %'},
+    {name:'Silver Mining',   base:+1.6, unit:'revenue %'},
     {name:'Jewelry',         base:-0.9, unit:'cost %'},
     {name:'EV/Battery',      base:-0.4, unit:'cost %'},
     {name:'Photography',     base:-0.3, unit:'cost %'}
@@ -555,7 +619,7 @@ var INDUSTRY_IMPACTS = {
     {name:'Chemicals',       base:-1.5, unit:'cost %'},
     {name:'Steel/Metals',    base:-0.8, unit:'cost %'},
     {name:'LNG Exporters',   base:+1.9, unit:'revenue %'},
-    {name:'Power Gen',       base:-1.2, unit:'margin %'}
+    {name:'Power Generation',base:-1.2, unit:'margin %'}
   ],
   wheat: [
     {name:'Food Processing', base:-1.3, unit:'cost %'},
@@ -564,16 +628,327 @@ var INDUSTRY_IMPACTS = {
     {name:'Fertilizers',     base:+0.8, unit:'demand %'},
     {name:'Retail/Grocery',  base:-0.4, unit:'margin %'},
     {name:'Emerging Markets',base:-1.8, unit:'food cost %'}
+  ],
+  corn: [
+    {name:'Livestock/Poultry',base:-1.5, unit:'cost %'},
+    {name:'Ethanol Producers',base:+1.2, unit:'revenue %'},
+    {name:'Food Processing',  base:-0.8, unit:'cost %'},
+    {name:'Agriculture ETFs', base:+0.9, unit:'NAV %'},
+    {name:'Fast Food Chains', base:-0.4, unit:'margin %'},
+    {name:'Biofuels',         base:+1.0, unit:'feedstock %'}
+  ],
+  soybeans: [
+    {name:'Animal Feed',      base:-1.3, unit:'cost %'},
+    {name:'Biodiesel / SAF',  base:+1.1, unit:'feedstock %'},
+    {name:'Food Processing',  base:-0.9, unit:'cost %'},
+    {name:'Aquaculture',      base:-0.8, unit:'cost %'},
+    {name:'China Importers',  base:-1.5, unit:'cost %'},
+    {name:'Agriculture',      base:+1.0, unit:'revenue %'}
+  ],
+  coffee: [
+    {name:'Coffee Chains',    base:-1.8, unit:'cost %'},
+    {name:'Grocery Retail',   base:-0.6, unit:'margin %'},
+    {name:'Coffee Roasters',  base:-2.0, unit:'input cost %'},
+    {name:'Latin Am Farmers', base:+1.5, unit:'revenue %'},
+    {name:'Foodservice',      base:-0.8, unit:'margin %'},
+    {name:'Trading Companies',base:+0.5, unit:'spread %'}
+  ],
+  sugar: [
+    {name:'Confectionery',    base:-1.2, unit:'cost %'},
+    {name:'Beverages',        base:-0.9, unit:'cost %'},
+    {name:'Ethanol (Biofuels)',base:+0.8, unit:'feedstock %'},
+    {name:'Food Processors',  base:-0.7, unit:'margin %'},
+    {name:'EM Consumers',     base:-1.4, unit:'food cost %'},
+    {name:'Brazil Agribusiness',base:+1.1,unit:'revenue %'}
+  ],
+  platinum: [
+    {name:'Automotive/Catalysts',base:-0.8, unit:'cost %'},
+    {name:'Hydrogen / Fuel Cell', base:-1.5, unit:'capex %'},
+    {name:'Jewelry',             base:-1.1, unit:'cost %'},
+    {name:'Platinum Mining',     base:+2.0, unit:'revenue %'},
+    {name:'Electronics',         base:-0.4, unit:'cost %'},
+    {name:'Chemical/Refining',   base:-0.6, unit:'catalyst cost %'}
+  ],
+  uranium: [
+    {name:'Nuclear Fuel Cost',   base:+0.8, unit:'cost %'},
+    {name:'Utilities (Nuclear)', base:-0.6, unit:'margin %'},
+    {name:'Uranium Miners',      base:+2.2, unit:'revenue %'},
+    {name:'SMR Developers',      base:+1.5, unit:'valuation %'},
+    {name:'Nuclear Services',    base:+1.0, unit:'contract %'},
+    {name:'Fossil Fuel Gen',     base:-0.4, unit:'competition %'}
+  ],
+  lithium: [
+    {name:'EV Manufacturers',  base:-1.4, unit:'battery cost %'},
+    {name:'Battery Makers',    base:-1.8, unit:'input cost %'},
+    {name:'Lithium Miners',    base:+2.0, unit:'revenue %'},
+    {name:'Grid Storage',      base:-1.2, unit:'capex %'},
+    {name:'Consumer Electronics',base:-0.5,unit:'battery cost %'},
+    {name:'Mining Companies',  base:+1.5, unit:'revenue %'}
+  ],
+  aluminum: [
+    {name:'Aerospace',         base:-1.1, unit:'cost %'},
+    {name:'Automotive',        base:-0.9, unit:'cost %'},
+    {name:'Construction',      base:-0.7, unit:'cost %'},
+    {name:'Packaging (Cans)',  base:-0.8, unit:'cost %'},
+    {name:'Aluminum Smelters', base:+1.8, unit:'revenue %'},
+    {name:'Electric Cables',   base:-0.6, unit:'cost %'}
+  ],
+  palladium: [
+    {name:'Automotive/Catalysts',base:-1.5, unit:'cost %'},
+    {name:'Palladium Mining',    base:+2.2, unit:'revenue %'},
+    {name:'Electronics',         base:-0.5, unit:'cost %'},
+    {name:'Dental/Medical',      base:-0.4, unit:'cost %'},
+    {name:'EV Sector',           base:-0.2, unit:'indirect %'},
+    {name:'Autocatalyst Recyclers',base:+0.8,unit:'margin %'}
   ]
 };
 
+// beta = sensitivity coefficient: company impact% = beta × scenarioAdjustment%
+// e.g. XOM beta 0.67, oil +18% scenario → XOM +12.1%
 var COMPANY_IMPACTS = {
-  crude_oil: [{n:'ExxonMobil (XOM)',v:+1.8},{n:'Chevron (CVX)',v:+1.6},{n:'Delta Air Lines (DAL)',v:-1.3},{n:'UPS (UPS)',v:-0.9}],
-  gold:      [{n:'Newmont (NEM)',v:+2.1},{n:'Barrick (GOLD)',v:+2.0},{n:'GLD ETF',v:+1.0},{n:'Tiffany/LVMH',v:-0.8}],
-  copper:    [{n:'Freeport-McMoRan (FCX)',v:+2.2},{n:'Southern Copper (SCCO)',v:+2.0},{n:'TSMC (TSM)',v:-0.9},{n:'Tesla (TSLA)',v:-1.1}],
-  silver:    [{n:'Pan American (PAAS)',v:+2.0},{n:'First Majestic (AG)',v:+2.3},{n:'SunPower (SPWR)',v:-1.2},{n:'Apple (AAPL)',v:-0.3}],
-  natural_gas:[{n:'EQT Corp (EQT)',v:+1.9},{n:'Cheniere (LNG)',v:+1.6},{n:'Duke Energy (DUK)',v:-1.1},{n:'CF Industries (CF)',v:-1.8}],
-  wheat:     [{n:'ADM (ADM)',v:+0.9},{n:'Bunge (BG)',v:+0.8},{n:"McDonald's (MCD)",v:-0.5},{n:'Flowers Foods (FLO)',v:-1.1}]
+  crude_oil: [
+    {n:'ExxonMobil (XOM)',        beta:+0.67},
+    {n:'Chevron (CVX)',           beta:+0.70},
+    {n:'ConocoPhillips (COP)',    beta:+0.72},
+    {n:'Occidental (OXY)',        beta:+0.85},
+    {n:'SLB (SLB)',               beta:+0.78},
+    {n:'XLE ETF',                 beta:+0.65},
+    {n:'Delta Air Lines (DAL)',   beta:-0.80},
+    {n:'United Airlines (UAL)',   beta:-0.83},
+    {n:'American Airlines (AAL)',beta:-0.85},
+    {n:'Southwest (LUV)',         beta:-0.70},
+    {n:'FedEx (FDX)',             beta:-0.28},
+    {n:'UPS (UPS)',               beta:-0.30},
+    {n:"McDonald's (MCD)",        beta:-0.10},
+    {n:'Dow Inc (DOW)',           beta:-0.40},
+    {n:'LyondellBasell (LYB)',    beta:-0.35}
+  ],
+  gold: [
+    {n:'Newmont (NEM)',           beta:+1.10},
+    {n:'Barrick Gold (GOLD)',     beta:+1.05},
+    {n:'Agnico Eagle (AEM)',      beta:+1.15},
+    {n:'Kinross (KGC)',           beta:+1.25},
+    {n:'GDX ETF',                 beta:+1.20},
+    {n:'GDXJ ETF',                beta:+1.45},
+    {n:'GLD ETF',                 beta:+1.00},
+    {n:'Wheaton Precious (WPM)', beta:+0.90},
+    {n:'Franco-Nevada (FNV)',     beta:+0.85},
+    {n:'Royal Gold (RGLD)',       beta:+0.88},
+    {n:'LVMH (MC.PA)',            beta:-0.22},
+    {n:'Tiffany/LVMH',           beta:-0.28},
+    {n:'Intel (INTC)',            beta:-0.08},
+    {n:'Apple (AAPL)',            beta:-0.06},
+    {n:'Bitcoin (BTC)',           beta:+0.35}
+  ],
+  copper: [
+    {n:'Freeport-McMoRan (FCX)', beta:+0.95},
+    {n:'Southern Copper (SCCO)', beta:+0.90},
+    {n:'Glencore (GLNCY)',        beta:+0.70},
+    {n:'Rio Tinto (RIO)',         beta:+0.58},
+    {n:'BHP Group (BHP)',         beta:+0.60},
+    {n:'Nucor (NUE)',             beta:+0.50},
+    {n:'Tesla (TSLA)',            beta:-0.45},
+    {n:'Ford (F)',                beta:-0.35},
+    {n:'GM (GM)',                 beta:-0.30},
+    {n:'Apple (AAPL)',            beta:-0.15},
+    {n:'TSMC (TSM)',              beta:-0.25},
+    {n:'First Solar (FSLR)',      beta:-0.40},
+    {n:'NextEra Energy (NEE)',    beta:-0.35},
+    {n:'Palo Alto (PANW)',        beta:-0.10},
+    {n:'Schneider Electric',      beta:-0.30}
+  ],
+  silver: [
+    {n:'Pan American (PAAS)',     beta:+1.10},
+    {n:'First Majestic (AG)',     beta:+1.25},
+    {n:'Wheaton PM (WPM)',        beta:+0.85},
+    {n:'SLV ETF',                 beta:+1.00},
+    {n:'GDX ETF',                 beta:+0.80},
+    {n:'Endeavour Silver (EXK)',  beta:+1.30},
+    {n:'SunPower (SPWR)',         beta:-0.60},
+    {n:'First Solar (FSLR)',      beta:-0.50},
+    {n:'Enphase Energy (ENPH)',   beta:-0.45},
+    {n:'Apple (AAPL)',            beta:-0.20},
+    {n:'Samsung Electronics',     beta:-0.15},
+    {n:'Vishay (VSH)',            beta:-0.18},
+    {n:'TE Connectivity (TEL)',   beta:-0.12},
+    {n:'Cohu Inc (COHU)',         beta:-0.22}
+  ],
+  natural_gas: [
+    {n:'EQT Corp (EQT)',          beta:+0.85},
+    {n:'Chesapeake (CHK)',         beta:+0.90},
+    {n:'Coterra Energy (CTRA)',   beta:+0.75},
+    {n:'Cheniere Energy (LNG)',   beta:+0.65},
+    {n:'UNG ETF',                 beta:+0.85},
+    {n:'Range Resources (RRC)',   beta:+0.88},
+    {n:'Duke Energy (DUK)',       beta:-0.55},
+    {n:'Dominion Energy (D)',     beta:-0.50},
+    {n:'NextEra Energy (NEE)',    beta:-0.45},
+    {n:'CF Industries (CF)',      beta:-0.70},
+    {n:'Mosaic (MOS)',            beta:-0.65},
+    {n:'BASF (BASFY)',            beta:-0.45},
+    {n:'Dow Inc (DOW)',           beta:-0.40},
+    {n:'LyondellBasell (LYB)',    beta:-0.35},
+    {n:'Celanese (CE)',           beta:-0.38}
+  ],
+  wheat: [
+    {n:'ADM (ADM)',               beta:+0.45},
+    {n:'Bunge (BG)',              beta:+0.50},
+    {n:'WEAT ETF',                beta:+1.00},
+    {n:'Nutrien (NTR)',           beta:+0.30},
+    {n:'Andersons Inc (ANDE)',    beta:+0.38},
+    {n:"McDonald's (MCD)",        beta:-0.12},
+    {n:'Flowers Foods (FLO)',     beta:-0.35},
+    {n:'General Mills (GIS)',     beta:-0.28},
+    {n:'Kraft Heinz (KHC)',       beta:-0.25},
+    {n:'Nestlé (NSRGY)',          beta:-0.22},
+    {n:'Tyson Foods (TSN)',       beta:-0.18},
+    {n:'Hershey (HSY)',           beta:-0.15},
+    {n:'Mondelez (MDLZ)',         beta:-0.20},
+    {n:'Arcos Dorados (ARCO)',    beta:-0.15},
+    {n:'Grupo Bimbo (BIMBOA)',    beta:-0.32}
+  ],
+  corn: [
+    {n:'ADM (ADM)',               beta:+0.40},
+    {n:'Bunge (BG)',              beta:+0.38},
+    {n:'CORN ETF',                beta:+1.00},
+    {n:'Rex Energy (REX)',        beta:+0.60},
+    {n:'Darling Ingredients (DAR)',beta:+0.25},
+    {n:'Tyson Foods (TSN)',       beta:-0.45},
+    {n:"Pilgrim's Pride (PPC)",   beta:-0.50},
+    {n:"McDonald's (MCD)",        beta:-0.12},
+    {n:'Yum Brands (YUM)',        beta:-0.10},
+    {n:'Sanderson Farms',         beta:-0.48},
+    {n:'Post Holdings (POST)',    beta:-0.22},
+    {n:'Kellogg (K)',             beta:-0.20},
+    {n:'General Mills (GIS)',     beta:-0.18},
+    {n:'Kraft Heinz (KHC)',       beta:-0.15}
+  ],
+  soybeans: [
+    {n:'Bunge (BG)',              beta:+0.50},
+    {n:'ADM (ADM)',               beta:+0.45},
+    {n:'SOYB ETF',                beta:+1.00},
+    {n:'Wilmar International',    beta:+0.40},
+    {n:'Viterra',                 beta:+0.38},
+    {n:'Tyson Foods (TSN)',       beta:-0.38},
+    {n:'Beyond Meat (BYND)',      beta:-0.30},
+    {n:'Kraft Heinz (KHC)',       beta:-0.22},
+    {n:'General Mills (GIS)',     beta:-0.18},
+    {n:'Darling Ingredients (DAR)',beta:+0.30},
+    {n:'Nufarm (NUF)',            beta:+0.25},
+    {n:'Cal-Maine Foods (CALM)',  beta:-0.35},
+    {n:'Pilgrim\'s Pride (PPC)', beta:-0.40},
+    {n:'Ingredion (INGR)',        beta:-0.25}
+  ],
+  coffee: [
+    {n:'Starbucks (SBUX)',        beta:-0.38},
+    {n:'Restaurant Brands (QSR)',beta:-0.20},
+    {n:'Nestlé (NSRGY)',          beta:-0.25},
+    {n:'JM Smucker (SJM)',        beta:-0.42},
+    {n:'CAFÉ ETF',                beta:+0.90},
+    {n:'Lavazza (pvt)',           beta:-0.50},
+    {n:'Whitbread/Costa (WTB)',   beta:-0.30},
+    {n:'Luckin Coffee (LKNCY)',   beta:-0.35},
+    {n:'Brazilian Farms (BRFS)', beta:+0.35},
+    {n:'Cooxupé Coop (pvt)',      beta:+0.65},
+    {n:'Tchibo (pvt)',            beta:-0.45},
+    {n:'JAB Holding (pvt)',       beta:-0.38},
+    {n:'Kraft Heinz (KHC)',       beta:-0.22}
+  ],
+  sugar: [
+    {n:'Hershey (HSY)',           beta:-0.35},
+    {n:'Mondelez (MDLZ)',         beta:-0.28},
+    {n:'Coca-Cola (KO)',          beta:-0.18},
+    {n:'PepsiCo (PEP)',           beta:-0.15},
+    {n:'Sao Martinho (SMTO3)',    beta:+0.80},
+    {n:'Raízen (RAIZ4)',          beta:+0.75},
+    {n:'Suedzucker (SZU)',        beta:+0.55},
+    {n:'Thai Sugar (pvt)',        beta:+0.65},
+    {n:'Tootsie Roll (TR)',       beta:-0.30},
+    {n:'Post Holdings (POST)',    beta:-0.22},
+    {n:'Ingredion (INGR)',        beta:-0.28},
+    {n:'Imperial Brands (IMB)',   beta:-0.10},
+    {n:'Wholesome Sweeteners',    beta:-0.22}
+  ],
+  platinum: [
+    {n:'Anglo American Plat (ANGPY)',beta:+2.10},
+    {n:'Impala Platinum (IMPUY)',  beta:+2.00},
+    {n:'Sibanye-Stillwater (SBSW)',beta:+1.80},
+    {n:'Heraeus (pvt)',            beta:+0.90},
+    {n:'Johnson Matthey (JMAT)',  beta:+0.75},
+    {n:'Toyota (TM)',              beta:-0.25},
+    {n:'Volkswagen (VWAGY)',       beta:-0.22},
+    {n:'Stellantis (STLA)',        beta:-0.20},
+    {n:'Plug Power (PLUG)',        beta:-0.60},
+    {n:'Bloom Energy (BE)',        beta:-0.55},
+    {n:'Ford (F)',                 beta:-0.20},
+    {n:'Honda (HMC)',              beta:-0.18},
+    {n:'Umicore (UMI.BR)',         beta:+0.55},
+    {n:'BASF Catalysts (BASFY)',  beta:-0.35}
+  ],
+  uranium: [
+    {n:'Cameco (CCJ)',             beta:+0.95},
+    {n:'NexGen Energy (NXE)',      beta:+0.90},
+    {n:'Uranium Energy (UEC)',     beta:+1.05},
+    {n:'Paladin Energy (PDN)',     beta:+1.00},
+    {n:'URA ETF',                  beta:+1.10},
+    {n:'Oklo (OKLO)',              beta:+0.80},
+    {n:'NuScale Power (SMR)',      beta:+0.85},
+    {n:'Constellation Energy (CEG)',beta:+0.45},
+    {n:'Duke Energy (DUK)',        beta:-0.20},
+    {n:'Exelon (EXC)',             beta:-0.15},
+    {n:'BWX Technologies (BWXT)', beta:+0.55},
+    {n:'Lightbridge (LTBR)',       beta:+0.70},
+    {n:'Energy Fuels (UUUU)',      beta:+1.10},
+    {n:'enCore Energy (EU)',       beta:+1.00}
+  ],
+  lithium: [
+    {n:'Albemarle (ALB)',          beta:+1.10},
+    {n:'SQM (SQM)',               beta:+1.05},
+    {n:'Livent (LTHM)',            beta:+1.00},
+    {n:'Piedmont Lithium (PLL)',   beta:+1.20},
+    {n:'Li Cycle Holdings (LICYF)',beta:+0.70},
+    {n:'Tesla (TSLA)',             beta:-0.40},
+    {n:'Rivian (RIVN)',            beta:-0.50},
+    {n:'Lucid Motors (LCID)',      beta:-0.48},
+    {n:'BYD (BYDDY)',              beta:-0.42},
+    {n:'Panasonic (PCRFY)',        beta:-0.35},
+    {n:'CATL (300750.SZ)',         beta:-0.45},
+    {n:'LG Energy Solution',       beta:-0.40},
+    {n:'QuantumScape (QS)',        beta:-0.30},
+    {n:'Solid Power (SLDP)',       beta:-0.25}
+  ],
+  aluminum: [
+    {n:'Alcoa (AA)',               beta:+0.85},
+    {n:'Century Aluminum (CENX)', beta:+0.95},
+    {n:'Norsk Hydro (NHYDY)',      beta:+0.80},
+    {n:'Rio Tinto (RIO)',          beta:+0.40},
+    {n:'Boeing (BA)',              beta:-0.30},
+    {n:'Airbus (AIR.PA)',          beta:-0.28},
+    {n:'Ford (F)',                 beta:-0.22},
+    {n:'GM (GM)',                  beta:-0.20},
+    {n:'Ball Corporation (BALL)', beta:-0.35},
+    {n:'Apple (AAPL)',             beta:-0.08},
+    {n:'Howmet Aerospace (HWM)',  beta:-0.25},
+    {n:'Spirit AeroSystems (SPR)',beta:-0.30},
+    {n:'Precision Castparts',      beta:-0.28},
+    {n:'Novelis (pvt)',            beta:+0.70}
+  ],
+  palladium: [
+    {n:'Sibanye-Stillwater (SBSW)',beta:+1.80},
+    {n:'Norilsk Nickel (NILSY)',   beta:+1.50},
+    {n:'Anglo American Plat',      beta:+1.20},
+    {n:'Johnson Matthey (JMAT)',  beta:+0.60},
+    {n:'Umicore (UMI.BR)',         beta:+0.55},
+    {n:'Toyota (TM)',              beta:-0.55},
+    {n:'General Motors (GM)',      beta:-0.50},
+    {n:'Ford (F)',                 beta:-0.48},
+    {n:'Honda (HMC)',              beta:-0.45},
+    {n:'Stellantis (STLA)',        beta:-0.42},
+    {n:'BASF (BASFY)',             beta:-0.40},
+    {n:'Volkswagen (VWAGY)',       beta:-0.38},
+    {n:'Hyundai (HYMTF)',          beta:-0.40},
+    {n:'Heraeus (pvt)',            beta:+0.50}
+  ]
 };
 
 // ── State ─────────────────────────────────────────────────────────────────
@@ -923,32 +1298,42 @@ function calcScenarioAdjustment(){
 function renderImpact(){
   var key = state.commodity;
   var scenAdj = calcScenarioAdjustment();
-  var industries = INDUSTRY_IMPACTS[key] || INDUSTRY_IMPACTS['crude_oil'];
-  var multiplier = 1 + Math.abs(scenAdj)/200;
+  // When no scenario active, show "per 10% move" baseline sensitivity
+  var displayAdj = scenAdj !== 0 ? scenAdj : 10;
+  var isBaseline = scenAdj === 0;
 
+  // Industry impacts: base = impact per 10% move, scales linearly
+  var industries = INDUSTRY_IMPACTS[key] || INDUSTRY_IMPACTS['crude_oil'];
   var industryEl = document.getElementById('sim-industry-impact');
   if(industryEl){
     industryEl.innerHTML = industries.map(function(item){
-      var v = item.base * multiplier;
+      var v = item.base * displayAdj / 10;
       var sign = v >= 0 ? '+' : '';
       var cls = v >= 0 ? 'up' : 'down';
+      var label = isBaseline
+        ? sign + v.toFixed(1) + '% ' + item.unit + ' <span style="font-size:0.65rem;opacity:0.5">/10%</span>'
+        : sign + v.toFixed(1) + '% ' + item.unit;
       return '<div class="sim-impact-card">'
         + '<span class="sim-impact-name">' + item.name + '</span>'
-        + '<span class="sim-impact-value ' + cls + '">' + sign + v.toFixed(1) + '% ' + item.unit + '</span>'
+        + '<span class="sim-impact-value ' + cls + '">' + label + '</span>'
         + '</div>';
     }).join('');
   }
 
+  // Company impacts: beta × scenAdj (or beta × 10 as baseline)
   var companyEl = document.getElementById('sim-company-impact');
   if(companyEl){
     var companies = COMPANY_IMPACTS[key] || COMPANY_IMPACTS['crude_oil'];
     companyEl.innerHTML = companies.map(function(item){
-      var v = item.v * multiplier;
+      var v = item.beta * displayAdj;
       var sign = v >= 0 ? '+' : '';
       var cls = v >= 0 ? 'up' : 'down';
+      var label = isBaseline
+        ? sign + v.toFixed(1) + '% <span style="font-size:0.65rem;opacity:0.5">/10%</span>'
+        : sign + v.toFixed(1) + '%';
       return '<div class="sim-impact-card">'
         + '<span class="sim-impact-name">' + item.n + '</span>'
-        + '<span class="sim-impact-value ' + cls + '">' + sign + v.toFixed(1) + '%</span>'
+        + '<span class="sim-impact-value ' + cls + '">' + label + '</span>'
         + '</div>';
     }).join('');
   }
