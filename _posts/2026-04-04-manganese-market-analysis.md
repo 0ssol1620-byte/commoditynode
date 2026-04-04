@@ -7,7 +7,7 @@ tags: [manganese, EV, battery, steel, mining]
 commodity_name: manganese
 description: "Manganese faces a mixed outlook as EV battery chemistry shifts away from manganese-rich cathodes while steel demand provides a floor. April 2026 analysis."
 reading_time: 5
-image: /assets/images/og-default.png
+image: /assets/images/og-steel.png
 direction: neutral
 sensitivity: Medium
 confidence: Medium

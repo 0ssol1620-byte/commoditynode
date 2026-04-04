@@ -7,7 +7,7 @@ tags: [potash, fertilizer, agriculture, sanctions, potassium]
 commodity_name: potash
 description: "Potash markets adjust to a post-sanctions trade landscape in Q2 2026 as Belarus and Russia reroute exports and new capacity emerges. Full market analysis."
 reading_time: 5
-image: /assets/images/og-default.png
+image: /assets/images/og-corn.png
 direction: neutral
 sensitivity: Medium
 confidence: Medium

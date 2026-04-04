@@ -7,7 +7,7 @@ tags: [rubber, auto, tires, thailand, indonesia]
 commodity_name: rubber
 description: "Natural rubber markets tighten as global auto production recovers while Thailand and Indonesia face aging plantations and weather disruptions."
 reading_time: 5
-image: /assets/images/og-default.png
+image: /assets/images/og-copper.png
 direction: neutral
 sensitivity: Medium
 confidence: Medium

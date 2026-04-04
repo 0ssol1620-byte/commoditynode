@@ -7,7 +7,7 @@ tags: [hydrogen, green-hydrogen, energy-transition, electrolysis, fuel-cells]
 commodity_name: hydrogen
 description: "Green hydrogen infrastructure faces headwinds in Q2 2026 as subsidy timelines slip and electrolyzer costs remain elevated. Market outlook analysis."
 reading_time: 5
-image: /assets/images/og-default.png
+image: /assets/images/og-natural-gas.png
 direction: neutral
 sensitivity: Medium
 confidence: Medium
