@@ -582,10 +582,10 @@ layout: default
       var histPrices = (d.history.prices || []).slice(-60);
       var fcDates    = d.forecast.dates   || [];
       var fcMedian   = d.forecast.median  || [];
-      var fcP10      = d.forecast.p10     || [];  // P25 차트용
-      var fcP90      = d.forecast.p90     || [];  // P75 차트용
-      var fcP10ext   = d.forecast.p10_extreme || fcP10;  // P10 메트릭용
-      var fcP90ext   = d.forecast.p90_extreme || fcP90;  // P90 메트릭용
+      var fcP10      = d.forecast.p25     || d.forecast.p10     || [];  // P25 chart band
+      var fcP90      = d.forecast.p75     || d.forecast.p90     || [];  // P75 chart band
+      var fcP10ext   = d.forecast.p10_extreme || fcP10;  // P10 metric
+      var fcP90ext   = d.forecast.p90_extreme || fcP90;  // P90 metric
       var joinPrice  = histPrices[histPrices.length - 1];
 
       var allLabels = histDates.concat(fcDates);
