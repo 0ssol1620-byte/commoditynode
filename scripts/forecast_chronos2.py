@@ -144,6 +144,106 @@ def fetch_history(symbol, period="5y"):
 
 COVARIATE_COLS = ["dxy", "vix", "us10y", "ret_1d", "ret_5d", "vol_20d", "rsi_14"]
 
+# ── Calendar Event Dates (OPEC / FOMC / USDA WASDE) ──────────────────────────
+# These are KNOWN-FUTURE covariates: scheduled dates available in advance.
+# Unlike macro prices, future_df can be populated with REAL future values.
+_OPEC_DATES = pd.to_datetime([
+    "2023-06-04", "2023-11-26",
+    "2024-06-02", "2024-11-30",
+    "2025-02-03", "2025-06-25", "2025-12-05",
+    "2026-06-10", "2026-12-04",
+])
+_FOMC_DATES = pd.to_datetime([
+    "2023-02-01", "2023-03-22", "2023-05-03", "2023-06-14",
+    "2023-07-26", "2023-09-20", "2023-11-01", "2023-12-13",
+    "2024-01-31", "2024-03-20", "2024-05-01", "2024-06-12",
+    "2024-07-31", "2024-09-18", "2024-11-07", "2024-12-18",
+    "2025-01-29", "2025-03-19", "2025-05-07", "2025-06-18",
+    "2025-07-30", "2025-09-17", "2025-10-29", "2025-12-17",
+    "2026-01-28", "2026-03-18", "2026-05-06", "2026-06-17",
+    "2026-07-29", "2026-09-16", "2026-10-28", "2026-12-16",
+])
+_WASDE_DATES = pd.to_datetime([
+    "2023-01-12", "2023-02-08", "2023-03-08", "2023-04-11",
+    "2023-05-12", "2023-06-09", "2023-07-12", "2023-08-11",
+    "2023-09-12", "2023-10-12", "2023-11-09", "2023-12-08",
+    "2024-01-12", "2024-02-08", "2024-03-08", "2024-04-11",
+    "2024-05-10", "2024-06-12", "2024-07-11", "2024-08-12",
+    "2024-09-12", "2024-10-11", "2024-11-08", "2024-12-10",
+    "2025-01-10", "2025-02-11", "2025-03-11", "2025-04-09",
+    "2025-05-12", "2025-06-11", "2025-07-11", "2025-08-12",
+    "2025-09-11", "2025-10-10", "2025-11-07", "2025-12-10",
+    "2026-01-09", "2026-02-10", "2026-03-11", "2026-04-09",
+    "2026-05-12", "2026-06-11", "2026-07-10", "2026-08-12",
+    "2026-09-11", "2026-10-09", "2026-11-10", "2026-12-10",
+])
+
+# Proper covariate columns split by how future_df is filled:
+# - LAST_KNOWN: use last observed value (no real future info)
+# - CALENDAR: computed from scheduled event dates (TRUE known-future)
+PROPER_LAST_KNOWN_COLS = ["dxy", "vix", "us10y", "ret_1d", "ret_5d", "vol_20d", "rsi_14", "futures_spread"]
+PROPER_CALENDAR_COLS   = ["days_to_opec", "days_to_fomc", "days_to_wasde",
+                           "days_since_opec", "opec_window", "fomc_window", "wasde_window"]
+PROPER_COVARIATE_COLS  = PROPER_LAST_KNOWN_COLS + PROPER_CALENDAR_COLS
+
+
+def build_calendar_flags(index: pd.DatetimeIndex) -> pd.DataFrame:
+    """
+    Compute calendar event proximity flags for any DatetimeIndex.
+    Works for both historical (context) and future dates — no look-ahead bias
+    because OPEC/FOMC/WASDE dates are publicly scheduled in advance.
+
+    Columns: days_to_opec, days_to_fomc, days_to_wasde, days_since_opec,
+             opec_window (<=7d), fomc_window, wasde_window.
+    """
+    _epoch = pd.Timestamp("1970-01-01")
+
+    def _epoch_days(dti):
+        # Robust across pandas versions: TimedeltaIndex.days gives integer calendar days.
+        # Avoids resolution ambiguity (pandas 2.0+ may use 's' not 'ns').
+        return (pd.DatetimeIndex(dti).normalize() - _epoch).days.values
+
+    idx_d   = _epoch_days(index)                              # (N,)
+    opec_d  = _epoch_days(_OPEC_DATES)
+    fomc_d  = _epoch_days(_FOMC_DATES)
+    wasde_d = _epoch_days(_WASDE_DATES)
+
+    # diff[i,j] = event_j - row_i  (positive = event in future)
+    def _next(event_d):
+        diff = event_d[np.newaxis, :] - idx_d[:, np.newaxis]
+        return np.where(diff >= 0, diff, np.inf).min(axis=1).clip(0, 999)
+
+    def _since(event_d):
+        diff = idx_d[:, np.newaxis] - event_d[np.newaxis, :]
+        return np.where(diff >= 0, diff, np.inf).min(axis=1).clip(0, 999)
+
+    dto  = _next(opec_d)
+    dtf  = _next(fomc_d)
+    dtw  = _next(wasde_d)
+    dso  = _since(opec_d)
+
+    return pd.DataFrame({
+        "days_to_opec":    dto.astype(float),
+        "days_to_fomc":    dtf.astype(float),
+        "days_to_wasde":   dtw.astype(float),
+        "days_since_opec": dso.astype(float),
+        "opec_window":     (dto <= 7).astype(float),
+        "fomc_window":     (dtf <= 7).astype(float),
+        "wasde_window":    (dtw <= 7).astype(float),
+    }, index=index)
+
+
+def add_futures_spread(closes: pd.Series) -> pd.Series:
+    """
+    Synthetic futures spread (contango/backwardation proxy).
+    log(close / 63-day MA) — positive = backwardation, negative = contango.
+    63 business days ≈ 3 calendar months.
+    """
+    ma63 = closes.rolling(63, min_periods=20).mean()
+    spread = np.log(closes / ma63)
+    spread.name = "futures_spread"
+    return spread.fillna(0)
+
 def forecast_with_chronos2(closes_dict, macro_df, prediction_length=90):
     """
     Chronos-2 predict_df with covariates.
