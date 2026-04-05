@@ -185,6 +185,12 @@ def compute_final_dir_acc(actual: np.ndarray, predicted_median: np.ndarray) -> f
     return float(pred_dir == actual_dir)
 
 
+def _avg_metric(lst: list, k: str) -> float:
+    """리스트의 딕셔너리에서 키 k의 평균값 계산."""
+    vals = [m[k] for m in lst if k in m]
+    return round(float(np.mean(vals)), 4) if vals else 0.0
+
+
 def run():
     print("\nCommodityNode — Walk-Forward Backtest: Baseline vs Enhanced")
     print(f"Horizon: {HORIZON}d | Windows: {TEST_WINDOWS} | Step: {STEP}d")
@@ -247,12 +253,13 @@ def run():
                 horizon=HORIZON,
                 period=PERIOD,
             )
-            if p_up is not None:
+            if p_up is not None and isinstance(p_up, (int, float)) and 0.0 <= p_up <= 1.0:
                 hybrid_dir = int(p_up >= 0.5)
                 actual_dir = int(actual[-1] > actual[0])
                 hybrid_fda = float(hybrid_dir == actual_dir)
             else:
-                hybrid_fda = base_fda   # fallback
+                print(f"    clf_predict 실패 → 중립(0.5) 적용")
+                hybrid_fda = 0.5   # neutral — neither correct nor incorrect
                 p_up = 0.5
 
             bm = compute_metrics(actual, base_pred)
@@ -271,16 +278,12 @@ def run():
         if not baseline_list:
             continue
 
-        def avg(lst, k):
-            vals = [m[k] for m in lst if k in m]
-            return round(float(np.mean(vals)), 4) if vals else 0.0
-
         results[key] = {
-            "baseline": {k: avg(baseline_list, k) for k in ["mae", "rmse", "mape", "dir_acc", "fda"]},
-            "enhanced": {k: avg(enhanced_list, k)  for k in ["mae", "rmse", "mape", "dir_acc", "fda"]},
+            "baseline": {k: _avg_metric(baseline_list, k) for k in ["mae", "rmse", "mape", "fda"]},
+            "enhanced": {k: _avg_metric(enhanced_list, k)  for k in ["mae", "rmse", "mape", "fda"]},
             "hybrid":   {
-                "fda":      avg(hybrid_list, "fda"),
-                "p_up_mean": avg(hybrid_list, "p_up"),
+                "fda":      _avg_metric(hybrid_list, "fda"),
+                "p_up_mean": _avg_metric(hybrid_list, "p_up"),
             },
             "windows": len(baseline_list),
         }
