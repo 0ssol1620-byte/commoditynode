@@ -25,6 +25,7 @@ from forecast_chronos2 import (
     add_technical_features,
     forecast_fallback,
 )
+from direction_classifier import train_and_predict as clf_predict
 
 # ── 설정 ─────────────────────────────────────────────────────────────────
 BACKTEST_COMMODITIES = {
@@ -171,6 +172,19 @@ def compute_metrics(actual, predicted):
     }
 
 
+def compute_final_dir_acc(actual: np.ndarray, predicted_median: np.ndarray) -> float:
+    """
+    30일 최종 방향성 정확도.
+    predicted_median[-1] > predicted_median[0] → UP 예측.
+    actual[-1] > actual[0] → UP 실제.
+    """
+    if len(actual) < 2 or len(predicted_median) < 2:
+        return 0.0
+    pred_dir   = int(predicted_median[-1] > predicted_median[0])
+    actual_dir = int(actual[-1] > actual[0])
+    return float(pred_dir == actual_dir)
+
+
 def run():
     print("\nCommodityNode — Walk-Forward Backtest: Baseline vs Enhanced")
     print(f"Horizon: {HORIZON}d | Windows: {TEST_WINDOWS} | Step: {STEP}d")
@@ -207,6 +221,7 @@ def run():
         n = len(closes)
         baseline_list = []
         enhanced_list = []
+        hybrid_list  = []
 
         for w in range(TEST_WINDOWS):
             pred_start = n - (TEST_WINDOWS - w) * STEP
@@ -221,42 +236,76 @@ def run():
             base_pred = predict_window(pipeline, context, ctx_macro, use_covariates=False, horizon=HORIZON)
             enh_pred  = predict_window(pipeline, context, ctx_macro, use_covariates=True,  horizon=HORIZON)
 
+            # Final Direction Accuracy (A/B)
+            base_fda = compute_final_dir_acc(actual, base_pred)
+            enh_fda  = compute_final_dir_acc(actual, enh_pred)
+
+            # Model C: GradBoost direction classifier
+            p_up = clf_predict(
+                key, context, ctx_macro,
+                train_end_idx=len(context),
+                horizon=HORIZON,
+                period=PERIOD,
+            )
+            if p_up is not None:
+                hybrid_dir = int(p_up >= 0.5)
+                actual_dir = int(actual[-1] > actual[0])
+                hybrid_fda = float(hybrid_dir == actual_dir)
+            else:
+                hybrid_fda = base_fda   # fallback
+                p_up = 0.5
+
             bm = compute_metrics(actual, base_pred)
+            bm["fda"] = base_fda
             em = compute_metrics(actual, enh_pred)
+            em["fda"] = enh_fda
+            hm = {"fda": hybrid_fda, "p_up": p_up}
+
             baseline_list.append(bm)
             enhanced_list.append(em)
+            hybrid_list.append(hm)
 
-            print(f"    W{w+1:02d}: Base MAPE={bm['mape']:6.2f}% DirAcc={bm['dir_acc']:5.1f}% | "
-                  f"Enh MAPE={em['mape']:6.2f}% DirAcc={em['dir_acc']:5.1f}%")
+            print(f"    W{w+1:02d}: A_FDA={base_fda:.0f} B_FDA={enh_fda:.0f} C_FDA={hybrid_fda:.0f} "
+                  f"P(up)={p_up:.2f} | MAPE A={bm['mape']:.1f}% B={em['mape']:.1f}%")
 
         if not baseline_list:
             continue
 
         def avg(lst, k):
-            return round(float(np.mean([m[k] for m in lst])), 4)
+            vals = [m[k] for m in lst if k in m]
+            return round(float(np.mean(vals)), 4) if vals else 0.0
 
         results[key] = {
-            "baseline": {k: avg(baseline_list, k) for k in ["mae", "rmse", "mape", "dir_acc"]},
-            "enhanced": {k: avg(enhanced_list, k)  for k in ["mae", "rmse", "mape", "dir_acc"]},
-            "windows":  len(baseline_list),
+            "baseline": {k: avg(baseline_list, k) for k in ["mae", "rmse", "mape", "dir_acc", "fda"]},
+            "enhanced": {k: avg(enhanced_list, k)  for k in ["mae", "rmse", "mape", "dir_acc", "fda"]},
+            "hybrid":   {
+                "fda":      avg(hybrid_list, "fda"),
+                "p_up_mean": avg(hybrid_list, "p_up"),
+            },
+            "windows": len(baseline_list),
         }
 
     # 결과 출력
-    print("\n" + "=" * 65)
-    print("BACKTEST 결과 요약 (평균)")
-    print("=" * 65)
-    print(f"{'Commodity':15} {'Metric':10} {'Baseline':>10} {'Enhanced':>10} {'Δ':>8} {'판정':>8}")
-    print("-" * 65)
+    print("\n" + "=" * 75)
+    print("BACKTEST 결과 요약 — Final Direction Accuracy (30일)")
+    print("=" * 75)
+    print(f"{'Commodity':15} {'A(Base)FDA%':>12} {'B(Enh)FDA%':>12} {'C(Hyb)FDA%':>12} {'Best':>8}")
+    print("-" * 75)
 
     for key, r in results.items():
-        b, e = r["baseline"], r["enhanced"]
-        for metric, higher_is_better in [("mape", False), ("dir_acc", True)]:
-            delta = e[metric] - b[metric]
-            if higher_is_better:
-                verdict = "✅ 개선" if delta > 0.5 else ("❌ 악화" if delta < -0.5 else "≈ 동일")
-            else:
-                verdict = "✅ 개선" if delta < -0.5 else ("❌ 악화" if delta > 0.5 else "≈ 동일")
-            print(f"{key:15} {metric:10} {b[metric]:>10.2f} {e[metric]:>10.2f} {delta:>+8.2f} {verdict:>8}")
+        a_fda = r["baseline"]["fda"] * 100
+        b_fda = r["enhanced"]["fda"] * 100
+        c_fda = r["hybrid"]["fda"] * 100
+        best  = max([("A", a_fda), ("B", b_fda), ("C", c_fda)], key=lambda x: x[1])
+        print(f"{key:15} {a_fda:>12.1f} {b_fda:>12.1f} {c_fda:>12.1f} {'Model '+best[0]:>8}")
+
+    print("-" * 75)
+    avg_a = np.mean([r["baseline"]["fda"] for r in results.values()]) * 100
+    avg_b = np.mean([r["enhanced"]["fda"] for r in results.values()]) * 100
+    avg_c = np.mean([r["hybrid"]["fda"]   for r in results.values()]) * 100
+    print(f"{'AVERAGE':15} {avg_a:>12.1f} {avg_b:>12.1f} {avg_c:>12.1f}")
+    print(f"\nRANDOM BASELINE: 50.0%")
+    print(f"개선 vs Random: A={avg_a-50:+.1f}%p  B={avg_b-50:+.1f}%p  C={avg_c-50:+.1f}%p")
 
     # JSON 저장
     out_path = os.path.join(
