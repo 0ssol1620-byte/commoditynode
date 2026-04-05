@@ -447,6 +447,41 @@ def run():
         sign = '+' if output[key]['change_90d_pct'] >= 0 else ''
         print(f"  {meta['symbol']:8} ${current_price:.2f} → 90d: ${forecast_90d:.2f} ({sign}{output[key]['change_90d_pct']}%)")
 
+    # ── Direction Classifier (GradBoost + alpha signals) ─────────────────────
+    CLASSIFIER_KEYS = {"crude_oil", "gold", "copper", "natural_gas", "wheat", "silver"}
+    print("\n[Direction Classifier] GradBoost P(up) 계산...")
+    try:
+        from direction_classifier import train_and_predict as _clf_predict
+        for key in closes_dict:
+            if key not in CLASSIFIER_KEYS or key not in output:
+                continue
+            closes = closes_dict[key]
+            p_up = _clf_predict(
+                key, closes, macro_df,
+                train_end_idx=len(closes),
+                horizon=30,
+                period="5y",
+            )
+            if p_up is None:
+                label = "NEUTRAL"
+                p_up  = 0.5
+            elif p_up >= 0.60:
+                label = "BULLISH"
+            elif p_up <= 0.40:
+                label = "BEARISH"
+            else:
+                label = "NEUTRAL"
+
+            output[key]["direction_signal"] = {
+                "label":        label,
+                "confidence":   round(float(p_up), 3),
+                "horizon_days": 30,
+                "model":        "gradboost_alpha",
+            }
+            print(f"  {key:15} → {label} ({p_up:.2f})")
+    except Exception as e:
+        print(f"  Direction classifier error: {e}")
+
     # 저장
     out_path = os.path.join(
         os.path.dirname(__file__), '..', 'assets', 'data', 'forecast.json'
