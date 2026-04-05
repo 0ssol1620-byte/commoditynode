@@ -27,7 +27,7 @@ MACRO_TICKERS = {
 # Chronos-2 임포트
 try:
     import torch
-    from chronos import BaseChronosPipeline, Chronos2Pipeline
+    from chronos import Chronos2Pipeline
     CHRONOS2_AVAILABLE = True
     print("✓ Chronos-2 로드 성공")
 except ImportError as e:
@@ -63,7 +63,7 @@ def fetch_covariates(period: str = "5y") -> pd.DataFrame:
     start = min(s.index[0] for s in frames.values())
     end   = max(s.index[-1] for s in frames.values())
     bday  = pd.bdate_range(start=start, end=end)
-    macro_df = macro_df.reindex(bday).ffill().bfill()
+    macro_df = macro_df.reindex(bday).ffill().fillna(0)
     return macro_df
 
 
@@ -188,7 +188,7 @@ def forecast_with_chronos2(closes_dict, macro_df, prediction_length=90):
                 start=last_date + pd.Timedelta(days=1),
                 periods=prediction_length,
             )
-            last_known = ctx[COVARIATE_COLS].iloc[-1]
+            last_known = ctx[COVARIATE_COLS].iloc[-1].fillna(0)
             fut = pd.DataFrame(
                 {col: [last_known[col]] * prediction_length for col in COVARIATE_COLS}
             )
