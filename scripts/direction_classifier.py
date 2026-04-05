@@ -158,7 +158,9 @@ def train_and_predict(
     clf = build_clf()
     clf.fit(train_feat.values, train_lab.values.astype(int))
 
-    pred_feat = features.iloc[train_end_idx:train_end_idx + 1]
+    # train_end_idx == len(features)인 경우 마지막 알려진 행 사용
+    pred_idx  = min(train_end_idx, len(features) - 1)
+    pred_feat = features.iloc[pred_idx:pred_idx + 1]
     if pred_feat.empty:
         return None
 
