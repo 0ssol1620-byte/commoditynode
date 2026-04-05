@@ -23,6 +23,16 @@ from alpha_signals import fetch_alpha_signals
 HORIZON = 30  # 방향성 예측 기간 (영업일)
 
 
+def _resample_weekly(closes: pd.Series, macro_df: pd.DataFrame) -> tuple:
+    """일봉 → 주봉 리샘플링 (Friday close 기준)."""
+    w_closes = closes.resample("W-FRI").last().dropna()
+    if not macro_df.empty:
+        w_macro = macro_df.resample("W-FRI").last().reindex(w_closes.index).ffill().fillna(0)
+    else:
+        w_macro = macro_df
+    return w_closes, w_macro
+
+
 def build_feature_matrix(
     key: str,
     closes: pd.Series,
@@ -89,26 +99,43 @@ def train_and_predict(
     train_end_idx: int,
     horizon: int = HORIZON,
     period: str = "3y",
+    use_weekly: bool = True,
 ) -> Optional[float]:
     """
     closes[:train_end_idx]로 학습 → closes[train_end_idx]에서 P(up) 반환.
     학습 데이터 부족(< 120행) 시 None 반환.
     """
-    features = build_feature_matrix(key, closes, macro_df, period=period)
-    labels   = make_labels(closes, horizon=horizon)
+    if use_weekly:
+        w_closes, w_macro = _resample_weekly(closes, macro_df)
+        # Convert train_end_idx (daily) to weekly equivalent
+        train_end_date = closes.index[min(train_end_idx - 1, len(closes) - 1)]
+        w_train_end = int(np.searchsorted(w_closes.index, train_end_date, side='right'))
+        horizon_label = 4  # 4 weeks ≈ 30 days
+        min_samples = 60
+        min_class = 5
+        closes = w_closes
+        macro_df = w_macro
+        train_end_idx = w_train_end
+    else:
+        horizon_label = horizon
+        min_samples = 120
+        min_class = 10
 
-    train_feat = features.iloc[:train_end_idx - horizon]
-    train_lab  = labels.iloc[:train_end_idx - horizon]
+    features = build_feature_matrix(key, closes, macro_df, period=period)
+    labels   = make_labels(closes, horizon=horizon_label)
+
+    train_feat = features.iloc[:train_end_idx - horizon_label]
+    train_lab  = labels.iloc[:train_end_idx - horizon_label]
 
     valid_mask = train_lab.notna()
     train_feat = train_feat[valid_mask]
     train_lab  = train_lab[valid_mask]
 
-    if len(train_feat) < 120:
+    if len(train_feat) < min_samples:
         return None
 
     class_counts = train_lab.value_counts()
-    if len(class_counts) < 2 or class_counts.min() < 10:
+    if len(class_counts) < 2 or class_counts.min() < min_class:
         return None
 
     clf = build_clf()
