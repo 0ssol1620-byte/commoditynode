@@ -606,24 +606,28 @@ layout: default
       }
 
       // Direction signal badge
-      if (d.direction_signal) {
+      if (d.direction_signal && d.direction_signal.label && typeof d.direction_signal.confidence === 'number') {
         var sig = d.direction_signal;
+        var LABELS = { BULLISH: 'BULLISH', BEARISH: 'BEARISH', NEUTRAL: 'NEUTRAL' };
+        var safeLabel   = LABELS[sig.label] || 'NEUTRAL';
+        var safeHorizon = parseInt(sig.horizon_days, 10) || 30;
         var COLORS = {
           BULLISH: { bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)', icon: '↑' },
           BEARISH: { bg: 'rgba(239,68,68,0.15)',  color: '#ef4444', border: 'rgba(239,68,68,0.3)',  icon: '↓' },
           NEUTRAL: { bg: 'rgba(100,116,139,0.12)', color: '#94a3b8', border: 'rgba(100,116,139,0.2)', icon: '→' }
         };
-        var c = COLORS[sig.label] || COLORS.NEUTRAL;
-        var pct = Math.round(sig.confidence * 100);
+        var palette = COLORS[safeLabel] || COLORS.NEUTRAL;
+        var rawConf = typeof sig.confidence === 'number' ? sig.confidence : 0;
+        var pct = Math.max(0, Math.min(100, Math.round(rawConf * 100)));
         var badgeHtml =
           '<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;' +
-          'background:' + c.bg + ';color:' + c.color + ';border:1px solid ' + c.border + ';' +
+          'background:' + palette.bg + ';color:' + palette.color + ';border:1px solid ' + palette.border + ';' +
           'font-size:0.9rem;font-weight:700;letter-spacing:0.02em;">' +
-          c.icon + ' ' + sig.label +
+          palette.icon + ' ' + safeLabel +
           '<span style="opacity:0.7;font-size:0.78rem;font-weight:500;">' + pct + '% confidence</span>' +
           '</span>' +
           '<span style="margin-left:10px;font-size:0.72rem;color:var(--text3);">' +
-          sig.horizon_days + '-day horizon · AI direction model</span>';
+          safeHorizon + '-day horizon · AI direction model</span>';
         var badgeEl = document.getElementById('direction-signal-badge');
         var wrapEl  = document.getElementById('direction-signal-wrap');
         if (badgeEl) {
