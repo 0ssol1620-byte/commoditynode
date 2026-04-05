@@ -34,7 +34,7 @@ except ImportError as e:
     CHRONOS2_AVAILABLE = False
     print(f"✗ Chronos-2 unavailable: {e} → fallback 사용")
 
-def fetch_covariates(period="5y"):
+def fetch_covariates(period: str = "5y") -> pd.DataFrame:
     """
     DXY, VIX, US10Y를 수집하여 영업일 인덱스로 정렬한 DataFrame 반환.
     결측값은 forward-fill (휴일 등).
@@ -70,16 +70,21 @@ def fetch_covariates(period="5y"):
 def add_technical_features(closes: pd.Series) -> pd.DataFrame:
     """
     단일 원자재 가격 시리즈에서 기술 지표 계산.
-    returns DataFrame with columns: ret_1d, ret_5d, vol_20d, rsi_14
+    반환 컬럼: ret_1d, ret_5d, vol_20d, rsi_14
+    Note: rolling window 때문에 초기 행은 NaN → 0으로 채움.
     """
     df = pd.DataFrame({"close": closes})
     df["ret_1d"]  = df["close"].pct_change(1)
     df["ret_5d"]  = df["close"].pct_change(5)
     df["vol_20d"] = df["close"].pct_change().rolling(20).std()
-    df["rsi_14"]  = ta_lib.momentum.RSIIndicator(
-        close=df["close"], window=14
-    ).rsi()
-    return df[["ret_1d", "ret_5d", "vol_20d", "rsi_14"]]
+    try:
+        df["rsi_14"] = ta_lib.momentum.RSIIndicator(
+            close=df["close"], window=14
+        ).rsi()
+    except Exception as e:
+        print(f"  RSI calculation failed: {e}")
+        df["rsi_14"] = np.nan
+    return df[["ret_1d", "ret_5d", "vol_20d", "rsi_14"]].fillna(0)
 
 
 # ── 원자재 목록 ──────────────────────────────────────────────────────────────
