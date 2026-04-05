@@ -447,40 +447,62 @@ def run():
         sign = '+' if output[key]['change_90d_pct'] >= 0 else ''
         print(f"  {meta['symbol']:8} ${current_price:.2f} → 90d: ${forecast_90d:.2f} ({sign}{output[key]['change_90d_pct']}%)")
 
-    # ── Direction Classifier (GradBoost + alpha signals) ─────────────────────
-    CLASSIFIER_KEYS = {"crude_oil", "gold", "copper", "natural_gas", "wheat", "silver"}
-    print("\n[Direction Classifier] GradBoost P(up) 계산...")
-    try:
-        from direction_classifier import train_and_predict as _clf_predict
-        for key in closes_dict:
-            if key not in CLASSIFIER_KEYS or key not in output:
-                continue
-            closes = closes_dict[key]
-            p_up = _clf_predict(
-                key, closes, macro_df,
-                train_end_idx=len(closes),
-                horizon=30,
-                period="5y",
-            )
-            if p_up is None:
-                label = "NEUTRAL"
-                p_up  = 0.5
-            elif p_up >= 0.60:
-                label = "BULLISH"
-            elif p_up <= 0.40:
-                label = "BEARISH"
-            else:
-                label = "NEUTRAL"
+    # 방향성 시그널 — Chronos-2 quantile band 기반
+    print("\n[Direction Signal] Chronos-2 quantile band 기반 방향성 계산...")
+    for key, data in output.items():
+        fc = data.get("forecast", {})
+        current = data.get("current_price", 0)
+        if not fc or not current:
+            continue
 
-            output[key]["direction_signal"] = {
-                "label":        label,
-                "confidence":   round(float(p_up), 3),
-                "horizon_days": 30,
-                "model":        "gradboost_alpha",
-            }
-            print(f"  {key:15} → {label} ({p_up:.2f})")
-    except Exception as e:
-        print(f"  Direction classifier error: {e}")
+        median    = fc.get("median", [])
+        p25       = fc.get("p25", [])
+        p75       = fc.get("p75", [])
+        p10_ext   = fc.get("p10_extreme", [])
+        p90_ext   = fc.get("p90_extreme", [])
+
+        if not median or not p25 or not p75:
+            continue
+
+        # 마지막 5일 평균으로 노이즈 제거
+        med_end = float(np.mean(median[-5:]))
+        p25_end = float(p25[-1])
+        p75_end = float(p75[-1])
+        p10_end = float(p10_ext[-1]) if p10_ext else p25_end
+        p90_end = float(p90_ext[-1]) if p90_ext else p75_end
+
+        med_chg_pct = (med_end - current) / current * 100 if current else 0
+
+        if abs(med_chg_pct) < 0.3:
+            label, confidence = "NEUTRAL", 0.50
+        elif med_end > current:
+            label = "BULLISH"
+            if p10_end > current:
+                confidence = 0.88   # 전체 분포가 현재가 위
+            elif p25_end > current:
+                confidence = 0.72   # 하위 25% 포함 전부 현재가 위
+            elif p75_end > current:
+                confidence = 0.58   # 중앙값+상위 분포만 현재가 위
+            else:
+                label, confidence = "NEUTRAL", 0.50  # 밴드가 현재가 걸침
+        else:
+            label = "BEARISH"
+            if p90_end < current:
+                confidence = 0.88
+            elif p75_end < current:
+                confidence = 0.72
+            elif p25_end < current:
+                confidence = 0.58
+            else:
+                label, confidence = "NEUTRAL", 0.50
+
+        output[key]["direction_signal"] = {
+            "label":        label,
+            "confidence":   round(confidence, 4),
+            "horizon_days": 30,
+            "model":        "chronos2_quantile",
+        }
+        print(f"  {key:15} → {label} ({confidence:.2f}) | 중앙값 {med_chg_pct:+.1f}%")
 
     # 저장 (기존 ag_forecast 보존)
     out_path = os.path.join(
