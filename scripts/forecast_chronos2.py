@@ -171,7 +171,7 @@ def forecast_with_chronos2(closes_dict, macro_df, prediction_length=90):
             ctx = pd.DataFrame({"target": closes})
             if not macro_df.empty:
                 ctx = ctx.join(macro_df[["dxy", "vix", "us10y"]], how="left")
-                ctx[["dxy", "vix", "us10y"]] = ctx[["dxy", "vix", "us10y"]].ffill().bfill()
+                ctx[["dxy", "vix", "us10y"]] = ctx[["dxy", "vix", "us10y"]].ffill().fillna(0)
             else:
                 ctx["dxy"] = ctx["vix"] = ctx["us10y"] = 0.0
 
@@ -219,11 +219,11 @@ def forecast_with_chronos2(closes_dict, macro_df, prediction_length=90):
                 continue
 
             median      = item_pred["predictions"].values
-            p10         = item_pred["0.25"].values
-            p90         = item_pred["0.75"].values
+            p25         = item_pred["0.25"].values
+            p75         = item_pred["0.75"].values
             p10_extreme = item_pred["0.1"].values
             p90_extreme = item_pred["0.9"].values
-            results[key] = (median, p10, p90, p10_extreme, p90_extreme)
+            results[key] = (median, p25, p75, p10_extreme, p90_extreme)
 
         return results
 
@@ -299,10 +299,10 @@ def run():
             continue
 
         if len(fc_result) == 5:
-            median, p10, p90, p10_extreme, p90_extreme = fc_result
+            median, p25, p75, p10_extreme, p90_extreme = fc_result
         else:
-            median, p10, p90 = fc_result
-            p10_extreme, p90_extreme = p10, p90
+            median, p25, p75 = fc_result
+            p10_extreme, p90_extreme = p25, p75
 
         # 영업일 기준 예측 날짜
         last_date = closes.index[-1]
@@ -329,8 +329,8 @@ def run():
                 "dates":   [d.strftime('%Y-%m-%d') for d in future_dates],
                 "median":  [round(float(v), 4) for v in median],
                 # 차트용 밴드: P25~P75 (시각화에 적합한 좁은 범위)
-                "p10":     [round(float(v), 4) for v in p10],
-                "p90":     [round(float(v), 4) for v in p90],
+                "p25":     [round(float(v), 4) for v in p25],
+                "p75":     [round(float(v), 4) for v in p75],
                 # 극단 범위: P10/P90 (메트릭 패널 upside/downside용)
                 "p10_extreme": [round(float(v), 4) for v in p10_extreme],
                 "p90_extreme": [round(float(v), 4) for v in p90_extreme],
