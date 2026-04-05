@@ -95,6 +95,7 @@ def run():
                 prediction_length=PREDICTION_LENGTH,
                 target="target",
                 known_covariates_names=PROPER_CALENDAR_COLS,
+                quantile_levels=[0.1, 0.5, 0.9],
                 freq="B",
             )
             print(f"    Fine-tuning ({AG_TIME_LIMIT}s)...")
@@ -118,6 +119,10 @@ def run():
 
             p10_col = "0.1"  if "0.1"  in item_preds.columns else "mean"
             p90_col = "0.9"  if "0.9"  in item_preds.columns else "mean"
+            if p10_col == "mean":
+                print(f"    ⚠ quantile 0.1 unavailable for {key} — p10 = median (degenerate band)")
+            if p90_col == "mean":
+                print(f"    ⚠ quantile 0.9 unavailable for {key} — p90 = median (degenerate band)")
             p10_arr = item_preds[p10_col].values[:PREDICTION_LENGTH]
             p90_arr = item_preds[p90_col].values[:PREDICTION_LENGTH]
 
