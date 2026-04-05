@@ -19,16 +19,29 @@ echo "[$(date)] Starting daily update..."
 echo "[$(date)] Step 1: Updating prices..."
 python3 scripts/update_prices.py
 
-# 2. Generate posts for top movers
-echo "[$(date)] Step 2: Generating posts for top movers..."
+# 2. Chronos-2 forecast (baseline + direction signals, runs daily)
+echo "[$(date)] Step 2: Chronos-2 forecast + direction signals..."
+python3 scripts/forecast_chronos2.py
+
+# 3. AutoGluon LoRA fine-tune forecast (runs weekly on Mondays only)
+DOW=$(date +%u)  # 1=Mon ... 7=Sun
+if [ "$DOW" = "1" ]; then
+  echo "[$(date)] Step 3: AutoGluon LoRA fine-tune (weekly)..."
+  python3 scripts/forecast_autogluon_prod.py
+else
+  echo "[$(date)] Step 3: AutoGluon LoRA fine-tune (skipped — not Monday)"
+fi
+
+# 4. Generate posts for top movers
+echo "[$(date)] Step 4: Generating posts for top movers..."
 python3 scripts/auto_post.py --max 2 --no-commit --no-og
 
-# 3. Generate OG images for new posts
-echo "[$(date)] Step 3: Generating OG images..."
+# 5. Generate OG images for new posts
+echo "[$(date)] Step 5: Generating OG images..."
 python3 scripts/generate_og_images.py
 
-# 4. Commit and push
-echo "[$(date)] Step 4: Committing and pushing..."
+# 6. Commit and push
+echo "[$(date)] Step 6: Committing and pushing..."
 git add -A
 git commit -m "auto: daily update $(date +%Y-%m-%d)" || echo "Nothing to commit"
 git push origin main
