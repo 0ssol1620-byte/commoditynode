@@ -482,12 +482,24 @@ def run():
     except Exception as e:
         print(f"  Direction classifier error: {e}")
 
-    # 저장
+    # 저장 (기존 ag_forecast 보존)
     out_path = os.path.join(
         os.path.dirname(__file__), '..', 'assets', 'data', 'forecast.json'
     )
-    with open(out_path, 'w') as f:
+    existing = {}
+    if os.path.exists(out_path):
+        try:
+            with open(out_path) as f:
+                existing = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            existing = {}
+    for key, payload in output.items():
+        if key in existing and 'ag_forecast' in existing[key]:
+            payload['ag_forecast'] = existing[key]['ag_forecast']
+    tmp_path = out_path + '.tmp'
+    with open(tmp_path, 'w') as f:
         json.dump(output, f, indent=2)
+    os.replace(tmp_path, out_path)
 
     model_used = "amazon/chronos-2 ✓" if CHRONOS2_AVAILABLE else "linear-fallback ⚠"
     print(f"\n✅ 완료: {len(output)}개 → assets/data/forecast.json")
