@@ -58,7 +58,7 @@ HORIZON      = 30
 STEP         = 30
 TEST_WINDOWS = 8
 PERIOD       = "3y"
-AG_TIME_LIMIT = 600   # seconds per commodity for AutoGluon fit
+AG_TIME_LIMIT = 120   # seconds per commodity for AutoGluon fit (LoRA fast pass)
 
 
 def load_pipeline():
@@ -280,11 +280,13 @@ def predict_window_autogluon(key, closes, horizon):
                 known_covariates_names=PROPER_CALENDAR_COLS,
                 freq="B",
             )
+            # Note: AutoGluon 1.5.0 has a 3D-input bug with chronos-2.
+            # chronos-bolt-small supports LoRA fine_tune and known_covariates.
             predictor.fit(
                 ts_df,
                 hyperparameters={
                     "Chronos": {
-                        "model_path": "amazon/chronos-2",
+                        "model_path": "amazon/chronos-bolt-small",
                         "fine_tune":  True,
                     }
                 },
