@@ -4,7 +4,8 @@
 #
 # Runs the full daily pipeline: price update → post generation → OG images → git commit+push
 
-set -e
+set -euo pipefail
+export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
 cd /home/phillip/.openclaw/workspace/commoditynode
 
 LOG_DIR="logs"
@@ -43,7 +44,11 @@ python3 scripts/generate_og_images.py
 # 6. Commit and push
 echo "[$(date)] Step 6: Committing and pushing..."
 git add -A
-git commit -m "auto: daily update $(date +%Y-%m-%d)" || echo "Nothing to commit"
-git push origin main
+if git diff --cached --quiet && git diff --quiet; then
+  echo "Nothing to commit"
+else
+  git commit -m "auto: daily update $(date +%Y-%m-%d)"
+  git push origin main
+fi
 
 echo "[$(date)] Daily update complete."
