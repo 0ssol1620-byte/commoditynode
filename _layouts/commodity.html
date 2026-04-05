@@ -105,6 +105,11 @@ layout: default
         </div>
       </div>
     </div>
+    <!-- Direction Signal Badge -->
+    <div id="direction-signal-wrap" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+      <div style="font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">30-Day Outlook</div>
+      <div id="direction-signal-badge"></div>
+    </div>
   </div>
 </div>
 
@@ -598,6 +603,33 @@ layout: default
         document.head.appendChild(s);
       } else {
         drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext);
+      }
+
+      // Direction signal badge
+      if (d.direction_signal) {
+        var sig = d.direction_signal;
+        var COLORS = {
+          BULLISH: { bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)', icon: '↑' },
+          BEARISH: { bg: 'rgba(239,68,68,0.15)',  color: '#ef4444', border: 'rgba(239,68,68,0.3)',  icon: '↓' },
+          NEUTRAL: { bg: 'rgba(100,116,139,0.12)', color: '#94a3b8', border: 'rgba(100,116,139,0.2)', icon: '→' }
+        };
+        var c = COLORS[sig.label] || COLORS.NEUTRAL;
+        var pct = Math.round(sig.confidence * 100);
+        var badgeHtml =
+          '<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;' +
+          'background:' + c.bg + ';color:' + c.color + ';border:1px solid ' + c.border + ';' +
+          'font-size:0.9rem;font-weight:700;letter-spacing:0.02em;">' +
+          c.icon + ' ' + sig.label +
+          '<span style="opacity:0.7;font-size:0.78rem;font-weight:500;">' + pct + '% confidence</span>' +
+          '</span>' +
+          '<span style="margin-left:10px;font-size:0.72rem;color:var(--text3);">' +
+          sig.horizon_days + '-day horizon · AI direction model</span>';
+        var badgeEl = document.getElementById('direction-signal-badge');
+        var wrapEl  = document.getElementById('direction-signal-wrap');
+        if (badgeEl) {
+          badgeEl.innerHTML = badgeHtml;
+          if (wrapEl) wrapEl.style.display = 'block';
+        }
       }
     })
     .catch(function(e) { console.warn('Forecast load error', e); });
