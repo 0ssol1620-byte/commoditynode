@@ -13,7 +13,8 @@
   "models": [
     "A(Base)",
     "B(GenMacro)",
-    "C(ProperCov)"
+    "C(ProperCov)",
+    "D(AutoGluon)"
   ],
   "covariates": {
     "B_gen_macro": [
@@ -63,7 +64,12 @@
         "mape": 6.3139,
         "fda": 0.5
       },
-      "D_autogluon": null,
+      "D_autogluon": {
+        "mae": 5.3075,
+        "rmse": 6.267,
+        "mape": 6.9883,
+        "fda": 0.5
+      },
       "gradboost": {
         "fda": 0.5,
         "p_up_mean": 0.2922
@@ -89,7 +95,12 @@
         "mape": 4.8555,
         "fda": 0.625
       },
-      "D_autogluon": null,
+      "D_autogluon": {
+        "mae": 208.2079,
+        "rmse": 236.1229,
+        "mape": 4.8923,
+        "fda": 0.625
+      },
       "gradboost": {
         "fda": 0.625,
         "p_up_mean": 0.79
@@ -115,7 +126,12 @@
         "mape": 7.1577,
         "fda": 0.25
       },
-      "D_autogluon": null,
+      "D_autogluon": {
+        "mae": 0.337,
+        "rmse": 0.3952,
+        "mape": 6.7429,
+        "fda": 0.625
+      },
       "gradboost": {
         "fda": 0.5,
         "p_up_mean": 0.7463
@@ -141,7 +157,12 @@
         "mape": 10.5565,
         "fda": 0.75
       },
-      "D_autogluon": null,
+      "D_autogluon": {
+        "mae": 0.5577,
+        "rmse": 0.6593,
+        "mape": 15.2735,
+        "fda": 0.5
+      },
       "gradboost": {
         "fda": 0.625,
         "p_up_mean": 0.5259
@@ -167,7 +188,12 @@
         "mape": 3.9811,
         "fda": 0.5
       },
-      "D_autogluon": null,
+      "D_autogluon": {
+        "mae": 17.2632,
+        "rmse": 19.7849,
+        "mape": 3.1625,
+        "fda": 0.75
+      },
       "gradboost": {
         "fda": 0.0,
         "p_up_mean": 0.4625
@@ -175,5 +201,5 @@
       "windows": 8
     }
   },
-  "run_at": "2026-04-05T08:19:39.515796+00:00"
+  "run_at": "2026-04-05T08:38:44.335276+00:00"
 }
