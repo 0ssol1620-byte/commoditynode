@@ -142,58 +142,75 @@ def fetch_history(symbol, period="5y"):
         print(f"  Error fetching {symbol}: {e}")
         return None
 
-def forecast_with_chronos2(closes_dict, prediction_length=90):
+COVARIATE_COLS = ["dxy", "vix", "us10y", "ret_1d", "ret_5d", "vol_20d", "rsi_14"]
+
+def forecast_with_chronos2(closes_dict, macro_df, prediction_length=90):
     """
-    Chronos-2 공식 API (predict_df) 사용.
-    
-    핵심 최적화:
-    1. 전체 히스토리 컨텍스트 사용 (최대 8192 steps)
-    2. quantile_levels=[0.1, 0.5, 0.9] → P10/median/P90 직접 출력
-    3. 여러 원자재를 한 번에 배치 처리 (멀티 ts → 더 빠름)
-    4. pandas DataFrame API (공식 권장 방식)
+    Chronos-2 predict_df with covariates.
+    - context_df: target + covariate 컬럼 (과거)
+    - future_df: covariate 컬럼만 (예측 기간, last-known forward-fill, no look-ahead bias)
     """
     if not CHRONOS2_AVAILABLE:
         return {k: forecast_fallback(v, prediction_length) for k, v in closes_dict.items()}
 
     try:
-        print("  Chronos-2 (amazon/chronos-2) 로드 중...")
-        pipeline = BaseChronosPipeline.from_pretrained(
+        print("  Chronos-2 로드 중...")
+        from chronos import Chronos2Pipeline
+        pipeline = Chronos2Pipeline.from_pretrained(
             "amazon/chronos-2",
-            device_map="cpu",         # GPU 없으면 CPU
+            device_map="cpu",
             torch_dtype=torch.float32,
         )
 
-        # ── 배치 DataFrame 구성 ──────────────────────────────────────────
-        # 여러 원자재를 하나의 DataFrame으로 묶어 배치 예측
-        rows = []
-        for key, closes in closes_dict.items():
-            # 전체 히스토리 사용 (최대 8192 steps)
-            # timestamp는 이미 tz-naive 영업일 인덱스 (fetch_history에서 처리됨)
-            for ts, price in zip(closes.index, closes.values):
-                rows.append({
-                    "id": key,
-                    "timestamp": pd.Timestamp(ts),
-                    "target": float(price),
-                })
+        context_rows = []
+        future_rows  = []
 
-        context_df = pd.DataFrame(rows)
-        context_df = context_df.sort_values(["id", "timestamp"]).reset_index(drop=True)
+        for key, closes in closes_dict.items():
+            tech = add_technical_features(closes)
+
+            ctx = pd.DataFrame({"target": closes})
+            if not macro_df.empty:
+                ctx = ctx.join(macro_df[["dxy", "vix", "us10y"]], how="left")
+                ctx[["dxy", "vix", "us10y"]] = ctx[["dxy", "vix", "us10y"]].ffill().bfill()
+            else:
+                ctx["dxy"] = ctx["vix"] = ctx["us10y"] = 0.0
+
+            ctx = ctx.join(tech, how="left")
+            ctx[COVARIATE_COLS[3:]] = ctx[COVARIATE_COLS[3:]].ffill().fillna(0)
+            ctx = ctx.dropna(subset=["target"])
+            ctx["id"] = key
+            ctx["timestamp"] = ctx.index
+            ctx = ctx.reset_index(drop=True)
+            context_rows.append(ctx)
+
+            last_date = closes.index[-1]
+            future_dates = pd.bdate_range(
+                start=last_date + pd.Timedelta(days=1),
+                periods=prediction_length,
+            )
+            last_known = ctx[COVARIATE_COLS].iloc[-1]
+            fut = pd.DataFrame(
+                {col: [last_known[col]] * prediction_length for col in COVARIATE_COLS}
+            )
+            fut["id"] = key
+            fut["timestamp"] = future_dates
+            future_rows.append(fut)
+
+        context_df = pd.concat(context_rows, ignore_index=True)
+        future_df  = pd.concat(future_rows,  ignore_index=True)
 
         print(f"  배치 예측 시작: {len(closes_dict)}개 원자재, prediction_length={prediction_length}")
 
         pred_df = pipeline.predict_df(
             context_df,
+            future_df=future_df,
             prediction_length=prediction_length,
-            # P25~P75 (IQR 50%) + median
-            # P10/P90은 너무 극단적 → 차트 y축 망가짐
-            # P25~P75가 실용적 투자 참고 범위로 적합
             quantile_levels=[0.1, 0.25, 0.5, 0.75, 0.9],
             id_column="id",
             timestamp_column="timestamp",
             target="target",
         )
 
-        # ── 결과 파싱 ────────────────────────────────────────────────────
         results = {}
         for key in closes_dict.keys():
             item_pred = pred_df[pred_df["id"] == key].sort_values("timestamp")
@@ -201,11 +218,9 @@ def forecast_with_chronos2(closes_dict, prediction_length=90):
                 results[key] = forecast_fallback(closes_dict[key], prediction_length)
                 continue
 
-            median = item_pred["predictions"].values
-            # 차트용: P25~P75 (좁은 밴드 — 시각화에 적합)
-            p10    = item_pred["0.25"].values   # 차트 하단 밴드
-            p90    = item_pred["0.75"].values   # 차트 상단 밴드
-            # 저장용: P10/P90도 따로 보관 (메트릭 패널에서 extreme 범위 표시)
+            median      = item_pred["predictions"].values
+            p10         = item_pred["0.25"].values
+            p90         = item_pred["0.75"].values
             p10_extreme = item_pred["0.1"].values
             p90_extreme = item_pred["0.9"].values
             results[key] = (median, p10, p90, p10_extreme, p90_extreme)
@@ -213,7 +228,7 @@ def forecast_with_chronos2(closes_dict, prediction_length=90):
         return results
 
     except Exception as e:
-        print(f"  Chronos-2 error: {e}")
+        print(f"  Chronos-2 covariate error: {e}")
         print("  → fallback 선형 트렌드로 전환")
         return {k: forecast_fallback(v, prediction_length) for k, v in closes_dict.items()}
 
@@ -243,6 +258,14 @@ def run():
     print(f"실행 시각: {now}")
     print("=" * 60)
 
+    # ── 0단계: 매크로 데이터 수집 ────────────────────────────────────────
+    print("\n[0/3] 매크로 covariate 수집 (DXY, VIX, US10Y)...")
+    macro_df = fetch_covariates(period="5y")
+    if macro_df.empty:
+        print("  ⚠ 매크로 데이터 없음 — covariate 없이 진행")
+    else:
+        print(f"  ✓ {macro_df.shape[1]}개 팩터, {len(macro_df)}일")
+
     # ── 1단계: 전체 원자재 히스토리 수집 ────────────────────────────────
     print("\n[1/3] 히스토리 데이터 수집 (5년치)...")
     closes_dict = {}
@@ -262,7 +285,7 @@ def run():
 
     # ── 2단계: Chronos-2 배치 예측 ───────────────────────────────────────
     print(f"\n[2/3] Chronos-2 배치 예측 ({len(closes_dict)}개 원자재, 90일)...")
-    forecast_results = forecast_with_chronos2(closes_dict, prediction_length=90)
+    forecast_results = forecast_with_chronos2(closes_dict, macro_df, prediction_length=90)
 
     # ── 3단계: 결과 포맷팅 및 저장 ───────────────────────────────────────
     print("\n[3/3] 결과 저장...")
