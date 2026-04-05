@@ -65,7 +65,7 @@ def build_feature_matrix(
         for col in alpha_df.columns:
             feat[col] = feat[col].ffill().fillna(0)
 
-    return feat.fillna(0)
+    return feat.replace([np.inf, -np.inf], np.nan).fillna(0)
 
 
 def make_labels(closes: pd.Series, horizon: int = HORIZON) -> pd.Series:
