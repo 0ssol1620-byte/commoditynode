@@ -14,8 +14,15 @@ from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
 import yfinance as yf
+import ta as ta_lib
 
 warnings.filterwarnings('ignore')
+
+MACRO_TICKERS = {
+    "dxy":   "DX-Y.NYB",
+    "vix":   "^VIX",
+    "us10y": "^TNX",
+}
 
 # Chronos-2 임포트
 try:
@@ -26,6 +33,54 @@ try:
 except ImportError as e:
     CHRONOS2_AVAILABLE = False
     print(f"✗ Chronos-2 unavailable: {e} → fallback 사용")
+
+def fetch_covariates(period="5y"):
+    """
+    DXY, VIX, US10Y를 수집하여 영업일 인덱스로 정렬한 DataFrame 반환.
+    결측값은 forward-fill (휴일 등).
+    """
+    frames = {}
+    for name, sym in MACRO_TICKERS.items():
+        try:
+            ticker = yf.Ticker(sym)
+            df = ticker.history(period=period)
+            if df.empty:
+                continue
+            s = df["Close"].dropna()
+            idx = pd.DatetimeIndex([
+                pd.Timestamp(ts).tz_localize(None).normalize()
+                for ts in s.index
+            ])
+            s.index = idx
+            frames[name] = s
+        except Exception as e:
+            print(f"  Macro fetch {sym}: {e}")
+
+    if not frames:
+        return pd.DataFrame()
+
+    macro_df = pd.DataFrame(frames)
+    start = min(s.index[0] for s in frames.values())
+    end   = max(s.index[-1] for s in frames.values())
+    bday  = pd.bdate_range(start=start, end=end)
+    macro_df = macro_df.reindex(bday).ffill().bfill()
+    return macro_df
+
+
+def add_technical_features(closes: pd.Series) -> pd.DataFrame:
+    """
+    단일 원자재 가격 시리즈에서 기술 지표 계산.
+    returns DataFrame with columns: ret_1d, ret_5d, vol_20d, rsi_14
+    """
+    df = pd.DataFrame({"close": closes})
+    df["ret_1d"]  = df["close"].pct_change(1)
+    df["ret_5d"]  = df["close"].pct_change(5)
+    df["vol_20d"] = df["close"].pct_change().rolling(20).std()
+    df["rsi_14"]  = ta_lib.momentum.RSIIndicator(
+        close=df["close"], window=14
+    ).rsi()
+    return df[["ret_1d", "ret_5d", "vol_20d", "rsi_14"]]
+
 
 # ── 원자재 목록 ──────────────────────────────────────────────────────────────
 COMMODITIES = {
