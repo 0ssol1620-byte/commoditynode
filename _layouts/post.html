@@ -19,12 +19,13 @@ layout: default
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "NewsArticle",
   "headline": "{{ page.title | escape }}",
   "description": "{{ page.description | default: site.description | escape }}",
   "datePublished": "{{ page.date | date_to_xmlschema }}",
   "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
-  "author": { "@type": "Organization", "name": "CommodityNode Research", "url": "https://commoditynode.com/about/editorial-team/" },
+  "articleSection": "{{ page.categories | first | default: 'Commodity Analysis' }}",
+  "author": { "@type": "Organization", "name": "CommodityNode Research", "url": "https://commoditynode.com/about/" },
   "publisher": {
     "@type": "Organization", "name": "CommodityNode",
     "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/logo.svg" }
@@ -38,13 +39,14 @@ layout: default
 }
 </script>
 
-{% if page.categories contains "Commodities" or page.categories contains "Energy" or page.categories contains "Metals" or page.categories contains "Precious Metals" %}
+{% if page.categories contains "Commodities" or page.categories contains "Energy" or page.categories contains "Metals" or page.categories contains "Precious Metals" or page.categories contains "Agriculture" or page.categories contains "Soft Commodities" or page.categories contains "Critical Materials" %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FinancialProduct",
   "name": "{{ page.commodity_name | default: page.title }}",
-  "description": "{{ page.description }}",
+  "description": "{{ page.description | default: site.description | escape }}",
+  "url": "{{ page.url | absolute_url }}",
   "provider": { "@type": "Organization", "name": "CommodityNode" }
 }
 </script>
@@ -119,12 +121,18 @@ layout: default
 
   <div class="post-layout" id="post-layout">
     <article class="post-content" id="post-article" data-animate>
+      {% if page.signal_summary %}
+      <div class="signal-summary-block" style="background:rgba(34,211,238,0.06);border-left:3px solid #22d3ee;border-radius:0 8px 8px 0;padding:14px 18px;margin:0 0 24px;font-size:0.92rem;line-height:1.6;">
+        <span style="font-weight:600;color:#22d3ee;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:6px;">Signal Summary</span>
+        <p style="margin:0;color:#e2e8f0;">{{ page.signal_summary }}</p>
+      </div>
+      {% endif %}
       {{ content }}
 
       {% if page.tags.size > 0 %}
       <div class="post-tags" aria-label="Post tags">
         {% for tag in page.tags %}
-        <a href="/tags/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
+        <a href="/commodities/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
         {% endfor %}
       </div>
       {% endif %}
@@ -172,7 +180,7 @@ layout: default
           {% if primary_tag %}
           <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
             <span style="color:var(--text3)">Next hop</span>
-            <a href="/tags/{{ primary_tag | slugify }}/" style="color:var(--text2)">{{ primary_tag }}</a>
+            <a href="/commodities/{{ primary_tag | slugify }}/" style="color:var(--text2)">{{ primary_tag }}</a>
           </div>
           {% endif %}
         </div>

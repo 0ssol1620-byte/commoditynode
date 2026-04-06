@@ -7,6 +7,23 @@ Disallow: /tags/
 Disallow: /social/
 Disallow: /logs/
 Disallow: /scripts/
+Disallow: /page/
 
 # Allow assets (CSS, JS, images) for proper rendering
 Allow: /assets/
+
+# AI Search Crawlers — explicitly welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /

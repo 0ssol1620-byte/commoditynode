@@ -1,7 +1,7 @@
 ---
 layout: commodity
-title: "Chromium Price Impact: Stainless Steel, Construction & Automotive Supply Chains"
-description: "How ferrochrome and chromium ore prices cascade through stainless steel production, construction, automotive, and chemical industries with South Africa and Kazakhstan as key suppliers."
+title: "Chromium Price Impact: Stainless Steel & Auto Supply"
+description: "How chromium prices cascade through stainless steel, construction, automotive, and chemical industries with South Africa and Kazakhstan as dominant suppliers."
 commodity_slug: "chromium"
 symbol: ""
 sector: "Industrial Metals"

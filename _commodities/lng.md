@@ -1,7 +1,7 @@
 ---
 layout: commodity
 image: "/assets/images/og-lng.png"
-title: "LNG"
+title: "LNG Price Impact: Utilities, Power & Export Markets"
 description: "Liquefied natural gas and the geopolitical reshaping of global energy trade routes."
 commodity_slug: "lng"
 symbol: "LNG"

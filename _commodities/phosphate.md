@@ -1,7 +1,7 @@
 ---
 layout: commodity
-title: "Phosphate Rock Price Impact: Fertilizer Markets, Food Security & Morocco Supply"
-description: "How phosphate rock and phosphoric acid prices cascade through global fertilizer production, agricultural commodity costs, and food security dynamics with Morocco controlling 70%+ of reserves."
+title: "Phosphate Price Impact: Fertilizers & Food Security"
+description: "How phosphate rock prices cascade through fertilizer production, agricultural costs, and food security with Morocco controlling 70%+ of global reserves."
 commodity_slug: "phosphate"
 symbol: "MOS"
 sector: "Agriculture/Fertilizer"

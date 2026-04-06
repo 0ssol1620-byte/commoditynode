@@ -2,7 +2,7 @@
 layout: commodity
 unit: "$/m³"
 image: "/assets/images/og-neon.png"
-title: "Neon Gas Price Impact: Semiconductor Lithography, Chip Supply & Geopolitical Risk"
+title: "Neon Gas Price Impact: Semiconductor Chips & Supply"
 description: "How neon gas supply disruptions cascade through semiconductor lithography, chip manufacturing, and the Ukraine-Russia geopolitical risk axis."
 commodity_slug: "neon"
 symbol: "SOXX"

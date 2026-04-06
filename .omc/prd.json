@@ -1,0 +1,278 @@
+{
+  "project": "CommodityNode SEO 전수 수정",
+  "goal": "모든 SEO 카테고리 100점 달성",
+  "iteration": 1,
+  "stories": [
+    {
+      "id": "US-001",
+      "title": "vercel.json 보안 헤더 추가",
+      "priority": 1,
+      "passes": false,
+      "acceptanceCriteria": [
+        "vercel.json에 X-Frame-Options: SAMEORIGIN 헤더 존재",
+        "vercel.json에 X-Content-Type-Options: nosniff 존재",
+        "vercel.json에 Strict-Transport-Security 존재",
+        "vercel.json에 Referrer-Policy 존재",
+        "vercel.json에 Permissions-Policy 존재"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "페이지 로더 LCP 차단 수정",
+      "priority": 1,
+      "passes": false,
+      "acceptanceCriteria": [
+        "default.html 로더에 1500ms 타임아웃 추가",
+        "타임아웃 후 로더 opacity:0 및 display:none 처리"
+      ]
+    },
+    {
+      "id": "US-003",
+      "title": "커피 포스트 중복 canonical 수정",
+      "priority": 1,
+      "passes": false,
+      "acceptanceCriteria": [
+        "starbucks-coffee-price-sensitivity.md front matter에 canonical_url 존재",
+        "canonical_url이 coffee-price-starbucks-retail/ 가리킴"
+      ]
+    },
+    {
+      "id": "US-004",
+      "title": "Organization 스키마 수정 (logo ImageObject + sameAs Twitter)",
+      "priority": 1,
+      "passes": false,
+      "acceptanceCriteria": [
+        "default.html Organization logo가 ImageObject 형식",
+        "sameAs에 twitter.com/commoditynode 포함",
+        "Feedly URL 제거 또는 유지 (Twitter 추가가 핵심)",
+        "about.md sameAs에도 Twitter 추가"
+      ]
+    },
+    {
+      "id": "US-005",
+      "title": "post.html Article→NewsArticle + author URL 수정",
+      "priority": 1,
+      "passes": false,
+      "acceptanceCriteria": [
+        "post.html @type이 NewsArticle",
+        "articleSection 필드 추가",
+        "author url이 /about/ 또는 제거",
+        "FinancialProduct에 url 필드 및 description fallback 추가",
+        "FinancialProduct 카테고리 조건에 Agriculture/Critical Materials 추가"
+      ]
+    },
+    {
+      "id": "US-006",
+      "title": "commodity.html datePublished 수정 + WebPage 타입",
+      "priority": 1,
+      "passes": false,
+      "acceptanceCriteria": [
+        "commodity.html Article→WebPage 또는 Dataset 타입 변경",
+        "datePublished site.time 대신 page.date 또는 제거",
+        "BreadcrumbList URL absolute_url 필터 사용",
+        "publisher logo가 logo.svg 참조"
+      ]
+    },
+    {
+      "id": "US-007",
+      "title": "15개 stub 커모디티 제목 수정",
+      "priority": 2,
+      "passes": false,
+      "acceptanceCriteria": [
+        "lng.md title이 50자 이상의 키워드 포함 제목",
+        "sugar.md title이 50자 이상",
+        "cocoa.md title이 50자 이상",
+        "ethanol.md title이 50자 이상",
+        "rhodium.md title이 50자 이상",
+        "cotton.md title이 50자 이상",
+        "coffee.md title이 50자 이상",
+        "diesel.md title이 50자 이상",
+        "soybeans.md title이 50자 이상",
+        "graphite.md title이 50자 이상",
+        "platinum.md title이 50자 이상",
+        "palladium.md title이 50자 이상",
+        "lean-hogs.md title이 50자 이상",
+        "vanadium.md title이 50자 이상",
+        "iron-ore.md title이 50자 이상"
+      ]
+    },
+    {
+      "id": "US-008",
+      "title": "noindex 5개 파일에 sitemap: false 추가",
+      "priority": 2,
+      "passes": false,
+      "acceptanceCriteria": [
+        "companies/index.html front matter에 sitemap: false",
+        "industries/index.html front matter에 sitemap: false",
+        "themes/index.html front matter에 sitemap: false",
+        "api-keys/index.html front matter에 sitemap: false",
+        "silver-solar-electronics-impact.md front matter에 sitemap: false"
+      ]
+    },
+    {
+      "id": "US-009",
+      "title": "Google Fonts 비블로킹 로드",
+      "priority": 2,
+      "passes": false,
+      "acceptanceCriteria": [
+        "default.html Google Fonts가 preload + onload 패턴으로 변경",
+        "noscript fallback 존재"
+      ]
+    },
+    {
+      "id": "US-010",
+      "title": "커모디티→기업 HTML 크롤 가능 링크 추가",
+      "priority": 2,
+      "passes": false,
+      "acceptanceCriteria": [
+        "commodity.html에 page.companies Liquid 루프 존재",
+        "각 기업이 /companies/{ticker}/ 링크로 렌더링"
+      ]
+    },
+    {
+      "id": "US-011",
+      "title": "/tags/ 내부 링크 → /commodities/ 교체",
+      "priority": 2,
+      "passes": false,
+      "acceptanceCriteria": [
+        "post.html의 tags/ 링크가 commodities/ 패턴으로 교체",
+        "또는 태그 대신 commodity hub 직접 링크"
+      ]
+    },
+    {
+      "id": "US-012",
+      "title": "메타 설명 160자 초과 11개 커모디티 수정",
+      "priority": 2,
+      "passes": false,
+      "acceptanceCriteria": [
+        "platinum.md description 160자 이하",
+        "jet-fuel.md description 160자 이하",
+        "diesel.md description 160자 이하",
+        "phosphate.md description 160자 이하",
+        "chromium.md description 160자 이하",
+        "germanium.md description 160자 이하",
+        "crude-oil.md description 160자 이하",
+        "copper.md description 160자 이하",
+        "molybdenum.md description 160자 이하",
+        "tungsten.md description 160자 이하",
+        "gold.md description 160자 이하"
+      ]
+    },
+    {
+      "id": "US-013",
+      "title": "pricing 페이지 SoftwareApplication 스키마 추가",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "pricing/index.html에 SoftwareApplication JSON-LD 존재",
+        "applicationCategory: FinanceApplication",
+        "offers 배열에 Free/Pro Monthly/Pro Annual 포함"
+      ]
+    },
+    {
+      "id": "US-014",
+      "title": "index.html CollectionPage 스키마 추가",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "index.html에 CollectionPage JSON-LD 존재",
+        "ItemList로 주요 커모디티 5개 이상 포함"
+      ]
+    },
+    {
+      "id": "US-015",
+      "title": "commodity.html Dataset 스키마 추가",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "commodity.html에 Dataset JSON-LD 블록 존재",
+        "creator, keywords, isAccessibleForFree 필드 포함"
+      ]
+    },
+    {
+      "id": "US-016",
+      "title": "commodity.html FAQPage 스키마 추가",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "commodity.html에 FAQPage JSON-LD 존재",
+        "최소 3개 Q&A 쌍 포함 (Liquid 기반)"
+      ]
+    },
+    {
+      "id": "US-017",
+      "title": "about.md 스키마 강화 (mainEntity + Person)",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "about.md AboutPage에 mainEntity로 Organization 연결",
+        "Person 스키마 블록 추가",
+        "sameAs에 Twitter/X 포함"
+      ]
+    },
+    {
+      "id": "US-018",
+      "title": "구리 근중복 포스트 4개 canonical 처리",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "2026-03-27-copper-structural-deficit-infrastructure.md에 canonical 추가",
+        "2026-03-20-copper-ev-infrastructure-impact.md에 canonical 추가"
+      ]
+    },
+    {
+      "id": "US-019",
+      "title": "robots.txt AI 크롤러 명시적 허용 추가",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "robots.txt에 GPTBot 명시적 Allow",
+        "ClaudeBot 명시적 Allow",
+        "PerplexityBot 명시적 Allow",
+        "Disallow: /page/ 추가"
+      ]
+    },
+    {
+      "id": "US-020",
+      "title": "llms.txt 커밋 확인 및 내용 검증",
+      "priority": 1,
+      "passes": false,
+      "acceptanceCriteria": [
+        "llms.txt 파일이 commoditynode 루트에 존재",
+        "플랫폼 정의 단락 존재",
+        "커모디티 허브 URL 목록 존재",
+        "툴 설명 존재"
+      ]
+    },
+    {
+      "id": "US-021",
+      "title": "post.html Signal Summary 블록 추가",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "post.html에 signal-summary include 또는 인라인 블록 존재",
+        "page.signal_summary front matter 있으면 표시"
+      ]
+    },
+    {
+      "id": "US-022",
+      "title": "회사 페이지 제목 SEO 최적화",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "_layouts/company.html 또는 개별 파일에서 제목 패턴 개선",
+        "최소 10개 주요 기업 페이지 제목이 50자 이상"
+      ]
+    },
+    {
+      "id": "US-023",
+      "title": "Impact Map 데이터 정적 HTML 테이블로 노출",
+      "priority": 3,
+      "passes": false,
+      "acceptanceCriteria": [
+        "commodity.html에 COMMODITY_DATA 기반 정적 HTML 테이블 추가",
+        "크롤러가 읽을 수 있는 임팩트 관계 데이터 표시"
+      ]
+    }
+  ]
+}

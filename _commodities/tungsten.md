@@ -1,7 +1,7 @@
 ---
 layout: commodity
 title: "Tungsten Price Impact: Cemented Carbide, Defense & China Supply Dominance"
-description: "How tungsten price movements cascade through cutting tool manufacturers, defense munitions, heavy industry, and mining equipment amid China's 80%+ supply control."
+description: "How tungsten prices cascade through cutting tool manufacturers, defense munitions, heavy industry, and mining equipment amid China's 80%+ supply control."
 commodity_slug: "tungsten"
 symbol: ""
 sector: "Industrial Metals/Defense"

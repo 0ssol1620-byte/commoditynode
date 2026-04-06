@@ -5,6 +5,7 @@ description: "How silver price movements ripple through solar panel manufacturer
 permalink: /silver-solar-electronics-impact/
 redirect_to: /commodities/silver/
 noindex: true
+sitemap: false
 ---
 <meta http-equiv="refresh" content="0; url=/commodities/silver/">
 <script>window.location.replace('/commodities/silver/');</script>

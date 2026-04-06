@@ -1,7 +1,7 @@
 ---
 layout: commodity
 image: "/assets/images/og-cocoa.png"
-title: "Cocoa"
+title: "Cocoa Price Impact: Chocolate, Food Stocks & Supply"
 description: "Cocoa's West African production concentration and climate change threat to global chocolate supply."
 commodity_slug: "cocoa"
 symbol: "CC=F"

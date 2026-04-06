@@ -1,7 +1,7 @@
 ---
 layout: commodity
 image: "/assets/images/og-corn.png"
-title: "Ethanol"
+title: "Ethanol Price Impact: Corn Demand, Biofuel & Refiners"
 description: "Fuel ethanol as a corn-derived biofuel blended into the US gasoline supply under federal renewable fuel mandates."
 commodity_slug: "ethanol"
 symbol: "REX"

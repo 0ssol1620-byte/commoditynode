@@ -2,7 +2,7 @@
 layout: commodity
 unit: "cents/lb"
 image: "/assets/images/og-cotton.png"
-title: "Cotton"
+title: "Cotton Price Impact: Apparel, Textiles & Agriculture"
 description: "Cotton's textile industry dynamics, weather sensitivity, and polyester competition."
 commodity_slug: "cotton"
 symbol: "CT=F"

@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/gallon"
 image: "/assets/images/og-diesel.png"
-title: "Diesel"
-description: "Diesel price impact analysis: how diesel costs ripple through freight, trucking, logistics, and agricultural operations. Track the hidden inflation transmission mechanism that drives consumer prices across every sector of the economy."
+title: "Diesel Price Impact: Freight, Trucking & Agriculture"
+description: "Diesel price impact analysis: how diesel costs ripple through freight, trucking, logistics, and agriculture, driving consumer prices across every sector."
 commodity_slug: "diesel"
 symbol: "HO=F"
 sector: "Energy"

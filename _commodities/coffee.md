@@ -2,7 +2,7 @@
 layout: commodity
 unit: "cents/lb"
 image: "/assets/images/og-coffee.png"
-title: "Coffee"
+title: "Coffee Price Impact: Food & Beverage Stocks & ETFs"
 description: "Coffee as the world's second-most traded commodity with climate-vulnerable supply chains."
 commodity_slug: "coffee"
 symbol: "KC=F"

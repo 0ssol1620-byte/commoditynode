@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/oz"
 image: "/assets/images/og-platinum.png"
-title: "Platinum"
-description: "Platinum price impact analysis: tracking the metal's transition from diesel catalytic converters to hydrogen fuel cell technology. Explore how platinum supply constraints in South Africa and shifting demand from auto catalysts to green hydrogen shape global markets."
+title: "Platinum Price Impact: Fuel Cells, Catalysts & PGMs"
+description: "Platinum price impact: how the shift from catalytic converters to hydrogen fuel cells, plus South African supply risks, reshape PGM demand and pricing."
 commodity_slug: "platinum"
 symbol: "PL=F"
 sector: "Precious Metals"

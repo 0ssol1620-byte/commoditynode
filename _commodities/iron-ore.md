@@ -2,7 +2,7 @@
 layout: commodity
 unit: "$/ton"
 image: "/assets/images/og-iron-ore.png"
-title: "Iron Ore"
+title: "Iron Ore Price Impact: Steel, China & Mining Stocks"
 description: "Iron ore as the essential steel feedstock driven by China's 70%+ consumption share."
 commodity_slug: "iron-ore"
 symbol: "VALE"

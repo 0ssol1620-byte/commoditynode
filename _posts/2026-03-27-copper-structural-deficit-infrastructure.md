@@ -9,7 +9,7 @@ reading_time: 8
 commodity_name: "Copper"
 direction: bullish
 image: /assets/images/og-copper-deficit.png
-canonical_url: https://commoditynode.com/copper-structural-deficit-infrastructure/
+canonical_url: https://commoditynode.com/copper-structural-deficit/
 ---
 
 <div style="background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.2);border-radius:12px;padding:28px;margin-bottom:32px;">

@@ -2,7 +2,7 @@
 layout: commodity
 unit: "cents/bushel"
 image: "/assets/images/og-soybeans.png"
-title: "Soybeans"
+title: "Soybeans Price Impact: Crush Margins, Feed & Biofuel"
 description: "Soybean crush economics and the US-Brazil-China trade triangle that drives global pricing."
 commodity_slug: "soybeans"
 symbol: "ZS=F"

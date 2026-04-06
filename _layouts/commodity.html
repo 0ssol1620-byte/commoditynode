@@ -5,15 +5,15 @@ layout: default
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "WebPage",
   "headline": "{{ page.title | escape }}",
   "description": "{{ page.description | default: site.description | escape }}",
   "author": { "@type": "Organization", "name": "CommodityNode", "url": "https://commoditynode.com" },
-  "publisher": { "@type": "Organization", "name": "CommodityNode", "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/og-default.png" } },
+  "publisher": { "@type": "Organization", "name": "CommodityNode", "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/logo.svg" } },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },
   "image": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}",
-  "datePublished": "{{ site.time | date_to_xmlschema }}",
-  "dateModified": "{{ site.time | date_to_xmlschema }}"
+  "datePublished": "{{ page.date | default: site.time | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | default: site.time | date_to_xmlschema }}"
 }
 </script>
 
@@ -43,7 +43,58 @@ layout: default
   "itemListElement": [
     {"@type":"ListItem","position":1,"name":"Home","item":"https://commoditynode.com/"},
     {"@type":"ListItem","position":2,"name":"Commodities","item":"https://commoditynode.com/commodities/"},
-    {"@type":"ListItem","position":3,"name":"{{ page.title | split: ':' | first | strip | escape }}","item":"https://commoditynode.com{{ page.url }}"}
+    {"@type":"ListItem","position":3,"name":"{{ page.title | split: ':' | first | strip | escape }}","item":"{{ page.url | absolute_url }}"}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "{{ page.title | split: ':' | first | strip | escape }} — Price Data and Impact Analysis",
+  "description": "Daily price data, 52-week range, and commodity-to-equity impact analysis for {{ page.title | split: ':' | first | strip | escape }}. Includes correlation scores, sector sensitivity, and company exposure mapping.",
+  "url": "{{ page.url | absolute_url }}",
+  "creator": {
+    "@type": "Organization",
+    "name": "CommodityNode",
+    "url": "https://commoditynode.com"
+  },
+  "keywords": ["{{ page.title | split: ':' | first | strip | downcase | escape }} price", "commodity price impact", "supply chain analysis"],
+  "isAccessibleForFree": true,
+  "license": "https://commoditynode.com/privacy/"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What drives {{ page.title | split: ':' | first | strip | escape }} prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ page.title | split: ':' | first | strip | escape }} prices are driven by supply and demand dynamics, geopolitical factors, currency movements, and macroeconomic conditions. Key sectors affected include {{ page.sector | default: 'industrial and financial markets' }}."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which stocks benefit when {{ page.title | split: ':' | first | strip | escape }} prices rise?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When {{ page.title | split: ':' | first | strip | escape }} prices rise, producers and related ETFs typically benefit. Companies with direct exposure include those listed in the impact map above. CommodityNode tracks correlation scores for each company."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does {{ page.title | split: ':' | first | strip | escape }} affect the broader market?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ page.title | split: ':' | first | strip | escape }} price movements ripple through supply chains, affecting industries from manufacturing to consumer goods. The CommodityNode impact map shows the full ripple chain with quantified sensitivity scores."
+      }
+    }
   ]
 }
 </script>
@@ -441,6 +492,17 @@ layout: default
     </aside>
   </div>
 </div>
+
+{% if page.companies and page.companies.size > 0 %}
+<section class="related-companies" style="margin:32px 0;padding:20px 24px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:10px;">
+  <h3 style="font-size:0.85rem;font-weight:600;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;margin:0 0 12px;">Related Company Pages</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+    {% for co in page.companies %}
+    <a href="/companies/{{ co | downcase }}/" style="display:inline-block;padding:5px 12px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.2);border-radius:16px;color:#22d3ee;font-size:0.82rem;text-decoration:none;font-weight:500;">{{ co }}</a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
 
 <!-- Related Commodities -->
 {% if page.substitutes %}

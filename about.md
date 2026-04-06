@@ -12,13 +12,21 @@ description: "CommodityNode maps how commodity price movements ripple through gl
   "name": "About CommodityNode",
   "url": "https://commoditynode.com/about/",
   "description": "CommodityNode is an independent commodity intelligence platform mapping how raw material price movements ripple through industries, stocks, and ETFs.",
-  "publisher": {
+  "mainEntity": {
     "@type": "Organization",
     "name": "CommodityNode",
     "url": "https://commoditynode.com",
     "email": "contact@commoditynode.com",
-    "sameAs": ["https://www.threads.com/@commoditynode"],
-    "knowsAbout": ["Commodity Markets", "Financial Analysis", "Supply Chain Risk", "Portfolio Management"]
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://commoditynode.com/assets/images/logo.svg"
+    },
+    "sameAs": [
+      "https://www.threads.com/@commoditynode",
+      "https://twitter.com/commoditynode"
+    ],
+    "knowsAbout": ["Commodity Markets", "Financial Analysis", "Supply Chain Risk", "Portfolio Management", "Commodity Price Forecasting", "Equity Impact Analysis"],
+    "description": "Independent commodity intelligence platform providing interactive Impact Maps, AI price forecasts, and Signal Reports on commodity-to-equity ripple effects."
   }
 }
 </script>
