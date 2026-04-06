@@ -6,6 +6,7 @@ title: "Soybean Meal Price Impact: Livestock Feed, Crush Margins & Agribusiness"
 description: "Soybean meal as the dominant global protein source in animal feed, driving the soy crush spread and livestock economics."
 commodity_slug: "soybean-meal"
 symbol: "ZM=F"
+data_type: "direct_futures"
 sector: "Agriculture"
 etfs: ["SOYB", "DBA"]
 companies: ["ADM", "CTVA"]

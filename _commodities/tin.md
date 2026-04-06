@@ -6,11 +6,13 @@ title: "Tin Price Impact: Semiconductors, Electronics & Soldering Supply Chain"
 description: "How tin price spikes ripple through semiconductor packaging, electronics manufacturers, and global PCB production."
 commodity_slug: "tin"
 symbol: ""
+data_type: "analysis_only"
 sector: "Industrial Metals"
 etfs: ["JJM"]
 companies: []
 substitutes: ["Lead-free Alternatives", "Conductive Adhesives"]
 themes: ["Supply Chain Disruption"]
+tags: ["tin"]
 ---
 
 <script>

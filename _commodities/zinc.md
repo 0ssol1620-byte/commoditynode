@@ -6,11 +6,13 @@ title: "Zinc Price Impact: Galvanized Steel, Construction & Infrastructure"
 description: "How zinc price movements affect galvanized steel producers, construction companies, and infrastructure spending cycles."
 commodity_slug: "zinc"
 symbol: "ZNC=F"
+data_type: "direct_futures"
 sector: "Industrial Metals"
 etfs: ["JJM"]
 companies: ["BHP", "GLNCY", "TECK"]
 substitutes: ["Aluminum", "Plastics"]
 themes: ["Infrastructure Boom"]
+tags: ["zinc"]
 ---
 
 <script>

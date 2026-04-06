@@ -6,11 +6,13 @@ title: "Sugar Price Impact: Food Industry, Ethanol & Global ETFs"
 description: "Sugar's unique economics driven by ethanol diversion, government subsidies, and climate risk."
 commodity_slug: "sugar"
 symbol: "SB=F"
+data_type: "direct_futures"
 sector: "Soft Commodities"
 etfs: ["CANE", "SGG"]
 companies: []
 substitutes: ["HFCS", "Stevia", "Aspartame"]
 themes: ["Food Inflation"]
+tags: ["sugar"]
 ---
 
 <script>

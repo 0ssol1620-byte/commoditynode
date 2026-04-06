@@ -1,277 +1,141 @@
 {
-  "project": "CommodityNode SEO 전수 수정",
-  "goal": "모든 SEO 카테고리 100점 달성",
-  "iteration": 3,
+  "project": "CommodityNode Ultimate Implementation Blueprint",
+  "goal": "제품 완성도 마감 — trust-based productized research platform",
+  "iteration": 1,
   "stories": [
     {
-      "id": "US-001",
-      "title": "vercel.json 보안 헤더 추가",
+      "id": "BP-001",
+      "title": "Phase 1: 62개 커모디티 data_type 분류 + front matter 추가",
       "priority": 1,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "vercel.json에 X-Frame-Options: SAMEORIGIN 헤더 존재",
-        "vercel.json에 X-Content-Type-Options: nosniff 존재",
-        "vercel.json에 Strict-Transport-Security 존재",
-        "vercel.json에 Referrer-Policy 존재",
-        "vercel.json에 Permissions-Policy 존재"
+        "모든 62개 _commodities/*.md에 data_type 필드 존재 (direct_futures/proxy/analysis_only)",
+        "direct_futures: =F로 끝나는 symbol 가진 26개",
+        "proxy: 주식/ETF ticker로 가격 추적하는 28개",
+        "analysis_only: symbol 빈 8개 (chromium, gallium, germanium, helium, molybdenum, silicon, tin, tungsten)",
+        "grep -c 'data_type:' 결과가 62"
       ]
     },
     {
-      "id": "US-002",
-      "title": "페이지 로더 LCP 차단 수정",
+      "id": "BP-002",
+      "title": "Phase 1: commodity.html 데이터 타입 배지 UI",
       "priority": 1,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "default.html 로더에 1500ms 타임아웃 추가",
-        "타임아웃 후 로더 opacity:0 및 display:none 처리"
+        "commodity.html 레이아웃에 page.data_type 기반 배지 렌더링",
+        "direct_futures → 'Live Futures' 배지 (초록)",
+        "proxy → 'Proxy-Based' 배지 (노랑) + proxy 설명 텍스트",
+        "analysis_only → 'Analysis Only' 배지 (회색) + 'No live benchmark' 설명",
+        "배지가 commodity 제목 근처에 위치"
       ]
     },
     {
-      "id": "US-003",
-      "title": "커피 포스트 중복 canonical 수정",
+      "id": "BP-003",
+      "title": "Phase 1: front matter 스키마 표준화 (누락 필드 보강)",
       "priority": 1,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "starbucks-coffee-price-sensitivity.md front matter에 canonical_url 존재",
-        "canonical_url이 coffee-price-starbucks-retail/ 가리킴"
+        "모든 62개 commodity에 sector 필드 존재",
+        "모든 62개 commodity에 companies 배열 존재 (최소 빈 배열)",
+        "모든 62개 commodity에 etfs 배열 존재",
+        "모든 62개 commodity에 substitutes 배열 존재",
+        "tags 필드 없는 31개 commodity에 tags 추가 (commodity_slug 포함)"
       ]
     },
     {
-      "id": "US-004",
-      "title": "Organization 스키마 수정 (logo ImageObject + sameAs Twitter)",
+      "id": "BP-004",
+      "title": "Phase 2: 대표 허브 10개 KPI 완성 + fallback 체계",
       "priority": 1,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "default.html Organization logo가 ImageObject 형식",
-        "sameAs에 twitter.com/commoditynode 포함",
-        "Feedly URL 제거 또는 유지 (Twitter 추가가 핵심)",
-        "about.md sameAs에도 Twitter 추가"
+        "commodity.html에 KPI 데이터 없을 때 fallback UI 존재 (빈칸/dash 대신 설명 텍스트)",
+        "analysis_only 허브는 'Analysis-First' 헤더로 가격 KPI 대신 분석 요약 표시",
+        "proxy 허브는 proxy 티커 명시 + '이 가격은 proxy 지표입니다' 설명",
+        "crude-oil, gold, copper, natural-gas, wheat 허브에서 forecast 영역 비어있지 않음"
       ]
     },
     {
-      "id": "US-005",
-      "title": "post.html Article→NewsArticle + author URL 수정",
-      "priority": 1,
-      "passes": true,
-      "acceptanceCriteria": [
-        "post.html @type이 NewsArticle",
-        "articleSection 필드 추가",
-        "author url이 /about/ 또는 제거",
-        "FinancialProduct에 url 필드 및 description fallback 추가",
-        "FinancialProduct 카테고리 조건에 Agriculture/Critical Materials 추가"
-      ]
-    },
-    {
-      "id": "US-006",
-      "title": "commodity.html datePublished 수정 + WebPage 타입",
-      "priority": 1,
-      "passes": true,
-      "acceptanceCriteria": [
-        "commodity.html Article→WebPage 또는 Dataset 타입 변경",
-        "datePublished site.time 대신 page.date 또는 제거",
-        "BreadcrumbList URL absolute_url 필터 사용",
-        "publisher logo가 logo.svg 참조"
-      ]
-    },
-    {
-      "id": "US-007",
-      "title": "15개 stub 커모디티 제목 수정",
+      "id": "BP-005",
+      "title": "Phase 2: zero/low related post 커모디티 보강",
       "priority": 2,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "lng.md title이 50자 이상의 키워드 포함 제목",
-        "sugar.md title이 50자 이상",
-        "cocoa.md title이 50자 이상",
-        "ethanol.md title이 50자 이상",
-        "rhodium.md title이 50자 이상",
-        "cotton.md title이 50자 이상",
-        "coffee.md title이 50자 이상",
-        "diesel.md title이 50자 이상",
-        "soybeans.md title이 50자 이상",
-        "graphite.md title이 50자 이상",
-        "platinum.md title이 50자 이상",
-        "palladium.md title이 50자 이상",
-        "lean-hogs.md title이 50자 이상",
-        "vanadium.md title이 50자 이상",
-        "iron-ore.md title이 50자 이상"
+        "ethylene.md에 tags 필드 추가 → related posts 연결 가능",
+        "palm-oil.md에 tags 필드 추가 → related posts 연결 가능",
+        "ethylene 허브에 'Coverage expanding' 안내 + related industry/company 섹션 존재",
+        "palm-oil 허브에 동일 처리"
       ]
     },
     {
-      "id": "US-008",
-      "title": "noindex 5개 파일에 sitemap: false 추가",
+      "id": "BP-006",
+      "title": "Phase 3: Simulator UX 완성 (demo scenario + preset shocks)",
       "priority": 2,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "companies/index.html front matter에 sitemap: false",
-        "industries/index.html front matter에 sitemap: false",
-        "themes/index.html front matter에 sitemap: false",
-        "api-keys/index.html front matter에 sitemap: false",
-        "silver-solar-electronics-impact.md front matter에 sitemap: false"
+        "simulator 첫 진입 시 default commodity 선택 + 차트 렌더링",
+        "preset shock 버튼 3개 이상 존재 (OPEC cut, supply disruption, demand shock 등)",
+        "무료 사용자도 기본 시나리오 결과 확인 가능",
+        "상단 카피가 사용 맥락 중심 ('Use before macro events, supply shocks, earnings checks')"
       ]
     },
     {
-      "id": "US-009",
-      "title": "Google Fonts 비블로킹 로드",
+      "id": "BP-007",
+      "title": "Phase 3: Pricing 결과 중심 개편",
       "priority": 2,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "default.html Google Fonts가 preload + onload 패턴으로 변경",
-        "noscript fallback 존재"
+        "Free/Pro/Enterprise 차이가 '결과' 중심 서술 (기능 나열 아님)",
+        "실제 사용 예시 최소 2개 (analyst workflow, trader workflow)",
+        "FAQ에 trial/cancellation/billing/export 항목 존재",
+        "CTA 문구가 구체적 ('Unlock forecasts and simulator', 'Talk to us about team access')"
       ]
     },
     {
-      "id": "US-010",
-      "title": "커모디티→기업 HTML 크롤 가능 링크 추가",
+      "id": "BP-008",
+      "title": "Phase 3: 전환용 Landing Page 추가",
       "priority": 2,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "commodity.html에 page.companies Liquid 루프 존재",
-        "각 기업이 /companies/{ticker}/ 링크로 렌더링"
+        "landing/index.html 또는 /pro/ 경로에 전환용 랜딩 페이지 존재",
+        "구조: 문제 제기 → 실제 예시 → 제품 차별화 → 무료/유료 차이 → trust → pricing → CTA",
+        "Home과 다른 단일 전환 목적 페이지"
       ]
     },
     {
-      "id": "US-011",
-      "title": "/tags/ 내부 링크 → /commodities/ 교체",
-      "priority": 2,
-      "passes": true,
-      "acceptanceCriteria": [
-        "post.html의 tags/ 링크가 commodities/ 패턴으로 교체",
-        "또는 태그 대신 commodity hub 직접 링크"
-      ]
-    },
-    {
-      "id": "US-012",
-      "title": "메타 설명 160자 초과 11개 커모디티 수정",
-      "priority": 2,
-      "passes": true,
-      "acceptanceCriteria": [
-        "platinum.md description 160자 이하",
-        "jet-fuel.md description 160자 이하",
-        "diesel.md description 160자 이하",
-        "phosphate.md description 160자 이하",
-        "chromium.md description 160자 이하",
-        "germanium.md description 160자 이하",
-        "crude-oil.md description 160자 이하",
-        "copper.md description 160자 이하",
-        "molybdenum.md description 160자 이하",
-        "tungsten.md description 160자 이하",
-        "gold.md description 160자 이하"
-      ]
-    },
-    {
-      "id": "US-013",
-      "title": "pricing 페이지 SoftwareApplication 스키마 추가",
+      "id": "BP-009",
+      "title": "Phase 4: CTA 흐름 연결 + newsletter 차등화",
       "priority": 3,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "pricing/index.html에 SoftwareApplication JSON-LD 존재",
-        "applicationCategory: FinanceApplication",
-        "offers 배열에 Free/Pro Monthly/Pro Annual 포함"
+        "commodity hub 하단에 시그널/시뮬레이터 CTA 존재",
+        "post 하단에 관련 hub + pricing CTA 존재",
+        "newsletter CTA가 페이지별 차등화 (home: weekly digest, hub: follow commodity, report: next analysis)",
+        "비결제 사용자 fallback CTA 강화"
       ]
     },
     {
-      "id": "US-014",
-      "title": "index.html CollectionPage 스키마 추가",
+      "id": "BP-010",
+      "title": "Phase 4: 카피/신뢰/정책 정렬",
       "priority": 3,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "index.html에 CollectionPage JSON-LD 존재",
-        "ItemList로 주요 커모디티 5개 이상 포함"
+        "Home/Pricing/Signals/Simulator/About 톤 통일",
+        "methodology trust snippet이 주요 페이지(pricing, hub, signals)에 분산 배치",
+        "free/metered/Pro-only 표현이 정책과 일치",
+        "근거 없는 강한 주장 제거 또는 완곡화"
       ]
     },
     {
-      "id": "US-015",
-      "title": "commodity.html Dataset 스키마 추가",
+      "id": "BP-011",
+      "title": "Phase 5: 검증 스크립트 + 최종 문서",
       "priority": 3,
-      "passes": true,
+      "passes": false,
       "acceptanceCriteria": [
-        "commodity.html에 Dataset JSON-LD 블록 존재",
-        "creator, keywords, isAccessibleForFree 필드 포함"
-      ]
-    },
-    {
-      "id": "US-016",
-      "title": "commodity.html FAQPage 스키마 추가",
-      "priority": 3,
-      "passes": true,
-      "acceptanceCriteria": [
-        "commodity.html에 FAQPage JSON-LD 존재",
-        "최소 3개 Q&A 쌍 포함 (Liquid 기반)"
-      ]
-    },
-    {
-      "id": "US-017",
-      "title": "about.md 스키마 강화 (mainEntity + Person)",
-      "priority": 3,
-      "passes": true,
-      "acceptanceCriteria": [
-        "about.md AboutPage에 mainEntity로 Organization 연결",
-        "Person 스키마 블록 추가",
-        "sameAs에 Twitter/X 포함"
-      ]
-    },
-    {
-      "id": "US-018",
-      "title": "구리 근중복 포스트 4개 canonical 처리",
-      "priority": 3,
-      "passes": true,
-      "acceptanceCriteria": [
-        "2026-03-27-copper-structural-deficit-infrastructure.md에 canonical 추가",
-        "2026-03-20-copper-ev-infrastructure-impact.md에 canonical 추가"
-      ]
-    },
-    {
-      "id": "US-019",
-      "title": "robots.txt AI 크롤러 명시적 허용 추가",
-      "priority": 3,
-      "passes": true,
-      "acceptanceCriteria": [
-        "robots.txt에 GPTBot 명시적 Allow",
-        "ClaudeBot 명시적 Allow",
-        "PerplexityBot 명시적 Allow",
-        "Disallow: /page/ 추가"
-      ]
-    },
-    {
-      "id": "US-020",
-      "title": "llms.txt 커밋 확인 및 내용 검증",
-      "priority": 1,
-      "passes": true,
-      "acceptanceCriteria": [
-        "llms.txt 파일이 commoditynode 루트에 존재",
-        "플랫폼 정의 단락 존재",
-        "커모디티 허브 URL 목록 존재",
-        "툴 설명 존재"
-      ]
-    },
-    {
-      "id": "US-021",
-      "title": "post.html Signal Summary 블록 추가",
-      "priority": 3,
-      "passes": true,
-      "acceptanceCriteria": [
-        "post.html에 signal-summary include 또는 인라인 블록 존재",
-        "page.signal_summary front matter 있으면 표시"
-      ]
-    },
-    {
-      "id": "US-022",
-      "title": "회사 페이지 제목 SEO 최적화",
-      "priority": 3,
-      "passes": true,
-      "acceptanceCriteria": [
-        "_layouts/company.html 또는 개별 파일에서 제목 패턴 개선",
-        "최소 10개 주요 기업 페이지 제목이 50자 이상"
-      ]
-    },
-    {
-      "id": "US-023",
-      "title": "Impact Map 데이터 정적 HTML 테이블로 노출",
-      "priority": 3,
-      "passes": true,
-      "acceptanceCriteria": [
-        "commodity.html에 COMMODITY_DATA 기반 정적 HTML 테이블 추가",
-        "크롤러가 읽을 수 있는 임팩트 관계 데이터 표시"
+        "scripts/validate_frontmatter.py 존재 + 실행 가능",
+        "scripts/validate_links.py 존재 + 실행 가능",
+        "CHANGELOG_IMPLEMENTATION.md 작성",
+        "VALIDATION_REPORT.md 작성",
+        "REMAINING_RISKS.md 작성"
       ]
     }
   ]

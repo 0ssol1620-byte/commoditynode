@@ -5,6 +5,7 @@ title: "Vanadium Price Impact: Grid Storage & Steel Alloys"
 description: "Vanadium's dual role in high-strength steel alloys and grid-scale redox flow batteries, with Chinese supply dominance."
 commodity_slug: "vanadium"
 symbol: "RIO"
+data_type: "proxy"
 sector: "Metals"
 etfs: ["PICK", "XME"]
 companies: ["RIO"]

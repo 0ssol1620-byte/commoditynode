@@ -6,11 +6,13 @@ title: "Aluminum Price Impact: Aerospace, Beverage Cans & Auto Industry"
 description: "How aluminum price movements affect aerospace manufacturers, beverage companies, automotive supply chains, and producers like Alcoa and Century Aluminum."
 commodity_slug: "aluminum"
 symbol: "ALI=F"
+data_type: "direct_futures"
 sector: "Industrial Metals"
 etfs: ["JJU"]
 companies: ["AA"]
 substitutes: ["Steel", "Carbon Fiber", "Plastics"]
 themes: ["EV Transition", "Clean Energy"]
+tags: ["aluminum"]
 ---
 
 <script>

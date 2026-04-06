@@ -6,6 +6,7 @@ title: "Crude Oil Price Impact: OPEC Policy, Refiner Margins & Energy Stocks"
 description: "How WTI crude oil price movements ripple through airlines, energy stocks, refiners, and consumer spending. Impact map with correlations and sensitivity scores."
 commodity_slug: "crude-oil"
 symbol: "CL=F"
+data_type: "direct_futures"
 sector: "Energy"
 etfs: ["XLE", "USO", "OIH"]
 companies: ["XOM", "CVX", "HAL", "SLB"]

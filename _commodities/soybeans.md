@@ -6,11 +6,13 @@ title: "Soybeans Price Impact: Crush Margins, Feed & Biofuel"
 description: "Soybean crush economics and the US-Brazil-China trade triangle that drives global pricing."
 commodity_slug: "soybeans"
 symbol: "ZS=F"
+data_type: "direct_futures"
 sector: "Agriculture"
 etfs: ["SOYB"]
 companies: ["ADM", "CTVA", "MOS"]
 substitutes: ["Canola", "Sunflower", "Palm Oil"]
 themes: ["Food Inflation"]
+tags: ["soybeans"]
 ---
 
 <script>

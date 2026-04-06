@@ -5,6 +5,7 @@ title: "Rare Earth Elements Price Impact: Tech Supply Chain & Critical Minerals"
 description: "Rare earth elements powering permanent magnets for EV motors, wind turbines, and defense systems, with extreme Chinese supply chain dominance."
 commodity_slug: "rare-earth"
 symbol: "MP"
+data_type: "proxy"
 sector: "Metals/Technology"
 etfs: ["REMX", "PICK"]
 companies: ["MP"]

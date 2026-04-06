@@ -6,11 +6,13 @@ title: "Iridium Price Impact: Green Hydrogen, PEM Electrolyzers & PGM Supply Cha
 description: "How iridium price shifts cascade through green hydrogen production, PEM electrolyzer manufacturers, and the South Africa-concentrated PGM supply chain."
 commodity_slug: "iridium"
 symbol: "SBSW"
+data_type: "proxy"
 sector: "PGM/Clean Energy"
 etfs: ["PPLT"]
 companies: ["SBSW", "IMPUY"]
 substitutes: ["Ruthenium Catalysts", "AEM Electrolyzers"]
 themes: ["Clean Energy"]
+tags: ["iridium"]
 ---
 
 <script>

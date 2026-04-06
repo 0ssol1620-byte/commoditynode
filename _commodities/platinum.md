@@ -6,11 +6,13 @@ title: "Platinum Price Impact: Fuel Cells, Catalysts & PGMs"
 description: "Platinum price impact: how the shift from catalytic converters to hydrogen fuel cells, plus South African supply risks, reshape PGM demand and pricing."
 commodity_slug: "platinum"
 symbol: "PL=F"
+data_type: "direct_futures"
 sector: "Precious Metals"
 etfs: ["PPLT"]
 companies: ["SBSW", "IMPUY", "ANGPY"]
 substitutes: ["Palladium", "Rhodium"]
 themes: ["EV Transition", "Clean Energy"]
+tags: ["platinum"]
 ---
 
 <script>

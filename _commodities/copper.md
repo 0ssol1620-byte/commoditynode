@@ -6,6 +6,7 @@ title: "Copper Price Impact: EVs, Mining & Construction"
 description: "How copper price movements signal economic cycles and impact EV makers, miners, homebuilders, and infrastructure. Impact map with real-time correlations."
 commodity_slug: "copper"
 symbol: "HG=F"
+data_type: "direct_futures"
 sector: "Industrial Metals"
 etfs: ["COPX", "CPER"]
 companies: ["FCX", "SCCO", "TECK"]

@@ -6,6 +6,7 @@ title: "Natural Gas Price Impact: Utilities, Fertilizers & LNG"
 description: "How Henry Hub natural gas prices affect utilities, fertilizer makers, and LNG exporters."
 commodity_slug: "natural-gas"
 symbol: "NG=F"
+data_type: "direct_futures"
 sector: "Energy"
 etfs: ["UNG", "BOIL", "FCG"]
 companies: []

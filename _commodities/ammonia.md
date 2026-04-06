@@ -5,6 +5,7 @@ title: "Ammonia Price Impact: Fertilizers, Stocks & ETFs"
 description: "How ammonia (NH3) price movements ripple through nitrogen fertilizers, natural gas markets, and green hydrogen."
 commodity_slug: "ammonia"
 symbol: "CF"
+data_type: "proxy"
 sector: "Agriculture/Chemicals"
 etfs: ["MOO", "XLB"]
 companies: ["CF", "NTR"]

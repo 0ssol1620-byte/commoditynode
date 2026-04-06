@@ -6,11 +6,13 @@ title: "Lithium Price Impact: EV Supply Chain, Battery Costs & Mining Stocks"
 description: "How lithium price moves affect EV manufacturers, battery pack costs, Albemarle, SQM, and the transition to lower-cost LFP battery chemistry."
 commodity_slug: "lithium"
 symbol: "ALB"
+data_type: "proxy"
 sector: "Battery Metals"
 etfs: ["LIT", "BATT"]
 companies: ["ALB", "SQM"]
 substitutes: ["Sodium-ion", "Solid-state", "Hydrogen Fuel Cells"]
 themes: ["EV Transition", "Clean Energy"]
+tags: ["lithium"]
 ---
 
 <script>

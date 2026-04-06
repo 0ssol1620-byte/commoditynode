@@ -6,11 +6,13 @@ title: "Water Price Impact: Agriculture, Climate Risk, Utilities & Scarcity Econ
 description: "How water scarcity and pricing cascade through agriculture, mining, municipal utilities, and the emerging water futures market."
 commodity_slug: "water"
 symbol: "PHO"
+data_type: "proxy"
 sector: "Agriculture/Utilities"
 etfs: ["PHO", "CGW"]
 companies: ["AWK", "XYL"]
 substitutes: ["Desalination", "Water Recycling"]
 themes: ["Water Scarcity"]
+tags: ["water"]
 ---
 
 <script>

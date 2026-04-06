@@ -5,6 +5,7 @@ title: "Feeder Cattle Price Impact: Beef Supply Chain & Cattle Cycle"
 description: "Feeder cattle as weaned calves entering feedlots, driven by the cattle cycle, corn costs, and drought conditions."
 commodity_slug: "feeder-cattle"
 symbol: "GF=F"
+data_type: "direct_futures"
 sector: "Agriculture/Livestock"
 etfs: ["COW", "DBA"]
 companies: ["TSN", "JBSAY"]

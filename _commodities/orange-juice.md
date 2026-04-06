@@ -6,6 +6,7 @@ title: "Orange Juice Price Impact: Citrus Supply, Weather Risk & ETFs"
 description: "How FCOJ futures ripple through beverage companies, Florida agriculture, Brazilian exports, and vitamin supplement markets."
 commodity_slug: "orange-juice"
 symbol: "OJ=F"
+data_type: "direct_futures"
 sector: "Agriculture"
 etfs: ["JJA", "DBA"]
 companies: ["PEP"]

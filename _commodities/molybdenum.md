@@ -4,6 +4,7 @@ title: "Molybdenum Price Impact: High-Strength Steel, Oil Drilling & Copper By-P
 description: "How molybdenum prices cascade through alloy steel, oil and gas drilling, pipeline construction, and copper mining economics as a critical by-product metal."
 commodity_slug: "molybdenum"
 symbol: ""
+data_type: "analysis_only"
 sector: "Industrial Metals/Energy"
 etfs: ["XME", "XOP"]
 companies: ["FCX", "SCCO"]

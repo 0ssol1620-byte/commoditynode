@@ -6,11 +6,13 @@ title: "Soybean Oil Price Impact: Food Industry, Biofuel & Crush Margins"
 description: "Soybean oil as a dual-use commodity bridging food markets and renewable diesel feedstock demand."
 commodity_slug: "soybean-oil"
 symbol: "ZL=F"
+data_type: "direct_futures"
 sector: "Agriculture"
 etfs: ["SOYB", "DBA"]
 companies: ["ADM"]
 substitutes: ["Palm Oil", "Canola Oil", "Sunflower Oil"]
 themes: ["Carbon Transition", "Food Inflation"]
+tags: ["soybean-oil"]
 ---
 
 <script>

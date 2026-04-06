@@ -5,6 +5,7 @@ title: "Manganese Price Impact: Steel Alloys, EV Batteries & Mining Stocks"
 description: "How manganese price movements ripple through steelmakers, EV battery producers, and mining companies."
 commodity_slug: "manganese"
 symbol: "VALE"
+data_type: "proxy"
 sector: "Metals"
 etfs: ["PICK", "XME"]
 companies: ["VALE", "BHP", "SCCO"]

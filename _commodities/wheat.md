@@ -6,6 +6,7 @@ title: "Wheat Price Impact: Food Security, Processors & EM Risk"
 description: "How wheat price spikes ripple through food manufacturers, agri-processors, and emerging markets."
 commodity_slug: "wheat"
 symbol: "ZW=F"
+data_type: "direct_futures"
 sector: "Agriculture"
 etfs: ["WEAT"]
 companies: ["ADM", "INGR"]

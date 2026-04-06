@@ -6,11 +6,13 @@ title: "Coffee Price Impact: Food & Beverage Stocks & ETFs"
 description: "Coffee as the world's second-most traded commodity with climate-vulnerable supply chains."
 commodity_slug: "coffee"
 symbol: "KC=F"
+data_type: "direct_futures"
 sector: "Soft Commodities"
 etfs: ["JO"]
 companies: ["SBUX"]
 substitutes: ["Tea", "Energy Drinks"]
 themes: ["Food Inflation"]
+tags: ["coffee"]
 ---
 
 <script>

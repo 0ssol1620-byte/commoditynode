@@ -5,6 +5,7 @@ title: "Hydrogen Price Impact: Green Energy, Electrolyzers & Fuel Cells"
 description: "Hydrogen's role as a clean energy carrier, electrolyzer economics, and the green vs grey transition."
 commodity_slug: "hydrogen"
 symbol: "PLUG"
+data_type: "proxy"
 sector: "Energy/Clean"
 etfs: ["HDRO", "ICLN"]
 companies: []

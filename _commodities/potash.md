@@ -5,6 +5,7 @@ title: "Potash Price Impact: Crop Yields, Fertilizer Stocks & Agriculture"
 description: "How potash (KCl) price movements ripple through fertilizer producers, agribusiness, and global food security."
 commodity_slug: "potash"
 symbol: "NTR"
+data_type: "proxy"
 sector: "Agriculture/Chemicals"
 etfs: ["MOS", "MOO"]
 companies: ["NTR", "MOS"]

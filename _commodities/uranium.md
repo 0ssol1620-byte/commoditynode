@@ -6,11 +6,13 @@ title: "Uranium Price Impact: Nuclear Reactors, Mining Stocks & Energy Policy"
 description: "How uranium price movements ripple through nuclear utilities, mining companies like CCJ and NexGen, clean energy policy, and uranium ETFs like URA."
 commodity_slug: "uranium"
 symbol: "URA"
+data_type: "proxy"
 sector: "Battery Metals"
 etfs: ["URA", "URNM"]
 companies: ["CCJ", "UEC"]
 substitutes: ["Solar", "Wind", "Natural Gas"]
 themes: ["Nuclear Renaissance", "Clean Energy"]
+tags: ["uranium"]
 ---
 
 <script>

@@ -6,11 +6,13 @@ title: "Palladium Price Impact: Auto Catalysts & PGM Supply"
 description: "Palladium's auto catalyst dominance and the structural demand threat from EV adoption."
 commodity_slug: "palladium"
 symbol: "PA=F"
+data_type: "direct_futures"
 sector: "Precious Metals"
 etfs: ["PALL"]
 companies: ["SBSW", "IMPUY"]
 substitutes: ["Platinum", "Rhodium"]
 themes: ["EV Transition"]
+tags: ["palladium"]
 ---
 
 <script>

@@ -4,6 +4,7 @@ title: "Silicon Price Impact: Solar, Semiconductors & Alloys"
 description: "How silicon metal and polysilicon prices cascade through solar panel manufacturing, semiconductor wafer production, and aluminum casting industries."
 commodity_slug: "silicon"
 symbol: ""
+data_type: "analysis_only"
 sector: "Critical Minerals/Solar"
 etfs: ["TAN", "SMH", "REMX"]
 companies: []

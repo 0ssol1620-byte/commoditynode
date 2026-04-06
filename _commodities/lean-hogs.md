@@ -5,11 +5,13 @@ title: "Lean Hogs Price Impact: Pork Markets & Agribusiness"
 description: "Lean hogs as a globally significant protein commodity dominated by Chinese demand and disease risk."
 commodity_slug: "lean-hogs"
 symbol: "HE=F"
+data_type: "direct_futures"
 sector: "Agriculture/Livestock"
 etfs: ["COW", "DBA"]
 companies: ["TSN"]
 substitutes: ["Chicken", "Beef", "Plant-Based Meat"]
 themes: ["Emerging Markets"]
+tags: ["lean-hogs"]
 ---
 
 <script>

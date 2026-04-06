@@ -5,11 +5,13 @@ title: "Live Cattle Price Impact: Beef Markets, Feed Costs & Agribusiness"
 description: "Live cattle as the cornerstone of the US beef market driven by cattle cycle dynamics and drought risk."
 commodity_slug: "live-cattle"
 symbol: "LE=F"
+data_type: "direct_futures"
 sector: "Agriculture/Livestock"
 etfs: ["COW", "DBA"]
 companies: ["TSN", "JBSAY"]
 substitutes: ["Chicken", "Pork", "Plant-Based Meat"]
 themes: ["Food Security"]
+tags: ["live-cattle"]
 ---
 
 <script>

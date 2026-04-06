@@ -6,11 +6,13 @@ title: "Antimony Price Impact: Defense & Flame Retardants"
 description: "How antimony price shifts cascade through defense contractors, flame retardant manufacturers, lead-acid batteries, and the China-dominated supply chain."
 commodity_slug: "antimony"
 symbol: "SBMMF"
+data_type: "proxy"
 sector: "Critical Minerals/Defense"
 etfs: ["REMX"]
 companies: ["UEC"]
 substitutes: ["Tin Alloys", "Aluminum Trihydrate"]
 themes: ["Rare Earth", "Defense Rearming"]
+tags: ["antimony"]
 ---
 
 <script>

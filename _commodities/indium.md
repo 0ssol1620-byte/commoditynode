@@ -6,11 +6,13 @@ title: "Indium Price Impact: Touchscreens, Solar Panels & Semiconductor Supply"
 description: "How indium price shifts cascade through display manufacturers, thin-film solar, semiconductor packaging, and the zinc refining by-product chain."
 commodity_slug: "indium"
 symbol: "FRES.L"
+data_type: "proxy"
 sector: "Critical Minerals/Tech"
 etfs: ["REMX"]
 companies: []
 substitutes: ["Fluorine-doped Tin Oxide", "Silver Nanowires"]
 themes: ["Clean Energy"]
+tags: ["indium"]
 ---
 
 <script>

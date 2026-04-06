@@ -4,6 +4,7 @@ title: "Helium Price Impact: Semiconductor Manufacturing, MRI Systems & Aerospac
 description: "How helium supply constraints cascade through semiconductor fabs, medical imaging, space launch, and scientific research amid U.S. strategic reserve depletion."
 commodity_slug: "helium"
 symbol: ""
+data_type: "analysis_only"
 sector: "Noble Gases/Tech"
 etfs: ["SMH", "IHI"]
 companies: ["RIO"]

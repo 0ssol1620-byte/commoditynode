@@ -5,6 +5,7 @@ title: "Rhodium Price Impact: Catalytic Converters & PGM Supply"
 description: "Rhodium's extreme scarcity, catalytic converter dominance, and South African supply concentration."
 commodity_slug: "rhodium"
 symbol: "SBSW"
+data_type: "proxy"
 sector: "Metals/Auto"
 etfs: ["PPLT", "SPPP"]
 companies: ["SBSW", "IMPUY", "ANGPY"]

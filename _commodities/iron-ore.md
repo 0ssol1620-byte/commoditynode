@@ -6,11 +6,13 @@ title: "Iron Ore Price Impact: Steel, China & Mining Stocks"
 description: "Iron ore as the essential steel feedstock driven by China's 70%+ consumption share."
 commodity_slug: "iron-ore"
 symbol: "VALE"
+data_type: "proxy"
 sector: "Industrial Metals"
 etfs: ["PICK"]
 companies: ["BHP", "RIO", "VALE", "CLF"]
 substitutes: ["Recycled Scrap Steel"]
 themes: ["Infrastructure Boom"]
+tags: ["iron-ore"]
 ---
 
 <script>

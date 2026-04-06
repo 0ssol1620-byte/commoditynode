@@ -6,6 +6,7 @@ title: "Rice Price Impact: Food Security, Asian Economies & Agribusiness"
 description: "How rough rice price movements affect Asian food security, export economies in India, Thailand and Vietnam, agribusiness companies, and global food inflation."
 commodity_slug: "rice"
 symbol: "ZR=F"
+data_type: "direct_futures"
 sector: "Agriculture"
 etfs: ["RJA", "DBA"]
 companies: ["ADM", "INGR"]

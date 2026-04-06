@@ -6,6 +6,7 @@ title: "Oats Price Impact: Feed Markets, Livestock & Biofuel Demand"
 description: "How oat futures ripple through cereal makers, oat milk brands, animal feed, and the plant-based food trend."
 commodity_slug: "oats"
 symbol: "ZO=F"
+data_type: "direct_futures"
 sector: "Agriculture"
 etfs: ["DBA", "RJA"]
 companies: ["PEP"]

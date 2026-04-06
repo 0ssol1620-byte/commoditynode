@@ -6,11 +6,13 @@ title: "Titanium Price Impact: Aerospace, Defense, Medical & Russia Supply Risk"
 description: "How titanium price shifts cascade through aerospace manufacturers, defense contractors, medical implants, and the Russia-dominated supply chain."
 commodity_slug: "titanium"
 symbol: "TIE"
+data_type: "proxy"
 sector: "Aerospace/Defense"
 etfs: ["ITA", "XAR"]
 companies: []
 substitutes: ["Advanced Aluminum Alloys", "Carbon Fiber Composites"]
 themes: ["Defense Rearming"]
+tags: ["titanium"]
 ---
 
 <script>

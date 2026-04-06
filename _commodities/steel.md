@@ -6,11 +6,13 @@ title: "Steel Price Impact: Construction, Auto Industry & Industrial Stocks"
 description: "How steel price changes ripple through construction, automotive, appliances, and industrial companies including Nucor, Steel Dynamics and ArcelorMittal."
 commodity_slug: "steel"
 symbol: "SLX"
+data_type: "proxy"
 sector: "Industrial Metals"
 etfs: ["SLX"]
 companies: ["NUE", "CLF"]
 substitutes: ["Aluminum", "Carbon Fiber", "Engineered Wood"]
 themes: ["Infrastructure Boom"]
+tags: ["steel"]
 ---
 
 <script>

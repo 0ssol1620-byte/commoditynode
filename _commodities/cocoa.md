@@ -5,11 +5,13 @@ title: "Cocoa Price Impact: Chocolate, Food Stocks & Supply"
 description: "Cocoa's West African production concentration and climate change threat to global chocolate supply."
 commodity_slug: "cocoa"
 symbol: "CC=F"
+data_type: "direct_futures"
 sector: "Soft Commodities"
 etfs: ["NIB"]
 companies: ["HSY", "MDLZ"]
 substitutes: ["Carob", "Compound Chocolate"]
 themes: ["Food Inflation"]
+tags: ["cocoa"]
 ---
 
 <script>

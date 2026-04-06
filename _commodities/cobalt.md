@@ -6,11 +6,13 @@ title: "Cobalt Price Impact: EV Batteries, Supply Chain Risk & Mining Stocks"
 description: "How cobalt price shifts cascade through EV battery manufacturers, smartphone supply chains, DRC geopolitical risk, and companies like Glencore and CATL."
 commodity_slug: "cobalt"
 symbol: "GLNCY"
+data_type: "proxy"
 sector: "Battery Metals"
 etfs: ["BATT"]
 companies: ["GLNCY"]
 substitutes: ["LFP Chemistry", "High-Nickel NMC"]
 themes: ["EV Transition", "Supply Chain Disruption"]
+tags: ["cobalt"]
 ---
 
 <script>

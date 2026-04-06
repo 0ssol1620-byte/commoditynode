@@ -6,11 +6,13 @@ title: "Cotton Price Impact: Apparel, Textiles & Agriculture"
 description: "Cotton's textile industry dynamics, weather sensitivity, and polyester competition."
 commodity_slug: "cotton"
 symbol: "CT=F"
+data_type: "direct_futures"
 sector: "Soft Commodities"
 etfs: ["BAL"]
 companies: []
 substitutes: ["Polyester", "Nylon", "Rayon"]
 themes: ["Supply Chain Disruption"]
+tags: ["cotton"]
 ---
 
 <script>

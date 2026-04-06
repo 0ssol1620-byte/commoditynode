@@ -133,6 +133,22 @@ layout: default
       {% endif %}
     </div>
     <h1>{{ page.title }}{% assign sym_strip = page.symbol | strip %}{% if sym_strip == "" or sym_strip == nil %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(100,116,139,0.15);color:#64748b;border:1px solid rgba(100,116,139,0.3);margin-left:8px;vertical-align:middle;">Analysis Only</span>{% elsif page.proxy_type == "futures" %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3);margin-left:8px;vertical-align:middle;">Direct Market Price</span>{% elsif page.proxy_type == "etf_proxy" or page.proxy_type == "equity_proxy" %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);margin-left:8px;vertical-align:middle;">Proxy Asset Benchmark</span>{% endif %}</h1>
+    {% if page.data_type == 'direct_futures' %}
+    <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="display:inline-block;padding:4px 12px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:16px;color:#22c55e;font-size:0.78rem;font-weight:600;">Live Futures</span>
+      <span style="font-size:0.75rem;color:var(--text3);">Real-time futures contract data</span>
+    </div>
+    {% elsif page.data_type == 'proxy' %}
+    <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="display:inline-block;padding:4px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:16px;color:#f59e0b;font-size:0.78rem;font-weight:600;">Proxy-Based</span>
+      <span style="font-size:0.75rem;color:var(--text3);">Price tracked via {{ page.symbol }} (related equity/ETF)</span>
+    </div>
+    {% elsif page.data_type == 'analysis_only' %}
+    <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="display:inline-block;padding:4px 12px;background:rgba(148,163,184,0.08);border:1px solid rgba(148,163,184,0.25);border-radius:16px;color:#94a3b8;font-size:0.78rem;font-weight:600;">Analysis Only</span>
+      <span style="font-size:0.75rem;color:var(--text3);">No live price benchmark available</span>
+    </div>
+    {% endif %}
     {% if page.description %}
     <p class="post-meta-bar">{{ page.description }}</p>
     <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data: daily auto-update · Analysis published: <time datetime="{{ page.date | default: site.time | date: '%Y-%m-%d' }}">{{ page.date | default: site.time | date: "%b %d, %Y" }}</time></p>

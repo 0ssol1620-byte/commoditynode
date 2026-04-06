@@ -6,6 +6,7 @@ title: "Gold Price Impact: Miners, Dollar & Safe Haven Flows"
 description: "How gold price movements reflect inflation hedging, currency dynamics, and risk sentiment across global markets. Impact map for miners, ETFs, and macro factors."
 commodity_slug: "gold"
 symbol: "GC=F"
+data_type: "direct_futures"
 sector: "Precious Metals"
 etfs: ["GLD", "GDX", "IAU", "GDXJ"]
 companies: ["NEM"]

@@ -6,11 +6,13 @@ title: "Diesel Price Impact: Freight, Trucking & Agriculture"
 description: "Diesel price impact analysis: how diesel costs ripple through freight, trucking, logistics, and agriculture, driving consumer prices across every sector."
 commodity_slug: "diesel"
 symbol: "HO=F"
+data_type: "direct_futures"
 sector: "Energy"
 etfs: ["UGA"]
 companies: []
 substitutes: ["Biodiesel", "Electric Trucks", "LNG"]
 themes: ["Supply Chain Disruption"]
+tags: ["diesel"]
 ---
 
 <script>

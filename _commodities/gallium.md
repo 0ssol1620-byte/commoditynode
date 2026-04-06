@@ -4,6 +4,7 @@ title: "Gallium Price Impact: Semiconductors & 5G Supply"
 description: "How gallium supply disruptions cascade through semiconductor fabs, LED manufacturing, 5G deployment, and defense electronics amid China's export restrictions."
 commodity_slug: "gallium"
 symbol: ""
+data_type: "analysis_only"
 sector: "Critical Minerals/Tech"
 etfs: ["REMX", "SMH"]
 companies: []

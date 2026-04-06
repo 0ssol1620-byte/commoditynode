@@ -6,11 +6,13 @@ title: "Silver Price Impact: Solar, Electronics & Industrial Demand"
 description: "How silver price movements impact solar panel manufacturers, electronics makers, and precious metal portfolios."
 commodity_slug: "silver"
 symbol: "SI=F"
+data_type: "direct_futures"
 sector: "Precious Metals"
 etfs: ["SLV", "SIVR"]
 companies: ["PAAS", "WPM"]
 substitutes: ["Gold", "Platinum", "Copper"]
 themes: ["Clean Energy"]
+tags: ["silver"]
 ---
 
 <script>

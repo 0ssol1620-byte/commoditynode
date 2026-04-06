@@ -6,11 +6,13 @@ title: "Neon Gas Price Impact: Semiconductor Chips & Supply"
 description: "How neon gas supply disruptions cascade through semiconductor lithography, chip manufacturing, and the Ukraine-Russia geopolitical risk axis."
 commodity_slug: "neon"
 symbol: "SOXX"
+data_type: "proxy"
 sector: "Noble Gases/Semiconductor"
 etfs: ["SOXX", "SMH"]
 companies: ["ASML"]
 substitutes: ["Fluorine-based Lasers", "EUV Direct"]
 themes: ["Supply Chain Disruption", "Geopolitical Risk"]
+tags: ["neon"]
 ---
 
 <script>

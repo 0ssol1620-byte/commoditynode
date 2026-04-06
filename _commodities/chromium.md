@@ -4,6 +4,7 @@ title: "Chromium Price Impact: Stainless Steel & Auto Supply"
 description: "How chromium prices cascade through stainless steel, construction, automotive, and chemical industries with South Africa and Kazakhstan as dominant suppliers."
 commodity_slug: "chromium"
 symbol: ""
+data_type: "analysis_only"
 sector: "Industrial Metals"
 etfs: ["SLX", "XME"]
 companies: ["SBSW", "GLNCY"]

@@ -4,6 +4,7 @@ title: "Tungsten Price Impact: Cemented Carbide, Defense & China Supply Dominanc
 description: "How tungsten prices cascade through cutting tool manufacturers, defense munitions, heavy industry, and mining equipment amid China's 80%+ supply control."
 commodity_slug: "tungsten"
 symbol: ""
+data_type: "analysis_only"
 sector: "Industrial Metals/Defense"
 etfs: ["XME", "ITA"]
 companies: ["SBSW"]
