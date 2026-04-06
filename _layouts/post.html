@@ -155,6 +155,21 @@ layout: default
         <a class="btn btn-secondary post-share-btn" href="mailto:?subject={{ page.title | uri_escape }}&body={{ page.url | absolute_url | uri_escape }}">Email</a>
       </section>
 
+      <!-- Post bottom CTA -->
+      {% if page.commodity_name %}
+      <div style="margin:32px 0;padding:20px 24px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="color:var(--text);font-weight:600;font-size:0.95rem;">Explore the full {{ page.commodity_name }} Impact Map</div>
+          <div style="color:var(--text3);font-size:0.82rem;">See price correlations, company sensitivity scores, and AI forecasts.</div>
+        </div>
+        <a href="/commodities/{{ page.commodity_name | slugify }}/" style="padding:8px 18px;background:var(--accent);color:#000;border-radius:6px;text-decoration:none;font-size:0.85rem;font-weight:600;white-space:nowrap;">View Hub →</a>
+      </div>
+      {% endif %}
+
+      <div style="margin:24px 0;text-align:center;">
+        <p style="color:var(--text3);font-size:0.85rem;">Want the next Signal Report? <a href="#" onclick="if(window.Clerk)window.Clerk.openSignUp();return false;" style="color:#22d3ee;">Sign up free</a> — we publish within hours of major commodity moves.</p>
+      </div>
+
       <section class="methodology-note" aria-labelledby="methodology-title">
         <p class="summary-kicker">Methodology</p>
         <h2 id="methodology-title">How to read this Impact Map</h2>
