@@ -354,7 +354,7 @@ permalink: /simulator/
       Live Forecast Engine
     </div>
     <h1>Commodity Scenario<br>Simulator</h1>
-    <p>Use before OPEC decisions, WASDE crop reports, and Fed announcements — model how commodity price shocks ripple through your equity positions before consensus catches up.</p>
+    <p>Model price shock scenarios before macro events, supply disruptions, or earnings season. Select a commodity, apply a scenario, and see how the ripple effects propagate through related equities.</p>
   </div>
 </section>
 
@@ -387,6 +387,11 @@ permalink: /simulator/
   <div>
     <h2 style="font-size:0.8rem;font-weight:700;color:#9494a8;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Select Commodity</h2>
     <div class="sim-selector-grid" id="sim-selector"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 20px;">
+      <button class="preset-shock" onclick="applyPreset('supply_cut')" style="padding:6px 14px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:20px;color:#ef4444;font-size:0.82rem;cursor:pointer;">Supply Disruption +15%</button>
+      <button class="preset-shock" onclick="applyPreset('demand_surge')" style="padding:6px 14px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:20px;color:#22c55e;font-size:0.82rem;cursor:pointer;">Demand Surge +10%</button>
+      <button class="preset-shock" onclick="applyPreset('recession')" style="padding:6px 14px;background:rgba(148,163,184,0.1);border:1px solid rgba(148,163,184,0.3);border-radius:20px;color:#94a3b8;font-size:0.82rem;cursor:pointer;">Recession -20%</button>
+    </div>
   </div>
 
   <!-- Main Chart -->
@@ -1390,7 +1395,22 @@ function checkProAccess() {
   }
 }
 
+// ── Preset shocks ─────────────────────────────────────────────────────────
+window.applyPreset = function(type) {
+  var val = type === 'supply_cut' ? 15 : type === 'demand_surge' ? 10 : -20;
+  var slider = document.getElementById('scenario-slider') || document.querySelector('input[type="range"]');
+  if (slider) { slider.value = val; slider.dispatchEvent(new Event('input')); }
+  // Also apply as a named scenario so the chart and stats update immediately
+  state.scenarios = {};
+  state.scenarios['preset_' + type] = val;
+  renderChart();
+  renderStats();
+  renderImpact();
+};
+
 // ── Init ──────────────────────────────────────────────────────────────────
+// Default to crude-oil so the chart is populated on first visit
+state.commodity = 'crude_oil';
 loadForecast();
 // Pro check: listen for clerk-auth ready event, with polling fallback
 document.addEventListener('cn:authready', function() {

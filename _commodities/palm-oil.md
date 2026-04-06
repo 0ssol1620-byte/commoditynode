@@ -14,7 +14,7 @@ companies: ["PG", "UNILEVER", "ADM"]
 substitutes: ["Soybean Oil", "Canola Oil", "Sunflower Oil"]
 industries: ["consumer-goods", "food-processing"]
 themes: ["Food Inflation"]
-tags: [palm oil, vegetable oil, Indonesia, Malaysia, food processing, cosmetics, biodiesel, supply chain]
+tags: ["palm-oil", "oilseeds", "biodiesel", "food-industry", "soybeans"]
 image: "/assets/images/og-palm-oil.png"
 ---
 
@@ -58,3 +58,9 @@ Palm oil accounts for approximately **35% of global vegetable oil consumption**,
 - **Consumer goods giants** (P&G, Unilever) — Palm oil is a key input for soaps, detergents, and food products
 - **Food processors** — Used in baked goods, margarine, instant noodles, and confectionery
 - **Biodiesel producers** — Competing with food use for palm oil supply
+
+## Coverage Status
+
+CommodityNode is expanding coverage of palm oil markets. Current analysis focuses on oilseed supply chains, biodiesel demand, and food industry exposure. Additional Signal Reports covering palm oil-specific price drivers will be published as our dataset grows.
+
+For related analysis, explore our [Soybeans](/commodities/soybeans/) and [Corn](/commodities/corn/) hubs, which cover substitute oilseed dynamics that directly affect palm oil pricing.

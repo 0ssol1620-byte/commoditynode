@@ -291,6 +291,21 @@ layout: default
   <div class="cn-price-chart" data-symbol="{{ page.symbol }}" data-name="{{ page.title }}" data-unit="{{ page.unit | default: '' }}" style="margin-bottom:40px;"></div>
   {% endif %}
 
+  <!-- Analysis-only fallback block -->
+  {% if page.data_type == 'analysis_only' %}
+  <div style="padding:16px 20px;background:rgba(148,163,184,0.06);border:1px solid rgba(148,163,184,0.15);border-radius:10px;margin-bottom:20px;">
+    <div style="font-size:0.85rem;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;">Analysis Only</div>
+    <p style="margin:0;color:var(--text2);font-size:0.9rem;">No standardized futures or benchmark price exists for {{ page.title | split: ':' | first | strip }}. This hub provides qualitative supply-demand analysis, key producers, and downstream impact mapping.</p>
+  </div>
+  {% endif %}
+
+  <!-- Proxy indicator note -->
+  {% if page.data_type == 'proxy' %}
+  <div style="font-size:0.75rem;color:var(--text3);margin-top:4px;">
+    Price tracked via {{ page.symbol }} (proxy indicator). Not a direct commodity benchmark.
+  </div>
+  {% endif %}
+
   <!-- AI Forecast Mini Chart -->
   <div class="commodity-forecast-section" id="commodity-forecast-section">
     <div class="cf-header">
@@ -327,8 +342,9 @@ layout: default
       </div>
     </div>
     <div class="cf-no-data" id="cf-no-data" style="display:none">
-      <p>AI forecast not available for this commodity yet.</p>
-      <a href="/simulator/" class="cf-sim-link">View forecasts in Simulator →</a>
+      <div style="padding:12px 16px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:8px;text-align:center;">
+        <p style="margin:0;color:var(--text3);font-size:0.85rem;">AI forecast for this commodity is being calibrated. <a href="/simulator/" style="color:#22d3ee;">Try the Scenario Simulator →</a></p>
+      </div>
     </div>
   </div>
 
