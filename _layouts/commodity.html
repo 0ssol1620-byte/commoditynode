@@ -9,9 +9,14 @@ layout: default
   "headline": "{{ page.title | escape }}",
   "description": "{{ page.description | default: site.description | escape }}",
   "author": { "@type": "Organization", "name": "CommodityNode", "url": "https://commoditynode.com" },
-  "publisher": { "@type": "Organization", "name": "CommodityNode", "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/logo.svg" } },
+  "publisher": { "@type": "Organization", "name": "CommodityNode", "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/logo.svg", "width": 200, "height": 60 } },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },
-  "image": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}",
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}",
+    "width": 1200,
+    "height": 630
+  },
   "datePublished": "{{ page.date | default: site.time | date_to_xmlschema }}",
   "dateModified": "{{ page.last_modified_at | default: page.date | default: site.time | date_to_xmlschema }}"
 }

@@ -9,7 +9,7 @@ reading_time: 7
 commodity_name: "Gallium"
 direction: bullish
 image: /assets/images/og-gallium.png
-canonical_url: https://commoditynode.com/gallium-china-semiconductor-chokepoint/
+canonical_url: https://commoditynode.com/gallium-germanium-china-semiconductor/
 ---
 
 On August 1, 2023, China's Ministry of Commerce implemented export controls on gallium and germanium — two metals most people have never heard of but that underpin the modern semiconductor stack. The market barely flinched. That was a mistake. Gallium prices have since surged over **200%** from pre-restriction levels, and the structural supply deficit is only getting worse as **GaN (gallium nitride)** chips become the backbone of 5G infrastructure, defense radar systems, and next-generation power electronics.

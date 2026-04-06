@@ -66,4 +66,4 @@ Potash in April 2026 has found a fragile equilibrium. Sanctions have permanently
 
 ---
 
-*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+*Run the full scenario analysis for potash in the [Scenario Simulator](/simulator/) →*

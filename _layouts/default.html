@@ -63,7 +63,7 @@
     },
     "description": "Interactive analysis of how commodity price movements ripple through global industries, ETFs, and stocks.",
     "sameAs": [
-      "https://www.threads.com/@commoditynode",
+      "https://www.threads.net/@commoditynode",
       "https://twitter.com/commoditynode"
     ],
     "contactPoint": {
@@ -82,10 +82,7 @@
     "description": "Commodity price impact maps for markets, supply chains and equities.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://commoditynode.com/reports/?q={search_term_string}"
-      },
+      "target": "https://commoditynode.com/reports/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }
@@ -113,11 +110,12 @@
 </div>
 <script>
 (function(){
-  var t=setTimeout(function(){
+  function hideLoader(){
     var l=document.getElementById('page-loader');
     if(l){l.style.opacity='0';setTimeout(function(){l.style.display='none';},400);}
-  },1500);
-  document.addEventListener('DOMContentLoaded',function(){clearTimeout(t);});
+  }
+  document.addEventListener('DOMContentLoaded',hideLoader);
+  setTimeout(hideLoader,1500);
 })();
 </script>
 {% endunless %}

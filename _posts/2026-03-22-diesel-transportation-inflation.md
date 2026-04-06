@@ -13,6 +13,7 @@ confidence: High
 reading_time: 6
 image: /assets/images/og/diesel-transportation-inflation.png
 commodity_name: "Diesel"
+canonical_url: https://commoditynode.com/diesel-price-transportation-impact/
 ---
 
 Most inflation analysis focuses on gasoline because consumers see gas prices every day at every corner station. But diesel is the real transmission mechanism between commodity prices and everything in the consumer price index.

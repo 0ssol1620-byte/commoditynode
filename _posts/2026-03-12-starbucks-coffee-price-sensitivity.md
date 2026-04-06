@@ -10,6 +10,9 @@ commodity_name: 'Coffee'
 direction: bearish
 image: /assets/images/og-coffee.png
 canonical_url: https://commoditynode.com/coffee-price-starbucks-retail/
+permalink: /coffee-price-starbucks-retail/
+sitemap: false
+noindex: true
 ---
 
 Arabica coffee prices have climbed above $3.00 per pound in early 2026, extending a rally that began with severe droughts across Brazil's Minas Gerais coffee belt and compounding supply disruptions in Vietnam's robusta-producing Central Highlands.

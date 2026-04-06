@@ -65,4 +65,4 @@ Ammonia enters Q2 2026 in a state of tension between elevated input costs and mo
 
 ---
 
-*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+*Run the full scenario analysis for ammonia in the [Scenario Simulator](/simulator/) →*

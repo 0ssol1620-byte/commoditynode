@@ -28,10 +28,15 @@ layout: default
   "author": { "@type": "Organization", "name": "CommodityNode Research", "url": "https://commoditynode.com/about/" },
   "publisher": {
     "@type": "Organization", "name": "CommodityNode",
-    "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/logo.svg" }
+    "logo": { "@type": "ImageObject", "url": "https://commoditynode.com/assets/images/logo.svg", "width": 200, "height": 60 }
   },
   "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ page.url | absolute_url }}" },
-  "image": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}",
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ page.image | default: '/assets/images/og-default.png' | absolute_url }}",
+    "width": 1200,
+    "height": 630
+  },
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": [".post-content p:first-of-type", ".post-meta-bar"]
@@ -131,8 +136,14 @@ layout: default
 
       {% if page.tags.size > 0 %}
       <div class="post-tags" aria-label="Post tags">
+        {% assign commodity_slugs = site.commodities | map: 'slug' %}
         {% for tag in page.tags %}
-        <a href="/commodities/{{ tag | slugify }}/" class="tag">{{ tag }}</a>
+          {% assign tag_slug = tag | slugify %}
+          {% if commodity_slugs contains tag_slug %}
+        <a href="/commodities/{{ tag_slug }}/" class="tag">{{ tag }}</a>
+          {% else %}
+        <span class="tag">{{ tag }}</span>
+          {% endif %}
         {% endfor %}
       </div>
       {% endif %}

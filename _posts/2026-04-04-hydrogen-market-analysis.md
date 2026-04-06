@@ -66,4 +66,4 @@ Hydrogen in April 2026 is a market defined by unrealized potential. The fundamen
 
 ---
 
-*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+*Run the full scenario analysis for hydrogen in the [Scenario Simulator](/simulator/) →*

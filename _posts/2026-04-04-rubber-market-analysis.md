@@ -74,4 +74,4 @@ Natural rubber enters Q2 2026 with a quietly constructive setup. Structural supp
 
 ---
 
-*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+*Run the full scenario analysis for rubber in the [Scenario Simulator](/simulator/) →*

@@ -75,4 +75,4 @@ Rice in April 2026 is a market defined by policy-driven scarcity and weather anx
 
 ---
 
-*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+*Run the full scenario analysis for rice in the [Scenario Simulator](/simulator/) →*
