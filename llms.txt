@@ -39,7 +39,6 @@ Each commodity hub page includes: an interactive Impact Map (D3.js), quantified 
 - [Rare Earth](https://commoditynode.com/commodities/rare-earth/): EV motors, defense electronics, China export controls
 - [Graphite](https://commoditynode.com/commodities/graphite/): EV battery anodes, China supply dominance
 - [Vanadium](https://commoditynode.com/commodities/vanadium/): Grid-scale energy storage, steel alloying
-- [Uranium](https://commoditynode.com/commodities/uranium/): Nuclear renaissance, URA/URNM ETFs, Cameco
 
 ## Signal Reports (Recent)
 

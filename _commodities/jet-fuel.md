@@ -1,7 +1,7 @@
 ---
 layout: commodity
 image: "/assets/images/og-jet-fuel.png"
-title: "Jet Fuel"
+title: "Jet Fuel Price Impact: Airline Costs, Hedging & ETFs"
 description: "Jet fuel price impact: how aviation fuel costs affect airline profitability, ticket prices, and hedging strategies. Jet fuel is 20-30% of airline costs."
 commodity_slug: "jet-fuel"
 symbol: "CL=F"

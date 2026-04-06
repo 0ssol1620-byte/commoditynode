@@ -76,23 +76,23 @@ layout: default
       "name": "What drives {{ page.title | split: ':' | first | strip | escape }} prices?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "{{ page.title | split: ':' | first | strip | escape }} prices are driven by supply and demand dynamics, geopolitical factors, currency movements, and macroeconomic conditions. Key sectors affected include {{ page.sector | default: 'industrial and financial markets' }}."
+        "text": "{{ page.title | split: ':' | first | strip | escape }} prices are primarily driven by global supply and demand balances, currency fluctuations (particularly the US dollar), geopolitical events affecting production regions, and macroeconomic growth signals. The sector is classified under {{ page.sector | default: 'commodity markets' }}. Key demand themes include {{ page.themes | join: ', ' | default: 'industrial demand and investment flows' }}. Producers in this space include companies such as {{ page.companies | first | default: 'major commodity producers' }}, while ETF exposure is available through instruments like {{ page.etfs | first | default: 'commodity ETFs' }}."
       }
     },
     {
       "@type": "Question",
-      "name": "Which stocks benefit when {{ page.title | split: ':' | first | strip | escape }} prices rise?",
+      "name": "Which stocks and ETFs are most sensitive to {{ page.title | split: ':' | first | strip | escape }} price changes?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "When {{ page.title | split: ':' | first | strip | escape }} prices rise, producers and related ETFs typically benefit. Companies with direct exposure include those listed in the impact map above. CommodityNode tracks correlation scores for each company."
+        "text": "The equities most sensitive to {{ page.title | split: ':' | first | strip | escape }} prices include direct producers ({{ page.companies | join: ', ' | default: 'major producers in the sector' }}) and ETFs such as {{ page.etfs | join: ', ' | default: 'sector-specific commodity ETFs' }}. When prices rise, producers and royalty companies typically see margin expansion; when prices fall, downstream manufacturers and consumers benefit from lower input costs. CommodityNode tracks correlation scores and sensitivity ratings for each company in the impact map above."
       }
     },
     {
       "@type": "Question",
-      "name": "How does {{ page.title | split: ':' | first | strip | escape }} affect the broader market?",
+      "name": "How can investors track {{ page.title | split: ':' | first | strip | escape }} price impact on portfolios?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "{{ page.title | split: ':' | first | strip | escape }} price movements ripple through supply chains, affecting industries from manufacturing to consumer goods. The CommodityNode impact map shows the full ripple chain with quantified sensitivity scores."
+        "text": "Investors can track {{ page.title | split: ':' | first | strip | escape }} price impact using CommodityNode's interactive Impact Map, which shows real-time correlation scores between commodity prices and related equities. The 52-Week Range Tracker provides historical context, while the Scenario Simulator models portfolio impact from hypothetical price moves. Signal Reports published on CommodityNode provide qualitative analysis of supply disruptions, demand shifts, and macro regime changes affecting {{ page.title | split: ':' | first | strip | escape }} markets. Available at https://commoditynode.com{{ page.url }}"
       }
     }
   ]
@@ -123,7 +123,7 @@ layout: default
     <h1>{{ page.title }}{% assign sym_strip = page.symbol | strip %}{% if sym_strip == "" or sym_strip == nil %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(100,116,139,0.15);color:#64748b;border:1px solid rgba(100,116,139,0.3);margin-left:8px;vertical-align:middle;">Analysis Only</span>{% elsif page.proxy_type == "futures" %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3);margin-left:8px;vertical-align:middle;">Direct Market Price</span>{% elsif page.proxy_type == "etf_proxy" or page.proxy_type == "equity_proxy" %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);margin-left:8px;vertical-align:middle;">Proxy Asset Benchmark</span>{% endif %}</h1>
     {% if page.description %}
     <p class="post-meta-bar">{{ page.description }}</p>
-    <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data: daily auto-update · Analysis published: <time datetime="{{ site.time | date: '%Y-%m-%d' }}">{{ site.time | date: "%b %d, %Y" }}</time></p>
+    <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data: daily auto-update · Analysis published: <time datetime="{{ page.date | default: site.time | date: '%Y-%m-%d' }}">{{ page.date | default: site.time | date: "%b %d, %Y" }}</time></p>
     {% endif %}
   </div>
 </header>
@@ -339,7 +339,7 @@ layout: default
             {% if page.companies %}
             <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:6px 10px;font-weight:600;">Key Companies</td>
-              <td style="padding:6px 10px;">{% for company in page.companies %}{{ company }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
+              <td style="padding:6px 10px;">{% for company in page.companies %}<a href="/companies/{{ company | downcase }}/" style="color:#22d3ee;text-decoration:none;">{{ company }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
             </tr>
             {% endif %}
             {% if page.substitutes %}
