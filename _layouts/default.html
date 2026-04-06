@@ -116,7 +116,6 @@
     if(l){l.style.opacity='0';setTimeout(function(){l.style.display='none';},400);}
   }
   document.addEventListener('DOMContentLoaded',hideLoader);
-  setTimeout(hideLoader,1500);
 })();
 </script>
 {% endunless %}
@@ -149,7 +148,7 @@
           <span class="logo-text">Commodity<strong>Node</strong></span>
         </a>
 
-        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
           <a href="{{ '/' | relative_url }}"             {% if page.url == '/' %}class="active"{% endif %}>Home</a>
           <a href="{{ '/commodities/' | relative_url }}" {% if page.url contains '/commodities' %}class="active"{% endif %}>Commodities</a>
           <a href="{{ '/industries/' | relative_url }}" {% if page.url contains '/industries' %}class="active"{% endif %}>Industries</a>
@@ -296,7 +295,7 @@
   {% unless page.no_chart %}
   <script src="{{ '/assets/js/price-chart.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   {% endunless %}
-  {% if page.layout == 'commodity' or page.url == '/' %}
+  {% if page.url == '/' %}
   <script src="{{ '/assets/js/universe-3d.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   {% endif %}
   {% endunless %}

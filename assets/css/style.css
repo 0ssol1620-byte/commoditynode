@@ -266,7 +266,7 @@ code, kbd, pre {
   transform: translateY(-1px);
   box-shadow: var(--glow-cyan);
   background: var(--surface) !important;
-  color: var(--bg) !important;
+  color: var(--text) !important;
 }
 
 /* Hamburger */
@@ -1257,6 +1257,7 @@ code, kbd, pre {
 }
 
 [data-animate][data-delay="100"] { transition-delay: 0.1s; }
+[data-animate][data-delay="150"] { transition-delay: 0.15s; }
 [data-animate][data-delay="200"] { transition-delay: 0.2s; }
 [data-animate][data-delay="300"] { transition-delay: 0.3s; }
 [data-animate][data-delay="400"] { transition-delay: 0.4s; }
@@ -1502,7 +1503,7 @@ hr {
 
 /* ── Impact Graph Labels ── */
 .impact-graph text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', -apple-system, sans-serif;
   pointer-events: none;
 }
 /* Better contrast for labels */
@@ -1597,7 +1598,7 @@ hr {
   border-radius: 10px;
   padding: 10px 14px;
   font-size: 13px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', -apple-system, sans-serif;
   line-height: 1.7;
   color: #e4e4e7;
   pointer-events: none;
@@ -1652,11 +1653,6 @@ h1.post-title {
 @keyframes cn-spin {
   to { transform: rotate(360deg); }
 }
-.cn-chart-loading {
-  display: flex;
-  align-items: center;
-}
-
 /* ── Post title: solid color override (gradient breaks text-shadow) ── */
 .post-header h1 {
   background: none !important;
@@ -1736,8 +1732,6 @@ a.feature-card:hover,
     .commodity-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* ── Impact graph hint text hidden ── */
-em:has-text('Drag nodes') { display: none; }
 /* ════════════════════════════════════════════
    POST — Full-bleed graph section
    ════════════════════════════════════════════ */
@@ -1884,10 +1878,6 @@ a:focus-visible, button:focus-visible {
   gap: 12px;
   margin-left: 8px;
 }
-
-/* ── Chart body height ── */
-@media (max-width: 640px) {
-  }
 
 /* ── Hex node legend dots ── */
 .cn-graph-tooltip strong { color: #f0f0f5; }
@@ -2058,6 +2048,7 @@ a:focus-visible, button:focus-visible {
   max-width: 860px;
   color: var(--text2);
   font-size: 1.05rem;
+  margin-bottom: 16px;
 }
 
 .signal-dashboard {
@@ -2440,11 +2431,10 @@ a:focus-visible, button:focus-visible {
 .cn-reset-overlay-btn { font-family: 'JetBrains Mono', 'Courier New', monospace; letter-spacing: 0.02em; }
 .cn-reset-overlay-btn:hover { opacity: 1 !important; box-shadow: 0 0 12px rgba(34,211,238,0.3); }
 
-/* ── Chart height optimization (consolidated) ── */
-.cn-chart-body { height: 380px; }
-@media (min-width: 768px) { .cn-chart-body { height: 320px; } }
+/* ── Chart height optimization (consolidated, mobile-first) ── */
+.cn-chart-body { height: 280px; }
+@media (min-width: 768px) { .cn-chart-body { height: 380px; } }
 @media (max-width: 767px) {
-  .cn-chart-body { height: 300px; }
   .cn-period { font-size: 0.7rem; padding: 4px 8px; }
 }
 
@@ -2933,7 +2923,7 @@ a:focus-visible, button:focus-visible {
   background: rgba(7,10,18,0.86);
   border: 1px solid rgba(255,255,255,0.1);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: 'DM Sans', -apple-system, sans-serif;
   font-size: 0.78rem;
   padding: 6px 10px;
   border-radius: 999px;
