@@ -1090,8 +1090,8 @@ function renderChart(){
     fcstLabels = d.forecast.dates.slice(0, fcLen);
     var adj = 1 + scenarioAdj/100;
     fcstMedian = d.forecast.median.slice(0, fcLen).map(function(v){ return v * adj; });
-    fcstP10    = d.forecast.p10.slice(0, fcLen).map(function(v){ return v * adj; });
-    fcstP90    = d.forecast.p90.slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstP10    = d.forecast.p10_extreme.slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstP90    = d.forecast.p90_extreme.slice(0, fcLen).map(function(v){ return v * adj; });
   } else {
     // Demo data
     var base = {crude_oil:71, gold:3200, copper:4.5, silver:32, natural_gas:2.8, wheat:550}[key] || 100;
