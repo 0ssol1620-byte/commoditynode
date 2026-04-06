@@ -317,11 +317,10 @@ layout: default
         {{ content }}
       </div>
 
-      <!-- Static Impact Summary for crawlers (noscript fallback) -->
-      <noscript>
+      <!-- Static Impact Summary for crawlers (always visible) -->
       <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--border);">
         <h2 style="font-size:1.25rem;margin-bottom:16px;">Impact Map Summary</h2>
-        <p>This commodity's interactive impact map shows how price movements ripple through related ETFs, producers, consumers, and macro factors. Enable JavaScript to view the full interactive visualization, or browse the Key Impact Relationships table and Signal Reports below for detailed analysis.</p>
+        <p>This commodity's interactive impact map shows how price movements ripple through related ETFs, producers, consumers, and macro factors. Browse the Key Impact Relationships table and Signal Reports below for detailed analysis.</p>
         <table style="width:100%;border-collapse:collapse;font-size:0.85rem;margin:16px 0;">
           <thead>
             <tr style="border-bottom:2px solid var(--border);text-align:left;">
@@ -355,7 +354,6 @@ layout: default
           </tbody>
         </table>
       </div>
-      </noscript>
 
       <!-- Substitutes & Alternatives -->
       {% if page.substitutes %}

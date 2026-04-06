@@ -31,6 +31,24 @@ description: "CommodityNode maps how commodity price movements ripple through gl
 }
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "CommodityNode Editorial Team",
+  "url": "https://commoditynode.com/about/",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "CommodityNode",
+    "url": "https://commoditynode.com"
+  },
+  "knowsAbout": ["Commodity Markets", "Financial Analysis", "Supply Chain Risk", "Portfolio Management", "Commodity Price Forecasting", "Equity Impact Analysis"],
+  "sameAs": [
+    "https://twitter.com/commoditynode"
+  ]
+}
+</script>
+
 <div class="post-header">
   <div class="container">
     <div class="post-header-badge">
