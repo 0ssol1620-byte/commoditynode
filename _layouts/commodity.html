@@ -67,7 +67,14 @@ layout: default
   },
   "keywords": ["{{ page.title | split: ':' | first | strip | downcase | escape }} price", "commodity price impact", "supply chain analysis"],
   "isAccessibleForFree": true,
-  "license": "https://commoditynode.com/privacy/"
+  "license": "https://commoditynode.com/terms/",
+  "variableMeasured": "{{ page.title | split: ':' | first | strip | escape }} spot price",
+  "temporalCoverage": "2020-01/..",
+  "distribution": {
+    "@type": "DataDownload",
+    "encodingFormat": "text/html",
+    "contentUrl": "{{ page.url | absolute_url }}"
+  }
 }
 </script>
 
