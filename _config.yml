@@ -70,6 +70,12 @@ feed:
 
 future: true
 
+include:
+  - ads.txt
+  - llms.txt
+  - indexnow-commoditynode.txt
+  - c7f3a2e8b4d91f06e5a0c3b8d2e7f1a4.txt
+
 exclude:
   - node_modules/
   - vendor/
