@@ -42,8 +42,23 @@ permalink: /pricing/
     },
     {
       "@type": "Question",
-      "name": "What happens after the 7-day free trial?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Your account continues at $19/month (or $149/year if you chose annual). Cancel anytime before the trial ends — no charge. Your data and saved scenarios are preserved if you resubscribe." }
+      "name": "What happens after the 7-day trial?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Your account automatically converts to the Free tier. No charge. You keep access to all commodity hubs, public reports, and the basic Impact Map." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I cancel anytime?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Cancel from your account settings with one click. No questions, no exit interview." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer refunds?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer a full refund within the first 14 days if Pro isn't right for you." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there an API?",
+      "acceptedAnswer": { "@type": "Answer", "text": "API access is available on the Enterprise plan. Contact us for documentation and rate limits." }
     },
     {
       "@type": "Question",
@@ -314,7 +329,7 @@ permalink: /pricing/
   <div class="pricing-card">
     <div class="pricing-tier">Free</div>
     <div class="pricing-price">$0 <span>/month</span></div>
-    <div class="pricing-desc">Essential commodity intelligence for curious investors.</div>
+    <div class="pricing-desc">Discover how commodity prices impact your portfolio. Access all 62 commodity hubs, read public Signal Reports, and explore the basic Impact Map.</div>
     <button class="pricing-btn pricing-btn-ghost" onclick="if(window.Clerk)window.Clerk.openSignUp()">Get Started Free</button>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> 3 Signal Reports / month</li>
@@ -334,8 +349,8 @@ permalink: /pricing/
     <div class="pricing-tier">Pro</div>
     <div class="pricing-price"><span id="pro-price">$19</span> <span id="pro-sub">/month</span></div>
     <div class="plan-billed plan-billed-pro" id="pro-billed">Billed monthly · Cancel anytime</div>
-    <div class="pricing-desc">For active investors who trade around commodity cycles.</div>
-    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:block;text-align:center;">Start 7-Day Free Trial →</a>
+    <div class="pricing-desc">Make faster cross-commodity decisions. Get AI 90-day price forecasts, unlimited Signal Reports, full Scenario Simulator with company sensitivity analysis, and trading notes on every signal.</div>
+    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:block;text-align:center;">Unlock Forecasts & Simulator →</a>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> <strong>Make faster multi-commodity decisions</strong> without hitting a wall<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Unlimited Signal Reports across all 60 commodity hubs</span></li>
       <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
@@ -353,8 +368,8 @@ permalink: /pricing/
     <div class="pricing-tier">Enterprise</div>
     <div class="pricing-price"><span id="ent-price">$99</span> <span>/month</span></div>
     <div class="plan-billed" id="ent-billed">Billed monthly · Cancel anytime</div>
-    <div class="pricing-desc">For funds, analysts, and teams needing data exports and API access.</div>
-    <button class="pricing-btn pricing-btn-ghost" onclick="window.location='/contact/'">Contact Us</button>
+    <div class="pricing-desc">Scale commodity intelligence across your team. Everything in Pro plus API access, bulk data exports, custom alerts, and collaborative research workflows.</div>
+    <button class="pricing-btn pricing-btn-ghost" onclick="window.location='/contact/'">Talk to Us About Team Access →</button>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> Everything in Pro</li>
       <li class="yes"><span class="feat-check">✓</span> CSV / JSON data export<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Download clean datasets for your own models</span></li>
@@ -367,6 +382,24 @@ permalink: /pricing/
     </ul>
   </div>
 </div>
+
+<section style="max-width:900px;margin:60px auto 0;padding:0 24px;">
+  <h2 style="text-align:center;font-size:1.5rem;margin-bottom:32px;color:var(--text);">How Professionals Use CommodityNode</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
+    <div style="padding:20px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:10px;">
+      <div style="color:#22d3ee;font-weight:600;font-size:0.9rem;margin-bottom:8px;">Equity Analyst</div>
+      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">"I check the copper hub before covering FCX earnings. The impact score tells me exactly how sensitive the stock is to price moves — saves hours of manual correlation work."</p>
+    </div>
+    <div style="padding:20px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:10px;">
+      <div style="color:#fbbf24;font-weight:600;font-size:0.9rem;margin-bottom:8px;">Macro Trader</div>
+      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">"The Scenario Simulator lets me model an OPEC cut before it happens. I see which energy stocks get hit hardest and position accordingly — the 90-day forecast is my edge."</p>
+    </div>
+    <div style="padding:20px;background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.12);border-radius:10px;">
+      <div style="color:#a855f7;font-weight:600;font-size:0.9rem;margin-bottom:8px;">Portfolio Manager</div>
+      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">"My team uses CommodityNode to track commodity exposure across 200+ holdings. The ripple chain analysis catches second-order risks we'd otherwise miss."</p>
+    </div>
+  </div>
+</section>
 
 <!-- Next Report Teaser -->
 <section class="next-report-teaser">
@@ -494,7 +527,19 @@ function setBilling(mode, btn) {
   </div>
   <div class="faq-item">
     <div class="faq-q">What happens after the 7-day trial?</div>
-    <div class="faq-a">Your account continues at $19/month (or $149/year if you chose annual). Cancel anytime before the trial ends — no charge. Your data and saved scenarios are preserved if you resubscribe.</div>
+    <div class="faq-a">Your account automatically converts to the Free tier. No charge. You keep access to all commodity hubs, public reports, and the basic Impact Map.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Can I cancel anytime?</div>
+    <div class="faq-a">Yes. Cancel from your account settings with one click. No questions, no exit interview.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Do you offer refunds?</div>
+    <div class="faq-a">Yes, we offer a full refund within the first 14 days if Pro isn't right for you.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Is there an API?</div>
+    <div class="faq-a">API access is available on the Enterprise plan. Contact us for documentation and rate limits.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">How does Enterprise work?</div>
