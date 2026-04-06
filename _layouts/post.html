@@ -191,7 +191,12 @@ layout: default
           {% if primary_tag %}
           <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
             <span style="color:var(--text3)">Next hop</span>
-            <a href="/commodities/{{ primary_tag | slugify }}/" style="color:var(--text2)">{{ primary_tag }}</a>
+            {% assign primary_tag_slug = primary_tag | slugify %}
+            {% if commodity_slugs contains primary_tag_slug %}
+            <a href="/commodities/{{ primary_tag_slug }}/" style="color:var(--text2)">{{ primary_tag }}</a>
+            {% else %}
+            <span style="color:var(--text2)">{{ primary_tag }}</span>
+            {% endif %}
           </div>
           {% endif %}
         </div>

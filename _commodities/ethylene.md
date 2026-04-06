@@ -1,7 +1,7 @@
 ---
 layout: commodity
 name: "Ethylene"
-title: "Ethylene Price Impact: Industries, Stocks & ETFs"
+title: "Ethylene Price Impact: Plastics, Petrochemicals & Chemical Industry"
 description: "Ethylene is the world's most-produced organic chemical, the building block for polyethylene plastics, PVC, and thousands of downstream products."
 commodity_slug: "ethylene"
 symbol: "DOW"

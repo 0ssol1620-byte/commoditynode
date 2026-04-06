@@ -2,7 +2,7 @@
 layout: commodity
 unit: "$/barrel"
 image: "/assets/images/og-crude-oil.png"
-title: "Crude Oil Price Impact: Industries, Stocks & ETFs"
+title: "Crude Oil Price Impact: OPEC Policy, Refiner Margins & Energy Stocks"
 description: "How WTI crude oil price movements ripple through airlines, energy stocks, refiners, and consumer spending. Impact map with correlations and sensitivity scores."
 commodity_slug: "crude-oil"
 symbol: "CL=F"

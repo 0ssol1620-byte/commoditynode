@@ -72,4 +72,4 @@ Soybean oil in April 2026 is a commodity in transition. The renewable diesel dem
 
 ---
 
-*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+*Run the full scenario analysis for soybean oil in the [Scenario Simulator](/simulator/) →*

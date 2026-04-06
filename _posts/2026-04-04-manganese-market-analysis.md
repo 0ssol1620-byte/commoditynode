@@ -63,4 +63,4 @@ Manganese in April 2026 is a commodity caught between a reliable but slow-growth
 
 ---
 
-*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+*Run the full scenario analysis for manganese in the [Scenario Simulator](/simulator/) →*

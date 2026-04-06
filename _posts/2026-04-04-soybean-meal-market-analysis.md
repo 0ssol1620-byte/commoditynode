@@ -73,4 +73,4 @@ Soybean meal in April 2026 is caught in a crosscurrent of abundant supply and re
 
 ---
 
-*Run the full scenario analysis for {{ page.commodity_name | default: "this commodity" }} in the [Scenario Simulator](/simulator/) →*
+*Run the full scenario analysis for soybean meal in the [Scenario Simulator](/simulator/) →*

@@ -1,7 +1,7 @@
 ---
 layout: commodity
 name: "Palm Oil"
-title: "Palm Oil Price Impact: Industries, Stocks & ETFs"
+title: "Palm Oil Price Impact: Food Industry, Biodiesel & Oilseed Markets"
 description: "Palm oil is the world's most consumed vegetable oil, produced primarily in Indonesia and Malaysia. It's used in food processing, cosmetics, and biodiesel."
 commodity_slug: "palm-oil"
 symbol: "ZL=F"

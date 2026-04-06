@@ -19,7 +19,9 @@ description: "CommodityNode maps how commodity price movements ripple through gl
     "email": "contact@commoditynode.com",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://commoditynode.com/assets/images/logo.svg"
+      "url": "https://commoditynode.com/assets/images/logo.svg",
+      "width": 200,
+      "height": 60
     },
     "sameAs": [
       "https://www.threads.net/@commoditynode",
