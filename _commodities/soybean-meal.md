@@ -1,7 +1,7 @@
 ---
 layout: commodity
 unit: "cents/short ton"
-image: "/assets/images/og-soybeans.png"
+image: "/assets/images/og-soybean-meal.png"
 title: "Soybean Meal Price Impact: Livestock Feed, Crush Margins & Agribusiness"
 description: "Soybean meal as the dominant global protein source in animal feed, driving the soy crush spread and livestock economics."
 commodity_slug: "soybean-meal"

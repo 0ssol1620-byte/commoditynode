@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-steel.png"
+image: "/assets/images/og-manganese.png"
 title: "Manganese Price Impact: Steel Alloys, EV Batteries & Mining Stocks"
 description: "How manganese price movements ripple through steelmakers, EV battery producers, and mining companies."
 commodity_slug: "manganese"

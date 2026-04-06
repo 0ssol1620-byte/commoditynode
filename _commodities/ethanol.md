@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-corn.png"
+image: "/assets/images/og-ethanol.png"
 title: "Ethanol Price Impact: Corn Demand, Biofuel & Refiners"
 description: "Fuel ethanol as a corn-derived biofuel blended into the US gasoline supply under federal renewable fuel mandates."
 commodity_slug: "ethanol"

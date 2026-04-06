@@ -1,7 +1,7 @@
 ---
 layout: commodity
 unit: "cents/lb"
-image: "/assets/images/og-soybeans.png"
+image: "/assets/images/og-soybean-oil.png"
 title: "Soybean Oil Price Impact: Food Industry, Biofuel & Crush Margins"
 description: "Soybean oil as a dual-use commodity bridging food markets and renewable diesel feedstock demand."
 commodity_slug: "soybean-oil"

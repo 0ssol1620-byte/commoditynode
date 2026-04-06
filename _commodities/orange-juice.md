@@ -1,7 +1,7 @@
 ---
 layout: commodity
 unit: "cents/lb"
-image: "/assets/images/og-coffee.png"
+image: "/assets/images/og-orange-juice.png"
 title: "Orange Juice Price Impact: Citrus Supply, Weather Risk & ETFs"
 description: "How FCOJ futures ripple through beverage companies, Florida agriculture, Brazilian exports, and vitamin supplement markets."
 commodity_slug: "orange-juice"

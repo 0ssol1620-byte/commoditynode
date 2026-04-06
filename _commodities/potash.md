@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-corn.png"
+image: "/assets/images/og-potash.png"
 title: "Potash Price Impact: Crop Yields, Fertilizer Stocks & Agriculture"
 description: "How potash (KCl) price movements ripple through fertilizer producers, agribusiness, and global food security."
 commodity_slug: "potash"

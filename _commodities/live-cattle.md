@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-corn.png"
+image: "/assets/images/og-live-cattle.png"
 title: "Live Cattle Price Impact: Beef Markets, Feed Costs & Agribusiness"
 description: "Live cattle as the cornerstone of the US beef market driven by cattle cycle dynamics and drought risk."
 commodity_slug: "live-cattle"

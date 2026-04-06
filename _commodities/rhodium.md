@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-default.png"
+image: "/assets/images/og-rhodium.png"
 title: "Rhodium Price Impact: Catalytic Converters & PGM Supply"
 description: "Rhodium's extreme scarcity, catalytic converter dominance, and South African supply concentration."
 commodity_slug: "rhodium"

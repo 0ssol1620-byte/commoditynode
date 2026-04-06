@@ -1,6 +1,6 @@
 ---
 layout: commodity
-image: "/assets/images/og-corn.png"
+image: "/assets/images/og-feeder-cattle.png"
 title: "Feeder Cattle Price Impact: Beef Supply Chain & Cattle Cycle"
 description: "Feeder cattle as weaned calves entering feedlots, driven by the cattle cycle, corn costs, and drought conditions."
 commodity_slug: "feeder-cattle"

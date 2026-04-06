@@ -14,7 +14,7 @@ substitutes: ["Soybean Oil", "Canola Oil", "Sunflower Oil"]
 industries: ["consumer-goods", "food-processing"]
 themes: ["Food Inflation"]
 tags: [palm oil, vegetable oil, Indonesia, Malaysia, food processing, cosmetics, biodiesel, supply chain]
-image: /assets/images/og-soybeans.png
+image: "/assets/images/og-palm-oil.png"
 ---
 
 <script>
