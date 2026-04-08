@@ -1,94 +1,77 @@
 ---
 layout: post
-title: "Coffee's 10% Crash: Brazil's Record Harvest Ends a 3-Year Bull Run"
-date: 2026-03-23
-categories: [agriculture, commodities]
-tags: [coffee, arabica, brazil, vietnam, supply-surplus, agriculture]
-description: "Brazil's record 66.2M bag harvest crashes arabica coffee futures 10%. Analysis of the supply surplus ending a 3-year bull run and its ripple effects on cafes, packaged food, and farming economies."
-excerpt: "Arabica coffee futures plunged nearly 10% as Brazil's Conab projected a record 66.2 million bag harvest — a 17% year-on-year surge. After three years of supply deficits driving prices to all-time highs, the commodity cycle is turning."
+title: "Coffee Selloff Deepens Near 52-Week Low as the Surplus Story Tightens"
+date: 2026-04-08
+categories: [Signal Report, Agriculture]
+tags: [coffee, arabica, brazil, supply-surplus, soft-commodities]
+description: "Coffee futures fell to roughly 269–271 cents/lb on April 8, down about 5.4–9.6% and sitting near the 52-week low. The old Brazil-surplus story still dominates, and the latest selloff reinforces it."
+excerpt: "Coffee is back near the bottom of its 52-week range. The bearish Brazil-surplus narrative has not broken, it has deepened."
 commodity: coffee
 impact_nodes:
   - id: "coffee"
     label: "Coffee (KC=F)"
     type: "commodity"
-    change: -9.8
+    change: -9.6
   - id: "cafes"
     label: "Cafes & Restaurants"
     type: "industry"
-    change: 3.2
+    change: 2.5
   - id: "packaged_food"
     label: "Packaged Food Cos."
     type: "industry"
-    change: 2.8
+    change: 2.2
   - id: "brazil_agri"
     label: "Brazil Agriculture"
     type: "region"
-    change: -4.1
+    change: -4.5
   - id: "commodity_funds"
     label: "Commodity Funds"
     type: "finance"
-    change: -6.5
+    change: -6.8
 image: /assets/images/og/coffee-price-crash-brazil-surplus.png
-reading_time: 5
+reading_time: 6
 commodity_name: "Coffee"
+updated: true
 ---
 
-Arabica coffee futures posted one of their sharpest single-session declines in recent memory, dropping **9.8%** to 276 cents/lb — levels not seen since mid-2024. The catalyst: Brazil's national crop agency Conab released February 2026 projections showing overall coffee production surging **17.2% year-on-year** to a record **66.2 million bags**, with Arabica output alone jumping **23.2% to 44.1 million bags**.
+Coffee futures traded around 269 to 271 cents per pound on April 8, down roughly 5.4% to 9.6% on the day and sitting just above the 52-week low of 267.75 cents. That is the key fact now. The old Brazil-surplus story has not been disproven by time, it has been reinforced by price. A market sitting this close to the bottom of its annual range is telling you that sellers still control the trend.
 
-## The Supply Surge That's Ending Three Years of Pain
+Coffee is still well below its 52-week high of 437.95 cents. That distance matters because it shows how far the market has already repriced from scarcity and panic into a surplus-driven regime. The latest selloff does not introduce a brand-new thesis, it confirms that the bearish one remains in charge.
 
-Coffee drinkers have endured a brutal stretch. Prices nearly doubled between 2023 and 2025 as back-to-back climate disruptions hit Brazil's crop cycle — the world's largest Arabica producer. El Niño-driven droughts in 2023, frost scares, and irregular rainfall pushed supply deficits above 5 million bags annually. Roasters and café chains absorbed costs as long as they could, then passed them to consumers.
+## Why the move matters
 
-Now the pendulum is swinging the other way — hard.
+The first reason the move matters is simple: trend persistence. When a commodity falls back toward the low end of its annual range after an earlier breakdown, it signals that dip buyers have not been strong enough to rebuild confidence. Coffee is not consolidating comfortably in the middle of the range, it is leaning on the bottom.
 
-**Why this harvest is different:**
-- Favorable on-year cycle for Brazil's biennial Arabica production
-- Consistent rainfall across Minas Gerais and São Paulo growing regions since Q3 2025
-- Farmers held back beans to push sales into the new Brazilian tax year — those bags are now entering the market simultaneously
-- US tariff reversals on Brazilian coffee imports re-opened demand channels that had been partially disrupted
+Second, lower coffee prices carry real economic consequences across the supply chain. Producers and exporters that are not fully hedged lose pricing power quickly when the market trades like this. What looks like relief for end buyers is stress for origin-side cash flow.
 
-StoneX estimates Brazilian production could reach **77 million bags total** — an increase of 13.5%. Rabobank projects global output hitting **180 million bags** for the first time in history, with a net surplus of 5–8 million bags emerging in the 2026/27 season.
+Third, sharp downside moves near the lows can create self-reinforcing behavior. Funds extend shorts, commercial sellers become more aggressive, and market participants stop treating rebounds as trend changes unless something tangible breaks the supply story.
 
-## Vietnam Piles On
+## Industry ripple effects
 
-While Brazil dominates Arabica, Vietnam is the global Robusta kingpin — and it's also in a growth phase. Vietnam's 2025/26 harvest volumes are estimated up **5–10%**, adding further pressure to the broader coffee complex. With both major producers in upcycles simultaneously, the supply argument has completely flipped.
+For coffee growers and exporters, this is margin pressure. Lower flat prices mean origin economics become more fragile, especially for smaller participants with less financing flexibility. That matters in Brazil, but it matters just as much for the broader export chain that depends on predictable cash conversion.
 
-## Who Benefits, Who Gets Hurt
+For roasters and branded consumer companies, the move is directionally positive. Names with meaningful coffee exposure, such as Starbucks (SBUX), Nestlé (NSRGY), and JDE Peet's, benefit from an improving raw-material backdrop if weakness persists long enough to filter through procurement cycles. The pass-through is never instant, but the pressure is clearly less severe when futures are sitting near the lows instead of near the highs.
 
-**Winners:**
-- **Cafés and QSR chains** (Starbucks, McDonald's McCafé segment) — input cost relief after two years of margin compression. Analysts expect 150–200bps gross margin expansion if prices hold.
-- **Packaged coffee brands** (Nestlé Nespresso, JDE Peet's, Lavazza) — long-term contracts were locked at elevated rates; spot-buying flexibility now becomes a competitive advantage.
-- **Consumers** — eventually. Retail coffee prices lag futures by 6–12 months, but the trend is now unambiguously deflationary.
+For speculators and commodity funds, the setup remains dangerous in both directions. The dominant trend is still bearish, but markets that get crowded near the lows can produce violent squeezes if positioning becomes too one-sided. That does not make the trend bullish, it just means the path lower can stay volatile.
 
-**Losers:**
-- **Commodity funds** with long Arabica positions — managed money had built record net-long positions through early 2026; forced liquidation is accelerating the move.
-- **Brazilian coffee farmers** — revenue per bag collapses even as volumes rise. The classic commodity trap: produce more, earn less.
-- **Specialty roasters** who pre-paid for premium lots at 2025 peak prices face inventory written down against a falling market.
+## What changed versus last week
 
-## The Cocoa Echo
+The main change is intensity. Last week's story was that coffee remained under pressure from surplus logic. This week, price action made that conclusion harder to argue against by driving the contract back down toward the 52-week floor.
 
-Markets are drawing explicit parallels to cocoa's collapse. Cocoa hit a record $12,500/tonne in 2024 before supply recovery drove a brutal 60% drawdown. Analysts at Rabobank and ING have both published notes suggesting Arabica could retrace to **$1.80–$2.00/lb** by end-2026 — a 35–40% decline from current levels if the surplus materializes as projected.
+The second change is that the market is now testing whether low prices themselves are enough to create support. So far, the answer appears to be no. If buyers were eager to rebuild long exposure simply because coffee was cheaper, the contract would not still be hovering near the bottom of the range.
 
-The pattern is textbook commodity cycle: multi-year supply deficit → price spike → farmer investment → record supply → price crash. Coffee is just following the script.
+The third change is relative context. Other agricultural contracts also traded weakly, with wheat lower, corn lower, and soybean oil down around 3.6% on the day. That broader softness matters because it tells you coffee is not fighting against a powerful ag-wide rebound. It is falling inside a tape that still tolerates downside.
 
-## What to Watch
+So the original surplus narrative remains valid, but the latest move tightens it. The market is no longer just talking about oversupply risk, it is pricing that risk aggressively.
 
-- **Conab's June 2026 update** — will confirm or revise the record harvest projection
-- **ICO monthly supply/demand balance** — surplus confirmation needed to sustain the downtrend
-- **Currency risk** — a weakening Brazilian Real amplifies farmer incentives to sell dollar-denominated exports, accelerating supply flow
-- **Climate wildcard** — late-season frost events (June–July in Brazil) remain the primary upside risk
+## What to watch next
 
-## Market Context
+The first thing to monitor is whether coffee can hold above the 52-week low. Once a market starts leaning this hard on the bottom of the range, breaks can accelerate.
 
-The coffee crash is occurring within a broader commodity correction narrative. Multiple agricultural commodities that spiked during 2022-2025 — driven by supply disruptions, logistics costs, and speculative positioning — are now reverting as supply conditions normalize. Cocoa, orange juice, and now coffee are all experiencing variants of the same cycle.
+Second, watch export flow and commercial selling behavior. If origin-side selling remains active even at depressed prices, the bearish trend can keep extending.
 
-For the broader food inflation picture, coffee's decline is unambiguously positive. Coffee is a direct consumer purchase with high price visibility, meaning falling futures will eventually translate to lower retail prices and contribute to headline CPI moderation. The transmission lag is typically 6-12 months due to roaster hedging and retailer pricing cycles.
+Third, keep an eye on weather and any credible supply disruption signals. At this point, the bearish trend probably needs a real fundamental interruption, not just a technical bounce, to reset sentiment.
 
-## Key Risk Factors
+Finally, watch coffee-sensitive consumer names and procurement commentary. If the equity side starts behaving as though lower bean costs are becoming durable, that will confirm the market is treating this as more than a one-day liquidation event.
 
-- **Late frost in Brazil:** June-July frosts in Minas Gerais or São Paulo could damage the 2027 crop and reverse the bearish sentiment overnight. This is the single most important risk to the surplus thesis.
-- **Speculative overshoot:** Managed money positioning has swung from record longs to accelerating liquidation. If the market overshoots to the downside, a technical reversal could be sharp.
-- **Logistics disruptions:** Brazilian port congestion during peak soybean and coffee export season (April-June) could delay physical deliveries and create temporary price support.
-- **Vietnamese Robusta quality issues:** Any quality or supply concerns from Vietnam's harvest would tighten the Robusta market and provide indirect support to Arabica.
-
-The coffee bull market that enriched producers and punished consumers for three years appears to be over. The question now is how far the correction runs.
+*Data and market context updated for April 8, 2026. For informational purposes only.*
