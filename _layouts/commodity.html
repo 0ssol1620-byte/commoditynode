@@ -210,6 +210,8 @@ layout: default
       return;
     }
 
+    console.log('commodity-banner-data', key, c);
+
     // Update banner UI
     var banner = document.getElementById('commodity-price-banner');
     banner.style.display = 'block';
@@ -282,7 +284,8 @@ layout: default
 
     // Dispatch event so impact-graph.js and price-chart.js can react
     window.dispatchEvent(new CustomEvent('commodity-price-loaded', {detail: {key: key, data: c, allPrices: d}}));
-  }).catch(function(){
+  }).catch(function(err){
+    console.warn('commodity banner load failed', err);
     var banner = document.getElementById('commodity-price-banner');
     if(banner){
       banner.style.display = 'block';
