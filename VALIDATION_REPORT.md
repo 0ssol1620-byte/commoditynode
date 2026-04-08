@@ -1,5 +1,29 @@
 # CommodityNode Validation Report
-Generated: 2026-04-06
+Generated: 2026-04-08
+
+---
+
+## 0. Master Spec Audit Snapshot (2026-04-08)
+
+### Repo and live checks completed
+- Verified representative live pages across home, browse, pricing, signals, simulator, methodology, and flagship commodity hubs
+- Confirmed repo coverage counts and centralized public-facing count rendering
+- Identified and fixed commodity hub live KPI regression caused by slug-to-data-key mismatch and `price` vs `current_price` field mismatch
+- Logged unresolved product-level risks separately in `OPEN_RISKS.md`
+
+### Key findings
+| Area | Result |
+|------|--------|
+| Public coverage counts | Fixed in repo, now sourced from `_config.yml` |
+| Representative hub live KPI logic | Fixed in repo |
+| Data type disclosure | Present on commodity hubs and methodology |
+| Home placeholder copy | Reduced in repo |
+| Simulator availability | Live simulator renders and forecast stats are present |
+| Long-tail hub parity | Still uneven, tracked as open risk |
+| Backtest freshness parity | Still open risk |
+
+### Honest status
+This project is materially improved, but not fully “perfect” yet. Remaining structural gaps are product-depth issues, not cosmetic leftovers.
 
 ---
 

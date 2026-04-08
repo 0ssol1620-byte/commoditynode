@@ -1,5 +1,33 @@
 # CHANGELOG — CommodityNode Integrity Fixes (2026-04-04)
 
+## 2026-04-08 — Master Spec Execution (in progress)
+
+### What changed
+- Centralized public coverage counts in `_config.yml` via `coverage_counts`
+- Replaced stale hardcoded browse counts on home and commodities index
+- Fixed commodity hub live-price key resolution so slug-based pages map correctly to `prices.json`
+- Kept direct/proxy/analysis-only labeling in commodity hub surface and methodology alignment
+- Added `OPEN_RISKS.md` to document unresolved structural/product risks honestly
+
+### Why it changed
+- The master spec identified live-site drift between repo truth and public numbers
+- Representative hubs were incorrectly falling into a `Live price data not available` state due to slug/data-key mismatch
+- Product trust depends on consistent counts and visible, working KPI surfaces
+
+### Files changed
+- `_config.yml`
+- `index.html`
+- `commodities/index.md`
+- `_layouts/commodity.html`
+- `OPEN_RISKS.md`
+
+### Spec areas addressed
+- Coverage definition unification
+- Representative hub KPI restoration
+- Data type clarity
+- Risk logging / truthful completion standard
+
+
 ## Phase 1: Fixed 5 Broken Public HREFs
 
 | File | Broken Link | Fixed To |

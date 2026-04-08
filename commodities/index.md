@@ -505,15 +505,15 @@ description: "Explore how each commodity's price movements ripple through indust
 <div class="browse-grid" data-animate data-delay="100">
   <a href="/industries/" class="browse-card">
     <div class="browse-label">Industries</div>
-    <div class="browse-count">30 sectors</div>
+    <div class="browse-count">{{ site.coverage_counts.industries | default: 31 }} sectors</div>
   </a>
   <a href="/companies/" class="browse-card">
     <div class="browse-label">Companies</div>
-    <div class="browse-count">53 tickers</div>
+    <div class="browse-count">{{ site.coverage_counts.companies | default: 74 }} tickers</div>
   </a>
   <a href="/themes/" class="browse-card">
     <div class="browse-label">Themes</div>
-    <div class="browse-count">20 themes</div>
+    <div class="browse-count">{{ site.coverage_counts.themes | default: 23 }} themes</div>
   </a>
   <a href="/reports/" class="browse-card">
     <div class="browse-label">Reports</div>

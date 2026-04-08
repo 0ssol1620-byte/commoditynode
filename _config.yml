@@ -23,6 +23,15 @@ social:
   links:
     - https://twitter.com/commoditynode
 
+coverage_counts:
+  commodity_hubs: 62
+  direct_commodities: 27
+  proxy_hubs: 27
+  analysis_only_hubs: 8
+  companies: 74
+  industries: 31
+  themes: 23
+
 google_analytics: "G-8VF60DEP0W"
 
 markdown: kramdown
