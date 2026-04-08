@@ -77,22 +77,22 @@ def yahoo_fetch(symbol, range_="2d", interval="1d"):
 
 def fetch_price(symbol):
     try:
-        data = yahoo_fetch(symbol, "2d", "1d")
+        data = yahoo_fetch(symbol, "10d", "1d")
         result = data["chart"]["result"]
         if not result:
             return None
         meta = result[0]["meta"]
         quote = result[0].get("indicators", {}).get("quote", [{}])[0]
         closes = quote.get("close") or []
-        valid_closes = [c for c in closes if c is not None and c > 0]
+        valid_closes = [float(c) for c in closes if c is not None and c > 0]
 
         price = meta.get("regularMarketPrice")
         if price is None and valid_closes:
             price = valid_closes[-1]
         if price is None:
             return None
+        price = float(price)
 
-        # 일간 변동률: previousClose 우선, 없으면 직전 유효 종가, 마지막으로 chartPreviousClose 허용
         prev = meta.get("previousClose") or meta.get("regularMarketPreviousClose")
         if not prev and len(valid_closes) >= 2:
             prev = valid_closes[-2]
@@ -100,18 +100,39 @@ def fetch_price(symbol):
             cp = meta.get("chartPreviousClose")
             if cp and cp != price:
                 prev = cp
+        prev = float(prev) if prev else None
 
         chg = None
         if prev and prev != 0:
             raw_chg = round((price - prev) / prev * 100, 2)
+
+            recent = valid_closes[-6:] if len(valid_closes) >= 2 else valid_closes
+            prior = recent[:-1] if len(recent) >= 2 else []
+            median_prior = sorted(prior)[len(prior)//2] if prior else prev
+
+            scale_break = False
+            if median_prior and median_prior > 0:
+                ratio = price / median_prior
+                if ratio >= 8 or ratio <= 0.125:
+                    scale_break = True
+
+            frozen_series = len(set(round(v, 4) for v in prior)) <= 1 if len(prior) >= 3 else False
             is_futures = symbol.endswith('=F')
-            max_abs = 9.99 if is_futures else 20.0
-            chg = raw_chg if abs(raw_chg) <= max_abs else None
+            max_abs = 12.5 if is_futures else 20.0
+
+            if scale_break:
+                chg = None
+            elif frozen_series and meta.get("previousClose") is None and meta.get("regularMarketPreviousClose") is None:
+                chg = None
+            elif abs(raw_chg) > max_abs:
+                chg = None
+            else:
+                chg = raw_chg
 
         high_52w = meta.get("fiftyTwoWeekHigh") or round(price * 1.2, 2)
         low_52w  = meta.get("fiftyTwoWeekLow")  or round(price * 0.8, 2)
         return {
-            "price":      round(float(price), 4),
+            "price":      round(price, 4),
             "change_pct": chg,
             "high_52w":   round(float(high_52w), 2),
             "low_52w":    round(float(low_52w),  2),
