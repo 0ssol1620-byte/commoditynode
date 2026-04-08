@@ -75,6 +75,9 @@ def yahoo_fetch(symbol, range_="2d", interval="1d"):
     with urllib.request.urlopen(req, timeout=10) as r:
         return json.load(r)
 
+ENERGY_FUTURES = {"CL=F", "BZ=F", "NG=F", "HO=F", "RB=F"}
+
+
 def fetch_price(symbol):
     try:
         data = yahoo_fetch(symbol, "10d", "1d")
@@ -100,6 +103,25 @@ def fetch_price(symbol):
             cp = meta.get("chartPreviousClose")
             if cp and cp != price:
                 prev = cp
+
+        # Energy futures often show cleaner continuity on a wider window than 2d/10d chartPreviousClose
+        if symbol in ENERGY_FUTURES:
+            try:
+                monthly = yahoo_fetch(symbol, "1mo", "1d")
+                mres = monthly["chart"]["result"]
+                if mres:
+                    mmeta = mres[0]["meta"]
+                    mquote = mres[0].get("indicators", {}).get("quote", [{}])[0]
+                    mcloses = [float(c) for c in (mquote.get("close") or []) if c is not None and c > 0]
+                    mcp = mmeta.get("chartPreviousClose")
+                    if mcp and mcp > 0 and mcloses:
+                        continuity_ratio = price / float(mcp)
+                        recent_ratio = price / mcloses[-1] if mcloses[-1] else 1.0
+                        if 0.85 <= continuity_ratio <= 1.15 and 0.98 <= recent_ratio <= 1.02:
+                            prev = float(mcp)
+            except Exception:
+                pass
+
         prev = float(prev) if prev else None
 
         chg = None
