@@ -14,6 +14,13 @@
 - **User impact:** Medium. Forecast pages can appear fresher than methodology/performance evidence.
 - **Recommended next step:** Re-run the backtest pipeline, publish the new run timestamp, and surface it wherever forecast performance is referenced.
 
+### 2a. Some daily change feeds remain intentionally conservative
+- **Status:** Open, but deliberate.
+- **Issue:** A small subset of commodities still resolves to `Daily change unavailable` because the current heuristics detect scale breaks, frozen series, or rollover-sensitive discontinuities.
+- **Affected examples:** Rice, Zinc, Lean Hogs, Nickel proxy, Tin proxy.
+- **User impact:** Low to medium. Better than showing false precision, but not final-form.
+- **Recommended next step:** Add commodity-specific normalization rules or alternate upstream references for these feeds.
+
 ### 3. Hub quality remains uneven across long-tail commodities
 - **Status:** Open.
 - **Issue:** The spec target for fully tiered, fully even coverage is not yet complete. `ethylene` and `palm-oil` still need stronger related-report depth, and many hubs remain thin.

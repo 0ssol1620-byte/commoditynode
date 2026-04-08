@@ -23,7 +23,19 @@ Generated: 2026-04-08
 | Backtest freshness parity | Still open risk |
 
 ### Honest status
-This project is materially improved, but not fully “perfect” yet. Remaining structural gaps are product-depth issues, not cosmetic leftovers.
+This project is materially improved and the most serious live trust defects were fixed. Remaining gaps are concentrated in a smaller set of rollover-sensitive or structurally weak price feeds, not broad site-wide display failures.
+
+### Follow-up refinement outcome (2026-04-09)
+- Added rollover-aware daily change recovery for energy futures
+- Restored live homepage WTI and natural gas change rendering
+- Removed misleading `0.0%` / `Data check` style fallback from live home output when recoverable data exists
+- Preserved `Daily change unavailable` only for feeds that remain genuinely unreliable under current heuristics
+
+### Remaining intentionally conservative cases
+- Rice (`ZR=F`) — detected scale break / unit discontinuity
+- Zinc (`ZNC=F`) — frozen series / unreliable day-over-day basis
+- Lean Hogs (`HE=F`) — high-jump contract behavior not yet safely normalized
+- Nickel / Tin (`JJN`) — proxy feed limitations
 
 ---
 
