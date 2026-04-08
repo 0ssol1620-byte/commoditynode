@@ -76,6 +76,13 @@ def yahoo_fetch(symbol, range_="2d", interval="1d"):
         return json.load(r)
 
 ENERGY_FUTURES = {"CL=F", "BZ=F", "NG=F", "HO=F", "RB=F"}
+ENERGY_SOFT_MAX_ABS = {
+    "CL=F": 8.0,
+    "BZ=F": 8.0,
+    "NG=F": 15.0,
+    "HO=F": 12.0,
+    "RB=F": 12.0,
+}
 
 
 def fetch_price(symbol):
@@ -140,7 +147,7 @@ def fetch_price(symbol):
 
             frozen_series = len(set(round(v, 4) for v in prior)) <= 1 if len(prior) >= 3 else False
             is_futures = symbol.endswith('=F')
-            max_abs = 12.5 if is_futures else 20.0
+            max_abs = ENERGY_SOFT_MAX_ABS.get(symbol, 12.5 if is_futures else 20.0)
 
             if scale_break:
                 chg = None

@@ -146,7 +146,7 @@ image: "/assets/images/og-default.png"
               var pct = oil.change_pct;
               var staleZero = (pct === 0 || pct === 0.0) && oil.updated_at;
               if (staleZero) {
-                el.textContent='Data check';
+                el.textContent='—';
                 el.className='value';
                 el.title='WTI daily change is unavailable or filtered by the current data pipeline. See pricing page for the latest absolute price.';
               } else if (typeof pct === 'number') {
