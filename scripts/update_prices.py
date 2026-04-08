@@ -82,29 +82,32 @@ def fetch_price(symbol):
         if not result:
             return None
         meta = result[0]["meta"]
+        quote = result[0].get("indicators", {}).get("quote", [{}])[0]
+        closes = quote.get("close") or []
+        valid_closes = [c for c in closes if c is not None and c > 0]
+
         price = meta.get("regularMarketPrice")
-        # 일간 변동률: previousClose (직전 거래일 종가) 우선 사용
+        if price is None and valid_closes:
+            price = valid_closes[-1]
+        if price is None:
+            return None
+
+        # 일간 변동률: previousClose 우선, 없으면 직전 유효 종가, 마지막으로 chartPreviousClose 허용
         prev = meta.get("previousClose") or meta.get("regularMarketPreviousClose")
-        closes = result[0].get("indicators", {}).get("quote", [{}])[0].get("close", [])
-        valid = [c for c in closes if c is not None]
-        # previousClose 없으면 closes 배열에서 직전 값 사용
-        if not prev and len(valid) >= 2:
-            prev = valid[-2]
-        # chartPreviousClose는 range 시작점이라 일간용으로 부정확 — fallback만
+        if not prev and len(valid_closes) >= 2:
+            prev = valid_closes[-2]
         if not prev:
-            prev = meta.get("chartPreviousClose")
-        if price and prev and prev != 0:
-            chg = round((price - prev) / prev * 100, 2)
-            # 선물 롤오버 감지: ±10% 초과 시 의심
-            if abs(chg) > 10:
-                valid_closes = [c for c in closes if c is not None and c > 0]
-                nearby = [c for c in valid_closes if abs(c - price) / price < 0.10]
-                if len(nearby) >= 2:
-                    chg = round((price - nearby[-2]) / nearby[-2] * 100, 2)
-                else:
-                    chg = 0.0  # 롤오버로 판단, 0으로 처리
-        else:
-            chg = 0.0
+            cp = meta.get("chartPreviousClose")
+            if cp and cp != price:
+                prev = cp
+
+        chg = None
+        if prev and prev != 0:
+            raw_chg = round((price - prev) / prev * 100, 2)
+            is_futures = symbol.endswith('=F')
+            max_abs = 9.99 if is_futures else 20.0
+            chg = raw_chg if abs(raw_chg) <= max_abs else None
+
         high_52w = meta.get("fiftyTwoWeekHigh") or round(price * 1.2, 2)
         low_52w  = meta.get("fiftyTwoWeekLow")  or round(price * 0.8, 2)
         return {
@@ -158,8 +161,12 @@ def main():
             if "proxy_type" in info:
                 entry["proxy_type"] = info["proxy_type"]
             prices[key] = entry
-            sign = "+" if data["change_pct"] >= 0 else ""
-            print(f"   ${data['price']} ({sign}{data['change_pct']}%)")
+            pct = data.get("change_pct")
+            if isinstance(pct, (int, float)):
+                sign = "+" if pct >= 0 else ""
+                print(f"   ${data['price']} ({sign}{pct}%)")
+            else:
+                print(f"   ${data['price']} (daily change unavailable)")
         time.sleep(0.25)
 
     with open("_data/prices.json", "w") as f:

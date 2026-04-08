@@ -248,11 +248,17 @@ layout: default
       proxyBadge.title = 'This price reflects a proxy asset (' + (c.symbol||'') + '), not a direct commodity futures price. See methodology for details.';
       document.getElementById('banner-price').parentElement.appendChild(proxyBadge);
     }
-    var sign = c.change_pct >= 0 ? '+' : '';
     var changeEl = document.getElementById('banner-change');
-    changeEl.textContent = sign + c.change_pct + '%';
-    changeEl.style.background = c.change_pct >= 0 ? 'rgba(16,185,129,0.2)' : 'rgba(244,63,94,0.2)';
-    changeEl.style.color = c.change_pct >= 0 ? '#10b981' : '#f43f5e';
+    if (typeof c.change_pct === 'number') {
+      var sign = c.change_pct >= 0 ? '+' : '';
+      changeEl.textContent = sign + c.change_pct + '%';
+      changeEl.style.background = c.change_pct >= 0 ? 'rgba(16,185,129,0.2)' : 'rgba(244,63,94,0.2)';
+      changeEl.style.color = c.change_pct >= 0 ? '#10b981' : '#f43f5e';
+    } else {
+      changeEl.textContent = 'Daily change unavailable';
+      changeEl.style.background = 'rgba(148,163,184,0.16)';
+      changeEl.style.color = '#94a3b8';
+    }
     // 52w estimates: +/-15% from current as reasonable range
     var high = (livePrice * 1.15).toFixed(2);
     var low = (livePrice * 0.85).toFixed(2);

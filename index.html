@@ -118,7 +118,7 @@ image: "/assets/images/og-default.png"
 
       function buildInsights(data) {
         var sorted = Object.entries(data)
-          .filter(function(e){ return e[1].change_pct !== undefined && e[1].change_pct !== 0; })
+          .filter(function(e){ return typeof e[1].change_pct === 'number' && e[1].change_pct !== 0; })
           .sort(function(a,b){ return Math.abs(b[1].change_pct) - Math.abs(a[1].change_pct); })
           .slice(0, 3);
         var list = document.getElementById('insights-list');
@@ -143,14 +143,26 @@ image: "/assets/images/og-default.png"
           var oil=d.crude_oil; if(oil){
             var el=document.getElementById('hero-wti-change');
             if(el){
-              var sign=oil.change_pct>=0?'+':'';
-              el.textContent=sign+oil.change_pct.toFixed(2)+'%';
-              el.className='value '+(oil.change_pct>=0?'positive':'negative');
+              var pct = oil.change_pct;
+              var staleZero = (pct === 0 || pct === 0.0) && oil.updated_at;
+              if (staleZero) {
+                el.textContent='Data check';
+                el.className='value';
+                el.title='WTI daily change is unavailable or filtered by the current data pipeline. See pricing page for the latest absolute price.';
+              } else if (typeof pct === 'number') {
+                var sign=pct>=0?'+':'';
+                el.textContent=sign+pct.toFixed(2)+'%';
+                el.className='value '+(pct>=0?'positive':'negative');
+              } else {
+                el.textContent='—';
+                el.className='value';
+              }
             }
           }
           // Dynamic hero headline - TOP 1 mover
           var top = null, maxAbs = 0;
           Object.entries(d).forEach(function(e){
+            if (typeof e[1].change_pct !== 'number') return;
             if (Math.abs(e[1].change_pct) > maxAbs) {
               maxAbs = Math.abs(e[1].change_pct);
               top = { key: e[0], name: e[1].name, change_pct: e[1].change_pct };
@@ -771,10 +783,18 @@ image: "/assets/images/og-default.png"
       var map={oil:'crude_oil',gold:'gold',copper:'copper',gas:'natural_gas'};
       Object.keys(map).forEach(function(k){
         var c=d[map[k]]; if(!c)return;
-        var sign=c.change_pct>=0?'+':'';
         var dir=document.getElementById('signal-'+k+'-dir');
         var price=document.getElementById('signal-'+k+'-price');
-        if(dir){dir.textContent=sign+c.change_pct+'%';dir.className='signal-mover-direction '+(c.change_pct>=0?'up':'down');}
+        if(dir){
+          if(typeof c.change_pct === 'number'){
+            var sign=c.change_pct>=0?'+':'';
+            dir.textContent=sign+c.change_pct+'%';
+            dir.className='signal-mover-direction '+(c.change_pct>=0?'up':'down');
+          } else {
+            dir.textContent='—';
+            dir.className='signal-mover-direction';
+          }
+        }
         if(price){price.textContent='$'+c.price;}
       });
     }).catch(function(){});
@@ -1140,7 +1160,8 @@ image: "/assets/images/og-default.png"
         fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
           var topKey=null, topAbs=0;
           Object.keys(d).forEach(function(k){
-            var abs=Math.abs(d[k].change_pct||0);
+            if(typeof d[k].change_pct !== 'number') return;
+            var abs=Math.abs(d[k].change_pct);
             if(abs>topAbs){topAbs=abs;topKey=k;}
           });
           if(!topKey||topAbs<2) return; // keep default if move < 2%
@@ -1354,8 +1375,9 @@ function renderPreviewRanges(prices) {
     var pct = Math.round((d.price - d.low_52w) / (d.high_52w - d.low_52w) * 100);
     pct = Math.max(0, Math.min(100, pct));
     var barColor = pct >= 90 ? '#ef4444' : pct >= 70 ? '#f97316' : pct >= 30 ? '#22d3ee' : '#10b981';
-    var sign = d.change_pct >= 0 ? '+' : '';
-    var chgColor = d.change_pct >= 0 ? '#10b981' : '#f43f5e';
+    var hasChange = typeof d.change_pct === 'number';
+    var sign = hasChange && d.change_pct >= 0 ? '+' : '';
+    var chgColor = hasChange && d.change_pct >= 0 ? '#10b981' : '#94a3b8';
     return '<div class="preview-range-row">'
       + '<div class="preview-range-name">' + names[k] + '</div>'
       + '<div class="preview-range-bar-wrap">'
@@ -1365,7 +1387,7 @@ function renderPreviewRanges(prices) {
       + '</div>'
       + '<div class="preview-range-info">'
       + '<span class="preview-range-price">$' + d.price + '</span>'
-      + '<span class="preview-range-chg" style="color:'+chgColor+'">' + sign + d.change_pct + '%</span>'
+      + '<span class="preview-range-chg" style="color:'+chgColor+'">' + (hasChange ? (sign + d.change_pct + '%') : 'Daily change unavailable') + '</span>'
       + '<span class="preview-range-pct">' + pct + '% of range</span>'
       + '</div></div>';
   }).join('');
