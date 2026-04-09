@@ -17,7 +17,47 @@
           "contains": ["What makes this archive useful"]
         },
         {
+          "url": "https://commoditynode.com/about/",
+          "status": 200,
+          "contains": ["Editorial Transparency", "Corrections", "Review Policy"]
+        },
+        {
+          "url": "https://commoditynode.com/contact/",
+          "status": 200,
+          "contains": ["Editorial &amp; Commercial Transparency", "Enterprise &amp; Team Access"]
+        },
+        {
+          "url": "https://commoditynode.com/methodology/",
+          "status": 200,
+          "contains": ["Transparency &amp; Limitations", "Proxy Symbol Limitations", "Data Freshness"]
+        },
+        {
           "url": "https://commoditynode.com/commodities/gold/",
+          "status": 200,
+          "contains": ["How to Use This Hub in Practice", "Best Companion Hubs"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/crude-oil/",
+          "status": 200,
+          "contains": ["How to Use This Hub in Practice", "Best Companion Hubs"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/copper/",
+          "status": 200,
+          "contains": ["How to Use This Hub in Practice", "Best Companion Hubs"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/natural-gas/",
+          "status": 200,
+          "contains": ["How to Use This Hub in Practice", "Best Companion Hubs"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/lithium/",
+          "status": 200,
+          "contains": ["How to Use This Hub in Practice", "Best Companion Hubs"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/wheat/",
           "status": 200,
           "contains": ["How to Use This Hub in Practice", "Best Companion Hubs"]
         },

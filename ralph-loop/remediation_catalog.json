@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "safe_patterns": [
+    {
+      "id": "internal-doc-exclude",
+      "matches": ["internal-doc-exposure", "Unexpected HTTP status for https://commoditynode.com/SEO-AUDIT-2026-04-04.html"],
+      "handler": "ensure_config_excludes"
+    },
+    {
+      "id": "trust-surface-regression",
+      "matches": ["live-tier1-content"],
+      "handler": "manual_review_required"
+    },
+    {
+      "id": "repo-qa-failure",
+      "matches": ["repo-script-qa-check", "repo-link-qa-check"],
+      "handler": "manual_review_required"
+    }
+  ]
+}

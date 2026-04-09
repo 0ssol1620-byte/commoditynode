@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ISSUES_PATH = ROOT / "ralph-loop" / "issues.json"
 REPORT_PATH = ROOT / "ralph-loop" / "autofix_report.json"
+CATALOG_PATH = ROOT / "ralph-loop" / "remediation_catalog.json"
 CONFIG_PATH = ROOT / "_config.yml"
 
 INTERNAL_DOCS = [
@@ -34,6 +35,22 @@ def ensure_excludes(config_text: str):
     return config_text, changed
 
 
+def load_catalog():
+    if not CATALOG_PATH.exists():
+        return {"safe_patterns": []}
+    return json.loads(CATALOG_PATH.read_text())
+
+
+def classify_issue(issue, catalog):
+    title = issue.get("title", "")
+    check_id = issue.get("check_id", "")
+    for item in catalog.get("safe_patterns", []):
+        matches = item.get("matches", [])
+        if any(m == check_id or m in title for m in matches):
+            return item.get("handler", "manual_review_required")
+    return "manual_review_required"
+
+
 def main():
     if not ISSUES_PATH.exists():
         payload = {"ok": True, "applied": [], "message": "No issues.json found"}
@@ -43,6 +60,7 @@ def main():
 
     issues_doc = json.loads(ISSUES_PATH.read_text())
     issues = issues_doc.get("issues", [])
+    catalog = load_catalog()
     applied = []
     skipped = []
 
@@ -57,11 +75,19 @@ def main():
         })
 
     for issue in issues:
-        skipped.append({
-            "issue_id": issue.get("id"),
-            "title": issue.get("title"),
-            "reason": "No safe auto-fix routine registered yet"
-        })
+        handler = classify_issue(issue, catalog)
+        if handler == "ensure_config_excludes":
+            skipped.append({
+                "issue_id": issue.get("id"),
+                "title": issue.get("title"),
+                "reason": "Config exclude safeguard already evaluated in this run"
+            })
+        else:
+            skipped.append({
+                "issue_id": issue.get("id"),
+                "title": issue.get("title"),
+                "reason": f"Handler {handler} requires manual review or future routine"
+            })
 
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
