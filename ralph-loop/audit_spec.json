@@ -131,6 +131,20 @@
       "severity": "medium",
       "file": "index.html",
       "contains": ["CommodityNode — Commodity Price Impact Maps | CommodityNode"]
+    },
+    {
+      "id": "repo-home-ai-surface-links",
+      "type": "file_contains",
+      "severity": "medium",
+      "file": "index.html",
+      "contains": ["/pricing.txt", "/reports/", "/methodology/"]
+    },
+    {
+      "id": "repo-reports-meta-length",
+      "type": "file_not_contains",
+      "severity": "low",
+      "file": "reports/index.html",
+      "contains": ["Browse the full CommodityNode archive of Impact Maps, Signal Reports, and commodity Ripple Chain analysis. Deep-dive research on price impact across 60+ commodities."]
     }
   ]
 }
