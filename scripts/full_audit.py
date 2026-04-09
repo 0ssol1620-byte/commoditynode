@@ -156,6 +156,31 @@ def main():
                     "Restore the expected trust or transparency block in the source file."
                 ))
 
+        elif ctype == "file_not_contains":
+            file_path = ROOT / check["file"]
+            if not file_path.exists():
+                results.append({"check_id": cid, "file": check["file"], "ok": False, "missing_file": True})
+                issues.append(issue(
+                    cid,
+                    severity,
+                    f"Required file missing: {check['file']}",
+                    {"file": check["file"]},
+                    "Restore the missing file or update the audit spec if the path changed."
+                ))
+                continue
+            content = file_path.read_text()
+            found = [x for x in check.get("contains", []) if x in content]
+            ok = not found
+            results.append({"check_id": cid, "file": check["file"], "ok": ok, "found": found})
+            if not ok:
+                issues.append(issue(
+                    cid,
+                    severity,
+                    f"Undesired repo markers found in {check['file']}",
+                    {"file": check['file'], "found": found},
+                    "Refine the page copy or metadata to remove the weak or redundant pattern."
+                ))
+
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "ok": len(issues) == 0,

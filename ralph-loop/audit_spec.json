@@ -124,6 +124,13 @@
       "severity": "critical",
       "file": "methodology.html",
       "contains": ["Transparency &amp; Limitations", "Proxy Symbol Limitations", "Data Freshness"]
+    },
+    {
+      "id": "repo-home-title-quality",
+      "type": "file_not_contains",
+      "severity": "medium",
+      "file": "index.html",
+      "contains": ["CommodityNode — Commodity Price Impact Maps | CommodityNode"]
     }
   ]
 }
