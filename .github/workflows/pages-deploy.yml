@@ -31,7 +31,22 @@ jobs:
           bundler-cache: true
 
       - name: Build site
-        run: bundle exec jekyll build --trace
+        id: build_site
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          bundle exec jekyll build --trace 2>&1 | tee build.log
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jekyll-build-log
+          path: build.log
+
+      - name: Fail if build failed
+        if: steps.build_site.outcome != 'success'
+        run: exit 1
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
