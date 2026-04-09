@@ -168,6 +168,23 @@ layout: default
         <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">CommodityNode labels direct futures, proxy benchmarks, and analysis-only pages explicitly. When a daily feed is unreliable, we suppress false precision instead of forcing a number.</div>
       </div>
     </div>
+
+    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+      <div style="padding:14px 16px;background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#818cf8;font-weight:700;margin-bottom:8px;">Start here</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Need the quick read? Check <a href="/pricing/" style="color:var(--accent);">forecast coverage</a>, then compare this hub with the <a href="/reports/" style="color:var(--accent);">latest Signal Reports</a> for the live narrative behind the move.</div>
+      </div>
+      <div style="padding:14px 16px;background:rgba(236,72,153,0.05);border:1px solid rgba(236,72,153,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#f472b6;font-weight:700;margin-bottom:8px;">Related hubs</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">
+          {% if page.substitutes and page.substitutes.size > 0 %}
+            Compare against substitute chains like {% for substitute in page.substitutes limit:3 %}<a href="/commodities/{{ substitute | slugify }}/" style="color:var(--accent);">{{ substitute }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}.
+          {% else %}
+            Move sideways into adjacent commodity hubs to compare second-order effects and portfolio sensitivity.
+          {% endif %}
+        </div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -317,6 +334,31 @@ layout: default
   {% if sym_trimmed != "" and sym_trimmed != nil %}
   <div class="cn-price-chart" data-symbol="{{ page.symbol }}" data-name="{{ page.title }}" data-unit="{{ page.unit | default: '' }}" style="margin-bottom:40px;"></div>
   {% endif %}
+
+  <section style="margin:0 0 32px;padding:18px 20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="max-width:760px;">
+        <div style="font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Best next steps</div>
+        <h2 style="margin:0 0 8px;font-size:1.2rem;">Use this hub as your anchor page</h2>
+        <p style="margin:0;color:var(--text2);line-height:1.7;">For AI search and human readers alike, the strongest workflow is: current price context → impact map → latest Signal Reports → adjacent commodity comparison. That is the shortest path from raw move to decision-useful context.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/reports/" class="btn btn-secondary">Browse Signal Reports</a>
+        <a href="/commodities/" class="btn btn-secondary">Compare Commodity Hubs</a>
+      </div>
+    </div>
+    {% if related_posts.size > 0 %}
+    <div style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+      {% for post in related_posts limit:3 %}
+      <a href="{{ post.url | relative_url }}" style="display:block;padding:14px 16px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:12px;text-decoration:none;">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Related report</div>
+        <div style="color:var(--text);font-weight:700;line-height:1.5;">{{ post.title }}</div>
+        <div style="margin-top:8px;font-size:0.84rem;color:var(--text3);">{{ post.description | default: post.excerpt | strip_html | truncatewords: 16 }}</div>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
 
   <!-- Analysis-only fallback block -->
   {% if page.data_type == 'analysis_only' %}
