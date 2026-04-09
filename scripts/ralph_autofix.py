@@ -68,9 +68,13 @@ def classify_issue(issue, catalog):
 def match_playbook(issue, playbooks):
     title = issue.get("title", "")
     evidence = issue.get("evidence", {})
+    file_path = str(evidence.get("file", ""))
     for pb in playbooks.get("playbooks", []):
+        target = pb.get("target", "")
+        if file_path and file_path in target:
+            return pb
         markers = pb.get("required_markers", [])
-        if all(marker in title or marker in str(evidence) for marker in markers[:1]):
+        if markers and any(marker in title or marker in str(evidence) for marker in markers):
             return pb
         if any(url in title for url in pb.get("trigger_urls", [])):
             return pb

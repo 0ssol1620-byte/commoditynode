@@ -131,6 +131,31 @@ def main():
                     "Inspect the failing QA output, apply a bounded fix batch, and rerun the audit."
                 ))
 
+        elif ctype == "file_contains":
+            file_path = ROOT / check["file"]
+            if not file_path.exists():
+                results.append({"check_id": cid, "file": check["file"], "ok": False, "missing_file": True})
+                issues.append(issue(
+                    cid,
+                    severity,
+                    f"Required file missing: {check['file']}",
+                    {"file": check["file"]},
+                    "Restore the missing file or update the audit spec if the path changed."
+                ))
+                continue
+            content = file_path.read_text()
+            missing = [x for x in check.get("contains", []) if x not in content]
+            ok = not missing
+            results.append({"check_id": cid, "file": check["file"], "ok": ok, "missing": missing})
+            if not ok:
+                issues.append(issue(
+                    cid,
+                    severity,
+                    f"Required repo markers missing in {check['file']}",
+                    {"file": check['file'], "missing": missing},
+                    "Restore the expected trust or transparency block in the source file."
+                ))
+
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "ok": len(issues) == 0,

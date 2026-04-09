@@ -15,6 +15,11 @@
       "id": "repo-qa-failure",
       "matches": ["repo-script-qa-check", "repo-link-qa-check"],
       "handler": "manual_review_required"
+    },
+    {
+      "id": "repo-trust-marker-regression",
+      "matches": ["repo-trust-markers-about", "repo-trust-markers-contact", "repo-trust-markers-methodology"],
+      "handler": "playbook_restore_required"
     }
   ]
 }

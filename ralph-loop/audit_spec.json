@@ -103,6 +103,27 @@
       "type": "command",
       "severity": "high",
       "command": "python3 scripts/qa_links.py"
+    },
+    {
+      "id": "repo-trust-markers-about",
+      "type": "file_contains",
+      "severity": "critical",
+      "file": "about.md",
+      "contains": ["Editorial Transparency", "Corrections & Review Policy"]
+    },
+    {
+      "id": "repo-trust-markers-contact",
+      "type": "file_contains",
+      "severity": "critical",
+      "file": "contact.md",
+      "contains": ["Editorial &amp; Commercial Transparency", "Enterprise &amp; Team Access"]
+    },
+    {
+      "id": "repo-trust-markers-methodology",
+      "type": "file_contains",
+      "severity": "critical",
+      "file": "methodology.html",
+      "contains": ["Transparency &amp; Limitations", "Proxy Symbol Limitations", "Data Freshness"]
     }
   ]
 }
