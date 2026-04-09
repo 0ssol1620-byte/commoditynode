@@ -96,10 +96,15 @@ exclude:
   - CRON_SETUP.md
   - ROADMAP.md
   - SEO_AUDIT.md
+  - SEO-AUDIT-2026-04-04.md
   - DEV_TODO.md
   - QUALITY_REPORT.md
   - FINAL_AUDIT.md
   - FINAL_CHECK.md
+  - ADSENSE_REVIEW_CHECKLIST.md
+  - CHANGELOG.md
+  - CHANGELOG_IMPLEMENTATION.md
+  - GSC_RESUBMISSION_PRIORITY.md
   - logs/
   - scripts/
   - social/
