@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "loop_name": "commoditynode-ralph-loop",
+  "max_iterations": 8,
+  "tasks": [
+    {
+      "id": "deploy-health",
+      "priority": 1,
+      "status": "pending",
+      "type": "verification",
+      "goal": "Ensure deployment and publication surfaces are healthy.",
+      "checks": [
+        "Tier-1 pages return expected status codes",
+        "Internal audit docs are not published",
+        "Pages workflow/build health has no current blocking issue"
+      ]
+    },
+    {
+      "id": "tier1-seo-trust",
+      "priority": 2,
+      "status": "pending",
+      "type": "improvement",
+      "goal": "Verify and strengthen Tier-1 trust and conversion surfaces.",
+      "checks": [
+        "Pricing page trust/value blocks present",
+        "Reports archive framing present",
+        "Flagship commodity hubs contain practical usage and companion-hub blocks"
+      ]
+    },
+    {
+      "id": "index-hygiene",
+      "priority": 3,
+      "status": "pending",
+      "type": "verification",
+      "goal": "Prevent low-value or internal pages from polluting search/index signals.",
+      "checks": [
+        "Noindex pages are excluded from sitemap where intended",
+        "Internal operational markdown is excluded from Jekyll output"
+      ]
+    }
+  ]
+}
