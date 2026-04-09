@@ -32,6 +32,7 @@ description: "Get in touch with the CommodityNode team for tips, corrections, pa
     <p>For all inquiries, please use the form or reach us at:</p>
     <p><strong>contact [at] commoditynode [dot] com</strong></p>
     <p>We aim to respond within 2–3 business days.</p>
+    <p style="font-size:0.88rem;color:var(--text3);">For factual corrections or data issues, include the page URL, the value you think is wrong, and your source if available. We prioritize correction requests over general feedback.</p>
     <hr>
     <h3>A Note on Financial Advice</h3>
     <p>We do <strong>not</strong> provide personalized financial or investment advice. Please consult a licensed financial professional for investment decisions.</p>
@@ -44,6 +45,14 @@ description: "Get in touch with the CommodityNode team for tips, corrections, pa
       <li><strong>Newsletter:</strong> Weekly Signal Report digest delivered to your inbox</li>
     </ul>
     <p style="font-size:0.85rem;color:var(--text3);margin-top:16px;">Response times may be slower during major market events when we're heads-down on analysis.</p>
+
+    <hr>
+    <h2>Editorial &amp; Commercial Transparency</h2>
+    <ul>
+      <li>CommodityNode publishes independent analysis and does not accept payment for favorable commodity or company coverage.</li>
+      <li>Advertising and subscriptions support the site, but sponsored research is not mixed into core market analysis.</li>
+      <li>If a data feed is unstable, rollover-distorted, or proxy-limited, we may suppress the daily change value rather than display a misleading number.</li>
+    </ul>
 
     <hr>
     <h2>Enterprise &amp; Team Access</h2>
