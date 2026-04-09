@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "playbooks": [
+    {
+      "id": "about-trust-surface",
+      "target": "about.md",
+      "trigger_urls": ["https://commoditynode.com/about/"],
+      "required_markers": ["Editorial Transparency", "Corrections", "Review Policy"],
+      "handler": "manual_restore_block"
+    },
+    {
+      "id": "contact-transparency-surface",
+      "target": "contact.md",
+      "trigger_urls": ["https://commoditynode.com/contact/"],
+      "required_markers": ["Editorial &amp; Commercial Transparency", "Enterprise &amp; Team Access"],
+      "handler": "manual_restore_block"
+    },
+    {
+      "id": "methodology-limitations-surface",
+      "target": "methodology.html",
+      "trigger_urls": ["https://commoditynode.com/methodology/"],
+      "required_markers": ["Transparency &amp; Limitations", "Proxy Symbol Limitations", "Data Freshness"],
+      "handler": "manual_restore_block"
+    },
+    {
+      "id": "flagship-hub-practical-blocks",
+      "target": "_commodities/{gold,crude-oil,copper,natural-gas,lithium,wheat}.md",
+      "trigger_urls": [
+        "https://commoditynode.com/commodities/gold/",
+        "https://commoditynode.com/commodities/crude-oil/",
+        "https://commoditynode.com/commodities/copper/",
+        "https://commoditynode.com/commodities/natural-gas/",
+        "https://commoditynode.com/commodities/lithium/",
+        "https://commoditynode.com/commodities/wheat/"
+      ],
+      "required_markers": ["How to Use This Hub in Practice", "Best Companion Hubs"],
+      "handler": "manual_restore_block"
+    }
+  ]
+}

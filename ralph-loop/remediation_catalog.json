@@ -9,7 +9,7 @@
     {
       "id": "trust-surface-regression",
       "matches": ["live-tier1-content"],
-      "handler": "manual_review_required"
+      "handler": "playbook_restore_required"
     },
     {
       "id": "repo-qa-failure",

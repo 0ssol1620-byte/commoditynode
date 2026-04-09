@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ISSUES_PATH = ROOT / "ralph-loop" / "issues.json"
 REPORT_PATH = ROOT / "ralph-loop" / "autofix_report.json"
 CATALOG_PATH = ROOT / "ralph-loop" / "remediation_catalog.json"
+PLAYBOOKS_PATH = ROOT / "ralph-loop" / "playbooks.json"
 CONFIG_PATH = ROOT / "_config.yml"
 
 INTERNAL_DOCS = [
@@ -41,6 +42,12 @@ def load_catalog():
     return json.loads(CATALOG_PATH.read_text())
 
 
+def load_playbooks():
+    if not PLAYBOOKS_PATH.exists():
+        return {"playbooks": []}
+    return json.loads(PLAYBOOKS_PATH.read_text())
+
+
 def classify_issue(issue, catalog):
     title = issue.get("title", "")
     check_id = issue.get("check_id", "")
@@ -49,6 +56,18 @@ def classify_issue(issue, catalog):
         if any(m == check_id or m in title for m in matches):
             return item.get("handler", "manual_review_required")
     return "manual_review_required"
+
+
+def match_playbook(issue, playbooks):
+    title = issue.get("title", "")
+    evidence = issue.get("evidence", {})
+    for pb in playbooks.get("playbooks", []):
+        markers = pb.get("required_markers", [])
+        if all(marker in title or marker in str(evidence) for marker in markers[:1]):
+            return pb
+        if any(url in title for url in pb.get("trigger_urls", [])):
+            return pb
+    return None
 
 
 def main():
@@ -61,6 +80,7 @@ def main():
     issues_doc = json.loads(ISSUES_PATH.read_text())
     issues = issues_doc.get("issues", [])
     catalog = load_catalog()
+    playbooks = load_playbooks()
     applied = []
     skipped = []
 
@@ -81,6 +101,14 @@ def main():
                 "issue_id": issue.get("id"),
                 "title": issue.get("title"),
                 "reason": "Config exclude safeguard already evaluated in this run"
+            })
+        elif handler == "playbook_restore_required":
+            playbook = match_playbook(issue, playbooks)
+            skipped.append({
+                "issue_id": issue.get("id"),
+                "title": issue.get("title"),
+                "reason": "Playbook matched, but restore remains human-reviewed for now",
+                "playbook": playbook,
             })
         else:
             skipped.append({
