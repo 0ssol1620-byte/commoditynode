@@ -1,5 +1,7 @@
 ---
 layout: commodity
+noindex: true
+sitemap: false
 title: "Germanium Price Impact: Fiber Optics, Infrared Optics & China Export Controls"
 description: "How germanium supply constraints ripple through fiber optic networks, IR optics, satellite solar cells, and semiconductor substrates amid China's export curbs."
 commodity_slug: "germanium"

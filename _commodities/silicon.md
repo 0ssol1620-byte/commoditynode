@@ -1,5 +1,7 @@
 ---
 layout: commodity
+noindex: true
+sitemap: false
 title: "Silicon Price Impact: Solar, Semiconductors & Alloys"
 description: "How silicon metal and polysilicon prices cascade through solar panel manufacturing, semiconductor wafer production, and aluminum casting industries."
 commodity_slug: "silicon"

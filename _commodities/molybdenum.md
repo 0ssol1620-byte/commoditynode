@@ -1,5 +1,7 @@
 ---
 layout: commodity
+noindex: true
+sitemap: false
 title: "Molybdenum Price Impact: High-Strength Steel, Oil Drilling & Copper By-Product"
 description: "How molybdenum prices cascade through alloy steel, oil and gas drilling, pipeline construction, and copper mining economics as a critical by-product metal."
 commodity_slug: "molybdenum"

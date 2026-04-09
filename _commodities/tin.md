@@ -1,5 +1,7 @@
 ---
 layout: commodity
+noindex: true
+sitemap: false
 unit: "$/mt"
 image: "/assets/images/og-tin.png"
 title: "Tin Price Impact: Semiconductors, Electronics & Soldering Supply Chain"

@@ -1,5 +1,7 @@
 ---
 layout: commodity
+noindex: true
+sitemap: false
 title: "Helium Price Impact: Semiconductor Manufacturing, MRI Systems & Aerospace"
 description: "How helium supply constraints cascade through semiconductor fabs, medical imaging, space launch, and scientific research amid U.S. strategic reserve depletion."
 commodity_slug: "helium"
