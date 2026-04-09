@@ -110,6 +110,16 @@ Airlines face the most acute margin compression among major industries. Consumer
 
 The 10-day correlation between crude and XLE is historically 0.82-0.88. During geopolitical shocks (Russia-Ukraine, Middle East escalation), the correlation briefly spikes to 0.95+ before reverting. Consider 2:1 weighting (XLE long / JETS short) during uptrend phases. The EIA weekly petroleum status report (Wednesday 10:30 AM ET) and OPEC monthly oil market report are the primary data catalysts. Managed money positioning on NYMEX indicates speculative sentiment extremes that often precede reversals.
 
+## How to Use This Hub in Practice
+
+Use crude oil as the master energy hub when you need to know whether the market is repricing growth, geopolitics, inflation, or transport costs. Start with WTI and the OPEC/EIA policy layer, then split the impact map into three buckets: producers and services, refiners and logistics, and fuel-sensitive consumers like airlines and freight. That sequence prevents one of the most common mistakes in energy analysis, which is treating every oil rally as uniformly bullish for the whole energy complex.
+
+## Best Companion Hubs
+
+- [Natural Gas](/commodities/natural-gas/) for cross-energy substitution and power-market spillovers
+- [Copper](/commodities/copper/) when oil and industrial metals are moving together on growth expectations
+- [Wheat](/commodities/wheat/) for diesel, freight, and food-input pass-through into inflation
+
 ## Latest Signal Reports
 - [Oil's Geopolitical Premium: Strait of Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
 - [Oil Price Surge: Industry Impact Analysis](/oil-price-surge-industry-impact/)

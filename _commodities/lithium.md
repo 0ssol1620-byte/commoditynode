@@ -101,6 +101,16 @@ EV manufacturers absorb higher battery pack costs, compressing vehicle margins o
 
 Lithium lacks a liquid futures market outside China, making spot price indices (Fastmarkets, Benchmark Minerals) the primary reference. The spread between spot and long-term contract prices signals market tightness. Monitor Chinese lithium carbonate prices on the Guangzhou Futures Exchange for real-time demand signals. Oversupply cycles (2023-2024) have shown that lithium prices can decline 70-80% from peak to trough, creating high-conviction entry points when marginal producers begin curtailing output. Spodumene auction prices from Pilbara Minerals provide a transparent leading indicator of market direction.
 
+## How to Use This Hub in Practice
+
+Lithium should be read differently from a liquid futures market. This page is most useful when you need to understand whether equity proxies such as Albemarle and SQM are reflecting true lithium-cycle fundamentals, battery chemistry shifts, or simply equity-market beta. Start with the proxy label, then map the move across producers, converters, battery makers, and EV names. If the chain is not confirming broadly, treat the move as an imperfect benchmark rather than a clean commodity signal.
+
+## Best Companion Hubs
+
+- [Copper](/commodities/copper/) for EV, grid, and electrification demand confirmation
+- [Natural Gas](/commodities/natural-gas/) when power costs and fertilizer inputs are interacting with battery economics indirectly
+- [Gold](/commodities/gold/) if the market is trading macro risk rather than clean-energy growth
+
 ## Latest Signal Reports
 - [Lithium Surplus-to-Deficit Pivot](/lithium-surplus-deficit-pivot/)
 - [Lithium EV Supply Chain Analysis](/lithium-ev-supply-chain/)

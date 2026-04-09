@@ -110,6 +110,16 @@ Construction firms face rising input costs across wiring, plumbing, and HVAC sys
 
 The copper/gold ratio is a powerful risk-on/risk-off indicator. A rising ratio signals risk appetite; falling ratio signals defensive positioning. Track the HG/GC spread daily during macro regime shifts. LME and COMEX warehouse inventory levels signal physical market tightness, while the futures curve structure (contango vs. backwardation) indicates near-term supply-demand balance. Chinese bonded warehouse stocks provide an additional data point for the world's largest consumer market.
 
+## How to Use This Hub in Practice
+
+Copper works best as a regime-detection hub. Start here when you need to answer whether the market is pricing stronger industrial demand, grid buildout, EV demand, or a supply shock from Chile, Peru, or the DRC. If the move is broad and cyclical, mining equities and industrials typically confirm. If the move is supply-driven, miners can rally while downstream manufacturers struggle with input-cost pressure. Use the impact map to separate those two cases before treating copper as a simple risk-on signal.
+
+## Best Companion Hubs
+
+- [Gold](/commodities/gold/) for the copper/gold risk-on versus risk-off ratio framework
+- [Lithium](/commodities/lithium/) for EV and battery-chain confirmation
+- [Crude Oil](/commodities/crude-oil/) when macro growth and inflation are moving together
+
 ## Latest Signal Reports
 - [Copper Hits $5.70: EV Infrastructure Demand](/copper-hits-570-ev-infrastructure/)
 - [Copper Structural Deficit Analysis](/copper-structural-deficit/)
