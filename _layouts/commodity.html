@@ -153,6 +153,21 @@ layout: default
     <p class="post-meta-bar">{{ page.description }}</p>
     <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data: daily auto-update · Analysis published: <time datetime="{{ page.date | default: site.time | date: '%Y-%m-%d' }}">{{ page.date | default: site.time | date: "%b %d, %Y" }}</time></p>
     {% endif %}
+
+    <div style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;">
+      <div style="padding:14px 16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Who this page is for</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Investors, analysts, and operators who need the fastest path from {{ page.title | split: ':' | first | strip }} price action to company, sector, and portfolio impact.</div>
+      </div>
+      <div style="padding:14px 16px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">How to use it</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Start with the live price and forecast panel, inspect the impact map, then use the latest Signal Reports to understand what is changing now, not just structurally.</div>
+      </div>
+      <div style="padding:14px 16px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#f59e0b;font-weight:700;margin-bottom:6px;">Trust standard</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">CommodityNode labels direct futures, proxy benchmarks, and analysis-only pages explicitly. When a daily feed is unreliable, we suppress false precision instead of forcing a number.</div>
+      </div>
+    </div>
   </div>
 </header>
 
