@@ -8,6 +8,7 @@ ISSUES_PATH = ROOT / "ralph-loop" / "issues.json"
 REPORT_PATH = ROOT / "ralph-loop" / "autofix_report.json"
 CATALOG_PATH = ROOT / "ralph-loop" / "remediation_catalog.json"
 PLAYBOOKS_PATH = ROOT / "ralph-loop" / "playbooks.json"
+REFERENCE_BLOCKS_PATH = ROOT / "ralph-loop" / "reference_blocks.json"
 CONFIG_PATH = ROOT / "_config.yml"
 
 INTERNAL_DOCS = [
@@ -48,6 +49,12 @@ def load_playbooks():
     return json.loads(PLAYBOOKS_PATH.read_text())
 
 
+def load_reference_blocks():
+    if not REFERENCE_BLOCKS_PATH.exists():
+        return {}
+    return json.loads(REFERENCE_BLOCKS_PATH.read_text())
+
+
 def classify_issue(issue, catalog):
     title = issue.get("title", "")
     check_id = issue.get("check_id", "")
@@ -70,6 +77,25 @@ def match_playbook(issue, playbooks):
     return None
 
 
+def restore_reference_block(playbook_id, references):
+    ref = references.get(playbook_id)
+    if not ref:
+        return False, "No reference block registered"
+    target = ROOT / ref["file"]
+    if not target.exists():
+        return False, "Target file missing"
+    content = target.read_text()
+    block = ref["block"]
+    anchor = ref["anchor"]
+    if block in content:
+        return False, "Reference block already present"
+    if anchor not in content:
+        return False, "Anchor not found"
+    updated = content.replace(anchor, block + anchor, 1)
+    target.write_text(updated)
+    return True, str(target.relative_to(ROOT))
+
+
 def main():
     if not ISSUES_PATH.exists():
         payload = {"ok": True, "applied": [], "message": "No issues.json found"}
@@ -81,6 +107,7 @@ def main():
     issues = issues_doc.get("issues", [])
     catalog = load_catalog()
     playbooks = load_playbooks()
+    references = load_reference_blocks()
     applied = []
     skipped = []
 
@@ -104,12 +131,28 @@ def main():
             })
         elif handler == "playbook_restore_required":
             playbook = match_playbook(issue, playbooks)
-            skipped.append({
-                "issue_id": issue.get("id"),
-                "title": issue.get("title"),
-                "reason": "Playbook matched, but restore remains human-reviewed for now",
-                "playbook": playbook,
-            })
+            if playbook and playbook.get("handler") == "manual_restore_block":
+                changed, detail = restore_reference_block(playbook.get("id"), references)
+                if changed:
+                    applied.append({
+                        "fix": "restore-reference-block",
+                        "playbook": playbook.get("id"),
+                        "file": detail,
+                    })
+                else:
+                    skipped.append({
+                        "issue_id": issue.get("id"),
+                        "title": issue.get("title"),
+                        "reason": detail,
+                        "playbook": playbook,
+                    })
+            else:
+                skipped.append({
+                    "issue_id": issue.get("id"),
+                    "title": issue.get("title"),
+                    "reason": "Playbook matched, but no restorable reference block is registered",
+                    "playbook": playbook,
+                })
         else:
             skipped.append({
                 "issue_id": issue.get("id"),
