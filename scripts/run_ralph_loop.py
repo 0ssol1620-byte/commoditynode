@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import os
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -10,6 +11,7 @@ TASKS_PATH = ROOT / "ralph-loop" / "TASKS.json"
 PROGRESS_PATH = ROOT / "ralph-loop" / "progress.md"
 GOALS_PATH = ROOT / "ralph-loop" / "GOALS.md"
 VERIFY_CMD = [sys.executable, str(ROOT / "scripts" / "ralph_verify.py")]
+NOTIFY_ENABLED = os.environ.get("RALPH_NOTIFY", "1") != "0"
 
 
 def load_tasks():
@@ -27,6 +29,17 @@ def run_verify():
     except Exception:
         payload = {"ok": False, "raw": proc.stdout, "stderr": proc.stderr}
     return proc.returncode == 0, payload
+
+
+def notify(event_type, text):
+    if not NOTIFY_ENABLED:
+        return
+    cmd = [
+        "openclaw", "system", "event",
+        "--text", f"[ralph:{event_type}] {text}",
+        "--mode", "now"
+    ]
+    subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
 
 
 def append_progress(iteration, goal, change, evidence, result, next_step):
@@ -59,15 +72,19 @@ def main():
     iteration = 0
     summary = []
 
+    notify("start", "CommodityNode Ralph loop started")
+
     for _ in range(max_iterations):
         iteration += 1
         task = select_task(data.get("tasks", []))
         if not task:
+            notify("complete", "CommodityNode Ralph loop finished, no pending tasks remain")
             print(json.dumps({"ok": True, "message": "No pending tasks remain.", "summary": summary}, indent=2))
             return 0
 
         task["status"] = "in_progress"
         save_tasks(data)
+        notify("task", f"Running task {task['id']}: {task['goal']}")
 
         ok, payload = run_verify()
         timestamp = datetime.now(timezone.utc).isoformat()
@@ -107,9 +124,11 @@ def main():
         summary.append({"task": task["id"], "status": task["status"], "result": result})
 
         if not ok:
+            notify("failed", f"CommodityNode Ralph loop stopped on task {task['id']} with verification failures")
             print(json.dumps({"ok": False, "message": "Loop stopped on failed verification.", "summary": summary, "failures": payload.get("failures", [])}, indent=2))
             return 1
 
+    notify("complete", "CommodityNode Ralph loop reached max iterations")
     print(json.dumps({"ok": True, "message": "Loop reached max iterations.", "summary": summary}, indent=2))
     return 0
 

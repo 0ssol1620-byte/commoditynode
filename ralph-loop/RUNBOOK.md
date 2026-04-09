@@ -34,6 +34,12 @@ What it does:
 - runs verification
 - updates task status
 - appends evidence to `ralph-loop/progress.md`
+- emits OpenClaw events for start, per-task progress, failure, and completion
+
+Notification behavior:
+- default: notifications enabled
+- disable per run with `RALPH_NOTIFY=0 python3 scripts/run_ralph_loop.py`
+- intended use: wake the main assistant session so it can proactively report to Telegram
 
 Current limitation:
 - this first runner is a verification-first loop controller, not a self-editing coder yet
