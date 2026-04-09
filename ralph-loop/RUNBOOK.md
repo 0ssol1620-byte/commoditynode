@@ -31,7 +31,8 @@ python3 scripts/run_ralph_loop.py
 What it does:
 - loads task state from `ralph-loop/TASKS.json`
 - picks the highest-priority pending task
-- runs verification
+- runs full audit plus verification
+- writes structured issue output to `ralph-loop/issues.json`
 - updates task status
 - appends evidence to `ralph-loop/progress.md`
 - emits OpenClaw events for start, per-task progress, failure, and completion
@@ -42,8 +43,8 @@ Notification behavior:
 - intended use: wake the main assistant session so it can proactively report to Telegram
 
 Current limitation:
-- this first runner is a verification-first loop controller, not a self-editing coder yet
-- it is meant to drive and record repeated QA/improvement cycles safely
+- this runner now performs full audit + verification + issue capture, but it is still not a self-editing coder
+- it is meant to drive and record repeated QA/improvement cycles safely before auto-fix routines are added
 
 ## Good Task Types
 - Fix broken deployment/build issues

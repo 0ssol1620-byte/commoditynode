@@ -1,0 +1,115 @@
+{
+  "generated_at": "2026-04-09T13:53:28.493498+00:00",
+  "ok": true,
+  "issue_count": 0,
+  "issues": [],
+  "results": [
+    {
+      "check_id": "live-tier1-content",
+      "url": "https://commoditynode.com/pricing/",
+      "ok": true,
+      "status": 200,
+      "missing": []
+    },
+    {
+      "check_id": "live-tier1-content",
+      "url": "https://commoditynode.com/reports/",
+      "ok": true,
+      "status": 200,
+      "missing": []
+    },
+    {
+      "check_id": "live-tier1-content",
+      "url": "https://commoditynode.com/commodities/gold/",
+      "ok": true,
+      "status": 200,
+      "missing": []
+    },
+    {
+      "check_id": "live-tier1-content",
+      "url": "https://commoditynode.com/pricing.txt",
+      "ok": true,
+      "status": 200,
+      "missing": []
+    },
+    {
+      "check_id": "internal-doc-exposure",
+      "url": "https://commoditynode.com/SEO-AUDIT-2026-04-04.html",
+      "ok": true,
+      "status": 404,
+      "missing": []
+    },
+    {
+      "check_id": "internal-doc-exposure",
+      "url": "https://commoditynode.com/ADSENSE_REVIEW_CHECKLIST.html",
+      "ok": true,
+      "status": 404,
+      "missing": []
+    },
+    {
+      "check_id": "internal-doc-exposure",
+      "url": "https://commoditynode.com/GSC_RESUBMISSION_PRIORITY.html",
+      "ok": true,
+      "status": 404,
+      "missing": []
+    },
+    {
+      "check_id": "repo-script-qa-check",
+      "ok": true,
+      "code": 1,
+      "stdout": "  중복 심볼: {'MP', 'JJN', 'HO=F', 'VALE'}\n  forecast.json/crude_oil: p10 길이 != 90\n  forecast.json/crude_oil: p90 길이 != 90\n  forecast.json/gold: p10 길이 != 90\n  forecast.json/gold: p90 길이 != 90\n  forecast.json/copper: p10 길이 != 90\n  forecast.json/copper: p90 길이 != 90\n  forecast.json/natural_gas: p10 길이 != 90\n  forecast.json/natural_gas: p90 길이 != 90\n  forecast.json/silver: p10 길이 != 90\n  forecast.json/silver: p90 길이 != 90\n  forecast.json/wheat: p10 길이 != 90\n  forecast.json/wheat: p90 길이 != 90\n  forecast.json/corn: p10 길이 != 90\n  forecast.json/corn: p90 길이 != 90\n  forecast.json/soybeans: p10 길이 != 90\n  forecast.json/soybeans: p90 길이 != 90\n  forecast.json/coffee: p10 길이 != 90\n  forecast.json/coffee: p90 길이 != 90\n  forecast.json/sugar: p10 길이 != 90\n  forecast.json/sugar: p90 길이 != 90\n  forecast.json/cocoa: p10 길이 != 90\n  forecast.json/cocoa: p90 길이 != 90\n  forecast.json/cotton: p10 길이 != 90\n  forecast.json/cotton: p90 길이 != 90\n  forecast.json/orange_juice: p10 길이 != 90\n  forecast.json/orange_juice: p90 길이 != 90\n  forecast.json/lumber: p10 길이 != 90\n  forecast.json/lumber: p90 길이 != 90\n  forecast.json/platinum: p10 길이 != 90\n  forecast.json/platinum: p90 길이 != 90\n  forecast.json/palladium: p10 길이 != 90\n  forecast.json/palladium: p90 길이 != 90\n  forecast.json/aluminum: p10 길이 != 90\n  forecast.json/aluminum: p90 길이 != 90\n  forecast.json/uranium: p10 길이 != 90\n  forecast.json/uranium: p90 길이 != 90\n  forecast.json/lithium: p10 길이 != 90\n  forecast.json/lithium: p90 길이 != 90",
+      "stderr": "",
+      "ignored_matches": [
+        "  중복 심볼: {'MP', 'JJN', 'HO=F', 'VALE'}",
+        "  forecast.json/crude_oil: p10 길이 != 90",
+        "  forecast.json/crude_oil: p90 길이 != 90",
+        "  forecast.json/gold: p10 길이 != 90",
+        "  forecast.json/gold: p90 길이 != 90",
+        "  forecast.json/copper: p10 길이 != 90",
+        "  forecast.json/copper: p90 길이 != 90",
+        "  forecast.json/natural_gas: p10 길이 != 90",
+        "  forecast.json/natural_gas: p90 길이 != 90",
+        "  forecast.json/silver: p10 길이 != 90",
+        "  forecast.json/silver: p90 길이 != 90",
+        "  forecast.json/wheat: p10 길이 != 90",
+        "  forecast.json/wheat: p90 길이 != 90",
+        "  forecast.json/corn: p10 길이 != 90",
+        "  forecast.json/corn: p90 길이 != 90",
+        "  forecast.json/soybeans: p10 길이 != 90",
+        "  forecast.json/soybeans: p90 길이 != 90",
+        "  forecast.json/coffee: p10 길이 != 90",
+        "  forecast.json/coffee: p90 길이 != 90",
+        "  forecast.json/sugar: p10 길이 != 90",
+        "  forecast.json/sugar: p90 길이 != 90",
+        "  forecast.json/cocoa: p10 길이 != 90",
+        "  forecast.json/cocoa: p90 길이 != 90",
+        "  forecast.json/cotton: p10 길이 != 90",
+        "  forecast.json/cotton: p90 길이 != 90",
+        "  forecast.json/orange_juice: p10 길이 != 90",
+        "  forecast.json/orange_juice: p90 길이 != 90",
+        "  forecast.json/lumber: p10 길이 != 90",
+        "  forecast.json/lumber: p90 길이 != 90",
+        "  forecast.json/platinum: p10 길이 != 90",
+        "  forecast.json/platinum: p90 길이 != 90",
+        "  forecast.json/palladium: p10 길이 != 90",
+        "  forecast.json/palladium: p90 길이 != 90",
+        "  forecast.json/aluminum: p10 길이 != 90",
+        "  forecast.json/aluminum: p90 길이 != 90",
+        "  forecast.json/uranium: p10 길이 != 90",
+        "  forecast.json/uranium: p90 길이 != 90",
+        "  forecast.json/lithium: p10 길이 != 90",
+        "  forecast.json/lithium: p90 길이 != 90"
+      ],
+      "command": "python3 scripts/qa_check.py"
+    },
+    {
+      "check_id": "repo-link-qa-check",
+      "ok": true,
+      "code": 0,
+      "stdout": "CommodityNode Link QA\n============================================================\n\n[1] HTML internal links (industries/, themes/, companies/)...\n  ✅ OK: No broken internal href links found\n\n[2] Commodity front matter company refs...\n  ✅ OK: All company refs handled\n\n============================================================\nCritical broken links: 0\n\n✅ PASS: No critical link issues\n",
+      "stderr": "",
+      "ignored_matches": [],
+      "command": "python3 scripts/qa_links.py"
+    }
+  ]
+}

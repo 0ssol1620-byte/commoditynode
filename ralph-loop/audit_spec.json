@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "checks": [
+    {
+      "id": "live-tier1-content",
+      "type": "live_url_contains",
+      "severity": "critical",
+      "urls": [
+        {
+          "url": "https://commoditynode.com/pricing/",
+          "status": 200,
+          "contains": ["Built for real workflows"]
+        },
+        {
+          "url": "https://commoditynode.com/reports/",
+          "status": 200,
+          "contains": ["What makes this archive useful"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/gold/",
+          "status": 200,
+          "contains": ["How to Use This Hub in Practice", "Best Companion Hubs"]
+        },
+        {
+          "url": "https://commoditynode.com/pricing.txt",
+          "status": 200,
+          "contains": ["Machine-readable pricing summary for AI agents"]
+        }
+      ]
+    },
+    {
+      "id": "internal-doc-exposure",
+      "type": "live_url_status",
+      "severity": "critical",
+      "urls": [
+        {
+          "url": "https://commoditynode.com/SEO-AUDIT-2026-04-04.html",
+          "status": 404
+        },
+        {
+          "url": "https://commoditynode.com/ADSENSE_REVIEW_CHECKLIST.html",
+          "status": 404
+        },
+        {
+          "url": "https://commoditynode.com/GSC_RESUBMISSION_PRIORITY.html",
+          "status": 404
+        }
+      ]
+    },
+    {
+      "id": "repo-script-qa-check",
+      "type": "command",
+      "severity": "high",
+      "command": "python3 scripts/qa_check.py",
+      "allowed_patterns": [
+        "중복 심볼:",
+        "p10 길이 != 90",
+        "p90 길이 != 90"
+      ]
+    },
+    {
+      "id": "repo-link-qa-check",
+      "type": "command",
+      "severity": "high",
+      "command": "python3 scripts/qa_links.py"
+    }
+  ]
+}

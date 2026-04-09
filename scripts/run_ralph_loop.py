@@ -11,6 +11,7 @@ TASKS_PATH = ROOT / "ralph-loop" / "TASKS.json"
 PROGRESS_PATH = ROOT / "ralph-loop" / "progress.md"
 GOALS_PATH = ROOT / "ralph-loop" / "GOALS.md"
 VERIFY_CMD = [sys.executable, str(ROOT / "scripts" / "ralph_verify.py")]
+FULL_AUDIT_CMD = [sys.executable, str(ROOT / "scripts" / "full_audit.py")]
 NOTIFY_ENABLED = os.environ.get("RALPH_NOTIFY", "1") != "0"
 
 
@@ -24,6 +25,15 @@ def save_tasks(data):
 
 def run_verify():
     proc = subprocess.run(VERIFY_CMD, cwd=ROOT, capture_output=True, text=True)
+    try:
+        payload = json.loads(proc.stdout)
+    except Exception:
+        payload = {"ok": False, "raw": proc.stdout, "stderr": proc.stderr}
+    return proc.returncode == 0, payload
+
+
+def run_full_audit():
+    proc = subprocess.run(FULL_AUDIT_CMD, cwd=ROOT, capture_output=True, text=True)
     try:
         payload = json.loads(proc.stdout)
     except Exception:
@@ -86,27 +96,30 @@ def main():
         save_tasks(data)
         notify("task", f"Running task {task['id']}: {task['goal']}")
 
-        ok, payload = run_verify()
+        audit_ok, audit_payload = run_full_audit()
+        verify_ok, verify_payload = run_verify()
+        ok = audit_ok and verify_ok
+        payload = {"audit": audit_payload, "verify": verify_payload}
         timestamp = datetime.now(timezone.utc).isoformat()
 
         if task["type"] == "verification":
             if ok:
                 task["status"] = "completed"
-                result = "Verification passed"
+                result = "Audit and verification passed"
                 next_step = "Advance to next pending task"
             else:
                 task["status"] = "failed"
-                result = "Verification failed"
-                next_step = "Investigate failures and apply a bounded fix batch"
+                result = "Audit or verification failed"
+                next_step = "Investigate issues.json and apply a bounded fix batch"
         else:
             if ok:
                 task["status"] = "completed"
-                result = "Baseline verification passed for improvement task"
+                result = "Baseline audit and verification passed for improvement task"
                 next_step = "Manually define the next improvement batch for this goal"
             else:
                 task["status"] = "failed"
-                result = "Baseline verification failed before improvement batch"
-                next_step = "Fix blocking verification issues first"
+                result = "Baseline audit or verification failed before improvement batch"
+                next_step = "Fix blocking issues first using ralph-loop/issues.json"
 
         task["last_run_at"] = timestamp
         task["last_result"] = result
@@ -124,8 +137,8 @@ def main():
         summary.append({"task": task["id"], "status": task["status"], "result": result})
 
         if not ok:
-            notify("failed", f"CommodityNode Ralph loop stopped on task {task['id']} with verification failures")
-            print(json.dumps({"ok": False, "message": "Loop stopped on failed verification.", "summary": summary, "failures": payload.get("failures", [])}, indent=2))
+            notify("failed", f"CommodityNode Ralph loop stopped on task {task['id']} with audit/verification failures")
+            print(json.dumps({"ok": False, "message": "Loop stopped on failed audit or verification.", "summary": summary, "failures": payload}, indent=2))
             return 1
 
     notify("complete", "CommodityNode Ralph loop reached max iterations")
