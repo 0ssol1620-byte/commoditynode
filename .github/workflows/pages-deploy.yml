@@ -50,8 +50,10 @@ jobs:
           path: build.log
 
       - name: Fail if build failed
-        if: steps.build_site.outcome != 'success'
-        run: exit 1
+        if: failure() || steps.build_site.outcome != 'success'
+        run: |
+          echo "Jekyll build failed"
+          exit 1
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
