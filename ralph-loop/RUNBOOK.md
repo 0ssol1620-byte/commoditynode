@@ -21,6 +21,24 @@ Use this command after each batch:
 python3 scripts/ralph_verify.py
 ```
 
+## Automated Runner
+Use this command to execute the current Ralph loop state machine:
+
+```bash
+python3 scripts/run_ralph_loop.py
+```
+
+What it does:
+- loads task state from `ralph-loop/TASKS.json`
+- picks the highest-priority pending task
+- runs verification
+- updates task status
+- appends evidence to `ralph-loop/progress.md`
+
+Current limitation:
+- this first runner is a verification-first loop controller, not a self-editing coder yet
+- it is meant to drive and record repeated QA/improvement cycles safely
+
 ## Good Task Types
 - Fix broken deployment/build issues
 - Repair Tier-1 page trust/conversion regressions

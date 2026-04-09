@@ -6,37 +6,43 @@
     {
       "id": "deploy-health",
       "priority": 1,
-      "status": "pending",
+      "status": "completed",
       "type": "verification",
       "goal": "Ensure deployment and publication surfaces are healthy.",
       "checks": [
         "Tier-1 pages return expected status codes",
         "Internal audit docs are not published",
         "Pages workflow/build health has no current blocking issue"
-      ]
+      ],
+      "last_run_at": "2026-04-09T13:37:32.476911+00:00",
+      "last_result": "Verification passed"
     },
     {
       "id": "tier1-seo-trust",
       "priority": 2,
-      "status": "pending",
+      "status": "completed",
       "type": "improvement",
       "goal": "Verify and strengthen Tier-1 trust and conversion surfaces.",
       "checks": [
         "Pricing page trust/value blocks present",
         "Reports archive framing present",
         "Flagship commodity hubs contain practical usage and companion-hub blocks"
-      ]
+      ],
+      "last_run_at": "2026-04-09T13:37:32.918922+00:00",
+      "last_result": "Baseline verification passed for improvement task"
     },
     {
       "id": "index-hygiene",
       "priority": 3,
-      "status": "pending",
+      "status": "completed",
       "type": "verification",
       "goal": "Prevent low-value or internal pages from polluting search/index signals.",
       "checks": [
         "Noindex pages are excluded from sitemap where intended",
         "Internal operational markdown is excluded from Jekyll output"
-      ]
+      ],
+      "last_run_at": "2026-04-09T13:37:33.411356+00:00",
+      "last_result": "Verification passed"
     }
   ]
 }
