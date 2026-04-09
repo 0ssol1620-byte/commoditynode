@@ -12,6 +12,7 @@ PROGRESS_PATH = ROOT / "ralph-loop" / "progress.md"
 GOALS_PATH = ROOT / "ralph-loop" / "GOALS.md"
 VERIFY_CMD = [sys.executable, str(ROOT / "scripts" / "ralph_verify.py")]
 FULL_AUDIT_CMD = [sys.executable, str(ROOT / "scripts" / "full_audit.py")]
+AUTOFIX_CMD = [sys.executable, str(ROOT / "scripts" / "ralph_autofix.py")]
 NOTIFY_ENABLED = os.environ.get("RALPH_NOTIFY", "1") != "0"
 
 
@@ -34,6 +35,15 @@ def run_verify():
 
 def run_full_audit():
     proc = subprocess.run(FULL_AUDIT_CMD, cwd=ROOT, capture_output=True, text=True)
+    try:
+        payload = json.loads(proc.stdout)
+    except Exception:
+        payload = {"ok": False, "raw": proc.stdout, "stderr": proc.stderr}
+    return proc.returncode == 0, payload
+
+
+def run_autofix():
+    proc = subprocess.run(AUTOFIX_CMD, cwd=ROOT, capture_output=True, text=True)
     try:
         payload = json.loads(proc.stdout)
     except Exception:
@@ -97,9 +107,14 @@ def main():
         notify("task", f"Running task {task['id']}: {task['goal']}")
 
         audit_ok, audit_payload = run_full_audit()
+        autofix_payload = None
+        if not audit_ok:
+            notify("autofix", f"Attempting safe auto-fix routines for task {task['id']}")
+            _, autofix_payload = run_autofix()
+            audit_ok, audit_payload = run_full_audit()
         verify_ok, verify_payload = run_verify()
         ok = audit_ok and verify_ok
-        payload = {"audit": audit_payload, "verify": verify_payload}
+        payload = {"audit": audit_payload, "autofix": autofix_payload, "verify": verify_payload}
         timestamp = datetime.now(timezone.utc).isoformat()
 
         if task["type"] == "verification":

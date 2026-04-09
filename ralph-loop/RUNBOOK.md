@@ -43,8 +43,9 @@ Notification behavior:
 - intended use: wake the main assistant session so it can proactively report to Telegram
 
 Current limitation:
-- this runner now performs full audit + verification + issue capture, but it is still not a self-editing coder
-- it is meant to drive and record repeated QA/improvement cycles safely before auto-fix routines are added
+- this runner now performs full audit + issue capture + safe auto-fix attempt + verification
+- auto-fix coverage is intentionally narrow right now and only handles low-risk patterns
+- broader code/content remediation routines should be added gradually by issue type
 
 ## Good Task Types
 - Fix broken deployment/build issues
