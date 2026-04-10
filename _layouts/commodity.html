@@ -786,10 +786,15 @@ layout: default
     return m.unit + Number(v).toLocaleString('en-US', { minimumFractionDigits: m.dec, maximumFractionDigits: m.dec });
   }
 
-  fetch('/assets/data/forecast.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var d = data[fcKey];
+  Promise.all([
+    fetch('/assets/data/forecast-consensus.json').then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; }),
+    fetch('/assets/data/forecast.json').then(function(r) { return r.json(); })
+  ])
+    .then(function(responses) {
+      var consensusData = responses[0] || {};
+      var legacyData = responses[1] || {};
+      var consensusEntry = consensusData[fcKey];
+      var d = legacyData[fcKey];
       if (!d || !d.forecast) {
         document.getElementById('cf-no-data').style.display = 'block';
         return;
@@ -816,10 +821,10 @@ layout: default
       if (typeof Chart === 'undefined') {
         var s = document.createElement('script');
         s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
-        s.onload = function() { drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext); };
+        s.onload = function() { drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry); };
         document.head.appendChild(s);
       } else {
-        drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext);
+        drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry);
       }
 
       // Direction signal badge
@@ -855,17 +860,32 @@ layout: default
     })
     .catch(function(e) { console.warn('Forecast load error', e); });
 
-  function drawChart(canvas, labels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext) {
+  function drawChart(canvas, labels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry) {
+    var datasets = [
+      { label:'P90', data:p90Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0.12)', fill:'+1', pointRadius:0, tension:0.3, order:4 },
+      { label:'P10', data:p10Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0)', fill:false, pointRadius:0, tension:0.3, order:5 },
+      { label:'Historical', data:histLine, borderColor:'#64748b', backgroundColor:'transparent', borderWidth:1.5, pointRadius:0, tension:0.2, order:2 },
+      { label:'AI Forecast', data:medLine, borderColor:'#22d3ee', backgroundColor:'transparent', borderWidth:2, pointRadius:0, tension:0.3, order:1 }
+    ];
+
+    if (consensusEntry && consensusEntry.agreement && consensusEntry.models) {
+      datasets.push({
+        label:'Consensus',
+        data:medLine,
+        borderColor:'#e2e8f0',
+        backgroundColor:'transparent',
+        borderWidth:2.6,
+        pointRadius:0,
+        tension:0.32,
+        order:0
+      });
+    }
+
     new Chart(canvas, {
       type: 'line',
       data: {
         labels: labels,
-        datasets: [
-          { label:'P90', data:p90Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0.12)', fill:'+1', pointRadius:0, tension:0.3, order:4 },
-          { label:'P10', data:p10Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0)', fill:false, pointRadius:0, tension:0.3, order:5 },
-          { label:'Historical', data:histLine, borderColor:'#64748b', backgroundColor:'transparent', borderWidth:1.5, pointRadius:0, tension:0.2, order:2 },
-          { label:'AI Forecast', data:medLine, borderColor:'#22d3ee', backgroundColor:'transparent', borderWidth:2, pointRadius:0, tension:0.3, order:1 }
-        ]
+        datasets: datasets
       },
       options: {
         responsive:true, maintainAspectRatio:false,
@@ -895,6 +915,26 @@ layout: default
     }
     if(el('cf-p90')&&fcP90ext.length) el('cf-p90').textContent = fmt(fcP90ext[fcP90ext.length-1], meta);
     if(el('cf-p10')&&fcP10ext.length) el('cf-p10').textContent = fmt(fcP10ext[fcP10ext.length-1], meta);
+
+    if (consensusEntry && consensusEntry.agreement) {
+      var wrapEl = document.getElementById('direction-signal-wrap');
+      var badgeEl = document.getElementById('direction-signal-badge');
+      if (badgeEl && wrapEl) {
+        var level = consensusEntry.agreement.level || 'moderate';
+        var score = typeof consensusEntry.agreement.score === 'number' ? Math.round(consensusEntry.agreement.score * 100) : null;
+        var palette = level === 'high'
+          ? { bg:'rgba(16,185,129,0.12)', color:'#10b981', border:'rgba(16,185,129,0.25)' }
+          : level === 'divergent'
+            ? { bg:'rgba(239,68,68,0.12)', color:'#ef4444', border:'rgba(239,68,68,0.25)' }
+            : { bg:'rgba(245,158,11,0.12)', color:'#f59e0b', border:'rgba(245,158,11,0.25)' };
+        badgeEl.innerHTML =
+          '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">'
+          + '<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;background:' + palette.bg + ';color:' + palette.color + ';border:1px solid ' + palette.border + ';font-size:0.9rem;font-weight:700;">Consensus ready</span>'
+          + '<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;background:rgba(148,163,184,0.10);color:#cbd5e1;border:1px solid rgba(148,163,184,0.2);font-size:0.85rem;font-weight:600;">Agreement: ' + level.toUpperCase() + (score !== null ? ' · ' + score + '%' : '') + '</span>'
+          + '</div>';
+        wrapEl.style.display = 'block';
+      }
+    }
   }
 })();
 </script>

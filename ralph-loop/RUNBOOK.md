@@ -40,7 +40,10 @@ What it does:
 Notification behavior:
 - default: notifications enabled
 - disable per run with `RALPH_NOTIFY=0 python3 scripts/run_ralph_loop.py`
+- current implementation emits `openclaw system event` messages only
 - intended use: wake the main assistant session so it can proactively report to Telegram
+- current gap: there is no guaranteed event-to-Telegram bridge yet, so internal events may not become user-visible Telegram updates automatically
+- practical workaround today: run Ralph from the main session when you want visible progress, or add a dedicated reporter layer that converts `[ralph:*]` events into `sessions_send`/channel messages
 
 Current limitation:
 - this runner now performs full audit + issue capture + safe auto-fix attempt + verification
