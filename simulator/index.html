@@ -170,25 +170,40 @@ permalink: /simulator/
   padding: 8px 0 0;
 }
 .sim-legend {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 8px;
   margin-top: 16px;
-  flex-wrap: wrap;
 }
 .sim-legend-item {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 0.76rem;
   color: #cbd5e1;
-  background: var(--sim-pill-bg);
+  background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.06);
-  padding: 7px 10px;
-  border-radius: 999px;
+  padding: 9px 11px;
+  border-radius: 14px;
+  min-height: 40px;
+}
+.sim-legend-item strong {
+  color: #f8fafc;
+  font-weight: 700;
+}
+.sim-legend-item span:last-child {
+  color: #94a3b8;
 }
 .sim-legend-dot {
-  width: 12px;
-  height: 3px;
+  width: 18px;
+  height: 0;
+  border-radius: 999px;
+  border-top: 3px solid currentColor;
+  flex-shrink: 0;
+}
+.sim-legend-swatch {
+  width: 18px;
+  height: 10px;
   border-radius: 999px;
   flex-shrink: 0;
 }
@@ -352,8 +367,8 @@ permalink: /simulator/
   .sim-chart-stage { height: 300px; }
   .sim-period-btns { width: 100%; justify-content: space-between; }
   .sim-period-btn { flex: 1; text-align: center; padding: 10px 0; }
-  .sim-legend { gap: 6px; }
-  .sim-legend-item { font-size: 0.72rem; padding: 6px 9px; }
+  .sim-legend { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .sim-legend-item { font-size: 0.72rem; padding: 7px 8px; min-height: 38px; }
   .sim-scenario-panel { padding: 18px 16px; }
   .sim-scenario-item { align-items: flex-start; }
   .sim-scenario-badge { margin-top: 2px; }
@@ -434,11 +449,11 @@ permalink: /simulator/
       <canvas id="sim-chart"></canvas>
     </div>
     <div class="sim-legend">
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#22d3ee"></div>Historical</div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#22d3ee"></div><span id="sim-legend-model">Consensus</span></div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#a855f7;border-top:2px dashed #a855f7"></div>Chronos-2</div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#fbbf24;border-top:2px dashed #fbbf24"></div>TimesFM 2.5</div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:rgba(34,211,238,0.2);width:16px;height:10px;border-radius:3px"></div>Consensus Range</div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#38bdf8"></div><span><strong>History</strong><br><span>Observed settlement path</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#f8fafc"></div><span><strong id="sim-legend-model">Consensus</strong><br><span>Primary forecast path</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#a855f7;border-top-style:dashed"></div><span><strong>Chronos-2</strong><br><span>Model comparison</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#fbbf24;border-top-style:dashed"></div><span><strong>TimesFM 2.5</strong><br><span>Model comparison</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-swatch" style="background:rgba(226,232,240,0.10);border:1px solid rgba(226,232,240,0.18)"></div><span><strong>Consensus range</strong><br><span>Expected band, p10 to p90</span></span></div>
     </div>
   </div>
 
@@ -1105,6 +1120,30 @@ function getHistorySlice(hist){
   return {dates: dates, prices: prices};
 }
 
+function formatAxisLabel(raw, compact){
+  if (!raw) return '';
+  var dte = new Date(raw);
+  if (isNaN(dte.getTime())) return raw;
+  return compact
+    ? dte.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric' })
+    : dte.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function buildTickIndexMap(total, forecastStart, compact){
+  if (total <= 0) return {};
+  var targetTicks = compact ? 4 : 7;
+  var step = Math.max(1, Math.ceil((total - 1) / targetTicks));
+  var map = {};
+  map[0] = true;
+  map[total - 1] = true;
+  for (var i = 0; i < total; i += step) map[i] = true;
+  if (forecastStart > 0 && forecastStart < total - 1) {
+    map[forecastStart] = true;
+    if (!compact && forecastStart - 1 > 0) map[forecastStart - 1] = true;
+  }
+  return map;
+}
+
 function renderChart(){
   var key = state.commodity;
   var itemMeta = SELECTOR_ITEMS.find(function(i){ return i.key===key; }) || {name:key};
@@ -1169,18 +1208,22 @@ function renderChart(){
 
   var compact = isCompactMobile();
   var connPrice = histPrices[histPrices.length-1];
-  var axisLabels = histLabels.concat(fcstLabels);
-  var histDataset = histPrices.map(function(v, i){ return {x:i, y:v}; });
-  var fcStart = Math.max(histPrices.length - 1, 0);
-  var consensusDataset = [{x:fcStart, y:connPrice}].concat(fcstMedian.map(function(v, i){ return {x:fcStart + i + 1, y:v}; }));
-  var chronosDataset = [{x:fcStart, y:connPrice}].concat(chronosMedian.map(function(v, i){ return {x:fcStart + i + 1, y:v}; }));
-  var timesfmDataset = [{x:fcStart, y:connPrice}].concat(timesfmMedian.map(function(v, i){ return {x:fcStart + i + 1, y:v}; }));
-  var bandP10Dataset = [{x:fcStart, y:connPrice}].concat(fcstP10.map(function(v, i){ return {x:fcStart + i + 1, y:v}; }));
-  var bandP90Dataset = [{x:fcStart, y:connPrice}].concat(fcstP90.map(function(v, i){ return {x:fcStart + i + 1, y:v}; }));
+  var forecastStartIndex = Math.max(histLabels.length - 1, 0);
+  var axisLabels = histLabels.slice();
+  if (fcstLabels.length) {
+    axisLabels = axisLabels.concat(fcstLabels);
+  }
+  var tickIndexMap = buildTickIndexMap(axisLabels.length, forecastStartIndex, compact);
+  var histDataset = histPrices.map(function(v, i){ return {x: histLabels[i], y: v}; });
+  var consensusDataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(fcstMedian.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
+  var chronosDataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(chronosMedian.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
+  var timesfmDataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(timesfmMedian.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
+  var bandP10Dataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(fcstP10.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
+  var bandP90Dataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(fcstP90.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
 
   if (compact && chronosDataset.length > 1) {
-    chronosDataset = chronosDataset.filter(function(_, i){ return i === 0 || i % 2 === 1; });
-    timesfmDataset = timesfmDataset.filter(function(_, i){ return i === 0 || i % 2 === 1; });
+    chronosDataset = chronosDataset.filter(function(_, i){ return i === 0 || i % 3 === 1; });
+    timesfmDataset = timesfmDataset.filter(function(_, i){ return i === 0 || i % 3 === 1; });
   }
 
   if(state.chart){ state.chart.destroy(); }
@@ -1193,66 +1236,67 @@ function renderChart(){
         {
           label: 'Consensus Upper',
           data: bandP90Dataset,
-          borderColor: 'rgba(34,211,238,0)',
+          borderColor: 'rgba(226,232,240,0)',
           borderWidth: 0,
-          backgroundColor: compact ? 'rgba(34,211,238,0.10)' : 'rgba(34,211,238,0.12)',
+          backgroundColor: compact ? 'rgba(226,232,240,0.07)' : 'rgba(226,232,240,0.09)',
           fill: '+1',
           pointRadius: 0,
-          tension: 0.3,
+          tension: 0.22,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 6
         },
         {
           label: 'Consensus Lower',
           data: bandP10Dataset,
-          borderColor: 'rgba(34,211,238,0)',
+          borderColor: 'rgba(226,232,240,0)',
           borderWidth: 0,
-          backgroundColor: compact ? 'rgba(34,211,238,0.10)' : 'rgba(34,211,238,0.12)',
+          backgroundColor: compact ? 'rgba(226,232,240,0.07)' : 'rgba(226,232,240,0.09)',
           fill: false,
           pointRadius: 0,
-          tension: 0.3,
+          tension: 0.22,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 7
         },
         {
           label: 'Historical',
           data: histDataset,
-          borderColor: '#22d3ee',
-          borderWidth: compact ? 2.4 : 2,
+          borderColor: 'rgba(56,189,248,0.95)',
+          borderWidth: compact ? 2.1 : 1.9,
           pointRadius: 0,
-          tension: 0.3,
+          tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 5
         },
         {
           label: 'Chronos-2',
           data: chronosDataset,
-          borderColor: 'rgba(168,85,247,0.88)',
-          borderWidth: compact ? 1.8 : 1.5,
-          borderDash: compact ? [4,3] : [6,4],
+          borderColor: 'rgba(168,85,247,0.82)',
+          borderWidth: compact ? 1.5 : 1.35,
+          borderDash: compact ? [4,4] : [6,5],
           pointRadius: 0,
-          tension: 0.3,
+          tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 4
         },
         {
           label: 'TimesFM 2.5',
           data: timesfmDataset,
-          borderColor: 'rgba(251,191,36,0.96)',
-          borderWidth: compact ? 1.8 : 1.5,
-          borderDash: compact ? [2,3] : [3,4],
+          borderColor: 'rgba(251,191,36,0.84)',
+          borderWidth: compact ? 1.5 : 1.35,
+          borderDash: compact ? [2,4] : [3,5],
           pointRadius: 0,
-          tension: 0.3,
+          tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 3
         },
         {
           label: 'Consensus',
           data: consensusDataset,
-          borderColor: '#e2e8f0',
-          borderWidth: compact ? 3.2 : 2.8,
+          borderColor: '#f8fafc',
+          borderWidth: compact ? 2.8 : 2.6,
           pointRadius: 0,
-          tension: 0.3,
+          pointHoverRadius: compact ? 3 : 4,
+          tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 2
         }
@@ -1265,27 +1309,25 @@ function renderChart(){
       interaction: { mode: 'nearest', intersect: false },
       scales: {
         x: {
-          type: 'linear',
-          min: 0,
-          max: Math.max(axisLabels.length - 1, 0),
+          type: 'category',
+          labels: axisLabels,
+          offset: false,
           ticks: {
             color: '#64748b',
-            maxTicksLimit: compact ? 5 : 8,
+            autoSkip: false,
             maxRotation: 0,
-            font: { size: compact ? 11 : 10, weight: compact ? '600' : '500' },
-            callback: function(value){
-              var idx = Math.round(value);
-              if (idx < 0 || idx >= axisLabels.length) return '';
-              var raw = axisLabels[idx];
-              if (!raw) return '';
-              var dte = new Date(raw);
-              if (isNaN(dte.getTime())) return raw;
-              return compact ? (dte.getMonth() + 1) + '/' + dte.getDate() : dte.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            minRotation: 0,
+            padding: compact ? 8 : 6,
+            font: { size: compact ? 10 : 10, weight: compact ? '600' : '500' },
+            callback: function(value, index){
+              if (!tickIndexMap[index]) return '';
+              return formatAxisLabel(axisLabels[index], compact);
             }
           },
           grid: {
+            drawTicks: false,
             color: function(context){
-              return Math.round(context.tick.value) === fcStart ? 'rgba(34,211,238,0.18)' : 'rgba(255,255,255,0.04)';
+              return context.index === forecastStartIndex ? 'rgba(148,163,184,0.16)' : 'rgba(255,255,255,0.04)';
             }
           },
           border: { color: 'rgba(255,255,255,0.08)' }
@@ -1311,6 +1353,13 @@ function renderChart(){
           titleColor: '#9494a8',
           bodyColor: '#f0f0f5',
           callbacks: {
+            title: function(items){
+              if (!items || !items.length) return '';
+              var raw = items[0].label;
+              var idx = axisLabels.indexOf(raw);
+              var phase = idx > forecastStartIndex ? 'Forecast' : 'History';
+              return formatAxisLabel(raw, false) + ' • ' + phase;
+            },
             label: function(ctx){
               if(ctx.dataset.label === 'Consensus Upper' || ctx.dataset.label === 'Consensus Lower') return null;
               return ctx.dataset.label + ': ' + fmtPrice(ctx.parsed.y, key);
