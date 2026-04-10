@@ -405,15 +405,18 @@ layout: default
   <div class="commodity-forecast-section" id="commodity-forecast-section">
     <div class="cf-header">
       <div>
-        <div class="cf-title">AI Price Forecast — 90 Days</div>
-        <div class="cf-subtitle">Powered by time series AI model · Updated daily</div>
+        <div class="cf-title">Consensus Price Outlook — 90 Days</div>
+        <div class="cf-subtitle" id="cf-subtitle">Chronos-2 + TimesFM 2.5, combined into a decision-grade range</div>
       </div>
       <div class="cf-legend">
         <span class="cf-leg-item"><span class="cf-leg-line hist"></span>Historical</span>
-        <span class="cf-leg-item"><span class="cf-leg-line med"></span>AI Forecast</span>
+        <span class="cf-leg-item"><span class="cf-leg-line med"></span>Consensus</span>
+        <span class="cf-leg-item"><span style="display:inline-block;width:18px;height:0;border-top:2px dashed rgba(168,85,247,0.9);vertical-align:middle;margin-right:6px;"></span>Chronos-2</span>
+        <span class="cf-leg-item"><span style="display:inline-block;width:18px;height:0;border-top:2px dashed rgba(251,191,36,0.95);vertical-align:middle;margin-right:6px;"></span>TimesFM 2.5</span>
         <span class="cf-leg-item"><span class="cf-leg-band"></span>P10–P90</span>
       </div>
     </div>
+    <div id="cf-agreement-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:0 0 14px;"></div>
     <div class="cf-chart-wrap">
       <canvas id="commodity-fc-canvas"></canvas>
     </div>
@@ -423,7 +426,7 @@ layout: default
         <div class="cf-metric-val" id="cf-current">—</div>
       </div>
       <div class="cf-metric highlight">
-        <div class="cf-metric-label">90-Day Target</div>
+        <div class="cf-metric-label" id="cf-target-label">90-Day Consensus</div>
         <div class="cf-metric-val" id="cf-target">—</div>
         <div class="cf-metric-chg" id="cf-chg">—</div>
       </div>
@@ -442,6 +445,7 @@ layout: default
       </div>
     </div>
   </div>
+
 
   <!-- Simulator CTA -->
   <div class="commodity-sim-cta">
@@ -781,9 +785,13 @@ layout: default
   };
 
   function fmt(v, meta) {
-    if (v == null) return '\u2014';
+    if (v == null || Number.isNaN(Number(v))) return '—';
     var m = meta || { unit: '$', dec: 2 };
     return m.unit + Number(v).toLocaleString('en-US', { minimumFractionDigits: m.dec, maximumFractionDigits: m.dec });
+  }
+
+  function makeLine(joinPrice, histDates, arr) {
+    return histDates.slice(0, -1).map(function(){ return null; }).concat([joinPrice]).concat(arr || []);
   }
 
   Promise.all([
@@ -793,154 +801,129 @@ layout: default
     .then(function(responses) {
       var consensusData = responses[0] || {};
       var legacyData = responses[1] || {};
-      var consensusEntry = consensusData[fcKey];
+      var entry = consensusData[fcKey];
       var d = legacyData[fcKey];
-      var activeForecast = d && d.timesfm_forecast ? d.timesfm_forecast : (d ? d.forecast : null);
-      var activeModel = d && d.timesfm_forecast ? 'TimesFM 2.5' : (d && d.model ? d.model : 'Chronos-2');
-      if (!d || !activeForecast) {
+      if (!d) {
         document.getElementById('cf-no-data').style.display = 'block';
         return;
       }
-      var meta = META[fcKey] || { unit: '$', dec: 2 };
-      var histDates  = (d.history.dates || []).slice(-60);
-      var histPrices = (d.history.prices || []).slice(-60);
-      var fcDates    = activeForecast.dates   || [];
-      var fcMedian   = activeForecast.median  || [];
-      var fcP10      = activeForecast.p25     || activeForecast.p10     || [];  // P25 chart band
-      var fcP90      = activeForecast.p75     || activeForecast.p90     || [];  // P75 chart band
-      var fcP10ext   = activeForecast.p10_extreme || activeForecast.p10 || fcP10;  // P10 metric
-      var fcP90ext   = activeForecast.p90_extreme || activeForecast.p90 || fcP90;  // P90 metric
-      var joinPrice  = histPrices[histPrices.length - 1];
 
-      var allLabels = histDates.concat(fcDates);
-      var histLine  = histPrices.concat(fcDates.map(function() { return null; }));
-      var medLine   = histDates.slice(0,-1).map(function(){return null;}).concat([joinPrice]).concat(fcMedian);
-      var p90Line   = histDates.slice(0,-1).map(function(){return null;}).concat([joinPrice]).concat(fcP90);
-      var p10Line   = histDates.slice(0,-1).map(function(){return null;}).concat([joinPrice]).concat(fcP10);
+      var consensus = entry && entry.consensus && entry.consensus.status === 'ready' ? entry.consensus : null;
+      var chronos = entry && entry.models ? entry.models.chronos2 : null;
+      var timesfm = entry && entry.models ? entry.models.timesfm : null;
+      var activeForecast = consensus || d.timesfm_forecast || d.forecast;
+      if (!activeForecast) {
+        document.getElementById('cf-no-data').style.display = 'block';
+        return;
+      }
+
+      var meta = META[fcKey] || { unit: '$', dec: 2 };
+      var histDates = (d.history.dates || []).slice(-60);
+      var histPrices = (d.history.prices || []).slice(-60);
+      var joinPrice = histPrices[histPrices.length - 1];
+      var fcDates = activeForecast.dates || [];
+      var fcMedian = activeForecast.median || [];
+      var fcP10 = (activeForecast.p10 || activeForecast.p25 || []).slice(0);
+      var fcP90 = (activeForecast.p90 || activeForecast.p75 || []).slice(0);
+      var chronosMedian = chronos && chronos.raw && chronos.raw.forecast ? (chronos.raw.forecast.median || []) : [];
+      var timesfmMedian = timesfm ? (timesfm.median || []) : [];
+
+      var labels = histDates.concat(fcDates);
+      var histLine = histPrices.concat(fcDates.map(function(){ return null; }));
+      var consensusLine = makeLine(joinPrice, histDates, fcMedian);
+      var p10Line = makeLine(joinPrice, histDates, fcP10);
+      var p90Line = makeLine(joinPrice, histDates, fcP90);
+      var chronosLine = makeLine(joinPrice, histDates, chronosMedian);
+      var timesfmLine = makeLine(joinPrice, histDates, timesfmMedian);
 
       var canvas = document.getElementById('commodity-fc-canvas');
       if (!canvas) return;
+      var render = function() {
+        new Chart(canvas, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [
+              { label:'Range Upper', data:p90Line, borderColor:'transparent', backgroundColor:'rgba(34,211,238,0.12)', fill:'+1', pointRadius:0, tension:0.3, order:6 },
+              { label:'Range Lower', data:p10Line, borderColor:'transparent', backgroundColor:'transparent', fill:false, pointRadius:0, tension:0.3, order:7 },
+              { label:'Historical', data:histLine, borderColor:'#64748b', backgroundColor:'transparent', borderWidth:1.5, pointRadius:0, tension:0.2, order:4 },
+              { label:'Chronos-2', data:chronosLine, borderColor:'rgba(168,85,247,0.88)', backgroundColor:'transparent', borderWidth:1.6, pointRadius:0, tension:0.3, order:3, borderDash:[6,4] },
+              { label:'TimesFM 2.5', data:timesfmLine, borderColor:'rgba(251,191,36,0.96)', backgroundColor:'transparent', borderWidth:1.6, pointRadius:0, tension:0.3, order:2, borderDash:[3,4] },
+              { label:'Consensus', data:consensusLine, borderColor:'#22d3ee', backgroundColor:'transparent', borderWidth:2.8, pointRadius:0, tension:0.32, order:1 }
+            ]
+          },
+          options: {
+            responsive:true, maintainAspectRatio:false,
+            interaction:{ mode:'index', intersect:false },
+            plugins:{
+              legend:{display:false},
+              tooltip:{
+                backgroundColor:'rgba(13,13,24,0.95)', borderColor:'rgba(34,211,238,0.3)', borderWidth:1,
+                titleColor:'#94a3b8', bodyColor:'#e2e8f0',
+                callbacks:{ label:function(ctx){ if(ctx.parsed.y===null||ctx.dataset.label==='Range Upper'||ctx.dataset.label==='Range Lower') return null; return ctx.dataset.label + ': ' + fmt(ctx.parsed.y, meta); } }
+              }
+            },
+            scales:{
+              x:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#475569', maxTicksLimit:7, maxRotation:0, callback:function(v){ var l=this.getLabelForValue(v); if(!l) return ''; var dt=new Date(l); return (dt.getMonth()+1)+'/'+dt.getDate(); }} },
+              y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#475569', callback:function(v){ return fmt(v,meta); }} }
+            }
+          }
+        });
+      };
+
       if (typeof Chart === 'undefined') {
         var s = document.createElement('script');
         s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
-        s.onload = function() { drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry, activeForecast, activeModel); };
+        s.onload = render;
         document.head.appendChild(s);
       } else {
-        drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry, activeForecast, activeModel);
+        render();
       }
 
-      // Direction signal badge
-      if (d.direction_signal && d.direction_signal.label && typeof d.direction_signal.confidence === 'number') {
-        var sig = d.direction_signal;
-        var LABELS = { BULLISH: 'BULLISH', BEARISH: 'BEARISH', NEUTRAL: 'NEUTRAL' };
-        var safeLabel   = LABELS[sig.label] || 'NEUTRAL';
-        var safeHorizon = parseInt(sig.horizon_days, 10) || 30;
-        var COLORS = {
-          BULLISH: { bg: 'rgba(16,185,129,0.15)', color: '#10b981', border: 'rgba(16,185,129,0.3)', icon: '↑' },
-          BEARISH: { bg: 'rgba(239,68,68,0.15)',  color: '#ef4444', border: 'rgba(239,68,68,0.3)',  icon: '↓' },
-          NEUTRAL: { bg: 'rgba(100,116,139,0.12)', color: '#94a3b8', border: 'rgba(100,116,139,0.2)', icon: '→' }
-        };
-        var palette = COLORS[safeLabel] || COLORS.NEUTRAL;
-        var rawConf = typeof sig.confidence === 'number' ? sig.confidence : 0;
-        var pct = Math.max(0, Math.min(100, Math.round(rawConf * 100)));
-        var badgeHtml =
-          '<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;' +
-          'background:' + palette.bg + ';color:' + palette.color + ';border:1px solid ' + palette.border + ';' +
-          'font-size:0.9rem;font-weight:700;letter-spacing:0.02em;">' +
-          palette.icon + ' ' + safeLabel +
-          '<span style="opacity:0.7;font-size:0.78rem;font-weight:500;">' + pct + '% confidence</span>' +
-          '</span>' +
-          '<span style="margin-left:10px;font-size:0.72rem;color:var(--text3);">' +
-          safeHorizon + '-day horizon · AI direction model</span>';
-        var badgeEl = document.getElementById('direction-signal-badge');
-        var wrapEl  = document.getElementById('direction-signal-wrap');
-        if (badgeEl) {
-          badgeEl.innerHTML = badgeHtml;
-          if (wrapEl) wrapEl.style.display = 'block';
-        }
+      var target = fcMedian.length ? fcMedian[Math.min(fcMedian.length - 1, 89)] : null;
+      var pct = d.current_price && target ? ((target - d.current_price) / d.current_price * 100) : null;
+      var el = function(id){ return document.getElementById(id); };
+      if (el('cf-current')) el('cf-current').textContent = fmt(d.current_price, meta);
+      if (el('cf-target')) el('cf-target').textContent = fmt(target, meta);
+      if (el('cf-target-label')) el('cf-target-label').textContent = consensus ? '90-Day Consensus' : '90-Day Forecast';
+      if (el('cf-p90')) el('cf-p90').textContent = fmt(fcP90.length ? fcP90[Math.min(fcP90.length - 1, 89)] : null, meta);
+      if (el('cf-p10')) el('cf-p10').textContent = fmt(fcP10.length ? fcP10[Math.min(fcP10.length - 1, 89)] : null, meta);
+      if (el('cf-subtitle')) el('cf-subtitle').textContent = consensus ? 'Chronos-2 + TimesFM 2.5, combined into a decision-grade range' : 'Single-model AI forecast view';
+      if (el('cf-chg')) {
+        el('cf-chg').textContent = pct == null ? '—' : ((pct >= 0 ? '+' : '') + pct.toFixed(1) + '%');
+        el('cf-chg').style.color = pct != null && pct >= 0 ? '#10b981' : '#f43f5e';
+      }
+
+      var strip = document.getElementById('cf-agreement-strip');
+      if (strip && entry) {
+        var agreement = entry.agreement || {};
+        var level = agreement.level || 'moderate';
+        var palette = level === 'high'
+          ? ['#10b981','rgba(16,185,129,0.08)','rgba(16,185,129,0.18)']
+          : level === 'divergent'
+            ? ['#ef4444','rgba(239,68,68,0.08)','rgba(239,68,68,0.18)']
+            : ['#f59e0b','rgba(245,158,11,0.08)','rgba(245,158,11,0.18)'];
+        strip.innerHTML = ''
+          + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
+          + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Agreement</div>'
+          + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + level.toUpperCase() + '</div>'
+          + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
+          + '</div>'
+          + '<div style="padding:12px 14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.16);border-radius:12px;">'
+          + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:700;margin-bottom:6px;">Consensus 90D</div>'
+          + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(target, meta) + '</div>'
+          + '</div>'
+          + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
+          + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#a855f7;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
+          + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(chronos ? chronos.forecast_90d : null, meta) + '</div>'
+          + '</div>'
+          + '<div style="padding:12px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.16);border-radius:12px;">'
+          + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
+          + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(timesfm ? timesfm.forecast_90d : null, meta) + '</div>'
+          + '</div>';
       }
     })
     .catch(function(e) { console.warn('Forecast load error', e); });
-
-  function drawChart(canvas, labels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry, activeForecast, activeModel) {
-    var datasets = [
-      { label:'P90', data:p90Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0.12)', fill:'+1', pointRadius:0, tension:0.3, order:4 },
-      { label:'P10', data:p10Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0)', fill:false, pointRadius:0, tension:0.3, order:5 },
-      { label:'Historical', data:histLine, borderColor:'#64748b', backgroundColor:'transparent', borderWidth:1.5, pointRadius:0, tension:0.2, order:2 },
-      { label:'AI Forecast', data:medLine, borderColor:'#22d3ee', backgroundColor:'transparent', borderWidth:2, pointRadius:0, tension:0.3, order:1 }
-    ];
-
-    if (consensusEntry && consensusEntry.agreement && consensusEntry.models) {
-      datasets.push({
-        label:'Consensus',
-        data:medLine,
-        borderColor:'#e2e8f0',
-        backgroundColor:'transparent',
-        borderWidth:2.6,
-        pointRadius:0,
-        tension:0.32,
-        order:0
-      });
-    }
-
-    new Chart(canvas, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: datasets
-      },
-      options: {
-        responsive:true, maintainAspectRatio:false,
-        interaction:{ mode:'index', intersect:false },
-        plugins:{
-          legend:{display:false},
-          tooltip:{
-            backgroundColor:'rgba(13,13,24,0.95)', borderColor:'rgba(34,211,238,0.3)', borderWidth:1,
-            titleColor:'#94a3b8', bodyColor:'#e2e8f0',
-            callbacks:{ label:function(ctx){ if(ctx.parsed.y===null||ctx.dataset.label==='P90'||ctx.dataset.label==='P10') return null; return ctx.dataset.label+': '+fmt(ctx.parsed.y, meta); } }
-          }
-        },
-        scales:{
-          x:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#475569', maxTicksLimit:7, maxRotation:0, callback:function(v){ var l=this.getLabelForValue(v); if(!l) return ''; var dt=new Date(l); return (dt.getMonth()+1)+'/'+dt.getDate(); }} },
-          y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#475569', callback:function(v){ return fmt(v,meta); }} }
-        }
-      }
-    });
-
-    var el = function(id){ return document.getElementById(id); };
-    var activeMedian = activeForecast && activeForecast.median ? activeForecast.median : [];
-    var activeTarget = activeMedian.length ? activeMedian[Math.min(activeMedian.length - 1, 89)] : d.forecast_90d;
-    var pct = d.current_price && activeTarget ? ((activeTarget - d.current_price) / d.current_price * 100) : (d.change_90d_pct || 0);
-    if(el('cf-current')) el('cf-current').textContent = fmt(d.current_price, meta);
-    if(el('cf-target'))  el('cf-target').textContent  = fmt(activeTarget, meta);
-    var modelMetric = document.querySelector('.cf-metric-val.model');
-    if (modelMetric) modelMetric.textContent = activeModel;
-    if(el('cf-chg')) {
-      el('cf-chg').textContent = (pct>=0?'+':'')+pct.toFixed(1)+'%';
-      el('cf-chg').style.color = pct>=0?'#10b981':'#f43f5e';
-    }
-    if(el('cf-p90')&&fcP90ext.length) el('cf-p90').textContent = fmt(fcP90ext[fcP90ext.length-1], meta);
-    if(el('cf-p10')&&fcP10ext.length) el('cf-p10').textContent = fmt(fcP10ext[fcP10ext.length-1], meta);
-
-    if (consensusEntry && consensusEntry.agreement) {
-      var wrapEl = document.getElementById('direction-signal-wrap');
-      var badgeEl = document.getElementById('direction-signal-badge');
-      if (badgeEl && wrapEl) {
-        var level = consensusEntry.agreement.level || 'moderate';
-        var score = typeof consensusEntry.agreement.score === 'number' ? Math.round(consensusEntry.agreement.score * 100) : null;
-        var palette = level === 'high'
-          ? { bg:'rgba(16,185,129,0.12)', color:'#10b981', border:'rgba(16,185,129,0.25)' }
-          : level === 'divergent'
-            ? { bg:'rgba(239,68,68,0.12)', color:'#ef4444', border:'rgba(239,68,68,0.25)' }
-            : { bg:'rgba(245,158,11,0.12)', color:'#f59e0b', border:'rgba(245,158,11,0.25)' };
-        badgeEl.innerHTML =
-          '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">'
-          + '<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;background:' + palette.bg + ';color:' + palette.color + ';border:1px solid ' + palette.border + ';font-size:0.9rem;font-weight:700;">Consensus ready</span>'
-          + '<span style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:8px;background:rgba(148,163,184,0.10);color:#cbd5e1;border:1px solid rgba(148,163,184,0.2);font-size:0.85rem;font-weight:600;">Agreement: ' + level.toUpperCase() + (score !== null ? ' · ' + score + '%' : '') + '</span>'
-          + '</div>';
-        wrapEl.style.display = 'block';
-      }
-    }
-  }
 })();
 </script>
+

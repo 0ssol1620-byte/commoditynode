@@ -359,7 +359,7 @@ permalink: /simulator/
 </section>
 
 <div style="text-align:center;margin:-8px 0 24px;">
-  <a href="/methodology/" style="font-size:0.78rem;color:#475569;text-decoration:none;">AI forecast powered by TimesFM 2.5. <span style="color:#22d3ee">See methodology →</span></a>
+  <a href="/methodology/" style="font-size:0.78rem;color:#475569;text-decoration:none;">Consensus forecast layer powered by Chronos-2 + TimesFM 2.5. <span style="color:#22d3ee">See methodology →</span></a>
 </div>
 
 <div class="container" style="padding: 40px 24px 80px;">
@@ -399,7 +399,7 @@ permalink: /simulator/
     <div class="sim-chart-header">
       <div>
         <div class="sim-chart-title" id="sim-chart-title">Select a scenario to view analysis</div>
-        <div class="sim-chart-subtitle" id="sim-chart-subtitle">Historical prices + TimesFM AI forecast with 80% confidence interval</div>
+        <div class="sim-chart-subtitle" id="sim-chart-subtitle">Historical prices + consensus forecast with Chronos-2 and TimesFM comparison</div>
       </div>
       <div class="sim-period-btns">
         <button class="sim-period-btn active" data-period="3m" onclick="setPeriod('3m',this)">3M</button>
@@ -412,13 +412,15 @@ permalink: /simulator/
     </div>
     <div class="sim-legend">
       <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#22d3ee"></div>Historical</div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#a855f7;border-top:2px dashed #a855f7"></div><span id="sim-legend-model">AI Forecast (TimesFM)</span></div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:rgba(168,85,247,0.2);width:16px;height:10px;border-radius:3px"></div>80% Confidence</div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#22d3ee"></div><span id="sim-legend-model">Consensus</span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#a855f7;border-top:2px dashed #a855f7"></div>Chronos-2</div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#fbbf24;border-top:2px dashed #fbbf24"></div>TimesFM 2.5</div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:rgba(34,211,238,0.2);width:16px;height:10px;border-radius:3px"></div>Consensus Range</div>
     </div>
   </div>
 
   <div style="margin:12px 0;padding:10px 14px;background:rgba(34,211,238,0.03);border-radius:6px;">
-    <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic (TimesFM model, p10–p90 bands). Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a></p>
+    <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model comparison. Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a></p>
   </div>
 
   <!-- Stats Row -->
@@ -429,13 +431,13 @@ permalink: /simulator/
       <div class="sim-stat-change neutral" id="stat-current-sub">—</div>
     </div>
     <div class="sim-stat-card">
-      <div class="sim-stat-label">30-Day Forecast</div>
+      <div class="sim-stat-label">30-Day Consensus</div>
       <div class="sim-stat-value" id="stat-30d">—</div>
       <div class="sim-stat-change" id="stat-30d-change">—</div>
     </div>
     <div class="sim-stat-card sim-pro-blur" id="stat-90d-gate" style="padding:0;overflow:hidden;min-height:80px">
       <div style="padding:14px 16px;filter:blur(4px);pointer-events:none;user-select:none" id="stat-90d-content">
-        <div class="sim-stat-label">90-Day Forecast</div>
+        <div class="sim-stat-label">90-Day Consensus</div>
         <div class="sim-stat-value" id="stat-90d">—</div>
         <div class="sim-stat-change" id="stat-90d-change">—</div>
       </div>

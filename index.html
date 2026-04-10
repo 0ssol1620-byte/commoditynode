@@ -298,10 +298,11 @@ image: "/assets/images/og-default.png"
     <header class="section-header" data-animate>
       <p class="section-label">AI Price Intelligence</p>
       <h2 class="section-title">What our AI sees coming</h2>
-      <p class="section-desc">Price forecasts with fan chart confidence bands, powered by TimesFM 2.5 and updated daily.</p>
+      <p class="section-desc">Consensus forecasts built from Chronos-2 and TimesFM 2.5, with agreement scoring and full scenario bands.</p>
     </header>
 
-    <!-- 상품 선택 + 기간 선택 -->
+    <div id="home-consensus-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:0 0 14px;" data-animate data-delay="60"></div>
+
     <div class="forecast-top-bar" data-animate>
       <div class="forecast-tabs">
         <button class="forecast-tab active" data-commodity="gold">Gold</button>
@@ -315,21 +316,19 @@ image: "/assets/images/og-default.png"
       </div>
     </div>
 
-    <!-- 메인 레이아웃: 차트 + 사이드 메트릭 -->
     <div class="forecast-layout" data-animate data-delay="100">
-
-      <!-- 차트 영역 -->
       <div class="forecast-chart-wrap">
         <div class="forecast-chart-header">
           <div>
             <div class="forecast-commodity-name" id="fc-name">Gold</div>
-            <div class="forecast-subtitle" id="home-forecast-subtitle">90-day AI forecast with TimesFM median and P10–P90 confidence band</div>
+            <div class="forecast-subtitle" id="home-forecast-subtitle">Consensus forecast with dual-model comparison and agreement scoring</div>
           </div>
           <div class="forecast-legend">
             <span class="fc-legend-item"><span class="fc-legend-line history"></span>Historical</span>
-            <span class="fc-legend-item"><span class="fc-legend-line median"></span>AI Median</span>
-            <span class="fc-legend-item"><span class="fc-legend-fan fc-fan-50"></span>50% range</span>
-            <span class="fc-legend-item"><span class="fc-legend-fan fc-fan-80"></span>80% range</span>
+            <span class="fc-legend-item"><span class="fc-legend-line median"></span>Consensus</span>
+            <span class="fc-legend-item"><span style="display:inline-block;width:20px;height:0;border-top:2px dashed rgba(168,85,247,0.9);vertical-align:middle;margin-right:6px;"></span>Chronos-2</span>
+            <span class="fc-legend-item"><span style="display:inline-block;width:20px;height:0;border-top:2px dashed rgba(251,191,36,0.95);vertical-align:middle;margin-right:6px;"></span>TimesFM 2.5</span>
+            <span class="fc-legend-item"><span class="fc-legend-fan fc-fan-80"></span>Consensus range</span>
           </div>
         </div>
         <div class="fc-chart-canvas-wrap">
@@ -337,54 +336,47 @@ image: "/assets/images/og-default.png"
         </div>
       </div>
 
-      <!-- 사이드 메트릭 패널 -->
       <div class="forecast-metrics">
-
         <div class="fc-metric-card">
           <div class="fc-metric-label">Current Price</div>
-          <div class="fc-metric-val" id="fc-current">$4,618</div>
+          <div class="fc-metric-val" id="fc-current">-</div>
         </div>
 
         <div class="fc-metric-card highlight">
-          <div class="fc-metric-label" id="fc-90d-label">90-Day Forecast</div>
-          <div class="fc-metric-val" id="fc-90d">$4,855</div>
-          <div class="fc-metric-change up" id="fc-change">+5.1%</div>
+          <div class="fc-metric-label" id="fc-90d-label">90-Day Consensus</div>
+          <div class="fc-metric-val" id="fc-90d">-</div>
+          <div class="fc-metric-change up" id="fc-change">-</div>
         </div>
 
         <div class="fc-metric-card">
           <div class="fc-metric-label">Upside (P90)</div>
-          <div class="fc-metric-val up" id="fc-p90">$4,969</div>
+          <div class="fc-metric-val up" id="fc-p90">-</div>
         </div>
 
         <div class="fc-metric-card">
           <div class="fc-metric-label">Downside (P10)</div>
-          <div class="fc-metric-val down" id="fc-p10">$4,741</div>
+          <div class="fc-metric-val down" id="fc-p10">-</div>
         </div>
 
         <div class="fc-metric-card">
-          <div class="fc-metric-label">Model</div>
-          <div class="fc-metric-val model" id="home-model-label">TimesFM 2.5</div>
-          <div class="fc-metric-sub">Updated daily</div>
+          <div class="fc-metric-label">Decision Layer</div>
+          <div class="fc-metric-val model" id="home-model-label">Consensus</div>
+          <div class="fc-metric-sub" id="home-model-sub">Chronos-2 + TimesFM 2.5</div>
         </div>
 
         <a href="/simulator/" class="fc-cta-btn">
           Run Scenario Simulator →
         </a>
-
       </div>
     </div>
 
-    <!-- 하단: 3개 원자재 요약 바 -->
-    <div class="forecast-summary-bar" data-animate data-delay="200" id="forecast-summary-bar">
-      <!-- JS로 채워짐 -->
-    </div>
+    <div class="forecast-summary-bar" data-animate data-delay="200" id="forecast-summary-bar"></div>
 
-    <!-- Pro CTA -->
     <div class="forecast-pro-cta" data-animate data-delay="300">
       <div class="forecast-pro-inner">
         <div>
           <div class="forecast-pro-title">AI price forecasts for all major commodities</div>
-          <div class="forecast-pro-desc">Copper, Silver, Wheat, Uranium, Lithium + 14 more — all with P10/P90 bands and daily updates.</div>
+          <div class="forecast-pro-desc">Consensus, Chronos-2, and TimesFM views for copper, silver, wheat, uranium, lithium, and more.</div>
         </div>
         <a href="/range-tracker/" class="btn btn-primary">View All Forecasts →</a>
       </div>
@@ -398,8 +390,10 @@ image: "/assets/images/og-default.png"
   'use strict';
 
   var forecastData = null;
+  var consensusData = null;
   var fcChart = null;
   var currentCommodity = 'gold';
+  var currentHorizon = 30;
 
   var COMMODITY_META = {
     gold:      { name: 'Gold',      unit: '$', decimals: 0 },
@@ -407,120 +401,119 @@ image: "/assets/images/og-default.png"
     crude_oil: { name: 'Crude Oil', unit: '$', decimals: 2 }
   };
 
-  fetch('/assets/data/forecast.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      forecastData = data;
+  Promise.all([
+    fetch('/assets/data/forecast.json').then(function(r) { return r.json(); }),
+    fetch('/assets/data/forecast-consensus.json').then(function(r) { return r.ok ? r.json() : {}; }).catch(function(){ return {}; })
+  ])
+    .then(function(responses) {
+      forecastData = responses[0] || {};
+      consensusData = responses[1] || {};
       renderForecastChart('gold');
-      renderSummaryBar(data);
+      renderSummaryBar();
     })
     .catch(function(e) { console.error('Forecast load error', e); });
 
   function fmt(val, meta) {
-    if (!meta) return val;
+    if (val === null || val === undefined || Number.isNaN(Number(val))) return '—';
     return meta.unit + Number(val).toLocaleString('en-US', {
       minimumFractionDigits: meta.decimals,
       maximumFractionDigits: meta.decimals
     });
   }
 
-  var currentHorizon = 30;
+  function getBundle(key) {
+    var d = forecastData && forecastData[key] ? forecastData[key] : null;
+    if (!d) return null;
+    var c = consensusData && consensusData[key] ? consensusData[key] : null;
+    var chronos = c && c.models ? c.models.chronos2 : null;
+    var timesfm = c && c.models ? c.models.timesfm : null;
+    var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
+    return { raw: d, entry: c, consensus: consensus, chronos: chronos, timesfm: timesfm };
+  }
+
+  function forecastLineFromHistory(joinPrice, histDates, arr) {
+    var nullHist = histDates.slice(0, -1).map(function() { return null; });
+    return nullHist.concat([joinPrice]).concat(arr || []);
+  }
 
   function renderForecastChart(key, horizonDays) {
-    if (!forecastData) return;
-    var d = forecastData[key];
-    if (!d) return;
-    var meta = COMMODITY_META[key] || { name: key, unit: '$', decimals: 2 };
     if (horizonDays !== undefined) currentHorizon = horizonDays;
     currentCommodity = key;
 
-    var histLen = 45; // 히스토리 45일 표시 (예측과 비율 균형)
-    var fcLen   = currentHorizon; // 30 / 60 / 90
+    var bundle = getBundle(key);
+    if (!bundle) return;
 
-    var activeForecast = d.timesfm_forecast || d.forecast;
-    var activeModel = d.timesfm_forecast ? 'TimesFM 2.5' : 'Chronos-2';
-    var histDates  = (d.history.dates  || []).slice(-histLen);
+    var d = bundle.raw;
+    var meta = COMMODITY_META[key] || { name: key, unit: '$', decimals: 2 };
+    var histLen = 45;
+    var fcLen = currentHorizon;
+    var histDates = (d.history.dates || []).slice(-histLen);
     var histPrices = (d.history.prices || []).slice(-histLen);
-    var fcDates    = (activeForecast.dates  || []).slice(0, fcLen);
-    var fcMedian   = (activeForecast.median || []).slice(0, fcLen);
-    // 팬 차트용 밴드
-    var fcP25 = ((activeForecast.p25 || activeForecast.p10) || []).slice(0, fcLen);
-    var fcP75 = ((activeForecast.p75 || activeForecast.p90) || []).slice(0, fcLen);
-    var fcP10 = ((activeForecast.p10_extreme || activeForecast.p10) || fcP25).slice(0, fcLen);
-    var fcP90 = ((activeForecast.p90_extreme || activeForecast.p90) || fcP75).slice(0, fcLen);
-
     var joinPrice = histPrices[histPrices.length - 1];
+
+    var consensus = bundle.consensus;
+    var activeForecast = consensus || d.timesfm_forecast || d.forecast;
+    var activeModel = consensus ? 'Consensus' : (d.timesfm_forecast ? 'TimesFM 2.5' : 'Chronos-2');
+
+    var fcDates = (activeForecast.dates || []).slice(0, fcLen);
+    var fcMedian = (activeForecast.median || []).slice(0, fcLen);
+    var fcP10 = ((activeForecast.p10_extreme || activeForecast.p10 || activeForecast.p25) || []).slice(0, fcLen);
+    var fcP90 = ((activeForecast.p90_extreme || activeForecast.p90 || activeForecast.p75) || []).slice(0, fcLen);
+    var chronosMedian = bundle.chronos && bundle.chronos.raw && bundle.chronos.raw.forecast ? (bundle.chronos.raw.forecast.median || []).slice(0, fcLen) : [];
+    var timesfmMedian = bundle.timesfm ? (bundle.timesfm.median || []).slice(0, fcLen) : [];
+
     var allLabels = histDates.concat(fcDates);
-    var nullHist  = histDates.slice(0, -1).map(function() { return null; });
-
-    // 히스토리 라인 (예측 구간은 null)
     var histLine = histPrices.concat(fcDates.map(function() { return null; }));
-
-    // 예측 라인들 (히스토리 구간은 null + 연결점)
-    function makeFcLine(arr) {
-      return nullHist.concat([joinPrice]).concat(arr);
-    }
-
-    var medianLine = makeFcLine(fcMedian);
-    var p25Line    = makeFcLine(fcP25);
-    var p75Line    = makeFcLine(fcP75);
-    var p10Line    = makeFcLine(fcP10);
-    var p90Line    = makeFcLine(fcP90);
+    var medianLine = forecastLineFromHistory(joinPrice, histDates, fcMedian);
+    var p10Line = forecastLineFromHistory(joinPrice, histDates, fcP10);
+    var p90Line = forecastLineFromHistory(joinPrice, histDates, fcP90);
+    var chronosLine = forecastLineFromHistory(joinPrice, histDates, chronosMedian);
+    var timesfmLine = forecastLineFromHistory(joinPrice, histDates, timesfmMedian);
 
     var ctx = document.getElementById('fc-chart');
     if (!ctx) return;
     if (fcChart) { fcChart.destroy(); fcChart = null; }
-
-    // 예측 시작 수직선 위치
-    var splitIdx = histDates.length - 1;
 
     fcChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: allLabels,
         datasets: [
-          // ── 팬 차트: 80% 외곽 (P10~P90, 연한 보라) ──
           {
-            label: '80% Upper', data: p90Line,
+            label: 'Range Upper', data: p90Line,
             borderColor: 'transparent',
-            backgroundColor: 'rgba(139,92,246,0.10)',
+            backgroundColor: 'rgba(34,211,238,0.12)',
             fill: '+1', pointRadius: 0, tension: 0.35, order: 6
           },
           {
-            label: '80% Lower', data: p10Line,
+            label: 'Range Lower', data: p10Line,
             borderColor: 'transparent',
             backgroundColor: 'transparent',
             fill: false, pointRadius: 0, tension: 0.35, order: 7
           },
-          // ── 팬 차트: 50% 내부 (P25~P75, 진한 보라) ──
-          {
-            label: '50% Upper', data: p75Line,
-            borderColor: 'transparent',
-            backgroundColor: 'rgba(139,92,246,0.22)',
-            fill: '+1', pointRadius: 0, tension: 0.35, order: 4
-          },
-          {
-            label: '50% Lower', data: p25Line,
-            borderColor: 'transparent',
-            backgroundColor: 'transparent',
-            fill: false, pointRadius: 0, tension: 0.35, order: 5
-          },
-          // ── 히스토리 라인 ──
           {
             label: 'Historical', data: histLine,
             borderColor: '#64748b',
             backgroundColor: 'transparent',
-            borderWidth: 2, pointRadius: 0, tension: 0.15, order: 2
+            borderWidth: 2, pointRadius: 0, tension: 0.15, order: 4
           },
-          // ── AI Median ── (굵고 밝은 청록)
           {
-            label: 'AI Median', data: medianLine,
+            label: 'Chronos-2', data: chronosLine,
+            borderColor: 'rgba(168,85,247,0.88)',
+            backgroundColor: 'transparent',
+            borderWidth: 1.6, pointRadius: 0, tension: 0.35, order: 3, borderDash: [6,4]
+          },
+          {
+            label: 'TimesFM 2.5', data: timesfmLine,
+            borderColor: 'rgba(251,191,36,0.96)',
+            backgroundColor: 'transparent',
+            borderWidth: 1.6, pointRadius: 0, tension: 0.35, order: 2, borderDash: [3,4]
+          },
+          {
+            label: 'Consensus', data: medianLine,
             borderColor: '#22d3ee',
             backgroundColor: 'transparent',
-            borderWidth: 2.5,
-            pointRadius: 0, tension: 0.35, order: 1,
-            shadowColor: 'rgba(34,211,238,0.4)',
-            shadowBlur: 8,
+            borderWidth: 2.8, pointRadius: 0, tension: 0.35, order: 1
           }
         ]
       },
@@ -541,15 +534,11 @@ image: "/assets/images/og-default.png"
             callbacks: {
               label: function(ctx) {
                 if (ctx.parsed.y === null) return null;
-                var lbl = ctx.dataset.label;
-                if (lbl === '80% Upper' || lbl === '80% Lower' ||
-                    lbl === '50% Upper' || lbl === '50% Lower') return null;
-                return ' ' + lbl + ': ' + fmt(ctx.parsed.y, meta);
+                if (ctx.dataset.label === 'Range Upper' || ctx.dataset.label === 'Range Lower') return null;
+                return ' ' + ctx.dataset.label + ': ' + fmt(ctx.parsed.y, meta);
               }
             }
-          },
-          // 예측 시작 수직선
-          annotation: undefined
+          }
         },
         scales: {
           x: {
@@ -562,102 +551,95 @@ image: "/assets/images/og-default.png"
                 var label = this.getLabelForValue(val);
                 if (!label) return '';
                 var dt = new Date(label);
-                return (dt.getMonth()+1) + '/' + dt.getDate();
+                return (dt.getMonth() + 1) + '/' + dt.getDate();
               }
             }
           },
           y: {
             grid: { color: 'rgba(255,255,255,0.04)' },
-            ticks: {
-              color: '#475569',
-              callback: function(val) { return fmt(val, meta); }
-            }
+            ticks: { color: '#475569', callback: function(val) { return fmt(val, meta); } }
           }
         }
       }
     });
 
-    // 수직 구분선 — canvas afterDraw로 직접 그리기
-    var origAfterDraw = fcChart.options.animation.onComplete;
-    fcChart.options.plugins.afterDraw = undefined;
-    Chart.register({
-      id: 'splitLine_' + Date.now(),
-      afterDraw: function(chart) {
-        if (chart !== fcChart) return;
-        var ctx2 = chart.ctx;
-        var xAxis = chart.scales.x;
-        var yAxis = chart.scales.y;
-        var x = xAxis.getPixelForValue(splitIdx);
-        ctx2.save();
-        ctx2.strokeStyle = 'rgba(34,211,238,0.2)';
-        ctx2.lineWidth = 1;
-        ctx2.setLineDash([4, 4]);
-        ctx2.beginPath();
-        ctx2.moveTo(x, yAxis.top);
-        ctx2.lineTo(x, yAxis.bottom);
-        ctx2.stroke();
-        // "Forecast →" 라벨
-        ctx2.fillStyle = 'rgba(34,211,238,0.4)';
-        ctx2.font = '600 11px Inter, sans-serif';
-        ctx2.fillText('Forecast ▶', x + 6, yAxis.top + 16);
-        ctx2.restore();
-      }
-    });
-
-    // 메트릭 패널 업데이트
-    var el = function(id) { return document.getElementById(id); };
-    if (el('fc-name'))    el('fc-name').textContent    = meta.name;
-    if (el('fc-current')) el('fc-current').textContent = fmt(d.current_price, meta);
-    if (el('home-model-label')) el('home-model-label').textContent = activeModel;
-    if (el('home-forecast-subtitle')) el('home-forecast-subtitle').textContent = '90-day AI forecast with ' + activeModel + ' median and P10–P90 confidence band';
-
-    var targetIdx = fcLen - 1;
-    var targetPrice = fcMedian[targetIdx];
-    if (el('fc-90d'))    el('fc-90d').textContent    = fmt(targetPrice, meta);
-    if (el('fc-90d-label')) el('fc-90d-label').textContent = fcLen + '-Day Forecast';
-
-    var pctChange = (targetPrice - d.current_price) / d.current_price * 100;
-    var chgEl = el('fc-change');
-    if (chgEl) {
-      chgEl.textContent = (pctChange >= 0 ? '+' : '') + pctChange.toFixed(1) + '%';
-      chgEl.className = 'fc-metric-change ' + (pctChange >= 0 ? 'up' : 'down');
-    }
-
-    // P10/P90 extreme 메트릭
+    var targetPrice = fcMedian[fcLen - 1];
+    var pctChange = (d.current_price && targetPrice) ? ((targetPrice - d.current_price) / d.current_price * 100) : null;
     var lastP90 = fcP90[fcLen - 1];
     var lastP10 = fcP10[fcLen - 1];
-    if (el('fc-p90') && lastP90) el('fc-p90').textContent = fmt(lastP90, meta);
-    if (el('fc-p10') && lastP10) el('fc-p10').textContent = fmt(lastP10, meta);
+    var agreement = bundle.entry && bundle.entry.agreement ? bundle.entry.agreement : {};
+    var chronos90 = bundle.chronos ? bundle.chronos.forecast_90d : null;
+    var timesfm90 = bundle.timesfm ? bundle.timesfm.forecast_90d : null;
+
+    var el = function(id) { return document.getElementById(id); };
+    if (el('fc-name')) el('fc-name').textContent = meta.name;
+    if (el('fc-current')) el('fc-current').textContent = fmt(d.current_price, meta);
+    if (el('fc-90d')) el('fc-90d').textContent = fmt(targetPrice, meta);
+    if (el('fc-90d-label')) el('fc-90d-label').textContent = fcLen + '-Day ' + (consensus ? 'Consensus' : 'Forecast');
+    if (el('fc-p90')) el('fc-p90').textContent = fmt(lastP90, meta);
+    if (el('fc-p10')) el('fc-p10').textContent = fmt(lastP10, meta);
+    if (el('home-model-label')) el('home-model-label').textContent = activeModel;
+    if (el('home-model-sub')) el('home-model-sub').textContent = consensus ? 'Chronos-2 + TimesFM 2.5' : activeModel + ' only';
+    if (el('home-forecast-subtitle')) el('home-forecast-subtitle').textContent = consensus ? 'Consensus forecast with dual-model comparison and agreement scoring' : ('90-day AI forecast with ' + activeModel + ' median and P10–P90 confidence band');
+
+    var chgEl = el('fc-change');
+    if (chgEl) {
+      chgEl.textContent = pctChange === null ? '—' : ((pctChange >= 0 ? '+' : '') + pctChange.toFixed(1) + '%');
+      chgEl.className = 'fc-metric-change ' + (pctChange !== null && pctChange >= 0 ? 'up' : 'down');
+    }
+
+    var strip = el('home-consensus-strip');
+    if (strip) {
+      var level = agreement.level || 'moderate';
+      var palette = level === 'high' ? ['#10b981','rgba(16,185,129,0.08)','rgba(16,185,129,0.18)'] : level === 'divergent' ? ['#ef4444','rgba(239,68,68,0.08)','rgba(239,68,68,0.18)'] : ['#f59e0b','rgba(245,158,11,0.08)','rgba(245,158,11,0.18)'];
+      strip.innerHTML = ''
+        + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Model agreement</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + level.toUpperCase() + '</div>'
+        + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
+        + '</div>'
+        + '<div style="padding:12px 14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.16);border-radius:12px;">'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:700;margin-bottom:6px;">Consensus 90D</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(targetPrice, meta) + '</div>'
+        + '</div>'
+        + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#a855f7;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(chronos90, meta) + '</div>'
+        + '</div>'
+        + '<div style="padding:12px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.16);border-radius:12px;">'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(timesfm90, meta) + '</div>'
+        + '</div>';
+    }
   }
 
-  function renderSummaryBar(data) {
+  function renderSummaryBar() {
     var keys = ['gold', 'copper', 'crude_oil'];
     var bar = document.getElementById('forecast-summary-bar');
     if (!bar) return;
 
-    var html = keys.map(function(k) {
-      var d = data[k];
-      if (!d) return '';
+    bar.innerHTML = keys.map(function(k) {
+      var bundle = getBundle(k);
+      if (!bundle) return '';
+      var d = bundle.raw;
       var meta = COMMODITY_META[k] || { name: k, unit: '$', decimals: 2 };
-      var target90 = (d.timesfm_forecast && d.timesfm_forecast.median && d.timesfm_forecast.median[89]) || d.forecast_90d;
-      var pct = d.current_price && target90 ? ((target90 - d.current_price) / d.current_price * 100) : (d.change_90d_pct || 0);
+      var target90 = bundle.consensus ? bundle.consensus.forecast_90d : (((d.timesfm_forecast || {}).median || [])[89] || d.forecast_90d);
+      var pct = d.current_price && target90 ? ((target90 - d.current_price) / d.current_price * 100) : 0;
       var dir = pct >= 0 ? 'up' : 'down';
-      var sign = pct >= 0 ? '+' : '';
+      var level = bundle.entry && bundle.entry.agreement ? bundle.entry.agreement.level : 'moderate';
       return '<div class="fc-summary-item" data-commodity="' + k + '" onclick="window._fcSwitch && window._fcSwitch(\'' + k + '\')">'
         + '<div class="fc-sum-header">'
         + '<div class="fc-sum-name">' + meta.name + '</div>'
-        + '<div class="fc-sum-badge ' + dir + '">' + sign + pct.toFixed(1) + '%</div>'
+        + '<div class="fc-sum-badge ' + dir + '">' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%</div>'
         + '</div>'
         + '<div class="fc-sum-prices">'
         + '<span class="fc-sum-current">' + fmt(d.current_price, meta) + '</span>'
         + '<span class="fc-sum-arrow">→</span>'
         + '<span class="fc-sum-forecast">' + fmt(target90, meta) + '</span>'
         + '</div>'
-        + '<div class="fc-sum-label">90-day AI forecast</div>'
+        + '<div class="fc-sum-label">90-day consensus, agreement ' + level + '</div>'
         + '</div>';
     }).join('');
-
-    bar.innerHTML = html;
   }
 
   window._fcSwitch = function(key) {
@@ -671,26 +653,23 @@ image: "/assets/images/og-default.png"
   };
 
   document.addEventListener('DOMContentLoaded', function() {
-    // 원자재 탭
     document.querySelectorAll('.forecast-tab').forEach(function(btn) {
       btn.addEventListener('click', function() {
         window._fcSwitch(this.dataset.commodity);
       });
     });
-    // 기간 토글 탭
     document.querySelectorAll('.horizon-tab').forEach(function(btn) {
       btn.addEventListener('click', function() {
         currentHorizon = parseInt(this.dataset.days, 10);
         document.querySelectorAll('.horizon-tab').forEach(function(b) { b.classList.remove('active'); });
         this.classList.add('active');
         renderForecastChart(currentCommodity, currentHorizon);
-        var lbl = document.getElementById('fc-90d-label');
-        if (lbl) lbl.textContent = currentHorizon + '-Day Forecast';
       });
     });
   });
 })();
 </script>
+
 
 <!-- Price Alert Banner -->
 <div style="padding:12px 24px 0;">
