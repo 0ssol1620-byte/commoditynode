@@ -29,6 +29,8 @@ layout: default
     {% assign related_posts = related_posts | push: post %}
   {% endif %}
 {% endfor %}
+{% assign latest_related_posts = related_posts | slice: 0, 3 %}
+{% assign latest_related_post = related_posts | first %}
 
 {% comment %}Breadcrumb — structured data + visible nav{% endcomment %}
 <nav aria-label="Breadcrumb" class="breadcrumb-nav" style="padding:12px 0 0;max-width:1280px;margin:0 auto;padding-left:24px;">
@@ -181,6 +183,30 @@ layout: default
             Compare against substitute chains like {% for substitute in page.substitutes limit:3 %}<a href="/commodities/{{ substitute | slugify }}/" style="color:var(--accent);">{{ substitute }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}.
           {% else %}
             Move sideways into adjacent commodity hubs to compare second-order effects and portfolio sensitivity.
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+      <div style="padding:14px 16px;background:rgba(14,165,233,0.05);border:1px solid rgba(14,165,233,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#38bdf8;font-weight:700;margin-bottom:8px;">Latest related report</div>
+        {% if latest_related_post %}
+        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">
+          <a href="{{ latest_related_post.url }}" style="color:var(--accent);font-weight:600;">{{ latest_related_post.title }}</a><br>
+          <span style="font-size:0.82rem;color:var(--text3);">{{ latest_related_post.date | date: "%b %d, %Y" }} · use this with the hub to connect the current narrative to live price and forecast context.</span>
+        </div>
+        {% else %}
+        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">No fresh report is linked yet. Browse the <a href="/reports/" style="color:var(--accent);">Research Archive</a> and treat this hub as the primary live reference page.</div>
+        {% endif %}
+      </div>
+      <div style="padding:14px 16px;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22c55e;font-weight:700;margin-bottom:8px;">Freshness check</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">
+          {% if latest_related_post %}
+            Latest report update: <strong>{{ latest_related_post.date | date: "%b %d, %Y" }}</strong>. If the price panel is moving but the narrative is stale, review the archive or publish a fresh signal note.
+          {% else %}
+            No report history yet for this commodity tag. This hub may need editorial expansion if user demand rises.
           {% endif %}
         </div>
       </div>

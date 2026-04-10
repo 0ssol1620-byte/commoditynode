@@ -166,6 +166,13 @@
       "severity": "low",
       "file": "index.html",
       "contains": ["Commodity Intelligence Impact Maps for Markets and Supply Chains"]
+    },
+    {
+      "id": "repo-commodity-freshness-blocks",
+      "type": "file_contains",
+      "severity": "low",
+      "file": "_layouts/commodity.html",
+      "contains": ["Latest related report", "Freshness check", "No fresh report is linked yet"]
     }
   ]
 }
