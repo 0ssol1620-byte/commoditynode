@@ -37,6 +37,8 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with Jekyll
+        id: build_jekyll
+        continue-on-error: true
         run: |
           set -o pipefail
           bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}" --trace 2>&1 | tee build.log
@@ -49,6 +51,14 @@ jobs:
         with:
           name: jekyll-build-log
           path: build.log
+
+      - name: Print build log tail
+        if: steps.build_jekyll.outcome != 'success'
+        run: tail -n 200 build.log
+
+      - name: Fail if build failed
+        if: steps.build_jekyll.outcome != 'success'
+        run: exit 1
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
