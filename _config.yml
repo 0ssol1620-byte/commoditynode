@@ -39,6 +39,8 @@ permalink: /:title/
 paginate: 12
 paginate_path: "/page/:num/"
 
+theme: null
+
 plugins:
   - jekyll-feed
   - jekyll-sitemap
