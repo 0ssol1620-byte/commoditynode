@@ -1270,27 +1270,25 @@ function renderChart(){
         },
         {
           label: 'Chronos-2',
-          data: compact ? [] : chronosDataset,
+          data: chronosDataset,
           borderColor: 'rgba(192,132,252,0.96)',
-          borderWidth: 2,
-          borderDash: [7,5],
+          borderWidth: compact ? 2 : 2,
+          borderDash: compact ? [6,4] : [7,5],
           pointRadius: 0,
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
-          order: 4,
-          hidden: compact
+          order: 4
         },
         {
           label: 'TimesFM 2.5',
-          data: compact ? [] : timesfmDataset,
+          data: timesfmDataset,
           borderColor: 'rgba(251,191,36,0.98)',
-          borderWidth: 2,
-          borderDash: [4,5],
+          borderWidth: compact ? 2 : 2,
+          borderDash: compact ? [3,4] : [4,5],
           pointRadius: 0,
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
-          order: 3,
-          hidden: compact
+          order: 3
         },
         {
           label: 'Consensus',
@@ -1662,11 +1660,27 @@ if(window.innerWidth < 640){
 }
 
 var resizeTimer = null;
+var lastResizeWidth = window.innerWidth;
+var lastCompactMode = isCompactMobile();
 window.addEventListener('resize', function(){
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function(){
-    if (state.chart) renderChart();
-  }, 120);
+    var currentWidth = window.innerWidth;
+    var currentCompact = isCompactMobile();
+    var widthDelta = Math.abs(currentWidth - lastResizeWidth);
+    if (!state.chart) {
+      lastResizeWidth = currentWidth;
+      lastCompactMode = currentCompact;
+      return;
+    }
+    if (currentCompact !== lastCompactMode || widthDelta > 120) {
+      renderChart();
+    } else if (typeof state.chart.resize === 'function') {
+      state.chart.resize();
+    }
+    lastResizeWidth = currentWidth;
+    lastCompactMode = currentCompact;
+  }, 160);
 });
 
 })();
