@@ -145,6 +145,27 @@
       "severity": "low",
       "file": "reports/index.html",
       "contains": ["Browse the full CommodityNode archive of Impact Maps, Signal Reports, and commodity Ripple Chain analysis. Deep-dive research on price impact across 60+ commodities."]
+    },
+    {
+      "id": "repo-default-explicit-robots",
+      "type": "file_contains",
+      "severity": "medium",
+      "file": "_layouts/default.html",
+      "contains": ["index, follow, max-image-preview:large", "noindex, follow"]
+    },
+    {
+      "id": "repo-about-machine-readable-resources",
+      "type": "file_contains",
+      "severity": "low",
+      "file": "about.md",
+      "contains": ["Machine-Readable Resources", "/llms.txt", "/pricing.txt"]
+    },
+    {
+      "id": "repo-home-title-shorter",
+      "type": "file_not_contains",
+      "severity": "low",
+      "file": "index.html",
+      "contains": ["Commodity Intelligence Impact Maps for Markets and Supply Chains"]
     }
   ]
 }

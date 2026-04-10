@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% if page.noindex %}<meta name="robots" content="noindex, follow">{% endif %}
+  {% if page.noindex %}
+  <meta name="robots" content="noindex, follow">
+  {% else %}
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  {% endif %}
   <meta name="theme-color" content="#050508">
 
   {% seo %}
@@ -214,6 +218,13 @@
             Interactive analysis of how commodity price movements ripple through
             global industries, stocks, and ETFs.
           </p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px;font-size:0.82rem;color:var(--text3);">
+            <a href="/methodology/" style="color:var(--text2);text-decoration:none;">Methodology</a>
+            <span aria-hidden="true">·</span>
+            <a href="/pricing.txt" style="color:var(--text2);text-decoration:none;">Machine-readable pricing</a>
+            <span aria-hidden="true">·</span>
+            <a href="/llms.txt" style="color:var(--text2);text-decoration:none;">LLM access notes</a>
+          </div>
           <div class="footer-social">
             <a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fcommoditynode.com%2Ffeed.xml" class="social-link" title="Subscribe via Feedly" aria-label="Subscribe via Feedly" target="_blank" rel="noopener">
               <!-- RSS SVG icon -->

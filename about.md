@@ -88,6 +88,15 @@ description: "CommodityNode maps how commodity price movements ripple through gl
 <h2>Methodology</h2>
 <p>Every impact score, correlation figure, and sensitivity estimate is backed by historical data and transparent calculation logic. We show our work — because research you can't verify isn't research. <a href="/methodology/">Read our full methodology &rarr;</a></p>
 
+<h2>Machine-Readable Resources</h2>
+<p>If you are auditing, citing, or programmatically reviewing CommodityNode, start with these public resources:</p>
+<ul>
+  <li><a href="/llms.txt">LLM access notes</a> for AI-readable site guidance</li>
+  <li><a href="/pricing.txt">Machine-readable pricing</a> for plan and access structure</li>
+  <li><a href="/reports/">Research Archive</a> for the editorial layer tied to live commodity hubs</li>
+  <li><a href="/methodology/">Methodology</a> for data caveats, forecast limits, and proxy disclosures</li>
+</ul>
+
 <h2>Why Trust CommodityNode?</h2>
 <div style="padding:18px 20px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;margin:16px 0 20px;">
   <div style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:10px;">Editorial Transparency</div>
