@@ -1214,12 +1214,12 @@ function renderChart(){
     axisLabels = axisLabels.concat(fcstLabels);
   }
   var tickIndexMap = buildTickIndexMap(axisLabels.length, forecastStartIndex, compact);
-  var histDataset = histPrices.map(function(v, i){ return {x: histLabels[i], y: v}; });
-  var consensusDataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(fcstMedian.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
-  var chronosDataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(chronosMedian.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
-  var timesfmDataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(timesfmMedian.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
-  var bandP10Dataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(fcstP10.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
-  var bandP90Dataset = [{x: histLabels[histLabels.length - 1], y: connPrice}].concat(fcstP90.map(function(v, i){ return {x: fcstLabels[i], y: v}; }));
+  var histDataset = histPrices.map(function(v, i){ return {x: i, y: v}; });
+  var consensusDataset = [{x: forecastStartIndex, y: connPrice}].concat(fcstMedian.map(function(v, i){ return {x: forecastStartIndex + 1 + i, y: v}; }));
+  var chronosDataset = [{x: forecastStartIndex, y: connPrice}].concat(chronosMedian.map(function(v, i){ return {x: forecastStartIndex + 1 + i, y: v}; }));
+  var timesfmDataset = [{x: forecastStartIndex, y: connPrice}].concat(timesfmMedian.map(function(v, i){ return {x: forecastStartIndex + 1 + i, y: v}; }));
+  var bandP10Dataset = [{x: forecastStartIndex, y: connPrice}].concat(fcstP10.map(function(v, i){ return {x: forecastStartIndex + 1 + i, y: v}; }));
+  var bandP90Dataset = [{x: forecastStartIndex, y: connPrice}].concat(fcstP90.map(function(v, i){ return {x: forecastStartIndex + 1 + i, y: v}; }));
 
   if (compact && chronosDataset.length > 1) {
     chronosDataset = chronosDataset.filter(function(_, i){ return i === 0 || i % 3 === 1; });
@@ -1309,17 +1309,20 @@ function renderChart(){
       interaction: { mode: 'nearest', intersect: false },
       scales: {
         x: {
-          type: 'category',
-          labels: axisLabels,
-          offset: false,
+          type: 'linear',
+          min: 0,
+          max: Math.max(axisLabels.length - 1, 1),
           ticks: {
             color: '#64748b',
+            stepSize: 1,
             autoSkip: false,
             maxRotation: 0,
             minRotation: 0,
             padding: compact ? 8 : 6,
             font: { size: compact ? 10 : 10, weight: compact ? '600' : '500' },
-            callback: function(value, index){
+            callback: function(value){
+              var index = Math.round(value);
+              if (Math.abs(value - index) > 0.001) return '';
               if (!tickIndexMap[index]) return '';
               return formatAxisLabel(axisLabels[index], compact);
             }
@@ -1327,7 +1330,7 @@ function renderChart(){
           grid: {
             drawTicks: false,
             color: function(context){
-              return context.index === forecastStartIndex ? 'rgba(148,163,184,0.16)' : 'rgba(255,255,255,0.04)';
+              return Math.round(context.tick.value) === forecastStartIndex ? 'rgba(148,163,184,0.16)' : 'rgba(255,255,255,0.04)';
             }
           },
           border: { color: 'rgba(255,255,255,0.08)' }
@@ -1355,8 +1358,8 @@ function renderChart(){
           callbacks: {
             title: function(items){
               if (!items || !items.length) return '';
-              var raw = items[0].label;
-              var idx = axisLabels.indexOf(raw);
+              var idx = Math.round(items[0].parsed.x);
+              var raw = axisLabels[idx] || '';
               var phase = idx > forecastStartIndex ? 'Forecast' : 'History';
               return formatAxisLabel(raw, false) + ' • ' + phase;
             },
