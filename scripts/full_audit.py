@@ -181,6 +181,33 @@ def main():
                     "Refine the page copy or metadata to remove the weak or redundant pattern."
                 ))
 
+        elif ctype == "url_contains":
+            for item in check.get("checks", []):
+                url = item["url"]
+                contains = item.get("contains", [])
+                try:
+                    status, body = fetch(url)
+                    missing = [x for x in contains if x not in body]
+                    ok = status == 200 and not missing
+                    results.append({"check_id": cid, "url": url, "ok": ok, "status": status, "missing": missing})
+                    if not ok:
+                        issues.append(issue(
+                            cid,
+                            severity,
+                            f"Required live markers missing for {url}",
+                            {"status": status, "missing": missing},
+                            "Review the live commodity page and restore the missing freshness/editorial block."
+                        ))
+                except Exception as e:
+                    results.append({"check_id": cid, "url": url, "ok": False, "status": "error", "error": str(e)})
+                    issues.append(issue(
+                        cid,
+                        severity,
+                        f"Audit fetch failed for {url}",
+                        {"error": str(e)},
+                        "Retry the audit and inspect network/runtime conditions."
+                    ))
+
     summary = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "ok": len(issues) == 0,

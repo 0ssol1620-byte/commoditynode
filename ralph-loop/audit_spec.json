@@ -173,6 +173,42 @@
       "severity": "low",
       "file": "_layouts/commodity.html",
       "contains": ["Latest related report", "Freshness check", "No fresh report is linked yet"]
+    },
+    {
+      "id": "live-flagship-freshness-content",
+      "type": "url_contains",
+      "severity": "low",
+      "checks": [
+        {
+          "url": "https://commoditynode.com/commodities/gold/",
+          "contains": ["Latest related report", "Freshness check"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/crude-oil/",
+          "contains": ["Latest related report", "Freshness check"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/natural-gas/",
+          "contains": ["Latest related report", "Freshness check"]
+        },
+        {
+          "url": "https://commoditynode.com/commodities/copper/",
+          "contains": ["Latest related report", "Freshness check"]
+        }
+      ]
+    },
+    {
+      "id": "repo-timesfm-script-present",
+      "type": "file_contains",
+      "severity": "medium",
+      "file": "scripts/forecast_timesfm.py",
+      "contains": ["TimesFM 2.5 Production Forecast", "timesfm_forecast", "google/timesfm-2.5-200m-pytorch"]
+    },
+    {
+      "id": "repo-timesfm-forecast-artifact",
+      "type": "command",
+      "severity": "medium",
+      "command": "python3 - <<'PY'\nimport json\nfrom pathlib import Path\nobj = json.loads(Path('assets/data/forecast.json').read_text())\nrequired = ['crude_oil', 'gold', 'natural_gas', 'copper']\nmissing = []\nfor key in required:\n    tf = obj.get(key, {}).get('timesfm_forecast')\n    if not tf or len(tf.get('median', [])) != 90 or len(tf.get('p10', [])) != 90 or len(tf.get('p90', [])) != 90:\n        missing.append(key)\nif missing:\n    raise SystemExit('Missing or invalid timesfm_forecast for: ' + ', '.join(missing))\nprint('timesfm_forecast OK for', ', '.join(required))\nPY"
     }
   ]
 }

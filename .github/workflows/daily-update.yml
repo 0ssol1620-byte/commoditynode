@@ -22,10 +22,16 @@ jobs:
       - name: Update commodity prices and chart data
         run: python scripts/update_prices.py
 
+      - name: Generate Chronos-2 forecast
+        run: python scripts/forecast_chronos2.py
+
+      - name: Generate TimesFM forecast
+        run: python scripts/forecast_timesfm.py
+
       - name: Commit and push if changed
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "GitHub Actions"
-          git add assets/data/prices.json _data/prices.json assets/data/chart-data.json
-          git diff --staged --quiet || git commit -m "📊 Auto-update: commodity prices $(date +'%Y-%m-%d')"
+          git add assets/data/prices.json _data/prices.json assets/data/chart-data.json assets/data/forecast.json scripts/forecast_timesfm.py
+          git diff --staged --quiet || git commit -m "📊 Auto-update: commodity data $(date +'%Y-%m-%d')"
           git push
