@@ -419,6 +419,8 @@ permalink: /simulator/
     </div>
   </div>
 
+  <div id="sim-consensus-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0 12px;"></div>
+
   <div style="margin:12px 0;padding:10px 14px;background:rgba(34,211,238,0.03);border-radius:6px;">
     <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model comparison. Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a></p>
   </div>
@@ -1079,28 +1081,29 @@ function getHistorySlice(hist){
 function renderChart(){
   var key = state.commodity;
   var itemMeta = SELECTOR_ITEMS.find(function(i){ return i.key===key; }) || {name:key};
-  document.getElementById('sim-chart-title').textContent = itemMeta.name + ' — Price History & AI Forecast';
+  document.getElementById('sim-chart-title').textContent = itemMeta.name + ' — Consensus Forecast Studio';
 
   var canvas = document.getElementById('sim-chart');
   if(!canvas) return;
 
   var d = state.forecastData && state.forecastData[key];
-  var tf = d && d.timesfm_forecast ? d.timesfm_forecast : null;
-  var activeModel = tf ? 'TimesFM 2.5' : 'Chronos-2';
-  var activeForecast = tf ? tf : (d ? d.forecast : null);
+  var c = state.consensusData && state.consensusData[key] ? state.consensusData[key] : null;
+  var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
+  var chronos = c && c.models ? c.models.chronos2 : null;
+  var timesfm = c && c.models ? c.models.timesfm : null;
+  var activeForecast = consensus || (d && d.timesfm_forecast ? d.timesfm_forecast : (d ? d.forecast : null));
 
   var subtitleEl = document.getElementById('sim-chart-subtitle');
   var legendEl = document.getElementById('sim-legend-model');
   var noteEl = document.getElementById('sim-forecast-note');
-  if (subtitleEl) subtitleEl.textContent = 'Historical prices + ' + activeModel + ' AI forecast with 80% confidence interval';
-  if (legendEl) legendEl.textContent = 'AI Forecast (' + activeModel + ')';
-  if (noteEl) noteEl.innerHTML = 'Forecasts are probabilistic (' + activeModel + ' model, p10–p90 bands). Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a>';
+  if (subtitleEl) subtitleEl.textContent = 'Historical prices + consensus curve with Chronos-2 and TimesFM comparison';
+  if (legendEl) legendEl.textContent = 'Consensus';
+  if (noteEl) noteEl.innerHTML = 'Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model spread tracking. Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a>';
 
-  // Build scenario-adjusted forecast
   var scenarioAdj = calcScenarioAdjustment();
-
   var histLabels = [], histPrices = [];
   var fcstLabels = [], fcstMedian = [], fcstP10 = [], fcstP90 = [];
+  var chronosMedian = [], timesfmMedian = [];
 
   if(d && d.history && activeForecast){
     var h = getHistorySlice(d.history);
@@ -1111,10 +1114,11 @@ function renderChart(){
     fcstLabels = (activeForecast.dates || []).slice(0, fcLen);
     var adj = 1 + scenarioAdj/100;
     fcstMedian = (activeForecast.median || []).slice(0, fcLen).map(function(v){ return v * adj; });
-    fcstP10    = ((activeForecast.p10_extreme || activeForecast.p10 || activeForecast.p25) || []).slice(0, fcLen).map(function(v){ return v * adj; });
-    fcstP90    = ((activeForecast.p90_extreme || activeForecast.p90 || activeForecast.p75) || []).slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstP10    = ((activeForecast.p10 || activeForecast.p10_extreme || activeForecast.p25) || []).slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstP90    = ((activeForecast.p90 || activeForecast.p90_extreme || activeForecast.p75) || []).slice(0, fcLen).map(function(v){ return v * adj; });
+    chronosMedian = (chronos && chronos.raw && chronos.raw.forecast ? (chronos.raw.forecast.median || []) : []).slice(0, fcLen).map(function(v){ return v * adj; });
+    timesfmMedian = (timesfm ? (timesfm.median || []) : []).slice(0, fcLen).map(function(v){ return v * adj; });
   } else {
-    // Demo data
     var base = {crude_oil:71, gold:3200, copper:4.5, silver:32, natural_gas:2.8, wheat:550}[key] || 100;
     for(var i=0; i<63; i++){
       var dt = new Date(); dt.setDate(dt.getDate()-63+i);
@@ -1131,32 +1135,51 @@ function renderChart(){
       fcstMedian.push(+adjBase.toFixed(3));
       fcstP10.push(+(adjBase*0.92).toFixed(3));
       fcstP90.push(+(adjBase*1.08).toFixed(3));
+      chronosMedian.push(+(adjBase*1.02).toFixed(3));
+      timesfmMedian.push(+(adjBase*0.98).toFixed(3));
     }
   }
 
-  // Connector point
   var connLabel = histLabels[histLabels.length-1];
   var connPrice = histPrices[histPrices.length-1];
-
   var histDataset = histLabels.map(function(l,i){ return {x:l, y:histPrices[i]}; });
-  var fcstDataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstMedian[i]}; }));
-  // P10 lower band dataset
+  var consensusDataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstMedian[i]}; }));
+  var chronosDataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:chronosMedian[i]}; }));
+  var timesfmDataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:timesfmMedian[i]}; }));
   var bandP10Dataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstP10[i]}; }));
-  // P90 upper band dataset
   var bandP90Dataset = [{x:connLabel, y:connPrice}].concat(fcstLabels.map(function(l,i){ return {x:l, y:fcstP90[i]}; }));
-  var bandDataset = bandP90Dataset; // keep for compat
 
   if(state.chart){ state.chart.destroy(); }
 
   var ctx = canvas.getContext('2d');
-  var gradient = ctx.createLinearGradient(0,0,0,300);
-  gradient.addColorStop(0,'rgba(168,85,247,0.25)');
-  gradient.addColorStop(1,'rgba(168,85,247,0.0)');
-
   state.chart = new Chart(ctx, {
     type: 'line',
     data: {
       datasets: [
+        {
+          label: 'Consensus Upper',
+          data: bandP90Dataset,
+          borderColor: 'rgba(34,211,238,0)',
+          borderWidth: 1,
+          backgroundColor: 'rgba(34,211,238,0.12)',
+          fill: '+1',
+          pointRadius: 0,
+          tension: 0.3,
+          parsing: {xAxisKey:'x', yAxisKey:'y'},
+          order: 6
+        },
+        {
+          label: 'Consensus Lower',
+          data: bandP10Dataset,
+          borderColor: 'rgba(34,211,238,0)',
+          borderWidth: 1,
+          backgroundColor: 'rgba(34,211,238,0.12)',
+          fill: false,
+          pointRadius: 0,
+          tension: 0.3,
+          parsing: {xAxisKey:'x', yAxisKey:'y'},
+          order: 7
+        },
         {
           label: 'Historical',
           data: histDataset,
@@ -1164,43 +1187,40 @@ function renderChart(){
           borderWidth: 2,
           pointRadius: 0,
           tension: 0.3,
-          parsing: {xAxisKey:'x', yAxisKey:'y'}
+          parsing: {xAxisKey:'x', yAxisKey:'y'},
+          order: 5
         },
         {
-          label: 'AI Forecast',
-          data: fcstDataset,
-          borderColor: '#a855f7',
-          borderWidth: 2,
+          label: 'Chronos-2',
+          data: chronosDataset,
+          borderColor: 'rgba(168,85,247,0.88)',
+          borderWidth: 1.5,
           borderDash: [6,4],
           pointRadius: 0,
           tension: 0.3,
-          parsing: {xAxisKey:'x', yAxisKey:'y'}
+          parsing: {xAxisKey:'x', yAxisKey:'y'},
+          order: 4
         },
         {
-          label: 'P90 Upper',
-          data: bandP90Dataset,
-          borderColor: 'rgba(168,85,247,0.2)',
-          borderWidth: 1,
-          borderDash: [4,3],
-          backgroundColor: 'rgba(168,85,247,0.12)',
-          fill: false,
+          label: 'TimesFM 2.5',
+          data: timesfmDataset,
+          borderColor: 'rgba(251,191,36,0.96)',
+          borderWidth: 1.5,
+          borderDash: [3,4],
           pointRadius: 0,
           tension: 0.3,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 3
         },
         {
-          label: 'P10 Lower',
-          data: bandP10Dataset,
-          borderColor: 'rgba(168,85,247,0.2)',
-          borderWidth: 1,
-          borderDash: [4,3],
-          backgroundColor: 'rgba(168,85,247,0.12)',
-          fill: '-1',
+          label: 'Consensus',
+          data: consensusDataset,
+          borderColor: '#e2e8f0',
+          borderWidth: 2.8,
           pointRadius: 0,
           tension: 0.3,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
-          order: 4
+          order: 2
         }
       ]
     },
@@ -1239,7 +1259,7 @@ function renderChart(){
           bodyColor: '#f0f0f5',
           callbacks: {
             label: function(ctx){
-              if(ctx.dataset.label === 'P90 Upper' || ctx.dataset.label === 'P10 Lower') return null;
+              if(ctx.dataset.label === 'Consensus Upper' || ctx.dataset.label === 'Consensus Lower') return null;
               return ctx.dataset.label + ': ' + fmtPrice(ctx.parsed.y, key);
             }
           }
@@ -1247,14 +1267,47 @@ function renderChart(){
       }
     }
   });
+
+  var strip = document.getElementById('sim-consensus-strip');
+  if (strip && c) {
+    var agreement = c.agreement || {};
+    var level = agreement.level || 'moderate';
+    var palette = level === 'high'
+      ? ['#10b981','rgba(16,185,129,0.08)','rgba(16,185,129,0.18)']
+      : level === 'divergent'
+        ? ['#ef4444','rgba(239,68,68,0.08)','rgba(239,68,68,0.18)']
+        : ['#f59e0b','rgba(245,158,11,0.08)','rgba(245,158,11,0.18)'];
+    var c90 = fcstMedian.length ? fcstMedian[Math.min(fcstMedian.length - 1, 89)] : null;
+    var ch90 = chronosMedian.length ? chronosMedian[Math.min(chronosMedian.length - 1, 89)] : null;
+    var tf90 = timesfmMedian.length ? timesfmMedian[Math.min(timesfmMedian.length - 1, 89)] : null;
+    strip.innerHTML = ''
+      + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
+      + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Agreement</div>'
+      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + level.toUpperCase() + '</div>'
+      + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
+      + '</div>'
+      + '<div style="padding:12px 14px;background:rgba(226,232,240,0.05);border:1px solid rgba(226,232,240,0.12);border-radius:12px;">'
+      + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#e2e8f0;font-weight:700;margin-bottom:6px;">Consensus 90D</div>'
+      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(c90, key) + '</div>'
+      + '</div>'
+      + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
+      + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#a855f7;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
+      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(ch90, key) + '</div>'
+      + '</div>'
+      + '<div style="padding:12px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.16);border-radius:12px;">'
+      + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
+      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(tf90, key) + '</div>'
+      + '</div>';
+  }
 }
 
 // ── Stats ─────────────────────────────────────────────────────────────────
 function renderStats(){
   var key = state.commodity;
   var d = state.forecastData && state.forecastData[key];
-  var tf = d && d.timesfm_forecast ? d.timesfm_forecast : null;
-  var activeMedian = tf && tf.median ? tf.median : (d && d.forecast ? d.forecast.median : null);
+  var c = state.consensusData && state.consensusData[key] ? state.consensusData[key] : null;
+  var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
+  var activeMedian = consensus && consensus.median ? consensus.median : ((d && d.timesfm_forecast && d.timesfm_forecast.median) ? d.timesfm_forecast.median : (d && d.forecast ? d.forecast.median : null));
   var adj = 1 + calcScenarioAdjustment()/100;
   var itemMeta = SELECTOR_ITEMS.find(function(i){ return i.key===key; }) || {name:key};
 
