@@ -359,7 +359,7 @@ permalink: /simulator/
 </section>
 
 <div style="text-align:center;margin:-8px 0 24px;">
-  <a href="/methodology/" style="font-size:0.78rem;color:#475569;text-decoration:none;">AI forecast powered by Amazon Chronos-2. <span style="color:#22d3ee">See methodology →</span></a>
+  <a href="/methodology/" style="font-size:0.78rem;color:#475569;text-decoration:none;">AI forecast powered by TimesFM 2.5, with Chronos-2 fallback coverage. <span style="color:#22d3ee">See methodology →</span></a>
 </div>
 
 <div class="container" style="padding: 40px 24px 80px;">
@@ -399,7 +399,7 @@ permalink: /simulator/
     <div class="sim-chart-header">
       <div>
         <div class="sim-chart-title" id="sim-chart-title">Select a scenario to view analysis</div>
-        <div class="sim-chart-subtitle">Historical prices + Chronos-2 AI forecast with 80% confidence interval</div>
+        <div class="sim-chart-subtitle" id="sim-chart-subtitle">Historical prices + TimesFM AI forecast with 80% confidence interval</div>
       </div>
       <div class="sim-period-btns">
         <button class="sim-period-btn active" data-period="3m" onclick="setPeriod('3m',this)">3M</button>
@@ -412,13 +412,13 @@ permalink: /simulator/
     </div>
     <div class="sim-legend">
       <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#22d3ee"></div>Historical</div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#a855f7;border-top:2px dashed #a855f7"></div>AI Forecast (Chronos-2)</div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="background:#a855f7;border-top:2px dashed #a855f7"></div><span id="sim-legend-model">AI Forecast (TimesFM)</span></div>
       <div class="sim-legend-item"><div class="sim-legend-dot" style="background:rgba(168,85,247,0.2);width:16px;height:10px;border-radius:3px"></div>80% Confidence</div>
     </div>
   </div>
 
   <div style="margin:12px 0;padding:10px 14px;background:rgba(34,211,238,0.03);border-radius:6px;">
-    <p style="color:var(--text3);font-size:0.78rem;margin:0;">Forecasts are probabilistic (Chronos-2 model, p10–p90 bands). Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a></p>
+    <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic (TimesFM model, p10–p90 bands). Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a></p>
   </div>
 
   <!-- Stats Row -->
@@ -1083,6 +1083,16 @@ function renderChart(){
   if(!canvas) return;
 
   var d = state.forecastData && state.forecastData[key];
+  var tf = d && d.timesfm_forecast ? d.timesfm_forecast : null;
+  var activeModel = tf ? 'TimesFM 2.5' : 'Chronos-2';
+  var activeForecast = tf ? tf : (d ? d.forecast : null);
+
+  var subtitleEl = document.getElementById('sim-chart-subtitle');
+  var legendEl = document.getElementById('sim-legend-model');
+  var noteEl = document.getElementById('sim-forecast-note');
+  if (subtitleEl) subtitleEl.textContent = 'Historical prices + ' + activeModel + ' AI forecast with 80% confidence interval';
+  if (legendEl) legendEl.textContent = 'AI Forecast (' + activeModel + ')';
+  if (noteEl) noteEl.innerHTML = 'Forecasts are probabilistic (' + activeModel + ' model, p10–p90 bands). Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a>';
 
   // Build scenario-adjusted forecast
   var scenarioAdj = calcScenarioAdjustment();
@@ -1090,17 +1100,17 @@ function renderChart(){
   var histLabels = [], histPrices = [];
   var fcstLabels = [], fcstMedian = [], fcstP10 = [], fcstP90 = [];
 
-  if(d && d.history && d.forecast){
+  if(d && d.history && activeForecast){
     var h = getHistorySlice(d.history);
     histLabels = h.dates;
     histPrices = h.prices;
 
     var fcLen = 90;
-    fcstLabels = d.forecast.dates.slice(0, fcLen);
+    fcstLabels = (activeForecast.dates || []).slice(0, fcLen);
     var adj = 1 + scenarioAdj/100;
-    fcstMedian = d.forecast.median.slice(0, fcLen).map(function(v){ return v * adj; });
-    fcstP10    = d.forecast.p10_extreme.slice(0, fcLen).map(function(v){ return v * adj; });
-    fcstP90    = d.forecast.p90_extreme.slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstMedian = (activeForecast.median || []).slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstP10    = ((activeForecast.p10_extreme || activeForecast.p10 || activeForecast.p25) || []).slice(0, fcLen).map(function(v){ return v * adj; });
+    fcstP90    = ((activeForecast.p90_extreme || activeForecast.p90 || activeForecast.p75) || []).slice(0, fcLen).map(function(v){ return v * adj; });
   } else {
     // Demo data
     var base = {crude_oil:71, gold:3200, copper:4.5, silver:32, natural_gas:2.8, wheat:550}[key] || 100;
@@ -1241,12 +1251,14 @@ function renderChart(){
 function renderStats(){
   var key = state.commodity;
   var d = state.forecastData && state.forecastData[key];
+  var tf = d && d.timesfm_forecast ? d.timesfm_forecast : null;
+  var activeMedian = tf && tf.median ? tf.median : (d && d.forecast ? d.forecast.median : null);
   var adj = 1 + calcScenarioAdjustment()/100;
   var itemMeta = SELECTOR_ITEMS.find(function(i){ return i.key===key; }) || {name:key};
 
   var cur  = d ? d.current_price : null;
-  var f30  = d ? d.forecast_30d * adj : null;
-  var f90  = d ? d.forecast_90d * adj : null;
+  var f30  = cur && activeMedian && activeMedian.length > 29 ? activeMedian[29] * adj : null;
+  var f90  = cur && activeMedian && activeMedian.length > 89 ? activeMedian[89] * adj : null;
   var c30  = cur && f30 ? (f30-cur)/cur*100 : null;
   var c90  = cur && f90 ? (f90-cur)/cur*100 : null;
 

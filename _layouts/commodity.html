@@ -795,19 +795,21 @@ layout: default
       var legacyData = responses[1] || {};
       var consensusEntry = consensusData[fcKey];
       var d = legacyData[fcKey];
-      if (!d || !d.forecast) {
+      var activeForecast = d && d.timesfm_forecast ? d.timesfm_forecast : (d ? d.forecast : null);
+      var activeModel = d && d.timesfm_forecast ? 'TimesFM 2.5' : (d && d.model ? d.model : 'Chronos-2');
+      if (!d || !activeForecast) {
         document.getElementById('cf-no-data').style.display = 'block';
         return;
       }
       var meta = META[fcKey] || { unit: '$', dec: 2 };
       var histDates  = (d.history.dates || []).slice(-60);
       var histPrices = (d.history.prices || []).slice(-60);
-      var fcDates    = d.forecast.dates   || [];
-      var fcMedian   = d.forecast.median  || [];
-      var fcP10      = d.forecast.p25     || d.forecast.p10     || [];  // P25 chart band
-      var fcP90      = d.forecast.p75     || d.forecast.p90     || [];  // P75 chart band
-      var fcP10ext   = d.forecast.p10_extreme || fcP10;  // P10 metric
-      var fcP90ext   = d.forecast.p90_extreme || fcP90;  // P90 metric
+      var fcDates    = activeForecast.dates   || [];
+      var fcMedian   = activeForecast.median  || [];
+      var fcP10      = activeForecast.p25     || activeForecast.p10     || [];  // P25 chart band
+      var fcP90      = activeForecast.p75     || activeForecast.p90     || [];  // P75 chart band
+      var fcP10ext   = activeForecast.p10_extreme || activeForecast.p10 || fcP10;  // P10 metric
+      var fcP90ext   = activeForecast.p90_extreme || activeForecast.p90 || fcP90;  // P90 metric
       var joinPrice  = histPrices[histPrices.length - 1];
 
       var allLabels = histDates.concat(fcDates);
@@ -821,10 +823,10 @@ layout: default
       if (typeof Chart === 'undefined') {
         var s = document.createElement('script');
         s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
-        s.onload = function() { drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry); };
+        s.onload = function() { drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry, activeForecast, activeModel); };
         document.head.appendChild(s);
       } else {
-        drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry);
+        drawChart(canvas, allLabels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry, activeForecast, activeModel);
       }
 
       // Direction signal badge
@@ -860,7 +862,7 @@ layout: default
     })
     .catch(function(e) { console.warn('Forecast load error', e); });
 
-  function drawChart(canvas, labels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry) {
+  function drawChart(canvas, labels, histLine, medLine, p90Line, p10Line, meta, d, fcP90ext, fcP10ext, consensusEntry, activeForecast, activeModel) {
     var datasets = [
       { label:'P90', data:p90Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0.12)', fill:'+1', pointRadius:0, tension:0.3, order:4 },
       { label:'P10', data:p10Line, borderColor:'rgba(168,85,247,0)', backgroundColor:'rgba(168,85,247,0)', fill:false, pointRadius:0, tension:0.3, order:5 },
@@ -906,9 +908,13 @@ layout: default
     });
 
     var el = function(id){ return document.getElementById(id); };
+    var activeMedian = activeForecast && activeForecast.median ? activeForecast.median : [];
+    var activeTarget = activeMedian.length ? activeMedian[Math.min(activeMedian.length - 1, 89)] : d.forecast_90d;
+    var pct = d.current_price && activeTarget ? ((activeTarget - d.current_price) / d.current_price * 100) : (d.change_90d_pct || 0);
     if(el('cf-current')) el('cf-current').textContent = fmt(d.current_price, meta);
-    if(el('cf-target'))  el('cf-target').textContent  = fmt(d.forecast_90d, meta);
-    var pct = d.change_90d_pct || 0;
+    if(el('cf-target'))  el('cf-target').textContent  = fmt(activeTarget, meta);
+    var modelMetric = document.querySelector('.cf-metric-val.model');
+    if (modelMetric) modelMetric.textContent = activeModel;
     if(el('cf-chg')) {
       el('cf-chg').textContent = (pct>=0?'+':'')+pct.toFixed(1)+'%';
       el('cf-chg').style.color = pct>=0?'#10b981':'#f43f5e';

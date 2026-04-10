@@ -323,7 +323,7 @@ image: "/assets/images/og-default.png"
         <div class="forecast-chart-header">
           <div>
             <div class="forecast-commodity-name" id="fc-name">Gold</div>
-            <div class="forecast-subtitle">90-day AI forecast with P25–P75 confidence band (IQR)</div>
+            <div class="forecast-subtitle" id="home-forecast-subtitle">90-day AI forecast with TimesFM median and P10–P90 confidence band</div>
           </div>
           <div class="forecast-legend">
             <span class="fc-legend-item"><span class="fc-legend-line history"></span>Historical</span>
@@ -363,7 +363,7 @@ image: "/assets/images/og-default.png"
 
         <div class="fc-metric-card">
           <div class="fc-metric-label">Model</div>
-          <div class="fc-metric-val model">Chronos-2</div>
+          <div class="fc-metric-val model" id="home-model-label">TimesFM 2.5</div>
           <div class="fc-metric-sub">Updated daily</div>
         </div>
 
@@ -437,15 +437,17 @@ image: "/assets/images/og-default.png"
     var histLen = 45; // 히스토리 45일 표시 (예측과 비율 균형)
     var fcLen   = currentHorizon; // 30 / 60 / 90
 
+    var activeForecast = d.timesfm_forecast || d.forecast;
+    var activeModel = d.timesfm_forecast ? 'TimesFM 2.5' : 'Chronos-2';
     var histDates  = (d.history.dates  || []).slice(-histLen);
     var histPrices = (d.history.prices || []).slice(-histLen);
-    var fcDates    = (d.forecast.dates  || []).slice(0, fcLen);
-    var fcMedian   = (d.forecast.median || []).slice(0, fcLen);
-    // 팬 차트용 밴드 (P25/P75 차트, P10/P90 extreme)
-    var fcP25 = (d.forecast.p10         || []).slice(0, fcLen);
-    var fcP75 = (d.forecast.p90         || []).slice(0, fcLen);
-    var fcP10 = (d.forecast.p10_extreme || fcP25).slice(0, fcLen);
-    var fcP90 = (d.forecast.p90_extreme || fcP75).slice(0, fcLen);
+    var fcDates    = (activeForecast.dates  || []).slice(0, fcLen);
+    var fcMedian   = (activeForecast.median || []).slice(0, fcLen);
+    // 팬 차트용 밴드
+    var fcP25 = ((activeForecast.p25 || activeForecast.p10) || []).slice(0, fcLen);
+    var fcP75 = ((activeForecast.p75 || activeForecast.p90) || []).slice(0, fcLen);
+    var fcP10 = ((activeForecast.p10_extreme || activeForecast.p10) || fcP25).slice(0, fcLen);
+    var fcP90 = ((activeForecast.p90_extreme || activeForecast.p90) || fcP75).slice(0, fcLen);
 
     var joinPrice = histPrices[histPrices.length - 1];
     var allLabels = histDates.concat(fcDates);
@@ -606,6 +608,8 @@ image: "/assets/images/og-default.png"
     var el = function(id) { return document.getElementById(id); };
     if (el('fc-name'))    el('fc-name').textContent    = meta.name;
     if (el('fc-current')) el('fc-current').textContent = fmt(d.current_price, meta);
+    if (el('home-model-label')) el('home-model-label').textContent = activeModel;
+    if (el('home-forecast-subtitle')) el('home-forecast-subtitle').textContent = '90-day AI forecast with ' + activeModel + ' median and P10–P90 confidence band';
 
     var targetIdx = fcLen - 1;
     var targetPrice = fcMedian[targetIdx];
@@ -635,7 +639,8 @@ image: "/assets/images/og-default.png"
       var d = data[k];
       if (!d) return '';
       var meta = COMMODITY_META[k] || { name: k, unit: '$', decimals: 2 };
-      var pct = d.change_90d_pct || 0;
+      var target90 = (d.timesfm_forecast && d.timesfm_forecast.median && d.timesfm_forecast.median[89]) || d.forecast_90d;
+      var pct = d.current_price && target90 ? ((target90 - d.current_price) / d.current_price * 100) : (d.change_90d_pct || 0);
       var dir = pct >= 0 ? 'up' : 'down';
       var sign = pct >= 0 ? '+' : '';
       return '<div class="fc-summary-item" data-commodity="' + k + '" onclick="window._fcSwitch && window._fcSwitch(\'' + k + '\')">'
@@ -646,7 +651,7 @@ image: "/assets/images/og-default.png"
         + '<div class="fc-sum-prices">'
         + '<span class="fc-sum-current">' + fmt(d.current_price, meta) + '</span>'
         + '<span class="fc-sum-arrow">→</span>'
-        + '<span class="fc-sum-forecast">' + fmt(d.forecast_90d, meta) + '</span>'
+        + '<span class="fc-sum-forecast">' + fmt(target90, meta) + '</span>'
         + '</div>'
         + '<div class="fc-sum-label">90-day AI forecast</div>'
         + '</div>';
