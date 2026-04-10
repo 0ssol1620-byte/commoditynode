@@ -105,6 +105,11 @@ exclude:
   - CHANGELOG.md
   - CHANGELOG_IMPLEMENTATION.md
   - GSC_RESUBMISSION_PRIORITY.md
+  - QA_REPORT.md
+  - REMAINING_RISKS.md
+  - SEO-AUDIT-2026-04-06.md
+  - OPEN_RISKS.md
+  - VALIDATION_REPORT.md
   - logs/
   - scripts/
   - social/
