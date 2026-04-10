@@ -449,11 +449,11 @@ permalink: /simulator/
       <canvas id="sim-chart"></canvas>
     </div>
     <div class="sim-legend">
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#38bdf8"></div><span><strong>History</strong><br><span>Observed settlement path</span></span></div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#f8fafc"></div><span><strong id="sim-legend-model">Consensus</strong><br><span>Primary forecast path</span></span></div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#a855f7;border-top-style:dashed"></div><span><strong>Chronos-2</strong><br><span>Model comparison</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#64748b"></div><span><strong>History</strong><br><span>Observed settlement path</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#5eead4;filter:drop-shadow(0 0 6px rgba(94,234,212,0.45))"></div><span><strong id="sim-legend-model">Consensus</strong><br><span>Primary forecast path</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#c084fc;border-top-style:dashed"></div><span><strong>Chronos-2</strong><br><span>Model comparison</span></span></div>
       <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#fbbf24;border-top-style:dashed"></div><span><strong>TimesFM 2.5</strong><br><span>Model comparison</span></span></div>
-      <div class="sim-legend-item"><div class="sim-legend-swatch" style="background:rgba(226,232,240,0.10);border:1px solid rgba(226,232,240,0.18)"></div><span><strong>Consensus range</strong><br><span>Expected band, p10 to p90</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-swatch" style="background:rgba(94,234,212,0.12);border:1px solid rgba(94,234,212,0.22)"></div><span><strong>Consensus range</strong><br><span>Expected band, p10 to p90</span></span></div>
     </div>
   </div>
 
@@ -1236,32 +1236,32 @@ function renderChart(){
         {
           label: 'Consensus Upper',
           data: bandP90Dataset,
-          borderColor: 'rgba(226,232,240,0)',
+          borderColor: 'rgba(94,234,212,0)',
           borderWidth: 0,
-          backgroundColor: compact ? 'rgba(226,232,240,0.07)' : 'rgba(226,232,240,0.09)',
+          backgroundColor: compact ? 'rgba(94,234,212,0.10)' : 'rgba(94,234,212,0.12)',
           fill: '+1',
           pointRadius: 0,
-          tension: 0.22,
+          tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 6
         },
         {
           label: 'Consensus Lower',
           data: bandP10Dataset,
-          borderColor: 'rgba(226,232,240,0)',
+          borderColor: 'rgba(94,234,212,0)',
           borderWidth: 0,
-          backgroundColor: compact ? 'rgba(226,232,240,0.07)' : 'rgba(226,232,240,0.09)',
+          backgroundColor: compact ? 'rgba(94,234,212,0.10)' : 'rgba(94,234,212,0.12)',
           fill: false,
           pointRadius: 0,
-          tension: 0.22,
+          tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 7
         },
         {
           label: 'Historical',
           data: histDataset,
-          borderColor: 'rgba(56,189,248,0.95)',
-          borderWidth: compact ? 2.1 : 1.9,
+          borderColor: 'rgba(100,116,139,0.95)',
+          borderWidth: compact ? 2.2 : 2,
           pointRadius: 0,
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
@@ -1270,9 +1270,9 @@ function renderChart(){
         {
           label: 'Chronos-2',
           data: chronosDataset,
-          borderColor: 'rgba(168,85,247,0.82)',
-          borderWidth: compact ? 1.5 : 1.35,
-          borderDash: compact ? [4,4] : [6,5],
+          borderColor: 'rgba(192,132,252,0.96)',
+          borderWidth: compact ? 2.2 : 2,
+          borderDash: compact ? [6,4] : [7,5],
           pointRadius: 0,
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
@@ -1281,9 +1281,9 @@ function renderChart(){
         {
           label: 'TimesFM 2.5',
           data: timesfmDataset,
-          borderColor: 'rgba(251,191,36,0.84)',
-          borderWidth: compact ? 1.5 : 1.35,
-          borderDash: compact ? [2,4] : [3,5],
+          borderColor: 'rgba(251,191,36,0.98)',
+          borderWidth: compact ? 2.2 : 2,
+          borderDash: compact ? [3,4] : [4,5],
           pointRadius: 0,
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
@@ -1292,10 +1292,10 @@ function renderChart(){
         {
           label: 'Consensus',
           data: consensusDataset,
-          borderColor: '#f8fafc',
-          borderWidth: compact ? 2.8 : 2.6,
+          borderColor: '#5eead4',
+          borderWidth: compact ? 3.2 : 3,
           pointRadius: 0,
-          pointHoverRadius: compact ? 3 : 4,
+          pointHoverRadius: compact ? 4 : 5,
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 2
