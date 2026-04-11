@@ -451,8 +451,8 @@ permalink: /simulator/
     <div class="sim-legend">
       <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#64748b"></div><span><strong>History</strong><br><span>Observed settlement path</span></span></div>
       <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#5eead4;filter:drop-shadow(0 0 6px rgba(94,234,212,0.45))"></div><span><strong id="sim-legend-model">Consensus</strong><br><span>Primary forecast path</span></span></div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#c084fc;border-top-style:dashed"></div><span><strong>Chronos-2</strong><br><span>Shown in compare cards</span></span></div>
-      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#fbbf24;border-top-style:dashed"></div><span><strong>TimesFM 2.5</strong><br><span>Shown in compare cards</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#c084fc;border-top-style:dashed"></div><span><strong>Chronos-2</strong><br><span>Comparison model line</span></span></div>
+      <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#fbbf24;border-top-style:dashed"></div><span><strong>TimesFM 2.5</strong><br><span>Comparison model line</span></span></div>
       <div class="sim-legend-item"><div class="sim-legend-swatch" style="background:rgba(94,234,212,0.12);border:1px solid rgba(94,234,212,0.22)"></div><span><strong>Consensus range</strong><br><span>Expected band, p10 to p90</span></span></div>
     </div>
   </div>
@@ -1272,8 +1272,8 @@ function renderChart(){
           label: 'Chronos-2',
           data: chronosDataset,
           borderColor: 'rgba(192,132,252,0.96)',
-          borderWidth: compact ? 2 : 2,
-          borderDash: compact ? [6,4] : [7,5],
+          borderWidth: compact ? 2.6 : 2.3,
+          borderDash: compact ? [7,4] : [8,5],
           pointRadius: 0,
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
@@ -1283,8 +1283,8 @@ function renderChart(){
           label: 'TimesFM 2.5',
           data: timesfmDataset,
           borderColor: 'rgba(251,191,36,0.98)',
-          borderWidth: compact ? 2 : 2,
-          borderDash: compact ? [3,4] : [4,5],
+          borderWidth: compact ? 2.6 : 2.3,
+          borderDash: compact ? [4,4] : [5,5],
           pointRadius: 0,
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
@@ -1294,7 +1294,7 @@ function renderChart(){
           label: 'Consensus',
           data: consensusDataset,
           borderColor: '#5eead4',
-          borderWidth: compact ? 3.2 : 3,
+          borderWidth: compact ? 3.4 : 3.1,
           pointRadius: 0,
           pointHoverRadius: compact ? 4 : 5,
           tension: 0.18,
@@ -1410,12 +1410,14 @@ function renderChart(){
       var spread = (ch90 != null && tf90 != null && c90 != null) ? Math.abs(ch90 - tf90) : null;
       compareStrip.innerHTML = ''
         + '<div style="padding:12px 14px;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.18);border-radius:12px;">'
-        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#c084fc;font-weight:700;margin-bottom:6px;">Chronos-2 path</div>'
-        + '<div style="font-size:0.82rem;color:#cbd5e1;line-height:1.45;">Comparison model, kept outside the main mobile chart to avoid line overlap.</div>'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#c084fc;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(ch90, key) + '</div>'
+        + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Visible in the main chart as a dashed comparison line</div>'
         + '</div>'
         + '<div style="padding:12px 14px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.18);border-radius:12px;">'
-        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM path</div>'
-        + '<div style="font-size:0.82rem;color:#cbd5e1;line-height:1.45;">Comparison model, separated for mobile readability and clearer decision-making.</div>'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(tf90, key) + '</div>'
+        + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Visible in the main chart as a dashed comparison line</div>'
         + '</div>'
         + '<div style="padding:12px 14px;background:rgba(94,234,212,0.08);border:1px solid rgba(94,234,212,0.18);border-radius:12px;">'
         + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#5eead4;font-weight:700;margin-bottom:6px;">Model spread</div>'
