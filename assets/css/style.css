@@ -745,6 +745,24 @@ code, kbd, pre {
 #impact-graph { min-height: 600px; width: 100% !important; min-width: 300px; max-width: 100%; background: rgba(5,5,14,0.8); border-radius: 16px; position: relative; overflow: visible; display: block; box-sizing: border-box; }
 #impact-graph svg { display: block; width: 100%; height: 100%; }
 
+/* Local graph uses the same mount ID but must participate in normal document flow.
+   Without these overrides, legacy min-height/overflow rules can let following headings
+   visually bleed into the graph region on mobile. */
+#impact-graph.cn-local-graph-mount {
+  min-height: auto;
+  height: auto;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin: 0 0 36px;
+}
+
+#impact-graph.cn-local-graph-mount > * {
+  position: relative;
+  z-index: 1;
+}
+
 .graph-tooltip {
   position: absolute;
   background: rgba(13,13,20,0.95);
