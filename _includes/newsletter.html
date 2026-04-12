@@ -1,14 +1,19 @@
-<!-- Newsletter Subscription Form — Mailchimp JSONP -->
+<!-- Newsletter Subscription Form — CSP-safe Mailchimp form post -->
 <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:36px 32px;text-align:center;">
   <p style="font-size:0.75rem;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;font-weight:700;margin-bottom:8px;">Stay Informed</p>
   <h3 style="font-size:1.25rem;font-weight:700;margin-bottom:8px;color:var(--text);">Weekly Commodity Signal Digest</h3>
   <p style="font-size:0.85rem;color:var(--text2);margin-bottom:20px;max-width:420px;margin-left:auto;margin-right:auto;">Every Monday: the 3 most actionable commodity signals, biggest supply disruptions, and key events to watch. Free, no spam.</p>
-  <form id="newsletter-form" style="display:flex;gap:8px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
-    <input type="email" id="newsletter-email" required placeholder="your@email.com" aria-label="Email address"
+  <form id="newsletter-form" action="https://gmail.us6.list-manage.com/subscribe/post?u=6efff402bc322a88c7eb718dd&amp;id=b65e529024&amp;f_id=00fd5fe0f0" method="post" target="newsletter-target" novalidate style="display:flex;gap:8px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+    <input type="email" id="newsletter-email" name="EMAIL" required placeholder="your@email.com" aria-label="Email address" autocomplete="email"
       style="flex:1;min-width:200px;padding:10px 16px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:0.9rem;font-family:inherit;outline:none;transition:border-color 0.2s;"
       onfocus="this.style.borderColor='rgba(34,211,238,0.5)'" onblur="this.style.borderColor='rgba(255,255,255,0.08)'">
+    <input type="hidden" name="tags" value="2146524">
+    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+      <input type="text" name="b_6efff402bc322a88c7eb718dd_b65e529024" tabindex="-1" value="">
+    </div>
     <button type="submit" id="newsletter-btn" class="btn btn-primary" style="padding:10px 24px;font-size:0.9rem;white-space:nowrap;">Subscribe</button>
   </form>
+  <iframe name="newsletter-target" title="Newsletter signup" style="display:none;"></iframe>
   <p id="newsletter-msg" style="font-size:0.85rem;margin-top:12px;min-height:20px;"></p>
   <p style="font-size:0.72rem;color:var(--text3);margin-top:4px;">No spam. Unsubscribe anytime.</p>
   <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:10px;">
@@ -20,59 +25,30 @@
 <script>
 (function(){
   var form = document.getElementById('newsletter-form');
+  var emailInput = document.getElementById('newsletter-email');
   var msg  = document.getElementById('newsletter-msg');
   var btn  = document.getElementById('newsletter-btn');
-  if (!form) return;
+  if (!form || !emailInput || !msg || !btn) return;
 
   form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    var email = document.getElementById('newsletter-email').value.trim();
-    if (!email) return;
-
-    btn.disabled = true;
-    btn.textContent = 'Subscribing…';
-    msg.textContent = '';
-    msg.style.color = '';
-
-    // Mailchimp JSONP — official embed method, no CORS issues
-    var cbName = 'mc_cb_' + Date.now();
-    var script  = document.createElement('script');
-    var timeout = setTimeout(function() {
-      showError();
-      delete window[cbName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    }, 8000);
-
-    window[cbName] = function(data) {
-      clearTimeout(timeout);
-      delete window[cbName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-      if (data.result === 'success') {
-        form.innerHTML = '<p style="color:#10b981;font-weight:600;font-size:0.95rem;">✓ Subscribed! Welcome to CommodityNode.</p>';
-      } else {
-        // already subscribed or other error
-        var txt = (data.msg || '').toLowerCase();
-        if (txt.indexOf('already subscribed') !== -1) {
-          form.innerHTML = '<p style="color:#10b981;font-weight:600;font-size:0.95rem;">✓ You\'re already subscribed!</p>';
-        } else {
-          showError();
-        }
-      }
-    };
-
-    function showError() {
-      btn.disabled = false;
-      btn.textContent = 'Subscribe';
+    var email = emailInput.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      e.preventDefault();
       msg.style.color = '#f43f5e';
-      msg.textContent = 'Something went wrong. Please try again.';
+      msg.textContent = 'Please enter a valid email address.';
+      emailInput.focus();
+      return;
     }
 
-    var u = '6efff402bc322a88c7eb718dd';
-    var id = 'b65e529024';
-    script.src = 'https://gmail.us6.list-manage.com/subscribe/post-json?u=' + u +
-                 '&id=' + id + '&EMAIL=' + encodeURIComponent(email) +
-                 '&c=' + cbName;
-    document.head.appendChild(script);
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    msg.style.color = '#10b981';
+    msg.textContent = 'Submitting… If accepted, you will receive a confirmation email shortly.';
+
+    window.setTimeout(function() {
+      btn.disabled = false;
+      btn.textContent = 'Subscribe';
+    }, 4000);
   });
 })();
 </script>

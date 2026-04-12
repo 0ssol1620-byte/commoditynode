@@ -1023,6 +1023,7 @@ var state = {
   period: '3m',
   scenarios: {},
   forecastData: null,
+  consensusData: null,
   chart: null
 };
 
@@ -1032,15 +1033,21 @@ function isCompactMobile() {
 
 // ── Fetch forecast data ───────────────────────────────────────────────────
 function loadForecast() {
-  fetch('/assets/data/forecast.json?v=' + Date.now())
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      state.forecastData = d;
+  Promise.all([
+    fetch('/assets/data/forecast.json?v=' + Date.now()).then(function(r){ return r.json(); }),
+    fetch('/assets/data/forecast-consensus.json?v=' + Date.now())
+      .then(function(r){ return r.ok ? r.json() : {}; })
+      .catch(function(){ return {}; })
+  ])
+    .then(function(responses){
+      state.forecastData = responses[0] || {};
+      state.consensusData = responses[1] || {};
       renderSelector();
       selectCommodity(state.commodity);
     })
     .catch(function(e){
       console.warn('Forecast data unavailable:', e);
+      state.consensusData = {};
       renderSelector();
       selectCommodity(state.commodity);
     });

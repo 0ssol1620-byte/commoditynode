@@ -151,5 +151,5 @@ Copper's role as an economic bellwether makes it a must-watch commodity. When co
 - [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
 - [COPX: Copper Mining ETF Analysis](/copx-copper-mining-etf/)
 - [Copper Hits $5.70: EV Infrastructure](/copper-hits-570-ev-infrastructure/)
-- [Copper EV Infrastructure Impact](/copper-ev-infrastructure-impact/)
+- [Copper EV Infrastructure Impact](/copper-hits-570-ev-infrastructure/)
 - [Copper Structural Deficit](/copper-structural-deficit/)

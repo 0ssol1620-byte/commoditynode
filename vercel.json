@@ -4,23 +4,601 @@
   "installCommand": "bundle install",
   "framework": null,
   "redirects": [
-    { "source": "/silver-solar-electronics-impact/", "destination": "/commodities/silver/", "permanent": true },
-    { "source": "/silver-solar-electronics-impact", "destination": "/commodities/silver/", "permanent": true },
-    { "source": "/tags/:path*", "destination": "/commodities/", "permanent": true }
+    {
+      "source": "/silver-solar-electronics-impact/",
+      "destination": "/commodities/silver/",
+      "permanent": true
+    },
+    {
+      "source": "/silver-solar-electronics-impact",
+      "destination": "/commodities/silver/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/advanced-aluminum-alloys/",
+      "destination": "/commodities/titanium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/aem-electrolyzers/",
+      "destination": "/commodities/iridium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/agriculture/",
+      "destination": "/industries/agriculture-industry/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/aluminum-trihydrate/",
+      "destination": "/commodities/antimony/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/ammonium-nitrate/",
+      "destination": "/commodities/ammonia/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/apple-juice/",
+      "destination": "/commodities/orange-juice/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/aspartame/",
+      "destination": "/commodities/sugar/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/barley/",
+      "destination": "/commodities/wheat/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/batteries/",
+      "destination": "/themes/battery-metals/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/beef/",
+      "destination": "/commodities/live-cattle/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/bio-based-ethylene/",
+      "destination": "/commodities/ethylene/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/biodiesel/",
+      "destination": "/commodities/ethanol/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/biofuels/",
+      "destination": "/themes/clean-energy/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/bitcoin/",
+      "destination": "/commodities/gold/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/canola-meal/",
+      "destination": "/commodities/soybean-meal/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/canola-oil/",
+      "destination": "/commodities/soybean-oil/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/canola/",
+      "destination": "/commodities/soybeans/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/carbon-fiber-composites/",
+      "destination": "/commodities/titanium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/carbon-fiber/",
+      "destination": "/commodities/aluminum/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/carob/",
+      "destination": "/commodities/cocoa/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/cassava/",
+      "destination": "/commodities/rice/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/catalytic-alternatives/",
+      "destination": "/commodities/rhodium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/chicken/",
+      "destination": "/commodities/live-cattle/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/chromium-ferrochrome/",
+      "destination": "/commodities/chromium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/compost/",
+      "destination": "/commodities/potash/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/compound-chocolate/",
+      "destination": "/commodities/cocoa/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/concrete/",
+      "destination": "/industries/construction/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/dairy-calves/",
+      "destination": "/commodities/feeder-cattle/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/ddgs/",
+      "destination": "/commodities/soybean-meal/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/desalination/",
+      "destination": "/commodities/water/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/electric-aircraft/",
+      "destination": "/industries/aerospace/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/electric-trucks/",
+      "destination": "/industries/transportation/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/energy-drinks/",
+      "destination": "/commodities/coffee/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/engineered-wood/",
+      "destination": "/commodities/lumber/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/euv-direct/",
+      "destination": "/commodities/neon/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/ferrite-magnets/",
+      "destination": "/commodities/rare-earth/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/fertilizer/",
+      "destination": "/industries/fertilizers/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/fiber-optics/",
+      "destination": "/commodities/copper/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/fish-meal/",
+      "destination": "/commodities/soybean-meal/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/fluorine-based-lasers/",
+      "destination": "/commodities/neon/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/fluorine-doped-tin-oxide/",
+      "destination": "/commodities/indium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/gallium-germanium/",
+      "destination": "/gallium-germanium-china-semiconductor/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/gasoline/",
+      "destination": "/commodities/ethanol/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/general/",
+      "destination": "/commodities/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/hfcs/",
+      "destination": "/commodities/sugar/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/high-nickel-nmc/",
+      "destination": "/commodities/cobalt/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/hydrogen-fuel-cells/",
+      "destination": "/commodities/hydrogen/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/imported-beef/",
+      "destination": "/commodities/live-cattle/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/induction-motors/",
+      "destination": "/commodities/rare-earth/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/lfp-battery-chemistry/",
+      "destination": "/themes/battery-metals/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/lfp-chemistry/",
+      "destination": "/themes/battery-metals/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/lithium-carbonate/",
+      "destination": "/commodities/lithium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/lithium-titanate/",
+      "destination": "/commodities/graphite/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/metals/",
+      "destination": "/industries/mining/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/methanol/",
+      "destination": "/commodities/ethanol/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/multi-commodity/",
+      "destination": "/commodities/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/natural-gas-henry-hub/",
+      "destination": "/commodities/natural-gas/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/nitrogen-fixation/",
+      "destination": "/commodities/ammonia/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/nuclear/",
+      "destination": "/themes/nuclear-renaissance/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/nylon/",
+      "destination": "/commodities/cotton/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/organic-fertilizers/",
+      "destination": "/industries/fertilizers/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/organic-nitrogen/",
+      "destination": "/commodities/ammonia/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/other-citrus/",
+      "destination": "/commodities/orange-juice/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/phosphate-rock/",
+      "destination": "/commodities/phosphate/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/pipeline-gas/",
+      "destination": "/commodities/natural-gas/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/plant-based-meat/",
+      "destination": "/industries/food-beverage/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/plastics/",
+      "destination": "/industries/chemicals/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/polyester/",
+      "destination": "/commodities/cotton/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/polysilicon/",
+      "destination": "/commodities/silicon/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/pork/",
+      "destination": "/commodities/lean-hogs/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/precision-agriculture/",
+      "destination": "/themes/agritech/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/propylene/",
+      "destination": "/commodities/ethylene/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/quinoa/",
+      "destination": "/commodities/oats/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/rare-earth-elements-natural-graphite/",
+      "destination": "/commodities/rare-earth/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/rayon/",
+      "destination": "/commodities/cotton/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/recycled-plastics/",
+      "destination": "/industries/chemicals/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/recycled-ree/",
+      "destination": "/commodities/rare-earth/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/recycled-rubber/",
+      "destination": "/commodities/rubber/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/recycled-scrap-steel/",
+      "destination": "/commodities/steel/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/renewables/",
+      "destination": "/industries/renewable-energy/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/ruthenium-catalysts/",
+      "destination": "/commodities/iridium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/silicon-anodes/",
+      "destination": "/commodities/graphite/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/silicone/",
+      "destination": "/commodities/rubber/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/silver-nanowires/",
+      "destination": "/commodities/indium/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/sodium-ion/",
+      "destination": "/themes/battery-metals/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/solar/",
+      "destination": "/industries/renewable-energy/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/solid-state/",
+      "destination": "/themes/battery-metals/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/sorghum/",
+      "destination": "/commodities/corn/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/steel-framing/",
+      "destination": "/commodities/steel/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/stevia/",
+      "destination": "/commodities/sugar/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/sugar-cane/",
+      "destination": "/commodities/sugar/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/sunflower-oil/",
+      "destination": "/commodities/soybean-oil/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/sunflower/",
+      "destination": "/commodities/soybeans/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/sustainable-aviation-fuel/",
+      "destination": "/commodities/jet-fuel/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/synthetic-graphite/",
+      "destination": "/commodities/graphite/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/synthetic-rubber/",
+      "destination": "/commodities/rubber/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/tea/",
+      "destination": "/commodities/coffee/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/tin-alloys/",
+      "destination": "/commodities/tin/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/treasury-bonds/",
+      "destination": "/commodities/gold/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/urea/",
+      "destination": "/commodities/ammonia/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/vitamin-supplements/",
+      "destination": "/commodities/orange-juice/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/water-recycling/",
+      "destination": "/commodities/water/",
+      "permanent": true
+    },
+    {
+      "source": "/commodities/wind/",
+      "destination": "/industries/renewable-energy/",
+      "permanent": true
+    },
+    {
+      "source": "/copper-ev-infrastructure-impact/",
+      "destination": "/copper-hits-570-ev-infrastructure/",
+      "permanent": true
+    },
+    {
+      "source": "/gold-safe-haven-allocation/",
+      "destination": "/gold-price-regime-change/",
+      "permanent": true
+    },
+    {
+      "source": "/companies/aal/",
+      "destination": "/companies/american-airlines/",
+      "permanent": true
+    },
+    {
+      "source": "/companies/exxonmobil/",
+      "destination": "/companies/xom/",
+      "permanent": true
+    },
+    {
+      "source": "/companies/ual/",
+      "destination": "/companies/united/",
+      "permanent": true
+    },
+    {
+      "source": "/companies/luv/",
+      "destination": "/companies/southwest/",
+      "permanent": true
+    },
+    {
+      "source": "/tags/:path*",
+      "destination": "/commodities/",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://d3js.org https://cdnjs.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.clerk.io https://clerk.commoditynode.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.clerk.dev https://clerk.commoditynode.com https://www.google-analytics.com; frame-src https://googleads.g.doubleclick.net; object-src 'none';" }
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://d3js.org https://cdnjs.cloudflare.com https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com https://cdn.clerk.io https://clerk.commoditynode.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://api.clerk.dev https://clerk.commoditynode.com https://www.google-analytics.com; frame-src https://googleads.g.doubleclick.net https://gmail.us6.list-manage.com; form-action 'self' https://gmail.us6.list-manage.com; object-src 'none';"
+        }
       ]
     }
   ]

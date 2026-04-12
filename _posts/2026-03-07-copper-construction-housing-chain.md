@@ -203,5 +203,5 @@ The investment implication is that copper's role as both a cyclical indicator an
 - [Copper, Construction & Housing Chain](/copper-construction-housing-chain/)
 - [COPX: Copper Mining ETF Analysis](/copx-copper-mining-etf/)
 - [Copper Hits $5.70: EV Infrastructure](/copper-hits-570-ev-infrastructure/)
-- [Copper EV Infrastructure Impact](/copper-ev-infrastructure-impact/)
+- [Copper EV Infrastructure Impact](/copper-hits-570-ev-infrastructure/)
 - [Copper Structural Deficit](/copper-structural-deficit/)
