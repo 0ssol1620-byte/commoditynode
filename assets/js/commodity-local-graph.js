@@ -261,7 +261,7 @@
       '    <div class="cn-local-graph-intro">',
       '      <span class="cn-local-graph-eyebrow">Knowledge graph</span>',
       '      <h2>Local Node Graph</h2>',
-      '      <p>Obsidian-style neighborhood view for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Click nodes to inspect relationships, then jump into connected pages and reports.</p>',
+      '      <p>Neighborhood view for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Click nodes to inspect relationships, then jump into connected pages and reports.</p>',
       '    </div>',
       '    <div class="cn-local-graph-controls">',
       '      <label class="cn-local-graph-search">',
