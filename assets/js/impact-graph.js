@@ -4,6 +4,7 @@
    50+ node support with 5 orbital levels */
 (function () {
   'use strict';
+  if (window.COMMODITY_GRAPH_DISABLE_LEGACY) return;
 
   var _bootAttempts = 0;
   function boot() {
