@@ -9,7 +9,7 @@ data_type: "proxy"
 sector: "Energy"
 etfs: ["KOL"]
 companies: []
-substitutes: ["Natural Gas", "Solar", "Nuclear", "Wind"]
+substitutes: ["Natural Gas", "Uranium", "Crude Oil"]
 themes: ["Clean Energy"]
 tags: ["coal"]
 ---

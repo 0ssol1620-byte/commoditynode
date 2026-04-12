@@ -9,7 +9,7 @@ data_type: "proxy"
 sector: "Energy"
 etfs: ["FCG"]
 companies: []
-substitutes: ["Pipeline Gas", "Nuclear", "Coal"]
+substitutes: ["Natural Gas", "Uranium", "Coal"]
 themes: ["Clean Energy", "Supply Chain Disruption"]
 tags: ["lng"]
 ---

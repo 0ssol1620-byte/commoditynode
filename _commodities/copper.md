@@ -10,7 +10,7 @@ data_type: "direct_futures"
 sector: "Industrial Metals"
 etfs: ["COPX", "CPER"]
 companies: ["FCX", "SCCO", "TECK"]
-substitutes: ["Aluminum", "Fiber Optics"]
+substitutes: ["Aluminum", "Zinc"]
 themes: ["EV Transition", "Infrastructure Boom", "Clean Energy"]
 tags: [copper, commodity analysis, supply chain]
 ---

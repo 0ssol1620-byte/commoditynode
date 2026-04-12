@@ -10,7 +10,7 @@ data_type: "proxy"
 sector: "Battery Metals"
 etfs: ["URA", "URNM"]
 companies: ["CCJ", "UEC"]
-substitutes: ["Solar", "Wind", "Natural Gas"]
+substitutes: ["Natural Gas", "Coal", "Crude Oil"]
 themes: ["Nuclear Renaissance", "Clean Energy"]
 tags: ["uranium"]
 ---

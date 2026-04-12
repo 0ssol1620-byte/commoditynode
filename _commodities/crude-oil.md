@@ -10,7 +10,7 @@ data_type: "direct_futures"
 sector: "Energy"
 etfs: ["XLE", "USO", "OIH"]
 companies: ["XOM", "CVX", "HAL", "SLB"]
-substitutes: ["Natural Gas", "Renewables", "Nuclear"]
+substitutes: ["Natural Gas", "Uranium", "Hydrogen"]
 themes: ["Supply Chain Disruption", "Clean Energy"]
 tags: [crude oil, commodity analysis, supply chain]
 ---

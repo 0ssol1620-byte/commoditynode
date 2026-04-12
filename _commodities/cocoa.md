@@ -9,7 +9,7 @@ data_type: "direct_futures"
 sector: "Soft Commodities"
 etfs: ["NIB"]
 companies: ["HSY", "MDLZ"]
-substitutes: ["Carob", "Compound Chocolate"]
+substitutes: ["Sugar", "Palm Oil"]
 themes: ["Food Inflation"]
 tags: ["cocoa"]
 ---
