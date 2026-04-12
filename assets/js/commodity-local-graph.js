@@ -228,6 +228,17 @@
     var searchTerm = '';
     var filterMode = 'all';
     var resizeObserver = null;
+    var isMobile = (container.clientWidth || window.innerWidth) <= 720 || window.innerWidth <= 720;
+
+    function cleanDisplayTitle(value) {
+      return String(value || '')
+        .replace(/\s*\([^)]*\)\s*/g, ' ')
+        .replace(/\s*price impact\s*/i, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    var graphDisplayTitle = cleanDisplayTitle((graph.pageMeta && graph.pageMeta.shortTitle) || (graph.pageMeta && graph.pageMeta.title) || (rawData.commodity && rawData.commodity.label) || graph.commodityId);
 
     container.classList.add('cn-local-graph-mount');
     container.innerHTML = [
@@ -236,7 +247,7 @@
       '    <div class="cn-local-graph-intro">',
       '      <span class="cn-local-graph-eyebrow">Knowledge graph</span>',
       '      <h2>Local Node Graph</h2>',
-      '      <p>Obsidian-style neighborhood view for ' + escapeHtml(graph.pageMeta.shortTitle || graph.pageMeta.title || 'this hub') + '. Click nodes to inspect relationships, then jump into connected pages and reports.</p>',
+      '      <p>Obsidian-style neighborhood view for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Click nodes to inspect relationships, then jump into connected pages and reports.</p>',
       '    </div>',
       '    <div class="cn-local-graph-controls">',
       '      <label class="cn-local-graph-search">',
@@ -255,7 +266,7 @@
       '  <div class="cn-local-graph-body">',
       '    <div class="cn-local-graph-canvas-wrap">',
       '      <div class="cn-local-graph-canvas"></div>',
-      '      <div class="cn-local-graph-hint">Drag to explore • Scroll to zoom • Double-click a linked note to open it</div>',
+      '      <div class="cn-local-graph-hint">' + (isMobile ? 'Drag to explore • Pinch/zoom for detail' : 'Drag to explore • Scroll to zoom • Double-click a linked note to open it') + '</div>',
       '    </div>',
       '    <aside class="cn-local-graph-panel" aria-live="polite"></aside>',
       '  </div>',
@@ -316,6 +327,45 @@
         var targetId = typeof link.target === 'object' ? link.target.id : link.target;
         return visibleSet.has(sourceId) && visibleSet.has(targetId);
       });
+
+      if (isMobile && !searchTerm) {
+        var centerId = graph.commodityId;
+        var scoreNode = function (node) {
+          var base = node.id === centerId ? 999 : 0;
+          var impact = typeof node.impact === 'number' ? Math.abs(node.impact) : 0;
+          var degree = node.degree || 0;
+          var levelBonus = node.level === 1 ? 12 : node.level === 2 ? 7 : node.level === 3 ? 3 : 0;
+          var researchPenalty = node.group === 'research' ? -1 : 0;
+          return base + degree * 3 + impact * 1.2 + levelBonus + researchPenalty;
+        };
+
+        var compactLimit = filterMode === 'all' ? 18 : filterMode === 'research' ? 10 : 14;
+        var compactNodes = visibleNodes
+          .slice()
+          .sort(function (a, b) { return scoreNode(b) - scoreNode(a); })
+          .slice(0, compactLimit);
+
+        var compactSet = new Set(compactNodes.map(function (node) { return node.id; }));
+        compactSet.add(centerId);
+
+        visibleLinks.forEach(function (link) {
+          var sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+          var targetId = typeof link.target === 'object' ? link.target.id : link.target;
+          if (sourceId === centerId || targetId === centerId) {
+            compactSet.add(sourceId);
+            compactSet.add(targetId);
+          }
+        });
+
+        visibleNodes = visibleNodes.filter(function (node) { return compactSet.has(node.id); });
+        visibleLinks = visibleLinks.filter(function (link) {
+          var sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+          var targetId = typeof link.target === 'object' ? link.target.id : link.target;
+          return compactSet.has(sourceId) && compactSet.has(targetId);
+        });
+        visibleSet = compactSet;
+      }
+
       return { nodes: visibleNodes, links: visibleLinks, visibleSet: visibleSet };
     }
 
@@ -416,8 +466,10 @@
     }
 
     var visibleGraph = buildVisibleGraph();
-    var width = Math.max(540, canvasWrap.clientWidth || 720);
-    var height = Math.max(480, Math.min(760, window.innerHeight * 0.7));
+    var width = Math.max(280, Math.floor(canvasWrap.clientWidth || canvas.clientWidth || container.clientWidth || window.innerWidth - 32));
+    var height = isMobile
+      ? Math.max(360, Math.min(460, Math.round(width * 1.02)))
+      : Math.max(480, Math.min(760, window.innerHeight * 0.7));
 
     var svg = d3.select(canvas)
       .append('svg')
@@ -461,10 +513,10 @@
     var labelSelection;
 
     function nodeRadius(node) {
-      if (node.id === graph.commodityId) return 18;
-      var degreeBoost = Math.min(8, (node.degree || 0) * 0.9);
-      var impactBoost = typeof node.impact === 'number' ? Math.min(6, Math.abs(node.impact) * 0.25) : 0;
-      return 8 + degreeBoost + impactBoost;
+      if (node.id === graph.commodityId) return isMobile ? 15 : 18;
+      var degreeBoost = Math.min(isMobile ? 5 : 8, (node.degree || 0) * (isMobile ? 0.65 : 0.9));
+      var impactBoost = typeof node.impact === 'number' ? Math.min(isMobile ? 4 : 6, Math.abs(node.impact) * (isMobile ? 0.18 : 0.25)) : 0;
+      return (isMobile ? 6.5 : 8) + degreeBoost + impactBoost;
     }
 
     function truncateLabel(label, maxLength) {
@@ -476,8 +528,11 @@
       visibleGraph = buildVisibleGraph();
       if (selectedId && !visibleGraph.visibleSet.has(selectedId)) selectedId = graph.commodityId;
 
-      width = Math.max(540, canvasWrap.clientWidth || 720);
-      height = Math.max(480, Math.min(760, window.innerHeight * 0.7));
+      width = Math.max(280, Math.floor(canvasWrap.clientWidth || canvas.clientWidth || container.clientWidth || window.innerWidth - 32));
+      isMobile = width <= 720 || window.innerWidth <= 720;
+      height = isMobile
+        ? Math.max(360, Math.min(460, Math.round(width * 1.02)))
+        : Math.max(480, Math.min(760, window.innerHeight * 0.7));
       svg.attr('viewBox', '0 0 ' + width + ' ' + height);
 
       if (simulation) simulation.stop();
@@ -487,21 +542,25 @@
 
       simulation = d3.forceSimulation(nodes)
         .force('link', d3.forceLink(links).id(function (d) { return d.id; }).distance(function (d) {
+          if (isMobile) {
+            return d.relation === 'report' ? 92 : d.relation === 'theme' ? 102 : 74 + Math.max(0, (d.weight || 1) * 8);
+          }
           return d.relation === 'report' ? 120 : d.relation === 'theme' ? 140 : 96 + Math.max(0, (d.weight || 1) * 12);
         }).strength(function (d) {
           return d.relation === 'report' ? 0.7 : 0.45;
         }))
         .force('charge', d3.forceManyBody().strength(function (d) {
+          if (isMobile) return d.id === graph.commodityId ? -360 : -145;
           return d.id === graph.commodityId ? -600 : -280;
         }))
         .force('center', d3.forceCenter(width / 2, height / 2))
-        .force('collision', d3.forceCollide().radius(function (d) { return nodeRadius(d) + 24; }).iterations(2))
+        .force('collision', d3.forceCollide().radius(function (d) { return nodeRadius(d) + (isMobile ? 13 : 24); }).iterations(2))
         .force('radial', d3.forceRadial(function (d) {
           if (d.id === graph.commodityId) return 0;
-          if (d.group === 'research') return Math.min(width, height) * 0.22;
-          if (d.group === 'macro') return Math.min(width, height) * 0.28;
-          return Math.min(width, height) * 0.18;
-        }, width / 2, height / 2).strength(0.12));
+          if (d.group === 'research') return Math.min(width, height) * (isMobile ? 0.26 : 0.22);
+          if (d.group === 'macro') return Math.min(width, height) * (isMobile ? 0.3 : 0.28);
+          return Math.min(width, height) * (isMobile ? 0.2 : 0.18);
+        }, width / 2, height / 2).strength(isMobile ? 0.16 : 0.12));
 
       linkSelection = linksLayer.selectAll('line').data(links, function (d) { return d.id; });
       linkSelection.exit().remove();
@@ -552,8 +611,8 @@
       labelSelection = labelSelection.enter().append('text').merge(labelSelection)
         .attr('class', 'cn-local-graph-label')
         .attr('text-anchor', 'middle')
-        .attr('dy', function (d) { return nodeRadius(d) + 18; })
-        .text(function (d) { return truncateLabel(d.label, d.id === graph.commodityId ? 26 : 22); });
+        .attr('dy', function (d) { return nodeRadius(d) + (isMobile ? 14 : 18); })
+        .text(function (d) { return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 18 : 26) : (isMobile ? 14 : 22)); });
 
       simulation.on('tick', function () {
         linkSelection
@@ -591,8 +650,10 @@
 
       labelSelection
         .attr('opacity', function (d) {
-          if (!focusId) return 0.9;
-          return related.has(d.id) ? 1 : 0.14;
+          if (!focusId) return isMobile ? (d.id === graph.commodityId ? 1 : 0.3) : 0.9;
+          if (!related.has(d.id)) return isMobile ? 0 : 0.14;
+          if (!isMobile) return 1;
+          return (d.id === graph.commodityId || d.id === selectedId || d.level <= 1) ? 1 : 0.58;
         })
         .attr('font-weight', function (d) { return d.id === selectedId ? 700 : 500; });
 

@@ -3691,6 +3691,7 @@ html { scroll-behavior: smooth; }
   padding: 24px 28px;
   margin-bottom: 40px;
   box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+  overflow: hidden;
 }
 .cf-header {
   display: flex;
@@ -3707,7 +3708,7 @@ html { scroll-behavior: smooth; }
   margin-bottom: 4px;
   letter-spacing: -0.01em;
 }
-.cf-subtitle { font-size: 0.73rem; color: #475569; }
+.cf-subtitle { font-size: 0.73rem; color: #475569; max-width: 42rem; }
 .cf-legend { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
 .cf-leg-item { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: #64748b; }
 .cf-leg-line { display: inline-block; width: 22px; height: 2px; border-radius: 2px; }
@@ -3726,21 +3727,47 @@ html { scroll-behavior: smooth; }
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 10px;
   padding: 12px 14px;
+  min-width: 0;
 }
 .cf-metric.highlight {
   background: linear-gradient(135deg, rgba(34,211,238,0.07), rgba(168,85,247,0.07));
   border-color: rgba(34,211,238,0.2);
 }
 .cf-metric-label { font-size: 0.67rem; color: #475569; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 5px; font-weight: 600; }
-.cf-metric-val { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800; color: #f1f5f9; }
+.cf-metric-val { font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 800; color: #f1f5f9; word-break: break-word; }
 .cf-metric-val.up { color: #10b981; }
 .cf-metric-val.down { color: #f43f5e; }
 .cf-metric-chg { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; margin-top: 2px; }
 .cf-no-data { text-align: center; padding: 24px; color: #475569; font-size: 0.88rem; }
 .cf-sim-link { color: #22d3ee; text-decoration: none; font-weight: 600; }
+@media(max-width: 900px) {
+  .cf-header { flex-direction: column; }
+  .cf-legend { gap: 10px 12px; }
+}
 @media(max-width: 640px) {
-  .cf-metrics { grid-template-columns: repeat(2, 1fr); }
-  .cf-chart-wrap { height: 200px; }
+  .commodity-forecast-section {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+  .cf-title { font-size: 0.96rem; }
+  .cf-subtitle { font-size: 0.76rem; line-height: 1.5; }
+  .cf-legend {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    margin-right: -2px;
+  }
+  .cf-leg-item {
+    flex: 0 0 auto;
+    font-size: 0.69rem;
+    white-space: nowrap;
+  }
+  .cf-chart-wrap { height: 240px; margin-bottom: 16px; }
+  .cf-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .cf-metric { padding: 11px 10px; }
+  .cf-metric-label { font-size: 0.62rem; }
+  .cf-metric-val { font-size: 0.92rem; }
+  .cf-metric-chg { font-size: 0.76rem; }
 }
 
 /* ===== COMMODITY SIMULATOR CTA ===== */
@@ -3821,6 +3848,9 @@ html { scroll-behavior: smooth; }
 /* ---------- Commodity hub local knowledge graph ---------- */
 .cn-local-graph-mount {
   margin: 0 0 40px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .cn-local-graph-card {
@@ -4224,6 +4254,30 @@ html { scroll-behavior: smooth; }
     border-radius: 18px;
   }
 
+  .cn-local-graph-header {
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .cn-local-graph-intro h2 {
+    font-size: 1.24rem;
+    line-height: 1.2;
+  }
+
+  .cn-local-graph-intro p {
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .cn-local-graph-controls {
+    width: 100%;
+  }
+
+  .cn-local-graph-search input {
+    font-size: 0.92rem;
+    padding: 11px 12px;
+  }
+
   .cn-local-graph-filters {
     overflow-x: auto;
     padding-bottom: 4px;
@@ -4232,19 +4286,47 @@ html { scroll-behavior: smooth; }
 
   .cn-local-graph-filters button {
     flex: 0 0 auto;
+    font-size: 0.8rem;
+    padding: 8px 11px;
   }
 
   .cn-local-graph-canvas,
   .cn-local-graph-canvas-wrap {
-    min-height: 420px;
+    min-height: 360px;
+  }
+
+  .cn-local-graph-label {
+    font-size: 10px;
   }
 
   .cn-local-graph-panel {
     min-height: auto;
+    padding: 16px;
+  }
+
+  .cn-local-graph-panel-top h3 {
+    font-size: 1.08rem;
   }
 
   .cn-local-graph-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .cn-local-graph-actions {
+    flex-direction: column;
+  }
+
+  .cn-local-graph-actions a {
+    width: 100%;
+  }
+
+  .cn-local-graph-neighbors button {
+    padding: 11px 12px;
+  }
+
+  .cn-local-graph-legend {
+    gap: 10px;
+    font-size: 0.76rem;
   }
 
   .cn-local-graph-hint {
@@ -4253,5 +4335,7 @@ html { scroll-behavior: smooth; }
     bottom: 10px;
     border-radius: 12px;
     text-align: center;
+    font-size: 0.72rem;
+    line-height: 1.35;
   }
 }

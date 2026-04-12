@@ -884,6 +884,7 @@ layout: default
 
       var canvas = document.getElementById('commodity-fc-canvas');
       if (!canvas) return;
+      var isMobileChart = ((canvas.parentElement && canvas.parentElement.clientWidth) || window.innerWidth) <= 640 || window.innerWidth <= 640;
       var render = function() {
         new Chart(canvas, {
           type: 'line',
@@ -906,12 +907,34 @@ layout: default
               tooltip:{
                 backgroundColor:'rgba(13,13,24,0.95)', borderColor:'rgba(34,211,238,0.3)', borderWidth:1,
                 titleColor:'#94a3b8', bodyColor:'#e2e8f0',
+                titleFont:{ size:isMobileChart ? 11 : 12, weight:'700' },
+                bodyFont:{ size:isMobileChart ? 11 : 12 },
+                padding:isMobileChart ? 10 : 12,
+                displayColors:false,
                 callbacks:{ label:function(ctx){ if(ctx.parsed.y===null||ctx.dataset.label==='Range Upper'||ctx.dataset.label==='Range Lower') return null; return ctx.dataset.label + ': ' + fmt(ctx.parsed.y, meta); } }
               }
             },
             scales:{
-              x:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#475569', maxTicksLimit:7, maxRotation:0, callback:function(v){ var l=this.getLabelForValue(v); if(!l) return ''; var dt=new Date(l); return (dt.getMonth()+1)+'/'+dt.getDate(); }} },
-              y:{ grid:{color:'rgba(255,255,255,0.04)'}, ticks:{color:'#475569', callback:function(v){ return fmt(v,meta); }} }
+              x:{
+                grid:{color:'rgba(255,255,255,0.04)'},
+                ticks:{
+                  color:'#64748b',
+                  font:{ size:isMobileChart ? 10 : 11 },
+                  maxTicksLimit:isMobileChart ? 5 : 7,
+                  autoSkip:true,
+                  maxRotation:0,
+                  callback:function(v){ var l=this.getLabelForValue(v); if(!l) return ''; var dt=new Date(l); return (dt.getMonth()+1)+'/'+dt.getDate(); }
+                }
+              },
+              y:{
+                grid:{color:'rgba(255,255,255,0.04)'},
+                ticks:{
+                  color:'#64748b',
+                  font:{ size:isMobileChart ? 10 : 11 },
+                  maxTicksLimit:isMobileChart ? 5 : 6,
+                  callback:function(v){ return fmt(v,meta); }
+                }
+              }
             }
           }
         });
