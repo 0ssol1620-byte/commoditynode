@@ -230,6 +230,12 @@
     var resizeObserver = null;
     var isMobile = (container.clientWidth || window.innerWidth) <= 720 || window.innerWidth <= 720;
 
+    function syncCardMode() {
+      if (!card) return;
+      card.classList.toggle('is-mobile', !!isMobile);
+      card.classList.toggle('is-desktop', !isMobile);
+    }
+
     function cleanDisplayTitle(value) {
       return String(value || '')
         .replace(/\s*\([^)]*\)\s*/g, ' ')
@@ -285,6 +291,8 @@
     var panel = card.querySelector('.cn-local-graph-panel');
     var searchInput = card.querySelector('input[type="search"]');
     var filterButtons = Array.prototype.slice.call(card.querySelectorAll('[data-filter]'));
+
+    syncCardMode();
 
     var colorByGroup = {
       market: '#22d3ee',
@@ -530,6 +538,7 @@
 
       width = Math.max(280, Math.floor(canvasWrap.clientWidth || canvas.clientWidth || container.clientWidth || window.innerWidth - 32));
       isMobile = width <= 720 || window.innerWidth <= 720;
+      syncCardMode();
       height = isMobile
         ? Math.max(360, Math.min(460, Math.round(width * 1.02)))
         : Math.max(480, Math.min(760, window.innerHeight * 0.7));

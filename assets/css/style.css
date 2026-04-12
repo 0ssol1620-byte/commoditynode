@@ -3851,11 +3851,14 @@ html { scroll-behavior: smooth; }
   width: 100%;
   max-width: 100%;
   overflow: hidden;
+  isolation: isolate;
 }
 
 .cn-local-graph-card {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+  z-index: 0;
   padding: 24px;
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 22px;
@@ -3987,6 +3990,8 @@ html { scroll-behavior: smooth; }
   grid-template-columns: minmax(0, 1.8fr) minmax(300px, 0.9fr);
   gap: 18px;
   align-items: stretch;
+  position: relative;
+  z-index: 1;
 }
 
 .cn-local-graph-canvas-wrap,
@@ -3994,7 +3999,9 @@ html { scroll-behavior: smooth; }
   min-height: 540px;
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 18px;
-  background: rgba(5,8,15,0.72);
+  background: rgba(5,8,15,0.94);
+  position: relative;
+  z-index: 1;
 }
 
 .cn-local-graph-canvas-wrap {
@@ -4249,9 +4256,28 @@ html { scroll-behavior: smooth; }
 }
 
 @media (max-width: 720px) {
-  .cn-local-graph-card {
+  .cn-local-graph-card,
+  .cn-local-graph-card.is-mobile {
     padding: 16px;
     border-radius: 18px;
+  }
+
+  .cn-local-graph-card.is-mobile .cn-local-graph-body,
+  .cn-local-graph-card.is-mobile .cn-local-graph-header,
+  .cn-local-graph-body {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .cn-local-graph-card.is-mobile .cn-local-graph-canvas-wrap,
+  .cn-local-graph-card.is-mobile .cn-local-graph-panel,
+  .cn-local-graph-canvas,
+  .cn-local-graph-canvas-wrap {
+    min-height: 360px;
+  }
+
+  .cn-local-graph-card.is-mobile .cn-local-graph-panel {
+    margin-top: 4px;
   }
 
   .cn-local-graph-header {
@@ -4288,11 +4314,6 @@ html { scroll-behavior: smooth; }
     flex: 0 0 auto;
     font-size: 0.8rem;
     padding: 8px 11px;
-  }
-
-  .cn-local-graph-canvas,
-  .cn-local-graph-canvas-wrap {
-    min-height: 360px;
   }
 
   .cn-local-graph-label {
@@ -4338,4 +4359,52 @@ html { scroll-behavior: smooth; }
     font-size: 0.72rem;
     line-height: 1.35;
   }
+}
+
+.cn-local-graph-card.is-mobile {
+  padding: 16px;
+  border-radius: 18px;
+}
+
+.cn-local-graph-card.is-mobile .cn-local-graph-header,
+.cn-local-graph-card.is-mobile .cn-local-graph-body {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.cn-local-graph-card.is-mobile .cn-local-graph-controls {
+  width: 100%;
+}
+
+.cn-local-graph-card.is-mobile .cn-local-graph-canvas-wrap,
+.cn-local-graph-card.is-mobile .cn-local-graph-canvas {
+  min-height: 360px;
+}
+
+.cn-local-graph-card.is-mobile .cn-local-graph-panel {
+  min-height: auto;
+  padding: 16px;
+  margin-top: 4px;
+}
+
+.cn-local-graph-card.is-mobile .cn-local-graph-actions {
+  flex-direction: column;
+}
+
+.cn-local-graph-card.is-mobile .cn-local-graph-actions a {
+  width: 100%;
+}
+
+.cn-local-graph-card.is-mobile .cn-local-graph-label {
+  font-size: 10px;
+}
+
+.cn-local-graph-card.is-mobile .cn-local-graph-hint {
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 0.72rem;
+  line-height: 1.35;
 }
