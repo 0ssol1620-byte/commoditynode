@@ -230,6 +230,14 @@
     var resizeObserver = null;
     var isMobile = (container.clientWidth || window.innerWidth) <= 720 || window.innerWidth <= 720;
 
+    function syncContainerHeight() {
+      if (!sectionEl) return;
+      var nextHeight = Math.ceil(sectionEl.getBoundingClientRect().height || sectionEl.offsetHeight || 0);
+      if (!nextHeight) return;
+      container.style.minHeight = nextHeight + 'px';
+      container.style.height = nextHeight + 'px';
+    }
+
     function syncCardMode() {
       if (!sectionEl) return;
       sectionEl.classList.toggle('is-mobile', !!isMobile);
@@ -345,7 +353,7 @@
           return base + degree * 3 + impact * 1.2 + levelBonus + researchPenalty;
         };
 
-        var compactLimit = filterMode === 'all' ? 18 : filterMode === 'research' ? 10 : 14;
+        var compactLimit = filterMode === 'all' ? 10 : filterMode === 'research' ? 6 : filterMode === 'company' ? 8 : 7;
         var compactNodes = visibleNodes
           .slice()
           .sort(function (a, b) { return scoreNode(b) - scoreNode(a); })
@@ -424,7 +432,7 @@
       relatedIds.delete(nodeId);
       return allNodes.filter(function (node) { return relatedIds.has(node.id); }).sort(function (a, b) {
         return (b.degree || 0) - (a.degree || 0);
-      }).slice(0, 8);
+      }).slice(0, isMobile ? 4 : 8);
     }
 
     function metricHtml(label, value) {
@@ -469,6 +477,7 @@
           pickNode(button.getAttribute('data-node-jump'));
         });
       });
+      requestAnimationFrame(syncContainerHeight);
     }
 
     var visibleGraph = buildVisibleGraph();
@@ -528,6 +537,43 @@
     function truncateLabel(label, maxLength) {
       var text = String(label || '');
       return text.length > maxLength ? text.slice(0, maxLength - 1) + '…' : text;
+    }
+
+    function computeMobileLabelIds(nodes, links) {
+      var focusId = hoveredId || selectedId || graph.commodityId;
+      var keep = new Set([graph.commodityId]);
+      if (focusId) keep.add(focusId);
+
+      var focusedNeighbors = nodes.filter(function (node) {
+        if (node.id === graph.commodityId || node.id === focusId) return false;
+        if (node.group === 'research' && node.id !== focusId) return false;
+        return neighborSetFor(focusId, links).has(node.id);
+      }).sort(function (a, b) {
+        var aScore = (a.degree || 0) + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0);
+        var bScore = (b.degree || 0) + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0);
+        return bScore - aScore;
+      }).slice(0, 4);
+
+      focusedNeighbors.forEach(function (node) { keep.add(node.id); });
+
+      nodes.filter(function (node) {
+        return node.level <= 1 && node.group !== 'research' && node.id !== graph.commodityId;
+      }).sort(function (a, b) {
+        return (b.degree || 0) - (a.degree || 0);
+      }).slice(0, 2).forEach(function (node) {
+        keep.add(node.id);
+      });
+
+      return keep;
+    }
+
+    function refreshLabelText() {
+      if (!labelSelection) return;
+      var mobileLabelIds = isMobile ? computeMobileLabelIds(visibleGraph.nodes, visibleGraph.links) : null;
+      labelSelection.text(function (d) {
+        if (isMobile && mobileLabelIds && !mobileLabelIds.has(d.id)) return '';
+        return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 18 : 26) : (isMobile ? 14 : 22));
+      });
     }
 
     function relayout() {
@@ -618,8 +664,8 @@
       labelSelection = labelSelection.enter().append('text').merge(labelSelection)
         .attr('class', 'cn-local-graph-label')
         .attr('text-anchor', 'middle')
-        .attr('dy', function (d) { return nodeRadius(d) + (isMobile ? 14 : 18); })
-        .text(function (d) { return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 18 : 26) : (isMobile ? 14 : 22)); });
+        .attr('dy', function (d) { return nodeRadius(d) + (isMobile ? 14 : 18); });
+      refreshLabelText();
 
       simulation.on('tick', function () {
         linkSelection
@@ -639,6 +685,7 @@
 
       updateHighlight();
       updatePanel();
+      requestAnimationFrame(syncContainerHeight);
     }
 
     function updateHighlight() {
@@ -663,6 +710,7 @@
           return (d.id === graph.commodityId || d.id === selectedId || d.level <= 1) ? 1 : 0.58;
         })
         .attr('font-weight', function (d) { return d.id === selectedId ? 700 : 500; });
+      refreshLabelText();
 
       linkSelection
         .attr('stroke', function (d) {
@@ -703,11 +751,13 @@
         relayout();
       });
       resizeObserver.observe(canvasWrap);
+      resizeObserver.observe(sectionEl);
     } else {
       window.addEventListener('resize', relayout);
     }
 
     relayout();
+    requestAnimationFrame(syncContainerHeight);
   }
 
   function renderFallback(container, meta) {

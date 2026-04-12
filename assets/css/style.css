@@ -749,13 +749,18 @@ code, kbd, pre {
    Without these overrides, legacy min-height/overflow rules can let following headings
    visually bleed into the graph region on mobile. */
 #impact-graph.cn-local-graph-mount {
-  min-height: auto;
-  height: auto;
-  overflow: hidden;
+  min-height: auto !important;
+  height: auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  margin: 0 0 48px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 0 8px;
+  display: flow-root;
+  overflow: visible;
   background: transparent;
-  border-radius: 0;
-  padding: 0;
-  margin: 0 0 36px;
 }
 
 #impact-graph.cn-local-graph-mount > * {
@@ -3875,7 +3880,7 @@ html { scroll-behavior: smooth; }
 .cn-local-graph-section {
   position: relative;
   display: block;
-  padding: 0;
+  padding: 0 0 28px;
   background: transparent;
   border: 0;
   border-radius: 0;
@@ -3898,6 +3903,17 @@ html { scroll-behavior: smooth; }
     radial-gradient(circle at top right, rgba(168,85,247,0.08), transparent 30%),
     linear-gradient(180deg, rgba(19,19,30,0.96), rgba(9,9,16,0.98));
   box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+}
+
+.cn-local-graph-section::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(34,211,238,0), rgba(34,211,238,0.24), rgba(34,211,238,0));
+  pointer-events: none;
 }
 
 .cn-local-graph-card::before {
@@ -4288,9 +4304,20 @@ html { scroll-behavior: smooth; }
 }
 
 @media (max-width: 720px) {
+  #impact-graph.cn-local-graph-mount {
+    width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    margin: 0 0 52px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-bottom: 14px;
+    border-radius: 0 !important;
+  }
+
   .cn-local-graph-section,
   .cn-local-graph-section.is-mobile {
-    padding: 0;
+    padding: 0 0 32px;
   }
 
   .cn-local-graph-header {
@@ -4320,12 +4347,15 @@ html { scroll-behavior: smooth; }
   .cn-local-graph-filters {
     overflow-x: visible;
     padding-bottom: 0;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
   }
 
   .cn-local-graph-filters button {
     flex: 0 1 auto;
+    width: 100%;
+    justify-content: center;
     font-size: 0.8rem;
     padding: 8px 11px;
   }
@@ -4334,11 +4364,11 @@ html { scroll-behavior: smooth; }
   .cn-local-graph-canvas-wrap,
   .cn-local-graph-section.is-mobile .cn-local-graph-canvas,
   .cn-local-graph-section.is-mobile .cn-local-graph-canvas-wrap {
-    min-height: 360px;
+    min-height: 400px;
   }
 
   .cn-local-graph-label {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .cn-local-graph-panel,
@@ -4370,8 +4400,7 @@ html { scroll-behavior: smooth; }
   }
 
   .cn-local-graph-legend {
-    gap: 10px;
-    font-size: 0.76rem;
+    display: none;
   }
 
   .cn-local-graph-hint {
@@ -4391,7 +4420,7 @@ html { scroll-behavior: smooth; }
 
 .cn-local-graph-section.is-mobile .cn-local-graph-canvas-wrap,
 .cn-local-graph-section.is-mobile .cn-local-graph-canvas {
-  min-height: 360px;
+  min-height: 400px;
 }
 
 .cn-local-graph-section.is-mobile .cn-local-graph-panel {
@@ -4408,7 +4437,7 @@ html { scroll-behavior: smooth; }
 }
 
 .cn-local-graph-section.is-mobile .cn-local-graph-label {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .cn-local-graph-section.is-mobile .cn-local-graph-hint {
