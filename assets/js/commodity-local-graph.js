@@ -231,9 +231,9 @@
     var isMobile = (container.clientWidth || window.innerWidth) <= 720 || window.innerWidth <= 720;
 
     function syncCardMode() {
-      if (!card) return;
-      card.classList.toggle('is-mobile', !!isMobile);
-      card.classList.toggle('is-desktop', !isMobile);
+      if (!sectionEl) return;
+      sectionEl.classList.toggle('is-mobile', !!isMobile);
+      sectionEl.classList.toggle('is-desktop', !isMobile);
     }
 
     function cleanDisplayTitle(value) {
@@ -248,7 +248,7 @@
 
     container.classList.add('cn-local-graph-mount');
     container.innerHTML = [
-      '<section class="cn-local-graph-card">',
+      '<section class="cn-local-graph-section">',
       '  <div class="cn-local-graph-header">',
       '    <div class="cn-local-graph-intro">',
       '      <span class="cn-local-graph-eyebrow">Knowledge graph</span>',
@@ -269,13 +269,11 @@
       '      </div>',
       '    </div>',
       '  </div>',
-      '  <div class="cn-local-graph-body">',
-      '    <div class="cn-local-graph-canvas-wrap">',
-      '      <div class="cn-local-graph-canvas"></div>',
-      '      <div class="cn-local-graph-hint">' + (isMobile ? 'Drag to explore • Pinch/zoom for detail' : 'Drag to explore • Scroll to zoom • Double-click a linked note to open it') + '</div>',
-      '    </div>',
-      '    <aside class="cn-local-graph-panel" aria-live="polite"></aside>',
+      '  <div class="cn-local-graph-canvas-wrap">',
+      '    <div class="cn-local-graph-canvas"></div>',
+      '    <div class="cn-local-graph-hint">' + (isMobile ? 'Drag to explore • Pinch/zoom for detail' : 'Drag to explore • Scroll to zoom • Double-click a linked note to open it') + '</div>',
       '  </div>',
+      '  <section class="cn-local-graph-panel" aria-live="polite"></section>',
       '  <div class="cn-local-graph-legend">',
       '    <span><i class="market"></i>Commodity & market nodes</span>',
       '    <span><i class="company"></i>Company exposure</span>',
@@ -285,12 +283,12 @@
       '</section>'
     ].join('');
 
-    var card = container.querySelector('.cn-local-graph-card');
-    var canvasWrap = card.querySelector('.cn-local-graph-canvas-wrap');
-    var canvas = card.querySelector('.cn-local-graph-canvas');
-    var panel = card.querySelector('.cn-local-graph-panel');
-    var searchInput = card.querySelector('input[type="search"]');
-    var filterButtons = Array.prototype.slice.call(card.querySelectorAll('[data-filter]'));
+    var sectionEl = container.querySelector('.cn-local-graph-section');
+    var canvasWrap = sectionEl.querySelector('.cn-local-graph-canvas-wrap');
+    var canvas = sectionEl.querySelector('.cn-local-graph-canvas');
+    var panel = sectionEl.querySelector('.cn-local-graph-panel');
+    var searchInput = sectionEl.querySelector('input[type="search"]');
+    var filterButtons = Array.prototype.slice.call(sectionEl.querySelectorAll('[data-filter]'));
 
     syncCardMode();
 
