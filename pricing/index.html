@@ -437,7 +437,7 @@ permalink: /pricing/
     <div class="social-proof-strip">
       <div class="sp-item"><span class="sp-num">{{ site.posts.size }}</span><span class="sp-label">Signal Reports live</span></div>
       <div class="sp-divider"></div>
-      <div class="sp-item"><span class="sp-num">{{ site.coverage_counts.commodity_hubs | default: site.commodities | size }}</span><span class="sp-label">Commodity hubs tracked</span></div>
+      <div class="sp-item"><span class="sp-num">{{ site.coverage_counts.commodity_hubs | default: site.commodities.size }}</span><span class="sp-label">Commodity hubs tracked</span></div>
       <div class="sp-divider"></div>
       <div class="sp-item"><span class="sp-num">Daily</span><span class="sp-label">Forecast + price refresh</span></div>
       <div class="sp-divider"></div>

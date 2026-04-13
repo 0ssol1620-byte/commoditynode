@@ -60,7 +60,7 @@ image: "/assets/images/og-default.png"
       </p>
 
       <div class="hero-trust-strip" data-animate data-delay="150">
-        <span class="trust-item">{{ site.coverage_counts.commodity_hubs | default: site.commodities | size }} commodity hubs</span>
+        <span class="trust-item">{{ site.coverage_counts.commodity_hubs | default: site.commodities.size }} commodity hubs</span>
         <span class="trust-sep">·</span>
         <span class="trust-item">AI 90-day forecast</span>
         <span class="trust-sep">·</span>
@@ -122,7 +122,7 @@ image: "/assets/images/og-default.png"
           <span class="label">Signal Reports</span>
         </div>
         <div class="hero-stat">
-          {% assign commodity_count = site.coverage_counts.commodity_hubs | default: site.commodities | size %}
+          {% assign commodity_count = site.coverage_counts.commodity_hubs | default: site.commodities.size %}
           <span class="value" data-count="{{ commodity_count }}" data-suffix=" hubs">{{ commodity_count }} hubs</span>
           <span class="label">Commodity Hubs</span>
         </div>
@@ -1064,7 +1064,7 @@ image: "/assets/images/og-default.png"
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/><line x1="12" y1="12" x2="4" y2="6"/><line x1="12" y1="12" x2="20" y2="6"/><line x1="12" y1="12" x2="4" y2="18"/><line x1="12" y1="12" x2="20" y2="18"/></svg>
         </div>
         <div class="browse-label">Commodity Hubs</div>
-        <div class="browse-count">{{ site.coverage_counts.commodity_hubs | default: site.commodities | size }} hubs</div>
+        <div class="browse-count">{{ site.coverage_counts.commodity_hubs | default: site.commodities.size }} hubs</div>
       </a>
       <a href="/industries/" class="browse-card">
         <div class="browse-icon" style="color:var(--gold);">
