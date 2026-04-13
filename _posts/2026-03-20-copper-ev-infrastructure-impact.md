@@ -9,8 +9,8 @@ reading_time: 8
 commodity_name: "Copper"
 direction: bullish
 image: /assets/images/og-copper.png
-canonical_url: https://commoditynode.com/copper-hits-570-ev-infrastructure/
-permalink: /copper-hits-570-ev-infrastructure/
+canonical_url: https://commoditynode.com/copper-ev-infrastructure-impact/
+permalink: /copper-ev-infrastructure-impact/
 ---
 
 Copper is often called "Dr. Copper" for its reputation as a barometer of global economic health, but in the current cycle it has taken on a new role: the essential metal of the energy transition. When copper prices push toward $4.25 per pound on the COMEX, the implications extend far beyond traditional mining stocks. Electric vehicles require three to four times more copper than internal combustion engine vehicles, EV charging stations are copper-intensive, and renewable energy installations use five times more copper per megawatt than fossil fuel power plants.

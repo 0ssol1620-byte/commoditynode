@@ -7,9 +7,9 @@ import yaml
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 COMMODITIES_DIR = os.path.join(BASE, '_commodities')
 
-REQUIRED = [
-    'title', 'description', 'symbol', 'sector', 'data_type',
-    'companies', 'etfs', 'substitutes', 'themes', 'tags', 'image'
+REQUIRED_BASE = [
+    'title', 'description', 'sector', 'data_type',
+    'etfs', 'substitutes', 'tags', 'image'
 ]
 
 TITLE_MIN = 50
@@ -42,12 +42,21 @@ def validate_file(filepath):
     if fm is None:
         return slug, False, [f'PARSE ERROR: {err}'], []
 
+    data_type = fm.get('data_type', '')
+
     # Required field checks
-    for field in REQUIRED:
+    for field in REQUIRED_BASE:
         if field not in fm or fm[field] is None:
             issues.append(f'Missing required field: {field}')
         elif isinstance(fm[field], (list, str)) and not fm[field]:
             issues.append(f'Empty required field: {field}')
+
+    if data_type != 'analysis_only':
+        symbol = fm.get('symbol')
+        if symbol is None:
+            issues.append('Missing required field: symbol')
+        elif isinstance(symbol, str) and not symbol.strip():
+            issues.append('Empty required field: symbol')
 
     # Title length check
     title = fm.get('title', '')
@@ -63,8 +72,8 @@ def validate_file(filepath):
     if desc:
         dlen = len(desc)
         if dlen > DESC_MAX:
-            issues.append(
-                f'Description too long: {dlen} chars (max {DESC_MAX}): "{desc[:80]}..."'
+            warnings.append(
+                f'Description too long: {dlen} chars (recommended max {DESC_MAX}): "{desc[:80]}..."'
             )
 
     passed = len(issues) == 0

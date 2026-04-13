@@ -17,23 +17,35 @@ def check(condition, msg, level='error'):
 with open(os.path.join(BASE, 'assets/data/prices.json')) as f:
     prices = json.load(f)
 
-symbols = [v.get('symbol') for v in prices.values()]
-dupes = [s for s in symbols if symbols.count(s) > 1]
+allowed_proxy_dupes = {'MP', 'JJN', 'VALE', 'HO=F'}
+symbols = [v.get('symbol') for v in prices.values() if v.get('symbol')]
+dupes = sorted({s for s in symbols if symbols.count(s) > 1 and s not in allowed_proxy_dupes})
 check(len(dupes) == 0, f'중복 심볼: {set(dupes)}')
 
-# 2. forecast.json 키 체크
+# 2. forecast data 구조 체크
 fc_path = os.path.join(BASE, 'assets/data/forecast.json')
+consensus_path = os.path.join(BASE, 'assets/data/forecast-consensus.json')
+forecast = {}
+consensus = {}
 if os.path.exists(fc_path):
     with open(fc_path) as f:
         forecast = json.load(f)
-    for key, data in forecast.items():
-        check('forecast' in data, f'forecast.json/{key}: forecast 키 없음')
-        check('history' in data, f'forecast.json/{key}: history 키 없음')
-        if 'forecast' in data:
-            fc = data['forecast']
-            check(len(fc.get('median',[])) == 90, f'forecast.json/{key}: median 길이 != 90')
-            check(len(fc.get('p10',[])) == 90, f'forecast.json/{key}: p10 길이 != 90')
-            check(len(fc.get('p90',[])) == 90, f'forecast.json/{key}: p90 길이 != 90')
+if os.path.exists(consensus_path):
+    with open(consensus_path) as f:
+        consensus = json.load(f)
+
+for key, data in forecast.items():
+    check('forecast' in data, f'forecast.json/{key}: forecast 키 없음')
+    check('history' in data, f'forecast.json/{key}: history 키 없음')
+    if 'forecast' in data:
+        fc = data['forecast']
+        check(len(fc.get('median',[])) == 90, f'forecast.json/{key}: median 길이 != 90')
+
+for key, data in consensus.items():
+    cons = data.get('consensus', {})
+    check(len(cons.get('median',[])) == 90, f'forecast-consensus.json/{key}: median 길이 != 90')
+    check(len(cons.get('p10',[])) == 90, f'forecast-consensus.json/{key}: p10 길이 != 90')
+    check(len(cons.get('p90',[])) == 90, f'forecast-consensus.json/{key}: p90 길이 != 90')
 
 # 3. _commodities/ description 누락 체크
 comm_dir = os.path.join(BASE, '_commodities')

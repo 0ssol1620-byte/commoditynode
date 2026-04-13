@@ -3,7 +3,7 @@ layout: commodity
 unit: "$/MMBtu"
 image: "/assets/images/og-natural-gas.png"
 title: "Natural Gas Price Impact: Utilities, Fertilizers & LNG"
-description: "Track how Henry Hub natural gas prices ripple through utilities, fertilizer makers, LNG exporters, and gas-sensitive equities with live context and forecast framing."
+description: "Track how Henry Hub natural gas moves ripple through utilities, fertilizers, LNG exporters, and gas-sensitive equities with live price and forecast context."
 commodity_slug: "natural-gas"
 symbol: "NG=F"
 data_type: "direct_futures"

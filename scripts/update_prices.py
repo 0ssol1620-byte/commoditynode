@@ -223,7 +223,7 @@ def main():
         json.dump(prices, f, indent=2)
     with open("assets/data/prices.json", "w") as f:
         json.dump(prices, f, indent=2)
-    print(f"\n✅ {len(prices)}/45 prices updated")
+    print(f"\n✅ {len(prices)}/{len(COMMODITIES)} prices updated")
 
     # --- chart-data.json ---
     chart_data = {}
