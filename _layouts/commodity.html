@@ -211,6 +211,17 @@ layout: default
         </div>
       </div>
     </div>
+
+    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+      <div style="padding:14px 16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Published by</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">CommodityNode Research. Review our <a href="/about/editorial-team/" style="color:var(--accent);">editorial team</a> and <a href="/about/editorial-process/" style="color:var(--accent);">review process</a>.</div>
+      </div>
+      <div style="padding:14px 16px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:8px;">Corrections & caveats</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Use this hub with the <a href="/methodology/" style="color:var(--accent);">methodology</a>. If a value or label looks wrong, contact <a href="mailto:contact@commoditynode.com" style="color:var(--accent);">contact@commoditynode.com</a>.</div>
+      </div>
+    </div>
   </div>
 </header>
 
@@ -738,7 +749,7 @@ layout: default
     <a href="/signals/" style="padding:10px 20px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:8px;color:#fbbf24;text-decoration:none;font-size:0.9rem;font-weight:500;">Browse Signal Reports →</a>
     <a href="/pro/" style="padding:10px 20px;background:var(--accent);border-radius:8px;color:#000;text-decoration:none;font-size:0.9rem;font-weight:600;">Unlock Pro →</a>
   </div>
-  <p style="color:var(--text3);font-size:0.82rem;margin-top:16px;">Get notified on {{ page.title | split: ':' | first | strip }} price moves → <a href="#" onclick="if(window.Clerk)window.Clerk.openSignUp();return false;" style="color:#22d3ee;">Create free account</a></p>
+  <p style="color:var(--text3);font-size:0.82rem;margin-top:16px;">Get notified on {{ page.title | split: ':' | first | strip }} price moves → <a href="/pricing/" onclick="if(window.Clerk){window.Clerk.openSignUp();return false;}" style="color:#22d3ee;">Create free account</a></p>
 </section>
 
 <!-- Newsletter CTA Strip -->

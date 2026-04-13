@@ -8,13 +8,25 @@
 
   /* ---------- Constants ---------- */
   var FREE_REPORTS_PER_MONTH = 3;
-  var ADMIN_EMAILS = ['0ssol1620@gmail.com'];
+  var ADMIN_EMAIL_HASHES = ['613152878'];
+
+  function hashEmail(email) {
+    var input = String(email || '').trim().toLowerCase();
+    var h = 2166136261;
+    for (var i = 0; i < input.length; i++) {
+      h ^= input.charCodeAt(i);
+      h = Math.imul(h, 16777619) >>> 0;
+    }
+    return String(h);
+  }
 
   function isAdmin(user) {
     if (!user) return false;
+    var meta = user.publicMetadata || {};
+    if (meta.role === 'admin' || meta.admin === true || meta.plan === 'admin') return true;
     var emails = user.emailAddresses || [];
     for (var i = 0; i < emails.length; i++) {
-      if (ADMIN_EMAILS.indexOf(emails[i].emailAddress) >= 0) return true;
+      if (ADMIN_EMAIL_HASHES.indexOf(hashEmail(emails[i].emailAddress)) >= 0) return true;
     }
     return false;
   }
@@ -104,6 +116,12 @@
     document.getElementById('cn-pro-modal-later').addEventListener('click', closeModal);
     modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
   }
+
+  window.CNAuth = window.CNAuth || {
+    isPro: function () { return isPro(window.Clerk && window.Clerk.user); },
+    isEnterprise: function () { return isEnterprise(window.Clerk && window.Clerk.user); },
+    showProModal: function (featureName, description) { showProModal(featureName, description); }
+  };
 
   /* ---------- DOM Builders ---------- */
 
@@ -350,7 +368,8 @@
   /* ---------- Main Init ---------- */
 
   function isPostPage() {
-    return !!document.querySelector('.post-content');
+    return document.body && document.body.dataset.pageType === 'signal-report'
+      || !!document.querySelector('[data-page-type="signal-report"]');
   }
 
   function init() {

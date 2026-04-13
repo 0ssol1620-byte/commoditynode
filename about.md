@@ -2,7 +2,7 @@
 no_loader: true
 layout: default
 title: About CommodityNode
-description: "CommodityNode maps how commodity price movements ripple through global industries, stocks, and ETFs with interactive Impact Maps and Signal Reports."
+description: "CommodityNode is an independent commodity intelligence publisher mapping how raw-material price moves ripple through industries, stocks, ETFs, and supply chains."
 ---
 
 <script type="application/ld+json">
@@ -11,7 +11,7 @@ description: "CommodityNode maps how commodity price movements ripple through gl
   "@type": "AboutPage",
   "name": "About CommodityNode",
   "url": "https://commoditynode.com/about/",
-  "description": "CommodityNode is an independent commodity intelligence platform mapping how raw material price movements ripple through industries, stocks, and ETFs.",
+  "description": "CommodityNode is an independent commodity intelligence publisher focused on commodity-to-equity ripple effects, supply-chain exposure, and decision-useful market context.",
   "mainEntity": {
     "@type": "Organization",
     "name": "CommodityNode",
@@ -27,27 +27,17 @@ description: "CommodityNode maps how commodity price movements ripple through gl
       "https://www.threads.net/@commoditynode",
       "https://twitter.com/commoditynode"
     ],
-    "knowsAbout": ["Commodity Markets", "Financial Analysis", "Supply Chain Risk", "Portfolio Management", "Commodity Price Forecasting", "Equity Impact Analysis"],
-    "description": "Independent commodity intelligence platform providing interactive Impact Maps, AI price forecasts, and Signal Reports on commodity-to-equity ripple effects."
+    "description": "Independent commodity intelligence publisher providing impact maps, Signal Reports, scenario tools, and forecast ranges across commodity-sensitive markets.",
+    "knowsAbout": [
+      "Commodity Markets",
+      "Supply Chain Risk",
+      "Equity Sensitivity Analysis",
+      "Portfolio Risk",
+      "Energy Markets",
+      "Industrial Metals",
+      "Agricultural Commodities"
+    ]
   }
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "CommodityNode Editorial Team",
-  "url": "https://commoditynode.com/about/",
-  "parentOrganization": {
-    "@type": "Organization",
-    "name": "CommodityNode",
-    "url": "https://commoditynode.com"
-  },
-  "knowsAbout": ["Commodity Markets", "Financial Analysis", "Supply Chain Risk", "Portfolio Management", "Commodity Price Forecasting", "Equity Impact Analysis"],
-  "sameAs": [
-    "https://twitter.com/commoditynode"
-  ]
 }
 </script>
 
@@ -55,170 +45,119 @@ description: "CommodityNode maps how commodity price movements ripple through gl
   <div class="container">
     <div class="post-header-badge">
       <span class="badge badge-cyan">About</span>
+      <span class="badge badge-gold">Independent publisher</span>
     </div>
     <h1>About CommodityNode</h1>
-    <p class="post-meta-bar">Where Raw Materials Meet Markets</p>
+    <p class="post-meta-bar">Independent commodity intelligence for investors, analysts, and operators who need more than a headline chart.</p>
   </div>
 </div>
 
 <div class="container" style="padding:48px 24px 80px;">
-<div style="max-width:720px;margin:0 auto;">
+<div style="max-width:780px;margin:0 auto;">
 <div class="post-content" data-animate>
 
-<h2>What We Do</h2>
-<p>CommodityNode maps the <strong>invisible connections</strong> between raw material price movements and the industries, companies, and portfolios that feel their impact.</p>
-<p>When crude oil jumps 15%, it doesn't just affect gas stations. The ripple reaches airlines, EV makers, plastics manufacturers, logistics companies, and a dozen more sectors — each in different directions, at different magnitudes.</p>
-<p>We trace those ripples.</p>
+{% assign commodity_count = site.coverage_counts.commodity_hubs | default: site.commodities.size %}
 
-<h2>Our Approach</h2>
-<p>Every analysis on CommodityNode is built around three principles:</p>
-<p><strong>1. Quantify Everything</strong><br>We put numbers on impact. Not "airlines will suffer" but "airlines face an estimated −12% margin compression." Real estimates, properly caveated.</p>
-<p><strong>2. Visualize Connections</strong><br>Our interactive Impact Maps (D3.js node graphs) let you see the full web of impact at a glance. Drag nodes, zoom in, hover for details. The Impact Map is the analysis.</p>
-<p><strong>3. Publish When It Matters</strong><br>Markets don't wait for monthly editorial calendars. We publish Signal Reports when commodity price moves create actionable intelligence.</p>
-
-<h2>The Tech Stack</h2>
-<p>Every visualization on this site is built with:</p>
-<ul>
-  <li><strong>D3.js</strong> — Force-directed graphs, real-time layout</li>
-  <li><strong>Chart.js</strong> — Premium candlestick price charts</li>
-  <li><strong>Jekyll</strong> — Fast, static, GitHub Pages hosted</li>
-  <li><strong>Free to start</strong> — Core analysis open access, advanced AI tools with Pro</li>
-</ul>
-
-<h2>Methodology</h2>
-<p>Every impact score, correlation figure, and sensitivity estimate is backed by historical data and transparent calculation logic. We show our work — because research you can't verify isn't research. <a href="/methodology/">Read our full methodology &rarr;</a></p>
-
-<h2>Machine-Readable Resources</h2>
-<p>If you are auditing, citing, or programmatically reviewing CommodityNode, start with these public resources:</p>
-<ul>
-  <li><a href="/llms.txt">LLM access notes</a> for AI-readable site guidance</li>
-  <li><a href="/pricing.txt">Machine-readable pricing</a> for plan and access structure</li>
-  <li><a href="/reports/">Research Archive</a> for the editorial layer tied to live commodity hubs</li>
-  <li><a href="/methodology/">Methodology</a> for data caveats, forecast limits, and proxy disclosures</li>
-</ul>
-
-<h2>Why Trust CommodityNode?</h2>
-<div style="padding:18px 20px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;margin:16px 0 20px;">
-  <div style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:10px;">Editorial Transparency</div>
-  <ul style="margin:0;padding-left:18px;color:var(--text2);font-size:0.92rem;line-height:1.7;">
-    <li>Every commodity hub clearly labels whether its pricing is based on direct futures, a proxy asset, or analysis-only coverage.</li>
-    <li>We separate market data freshness from editorial publication dates so readers can tell what was updated automatically versus what was reviewed by the editorial layer.</li>
-    <li>We publish methodology, corrections, contact details, and commercial limitations publicly rather than hiding them in fine print.</li>
-    <li>When a feed is unreliable because of rollover, scale breaks, or proxy limitations, we prefer showing unavailable status over publishing false precision.</li>
-  </ul>
-</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:16px 0 24px;">
-  <div style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:10px;padding:16px;">
-    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Transparent Methodology</div>
-    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Every impact score and correlation is calculated from historical data with documented logic. We show our work.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:0 0 28px;">
+  <div style="padding:18px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:14px;">
+    <div style="font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Coverage</div>
+    <div style="font-size:1.5rem;font-weight:800;color:#f8fafc;">{{ commodity_count }} hubs</div>
+    <p style="font-size:0.86rem;color:var(--text2);margin:8px 0 0;">Live commodity reference pages tied to companies, industries, and reports.</p>
   </div>
-  <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:10px;padding:16px;">
-    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">No Conflict of Interest</div>
-    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">We don't manage money, run a fund, or receive payments to cover specific commodities. Analysis is independent.</p>
+  <div style="padding:18px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:14px;">
+    <div style="font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:8px;">Editorial model</div>
+    <div style="font-size:1.5rem;font-weight:800;color:#f8fafc;">Research first</div>
+    <p style="font-size:0.86rem;color:var(--text2);margin:8px 0 0;">We prioritize methodology, caveats, and second-order impact over noisy commentary.</p>
   </div>
-  <div style="background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.1);border-radius:10px;padding:16px;">
-    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Clear Caveats</div>
-    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Every forecast includes confidence ranges. Every signal states its historical win rate and time horizon. Not financial advice.</p>
-  </div>
-  <div style="background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.1);border-radius:10px;padding:16px;">
-    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Living Documentation</div>
-    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Methodology evolves as we improve models. Version history is tracked and major changes are disclosed in posts.</p>
+  <div style="padding:18px;background:rgba(168,85,247,0.05);border:1px solid rgba(168,85,247,0.14);border-radius:14px;">
+    <div style="font-size:0.76rem;letter-spacing:0.1em;text-transform:uppercase;color:#a855f7;font-weight:700;margin-bottom:8px;">Commercial model</div>
+    <div style="font-size:1.5rem;font-weight:800;color:#f8fafc;">Ads + Pro</div>
+    <p style="font-size:0.86rem;color:var(--text2);margin:8px 0 0;">Advertising and subscriptions support the site, but do not determine coverage.</p>
   </div>
 </div>
-<p>Read the full <a href="/methodology/">Methodology →</a></p>
 
-<h2>Why Trust CommodityNode?</h2>
-<div style="padding:18px 20px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;margin:16px 0 20px;">
-  <div style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:10px;">Editorial Transparency</div>
-  <ul style="margin:0;padding-left:18px;color:var(--text2);font-size:0.92rem;line-height:1.7;">
-    <li>Every commodity hub clearly labels whether its pricing is based on direct futures, a proxy asset, or analysis-only coverage.</li>
-    <li>We separate market data freshness from editorial publication dates so readers can tell what was updated automatically versus what was reviewed by the editorial layer.</li>
-    <li>We publish methodology, corrections, contact details, and commercial limitations publicly rather than hiding them in fine print.</li>
-    <li>When a feed is unreliable because of rollover, scale breaks, or proxy limitations, we prefer showing unavailable status over publishing false precision.</li>
-  </ul>
-</div>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:16px 0 24px;">
-  <div style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:10px;padding:16px;">
-    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Transparent Methodology</div>
-    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Every impact score and correlation is calculated from historical data with documented logic. We show our work.</p>
+<h2>What CommodityNode Does</h2>
+<p>CommodityNode maps how raw-material price moves ripple into industries, companies, ETFs, and portfolio risk. We built the site for people who need to move from <strong>commodity price action</strong> to <strong>decision-useful context</strong> quickly — without relying on vague macro commentary or generic market recaps.</p>
+<p>When crude oil jumps, the real question is not just “what happened?” It is “which companies, sectors, and supply chains feel it first, and how strong is the transmission?” CommodityNode exists to answer that second question.</p>
+
+<h2>What Makes This Different</h2>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:18px 0 22px;">
+  <div style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:12px;padding:18px;">
+    <div style="font-weight:700;color:#e2e8f0;margin-bottom:8px;">Commodity-to-equity mapping</div>
+    <p style="font-size:0.86rem;color:var(--text2);margin:0;">We do not stop at the commodity chart. We connect the move to equities, sectors, and supply-chain nodes.</p>
   </div>
-  <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:10px;padding:16px;">
-    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">No Conflict of Interest</div>
-    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">We don't manage money, run a fund, or receive payments to cover specific commodities. Analysis is independent.</p>
+  <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.1);border-radius:12px;padding:18px;">
+    <div style="font-weight:700;color:#e2e8f0;margin-bottom:8px;">Transparent caveats</div>
+    <p style="font-size:0.86rem;color:var(--text2);margin:0;">Proxy pages are labeled, weak feeds are disclosed, and unavailable daily changes are not dressed up as precise signals.</p>
   </div>
-  <div style="background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.1);border-radius:10px;padding:16px;">
-    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Clear Caveats</div>
-    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Every forecast includes confidence ranges. Every signal states its historical win rate and time horizon. Not financial advice.</p>
-  </div>
-  <div style="background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.1);border-radius:10px;padding:16px;">
-    <div style="font-weight:700;color:#e2e8f0;margin-bottom:6px;">Living Documentation</div>
-    <p style="font-size:0.82rem;color:#94a3b8;margin:0;">Methodology evolves as we improve models. Version history is tracked and major changes are disclosed in posts.</p>
+  <div style="background:rgba(16,185,129,0.04);border:1px solid rgba(16,185,129,0.1);border-radius:12px;padding:18px;">
+    <div style="font-weight:700;color:#e2e8f0;margin-bottom:8px;">Live + editorial workflow</div>
+    <p style="font-size:0.86rem;color:var(--text2);margin:0;">Each hub is tied to a research archive, methodology, and scenario workflow instead of existing as a disconnected static page.</p>
   </div>
 </div>
-<p>Read the full <a href="/methodology/">Methodology →</a></p>
 
-<h2>Corrections & Review Policy</h2>
+<h2>Who Uses CommodityNode</h2>
 <ul>
-  <li><strong>Corrections:</strong> Material factual or numerical errors are corrected on-page as soon as verified.</li>
-  <li><strong>Review standard:</strong> High-traffic pages, flagship commodity hubs, and monetized surfaces receive the most frequent review and QA attention.</li>
-  <li><strong>Data exceptions:</strong> If a live feed becomes unreliable because of contract rollovers, frozen upstream series, or proxy distortions, we may suppress the daily change figure until a safer value is available.</li>
-  <li><strong>Commercial separation:</strong> Advertising and subscriptions support the site, but they do not determine which commodities or companies are covered.</li>
-</ul>
-<h2>Who It's For</h2>
-<p>CommodityNode is built for investors, analysts, and anyone who wants to understand the second-order effects of commodity price movements:</p>
-<ul>
-  <li><strong>Equity investors</strong> — Understand which stocks benefit or suffer when oil, gold, or copper moves</li>
-  <li><strong>Portfolio managers</strong> — Map commodity exposure across industries and sectors</li>
-  <li><strong>Macro traders</strong> — Track ripple chains from raw materials to currencies, rates, and risk sentiment</li>
-  <li><strong>Supply chain professionals</strong> — Monitor input cost pressures before they hit earnings</li>
-  <li><strong>Journalists & researchers</strong> — Find the real-world connections behind commodity price headlines</li>
+  <li><strong>Self-directed investors</strong> who need to understand how commodity moves change their watchlist.</li>
+  <li><strong>Analysts and macro traders</strong> who want faster context on second-order transmission paths.</li>
+  <li><strong>Operators and supply-chain teams</strong> who need market signals translated into input-cost or margin risk.</li>
+  <li><strong>Researchers and journalists</strong> who need a structured map from raw-material moves to corporate and sector impact.</li>
 </ul>
 
-<h2>Coverage</h2>
-<p>We cover <strong>60 commodity hubs</strong> spanning Energy, Metals, Agriculture, and Soft commodities — each with an interactive Impact Map, live price data, and curated Signal Reports. Our analysis spans:</p>
+<h2>How We Publish</h2>
+<p>CommodityNode publishes under the <strong>CommodityNode Research</strong> identity. The site blends quantitative market data, documented methodology, and manual editorial judgment.</p>
 <ul>
-  <li>Energy: Crude Oil, Natural Gas, LNG, Coal, Diesel, Jet Fuel, Ethanol</li>
-  <li>Precious Metals: Gold, Silver, Platinum, Palladium, Rhodium</li>
-  <li>Industrial Metals: Copper, Aluminum, Steel, Zinc, Nickel, Tin, Iron Ore, Cobalt, Lithium, Manganese</li>
-  <li>Agriculture: Wheat, Corn, Soybeans, Coffee, Sugar, Cotton, Rice, Cocoa, Lumber</li>
-  <li>Critical Materials: Uranium, Rare Earth, Graphite, Vanadium, Potash</li>
+  <li><strong>Commodity hubs</strong> are maintained as living reference pages with data labels, price context, and related research.</li>
+  <li><strong>Signal Reports</strong> explain why a move matters now, not just what the chart did.</li>
+  <li><strong>Forecast and scenario tools</strong> are presented as probabilistic aids with explicit uncertainty ranges.</li>
+  <li><strong>Corrections and freshness</strong> matter: we distinguish between automated price refreshes and editorial publication dates.</li>
 </ul>
+
+<div style="padding:22px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:14px;margin:24px 0;">
+  <div style="font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:10px;">Trust center</div>
+  <p style="margin:0 0 12px;color:var(--text2);">If you are reviewing CommodityNode as a publisher, start with the pages below. They explain who publishes the site, how pages are reviewed, how corrections are handled, and where data limitations are disclosed.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <a href="/about/editorial-team/" class="btn btn-secondary">Editorial Team</a>
+    <a href="/about/editorial-process/" class="btn btn-secondary">Editorial Process</a>
+    <a href="/methodology/" class="btn btn-secondary">Methodology</a>
+    <a href="/contact/" class="btn btn-secondary">Contact & Corrections</a>
+  </div>
+</div>
+
+<h2>Editorial Independence</h2>
+<ul>
+  <li>CommodityNode does <strong>not</strong> accept payment for favorable coverage of specific companies, commodities, or ETFs.</li>
+  <li>Advertising and subscriptions support the business, but they do not determine what gets covered or how it is framed.</li>
+  <li>Nothing on the site is personalized investment advice, and research tools are not recommendations to buy or sell securities.</li>
+</ul>
+
+<h2>Data Sources and Limits</h2>
+<p>We combine public market data, filings, and domain-specific datasets to build our pages. Key source families include futures and ETF pricing, SEC filings, central-bank and macroeconomic publications, and commodity-specific reporting bodies such as USDA, IEA, and LME-linked datasets.</p>
+<p>We also label limitations clearly. If a page depends on a proxy asset or an upstream feed becomes unstable because of rollovers, stale prints, or proxy distortions, we would rather show <em>less</em> than imply false certainty.</p>
+
+<h2>Corrections and Review</h2>
+<p>Material factual or numerical errors are corrected when verified. High-traffic pages, flagship commodity hubs, and monetized surfaces receive the most frequent QA and editorial review. If you spot a problem, email <a href="mailto:contact@commoditynode.com">contact@commoditynode.com</a> or use the <a href="/contact/">contact form</a>.</p>
+<p>For a fuller explanation of how pages are reviewed and updated, see the <a href="/about/editorial-process/">Editorial Process</a>.</p>
 
 <h2>Who Built This</h2>
-<p>CommodityNode was built by a quantitative analyst and data engineer with a background in financial markets, supply chain analytics, and data visualization. After years of working with institutional commodity data tools (Bloomberg, Kpler, CRU), the founder realized that the core insights from commodity-equity relationship analysis weren't accessible to retail investors, independent analysts, or anyone without a five-figure research budget.</p>
-<p>The site was built from scratch using open-source technologies, public data sources, and hundreds of hours of manual supply chain research. Every impact score is backed by transparent methodology, and every correlation is recalculated quarterly using the latest available data.</p>
-<p><strong>Credentials:</strong> Background in quantitative finance and data science. Professional experience spanning commodity research, algorithmic trading systems, and financial data engineering. No affiliation with any broker, hedge fund, or commodity trading firm.</p>
-
-<h2>Editorial Standards</h2>
-<p>CommodityNode adheres to the following editorial principles:</p>
-<ul>
-  <li><strong>Data-driven:</strong> All analyses are based on publicly available data. We cite our sources and show our methodology.</li>
-  <li><strong>Transparent limitations:</strong> We acknowledge uncertainty. Impact scores are estimates, not predictions. Correlations can break down during market stress.</li>
-  <li><strong>No investment advice:</strong> Nothing on this site constitutes a recommendation to buy, sell, or hold any security. We provide analysis tools; investment decisions remain yours.</li>
-  <li><strong>No conflicts of interest:</strong> CommodityNode does not receive compensation from any company, ETF provider, or broker featured in our analysis. Revenue comes from a combination of advertising and Pro subscriptions.</li>
-  <li><strong>Corrections policy:</strong> If you find an error in our data, calculations, or analysis, please <a href="/contact/">contact us</a>. We publish corrections promptly and transparently.</li>
-</ul>
-
+<p>CommodityNode was built by a quantitative analyst and data engineer with experience in commodity research, financial data engineering, and market-structure analysis. The goal was to make commodity-to-equity ripple analysis available without requiring an institutional research stack.</p>
+<p>That is why the product emphasizes traceable methodology, explicit caveats, and operational clarity over vague commentary. We would rather publish a narrower, more defensible claim than a broader, harder-to-verify one.</p>
 
 <h2>Contact</h2>
-<p>Have questions, corrections, partnership inquiries, or feedback? We'd love to hear from you.</p>
 <ul>
-  <li><strong>Email:</strong> <a href="mailto:contact@commoditynode.com">contact@commoditynode.com</a></li>
-  <li><strong>Twitter/X:</strong> <a href="https://twitter.com/commoditynode" target="_blank" rel="noopener">@commoditynode</a></li>
+  <li><strong>General inquiries:</strong> <a href="mailto:contact@commoditynode.com">contact@commoditynode.com</a></li>
+  <li><strong>Enterprise and team access:</strong> <a href="mailto:enterprise@commoditynode.com">enterprise@commoditynode.com</a></li>
+  <li><strong>Research archive:</strong> <a href="/reports/">Browse Signal Reports</a></li>
+  <li><strong>Methods and caveats:</strong> <a href="/methodology/">Read the Methodology</a></li>
 </ul>
-<p>For detailed questions about our methodology, please see our <a href="/methodology/">Methodology page</a>.</p>
-
-<h2>Free to Start</h2>
-<p>CommodityNode's core content — commodity impact maps, signal reports, and market analysis — is free and open to everyone. We believe good financial research shouldn't require a Bloomberg terminal.</p>
-<p>Advanced features — AI price forecasts, the Scenario Simulator, Portfolio Stress Test, and unlimited signal reports — are available with a <a href="/pricing/">Pro subscription</a>. This keeps the platform sustainable while the core mission stays accessible.</p>
 
 <div style="margin-top:40px;padding:28px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);text-align:center;">
-  <p style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Ready to explore?</p>
-  <p style="color:var(--text2);margin-bottom:20px;">Start with our most-visited commodity impact maps.</p>
+  <p style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Start with the highest-signal pages</p>
+  <p style="color:var(--text2);margin-bottom:20px;">If you are new to CommodityNode, begin with a flagship commodity hub, then read the matching Signal Report.</p>
   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
-    <a href="/commodities/gold/" class="btn btn-primary">Gold Impact Map</a>
-    <a href="/commodities/crude-oil/" class="btn btn-secondary">Oil Impact Map</a>
-    <a href="/commodities/copper/" class="btn btn-secondary">Copper Impact Map</a>
+    <a href="/commodities/gold/" class="btn btn-primary">Gold Impact Hub</a>
+    <a href="/commodities/crude-oil/" class="btn btn-secondary">Crude Oil Impact Hub</a>
+    <a href="/reports/" class="btn btn-secondary">Research Archive</a>
   </div>
 </div>
 

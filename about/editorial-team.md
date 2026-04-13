@@ -52,7 +52,7 @@ no_loader: true
   <li><strong>Commodity Impact Maps</strong> — How a 10% price move in a raw material ripples through industries, ETFs, and companies, based on historical regression and supply-chain input-output analysis</li>
   <li><strong>Signal Reports</strong> — Specific price movements or structural market changes with quantified impact estimates, historical analogues, and relevant equities</li>
   <li><strong>Cross-Commodity Signals</strong> — Historically validated ratio and spread patterns with documented win rates and time horizons</li>
-  <li><strong>AI Price Forecasts</strong> — 90-day projections powered by Amazon Chronos-2 time series models with P10/P90 confidence bands</li>
+  <li><strong>AI Price Forecasts</strong> — 90-day projections that compare Chronos-2 and TimesFM 2.5 with consensus ranges and explicit uncertainty bands</li>
 </ul>
 
 <h3>What We Don't Do</h3>
@@ -70,11 +70,11 @@ no_loader: true
   <li><strong>Fundamentals:</strong> SEC EDGAR (10-K, 10-Q filings), company investor relations</li>
   <li><strong>Commodity data:</strong> International Energy Agency (IEA), USDA World Agricultural Supply and Demand Estimates (WASDE), World Bureau of Metal Statistics (WBMS), London Metal Exchange (LME)</li>
   <li><strong>Macro data:</strong> Federal Reserve FRED, BLS, central bank publications</li>
-  <li><strong>AI forecasting:</strong> Amazon Chronos-2 time series foundation model</li>
+  <li><strong>AI forecasting:</strong> Chronos-2 and TimesFM 2.5, presented as comparison models with consensus ranges and uncertainty bands</li>
 </ul>
 
 <h2>Corrections Policy</h2>
-<p>If you identify a factual error in our analysis, please contact us at <strong>contact@commoditynode.com</strong>. We review all correction requests within 48 hours and publish updates prominently on the affected page.</p>
+<p>If you identify a factual error in our analysis, please contact us at <strong>contact@commoditynode.com</strong>. We aim to acknowledge correction requests within 2–3 business days, prioritize material factual issues faster when possible, and publish updates prominently on the affected page once verified.</p>
 
 <p><a href="/about/">← Back to About</a> &nbsp;·&nbsp; <a href="/methodology/">Read our full Methodology →</a></p>
 

@@ -428,7 +428,7 @@ noindex: false
         <div class="pro-gate" id="pro-gate" style="display:none">
           <h3>Pro Feature</h3>
           <p>Full pattern library requires Pro access</p>
-          <button onclick="if(window.Clerk)Clerk.openSignIn()">Sign In</button>
+          <button onclick="if(window.Clerk){window.Clerk.openSignIn();return;} window.location.href='/pricing/';">Sign In</button>
         </div>
       </div>
     </div>
@@ -461,17 +461,10 @@ noindex: false
     var gate=document.getElementById('pro-gate');
     var content=document.getElementById('pattern-content');
     if(!gate||!content) return;
-    if(window.Clerk&&window.Clerk.user){
-      var emails=window.Clerk.user.emailAddresses||[];
-      var isAdmin=false;
-      for(var i=0;i<emails.length;i++){
-        if(emails[i].emailAddress==='0ssol1620@gmail.com') isAdmin=true;
-      }
-      if(isAdmin||window.Clerk.user){
-        gate.style.display='none';
-        content.classList.remove('blur-content');
-        return;
-      }
+    if(window.CNAuth && window.CNAuth.isPro && window.CNAuth.isPro()){
+      gate.style.display='none';
+      content.classList.remove('blur-content');
+      return;
     }
     gate.style.display='flex';
     content.classList.add('blur-content');
@@ -517,7 +510,7 @@ noindex: false
         <li>New signal alerts via email</li>
       </ul>
     </div>
-    <button onclick="if(window.Clerk)window.Clerk.openSignUp()" class="sig-modal-cta">
+    <button onclick="if(window.Clerk){window.Clerk.openSignUp();return;} window.location.href='/pricing/';" class="sig-modal-cta">
       Unlock Pro Analysis — $19/month
     </button>
     <p class="sig-modal-fine">Cancel anytime. Most members recover cost in first week.</p>
