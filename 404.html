@@ -3,15 +3,193 @@ layout: default
 title: "404 — Page Not Found"
 permalink: /404.html
 ---
-<div style="min-height:60vh;display:flex;align-items:center;justify-content:center;padding:80px 24px;">
-  <div style="text-align:center;max-width:520px;">
-    <div style="font-size:6rem;font-weight:900;font-family:'JetBrains Mono',monospace;background:linear-gradient(135deg,#22d3ee,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:16px;">404</div>
-    <h1 style="font-size:1.5rem;color:#f0f0f5;margin-bottom:12px;">Page Not Found</h1>
-    <p style="color:#9494a8;margin-bottom:32px;line-height:1.7;">This commodity may have been delisted, expired, or the URL changed. Let's get you back to the markets.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a href="/" class="btn btn-primary">Back to Home</a>
-      <a href="/commodities/" class="btn btn-secondary">Browse Commodities</a>
+
+<section class="cn-404-shell">
+  <div class="cn-404-card">
+    <div class="cn-404-code">404</div>
+    <p class="cn-404-eyebrow">Recovery mode</p>
+    <h1>That page is gone — but the workflow isn't.</h1>
+    <p class="cn-404-copy">This URL may have changed, expired, or been delisted. Use the search below or jump straight into live commodity hubs, current Signal Reports, and the simulator.</p>
+
+    <form class="cn-404-search" action="/reports/" method="get" role="search">
+      <input type="search" name="q" placeholder="Search reports, commodities, companies, or themes…" aria-label="Search CommodityNode">
+      <button type="submit" class="btn btn-primary">Search Archive</button>
+    </form>
+
+    <div class="cn-404-actions">
+      <a href="/commodities/" class="btn btn-primary">Browse Commodity Hubs</a>
+      <a href="/reports/" class="btn btn-secondary">Open Signal Reports</a>
+      <a href="/simulator/" class="btn btn-secondary">Run Scenario Simulator</a>
     </div>
-    <p style="margin-top:40px;font-size:0.8rem;color:#3f3f5a;font-family:'JetBrains Mono',monospace;">ERROR_CODE: COMMODITY_NOT_FOUND</p>
+
+    <div class="cn-404-grid">
+      <a href="/commodities/crude-oil/" class="cn-404-link-card">
+        <span>Popular hub</span>
+        <strong>Crude Oil</strong>
+        <p>Track route-risk, OPEC, airlines, and energy-equity sensitivity.</p>
+      </a>
+      <a href="/commodities/copper/" class="cn-404-link-card">
+        <span>Popular hub</span>
+        <strong>Copper</strong>
+        <p>See how EVs, construction, and grid capex are repricing industrial metals.</p>
+      </a>
+      <a href="/reports/" class="cn-404-link-card">
+        <span>Best next step</span>
+        <strong>Latest Signal Reports</strong>
+        <p>Open the newest market-moving commodity notes first, then jump into the matching hub.</p>
+      </a>
+    </div>
+
+    <div class="cn-404-footer">
+      <div>
+        <strong>Why stay on CommodityNode?</strong>
+        <p>Use the site the same way power users do: open the commodity hub, read the linked signal, then check scenario context before the market reprices.</p>
+      </div>
+      <a href="/pricing/" class="cn-404-footer-link">See the full Pro workflow →</a>
+    </div>
+
+    <p class="cn-404-code-meta">ERROR_CODE: COMMODITY_NOT_FOUND</p>
   </div>
-</div>
+</section>
+
+<style>
+.cn-404-shell {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 24px;
+}
+.cn-404-card {
+  width: min(100%, 980px);
+  padding: 40px 32px;
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(15,23,42,0.88), rgba(2,6,23,0.96));
+  box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+}
+.cn-404-code {
+  font-size: 5.4rem;
+  font-weight: 900;
+  font-family:'JetBrains Mono',monospace;
+  line-height: 1;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg,#22d3ee,#fbbf24);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.cn-404-eyebrow {
+  margin: 0 0 10px;
+  color: #22d3ee;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cn-404-card h1 {
+  margin: 0 0 12px;
+  color: #f0f0f5;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+}
+.cn-404-copy {
+  margin: 0 0 24px;
+  color: #94a3b8;
+  line-height: 1.75;
+  max-width: 760px;
+}
+.cn-404-search {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.cn-404-search input {
+  flex: 1 1 420px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: #f0f0f5;
+  font: inherit;
+}
+.cn-404-search input:focus {
+  outline: none;
+  border-color: rgba(34,211,238,0.35);
+  box-shadow: 0 0 0 3px rgba(34,211,238,0.12);
+}
+.cn-404-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.cn-404-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.cn-404-link-card {
+  display: block;
+  padding: 18px 18px 16px;
+  border-radius: 16px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+}
+.cn-404-link-card span {
+  display: block;
+  margin-bottom: 6px;
+  color: #22d3ee;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.cn-404-link-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #f0f0f5;
+  font-size: 1rem;
+}
+.cn-404-link-card p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+.cn-404-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.cn-404-footer strong {
+  color: #f0f0f5;
+}
+.cn-404-footer p {
+  margin: 8px 0 0;
+  color: #94a3b8;
+  line-height: 1.7;
+  max-width: 700px;
+}
+.cn-404-footer-link {
+  color: #22d3ee;
+  text-decoration: none;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.cn-404-code-meta {
+  margin: 22px 0 0;
+  color: #475569;
+  font-size: 0.76rem;
+  font-family:'JetBrains Mono',monospace;
+}
+@media (max-width: 900px) {
+  .cn-404-grid { grid-template-columns: 1fr; }
+  .cn-404-footer { flex-direction: column; align-items: flex-start; }
+}
+</style>

@@ -184,6 +184,76 @@ permalink: /pricing/
   margin: 48px auto 0;
   padding: 0 24px;
 }
+.pricing-compare-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 980px;
+  margin: 24px auto 0;
+  padding: 0 24px;
+}
+.pricing-compare-card {
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+}
+.pricing-compare-card.featured {
+  border-color: rgba(34,211,238,0.32);
+  background: rgba(34,211,238,0.05);
+}
+.pricing-compare-card span {
+  display: block;
+  margin-bottom: 6px;
+  color: #22d3ee;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pricing-compare-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #f0f0f5;
+  font-size: 1rem;
+}
+.pricing-compare-card p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+.pricing-quick-compare {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.02);
+}
+.compare-row {
+  display: grid;
+  grid-template-columns: 1.35fr repeat(3, minmax(0, 1fr));
+}
+.compare-row > div {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #cbd5e1;
+  font-size: 0.88rem;
+}
+.compare-row > div:first-child {
+  color: #f0f0f5;
+  font-weight: 700;
+}
+.compare-row.compare-head > div {
+  color: #94a3b8;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.02);
+}
+.compare-row:last-child > div {
+  border-bottom: none;
+}
 .pricing-card {
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.08);
@@ -306,7 +376,10 @@ permalink: /pricing/
 .faq-a { font-size: 0.8rem; color: #9494a8; line-height: 1.6; }
 
 @media (max-width: 768px) {
+  .pricing-compare-strip,
   .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .compare-row { grid-template-columns: 1fr; }
+  .compare-row > div:first-child { padding-bottom: 6px; }
 }
 .plan-billed { font-size:0.72rem; font-weight:600; margin-top:4px; color:#64748b; }
 .plan-billed-pro { color:#a855f7; }
@@ -329,13 +402,13 @@ permalink: /pricing/
       <p style="font-size:0.78rem;color:#64748b;">— Self-directed investor, Pro subscriber</p>
     </div>
     <div class="social-proof-strip">
-      <div class="sp-item"><span class="sp-num">Growing</span><span class="sp-label">Community of traders</span></div>
+      <div class="sp-item"><span class="sp-num">{{ site.posts.size }}</span><span class="sp-label">Signal Reports live</span></div>
       <div class="sp-divider"></div>
-      <div class="sp-item"><span class="sp-num">High</span><span class="sp-label">Renewal rate</span></div>
+      <div class="sp-item"><span class="sp-num">{{ site.coverage_counts.commodity_hubs | default: site.commodities | size }}</span><span class="sp-label">Commodity hubs tracked</span></div>
       <div class="sp-divider"></div>
-      <div class="sp-item"><span class="sp-num">19</span><span class="sp-label">Reports/month avg (Pro)</span></div>
+      <div class="sp-item"><span class="sp-num">Daily</span><span class="sp-label">Forecast + price refresh</span></div>
       <div class="sp-divider"></div>
-      <div class="sp-item"><span class="sp-num">$19</span><span class="sp-label">Average monthly investment</span></div>
+      <div class="sp-item"><span class="sp-num">$19</span><span class="sp-label">Pro starts per month</span></div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:960px;margin:26px auto 0;text-align:left;">
       <div style="padding:16px 18px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
@@ -360,13 +433,67 @@ permalink: /pricing/
   <button class="billing-btn" data-billing="annual" onclick="setBilling('annual',this)">Annual <span class="save-badge">Save 35%</span></button>
 </div>
 
+<div class="pricing-compare-strip">
+  <div class="pricing-compare-card">
+    <span>Free</span>
+    <strong>Read, browse, and validate the workflow</strong>
+    <p>Best for first-time users who want the hubs, public reports, and weekly digest before upgrading.</p>
+  </div>
+  <div class="pricing-compare-card featured">
+    <span>Pro</span>
+    <strong>Get the full investor workflow</strong>
+    <p>Best for self-directed investors and analysts who need unlimited reports, forecast ranges, simulator access, and company sensitivity.</p>
+  </div>
+  <div class="pricing-compare-card">
+    <span>Enterprise</span>
+    <strong>Bring the workflow to the whole team</strong>
+    <p>Best for desks that need exports, API-style access, alerts, and shared research workflows across multiple seats.</p>
+  </div>
+</div>
+
+<section style="max-width:980px;margin:28px auto 0;padding:0 24px;">
+  <div class="pricing-quick-compare">
+    <div class="compare-row compare-head">
+      <div>What changes</div>
+      <div>Free</div>
+      <div>Pro</div>
+      <div>Enterprise</div>
+    </div>
+    <div class="compare-row">
+      <div>Signal Reports</div>
+      <div>3 / month</div>
+      <div>Unlimited</div>
+      <div>Unlimited + team use</div>
+    </div>
+    <div class="compare-row">
+      <div>AI forecast ranges</div>
+      <div>Preview only</div>
+      <div>Full 90-day access</div>
+      <div>Full + export workflow</div>
+    </div>
+    <div class="compare-row">
+      <div>Scenario analysis</div>
+      <div>Not included</div>
+      <div>Simulator + sensitivity</div>
+      <div>Simulator + team workflows</div>
+    </div>
+    <div class="compare-row">
+      <div>Best use case</div>
+      <div>Evaluate the product</div>
+      <div>Run a daily decision workflow</div>
+      <div>Scale across a desk</div>
+    </div>
+  </div>
+</section>
+
 <div class="pricing-grid">
   <!-- Free -->
   <div class="pricing-card">
     <div class="pricing-tier">Free</div>
     <div class="pricing-price">$0 <span>/month</span></div>
-    <div class="pricing-desc">Discover how commodity prices impact your portfolio. Access all 62 commodity hubs, read up to 3 Signal Reports per month, and explore the basic Impact Map.</div>
-    <button class="pricing-btn pricing-btn-ghost" onclick="if(window.Clerk)window.Clerk.openSignUp()">Get Started Free</button>
+    <div class="plan-billed">Best for evaluating the workflow before you pay</div>
+    <div class="pricing-desc">Access all 62 commodity hubs, read 3 Signal Reports per month, and validate whether the workflow fits your process.</div>
+    <button class="pricing-btn pricing-btn-ghost" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start Free</button>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> 3 Signal Reports / month</li>
       <li class="yes"><span class="feat-check">✓</span> Commodity price charts</li>
@@ -384,9 +511,9 @@ permalink: /pricing/
   <div class="pricing-card featured">
     <div class="pricing-tier">Pro</div>
     <div class="pricing-price"><span id="pro-price">$19</span> <span id="pro-sub">/month</span></div>
-    <div class="plan-billed plan-billed-pro" id="pro-billed">Billed monthly · Cancel anytime</div>
-    <div class="pricing-desc">Make faster cross-commodity decisions. Get AI 90-day price forecasts, unlimited Signal Reports, full Scenario Simulator with company sensitivity analysis, and trading notes on every signal.</div>
-    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:block;text-align:center;">Unlock Forecasts & Simulator →</a>
+    <div class="plan-billed plan-billed-pro" id="pro-billed">Best for investors and analysts running this workflow every week</div>
+    <div class="pricing-desc">Unlimited reports, full AI forecast ranges, simulator access, company sensitivity, and unblurred trading notes in one decision workflow.</div>
+    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:block;text-align:center;">Start Pro — Forecasts & Simulator →</a>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> <strong>Make faster multi-commodity decisions</strong> without hitting a wall<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Unlimited Signal Reports across all 60 commodity hubs</span></li>
       <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
@@ -403,9 +530,9 @@ permalink: /pricing/
   <div class="pricing-card">
     <div class="pricing-tier">Enterprise</div>
     <div class="pricing-price"><span id="ent-price">$99</span> <span>/month</span></div>
-    <div class="plan-billed" id="ent-billed">Billed monthly · Cancel anytime</div>
-    <div class="pricing-desc">Scale commodity intelligence across your team. Everything in Pro plus API access, bulk data exports, custom alerts, and collaborative research workflows.</div>
-    <button class="pricing-btn pricing-btn-ghost" onclick="window.location='/contact/'">Talk to Us About Team Access →</button>
+    <div class="plan-billed" id="ent-billed">Best for research desks and teams that need shared workflows</div>
+    <div class="pricing-desc">Everything in Pro plus exports, API-style access, alerts, and collaborative workflows for desks that need repeatable team coverage.</div>
+    <button class="pricing-btn pricing-btn-ghost" onclick="window.location='/contact/'">Talk to Sales About Team Access →</button>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> Everything in Pro</li>
       <li class="yes"><span class="feat-check">✓</span> CSV / JSON data export<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Download clean datasets for your own models</span></li>
@@ -516,13 +643,13 @@ function setBilling(mode, btn) {
   var proBilled = document.getElementById('pro-billed');
   if (proPrice) proPrice.textContent = isAnnual ? '$12' : '$19';
   if (proSub) proSub.textContent = isAnnual ? '/month' : '/month';
-  if (proBilled) proBilled.textContent = isAnnual ? 'Billed annually ($149/yr) · Save $79' : 'Billed monthly · Cancel anytime';
+  if (proBilled) proBilled.textContent = isAnnual ? 'Best for investors and analysts running this workflow every week · $149/yr billed annually' : 'Best for investors and analysts running this workflow every week';
 
   // Enterprise 카드 가격 업데이트
   var entPrice = document.getElementById('ent-price');
   var entBilled = document.getElementById('ent-billed');
   if (entPrice) entPrice.textContent = isAnnual ? '$79' : '$99';
-  if (entBilled) entBilled.textContent = isAnnual ? 'Billed annually · Save $189' : 'Billed monthly · Cancel anytime';
+  if (entBilled) entBilled.textContent = isAnnual ? 'Best for research desks and teams that need shared workflows · annual pricing available' : 'Best for research desks and teams that need shared workflows';
 }
 
 // 동적 날짜 배지

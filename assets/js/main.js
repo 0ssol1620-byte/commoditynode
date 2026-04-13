@@ -434,12 +434,19 @@
     if (!grid) return;
     const pagination = root.querySelector('.posts-pagination');
     const chips = root.querySelectorAll('.filter-chip');
+    const searchInput = root.querySelector('input[type="search"]');
     const cards = Array.from(grid.querySelectorAll('[data-post-card]'));
     if (!cards.length) return;
 
     const pageSize = parseInt(grid.dataset.pageSize || '6', 10);
     let currentFilter = 'all';
     let currentPage = 1;
+    let currentSearch = '';
+    try {
+      const params = new URLSearchParams(window.location.search);
+      currentSearch = (params.get('q') || '').trim().toLowerCase();
+      if (searchInput && currentSearch) searchInput.value = params.get('q') || '';
+    } catch (_) {}
 
     const filterMatchers = {
       all: () => true,
@@ -452,7 +459,10 @@
     function getVisibleCards() {
       return cards.filter(card => {
         const haystack = (card.dataset.filterTags || '').toLowerCase();
-        return (filterMatchers[currentFilter] || filterMatchers.all)(haystack);
+        const searchHaystack = (card.dataset.searchText || card.textContent || '').toLowerCase();
+        const matchesFilter = (filterMatchers[currentFilter] || filterMatchers.all)(haystack);
+        const matchesSearch = !currentSearch || haystack.includes(currentSearch) || searchHaystack.includes(currentSearch);
+        return matchesFilter && matchesSearch;
       });
     }
 
@@ -502,6 +512,12 @@
         chips.forEach(btn => btn.classList.toggle('is-active', btn === chip));
         render();
       });
+    });
+
+    searchInput?.addEventListener('input', () => {
+      currentSearch = (searchInput.value || '').trim().toLowerCase();
+      currentPage = 1;
+      render();
     });
 
     pagination?.addEventListener('click', e => {

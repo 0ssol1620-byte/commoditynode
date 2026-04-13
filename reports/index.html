@@ -44,14 +44,27 @@ description: "Browse CommodityNode Signal Reports, Impact Maps, and Ripple Chain
       </div>
     </div>
     <div class="archive-toolbar" data-animate>
-      <div class="filter-chips" role="tablist" aria-label="Filter archive Signal Reports">
-        <button class="filter-chip is-active" type="button" data-filter="all">All</button>
-        <button class="filter-chip" type="button" data-filter="energy">Energy</button>
-        <button class="filter-chip" type="button" data-filter="metals">Metals</button>
-        <button class="filter-chip" type="button" data-filter="agriculture">Agriculture</button>
-        <button class="filter-chip" type="button" data-filter="battery">Battery</button>
+      <div class="archive-toolbar-main">
+        <div class="filter-chips" role="tablist" aria-label="Filter archive Signal Reports">
+          <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+          <button class="filter-chip" type="button" data-filter="energy">Energy</button>
+          <button class="filter-chip" type="button" data-filter="metals">Metals</button>
+          <button class="filter-chip" type="button" data-filter="agriculture">Agriculture</button>
+          <button class="filter-chip" type="button" data-filter="battery">Battery</button>
+        </div>
+        <label class="archive-search" aria-label="Search reports">
+          <span>Search archive</span>
+          <input type="search" id="archive-search-input" placeholder="Search commodities, companies, countries, or themes…">
+        </label>
       </div>
-      <p class="archive-meta">Filter by cluster and paginate through the full archive.</p>
+      <div class="archive-discovery-note">
+        <p class="archive-meta">Filter by cluster, search by keyword, and paginate through the full archive.</p>
+        <div class="archive-shortcuts">
+          <a href="/signals/">Open live signals</a>
+          <a href="/commodities/">Jump to commodity hubs</a>
+          <a href="/pricing/">See Pro workflow</a>
+        </div>
+      </div>
     </div>
 
     <div class="posts-grid posts-grid--paginated" id="archive-posts-grid" data-page-size="12">
@@ -59,7 +72,7 @@ description: "Browse CommodityNode Signal Reports, Impact Maps, and Ripple Chain
       {% assign categories_joined = post.categories | join: '|' | downcase %}
       {% assign tags_joined = post.tags | join: '|' | downcase %}
       {% assign first_tag = post.tags | first | slugify %}
-      <article class="post-card post-card--discoverable" data-post-card data-filter-tags="{{ categories_joined }}|{{ tags_joined }}" data-commodity="{{ first_tag }}" data-animate>
+      <article class="post-card post-card--discoverable" data-post-card data-filter-tags="{{ categories_joined }}|{{ tags_joined }}" data-commodity="{{ first_tag }}" data-search-text="{{ post.title | strip_html | escape }} {{ post.description | default: post.excerpt | strip_html | escape }} {{ post.tags | join: ' ' | escape }} {{ post.categories | join: ' ' | escape }}" data-animate>
         <div class="post-card-accent"></div>
         <div class="post-card-body">
           <div class="post-card-meta">

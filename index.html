@@ -52,8 +52,12 @@ image: "/assets/images/og-default.png"
       </div>
 
       <h1 data-animate data-delay="100">
-        The Commodity <span class="highlight">Impact Map</span> For Markets, Supply Chains &amp; Equities
+        See which <span class="highlight">commodity shocks</span> hit your watchlist, supply chain, and sector exposure next
       </h1>
+
+      <p class="hero-kicker" data-animate data-delay="130">
+        CommodityNode turns live commodity moves into decision-ready context for investors, analysts, and operators tracking second-order market impact.
+      </p>
 
       <div class="hero-trust-strip" data-animate data-delay="150">
         <span class="trust-item">{{ site.coverage_counts.commodity_hubs | default: site.commodities | size }} commodity hubs</span>
@@ -67,12 +71,30 @@ image: "/assets/images/og-default.png"
 
       <p class="hero-desc" data-animate data-delay="200">
         Track how oil, metals, agriculture, and energy shocks propagate through
-        sectors, companies, ETFs, and second-order supply-chain relationships.
+        companies, ETFs, industries, and second-order supply-chain relationships — with live pricing, scenario ranges, and linked Signal Reports.
       </p>
 
+      <div class="hero-answer-grid" data-animate data-delay="240">
+        <div class="hero-answer-card">
+          <span>What it is</span>
+          <strong>Live commodity intelligence</strong>
+          <p>Commodity hubs, impact maps, AI forecast ranges, and research updates in one workflow.</p>
+        </div>
+        <div class="hero-answer-card">
+          <span>Who it is for</span>
+          <strong>Investors, analysts, and operators</strong>
+          <p>Use it when a commodity move can change your watchlist, margin outlook, or portfolio risk.</p>
+        </div>
+        <div class="hero-answer-card">
+          <span>Best next step</span>
+          <strong>Start with the live hub</strong>
+          <p>Check the commodity, open the signal, then model the scenario before consensus catches up.</p>
+        </div>
+      </div>
+
       <div class="hero-actions" data-animate data-delay="300">
-        <a href="/commodities/" class="btn btn-primary">Explore Commodity Hubs</a>
-        <a href="#guided-entry" class="btn btn-secondary">See What's Moving →</a>
+        <a href="/commodities/" class="btn btn-primary">Open Live Commodity Hubs</a>
+        <a href="/stress-test/" class="btn btn-secondary">Run Portfolio Stress Test</a>
       </div>
 
       <div class="hero-micro-links" data-animate data-delay="340" style="display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:0.84rem;color:var(--text3);">
@@ -1261,6 +1283,7 @@ image: "/assets/images/og-default.png"
                data-delay="{{ forloop.index0 | times: 100 | modulo: 500 }}"
                data-post-card
                data-filter-tags="{{ categories_joined }}|{{ tags_joined }}"
+               data-search-text="{{ post.title | strip_html | escape }} {{ post.description | default: post.excerpt | strip_html | escape }} {{ post.tags | join: ' ' | escape }} {{ post.categories | join: ' ' | escape }}"
                data-commodity="{{ first_tag }}">
 
         {% if forloop.first %}
