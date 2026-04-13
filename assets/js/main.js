@@ -435,6 +435,9 @@
     const pagination = root.querySelector('.posts-pagination');
     const chips = root.querySelectorAll('.filter-chip');
     const searchInput = root.querySelector('input[type="search"]');
+    const searchClear = root.querySelector('#archive-search-clear');
+    const searchStatus = root.querySelector('#archive-search-status');
+    const queryChips = root.querySelectorAll('[data-query-chip]');
     const cards = Array.from(grid.querySelectorAll('[data-post-card]'));
     if (!cards.length) return;
 
@@ -445,6 +448,7 @@
     try {
       const params = new URLSearchParams(window.location.search);
       currentSearch = (params.get('q') || '').trim().toLowerCase();
+      currentFilter = (params.get('filter') || 'all').trim().toLowerCase() || 'all';
       if (searchInput && currentSearch) searchInput.value = params.get('q') || '';
     } catch (_) {}
 
@@ -455,6 +459,17 @@
       agriculture: tags => /agriculture|wheat|corn|coffee|lumber|food/.test(tags),
       battery: tags => /battery|lithium|ev|uranium|clean-energy/.test(tags)
     };
+
+    function syncUrl() {
+      try {
+        const url = new URL(window.location.href);
+        if (currentSearch) url.searchParams.set('q', currentSearch);
+        else url.searchParams.delete('q');
+        if (currentFilter && currentFilter !== 'all') url.searchParams.set('filter', currentFilter);
+        else url.searchParams.delete('filter');
+        window.history.replaceState({}, '', url.toString());
+      } catch (_) {}
+    }
 
     function getVisibleCards() {
       return cards.filter(card => {
@@ -502,14 +517,24 @@
         card.classList.add('is-visible-page');
       });
 
+      chips.forEach(btn => btn.classList.toggle('is-active', (btn.dataset.filter || 'all') === currentFilter));
+      queryChips.forEach(chip => chip.classList.toggle('is-active', (chip.dataset.queryChip || '').toLowerCase() === currentSearch));
+      if (searchStatus) {
+        const filterLabel = currentFilter === 'all' ? 'all sectors' : currentFilter;
+        searchStatus.textContent = currentSearch
+          ? `Showing ${visibleCards.length} report${visibleCards.length === 1 ? '' : 's'} for “${currentSearch}” in ${filterLabel}.`
+          : `Showing ${visibleCards.length} report${visibleCards.length === 1 ? '' : 's'} in ${filterLabel}.`;
+      }
+      if (searchClear) searchClear.hidden = !currentSearch;
+
       renderPagination(totalPages, visibleCards.length);
+      syncUrl();
     }
 
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
         currentFilter = chip.dataset.filter || 'all';
         currentPage = 1;
-        chips.forEach(btn => btn.classList.toggle('is-active', btn === chip));
         render();
       });
     });
@@ -518,6 +543,25 @@
       currentSearch = (searchInput.value || '').trim().toLowerCase();
       currentPage = 1;
       render();
+    });
+
+    searchClear?.addEventListener('click', () => {
+      currentSearch = '';
+      currentPage = 1;
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      render();
+    });
+
+    queryChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        currentSearch = (chip.dataset.queryChip || '').trim().toLowerCase();
+        currentPage = 1;
+        if (searchInput) searchInput.value = chip.dataset.queryChip || '';
+        render();
+      });
     });
 
     pagination?.addEventListener('click', e => {
@@ -533,6 +577,16 @@
   }
 
   document.querySelectorAll('.section, .archive-section').forEach(initDiscoverablePosts);
+
+  document.addEventListener('click', function(event) {
+    const target = event.target.closest('[data-cta]');
+    if (!target || typeof window.gtag !== 'function') return;
+    window.gtag('event', 'cta_click', {
+      event_category: 'engagement',
+      event_label: target.getAttribute('data-cta'),
+      page_path: window.location.pathname
+    });
+  });
 
   /* ---------- Smooth reveal for first visit ---------- */
   document.documentElement.style.opacity = '0';

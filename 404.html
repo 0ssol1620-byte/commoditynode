@@ -13,13 +13,20 @@ permalink: /404.html
 
     <form class="cn-404-search" action="/reports/" method="get" role="search">
       <input type="search" name="q" placeholder="Search reports, commodities, companies, or themes…" aria-label="Search CommodityNode">
-      <button type="submit" class="btn btn-primary">Search Archive</button>
+      <button type="submit" class="btn btn-primary" data-cta="404_search_archive">Search Archive</button>
     </form>
 
+    <div class="cn-404-suggested-searches" aria-label="Popular recovery searches">
+      <a href="/reports/?q=hormuz" class="cn-404-chip" data-cta="404_chip_hormuz">Hormuz risk</a>
+      <a href="/reports/?q=copper" class="cn-404-chip" data-cta="404_chip_copper">Copper supply</a>
+      <a href="/reports/?q=uranium" class="cn-404-chip" data-cta="404_chip_uranium">Uranium</a>
+      <a href="/commodities/" class="cn-404-chip" data-cta="404_chip_hubs">Commodity hubs</a>
+    </div>
+
     <div class="cn-404-actions">
-      <a href="/commodities/" class="btn btn-primary">Browse Commodity Hubs</a>
-      <a href="/reports/" class="btn btn-secondary">Open Signal Reports</a>
-      <a href="/simulator/" class="btn btn-secondary">Run Scenario Simulator</a>
+      <a href="/commodities/" class="btn btn-primary" data-cta="404_browse_hubs">Browse Commodity Hubs</a>
+      <a href="/reports/" class="btn btn-secondary" data-cta="404_open_signals">Open Signal Reports</a>
+      <a href="/simulator/" class="btn btn-secondary" data-cta="404_open_simulator">Run Scenario Simulator</a>
     </div>
 
     <div class="cn-404-grid">
@@ -103,6 +110,28 @@ permalink: /404.html
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 22px;
+}
+.cn-404-suggested-searches {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: -8px 0 24px;
+}
+.cn-404-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  text-decoration: none;
+}
+.cn-404-chip:hover {
+  border-color: rgba(34,211,238,0.28);
+  color: #f0f0f5;
 }
 .cn-404-search input {
   flex: 1 1 420px;

@@ -254,6 +254,46 @@ permalink: /pricing/
 .compare-row:last-child > div {
   border-bottom: none;
 }
+.faq-item {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+}
+.faq-item summary::-webkit-details-marker { display:none; }
+.faq-q { font-size: 0.88rem; font-weight: 600; color: #f0f0f5; margin: 0; }
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  flex: 0 0 auto;
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+  color: #22d3ee;
+  border-color: rgba(34,211,238,0.28);
+}
+.faq-a {
+  font-size: 0.82rem;
+  color: #9494a8;
+  line-height: 1.7;
+  padding: 0 22px 20px;
+}
 .pricing-card {
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.08);
@@ -368,12 +408,6 @@ permalink: /pricing/
   text-align: center;
   margin-bottom: 32px;
 }
-.faq-item {
-  border-top: 1px solid rgba(255,255,255,0.07);
-  padding: 18px 0;
-}
-.faq-q { font-size: 0.88rem; font-weight: 600; color: #f0f0f5; margin-bottom: 8px; }
-.faq-a { font-size: 0.8rem; color: #9494a8; line-height: 1.6; }
 
 @media (max-width: 768px) {
   .pricing-compare-strip,
@@ -392,9 +426,8 @@ permalink: /pricing/
   <div class="container">
     <p class="section-label" style="text-align:center">Simple, Transparent Pricing</p>
     <h1>Intelligence that pays<br><span style="background:linear-gradient(135deg,#22d3ee,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">for itself.</span></h1>
-    <p class="pricing-hero-sub" style="color:#9494a8;font-size:1rem;max-width:540px;margin:0 auto">
-      One well-timed trade using CommodityNode signal data typically covers months of Pro membership.
-      Join a <strong style="color:#e2e8f0">growing community of analysts and traders</strong> who use our platform daily.
+    <p class="pricing-hero-sub" style="color:#9494a8;font-size:1rem;max-width:640px;margin:0 auto">
+      Start free, validate the workflow on live market moves, then upgrade when you need unlimited Signal Reports, forecast ranges, and scenario context in one place.
     </p>
     <div style="max-width:700px;margin:0 auto 32px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:16px;padding:24px 28px;">
       <div style="font-size:0.72rem;color:#22d3ee;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Real Use Case</div>
@@ -493,7 +526,7 @@ permalink: /pricing/
     <div class="pricing-price">$0 <span>/month</span></div>
     <div class="plan-billed">Best for evaluating the workflow before you pay</div>
     <div class="pricing-desc">Access all 62 commodity hubs, read 3 Signal Reports per month, and validate whether the workflow fits your process.</div>
-    <button class="pricing-btn pricing-btn-ghost" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start Free</button>
+    <button class="pricing-btn pricing-btn-ghost" data-cta="pricing_start_free" onclick="if(window.Clerk)window.Clerk.openSignUp()">Start Free</button>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> 3 Signal Reports / month</li>
       <li class="yes"><span class="feat-check">✓</span> Commodity price charts</li>
@@ -513,7 +546,7 @@ permalink: /pricing/
     <div class="pricing-price"><span id="pro-price">$19</span> <span id="pro-sub">/month</span></div>
     <div class="plan-billed plan-billed-pro" id="pro-billed">Best for investors and analysts running this workflow every week</div>
     <div class="pricing-desc">Unlimited reports, full AI forecast ranges, simulator access, company sensitivity, and unblurred trading notes in one decision workflow.</div>
-    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:block;text-align:center;">Start Pro — Forecasts & Simulator →</a>
+    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" data-cta="pricing_start_pro" style="text-decoration:none;display:block;text-align:center;">Start Pro — Forecasts & Simulator →</a>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> <strong>Make faster multi-commodity decisions</strong> without hitting a wall<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Unlimited Signal Reports across all 60 commodity hubs</span></li>
       <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
@@ -532,7 +565,7 @@ permalink: /pricing/
     <div class="pricing-price"><span id="ent-price">$99</span> <span>/month</span></div>
     <div class="plan-billed" id="ent-billed">Best for research desks and teams that need shared workflows</div>
     <div class="pricing-desc">Everything in Pro plus exports, API-style access, alerts, and collaborative workflows for desks that need repeatable team coverage.</div>
-    <button class="pricing-btn pricing-btn-ghost" onclick="window.location='/contact/'">Talk to Sales About Team Access →</button>
+    <button class="pricing-btn pricing-btn-ghost" data-cta="pricing_talk_sales" onclick="window.location='/contact/'">Talk to Sales About Team Access →</button>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> Everything in Pro</li>
       <li class="yes"><span class="feat-check">✓</span> CSV / JSON data export<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Download clean datasets for your own models</span></li>
@@ -664,54 +697,54 @@ function setBilling(mode, btn) {
 
 <div class="pricing-faq">
   <h2>Frequently asked questions</h2>
-  <div class="faq-item">
-    <div class="faq-q">How accurate is the AI forecast?</div>
+  <details class="faq-item" open>
+    <summary><span class="faq-q">How accurate is the AI forecast?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Our proprietary AI forecast engine uses state-of-the-art time series models to generate 90-day price projections. Forecasts include 80% confidence intervals so you can assess the uncertainty range. Updated daily with fresh market data.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">How do I cancel?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">How do I cancel?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Cancel anytime from your account settings. No questions asked. You keep access until the end of your billing period.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">Is there a billing portal?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">Is there a billing portal?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Yes, manage your subscription at any time through your account. View invoices, update payment methods, or change your plan — all self-serve.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">What commodities are covered?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">What commodities are covered?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">60 commodity hubs including energy (crude oil, natural gas, LNG), precious metals (gold, silver, platinum), industrial metals (copper, aluminum, nickel), agriculture (wheat, corn, soybeans, coffee), and critical materials (lithium, uranium, cobalt).</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">Is this financial advice?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">Is this financial advice?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">No. CommodityNode provides research and analytical tools for informational purposes only. All forecasts and analysis should be treated as one input among many in your investment process. Please read our full disclaimer on the methodology page.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">What's the difference between Free and Pro?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">What's the difference between Free and Pro?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Free gives you access to all 60 commodity hubs, up to 3 Signal Reports per month, and the basic Impact Map. Pro unlocks unlimited Signal Reports, the AI 90-day price forecast, full Scenario Simulator with company sensitivity analysis, and trading notes on each signal.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">What happens after the 7-day trial?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">What happens after the 7-day trial?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Your account automatically converts to the Free tier. No charge. You keep access to all commodity hubs, public reports, and the basic Impact Map.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">Can I cancel anytime?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">Can I cancel anytime?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Yes. Cancel from your account settings with one click. No questions, no exit interview.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">Do you offer refunds?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">Do you offer refunds?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Yes, we offer a full refund within the first 14 days if Pro isn't right for you.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">Is there an API?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">Is there an API?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">API access is available on the Enterprise plan. Contact us for documentation and rate limits.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">How does Enterprise work?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">How does Enterprise work?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Contact us for team seats, API access, and custom data exports. We'll respond within 24 hours. Enterprise includes everything in Pro plus dedicated support and custom integrations.</div>
-  </div>
-  <div class="faq-item">
-    <div class="faq-q">Is this suitable for individual investors, not just professionals?</div>
+  </details>
+  <details class="faq-item">
+    <summary><span class="faq-q">Is this suitable for individual investors, not just professionals?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
     <div class="faq-a">Yes. Most Pro members are individual investors and self-directed traders who want the same commodity intelligence that professional analysts use — without institutional pricing. If you manage a personal portfolio with commodity-sensitive stocks (energy, mining, agriculture, airlines), Pro pays for itself quickly.</div>
-  </div>
+  </details>
 </div>
 
 <div style="max-width:700px;margin:32px auto 0;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:12px;">

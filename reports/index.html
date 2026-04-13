@@ -54,15 +54,25 @@ description: "Browse CommodityNode Signal Reports, Impact Maps, and Ripple Chain
         </div>
         <label class="archive-search" aria-label="Search reports">
           <span>Search archive</span>
-          <input type="search" id="archive-search-input" placeholder="Search commodities, companies, countries, or themes…">
+          <div class="archive-search-row">
+            <input type="search" id="archive-search-input" placeholder="Search commodities, companies, countries, or themes…" data-cta="archive_search_input">
+            <button type="button" class="archive-clear-btn" id="archive-search-clear">Clear</button>
+          </div>
         </label>
       </div>
       <div class="archive-discovery-note">
         <p class="archive-meta">Filter by cluster, search by keyword, and paginate through the full archive.</p>
+        <div class="archive-search-status" id="archive-search-status" aria-live="polite"></div>
+        <div class="archive-query-chips" aria-label="Popular archive searches">
+          <button type="button" class="archive-query-chip" data-query-chip="hormuz">Hormuz</button>
+          <button type="button" class="archive-query-chip" data-query-chip="copper">Copper</button>
+          <button type="button" class="archive-query-chip" data-query-chip="uranium">Uranium</button>
+          <button type="button" class="archive-query-chip" data-query-chip="china demand">China demand</button>
+        </div>
         <div class="archive-shortcuts">
-          <a href="/signals/">Open live signals</a>
-          <a href="/commodities/">Jump to commodity hubs</a>
-          <a href="/pricing/">See Pro workflow</a>
+          <a href="/signals/" data-cta="archive_open_signals">Open live signals</a>
+          <a href="/commodities/" data-cta="archive_jump_hubs">Jump to commodity hubs</a>
+          <a href="/pricing/" data-cta="archive_see_pricing">See Pro workflow</a>
         </div>
       </div>
     </div>
