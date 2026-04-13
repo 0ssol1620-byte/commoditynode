@@ -2,7 +2,7 @@
 layout: commodity
 unit: "$/oz"
 image: "/assets/images/og-iridium.png"
-title: "Iridium Price Impact: Green Hydrogen, PEM Electrolyzers & PGM Supply Chain"
+title: "Iridium Price Impact: Hydrogen, PEM Electrolyzers & PGMs"
 description: "How iridium price shifts cascade through green hydrogen production, PEM electrolyzer manufacturers, and the South Africa-concentrated PGM supply chain."
 commodity_slug: "iridium"
 symbol: "SBSW"

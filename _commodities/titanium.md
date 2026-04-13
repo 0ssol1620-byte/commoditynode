@@ -2,7 +2,7 @@
 layout: commodity
 unit: "$/kg"
 image: "/assets/images/og-titanium.png"
-title: "Titanium Price Impact: Aerospace, Defense, Medical & Russia Supply Risk"
+title: "Titanium Price Impact: Aerospace, Defense & Medical Supply"
 description: "How titanium price shifts cascade through aerospace manufacturers, defense contractors, medical implants, and the Russia-dominated supply chain."
 commodity_slug: "titanium"
 symbol: "TIE"

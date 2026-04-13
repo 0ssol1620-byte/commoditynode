@@ -2,7 +2,7 @@
 layout: commodity
 unit: "$/acre-ft"
 image: "/assets/images/og-water.png"
-title: "Water Price Impact: Agriculture, Climate Risk, Utilities & Scarcity Economics"
+title: "Water Price Impact: Agriculture, Utilities & Scarcity Risk"
 description: "How water scarcity and pricing cascade through agriculture, mining, municipal utilities, and the emerging water futures market."
 commodity_slug: "water"
 symbol: "PHO"
