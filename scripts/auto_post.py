@@ -99,8 +99,12 @@ def load_prices() -> dict:
 
 def top_movers(prices: dict, n: int = 3, min_move: float = 2.0) -> list[tuple[str, dict]]:
     """Return top N commodities sorted by abs(change_pct), filtered by min_move."""
-    ranked = sorted(prices.items(), key=lambda kv: abs(kv[1].get("change_pct", 0)), reverse=True)
-    return [(k, v) for k, v in ranked if abs(v.get("change_pct", 0)) >= min_move][:n]
+    def safe_change(entry: dict) -> float:
+        ch = entry.get("change_pct", 0)
+        return abs(ch) if isinstance(ch, (int, float)) else 0.0
+
+    ranked = sorted(prices.items(), key=lambda kv: safe_change(kv[1]), reverse=True)
+    return [(k, v) for k, v in ranked if safe_change(v) >= min_move][:n]
 
 
 def already_posted_today(commodity_key: str) -> bool:
@@ -337,7 +341,8 @@ def main():
         log(f"No commodities moved more than {args.min_move}%. Nothing to generate.")
         sys.exit(0)
 
-    log(f"Top movers: {', '.join(f'{k} ({v['change_pct']:+.1f}%)' for k, v in movers)}")
+    mover_labels = ["{} ({:+.1f}%)".format(k, v['change_pct']) for k, v in movers]
+    log(f"Top movers: {', '.join(mover_labels)}")
 
     files_created = []
 
