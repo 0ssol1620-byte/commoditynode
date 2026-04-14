@@ -463,6 +463,7 @@ permalink: /simulator/
       <div>
         <div class="sim-chart-title" id="sim-chart-title">Select a scenario to view analysis</div>
         <div class="sim-chart-subtitle" id="sim-chart-subtitle">Historical prices + consensus forecast with Chronos-2 and TimesFM comparison</div>
+        <div id="sim-active-scenario-badge" style="display:none;margin-top:10px;"></div>
       </div>
       <div class="sim-period-btns">
         <button class="sim-period-btn active" data-period="3m" onclick="setPeriod('3m',this)">3M</button>
@@ -1247,6 +1248,7 @@ function renderChart(){
     axisLabels = axisLabels.concat(fcstLabels);
   }
   var tickIndexMap = buildTickIndexMap(axisLabels.length, forecastStartIndex, compact);
+  var activeScenarioSummary = getActiveScenarioSummary();
   var histDataset = histPrices.map(function(v, i){ return {x: i, y: v}; });
   var consensusDataset = [{x: forecastStartIndex, y: connPrice}].concat(fcstMedian.map(function(v, i){ return {x: forecastStartIndex + 1 + i, y: v}; }));
   var chronosDataset = [{x: forecastStartIndex, y: connPrice}].concat(chronosMedian.map(function(v, i){ return {x: forecastStartIndex + 1 + i, y: v}; }));
@@ -1335,6 +1337,30 @@ function renderChart(){
         }
       ]
     },
+    plugins: [{
+      id: 'forecastStartMarker',
+      afterDraw: function(chart) {
+        var chartArea = chart.chartArea;
+        if (!chartArea) return;
+        var xScale = chart.scales && chart.scales.x;
+        if (!xScale) return;
+        var x = xScale.getPixelForValue(forecastStartIndex);
+        var ctx2 = chart.ctx;
+        ctx2.save();
+        ctx2.strokeStyle = 'rgba(148,163,184,0.28)';
+        ctx2.setLineDash([5, 5]);
+        ctx2.beginPath();
+        ctx2.moveTo(x, chartArea.top + 2);
+        ctx2.lineTo(x, chartArea.bottom);
+        ctx2.stroke();
+        ctx2.setLineDash([]);
+        ctx2.fillStyle = 'rgba(148,163,184,0.92)';
+        ctx2.font = '600 11px Inter, system-ui, sans-serif';
+        ctx2.textAlign = 'left';
+        ctx2.fillText('Forecast starts', Math.min(x + 8, chartArea.right - 86), chartArea.top + 14);
+        ctx2.restore();
+      }
+    }],
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -1405,6 +1431,25 @@ function renderChart(){
       }
     }
   });
+
+  var activeBadge = document.getElementById('sim-active-scenario-badge');
+  if (activeBadge) {
+    if (activeScenarioSummary) {
+      var totalAdj = calcScenarioAdjustment();
+      activeBadge.style.display = 'inline-flex';
+      activeBadge.style.alignItems = 'center';
+      activeBadge.style.gap = '8px';
+      activeBadge.style.padding = '7px 11px';
+      activeBadge.style.borderRadius = '999px';
+      activeBadge.style.border = '1px solid rgba(94,234,212,0.18)';
+      activeBadge.style.background = totalAdj > 0 ? 'rgba(16,185,129,0.10)' : 'rgba(244,63,94,0.10)';
+      activeBadge.style.color = totalAdj > 0 ? '#34d399' : '#fb7185';
+      activeBadge.innerHTML = '<strong style="font-size:0.74rem;letter-spacing:0.06em;text-transform:uppercase;">' + activeScenarioSummary.label + '</strong><span style="font-size:0.78rem;color:#cbd5e1;">' + activeScenarioSummary.detail + '</span>';
+    } else {
+      activeBadge.style.display = 'none';
+      activeBadge.innerHTML = '';
+    }
+  }
 
   var strip = document.getElementById('sim-consensus-strip');
   var compareStrip = document.getElementById('sim-model-compare-strip');
@@ -1546,6 +1591,16 @@ function showSimulatorCTA() {
 
 function calcScenarioAdjustment(){
   return Object.values(state.scenarios).reduce(function(sum, v){ return sum + v; }, 0);
+}
+
+function getActiveScenarioSummary() {
+  var totalAdj = calcScenarioAdjustment();
+  if (!totalAdj) return null;
+  var label = totalAdj > 0 ? 'Bullish scenario active' : 'Bearish scenario active';
+  return {
+    label: label,
+    detail: (totalAdj > 0 ? '+' : '') + totalAdj + '% aggregate commodity shock'
+  };
 }
 
 // ── Impact ────────────────────────────────────────────────────────────────

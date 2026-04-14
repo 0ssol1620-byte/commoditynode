@@ -433,23 +433,34 @@
     const grid = root.querySelector('.posts-grid--paginated');
     if (!grid) return;
     const pagination = root.querySelector('.posts-pagination');
-    const chips = root.querySelectorAll('.filter-chip');
+    const chips = root.querySelectorAll('.filter-chip[data-filter]');
+    const directionChips = root.querySelectorAll('[data-direction-filter]');
     const searchInput = root.querySelector('input[type="search"]');
     const searchClear = root.querySelector('#archive-search-clear');
     const searchStatus = root.querySelector('#archive-search-status');
     const queryChips = root.querySelectorAll('[data-query-chip]');
+    const sortSelect = root.querySelector('[data-sort-select]');
+    const recencySelect = root.querySelector('[data-recency-select]');
     const cards = Array.from(grid.querySelectorAll('[data-post-card]'));
     if (!cards.length) return;
 
     const pageSize = parseInt(grid.dataset.pageSize || '6', 10);
     let currentFilter = 'all';
+    let currentDirection = 'all';
     let currentPage = 1;
     let currentSearch = '';
+    let currentSort = 'latest';
+    let currentRecency = 'all';
     try {
       const params = new URLSearchParams(window.location.search);
       currentSearch = (params.get('q') || '').trim().toLowerCase();
       currentFilter = (params.get('filter') || 'all').trim().toLowerCase() || 'all';
+      currentDirection = (params.get('direction') || 'all').trim().toLowerCase() || 'all';
+      currentSort = (params.get('sort') || 'latest').trim().toLowerCase() || 'latest';
+      currentRecency = (params.get('window') || 'all').trim().toLowerCase() || 'all';
       if (searchInput && currentSearch) searchInput.value = params.get('q') || '';
+      if (sortSelect) sortSelect.value = currentSort;
+      if (recencySelect) recencySelect.value = currentRecency;
     } catch (_) {}
 
     const filterMatchers = {
@@ -467,17 +478,37 @@
         else url.searchParams.delete('q');
         if (currentFilter && currentFilter !== 'all') url.searchParams.set('filter', currentFilter);
         else url.searchParams.delete('filter');
+        if (currentDirection && currentDirection !== 'all') url.searchParams.set('direction', currentDirection);
+        else url.searchParams.delete('direction');
+        if (currentSort && currentSort !== 'latest') url.searchParams.set('sort', currentSort);
+        else url.searchParams.delete('sort');
+        if (currentRecency && currentRecency !== 'all') url.searchParams.set('window', currentRecency);
+        else url.searchParams.delete('window');
         window.history.replaceState({}, '', url.toString());
       } catch (_) {}
     }
 
     function getVisibleCards() {
-      return cards.filter(card => {
+      const nowTs = Math.floor(Date.now() / 1000);
+      const visible = cards.filter(card => {
         const haystack = (card.dataset.filterTags || '').toLowerCase();
         const searchHaystack = (card.dataset.searchText || card.textContent || '').toLowerCase();
+        const direction = (card.dataset.direction || 'neutral').toLowerCase();
+        const postDate = parseInt(card.dataset.postDate || '0', 10);
         const matchesFilter = (filterMatchers[currentFilter] || filterMatchers.all)(haystack);
         const matchesSearch = !currentSearch || haystack.includes(currentSearch) || searchHaystack.includes(currentSearch);
-        return matchesFilter && matchesSearch;
+        const matchesDirection = currentDirection === 'all' || direction === currentDirection;
+        const matchesRecency = currentRecency === 'all' || (postDate && (nowTs - postDate) <= parseInt(currentRecency, 10) * 86400);
+        return matchesFilter && matchesSearch && matchesDirection && matchesRecency;
+      });
+      return visible.sort((a, b) => {
+        const aDate = parseInt(a.dataset.postDate || '0', 10);
+        const bDate = parseInt(b.dataset.postDate || '0', 10);
+        const aTitle = (a.dataset.postTitle || '').toLowerCase();
+        const bTitle = (b.dataset.postTitle || '').toLowerCase();
+        if (currentSort === 'oldest') return aDate - bDate;
+        if (currentSort === 'title_asc') return aTitle.localeCompare(bTitle);
+        return bDate - aDate;
       });
     }
 
@@ -518,12 +549,15 @@
       });
 
       chips.forEach(btn => btn.classList.toggle('is-active', (btn.dataset.filter || 'all') === currentFilter));
+      directionChips.forEach(btn => btn.classList.toggle('is-active', (btn.dataset.directionFilter || 'all') === currentDirection));
       queryChips.forEach(chip => chip.classList.toggle('is-active', (chip.dataset.queryChip || '').toLowerCase() === currentSearch));
       if (searchStatus) {
         const filterLabel = currentFilter === 'all' ? 'all sectors' : currentFilter;
+        const directionLabel = currentDirection === 'all' ? 'all signals' : currentDirection;
+        const recencyLabel = currentRecency === 'all' ? 'all time' : `last ${currentRecency}d`;
         searchStatus.textContent = currentSearch
-          ? `Showing ${visibleCards.length} report${visibleCards.length === 1 ? '' : 's'} for “${currentSearch}” in ${filterLabel}.`
-          : `Showing ${visibleCards.length} report${visibleCards.length === 1 ? '' : 's'} in ${filterLabel}.`;
+          ? `Showing ${visibleCards.length} report${visibleCards.length === 1 ? '' : 's'} for “${currentSearch}” in ${filterLabel} · ${directionLabel} · ${recencyLabel}.`
+          : `Showing ${visibleCards.length} report${visibleCards.length === 1 ? '' : 's'} in ${filterLabel} · ${directionLabel} · ${recencyLabel}.`;
       }
       if (searchClear) searchClear.hidden = !currentSearch;
 
@@ -534,6 +568,14 @@
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
         currentFilter = chip.dataset.filter || 'all';
+        currentPage = 1;
+        render();
+      });
+    });
+
+    directionChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        currentDirection = chip.dataset.directionFilter || 'all';
         currentPage = 1;
         render();
       });
@@ -562,6 +604,18 @@
         if (searchInput) searchInput.value = chip.dataset.queryChip || '';
         render();
       });
+    });
+
+    sortSelect?.addEventListener('change', () => {
+      currentSort = (sortSelect.value || 'latest').trim().toLowerCase();
+      currentPage = 1;
+      render();
+    });
+
+    recencySelect?.addEventListener('change', () => {
+      currentRecency = (recencySelect.value || 'all').trim().toLowerCase();
+      currentPage = 1;
+      render();
     });
 
     pagination?.addEventListener('click', e => {

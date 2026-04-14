@@ -411,6 +411,14 @@ no_loader: true
     <p class="pricing-hero-sub" style="color:#9494a8;font-size:1rem;max-width:640px;margin:0 auto">
       Start free, validate the workflow on live market moves, then upgrade when you need unlimited Signal Reports, forecast ranges, and scenario context in one place.
     </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 22px;">
+      <a href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start Pro — $19/month</a>
+      <button class="pricing-btn pricing-btn-ghost" data-cta="pricing_start_free_hero" onclick="if(window.Clerk)window.Clerk.openSignUp()" style="width:auto;min-width:180px;margin-bottom:0;padding:12px 18px;">Start Free</button>
+    </div>
+    <div class="billing-toggle" id="billing-toggle-hero" style="margin:0 auto 18px;">
+      <button class="billing-btn active" data-billing="monthly" onclick="setBilling('monthly',this)">Monthly</button>
+      <button class="billing-btn" data-billing="annual" onclick="setBilling('annual',this)">Annual <span class="save-badge">Save 35%</span></button>
+    </div>
     <div style="max-width:700px;margin:0 auto 32px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:16px;padding:24px 28px;">
       <div style="font-size:0.72rem;color:#22d3ee;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Real Use Case</div>
       <p style="font-size:0.9rem;color:#cbd5e1;line-height:1.7;margin-bottom:8px;">"When Kazakhstan announced uranium production cuts, CommodityNode's Uranium hub already had the company sensitivity mapped — CCJ, NXE, URA. The signal was live before most analyst notes hit my inbox."</p>
@@ -425,25 +433,21 @@ no_loader: true
       <div class="sp-divider"></div>
       <div class="sp-item"><span class="sp-num">$19</span><span class="sp-label">Pro starts per month</span></div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:960px;margin:26px auto 0;text-align:left;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:920px;margin:18px auto 0;text-align:left;">
       <div style="padding:16px 18px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
         <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Built for real workflows</div>
-        <div style="font-size:0.92rem;color:#cbd5e1;line-height:1.6;">Use Pro when commodity moves actually change your watchlist, sector views, or portfolio risk, not just when you want another chart.</div>
+        <div style="font-size:0.92rem;color:#cbd5e1;line-height:1.6;">Use Pro when commodity moves actually change your watchlist, sector views, or portfolio risk — not just when you want another chart.</div>
       </div>
       <div style="padding:16px 18px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
         <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">Transparent limits</div>
-        <div style="font-size:0.92rem;color:#cbd5e1;line-height:1.6;">Forecasts include uncertainty, proxy-priced commodities are labeled, and unreliable daily changes are suppressed instead of faked. That is deliberate.</div>
-      </div>
-      <div style="padding:16px 18px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#f59e0b;font-weight:700;margin-bottom:6px;">Why users pay</div>
-        <div style="font-size:0.92rem;color:#cbd5e1;line-height:1.6;">The value is faster interpretation, cleaner portfolio context, and better second-order thinking across commodities, sectors, and equities.</div>
+        <div style="font-size:0.92rem;color:#cbd5e1;line-height:1.6;">Forecasts include uncertainty, proxy-priced commodities are labeled, and unreliable daily changes are suppressed instead of faked.</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- Billing Toggle -->
-<div class="billing-toggle" id="billing-toggle">
+<div class="billing-toggle" id="billing-toggle" style="display:none;">
   <button class="billing-btn active" data-billing="monthly" onclick="setBilling('monthly',this)">Monthly</button>
   <button class="billing-btn" data-billing="annual" onclick="setBilling('annual',this)">Annual <span class="save-badge">Save 35%</span></button>
 </div>
@@ -644,8 +648,9 @@ var PRO_ANNUAL_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/b7c744
 
 // Billing toggle
 function setBilling(mode, btn) {
-  document.querySelectorAll('.billing-btn').forEach(function(b){ b.classList.remove('active'); });
-  btn.classList.add('active');
+  document.querySelectorAll('.billing-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.billing === mode);
+  });
   var isAnnual = mode === 'annual';
 
   // Pro CTA 버튼 URL 업데이트
