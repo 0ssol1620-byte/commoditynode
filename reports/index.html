@@ -3,6 +3,7 @@ layout: default
 title: Research Archive
 permalink: /reports/
 description: "Browse CommodityNode Signal Reports, Impact Maps, and Ripple Chain research across 60+ commodities, supply shocks, and portfolio-sensitive sectors."
+no_loader: true
 ---
 
 <div class="post-header">
@@ -112,7 +113,7 @@ description: "Browse CommodityNode Signal Reports, Impact Maps, and Ripple Chain
           </div>
           {% endif %}
           <div class="post-card-footer">
-            <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a>
+            <a href="{{ post.url | relative_url }}" class="read-more">Open Research &rarr;</a>
             {% if post.reading_time %}<span class="reading-time">{{ post.reading_time }} min read</span>{% endif %}
           </div>
         </div>

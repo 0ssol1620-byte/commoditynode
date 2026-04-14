@@ -280,7 +280,7 @@ image: "/assets/images/og-default.png"
       </a>
       <a href="/simulator/" class="guided-card" data-category="scenarios">
         <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-        <div class="guided-content"><div class="guided-title-sm">Run "what-if" scenarios</div><div class="guided-desc">Simulate Iran crisis, China slowdown, or Fed cuts — see which industries and companies are hit.</div></div>
+        <div class="guided-content"><div class="guided-title-sm">Run scenario stress tests</div><div class="guided-desc">Simulate Iran crisis, China slowdown, or Fed cuts — see which industries and companies are hit.</div></div>
         <div class="guided-arrow">→</div>
       </a>
       <a href="/correlation/" class="guided-card" data-category="analysis">
@@ -586,9 +586,10 @@ image: "/assets/images/og-default.png"
           x: {
             grid: { color: 'rgba(255,255,255,0.03)' },
             ticks: {
-              color: '#334155',
+              color: '#94a3b8',
               maxTicksLimit: 8,
               maxRotation: 0,
+              font: { size: 11, weight: '600' },
               callback: function(val) {
                 var label = this.getLabelForValue(val);
                 if (!label) return '';
@@ -599,7 +600,7 @@ image: "/assets/images/og-default.png"
           },
           y: {
             grid: { color: 'rgba(255,255,255,0.04)' },
-            ticks: { color: '#475569', callback: function(val) { return fmt(val, meta); } }
+            ticks: { color: '#94a3b8', font: { size: 11, weight: '600' }, callback: function(val) { return fmt(val, meta); } }
           }
         }
       }

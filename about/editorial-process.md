@@ -34,6 +34,20 @@ no_loader: true
 
 <div class="container" style="padding:48px 24px 80px;">
 <div style="max-width:760px;margin:0 auto;">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:0 0 24px;" data-animate>
+  <div style="padding:14px 16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
+    <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Last reviewed</div>
+    <div style="font-size:0.96rem;color:var(--text2);font-weight:700;">Apr 14, 2026</div>
+  </div>
+  <div style="padding:14px 16px;background:rgba(168,85,247,0.05);border:1px solid rgba(168,85,247,0.14);border-radius:12px;">
+    <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#a855f7;font-weight:700;margin-bottom:6px;">Reviewed by</div>
+    <div style="font-size:0.96rem;color:var(--text2);font-weight:700;">CommodityNode Research</div>
+  </div>
+  <div style="padding:14px 16px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
+    <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">Applies to</div>
+    <div style="font-size:0.96rem;color:var(--text2);font-weight:700;">Hubs, reports, forecasts, scenarios</div>
+  </div>
+</div>
 <div class="post-content" data-animate>
 
 <h2>1. What We Publish</h2>
@@ -86,6 +100,15 @@ no_loader: true
   <li><a href="/contact/">Contact & Corrections</a></li>
   <li><a href="/reports/">Research Archive</a></li>
 </ul>
+
+<div style="margin-top:28px;padding:22px 24px;background:linear-gradient(135deg,rgba(34,211,238,0.06),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.16);border-radius:16px;">
+  <div style="font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">See the standards in action</div>
+  <p style="margin:0 0 14px;color:var(--text2);line-height:1.7;">Start with a live commodity hub, then open the matching research note to see how CommodityNode separates current pricing, probabilistic forecasts, and editorial context.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <a href="/commodities/" style="padding:10px 14px;border-radius:10px;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;text-decoration:none;font-weight:800;">Open Commodity Hubs</a>
+    <a href="/reports/" style="padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.12);color:var(--text);text-decoration:none;font-weight:700;">Browse Research Archive</a>
+  </div>
+</div>
 
 </div>
 </div>
