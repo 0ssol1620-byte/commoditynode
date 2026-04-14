@@ -115,4 +115,9 @@ exclude:
   - logs/
   - scripts/
   - social/
+  - docs/
+  - ralph-loop/
+  - tmp/
   - assets/email/
+  - assets/images/README.md
+  - TIMESFM_INTEGRATION_PLAN.md
