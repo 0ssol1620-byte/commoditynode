@@ -24,14 +24,22 @@ from huggingface_hub import hf_hub_download
 warnings.filterwarnings("ignore")
 
 sys.path.insert(0, os.path.dirname(__file__))
-from forecast_chronos2 import COMMODITIES, fetch_history
 
 try:
     from timesfm import ForecastConfig, TimesFM_2p5_200M_torch
     TIMESFM_AVAILABLE = True
+    TIMESFM_IMPORT_ERROR = None
 except ImportError as e:
     TIMESFM_AVAILABLE = False
     TIMESFM_IMPORT_ERROR = str(e)
+
+
+def load_shared_inputs():
+    try:
+        from forecast_chronos2 import COMMODITIES, fetch_history
+        return COMMODITIES, fetch_history, None
+    except Exception as e:
+        return None, None, str(e)
 
 
 PREDICTION_LENGTH = 90
@@ -76,6 +84,11 @@ def _safe_round_list(values):
 def run():
     if not TIMESFM_AVAILABLE:
         print(f"TimesFM unavailable: {TIMESFM_IMPORT_ERROR}")
+        return 1
+
+    COMMODITIES, fetch_history, shared_import_error = load_shared_inputs()
+    if shared_import_error:
+        print(f"Shared forecast helpers unavailable: {shared_import_error}")
         return 1
 
     out_path = os.path.join(os.path.dirname(__file__), "..", "assets", "data", "forecast.json")
