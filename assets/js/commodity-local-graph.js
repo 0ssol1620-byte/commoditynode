@@ -569,12 +569,34 @@
       return keep;
     }
 
+    function computeDesktopLabelIds(nodes, links) {
+      var focusId = hoveredId || selectedId || graph.commodityId;
+      var keep = new Set([graph.commodityId]);
+      if (focusId) keep.add(focusId);
+
+      nodes.slice().sort(function (a, b) {
+        var aScore = (a.degree || 0) * 2 + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0) + (a.level === 1 ? 8 : 0);
+        var bScore = (b.degree || 0) * 2 + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0) + (b.level === 1 ? 8 : 0);
+        return bScore - aScore;
+      }).slice(0, 12).forEach(function (node) {
+        keep.add(node.id);
+      });
+
+      neighborSetFor(focusId, links).forEach(function (nodeId) {
+        keep.add(nodeId);
+      });
+
+      return keep;
+    }
+
     function refreshLabelText() {
       if (!labelSelection) return;
       var mobileLabelIds = isMobile ? computeMobileLabelIds(visibleGraph.nodes, visibleGraph.links) : null;
+      var desktopLabelIds = !isMobile ? computeDesktopLabelIds(visibleGraph.nodes, visibleGraph.links) : null;
       labelSelection.text(function (d) {
         if (isMobile && mobileLabelIds && !mobileLabelIds.has(d.id)) return '';
-        return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 18 : 26) : (isMobile ? 14 : 22));
+        if (!isMobile && desktopLabelIds && !desktopLabelIds.has(d.id)) return '';
+        return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 18 : 26) : (isMobile ? 14 : 20));
       });
     }
 

@@ -463,7 +463,10 @@ permalink: /simulator/
       <div>
         <div class="sim-chart-title" id="sim-chart-title">Select a scenario to view analysis</div>
         <div class="sim-chart-subtitle" id="sim-chart-subtitle">Historical prices + consensus forecast with Chronos-2 and TimesFM comparison</div>
-        <div id="sim-active-scenario-badge" style="display:none;margin-top:10px;"></div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
+          <div id="sim-active-scenario-badge" style="display:none;"></div>
+          <button type="button" onclick="copySimulatorShareLink()" style="padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.04);color:#cbd5e1;font-size:0.78rem;font-weight:700;cursor:pointer;">Copy share link</button>
+        </div>
       </div>
       <div class="sim-period-btns">
         <button class="sim-period-btn active" data-period="3m" onclick="setPeriod('3m',this)">3M</button>
@@ -1050,8 +1053,46 @@ var state = {
   scenarios: {},
   forecastData: null,
   consensusData: null,
-  chart: null
+  chart: null,
+  pendingScenarioIds: []
 };
+
+function syncSimulatorUrl() {
+  try {
+    var url = new URL(window.location.href);
+    url.searchParams.set('commodity', state.commodity);
+    url.searchParams.set('period', state.period);
+    var scenarioKeys = Object.keys(state.scenarios || {});
+    if (scenarioKeys.length) url.searchParams.set('scenarios', scenarioKeys.join(','));
+    else url.searchParams.delete('scenarios');
+    window.history.replaceState({}, '', url.toString());
+  } catch (_) {}
+}
+
+function hydrateStateFromUrl() {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var commodity = (params.get('commodity') || '').trim();
+    var period = (params.get('period') || '').trim();
+    var scenarios = (params.get('scenarios') || '').trim();
+    if (commodity && SELECTOR_ITEMS.some(function(item){ return item.key === commodity; })) state.commodity = commodity;
+    if (period && ['3m','6m','1y'].indexOf(period) !== -1) state.period = period;
+    if (scenarios) state.pendingScenarioIds = scenarios.split(',').filter(Boolean);
+  } catch (_) {}
+}
+
+function copySimulatorShareLink() {
+  syncSimulatorUrl();
+  var href = window.location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(href).catch(function() {});
+  }
+  var badge = document.getElementById('sim-active-scenario-badge');
+  if (badge) {
+    badge.style.display = 'inline-flex';
+    badge.innerHTML = '<strong style="font-size:0.74rem;letter-spacing:0.06em;text-transform:uppercase;">Share link copied</strong><span style="font-size:0.78rem;color:#cbd5e1;">Current simulator state saved in URL</span>';
+  }
+}
 
 function isCompactMobile() {
   return window.innerWidth < 640;
@@ -1070,6 +1111,21 @@ function loadForecast() {
       state.consensusData = responses[1] || {};
       renderSelector();
       selectCommodity(state.commodity);
+      if (state.pendingScenarioIds && state.pendingScenarioIds.length) {
+        state.pendingScenarioIds.forEach(function(id) {
+          Object.keys(SCENARIOS).forEach(function(bucket) {
+            (SCENARIOS[bucket] || []).forEach(function(s) {
+              if (s.id === id) state.scenarios[id] = s.impact;
+            });
+          });
+        });
+        state.pendingScenarioIds = [];
+        renderChart();
+        renderStats();
+        renderScenarios();
+        renderImpact();
+        syncSimulatorUrl();
+      }
     })
     .catch(function(e){
       console.warn('Forecast data unavailable:', e);
@@ -1133,10 +1189,12 @@ window.selectCommodity = function(key){
   SELECTOR_ITEMS.forEach(function(item, i){
     if(item.key === key) btns[i] && btns[i].classList.add('active');
   });
+  syncPresetButtons(null);
   renderChart();
   renderStats();
   renderScenarios();
   renderImpact();
+  syncSimulatorUrl();
 };
 
 // ── Chart ─────────────────────────────────────────────────────────────────
@@ -1145,6 +1203,7 @@ window.setPeriod = function(p, btn){
   document.querySelectorAll('.sim-period-btn').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   renderChart();
+  syncSimulatorUrl();
 };
 
 function getHistorySlice(hist){
@@ -1569,6 +1628,7 @@ window.toggleScenario = function(id, impact, checkbox){
   renderStats();
   renderImpact();
   showSimulatorCTA();
+  syncSimulatorUrl();
 };
 
 function showSimulatorCTA() {
@@ -1706,11 +1766,12 @@ window.applyPreset = function(type) {
   renderChart();
   renderStats();
   renderImpact();
+  syncSimulatorUrl();
 };
 
 // ── Init ──────────────────────────────────────────────────────────────────
 // Default to crude-oil so the chart is populated on first visit
-state.commodity = 'crude_oil';
+hydrateStateFromUrl();
 syncPresetButtons(null);
 loadForecast();
 // Pro check: listen for clerk-auth ready event, with polling fallback
