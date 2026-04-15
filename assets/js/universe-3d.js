@@ -714,8 +714,12 @@
           parentLink: d.link,
           parentData: d,
           nodeData: n,
-          baseOpacity: 0.94,
-          baseEmissive: 0.025,
+          url: n.url || '',
+          sector: n.sector || '',
+          relationLabel: n.relationLabel || '',
+          note: n.note || '',
+          baseOpacity: 0.98,
+          baseEmissive: 0.04,
           stretchX: stretchX,
           stretchY: stretchY,
           stretchZ: stretchZ
@@ -730,7 +734,7 @@
         group.add(shell);
 
         /* Satellite glow sprite */
-        var satGlowSprite = makeSatGlow(nColor, satSize * 0.55);
+        var satGlowSprite = makeSatGlow(nColor, satSize * 0.75);
         satGlowSprite.position.copy(sMesh.position);
         group.add(satGlowSprite);
 
@@ -940,8 +944,11 @@
           var ud = hit.obj.userData;
           showTooltip(e,
             '<div style="font-weight:600;color:#e2e8f0;">' + ud.name + '</div>' +
-            '<div style="font-size:0.78rem;color:#94a3b8;margin-top:2px;">Type: ' + ud.type + '</div>' +
-            '<div style="font-size:0.78rem;color:#64748b;">Part of ' + ud.parent + '</div>'
+            '<div style="font-size:0.78rem;color:#94a3b8;margin-top:2px;">' + (ud.type ? ('Type: ' + ud.type) : 'Satellite node') + '</div>' +
+            (ud.sector ? '<div style="font-size:0.78rem;color:#94a3b8;">Sector: ' + ud.sector + '</div>' : '') +
+            (ud.relationLabel ? '<div style="font-size:0.78rem;color:#cbd5e1;margin-top:4px;">' + ud.relationLabel + '</div>' : '') +
+            '<div style="font-size:0.78rem;color:#64748b;">Part of ' + ud.parent + '</div>' +
+            (ud.url ? '<div style="margin-top:4px;font-size:0.74rem;color:#67e8f9;">Click to open linked page</div>' : '<div style="margin-top:4px;font-size:0.74rem;color:#64748b;">Hover to inspect · click for parent hub</div>')
           );
           var hoveredSatellite = satellites.find(function (sat) { return sat.mesh === hit.obj; });
           if (hoveredSatellite) {
@@ -1036,7 +1043,7 @@
         if (typeof config.onSatelliteSelect === 'function') {
           shouldContinue = config.onSatelliteSelect(satelliteData, satelliteData.parentData || null);
         }
-        var link = satelliteData.parentLink;
+        var link = satelliteData.url || satelliteData.parentLink;
         if (shouldContinue !== false && link) window.location.href = link;
       } else if (isZoomed) {
         resetView();
