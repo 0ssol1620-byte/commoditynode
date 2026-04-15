@@ -2,8 +2,8 @@
 layout: commodity
 unit: "cents/bushel"
 image: "/assets/images/og-wheat.png"
-title: "Wheat Price Impact: Food Security, Processors & EM Risk"
-description: "How wheat price spikes ripple through food manufacturers, agri-processors, and emerging markets."
+title: "Wheat Price Today, Forecast & Food Stock Impact"
+description: "Track wheat price today, forecast ranges, why wheat is moving, and which food manufacturers, grain traders, and import-sensitive markets are exposed."
 commodity_slug: "wheat"
 symbol: "ZW=F"
 data_type: "direct_futures"

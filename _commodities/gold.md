@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/oz"
 image: "/assets/images/og-gold.png"
-title: "Gold Price Impact: Miners, Dollar & Safe Haven Flows"
-description: "How gold price movements reflect inflation hedging, currency dynamics, and risk sentiment across global markets. Impact map for miners, ETFs, and macro factors."
+title: "Gold Price Today, Forecast & Stock Impact"
+description: "Track gold price today, 30/90-day forecast ranges, why gold is moving, and which miners, ETFs, and macro signals are most exposed."
 commodity_slug: "gold"
 symbol: "GC=F"
 data_type: "direct_futures"

@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/lb"
 image: "/assets/images/og-copper.png"
-title: "Copper Price Impact: EVs, Mining, Construction & Power Grids"
-description: "How copper price movements signal economic cycles and impact EV makers, miners, homebuilders, and infrastructure. Impact map with real-time correlations."
+title: "Copper Price Today, Forecast & Stock Impact"
+description: "Track copper price today, forecast ranges, why copper is moving, and which mining, EV, construction, and grid-exposed stocks are most sensitive."
 commodity_slug: "copper"
 symbol: "HG=F"
 data_type: "direct_futures"

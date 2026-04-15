@@ -1,8 +1,8 @@
 ---
 layout: commodity
 image: "/assets/images/og-cocoa.png"
-title: "Cocoa Price Impact: Chocolate, Food Stocks & Supply"
-description: "Cocoa's West African production concentration and climate change threat to global chocolate supply."
+title: "Cocoa Price Today, Forecast & Chocolate Stock Impact"
+description: "Track cocoa price today, forecast ranges, why cocoa is moving, and which chocolate, food, and soft-commodity names are most exposed."
 commodity_slug: "cocoa"
 symbol: "CC=F"
 data_type: "direct_futures"

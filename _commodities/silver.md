@@ -2,8 +2,8 @@
 layout: commodity
 unit: "$/oz"
 image: "/assets/images/og-silver.png"
-title: "Silver Price Impact: Solar, Electronics & Industrial Demand"
-description: "How silver price movements impact solar panel manufacturers, electronics makers, and precious metal portfolios."
+title: "Silver Price Today, Forecast & Stock Impact"
+description: "Track silver price today, forecast ranges, why silver is moving, and which miners, solar names, and precious-metals trades are most exposed."
 commodity_slug: "silver"
 symbol: "SI=F"
 data_type: "direct_futures"
