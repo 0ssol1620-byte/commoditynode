@@ -445,6 +445,14 @@
     return sprite;
   }
 
+  function satelliteGeometryForType(type) {
+    if (type === 'producer' || type === 'commodity') return new THREE.IcosahedronGeometry(1, 0);
+    if (type === 'macro' || type === 'policy' || type === 'theme' || type === 'report') return new THREE.OctahedronGeometry(1, 0);
+    if (type === 'consumer' || type === 'processor') return new THREE.DodecahedronGeometry(1, 0);
+    if (type === 'etf' || type === 'index' || type === 'fx') return new THREE.TetrahedronGeometry(1.08, 0);
+    return new THREE.IcosahedronGeometry(1, 0);
+  }
+
   /* ---- Mount ---- */
   function mountUniverse(config) {
     config = config || {};
@@ -594,8 +602,21 @@
     var allGroups = [];
     var pointLights = [];
 
-    /* Shared satellite geometry (instancing concept but manual for r128 compat) */
-    var sharedSatGeo = new THREE.SphereGeometry(1, 12, 12);
+    /* Shared satellite geometries by type */
+    var satelliteGeometries = {
+      producer: satelliteGeometryForType('producer'),
+      commodity: satelliteGeometryForType('commodity'),
+      macro: satelliteGeometryForType('macro'),
+      policy: satelliteGeometryForType('policy'),
+      theme: satelliteGeometryForType('theme'),
+      report: satelliteGeometryForType('report'),
+      consumer: satelliteGeometryForType('consumer'),
+      processor: satelliteGeometryForType('processor'),
+      etf: satelliteGeometryForType('etf'),
+      index: satelliteGeometryForType('index'),
+      fx: satelliteGeometryForType('fx'),
+      default: satelliteGeometryForType('default')
+    };
 
     universeData.forEach(function (d) {
       var cluster = CLUSTERS[d.category];
@@ -656,21 +677,39 @@
         var angle = (ni / d.nodes.length) * Math.PI * 2;
         var speed = rand(0.002, 0.008);
         var nColor = TYPE_COLORS[n.type] || '#94a3b8';
-        var satSize = rand(2, 4);
+        var satSize = rand(1.8, 3.2);
 
-        /* ---- 3. Glass/Crystal Satellite ---- */
-        var sGeo = sharedSatGeo;
-        var sMat = new THREE.MeshPhongMaterial({
-          color: hexToRGB(nColor),
+        /* ---- 3. Faceted cosmic satellite ---- */
+        var sGeo = satelliteGeometries[n.type] || satelliteGeometries.default;
+        var sColor = hexToRGB(nColor);
+        var sMat = new THREE.MeshStandardMaterial({
+          color: sColor.clone().lerp(new THREE.Color(0xffffff), 0.08),
           transparent: true,
-          opacity: 0.7,
-          shininess: 100,
-          specular: new THREE.Color(0xffffff),
-          emissive: hexToRGB(nColor),
-          emissiveIntensity: 0.15
+          opacity: 0.82,
+          metalness: 0.7,
+          roughness: 0.26,
+          emissive: sColor,
+          emissiveIntensity: 0.08
         });
         var sMesh = new THREE.Mesh(sGeo, sMat);
-        sMesh.scale.set(satSize, satSize, satSize);
+        var stretchX = rand(0.92, 1.22);
+        var stretchY = rand(0.88, 1.18);
+        var stretchZ = rand(0.92, 1.28);
+        sMesh.scale.set(satSize * stretchX, satSize * stretchY, satSize * stretchZ);
+        sMesh.rotation.set(rand(0, Math.PI), rand(0, Math.PI), rand(0, Math.PI));
+        var shell = new THREE.Mesh(
+          sGeo,
+          new THREE.MeshBasicMaterial({
+            color: sColor.clone().lerp(new THREE.Color(0xffffff), 0.18),
+            wireframe: true,
+            transparent: true,
+            opacity: 0.12,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+          })
+        );
+        shell.scale.set(satSize * stretchX * 1.18, satSize * stretchY * 1.18, satSize * stretchZ * 1.18);
+        shell.rotation.copy(sMesh.rotation);
         sMesh.userData = {
           id: n.id || n.name,
           name: n.name,
@@ -679,18 +718,23 @@
           parentLink: d.link,
           parentData: d,
           nodeData: n,
-          baseOpacity: 0.7,
-          baseEmissive: 0.15
+          baseOpacity: 0.82,
+          baseEmissive: 0.08,
+          stretchX: stretchX,
+          stretchY: stretchY,
+          stretchZ: stretchZ
         };
 
         var sx = Math.cos(angle) * orbitR;
         var sz = Math.sin(angle) * orbitR;
         var sy = Math.sin(angle * 0.7) * orbitR * 0.3;
         sMesh.position.set(sx, sy, sz);
+        shell.position.copy(sMesh.position);
         group.add(sMesh);
+        group.add(shell);
 
         /* Satellite glow sprite */
-        var satGlowSprite = makeSatGlow(nColor, satSize);
+        var satGlowSprite = makeSatGlow(nColor, satSize * 0.9);
         satGlowSprite.position.copy(sMesh.position);
         group.add(satGlowSprite);
 
@@ -705,7 +749,7 @@
 
         var inclination = rand(-0.6, 0.6); // random orbital inclination
         var satObj = {
-          mesh: sMesh, satGlow: satGlowSprite, parentObj: cObj,
+          mesh: sMesh, satShell: shell, satGlow: satGlowSprite, parentObj: cObj,
           angle: angle, speed: speed, orbitR: orbitR,
           inclination: inclination,
           nodeData: n, connMesh: connMesh, nColor: nColor
@@ -793,8 +837,9 @@
             /* Brighten satellites */
             c.satellites.forEach(function (sat) {
               if (sat.mesh.material.emissiveIntensity !== undefined) {
-                sat.mesh.material.emissiveIntensity = 0.4;
+                sat.mesh.material.emissiveIntensity = 0.18;
               }
+              if (sat.satShell) sat.satShell.material.opacity = 0.24;
               if (sat.satGlow) sat.satGlow.material.opacity = 0.5;
             });
             /* Brighten connections */
@@ -829,10 +874,11 @@
             ring.material.opacity = 0.1;
           });
           c.satellites.forEach(function (sat) {
-            sat.mesh.material.opacity = 0.7;
+            sat.mesh.material.opacity = sat.mesh.userData.baseOpacity || 0.82;
             if (sat.mesh.material.emissiveIntensity !== undefined) {
-              sat.mesh.material.emissiveIntensity = 0.15;
+              sat.mesh.material.emissiveIntensity = sat.mesh.userData.baseEmissive || 0.08;
             }
+            if (sat.satShell) sat.satShell.material.opacity = 0.12;
             if (sat.satGlow) sat.satGlow.material.opacity = 0.3;
           });
           c.connectionMeshes.forEach(function (conn) {
@@ -1129,6 +1175,16 @@
         var sz = Math.sin(sat.angle) * sat.orbitR * Math.cos(sat.inclination);
         var sy = Math.sin(sat.angle) * sat.orbitR * Math.sin(sat.inclination);
         sat.mesh.position.set(sx, sy, sz);
+        sat.mesh.rotation.x += sat.speed * 0.8;
+        sat.mesh.rotation.y += sat.speed * 1.2;
+        sat.mesh.rotation.z += sat.speed * 0.6;
+
+        if (sat.satShell) {
+          sat.satShell.position.set(sx, sy, sz);
+          sat.satShell.rotation.x += sat.speed * 0.55;
+          sat.satShell.rotation.y += sat.speed * 0.85;
+          sat.satShell.rotation.z += sat.speed * 0.45;
+        }
 
         /* Update satellite glow position */
         if (sat.satGlow) {
