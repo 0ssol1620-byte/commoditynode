@@ -5183,8 +5183,21 @@ html { scroll-behavior: smooth; }
 .cn-local-graph-canvas {
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: 1;
   background:
     radial-gradient(circle at 50% 48%, rgba(20,31,48,0.52), rgba(6,9,15,0.95) 72%);
+}
+
+.cn-local-graph-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: grab;
+}
+
+.cn-local-graph-canvas canvas:active {
+  cursor: grabbing;
 }
 
 .cn-local-graph-svg {
@@ -5556,7 +5569,7 @@ html { scroll-behavior: smooth; }
 
 .cn-local-graph-canvas-wrap,
 .cn-local-graph-panel {
-  min-height: 600px;
+  min-height: 700px;
   border-radius: 18px;
   background: rgba(7,10,16,0.94);
   border-color: rgba(255,255,255,0.06);
@@ -5685,12 +5698,12 @@ html { scroll-behavior: smooth; }
 
   .cn-local-graph-canvas-wrap,
   .cn-local-graph-panel {
-    min-height: 540px;
+    min-height: 620px;
     border-radius: 16px;
   }
 
   .cn-local-graph-canvas {
-    min-height: 540px;
+    min-height: 620px;
   }
 
   .cn-local-graph-panel {

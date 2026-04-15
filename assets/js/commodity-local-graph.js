@@ -228,6 +228,7 @@
     var searchTerm = '';
     var filterMode = 'all';
     var resizeObserver = null;
+    var refreshVisualization = function () {};
     var isMobile = (container.clientWidth || window.innerWidth) <= 720 || window.innerWidth <= 720;
 
     function syncContainerHeight() {
@@ -259,9 +260,9 @@
       '<section class="cn-local-graph-section">',
       '  <div class="cn-local-graph-header">',
       '    <div class="cn-local-graph-intro">',
-      '      <span class="cn-local-graph-eyebrow">Knowledge graph</span>',
-      '      <h2>Local Knowledge Map</h2>',
-      '      <p>Obsidian-inspired neighborhood view for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Follow the immediate relationships, inspect connected entities, and branch into linked reports without leaving the page.</p>',
+      '      <span class="cn-local-graph-eyebrow">3D knowledge graph</span>',
+      '      <h2>Local Universe View</h2>',
+      '      <p>Cinematic 3D hub universe for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Orbit through the immediate relationships, focus key entities, and branch into linked reports from a premium market-intelligence view.</p>',
       '    </div>',
       '    <div class="cn-local-graph-controls">',
       '      <label class="cn-local-graph-search">',
@@ -289,7 +290,7 @@
       '    <span><i class="company"></i>Company exposure</span>',
       '    <span><i class="macro"></i>Macro / policy / region</span>',
       '    <span><i class="research"></i>Reports & themes</span>',
-      '    <span class="cn-local-graph-legend-meta">Click a node to focus the network · Double-click linked notes to open</span>',
+      '    <span class="cn-local-graph-legend-meta">Tap or click a node to focus the 3D hub · Drag to orbit · Scroll or pinch to zoom</span>',
       '  </div>',
       '</section>'
     ].join('');
@@ -400,7 +401,8 @@
     function pickNode(nodeId) {
       selectedId = nodeId;
       updatePanel();
-      updateHighlight();
+      refreshVisualization();
+      if (typeof updateHighlight === 'function') updateHighlight();
     }
 
     function selectedNode() {
@@ -583,6 +585,332 @@
         });
       });
       requestAnimationFrame(syncContainerHeight);
+    }
+
+    function initThreeUniverse() {
+      if (typeof THREE === 'undefined') return false;
+
+      var scene;
+      var camera;
+      var renderer;
+      var controls;
+      var composer = null;
+      var useBloom = false;
+      var sceneRoot;
+      var starField;
+      var sceneObjects = [];
+      var interactiveNodes = [];
+      var nodePositions = {};
+      var raycaster = new THREE.Raycaster();
+      var pointer = new THREE.Vector2();
+
+      function sourceId(link) {
+        return typeof link.source === 'object' ? link.source.id : link.source;
+      }
+
+      function targetId(link) {
+        return typeof link.target === 'object' ? link.target.id : link.target;
+      }
+
+      function colorForGroup(group) {
+        return colorByGroup[group] || '#94a3b8';
+      }
+
+      function truncate3DLabel(label, maxLength) {
+        var text = String(label || '');
+        return text.length > maxLength ? text.slice(0, maxLength - 1) + '…' : text;
+      }
+
+      function makeLabelSprite(text, colorHex, scaleX, scaleY, fontPx) {
+        var canvasEl = document.createElement('canvas');
+        canvasEl.width = 512;
+        canvasEl.height = 128;
+        var ctx = canvasEl.getContext('2d');
+        ctx.font = '700 ' + (fontPx || 34) + 'px DM Sans, -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.lineJoin = 'round';
+        ctx.strokeStyle = 'rgba(2,6,14,0.92)';
+        ctx.lineWidth = 10;
+        ctx.strokeText(text, canvasEl.width / 2, canvasEl.height / 2);
+        ctx.fillStyle = colorHex || '#e7f1fb';
+        ctx.fillText(text, canvasEl.width / 2, canvasEl.height / 2);
+        var texture = new THREE.CanvasTexture(canvasEl);
+        var material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthWrite: false, opacity: 0.98 });
+        var sprite = new THREE.Sprite(material);
+        sprite.scale.set(scaleX || 92, scaleY || 22, 1);
+        return sprite;
+      }
+
+      function buildVisibleGraph3D() {
+        var nodes = allNodes.filter(passesFilter);
+        var visibleSet = new Set(nodes.map(function (node) { return node.id; }));
+        var links = allLinks.filter(function (link) {
+          return visibleSet.has(sourceId(link)) && visibleSet.has(targetId(link));
+        });
+        return { nodes: nodes, links: links, visibleSet: visibleSet };
+      }
+
+      function nodeVisualSize(node) {
+        if (node.id === graph.commodityId) return isMobile ? 18 : 22;
+        if (node.id === selectedId) return isMobile ? 11 : 13;
+        if (node.level >= 2) return isMobile ? 6.4 : 7.8;
+        if (node.group === 'company') return isMobile ? 8.2 : 9.2;
+        if (node.group === 'macro') return isMobile ? 7.6 : 8.6;
+        if (node.group === 'research') return isMobile ? 7.2 : 8.2;
+        return isMobile ? 8 : 9;
+      }
+
+      function labelShouldShow(node) {
+        if (node.id === graph.commodityId || node.id === selectedId) return true;
+        if (isMobile) return node.level <= 1;
+        return node.level <= 1 || node.degree >= 3;
+      }
+
+      function buildSceneOnce() {
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x03060c);
+        scene.fog = new THREE.FogExp2(0x050912, 0.001);
+
+        camera = new THREE.PerspectiveCamera(54, 1, 1, 4000);
+        camera.position.set(0, isMobile ? 12 : -14, isMobile ? 320 : 440);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.24;
+        canvas.innerHTML = '';
+        canvas.appendChild(renderer.domElement);
+
+        if (typeof THREE.EffectComposer !== 'undefined' && typeof THREE.RenderPass !== 'undefined' && typeof THREE.UnrealBloomPass !== 'undefined') {
+          composer = new THREE.EffectComposer(renderer);
+          composer.addPass(new THREE.RenderPass(scene, camera));
+          var bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(1, 1), isMobile ? 1.0 : 1.18, 0.76, 0.2);
+          composer.addPass(bloomPass);
+          useBloom = true;
+        }
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.06;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = isMobile ? 0.24 : 0.3;
+        controls.minDistance = isMobile ? 180 : 220;
+        controls.maxDistance = isMobile ? 520 : 780;
+        controls.maxPolarAngle = Math.PI * 0.72;
+        controls.minPolarAngle = Math.PI * 0.26;
+
+        scene.add(new THREE.AmbientLight(0x1f2937, 0.74));
+        var fillLight = new THREE.PointLight(0x67e8f9, 1.08, 900, 2);
+        fillLight.position.set(140, 140, 210);
+        scene.add(fillLight);
+        var rimLight = new THREE.PointLight(0xa855f7, 0.68, 820, 2);
+        rimLight.position.set(-180, -120, 220);
+        scene.add(rimLight);
+
+        var starCount = isMobile ? 900 : 1800;
+        var starPositions = new Float32Array(starCount * 3);
+        for (var i = 0; i < starCount; i++) {
+          var radius = 640 + Math.random() * 880;
+          var theta = Math.random() * Math.PI * 2;
+          var phi = Math.acos(2 * Math.random() - 1);
+          starPositions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+          starPositions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+          starPositions[i * 3 + 2] = radius * Math.cos(phi);
+        }
+        var starGeo = new THREE.BufferGeometry();
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+        var starMat = new THREE.PointsMaterial({ color: 0xe6eefc, size: isMobile ? 1.5 : 1.2, transparent: true, opacity: 0.68, depthWrite: false });
+        starField = new THREE.Points(starGeo, starMat);
+        scene.add(starField);
+
+        sceneRoot = new THREE.Group();
+        scene.add(sceneRoot);
+
+        renderer.domElement.addEventListener('pointerdown', function (event) {
+          var bounds = renderer.domElement.getBoundingClientRect();
+          pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+          pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1;
+          raycaster.setFromCamera(pointer, camera);
+          var hits = raycaster.intersectObjects(interactiveNodes, false);
+          if (hits.length && hits[0].object && hits[0].object.userData && hits[0].object.userData.nodeId) {
+            pickNode(hits[0].object.userData.nodeId);
+          }
+        });
+
+        (function animate() {
+          window.requestAnimationFrame(animate);
+          if (sceneRoot) sceneRoot.rotation.y += isMobile ? 0.0008 : 0.00055;
+          if (starField) starField.rotation.y += 0.00015;
+          if (controls) controls.update();
+          if (useBloom && composer) composer.render();
+          else if (renderer) renderer.render(scene, camera);
+        })();
+      }
+
+      function clearSceneRoot() {
+        sceneObjects.forEach(function (obj) {
+          if (obj.parent) obj.parent.remove(obj);
+          if (obj.geometry && obj.geometry.dispose) obj.geometry.dispose();
+          if (obj.material) {
+            if (Array.isArray(obj.material)) obj.material.forEach(function (m) { if (m && m.dispose) m.dispose(); });
+            else if (obj.material.dispose) obj.material.dispose();
+          }
+          if (obj.material && obj.material.map && obj.material.map.dispose) obj.material.map.dispose();
+        });
+        sceneObjects = [];
+        interactiveNodes = [];
+        nodePositions = {};
+      }
+
+      function computeNodePositions(visibleGraph) {
+        var centerId = graph.commodityId;
+        nodePositions[centerId] = new THREE.Vector3(0, 0, 0);
+
+        var firstRing = visibleGraph.nodes.filter(function (node) { return node.id !== centerId && node.level <= 1; });
+        var grouped = ['market', 'company', 'macro', 'research'].map(function (groupKey) {
+          return {
+            key: groupKey,
+            nodes: firstRing.filter(function (node) { return node.group === groupKey; })
+          };
+        });
+
+        grouped.forEach(function (bucket, bucketIndex) {
+          bucket.nodes.forEach(function (node, index) {
+            var radius = (isMobile ? 92 : 138) + bucketIndex * (isMobile ? 18 : 24);
+            var angle = -Math.PI * 0.72 + bucketIndex * (Math.PI / 1.7) + (index / Math.max(1, bucket.nodes.length)) * (Math.PI / 2.1);
+            nodePositions[node.id] = new THREE.Vector3(
+              Math.cos(angle) * radius,
+              Math.sin(index * 1.2 + bucketIndex) * (isMobile ? 26 : 40),
+              Math.sin(angle) * radius * 0.84
+            );
+          });
+        });
+
+        visibleGraph.nodes.filter(function (node) { return node.level >= 2; }).forEach(function (node, index) {
+          var parentLink = visibleGraph.links.find(function (link) { return targetId(link) === node.id; }) || visibleGraph.links.find(function (link) { return sourceId(link) === node.id; });
+          var parentId = parentLink ? (targetId(parentLink) === node.id ? sourceId(parentLink) : targetId(parentLink)) : centerId;
+          var parentPos = nodePositions[parentId] || new THREE.Vector3();
+          var angle = (index / Math.max(1, visibleGraph.nodes.length)) * Math.PI * 2;
+          var offset = new THREE.Vector3(Math.cos(angle) * (isMobile ? 38 : 52), Math.sin(angle * 1.7) * (isMobile ? 16 : 24), Math.sin(angle) * (isMobile ? 34 : 48));
+          nodePositions[node.id] = parentPos.clone().add(offset);
+        });
+      }
+
+      function addLinkVisual(link) {
+        var start = nodePositions[sourceId(link)];
+        var end = nodePositions[targetId(link)];
+        if (!start || !end) return;
+        var connected = selectedId && (sourceId(link) === selectedId || targetId(link) === selectedId);
+        var line = new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints([start, end]),
+          new THREE.LineBasicMaterial({
+            color: new THREE.Color(connected ? colorForGroup(relationTone(link.relation)) : '#607089'),
+            transparent: true,
+            opacity: connected ? 0.86 : 0.18,
+            depthWrite: false
+          })
+        );
+        sceneRoot.add(line);
+        sceneObjects.push(line);
+      }
+
+      function addNodeVisual(node) {
+        var pos = nodePositions[node.id] || new THREE.Vector3();
+        var radius = nodeVisualSize(node);
+        var colorHex = colorForGroup(node.group);
+        var relatedSet = selectedId ? neighborSetFor(selectedId, allLinks) : new Set();
+        var dimmed = selectedId && node.id !== selectedId && node.id !== graph.commodityId && !relatedSet.has(node.id);
+
+        var sphere = new THREE.Mesh(
+          new THREE.SphereGeometry(radius, isMobile ? 28 : 36, isMobile ? 28 : 36),
+          new THREE.MeshStandardMaterial({
+            color: new THREE.Color(colorHex),
+            emissive: new THREE.Color(colorHex),
+            emissiveIntensity: node.id === selectedId ? 1.15 : node.id === graph.commodityId ? 0.88 : 0.44,
+            metalness: 0.22,
+            roughness: 0.24,
+            transparent: true,
+            opacity: dimmed ? 0.36 : 0.98
+          })
+        );
+        sphere.position.copy(pos);
+        sphere.userData.nodeId = node.id;
+        sceneRoot.add(sphere);
+        sceneObjects.push(sphere);
+        interactiveNodes.push(sphere);
+
+        var glow = new THREE.Sprite(new THREE.SpriteMaterial({ color: new THREE.Color(colorHex), transparent: true, opacity: dimmed ? 0.08 : (node.id === selectedId ? 0.42 : 0.2), depthWrite: false }));
+        glow.scale.set(radius * 6.8, radius * 6.8, 1);
+        glow.position.copy(pos);
+        sceneRoot.add(glow);
+        sceneObjects.push(glow);
+
+        if (labelShouldShow(node)) {
+          var label = makeLabelSprite(truncate3DLabel(node.label, node.id === graph.commodityId ? 18 : 16), node.id === selectedId || node.id === graph.commodityId ? '#f8fbff' : '#dce9f6', node.id === graph.commodityId ? 118 : 88, node.id === graph.commodityId ? 28 : 20, node.id === graph.commodityId ? 40 : 28);
+          label.position.copy(pos.clone().add(new THREE.Vector3(0, radius + (isMobile ? 16 : 20), 0)));
+          sceneRoot.add(label);
+          sceneObjects.push(label);
+        }
+      }
+
+      function renderThreeUniverse() {
+        if (!scene) buildSceneOnce();
+
+        var visibleGraph = buildVisibleGraph3D();
+        if (selectedId && !visibleGraph.visibleSet.has(selectedId)) selectedId = graph.commodityId;
+
+        var width = Math.max(320, Math.floor(canvasWrap.clientWidth || canvas.clientWidth || container.clientWidth || window.innerWidth - 32));
+        isMobile = width <= 720 || window.innerWidth <= 720;
+        syncCardMode();
+        var height = isMobile ? Math.max(560, Math.min(760, Math.round(width * 1.18))) : Math.max(680, Math.min(900, Math.round(window.innerHeight * 0.82)));
+
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        if (composer && composer.setSize) composer.setSize(width, height);
+
+        clearSceneRoot();
+        computeNodePositions(visibleGraph);
+        visibleGraph.links.forEach(addLinkVisual);
+        visibleGraph.nodes.forEach(addNodeVisual);
+        updatePanel();
+        requestAnimationFrame(syncContainerHeight);
+      }
+
+      refreshVisualization = renderThreeUniverse;
+
+      searchInput.addEventListener('input', function () {
+        searchTerm = String(searchInput.value || '').trim().toLowerCase();
+        renderThreeUniverse();
+      });
+
+      filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          filterMode = button.getAttribute('data-filter') || 'all';
+          filterButtons.forEach(function (candidate) {
+            candidate.classList.toggle('is-active', candidate === button);
+          });
+          renderThreeUniverse();
+        });
+      });
+
+      if (typeof ResizeObserver !== 'undefined') {
+        resizeObserver = new ResizeObserver(function () {
+          renderThreeUniverse();
+        });
+        resizeObserver.observe(canvasWrap);
+        resizeObserver.observe(sectionEl);
+      } else {
+        window.addEventListener('resize', renderThreeUniverse);
+      }
+
+      renderThreeUniverse();
+      return true;
+    }
+
+    if (initThreeUniverse()) {
+      return;
     }
 
     var visibleGraph = buildVisibleGraph();
@@ -943,7 +1271,7 @@
     var containers = document.querySelectorAll('#impact-graph');
     if (!containers.length) return;
 
-    if (typeof window.d3 === 'undefined') {
+    if (typeof window.THREE === 'undefined' && typeof window.d3 === 'undefined') {
       if (bootAttempts < 20) {
         setTimeout(boot, 80);
         return;
