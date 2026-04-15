@@ -1456,6 +1456,12 @@
     }
 
     containers.forEach(function (container) {
+      var canUpgradeToSharedUniverse = !!(window.CommodityUniverse3D && typeof window.CommodityUniverse3D.mount === 'function');
+      var currentEyebrow = container.querySelector('.cn-local-graph-eyebrow');
+      if (canUpgradeToSharedUniverse && container.dataset.cnGraphReady === '1' && currentEyebrow && currentEyebrow.textContent !== 'Signature 3D universe') {
+        container.dataset.cnGraphReady = '';
+        container.innerHTML = '';
+      }
       render(container, window.COMMODITY_DATA, window.COMMODITY_PAGE_META || {});
     });
   }
