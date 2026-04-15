@@ -470,8 +470,17 @@
       var relatedIds = neighborSetFor(nodeId, allLinks);
       relatedIds.delete(nodeId);
       return allNodes.filter(function (node) { return relatedIds.has(node.id); }).sort(function (a, b) {
-        return (b.degree || 0) - (a.degree || 0);
-      }).slice(0, isMobile ? 6 : 8);
+        function score(node) {
+          var degree = (node.degree || 0) * 2;
+          var impact = typeof node.impact === 'number' ? Math.abs(node.impact) : 0;
+          var researchBoost = node.group === 'research' ? 18 : 0;
+          var companyBoost = node.group === 'company' ? 10 : 0;
+          var themeBoost = node.type === 'theme' ? 12 : 0;
+          var reportBoost = node.type === 'report' ? 8 : 0;
+          return degree + impact + researchBoost + companyBoost + themeBoost + reportBoost;
+        }
+        return score(b) - score(a);
+      }).slice(0, isMobile ? 8 : 12);
     }
 
     function directConnections(nodeId) {
@@ -579,7 +588,7 @@
       if (node.dateLabel) metrics.push(metricHtml('Date', node.dateLabel));
 
       var related = connectedNodes(node.id);
-      var direct = directConnections(node.id).slice(0, isMobile ? 4 : 5);
+      var direct = directConnections(node.id).slice(0, isMobile ? 5 : 7);
       var actions = findLinkedResources(node);
       var path = focusPath(node);
       var insight = nodeInsight(node, related);
