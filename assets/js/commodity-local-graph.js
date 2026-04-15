@@ -260,8 +260,8 @@
       '  <div class="cn-local-graph-header">',
       '    <div class="cn-local-graph-intro">',
       '      <span class="cn-local-graph-eyebrow">Knowledge graph</span>',
-      '      <h2>Local Market Workspace</h2>',
-      '      <p>Neighborhood view for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Explore the immediate market structure, inspect connected entities, and jump into the most relevant reports without leaving the page.</p>',
+      '      <h2>Local Knowledge Map</h2>',
+      '      <p>Obsidian-inspired neighborhood view for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Follow the immediate relationships, inspect connected entities, and branch into linked reports without leaving the page.</p>',
       '    </div>',
       '    <div class="cn-local-graph-controls">',
       '      <label class="cn-local-graph-search">',
@@ -356,7 +356,7 @@
           return base + degree * 3 + impact * 1.2 + levelBonus + researchPenalty;
         };
 
-        var compactLimit = filterMode === 'all' ? 10 : filterMode === 'research' ? 6 : filterMode === 'company' ? 8 : 7;
+        var compactLimit = filterMode === 'all' ? 14 : filterMode === 'research' ? 8 : filterMode === 'company' ? 10 : 9;
         var compactNodes = visibleNodes
           .slice()
           .sort(function (a, b) { return scoreNode(b) - scoreNode(a); })
@@ -435,7 +435,7 @@
       relatedIds.delete(nodeId);
       return allNodes.filter(function (node) { return relatedIds.has(node.id); }).sort(function (a, b) {
         return (b.degree || 0) - (a.degree || 0);
-      }).slice(0, isMobile ? 4 : 8);
+      }).slice(0, isMobile ? 6 : 8);
     }
 
     function metricHtml(label, value) {
@@ -532,10 +532,10 @@
     var labelSelection;
 
     function nodeRadius(node) {
-      if (node.id === graph.commodityId) return isMobile ? 15 : 18;
-      var degreeBoost = Math.min(isMobile ? 5 : 8, (node.degree || 0) * (isMobile ? 0.65 : 0.9));
-      var impactBoost = typeof node.impact === 'number' ? Math.min(isMobile ? 4 : 6, Math.abs(node.impact) * (isMobile ? 0.18 : 0.25)) : 0;
-      return (isMobile ? 6.5 : 8) + degreeBoost + impactBoost;
+      if (node.id === graph.commodityId) return isMobile ? 13 : 16;
+      var degreeBoost = Math.min(isMobile ? 4 : 6, (node.degree || 0) * (isMobile ? 0.5 : 0.7));
+      var impactBoost = typeof node.impact === 'number' ? Math.min(isMobile ? 2.8 : 4.5, Math.abs(node.impact) * (isMobile ? 0.12 : 0.16)) : 0;
+      return (isMobile ? 5.2 : 6.6) + degreeBoost + impactBoost;
     }
 
     function truncateLabel(label, maxLength) {
@@ -556,7 +556,7 @@
         var aScore = (a.degree || 0) + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0);
         var bScore = (b.degree || 0) + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0);
         return bScore - aScore;
-      }).slice(0, 4);
+      }).slice(0, 6);
 
       focusedNeighbors.forEach(function (node) { keep.add(node.id); });
 
@@ -564,7 +564,7 @@
         return node.level <= 1 && node.group !== 'research' && node.id !== graph.commodityId;
       }).sort(function (a, b) {
         return (b.degree || 0) - (a.degree || 0);
-      }).slice(0, 2).forEach(function (node) {
+      }).slice(0, 4).forEach(function (node) {
         keep.add(node.id);
       });
 
@@ -580,7 +580,7 @@
         var aScore = (a.degree || 0) * 2 + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0) + (a.level === 1 ? 8 : 0);
         var bScore = (b.degree || 0) * 2 + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0) + (b.level === 1 ? 8 : 0);
         return bScore - aScore;
-      }).slice(0, 12).forEach(function (node) {
+      }).slice(0, 18).forEach(function (node) {
         keep.add(node.id);
       });
 
@@ -622,24 +622,37 @@
       simulation = d3.forceSimulation(nodes)
         .force('link', d3.forceLink(links).id(function (d) { return d.id; }).distance(function (d) {
           if (isMobile) {
-            return d.relation === 'report' ? 92 : d.relation === 'theme' ? 102 : 74 + Math.max(0, (d.weight || 1) * 8);
+            return d.relation === 'report' ? 82 : d.relation === 'theme' ? 90 : 64 + Math.max(0, (d.weight || 1) * 7);
           }
-          return d.relation === 'report' ? 120 : d.relation === 'theme' ? 140 : 96 + Math.max(0, (d.weight || 1) * 12);
+          return d.relation === 'report' ? 106 : d.relation === 'theme' ? 118 : 82 + Math.max(0, (d.weight || 1) * 10);
         }).strength(function (d) {
-          return d.relation === 'report' ? 0.7 : 0.45;
+          return d.relation === 'report' ? 0.56 : 0.34;
         }))
         .force('charge', d3.forceManyBody().strength(function (d) {
-          if (isMobile) return d.id === graph.commodityId ? -360 : -145;
-          return d.id === graph.commodityId ? -600 : -280;
+          if (isMobile) return d.id === graph.commodityId ? -300 : -112;
+          return d.id === graph.commodityId ? -460 : -188;
         }))
         .force('center', d3.forceCenter(width / 2, height / 2))
-        .force('collision', d3.forceCollide().radius(function (d) { return nodeRadius(d) + (isMobile ? 13 : 24); }).iterations(2))
+        .force('collision', d3.forceCollide().radius(function (d) { return nodeRadius(d) + (isMobile ? 10 : 18); }).iterations(2))
+        .force('x', d3.forceX(function (d) {
+          if (d.id === graph.commodityId) return width / 2;
+          if (d.group === 'research') return width * 0.76;
+          if (d.group === 'macro') return width * 0.24;
+          if (d.group === 'company') return width * 0.6;
+          return width * 0.4;
+        }).strength(isMobile ? 0.05 : 0.035))
+        .force('y', d3.forceY(function (d) {
+          if (d.id === graph.commodityId) return height / 2;
+          if (d.group === 'research') return height * 0.68;
+          if (d.group === 'macro') return height * 0.34;
+          return height * 0.52;
+        }).strength(isMobile ? 0.05 : 0.03))
         .force('radial', d3.forceRadial(function (d) {
           if (d.id === graph.commodityId) return 0;
-          if (d.group === 'research') return Math.min(width, height) * (isMobile ? 0.26 : 0.22);
-          if (d.group === 'macro') return Math.min(width, height) * (isMobile ? 0.3 : 0.28);
-          return Math.min(width, height) * (isMobile ? 0.2 : 0.18);
-        }, width / 2, height / 2).strength(isMobile ? 0.16 : 0.12));
+          if (d.group === 'research') return Math.min(width, height) * (isMobile ? 0.24 : 0.2);
+          if (d.group === 'macro') return Math.min(width, height) * (isMobile ? 0.22 : 0.19);
+          return Math.min(width, height) * (isMobile ? 0.16 : 0.14);
+        }, width / 2, height / 2).strength(isMobile ? 0.08 : 0.055));
 
       linkSelection = linksLayer.selectAll('line').data(links, function (d) { return d.id; });
       linkSelection.exit().remove();
@@ -690,7 +703,7 @@
       labelSelection = labelSelection.enter().append('text').merge(labelSelection)
         .attr('class', 'cn-local-graph-label')
         .attr('text-anchor', 'middle')
-        .attr('dy', function (d) { return nodeRadius(d) + (isMobile ? 14 : 18); });
+        .attr('dy', function (d) { return nodeRadius(d) + (isMobile ? 12 : 16); });
       refreshLabelText();
 
       simulation.on('tick', function () {
@@ -743,17 +756,17 @@
           var sourceId = typeof d.source === 'object' ? d.source.id : d.source;
           var targetId = typeof d.target === 'object' ? d.target.id : d.target;
           var connected = focusId && (sourceId === focusId || targetId === focusId);
-          if (connected && d.relation === 'report') return 'rgba(16,185,129,0.95)';
-          if (connected && d.relation === 'theme') return 'rgba(168,85,247,0.95)';
-          if (connected && d.relation === 'substitute') return 'rgba(245,158,11,0.95)';
-          if (connected) return 'rgba(34,211,238,0.95)';
-          return 'rgba(148,163,184,0.18)';
+          if (connected && d.relation === 'report') return 'rgba(110,231,183,0.92)';
+          if (connected && d.relation === 'theme') return 'rgba(196,181,253,0.9)';
+          if (connected && d.relation === 'substitute') return 'rgba(251,191,36,0.88)';
+          if (connected) return 'rgba(125,211,252,0.92)';
+          return 'rgba(148,163,184,0.22)';
         })
         .attr('opacity', function (d) {
-          if (!focusId) return 0.42;
+          if (!focusId) return 0.32;
           var sourceId = typeof d.source === 'object' ? d.source.id : d.source;
           var targetId = typeof d.target === 'object' ? d.target.id : d.target;
-          return sourceId === focusId || targetId === focusId ? 1 : 0.12;
+          return sourceId === focusId || targetId === focusId ? 0.95 : 0.08;
         });
     }
 
