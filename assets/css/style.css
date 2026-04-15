@@ -5222,7 +5222,7 @@ html { scroll-behavior: smooth; }
 }
 
 .cn-local-graph-panel-top p {
-  color: rgba(203,213,225,0.78);
+  color: rgba(221,230,239,0.84);
   line-height: 1.72;
   font-size: 0.94rem;
 }
@@ -5619,9 +5619,10 @@ html { scroll-behavior: smooth; }
 }
 
 .cn-local-graph-label {
-  font-size: 10.5px;
+  font-size: 10px;
   font-weight: 500;
-  fill: rgba(223,231,240,0.84);
+  fill: rgba(214,225,236,0.82);
+  stroke: rgba(2,6,14,0.9);
   stroke-width: 3.2px;
 }
 
@@ -5629,6 +5630,9 @@ html { scroll-behavior: smooth; }
   padding: 9px 12px;
   border-radius: 12px;
   font-size: 0.72rem;
+  color: rgba(194,206,220,0.78);
+  background: rgba(7,11,18,0.84);
+  border-color: rgba(148,163,184,0.14);
 }
 
 .cn-local-graph-legend {
@@ -5639,6 +5643,8 @@ html { scroll-behavior: smooth; }
   padding: 7px 10px;
   border-radius: 10px;
   font-size: 0.72rem;
+  color: rgba(189,201,216,0.78);
+  background: rgba(255,255,255,0.025);
 }
 
 .cn-local-graph-legend .cn-local-graph-legend-meta {
@@ -5693,8 +5699,9 @@ html { scroll-behavior: smooth; }
   }
 
   .cn-local-graph-label {
-    font-size: 10px;
-    stroke-width: 2.8px;
+    font-size: 9.8px;
+    fill: rgba(210,222,236,0.8);
+    stroke-width: 3.3px;
   }
 
   .cn-local-graph-hint {

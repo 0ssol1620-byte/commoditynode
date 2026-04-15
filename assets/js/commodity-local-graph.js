@@ -649,25 +649,29 @@
       var keep = new Set([graph.commodityId]);
       if (focusId) keep.add(focusId);
 
+      var focusNeighbors = neighborSetFor(focusId, links);
       var focusedNeighbors = nodes.filter(function (node) {
         if (node.id === graph.commodityId || node.id === focusId) return false;
+        if (!focusNeighbors.has(node.id)) return false;
         if (node.group === 'research' && node.id !== focusId) return false;
-        return neighborSetFor(focusId, links).has(node.id);
+        return node.level <= 1 || node.id === selectedId;
       }).sort(function (a, b) {
-        var aScore = (a.degree || 0) + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0);
-        var bScore = (b.degree || 0) + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0);
+        var aScore = (a.degree || 0) + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0) + (a.level === 1 ? 4 : 0);
+        var bScore = (b.degree || 0) + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0) + (b.level === 1 ? 4 : 0);
         return bScore - aScore;
-      }).slice(0, 6);
+      }).slice(0, focusId === graph.commodityId ? 4 : 3);
 
       focusedNeighbors.forEach(function (node) { keep.add(node.id); });
 
-      nodes.filter(function (node) {
-        return node.level <= 1 && node.group !== 'research' && node.id !== graph.commodityId;
-      }).sort(function (a, b) {
-        return (b.degree || 0) - (a.degree || 0);
-      }).slice(0, 4).forEach(function (node) {
-        keep.add(node.id);
-      });
+      if (focusId !== graph.commodityId) {
+        nodes.filter(function (node) {
+          return node.id !== graph.commodityId && node.id !== focusId && focusNeighbors.has(node.id) && node.level <= 1;
+        }).sort(function (a, b) {
+          return (b.degree || 0) - (a.degree || 0);
+        }).slice(0, 1).forEach(function (node) {
+          keep.add(node.id);
+        });
+      }
 
       return keep;
     }
@@ -699,7 +703,7 @@
       labelSelection.text(function (d) {
         if (isMobile && mobileLabelIds && !mobileLabelIds.has(d.id)) return '';
         if (!isMobile && desktopLabelIds && !desktopLabelIds.has(d.id)) return '';
-        return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 18 : 26) : (isMobile ? 14 : 20));
+        return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 14 : 26) : (isMobile ? 11 : 20));
       });
     }
 
