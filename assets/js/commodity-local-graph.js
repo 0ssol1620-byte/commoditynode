@@ -280,7 +280,7 @@
       '  <div class="cn-local-graph-body">',
       '    <div class="cn-local-graph-canvas-wrap">',
       '      <div class="cn-local-graph-canvas"></div>',
-      '      <div class="cn-local-graph-hint">' + (isMobile ? 'Drag to explore • Pinch/zoom for detail' : 'Drag to explore • Scroll to zoom • Double-click a linked note to open it') + '</div>',
+      '      <div class="cn-local-graph-hint">' + (isMobile ? 'Tap a node to focus • Drag to explore • Pinch to zoom' : 'Drag to explore • Scroll to zoom • Double-click a linked note to open it') + '</div>',
       '    </div>',
       '    <section class="cn-local-graph-panel" aria-live="polite"></section>',
       '  </div>',
@@ -588,7 +588,7 @@
     var visibleGraph = buildVisibleGraph();
     var width = Math.max(280, Math.floor(canvasWrap.clientWidth || canvas.clientWidth || container.clientWidth || window.innerWidth - 32));
     var height = isMobile
-      ? Math.max(420, Math.min(560, Math.round(width * 1.08)))
+      ? Math.max(460, Math.min(620, Math.round(width * 1.16)))
       : Math.max(480, Math.min(760, window.innerHeight * 0.7));
 
     var svg = d3.select(canvas)
@@ -650,18 +650,20 @@
       if (focusId) keep.add(focusId);
 
       var focusNeighbors = neighborSetFor(focusId, links);
-      var focusedNeighbors = nodes.filter(function (node) {
+      var primaryNeighbors = nodes.filter(function (node) {
         if (node.id === graph.commodityId || node.id === focusId) return false;
         if (!focusNeighbors.has(node.id)) return false;
         if (node.group === 'research' && node.id !== focusId) return false;
-        return node.level <= 1 || node.id === selectedId;
+        return node.level <= 1;
       }).sort(function (a, b) {
-        var aScore = (a.degree || 0) + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0) + (a.level === 1 ? 4 : 0);
-        var bScore = (b.degree || 0) + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0) + (b.level === 1 ? 4 : 0);
+        var aScore = (a.degree || 0) + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0) + (a.level === 1 ? 5 : 0);
+        var bScore = (b.degree || 0) + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0) + (b.level === 1 ? 5 : 0);
         return bScore - aScore;
-      }).slice(0, focusId === graph.commodityId ? 4 : 3);
+      });
 
-      focusedNeighbors.forEach(function (node) { keep.add(node.id); });
+      primaryNeighbors.slice(0, focusId === graph.commodityId ? 2 : 1).forEach(function (node) {
+        keep.add(node.id);
+      });
 
       if (focusId !== graph.commodityId) {
         nodes.filter(function (node) {
@@ -703,7 +705,7 @@
       labelSelection.text(function (d) {
         if (isMobile && mobileLabelIds && !mobileLabelIds.has(d.id)) return '';
         if (!isMobile && desktopLabelIds && !desktopLabelIds.has(d.id)) return '';
-        return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 14 : 26) : (isMobile ? 11 : 20));
+        return truncateLabel(d.label, d.id === graph.commodityId ? (isMobile ? 12 : 26) : (isMobile ? 9 : 20));
       });
     }
 
@@ -715,7 +717,7 @@
       isMobile = width <= 720 || window.innerWidth <= 720;
       syncCardMode();
       height = isMobile
-        ? Math.max(420, Math.min(560, Math.round(width * 1.08)))
+        ? Math.max(460, Math.min(620, Math.round(width * 1.16)))
         : Math.max(480, Math.min(760, window.innerHeight * 0.7));
       svg.attr('viewBox', '0 0 ' + width + ' ' + height);
 
@@ -727,37 +729,37 @@
       simulation = d3.forceSimulation(nodes)
         .force('link', d3.forceLink(links).id(function (d) { return d.id; }).distance(function (d) {
           if (isMobile) {
-            return d.relation === 'report' ? 82 : d.relation === 'theme' ? 90 : 64 + Math.max(0, (d.weight || 1) * 7);
+            return d.relation === 'report' ? 96 : d.relation === 'theme' ? 108 : 76 + Math.max(0, (d.weight || 1) * 8);
           }
           return d.relation === 'report' ? 106 : d.relation === 'theme' ? 118 : 82 + Math.max(0, (d.weight || 1) * 10);
         }).strength(function (d) {
           return d.relation === 'report' ? 0.56 : 0.34;
         }))
         .force('charge', d3.forceManyBody().strength(function (d) {
-          if (isMobile) return d.id === graph.commodityId ? -300 : -112;
+          if (isMobile) return d.id === graph.commodityId ? -360 : -136;
           return d.id === graph.commodityId ? -460 : -188;
         }))
         .force('center', d3.forceCenter(width / 2, height / 2))
-        .force('collision', d3.forceCollide().radius(function (d) { return nodeRadius(d) + (isMobile ? 10 : 18); }).iterations(2))
+        .force('collision', d3.forceCollide().radius(function (d) { return nodeRadius(d) + (isMobile ? 16 : 18); }).iterations(isMobile ? 3 : 2))
         .force('x', d3.forceX(function (d) {
           if (d.id === graph.commodityId) return width / 2;
-          if (d.group === 'research') return width * 0.76;
-          if (d.group === 'macro') return width * 0.24;
-          if (d.group === 'company') return width * 0.6;
-          return width * 0.4;
-        }).strength(isMobile ? 0.05 : 0.035))
+          if (d.group === 'research') return width * 0.78;
+          if (d.group === 'macro') return width * 0.22;
+          if (d.group === 'company') return width * 0.62;
+          return width * 0.38;
+        }).strength(isMobile ? 0.04 : 0.035))
         .force('y', d3.forceY(function (d) {
           if (d.id === graph.commodityId) return height / 2;
-          if (d.group === 'research') return height * 0.68;
-          if (d.group === 'macro') return height * 0.34;
+          if (d.group === 'research') return height * 0.72;
+          if (d.group === 'macro') return height * 0.3;
           return height * 0.52;
-        }).strength(isMobile ? 0.05 : 0.03))
+        }).strength(isMobile ? 0.04 : 0.03))
         .force('radial', d3.forceRadial(function (d) {
           if (d.id === graph.commodityId) return 0;
-          if (d.group === 'research') return Math.min(width, height) * (isMobile ? 0.24 : 0.2);
-          if (d.group === 'macro') return Math.min(width, height) * (isMobile ? 0.22 : 0.19);
-          return Math.min(width, height) * (isMobile ? 0.16 : 0.14);
-        }, width / 2, height / 2).strength(isMobile ? 0.08 : 0.055));
+          if (d.group === 'research') return Math.min(width, height) * (isMobile ? 0.29 : 0.2);
+          if (d.group === 'macro') return Math.min(width, height) * (isMobile ? 0.26 : 0.19);
+          return Math.min(width, height) * (isMobile ? 0.2 : 0.14);
+        }, width / 2, height / 2).strength(isMobile ? 0.06 : 0.055));
 
       linkSelection = linksLayer.selectAll('line').data(links, function (d) { return d.id; });
       linkSelection.exit().remove();

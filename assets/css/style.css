@@ -5685,12 +5685,12 @@ html { scroll-behavior: smooth; }
 
   .cn-local-graph-canvas-wrap,
   .cn-local-graph-panel {
-    min-height: 500px;
+    min-height: 540px;
     border-radius: 16px;
   }
 
   .cn-local-graph-canvas {
-    min-height: 500px;
+    min-height: 540px;
   }
 
   .cn-local-graph-panel {
