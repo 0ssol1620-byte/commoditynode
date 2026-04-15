@@ -5563,14 +5563,14 @@ html { scroll-behavior: smooth; }
 }
 
 .cn-local-graph-body {
-  grid-template-columns: minmax(0, 2.2fr) minmax(300px, 0.8fr);
+  grid-template-columns: minmax(0, 2.45fr) minmax(280px, 0.68fr);
   gap: 14px;
   align-items: start;
 }
 
 .cn-local-graph-canvas-wrap,
 .cn-local-graph-panel {
-  min-height: 760px;
+  min-height: 820px;
   border-radius: 18px;
   background: rgba(7,10,16,0.94);
   border-color: rgba(255,255,255,0.06);
@@ -5578,7 +5578,7 @@ html { scroll-behavior: smooth; }
 }
 
 .cn-local-universe-frame {
-  min-height: 760px;
+  min-height: 820px;
 }
 
 .cn-local-graph-canvas-wrap::before {
@@ -5597,7 +5597,7 @@ html { scroll-behavior: smooth; }
   padding: 18px;
   gap: 14px;
   background: rgba(10,13,18,0.96);
-  max-height: 760px;
+  max-height: 820px;
   overflow-y: auto;
   overscroll-behavior: contain;
 }
