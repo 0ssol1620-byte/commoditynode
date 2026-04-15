@@ -1439,9 +1439,14 @@
     var containers = document.querySelectorAll('#impact-graph');
     if (!containers.length) return;
 
-    if (typeof window.THREE === 'undefined' && typeof window.d3 === 'undefined') {
-      if (bootAttempts < 20) {
-        setTimeout(boot, 80);
+    var waitingForGraphLibrary = typeof window.THREE === 'undefined' && typeof window.d3 === 'undefined';
+    var waitingForSharedUniverse = typeof window.THREE !== 'undefined'
+      && typeof window.CommodityUniverse3D === 'undefined'
+      && typeof window.d3 === 'undefined';
+
+    if (waitingForGraphLibrary || waitingForSharedUniverse) {
+      if (bootAttempts < 40) {
+        setTimeout(boot, waitingForSharedUniverse ? 120 : 80);
         return;
       }
       containers.forEach(function (container) {
