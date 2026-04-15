@@ -438,6 +438,93 @@
       }).slice(0, isMobile ? 6 : 8);
     }
 
+    function directConnections(nodeId) {
+      return allLinks.filter(function (link) {
+        var sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+        var targetId = typeof link.target === 'object' ? link.target.id : link.target;
+        return sourceId === nodeId || targetId === nodeId;
+      }).map(function (link) {
+        var sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+        var targetId = typeof link.target === 'object' ? link.target.id : link.target;
+        var counterpartId = sourceId === nodeId ? targetId : sourceId;
+        var counterpart = allNodes.find(function (node) { return node.id === counterpartId; });
+        return {
+          link: link,
+          node: counterpart,
+          counterpartId: counterpartId,
+          isIncoming: targetId === nodeId,
+          isOutgoing: sourceId === nodeId
+        };
+      }).filter(function (item) {
+        return !!item.node;
+      }).sort(function (a, b) {
+        var aWeight = Number((a.link && a.link.weight) || 0) + Number((a.node && a.node.degree) || 0);
+        var bWeight = Number((b.link && b.link.weight) || 0) + Number((b.node && b.node.degree) || 0);
+        return bWeight - aWeight;
+      });
+    }
+
+    function relationTone(relation) {
+      if (relation === 'report') return 'research';
+      if (relation === 'theme') return 'macro';
+      if (relation === 'substitute') return 'company';
+      return 'market';
+    }
+
+    function relationVerb(item) {
+      if (!item) return 'connected to';
+      var relation = item.link && item.link.relation;
+      if (relation === 'report') return item.isOutgoing ? 'documented in' : 'documents';
+      if (relation === 'theme') return item.isOutgoing ? 'framed by' : 'frames';
+      if (relation === 'substitute') return 'compared with';
+      return item.isOutgoing ? 'connects to' : 'is linked from';
+    }
+
+    function focusPath(node) {
+      if (!node) return null;
+      if (node.id === graph.commodityId) {
+        return {
+          title: 'Hub anchor',
+          description: 'This is the center of the local map. Every visible branch radiates from this commodity context.'
+        };
+      }
+
+      var connections = directConnections(node.id);
+      var primary = connections.find(function (item) { return item.counterpartId === graph.commodityId; }) || connections[0];
+      if (!primary || !primary.node) return null;
+
+      return {
+        title: cleanDisplayTitle(graphDisplayTitle || selectedNode().label) + ' → ' + cleanDisplayTitle(node.label),
+        description: cleanDisplayTitle(node.label) + ' ' + relationVerb(primary) + ' ' + cleanDisplayTitle(primary.node.label) + (primary.link && primary.link.relationLabel ? ' via ' + primary.link.relationLabel.toLowerCase() : '.')
+      };
+    }
+
+    function nodeInsight(node, related) {
+      var count = related.length;
+      var strongest = related[0];
+      if (node.id === graph.commodityId) {
+        return 'Use this hub as the anchor. It currently fans out into ' + count + ' direct branches across markets, companies, macro drivers, and research notes.';
+      }
+      if (node.type === 'report') {
+        return 'This report node is narrative context. Use it when you need the freshest explanation behind the price move, then jump back to the hub for live market state.';
+      }
+      if (node.type === 'theme') {
+        return 'This theme node groups the structural narrative around the commodity so you can move from a one-day move to the bigger regime story.';
+      }
+      if (node.type === 'substitute') {
+        return 'This companion market is best used as a cross-check when the selected commodity move may spill into adjacent chains.';
+      }
+      if (node.group === 'company') {
+        return cleanDisplayTitle(node.label) + ' is an exposure node. Compare it against the hub and nearby companies to see whether the move is upstream, downstream, or margin-sensitive.';
+      }
+      if (node.group === 'macro') {
+        return cleanDisplayTitle(node.label) + ' is a macro driver. Use it to interpret whether this neighborhood is being pushed by policy, region, FX, or broader risk repricing.';
+      }
+      return strongest
+        ? cleanDisplayTitle(node.label) + ' currently sits closest to ' + cleanDisplayTitle(strongest.label) + ' inside this filtered neighborhood.'
+        : cleanDisplayTitle(node.label) + ' is currently isolated inside this filtered neighborhood.';
+    }
+
     function metricHtml(label, value) {
       return '<div class="cn-local-graph-metric"><span>' + escapeHtml(label) + '</span><strong>' + escapeHtml(value) + '</strong></div>';
     }
@@ -456,7 +543,10 @@
       if (node.dateLabel) metrics.push(metricHtml('Date', node.dateLabel));
 
       var related = connectedNodes(node.id);
+      var direct = directConnections(node.id).slice(0, isMobile ? 4 : 5);
       var actions = findLinkedResources(node);
+      var path = focusPath(node);
+      var insight = nodeInsight(node, related);
       panel.innerHTML = [
         '<div class="cn-local-graph-panel-top">',
         '  <div class="cn-local-graph-panel-kicker">Selected context</div>',
@@ -464,10 +554,21 @@
         '  <h3>' + escapeHtml(node.label) + '</h3>',
         '  <p>' + escapeHtml(node.note || node.relationLabel || defaultDescription(node, graph.pageMeta, graph.commodityId)) + '</p>',
         '</div>',
+        insight ? '  <div class="cn-local-graph-insight"><span>What this view means</span><p>' + escapeHtml(insight) + '</p></div>' : '',
+        path ? '  <div class="cn-local-graph-path"><span>Current path</span><strong>' + escapeHtml(path.title) + '</strong><p>' + escapeHtml(path.description) + '</p></div>' : '',
         '  <div class="cn-local-graph-metrics">' + metrics.join('') + '</div>',
         actions.length ? '  <div class="cn-local-graph-actions">' + actions.map(function (action) {
           return '<a class="' + (action.tone === 'primary' ? 'primary' : 'secondary') + '" href="' + escapeAttribute(action.url) + '">' + escapeHtml(action.label) + '</a>';
         }).join('') + '</div>' : '',
+        '  <div class="cn-local-graph-relations">',
+        '    <div class="cn-local-graph-neighbors-head">Relationship cues</div>',
+        direct.length ? direct.map(function (item) {
+          var relationLabel = item.link && item.link.relationLabel ? item.link.relationLabel : 'Linked context';
+          var relationMeta = [relationVerb(item), typeLabelMap[item.node.type] || item.node.type || 'Node'];
+          if (typeof item.link.correlation === 'number') relationMeta.push('corr ' + item.link.correlation.toFixed(2));
+          return '<div class="cn-local-graph-relation-row"><i class="' + escapeHtml(relationTone(item.link && item.link.relation)) + '"></i><div><strong>' + escapeHtml(item.node.label) + '</strong><small>' + escapeHtml(relationLabel) + ' · ' + escapeHtml(relationMeta.join(' · ')) + '</small></div></div>';
+        }).join('') : '<div class="cn-local-graph-empty">No direct relationship details are available in the current filtered view.</div>',
+        '  </div>',
         '  <div class="cn-local-graph-neighbors">',
         '    <div class="cn-local-graph-neighbors-head">Direct connections</div>',
         related.length ? related.map(function (item) {
@@ -487,7 +588,7 @@
     var visibleGraph = buildVisibleGraph();
     var width = Math.max(280, Math.floor(canvasWrap.clientWidth || canvas.clientWidth || container.clientWidth || window.innerWidth - 32));
     var height = isMobile
-      ? Math.max(360, Math.min(460, Math.round(width * 1.02)))
+      ? Math.max(420, Math.min(560, Math.round(width * 1.08)))
       : Math.max(480, Math.min(760, window.innerHeight * 0.7));
 
     var svg = d3.select(canvas)
@@ -610,7 +711,7 @@
       isMobile = width <= 720 || window.innerWidth <= 720;
       syncCardMode();
       height = isMobile
-        ? Math.max(360, Math.min(460, Math.round(width * 1.02)))
+        ? Math.max(420, Math.min(560, Math.round(width * 1.08)))
         : Math.max(480, Math.min(760, window.innerHeight * 0.7));
       svg.attr('viewBox', '0 0 ' + width + ' ' + height);
 
@@ -734,8 +835,12 @@
       var related = focusId ? neighborSetFor(focusId, visibleLinks) : new Set();
 
       nodeSelection
-        .attr('stroke', function (d) { return d.id === selectedId ? '#f8fafc' : 'rgba(248,250,252,0.18)'; })
-        .attr('stroke-width', function (d) { return d.id === selectedId ? 2.6 : 1.1; })
+        .attr('stroke', function (d) {
+          if (d.id === selectedId) return '#f8fafc';
+          if (focusId && related.has(d.id)) return 'rgba(226,232,240,0.42)';
+          return 'rgba(248,250,252,0.14)';
+        })
+        .attr('stroke-width', function (d) { return d.id === selectedId ? 3 : (focusId && related.has(d.id) ? 1.5 : 1); })
         .attr('opacity', function (d) {
           if (!focusId) return 1;
           return related.has(d.id) ? 1 : 0.22;
@@ -767,6 +872,12 @@
           var sourceId = typeof d.source === 'object' ? d.source.id : d.source;
           var targetId = typeof d.target === 'object' ? d.target.id : d.target;
           return sourceId === focusId || targetId === focusId ? 0.95 : 0.08;
+        })
+        .attr('stroke-width', function (d) {
+          var sourceId = typeof d.source === 'object' ? d.source.id : d.source;
+          var targetId = typeof d.target === 'object' ? d.target.id : d.target;
+          var connected = focusId && (sourceId === focusId || targetId === focusId);
+          return connected ? 2.6 + Math.min(1.6, (d.weight || 1) * 0.5) : 1 + Math.min(1.4, (d.weight || 1) * 0.4);
         });
     }
 

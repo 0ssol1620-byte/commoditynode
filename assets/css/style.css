@@ -5236,6 +5236,74 @@ html { scroll-behavior: smooth; }
   text-transform: uppercase;
 }
 
+.cn-local-graph-insight,
+.cn-local-graph-path,
+.cn-local-graph-relations {
+  display: grid;
+  gap: 8px;
+  padding: 14px 15px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.025);
+}
+
+.cn-local-graph-insight span,
+.cn-local-graph-path span {
+  color: rgba(177,190,205,0.9);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+}
+
+.cn-local-graph-insight p,
+.cn-local-graph-path p {
+  color: rgba(224,232,241,0.88);
+  font-size: 0.87rem;
+  line-height: 1.6;
+}
+
+.cn-local-graph-path strong {
+  color: #f8fafc;
+  font-size: 0.96rem;
+  letter-spacing: -0.02em;
+}
+
+.cn-local-graph-relation-row {
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.cn-local-graph-relation-row i {
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 999px;
+  display: block;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.cn-local-graph-relation-row i.market { color: #22d3ee; background: currentColor; }
+.cn-local-graph-relation-row i.company { color: #f59e0b; background: currentColor; }
+.cn-local-graph-relation-row i.macro { color: #a855f7; background: currentColor; }
+.cn-local-graph-relation-row i.research { color: #10b981; background: currentColor; }
+
+.cn-local-graph-relation-row strong {
+  display: block;
+  color: #f8fafc;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.cn-local-graph-relation-row small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(171,184,198,0.88);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
 .cn-local-graph-metrics {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
