@@ -70,4 +70,6 @@ For governments and food importers, the stakes are larger. Wheat is politically 
 
 Wheat is moving higher because the market still does not trust Black Sea normalization. As long as export risk can plausibly extend into 2026, wheat remains a food-inflation and food-security market first, not a calm harvest story.
 
+**Best companion hub for this angle:** [Crude Oil Impact Map](/commodities/crude-oil/) if you want to track freight, shipping, and broader inflation pass-through alongside grain risk.
+
 **Related hub:** [Wheat Impact Map](/commodities/wheat/)

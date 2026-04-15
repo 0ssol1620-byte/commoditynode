@@ -72,4 +72,6 @@ For airlines and logistics, the move is more constructive. JETS, Delta (DAL), Un
 
 Crude oil is falling because demand fear is finally competing successfully with the geopolitical premium. If that balance persists, the market will keep rotating away from high-beta oil exposure and toward fuel-sensitive beneficiaries.
 
+**Best companion hub for this angle:** [Jet Fuel Impact Map](/commodities/jet-fuel/) if you want the fastest downstream read-through into airline margins and transport-cost relief.
+
 **Related hub:** [Crude Oil Impact Map](/commodities/crude-oil/)

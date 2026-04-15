@@ -71,4 +71,6 @@ For macro investors, the more interesting point is relative performance. If silv
 
 Silver's rally matters because it suggests the market is moving out of indiscriminate selling and back toward differentiation. If the rebound continues and relative strength versus gold holds, silver starts to look less like collateral damage and more like a leadership asset again.
 
+**Best companion hub for this angle:** [Gold Impact Map](/commodities/gold/) if you want to monitor the relative-value confirmation behind silver's outperformance.
+
 **Related hub:** [Silver Impact Map](/commodities/silver/)

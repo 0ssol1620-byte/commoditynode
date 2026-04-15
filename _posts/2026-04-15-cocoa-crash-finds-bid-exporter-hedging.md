@@ -71,4 +71,6 @@ For growers and producing countries, the signal is mixed. The market is no longe
 
 Cocoa's rebound is real, but it still looks like a market stabilizing after a crash rather than a fully restored bull story. Until the market proves that forced flow pressure has cleared and supply incentives have found a healthier balance, cocoa remains a high-volatility reset trade rather than a simple recovery.
 
+**Best companion hub for this angle:** [Sugar Impact Map](/commodities/sugar/) if you want a second softs read-through on ingredient inflation and consumer staples pressure.
+
 **Related hub:** [Cocoa Impact Map](/commodities/cocoa/)

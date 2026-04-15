@@ -73,4 +73,6 @@ Jewelry and fabrication channels are the weaker side of the chain. Higher prices
 
 Gold's latest rally is important because it joins two demand engines that matter for different reasons: short-cycle safety buying and long-cycle central-bank accumulation. As long as both remain in play, the burden of proof stays on bears calling for a simple mean reversion.
 
+**Best companion hub for this angle:** [Silver Impact Map](/commodities/silver/) if you want to confirm whether precious-metals strength is broadening beyond gold.
+
 **Related hub:** [Gold Impact Map](/commodities/gold/)
