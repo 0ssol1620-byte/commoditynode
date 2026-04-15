@@ -741,6 +741,25 @@
         signalRing.material.opacity = 0.16;
         group.add(signalRing);
 
+        var signalRingOuter = makeOrbitalRing(satSize * 3.1, nColor);
+        signalRingOuter.position.copy(sMesh.position);
+        signalRingOuter.rotation.x = Math.PI / 2 + rand(-0.3, 0.3);
+        signalRingOuter.rotation.z = rand(-0.8, 0.8);
+        signalRingOuter.material.opacity = 0.08;
+        group.add(signalRingOuter);
+
+        var satPulse = new THREE.Sprite(new THREE.SpriteMaterial({
+          map: glowTexMid,
+          color: sColor,
+          transparent: true,
+          opacity: 0.06,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending
+        }));
+        satPulse.scale.set(satSize * 2.6, satSize * 2.6, 1);
+        satPulse.position.copy(sMesh.position);
+        group.add(satPulse);
+
         /* ---- 7. Connection line (gradient) ---- */
         var connMesh = makeConnection(d.color, nColor, new THREE.Vector3(0, 0, 0), new THREE.Vector3(sx, sy, sz));
         group.add(connMesh);
@@ -752,7 +771,7 @@
 
         var inclination = rand(-0.6, 0.6); // random orbital inclination
         var satObj = {
-          mesh: sMesh, satShell: shell, satGlow: satGlowSprite, satRing: signalRing, parentObj: cObj,
+          mesh: sMesh, satShell: shell, satGlow: satGlowSprite, satRing: signalRing, satRingOuter: signalRingOuter, satPulse: satPulse, parentObj: cObj,
           angle: angle, speed: speed, orbitR: orbitR,
           inclination: inclination,
           nodeData: n, connMesh: connMesh, nColor: nColor
@@ -884,6 +903,8 @@
             }
             if (sat.satShell) sat.satShell.material.opacity = 0.08;
             if (sat.satRing) sat.satRing.material.opacity = 0.16;
+            if (sat.satRingOuter) sat.satRingOuter.material.opacity = 0.08;
+            if (sat.satPulse) sat.satPulse.material.opacity = 0.06;
             if (sat.satGlow) sat.satGlow.material.opacity = 0.1;
           });
           c.connectionMeshes.forEach(function (conn) {
@@ -922,6 +943,15 @@
             '<div style="font-size:0.78rem;color:#94a3b8;margin-top:2px;">Type: ' + ud.type + '</div>' +
             '<div style="font-size:0.78rem;color:#64748b;">Part of ' + ud.parent + '</div>'
           );
+          var hoveredSatellite = satellites.find(function (sat) { return sat.mesh === hit.obj; });
+          if (hoveredSatellite) {
+            hoveredSatellite.mesh.material.emissiveIntensity = 0.16;
+            if (hoveredSatellite.satRing) hoveredSatellite.satRing.material.opacity = 0.42;
+            if (hoveredSatellite.satRingOuter) hoveredSatellite.satRingOuter.material.opacity = 0.2;
+            if (hoveredSatellite.satPulse) hoveredSatellite.satPulse.material.opacity = 0.22;
+            if (hoveredSatellite.satGlow) hoveredSatellite.satGlow.material.opacity = 0.24;
+            if (hoveredSatellite.connMesh) hoveredSatellite.connMesh.material.opacity = 0.48;
+          }
           if (hoveredObj !== null) {
             hoveredObj = null;
             applyHoverEffects(null);
@@ -1193,6 +1223,18 @@
           sat.satRing.rotation.z += sat.speed * 0.9;
         }
 
+        if (sat.satRingOuter) {
+          sat.satRingOuter.position.set(sx, sy, sz);
+          sat.satRingOuter.rotation.z -= sat.speed * 0.62;
+        }
+
+        if (sat.satPulse) {
+          var pulseScale = 1 + Math.sin(elapsed * 2.4 + sat.angle * 1.7) * 0.16;
+          sat.satPulse.position.set(sx, sy, sz);
+          sat.satPulse.scale.set((sat.orbitR * 0.06) * pulseScale, (sat.orbitR * 0.06) * pulseScale, 1);
+          sat.satPulse.material.opacity = 0.04 + Math.abs(Math.sin(elapsed * 1.8 + sat.angle)) * 0.05;
+        }
+
         /* Update satellite glow position */
         if (sat.satGlow) {
           sat.satGlow.position.set(sx, sy, sz);
@@ -1238,6 +1280,8 @@
                 sat.mesh.material.emissiveIntensity = 0.1;
               }
               if (sat.satRing) sat.satRing.material.opacity = 0.36;
+              if (sat.satRingOuter) sat.satRingOuter.material.opacity = 0.18;
+              if (sat.satPulse) sat.satPulse.material.opacity = 0.14;
             });
           } else {
             /* Distant: fade based on distance */
