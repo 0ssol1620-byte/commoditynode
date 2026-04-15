@@ -445,12 +445,21 @@
     return sprite;
   }
 
-  /* ---- Init ---- */
-  function init() {
-    var container = document.getElementById('universe-canvas');
-    if (!container) return;
+  /* ---- Mount ---- */
+  function mountUniverse(config) {
+    config = config || {};
+    var container = config.container || document.getElementById(config.containerId || 'universe-canvas');
+    if (!container) return null;
+    if (container.dataset.cnUniverseMounted === '1') return null;
+    container.dataset.cnUniverseMounted = '1';
 
-    var tooltip = document.getElementById('universe-tooltip');
+    var scopeRoot = config.root || (container.closest ? container.closest('.universe-container') : null) || container.parentNode || document;
+    var tooltip = config.tooltip || scopeRoot.querySelector('#universe-tooltip, .universe-tooltip');
+    var universeData = Array.isArray(config.data) && config.data.length ? config.data : UNIVERSE_DATA;
+    var defaultHintText = config.defaultHintText || 'Drag to rotate · Scroll to zoom · Click a star to open its hub';
+    var zoomHintText = config.zoomHintText || function (commodityData) {
+      return '✦ ' + commodityData.name + ' — click again to enter the hub';
+    };
     var width = container.clientWidth;
     var height = container.clientHeight;
 
@@ -583,7 +592,7 @@
     /* Shared satellite geometry (instancing concept but manual for r128 compat) */
     var sharedSatGeo = new THREE.SphereGeometry(1, 12, 12);
 
-    UNIVERSE_DATA.forEach(function (d) {
+    universeData.forEach(function (d) {
       var cluster = CLUSTERS[d.category];
       var cx = cluster.x + rand(-180, 180);
       var cy = cluster.y + rand(-180, 180);
@@ -656,7 +665,17 @@
         });
         var sMesh = new THREE.Mesh(sGeo, sMat);
         sMesh.scale.set(satSize, satSize, satSize);
-        sMesh.userData = { name: n.name, type: n.type, parent: d.name, parentLink: d.link, baseOpacity: 0.7, baseEmissive: 0.15 };
+        sMesh.userData = {
+          id: n.id || n.name,
+          name: n.name,
+          type: n.type,
+          parent: d.name,
+          parentLink: d.link,
+          parentData: d,
+          nodeData: n,
+          baseOpacity: 0.7,
+          baseEmissive: 0.15
+        };
 
         var sx = Math.cos(angle) * orbitR;
         var sz = Math.sin(angle) * orbitR;
@@ -891,11 +910,16 @@
         var commodityData = c.userData;
 
         if (isZoomed && zoomedCommodityId === commodityData.id) {
-          // Already zoomed on this commodity — navigate to hub page
+          // Already zoomed on this commodity — navigate to hub page unless overridden
           var slug = commodityData.id;
-          // Try commodity hub page first, fall back to link property
           var hubUrl = '/commodities/' + slug + '/';
-          window.location.href = hubUrl;
+          var shouldNavigate = true;
+          if (typeof config.onCommodityNavigate === 'function') {
+            shouldNavigate = config.onCommodityNavigate(commodityData, hubUrl);
+          }
+          if (shouldNavigate !== false) {
+            window.location.href = hubUrl;
+          }
           return;
         }
 
@@ -908,16 +932,25 @@
         zoomedCommodityId = commodityData.id;
         controls.autoRotate = false;
 
+        if (typeof config.onCommoditySelect === 'function') {
+          config.onCommoditySelect(commodityData, { isZoomed: isZoomed, zoomedCommodityId: zoomedCommodityId });
+        }
+
         // Show "click again to explore" hint
-        var hint = document.getElementById('universe-hint');
+        var hint = config.hint || scopeRoot.querySelector('#universe-hint, .universe-hint');
         if (hint) {
-          hint.textContent = '✦ ' + commodityData.name + ' — click again to enter the hub';
+          hint.textContent = typeof zoomHintText === 'function' ? zoomHintText(commodityData) : zoomHintText;
           hint.style.opacity = '1';
           hint.style.color = '#e2e8f0';
         }
       } else if (hit && hit.type === 'satellite') {
-        var link = hit.obj.userData.parentLink;
-        if (link) window.location.href = link;
+        var satelliteData = hit.obj.userData || {};
+        var shouldContinue = true;
+        if (typeof config.onSatelliteSelect === 'function') {
+          shouldContinue = config.onSatelliteSelect(satelliteData, satelliteData.parentData || null);
+        }
+        var link = satelliteData.parentLink;
+        if (shouldContinue !== false && link) window.location.href = link;
       } else if (isZoomed) {
         resetView();
       }
@@ -944,9 +977,9 @@
       };
       isZoomed = false;
       zoomedCommodityId = null;
-      var hint = document.getElementById('universe-hint');
+      var hint = config.hint || scopeRoot.querySelector('#universe-hint, .universe-hint');
       if (hint) {
-        hint.textContent = 'Drag to rotate · Scroll to zoom · Click a star to open its hub';
+        hint.textContent = defaultHintText;
         hint.style.color = 'rgba(203,213,225,0.74)';
       }
       setTimeout(function () {
@@ -961,14 +994,14 @@
     });
 
     /* Reset button */
-    var resetBtn = document.querySelector('.universe-reset-btn');
+    var resetBtn = config.resetButton || scopeRoot.querySelector('.universe-reset-btn');
     if (resetBtn) resetBtn.addEventListener('click', resetView);
 
     /* ---- Filters ---- */
     var activeFilter = 'all';
-    document.querySelectorAll('.universe-filter').forEach(function (btn) {
+    Array.prototype.slice.call(config.filterButtons || scopeRoot.querySelectorAll('.universe-filter')).forEach(function (btn) {
       btn.addEventListener('click', function () {
-        document.querySelectorAll('.universe-filter').forEach(function (b) { b.classList.remove('is-active'); });
+        Array.prototype.slice.call(config.filterButtons || scopeRoot.querySelectorAll('.universe-filter')).forEach(function (b) { b.classList.remove('is-active'); });
         btn.classList.add('is-active');
         activeFilter = btn.dataset.filter;
         applyFilter();
@@ -986,7 +1019,7 @@
     }
 
     /* ---- Search ---- */
-    var searchInput = document.querySelector('.universe-search');
+    var searchInput = config.searchInput || scopeRoot.querySelector('.universe-search');
     if (searchInput) {
       searchInput.addEventListener('input', function () {
         var q = this.value.toLowerCase().trim();
@@ -1173,9 +1206,31 @@
       renderer.dispose();
       window.removeEventListener('resize', onResize);
     });
+
+    return {
+      resetView: resetView,
+      renderer: renderer,
+      scene: scene,
+      camera: camera,
+      controls: controls,
+      data: universeData
+    };
   }
 
   /* ---- Boot ---- */
+  window.CommodityUniverse3D = window.CommodityUniverse3D || {};
+  window.CommodityUniverse3D.mount = mountUniverse;
+  window.CommodityUniverse3D.defaultData = UNIVERSE_DATA;
+
+  function init() {
+    var container = document.getElementById('universe-canvas');
+    if (!container) return;
+    mountUniverse({
+      container: container,
+      root: (container.closest ? container.closest('.universe-container') : null) || document
+    });
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

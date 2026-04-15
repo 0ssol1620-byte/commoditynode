@@ -313,7 +313,7 @@
   {% unless page.no_chart %}
   <script src="{{ '/assets/js/price-chart.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   {% endunless %}
-  {% if page.url == '/' %}
+  {% if page.url == '/' or page.layout == 'commodity' %}
   <script src="{{ '/assets/js/universe-3d.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
   {% endif %}
   {% endunless %}

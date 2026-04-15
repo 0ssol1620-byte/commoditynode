@@ -587,6 +587,170 @@
       requestAnimationFrame(syncContainerHeight);
     }
 
+    function inferUniverseCategory() {
+      var sector = String((graph.pageMeta && graph.pageMeta.sector) || '').toLowerCase();
+      var title = String(graphDisplayTitle || '').toLowerCase();
+      if (/precious|gold|silver|platinum|palladium|rhodium|iridium/.test(sector + ' ' + title)) return 'precious';
+      if (/energy|oil|gas|uranium|coal|lng|diesel|jet fuel|hydrogen/.test(sector + ' ' + title)) return 'energy';
+      if (/agri|agriculture|wheat|corn|soy|cattle|cotton|coffee|cocoa|sugar|rice|oats|potash|phosphate|water/.test(sector + ' ' + title)) return 'agriculture';
+      return 'industrial';
+    }
+
+    function universeColorForCategory(category) {
+      return {
+        energy: '#ef4444',
+        precious: '#fbbf24',
+        industrial: '#22d3ee',
+        agriculture: '#22c55e'
+      }[category] || '#22d3ee';
+    }
+
+    function buildHubUniverseData() {
+      var category = inferUniverseCategory();
+      var nodeLimit = isMobile ? 12 : 18;
+      var rankedNodes = allNodes
+        .filter(function (node) {
+          return node.id !== graph.commodityId && node.group !== 'research';
+        })
+        .slice()
+        .sort(function (a, b) {
+          var aScore = (a.level === 1 ? 100 : a.level === 2 ? 65 : 35) + (typeof a.impact === 'number' ? Math.abs(a.impact) * 4 : 0) + (a.degree || 0) * 6;
+          var bScore = (b.level === 1 ? 100 : b.level === 2 ? 65 : 35) + (typeof b.impact === 'number' ? Math.abs(b.impact) * 4 : 0) + (b.degree || 0) * 6;
+          return bScore - aScore;
+        })
+        .slice(0, nodeLimit);
+
+      return [{
+        id: graph.commodityId,
+        name: graphDisplayTitle || (graph.pageMeta && graph.pageMeta.shortTitle) || 'Commodity hub',
+        symbol: (graph.pageMeta && graph.pageMeta.symbol) || '',
+        category: category,
+        size: isMobile ? 14 : 15,
+        color: universeColorForCategory(category),
+        link: (graph.pageMeta && graph.pageMeta.url) || '',
+        nodes: rankedNodes.map(function (node) {
+          return {
+            id: node.id,
+            name: node.label,
+            type: node.type || 'market',
+            group: node.group,
+            impact: node.impact,
+            correlation: node.correlation,
+            sector: node.sector,
+            relationLabel: node.relationLabel,
+            note: node.note,
+            url: node.url || ''
+          };
+        })
+      }];
+    }
+
+    function mountSharedUniverse() {
+      if (!window.CommodityUniverse3D || typeof window.CommodityUniverse3D.mount !== 'function') return false;
+
+      var universeData = buildHubUniverseData();
+      var category = inferUniverseCategory();
+      var categoryLabel = {
+        energy: 'Energy orbit',
+        precious: 'Precious orbit',
+        industrial: 'Industrial orbit',
+        agriculture: 'Agriculture orbit'
+      }[category] || 'Hub orbit';
+
+      container.classList.add('cn-local-graph-mount');
+      container.innerHTML = [
+        '<section class="cn-local-graph-section">',
+        '  <div class="cn-local-graph-header">',
+        '    <div class="cn-local-graph-intro">',
+        '      <span class="cn-local-graph-eyebrow">Signature 3D universe</span>',
+        '      <h2>Local Universe View</h2>',
+        '      <p>This hub now uses the same 3D universe renderer as the homepage — reduced to ' + escapeHtml(graphDisplayTitle || 'this commodity') + ' and its highest-signal satellites.</p>',
+        '    </div>',
+        '  </div>',
+        '  <div class="cn-local-graph-body">',
+        '    <div class="cn-local-graph-canvas-wrap universe-container">',
+        '      <div class="universe-stage-toolbar">',
+        '        <div class="universe-controls">',
+        '          <div class="universe-control-group">',
+        '            <span class="universe-control-label">Orbit</span>',
+        '            <button class="universe-filter is-active" data-filter="all">All satellites</button>',
+        '            <button class="universe-filter" data-filter="' + escapeAttribute(category) + '">' + escapeHtml(categoryLabel) + '</button>',
+        '          </div>',
+        '          <div class="universe-control-group universe-search-group">',
+        '            <span class="universe-control-label">Search</span>',
+        '            <input type="text" class="universe-search" placeholder="Search satellites, companies, drivers…" aria-label="Search local universe">',
+        '          </div>',
+        '        </div>',
+        '        <button class="universe-reset-btn" type="button">Reset viewpoint</button>',
+        '      </div>',
+        '      <div class="universe-frame cn-local-universe-frame">',
+        '        <div class="universe-frame-grid"></div>',
+        '        <div class="universe-stage-caption universe-stage-caption-top">Homepage 3D renderer · scoped to this commodity hub</div>',
+        '        <div id="universe-canvas" class="universe-canvas"></div>',
+        '        <div id="universe-tooltip" class="universe-tooltip"></div>',
+        '        <div class="universe-orbit-info universe-orbit-info-left">',
+        '          <span class="universe-orbit-label">Core star</span>',
+        '          <strong>' + escapeHtml(graphDisplayTitle || 'Commodity hub') + '</strong>',
+        '          <small>The center node is the current raw material. Satellites are the highest-signal linked exposures and macro drivers from this hub.</small>',
+        '        </div>',
+        '        <div class="universe-orbit-info universe-orbit-info-right">',
+        '          <span class="universe-orbit-label">Interaction</span>',
+        '          <strong>Focus without leaving the page</strong>',
+        '          <small>Tap or click satellites to inspect them in the side panel while keeping the local universe anchored on this commodity.</small>',
+        '        </div>',
+        '        <div id="universe-hint" class="universe-hint">Drag to rotate · Scroll or pinch to zoom · Tap satellites to inspect them</div>',
+        '      </div>',
+        '    </div>',
+        '    <section class="cn-local-graph-panel" aria-live="polite"></section>',
+        '  </div>',
+        '  <div class="cn-local-graph-legend">',
+        '    <span><i class="market"></i>Commodity & market satellites</span>',
+        '    <span><i class="company"></i>Company satellites</span>',
+        '    <span><i class="macro"></i>Macro / policy satellites</span>',
+        '    <span class="cn-local-graph-legend-meta">Same renderer as the homepage universe · scoped to the current hub only</span>',
+        '  </div>',
+        '</section>'
+      ].join('');
+
+      sectionEl = container.querySelector('.cn-local-graph-section');
+      canvasWrap = container.querySelector('.cn-local-graph-canvas-wrap');
+      canvas = container.querySelector('#universe-canvas');
+      panel = container.querySelector('.cn-local-graph-panel');
+      searchInput = container.querySelector('.universe-search');
+      filterButtons = Array.prototype.slice.call(container.querySelectorAll('.universe-filter'));
+
+      syncCardMode();
+      updatePanel();
+
+      window.CommodityUniverse3D.mount({
+        container: canvas,
+        root: canvasWrap,
+        tooltip: container.querySelector('#universe-tooltip'),
+        hint: container.querySelector('#universe-hint'),
+        searchInput: searchInput,
+        filterButtons: filterButtons,
+        resetButton: container.querySelector('.universe-reset-btn'),
+        data: universeData,
+        defaultHintText: 'Drag to rotate · Scroll or pinch to zoom · Tap satellites to inspect them',
+        zoomHintText: function (commodityData) {
+          return '✦ ' + commodityData.name + ' — local hub locked. Keep exploring its satellites.';
+        },
+        onCommoditySelect: function () {
+          pickNode(graph.commodityId);
+        },
+        onCommodityNavigate: function () {
+          return false;
+        },
+        onSatelliteSelect: function (satelliteData) {
+          if (satelliteData && satelliteData.id) pickNode(satelliteData.id);
+          return false;
+        }
+      });
+
+      requestAnimationFrame(syncContainerHeight);
+      return true;
+    }
+
     function initThreeUniverse() {
       if (typeof THREE === 'undefined') return false;
 
@@ -907,6 +1071,10 @@
 
       renderThreeUniverse();
       return true;
+    }
+
+    if (mountSharedUniverse()) {
+      return;
     }
 
     if (initThreeUniverse()) {
