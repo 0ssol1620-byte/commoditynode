@@ -5565,15 +5565,20 @@ html { scroll-behavior: smooth; }
 .cn-local-graph-body {
   grid-template-columns: minmax(0, 2.2fr) minmax(300px, 0.8fr);
   gap: 14px;
+  align-items: start;
 }
 
 .cn-local-graph-canvas-wrap,
 .cn-local-graph-panel {
-  min-height: 700px;
+  min-height: 760px;
   border-radius: 18px;
   background: rgba(7,10,16,0.94);
   border-color: rgba(255,255,255,0.06);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+.cn-local-universe-frame {
+  min-height: 760px;
 }
 
 .cn-local-graph-canvas-wrap::before {
@@ -5592,6 +5597,9 @@ html { scroll-behavior: smooth; }
   padding: 18px;
   gap: 14px;
   background: rgba(10,13,18,0.96);
+  max-height: 760px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .cn-local-graph-panel-top h3 {
@@ -5702,12 +5710,18 @@ html { scroll-behavior: smooth; }
     border-radius: 16px;
   }
 
+  .cn-local-universe-frame {
+    min-height: 620px;
+  }
+
   .cn-local-graph-canvas {
     min-height: 620px;
   }
 
   .cn-local-graph-panel {
     min-height: auto;
+    max-height: none;
+    overflow: visible;
     padding: 16px;
   }
 

@@ -462,6 +462,10 @@
     };
     var width = container.clientWidth;
     var height = container.clientHeight;
+    var centerPrimary = !!config.centerPrimary;
+    var autoRotate = typeof config.autoRotate === 'boolean' ? config.autoRotate : true;
+    var cameraPosition = config.initialCameraPosition || { x: 0, y: -18, z: 760 };
+    var cameraTarget = config.initialTarget || { x: 0, y: 0, z: 0 };
 
     /* Scene */
     var scene = new THREE.Scene();
@@ -470,7 +474,7 @@
 
     /* Camera */
     var camera = new THREE.PerspectiveCamera(54, width / height, 1, 5000);
-    camera.position.set(0, -18, 760);
+    camera.position.set(cameraPosition.x, cameraPosition.y, cameraPosition.z);
 
     /* Renderer */
     var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
@@ -509,12 +513,13 @@
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.46;
-    controls.minDistance = 140;
-    controls.maxDistance = 2200;
+    controls.autoRotate = autoRotate;
+    controls.autoRotateSpeed = typeof config.autoRotateSpeed === 'number' ? config.autoRotateSpeed : 0.46;
+    controls.minDistance = typeof config.minDistance === 'number' ? config.minDistance : 140;
+    controls.maxDistance = typeof config.maxDistance === 'number' ? config.maxDistance : 2200;
     controls.maxPolarAngle = Math.PI * 0.72;
     controls.minPolarAngle = Math.PI * 0.28;
+    controls.target.set(cameraTarget.x, cameraTarget.y, cameraTarget.z);
 
     /* ---- Lighting ---- */
     var ambientLight = new THREE.AmbientLight(0x182238, 0.44);
@@ -594,9 +599,10 @@
 
     universeData.forEach(function (d) {
       var cluster = CLUSTERS[d.category];
-      var cx = cluster.x + rand(-180, 180);
-      var cy = cluster.y + rand(-180, 180);
-      var cz = cluster.z + rand(-180, 180);
+      var singleCenteredUniverse = centerPrimary && universeData.length === 1;
+      var cx = singleCenteredUniverse ? 0 : cluster.x + rand(-180, 180);
+      var cy = singleCenteredUniverse ? 0 : cluster.y + rand(-180, 180);
+      var cz = singleCenteredUniverse ? 0 : cluster.z + rand(-180, 180);
 
       var group = new THREE.Group();
       group.position.set(cx, cy, cz);
@@ -882,8 +888,8 @@
 
     /* ---- Click / zoom ---- */
     var zoomTarget = null;
-    var defaultCamPos = new THREE.Vector3(0, -18, 760);
-    var defaultTarget = new THREE.Vector3(0, 0, 0);
+    var defaultCamPos = new THREE.Vector3(cameraPosition.x, cameraPosition.y, cameraPosition.z);
+    var defaultTarget = new THREE.Vector3(cameraTarget.x, cameraTarget.y, cameraTarget.z);
     var isZoomed = false;
 
     var touchStartTime = 0;

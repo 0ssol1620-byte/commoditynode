@@ -731,6 +731,12 @@
         filterButtons: filterButtons,
         resetButton: container.querySelector('.universe-reset-btn'),
         data: universeData,
+        centerPrimary: true,
+        autoRotate: false,
+        minDistance: 160,
+        maxDistance: 420,
+        initialCameraPosition: { x: 0, y: 12, z: 260 },
+        initialTarget: { x: 0, y: 0, z: 0 },
         defaultHintText: 'Drag to rotate · Scroll or pinch to zoom · Tap satellites to inspect them',
         zoomHintText: function (commodityData) {
           return '✦ ' + commodityData.name + ' — local hub locked. Keep exploring its satellites.';
