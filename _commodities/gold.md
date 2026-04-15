@@ -9,9 +9,9 @@ symbol: "GC=F"
 data_type: "direct_futures"
 sector: "Precious Metals"
 etfs: ["GLD", "GDX", "IAU", "GDXJ"]
-companies: ["NEM"]
+companies: ["NEM", "WPM", "PAAS"]
 substitutes: ["Silver", "Bitcoin", "Treasury Bonds"]
-themes: ["Clean Energy"]
+themes: ["Inflation Hedge", "Geopolitical Risk", "Emerging Markets", "Clean Energy"]
 tags: [gold, commodity analysis, supply chain]
 ---
 

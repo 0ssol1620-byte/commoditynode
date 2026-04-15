@@ -160,6 +160,40 @@
       });
     });
 
+    safeArray(meta.companies).forEach(function (item) {
+      var ticker = String(item && item.label || '').trim();
+      if (!ticker) return;
+      var matchedNode = nodes.find(function (node) {
+        if (node.group !== 'company') return false;
+        var label = String(node.label || '');
+        return label === ticker || label.indexOf('(' + ticker + ')') !== -1 || label.indexOf(ticker + ' ') === 0;
+      });
+
+      if (matchedNode) {
+        if (!matchedNode.url && item.url) matchedNode.url = item.url;
+        if (!matchedNode.note) matchedNode.note = 'Representative company exposure linked from the hub metadata.';
+        if (!matchedNode.relationLabel) matchedNode.relationLabel = 'Representative company';
+        return;
+      }
+
+      var companyId = 'company-' + slugify(ticker);
+      addNode({
+        id: companyId,
+        label: ticker,
+        type: 'producer',
+        group: 'company',
+        level: 1,
+        url: item.url || '',
+        relationLabel: 'Representative company',
+        note: 'Representative public company linked from the hub metadata.'
+      });
+      addLink(commodity.id, companyId, {
+        relation: 'company',
+        relationLabel: 'Representative company tied to this commodity hub',
+        weight: 1.35
+      });
+    });
+
     safeArray(meta.themes).forEach(function (item) {
       var id = 'theme-' + slugify(item.label);
       addNode({
