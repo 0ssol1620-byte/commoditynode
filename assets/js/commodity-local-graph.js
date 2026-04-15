@@ -607,18 +607,51 @@
 
     function buildHubUniverseData() {
       var category = inferUniverseCategory();
-      var nodeLimit = isMobile ? 12 : 18;
-      var rankedNodes = allNodes
-        .filter(function (node) {
-          return node.id !== graph.commodityId && node.group !== 'research';
-        })
+      var quotas = isMobile
+        ? { market: 4, company: 6, macro: 4, research: 2 }
+        : { market: 6, company: 10, macro: 6, research: 4 };
+      var totalLimit = Object.keys(quotas).reduce(function (sum, key) { return sum + quotas[key]; }, 0);
+
+      function nodeScore(node) {
+        var levelScore = node.level === 1 ? 100 : node.level === 2 ? 65 : 35;
+        var impactScore = typeof node.impact === 'number' ? Math.abs(node.impact) * 4 : 0;
+        var degreeScore = (node.degree || 0) * 6;
+        var urlBonus = node.url ? 8 : 0;
+        var reportThemeBonus = node.group === 'research'
+          ? (node.type === 'theme' ? 26 : node.type === 'report' ? 18 : 12)
+          : 0;
+        var companyBonus = node.group === 'company' ? 14 : 0;
+        return levelScore + impactScore + degreeScore + urlBonus + reportThemeBonus + companyBonus;
+      }
+
+      var candidates = allNodes.filter(function (node) {
+        return node.id !== graph.commodityId;
+      });
+
+      var selected = [];
+      var selectedIds = new Set();
+
+      ['market', 'company', 'macro', 'research'].forEach(function (groupKey) {
+        candidates
+          .filter(function (node) { return node.group === groupKey; })
+          .sort(function (a, b) { return nodeScore(b) - nodeScore(a); })
+          .slice(0, quotas[groupKey] || 0)
+          .forEach(function (node) {
+            if (selectedIds.has(node.id)) return;
+            selected.push(node);
+            selectedIds.add(node.id);
+          });
+      });
+
+      candidates
         .slice()
-        .sort(function (a, b) {
-          var aScore = (a.level === 1 ? 100 : a.level === 2 ? 65 : 35) + (typeof a.impact === 'number' ? Math.abs(a.impact) * 4 : 0) + (a.degree || 0) * 6;
-          var bScore = (b.level === 1 ? 100 : b.level === 2 ? 65 : 35) + (typeof b.impact === 'number' ? Math.abs(b.impact) * 4 : 0) + (b.degree || 0) * 6;
-          return bScore - aScore;
-        })
-        .slice(0, nodeLimit);
+        .sort(function (a, b) { return nodeScore(b) - nodeScore(a); })
+        .forEach(function (node) {
+          if (selected.length >= totalLimit) return;
+          if (selectedIds.has(node.id)) return;
+          selected.push(node);
+          selectedIds.add(node.id);
+        });
 
       return [{
         id: graph.commodityId,
@@ -628,7 +661,7 @@
         size: isMobile ? 14 : 15,
         color: universeColorForCategory(category),
         link: (graph.pageMeta && graph.pageMeta.url) || '',
-        nodes: rankedNodes.map(function (node) {
+        nodes: selected.map(function (node) {
           return {
             id: node.id,
             name: node.label,
