@@ -449,8 +449,16 @@
     if (type === 'producer' || type === 'commodity') return new THREE.IcosahedronGeometry(1, 0);
     if (type === 'macro' || type === 'policy' || type === 'theme' || type === 'report') return new THREE.OctahedronGeometry(1, 0);
     if (type === 'consumer' || type === 'processor') return new THREE.DodecahedronGeometry(1, 0);
-    if (type === 'etf' || type === 'index' || type === 'fx') return new THREE.TetrahedronGeometry(1.08, 0);
-    return new THREE.IcosahedronGeometry(1, 0);
+    if (type === 'etf' || type === 'index' || type === 'fx') return new THREE.TetrahedronGeometry(1, 0);
+    return new THREE.SphereGeometry(1.15, 12, 12);
+  }
+
+  function satelliteBadgeColor(type) {
+    if (type === 'report') return '#38bdf8';
+    if (type === 'theme') return '#f472b6';
+    if (type === 'producer' || type === 'consumer' || type === 'processor' || type === 'supplier') return '#34d399';
+    if (type === 'macro' || type === 'policy' || type === 'regional') return '#fbbf24';
+    return '#cbd5e1';
   }
 
   /* ---- Mount ---- */
@@ -677,7 +685,7 @@
         var angle = (ni / d.nodes.length) * Math.PI * 2;
         var speed = rand(0.002, 0.008);
         var nColor = TYPE_COLORS[n.type] || '#94a3b8';
-        var satSize = rand(1.8, 3.2);
+        var satSize = rand(2.1, 3.5);
 
         /* ---- 3. Faceted cosmic satellite ---- */
         var sGeo = satelliteGeometries[n.type] || satelliteGeometries.default;
@@ -700,12 +708,12 @@
         var shell = new THREE.Sprite(new THREE.SpriteMaterial({
           color: sColor,
           transparent: true,
-          opacity: 0.08,
+          opacity: 0.1,
           depthWrite: false,
           blending: THREE.AdditiveBlending,
           map: glowTexOuter
         }));
-        shell.scale.set(satSize * 3.2, satSize * 3.2, 1);
+        shell.scale.set(satSize * 3.8, satSize * 3.8, 1);
         sMesh.userData = {
           id: n.id || n.name,
           name: n.name,
@@ -718,8 +726,11 @@
           sector: n.sector || '',
           relationLabel: n.relationLabel || '',
           note: n.note || '',
-          baseOpacity: 0.98,
-          baseEmissive: 0.04,
+          baseOpacity: 0.99,
+          baseEmissive: 0.055,
+          baseScaleX: satSize * stretchX,
+          baseScaleY: satSize * stretchY,
+          baseScaleZ: satSize * stretchZ,
           stretchX: stretchX,
           stretchY: stretchY,
           stretchZ: stretchZ
@@ -734,7 +745,7 @@
         group.add(shell);
 
         /* Satellite glow sprite */
-        var satGlowSprite = makeSatGlow(nColor, satSize * 0.75);
+        var satGlowSprite = makeSatGlow(nColor, satSize * 0.9);
         satGlowSprite.position.copy(sMesh.position);
         group.add(satGlowSprite);
 
@@ -742,25 +753,25 @@
         signalRing.position.copy(sMesh.position);
         signalRing.rotation.x = Math.PI / 2 + rand(-0.4, 0.4);
         signalRing.rotation.z = rand(-0.6, 0.6);
-        signalRing.material.opacity = 0.16;
+        signalRing.material.opacity = 0.18;
         group.add(signalRing);
 
         var signalRingOuter = makeOrbitalRing(satSize * 3.1, nColor);
         signalRingOuter.position.copy(sMesh.position);
         signalRingOuter.rotation.x = Math.PI / 2 + rand(-0.3, 0.3);
         signalRingOuter.rotation.z = rand(-0.8, 0.8);
-        signalRingOuter.material.opacity = 0.08;
+        signalRingOuter.material.opacity = 0.11;
         group.add(signalRingOuter);
 
         var satPulse = new THREE.Sprite(new THREE.SpriteMaterial({
           map: glowTexMid,
           color: sColor,
           transparent: true,
-          opacity: 0.06,
+          opacity: 0.08,
           depthWrite: false,
           blending: THREE.AdditiveBlending
         }));
-        satPulse.scale.set(satSize * 2.6, satSize * 2.6, 1);
+        satPulse.scale.set(satSize * 3.1, satSize * 3.1, 1);
         satPulse.position.copy(sMesh.position);
         group.add(satPulse);
 
@@ -798,6 +809,7 @@
     raycaster.params.Points = { threshold: 5 };
     var mouse = new THREE.Vector2();
     var hoveredObj = null;
+    var hoveredSatelliteObj = null;
     var frameCount = 0;
     var lastHit = null;
 
@@ -844,6 +856,27 @@
       if (tooltip) tooltip.style.display = 'none';
     }
 
+    function resetHoveredSatellite() {
+      if (!hoveredSatelliteObj) return;
+      var ud = hoveredSatelliteObj.mesh.userData || {};
+      hoveredSatelliteObj.mesh.scale.set(
+        ud.baseScaleX || hoveredSatelliteObj.mesh.scale.x,
+        ud.baseScaleY || hoveredSatelliteObj.mesh.scale.y,
+        ud.baseScaleZ || hoveredSatelliteObj.mesh.scale.z
+      );
+      hoveredSatelliteObj.mesh.material.opacity = ud.baseOpacity || 0.99;
+      if (hoveredSatelliteObj.mesh.material.emissiveIntensity !== undefined) {
+        hoveredSatelliteObj.mesh.material.emissiveIntensity = ud.baseEmissive || 0.055;
+      }
+      if (hoveredSatelliteObj.satShell) hoveredSatelliteObj.satShell.material.opacity = 0.1;
+      if (hoveredSatelliteObj.satRing) hoveredSatelliteObj.satRing.material.opacity = 0.18;
+      if (hoveredSatelliteObj.satRingOuter) hoveredSatelliteObj.satRingOuter.material.opacity = 0.11;
+      if (hoveredSatelliteObj.satPulse) hoveredSatelliteObj.satPulse.material.opacity = 0.08;
+      if (hoveredSatelliteObj.satGlow) hoveredSatelliteObj.satGlow.material.opacity = 0.12;
+      if (hoveredSatelliteObj.connMesh) hoveredSatelliteObj.connMesh.material.opacity = 0.2;
+      hoveredSatelliteObj = null;
+    }
+
     /* ---- Hover effects ---- */
     var lastMouseEvent = null;
 
@@ -863,11 +896,13 @@
             /* Brighten satellites */
             c.satellites.forEach(function (sat) {
               if (sat.mesh.material.emissiveIntensity !== undefined) {
-                sat.mesh.material.emissiveIntensity = 0.08;
+                sat.mesh.material.emissiveIntensity = 0.1;
               }
-              if (sat.satShell) sat.satShell.material.opacity = 0.12;
-              if (sat.satRing) sat.satRing.material.opacity = 0.32;
-              if (sat.satGlow) sat.satGlow.material.opacity = 0.2;
+              if (sat.satShell) sat.satShell.material.opacity = 0.14;
+              if (sat.satRing) sat.satRing.material.opacity = 0.36;
+              if (sat.satRingOuter) sat.satRingOuter.material.opacity = 0.18;
+              if (sat.satPulse) sat.satPulse.material.opacity = 0.14;
+              if (sat.satGlow) sat.satGlow.material.opacity = 0.22;
             });
             /* Brighten connections */
             c.connectionMeshes.forEach(function (conn) {
@@ -929,6 +964,7 @@
       if (hit) {
         renderer.domElement.style.cursor = 'pointer';
         if (hit.type === 'commodity') {
+          resetHoveredSatellite();
           var d = hit.obj.data;
           showTooltip(e,
             '<div style="font-weight:700;font-size:1rem;color:' + d.color + ';">' + d.name + '</div>' +
@@ -942,22 +978,35 @@
           }
         } else {
           var ud = hit.obj.userData;
+          var badgeColor = satelliteBadgeColor(ud.type);
           showTooltip(e,
-            '<div style="font-weight:600;color:#e2e8f0;">' + ud.name + '</div>' +
-            '<div style="font-size:0.78rem;color:#94a3b8;margin-top:2px;">' + (ud.type ? ('Type: ' + ud.type) : 'Satellite node') + '</div>' +
+            '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">' +
+              '<span style="display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;background:' + badgeColor + '1a;color:' + badgeColor + ';border:1px solid ' + badgeColor + '4d;font-size:0.68rem;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;">' + (ud.type || 'node') + '</span>' +
+              '<span style="font-weight:700;color:#f8fafc;font-size:0.96rem;">' + ud.name + '</span>' +
+            '</div>' +
             (ud.sector ? '<div style="font-size:0.78rem;color:#94a3b8;">Sector: ' + ud.sector + '</div>' : '') +
             (ud.relationLabel ? '<div style="font-size:0.78rem;color:#cbd5e1;margin-top:4px;">' + ud.relationLabel + '</div>' : '') +
-            '<div style="font-size:0.78rem;color:#64748b;">Part of ' + ud.parent + '</div>' +
-            (ud.url ? '<div style="margin-top:4px;font-size:0.74rem;color:#67e8f9;">Click to open linked page</div>' : '<div style="margin-top:4px;font-size:0.74rem;color:#64748b;">Hover to inspect · click for parent hub</div>')
+            '<div style="font-size:0.78rem;color:#64748b;">Parent hub: ' + ud.parent + '</div>' +
+            (ud.url ? '<div style="margin-top:6px;font-size:0.74rem;color:#67e8f9;font-weight:700;">Linked page available · click to open</div>' : '<div style="margin-top:6px;font-size:0.74rem;color:#94a3b8;">No direct page · click keeps focus on the hub</div>')
           );
           var hoveredSatellite = satellites.find(function (sat) { return sat.mesh === hit.obj; });
           if (hoveredSatellite) {
-            hoveredSatellite.mesh.material.emissiveIntensity = 0.16;
-            if (hoveredSatellite.satRing) hoveredSatellite.satRing.material.opacity = 0.42;
-            if (hoveredSatellite.satRingOuter) hoveredSatellite.satRingOuter.material.opacity = 0.2;
-            if (hoveredSatellite.satPulse) hoveredSatellite.satPulse.material.opacity = 0.22;
-            if (hoveredSatellite.satGlow) hoveredSatellite.satGlow.material.opacity = 0.24;
-            if (hoveredSatellite.connMesh) hoveredSatellite.connMesh.material.opacity = 0.48;
+            if (hoveredSatelliteObj !== hoveredSatellite) {
+              resetHoveredSatellite();
+              hoveredSatelliteObj = hoveredSatellite;
+            }
+            hoveredSatellite.mesh.scale.set(
+              (ud.baseScaleX || hoveredSatellite.mesh.scale.x) * 1.14,
+              (ud.baseScaleY || hoveredSatellite.mesh.scale.y) * 1.14,
+              (ud.baseScaleZ || hoveredSatellite.mesh.scale.z) * 1.14
+            );
+            hoveredSatellite.mesh.material.emissiveIntensity = 0.2;
+            if (hoveredSatellite.satShell) hoveredSatellite.satShell.material.opacity = 0.16;
+            if (hoveredSatellite.satRing) hoveredSatellite.satRing.material.opacity = 0.48;
+            if (hoveredSatellite.satRingOuter) hoveredSatellite.satRingOuter.material.opacity = 0.28;
+            if (hoveredSatellite.satPulse) hoveredSatellite.satPulse.material.opacity = 0.26;
+            if (hoveredSatellite.satGlow) hoveredSatellite.satGlow.material.opacity = 0.3;
+            if (hoveredSatellite.connMesh) hoveredSatellite.connMesh.material.opacity = 0.54;
           }
           if (hoveredObj !== null) {
             hoveredObj = null;
@@ -967,6 +1016,7 @@
       } else {
         renderer.domElement.style.cursor = 'grab';
         hideTooltip();
+        resetHoveredSatellite();
         if (hoveredObj !== null) {
           hoveredObj = null;
           applyHoverEffects(null);

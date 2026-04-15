@@ -1250,7 +1250,9 @@ function renderChart(){
   var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
   var chronos = c && c.models ? c.models.chronos2 : null;
   var timesfm = c && c.models ? c.models.timesfm : null;
-  var activeForecast = consensus || (d && d.timesfm_forecast ? d.timesfm_forecast : (d ? d.forecast : null));
+  var fallbackChronos = d && (d.ag_forecast || d.forecast) ? (d.ag_forecast || d.forecast) : null;
+  var fallbackTimesfm = d && d.timesfm_forecast ? d.timesfm_forecast : null;
+  var activeForecast = consensus || fallbackTimesfm || fallbackChronos || (d ? d.forecast : null);
 
   var subtitleEl = document.getElementById('sim-chart-subtitle');
   var legendEl = document.getElementById('sim-legend-model');
@@ -1275,8 +1277,8 @@ function renderChart(){
     fcstMedian = (activeForecast.median || []).slice(0, fcLen).map(function(v){ return v * adj; });
     fcstP10    = ((activeForecast.p10 || activeForecast.p10_extreme || activeForecast.p25) || []).slice(0, fcLen).map(function(v){ return v * adj; });
     fcstP90    = ((activeForecast.p90 || activeForecast.p90_extreme || activeForecast.p75) || []).slice(0, fcLen).map(function(v){ return v * adj; });
-    chronosMedian = (chronos && chronos.raw && chronos.raw.forecast ? (chronos.raw.forecast.median || []) : []).slice(0, fcLen).map(function(v){ return v * adj; });
-    timesfmMedian = (timesfm ? (timesfm.median || []) : []).slice(0, fcLen).map(function(v){ return v * adj; });
+    chronosMedian = (chronos && chronos.raw && chronos.raw.forecast ? (chronos.raw.forecast.median || []) : ((fallbackChronos && fallbackChronos.median) || [])).slice(0, fcLen).map(function(v){ return v * adj; });
+    timesfmMedian = (timesfm ? (timesfm.median || []) : ((fallbackTimesfm && fallbackTimesfm.median) || [])).slice(0, fcLen).map(function(v){ return v * adj; });
   } else {
     var base = {crude_oil:71, gold:3200, copper:4.5, silver:32, natural_gas:2.8, wheat:550}[key] || 100;
     for(var i=0; i<63; i++){
