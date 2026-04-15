@@ -456,18 +456,19 @@
 
     /* Scene */
     var scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x050510);
+    scene.background = new THREE.Color(0x03060c);
+    scene.fog = new THREE.FogExp2(0x050912, 0.00072);
 
     /* Camera */
-    var camera = new THREE.PerspectiveCamera(60, width / height, 1, 5000);
-    camera.position.set(0, 0, 680);
+    var camera = new THREE.PerspectiveCamera(54, width / height, 1, 5000);
+    camera.position.set(0, -18, 760);
 
     /* Renderer */
-    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ReinhardToneMapping;
-    renderer.toneMappingExposure = 1.5;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.28;
     container.appendChild(renderer.domElement);
 
     /* ---- Bloom post-processing ---- */
@@ -482,9 +483,9 @@
         composer.addPass(renderPass);
         var bloomPass = new THREE.UnrealBloomPass(
           new THREE.Vector2(width, height),
-          1.8,   /* strength - more dramatic */
-          0.6,   /* radius */
-          0.1    /* threshold - lower for more bloom */
+          1.55,
+          0.78,
+          0.16
         );
         composer.addPass(bloomPass);
         useBloom = true;
@@ -498,15 +499,23 @@
     /* Controls */
     var controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.dampingFactor = 0.08;
+    controls.dampingFactor = 0.06;
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.3;
-    controls.minDistance = 100;
-    controls.maxDistance = 2000;
+    controls.autoRotateSpeed = 0.46;
+    controls.minDistance = 140;
+    controls.maxDistance = 2200;
+    controls.maxPolarAngle = Math.PI * 0.72;
+    controls.minPolarAngle = Math.PI * 0.28;
 
     /* ---- Lighting ---- */
-    var ambientLight = new THREE.AmbientLight(0x111122, 0.3);
+    var ambientLight = new THREE.AmbientLight(0x182238, 0.44);
     scene.add(ambientLight);
+    var fillLight = new THREE.DirectionalLight(0x67e8f9, 0.38);
+    fillLight.position.set(120, 180, 240);
+    scene.add(fillLight);
+    var rimLight = new THREE.DirectionalLight(0xa855f7, 0.22);
+    rimLight.position.set(-180, -120, 200);
+    scene.add(rimLight);
 
     /* ---- Enhanced Star Field ---- */
     var starCount = isMobile ? 2000 : 5000;
@@ -854,7 +863,7 @@
 
     /* ---- Click / zoom ---- */
     var zoomTarget = null;
-    var defaultCamPos = new THREE.Vector3(0, 0, 800);
+    var defaultCamPos = new THREE.Vector3(0, -18, 760);
     var defaultTarget = new THREE.Vector3(0, 0, 0);
     var isZoomed = false;
 
@@ -902,9 +911,9 @@
         // Show "click again to explore" hint
         var hint = document.getElementById('universe-hint');
         if (hint) {
-          hint.textContent = '🔍 ' + commodityData.name + ' — click again to explore hub';
+          hint.textContent = '✦ ' + commodityData.name + ' — click again to enter the hub';
           hint.style.opacity = '1';
-          hint.style.color = '#22d3ee';
+          hint.style.color = '#e2e8f0';
         }
       } else if (hit && hit.type === 'satellite') {
         var link = hit.obj.userData.parentLink;
@@ -937,8 +946,8 @@
       zoomedCommodityId = null;
       var hint = document.getElementById('universe-hint');
       if (hint) {
-        hint.textContent = 'Drag to rotate · Scroll to zoom · Click a star to explore';
-        hint.style.color = 'rgba(148,163,184,0.6)';
+        hint.textContent = 'Drag to rotate · Scroll to zoom · Click a star to open its hub';
+        hint.style.color = 'rgba(203,213,225,0.74)';
       }
       setTimeout(function () {
         zoomTarget = null;

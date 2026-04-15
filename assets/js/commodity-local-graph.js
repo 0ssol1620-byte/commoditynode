@@ -260,8 +260,8 @@
       '  <div class="cn-local-graph-header">',
       '    <div class="cn-local-graph-intro">',
       '      <span class="cn-local-graph-eyebrow">Knowledge graph</span>',
-      '      <h2>Local Node Graph</h2>',
-      '      <p>Neighborhood view for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Click nodes to inspect relationships, then jump into connected pages and reports.</p>',
+      '      <h2>Local Market Workspace</h2>',
+      '      <p>Neighborhood view for ' + escapeHtml(graphDisplayTitle || 'this hub') + '. Explore the immediate market structure, inspect connected entities, and jump into the most relevant reports without leaving the page.</p>',
       '    </div>',
       '    <div class="cn-local-graph-controls">',
       '      <label class="cn-local-graph-search">',
@@ -289,6 +289,7 @@
       '    <span><i class="company"></i>Company exposure</span>',
       '    <span><i class="macro"></i>Macro / policy / region</span>',
       '    <span><i class="research"></i>Reports & themes</span>',
+      '    <span class="cn-local-graph-legend-meta">Click a node to focus the network · Double-click linked notes to open</span>',
       '  </div>',
       '</section>'
     ].join('');
@@ -458,6 +459,7 @@
       var actions = findLinkedResources(node);
       panel.innerHTML = [
         '<div class="cn-local-graph-panel-top">',
+        '  <div class="cn-local-graph-panel-kicker">Selected context</div>',
         '  <span class="cn-local-graph-node-pill ' + escapeHtml(node.group) + '">' + escapeHtml(typeLabel) + '</span>',
         '  <h3>' + escapeHtml(node.label) + '</h3>',
         '  <p>' + escapeHtml(node.note || node.relationLabel || defaultDescription(node, graph.pageMeta, graph.commodityId)) + '</p>',
