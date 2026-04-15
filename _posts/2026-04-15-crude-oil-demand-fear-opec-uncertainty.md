@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Crude Oil Sinks as Demand Fear Starts to Beat the Geopolitical Premium"
+title: "Why Crude Oil Is Down Today: China Demand Fear and OPEC+ Uncertainty"
 date: 2026-04-15 08:50:00 +0900
 categories: [energy, macro]
 tags: [crude-oil, opec, china, airlines, xom, cvx, reuters]
@@ -9,7 +9,7 @@ direction: bearish
 sensitivity: high
 confidence: medium-high
 canonical_url: https://commoditynode.com/crude-oil-demand-fear-opec-uncertainty/
-description: "Crude oil fell 6.92% to $91.88/barrel as demand fears tied to China and macro uncertainty started to outweigh the geopolitical premium and OPEC+ narrative."
+description: "Why crude oil is down today: WTI fell 6.92% to $91.88/barrel as China demand fear and OPEC+ uncertainty started to outweigh the geopolitical premium."
 image: /assets/images/og-crude-oil.png
 ---
 

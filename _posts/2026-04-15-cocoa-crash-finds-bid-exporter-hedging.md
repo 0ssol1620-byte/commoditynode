@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cocoa Finds a Bid After the Crash, but Exporter Hedging Still Caps the Bounce"
+title: "Why Cocoa Is Up Today: Rebound Buying After the Crash"
 date: 2026-04-15 08:46:00 +0900
 categories: [agriculture, softs]
 tags: [cocoa, west-africa, confectionery, hershey, mdlz, reuters]
@@ -9,7 +9,7 @@ direction: bullish
 sensitivity: high
 confidence: medium-high
 canonical_url: https://commoditynode.com/cocoa-crash-finds-bid-exporter-hedging/
-description: "Cocoa jumped 10.74% to $3,630/tonne, but Bloomberg's exporter-hedging backdrop and Reuters reporting on post-crash strain in Brazil suggest the rebound is not yet a clean bull reset."
+description: "Why cocoa is up today: Cocoa jumped 10.74% to $3,630/tonne as buyers stepped back in after the crash, even though exporter hedging still clouds the rebound."
 image: /assets/images/og-cocoa.png
 ---
 

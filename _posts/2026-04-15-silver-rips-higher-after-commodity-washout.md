@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Silver Rips Higher as the Commodity Washout Starts to Reverse"
+title: "Why Silver Is Up Today: Commodity Sell-Off Reversal and Gold Confirmation"
 date: 2026-04-15 08:48:00 +0900
 categories: [precious-metals, macro]
 tags: [silver, precious-metals, miners, solar, reuters, gold]
@@ -9,7 +9,7 @@ direction: bullish
 sensitivity: high
 confidence: medium-high
 canonical_url: https://commoditynode.com/silver-rips-higher-after-commodity-washout/
-description: "Silver rose 5.3% to $79.525/oz as the market reversed part of the broader commodity sell-off, with Reuters noting both the washout and silver's quiet outperformance versus gold."
+description: "Why silver is up today: Silver rose 5.3% to $79.525/oz as the commodity washout reversed and the metal started outperforming gold again."
 image: /assets/images/og-silver.png
 ---
 

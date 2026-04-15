@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Gold Reclaims Momentum as the Safety Bid Feeds the Central Bank Story"
+title: "Why Gold Is Up Today: Safety Bids and Central Bank Buying"
 date: 2026-04-15 08:35:00 +0900
 categories: [precious-metals, macro]
 tags: [gold, central-banks, miners, safe-haven, dollar, reuters]
@@ -9,7 +9,7 @@ direction: bullish
 sensitivity: high
 confidence: medium-high
 canonical_url: https://commoditynode.com/gold-safety-bid-central-bank-fire/
-description: "Gold rose 2.52% to $4,861.8/oz as the market leaned back into safe-haven demand and the central-bank accumulation narrative regained force."
+description: "Why gold is up today: Gold rose 2.52% to $4,861.8/oz as safe-haven demand and central-bank buying regained control of the market narrative."
 image: /assets/images/og-gold.png
 ---
 

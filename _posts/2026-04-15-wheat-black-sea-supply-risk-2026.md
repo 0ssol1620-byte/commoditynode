@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Wheat Pushes Higher as Black Sea Supply Risk Refuses to Clear"
+title: "Why Wheat Is Up Today: Black Sea Supply Risk Still Matters"
 date: 2026-04-15 08:37:00 +0900
 categories: [agriculture, food-inflation]
 tags: [wheat, black-sea, food-security, adm, bg, reuters, inflation]
@@ -9,7 +9,7 @@ direction: bullish
 sensitivity: high
 confidence: medium-high
 canonical_url: https://commoditynode.com/wheat-black-sea-supply-risk-2026/
-description: "Wheat rose 3.43% to 602.25 cents/bushel as Reuters highlighted that Black Sea supply may stay constrained into 2026, keeping food-security and importer risk in focus."
+description: "Why wheat is up today: Wheat rose 3.43% to 602.25 cents/bushel as Black Sea supply risk remained a live threat into 2026."
 image: /assets/images/og-wheat.png
 ---
 

@@ -3,6 +3,17 @@ layout: default
 ---
 
 {% assign primary_tag = page.tags | first %}
+{% assign commodity_display = page.commodity_name | default: primary_tag | default: page.title %}
+{% assign commodity_slug = commodity_display | slugify %}
+{% assign move_word = 'moving' %}
+{% assign move_phrase = 'moving today' %}
+{% if page.direction == 'bullish' %}
+  {% assign move_word = 'up' %}
+  {% assign move_phrase = 'up today' %}
+{% elsif page.direction == 'bearish' %}
+  {% assign move_word = 'down' %}
+  {% assign move_phrase = 'down today' %}
+{% endif %}
 
 <div data-page-type="signal-report" hidden></div>
 
@@ -43,6 +54,39 @@ layout: default
     "@type": "SpeakableSpecification",
     "cssSelector": [".post-content p:first-of-type", ".post-meta-bar"]
   }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is {{ commodity_display | escape }} {{ move_phrase }}?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ page.description | default: site.description | strip_html | strip_newlines | escape }}"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What stocks and sectors are most affected by {{ commodity_display | escape }}?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This CommodityNode Signal Report focuses on the second-order impact path from {{ commodity_display | escape }} into companies, ETFs, industries, and supply-chain exposure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I track {{ commodity_display | escape }} price, forecast, and related reports?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Use the linked CommodityNode hub for live price context, forecast ranges, and related reports: https://commoditynode.com/commodities/{{ commodity_slug }}/"
+      }
+    }
+  ]
 }
 </script>
 
@@ -135,6 +179,28 @@ layout: default
       </div>
     </div>
   </div>
+
+  <section aria-label="Search intent quick answer" data-animate style="margin-top:18px;padding:18px 20px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:start;">
+    <div>
+      <div style="font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Quick answer</div>
+      <h2 style="margin:0 0 10px;font-size:1.15rem;line-height:1.35;">Why is {{ commodity_display }} {{ move_word }} today?</h2>
+      <p style="margin:0;color:var(--text2);line-height:1.7;">{{ page.description | default: site.description }}</p>
+    </div>
+    <div style="display:grid;gap:10px;">
+      <div style="padding:12px 14px;border-radius:12px;background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.14);">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#818cf8;font-weight:700;margin-bottom:6px;">Best next step</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Open the <a href="/commodities/{{ commodity_slug }}/" style="color:var(--accent);">{{ commodity_display }} hub</a> for live price, forecast, and impact-map context.</div>
+      </div>
+      <div style="padding:12px 14px;border-radius:12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">What this page answers</div>
+        <ul style="margin:0;padding-left:18px;color:var(--text2);line-height:1.65;font-size:0.9rem;">
+          <li>Why {{ commodity_display }} is {{ move_word }}</li>
+          <li>Which stocks and sectors are affected</li>
+          <li>What to watch over the next 24–72 hours</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <div class="post-layout" id="post-layout">
     <article class="post-content" id="post-article" data-animate>
