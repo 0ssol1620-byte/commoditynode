@@ -683,13 +683,13 @@
         var sGeo = satelliteGeometries[n.type] || satelliteGeometries.default;
         var sColor = hexToRGB(nColor);
         var sMat = new THREE.MeshStandardMaterial({
-          color: sColor.clone().lerp(new THREE.Color(0xffffff), 0.08),
+          color: sColor.clone().multiplyScalar(0.28).lerp(new THREE.Color(0x0b1220), 0.45),
           transparent: true,
-          opacity: 0.82,
-          metalness: 0.7,
-          roughness: 0.26,
+          opacity: 0.94,
+          metalness: 0.22,
+          roughness: 0.78,
           emissive: sColor,
-          emissiveIntensity: 0.08
+          emissiveIntensity: 0.025
         });
         var sMesh = new THREE.Mesh(sGeo, sMat);
         var stretchX = rand(0.92, 1.22);
@@ -697,19 +697,15 @@
         var stretchZ = rand(0.92, 1.28);
         sMesh.scale.set(satSize * stretchX, satSize * stretchY, satSize * stretchZ);
         sMesh.rotation.set(rand(0, Math.PI), rand(0, Math.PI), rand(0, Math.PI));
-        var shell = new THREE.Mesh(
-          sGeo,
-          new THREE.MeshBasicMaterial({
-            color: sColor.clone().lerp(new THREE.Color(0xffffff), 0.18),
-            wireframe: true,
-            transparent: true,
-            opacity: 0.12,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false
-          })
-        );
-        shell.scale.set(satSize * stretchX * 1.18, satSize * stretchY * 1.18, satSize * stretchZ * 1.18);
-        shell.rotation.copy(sMesh.rotation);
+        var shell = new THREE.Sprite(new THREE.SpriteMaterial({
+          color: sColor,
+          transparent: true,
+          opacity: 0.08,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending,
+          map: glowTexOuter
+        }));
+        shell.scale.set(satSize * 3.2, satSize * 3.2, 1);
         sMesh.userData = {
           id: n.id || n.name,
           name: n.name,
@@ -718,8 +714,8 @@
           parentLink: d.link,
           parentData: d,
           nodeData: n,
-          baseOpacity: 0.82,
-          baseEmissive: 0.08,
+          baseOpacity: 0.94,
+          baseEmissive: 0.025,
           stretchX: stretchX,
           stretchY: stretchY,
           stretchZ: stretchZ
@@ -734,9 +730,16 @@
         group.add(shell);
 
         /* Satellite glow sprite */
-        var satGlowSprite = makeSatGlow(nColor, satSize * 0.9);
+        var satGlowSprite = makeSatGlow(nColor, satSize * 0.55);
         satGlowSprite.position.copy(sMesh.position);
         group.add(satGlowSprite);
+
+        var signalRing = makeOrbitalRing(satSize * 2.3, nColor);
+        signalRing.position.copy(sMesh.position);
+        signalRing.rotation.x = Math.PI / 2 + rand(-0.4, 0.4);
+        signalRing.rotation.z = rand(-0.6, 0.6);
+        signalRing.material.opacity = 0.16;
+        group.add(signalRing);
 
         /* ---- 7. Connection line (gradient) ---- */
         var connMesh = makeConnection(d.color, nColor, new THREE.Vector3(0, 0, 0), new THREE.Vector3(sx, sy, sz));
@@ -749,7 +752,7 @@
 
         var inclination = rand(-0.6, 0.6); // random orbital inclination
         var satObj = {
-          mesh: sMesh, satShell: shell, satGlow: satGlowSprite, parentObj: cObj,
+          mesh: sMesh, satShell: shell, satGlow: satGlowSprite, satRing: signalRing, parentObj: cObj,
           angle: angle, speed: speed, orbitR: orbitR,
           inclination: inclination,
           nodeData: n, connMesh: connMesh, nColor: nColor
@@ -837,10 +840,11 @@
             /* Brighten satellites */
             c.satellites.forEach(function (sat) {
               if (sat.mesh.material.emissiveIntensity !== undefined) {
-                sat.mesh.material.emissiveIntensity = 0.18;
+                sat.mesh.material.emissiveIntensity = 0.08;
               }
-              if (sat.satShell) sat.satShell.material.opacity = 0.24;
-              if (sat.satGlow) sat.satGlow.material.opacity = 0.5;
+              if (sat.satShell) sat.satShell.material.opacity = 0.12;
+              if (sat.satRing) sat.satRing.material.opacity = 0.32;
+              if (sat.satGlow) sat.satGlow.material.opacity = 0.2;
             });
             /* Brighten connections */
             c.connectionMeshes.forEach(function (conn) {
@@ -876,10 +880,11 @@
           c.satellites.forEach(function (sat) {
             sat.mesh.material.opacity = sat.mesh.userData.baseOpacity || 0.82;
             if (sat.mesh.material.emissiveIntensity !== undefined) {
-              sat.mesh.material.emissiveIntensity = sat.mesh.userData.baseEmissive || 0.08;
+              sat.mesh.material.emissiveIntensity = sat.mesh.userData.baseEmissive || 0.025;
             }
-            if (sat.satShell) sat.satShell.material.opacity = 0.12;
-            if (sat.satGlow) sat.satGlow.material.opacity = 0.3;
+            if (sat.satShell) sat.satShell.material.opacity = 0.08;
+            if (sat.satRing) sat.satRing.material.opacity = 0.16;
+            if (sat.satGlow) sat.satGlow.material.opacity = 0.1;
           });
           c.connectionMeshes.forEach(function (conn) {
             conn.material.opacity = 0.2;
@@ -1181,9 +1186,11 @@
 
         if (sat.satShell) {
           sat.satShell.position.set(sx, sy, sz);
-          sat.satShell.rotation.x += sat.speed * 0.55;
-          sat.satShell.rotation.y += sat.speed * 0.85;
-          sat.satShell.rotation.z += sat.speed * 0.45;
+        }
+
+        if (sat.satRing) {
+          sat.satRing.position.set(sx, sy, sz);
+          sat.satRing.rotation.z += sat.speed * 0.9;
         }
 
         /* Update satellite glow position */
@@ -1228,8 +1235,9 @@
               /* Show satellite labels (not currently labels, but enhance visibility) */
               sat.mesh.material.opacity = 0.9;
               if (sat.mesh.material.emissiveIntensity !== undefined) {
-                sat.mesh.material.emissiveIntensity = 0.3;
+                sat.mesh.material.emissiveIntensity = 0.1;
               }
+              if (sat.satRing) sat.satRing.material.opacity = 0.36;
             });
           } else {
             /* Distant: fade based on distance */
