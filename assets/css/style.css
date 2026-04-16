@@ -2634,6 +2634,164 @@ a:focus-visible, button:focus-visible {
    Homepage — Signals, Ripple Chains, Matrix, Browse
    ============================================================ */
 
+/* ---------- Decision surfaces ---------- */
+.decision-surfaces-header {
+  max-width: 940px;
+}
+.decision-surfaces-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+.decision-surfaces-primary,
+.decision-surfaces-secondary {
+  display: grid;
+  gap: 24px;
+}
+.decision-card {
+  padding: 24px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(11,14,22,0.94), rgba(7,10,18,0.94));
+  box-shadow: 0 22px 60px rgba(0,0,0,0.28);
+}
+.decision-card h3 {
+  margin: 0;
+  font-size: clamp(1.08rem, 1.6vw, 1.4rem);
+  color: var(--text);
+}
+.decision-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.decision-inline-link {
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+.decision-inline-link:hover {
+  color: var(--accent);
+}
+.decision-signals-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.decision-surface-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.95fr);
+  gap: 24px;
+}
+.decision-card--ripple p#featured-ripple-desc {
+  color: var(--text2);
+  max-width: 56ch;
+}
+.decision-route-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+.decision-route-card {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.025);
+  text-decoration: none;
+  transition: var(--transition);
+}
+.decision-route-card:hover {
+  border-color: rgba(34,211,238,0.24);
+  transform: translateY(-2px);
+}
+.decision-route-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(34,211,238,0.14), rgba(168,85,247,0.16));
+  color: #67e8f9;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+.decision-route-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 0.92rem;
+}
+.decision-route-card span:last-child {
+  color: var(--text2);
+  font-size: 0.83rem;
+  line-height: 1.55;
+}
+.exposure-matrix--compact {
+  min-width: 560px;
+  font-size: 0.8rem;
+}
+.exposure-matrix--compact th,
+.exposure-matrix--compact td {
+  padding: 9px 12px;
+}
+.decision-matrix-note {
+  margin: 12px 0 0;
+  color: var(--text3);
+  font-size: 0.75rem;
+}
+.decision-link-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+.decision-link-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text2);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: var(--transition);
+  text-align: center;
+}
+.decision-link-pill:hover {
+  color: var(--text);
+  border-color: rgba(34,211,238,0.24);
+  box-shadow: var(--glow-cyan);
+}
+@media (max-width: 1180px) {
+  .decision-surfaces-shell,
+  .decision-surface-split {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 720px) {
+  .decision-card {
+    padding: 20px;
+    border-radius: 18px;
+  }
+  .decision-card-head {
+    flex-direction: column;
+  }
+  .decision-signals-grid,
+  .decision-link-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ---------- Top Commodity Signals ---------- */
 .signals-grid {
   display: grid;
