@@ -404,6 +404,57 @@ no_loader: true
   gap: 18px;
   margin-bottom: 24px;
 }
+.pricing-hero-actions {
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 22px;
+}
+.pricing-use-case-card {
+  max-width:700px;
+  margin:0 auto 32px;
+  background:linear-gradient(135deg, rgba(34,211,238,0.05), rgba(168,85,247,0.04));
+  border:1px solid rgba(34,211,238,0.12);
+  border-radius:18px;
+  padding:24px 28px;
+  text-align:left;
+}
+.pricing-use-case-kicker {
+  font-size:0.72rem;color:#22d3ee;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;
+}
+.pricing-use-case-quote {
+  font-size:0.92rem;color:#cbd5e1;line-height:1.75;margin:0 0 8px;
+}
+.pricing-use-case-source {
+  font-size:0.78rem;color:#64748b;margin:0;
+}
+.pricing-proof-grid {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:920px;margin:18px auto 0;text-align:left;
+}
+.pricing-proof-card {
+  padding:16px 18px;border-radius:14px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);
+}
+.pricing-proof-card--cyan { background:rgba(34,211,238,0.05);border-color:rgba(34,211,238,0.14); }
+.pricing-proof-card--green { background:rgba(16,185,129,0.05);border-color:rgba(16,185,129,0.14); }
+.pricing-proof-card-label { font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;margin-bottom:6px;display:block; }
+.pricing-proof-card--cyan .pricing-proof-card-label { color:#22d3ee; }
+.pricing-proof-card--green .pricing-proof-card-label { color:#10b981; }
+.pricing-proof-card p { font-size:0.92rem;color:#cbd5e1;line-height:1.6;margin:0; }
+.pricing-compare-shell { max-width:980px;margin:28px auto 0;padding:0 24px; }
+.pricing-plan-section { max-width:900px;margin:52px auto 0;padding:0 24px; }
+.pricing-role-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px; }
+.pricing-role-card { padding:22px;border-radius:16px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.025); }
+.pricing-role-card--cyan { background:rgba(34,211,238,0.04); border-color:rgba(34,211,238,0.12); }
+.pricing-role-card--gold { background:rgba(251,191,36,0.04); border-color:rgba(251,191,36,0.12); }
+.pricing-role-card--violet { background:rgba(168,85,247,0.04); border-color:rgba(168,85,247,0.12); }
+.pricing-role-title { font-weight:600;font-size:0.9rem;margin-bottom:8px; }
+.pricing-role-card--cyan .pricing-role-title { color:#22d3ee; }
+.pricing-role-card--gold .pricing-role-title { color:#fbbf24; }
+.pricing-role-card--violet .pricing-role-title { color:#a855f7; }
+.pricing-role-card p { color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6; }
+.pricing-value-shell { max-width:860px;margin:0 auto; }
+.pricing-value-cta { margin-top:20px;display:flex;justify-content:center; }
+.pricing-value-cta .pricing-btn { width:auto;min-width:220px;margin-bottom:0;padding:12px 18px; }
+.cost-conclusion { text-align:center; }
+.pricing-founder-note { max-width:700px;margin:32px auto 0;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:12px; }
+.pricing-founder-note p { font-size:0.85rem;color:#64748b;line-height:1.7;margin:0; }
 
 @media (max-width: 768px) {
   .pricing-compare-strip,
@@ -420,14 +471,14 @@ no_loader: true
 <div class="pricing-urgency-bar" id="pricing-urgency-bar"></div>
 
 <section class="pricing-hero">
-  <div class="container">
+  <div class="container pricing-value-shell">
     <p class="section-label" style="text-align:center">Simple, Transparent Pricing</p>
     <h1>Intelligence that pays<br><span style="background:linear-gradient(135deg,#22d3ee,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">for itself.</span></h1>
     <p class="pricing-hero-sub" style="color:#9494a8;font-size:1rem;max-width:640px;margin:0 auto">
       Start free, validate the workflow on live market moves, then upgrade when you need unlimited Signal Reports, forecast ranges, scenario context, and stock sensitivity in one place.
     </p>
     <div class="pricing-hero-proof">Built for self-directed investors, analysts, and research teams who want a repeatable commodity workflow before the next earnings note or macro meeting.</div>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 22px;">
+    <div class="pricing-hero-actions">
       <a href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start Pro — $19/month</a>
       <button class="pricing-btn pricing-btn-ghost" data-cta="pricing_start_free_hero" onclick="if(window.Clerk)window.Clerk.openSignUp()" style="width:auto;min-width:180px;margin-bottom:0;padding:12px 18px;">Start Free</button>
     </div>
@@ -435,10 +486,10 @@ no_loader: true
       <button class="billing-btn active" data-billing="monthly" onclick="setBilling('monthly',this)">Monthly</button>
       <button class="billing-btn" data-billing="annual" onclick="setBilling('annual',this)">Annual <span class="save-badge">Save 35%</span></button>
     </div>
-    <div style="max-width:700px;margin:0 auto 32px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:16px;padding:24px 28px;">
-      <div style="font-size:0.72rem;color:#22d3ee;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Real Use Case</div>
-      <p style="font-size:0.9rem;color:#cbd5e1;line-height:1.7;margin-bottom:8px;">"When Kazakhstan announced uranium production cuts, CommodityNode's Uranium hub already had the company sensitivity mapped — CCJ, NXE, URA. The signal was live before most analyst notes hit my inbox."</p>
-      <p style="font-size:0.78rem;color:#64748b;">— Self-directed investor, Pro subscriber</p>
+    <div class="pricing-use-case-card">
+      <div class="pricing-use-case-kicker">Real Use Case</div>
+      <p class="pricing-use-case-quote">"When Kazakhstan announced uranium production cuts, CommodityNode's Uranium hub already had the company sensitivity mapped — CCJ, NXE, URA. The signal was live before most analyst notes hit my inbox."</p>
+      <p class="pricing-use-case-source">— Self-directed investor, Pro subscriber</p>
     </div>
     <div class="social-proof-strip">
       <div class="sp-item"><span class="sp-num">{{ site.posts.size }}</span><span class="sp-label">Signal Reports live</span></div>
@@ -449,14 +500,14 @@ no_loader: true
       <div class="sp-divider"></div>
       <div class="sp-item"><span class="sp-num">$19</span><span class="sp-label">Pro starts per month</span></div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;max-width:920px;margin:18px auto 0;text-align:left;">
-      <div style="padding:16px 18px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Built for real workflows</div>
-        <div style="font-size:0.92rem;color:#cbd5e1;line-height:1.6;">Use Pro when commodity moves actually change your watchlist, sector views, or portfolio risk — not just when you want another chart.</div>
+    <div class="pricing-proof-grid">
+      <div class="pricing-proof-card pricing-proof-card--cyan">
+        <span class="pricing-proof-card-label">Built for real workflows</span>
+        <p>Use Pro when commodity moves actually change your watchlist, sector views, or portfolio risk — not just when you want another chart.</p>
       </div>
-      <div style="padding:16px 18px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">Transparent limits</div>
-        <div style="font-size:0.92rem;color:#cbd5e1;line-height:1.6;">Forecasts include uncertainty, proxy-priced commodities are labeled, and unreliable daily changes are suppressed instead of faked.</div>
+      <div class="pricing-proof-card pricing-proof-card--green">
+        <span class="pricing-proof-card-label">Transparent limits</span>
+        <p>Forecasts include uncertainty, proxy-priced commodities are labeled, and unreliable daily changes are suppressed instead of faked.</p>
       </div>
     </div>
   </div>
@@ -486,7 +537,7 @@ no_loader: true
   </div>
 </div>
 
-<section style="max-width:980px;margin:28px auto 0;padding:0 24px;">
+<section class="pricing-compare-shell">
   <div class="pricing-quick-compare">
     <div class="compare-row compare-head">
       <div>What changes</div>
@@ -581,7 +632,7 @@ no_loader: true
   </div>
 </div>
 
-<section style="max-width:900px;margin:52px auto 0;padding:0 24px;">
+<section class="pricing-plan-section">
   <div class="pricing-proof-header">
     <div>
       <p class="section-label" style="margin-bottom:8px;">Used in real decision loops</p>
@@ -589,18 +640,18 @@ no_loader: true
     </div>
     <p style="color:#94a3b8;max-width:420px;line-height:1.6;margin:0;">The product is strongest when a commodity move can directly change your watchlist, margin assumptions, or portfolio risk.</p>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;">
-    <div style="padding:20px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:10px;">
-      <div style="color:#22d3ee;font-weight:600;font-size:0.9rem;margin-bottom:8px;">Equity Analyst</div>
-      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">"I check the copper hub before covering FCX earnings. The impact score tells me exactly how sensitive the stock is to price moves — saves hours of manual correlation work."</p>
+  <div class="pricing-role-grid">
+    <div class="pricing-role-card pricing-role-card--cyan">
+      <div class="pricing-role-title">Equity Analyst</div>
+      <p>"I check the copper hub before covering FCX earnings. The impact score tells me exactly how sensitive the stock is to price moves — saves hours of manual correlation work."</p>
     </div>
-    <div style="padding:20px;background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:10px;">
-      <div style="color:#fbbf24;font-weight:600;font-size:0.9rem;margin-bottom:8px;">Macro Trader</div>
-      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">"The Scenario Simulator lets me model an OPEC cut before it happens. I see which energy stocks get hit hardest and position accordingly — the 90-day forecast is my edge."</p>
+    <div class="pricing-role-card pricing-role-card--gold">
+      <div class="pricing-role-title">Macro Trader</div>
+      <p>"The Scenario Simulator lets me model an OPEC cut before it happens. I see which energy stocks get hit hardest and position accordingly — the 90-day forecast is my edge."</p>
     </div>
-    <div style="padding:20px;background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.12);border-radius:10px;">
-      <div style="color:#a855f7;font-weight:600;font-size:0.9rem;margin-bottom:8px;">Portfolio Manager</div>
-      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">"My team uses CommodityNode to track commodity exposure across 200+ holdings. The ripple chain analysis catches second-order risks we'd otherwise miss."</p>
+    <div class="pricing-role-card pricing-role-card--violet">
+      <div class="pricing-role-title">Portfolio Manager</div>
+      <p>"My team uses CommodityNode to track commodity exposure across 200+ holdings. The ripple chain analysis catches second-order risks we'd otherwise miss."</p>
     </div>
   </div>
 </section>
@@ -643,6 +694,9 @@ no_loader: true
       </div>
     </div>
     <p class="cost-conclusion">CommodityNode Pro costs $0.63/day. One informed decision covers a year.</p>
+    <div class="pricing-value-cta">
+      <a href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:inline-block;text-align:center;">Start Pro — turn commodity moves into decisions →</a>
+    </div>
   </div>
 </section>
 
@@ -752,6 +806,6 @@ function setBilling(mode, btn) {
   </details>
 </div>
 
-<div style="max-width:700px;margin:32px auto 0;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:12px;">
-  <p style="font-size:0.85rem;color:#64748b;line-height:1.7;margin:0;">CommodityNode is priced to be accessible. We'd rather have 1,000 analysts using us daily at $19/month than 10 institutions paying $1,000/month who barely use the product. The best research tool is one you actually open before making a decision.</p>
+<div class="pricing-founder-note">
+  <p>CommodityNode is priced to be accessible. We'd rather have 1,000 analysts using us daily at $19/month than 10 institutions paying $1,000/month who barely use the product. The best research tool is one you actually open before making a decision.</p>
 </div>

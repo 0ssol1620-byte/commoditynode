@@ -416,11 +416,124 @@ permalink: /simulator/
 }
 .sim-pro-cta h3 { font-size: 1.1rem; font-weight: 800; color: #f0f0f5; margin-bottom: 8px; }
 .sim-pro-cta p { font-size: 0.84rem; color: #9494a8; margin-bottom: 20px; line-height: 1.5; }
+.sim-decision-brief {
+  margin: 14px 0;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, rgba(34,211,238,0.05), rgba(168,85,247,0.04));
+  border: 1px solid rgba(34,211,238,0.12);
+  border-radius: 18px;
+  display: grid;
+  gap: 14px;
+}
+.sim-decision-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #22d3ee;
+}
+.sim-decision-copy {
+  color: #e2e8f0;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin: 0;
+}
+.sim-decision-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.sim-decision-step {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.03);
+}
+.sim-decision-step strong {
+  display: block;
+  color: #f8fafc;
+  font-size: 0.86rem;
+  margin-bottom: 6px;
+}
+.sim-decision-step span {
+  display: block;
+  color: #94a3b8;
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+.sim-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0,0.96fr) minmax(0,1.04fr);
+  gap: 20px;
+  margin: 8px 0;
+  align-items: start;
+}
+.sim-impact-shell {
+  display: grid;
+  gap: 20px;
+}
+.sim-impact-panel {
+  border-radius: 24px;
+  padding: 22px;
+  background: linear-gradient(180deg, rgba(10,15,24,0.92), rgba(7,10,18,0.92));
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+}
+.sim-impact-panel--industry {
+  background: linear-gradient(180deg, rgba(10,15,24,0.92), rgba(9,18,28,0.94));
+}
+.sim-impact-panel--company {
+  background: linear-gradient(180deg, rgba(12,13,24,0.92), rgba(15,10,24,0.92));
+}
+.sim-impact-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.sim-impact-header-copy {
+  max-width: 58ch;
+}
+.sim-impact-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #22d3ee;
+  margin-bottom: 8px;
+}
+.sim-impact-panel--company .sim-impact-kicker { color: #c084fc; }
+.sim-impact-desc {
+  color: #94a3b8;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 0;
+}
+.sim-impact-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(34,211,238,0.18);
+  color: #cbd5e1;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.sim-impact-panel--company .sim-impact-badge { border-color: rgba(192,132,252,0.22); }
 @media (max-width: 900px) {
   .sim-step-strip { grid-template-columns: 1fr; }
+  .sim-decision-flow { grid-template-columns: 1fr; }
   .sim-stats-row { grid-template-columns: 1fr; }
   .sim-selector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .sim-main-grid { grid-template-columns: 1fr !important; }
+  .sim-impact-header { flex-direction: column; }
 }
 
 @media (max-width: 640px) {
@@ -550,9 +663,23 @@ permalink: /simulator/
   <div id="sim-consensus-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:12px 0 14px;"></div>
   <div id="sim-model-compare-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:0 0 14px;"></div>
 
-    <div style="margin:14px 0;padding:14px 16px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.08);border-radius:14px;display:grid;gap:8px;">
-      <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;">Decision shortcut</div>
-      <p style="color:#e2e8f0;font-size:0.9rem;line-height:1.65;margin:0;">Start with the preset shock, confirm the forecast direction, then use industry and company sensitivity to identify the likely winners, losers, and margin pressure points.</p>
+    <div class="sim-decision-brief">
+      <div class="sim-decision-label">Decision shortcut</div>
+      <p class="sim-decision-copy">Start with the preset shock, confirm the forecast direction, then read industry and company sensitivity together to identify the likely winners, losers, and margin pressure points before the street reprices.</p>
+      <div class="sim-decision-flow">
+        <div class="sim-decision-step">
+          <strong>1. Set the base shock</strong>
+          <span>Choose the preset that matches the macro or supply story you actually care about.</span>
+        </div>
+        <div class="sim-decision-step">
+          <strong>2. Check model agreement</strong>
+          <span>Read consensus, Chronos-2, and TimesFM together before trusting one line in isolation.</span>
+        </div>
+        <div class="sim-decision-step">
+          <strong>3. Translate to positions</strong>
+          <span>Use sector direction first, then unlock stock-level sensitivity when naming the trade matters.</span>
+        </div>
+      </div>
       <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model comparison. Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a></p>
     </div>
 
@@ -584,7 +711,7 @@ permalink: /simulator/
   </div>
 
   <!-- Layout: Scenario + Impact -->
-  <div style="display:grid;grid-template-columns:minmax(0,0.96fr) minmax(0,1.04fr);gap:20px;margin:8px 0;align-items:start;" class="sim-main-grid">
+  <div class="sim-main-grid">
 
     <!-- Scenario Panel -->
     <div class="sim-scenario-panel">
@@ -597,14 +724,25 @@ permalink: /simulator/
     </div>
 
     <!-- Impact Panel -->
-    <div>
-      <div class="sim-impact-section">
-        <div class="sim-impact-title">Industry Impact</div>
+    <div class="sim-impact-shell">
+      <div class="sim-impact-panel sim-impact-panel--industry">
+        <div class="sim-impact-header">
+          <div class="sim-impact-header-copy">
+            <div class="sim-impact-kicker">Industry impact</div>
+            <div class="sim-impact-desc">Read this as the first downstream translation layer: which sectors absorb the move, which ones benefit, and where cost or margin pressure shows up first.</div>
+          </div>
+          <div class="sim-impact-badge">Sector-first view</div>
+        </div>
         <div class="sim-impact-grid" id="sim-industry-impact"></div>
       </div>
-      <div class="sim-impact-section" style="margin-top:20px;">
-        <div class="sim-impact-title">Company Sensitivity</div>
-        <div style="font-size:0.8rem;color:#94a3b8;line-height:1.6;margin:-2px 0 12px;">Upgrade when you need stock-level winners, losers, and beta-sensitive names instead of sector-level direction only.</div>
+      <div class="sim-impact-panel sim-impact-panel--company">
+        <div class="sim-impact-header">
+          <div class="sim-impact-header-copy">
+            <div class="sim-impact-kicker">Company sensitivity</div>
+            <div class="sim-impact-desc">Upgrade when you need stock-level winners, losers, and beta-sensitive names instead of sector-level direction only.</div>
+          </div>
+          <div class="sim-impact-badge">Pro surface</div>
+        </div>
         <div id="sim-company-impact-wrapper">
           <div class="sim-pro-blur" id="sim-company-blur-wrapper">
             <div class="sim-blur-content" id="sim-company-blur-content" style="filter:blur(6px);pointer-events:none;user-select:none">
