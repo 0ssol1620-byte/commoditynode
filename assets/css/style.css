@@ -4575,7 +4575,11 @@ html { scroll-behavior: smooth; }
   .cn-local-graph-canvas-wrap,
   .cn-local-graph-section.is-mobile .cn-local-graph-canvas,
   .cn-local-graph-section.is-mobile .cn-local-graph-canvas-wrap {
-    min-height: 400px;
+    min-height: 430px;
+  }
+
+  .cn-local-graph-canvas-wrap {
+    margin-bottom: 12px;
   }
 
   .cn-local-graph-label {
@@ -4586,6 +4590,7 @@ html { scroll-behavior: smooth; }
   .cn-local-graph-section.is-mobile .cn-local-graph-panel {
     min-height: auto;
     padding: 16px;
+    margin-top: 6px;
   }
 
   .cn-local-graph-panel-top h3 {
