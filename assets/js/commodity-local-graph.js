@@ -262,7 +262,6 @@
     var searchTerm = '';
     var filterMode = 'all';
     var orbitGroupFocus = 'all';
-    var orbitLevelFocus = 'all';
     var resizeObserver = null;
     var refreshVisualization = function () {};
     var universeApi = null;
@@ -446,9 +445,7 @@
     function focusMatchedNodes() {
       return allNodes.filter(function (node) {
         if (node.id === graph.commodityId) return false;
-        var groupMatch = orbitGroupFocus === 'all' || node.group === orbitGroupFocus;
-        var levelMatch = orbitLevelFocus === 'all' || String(node.level) === String(orbitLevelFocus);
-        return groupMatch && levelMatch;
+        return orbitGroupFocus === 'all' || node.group === orbitGroupFocus;
       }).sort(function (a, b) {
         return ((b.degree || 0) + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0)) - ((a.degree || 0) + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0));
       });
@@ -623,7 +620,7 @@
         '  <h3>' + escapeHtml(node.label) + '</h3>',
         '  <p>' + escapeHtml(node.note || node.relationLabel || defaultDescription(node, graph.pageMeta, graph.commodityId)) + '</p>',
         '</div>',
-        '  <div class="cn-local-graph-insight"><span>Orbit focus</span><p>' + escapeHtml('Type: ' + (orbitGroupFocus === 'all' ? 'all satellites' : orbitGroupFocus) + ' · Level: ' + (orbitLevelFocus === 'all' ? 'all levels' : orbitLevelFocus) + ' · ' + orbitMatches.length + ' nodes in current orbit set.') + '</p></div>',
+        '  <div class="cn-local-graph-insight"><span>Orbit focus</span><p>' + escapeHtml('Type: ' + (orbitGroupFocus === 'all' ? 'all satellites' : orbitGroupFocus) + ' · ' + orbitMatches.length + ' nodes in current orbit set.') + '</p></div>',
         insight ? '  <div class="cn-local-graph-insight"><span>What this view means</span><p>' + escapeHtml(insight) + '</p></div>' : '',
         path ? '  <div class="cn-local-graph-path"><span>Current path</span><strong>' + escapeHtml(path.title) + '</strong><p>' + escapeHtml(path.description) + '</p></div>' : '',
         '  <div class="cn-local-graph-actions"><button type="button" class="secondary" data-orbit-nav="prev">◀ Previous in orbit</button><button type="button" class="secondary" data-orbit-nav="next">Next in orbit ▶</button></div>',
@@ -779,20 +776,15 @@
         '    <div class="cn-local-graph-canvas-wrap universe-container">',
         '      <div class="universe-stage-toolbar">',
         '        <div class="universe-controls">',
-        '          <div class="universe-control-group">',
+        '          <div class="universe-control-group universe-orbit-group">',
         '            <span class="universe-control-label">Type orbit</span>',
-        '            <button class="universe-orbit-filter is-active" data-orbit-group="all">All</button>',
-        '            <button class="universe-orbit-filter" data-orbit-group="company">Companies</button>',
-        '            <button class="universe-orbit-filter" data-orbit-group="research">Themes & reports</button>',
-        '            <button class="universe-orbit-filter" data-orbit-group="macro">Macro</button>',
-        '            <button class="universe-orbit-filter" data-orbit-group="market">Markets</button>',
-        '          </div>',
-        '          <div class="universe-control-group">',
-        '            <span class="universe-control-label">Level orbit</span>',
-        '            <button class="universe-orbit-level is-active" data-orbit-level="all">All levels</button>',
-        '            <button class="universe-orbit-level" data-orbit-level="1">Level 1</button>',
-        '            <button class="universe-orbit-level" data-orbit-level="2">Level 2</button>',
-        '            <button class="universe-orbit-level" data-orbit-level="3">Level 3</button>',
+        '            <div class="universe-orbit-grid">',
+        '              <button class="universe-orbit-filter is-active" data-orbit-group="all">All</button>',
+        '              <button class="universe-orbit-filter" data-orbit-group="company">Companies</button>',
+        '              <button class="universe-orbit-filter" data-orbit-group="research">Themes & reports</button>',
+        '              <button class="universe-orbit-filter" data-orbit-group="macro">Macro</button>',
+        '              <button class="universe-orbit-filter" data-orbit-group="market">Markets</button>',
+        '            </div>',
         '          </div>',
         '          <div class="universe-control-group universe-search-group">',
         '            <span class="universe-control-label">Search</span>',
@@ -813,10 +805,10 @@
         '        </div>',
         '        <div class="universe-orbit-info universe-orbit-info-right">',
         '          <span class="universe-orbit-label">Interaction</span>',
-        '          <strong>Fixed camera · moving satellites</strong>',
-        '          <small>Select a type or level orbit, then let the satellites pass in front of you. Click any one to inspect it without moving the camera.</small>',
+        '          <strong>Anchored camera · manual inspection</strong>',
+        '          <small>Pick a type to isolate that orbit. Motion pauses so you can drag the scene yourself and choose the exact satellite you want.</small>',
         '        </div>',
-        '        <div id="universe-hint" class="universe-hint">Camera stays anchored · satellites orbit by type and level · Tap satellites or use previous/next in the panel</div>',
+        '        <div id="universe-hint" class="universe-hint">Type filters isolate orbit groups · satellites pause when filtered · drag to inspect and tap to open details</div>',
         '      </div>',
         '    </div>',
         '    <section class="cn-local-graph-panel" aria-live="polite"></section>',
@@ -850,20 +842,21 @@
         data: universeData,
         centerPrimary: true,
         autoRotate: false,
-        enableRotate: false,
+        enableRotate: true,
         minDistance: 160,
         maxDistance: 420,
         initialCameraPosition: { x: 0, y: 12, z: 260 },
         initialTarget: { x: 0, y: 0, z: 0 },
-        defaultHintText: 'Camera stays anchored · satellites orbit by type and level · Tap satellites to inspect them',
+        defaultHintText: 'Type filters isolate orbit groups · satellites pause when filtered · drag to inspect and tap satellites',
         zoomHintText: function (commodityData) {
-          return '✦ ' + commodityData.name + ' — hub anchored. Keep browsing the active orbit.';
+          return '✦ ' + commodityData.name + ' — hub anchored. Drag to inspect the visible satellites.';
         },
         getSatelliteFocusState: function () {
           return {
             group: orbitGroupFocus,
-            level: orbitLevelFocus,
-            selectedId: selectedId
+            level: 'all',
+            selectedId: selectedId,
+            freezeSatellites: orbitGroupFocus !== 'all'
           };
         },
         onCommoditySelect: function () {
@@ -882,18 +875,6 @@
         button.addEventListener('click', function () {
           orbitGroupFocus = button.getAttribute('data-orbit-group') || 'all';
           Array.prototype.slice.call(container.querySelectorAll('[data-orbit-group]')).forEach(function (candidate) {
-            candidate.classList.toggle('is-active', candidate === button);
-          });
-          var matches = focusMatchedNodes();
-          if (matches.length && !matches.some(function (node) { return node.id === selectedId; })) selectedId = matches[0].id;
-          updatePanel();
-        });
-      });
-
-      Array.prototype.slice.call(container.querySelectorAll('[data-orbit-level]')).forEach(function (button) {
-        button.addEventListener('click', function () {
-          orbitLevelFocus = button.getAttribute('data-orbit-level') || 'all';
-          Array.prototype.slice.call(container.querySelectorAll('[data-orbit-level]')).forEach(function (candidate) {
             candidate.classList.toggle('is-active', candidate === button);
           });
           var matches = focusMatchedNodes();

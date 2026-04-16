@@ -1275,9 +1275,10 @@
         var levelMatch = !focusState.level || focusState.level === 'all' || Number(focusState.level) === Number(satLevel);
         var isMatched = typeMatch && levelMatch;
         var isSelected = focusState.selectedId && focusState.selectedId === sat.mesh.userData.id;
-        var orbitSpeed = sat.baseSpeed * (isMatched ? 1.15 : 0.28);
+        var freezeSatellites = !!focusState.freezeSatellites;
+        var orbitSpeed = freezeSatellites ? 0 : sat.baseSpeed * (isMatched ? 1.15 : 0.28);
         sat.angle += orbitSpeed;
-        if (isSelected) {
+        if (isSelected && !freezeSatellites) {
           var targetAngle = Math.PI * 0.5;
           sat.angle += (targetAngle - sat.angle) * 0.035;
         }
