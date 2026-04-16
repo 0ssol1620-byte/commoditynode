@@ -4575,11 +4575,11 @@ html { scroll-behavior: smooth; }
   .cn-local-graph-canvas-wrap,
   .cn-local-graph-section.is-mobile .cn-local-graph-canvas,
   .cn-local-graph-section.is-mobile .cn-local-graph-canvas-wrap {
-    min-height: 430px;
+    min-height: 470px;
   }
 
   .cn-local-graph-canvas-wrap {
-    margin-bottom: 12px;
+    margin-bottom: 22px;
   }
 
   .cn-local-graph-label {
@@ -4590,7 +4590,7 @@ html { scroll-behavior: smooth; }
   .cn-local-graph-section.is-mobile .cn-local-graph-panel {
     min-height: auto;
     padding: 16px;
-    margin-top: 6px;
+    margin-top: 14px;
   }
 
   .cn-local-graph-panel-top h3 {

@@ -845,8 +845,8 @@
         enableRotate: true,
         minDistance: 160,
         maxDistance: 420,
-        initialCameraPosition: { x: 0, y: 28, z: 260 },
-        initialTarget: { x: 0, y: -18, z: 0 },
+        initialCameraPosition: { x: 0, y: 46, z: 260 },
+        initialTarget: { x: 0, y: -42, z: 0 },
         defaultHintText: 'Type filters isolate orbit groups · satellites pause when filtered · drag to inspect and tap satellites',
         zoomHintText: function (commodityData) {
           return '✦ ' + commodityData.name + ' — hub anchored. Drag to inspect the visible satellites.';
