@@ -1292,6 +1292,11 @@
 
         var baseOpacity = sat.mesh.userData.baseOpacity || 0.99;
         var focusOpacity = isSelected ? 1 : isMatched ? 0.98 : 0.2;
+        var baseScaleX = sat.mesh.userData.baseScaleX || sat.mesh.scale.x;
+        var baseScaleY = sat.mesh.userData.baseScaleY || sat.mesh.scale.y;
+        var baseScaleZ = sat.mesh.userData.baseScaleZ || sat.mesh.scale.z;
+        var scaleBoost = isSelected ? 1.34 : isMatched ? (focusState.group && focusState.group !== 'all' ? 1.2 : 1.06) : 0.84;
+        sat.mesh.scale.set(baseScaleX * scaleBoost, baseScaleY * scaleBoost, baseScaleZ * scaleBoost);
         sat.mesh.material.opacity = Math.min(1, baseOpacity * focusOpacity);
         if (sat.mesh.material.emissiveIntensity !== undefined) {
           sat.mesh.material.emissiveIntensity = isSelected ? 0.24 : isMatched ? 0.12 : 0.028;

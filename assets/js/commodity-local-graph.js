@@ -808,8 +808,8 @@
         '          <strong>Anchored camera · manual inspection</strong>',
         '          <small>Pick a type to isolate that orbit. Motion pauses so you can drag the scene yourself and choose the exact satellite you want.</small>',
         '        </div>',
-        '        <div id="universe-hint" class="universe-hint">Type filters isolate orbit groups · satellites pause when filtered · drag to inspect and tap to open details</div>',
         '      </div>',
+        '      <div id="universe-hint" class="universe-hint universe-hint-inline">Type filters isolate orbit groups · satellites pause when filtered · drag to inspect and tap to open details</div>',
         '    </div>',
         '    <section class="cn-local-graph-panel" aria-live="polite"></section>',
         '  </div>',
@@ -882,6 +882,28 @@
           updatePanel();
         });
       });
+
+      var swipeStart = null;
+      canvasWrap.addEventListener('touchstart', function (event) {
+        if (!event.touches || event.touches.length !== 1) return;
+        swipeStart = {
+          x: event.touches[0].clientX,
+          y: event.touches[0].clientY,
+          at: Date.now()
+        };
+      }, { passive: true });
+
+      canvasWrap.addEventListener('touchend', function (event) {
+        if (!swipeStart || !event.changedTouches || event.changedTouches.length !== 1) return;
+        var dx = event.changedTouches[0].clientX - swipeStart.x;
+        var dy = event.changedTouches[0].clientY - swipeStart.y;
+        var elapsed = Date.now() - swipeStart.at;
+        swipeStart = null;
+        if (orbitGroupFocus === 'all') return;
+        if (elapsed > 420) return;
+        if (Math.abs(dx) < 42 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+        cycleFocusNode(dx < 0 ? 1 : -1);
+      }, { passive: true });
 
       requestAnimationFrame(syncContainerHeight);
       return true;
