@@ -180,7 +180,22 @@ layout: default
         <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#f472b6;font-weight:700;margin-bottom:8px;">Related hubs</div>
         <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">
           {% if page.substitutes and page.substitutes.size > 0 %}
-            Compare against substitute chains like {% for substitute in page.substitutes limit:3 %}<a href="/commodities/{{ substitute | slugify }}/" style="color:var(--accent);">{{ substitute }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}.
+            Compare against substitute chains like
+            {% for substitute in page.substitutes limit:3 %}
+              {% assign substitute_slug = substitute | slugify %}
+              {% assign substitute_url = '' %}
+              {% for c in site.commodities %}
+                {% assign c_slug = c.name | remove: '.md' %}
+                {% if c_slug == substitute_slug %}
+                  {% assign substitute_url = c.url %}
+                {% endif %}
+              {% endfor %}
+              {% if substitute_url != '' %}
+                <a href="{{ substitute_url | relative_url }}" style="color:var(--accent);">{{ substitute }}</a>
+              {% else %}
+                <span style="color:var(--text2);">{{ substitute }}</span>
+              {% endif %}{% unless forloop.last %}, {% endunless %}
+            {% endfor %}.
           {% else %}
             Move sideways into adjacent commodity hubs to compare second-order effects and portfolio sensitivity.
           {% endif %}

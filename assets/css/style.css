@@ -633,6 +633,10 @@ code, kbd, pre {
   line-height: 1.35;
   color: var(--text);
   transition: color var(--transition);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .post-card-title a {
@@ -2165,11 +2169,58 @@ a:focus-visible, button:focus-visible {
 .posts-toolbar,
 .archive-toolbar {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   justify-content: space-between;
-  gap: 16px;
+  gap: 18px;
   margin-bottom: 28px;
-  flex-wrap: wrap;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: linear-gradient(180deg, rgba(10,14,22,0.9), rgba(7,10,18,0.84));
+}
+
+.archive-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin: 0 0 24px;
+}
+
+.archive-intro-card {
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.025);
+}
+
+.archive-intro-card--cyan {
+  background: rgba(34,211,238,0.05);
+  border-color: rgba(34,211,238,0.14);
+}
+
+.archive-intro-card--violet {
+  background: rgba(99,102,241,0.05);
+  border-color: rgba(99,102,241,0.14);
+}
+
+.archive-intro-kicker,
+.archive-topic-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #cbd5e1;
+}
+
+.archive-intro-card--cyan .archive-intro-kicker { color: #22d3ee; }
+.archive-intro-card--violet .archive-intro-kicker { color: #818cf8; }
+
+.archive-intro-copy {
+  font-size: 0.94rem;
+  color: var(--text2);
+  line-height: 1.7;
 }
 
 .posts-toolbar-link,
@@ -2179,9 +2230,9 @@ a:focus-visible, button:focus-visible {
 }
 .archive-toolbar-main {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 14px;
-  flex: 1 1 720px;
+  flex: 1 1 auto;
   flex-wrap: wrap;
 }
 .archive-search {
@@ -2192,15 +2243,16 @@ a:focus-visible, button:focus-visible {
   flex: 1 1 320px;
 }
 .archive-search-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 10px;
   align-items: center;
 }
 .archive-search span {
-  color: var(--text3);
-  font-size: 0.72rem;
+  color: #cbd5e1;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 .archive-search input {
@@ -2252,20 +2304,38 @@ a:focus-visible, button:focus-visible {
   gap: 8px;
   flex-wrap: wrap;
 }
+.archive-topic-block {
+  display: grid;
+  gap: 8px;
+}
 .archive-discovery-note {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
+  padding-top: 4px;
 }
 .archive-shortcuts {
   display: flex;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 .archive-shortcuts a {
-  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: var(--text2);
   font-size: 0.82rem;
   text-decoration: none;
+  transition: all var(--transition);
+}
+.archive-shortcuts a:hover {
+  color: var(--text);
+  border-color: rgba(34,211,238,0.28);
 }
 
 .filter-chips {
@@ -2317,6 +2387,11 @@ a:focus-visible, button:focus-visible {
 .post-tag-pill {
   color: var(--text2);
   background: rgba(255,255,255,0.03);
+}
+
+.post-tag-pill--more {
+  color: #cbd5e1;
+  border-style: dashed;
 }
 
 .posts-pagination {
@@ -2493,7 +2568,7 @@ a:focus-visible, button:focus-visible {
   }
 
   .archive-search-row {
-    flex-wrap: wrap;
+    grid-template-columns: 1fr;
   }
 
   .post-content .cn-price-chart,

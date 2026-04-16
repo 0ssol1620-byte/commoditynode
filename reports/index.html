@@ -19,29 +19,14 @@ no_loader: true
 
 <section class="section archive-section">
   <div class="container">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:22px;" data-animate>
-      <div style="padding:16px 18px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">What makes this archive useful</div>
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">This is not a generic blog roll. Each report is part of a commodity-to-equity intelligence system built to connect price action, supply shocks, and second-order sector impact.</div>
+    <div class="archive-intro-grid" data-animate>
+      <div class="archive-intro-card archive-intro-card--cyan">
+        <div class="archive-intro-kicker">How to use this archive</div>
+        <div class="archive-intro-copy">Start with the newest report in your sector, then open the linked commodity hub for live price, AI forecast context, and company sensitivity. This keeps the archive useful as narrative context instead of a generic blog roll.</div>
       </div>
-      <div style="padding:16px 18px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">Best way to browse</div>
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">Start with the latest reports in your sector, then jump to the related commodity hub for live pricing, forecast context, and company sensitivity.</div>
-      </div>
-      <div style="padding:16px 18px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#f59e0b;font-weight:700;margin-bottom:6px;">Editorial promise</div>
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">We prioritize reports that explain why a commodity move matters for real portfolios, companies, and supply chains, not just the headline chart move itself.</div>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:0 0 24px;" data-animate>
-      <div style="padding:16px 18px;background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#818cf8;font-weight:700;margin-bottom:6px;">Start here if you're new</div>
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">Use this archive as the editorial layer on top of the commodity hubs. Read the report first for narrative context, then open the matching hub for live price, forecast, and impact-map detail.</div>
-      </div>
-      <div style="padding:16px 18px;background:rgba(236,72,153,0.05);border:1px solid rgba(236,72,153,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#f472b6;font-weight:700;margin-bottom:6px;">Best companion pages</div>
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;"><a href="/commodities/gold/" style="color:var(--accent);">Gold</a>, <a href="/commodities/crude-oil/" style="color:var(--accent);">Crude Oil</a>, <a href="/commodities/copper/" style="color:var(--accent);">Copper</a>, <a href="/commodities/natural-gas/" style="color:var(--accent);">Natural Gas</a>, and <a href="/commodities/wheat/" style="color:var(--accent);">Wheat</a> are the best starting hubs for high-intent readers.</div>
+      <div class="archive-intro-card archive-intro-card--violet">
+        <div class="archive-intro-kicker">Best starting hubs</div>
+        <div class="archive-intro-copy"><a href="/commodities/gold/" style="color:var(--accent);">Gold</a>, <a href="/commodities/crude-oil/" style="color:var(--accent);">Crude Oil</a>, <a href="/commodities/copper/" style="color:var(--accent);">Copper</a>, <a href="/commodities/natural-gas/" style="color:var(--accent);">Natural Gas</a>, and <a href="/commodities/wheat/" style="color:var(--accent);">Wheat</a> are the strongest starting points for high-intent readers.</div>
       </div>
     </div>
     <div class="archive-toolbar" data-animate>
@@ -92,22 +77,25 @@ no_loader: true
           </div>
         </div>
       </div>
-      <div class="archive-discovery-note">
-        <p class="archive-meta">Filter by cluster, search by keyword, sort by recency, and narrow the archive by signal bias.</p>
-        <div class="archive-search-status" id="archive-search-status" aria-live="polite"></div>
-        <div class="archive-query-chips" aria-label="Popular archive searches">
-          <button type="button" class="archive-query-chip" data-query-chip="hormuz">Hormuz</button>
-          <button type="button" class="archive-query-chip" data-query-chip="copper">Copper</button>
-          <button type="button" class="archive-query-chip" data-query-chip="uranium">Uranium</button>
-          <button type="button" class="archive-query-chip" data-query-chip="china demand">China demand</button>
+        <div class="archive-discovery-note">
+          <p class="archive-meta">Filter by cluster, search by keyword, sort by recency, and narrow the archive by signal bias.</p>
+          <div class="archive-search-status" id="archive-search-status" aria-live="polite"></div>
+          <div class="archive-topic-block">
+            <div class="archive-topic-label">Suggested topics</div>
+            <div class="archive-query-chips" aria-label="Popular archive searches">
+              <button type="button" class="archive-query-chip" data-query-chip="hormuz">Hormuz</button>
+              <button type="button" class="archive-query-chip" data-query-chip="copper">Copper</button>
+              <button type="button" class="archive-query-chip" data-query-chip="uranium">Uranium</button>
+              <button type="button" class="archive-query-chip" data-query-chip="china demand">China demand</button>
+            </div>
+          </div>
+          <div class="archive-shortcuts">
+            <a href="/signals/" data-cta="archive_open_signals">Open live signals</a>
+            <a href="/commodities/" data-cta="archive_jump_hubs">Jump to commodity hubs</a>
+            <a href="/pricing/" data-cta="archive_see_pricing">See Pro workflow</a>
+          </div>
         </div>
-        <div class="archive-shortcuts">
-          <a href="/signals/" data-cta="archive_open_signals">Open live signals</a>
-          <a href="/commodities/" data-cta="archive_jump_hubs">Jump to commodity hubs</a>
-          <a href="/pricing/" data-cta="archive_see_pricing">See Pro workflow</a>
-        </div>
-      </div>
-    </div>
+</div>
 
     <div class="posts-grid posts-grid--paginated" id="archive-posts-grid" data-page-size="12">
       {% for post in site.posts %}
@@ -126,7 +114,7 @@ no_loader: true
             <span class="post-card-direction bearish">&#9660; Bearish</span>
             {% endif %}
             {% assign now_epoch = 'now' | date: '%s' | plus: 0 %}{% assign post_epoch = post.date | date: '%s' | plus: 0 %}{% assign post_age = now_epoch | minus: post_epoch %}
-            {% if post_age < 259200 %}
+            {% if post_age < 172800 %}
             <span class="post-card-label post-card-label--new">NEW</span>
             {% elsif post.updated %}
             <span class="post-card-label post-card-label--updated">UPDATED</span>
@@ -138,9 +126,12 @@ no_loader: true
           <p class="post-card-excerpt">{{ post.description | default: post.excerpt | strip_html | truncatewords: 32 }}</p>
           {% if post.tags and post.tags.size > 0 %}
           <div class="post-card-tags">
-            {% for tag in post.tags limit:4 %}
+            {% for tag in post.tags limit:3 %}
             <span class="post-tag-pill">{{ tag }}</span>
             {% endfor %}
+            {% if post.tags.size > 3 %}
+            <span class="post-tag-pill post-tag-pill--more">+{{ post.tags.size | minus: 3 }}</span>
+            {% endif %}
           </div>
           {% endif %}
           <div class="post-card-footer">
