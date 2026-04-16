@@ -623,7 +623,7 @@
         '  <div class="cn-local-graph-insight"><span>Orbit focus</span><p>' + escapeHtml('Type: ' + (orbitGroupFocus === 'all' ? 'all satellites' : orbitGroupFocus) + ' · ' + orbitMatches.length + ' nodes in current orbit set.') + '</p></div>',
         insight ? '  <div class="cn-local-graph-insight"><span>What this view means</span><p>' + escapeHtml(insight) + '</p></div>' : '',
         path ? '  <div class="cn-local-graph-path"><span>Current path</span><strong>' + escapeHtml(path.title) + '</strong><p>' + escapeHtml(path.description) + '</p></div>' : '',
-        '  <div class="cn-local-graph-actions"><button type="button" class="secondary" data-orbit-nav="prev">◀ Previous in orbit</button><button type="button" class="secondary" data-orbit-nav="next">Next in orbit ▶</button></div>',
+        '  <div class="cn-local-graph-actions cn-local-graph-orbit-nav"><button type="button" class="secondary" data-orbit-nav="prev">◀ Previous in orbit</button><button type="button" class="secondary" data-orbit-nav="next">Next in orbit ▶</button></div>',
         '  <div class="cn-local-graph-metrics">' + metrics.join('') + '</div>',
         actions.length ? '  <div class="cn-local-graph-actions">' + actions.map(function (action) {
           return '<a class="' + (action.tone === 'primary' ? 'primary' : 'secondary') + '" href="' + escapeAttribute(action.url) + '">' + escapeHtml(action.label) + '</a>';

@@ -3156,13 +3156,14 @@ a.read-more:hover { gap: 8px; color: var(--accent2); }
 }
 .universe-orbit-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   width: 100%;
 }
+
 .universe-orbit-filter {
   appearance: none;
-  min-height: 48px;
+  min-height: 52px;
   padding: 12px 14px;
   border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.08);
@@ -3172,9 +3173,14 @@ a.read-more:hover { gap: 8px; color: var(--accent2); }
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  line-height: 1.35;
   text-align: center;
   cursor: pointer;
   transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease, color 0.16s ease;
+}
+
+.universe-orbit-filter[data-orbit-group="research"] {
+  grid-column: span 2;
 }
 .universe-orbit-filter:hover {
   transform: translateY(-1px);
@@ -4791,16 +4797,18 @@ html { scroll-behavior: smooth; }
 
 .universe-stage-toolbar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 14px;
+  gap: 16px;
   margin-bottom: 18px;
 }
 
 .universe-controls {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+  flex: 1 1 auto;
+  min-width: 0;
   flex-wrap: wrap;
   margin-bottom: 0;
 }
@@ -4808,20 +4816,36 @@ html { scroll-behavior: smooth; }
 .universe-control-group {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
+  gap: 8px;
+  padding: 10px 12px;
   background: rgba(255,255,255,0.035);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 999px;
+  border-radius: 22px;
   backdrop-filter: blur(18px);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
+.universe-orbit-group {
+  flex: 1 1 420px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: 12px;
+}
+
 .universe-search-group {
-  min-width: 280px;
+  flex: 0 1 280px;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
 }
 
 .universe-control-label {
+  display: block;
+  width: 100%;
+  margin: 0;
   font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -5459,26 +5483,60 @@ html { scroll-behavior: smooth; }
   gap: 10px;
 }
 
-.cn-local-graph-actions a {
+.cn-local-graph-orbit-nav {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cn-local-graph-actions a,
+.cn-local-graph-actions button {
   min-height: 44px;
   border-radius: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  gap: 8px;
+  padding: 11px 14px;
+  font-weight: 700;
+  font-size: 0.84rem;
+  letter-spacing: -0.01em;
   text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition), color var(--transition);
+}
+
+.cn-local-graph-actions button {
+  appearance: none;
+  cursor: pointer;
 }
 
 .cn-local-graph-actions a.primary {
-  background: linear-gradient(135deg, rgba(34,211,238,0.18), rgba(14,165,233,0.18));
-  border: 1px solid rgba(34,211,238,0.34);
+  background: rgba(125,211,252,0.12);
+  border-color: rgba(125,211,252,0.26);
   color: #f8fafc;
 }
 
-.cn-local-graph-actions a.secondary {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: rgba(226,232,240,0.82);
+.cn-local-graph-actions a.secondary,
+.cn-local-graph-actions button.secondary {
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+  border-color: rgba(148,163,184,0.18);
+  color: rgba(226,232,240,0.92);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.cn-local-graph-actions a:hover,
+.cn-local-graph-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.cn-local-graph-orbit-nav button.secondary {
+  justify-content: space-between;
+  background: linear-gradient(135deg, rgba(15,23,42,0.98), rgba(10,16,28,0.96));
+  border-color: rgba(103,232,249,0.16);
+}
+
+.cn-local-graph-orbit-nav button.secondary:hover {
+  border-color: rgba(103,232,249,0.34);
+  box-shadow: 0 14px 28px rgba(8,15,30,0.18);
 }
 
 .cn-local-graph-neighbors {
@@ -5703,12 +5761,18 @@ html { scroll-behavior: smooth; }
 }
 
 .cn-local-graph-panel {
+  align-self: start;
+  min-height: auto;
+  height: auto;
   padding: 18px;
   gap: 14px;
   background: rgba(10,13,18,0.96);
-  max-height: 820px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
+  max-height: none;
+  overflow: visible;
+}
+
+.cn-local-graph-panel-top {
+  padding-bottom: 14px;
 }
 
 .cn-local-graph-panel-top h3 {
@@ -5728,7 +5792,8 @@ html { scroll-behavior: smooth; }
   border-radius: 12px;
 }
 
-.cn-local-graph-actions a {
+.cn-local-graph-actions a,
+.cn-local-graph-actions button {
   min-height: 40px;
   border-radius: 10px;
   font-size: 0.84rem;
@@ -5832,6 +5897,10 @@ html { scroll-behavior: smooth; }
     max-height: none;
     overflow: visible;
     padding: 16px;
+  }
+
+  .cn-local-graph-orbit-nav {
+    grid-template-columns: 1fr;
   }
 
   .cn-local-graph-label {
