@@ -4575,11 +4575,11 @@ html { scroll-behavior: smooth; }
   .cn-local-graph-canvas-wrap,
   .cn-local-graph-section.is-mobile .cn-local-graph-canvas,
   .cn-local-graph-section.is-mobile .cn-local-graph-canvas-wrap {
-    min-height: 470px;
+    min-height: 500px;
   }
 
   .cn-local-graph-canvas-wrap {
-    margin-bottom: 22px;
+    margin-bottom: 28px;
   }
 
   .cn-local-graph-label {
@@ -5082,6 +5082,7 @@ html { scroll-behavior: smooth; }
 
   .universe-frame {
     min-height: 540px;
+    padding-bottom: 132px;
   }
 
   .universe-canvas {
@@ -5093,20 +5094,30 @@ html { scroll-behavior: smooth; }
     display: none;
   }
 
+  .universe-orbit-info {
+    max-width: calc(100% - 32px);
+    bottom: 92px;
+  }
+
   .universe-orbit-info-left {
     left: 16px;
     right: 16px;
-    bottom: 84px;
     max-width: none;
   }
 
   .universe-hint {
+    position: absolute;
     left: 16px;
     right: 16px;
+    bottom: 18px;
     transform: none;
-    text-align: center;
+    width: auto;
+    max-width: none;
     white-space: normal;
+    text-align: center;
     border-radius: 18px;
+    padding: 12px 14px;
+    line-height: 1.5;
   }
 }
 
