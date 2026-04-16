@@ -19,64 +19,79 @@ no_loader: true
 
 <section class="section archive-section">
   <div class="container">
-    <div class="archive-intro-grid" data-animate>
-      <div class="archive-intro-card archive-intro-card--cyan">
-        <div class="archive-intro-kicker">How to use this archive</div>
-        <div class="archive-intro-copy">Start with the newest report in your sector, then open the linked commodity hub for live price, AI forecast context, and company sensitivity. This keeps the archive useful as narrative context instead of a generic blog roll.</div>
-      </div>
-      <div class="archive-intro-card archive-intro-card--violet">
-        <div class="archive-intro-kicker">Best starting hubs</div>
-        <div class="archive-intro-copy"><a href="/commodities/gold/" style="color:var(--accent);">Gold</a>, <a href="/commodities/crude-oil/" style="color:var(--accent);">Crude Oil</a>, <a href="/commodities/copper/" style="color:var(--accent);">Copper</a>, <a href="/commodities/natural-gas/" style="color:var(--accent);">Natural Gas</a>, and <a href="/commodities/wheat/" style="color:var(--accent);">Wheat</a> are the strongest starting points for high-intent readers.</div>
-      </div>
-    </div>
-    <div class="archive-toolbar" data-animate>
-      <div class="archive-toolbar-main">
-        <div class="filter-chips" role="tablist" aria-label="Filter archive Signal Reports">
-          <button class="filter-chip is-active" type="button" data-filter="all">All</button>
-          <button class="filter-chip" type="button" data-filter="energy">Energy</button>
-          <button class="filter-chip" type="button" data-filter="metals">Metals</button>
-          <button class="filter-chip" type="button" data-filter="agriculture">Agriculture</button>
-          <button class="filter-chip" type="button" data-filter="battery">Battery</button>
+    <div class="archive-shell" data-animate>
+      <div class="archive-intro-grid">
+        <div class="archive-intro-card archive-intro-card--cyan">
+          <div class="archive-intro-kicker">How to use this archive</div>
+          <div class="archive-intro-copy">Start with the newest report in your sector, then open the linked commodity hub for live price, AI forecast context, and company sensitivity. This keeps the archive useful as narrative context instead of a generic blog roll.</div>
         </div>
-        <label class="archive-search" aria-label="Search reports">
-          <span>Search archive</span>
-          <div class="archive-search-row">
-            <input type="search" id="archive-search-input" placeholder="Search commodities, companies, countries, or themes…" data-cta="archive_search_input">
-            <button type="button" class="archive-clear-btn" id="archive-search-clear">Clear</button>
-          </div>
-        </label>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0 0;align-items:end;">
-        <label class="archive-search" aria-label="Sort archive">
-          <span>Sort</span>
-          <div class="archive-search-row">
-            <select id="archive-sort-select" data-sort-select style="width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(8,12,20,0.92);color:var(--text);font-size:0.92rem;outline:none;">
-              <option value="latest">Latest first</option>
-              <option value="oldest">Oldest first</option>
-              <option value="title_asc">Title A–Z</option>
-            </select>
-          </div>
-        </label>
-        <label class="archive-search" aria-label="Recent archive range">
-          <span>Recent window</span>
-          <div class="archive-search-row">
-            <select id="archive-recency-select" data-recency-select style="width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.08);background:rgba(8,12,20,0.92);color:var(--text);font-size:0.92rem;outline:none;">
-              <option value="all">All time</option>
-              <option value="30">Last 30 days</option>
-              <option value="90">Last 90 days</option>
-              <option value="365">Last 12 months</option>
-            </select>
-          </div>
-        </label>
-        <div class="archive-search" aria-label="Signal direction">
-          <span>Signal bias</span>
-          <div class="filter-chips" style="margin-top:0;">
-            <button class="filter-chip is-active" type="button" data-direction-filter="all">All</button>
-            <button class="filter-chip" type="button" data-direction-filter="bullish">Bullish</button>
-            <button class="filter-chip" type="button" data-direction-filter="bearish">Bearish</button>
-          </div>
+        <div class="archive-intro-card archive-intro-card--violet">
+          <div class="archive-intro-kicker">Best starting hubs</div>
+          <div class="archive-intro-copy"><a href="/commodities/gold/" class="archive-inline-link">Gold</a>, <a href="/commodities/crude-oil/" class="archive-inline-link">Crude Oil</a>, <a href="/commodities/copper/" class="archive-inline-link">Copper</a>, <a href="/commodities/natural-gas/" class="archive-inline-link">Natural Gas</a>, and <a href="/commodities/wheat/" class="archive-inline-link">Wheat</a> are the strongest starting points for high-intent readers.</div>
         </div>
       </div>
+      <div class="archive-signal-strip">
+        <div class="archive-signal-item">
+          <span class="archive-signal-kicker">Fastest route</span>
+          <strong>Newest report → live hub → scenario simulator</strong>
+        </div>
+        <div class="archive-signal-item">
+          <span class="archive-signal-kicker">Best for</span>
+          <strong>High-intent readers validating a commodity narrative before the next repricing</strong>
+        </div>
+        <div class="archive-signal-item">
+          <span class="archive-signal-kicker">Archive role</span>
+          <strong>Context layer for signals, not a generic chronological blog feed</strong>
+        </div>
+      </div>
+      <div class="archive-toolbar">
+        <div class="archive-toolbar-main">
+          <div class="filter-chips" role="tablist" aria-label="Filter archive Signal Reports">
+            <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+            <button class="filter-chip" type="button" data-filter="energy">Energy</button>
+            <button class="filter-chip" type="button" data-filter="metals">Metals</button>
+            <button class="filter-chip" type="button" data-filter="agriculture">Agriculture</button>
+            <button class="filter-chip" type="button" data-filter="battery">Battery</button>
+          </div>
+          <label class="archive-search" aria-label="Search reports">
+            <span>Search archive</span>
+            <div class="archive-search-row">
+              <input type="search" id="archive-search-input" placeholder="Search commodities, companies, countries, or themes…" data-cta="archive_search_input">
+              <button type="button" class="archive-clear-btn" id="archive-search-clear">Clear</button>
+            </div>
+          </label>
+        </div>
+        <div class="archive-control-grid">
+          <label class="archive-search" aria-label="Sort archive">
+            <span>Sort</span>
+            <div class="archive-search-row">
+              <select id="archive-sort-select" data-sort-select class="archive-select">
+                <option value="latest">Latest first</option>
+                <option value="oldest">Oldest first</option>
+                <option value="title_asc">Title A–Z</option>
+              </select>
+            </div>
+          </label>
+          <label class="archive-search" aria-label="Recent archive range">
+            <span>Recent window</span>
+            <div class="archive-search-row">
+              <select id="archive-recency-select" data-recency-select class="archive-select">
+                <option value="all">All time</option>
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 90 days</option>
+                <option value="365">Last 12 months</option>
+              </select>
+            </div>
+          </label>
+          <div class="archive-search" aria-label="Signal direction">
+            <span>Signal bias</span>
+            <div class="filter-chips archive-bias-chips">
+              <button class="filter-chip is-active" type="button" data-direction-filter="all">All</button>
+              <button class="filter-chip" type="button" data-direction-filter="bullish">Bullish</button>
+              <button class="filter-chip" type="button" data-direction-filter="bearish">Bearish</button>
+            </div>
+          </div>
+        </div>
         <div class="archive-discovery-note">
           <p class="archive-meta">Filter by cluster, search by keyword, sort by recency, and narrow the archive by signal bias.</p>
           <div class="archive-search-status" id="archive-search-status" aria-live="polite"></div>
@@ -95,7 +110,8 @@ no_loader: true
             <a href="/pricing/" data-cta="archive_see_pricing">See Pro workflow</a>
           </div>
         </div>
-</div>
+      </div>
+    </div>
 
     <div class="posts-grid posts-grid--paginated" id="archive-posts-grid" data-page-size="12">
       {% for post in site.posts %}
