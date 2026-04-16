@@ -267,6 +267,10 @@
     var universeApi = null;
     var isMobile = (container.clientWidth || window.innerWidth) <= 720 || window.innerWidth <= 720;
 
+    function refreshViewportMode() {
+      isMobile = (container.clientWidth || window.innerWidth) <= 720 || window.innerWidth <= 720;
+    }
+
     function syncContainerHeight() {
       if (!sectionEl) return;
       var nextHeight = Math.ceil(sectionEl.getBoundingClientRect().height || sectionEl.offsetHeight || 0);
@@ -275,7 +279,29 @@
       container.style.height = nextHeight + 'px';
     }
 
+    function syncPanelHeight() {
+      refreshViewportMode();
+      if (!panel) return;
+      if (isMobile) {
+        panel.style.maxHeight = 'none';
+        panel.style.overflowY = 'visible';
+        return;
+      }
+      var targetHeight = 0;
+      if (canvasWrap) {
+        targetHeight = Math.ceil(canvasWrap.getBoundingClientRect().height || canvasWrap.offsetHeight || 0);
+      }
+      if (!targetHeight) {
+        panel.style.maxHeight = 'none';
+        panel.style.overflowY = 'visible';
+        return;
+      }
+      panel.style.maxHeight = targetHeight + 'px';
+      panel.style.overflowY = 'auto';
+    }
+
     function syncCardMode() {
+      refreshViewportMode();
       if (!sectionEl) return;
       sectionEl.classList.toggle('is-mobile', !!isMobile);
       sectionEl.classList.toggle('is-desktop', !isMobile);
@@ -655,7 +681,10 @@
           cycleFocusNode(button.getAttribute('data-orbit-nav') === 'prev' ? -1 : 1);
         });
       });
-      requestAnimationFrame(syncContainerHeight);
+      requestAnimationFrame(function () {
+        syncPanelHeight();
+        syncContainerHeight();
+      });
     }
 
     function inferUniverseCategory() {
@@ -788,10 +817,12 @@
         '          </div>',
         '          <div class="universe-control-group universe-search-group">',
         '            <span class="universe-control-label">Search</span>',
-        '            <input type="text" class="universe-search" placeholder="Search satellites, companies, drivers…" aria-label="Search local universe">',
+        '            <div class="universe-search-row">',
+        '              <input type="text" class="universe-search" placeholder="Search satellites, companies, drivers…" aria-label="Search local universe">',
+        '              <button class="universe-reset-btn" type="button">Reset viewpoint</button>',
+        '            </div>',
         '          </div>',
         '        </div>',
-        '        <button class="universe-reset-btn" type="button">Reset viewpoint</button>',
         '      </div>',
         '      <div class="universe-frame cn-local-universe-frame">',
         '        <div class="universe-frame-grid"></div>',
@@ -905,6 +936,7 @@
         cycleFocusNode(dx < 0 ? 1 : -1);
       }, { passive: true });
 
+      requestAnimationFrame(syncPanelHeight);
       requestAnimationFrame(syncContainerHeight);
       return true;
     }
