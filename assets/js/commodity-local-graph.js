@@ -867,7 +867,7 @@
         },
         onSatelliteSelect: function (satelliteData) {
           if (satelliteData && satelliteData.id) pickNode(satelliteData.id);
-          return !(satelliteData && satelliteData.url);
+          return !!(satelliteData && satelliteData.url);
         }
       });
 
