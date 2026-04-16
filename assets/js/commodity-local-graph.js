@@ -261,8 +261,11 @@
     var hoveredId = null;
     var searchTerm = '';
     var filterMode = 'all';
+    var orbitGroupFocus = 'all';
+    var orbitLevelFocus = 'all';
     var resizeObserver = null;
     var refreshVisualization = function () {};
+    var universeApi = null;
     var isMobile = (container.clientWidth || window.innerWidth) <= 720 || window.innerWidth <= 720;
 
     function syncContainerHeight() {
@@ -436,7 +439,27 @@
       selectedId = nodeId;
       updatePanel();
       refreshVisualization();
+      if (universeApi && typeof universeApi.focusSatelliteNode === 'function') universeApi.focusSatelliteNode(nodeId);
       if (typeof updateHighlight === 'function') updateHighlight();
+    }
+
+    function focusMatchedNodes() {
+      return allNodes.filter(function (node) {
+        if (node.id === graph.commodityId) return false;
+        var groupMatch = orbitGroupFocus === 'all' || node.group === orbitGroupFocus;
+        var levelMatch = orbitLevelFocus === 'all' || String(node.level) === String(orbitLevelFocus);
+        return groupMatch && levelMatch;
+      }).sort(function (a, b) {
+        return ((b.degree || 0) + (typeof b.impact === 'number' ? Math.abs(b.impact) : 0)) - ((a.degree || 0) + (typeof a.impact === 'number' ? Math.abs(a.impact) : 0));
+      });
+    }
+
+    function cycleFocusNode(step) {
+      var matches = focusMatchedNodes();
+      if (!matches.length) return;
+      var currentIndex = matches.findIndex(function (node) { return node.id === selectedId; });
+      var nextIndex = currentIndex === -1 ? 0 : (currentIndex + step + matches.length) % matches.length;
+      pickNode(matches[nextIndex].id);
     }
 
     function selectedNode() {
@@ -592,6 +615,7 @@
       var actions = findLinkedResources(node);
       var path = focusPath(node);
       var insight = nodeInsight(node, related);
+      var orbitMatches = focusMatchedNodes();
       panel.innerHTML = [
         '<div class="cn-local-graph-panel-top">',
         '  <div class="cn-local-graph-panel-kicker">Selected context</div>',
@@ -599,8 +623,10 @@
         '  <h3>' + escapeHtml(node.label) + '</h3>',
         '  <p>' + escapeHtml(node.note || node.relationLabel || defaultDescription(node, graph.pageMeta, graph.commodityId)) + '</p>',
         '</div>',
+        '  <div class="cn-local-graph-insight"><span>Orbit focus</span><p>' + escapeHtml('Type: ' + (orbitGroupFocus === 'all' ? 'all satellites' : orbitGroupFocus) + ' · Level: ' + (orbitLevelFocus === 'all' ? 'all levels' : orbitLevelFocus) + ' · ' + orbitMatches.length + ' nodes in current orbit set.') + '</p></div>',
         insight ? '  <div class="cn-local-graph-insight"><span>What this view means</span><p>' + escapeHtml(insight) + '</p></div>' : '',
         path ? '  <div class="cn-local-graph-path"><span>Current path</span><strong>' + escapeHtml(path.title) + '</strong><p>' + escapeHtml(path.description) + '</p></div>' : '',
+        '  <div class="cn-local-graph-actions"><button type="button" class="secondary" data-orbit-nav="prev">◀ Previous in orbit</button><button type="button" class="secondary" data-orbit-nav="next">Next in orbit ▶</button></div>',
         '  <div class="cn-local-graph-metrics">' + metrics.join('') + '</div>',
         actions.length ? '  <div class="cn-local-graph-actions">' + actions.map(function (action) {
           return '<a class="' + (action.tone === 'primary' ? 'primary' : 'secondary') + '" href="' + escapeAttribute(action.url) + '">' + escapeHtml(action.label) + '</a>';
@@ -625,6 +651,11 @@
       Array.prototype.slice.call(panel.querySelectorAll('[data-node-jump]')).forEach(function (button) {
         button.addEventListener('click', function () {
           pickNode(button.getAttribute('data-node-jump'));
+        });
+      });
+      Array.prototype.slice.call(panel.querySelectorAll('[data-orbit-nav]')).forEach(function (button) {
+        button.addEventListener('click', function () {
+          cycleFocusNode(button.getAttribute('data-orbit-nav') === 'prev' ? -1 : 1);
         });
       });
       requestAnimationFrame(syncContainerHeight);
@@ -710,6 +741,7 @@
             name: node.label,
             type: node.type || 'market',
             group: node.group,
+            level: node.level,
             impact: node.impact,
             correlation: node.correlation,
             sector: node.sector,
@@ -748,9 +780,19 @@
         '      <div class="universe-stage-toolbar">',
         '        <div class="universe-controls">',
         '          <div class="universe-control-group">',
-        '            <span class="universe-control-label">Orbit</span>',
-        '            <button class="universe-filter is-active" data-filter="all">All satellites</button>',
-        '            <button class="universe-filter" data-filter="' + escapeAttribute(category) + '">' + escapeHtml(categoryLabel) + '</button>',
+        '            <span class="universe-control-label">Type orbit</span>',
+        '            <button class="universe-orbit-filter is-active" data-orbit-group="all">All</button>',
+        '            <button class="universe-orbit-filter" data-orbit-group="company">Companies</button>',
+        '            <button class="universe-orbit-filter" data-orbit-group="research">Themes & reports</button>',
+        '            <button class="universe-orbit-filter" data-orbit-group="macro">Macro</button>',
+        '            <button class="universe-orbit-filter" data-orbit-group="market">Markets</button>',
+        '          </div>',
+        '          <div class="universe-control-group">',
+        '            <span class="universe-control-label">Level orbit</span>',
+        '            <button class="universe-orbit-level is-active" data-orbit-level="all">All levels</button>',
+        '            <button class="universe-orbit-level" data-orbit-level="1">Level 1</button>',
+        '            <button class="universe-orbit-level" data-orbit-level="2">Level 2</button>',
+        '            <button class="universe-orbit-level" data-orbit-level="3">Level 3</button>',
         '          </div>',
         '          <div class="universe-control-group universe-search-group">',
         '            <span class="universe-control-label">Search</span>',
@@ -771,10 +813,10 @@
         '        </div>',
         '        <div class="universe-orbit-info universe-orbit-info-right">',
         '          <span class="universe-orbit-label">Interaction</span>',
-        '          <strong>Focus without leaving the page</strong>',
-        '          <small>Tap or click satellites to inspect them in the side panel while keeping the local universe anchored on this commodity.</small>',
+        '          <strong>Fixed camera · moving satellites</strong>',
+        '          <small>Select a type or level orbit, then let the satellites pass in front of you. Click any one to inspect it without moving the camera.</small>',
         '        </div>',
-        '        <div id="universe-hint" class="universe-hint">Drag to rotate · Scroll or pinch to zoom · Tap satellites to inspect them</div>',
+        '        <div id="universe-hint" class="universe-hint">Camera stays anchored · satellites orbit by type and level · Tap satellites or use previous/next in the panel</div>',
         '      </div>',
         '    </div>',
         '    <section class="cn-local-graph-panel" aria-live="polite"></section>',
@@ -793,29 +835,36 @@
       canvas = container.querySelector('#universe-canvas');
       panel = container.querySelector('.cn-local-graph-panel');
       searchInput = container.querySelector('.universe-search');
-      filterButtons = Array.prototype.slice.call(container.querySelectorAll('.universe-filter'));
+      filterButtons = [];
 
       syncCardMode();
       updatePanel();
 
-      window.CommodityUniverse3D.mount({
+      universeApi = window.CommodityUniverse3D.mount({
         container: canvas,
         root: canvasWrap,
         tooltip: container.querySelector('#universe-tooltip'),
         hint: container.querySelector('#universe-hint'),
         searchInput: searchInput,
-        filterButtons: filterButtons,
         resetButton: container.querySelector('.universe-reset-btn'),
         data: universeData,
         centerPrimary: true,
         autoRotate: false,
+        enableRotate: false,
         minDistance: 160,
         maxDistance: 420,
         initialCameraPosition: { x: 0, y: 12, z: 260 },
         initialTarget: { x: 0, y: 0, z: 0 },
-        defaultHintText: 'Drag to rotate · Scroll or pinch to zoom · Tap satellites to inspect them',
+        defaultHintText: 'Camera stays anchored · satellites orbit by type and level · Tap satellites to inspect them',
         zoomHintText: function (commodityData) {
-          return '✦ ' + commodityData.name + ' — local hub locked. Keep exploring its satellites.';
+          return '✦ ' + commodityData.name + ' — hub anchored. Keep browsing the active orbit.';
+        },
+        getSatelliteFocusState: function () {
+          return {
+            group: orbitGroupFocus,
+            level: orbitLevelFocus,
+            selectedId: selectedId
+          };
         },
         onCommoditySelect: function () {
           pickNode(graph.commodityId);
@@ -824,9 +873,33 @@
           return false;
         },
         onSatelliteSelect: function (satelliteData) {
-          if (satelliteData && satelliteData.id && !satelliteData.url) pickNode(satelliteData.id);
+          if (satelliteData && satelliteData.id) pickNode(satelliteData.id);
           return !(satelliteData && satelliteData.url);
         }
+      });
+
+      Array.prototype.slice.call(container.querySelectorAll('[data-orbit-group]')).forEach(function (button) {
+        button.addEventListener('click', function () {
+          orbitGroupFocus = button.getAttribute('data-orbit-group') || 'all';
+          Array.prototype.slice.call(container.querySelectorAll('[data-orbit-group]')).forEach(function (candidate) {
+            candidate.classList.toggle('is-active', candidate === button);
+          });
+          var matches = focusMatchedNodes();
+          if (matches.length && !matches.some(function (node) { return node.id === selectedId; })) selectedId = matches[0].id;
+          updatePanel();
+        });
+      });
+
+      Array.prototype.slice.call(container.querySelectorAll('[data-orbit-level]')).forEach(function (button) {
+        button.addEventListener('click', function () {
+          orbitLevelFocus = button.getAttribute('data-orbit-level') || 'all';
+          Array.prototype.slice.call(container.querySelectorAll('[data-orbit-level]')).forEach(function (candidate) {
+            candidate.classList.toggle('is-active', candidate === button);
+          });
+          var matches = focusMatchedNodes();
+          if (matches.length && !matches.some(function (node) { return node.id === selectedId; })) selectedId = matches[0].id;
+          updatePanel();
+        });
       });
 
       requestAnimationFrame(syncContainerHeight);

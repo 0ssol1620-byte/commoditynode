@@ -480,6 +480,8 @@
     var height = container.clientHeight;
     var centerPrimary = !!config.centerPrimary;
     var autoRotate = typeof config.autoRotate === 'boolean' ? config.autoRotate : true;
+    var allowRotate = config.enableRotate !== false;
+    var getSatelliteFocusState = typeof config.getSatelliteFocusState === 'function' ? config.getSatelliteFocusState : function () { return null; };
     var cameraPosition = config.initialCameraPosition || { x: 0, y: -18, z: 760 };
     var cameraTarget = config.initialTarget || { x: 0, y: 0, z: 0 };
 
@@ -530,6 +532,8 @@
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
     controls.autoRotate = autoRotate;
+    controls.enableRotate = allowRotate;
+    controls.enablePan = false;
     controls.autoRotateSpeed = typeof config.autoRotateSpeed === 'number' ? config.autoRotateSpeed : 0.46;
     controls.minDistance = typeof config.minDistance === 'number' ? config.minDistance : 140;
     controls.maxDistance = typeof config.maxDistance === 'number' ? config.maxDistance : 2200;
@@ -718,6 +722,8 @@
           id: n.id || n.name,
           name: n.name,
           type: n.type,
+          group: n.group || '',
+          level: typeof n.level === 'number' ? n.level : 1,
           parent: d.name,
           parentLink: d.link,
           parentData: d,
@@ -789,7 +795,7 @@
           mesh: sMesh, satShell: shell, satGlow: satGlowSprite, satRing: signalRing, satRingOuter: signalRingOuter, satPulse: satPulse, parentObj: cObj,
           angle: angle, speed: speed, orbitR: orbitR,
           inclination: inclination,
-          nodeData: n, connMesh: connMesh, nColor: nColor
+          nodeData: n, connMesh: connMesh, nColor: nColor, baseSpeed: speed
         };
         satellites.push(satObj);
         cObj.satellites.push(satObj);
@@ -1229,6 +1235,7 @@
     function animate() {
       requestAnimationFrame(animate);
       var elapsed = clock.getElapsedTime();
+      var focusState = getSatelliteFocusState() || {};
       frameCount++;
 
       /* Throttled raycaster: every 3 frames */
@@ -1262,39 +1269,61 @@
 
       /* Satellite orbits */
       satellites.forEach(function (sat) {
-        sat.angle += sat.speed;
+        var satGroup = sat.mesh.userData.group || sat.nodeData.group || '';
+        var satLevel = typeof sat.mesh.userData.level === 'number' ? sat.mesh.userData.level : (typeof sat.nodeData.level === 'number' ? sat.nodeData.level : 1);
+        var typeMatch = !focusState.group || focusState.group === 'all' || focusState.group === satGroup;
+        var levelMatch = !focusState.level || focusState.level === 'all' || Number(focusState.level) === Number(satLevel);
+        var isMatched = typeMatch && levelMatch;
+        var isSelected = focusState.selectedId && focusState.selectedId === sat.mesh.userData.id;
+        var orbitSpeed = sat.baseSpeed * (isMatched ? 1.15 : 0.28);
+        sat.angle += orbitSpeed;
+        if (isSelected) {
+          var targetAngle = Math.PI * 0.5;
+          sat.angle += (targetAngle - sat.angle) * 0.035;
+        }
         var sx = Math.cos(sat.angle) * sat.orbitR;
         var sz = Math.sin(sat.angle) * sat.orbitR * Math.cos(sat.inclination);
         var sy = Math.sin(sat.angle) * sat.orbitR * Math.sin(sat.inclination);
         sat.mesh.position.set(sx, sy, sz);
-        sat.mesh.rotation.x += sat.speed * 0.8;
-        sat.mesh.rotation.y += sat.speed * 1.2;
-        sat.mesh.rotation.z += sat.speed * 0.6;
+        sat.mesh.rotation.x += orbitSpeed * 0.8;
+        sat.mesh.rotation.y += orbitSpeed * 1.2;
+        sat.mesh.rotation.z += orbitSpeed * 0.6;
+
+        var baseOpacity = sat.mesh.userData.baseOpacity || 0.99;
+        var focusOpacity = isSelected ? 1 : isMatched ? 0.98 : 0.2;
+        sat.mesh.material.opacity = Math.min(1, baseOpacity * focusOpacity);
+        if (sat.mesh.material.emissiveIntensity !== undefined) {
+          sat.mesh.material.emissiveIntensity = isSelected ? 0.24 : isMatched ? 0.12 : 0.028;
+        }
 
         if (sat.satShell) {
           sat.satShell.position.set(sx, sy, sz);
+          sat.satShell.material.opacity = isSelected ? 0.22 : isMatched ? 0.12 : 0.03;
         }
 
         if (sat.satRing) {
           sat.satRing.position.set(sx, sy, sz);
-          sat.satRing.rotation.z += sat.speed * 0.9;
+          sat.satRing.rotation.z += orbitSpeed * 0.9;
+          sat.satRing.material.opacity = isSelected ? 0.52 : isMatched ? 0.26 : 0.06;
         }
 
         if (sat.satRingOuter) {
           sat.satRingOuter.position.set(sx, sy, sz);
-          sat.satRingOuter.rotation.z -= sat.speed * 0.62;
+          sat.satRingOuter.rotation.z -= orbitSpeed * 0.62;
+          sat.satRingOuter.material.opacity = isSelected ? 0.3 : isMatched ? 0.14 : 0.035;
         }
 
         if (sat.satPulse) {
           var pulseScale = 1 + Math.sin(elapsed * 2.4 + sat.angle * 1.7) * 0.16;
           sat.satPulse.position.set(sx, sy, sz);
           sat.satPulse.scale.set((sat.orbitR * 0.06) * pulseScale, (sat.orbitR * 0.06) * pulseScale, 1);
-          sat.satPulse.material.opacity = 0.04 + Math.abs(Math.sin(elapsed * 1.8 + sat.angle)) * 0.05;
+          sat.satPulse.material.opacity = (isSelected ? 0.18 : isMatched ? 0.08 : 0.015) + Math.abs(Math.sin(elapsed * 1.8 + sat.angle)) * (isSelected ? 0.08 : isMatched ? 0.04 : 0.01);
         }
 
         /* Update satellite glow position */
         if (sat.satGlow) {
           sat.satGlow.position.set(sx, sy, sz);
+          sat.satGlow.material.opacity = isSelected ? 0.34 : isMatched ? 0.16 : 0.04;
         }
 
         /* Update connection line endpoint */
@@ -1304,7 +1333,7 @@
           sat.connMesh.userData.lineGeo.attributes.position.needsUpdate = true;
 
           /* Pulsing opacity for flowing energy effect */
-          var pulse = 0.12 + Math.abs(Math.sin(elapsed * 2.5 + sat.angle * 2.0)) * 0.2;
+          var pulse = (isSelected ? 0.3 : isMatched ? 0.12 : 0.025) + Math.abs(Math.sin(elapsed * 2.5 + sat.angle * 2.0)) * (isSelected ? 0.22 : isMatched ? 0.14 : 0.04);
           sat.connMesh.material.opacity = pulse;
         }
       });
@@ -1380,6 +1409,13 @@
 
     return {
       resetView: resetView,
+      focusSatelliteNode: function (nodeId) {
+        satellites.forEach(function (sat) {
+          if (sat.mesh && sat.mesh.userData && sat.mesh.userData.id === nodeId) {
+            sat.angle = Math.PI * 0.5;
+          }
+        });
+      },
       renderer: renderer,
       scene: scene,
       camera: camera,
