@@ -8,9 +8,12 @@ Disallow: /social/
 Disallow: /logs/
 Disallow: /scripts/
 Disallow: /page/
+Disallow: /assets/data/
 
-# Allow assets (CSS, JS, images) for proper rendering
-Allow: /assets/
+# Allow assets needed for rendering, but keep machine-readable JSON out of search indexing
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
 
 # AI Search Crawlers — explicitly welcome
 User-agent: GPTBot

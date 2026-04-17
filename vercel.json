@@ -22,6 +22,26 @@
       "permanent": true
     },
     {
+      "source": "/company-index",
+      "destination": "/companies/",
+      "permanent": true
+    },
+    {
+      "source": "/company-index/",
+      "destination": "/companies/",
+      "permanent": true
+    },
+    {
+      "source": "/themes/defense-screening",
+      "destination": "/themes/defense-rearming/",
+      "permanent": true
+    },
+    {
+      "source": "/themes/defense-screening/",
+      "destination": "/themes/defense-rearming/",
+      "permanent": true
+    },
+    {
       "source": "/companion-day",
       "destination": "/calendar/",
       "permanent": true
