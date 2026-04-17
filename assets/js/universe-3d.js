@@ -400,8 +400,9 @@
     var mat = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.2,
-      depthWrite: false
+      opacity: 0.08,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
     });
 
     var line = new THREE.Line(geo, mat);
@@ -425,8 +426,9 @@
     var mat = new THREE.LineBasicMaterial({
       color: hexToRGB(color),
       transparent: true,
-      opacity: 0.1,
-      depthWrite: false
+      opacity: 0.06,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
     });
     return new THREE.Line(geo, mat);
   }
@@ -542,13 +544,13 @@
     controls.target.set(cameraTarget.x, cameraTarget.y, cameraTarget.z);
 
     /* ---- Lighting ---- */
-    var ambientLight = new THREE.AmbientLight(0x182238, 0.44);
+    var ambientLight = new THREE.AmbientLight(0x182238, 0.4);
     scene.add(ambientLight);
-    var fillLight = new THREE.DirectionalLight(0x67e8f9, 0.38);
-    fillLight.position.set(120, 180, 240);
+    var fillLight = new THREE.DirectionalLight(0x67e8f9, 0.28);
+    fillLight.position.set(150, 140, 250);
     scene.add(fillLight);
-    var rimLight = new THREE.DirectionalLight(0xa855f7, 0.22);
-    rimLight.position.set(-180, -120, 200);
+    var rimLight = new THREE.DirectionalLight(0xdbeafe, 0.42);
+    rimLight.position.set(-220, 40, 320);
     scene.add(rimLight);
 
     /* ---- Enhanced Star Field ---- */
@@ -694,14 +696,16 @@
         /* ---- 3. Premium micro-orb satellite ---- */
         var sGeo = satelliteGeometries[n.type] || satelliteGeometries.default;
         var sColor = hexToRGB(nColor);
-        var sMat = new THREE.MeshStandardMaterial({
-          color: sColor.clone().multiplyScalar(0.2).lerp(new THREE.Color(0x111827), 0.62),
+        var sMat = new THREE.MeshPhysicalMaterial({
+          color: sColor.clone().multiplyScalar(0.16).lerp(new THREE.Color(0x0f172a), 0.7),
           transparent: true,
           opacity: 0.96,
-          metalness: 0.12,
-          roughness: 0.52,
-          emissive: sColor,
-          emissiveIntensity: 0.018
+          metalness: 0.08,
+          roughness: 0.34,
+          clearcoat: 0.65,
+          clearcoatRoughness: 0.46,
+          emissive: sColor.clone().multiplyScalar(0.42),
+          emissiveIntensity: 0.012
         });
         var sMesh = new THREE.Mesh(sGeo, sMat);
         var stretchX = rand(0.97, 1.06);
@@ -733,7 +737,7 @@
           relationLabel: n.relationLabel || '',
           note: n.note || '',
           baseOpacity: 0.9,
-          baseEmissive: 0.018,
+          baseEmissive: 0.012,
           baseScaleX: satSize * stretchX,
           baseScaleY: satSize * stretchY,
           baseScaleZ: satSize * stretchZ,
