@@ -446,11 +446,11 @@
   }
 
   function satelliteGeometryForType(type) {
-    if (type === 'producer' || type === 'commodity') return new THREE.IcosahedronGeometry(1, 0);
-    if (type === 'macro' || type === 'policy' || type === 'theme' || type === 'report') return new THREE.OctahedronGeometry(1, 0);
-    if (type === 'consumer' || type === 'processor') return new THREE.DodecahedronGeometry(1, 0);
-    if (type === 'etf' || type === 'index' || type === 'fx') return new THREE.TetrahedronGeometry(1, 0);
-    return new THREE.SphereGeometry(1.15, 12, 12);
+    if (type === 'producer' || type === 'commodity') return new THREE.IcosahedronGeometry(1, 1);
+    if (type === 'macro' || type === 'policy' || type === 'theme' || type === 'report') return new THREE.SphereGeometry(1.02, 18, 18);
+    if (type === 'consumer' || type === 'processor') return new THREE.SphereGeometry(1.08, 20, 18);
+    if (type === 'etf' || type === 'index' || type === 'fx') return new THREE.SphereGeometry(0.96, 16, 16);
+    return new THREE.SphereGeometry(1.04, 18, 18);
   }
 
   function satelliteBadgeColor(type) {
@@ -689,35 +689,35 @@
         var angle = (ni / d.nodes.length) * Math.PI * 2;
         var speed = rand(0.002, 0.008);
         var nColor = TYPE_COLORS[n.type] || '#94a3b8';
-        var satSize = rand(2.1, 3.5);
+        var satSize = rand(2.25, 3.2);
 
-        /* ---- 3. Faceted cosmic satellite ---- */
+        /* ---- 3. Premium micro-orb satellite ---- */
         var sGeo = satelliteGeometries[n.type] || satelliteGeometries.default;
         var sColor = hexToRGB(nColor);
         var sMat = new THREE.MeshStandardMaterial({
-          color: sColor.clone().multiplyScalar(0.28).lerp(new THREE.Color(0x0b1220), 0.45),
+          color: sColor.clone().multiplyScalar(0.2).lerp(new THREE.Color(0x111827), 0.62),
           transparent: true,
-          opacity: 0.94,
-          metalness: 0.22,
-          roughness: 0.78,
+          opacity: 0.96,
+          metalness: 0.12,
+          roughness: 0.52,
           emissive: sColor,
-          emissiveIntensity: 0.025
+          emissiveIntensity: 0.018
         });
         var sMesh = new THREE.Mesh(sGeo, sMat);
-        var stretchX = rand(0.92, 1.22);
-        var stretchY = rand(0.88, 1.18);
-        var stretchZ = rand(0.92, 1.28);
+        var stretchX = rand(0.97, 1.06);
+        var stretchY = rand(0.96, 1.05);
+        var stretchZ = rand(0.97, 1.08);
         sMesh.scale.set(satSize * stretchX, satSize * stretchY, satSize * stretchZ);
         sMesh.rotation.set(rand(0, Math.PI), rand(0, Math.PI), rand(0, Math.PI));
         var shell = new THREE.Sprite(new THREE.SpriteMaterial({
           color: sColor,
           transparent: true,
-          opacity: 0.1,
+          opacity: 0.055,
           depthWrite: false,
           blending: THREE.AdditiveBlending,
           map: glowTexOuter
         }));
-        shell.scale.set(satSize * 3.8, satSize * 3.8, 1);
+        shell.scale.set(satSize * 2.65, satSize * 2.65, 1);
         sMesh.userData = {
           id: n.id || n.name,
           name: n.name,
@@ -751,33 +751,34 @@
         group.add(shell);
 
         /* Satellite glow sprite */
-        var satGlowSprite = makeSatGlow(nColor, satSize * 0.9);
+        var satGlowSprite = makeSatGlow(nColor, satSize * 0.72);
+        satGlowSprite.material.opacity = 0.16;
         satGlowSprite.position.copy(sMesh.position);
         group.add(satGlowSprite);
 
-        var signalRing = makeOrbitalRing(satSize * 2.3, nColor);
+        var signalRing = makeOrbitalRing(satSize * 1.85, nColor);
         signalRing.position.copy(sMesh.position);
-        signalRing.rotation.x = Math.PI / 2 + rand(-0.4, 0.4);
-        signalRing.rotation.z = rand(-0.6, 0.6);
-        signalRing.material.opacity = 0.18;
+        signalRing.rotation.x = Math.PI / 2 + rand(-0.22, 0.22);
+        signalRing.rotation.z = rand(-0.3, 0.3);
+        signalRing.material.opacity = 0.09;
         group.add(signalRing);
 
-        var signalRingOuter = makeOrbitalRing(satSize * 3.1, nColor);
+        var signalRingOuter = makeOrbitalRing(satSize * 2.45, nColor);
         signalRingOuter.position.copy(sMesh.position);
-        signalRingOuter.rotation.x = Math.PI / 2 + rand(-0.3, 0.3);
-        signalRingOuter.rotation.z = rand(-0.8, 0.8);
-        signalRingOuter.material.opacity = 0.11;
+        signalRingOuter.rotation.x = Math.PI / 2 + rand(-0.18, 0.18);
+        signalRingOuter.rotation.z = rand(-0.35, 0.35);
+        signalRingOuter.material.opacity = 0.045;
         group.add(signalRingOuter);
 
         var satPulse = new THREE.Sprite(new THREE.SpriteMaterial({
           map: glowTexMid,
           color: sColor,
           transparent: true,
-          opacity: 0.08,
+          opacity: 0.03,
           depthWrite: false,
           blending: THREE.AdditiveBlending
         }));
-        satPulse.scale.set(satSize * 3.1, satSize * 3.1, 1);
+        satPulse.scale.set(satSize * 2.5, satSize * 2.5, 1);
         satPulse.position.copy(sMesh.position);
         group.add(satPulse);
 
