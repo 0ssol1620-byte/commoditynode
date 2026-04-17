@@ -7,7 +7,6 @@ Disallow: /tags/
 Disallow: /social/
 Disallow: /logs/
 Disallow: /scripts/
-Disallow: /page/
 Disallow: /assets/data/
 
 # Allow assets needed for rendering, but keep machine-readable JSON out of search indexing

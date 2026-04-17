@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% if page.noindex %}
+  {% assign should_noindex = page.noindex %}
+  {% if paginator and paginator.page and paginator.page > 1 %}
+    {% assign should_noindex = true %}
+  {% endif %}
+  {% if should_noindex %}
   <meta name="robots" content="noindex, follow">
   {% else %}
   <meta name="robots" content="index, follow, max-image-preview:large">
