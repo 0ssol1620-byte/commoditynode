@@ -732,11 +732,17 @@
           sector: n.sector || '',
           relationLabel: n.relationLabel || '',
           note: n.note || '',
-          baseOpacity: 0.99,
-          baseEmissive: 0.055,
+          baseOpacity: 0.9,
+          baseEmissive: 0.018,
           baseScaleX: satSize * stretchX,
           baseScaleY: satSize * stretchY,
           baseScaleZ: satSize * stretchZ,
+          baseShellOpacity: 0.055,
+          baseGlowOpacity: 0.09,
+          baseRingOpacity: 0.04,
+          baseRingOuterOpacity: 0.015,
+          basePulseOpacity: 0.012,
+          baseConnOpacity: 0.035,
           stretchX: stretchX,
           stretchY: stretchY,
           stretchZ: stretchZ
@@ -871,16 +877,16 @@
         ud.baseScaleY || hoveredSatelliteObj.mesh.scale.y,
         ud.baseScaleZ || hoveredSatelliteObj.mesh.scale.z
       );
-      hoveredSatelliteObj.mesh.material.opacity = ud.baseOpacity || 0.99;
+      hoveredSatelliteObj.mesh.material.opacity = ud.baseOpacity || 0.9;
       if (hoveredSatelliteObj.mesh.material.emissiveIntensity !== undefined) {
-        hoveredSatelliteObj.mesh.material.emissiveIntensity = ud.baseEmissive || 0.055;
+        hoveredSatelliteObj.mesh.material.emissiveIntensity = ud.baseEmissive || 0.018;
       }
-      if (hoveredSatelliteObj.satShell) hoveredSatelliteObj.satShell.material.opacity = 0.1;
-      if (hoveredSatelliteObj.satRing) hoveredSatelliteObj.satRing.material.opacity = 0.18;
-      if (hoveredSatelliteObj.satRingOuter) hoveredSatelliteObj.satRingOuter.material.opacity = 0.11;
-      if (hoveredSatelliteObj.satPulse) hoveredSatelliteObj.satPulse.material.opacity = 0.08;
-      if (hoveredSatelliteObj.satGlow) hoveredSatelliteObj.satGlow.material.opacity = 0.12;
-      if (hoveredSatelliteObj.connMesh) hoveredSatelliteObj.connMesh.material.opacity = 0.2;
+      if (hoveredSatelliteObj.satShell) hoveredSatelliteObj.satShell.material.opacity = ud.baseShellOpacity || 0.055;
+      if (hoveredSatelliteObj.satRing) hoveredSatelliteObj.satRing.material.opacity = ud.baseRingOpacity || 0.04;
+      if (hoveredSatelliteObj.satRingOuter) hoveredSatelliteObj.satRingOuter.material.opacity = ud.baseRingOuterOpacity || 0.015;
+      if (hoveredSatelliteObj.satPulse) hoveredSatelliteObj.satPulse.material.opacity = ud.basePulseOpacity || 0.012;
+      if (hoveredSatelliteObj.satGlow) hoveredSatelliteObj.satGlow.material.opacity = ud.baseGlowOpacity || 0.09;
+      if (hoveredSatelliteObj.connMesh) hoveredSatelliteObj.connMesh.material.opacity = ud.baseConnOpacity || 0.035;
       hoveredSatelliteObj = null;
     }
 
@@ -898,22 +904,25 @@
             });
             /* Brighten orbital rings */
             c.orbitalRings.forEach(function (ring) {
-              ring.material.opacity = 0.3;
+              ring.material.opacity = 0.2;
             });
             /* Brighten satellites */
             c.satellites.forEach(function (sat) {
+              var satUd = sat.mesh.userData || {};
+              sat.mesh.material.opacity = 0.96;
               if (sat.mesh.material.emissiveIntensity !== undefined) {
-                sat.mesh.material.emissiveIntensity = 0.1;
+                sat.mesh.material.emissiveIntensity = 0.085;
               }
-              if (sat.satShell) sat.satShell.material.opacity = 0.14;
-              if (sat.satRing) sat.satRing.material.opacity = 0.36;
-              if (sat.satRingOuter) sat.satRingOuter.material.opacity = 0.18;
-              if (sat.satPulse) sat.satPulse.material.opacity = 0.14;
-              if (sat.satGlow) sat.satGlow.material.opacity = 0.22;
+              if (sat.satShell) sat.satShell.material.opacity = 0.095;
+              if (sat.satRing) sat.satRing.material.opacity = 0.11;
+              if (sat.satRingOuter) sat.satRingOuter.material.opacity = 0.04;
+              if (sat.satPulse) sat.satPulse.material.opacity = 0.03;
+              if (sat.satGlow) sat.satGlow.material.opacity = 0.15;
+              if (sat.connMesh) sat.connMesh.material.opacity = satUd.baseConnOpacity ? satUd.baseConnOpacity * 2.1 : 0.075;
             });
             /* Brighten connections */
             c.connectionMeshes.forEach(function (conn) {
-              conn.material.opacity = 0.4;
+              conn.material.opacity = 0.22;
             });
           } else {
             /* Dim non-hovered commodities */
@@ -943,18 +952,19 @@
             ring.material.opacity = 0.1;
           });
           c.satellites.forEach(function (sat) {
-            sat.mesh.material.opacity = sat.mesh.userData.baseOpacity || 0.82;
+            var satUd = sat.mesh.userData || {};
+            sat.mesh.material.opacity = satUd.baseOpacity || 0.9;
             if (sat.mesh.material.emissiveIntensity !== undefined) {
-              sat.mesh.material.emissiveIntensity = sat.mesh.userData.baseEmissive || 0.025;
+              sat.mesh.material.emissiveIntensity = satUd.baseEmissive || 0.018;
             }
-            if (sat.satShell) sat.satShell.material.opacity = 0.08;
-            if (sat.satRing) sat.satRing.material.opacity = 0.16;
-            if (sat.satRingOuter) sat.satRingOuter.material.opacity = 0.08;
-            if (sat.satPulse) sat.satPulse.material.opacity = 0.06;
-            if (sat.satGlow) sat.satGlow.material.opacity = 0.1;
+            if (sat.satShell) sat.satShell.material.opacity = satUd.baseShellOpacity || 0.055;
+            if (sat.satRing) sat.satRing.material.opacity = satUd.baseRingOpacity || 0.04;
+            if (sat.satRingOuter) sat.satRingOuter.material.opacity = satUd.baseRingOuterOpacity || 0.015;
+            if (sat.satPulse) sat.satPulse.material.opacity = satUd.basePulseOpacity || 0.012;
+            if (sat.satGlow) sat.satGlow.material.opacity = satUd.baseGlowOpacity || 0.09;
           });
           c.connectionMeshes.forEach(function (conn) {
-            conn.material.opacity = 0.2;
+            conn.material.opacity = 0.08;
           });
         });
       }
@@ -1003,17 +1013,18 @@
               hoveredSatelliteObj = hoveredSatellite;
             }
             hoveredSatellite.mesh.scale.set(
-              (ud.baseScaleX || hoveredSatellite.mesh.scale.x) * 1.14,
-              (ud.baseScaleY || hoveredSatellite.mesh.scale.y) * 1.14,
-              (ud.baseScaleZ || hoveredSatellite.mesh.scale.z) * 1.14
+              (ud.baseScaleX || hoveredSatellite.mesh.scale.x) * 1.1,
+              (ud.baseScaleY || hoveredSatellite.mesh.scale.y) * 1.1,
+              (ud.baseScaleZ || hoveredSatellite.mesh.scale.z) * 1.1
             );
-            hoveredSatellite.mesh.material.emissiveIntensity = 0.2;
-            if (hoveredSatellite.satShell) hoveredSatellite.satShell.material.opacity = 0.16;
-            if (hoveredSatellite.satRing) hoveredSatellite.satRing.material.opacity = 0.48;
-            if (hoveredSatellite.satRingOuter) hoveredSatellite.satRingOuter.material.opacity = 0.28;
-            if (hoveredSatellite.satPulse) hoveredSatellite.satPulse.material.opacity = 0.26;
-            if (hoveredSatellite.satGlow) hoveredSatellite.satGlow.material.opacity = 0.3;
-            if (hoveredSatellite.connMesh) hoveredSatellite.connMesh.material.opacity = 0.54;
+            hoveredSatellite.mesh.material.opacity = 1;
+            hoveredSatellite.mesh.material.emissiveIntensity = 0.14;
+            if (hoveredSatellite.satShell) hoveredSatellite.satShell.material.opacity = 0.09;
+            if (hoveredSatellite.satRing) hoveredSatellite.satRing.material.opacity = 0.16;
+            if (hoveredSatellite.satRingOuter) hoveredSatellite.satRingOuter.material.opacity = 0.06;
+            if (hoveredSatellite.satPulse) hoveredSatellite.satPulse.material.opacity = 0.055;
+            if (hoveredSatellite.satGlow) hoveredSatellite.satGlow.material.opacity = 0.18;
+            if (hoveredSatellite.connMesh) hoveredSatellite.connMesh.material.opacity = 0.14;
           }
           if (hoveredObj !== null) {
             hoveredObj = null;
@@ -1291,46 +1302,47 @@
         sat.mesh.rotation.y += orbitSpeed * 1.2;
         sat.mesh.rotation.z += orbitSpeed * 0.6;
 
-        var baseOpacity = sat.mesh.userData.baseOpacity || 0.99;
-        var focusOpacity = isSelected ? 1 : isMatched ? 0.98 : 0.2;
+        var baseOpacity = sat.mesh.userData.baseOpacity || 0.9;
+        var isHoveredSatellite = hoveredSatelliteObj === sat;
+        var focusOpacity = isHoveredSatellite ? 1 : (isSelected ? 1 : isMatched ? 0.92 : 0.14);
         var baseScaleX = sat.mesh.userData.baseScaleX || sat.mesh.scale.x;
         var baseScaleY = sat.mesh.userData.baseScaleY || sat.mesh.scale.y;
         var baseScaleZ = sat.mesh.userData.baseScaleZ || sat.mesh.scale.z;
-        var scaleBoost = isSelected ? 1.34 : isMatched ? (focusState.group && focusState.group !== 'all' ? 1.2 : 1.06) : 0.84;
+        var scaleBoost = isHoveredSatellite ? 1.1 : (isSelected ? 1.24 : isMatched ? (focusState.group && focusState.group !== 'all' ? 1.1 : 1.02) : 0.92);
         sat.mesh.scale.set(baseScaleX * scaleBoost, baseScaleY * scaleBoost, baseScaleZ * scaleBoost);
         sat.mesh.material.opacity = Math.min(1, baseOpacity * focusOpacity);
         if (sat.mesh.material.emissiveIntensity !== undefined) {
-          sat.mesh.material.emissiveIntensity = isSelected ? 0.24 : isMatched ? 0.12 : 0.028;
+          sat.mesh.material.emissiveIntensity = isHoveredSatellite ? 0.14 : (isSelected ? 0.11 : isMatched ? 0.045 : 0.012);
         }
 
         if (sat.satShell) {
           sat.satShell.position.set(sx, sy, sz);
-          sat.satShell.material.opacity = isSelected ? 0.22 : isMatched ? 0.12 : 0.03;
+          sat.satShell.material.opacity = isHoveredSatellite ? 0.09 : (isSelected ? 0.08 : isMatched ? 0.045 : 0.01);
         }
 
         if (sat.satRing) {
           sat.satRing.position.set(sx, sy, sz);
-          sat.satRing.rotation.z += orbitSpeed * 0.9;
-          sat.satRing.material.opacity = isSelected ? 0.52 : isMatched ? 0.26 : 0.06;
+          sat.satRing.rotation.z += orbitSpeed * 0.45;
+          sat.satRing.material.opacity = isHoveredSatellite ? 0.16 : (isSelected ? 0.11 : isMatched ? 0.05 : 0.008);
         }
 
         if (sat.satRingOuter) {
           sat.satRingOuter.position.set(sx, sy, sz);
-          sat.satRingOuter.rotation.z -= orbitSpeed * 0.62;
-          sat.satRingOuter.material.opacity = isSelected ? 0.3 : isMatched ? 0.14 : 0.035;
+          sat.satRingOuter.rotation.z -= orbitSpeed * 0.3;
+          sat.satRingOuter.material.opacity = isHoveredSatellite ? 0.06 : (isSelected ? 0.04 : isMatched ? 0.02 : 0.003);
         }
 
         if (sat.satPulse) {
-          var pulseScale = 1 + Math.sin(elapsed * 2.4 + sat.angle * 1.7) * 0.16;
+          var pulseScale = 1 + Math.sin(elapsed * 1.9 + sat.angle * 1.4) * 0.1;
           sat.satPulse.position.set(sx, sy, sz);
-          sat.satPulse.scale.set((sat.orbitR * 0.06) * pulseScale, (sat.orbitR * 0.06) * pulseScale, 1);
-          sat.satPulse.material.opacity = (isSelected ? 0.18 : isMatched ? 0.08 : 0.015) + Math.abs(Math.sin(elapsed * 1.8 + sat.angle)) * (isSelected ? 0.08 : isMatched ? 0.04 : 0.01);
+          sat.satPulse.scale.set((sat.orbitR * 0.048) * pulseScale, (sat.orbitR * 0.048) * pulseScale, 1);
+          sat.satPulse.material.opacity = (isHoveredSatellite ? 0.04 : (isSelected ? 0.03 : isMatched ? 0.012 : 0.002)) + Math.abs(Math.sin(elapsed * 1.35 + sat.angle)) * (isHoveredSatellite ? 0.015 : (isSelected ? 0.012 : isMatched ? 0.006 : 0.002));
         }
 
         /* Update satellite glow position */
         if (sat.satGlow) {
           sat.satGlow.position.set(sx, sy, sz);
-          sat.satGlow.material.opacity = isSelected ? 0.34 : isMatched ? 0.16 : 0.04;
+          sat.satGlow.material.opacity = isHoveredSatellite ? 0.18 : (isSelected ? 0.12 : isMatched ? 0.055 : 0.012);
         }
 
         /* Update connection line endpoint */
@@ -1340,7 +1352,7 @@
           sat.connMesh.userData.lineGeo.attributes.position.needsUpdate = true;
 
           /* Pulsing opacity for flowing energy effect */
-          var pulse = (isSelected ? 0.3 : isMatched ? 0.12 : 0.025) + Math.abs(Math.sin(elapsed * 2.5 + sat.angle * 2.0)) * (isSelected ? 0.22 : isMatched ? 0.14 : 0.04);
+          var pulse = (isHoveredSatellite ? 0.11 : (isSelected ? 0.09 : isMatched ? 0.045 : 0.008)) + Math.abs(Math.sin(elapsed * 1.8 + sat.angle * 1.2)) * (isHoveredSatellite ? 0.03 : (isSelected ? 0.03 : isMatched ? 0.02 : 0.006));
           sat.connMesh.material.opacity = pulse;
         }
       });
@@ -1367,14 +1379,14 @@
               ring.material.opacity = 0.25;
             });
             c.satellites.forEach(function (sat) {
-              /* Show satellite labels (not currently labels, but enhance visibility) */
-              sat.mesh.material.opacity = 0.9;
+              /* Focused commodity satellites: clearer, still restrained */
+              sat.mesh.material.opacity = 0.92;
               if (sat.mesh.material.emissiveIntensity !== undefined) {
-                sat.mesh.material.emissiveIntensity = 0.1;
+                sat.mesh.material.emissiveIntensity = 0.075;
               }
-              if (sat.satRing) sat.satRing.material.opacity = 0.36;
-              if (sat.satRingOuter) sat.satRingOuter.material.opacity = 0.18;
-              if (sat.satPulse) sat.satPulse.material.opacity = 0.14;
+              if (sat.satRing) sat.satRing.material.opacity = 0.09;
+              if (sat.satRingOuter) sat.satRingOuter.material.opacity = 0.03;
+              if (sat.satPulse) sat.satPulse.material.opacity = 0.028;
             });
           } else {
             /* Distant: fade based on distance */
