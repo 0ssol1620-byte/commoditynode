@@ -165,6 +165,58 @@ image: "/assets/images/og-default.png"
         if (timeEl) timeEl.textContent = 'Updated ' + new Date().toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'});
       }
 
+      function getSetupLink(key) {
+        var reportMap = {
+          ammonia: '/reports/',
+          lithium: '/lithium-breaks-lower-even-as-models-stay-higher/',
+          coffee: '/coffee-sinks-again-as-premium-washout-deepens/',
+          orange_juice: '/orange-juice-extends-higher-as-models-lean-with-tape/',
+          silver: '/silver-rips-higher-but-model-split-warns-on-follow-through/',
+          cocoa: '/cocoa-bounces-but-models-still-lean-lower/',
+          crude_oil: '/crude-oil-consensus-turns-lower/',
+          natural_gas: '/natural-gas-waha-slide-lng-tail-risk/'
+        };
+        return reportMap[key] || ('/commodities/' + key.replace(/_/g,'-') + '/');
+      }
+
+      function buildActionableSetups(data) {
+        var container = document.getElementById('actionable-setups-grid');
+        if (!container) return;
+        var topSetups = Object.entries(data)
+          .filter(function(entry){ return typeof entry[1].change_pct === 'number' && entry[1].change_pct !== 0; })
+          .sort(function(a,b){ return Math.abs(b[1].change_pct) - Math.abs(a[1].change_pct); })
+          .slice(0, 3);
+        container.innerHTML = topSetups.map(function(entry, idx){
+          var key = entry[0];
+          var d = entry[1];
+          var implication = getImplication(key, d.change_pct);
+          var sign = d.change_pct > 0 ? '+' : '';
+          var dirColor = d.change_pct > 0 ? '#10b981' : '#f43f5e';
+          var setupHref = getSetupLink(key);
+          var hubHref = '/commodities/' + key.replace(/_/g,'-') + '/';
+          var actionLabel = idx === 0 ? 'Open the live setup' : (d.change_pct > 0 ? 'See who benefits' : 'See who gets hit');
+          return '<article style="padding:18px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.018));border:1px solid rgba(255,255,255,0.08);box-shadow:0 16px 38px rgba(2,6,23,0.28);display:grid;gap:12px;">'
+            + '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">'
+            + '<div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Actionable setup ' + (idx + 1) + '</div>'
+            + '<div style="font-size:0.92rem;font-weight:800;color:' + dirColor + '">' + sign + d.change_pct.toFixed(1) + '%</div>'
+            + '</div>'
+            + '<div>'
+            + '<div style="font-size:1.05rem;font-weight:800;color:#f8fafc;line-height:1.25;">' + (d.name || key) + '</div>'
+            + '<div style="font-size:0.86rem;color:var(--text3);margin-top:6px;">$' + d.price + ' · move first, translation second, scenario third.</div>'
+            + '</div>'
+            + '<p style="margin:0;color:var(--text2);line-height:1.7;font-size:0.9rem;">' + implication + '</p>'
+            + '<div style="padding:12px 14px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.84rem;color:#cbd5e1;line-height:1.6;">'
+            + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Best next step</strong>'
+            + 'Read the live setup first, then open the hub or simulator to finish the decision workflow.'
+            + '</div>'
+            + '<div style="display:flex;gap:10px;flex-wrap:wrap;">'
+            + '<a href="' + setupHref + '" class="btn btn-primary" style="min-width:190px;justify-content:center;">' + actionLabel + '</a>'
+            + '<a href="' + hubHref + '" class="btn btn-secondary" style="min-width:170px;justify-content:center;">Open hub</a>'
+            + '</div>'
+            + '</article>';
+        }).join('');
+      }
+
       document.addEventListener('DOMContentLoaded', function(){
         fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
           var oil=d.crude_oil; if(oil){
@@ -208,6 +260,7 @@ image: "/assets/images/og-default.png"
           }
           // Build insights section
           buildInsights(d);
+          buildActionableSetups(d);
           renderPreviewRanges(d);
         }).catch(function(){var e=document.getElementById('hero-wti-change');if(e){e.textContent='—';e.className='value';} });
       });
@@ -244,6 +297,35 @@ image: "/assets/images/og-default.png"
       <span class="insights-time" id="insights-time">Updated daily</span>
     </div>
     <div class="insights-list" id="insights-list"></div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="actionable-setups-title" style="padding-top:18px;">
+  <div class="container">
+    <div style="display:grid;gap:16px;max-width:1180px;margin:0 auto;">
+      <div style="display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div>
+          <p class="section-label" style="margin-bottom:8px;">Today’s actionable setups</p>
+          <h2 class="section-title" id="actionable-setups-title" style="margin-bottom:10px;">Start with the moves most likely to change a position now.</h2>
+          <p class="section-desc" style="max-width:720px;">Each setup starts with the live move, translates the downstream implication, then routes you into the hub or simulator before consensus catches up.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="/reports/" class="btn btn-secondary" style="min-width:200px;justify-content:center;">Open today’s reports</a>
+          <a href="/simulator/" class="btn btn-primary" style="min-width:220px;justify-content:center;">Go straight to simulator</a>
+        </div>
+      </div>
+      <div id="actionable-setups-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;"></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+        <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Why this is different</div>
+          <p style="margin:0;color:var(--text2);line-height:1.65;">Headlines tell you what moved. Charts tell you where it traded. CommodityNode tells you which sectors, stocks, and scenarios change next.</p>
+        </div>
+        <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Best route to a decision</div>
+          <p style="margin:0;color:var(--text2);line-height:1.65;">Open the setup → read the live narrative → verify the forecast → model the scenario. Pro becomes relevant only when you need to finish the workflow.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
