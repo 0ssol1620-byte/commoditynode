@@ -243,8 +243,8 @@ layout: default
             <div style="color:var(--text3);font-size:0.84rem;margin-top:6px;line-height:1.65;">Open the hub to verify the live tape, then use the simulator when the move is important enough to affect a position.</div>
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
-            <a href="/commodities/{{ page.commodity_name | slugify }}/" class="btn btn-primary" style="min-width:180px;justify-content:center;">Open live hub</a>
-            <a href="/simulator/" class="btn btn-secondary" style="min-width:180px;justify-content:center;">Model the move</a>
+            <a href="/commodities/{{ page.commodity_name | slugify }}/" class="btn btn-primary" data-cta="report_open_live_hub" style="min-width:180px;justify-content:center;">Open live hub</a>
+            <a href="/simulator/" class="btn btn-secondary" data-cta="report_model_the_move" style="min-width:180px;justify-content:center;">Model the move</a>
           </div>
         </div>
         <div style="padding:18px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
@@ -257,7 +257,7 @@ layout: default
             <p style="margin:0;color:var(--text2);line-height:1.65;font-size:0.88rem;">When you need forecast confidence, stock-level sensitivity, and scenario testing before the repricing is obvious.</p>
           </div>
           <div style="display:flex;align-items:end;justify-content:flex-end;">
-            <a href="/pricing/" class="btn btn-secondary" style="min-width:210px;justify-content:center;">See how Pro finishes the workflow</a>
+            <a href="/pricing/" class="btn btn-secondary" data-cta="report_pro_finishes_workflow" style="min-width:210px;justify-content:center;">See how Pro finishes the workflow</a>
           </div>
         </div>
       </div>
