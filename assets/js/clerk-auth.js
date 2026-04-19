@@ -49,6 +49,9 @@
   var PRO_LINK = '/pricing/';
   var PRO_MONTHLY_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71';
   var PRO_ANNUAL_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/b7c7444b-606f-49c0-a6ab-8f78f653702f';
+  var SIGNUP_STARTED_KEY = 'cn_signup_started';
+  var SIGNUP_SOURCE_KEY = 'cn_signup_source';
+  var SIGNUP_COMPLETE_KEY = 'cn_signup_complete_tracked';
 
   /* ---------- Helpers ---------- */
   function currentMonth() {
@@ -77,6 +80,46 @@
     m.count += 1;
     setMeter(m);
     return m;
+  }
+
+
+  function track(name, props) {
+    if (window.CNTrack) window.CNTrack(name, props);
+  }
+
+  function markSignupStart(source) {
+    try {
+      localStorage.setItem(SIGNUP_STARTED_KEY, '1');
+      localStorage.setItem(SIGNUP_SOURCE_KEY, source || 'unknown');
+    } catch (e) {}
+    track('signup_start', { source: source || 'unknown' });
+  }
+
+  function maybeTrackSignupComplete(user) {
+    if (!user) return;
+    var started = null;
+    var source = 'unknown';
+    try {
+      started = localStorage.getItem(SIGNUP_STARTED_KEY);
+      source = localStorage.getItem(SIGNUP_SOURCE_KEY) || 'unknown';
+    } catch (e) {}
+    if (!started) return;
+    var trackedKey = String((user && user.id) || '') + ':' + String((user && user.updatedAt) || '1');
+    try {
+      if (localStorage.getItem(SIGNUP_COMPLETE_KEY) === trackedKey) return;
+      localStorage.setItem(SIGNUP_COMPLETE_KEY, trackedKey);
+      localStorage.removeItem(SIGNUP_STARTED_KEY);
+      localStorage.removeItem(SIGNUP_SOURCE_KEY);
+    } catch (e) {}
+    var profile = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { commodities: [], watchlist: [], events: [], role: '' };
+    track('signup_complete', {
+      source: source,
+      role: profile.role || '',
+      saved_commodities_count: (profile.commodities || []).length,
+      saved_watchlist_count: (profile.watchlist || []).length,
+      saved_events_count: (profile.events || []).length,
+      plan_hint: (user.publicMetadata && user.publicMetadata.plan) || 'free'
+    });
   }
 
   /* ---------- Pro Modal ---------- */
@@ -135,6 +178,8 @@
         if (window.Clerk) window.Clerk.openSignIn();
       });
       document.getElementById('clerk-signup').addEventListener('click', function () {
+        markSignupStart('header');
+        markSignupStart('header_mobile');
         window.location.href = '/start/';
       });
     }
@@ -426,6 +471,7 @@
       function renderAuth() {
         var user = window.Clerk.user;
         if (user) {
+          maybeTrackSignupComplete(user);
           buildUserMenu(user);
           if (isPostPage()) {
             if (!isPro(user) && !isAdmin(user)) {

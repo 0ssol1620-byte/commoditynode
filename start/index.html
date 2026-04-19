@@ -103,19 +103,25 @@ description: "Choose your role, save your commodities and watchlist, and build a
 
   document.querySelectorAll('[data-role]').forEach(function(btn){
     btn.addEventListener('click', function(){
-      if (window.CNProfile && window.CNProfile.save) window.CNProfile.save({ role: btn.getAttribute('data-role') });
+      var role = btn.getAttribute('data-role');
+      if (window.CNProfile && window.CNProfile.save) window.CNProfile.save({ role: role });
+      if (window.CNTrack) window.CNTrack('saved_role_selected', { role: role, source: 'start_page' });
       render();
     });
   });
   document.querySelectorAll('[data-commodity]').forEach(function(btn){
     btn.addEventListener('click', function(){
-      if (window.CNProfile && window.CNProfile.addCommodity) window.CNProfile.addCommodity(btn.getAttribute('data-commodity'));
+      var commodity = btn.getAttribute('data-commodity');
+      if (window.CNProfile && window.CNProfile.addCommodity) window.CNProfile.addCommodity(commodity);
+      if (window.CNTrack) window.CNTrack('saved_commodity_added', { commodity: commodity, source: 'start_page' });
       render();
     });
   });
   document.querySelectorAll('[data-event]').forEach(function(btn){
     btn.addEventListener('click', function(){
-      if (window.CNProfile && window.CNProfile.addEvent) window.CNProfile.addEvent(btn.getAttribute('data-event'));
+      var eventName = btn.getAttribute('data-event');
+      if (window.CNProfile && window.CNProfile.addEvent) window.CNProfile.addEvent(eventName);
+      if (window.CNTrack) window.CNTrack('saved_event_added', { event_name: eventName, source: 'start_page' });
       render();
     });
   });
@@ -125,11 +131,26 @@ description: "Choose your role, save your commodities and watchlist, and build a
       var input = document.getElementById('start-watchlist-input');
       var values = String(input && input.value || '').split(',').map(function(v){ return v.trim(); }).filter(Boolean);
       if (values.length && window.CNProfile && window.CNProfile.addWatchlist) window.CNProfile.addWatchlist(values);
+      if (values.length && window.CNTrack) window.CNTrack('saved_watchlist_added', { source: 'start_page', count: values.length });
       render();
     });
   }
   var signup = document.getElementById('start-open-signup');
-  if (signup) signup.addEventListener('click', function(){ if (window.Clerk) window.Clerk.openSignUp(); else window.location.href='/pricing/'; });
+  if (signup) signup.addEventListener('click', function(){
+    var profile = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { role:'', commodities:[], watchlist:[], events:[] };
+    try {
+      localStorage.setItem('cn_signup_started', '1');
+      localStorage.setItem('cn_signup_source', 'start_page');
+    } catch (e) {}
+    if (window.CNTrack) window.CNTrack('signup_start', {
+      source: 'start_page',
+      role: profile.role || '',
+      saved_commodities: (profile.commodities || []).join(','),
+      saved_watchlist_count: (profile.watchlist || []).length,
+      saved_events: (profile.events || []).join(',')
+    });
+    if (window.Clerk) window.Clerk.openSignUp(); else window.location.href='/pricing/';
+  });
   document.addEventListener('cn:profile-updated', render);
   render();
 })();

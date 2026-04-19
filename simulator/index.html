@@ -735,7 +735,7 @@ permalink: /simulator/
       <div class="sim-pro-overlay" id="stat-90d-overlay" style="border-radius:10px">
         <div style="text-align:center;padding:8px 12px">
           <div style="font-size:0.65rem;font-weight:800;color:#22d3ee;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Pro</div>
-          <a href="/pricing/" style="font-size:0.78rem;color:#e2e8f0;text-decoration:none;font-weight:600;white-space:nowrap">Unlock 90-Day &rarr;</a>
+          <a href="/pricing/" data-cta="simulator_unlock_90d" onclick="if(window.CNTrack) window.CNTrack('simulator_unlock_90d', { commodity: state.commodity, period: state.period });" style="font-size:0.78rem;color:#e2e8f0;text-decoration:none;font-weight:600;white-space:nowrap">Unlock 90-Day &rarr;</a>
         </div>
       </div>
     </div>
@@ -1315,6 +1315,13 @@ function hydrateStateFromUrl() {
 }
 
 function copySimulatorShareLink() {
+  if (window.CNTrack) {
+    window.CNTrack('simulator_copy_share_link', {
+      commodity: state.commodity,
+      period: state.period,
+      active_scenarios: Object.keys(state.scenarios || {}).join(',')
+    });
+  }
   syncSimulatorUrl();
   var href = window.location.href;
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1415,6 +1422,9 @@ function fmtPrice(v, key) {
 
 // ── Select commodity ──────────────────────────────────────────────────────
 window.selectCommodity = function(key){
+  if (window.CNTrack && state.commodity !== key) {
+    window.CNTrack('simulator_select_commodity', { commodity: key, source: 'simulator_page' });
+  }
   state.commodity = key;
   state.scenarios = {};
   var btns = document.querySelectorAll('.sim-commodity-btn');
@@ -1432,6 +1442,9 @@ window.selectCommodity = function(key){
 
 // ── Chart ─────────────────────────────────────────────────────────────────
 window.setPeriod = function(p, btn){
+  if (window.CNTrack && state.period !== p) {
+    window.CNTrack('simulator_change_period', { period: p, commodity: state.commodity });
+  }
   state.period = p;
   document.querySelectorAll('.sim-period-btn').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
@@ -1850,6 +1863,7 @@ function renderScenarios(){
 }
 
 window.toggleScenario = function(id, impact, checkbox){
+  var wasActive = !!state.scenarios[id];
   delete state.scenarios.preset_supply_cut;
   delete state.scenarios.preset_demand_surge;
   delete state.scenarios.preset_recession;
@@ -1859,10 +1873,18 @@ window.toggleScenario = function(id, impact, checkbox){
   } else {
     delete state.scenarios[id];
   }
+  if (window.CNTrack) {
+    window.CNTrack('simulator_toggle_scenario', {
+      commodity: state.commodity,
+      scenario_id: id,
+      active: !wasActive
+    });
+  }
   renderChart();
   renderStats();
   renderImpact();
   showSimulatorCTA();
+  if (window.CNTrack) window.CNTrack('simulator_scenario_run', { commodity: state.commodity, period: state.period, scenario_count: Object.keys(state.scenarios || {}).length, total_adjustment: calcScenarioAdjustment() });
   syncSimulatorUrl();
 };
 
@@ -2036,6 +2058,11 @@ function checkProAccess() {
 // ── Preset shocks ─────────────────────────────────────────────────────────
 window.applyPreset = function(type) {
   var val = type === 'supply_cut' ? 15 : type === 'demand_surge' ? 10 : -20;
+  if (window.CNTrack) {
+    if (type === 'supply_cut') window.CNTrack('simulator_preset_supply_cut', { commodity: state.commodity });
+    if (type === 'demand_surge') window.CNTrack('simulator_preset_demand_surge', { commodity: state.commodity });
+    if (type === 'recession') window.CNTrack('simulator_preset_recession', { commodity: state.commodity });
+  }
   var slider = document.getElementById('scenario-slider') || document.querySelector('input[type="range"]');
   if (slider) { slider.value = val; slider.dispatchEvent(new Event('input')); }
   // Also apply as a named scenario so the chart and stats update immediately
@@ -2045,6 +2072,7 @@ window.applyPreset = function(type) {
   renderChart();
   renderStats();
   renderImpact();
+  if (window.CNTrack) window.CNTrack('simulator_scenario_run', { commodity: state.commodity, period: state.period, scenario_count: Object.keys(state.scenarios || {}).length, total_adjustment: calcScenarioAdjustment() });
   syncSimulatorUrl();
 };
 

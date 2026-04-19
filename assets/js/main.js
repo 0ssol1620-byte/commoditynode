@@ -679,6 +679,14 @@
       .join(' ');
   }
 
+  window.CNTrack = function(eventName, props) {
+    if (typeof window.gtag !== 'function') return;
+    window.gtag('event', eventName, Object.assign({
+      page_path: window.location.pathname,
+      page_title: document.title
+    }, props || {}));
+  };
+
   window.CNProfile = {
     get: getProfile,
     save: saveProfile,
