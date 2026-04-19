@@ -1,0 +1,136 @@
+---
+layout: default
+title: "Start Free — Build Your Commodity Workflow | CommodityNode"
+permalink: /start/
+description: "Choose your role, save your commodities and watchlist, and build a personalized CommodityNode workflow before you start using the product every day."
+---
+
+<div class="post-header">
+  <div class="container">
+    <div class="post-header-badge">
+      <span class="badge badge-cyan">Start free</span>
+      <span class="badge badge-gold">Personalized onboarding</span>
+    </div>
+    <h1>Build your commodity workflow in under 2 minutes</h1>
+    <p class="post-meta-bar">Save your role, key commodities, watchlist names, and event interests so CommodityNode can route you into the setups that actually matter.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container" style="max-width:1080px;display:grid;gap:18px;">
+    <div style="padding:22px 24px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center;">
+      <div>
+        <div style="font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Why this exists</div>
+        <h2 style="margin:0 0 10px;font-size:1.2rem;">The fastest way to feel value is to tell CommodityNode what decisions you actually make.</h2>
+        <p style="margin:0;color:var(--text2);line-height:1.7;">General market noise is cheap. Context that is already aligned to your role, names, and event calendar is not. Build your workflow once, then reuse it every day.</p>
+      </div>
+      <div style="display:grid;gap:10px;">
+        <div style="padding:14px 16px;border-radius:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved workflow</div>
+          <div id="start-profile-summary" style="color:#cbd5e1;line-height:1.7;">Not configured yet.</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button id="start-open-signup" class="btn btn-primary" data-cta="start_open_signup" style="min-width:220px;justify-content:center;">Continue with free account</button>
+          <a href="/pricing/" class="btn btn-secondary" data-cta="start_compare_plans" style="min-width:220px;justify-content:center;">Compare Free vs Pro</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;">
+      <div style="padding:18px;border-radius:16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;gap:10px;">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:800;">1. Choose your role</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="role-buttons">
+          <button class="btn btn-secondary" data-role="self-directed-investor">Investor</button>
+          <button class="btn btn-secondary" data-role="equity-analyst">Analyst</button>
+          <button class="btn btn-secondary" data-role="operator-procurement">Operator</button>
+        </div>
+      </div>
+      <div style="padding:18px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);display:grid;gap:10px;">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:800;">2. Save commodities</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="commodity-buttons">
+          <button class="btn btn-secondary" data-commodity="crude-oil">Crude oil</button>
+          <button class="btn btn-secondary" data-commodity="gold">Gold</button>
+          <button class="btn btn-secondary" data-commodity="copper">Copper</button>
+          <button class="btn btn-secondary" data-commodity="lithium">Lithium</button>
+          <button class="btn btn-secondary" data-commodity="coffee">Coffee</button>
+          <button class="btn btn-secondary" data-commodity="wheat">Wheat</button>
+        </div>
+      </div>
+      <div style="padding:18px;border-radius:16px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);display:grid;gap:10px;">
+        <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#10b981;font-weight:800;">3. Save events</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="event-buttons">
+          <button class="btn btn-secondary" data-event="opec">OPEC</button>
+          <button class="btn btn-secondary" data-event="wasde">WASDE</button>
+          <button class="btn btn-secondary" data-event="fed">Fed</button>
+          <button class="btn btn-secondary" data-event="geopolitics">Geopolitics</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:22px 24px;border-radius:18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);display:grid;gap:14px;">
+      <div>
+        <div style="font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">4. Save your watchlist</div>
+        <p style="margin:0;color:var(--text2);line-height:1.7;">Add a few names you actually care about. CommodityNode uses this to make simulator and report relevance more concrete.</p>
+      </div>
+      <label style="display:grid;gap:8px;">
+        <span style="color:#f8fafc;font-weight:700;">Tickers or names</span>
+        <input id="start-watchlist-input" type="text" placeholder="Example: XOM, DAL, FCX, TSLA, SBUX" style="padding:14px 16px;border-radius:12px;background:#111827;border:1px solid rgba(255,255,255,0.08);color:#f8fafc;" />
+      </label>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button id="start-save-watchlist" class="btn btn-primary" data-cta="start_save_watchlist" style="min-width:220px;justify-content:center;">Save watchlist</button>
+        <a href="/simulator/" class="btn btn-secondary" data-cta="start_open_simulator" style="min-width:220px;justify-content:center;">Open simulator</a>
+        <a href="/reports/" class="btn btn-secondary" data-cta="start_open_reports" style="min-width:220px;justify-content:center;">Open live setups</a>
+      </div>
+      <div id="start-watchlist-status" style="color:#cbd5e1;font-size:0.9rem;line-height:1.65;">Nothing saved yet.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  function render(){
+    var profile = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { role:'', commodities:[], watchlist:[], events:[] };
+    var summary = [];
+    if (profile.role) summary.push('Role: ' + profile.role.replace(/-/g,' '));
+    if (profile.commodities.length) summary.push('Commodities: ' + profile.commodities.join(', '));
+    if (profile.events.length) summary.push('Events: ' + profile.events.join(', '));
+    if (profile.watchlist.length) summary.push('Watchlist: ' + profile.watchlist.join(', '));
+    var summaryEl = document.getElementById('start-profile-summary');
+    if (summaryEl) summaryEl.textContent = summary.length ? summary.join(' · ') : 'Not configured yet.';
+    var statusEl = document.getElementById('start-watchlist-status');
+    if (statusEl) statusEl.textContent = profile.watchlist.length ? 'Saved watchlist: ' + profile.watchlist.join(', ') : 'Nothing saved yet.';
+  }
+
+  document.querySelectorAll('[data-role]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (window.CNProfile && window.CNProfile.save) window.CNProfile.save({ role: btn.getAttribute('data-role') });
+      render();
+    });
+  });
+  document.querySelectorAll('[data-commodity]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (window.CNProfile && window.CNProfile.addCommodity) window.CNProfile.addCommodity(btn.getAttribute('data-commodity'));
+      render();
+    });
+  });
+  document.querySelectorAll('[data-event]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if (window.CNProfile && window.CNProfile.addEvent) window.CNProfile.addEvent(btn.getAttribute('data-event'));
+      render();
+    });
+  });
+  var saveWatchlist = document.getElementById('start-save-watchlist');
+  if (saveWatchlist) {
+    saveWatchlist.addEventListener('click', function(){
+      var input = document.getElementById('start-watchlist-input');
+      var values = String(input && input.value || '').split(',').map(function(v){ return v.trim(); }).filter(Boolean);
+      if (values.length && window.CNProfile && window.CNProfile.addWatchlist) window.CNProfile.addWatchlist(values);
+      render();
+    });
+  }
+  var signup = document.getElementById('start-open-signup');
+  if (signup) signup.addEventListener('click', function(){ if (window.Clerk) window.Clerk.openSignUp(); else window.location.href='/pricing/'; });
+  document.addEventListener('cn:profile-updated', render);
+  render();
+})();
+</script>

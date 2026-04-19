@@ -179,6 +179,42 @@ image: "/assets/images/og-default.png"
         return reportMap[key] || ('/commodities/' + key.replace(/_/g,'-') + '/');
       }
 
+      function getExposureTeaser(key) {
+        var map = {
+          ammonia: 'Watch CF, fertilizer margins, and industrial input buyers.',
+          lithium: 'Watch ALB, SQM, TSLA supply chain, and battery materials.',
+          coffee: 'Watch SBUX, restaurant margins, and branded beverage names.',
+          orange_juice: 'Watch citrus processors, beverage names, and grocery inflation.',
+          silver: 'Watch PAAS, WPM, solar-linked manufacturers, and precious metals desks.',
+          crude_oil: 'Watch XOM, CVX, airlines, chemicals, and transport stocks.',
+          natural_gas: 'Watch utilities, fertilizers, LNG-linked names, and industrial gas buyers.'
+        };
+        return map[key] || 'Watch exposed sectors, the linked companies, and downstream cost pressure.';
+      }
+
+      function getModelTeaser(key, pct) {
+        var direction = pct > 0 ? 'trend continuation' : 'stress test';
+        var map = {
+          lithium: 'Model stack is split — spot is weak, but medium-term support still matters.',
+          coffee: 'Both path and tape lean lower — follow-through matters more than a headline bounce.',
+          orange_juice: 'Forecast stack is finally leaning with the tape after a volatile week.',
+          silver: 'Model spread is wide enough that confidence, not just direction, matters.',
+          crude_oil: 'Consensus, Chronos-2, and TimesFM are most useful before event risk forces repricing.'
+        };
+        return map[key] || ('Use the forecast stack to decide whether this move is a ' + direction + ' or just noise.');
+      }
+
+      function getProUnlockTeaser(key) {
+        var map = {
+          lithium: 'Pro unlock: stock-level battery chain sensitivity and scenario confidence.',
+          coffee: 'Pro unlock: margin winners vs losers instead of headline-level narrative only.',
+          orange_juice: 'Pro unlock: downstream beverage exposure and event-level scenario follow-through.',
+          crude_oil: 'Pro unlock: named winners and losers across energy, airlines, and chemicals.',
+          natural_gas: 'Pro unlock: utility, LNG, and fertilizer translation before the move is obvious.'
+        };
+        return map[key] || 'Pro unlock: named winners, losers, and scenario confidence before the market fully reprices.';
+      }
+
       function buildActionableSetups(data) {
         var container = document.getElementById('actionable-setups-grid');
         if (!container) return;
@@ -205,6 +241,20 @@ image: "/assets/images/og-default.png"
             + '<div style="font-size:0.86rem;color:var(--text3);margin-top:6px;">$' + d.price + ' · move first, translation second, scenario third.</div>'
             + '</div>'
             + '<p style="margin:0;color:var(--text2);line-height:1.7;font-size:0.9rem;">' + implication + '</p>'
+            + '<div style="display:grid;gap:8px;">'
+            + '<div style="padding:12px 14px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.84rem;color:#cbd5e1;line-height:1.6;">'
+            + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Why it matters now</strong>'
+            + getExposureTeaser(key)
+            + '</div>'
+            + '<div style="padding:12px 14px;border-radius:14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);font-size:0.84rem;color:#d8d4ff;line-height:1.6;">'
+            + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Model read</strong>'
+            + getModelTeaser(key, d.change_pct)
+            + '</div>'
+            + '<div style="padding:12px 14px;border-radius:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);font-size:0.84rem;color:#d1fae5;line-height:1.6;">'
+            + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Why people pay</strong>'
+            + getProUnlockTeaser(key)
+            + '</div>'
+            + '</div>'
             + '<div style="padding:12px 14px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.84rem;color:#cbd5e1;line-height:1.6;">'
             + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Best next step</strong>'
             + 'Read the live setup first, then open the hub or simulator to finish the decision workflow.'
@@ -324,6 +374,112 @@ image: "/assets/images/og-default.png"
           <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Best route to a decision</div>
           <p style="margin:0;color:var(--text2);line-height:1.65;">Open the setup → read the live narrative → verify the forecast → model the scenario. Pro becomes relevant only when you need to finish the workflow.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="personalized-workflow-title" style="padding-top:18px;">
+  <div class="container">
+    <div style="max-width:1180px;margin:0 auto;display:grid;gap:14px;">
+      <div style="padding:22px 24px;border-radius:20px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.16);display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center;">
+        <div>
+          <p class="section-label" style="margin-bottom:8px;">Personalized command center</p>
+          <h2 class="section-title" id="personalized-workflow-title" style="margin-bottom:10px;">Build your commodity decision workflow once. Reuse it every day.</h2>
+          <p class="section-desc" style="max-width:760px;">Save your role, key commodities, watchlist names, and event playbooks so CommodityNode can route you straight to the setups that matter. This is how the product stops being a read and starts becoming a repeatable edge.</p>
+          <div data-profile-empty style="margin-top:12px;color:var(--text2);line-height:1.7;">No workflow saved yet. Start with a role, a few commodities, and the names you actually care about.</div>
+          <div style="margin-top:14px;color:#e2e8f0;font-size:0.92rem;font-weight:700;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
+        </div>
+        <div style="display:grid;gap:10px;">
+          <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved role</div>
+            <div style="color:#f8fafc;font-weight:700;" data-profile-role>Not set yet</div>
+          </div>
+          <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved commodities</div>
+            <div style="color:#cbd5e1;line-height:1.65;" data-profile-commodities>No tracked commodities yet</div>
+          </div>
+          <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved watchlist</div>
+            <div style="color:#cbd5e1;line-height:1.65;" data-profile-watchlist>No saved watchlist names yet</div>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="/start/" class="btn btn-primary" data-cta="home_build_workflow" style="min-width:220px;justify-content:center;">Build my workflow</a>
+            <a href="/pricing/" class="btn btn-secondary" data-cta="home_compare_free_pro" style="min-width:220px;justify-content:center;">Compare Free vs Pro</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="role-pathways-title" style="padding-top:12px;">
+  <div class="container">
+    <div style="max-width:1180px;margin:0 auto;display:grid;gap:14px;">
+      <div>
+        <p class="section-label" style="margin-bottom:8px;">Who this is for</p>
+        <h2 class="section-title" id="role-pathways-title" style="margin-bottom:10px;">Choose the workflow that matches the decision you need to make.</h2>
+        <p class="section-desc" style="max-width:760px;">CommodityNode converts the same move into different next steps depending on whether you invest around commodity-sensitive names, cover sectors, or manage real-world input-cost exposure.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
+        <a href="/for-self-directed-investors/" data-cta="home_role_investor" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;gap:10px;">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Self-directed investors</div>
+          <div style="font-size:1.05rem;font-weight:800;color:#f8fafc;">Know which names change when the commodity move actually matters.</div>
+          <p style="margin:0;color:var(--text2);line-height:1.7;">Best if you trade or invest around energy, metals, agriculture, airlines, industrials, or battery-material names.</p>
+        </a>
+        <a href="/for-equity-analysts/" data-cta="home_role_analyst" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:grid;gap:10px;">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;">Equity and sector analysts</div>
+          <div style="font-size:1.05rem;font-weight:800;color:#f8fafc;">Move from commodity tape to first-pass sector and company read faster.</div>
+          <p style="margin:0;color:var(--text2);line-height:1.7;">Best if you need a quicker route from price move to thesis framing, model agreement, and downstream sensitivity.</p>
+        </a>
+        <a href="/for-operators-and-procurement/" data-cta="home_role_operator" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);display:grid;gap:10px;">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:800;">Operators and procurement</div>
+          <div style="font-size:1.05rem;font-weight:800;color:#f8fafc;">Track input-cost shocks before they show up in margin pressure.</div>
+          <p style="margin:0;color:var(--text2);line-height:1.7;">Best if commodity volatility changes supplier risk, purchasing timing, or budget assumptions in the real world.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="why-pay-title" style="padding-top:10px;">
+  <div class="container">
+    <div style="max-width:1180px;margin:0 auto;display:grid;gap:14px;">
+      <div>
+        <p class="section-label" style="margin-bottom:8px;">Why people pay</p>
+        <h2 class="section-title" id="why-pay-title" style="margin-bottom:10px;">People do not pay for more commodity data. They pay to finish a decision faster.</h2>
+        <p class="section-desc" style="max-width:780px;">The real product is not the chart. It is the path from move → meaning → exposure → scenario → action. Free explains the move. Pro matters when the move is important enough that named exposure, model disagreement, and scenario confidence affect what you do next.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+        <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Before</div>
+          <p style="margin:0;color:var(--text2);line-height:1.7;">Read a headline. Open a chart. Guess which names matter. Build the scenario translation manually.</p>
+        </div>
+        <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">After</div>
+          <p style="margin:0;color:var(--text2);line-height:1.7;">Open the setup, verify the hub, check model agreement, then run a scenario before the repricing feels obvious.</p>
+        </div>
+        <div style="padding:16px 18px;border-radius:16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">What Pro changes</div>
+          <p style="margin:0;color:var(--text2);line-height:1.7;">Named winners and losers, scenario-aware conviction, and a repeatable workflow that is strong enough to use every week.</p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+        <a href="/energy-workflow/" data-cta="home_energy_workflow" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:8px;">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Energy workflow</div>
+          <div style="color:#f8fafc;font-weight:700;">Oil → airlines, chemicals, and energy equities</div>
+          <p style="margin:0;color:var(--text2);line-height:1.65;">Best when OPEC, geopolitical chokepoints, or demand shocks matter more than the headline.</p>
+        </a>
+        <a href="/battery-materials-workflow/" data-cta="home_battery_workflow" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:8px;">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Battery materials workflow</div>
+          <div style="color:#f8fafc;font-weight:700;">Lithium, nickel, and cobalt → EV chain translation</div>
+          <p style="margin:0;color:var(--text2);line-height:1.65;">Best when raw-material volatility changes battery, EV, and supply-chain narratives fast.</p>
+        </a>
+        <a href="/agriculture-margin-workflow/" data-cta="home_agri_workflow" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:8px;">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Agriculture margin workflow</div>
+          <div style="color:#f8fafc;font-weight:700;">Coffee, grains, and softs → cost pressure and relief</div>
+          <p style="margin:0;color:var(--text2);line-height:1.65;">Best when commodity moves show up in food, beverage, livestock, or consumer margins.</p>
+        </a>
       </div>
     </div>
   </div>

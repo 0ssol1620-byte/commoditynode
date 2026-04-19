@@ -632,6 +632,136 @@
 
   document.querySelectorAll('.section, .archive-section').forEach(initDiscoverablePosts);
 
+  const PROFILE_KEY = 'cn_profile_v1';
+
+  function uniqueList(values) {
+    return Array.from(new Set((values || []).map(v => String(v || '').trim()).filter(Boolean)));
+  }
+
+  function normalizeProfile(raw) {
+    raw = raw || {};
+    return {
+      role: String(raw.role || '').trim(),
+      commodities: uniqueList(raw.commodities),
+      watchlist: uniqueList(raw.watchlist),
+      events: uniqueList(raw.events),
+      workflow: String(raw.workflow || '').trim(),
+      updatedAt: raw.updatedAt || null
+    };
+  }
+
+  function getProfile() {
+    try {
+      return normalizeProfile(JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}'));
+    } catch (err) {
+      return normalizeProfile({});
+    }
+  }
+
+  function saveProfile(next) {
+    const profile = normalizeProfile({ ...getProfile(), ...(next || {}), updatedAt: new Date().toISOString() });
+    try { localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); } catch (err) {}
+    document.dispatchEvent(new CustomEvent('cn:profile-updated', { detail: profile }));
+    return profile;
+  }
+
+  function addProfileItems(field, values) {
+    const profile = getProfile();
+    profile[field] = uniqueList([...(profile[field] || []), ...(values || [])]);
+    return saveProfile(profile);
+  }
+
+  function titleize(value) {
+    return String(value || '')
+      .split(/[-_]/g)
+      .filter(Boolean)
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join(' ');
+  }
+
+  window.CNProfile = {
+    get: getProfile,
+    save: saveProfile,
+    addCommodity: value => addProfileItems('commodities', [value]),
+    addWatchlist: values => addProfileItems('watchlist', Array.isArray(values) ? values : [values]),
+    addEvent: value => addProfileItems('events', [value])
+  };
+
+  function renderProfileSurfaces(profile) {
+    profile = profile || getProfile();
+    document.querySelectorAll('[data-profile-empty]').forEach(el => {
+      el.style.display = profile.role || profile.commodities.length || profile.watchlist.length || profile.events.length ? 'none' : '';
+    });
+    document.querySelectorAll('[data-profile-role]').forEach(el => {
+      el.textContent = profile.role ? titleize(profile.role) : 'Not set yet';
+    });
+    document.querySelectorAll('[data-profile-commodities]').forEach(el => {
+      el.textContent = profile.commodities.length ? profile.commodities.map(titleize).join(', ') : 'No tracked commodities yet';
+    });
+    document.querySelectorAll('[data-profile-watchlist]').forEach(el => {
+      el.textContent = profile.watchlist.length ? profile.watchlist.join(', ') : 'No saved watchlist names yet';
+    });
+    document.querySelectorAll('[data-profile-events]').forEach(el => {
+      el.textContent = profile.events.length ? profile.events.map(titleize).join(', ') : 'No event playbooks saved yet';
+    });
+    document.querySelectorAll('[data-profile-summary]').forEach(el => {
+      if (profile.role || profile.commodities.length || profile.watchlist.length) {
+        const bits = [];
+        if (profile.role) bits.push(titleize(profile.role));
+        if (profile.commodities.length) bits.push(profile.commodities.length + ' commodity workflows saved');
+        if (profile.watchlist.length) bits.push(profile.watchlist.length + ' watchlist names');
+        el.textContent = bits.join(' · ');
+      } else {
+        el.textContent = 'Build your workflow once, then use CommodityNode as a faster daily decision surface.';
+      }
+    });
+  }
+
+  function parseCsvData(value) {
+    return String(value || '').split(',').map(v => v.trim()).filter(Boolean);
+  }
+
+  document.addEventListener('click', function(event) {
+    const saveCommodity = event.target.closest('[data-save-commodity]');
+    if (saveCommodity) {
+      const value = saveCommodity.getAttribute('data-save-commodity');
+      if (value) {
+        window.CNProfile.addCommodity(value);
+      }
+    }
+
+    const saveWatchlist = event.target.closest('[data-save-watchlist]');
+    if (saveWatchlist) {
+      const values = parseCsvData(saveWatchlist.getAttribute('data-save-watchlist'));
+      if (values.length) {
+        window.CNProfile.addWatchlist(values);
+      }
+    }
+
+    const saveEvent = event.target.closest('[data-save-event]');
+    if (saveEvent) {
+      const value = saveEvent.getAttribute('data-save-event');
+      if (value) {
+        window.CNProfile.addEvent(value);
+      }
+    }
+
+    const saveRole = event.target.closest('[data-save-role]');
+    if (saveRole) {
+      const value = saveRole.getAttribute('data-save-role');
+      if (value) {
+        window.CNProfile.save({ role: value });
+      }
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    renderProfileSurfaces(getProfile());
+  });
+  document.addEventListener('cn:profile-updated', function(event) {
+    renderProfileSurfaces(event.detail || getProfile());
+  });
+
   document.addEventListener('click', function(event) {
     const target = event.target.closest('[data-cta]');
     if (!target || typeof window.gtag !== 'function') return;

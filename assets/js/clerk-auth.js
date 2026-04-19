@@ -129,13 +129,13 @@
     var wrap = document.getElementById('clerk-auth-area');
     if (wrap) {
       wrap.innerHTML =
-        '<button class="clerk-btn clerk-btn-ghost" id="clerk-signin">Sign In</button>' +
-        '<button class="clerk-btn clerk-btn-primary" id="clerk-signup">Sign Up Free</button>';
+        '<button class="clerk-btn clerk-btn-ghost" id="clerk-signin" data-cta="header_sign_in">Sign In</button>' +
+        '<button class="clerk-btn clerk-btn-primary" id="clerk-signup" data-cta="header_start_free">Start Free</button>';
       document.getElementById('clerk-signin').addEventListener('click', function () {
         if (window.Clerk) window.Clerk.openSignIn();
       });
       document.getElementById('clerk-signup').addEventListener('click', function () {
-        if (window.Clerk) window.Clerk.openSignUp();
+        window.location.href = '/start/';
       });
     }
 
@@ -143,10 +143,10 @@
     var navWrap = document.getElementById('clerk-auth-nav');
     if (navWrap) {
       navWrap.innerHTML =
-        '<button class="clerk-btn clerk-btn-primary" id="clerk-signup-nav">Sign Up Free</button>' +
-        '<button class="clerk-btn clerk-btn-ghost" id="clerk-signin-nav">Sign In</button>';
+        '<button class="clerk-btn clerk-btn-primary" id="clerk-signup-nav" data-cta="header_start_free_mobile">Start Free</button>' +
+        '<button class="clerk-btn clerk-btn-ghost" id="clerk-signin-nav" data-cta="header_sign_in_mobile">Sign In</button>';
       document.getElementById('clerk-signup-nav').addEventListener('click', function () {
-        if (window.Clerk) window.Clerk.openSignUp();
+        window.location.href = '/start/';
       });
       document.getElementById('clerk-signin-nav').addEventListener('click', function () {
         if (window.Clerk) window.Clerk.openSignIn();
@@ -415,7 +415,7 @@
         elements: {
           card: { backgroundColor: '#0d0d14', border: '1px solid rgba(255,255,255,0.08)' },
           headerTitle: { color: '#f0f0f5' },
-          headerSubtitle: { color: '#9494a8' },
+          headerSubtitle: { display: 'none' },
           formButtonPrimary: { backgroundColor: '#22d3ee', color: '#050508' },
           footerActionLink: { color: '#22d3ee' },
           modalBackdrop: { backgroundColor: 'rgba(5,5,8,0.85)' }

@@ -697,6 +697,22 @@ permalink: /simulator/
       <a href="/pricing/" class="btn btn-primary" data-cta="simulator_unlock_full_workflow" style="min-width:220px;justify-content:center;">Unlock the full decision workflow</a>
     </div>
   </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:0 0 16px;">
+    <div style="padding:18px 20px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
+      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Outcome summary</div>
+      <div id="sim-outcome-brief" style="color:var(--text2);line-height:1.7;font-size:0.9rem;">Run a baseline or event scenario to see likely winners, losers, and the confidence-sensitive read.</div>
+    </div>
+    <div style="padding:18px 20px;border-radius:16px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:grid;gap:10px;">
+      <div>
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;margin-bottom:6px;">Watchlist relevance</div>
+        <div id="sim-watchlist-brief" style="color:#ddd6fe;line-height:1.7;font-size:0.88rem;">Save a watchlist to see which names line up with this commodity shock.</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-secondary" data-save-commodity="crude-oil" data-cta="simulator_save_current_workflow" id="sim-save-workflow-btn" style="min-width:180px;justify-content:center;">Save this workflow</button>
+        <a href="/start/" class="btn btn-secondary" data-cta="simulator_build_watchlist" style="min-width:180px;justify-content:center;">Build watchlist</a>
+      </div>
+    </div>
+  </div>
 
   <!-- Stats Row -->
   <div class="sim-stats-row">
@@ -1861,7 +1877,7 @@ function showSimulatorCTA() {
     + '<p style="color:#94a3b8;font-size:0.88rem;margin-bottom:20px;max-width:420px;margin-left:auto;margin-right:auto;">Enter your real holdings and run stress tests across all 6 commodity scenarios. See exactly which positions are most at risk — before the market moves.</p>'
     + '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">'
     + '<a href="/stress-test/" style="padding:12px 24px;background:linear-gradient(135deg,#22d3ee,#a855f7);border-radius:10px;color:#050508;font-weight:800;font-size:0.88rem;text-decoration:none;">Run Portfolio Stress Test →</a>'
-    + '<button onclick="if(window.Clerk)window.Clerk.openSignUp()" style="padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e2e8f0;font-weight:600;font-size:0.88rem;cursor:pointer;">Unlock company sensitivity — Pro</button>'
+    + '<a href="/pricing/" style="display:inline-block;padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e2e8f0;font-weight:600;font-size:0.88rem;cursor:pointer;text-decoration:none;">Unlock company sensitivity — Pro</a>'
     + '<button onclick="exportScenariosCSV()" style="padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#9494a8;font-weight:600;font-size:0.88rem;cursor:pointer;">Export scenarios as CSV</button>'
     + '</div>';
   var target = document.querySelector('.sim-scenario-panel') || document.querySelector('.sim-main-grid');
@@ -1883,6 +1899,46 @@ function getActiveScenarioSummary() {
 }
 
 // ── Impact ────────────────────────────────────────────────────────────────
+function renderOutcomeSummary(){
+  var key = state.commodity;
+  var displayAdj = calcScenarioAdjustment() !== 0 ? calcScenarioAdjustment() : 10;
+  var companies = (COMPANY_IMPACTS[key] || COMPANY_IMPACTS['crude_oil']).slice().sort(function(a,b){ return (b.beta * displayAdj) - (a.beta * displayAdj); });
+  var positive = companies.filter(function(item){ return item.beta * displayAdj >= 0; }).slice(0, 2).map(function(item){ return item.n; });
+  var negative = companies.filter(function(item){ return item.beta * displayAdj < 0; }).slice(0, 2).map(function(item){ return item.n; });
+  var industries = (INDUSTRY_IMPACTS[key] || INDUSTRY_IMPACTS['crude_oil']).slice().sort(function(a,b){ return Math.abs(b.base) - Math.abs(a.base); }).slice(0, 2).map(function(item){ return item.name; });
+  var el = document.getElementById('sim-outcome-brief');
+  if (!el) return;
+  el.innerHTML = 'Most decision-relevant sectors right now: <strong style="color:#f8fafc;">' + industries.join(', ') + '</strong>. '
+    + (positive.length ? 'Likely beneficiaries to verify next: <strong style="color:#f8fafc;">' + positive.join(', ') + '</strong>. ' : '')
+    + (negative.length ? 'Likely pressure points: <strong style="color:#f8fafc;">' + negative.join(', ') + '</strong>. ' : '')
+    + 'Use Pro when you need the named winners and losers, not just the direction.';
+}
+
+function renderWatchlistRelevance(){
+  var el = document.getElementById('sim-watchlist-brief');
+  if (!el) return;
+  var profile = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { watchlist: [] };
+  var key = state.commodity;
+  var displayAdj = calcScenarioAdjustment() !== 0 ? calcScenarioAdjustment() : 10;
+  var companies = (COMPANY_IMPACTS[key] || COMPANY_IMPACTS['crude_oil']).map(function(item){
+    return { name: item.n, impact: item.beta * displayAdj };
+  });
+  var matches = companies.filter(function(item){
+    return (profile.watchlist || []).some(function(name){ return String(name).toLowerCase() === String(item.name).toLowerCase(); });
+  }).sort(function(a,b){ return Math.abs(b.impact) - Math.abs(a.impact); });
+  if (!profile.watchlist || !profile.watchlist.length) {
+    el.textContent = 'No saved watchlist yet. Add your names once and CommodityNode can show which ones line up with each commodity scenario.';
+    return;
+  }
+  if (!matches.length) {
+    el.textContent = 'Saved watchlist: ' + profile.watchlist.join(', ') + '. None of those names are in this commodity sensitivity map yet, so use the hub and sector layer first.';
+    return;
+  }
+  el.innerHTML = 'Saved watchlist overlap: <strong style="color:#f8fafc;">' + matches.slice(0, 3).map(function(item){
+    return item.name + ' ' + (item.impact >= 0 ? '+' : '') + item.impact.toFixed(1) + '%';
+  }).join(' · ') + '</strong>.';
+}
+
 function renderImpact(){
   var key = state.commodity;
   var scenAdj = calcScenarioAdjustment();
@@ -1929,6 +1985,10 @@ function renderImpact(){
         + '</div>';
     }).join('');
   }
+  renderOutcomeSummary();
+  renderWatchlistRelevance();
+  var saveBtn = document.getElementById('sim-save-workflow-btn');
+  if (saveBtn) saveBtn.setAttribute('data-save-commodity', key.replace(/_/g,'-'));
 }
 
 function syncPresetButtons(activePreset) {
