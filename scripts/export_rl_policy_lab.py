@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from dataclasses import asdict
 from pathlib import Path
@@ -28,6 +29,15 @@ def _load_benchmark_artifact() -> dict | None:
         return json.loads(benchmark_path.read_text(encoding='utf-8'))
     except json.JSONDecodeError:
         return None
+
+
+
+def _current_commit_marker() -> str:
+    try:
+        sha = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'], cwd=ROOT, text=True).strip()
+        return f'{sha}+'
+    except Exception:
+        return 'unknown'
 
 
 
@@ -148,7 +158,7 @@ def build_export_payload() -> dict:
         episode_replay.append(replay_item)
 
     return {
-        'updated_from_commit': '1bddf0d+',
+        'updated_from_commit': _current_commit_marker(),
         'config': asdict(config),
         'offline_report': asdict(offline_result.report),
         'ppo_report': asdict(ppo_result.report),
