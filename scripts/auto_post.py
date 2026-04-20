@@ -118,14 +118,23 @@ def already_posted_today(commodity_key: str) -> bool:
 
 
 def fetch_news_headlines(symbol: str, max_headlines: int = 5) -> list[str]:
-    """Fetch recent news headlines via yfinance."""
+    """Fetch recent news headlines via yfinance.
+
+    Yahoo Finance now commonly nests title fields under item['content'].
+    Keep compatibility with both the old flat shape and the newer nested payload.
+    """
     headlines = []
     try:
         import yfinance as yf
         ticker = yf.Ticker(symbol)
         news = ticker.news or []
         for item in news[:max_headlines]:
-            title = item.get("title", "")
+            content = item.get("content") if isinstance(item, dict) else None
+            title = (
+                item.get("title", "") if isinstance(item, dict) else ""
+            ) or (
+                content.get("title", "") if isinstance(content, dict) else ""
+            )
             if title:
                 headlines.append(title)
     except Exception as e:
