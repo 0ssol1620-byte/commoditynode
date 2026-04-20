@@ -1,0 +1,263 @@
+{
+  "crude_oil": {
+    "cluster": "Energy",
+    "event_probabilities": [
+      {"id": "opec-cut", "label": "OPEC+ surprise supply cut", "base_probability": 0.28, "bull_case": "Higher curve + upstream leverage", "bear_case": "Airline and chemical squeeze"},
+      {"id": "hormuz", "label": "Hormuz disruption premium", "base_probability": 0.18, "bull_case": "Front-end spike + freight stress", "bear_case": "Short-lived panic unwind"},
+      {"id": "demand-slow", "label": "Global demand slowdown", "base_probability": 0.31, "bull_case": "Refining margins defend", "bear_case": "Energy beta compresses"},
+      {"id": "usd-rally", "label": "USD / macro tightening shock", "base_probability": 0.23, "bull_case": "Defensive cash-flow names hold", "bear_case": "Commodity complex derates"}
+    ],
+    "ripple_ranker": [
+      {"name": "XOM", "type": "company", "score": 92, "reason": "Upstream beta + balance-sheet resilience"},
+      {"name": "CVX", "type": "company", "score": 88, "reason": "Oil-linked cash flow and integrated leverage"},
+      {"name": "DAL", "type": "company", "score": 81, "reason": "Fuel-cost sensitivity"},
+      {"name": "Chemical producers", "type": "sector", "score": 74, "reason": "Feedstock and margin pressure"}
+    ],
+    "hedges": [
+      {"name": "XLE", "kind": "equity basket", "fit": "Best simple upside hedge to fuel-sensitive exposure"},
+      {"name": "Airline underweight", "kind": "sector hedge", "fit": "Protects against oil cost spike into earnings"},
+      {"name": "Refiner basket", "kind": "relative value", "fit": "Useful when crude spikes but product demand holds"}
+    ],
+    "event_studies": [
+      {"event": "OPEC supply surprise", "window": "T-3 to T+10", "pattern": "Oil producers lead, airlines lag, refiners split on crack-spread context"},
+      {"event": "Geopolitical chokepoint stress", "window": "Intraday to T+5", "pattern": "Front-month oil spikes faster than equity beta catch-up"}
+    ],
+    "policy_actions": [
+      {"state": "bull-trend + high event risk", "action": "Accumulate upstream winners, trim airlines, keep scenario hedges on"},
+      {"state": "bear-trend + low agreement", "action": "Reduce directional conviction and wait for event confirmation"},
+      {"state": "high disagreement + low vol", "action": "Favor options / relative-value structures over outright risk"}
+    ]
+  },
+  "gold": {
+    "cluster": "Precious Metals",
+    "event_probabilities": [
+      {"id": "fed-cuts", "label": "Fed cuts / real-rate decline", "base_probability": 0.33, "bull_case": "Gold + miners rerate", "bear_case": "Crowded safe-haven unwind"},
+      {"id": "risk-off", "label": "Geopolitical risk-off impulse", "base_probability": 0.25, "bull_case": "Safe-haven demand broadens", "bear_case": "Short squeeze fades quickly"},
+      {"id": "usd-soft", "label": "Dollar softening regime", "base_probability": 0.22, "bull_case": "FX tailwind extends", "bear_case": "Growth-beta outperforms instead"},
+      {"id": "liquidation", "label": "Cross-asset liquidity event", "base_probability": 0.20, "bull_case": "Dip buys well later", "bear_case": "Forced selling hits miners first"}
+    ],
+    "ripple_ranker": [
+      {"name": "NEM", "type": "company", "score": 91, "reason": "Liquid gold miner beta"},
+      {"name": "GDX", "type": "ETF", "score": 88, "reason": "Sector expression of gold momentum"},
+      {"name": "WPM", "type": "company", "score": 83, "reason": "Royalty model with lower operating risk"},
+      {"name": "Risk assets", "type": "macro basket", "score": 71, "reason": "Inverse defensive rotation lens"}
+    ],
+    "hedges": [
+      {"name": "GDX", "kind": "ETF hedge", "fit": "Cleaner expression when gold move should transmit to miners"},
+      {"name": "USD shorts", "kind": "macro overlay", "fit": "Useful when gold thesis is really a rates / dollar thesis"},
+      {"name": "Treasury duration", "kind": "cross-asset hedge", "fit": "Complements real-rate-sensitive setups"}
+    ],
+    "event_studies": [
+      {"event": "Fed pivot", "window": "T-5 to T+20", "pattern": "Spot gold moves first, miners catch up with higher beta later"},
+      {"event": "Acute geopolitical shock", "window": "Intraday to T+7", "pattern": "Gold reacts immediately; silver/miners depend on broad risk tape"}
+    ],
+    "policy_actions": [
+      {"state": "bull-trend + strong agreement", "action": "Favor miner beta and trend continuation"},
+      {"state": "bull-trend + high vol", "action": "Scale entries and prefer royalty / ETF mix over single names"},
+      {"state": "bear-trend + risk-off narrative mismatch", "action": "Wait for correlation repair before sizing up"}
+    ]
+  },
+  "copper": {
+    "cluster": "Industrial Metals",
+    "event_probabilities": [
+      {"id": "china-stimulus", "label": "China stimulus / construction impulse", "base_probability": 0.29, "bull_case": "Copper and miners rerate", "bear_case": "Policy disappointment"},
+      {"id": "mine-strike", "label": "LatAm mine disruption", "base_probability": 0.21, "bull_case": "Supply squeeze and smelter stress", "bear_case": "Temporary spike only"},
+      {"id": "global-pmi", "label": "Global PMI slowdown", "base_probability": 0.31, "bull_case": "Grid / AI demand offsets macro softness", "bear_case": "Cyclicals underperform"},
+      {"id": "usd-rally", "label": "Dollar pressure", "base_probability": 0.19, "bull_case": "Short squeeze exhaustion", "bear_case": "Growth proxy derating"}
+    ],
+    "ripple_ranker": [
+      {"name": "FCX", "type": "company", "score": 95, "reason": "High copper beta"},
+      {"name": "SCCO", "type": "company", "score": 86, "reason": "Direct producer exposure"},
+      {"name": "Electrical equipment", "type": "sector", "score": 77, "reason": "Input-cost transmission"},
+      {"name": "Grid build-out", "type": "theme", "score": 73, "reason": "Demand duration support"}
+    ],
+    "hedges": [
+      {"name": "FCX / SCCO pair", "kind": "relative value", "fit": "Separate beta from idiosyncratic execution risk"},
+      {"name": "Industrial underweight", "kind": "sector hedge", "fit": "Useful when copper weakness points to macro deceleration"},
+      {"name": "Gold overlay", "kind": "cross-metal hedge", "fit": "Helps when growth shock beats inflation shock"}
+    ],
+    "event_studies": [
+      {"event": "China stimulus headlines", "window": "T-2 to T+15", "pattern": "Copper and miners jump first; industrials lag until demand confirmation"},
+      {"event": "Major mine strike", "window": "Intraday to T+10", "pattern": "Spot metal responds faster than downstream equities"}
+    ],
+    "policy_actions": [
+      {"state": "bull-trend + event catalyst", "action": "Lean into miner beta and grid / infrastructure themes"},
+      {"state": "bear-trend + high disagreement", "action": "Treat rallies as fragile until China signal confirms"},
+      {"state": "flat trend + anomaly", "action": "Watch for correlation breaks between copper and cyclicals"}
+    ]
+  },
+  "natural_gas": {
+    "cluster": "Energy",
+    "event_probabilities": [
+      {"id": "storage-tight", "label": "Storage draw surprise", "base_probability": 0.24, "bull_case": "Utilities and LNG repricing", "bear_case": "Weather premium mean-reverts"},
+      {"id": "cold-weather", "label": "Severe weather demand", "base_probability": 0.27, "bull_case": "Spot gas spikes and utility hedging returns", "bear_case": "Transient move only"},
+      {"id": "lng-capacity", "label": "LNG export expansion", "base_probability": 0.18, "bull_case": "Longer-dated demand rerate", "bear_case": "Domestic oversupply dominates"},
+      {"id": "warm-weather", "label": "Warm winter / demand miss", "base_probability": 0.31, "bull_case": "Downstream relief", "bear_case": "Gas producers under pressure"}
+    ],
+    "ripple_ranker": [
+      {"name": "LNG exporters", "type": "sector", "score": 88, "reason": "Direct gas throughput leverage"},
+      {"name": "Utilities", "type": "sector", "score": 84, "reason": "Fuel-input sensitivity"},
+      {"name": "CF", "type": "company", "score": 79, "reason": "Fertilizer feedstock costs"},
+      {"name": "Power buyers", "type": "sector", "score": 72, "reason": "Margin impact through fuel costs"}
+    ],
+    "hedges": [
+      {"name": "Utility pair trade", "kind": "sector hedge", "fit": "Separates regional weather beta from broad market moves"},
+      {"name": "Fertilizer basket", "kind": "input-cost hedge", "fit": "Works when gas feedstock dominates margin story"},
+      {"name": "LNG chain", "kind": "demand expression", "fit": "Best when export demand is the main driver"}
+    ],
+    "event_studies": [
+      {"event": "Weather shock", "window": "T-1 to T+5", "pattern": "Spot gas reacts first; equity beneficiaries split by fuel mix"}
+    ],
+    "policy_actions": [
+      {"state": "bull-trend + weather risk", "action": "Stay tactical and prioritize utility / LNG sensitivity"},
+      {"state": "bear-trend + low vol", "action": "Prefer downstream margin relief themes"}
+    ]
+  },
+  "wheat": {
+    "cluster": "Agriculture",
+    "event_probabilities": [
+      {"id": "wasde-bull", "label": "WASDE bullish surprise", "base_probability": 0.27, "bull_case": "Grain handlers rerate", "bear_case": "Supply relief narratives dominate"},
+      {"id": "black-sea", "label": "Black Sea supply stress", "base_probability": 0.24, "bull_case": "Export risk premium returns", "bear_case": "Short-lived geopolitical spike"},
+      {"id": "harvest-relief", "label": "Harvest / acreage relief", "base_probability": 0.30, "bull_case": "Downstream food margins recover", "bear_case": "Crop bulls unwind"},
+      {"id": "demand-soft", "label": "Feed and demand softness", "base_probability": 0.19, "bull_case": "Selective processors defend", "bear_case": "Broad ag beta fades"}
+    ],
+    "ripple_ranker": [
+      {"name": "Bunge", "type": "company", "score": 85, "reason": "Trading and origination leverage"},
+      {"name": "Food producers", "type": "sector", "score": 82, "reason": "Input-cost transmission"},
+      {"name": "Machinery", "type": "sector", "score": 69, "reason": "Second-order farm income linkage"}
+    ],
+    "hedges": [
+      {"name": "Food margin basket", "kind": "downstream hedge", "fit": "Useful when grain relief matters more than farm beta"},
+      {"name": "Grain merchant basket", "kind": "upstream expression", "fit": "Captures volatility monetization around WASDE"}
+    ],
+    "event_studies": [
+      {"event": "WASDE surprise", "window": "Intraday to T+7", "pattern": "Futures react immediately; food and merchant equities lag by session"}
+    ],
+    "policy_actions": [
+      {"state": "high event risk + low agreement", "action": "Trade around WASDE window instead of taking long-duration risk"}
+    ]
+  },
+  "coffee": {
+    "cluster": "Soft Commodities",
+    "event_probabilities": [
+      {"id": "brazil-frost", "label": "Brazil frost risk", "base_probability": 0.21, "bull_case": "Short squeeze in coffee complex", "bear_case": "Weather premium unwinds"},
+      {"id": "inventory-relief", "label": "Inventory / supply relief", "base_probability": 0.34, "bull_case": "Roasters get margin relief", "bear_case": "Producers stay under pressure"},
+      {"id": "demand-soft", "label": "Consumer demand softness", "base_probability": 0.22, "bull_case": "Value chains rotate lower", "bear_case": "Branded beverage names hold better"},
+      {"id": "freight-tight", "label": "Freight / logistics squeeze", "base_probability": 0.23, "bull_case": "Input-cost stress returns", "bear_case": "Temporary panic only"}
+    ],
+    "ripple_ranker": [
+      {"name": "SBUX", "type": "company", "score": 86, "reason": "Coffee input cost relevance"},
+      {"name": "Restaurant chains", "type": "sector", "score": 78, "reason": "Beverage and menu margin sensitivity"},
+      {"name": "Branded beverage", "type": "sector", "score": 74, "reason": "Commodity relief to margin narrative"}
+    ],
+    "hedges": [
+      {"name": "Consumer staples long", "kind": "downstream relief", "fit": "Works when coffee unwind helps margins"},
+      {"name": "Softs basket", "kind": "cross-commodity hedge", "fit": "Balances idiosyncratic weather risk"}
+    ],
+    "event_studies": [
+      {"event": "Brazil weather shock", "window": "Intraday to T+10", "pattern": "Coffee futures gap first, branded consumer names respond slower"}
+    ],
+    "policy_actions": [
+      {"state": "bear-trend + strong agreement", "action": "Favor downstream margin beneficiaries over trying to catch producer bottoms"}
+    ]
+  },
+  "lithium": {
+    "cluster": "Battery Materials",
+    "event_probabilities": [
+      {"id": "ev-demand", "label": "EV demand re-acceleration", "base_probability": 0.24, "bull_case": "Battery chain rerates", "bear_case": "Recovery hopes fail again"},
+      {"id": "supply-glut", "label": "Supply normalization / glut", "base_probability": 0.34, "bull_case": "Downstream margin relief", "bear_case": "Upstream miners compress further"},
+      {"id": "china-policy", "label": "China battery policy support", "base_probability": 0.23, "bull_case": "Lithium proxy rebound", "bear_case": "Temporary headline bounce only"},
+      {"id": "tech-shift", "label": "Battery chemistry substitution", "base_probability": 0.19, "bull_case": "Cost winners change", "bear_case": "Structural demand fears linger"}
+    ],
+    "ripple_ranker": [
+      {"name": "ALB", "type": "company", "score": 94, "reason": "Primary liquid lithium proxy"},
+      {"name": "SQM", "type": "company", "score": 87, "reason": "Direct lithium sensitivity"},
+      {"name": "TSLA supply chain", "type": "theme", "score": 79, "reason": "Battery-cost transmission"},
+      {"name": "LIT", "type": "ETF", "score": 76, "reason": "Cleaner basket exposure"}
+    ],
+    "hedges": [
+      {"name": "LIT / TSLA cross", "kind": "pair trade", "fit": "Separate raw material pain from downstream relief"},
+      {"name": "Battery suppliers basket", "kind": "theme hedge", "fit": "Useful when lithium weakness helps downstream margins"},
+      {"name": "Copper overlay", "kind": "complex hedge", "fit": "Battery-material dispersion hedge"}
+    ],
+    "event_studies": [
+      {"event": "Battery-material washout", "window": "T-5 to T+20", "pattern": "Upstream proxies overshoot before medium-term stack stabilizes"}
+    ],
+    "policy_actions": [
+      {"state": "bear-trend + moderate agreement", "action": "Prefer downstream beneficiaries until model stack re-accelerates"},
+      {"state": "high disagreement + catalyst risk", "action": "Trade smaller and wait for event confirmation"}
+    ]
+  },
+  "uranium": {
+    "cluster": "Energy Transition",
+    "event_probabilities": [
+      {"id": "supply-cut", "label": "Producer supply cut", "base_probability": 0.25, "bull_case": "Uranium equities rerate fast", "bear_case": "Spot illiquidity exaggerates then fades"},
+      {"id": "nuclear-policy", "label": "Nuclear policy expansion", "base_probability": 0.29, "bull_case": "Long-duration demand thesis strengthens", "bear_case": "Narrative outruns deliveries"},
+      {"id": "kazakh-output", "label": "Kazakh output normalization", "base_probability": 0.24, "bull_case": "Strong hands absorb", "bear_case": "Tightness narrative weakens"},
+      {"id": "risk-off", "label": "Risk-off equity shock", "base_probability": 0.22, "bull_case": "Strategic theme still bids", "bear_case": "High beta uranium names derate"}
+    ],
+    "ripple_ranker": [
+      {"name": "CCJ", "type": "company", "score": 92, "reason": "Liquid uranium leader"},
+      {"name": "NXE", "type": "company", "score": 83, "reason": "Higher beta development exposure"},
+      {"name": "URA", "type": "ETF", "score": 79, "reason": "Basket expression of uranium thesis"}
+    ],
+    "hedges": [
+      {"name": "URA", "kind": "ETF hedge", "fit": "Cleaner theme exposure than single-name sizing"},
+      {"name": "High-beta trim", "kind": "positioning hedge", "fit": "Useful when spot narrative and equity tape diverge"}
+    ],
+    "event_studies": [
+      {"event": "Producer cut announcement", "window": "T-2 to T+15", "pattern": "Equities can overshoot spot move due to scarcity narrative"}
+    ],
+    "policy_actions": [
+      {"state": "bull-trend + event support", "action": "Lean into liquid leaders and thematic ETF exposure"}
+    ]
+  },
+  "silver": {
+    "cluster": "Precious / Industrial",
+    "event_probabilities": [
+      {"id": "gold-follow", "label": "Gold-led precious metals squeeze", "base_probability": 0.26, "bull_case": "Silver beta outperforms", "bear_case": "Industrial softness offsets"},
+      {"id": "solar-demand", "label": "Solar demand impulse", "base_probability": 0.23, "bull_case": "Industrial support joins precious bid", "bear_case": "Demand optimism overstates reality"},
+      {"id": "usd-rates", "label": "Rates / dollar reset", "base_probability": 0.28, "bull_case": "Precious complex lifts", "bear_case": "Silver volatility whipsaws"},
+      {"id": "growth-scare", "label": "Growth scare", "base_probability": 0.23, "bull_case": "Defensive bid only partial", "bear_case": "Silver underperforms gold"}
+    ],
+    "ripple_ranker": [
+      {"name": "PAAS", "type": "company", "score": 85, "reason": "Silver miner beta"},
+      {"name": "WPM", "type": "company", "score": 82, "reason": "Precious royalty leverage"},
+      {"name": "Solar supply chain", "type": "theme", "score": 74, "reason": "Industrial demand sensitivity"}
+    ],
+    "hedges": [
+      {"name": "Gold / silver ratio", "kind": "relative value", "fit": "Best when silver thesis depends on gold leadership"},
+      {"name": "Miner basket", "kind": "sector hedge", "fit": "Spreads single-name operational risk"}
+    ],
+    "event_studies": [
+      {"event": "Precious metals squeeze", "window": "T-3 to T+12", "pattern": "Silver often lags then accelerates with higher beta"}
+    ],
+    "policy_actions": [
+      {"state": "bull-trend + wide disagreement", "action": "Favor ratio trades and scaled entries instead of binary conviction"}
+    ]
+  },
+  "aluminum": {
+    "cluster": "Industrial Metals",
+    "event_probabilities": [
+      {"id": "energy-cost", "label": "Power-cost supply shock", "base_probability": 0.24, "bull_case": "Smelter margin support", "bear_case": "Demand drag offsets"},
+      {"id": "china-policy", "label": "China production policy", "base_probability": 0.28, "bull_case": "Supply discipline narrative", "bear_case": "Policy reversal"},
+      {"id": "demand-soft", "label": "Industrial demand slowdown", "base_probability": 0.30, "bull_case": "Packaging and defense demand cushions", "bear_case": "Cyclicals fade"},
+      {"id": "aerospace", "label": "Aerospace / transport recovery", "base_probability": 0.18, "bull_case": "Demand duration strengthens", "bear_case": "Too small to offset macro drag"}
+    ],
+    "ripple_ranker": [
+      {"name": "Aluminum producers", "type": "sector", "score": 84, "reason": "Direct metal and power-cost sensitivity"},
+      {"name": "Aerospace", "type": "sector", "score": 72, "reason": "Input-cost + demand linkage"},
+      {"name": "Packaging", "type": "sector", "score": 69, "reason": "Margin transmission"}
+    ],
+    "hedges": [
+      {"name": "Industrial metals basket", "kind": "complex hedge", "fit": "Smooths single-metal idiosyncrasy"},
+      {"name": "Power-cost overlay", "kind": "supply hedge", "fit": "Useful when smelter economics drive move"}
+    ],
+    "event_studies": [
+      {"event": "Power-cost supply squeeze", "window": "T-2 to T+10", "pattern": "Aluminum spikes fast; downstream equities react more gradually"}
+    ],
+    "policy_actions": [
+      {"state": "bull-trend + supply catalyst", "action": "Favor producers over downstream users until cost pass-through is clear"}
+    ]
+  }
+}

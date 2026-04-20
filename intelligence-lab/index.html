@@ -1,0 +1,216 @@
+---
+layout: default
+title: "CommodityNode Intelligence Lab"
+permalink: /intelligence-lab/
+description: "Premium decision-support products on top of CommodityNode's commodity forecast stack: event probabilities, ripple ranking, exposure screening, stress tests, explainability, anomaly detection, event studies, and RL policy lab."
+---
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+.intelligence-lab-hero { padding: 72px 0 36px; background: linear-gradient(180deg, rgba(34,211,238,0.05), rgba(168,85,247,0.03)); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.intelligence-lab-hero h1 { font-size: clamp(2.3rem, 4vw, 3.4rem); line-height: 0.98; margin: 0 0 12px; color: #f8fafc; }
+.intelligence-lab-hero p { color: #94a3b8; max-width: 820px; line-height: 1.75; }
+.lab-shell { max-width: 1180px; margin: 0 auto; padding: 0 24px 60px; }
+.lab-kpis, .lab-module-grid, .lab-meta-grid, .lab-two-col, .lab-four-grid { display: grid; gap: 14px; }
+.lab-kpis { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); margin-top: 22px; }
+.lab-kpi, .lab-card, .lab-row-card, .lab-mini-card, .lab-policy-card { border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); border-radius: 18px; }
+.lab-kpi { padding: 18px 20px; }
+.lab-kpi-label { font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: #22d3ee; font-weight: 800; margin-bottom: 8px; }
+.lab-kpi strong { display: block; color: #f8fafc; font-size: 1.02rem; }
+.lab-hero-change.up, .up { color: #10b981; }
+.lab-hero-change.down, .down { color: #f43f5e; }
+.lab-toolbar { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; margin: 28px 0 18px; }
+.lab-select { background: rgba(8,12,20,0.9); color:#f8fafc; border:1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 14px; min-width: 220px; }
+.lab-anchor-row { display:flex; gap:10px; flex-wrap:wrap; }
+.lab-anchor-btn { background: rgba(255,255,255,0.04); color:#cbd5e1; border:1px solid rgba(255,255,255,0.08); border-radius:999px; padding:10px 14px; cursor:pointer; font-weight:700; font-size:0.82rem; }
+.lab-anchor-btn:hover { border-color: rgba(34,211,238,0.3); color:#22d3ee; }
+.lab-module-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.lab-card { padding: 22px; }
+.lab-card h2 { margin: 0 0 10px; font-size: 1.2rem; color: #f8fafc; }
+.lab-card p, .lab-card-copy { margin: 0; color: #94a3b8; line-height: 1.7; }
+.lab-card-kicker { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #22d3ee; font-weight: 800; margin-bottom: 8px; }
+.lab-two-col { grid-template-columns: 1.1fr 0.9fr; align-items:start; }
+.lab-four-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.lab-row-card, .lab-mini-card { padding: 14px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.lab-mini-card { display:grid; gap:8px; align-items:start; }
+.lab-row-title { color:#f8fafc; font-weight:800; line-height:1.4; }
+.lab-row-sub { color:#94a3b8; font-size:0.88rem; line-height:1.65; }
+.lab-row-metric { color:#f8fafc; font-weight:800; font-size:0.96rem; text-align:right; }
+.lab-rank-item { display:grid; grid-template-columns: 44px 1fr auto; gap:12px; align-items:center; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+.lab-rank-item:last-child { border-bottom:none; }
+.lab-rank-num { width: 40px; height: 40px; display:inline-flex; align-items:center; justify-content:center; border-radius: 999px; background: rgba(34,211,238,0.12); color:#22d3ee; font-weight:800; }
+.lab-chart { position: relative; min-height: 260px; }
+.lab-badge { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(34,211,238,0.09); color:#22d3ee; border:1px solid rgba(34,211,238,0.18); font-size:0.8rem; font-weight:700; }
+.lab-regime { display:flex; gap:10px; flex-wrap:wrap; margin: 12px 0; }
+.lab-meter { display:flex; align-items:flex-end; gap:18px; margin-top:16px; }
+.lab-meter-score { font-size: 3rem; font-weight: 800; color:#f8fafc; line-height:1; }
+.lab-chip { display:inline-flex; width:max-content; align-items:center; padding:6px 10px; border-radius:999px; background:rgba(168,85,247,0.12); color:#c084fc; border:1px solid rgba(168,85,247,0.18); font-size:0.76rem; font-weight:700; }
+.lab-policy-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:12px; margin-top:16px; }
+.lab-policy-card { padding: 14px 16px; }
+.lab-policy-card.active { border-color: rgba(34,211,238,0.28); background: linear-gradient(135deg, rgba(34,211,238,0.09), rgba(168,85,247,0.06)); }
+.lab-callout { margin-top: 26px; padding: 18px 20px; border-radius: 18px; background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(168,85,247,0.05)); border:1px solid rgba(34,211,238,0.16); }
+.lab-callout-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+.lab-btn { display:inline-flex; align-items:center; justify-content:center; min-width:220px; padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:800; }
+.lab-btn-primary { background:#22d3ee; color:#06131a; }
+.lab-btn-secondary { background: rgba(255,255,255,0.04); color:#e2e8f0; border:1px solid rgba(255,255,255,0.08); }
+.lab-error { padding: 22px; border-radius: 16px; background: rgba(127,29,29,0.25); border:1px solid rgba(248,113,113,0.25); color:#fecaca; }
+@media (max-width: 900px) {
+  .lab-kpis, .lab-module-grid, .lab-two-col, .lab-four-grid, .lab-policy-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<section class="intelligence-lab-hero">
+  <div class="lab-shell">
+    <div class="lab-badge">New premium product suite</div>
+    <h1>CommodityNode Intelligence Lab</h1>
+    <p>
+      This is the product layer above raw forecasting: event probabilities, ripple ranking, watchlist exposure, stress testing,
+      hedge selection, explainability, regime detection, anomaly monitoring, event studies, and an RL-inspired policy lab.
+      The goal is simple — finish the decision before the repricing, not after.
+    </p>
+    <div class="lab-kpis">
+      <div class="lab-kpi"><div class="lab-kpi-label">Selected commodity</div><strong id="lab-selected-name">—</strong></div>
+      <div class="lab-kpi"><div class="lab-kpi-label">Current price</div><strong id="lab-selected-price">—</strong></div>
+      <div class="lab-kpi"><div class="lab-kpi-label">Live move</div><strong id="lab-selected-change">—</strong></div>
+      <div class="lab-kpi"><div class="lab-kpi-label">30D setup</div><strong id="lab-selected-30d">—</strong></div>
+      <div class="lab-kpi"><div class="lab-kpi-label">90D setup</div><strong id="lab-selected-90d">—</strong></div>
+      <div class="lab-kpi"><div class="lab-kpi-label">Agreement</div><strong id="lab-selected-agreement">—</strong></div>
+      <div class="lab-kpi"><div class="lab-kpi-label">Cluster</div><strong id="lab-selected-cluster">—</strong></div>
+    </div>
+    <div class="lab-callout">
+      <div class="lab-card-kicker">What is monetizable here?</div>
+      <p>
+        Each module is designed to be sold as a Pro, Desk, or Enterprise surface: more explainable than a raw model,
+        more actionable than a report, and more trustworthy than a black-box “AI trader” promise.
+      </p>
+      <div class="lab-callout-actions">
+        <a href="/pricing/" class="lab-btn lab-btn-primary">Unlock pricing for advanced workflow access</a>
+        <a href="/simulator/" class="lab-btn lab-btn-secondary">Open simulator and compare the current stack</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lab-shell" id="intelligence-lab-shell">
+  <div class="lab-toolbar">
+    <div>
+      <label for="intelligence-lab-selector" class="lab-card-kicker" style="display:block;">Commodity selector</label>
+      <select id="intelligence-lab-selector" class="lab-select"></select>
+    </div>
+    <div class="lab-anchor-row">
+      <button class="lab-anchor-btn" data-lab-anchor="event-probability-studio">Event Probability</button>
+      <button class="lab-anchor-btn" data-lab-anchor="ripple-ranker">Ripple Ranker</button>
+      <button class="lab-anchor-btn" data-lab-anchor="exposure-screener">Exposure</button>
+      <button class="lab-anchor-btn" data-lab-anchor="stress-test-lab">Stress Test</button>
+      <button class="lab-anchor-btn" data-lab-anchor="hedge-optimizer">Hedges</button>
+      <button class="lab-anchor-btn" data-lab-anchor="forecast-explainability">Explainability</button>
+      <button class="lab-anchor-btn" data-lab-anchor="regime-shift-detector">Regime</button>
+      <button class="lab-anchor-btn" data-lab-anchor="anomaly-monitor">Anomaly</button>
+      <button class="lab-anchor-btn" data-lab-anchor="event-study-library">Event Study</button>
+      <button class="lab-anchor-btn" data-lab-anchor="rl-policy-lab">RL Policy</button>
+    </div>
+  </div>
+
+  <div class="lab-module-grid">
+    <section class="lab-card" id="event-probability-studio">
+      <div class="lab-card-kicker">1. Event Probability Studio</div>
+      <h2>Price moves are not enough. You need event odds.</h2>
+      <p>Use the current tape, forecast stack, and catalyst map to estimate what is most likely to matter next.</p>
+      <div class="lab-two-col" style="margin-top:16px;">
+        <div class="lab-chart"><canvas id="event-probability-chart"></canvas></div>
+        <div id="event-probability-list" class="lab-four-grid" style="grid-template-columns:1fr;"></div>
+      </div>
+    </section>
+
+    <section class="lab-card" id="ripple-ranker">
+      <div class="lab-card-kicker">2. Ripple Ranker</div>
+      <h2>Which names and sectors are most sensitive right now?</h2>
+      <p>Rank the highest-beta downstream names before the market narrative fully catches up.</p>
+      <div id="ripple-ranker-list" style="margin-top:16px;"></div>
+    </section>
+
+    <section class="lab-card" id="exposure-screener">
+      <div class="lab-card-kicker">3. Exposure Screener</div>
+      <h2>Screen your saved watchlist against the live commodity state.</h2>
+      <p id="exposure-screener-copy">No saved watchlist overlap yet.</p>
+      <div id="exposure-screener-list" class="lab-four-grid" style="margin-top:16px;"></div>
+    </section>
+
+    <section class="lab-card" id="stress-test-lab">
+      <div class="lab-card-kicker">4. Portfolio Stress Test</div>
+      <h2>Translate the commodity shock into position-level pain or relief.</h2>
+      <p>Simple, explainable stress ladders outperform vague “AI conviction” when actual capital is at risk.</p>
+      <div id="stress-test-list" style="margin-top:16px;"></div>
+    </section>
+
+    <section class="lab-card" id="hedge-optimizer">
+      <div class="lab-card-kicker">5. Hedge Optimizer</div>
+      <h2>Show the cleanest hedge candidates, not just the loudest trade.</h2>
+      <p>Use agreement, direction, and exposure maps to recommend hedges that fit the current regime.</p>
+      <div id="hedge-optimizer-list" style="margin-top:16px;"></div>
+    </section>
+
+    <section class="lab-card" id="forecast-explainability">
+      <div class="lab-card-kicker">6. Forecast Explainability Studio</div>
+      <h2>Explain why the models agree — or why they do not.</h2>
+      <p id="explainability-copy">Agreement score —.</p>
+      <div class="lab-chart" style="margin-top:16px;"><canvas id="forecast-explainability-chart"></canvas></div>
+    </section>
+
+    <section class="lab-card" id="regime-shift-detector">
+      <div class="lab-card-kicker">7. Regime Shift Detector</div>
+      <h2>State labeling beats intuition when the tape gets noisy.</h2>
+      <div class="lab-regime">
+        <span class="lab-badge" id="regime-detector-badge">—</span>
+        <span class="lab-badge" id="regime-detector-vol">—</span>
+      </div>
+      <p id="regime-detector-copy">—</p>
+    </section>
+
+    <section class="lab-card" id="anomaly-monitor">
+      <div class="lab-card-kicker">8. Anomaly Monitor</div>
+      <h2>Catch mismatches between spot action and model logic.</h2>
+      <div class="lab-meter">
+        <div class="lab-meter-score" id="anomaly-monitor-score">—</div>
+        <div>
+          <div class="lab-card-kicker" style="margin-bottom:4px;">Anomaly state</div>
+          <div class="lab-row-title" id="anomaly-monitor-label">—</div>
+        </div>
+      </div>
+      <p id="anomaly-monitor-copy" style="margin-top:12px;">—</p>
+    </section>
+
+    <section class="lab-card" id="event-study-library">
+      <div class="lab-card-kicker">9. Event Study Library</div>
+      <h2>Build the historical reaction layer around recurring catalysts.</h2>
+      <p>Event studies monetize well because they turn “what happened before?” into a reusable desk workflow.</p>
+      <div id="event-study-list" class="lab-four-grid" style="margin-top:16px;"></div>
+    </section>
+
+    <section class="lab-card" id="rl-policy-lab">
+      <div class="lab-card-kicker">10. RL Policy Lab</div>
+      <h2>Yes, reinforcement learning can be visualized — but it should sell as policy support, not magic alpha.</h2>
+      <p>
+        The user-facing form is a policy layer: given trend, disagreement, volatility, and catalyst risk, which action is most defensible?
+      </p>
+      <div class="lab-callout" style="margin-top:16px;">
+        <div class="lab-card-kicker">Recommended policy state</div>
+        <div id="policy-lab-recommendation" class="lab-row-title">—</div>
+      </div>
+      <div id="policy-lab-grid" class="lab-policy-grid"></div>
+    </section>
+  </div>
+
+  <section class="lab-card" style="margin-top:18px;">
+    <div class="lab-card-kicker">Commercial packaging</div>
+    <h2>How this turns into revenue</h2>
+    <div class="lab-four-grid" style="margin-top:16px;">
+      <div class="lab-mini-card"><div class="lab-row-title">Pro</div><div class="lab-row-sub">Event Probability Studio, Explainability, basic Ripple Ranker, anomaly and regime surfaces.</div></div>
+      <div class="lab-mini-card"><div class="lab-row-title">Desk</div><div class="lab-row-sub">Exposure Screener, Stress Test, Hedge Optimizer, Event Study Library, export workflow.</div></div>
+      <div class="lab-mini-card"><div class="lab-row-title">Enterprise</div><div class="lab-row-sub">Saved policy workspaces, API access, custom watchlists, recurring reports, alerting.</div></div>
+      <div class="lab-mini-card"><div class="lab-row-title">RL / Policy Lab</div><div class="lab-row-sub">Sell as a trust-first policy simulator, not an autopilot trading bot.</div></div>
+    </div>
+  </section>
+</div>
+
+<script src="/assets/js/intelligence-lab.js"></script>
