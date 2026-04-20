@@ -161,8 +161,8 @@ layout: default
   <div class="article-summary-card" data-animate>
     <div>
       <p class="summary-kicker">Signal Snapshot</p>
-      <h2>{{ page.commodity_name | default: primary_tag | default: 'Commodity' | capitalize }} Exposure Summary</h2>
-      <p>{{ page.description | default: site.description }}</p>
+      <h2>What matters most right now</h2>
+      <p>{% if page.signal_summary %}{{ page.signal_summary }}{% else %}Use this report to connect today’s move in {{ commodity_display }} to exposed sectors, named companies, and the next 24–72 hour catalysts that matter.{% endif %}</p>
     </div>
     <div class="summary-metrics" aria-label="Article quick stats">
       <div class="summary-metric">

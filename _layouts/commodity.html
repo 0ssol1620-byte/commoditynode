@@ -156,61 +156,14 @@ layout: default
     <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data: daily auto-update · Analysis published: <time datetime="{{ page.date | default: site.time | date: '%Y-%m-%d' }}">{{ page.date | default: site.time | date: "%b %d, %Y" }}</time></p>
     {% endif %}
 
-    <div style="margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;">
-      <div style="padding:14px 16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Who this page is for</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Investors, analysts, and operators who need the fastest path from {{ page.title | split: ':' | first | strip }} price action to company, sector, and portfolio impact.</div>
-      </div>
-      <div style="padding:14px 16px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">How to use it</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Start with the live price and forecast panel, inspect the impact map, then use the latest Signal Reports to understand what is changing now, not just structurally.</div>
-      </div>
-      <div style="padding:14px 16px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#f59e0b;font-weight:700;margin-bottom:6px;">Trust standard</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">CommodityNode labels direct futures, proxy benchmarks, and analysis-only pages explicitly. When a daily feed is unreliable, we suppress false precision instead of forcing a number.</div>
-      </div>
-    </div>
-
-    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
-      <div style="padding:14px 16px;background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#818cf8;font-weight:700;margin-bottom:8px;">Start here</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Need the quick read? Check <a href="/pricing/" style="color:var(--accent);">forecast coverage</a>, then compare this hub with the <a href="/reports/" style="color:var(--accent);">latest Signal Reports</a> for the live narrative behind the move.</div>
-      </div>
-      <div style="padding:14px 16px;background:rgba(236,72,153,0.05);border:1px solid rgba(236,72,153,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#f472b6;font-weight:700;margin-bottom:8px;">Related hubs</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">
-          {% if page.substitutes and page.substitutes.size > 0 %}
-            Compare against substitute chains like
-            {% for substitute in page.substitutes limit:3 %}
-              {% assign substitute_slug = substitute | slugify %}
-              {% assign substitute_url = '' %}
-              {% for c in site.commodities %}
-                {% assign c_slug = c.name | remove: '.md' %}
-                {% if c_slug == substitute_slug %}
-                  {% assign substitute_url = c.url %}
-                {% endif %}
-              {% endfor %}
-              {% if substitute_url != '' %}
-                <a href="{{ substitute_url | relative_url }}" style="color:var(--accent);">{{ substitute }}</a>
-              {% else %}
-                <span style="color:var(--text2);">{{ substitute }}</span>
-              {% endif %}{% unless forloop.last %}, {% endunless %}
-            {% endfor %}.
-          {% else %}
-            Move sideways into adjacent commodity hubs to compare second-order effects and portfolio sensitivity.
-          {% endif %}
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:14px;padding:18px 20px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+    <div style="margin-top:18px;padding:18px 20px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
       <div style="padding:12px 14px;border-radius:12px;background:rgba(8,12,20,0.42);border:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">{{ page.title | split: ':' | first | strip }} price today</div>
-        <div id="seo-price-today" style="font-size:1rem;color:var(--text2);line-height:1.6;">Live price loads below from the current market data feed.</div>
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Coverage status{% else %}{{ page.title | split: ':' | first | strip }} price today{% endif %}</div>
+        <div id="seo-price-today" style="font-size:1rem;color:var(--text2);line-height:1.6;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}No direct live benchmark is available for this hub. Use the analysis, linked reports, and impact map as the primary reference layer.{% else %}Live price loads below from the current market data feed.{% endif %}</div>
       </div>
       <div style="padding:12px 14px;border-radius:12px;background:rgba(8,12,20,0.42);border:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">{{ page.title | split: ':' | first | strip }} forecast</div>
-        <div id="seo-forecast-today" style="font-size:1rem;color:var(--text2);line-height:1.6;">Consensus 30-day and 90-day outlook loads from the forecast model below.</div>
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Analysis outlook{% else %}{{ page.title | split: ':' | first | strip }} forecast{% endif %}</div>
+        <div id="seo-forecast-today" style="font-size:1rem;color:var(--text2);line-height:1.6;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Use the latest linked report, structural themes, and exposed names below to understand the current outlook.{% else %}Consensus 30-day and 90-day outlook loads from the forecast model below.{% endif %}</div>
       </div>
       <div style="padding:12px 14px;border-radius:12px;background:rgba(8,12,20,0.42);border:1px solid rgba(255,255,255,0.06);">
         <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#f59e0b;font-weight:700;margin-bottom:6px;">Why it is moving</div>
@@ -228,38 +181,46 @@ layout: default
       </div>
     </div>
 
-    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
-      <div style="padding:14px 16px;background:rgba(14,165,233,0.05);border:1px solid rgba(14,165,233,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#38bdf8;font-weight:700;margin-bottom:8px;">Latest related report</div>
-        {% if latest_related_post %}
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">
-          <a href="{{ latest_related_post.url }}" style="color:var(--accent);font-weight:600;">{{ latest_related_post.title }}</a><br>
-          <span style="font-size:0.82rem;color:var(--text3);">{{ latest_related_post.date | date: "%b %d, %Y" }} · use this with the hub to connect the current narrative to live price and forecast context.</span>
+    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start;">
+      <div style="padding:16px 18px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:12px;">
+        <div>
+          <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Fastest route to value</div>
+          <div style="font-size:0.98rem;color:var(--text);font-weight:700;line-height:1.45;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}{% if latest_related_post %}Start with the linked report and the impact map, then use this hub to connect structural context to exposed names and substitute chains.{% else %}Start with the impact map and substitute-chain context below, then use this hub as the reference layer while coverage expands.{% endif %}{% else %}Start with the live price and forecast panel, then use the latest Signal Report and the impact map to decide who is exposed now.{% endif %}</div>
         </div>
-        {% else %}
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">No fresh report is linked yet. Browse the <a href="/reports/" style="color:var(--accent);">Research Archive</a> and treat this hub as the primary live reference page.</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
+          <div style="padding:12px 14px;border-radius:12px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.88rem;color:var(--text2);line-height:1.6;">
+            <strong style="color:#f8fafc;display:block;margin-bottom:4px;">Who this page is for</strong>
+            Investors, analysts, and operators who need the fastest path from {{ page.title | split: ':' | first | strip }} price action to company, sector, and portfolio impact.
+          </div>
+          <div style="padding:12px 14px;border-radius:12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);font-size:0.88rem;color:var(--text2);line-height:1.6;">
+            <strong style="color:#f8fafc;display:block;margin-bottom:4px;">Best next step</strong>
+            {% if latest_related_post %}
+            Read <a href="{{ latest_related_post.url }}" style="color:var(--accent);">the newest linked report</a>, then open the simulator only if the move is important enough to change a position.
+            {% else %}
+            Use this hub as the primary reference page, then compare it against the <a href="/reports/" style="color:var(--accent);">Research Archive</a> for narrative context.
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div style="padding:16px 18px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:10px;">
+        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;">Trust & freshness</div>
+        <div style="font-size:0.88rem;color:var(--text2);line-height:1.65;">CommodityNode labels direct futures, proxy benchmarks, and analysis-only pages explicitly. When a daily feed is unreliable, we suppress false precision instead of forcing a number.</div>
+        <div style="font-size:0.84rem;color:var(--text3);line-height:1.65;">{% if latest_related_post %}Latest report update: <strong style="color:var(--text2)">{{ latest_related_post.date | date: "%b %d, %Y" }}</strong>.{% else %}No linked report yet for this hub.{% endif %} Review our <a href="/about/editorial-team/" style="color:var(--accent);">editorial team</a>, <a href="/about/editorial-process/" style="color:var(--accent);">review process</a>, and <a href="/methodology/" style="color:var(--accent);">methodology</a>. Corrections: <a href="mailto:contact@commoditynode.com" style="color:var(--accent);">contact@commoditynode.com</a>.</div>
+        {% if page.substitutes and page.substitutes.size > 0 %}
+        <div style="font-size:0.84rem;color:var(--text3);line-height:1.65;">Compare against substitute chains like
+          {% for substitute in page.substitutes limit:3 %}
+            {% assign substitute_slug = substitute | slugify %}
+            {% assign substitute_url = '' %}
+            {% for c in site.commodities %}
+              {% assign c_slug = c.name | remove: '.md' %}
+              {% if c_slug == substitute_slug %}
+                {% assign substitute_url = c.url %}
+              {% endif %}
+            {% endfor %}
+            {% if substitute_url != '' %}<a href="{{ substitute_url | relative_url }}" style="color:var(--accent);">{{ substitute }}</a>{% else %}<span style="color:var(--text2);">{{ substitute }}</span>{% endif %}{% unless forloop.last %}, {% endunless %}
+          {% endfor %}.
+        </div>
         {% endif %}
-      </div>
-      <div style="padding:14px 16px;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22c55e;font-weight:700;margin-bottom:8px;">Freshness check</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">
-          {% if latest_related_post %}
-            Latest report update: <strong>{{ latest_related_post.date | date: "%b %d, %Y" }}</strong>. If the price panel is moving but the narrative is stale, review the archive or publish a fresh signal note.
-          {% else %}
-            No report history yet for this commodity tag. This hub may need editorial expansion if user demand rises.
-          {% endif %}
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
-      <div style="padding:14px 16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Published by</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">CommodityNode Research. Review our <a href="/about/editorial-team/" style="color:var(--accent);">editorial team</a> and <a href="/about/editorial-process/" style="color:var(--accent);">review process</a>.</div>
-      </div>
-      <div style="padding:14px 16px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:8px;">Corrections & caveats</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Use this hub with the <a href="/methodology/" style="color:var(--accent);">methodology</a>. If a value or label looks wrong, contact <a href="mailto:contact@commoditynode.com" style="color:var(--accent);">contact@commoditynode.com</a>.</div>
       </div>
     </div>
   </div>

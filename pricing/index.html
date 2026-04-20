@@ -39,12 +39,12 @@ no_loader: true
     {
       "@type": "Question",
       "name": "What's the difference between Free and Pro?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Free gives you access to all 60 commodity hubs, up to 3 Signal Reports per month, and the basic Impact Map. Pro unlocks unlimited Signal Reports, the AI 90-day price forecast, full Scenario Simulator with company sensitivity analysis, and trading notes on each signal." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Free gives you access to all 60 commodity hubs, up to 3 Signal Reports per month, plus the public forecast stack and simulator preview context so you can evaluate the workflow before paying. Pro unlocks unlimited Signal Reports, deeper scenario workflow, company sensitivity analysis, and trading notes on each signal." }
     },
     {
       "@type": "Question",
       "name": "What happens after the 7-day trial?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Your account automatically converts to the Free tier. No charge. You keep access to all commodity hubs, public reports, and the basic Impact Map." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Your account automatically converts to the Free tier. No charge. You keep access to all commodity hubs, public reports, the public forecast stack, and simulator preview context while you decide whether Pro belongs in your workflow." }
     },
     {
       "@type": "Question",
@@ -101,7 +101,7 @@ no_loader: true
       "name": "Free",
       "price": "0",
       "priceCurrency": "USD",
-      "description": "3 Signal Reports per month, commodity price charts, and basic Impact Map.",
+      "description": "3 Signal Reports per month, commodity price charts, impact map access, and preview-level forecast/simulator context.",
       "availability": "https://schema.org/OnlineOnly",
       "priceValidUntil": "2027-12-31",
       "url": "https://commoditynode.com/pricing/"
@@ -111,10 +111,10 @@ no_loader: true
       "name": "Pro Monthly",
       "price": "19",
       "priceCurrency": "USD",
-      "description": "Unlimited Signal Reports, AI 90-day forecasts, full Scenario Simulator, company sensitivity analysis.",
+      "description": "Unlimited Signal Reports, deeper scenario workflow, company sensitivity analysis, and trading notes for commodity investors.",
       "availability": "https://schema.org/OnlineOnly",
       "priceValidUntil": "2027-12-31",
-      "url": "https://commoditynode.lemonsqueezy.com/checkout/buy/b7c7444b-606f-49c0-a6ab-8f78f653702f"
+      "url": "https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71"
     },
     {
       "@type": "Offer",
@@ -124,7 +124,7 @@ no_loader: true
       "description": "Everything in Pro Monthly, billed annually.",
       "availability": "https://schema.org/OnlineOnly",
       "priceValidUntil": "2027-12-31",
-      "url": "https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71"
+      "url": "https://commoditynode.lemonsqueezy.com/checkout/buy/b7c7444b-606f-49c0-a6ab-8f78f653702f"
     }
   ],
   "publisher": {
@@ -407,6 +407,45 @@ no_loader: true
 .pricing-hero-actions {
   display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 22px;
 }
+.pricing-hero-decision-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  max-width:980px;
+  margin:18px auto 22px;
+  text-align:left;
+}
+.pricing-hero-decision-card {
+  padding:16px 18px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.025);
+}
+.pricing-hero-decision-card span {
+  display:block;
+  margin-bottom:6px;
+  font-size:0.72rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  font-weight:800;
+  color:#22d3ee;
+}
+.pricing-hero-decision-card strong {
+  display:block;
+  color:#f0f0f5;
+  font-size:0.96rem;
+  margin-bottom:6px;
+}
+.pricing-hero-decision-card p {
+  margin:0;
+  color:#cbd5e1;
+  font-size:0.86rem;
+  line-height:1.6;
+}
+.pricing-hero-decision-card--accent {
+  background:linear-gradient(135deg, rgba(34,211,238,0.08), rgba(168,85,247,0.05));
+  border-color:rgba(34,211,238,0.16);
+}
 .pricing-use-case-card {
   max-width:700px;
   margin:0 auto 32px;
@@ -458,7 +497,8 @@ no_loader: true
 
 @media (max-width: 768px) {
   .pricing-compare-strip,
-  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .pricing-grid,
+  .pricing-hero-decision-grid { grid-template-columns: 1fr; max-width: 400px; }
   .compare-row { grid-template-columns: 1fr; }
   .compare-row > div:first-child { padding-bottom: 6px; }
   .pricing-proof-header { flex-direction: column; align-items: flex-start; }
@@ -475,11 +515,28 @@ no_loader: true
     <p class="section-label" style="text-align:center">Simple, Transparent Pricing</p>
     <h1>Intelligence that pays<br><span style="background:linear-gradient(135deg,#22d3ee,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">for itself.</span></h1>
     <p class="pricing-hero-sub" style="color:#9494a8;font-size:1rem;max-width:700px;margin:0 auto">
-      Start free to understand the move. Upgrade when you need to finish the workflow — forecast confidence, scenario testing, and stock-level translation before the market reprices.
+      Free shows you the move, the public forecast stack, and simulator preview context. Pro helps you finish the decision with deeper scenario workflow, stock-level translation, and repeatable decision depth before the market reprices.
     </p>
-    <div class="pricing-hero-proof">CommodityNode is for self-directed investors, analysts, and research teams who do not need more market noise — they need a repeatable path from commodity shock to portfolio decision.</div>
+    <div class="pricing-hero-proof">Built for investors, analysts, and research teams whose watchlists actually move when oil, metals, grains, and energy inputs move.</div>
+    <div class="pricing-hero-decision-grid">
+      <div class="pricing-hero-decision-card">
+        <span>Best for</span>
+        <strong>Commodity-sensitive watchlists and decision loops</strong>
+        <p>Use CommodityNode when raw-material moves can change positions, margin assumptions, or sector views faster than the next analyst note.</p>
+      </div>
+      <div class="pricing-hero-decision-card pricing-hero-decision-card--accent">
+        <span>Free path</span>
+        <strong>Validate the move before you pay</strong>
+        <p>Read the signal, open the hub, and use the public forecast stack plus simulator preview context to decide whether the workflow fits you.</p>
+      </div>
+      <div class="pricing-hero-decision-card">
+        <span>What Pro unlocks</span>
+        <strong>Finish the workflow before the repricing</strong>
+        <p>Use full forecast ranges, scenario depth, and stock-level winners and losers when the move is important enough to change what you do next.</p>
+      </div>
+    </div>
     <div class="pricing-hero-actions">
-      <a href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary js-pro-checkout" data-checkout-source="pricing_hero_start_pro" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start Pro — $19/month</a>
+      <a id="hero-pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary js-pro-checkout" data-checkout-source="pricing_hero_start_pro" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start Pro — $19/month</a>
       <button class="pricing-btn pricing-btn-ghost" data-cta="pricing_start_free_hero" onclick="window.location.href='/start/'" style="width:auto;min-width:180px;margin-bottom:0;padding:12px 18px;">Start Free</button>
     </div>
     <div class="billing-toggle" id="billing-toggle-hero" style="margin:0 auto 18px;">
@@ -576,14 +633,14 @@ no_loader: true
     </div>
     <div class="compare-row">
       <div>AI forecast ranges</div>
-      <div>Preview only</div>
-      <div>Full 90-day access</div>
+      <div>Public forecast stack</div>
+      <div>Deeper workflow context + stock translation</div>
       <div>Full + export workflow</div>
     </div>
     <div class="compare-row">
       <div>Scenario analysis</div>
-      <div>Not included</div>
-      <div>Simulator + sensitivity</div>
+      <div>Preview mode</div>
+      <div>Full simulator + sensitivity</div>
       <div>Simulator + team workflows</div>
     </div>
     <div class="compare-row">
@@ -610,9 +667,9 @@ no_loader: true
       <li class="yes"><span class="feat-check">✓</span> Node Universe explorer</li>
       <li class="yes"><span class="feat-check">✓</span> Weekly newsletter</li>
       <li class="no"><span class="feat-x">✗</span> Trading Notes (blurred)</li>
-      <li class="no"><span class="feat-x">✗</span> AI Price Forecast — 90 days</li>
-      <li class="no"><span class="feat-x">✗</span> Scenario Simulator</li>
-      <li class="no"><span class="feat-x">✗</span> Company sensitivity</li>
+      <li class="yes"><span class="feat-check">✓</span> Public forecast stack across covered hubs</li>
+      <li class="yes"><span class="feat-check">✓</span> Scenario Simulator preview</li>
+      <li class="no"><span class="feat-x">✗</span> Company sensitivity and named winners/losers</li>
     </ul>
   </div>
 
@@ -622,7 +679,7 @@ no_loader: true
     <div class="pricing-price"><span id="pro-price">$19</span> <span id="pro-sub">/month</span></div>
     <div class="plan-billed plan-billed-pro" id="pro-billed">Best for investors and analysts running this workflow every week</div>
     <div class="pricing-desc">Finish the workflow in one place: unlimited reports, model agreement, scenario testing, company sensitivity, and clearer position-level decisions.</div>
-    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" data-cta="pricing_start_pro" style="text-decoration:none;display:block;text-align:center;" data-checkout-source="pricing_start_pro">Start Pro — Forecasts & Simulator →</a>
+    <a id="pro-cta-btn" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" data-cta="pricing_start_pro" style="text-decoration:none;display:block;text-align:center;" data-checkout-source="pricing_start_pro">Start Pro — full workflow access →</a>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> <strong>Make faster multi-commodity decisions</strong> without hitting a wall<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Unlimited Signal Reports across all 60 commodity hubs</span></li>
       <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
@@ -815,7 +872,7 @@ no_loader: true
     </div>
     <p class="cost-conclusion">CommodityNode Pro costs $0.63/day. One informed decision covers a year.</p>
     <div class="pricing-value-cta">
-      <a href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:inline-block;text-align:center;" data-cta="pricing_cost_section_start_pro" data-checkout-source="pricing_cost_section_start_pro">Start Pro — turn commodity moves into decisions →</a>
+      <a id="pricing-cost-pro-cta" href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" class="pricing-btn pricing-btn-primary" style="text-decoration:none;display:inline-block;text-align:center;" data-cta="pricing_cost_section_start_pro" data-checkout-source="pricing_cost_section_start_pro">Start Pro — turn commodity moves into decisions →</a>
     </div>
   </div>
 </section>
@@ -849,17 +906,28 @@ function setBilling(mode, btn) {
     b.classList.toggle('active', b.dataset.billing === mode);
   });
   var isAnnual = mode === 'annual';
+  var activeUrl = isAnnual ? PRO_ANNUAL_URL : PRO_MONTHLY_URL;
 
-  // Pro CTA 버튼 URL 업데이트
+  // Pro CTA buttons + hero CTA URL/text update
   var proBtn = document.getElementById('pro-cta-btn');
-  if (proBtn) proBtn.href = isAnnual ? PRO_ANNUAL_URL : PRO_MONTHLY_URL;
+  if (proBtn) {
+    proBtn.href = activeUrl;
+    proBtn.textContent = isAnnual ? 'Start Pro — full workflow access ($149/year) →' : 'Start Pro — full workflow access →';
+  }
+  var heroProBtn = document.getElementById('hero-pro-cta-btn');
+  if (heroProBtn) {
+    heroProBtn.href = activeUrl;
+    heroProBtn.textContent = isAnnual ? 'Start Pro — $149/year' : 'Start Pro — $19/month';
+  }
+  var costProBtn = document.getElementById('pricing-cost-pro-cta');
+  if (costProBtn) costProBtn.href = activeUrl;
 
   // Pro 카드 가격 업데이트
   var proPrice = document.getElementById('pro-price');
   var proSub = document.getElementById('pro-sub');
   var proBilled = document.getElementById('pro-billed');
   if (proPrice) proPrice.textContent = isAnnual ? '$12' : '$19';
-  if (proSub) proSub.textContent = isAnnual ? '/month' : '/month';
+  if (proSub) proSub.textContent = '/month';
   if (proBilled) proBilled.textContent = isAnnual ? 'Best for investors and analysts running this workflow every week · $149/yr billed annually' : 'Best for investors and analysts running this workflow every week';
 
   // Enterprise 카드 가격 업데이트
@@ -925,7 +993,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </details>
   <details class="faq-item">
     <summary><span class="faq-q">What's the difference between Free and Pro?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
-    <div class="faq-a">Free gives you access to all 60 commodity hubs, up to 3 Signal Reports per month, and the basic Impact Map. Pro unlocks unlimited Signal Reports, the AI 90-day price forecast, full Scenario Simulator with company sensitivity analysis, and trading notes on each signal.</div>
+    <div class="faq-a">Free gives you access to all 60 commodity hubs, up to 3 Signal Reports per month, plus the public forecast stack and simulator preview context so you can evaluate the workflow before paying. Pro unlocks unlimited Signal Reports, deeper scenario workflow, company sensitivity analysis, and trading notes on each signal.</div>
   </details>
   <details class="faq-item" data-faq-key="tradingview_diff">
     <summary><span class="faq-q">How is this different from TradingView or free charting tools?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
@@ -941,7 +1009,7 @@ document.addEventListener('DOMContentLoaded', function(){
   </details>
   <details class="faq-item">
     <summary><span class="faq-q">What happens after the 7-day trial?</span><span class="faq-icon" aria-hidden="true">+</span></summary>
-    <div class="faq-a">Your account automatically converts to the Free tier. No charge. You keep access to all commodity hubs, public reports, and the basic Impact Map.</div>
+    <div class="faq-a">Your account automatically converts to the Free tier. No charge. You keep access to all commodity hubs, public reports, the public forecast stack, and simulator preview context while you decide whether Pro belongs in your workflow.</div>
   </details>
   <details class="faq-item">
     <summary><span class="faq-q">Can I cancel anytime?</span><span class="faq-icon" aria-hidden="true">+</span></summary>

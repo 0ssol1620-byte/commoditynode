@@ -14,7 +14,7 @@ permalink: /simulator/
   "step": [
     { "@type": "HowToStep", "position": 1, "name": "Select a commodity", "text": "Choose a commodity from the selector grid — crude oil, gold, copper, wheat, and more." },
     { "@type": "HowToStep", "position": 2, "name": "Choose a scenario", "text": "Select a pre-built scenario such as Iran crisis, China slowdown, or Fed rate cut, or set a custom shock percentage." },
-    { "@type": "HowToStep", "position": 3, "name": "Review industry and company impacts", "text": "See the estimated impact on industries, ETFs, and individual companies based on historical sensitivity coefficients." },
+    { "@type": "HowToStep", "position": 3, "name": "Review industry impact and headline forecast context", "text": "See the estimated downstream sector impact, compare the public forecast stack, and decide whether the move deserves deeper work." },
     { "@type": "HowToStep", "position": 4, "name": "Unlock company sensitivity and export scenarios", "text": "Pro subscribers unlock company-level sensitivity analysis and can export scenarios as CSV for deeper portfolio stress testing." }
   ],
   "tool": { "@type": "HowToTool", "name": "CommodityNode Scenario Simulator" }
@@ -104,6 +104,12 @@ permalink: /simulator/
   color: #94a3b8;
   font-size: 0.82rem;
   line-height: 1.6;
+}
+.sim-top-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 14px;
+  align-items: start;
 }
 .sim-selector-grid {
   display: grid;
@@ -528,6 +534,7 @@ permalink: /simulator/
 }
 .sim-impact-panel--company .sim-impact-badge { border-color: rgba(192,132,252,0.22); }
 @media (max-width: 900px) {
+  .sim-top-grid,
   .sim-step-strip { grid-template-columns: 1fr; }
   .sim-decision-flow { grid-template-columns: 1fr; }
   .sim-stats-row { grid-template-columns: 1fr; }
@@ -576,46 +583,29 @@ permalink: /simulator/
   </div>
 </section>
 
-<div style="text-align:center;margin:-8px 0 24px;padding:0 16px;">
-  <a href="/methodology/" style="font-size:0.86rem;color:#94a3b8;text-decoration:none;line-height:1.6;display:inline-block;">Consensus forecast layer powered by Chronos-2 + TimesFM 2.5. <span style="color:#22d3ee">See methodology →</span></a>
-</div>
+<div class="container" style="padding: 24px 20px 80px;">
 
-<div class="container" style="padding: 32px 20px 80px;">
-
-  <div class="sim-step-strip">
-    <div class="sim-step-card">
-      <span>Step 1</span>
-      <strong>Select the commodity</strong>
-      <p>Start with the raw material actually driving your watchlist, sector, or supplier risk.</p>
+  <div class="sim-top-grid" style="max-width:1120px;margin:0 auto 18px;">
+    <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:12px;">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Fastest workflow</div>
+          <div style="color:#f0f0f5;font-weight:700;font-size:0.98rem;line-height:1.45;">Select the commodity → apply the base shock → read the downstream sector pressure and likely follow-through.</div>
+        </div>
+        <a href="/methodology/" style="font-size:0.82rem;color:#22d3ee;text-decoration:none;font-weight:700;white-space:nowrap;">Chronos-2 + TimesFM methodology →</a>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <div style="padding:10px 12px;border-radius:999px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.16);font-size:0.8rem;color:#cbd5e1;">Use before OPEC, WASDE, Fed, or earnings-linked commodity shocks.</div>
+        <div style="padding:10px 12px;border-radius:999px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.16);font-size:0.8rem;color:#ddd6fe;">Free = sector direction and model context. Pro = stock-level names and deeper workflow.</div>
+      </div>
     </div>
-    <div class="sim-step-card">
-      <span>Step 2</span>
-      <strong>Apply the base shock</strong>
-      <p>Use a preset scenario first, then layer geopolitical drivers only if you need deeper stress testing.</p>
-    </div>
-    <div class="sim-step-card sim-step-card--accent">
-      <span>Step 3</span>
-      <strong>Read the downstream winners and losers</strong>
-      <p>Use the forecast, industry impact, and company sensitivity together before consensus catches up.</p>
-    </div>
-  </div>
-
-  <!-- When to Use -->
-  <div style="max-width:800px;margin:0 auto 28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
-    <div style="background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:10px;padding:16px 18px;">
-      <div style="font-size:0.72rem;color:#22d3ee;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Before OPEC Meeting</div>
-      <p style="font-size:0.82rem;color:#94a3b8;line-height:1.5;margin:0;">Model oil shock scenarios on energy stocks, airlines, and chemical producers before production decisions.</p>
-      <p style="font-size:0.75rem;color:#22d3ee;margin:6px 0 0;font-weight:600;">→ Run a ±15% oil scenario on your energy holdings now</p>
-    </div>
-    <div style="background:rgba(168,85,247,0.04);border:1px solid rgba(168,85,247,0.12);border-radius:10px;padding:16px 18px;">
-      <div style="font-size:0.72rem;color:#a855f7;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Before USDA WASDE</div>
-      <p style="font-size:0.82rem;color:#94a3b8;line-height:1.5;margin:0;">Stress-test grain exposure across consumer staples, food processors, and agri ETFs before monthly crop estimates.</p>
-      <p style="font-size:0.75rem;color:#a855f7;margin:6px 0 0;font-weight:600;">→ Check your ADM, BG, TSN sensitivity to a crop surprise</p>
-    </div>
-    <div style="background:rgba(251,191,36,0.04);border:1px solid rgba(251,191,36,0.12);border-radius:10px;padding:16px 18px;">
-      <div style="font-size:0.72rem;color:#fbbf24;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Before Fed Decisions</div>
-      <p style="font-size:0.82rem;color:#94a3b8;line-height:1.5;margin:0;">Simulate gold, copper, and DXY impacts on commodity-sensitive equity positions around rate change scenarios.</p>
-      <p style="font-size:0.75rem;color:#fbbf24;margin:6px 0 0;font-weight:600;">→ Model a 3-cut scenario on gold miners and copper plays</p>
+    <div style="padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;gap:10px;">
+      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">High-intent event entry points</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <a href="/before-opec-oil-playbook/" data-cta="simulator_open_event_playbook" style="padding:10px 12px;border-radius:999px;background:rgba(8,12,20,0.36);border:1px solid rgba(255,255,255,0.08);color:#e2e8f0;text-decoration:none;font-size:0.8rem;font-weight:700;">Before OPEC → oil workflow</a>
+        <a href="/before-wasde-grains-playbook/" style="padding:10px 12px;border-radius:999px;background:rgba(8,12,20,0.36);border:1px solid rgba(255,255,255,0.08);color:#e2e8f0;text-decoration:none;font-size:0.8rem;font-weight:700;">Before WASDE → grains workflow</a>
+        <a href="/before-fed-metals-playbook/" style="padding:10px 12px;border-radius:999px;background:rgba(8,12,20,0.36);border:1px solid rgba(255,255,255,0.08);color:#e2e8f0;text-decoration:none;font-size:0.8rem;font-weight:700;">Before Fed → metals workflow</a>
+      </div>
     </div>
   </div>
 
@@ -665,8 +655,8 @@ permalink: /simulator/
   <div id="sim-model-compare-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:0 0 14px;"></div>
 
     <div class="sim-decision-brief">
-      <div class="sim-decision-label">Decision shortcut</div>
-      <p class="sim-decision-copy">Start with the preset shock, confirm the forecast direction, then read industry and company sensitivity together to identify the likely winners, losers, and margin pressure points before the street reprices.</p>
+      <div class="sim-decision-label">Decision workflow</div>
+      <p class="sim-decision-copy">Start with the preset shock, confirm the forecast direction, then read industry impact first and upgrade to company sensitivity only when naming the trade matters.</p>
       <div class="sim-decision-flow">
         <div class="sim-decision-step">
           <strong>1. Set the base shock</strong>
@@ -687,7 +677,7 @@ permalink: /simulator/
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 14px;">
     <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
       <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Where the free workflow stops</div>
-      <p style="margin:0;color:var(--text2);line-height:1.65;">Free lets you see the move, the direction, and the sector-level pressure. Pro matters when you need to finish the decision with stock-level sensitivity and deeper scenario confidence.</p>
+      <p style="margin:0;color:var(--text2);line-height:1.65;">Free shows you the move, the headline forecast path, and sector-level pressure. Pro matters when you need named winners, losers, and deeper scenario translation.</p>
     </div>
     <div style="padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
       <div>
@@ -726,18 +716,11 @@ permalink: /simulator/
       <div class="sim-stat-value" id="stat-30d">—</div>
       <div class="sim-stat-change" id="stat-30d-change">—</div>
     </div>
-    <div class="sim-stat-card sim-pro-blur" id="stat-90d-gate" style="padding:0;overflow:hidden;min-height:80px">
-      <div style="padding:14px 16px;filter:blur(4px);pointer-events:none;user-select:none" id="stat-90d-content">
-        <div class="sim-stat-label">90-Day Consensus</div>
-        <div class="sim-stat-value" id="stat-90d">—</div>
-        <div class="sim-stat-change" id="stat-90d-change">—</div>
-      </div>
-      <div class="sim-pro-overlay" id="stat-90d-overlay" style="border-radius:10px">
-        <div style="text-align:center;padding:8px 12px">
-          <div style="font-size:0.65rem;font-weight:800;color:#22d3ee;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">Pro</div>
-          <a href="/pricing/" data-cta="simulator_unlock_90d" onclick="if(window.CNTrack) window.CNTrack('simulator_unlock_90d', { commodity: state.commodity, period: state.period });" style="font-size:0.78rem;color:#e2e8f0;text-decoration:none;font-weight:600;white-space:nowrap">Unlock 90-Day &rarr;</a>
-        </div>
-      </div>
+    <div class="sim-stat-card" id="stat-90d-gate">
+      <div class="sim-stat-label">90-Day Consensus</div>
+      <div class="sim-stat-value" id="stat-90d">—</div>
+      <div class="sim-stat-change" id="stat-90d-change">—</div>
+      <div style="font-size:0.74rem;color:#94a3b8;margin-top:6px;line-height:1.5;">Use Pro for stock-level winners, losers, and deeper scenario translation after the forecast read.</div>
     </div>
   </div>
 
@@ -2036,21 +2019,6 @@ function checkProAccess() {
       companyContent.style.filter = 'blur(6px)';
       companyContent.style.pointerEvents = 'none';
       companyOverlay.style.display = 'flex';
-    }
-  }
-
-  // 90-day stat card gate
-  var stat90Overlay = document.getElementById('stat-90d-overlay');
-  var stat90Content = document.getElementById('stat-90d-content');
-  if (stat90Overlay && stat90Content) {
-    if (isProUser) {
-      stat90Content.style.filter = 'none';
-      stat90Content.style.pointerEvents = 'auto';
-      stat90Overlay.style.display = 'none';
-    } else {
-      stat90Content.style.filter = 'blur(4px)';
-      stat90Content.style.pointerEvents = 'none';
-      stat90Overlay.style.display = 'flex';
     }
   }
 }

@@ -95,7 +95,9 @@ image: "/assets/images/og-default.png"
       <div class="hero-proof-note" data-animate data-delay="320">Built for investors, analysts, and operators who need a repeatable workflow before the market reprices.</div>
 
       <div class="hero-micro-links" data-animate data-delay="340" style="display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:0.84rem;color:var(--text3);">
-        <a href="/reports/" style="color:var(--text2);text-decoration:none;">Latest research archive</a>
+        <a href="/start/" style="color:#22d3ee;text-decoration:none;font-weight:700;">Build my workflow</a>
+        <span aria-hidden="true">·</span>
+        <a href="/reports/" style="color:var(--text2);text-decoration:none;">Today’s live reports</a>
         <span aria-hidden="true">·</span>
         <a href="/methodology/" style="color:var(--text2);text-decoration:none;">Methodology</a>
         <span aria-hidden="true">·</span>
@@ -125,22 +127,44 @@ image: "/assets/images/og-default.png"
         </div>
       </div>
       <script>
+      {% assign first_report_pair = true %}
+      var latestReportMap = {
+      {% for commodity in site.commodities %}
+        {% assign commodity_key = commodity.slug | default: commodity.name | remove: '.md' %}
+        {% assign commodity_slug = commodity_key | replace: '_','-' %}
+        {% assign latest_post = nil %}
+        {% for post in site.posts %}
+          {% assign post_commodity_slug = post.commodity_name | slugify %}
+          {% if post.tags contains commodity_slug or post.commodity == commodity_key or post_commodity_slug == commodity_slug %}
+            {% assign latest_post = post %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        {% if latest_post %}
+          {% unless first_report_pair %},{% endunless %}
+          "{{ commodity_key | replace: '-','_' }}": {{ latest_post.url | jsonify }}
+          {% assign first_report_pair = false %}
+        {% endif %}
+      {% endfor %}
+      };
+
       function getImplication(key, pct) {
         var map = {
-          crude_oil: pct > 0 ? 'Energy stocks surging. DAL, UPS under pressure.' : 'Airlines rally. Energy producers face headwinds.',
-          gold: pct > 0 ? 'Safe-haven demand rising. NEM, GOLD in focus.' : 'Risk appetite returning. Miners under pressure.',
-          copper: pct > 0 ? 'Industrial recovery signal. FCX, VALE leading.' : 'China slowdown concern. Mining stocks vulnerable.',
-          natural_gas: pct > 0 ? 'Utilities cost spike. Fertilizer producers pressured.' : 'Heating cost relief. Industrial margins improve.',
-          wheat: pct > 0 ? 'Food inflation risk. ADM, Bunge in focus.' : 'Grain supply ease. Agri stocks stabilize.',
-          silver: pct > 0 ? 'Industrial + safe-haven demand converging.' : 'Gold-Silver ratio widening. Watch for reversal.',
-          lithium: pct > 0 ? 'EV supply chain cost rising. Tesla margin risk.' : 'Battery cost deflation. EV adoption accelerator.',
-          uranium: pct > 0 ? 'Nuclear energy demand surging. CCJ outperforming.' : 'Utility sector repricing. Watch spot vs contract.',
-          coffee: pct > 0 ? 'SBUX input costs rising. Consumer margins squeezed.' : 'Coffee input relief. Cafe chains benefit.',
-          corn: pct > 0 ? 'Ethanol, feed cost rising. Livestock sector pressured.' : 'Food cost deflation. Consumer staples benefit.',
-          coal: pct > 0 ? 'Power generation costs rising. Steel mills pressured.' : 'Energy cost relief. Industrial margins improve.',
-          cotton: pct > 0 ? 'Apparel input costs rising. Retail margins squeezed.' : 'Textile cost relief. Fast fashion benefits.'
+          ammonia: pct > 0 ? 'Nitrogen input costs are rising. Fertilizer buyers and industrial consumers lose margin room.' : 'Fertilizer producers are under pressure while downstream input buyers finally get relief.',
+          crude_oil: pct > 0 ? 'Energy producers gain leverage while airlines, chemicals, and transport absorb the shock.' : 'Energy equities lose momentum while airlines and fuel-sensitive names get immediate relief.',
+          gold: pct > 0 ? 'Safe-haven demand is winning the tape and gold-linked equities usually follow.' : 'Risk appetite is taking over and gold miners lose some defensive support.',
+          copper: pct > 0 ? 'Industrial demand is firming and miners, grids, and EV metal names matter more.' : 'Growth expectations are softening and cyclical metal exposure gets pressured first.',
+          natural_gas: pct > 0 ? 'Utilities, fertilizers, and LNG-sensitive buyers face another cost pulse.' : 'Input-cost pressure is easing for utilities, chemicals, and industrial gas consumers.',
+          wheat: pct > 0 ? 'Food inflation risk is rebuilding and grain handlers regain urgency.' : 'Crop pressure is easing and downstream food-margin stress softens.',
+          silver: pct > 0 ? 'Industrial demand and precious-metals momentum are reinforcing each other.' : 'Momentum is fading and the gold-silver relationship deserves a second look.',
+          lithium: pct > 0 ? 'Battery materials are repricing higher and automaker cost pressure returns.' : 'Upstream lithium names are under pressure while downstream battery-cost relief improves.',
+          uranium: pct > 0 ? 'Nuclear supply tightness is back in focus and uranium-linked equities can re-rate quickly.' : 'The market is easing its uranium urgency and utility-risk narratives cool off.',
+          coffee: pct > 0 ? 'Roasters and branded beverage names face another input-cost squeeze.' : 'The coffee scarcity premium is still unwinding and downstream buyers get breathing room.',
+          corn: pct > 0 ? 'Feed and ethanol costs are rising, which hits livestock and consumer staples next.' : 'Feed pressure is easing and food-margin relief becomes the cleaner story.',
+          coal: pct > 0 ? 'Power and steel input pressure are climbing again.' : 'Energy-cost pressure is easing for heavy industry and power buyers.',
+          cotton: pct > 0 ? 'Apparel and textile buyers face another cost squeeze.' : 'Retail and apparel buyers finally get cost relief.'
         };
-        return map[key] || (pct > 0 ? 'Bullish momentum building. Monitor related equities.' : 'Bearish pressure emerging. Risk management active.');
+        return map[key] || (pct > 0 ? 'Upstream beneficiaries are gaining leverage while downstream buyers absorb the move.' : 'The move is relieving downstream buyers while upstream names lose momentum.');
       }
 
       function buildInsights(data) {
@@ -166,30 +190,20 @@ image: "/assets/images/og-default.png"
       }
 
       function getSetupLink(key) {
-        var reportMap = {
-          ammonia: '/reports/',
-          lithium: '/lithium-breaks-lower-even-as-models-stay-higher/',
-          coffee: '/coffee-sinks-again-as-premium-washout-deepens/',
-          orange_juice: '/orange-juice-extends-higher-as-models-lean-with-tape/',
-          silver: '/silver-rips-higher-but-model-split-warns-on-follow-through/',
-          cocoa: '/cocoa-bounces-but-models-still-lean-lower/',
-          crude_oil: '/crude-oil-consensus-turns-lower/',
-          natural_gas: '/natural-gas-waha-slide-lng-tail-risk/'
-        };
-        return reportMap[key] || ('/commodities/' + key.replace(/_/g,'-') + '/');
+        return latestReportMap[key] || ('/commodities/' + key.replace(/_/g,'-') + '/');
       }
 
       function getExposureTeaser(key) {
         var map = {
-          ammonia: 'Watch CF, fertilizer margins, and industrial input buyers.',
-          lithium: 'Watch ALB, SQM, TSLA supply chain, and battery materials.',
-          coffee: 'Watch SBUX, restaurant margins, and branded beverage names.',
-          orange_juice: 'Watch citrus processors, beverage names, and grocery inflation.',
-          silver: 'Watch PAAS, WPM, solar-linked manufacturers, and precious metals desks.',
+          ammonia: 'Watch CF, fertilizer margins, industrial buyers, and nitrogen-sensitive names.',
+          lithium: 'Watch ALB, SQM, TSLA supply chain, and battery-material risk transfer.',
+          coffee: 'Watch SBUX, restaurant margins, and branded beverage cost relief.',
+          orange_juice: 'Watch citrus processors, beverage names, and grocery inflation pressure.',
+          silver: 'Watch PAAS, WPM, solar-linked manufacturers, and precious-metals desks.',
           crude_oil: 'Watch XOM, CVX, airlines, chemicals, and transport stocks.',
           natural_gas: 'Watch utilities, fertilizers, LNG-linked names, and industrial gas buyers.'
         };
-        return map[key] || 'Watch exposed sectors, the linked companies, and downstream cost pressure.';
+        return map[key] || 'Check the most exposed sectors, the linked companies, and who gains cost relief first.';
       }
 
       function getModelTeaser(key, pct) {
@@ -215,6 +229,15 @@ image: "/assets/images/og-default.png"
         return map[key] || 'Pro unlock: named winners, losers, and scenario confidence before the market fully reprices.';
       }
 
+      function formatActionablePrice(entry) {
+        if (!entry || entry.price == null) return '—';
+        var price = entry.price;
+        var unit = (entry.unit || '').toLowerCase();
+        if (unit.indexOf('cents') !== -1) return price + '¢';
+        if (unit.indexOf('$/share') !== -1 || unit.indexOf('$/oz') !== -1 || unit.indexOf('$/barrel') !== -1 || unit.indexOf('$/lb') !== -1 || unit.indexOf('$/gallon') !== -1 || unit.indexOf('$/mmbtu') !== -1 || unit.indexOf('$/tonne') !== -1 || unit.indexOf('$/short ton') !== -1) return '$' + price;
+        return String(price);
+      }
+
       function buildActionableSetups(data) {
         var container = document.getElementById('actionable-setups-grid');
         if (!container) return;
@@ -229,8 +252,14 @@ image: "/assets/images/og-default.png"
           var sign = d.change_pct > 0 ? '+' : '';
           var dirColor = d.change_pct > 0 ? '#10b981' : '#f43f5e';
           var setupHref = getSetupLink(key);
-          var hubHref = '/commodities/' + key.replace(/_/g,'-') + '/';
-          var actionLabel = idx === 0 ? 'Open the live setup' : (d.change_pct > 0 ? 'See who benefits' : 'See who gets hit');
+          var hasLiveReport = !!latestReportMap[key];
+          var primaryHref = hasLiveReport ? setupHref : ('/commodities/' + key.replace(/_/g,'-') + '/');
+          var secondaryHref = hasLiveReport ? ('/commodities/' + key.replace(/_/g,'-') + '/') : '/simulator/';
+          var actionLabel = hasLiveReport ? 'Read live report' : 'Open live hub';
+          var secondaryLabel = hasLiveReport ? 'Open live hub' : 'Model scenario';
+          var nextStepCopy = hasLiveReport
+            ? 'Read the live report first, then open the live hub to finish the decision workflow.'
+            : 'Open the live hub first, then use the simulator if you need scenario context before the market reprices.';
           return '<article style="padding:18px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.018));border:1px solid rgba(255,255,255,0.08);box-shadow:0 16px 38px rgba(2,6,23,0.28);display:grid;gap:12px;">'
             + '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">'
             + '<div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Actionable setup ' + (idx + 1) + '</div>'
@@ -238,7 +267,7 @@ image: "/assets/images/og-default.png"
             + '</div>'
             + '<div>'
             + '<div style="font-size:1.05rem;font-weight:800;color:#f8fafc;line-height:1.25;">' + (d.name || key) + '</div>'
-            + '<div style="font-size:0.86rem;color:var(--text3);margin-top:6px;">$' + d.price + ' · move first, translation second, scenario third.</div>'
+            + '<div style="font-size:0.86rem;color:var(--text3);margin-top:6px;">' + formatActionablePrice(d) + ' · live move, downstream translation, then scenario context.</div>'
             + '</div>'
             + '<p style="margin:0;color:var(--text2);line-height:1.7;font-size:0.9rem;">' + implication + '</p>'
             + '<div style="display:grid;gap:8px;">'
@@ -257,11 +286,11 @@ image: "/assets/images/og-default.png"
             + '</div>'
             + '<div style="padding:12px 14px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.84rem;color:#cbd5e1;line-height:1.6;">'
             + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Best next step</strong>'
-            + 'Read the live setup first, then open the hub or simulator to finish the decision workflow.'
+            + nextStepCopy
             + '</div>'
             + '<div style="display:flex;gap:10px;flex-wrap:wrap;">'
-            + '<a href="' + setupHref + '" class="btn btn-primary" data-cta="home_actionable_setup_open" style="min-width:190px;justify-content:center;">' + actionLabel + '</a>'
-            + '<a href="' + hubHref + '" class="btn btn-secondary" data-cta="home_actionable_setup_hub" style="min-width:170px;justify-content:center;">Open hub</a>'
+            + '<a href="' + primaryHref + '" class="btn btn-primary" data-cta="home_actionable_setup_open" style="min-width:190px;justify-content:center;">' + actionLabel + '</a>'
+            + '<a href="' + secondaryHref + '" class="btn btn-secondary" data-cta="home_actionable_setup_hub" style="min-width:170px;justify-content:center;">' + secondaryLabel + '</a>'
             + '</div>'
             + '</article>';
         }).join('');
