@@ -16,6 +16,7 @@ from rl.offline_train import train_offline_policy
 from rl.ppo_train import fine_tune_with_ppo
 from rl.env import CommodityTradingEnv
 from rl.neural_ppo import train_neural_ppo
+from rl.neural_eval import evaluate_neural_walk_forward, replay_policy
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / 'assets' / 'data' / 'rl-policy-lab.json'
@@ -71,6 +72,22 @@ def _build_neural_payload(dataset, config) -> dict:
             'reason': str(exc),
         }
 
+    replay = replay_policy(
+        name='neural_policy',
+        steps=list(dataset.test or dataset.val or dataset.train),
+        chooser=lambda obs, policy=neural_result.policy: policy.decide(obs).action,
+        config=config,
+    )
+    walk_forward = evaluate_neural_walk_forward(
+        dataset=dataset,
+        config=config,
+        total_timesteps=256,
+        window_count=3,
+        eval_window_size=18,
+        min_train_steps=72,
+        device=preferred_device,
+    )
+
     frontier = []
     for commodity in config.commodity_keys:
         commodity_steps = [step for step in dataset.train if step.commodity == commodity]
@@ -93,6 +110,8 @@ def _build_neural_payload(dataset, config) -> dict:
         'torch_cuda_available': bool(torch and torch.cuda.is_available()),
         'report': asdict(neural_result.report),
         'frontier': frontier,
+        'replay_summary': asdict(replay),
+        'walk_forward': asdict(walk_forward),
     }
     benchmark = _load_benchmark_artifact()
     if benchmark:

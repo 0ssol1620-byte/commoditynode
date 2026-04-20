@@ -1,5 +1,5 @@
 {
-  "updated_from_commit": "0982750+",
+  "updated_from_commit": "fa91b89+",
   "config": {
     "name": "commoditynode-rl-policy-lab",
     "commodity_keys": [
@@ -208,22 +208,130 @@
         }
       }
     ],
+    "replay_summary": {
+      "name": "neural_policy",
+      "total_reward": -0.8776370460485193,
+      "mean_reward": -0.05162570859108937,
+      "final_equity": 0.12236295395148072,
+      "max_drawdown": 0.8823433135081915,
+      "win_rate": 0.23529411764705882,
+      "action_counts": {
+        "hold": 15,
+        "add_hedge": 2
+      },
+      "reward_decomposition": {
+        "pnl": -0.003818846678669853,
+        "turnover_cost": 0.05,
+        "drawdown_cost": 0.5758181993698493,
+        "concentration_cost": 0.28800000000000003,
+        "event_gap_cost": 0.0,
+        "abstain_bonus": 0.04
+      }
+    },
+    "walk_forward": {
+      "windows": [
+        {
+          "window_index": 1,
+          "train_steps": 72,
+          "eval_steps": 18,
+          "start_timestamp": "2026-05-11",
+          "end_timestamp": "2026-05-14",
+          "total_reward": -0.8562811397547169,
+          "mean_reward": -0.09514234886163521,
+          "final_equity": 0.14371886024528316,
+          "max_drawdown": 0.8562811397547169,
+          "dominant_action": "hold"
+        },
+        {
+          "window_index": 2,
+          "train_steps": 128,
+          "eval_steps": 18,
+          "start_timestamp": "2026-06-12",
+          "end_timestamp": "2026-06-17",
+          "total_reward": -0.8124570320807345,
+          "mean_reward": -0.06770475267339454,
+          "final_equity": 0.18754296791926559,
+          "max_drawdown": 0.8124570320807344,
+          "dominant_action": "hold"
+        },
+        {
+          "window_index": 3,
+          "train_steps": 128,
+          "eval_steps": 18,
+          "start_timestamp": "2026-07-15",
+          "end_timestamp": "2026-07-21",
+          "total_reward": -0.8117430951369606,
+          "mean_reward": -0.06764525792808006,
+          "final_equity": 0.18825690486303942,
+          "max_drawdown": 0.8117430951369606,
+          "dominant_action": "hold"
+        }
+      ],
+      "mean_reward": -0.07683078648770326,
+      "mean_final_equity": 0.17317291100919605,
+      "mean_max_drawdown": 0.8268270889908039,
+      "positive_window_rate": 0.0
+    },
     "performance": {
       "cpu": {
         "device": "cpu",
-        "seconds": 2.81676392396912,
+        "seconds": 2.4236197309801355,
+        "timesteps": 512,
         "final_action": "hold",
-        "confidence": 0.2304118573665619,
+        "confidence": 0.21776361763477325,
         "mean_reward_estimate": 0.010000000000000007
       },
       "gpu": {
         "device": "cuda",
-        "seconds": 1.8386783880414441,
+        "seconds": 1.5473554439959116,
+        "timesteps": 512,
         "final_action": "reduce_risk",
-        "confidence": 0.24038536846637726,
-        "mean_reward_estimate": 0.010000000000000007
+        "confidence": 0.2132958471775055,
+        "mean_reward_estimate": -0.0069546328062138505
       },
-      "speedup_vs_cpu": 1.531950308596127
+      "speedup_vs_cpu": 1.5662979959674599,
+      "tiers": {
+        "smoke": {
+          "step_count": 128,
+          "cpu": {
+            "device": "cpu",
+            "seconds": 2.4236197309801355,
+            "timesteps": 512,
+            "final_action": "hold",
+            "confidence": 0.21776361763477325,
+            "mean_reward_estimate": 0.010000000000000007
+          },
+          "gpu": {
+            "device": "cuda",
+            "seconds": 1.5473554439959116,
+            "timesteps": 512,
+            "final_action": "reduce_risk",
+            "confidence": 0.2132958471775055,
+            "mean_reward_estimate": -0.0069546328062138505
+          },
+          "speedup_vs_cpu": 1.5662979959674599
+        },
+        "extended": {
+          "step_count": 192,
+          "cpu": {
+            "device": "cpu",
+            "seconds": 0.7237065760418773,
+            "timesteps": 1024,
+            "final_action": "hold",
+            "confidence": 0.2947676181793213,
+            "mean_reward_estimate": 0.010000000000000007
+          },
+          "gpu": {
+            "device": "cuda",
+            "seconds": 1.776911693974398,
+            "timesteps": 1024,
+            "final_action": "reduce_risk",
+            "confidence": 0.3076205551624298,
+            "mean_reward_estimate": -0.004765201372554144
+          },
+          "speedup_vs_cpu": 0.40728336613237714
+        }
+      }
     }
   },
   "policy_frontier": [

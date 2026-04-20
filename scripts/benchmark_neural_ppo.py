@@ -16,13 +16,20 @@ from rl.neural_ppo import train_neural_ppo
 OUTPUT = ROOT / 'artifacts' / 'rl-policy-lab-neural-ppo-benchmark.json'
 
 
-def run_case(device: str, steps, config):
+BENCHMARK_TIERS = (
+    {'name': 'smoke', 'step_count': 128, 'timesteps': 512},
+    {'name': 'extended', 'step_count': 192, 'timesteps': 1024},
+)
+
+
+def run_case(device: str, steps, config, total_timesteps: int):
     started = time.perf_counter()
-    result = train_neural_ppo(steps, config=config, total_timesteps=512, device=device)
+    result = train_neural_ppo(steps, config=config, total_timesteps=total_timesteps, device=device)
     elapsed = time.perf_counter() - started
     return {
         'device': device,
         'seconds': elapsed,
+        'timesteps': total_timesteps,
         'final_action': result.report.final_action,
         'confidence': result.report.confidence,
         'mean_reward_estimate': result.report.mean_reward_estimate,
@@ -31,15 +38,26 @@ def run_case(device: str, steps, config):
 
 def main() -> None:
     config = get_default_rl_config()
-    dataset = build_trajectory_dataset(commodity_keys=('crude_oil', 'gold'), config=config)
-    steps = list(dataset.train[:128])
-    cpu = run_case('cpu', steps, config)
-    gpu = run_case('cuda', steps, config)
-    speedup = cpu['seconds'] / gpu['seconds'] if gpu['seconds'] else None
+    dataset = build_trajectory_dataset(commodity_keys=('crude_oil', 'gold', 'copper'), config=config)
+    all_steps = list(dataset.train)
+    tiers = {}
+    for tier in BENCHMARK_TIERS:
+        steps = all_steps[:tier['step_count']]
+        cpu = run_case('cpu', steps, config, total_timesteps=tier['timesteps'])
+        gpu = run_case('cuda', steps, config, total_timesteps=tier['timesteps'])
+        tiers[tier['name']] = {
+            'step_count': tier['step_count'],
+            'cpu': cpu,
+            'gpu': gpu,
+            'speedup_vs_cpu': cpu['seconds'] / gpu['seconds'] if gpu['seconds'] else None,
+        }
+
+    smoke = tiers['smoke']
     payload = {
-        'cpu': cpu,
-        'gpu': gpu,
-        'speedup_vs_cpu': speedup,
+        'cpu': smoke['cpu'],
+        'gpu': smoke['gpu'],
+        'speedup_vs_cpu': smoke['speedup_vs_cpu'],
+        'tiers': tiers,
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(payload, indent=2), encoding='utf-8')

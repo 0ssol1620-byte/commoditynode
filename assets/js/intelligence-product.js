@@ -623,6 +623,8 @@
     var neural = getNeuralPolicy();
     var neuralFrontier = getNeuralFrontierForSelected();
     var neuralPerformance = getNeuralPerformance();
+    var walkForward = neural && neural.walk_forward ? neural.walk_forward : null;
+    var replaySummary = neural && neural.replay_summary ? neural.replay_summary : null;
     var items = buildPolicyScores(bundle);
     var actionLabels = items.map(function(item){ return item.state; });
     var offlineAction = frontier ? String(frontier.offline_action || 'hold') : '';
@@ -693,12 +695,17 @@
       if (neuralPerformance && neuralPerformance.speedup_vs_cpu) {
         summaryText += ', ' + Number(neuralPerformance.speedup_vs_cpu).toFixed(2) + 'x faster than CPU in the latest benchmark';
       }
+      if (walkForward && walkForward.positive_window_rate != null) {
+        summaryText += ', walk-forward hit rate ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '%';
+      }
       summaryText += ').';
       renderSummary(summaryText);
       renderInsights([
         { title: 'Offline policy → ' + offlineAction.replace(/_/g, ' '), copy: 'Offline confidence ' + Math.round(Number(frontier.offline_confidence || 0) * 100) + '%.' },
         { title: 'PPO bootstrap → ' + ppoAction.replace(/_/g, ' '), copy: 'Bootstrap confidence ' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '%. Timestamp ' + (frontier.timestamp || 'n/a') + '.' },
-        { title: 'Neural PPO → ' + neuralAction.replace(/_/g, ' '), copy: (neural && neural.report ? 'Timesteps ' + Number(neural.report.timesteps || 0) + ' · Mean reward ' + Number(neural.report.mean_reward_estimate || 0).toFixed(4) + '.' : 'Neural report unavailable.') + (neuralPerformance ? ' CPU ' + Number((neuralPerformance.cpu || {}).seconds || 0).toFixed(2) + 's vs GPU ' + Number((neuralPerformance.gpu || {}).seconds || 0).toFixed(2) + 's.' : '') }
+        { title: 'Neural PPO → ' + neuralAction.replace(/_/g, ' '), copy: (neural && neural.report ? 'Timesteps ' + Number(neural.report.timesteps || 0) + ' · Mean reward ' + Number(neural.report.mean_reward_estimate || 0).toFixed(4) + '.' : 'Neural report unavailable.') + (neuralPerformance ? ' CPU ' + Number((neuralPerformance.cpu || {}).seconds || 0).toFixed(2) + 's vs GPU ' + Number((neuralPerformance.gpu || {}).seconds || 0).toFixed(2) + 's.' : '') },
+        { title: 'Walk-forward robustness', copy: walkForward ? ('Positive windows ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% · Mean reward ' + Number(walkForward.mean_reward || 0).toFixed(4) + ' · Mean max drawdown ' + Number(walkForward.mean_max_drawdown || 0).toFixed(4) + '.') : 'Walk-forward report unavailable.' },
+        { title: 'Reward decomposition', copy: replaySummary ? ('PnL ' + Number((replaySummary.reward_decomposition || {}).pnl || 0).toFixed(4) + ' · Turnover -' + Number((replaySummary.reward_decomposition || {}).turnover_cost || 0).toFixed(4) + ' · Drawdown -' + Number((replaySummary.reward_decomposition || {}).drawdown_cost || 0).toFixed(4) + ' · Event gap -' + Number((replaySummary.reward_decomposition || {}).event_gap_cost || 0).toFixed(4) + '.') : 'Reward decomposition unavailable.' }
       ]);
       return;
     }
