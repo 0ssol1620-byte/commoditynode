@@ -1,0 +1,36 @@
+---
+layout: intelligence-product
+title: "Exposure Screener"
+permalink: /intelligence-lab/exposure-screener/
+description: "Screen saved watchlists and sector baskets against the live commodity state to find the names already colliding with the move."
+product_number: 3
+ideal_for: "Users with saved watchlists, analysts covering baskets, desks"
+best_tier: "Desk"
+primary_visual: "Overlap matrix + watchlist relevance heatmap"
+problem_title: "Generic rankings are not enough"
+problem: "Once users save their own names, they care less about a generic top-10 list and more about whether their actual watchlist is exposed right now."
+solution_title: "Make CommodityNode personal"
+solution: "Exposure Screener cross-references the user watchlist with the live commodity state and produces a relevance map. This is where saved workflow data becomes a real retention and monetization feature instead of a vanity preference layer."
+visualization_points:
+  - "Watchlist overlap matrix"
+  - "Name-by-name exposure badges"
+  - "Most at-risk vs most relieved split"
+  - "Portfolio cluster view"
+monetization_points:
+  - "High retention because it personalizes the product."
+  - "Strong desk tier upsell because custom universes matter."
+  - "Natural companion to alerts and saved workflows."
+inputs:
+  - "Saved watchlists"
+  - "Company sensitivity map"
+  - "Current commodity direction"
+  - "Scenario state"
+gating_points:
+  - "Free: save workflow only"
+  - "Pro: limited overlap previews"
+  - "Desk: full screening and custom universes"
+execution_notes:
+  - "Always show what is saved and when it was updated."
+  - "If no overlap exists, suggest the closest relevant names rather than a dead end."
+  - "This module should feel private and workflow-specific."
+---

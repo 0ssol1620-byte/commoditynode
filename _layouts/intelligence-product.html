@@ -1,0 +1,141 @@
+---
+layout: default
+---
+
+<style>
+.intel-product-hero { padding: 72px 0 34px; background: linear-gradient(180deg, rgba(34,211,238,0.05), rgba(168,85,247,0.03)); border-bottom: 1px solid rgba(255,255,255,0.06); }
+.intel-product-shell { max-width: 1080px; margin: 0 auto; padding: 0 24px 56px; }
+.intel-product-hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 0.98; margin: 0 0 12px; color: #f8fafc; }
+.intel-product-hero p { color: #94a3b8; line-height: 1.75; max-width: 760px; }
+.intel-product-grid, .intel-product-two, .intel-product-four { display:grid; gap:14px; }
+.intel-product-grid { grid-template-columns: repeat(3, minmax(0,1fr)); margin-top: 20px; }
+.intel-product-two { grid-template-columns: 1.1fr 0.9fr; }
+.intel-product-four { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.intel-card { padding: 20px 22px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); }
+.intel-kicker { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #22d3ee; font-weight: 800; margin-bottom: 8px; }
+.intel-card h2 { margin: 0 0 10px; color:#f8fafc; font-size: 1.2rem; }
+.intel-card p, .intel-card li { color:#94a3b8; line-height:1.75; }
+.intel-stat { font-size: 1.1rem; font-weight: 800; color:#f8fafc; }
+.intel-chip { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(34,211,238,0.09); border:1px solid rgba(34,211,238,0.18); color:#22d3ee; font-size:0.8rem; font-weight:700; }
+.intel-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+.intel-btn { display:inline-flex; align-items:center; justify-content:center; min-width:220px; padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:800; }
+.intel-btn-primary { background:#22d3ee; color:#06131a; }
+.intel-btn-secondary { background:rgba(255,255,255,0.04); color:#e2e8f0; border:1px solid rgba(255,255,255,0.08); }
+.intel-list { margin: 0; padding-left: 18px; }
+.intel-workflow-strip { margin-top:18px; padding:18px 20px; border-radius:16px; border:1px solid rgba(34,211,238,0.14); background:linear-gradient(135deg, rgba(34,211,238,0.08), rgba(168,85,247,0.05)); display:grid; grid-template-columns:1.1fr 1fr; gap:14px; }
+.intel-workflow-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.intel-workflow-card { padding:12px 14px; border-radius:14px; background:rgba(8,12,20,0.38); border:1px solid rgba(255,255,255,0.08); }
+.intel-workflow-card strong { display:block; margin-top:4px; color:#f8fafc; font-size:0.9rem; line-height:1.5; }
+@media (max-width: 900px) {
+  .intel-product-grid, .intel-product-two, .intel-product-four, .intel-workflow-strip, .intel-workflow-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<section class="intel-product-hero">
+  <div class="intel-product-shell">
+    <div class="intel-chip">Intelligence Lab · Product {{ page.product_number }}</div>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.description }}</p>
+    <div class="intel-actions">
+      <a href="/pricing/" class="intel-btn intel-btn-primary">Unlock {{ page.title }} access</a>
+      <a href="/intelligence-lab/" class="intel-btn intel-btn-secondary">Back to Intelligence Lab</a>
+    </div>
+    <div class="intel-product-grid">
+      <div class="intel-card"><div class="intel-kicker">Ideal buyer</div><div class="intel-stat">{{ page.ideal_for }}</div></div>
+      <div class="intel-card"><div class="intel-kicker">Best tier</div><div class="intel-stat">{{ page.best_tier }}</div></div>
+      <div class="intel-card"><div class="intel-kicker">Primary visual</div><div class="intel-stat">{{ page.primary_visual }}</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="intel-product-shell">
+  <section class="intel-workflow-strip" aria-label="Saved workflow continuation">
+    <div>
+      <div class="intel-kicker">Continue your saved workflow</div>
+      <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Build your commodity workflow, save the names you care about, then return here when this module becomes decision-critical.</div>
+      <div data-profile-has-saved style="display:none;">
+        <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
+        <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
+      </div>
+      <div class="intel-actions">
+        <a href="/start/" class="intel-btn intel-btn-secondary" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
+        <a href="/simulator/" class="intel-btn intel-btn-secondary" data-profile-secondary-link><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
+      </div>
+    </div>
+    <div class="intel-workflow-grid">
+      <div class="intel-workflow-card"><div class="intel-kicker">Saved role</div><strong data-profile-role>Not set yet</strong></div>
+      <div class="intel-workflow-card"><div class="intel-kicker">Saved commodities</div><strong data-profile-commodities>No tracked commodities yet</strong></div>
+      <div class="intel-workflow-card"><div class="intel-kicker">Watchlist</div><strong data-profile-watchlist>No saved watchlist names yet</strong></div>
+      <div class="intel-workflow-card"><div class="intel-kicker">Freshness</div><strong data-profile-updated>Not saved yet</strong></div>
+    </div>
+  </section>
+
+  <div class="intel-product-two" style="margin-top:18px;">
+    <section class="intel-card">
+      <div class="intel-kicker">What problem this solves</div>
+      <h2>{{ page.problem_title | default: 'Why this matters' }}</h2>
+      <p>{{ page.problem }}</p>
+    </section>
+    <section class="intel-card">
+      <div class="intel-kicker">What the product actually does</div>
+      <h2>{{ page.solution_title | default: 'Product behavior' }}</h2>
+      <p>{{ page.solution }}</p>
+    </section>
+  </div>
+
+  <div class="intel-product-two" style="margin-top:18px;">
+    <section class="intel-card">
+      <div class="intel-kicker">Visualization system</div>
+      <h2>How it should look on the site</h2>
+      <ul class="intel-list">
+        {% for item in page.visualization_points %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="intel-card">
+      <div class="intel-kicker">Monetization logic</div>
+      <h2>Why users would pay for this</h2>
+      <ul class="intel-list">
+        {% for item in page.monetization_points %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+
+  <div class="intel-product-four" style="margin-top:18px;">
+    <section class="intel-card">
+      <div class="intel-kicker">Inputs</div>
+      <h2>Data required</h2>
+      <ul class="intel-list">
+        {% for item in page.inputs %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section class="intel-card">
+      <div class="intel-kicker">Commercial hooks</div>
+      <h2>How to gate it</h2>
+      <ul class="intel-list">
+        {% for item in page.gating_points %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </section>
+  </div>
+
+  <section class="intel-card" style="margin-top:18px;">
+    <div class="intel-kicker">Execution notes</div>
+    <h2>What “extreme polish” means for this module</h2>
+    <ul class="intel-list">
+      {% for item in page.execution_notes %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+    <div class="intel-actions">
+      <a href="/pricing/" class="intel-btn intel-btn-primary">See pricing for {{ page.best_tier }}</a>
+      <a href="/enterprise/" class="intel-btn intel-btn-secondary">Package {{ page.title }} for Desk / Enterprise</a>
+    </div>
+  </section>
+</div>

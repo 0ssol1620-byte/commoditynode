@@ -333,20 +333,34 @@
   }
 
   function init(){
-    Promise.all([
+    Promise.allSettled([
       fetchJson('/assets/data/prices.json'),
       fetchJson('/assets/data/forecast-consensus.json'),
       fetchJson('/assets/data/intelligence-lab.json')
     ]).then(function(results){
-      state.prices = results[0] || {};
-      state.consensus = results[1] || {};
-      state.curated = results[2] || {};
+      var priceResult = results[0];
+      var consensusResult = results[1];
+      var curatedResult = results[2];
+      state.prices = priceResult.status === 'fulfilled' ? (priceResult.value || {}) : {};
+      state.consensus = consensusResult.status === 'fulfilled' ? (consensusResult.value || {}) : {};
+      state.curated = curatedResult.status === 'fulfilled' ? (curatedResult.value || {}) : {};
+      if (!Object.keys(state.curated).length) {
+        var shell = $('intelligence-lab-shell');
+        if (shell) shell.innerHTML = '<div class="lab-error">Intelligence Lab metadata failed to load. Please retry. ' + (curatedResult.reason && curatedResult.reason.message ? curatedResult.reason.message : '') + '</div>';
+        return;
+      }
       fillSelector();
       initTabs();
       renderAll();
+      if (priceResult.status !== 'fulfilled' || consensusResult.status !== 'fulfilled') {
+        var callout = document.querySelector('.lab-callout');
+        if (callout) {
+          callout.insertAdjacentHTML('beforeend', '<p style="margin-top:12px;color:#fbbf24;line-height:1.7;">Some live datasets are temporarily unavailable, so a few modules are running in fallback mode.</p>');
+        }
+      }
     }).catch(function(err){
       var shell = $('intelligence-lab-shell');
-      if (shell) shell.innerHTML = '<div class="lab-error">Intelligence Lab data failed to load. Please retry. ' + (err && err.message ? err.message : '') + '</div>';
+      if (shell) shell.innerHTML = '<div class="lab-error">Intelligence Lab failed to initialize. Please retry. ' + (err && err.message ? err.message : '') + '</div>';
     });
   }
 
