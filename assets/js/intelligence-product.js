@@ -637,14 +637,239 @@
 
   function setRlPanelsVisible(isVisible){
     var panel = $('intel-rl-premium-panels');
-    if (!panel) return;
-    panel.hidden = !isVisible;
+    var consolePanel = $('intel-rl-decision-console');
+    if (panel) panel.hidden = !isVisible;
+    if (consolePanel) consolePanel.hidden = !isVisible;
     if (!isVisible) {
       clearRlCharts();
-      ['intel-rl-probability-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline'].forEach(function(id){
+      ['intel-rl-probability-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body'].forEach(function(id){
         if ($(id)) $(id).innerHTML = '';
       });
+      if ($('intel-rl-decision-title')) $('intel-rl-decision-title').textContent = 'Recommendation unavailable';
+      if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'RL decision data is unavailable for the current selection.';
     }
+  }
+
+  function fmtSigned(value, decimals){
+    var num = Number(value || 0);
+    var precision = decimals == null ? 2 : decimals;
+    return (num >= 0 ? '+' : '') + num.toFixed(precision);
+  }
+
+  function escapeHtml(value){
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function getRlVerdict(replayUplift, walkUplift){
+    var replay = Number(replayUplift || 0);
+    var walk = Number(walkUplift || 0);
+    if (replay > 0.03 && walk > 0.15) return { label: 'Better', tone: 'better' };
+    if (replay < -0.03 && walk < -0.05) return { label: 'Worse', tone: 'worse' };
+    return { label: 'Unclear', tone: 'unclear' };
+  }
+
+  function getRlTrustFlags(neural, walkForward, replaySummary){
+    if (!neural) return [];
+    var commit = String(state.rlArtifacts && state.rlArtifacts.updated_from_commit || 'unknown');
+    var flags = [
+      { label: 'Model', value: titleize(neural.selected_device || neural.report && neural.report.device_used || 'cpu') + ' · ' + Number(neural.selected_timesteps || neural.report && neural.report.timesteps || 0) + ' steps' },
+      { label: 'Freshness', value: commit },
+      { label: 'Guardrails', value: Number(neural.vs_hold_reward_uplift || 0) >= 0 ? 'Baseline edge positive' : 'Baseline edge weak' },
+      { label: 'Regime fit', value: walkForward ? Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% positive windows' : 'Unknown' },
+      { label: 'Stability', value: replaySummary ? Math.round(Number(replaySummary.action_diversity || 0) * 100) + '% action diversity' : 'Unknown' }
+    ];
+    return flags;
+  }
+
+  function scoreScenarioActions(observation){
+    var obs = observation || {};
+    var forecast = Number(obs.forecast_return || 0);
+    var agreement = Number(obs.agreement_score || 0.5);
+    var anomaly = Number(obs.anomaly_score || 0);
+    var eventRisk = Number(obs.event_risk || 0);
+    var spread = Number(obs.model_spread || 0);
+    var trend = Number(obs.trend_3 || 0);
+    var volatility = Number(obs.volatility_5 || 0);
+    var pressure = Number(obs.risk_pressure || 0);
+    var scores = {
+      reduce_risk: 0.22 + pressure * 0.55 + anomaly * 0.35 + Math.max(0, -forecast) * 12 + Math.max(0, -trend) * 10,
+      hold: 0.16 + agreement * 0.12 + Math.max(0, 0.08 - volatility) * 1.5,
+      add_continuation: 0.16 + Math.max(0, forecast) * 16 + Math.max(0, trend) * 14 + agreement * 0.18 - pressure * 0.2,
+      add_hedge: 0.14 + eventRisk * 0.45 + volatility * 0.45 + Math.max(0, pressure - 0.2) * 0.3,
+      relative_value_rotation: 0.14 + spread * 1.8 + volatility * 0.18 + Math.max(0, agreement - 0.45) * 0.12
+    };
+    var total = 0;
+    Object.keys(scores).forEach(function(key){
+      scores[key] = Math.max(0.01, Number(scores[key] || 0));
+      total += scores[key];
+    });
+    Object.keys(scores).forEach(function(key){ scores[key] = scores[key] / total; });
+    return scores;
+  }
+
+  function deriveRlDrivers(observation){
+    var obs = observation || {};
+    var drivers = [
+      { key: 'agreement_score', label: 'Consensus agreement', value: Number(obs.agreement_score || 0), positive: 'Higher agreement supports action conviction.', negative: 'Weak agreement reduces policy confidence.' },
+      { key: 'anomaly_score', label: 'Anomaly pressure', value: Number(obs.anomaly_score || 0), positive: 'Anomaly pressure pushes the policy toward defense.', negative: 'Low anomaly pressure reduces the need for defensive action.' },
+      { key: 'event_risk', label: 'Event risk', value: Number(obs.event_risk || 0), positive: 'Catalyst risk raises the value of protection and caution.', negative: 'Low event risk leaves more room for directional positioning.' },
+      { key: 'model_spread', label: 'Model disagreement', value: Number(obs.model_spread || 0), positive: 'Model disagreement makes relative-value or defensive moves more attractive.', negative: 'Low disagreement supports a cleaner directional call.' },
+      { key: 'trend_3', label: 'Short trend', value: Number(obs.trend_3 || 0), positive: 'Trend strength supports continuation when risk is contained.', negative: 'Weak or negative trend undercuts continuation.' },
+      { key: 'volatility_5', label: 'Recent volatility', value: Number(obs.volatility_5 || 0), positive: 'High volatility increases hedging and defense value.', negative: 'Calmer conditions reduce urgency.' },
+      { key: 'risk_pressure', label: 'Risk pressure', value: Number(obs.risk_pressure || 0), positive: 'Composite pressure is a strong signal to de-risk.', negative: 'Low pressure supports staying closer to baseline risk.' }
+    ];
+    var ranked = drivers.slice().sort(function(a, b){ return Math.abs(b.value) - Math.abs(a.value); });
+    return {
+      positive: ranked.slice(0, 3),
+      negative: ranked.slice(3, 6)
+    };
+  }
+
+  function renderRlDecisionCard(frontier, neural, neuralFrontier, walkForward, replaySummary){
+    if (!neuralFrontier || !neural) return;
+    var verdict = getRlVerdict(neural.vs_hold_reward_uplift, walkForward && walkForward.vs_hold_reward_uplift);
+    if ($('intel-rl-decision-title')) $('intel-rl-decision-title').textContent = titleize(neuralFrontier.action || 'hold') + ' · ' + verdict.label;
+    if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'The current policy favors ' + String(neuralFrontier.action || 'hold').replace(/_/g, ' ') + ' with ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '% confidence. Replay uplift versus hold is ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + ', while walk-forward uplift is ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + '.';
+    var pills = [];
+    pills.push('<div class="intel-rl-pill"><strong>Confidence</strong> ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '%</div>');
+    pills.push('<div class="intel-rl-pill"><strong>Replay uplift</strong> ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + '</div>');
+    pills.push('<div class="intel-rl-pill"><strong>Walk uplift</strong> ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + '</div>');
+    pills.push('<div class="intel-rl-pill"><strong>Verdict</strong> ' + verdict.label + '</div>');
+    if (frontier) pills.push('<div class="intel-rl-pill"><strong>Baseline</strong> ' + titleize(frontier.offline_action || 'hold') + '</div>');
+    if ($('intel-rl-decision-pills')) $('intel-rl-decision-pills').innerHTML = pills.join('');
+  }
+
+  function renderRlTrustStrip(neural, walkForward, replaySummary){
+    var target = $('intel-rl-trust-strip');
+    if (!target || !neural) return;
+    target.innerHTML = getRlTrustFlags(neural, walkForward, replaySummary).map(function(item){
+      return '<div class="intel-rl-pill"><strong>' + escapeHtml(item.label) + '</strong> ' + escapeHtml(item.value) + '</div>';
+    }).join('');
+  }
+
+  function renderRlBaselineTable(frontier, neural, neuralFrontier, walkForward, replaySummary){
+    var target = $('intel-rl-baseline-table-body');
+    if (!target || !neural || !frontier || !neuralFrontier) return;
+    var hold = neural.hold_baseline || {};
+    var rows = [
+      { name: 'Hold baseline', action: 'hold', confidence: 1, reward: hold.total_reward, replayUplift: 0, walkUplift: 0, verdict: { label: 'Baseline', tone: 'unclear' } },
+      { name: 'Offline policy', action: frontier.offline_action || 'hold', confidence: frontier.offline_confidence || 0, reward: hold.total_reward, replayUplift: 0, walkUplift: 0, verdict: { label: 'Reference', tone: 'unclear' } },
+      { name: 'PPO bootstrap', action: frontier.ppo_action || 'hold', confidence: frontier.ppo_confidence || 0, reward: hold.total_reward, replayUplift: 0, walkUplift: 0, verdict: { label: 'Reference', tone: 'unclear' } },
+      { name: 'Neural PPO', action: neuralFrontier.action || 'hold', confidence: neuralFrontier.confidence || 0, reward: replaySummary && replaySummary.total_reward, replayUplift: neural.vs_hold_reward_uplift, walkUplift: walkForward && walkForward.vs_hold_reward_uplift, verdict: getRlVerdict(neural.vs_hold_reward_uplift, walkForward && walkForward.vs_hold_reward_uplift) }
+    ];
+    target.innerHTML = rows.map(function(row){
+      return '<tr>' +
+        '<td>' + escapeHtml(row.name) + '</td>' +
+        '<td>' + escapeHtml(titleize(row.action || 'hold')) + '</td>' +
+        '<td>' + Math.round(Number(row.confidence || 0) * 100) + '%</td>' +
+        '<td>' + Number(row.reward || 0).toFixed(3) + '</td>' +
+        '<td>' + fmtSigned(row.replayUplift || 0, 2) + '</td>' +
+        '<td>' + fmtSigned(row.walkUplift || 0, 2) + '</td>' +
+        '<td><span class="intel-price-badge">' + escapeHtml(row.verdict.label) + '</span></td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function renderRlWhyPanel(frontier, neuralFrontier, replayItems){
+    var target = $('intel-rl-why-panel');
+    if (!target || !frontier || !neuralFrontier) return;
+    var observation = frontier.observation || {};
+    var drivers = deriveRlDrivers(observation);
+    var analogs = safeArray(replayItems).filter(function(item){ return item.commodity === state.selected; }).slice(0, 3);
+    var topAction = titleize(neuralFrontier.action || 'hold');
+    target.innerHTML = [
+      '<div class="intel-insight-list">',
+      '<div class="intel-insight-card"><div class="intel-insight-title">Reason code</div><div class="intel-insight-copy">The policy favors ' + escapeHtml(topAction) + ' because risk pressure, model disagreement, and event context currently outweigh a passive hold posture.</div></div>',
+      '<div class="intel-insight-card"><div class="intel-insight-title">Top positive drivers</div><div class="intel-insight-copy">' + drivers.positive.map(function(item){ return escapeHtml(item.label + ' · ' + item.positive); }).join('<br>') + '</div></div>',
+      '<div class="intel-insight-card"><div class="intel-insight-title">Top negative drivers</div><div class="intel-insight-copy">' + drivers.negative.map(function(item){ return escapeHtml(item.label + ' · ' + item.negative); }).join('<br>') + '</div></div>',
+      '<div class="intel-insight-card"><div class="intel-insight-title">Historical analogs</div><div class="intel-insight-copy">' + (analogs.length ? analogs.map(function(item){ return escapeHtml((item.timestamp || 'n/a') + ' · ' + titleize(item.neural_action || 'hold') + ' · target ' + fmtPct(Number(item.target_return || 0) * 100)); }).join('<br>') : 'No same-commodity analogs available in the latest replay sample.') + '</div></div>',
+      '</div>'
+    ].join('');
+  }
+
+  function renderRlScenarioPanel(frontier, neuralFrontier){
+    var target = $('intel-rl-scenario-panel');
+    if (!target || !frontier) return;
+    var observation = frontier.observation || {};
+    var baseState = {
+      event_risk: Number(observation.event_risk || 0),
+      volatility_5: Number(observation.volatility_5 || 0),
+      agreement_score: Number(observation.agreement_score || 0.5),
+      model_spread: Number(observation.model_spread || 0),
+      trend_3: Number(observation.trend_3 || 0)
+    };
+    target.innerHTML = '' +
+      '<div class="intel-workflow-grid">' +
+        '<label class="intel-workflow-card">Event risk<input id="intel-rl-scenario-event" type="range" min="0" max="1" step="0.01" value="' + baseState.event_risk.toFixed(2) + '"><strong id="intel-rl-scenario-event-value">' + baseState.event_risk.toFixed(2) + '</strong></label>' +
+        '<label class="intel-workflow-card">Volatility<input id="intel-rl-scenario-vol" type="range" min="0" max="1" step="0.01" value="' + baseState.volatility_5.toFixed(2) + '"><strong id="intel-rl-scenario-vol-value">' + baseState.volatility_5.toFixed(2) + '</strong></label>' +
+        '<label class="intel-workflow-card">Agreement<input id="intel-rl-scenario-agreement" type="range" min="0" max="1" step="0.01" value="' + baseState.agreement_score.toFixed(2) + '"><strong id="intel-rl-scenario-agreement-value">' + baseState.agreement_score.toFixed(2) + '</strong></label>' +
+        '<label class="intel-workflow-card">Disagreement<input id="intel-rl-scenario-spread" type="range" min="0" max="1" step="0.01" value="' + Math.min(1, baseState.model_spread).toFixed(2) + '"><strong id="intel-rl-scenario-spread-value">' + Math.min(1, baseState.model_spread).toFixed(2) + '</strong></label>' +
+        '<label class="intel-workflow-card">Trend<input id="intel-rl-scenario-trend" type="range" min="-0.05" max="0.05" step="0.001" value="' + baseState.trend_3.toFixed(3) + '"><strong id="intel-rl-scenario-trend-value">' + baseState.trend_3.toFixed(3) + '</strong></label>' +
+      '</div>' +
+      '<div class="intel-actions" style="margin-top:12px;">' +
+        '<button type="button" class="intel-btn intel-btn-ghost" data-rl-preset="supply_shock">Supply shock</button>' +
+        '<button type="button" class="intel-btn intel-btn-ghost" data-rl-preset="demand_collapse">Demand collapse</button>' +
+        '<button type="button" class="intel-btn intel-btn-ghost" data-rl-preset="volatility_spike">Volatility spike</button>' +
+        '<button type="button" class="intel-btn intel-btn-ghost" data-rl-preset="consensus_recovery">Consensus recovery</button>' +
+        '<button type="button" class="intel-btn intel-btn-ghost" data-rl-preset="risk_off">Risk-off regime</button>' +
+      '</div>' +
+      '<div class="intel-summary" id="intel-rl-scenario-result" style="margin-top:12px;">Scenario approximation is loading…</div>';
+
+    function computeScenario(){
+      var scenarioObs = Object.assign({}, observation);
+      scenarioObs.event_risk = Number(($('intel-rl-scenario-event') || {}).value || baseState.event_risk);
+      scenarioObs.volatility_5 = Number(($('intel-rl-scenario-vol') || {}).value || baseState.volatility_5);
+      scenarioObs.agreement_score = Number(($('intel-rl-scenario-agreement') || {}).value || baseState.agreement_score);
+      scenarioObs.model_spread = Number(($('intel-rl-scenario-spread') || {}).value || baseState.model_spread);
+      scenarioObs.trend_3 = Number(($('intel-rl-scenario-trend') || {}).value || baseState.trend_3);
+      scenarioObs.risk_pressure = Math.min(1, Number(scenarioObs.anomaly_score || 0) * 0.4 + scenarioObs.event_risk * 0.35 + scenarioObs.model_spread * 0.25 + Math.max(0, -scenarioObs.trend_3) * 4);
+      var probabilities = scoreScenarioActions(scenarioObs);
+      var action = Object.keys(probabilities).sort(function(a, b){ return probabilities[b] - probabilities[a]; })[0] || 'hold';
+      var result = $('intel-rl-scenario-result');
+      if (result) result.textContent = 'Scenario approximation → ' + titleize(action) + ' (' + Math.round(Number(probabilities[action] || 0) * 100) + '% confidence). This browser-side proxy estimates how the recommendation would change if the state shifted.';
+      ['event', 'vol', 'agreement', 'spread', 'trend'].forEach(function(key){
+        var input = $('intel-rl-scenario-' + key);
+        var out = $('intel-rl-scenario-' + key + '-value');
+        if (input && out) out.textContent = Number(input.value || 0).toFixed(key === 'trend' ? 3 : 2);
+      });
+    }
+
+    Array.prototype.slice.call(target.querySelectorAll('input[type="range"]')).forEach(function(input){
+      input.addEventListener('input', computeScenario);
+    });
+    Array.prototype.slice.call(target.querySelectorAll('[data-rl-preset]')).forEach(function(button){
+      button.addEventListener('click', function(){
+        var preset = String(button.getAttribute('data-rl-preset') || '');
+        if (preset === 'supply_shock') { $('intel-rl-scenario-event').value = 0.85; $('intel-rl-scenario-vol').value = 0.55; $('intel-rl-scenario-spread').value = 0.35; }
+        if (preset === 'demand_collapse') { $('intel-rl-scenario-trend').value = -0.03; $('intel-rl-scenario-event').value = 0.6; $('intel-rl-scenario-agreement').value = 0.42; }
+        if (preset === 'volatility_spike') { $('intel-rl-scenario-vol').value = 0.9; $('intel-rl-scenario-spread').value = 0.45; }
+        if (preset === 'consensus_recovery') { $('intel-rl-scenario-agreement').value = 0.8; $('intel-rl-scenario-spread').value = 0.08; $('intel-rl-scenario-trend').value = 0.02; }
+        if (preset === 'risk_off') { $('intel-rl-scenario-event').value = 0.7; $('intel-rl-scenario-vol').value = 0.6; $('intel-rl-scenario-trend').value = -0.015; }
+        computeScenario();
+      });
+    });
+    computeScenario();
+  }
+
+  function renderRlAuditTrail(frontier, neural, walkForward, replaySummary, replayItems){
+    var target = $('intel-rl-audit-trail');
+    if (!target || !neural) return;
+    var events = [];
+    events.push({ title: 'Policy artifact refreshed', copy: 'Commit ' + String(state.rlArtifacts && state.rlArtifacts.updated_from_commit || 'unknown') + ' selected ' + titleize(neural.selected_device || 'cpu') + ' with ' + Number(neural.selected_timesteps || 0) + ' timesteps.' });
+    if (frontier) events.push({ title: 'Recommendation issued', copy: titleize(state.selected) + ' was assigned ' + titleize(frontier.neural_action || frontier.ppo_action || 'hold') + ' at ' + Math.round(Number(frontier.neural_confidence || 0) * 100) + '% confidence.' });
+    if (walkForward) events.push({ title: 'Walk-forward review', copy: 'Positive windows ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% with uplift vs hold ' + fmtSigned(walkForward.vs_hold_reward_uplift || 0, 2) + '.' });
+    if (replaySummary) events.push({ title: 'Replay outcome snapshot', copy: 'Replay final equity ' + Number(replaySummary.final_equity || 0).toFixed(3) + ' and action diversity ' + Math.round(Number(replaySummary.action_diversity || 0) * 100) + '%.' });
+    safeArray(replayItems).slice(0, 2).forEach(function(item, idx){
+      events.push({ title: 'Replay evidence ' + (idx + 1), copy: titleize(item.commodity || state.selected) + ' · ' + (item.timestamp || 'n/a') + ' · neural ' + titleize(item.neural_action || 'hold') + ' · target ' + fmtPct(Number(item.target_return || 0) * 100) + '.' });
+    });
+    target.innerHTML = events.map(function(item, idx){
+      return '<div class="intel-rl-step"><div class="intel-kicker">Event ' + (idx + 1) + '</div><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.copy) + '</span></div>';
+    }).join('');
   }
 
   function renderRlProbabilitySurface(neuralFrontier){
@@ -859,6 +1084,12 @@
         { title: 'Walk-forward robustness', copy: walkForward ? ('Positive windows ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% · Mean reward ' + Number(walkForward.mean_reward || 0).toFixed(4) + ' · Mean max drawdown ' + Number(walkForward.mean_max_drawdown || 0).toFixed(4) + ' · Uplift vs hold ' + (Number(walkForward.vs_hold_reward_uplift || 0) >= 0 ? '+' : '') + Number(walkForward.vs_hold_reward_uplift || 0).toFixed(4) + '.') : 'Walk-forward report unavailable.' },
         { title: 'Reward decomposition', copy: replaySummary ? ('PnL ' + Number((replaySummary.reward_decomposition || {}).pnl || 0).toFixed(4) + ' · Turnover -' + Number((replaySummary.reward_decomposition || {}).turnover_cost || 0).toFixed(4) + ' · Drawdown -' + Number((replaySummary.reward_decomposition || {}).drawdown_cost || 0).toFixed(4) + ' · Event gap -' + Number((replaySummary.reward_decomposition || {}).event_gap_cost || 0).toFixed(4) + '.') : 'Reward decomposition unavailable.' }
       ]);
+      renderRlDecisionCard(frontier, neural, neuralFrontier, walkForward, replaySummary);
+      renderRlTrustStrip(neural, walkForward, replaySummary);
+      renderRlBaselineTable(frontier, neural, neuralFrontier, walkForward, replaySummary);
+      renderRlWhyPanel(frontier, neuralFrontier, episodeReplay);
+      renderRlScenarioPanel(frontier, neuralFrontier);
+      renderRlAuditTrail(frontier, neural, walkForward, replaySummary, episodeReplay);
       renderRlPremiumPanels(frontier, neuralFrontier, walkForward, replaySummary, episodeReplay);
       return;
     }
@@ -873,7 +1104,7 @@
       renderRlPremiumPanels(frontier, null, null, null, episodeReplay);
       return;
     }
-    renderSummary('RL Policy Lab should feel like a policy frontier, not a fake autopilot. The highest-scoring state/action pair is your current default.');
+    renderSummary('RL Policy Lab should surface a policy frontier with baseline comparison, explanation, and auditability. The highest-scoring state/action pair is the current default.');
     renderInsights(items.map(function(item){
       return { title: item.state + ' · ' + item.score + '/100', copy: item.action };
     }));

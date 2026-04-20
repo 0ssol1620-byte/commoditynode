@@ -193,6 +193,64 @@ layout: default
         <div class="intel-insight-list" id="intel-demo-insights"></div>
       </div>
     </div>
+    <section class="intel-card" id="intel-rl-decision-console" hidden style="margin-top:18px;">
+      <div class="intel-kicker">Decision console</div>
+      <div class="intel-product-two" style="gap:16px;align-items:start;">
+        <section class="intel-card" style="margin:0;">
+          <div class="intel-kicker">Current policy recommendation</div>
+          <h3 id="intel-rl-decision-title">Loading recommendation…</h3>
+          <p id="intel-rl-decision-copy">The decision console is preparing the current recommendation, confidence, and baseline comparison.</p>
+          <div class="intel-rl-pill-row" id="intel-rl-decision-pills"></div>
+        </section>
+        <section class="intel-card" style="margin:0;">
+          <div class="intel-kicker">Trust strip</div>
+          <h3>Should this recommendation be trusted right now?</h3>
+          <p>Freshness, stability, guardrails, and policy readiness should be visible before a user acts on the recommendation.</p>
+          <div class="intel-rl-pill-row" id="intel-rl-trust-strip"></div>
+        </section>
+      </div>
+      <section class="intel-card" style="margin-top:16px;">
+        <div class="intel-kicker">Baseline comparison</div>
+        <h3>How does the recommended action compare with baseline policies?</h3>
+        <p>Show hold, offline, PPO bootstrap, and Neural PPO side-by-side so the user can see whether the recommendation is actually better than the current baseline.</p>
+        <div style="overflow:auto;">
+          <table class="intel-table" id="intel-rl-baseline-table">
+            <thead>
+              <tr>
+                <th>Policy</th>
+                <th>Action</th>
+                <th>Confidence</th>
+                <th>Replay reward</th>
+                <th>Replay uplift</th>
+                <th>Walk uplift</th>
+                <th>Verdict</th>
+              </tr>
+            </thead>
+            <tbody id="intel-rl-baseline-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+      <div class="intel-product-two" style="margin-top:16px;gap:16px;align-items:start;">
+        <section class="intel-card" style="margin:0;">
+          <div class="intel-kicker">Why this recommendation?</div>
+          <h3>What is driving the current action?</h3>
+          <p>Explain the strongest positive and negative drivers, then ground the recommendation with simple reason codes and comparable historical states.</p>
+          <div id="intel-rl-why-panel"></div>
+        </section>
+        <section class="intel-card" style="margin:0;">
+          <div class="intel-kicker">Scenario workbench</div>
+          <h3>What would flip this decision?</h3>
+          <p>Explore how event risk, volatility, agreement, disagreement, and trend strength change the recommendation before a user commits to action.</p>
+          <div id="intel-rl-scenario-panel"></div>
+        </section>
+      </div>
+      <section class="intel-card" style="margin-top:16px;">
+        <div class="intel-kicker">Policy audit trail</div>
+        <h3>What changed, and when?</h3>
+        <p>Keep a timeline of recommendation events, profile selection changes, alerts, and replay evidence so users can audit the recommendation path instead of trusting a static score.</p>
+        <div class="intel-rl-timeline" id="intel-rl-audit-trail"></div>
+      </section>
+    </section>
     <div class="intel-rl-grid" id="intel-rl-premium-panels" hidden>
       <section class="intel-rl-card">
         <div class="intel-kicker">Policy probability surface</div>
