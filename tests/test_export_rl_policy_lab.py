@@ -18,12 +18,14 @@ def test_export_payload_contains_frontier_and_replay():
     assert 'neural_policy' in payload
     assert isinstance(payload['neural_policy'], dict)
     if payload['neural_policy'].get('available'):
-        assert payload['neural_policy']['report']['timesteps'] == 4096
+        assert payload['neural_policy']['report']['timesteps'] in {512, 1024, 2048}
         assert len(payload['neural_policy'].get('frontier', [])) > 0
         assert 'walk_forward' in payload['neural_policy']
         assert 'replay_summary' in payload['neural_policy']
         assert 'hold_baseline' in payload['neural_policy']
         assert 'vs_hold_reward_uplift' in payload['neural_policy']
+        assert 'selected_timesteps' in payload['neural_policy']
+        assert 'profile_selection' in payload['neural_policy']
         assert 'action_diversity' in payload['neural_policy']['replay_summary']
         assert 'vs_hold_reward_uplift' in payload['neural_policy']['walk_forward']
         performance = payload['neural_policy'].get('performance', {})

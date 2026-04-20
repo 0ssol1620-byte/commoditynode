@@ -42,49 +42,54 @@ def _current_commit_marker() -> str:
 
 
 
-def _select_policy_device(dataset, config, preferred_device: str) -> tuple[str, list[dict]]:
+def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict, list[dict]]:
     candidate_devices = ['cpu']
     if preferred_device == 'cuda':
         candidate_devices.append('cuda')
+    candidate_timesteps = [512, 1024, 2048]
 
     train_steps = list(dataset.train[:192] or dataset.train)
     eval_steps = list(dataset.val or dataset.test or dataset.train)
     diagnostics: list[dict] = []
-    best_device = candidate_devices[0]
+    best_profile = {'device': candidate_devices[0], 'timesteps': candidate_timesteps[0]}
     best_score = float('-inf')
     for device in candidate_devices:
-        result = train_neural_ppo(
-            train_steps,
-            config=config,
-            total_timesteps=1024,
-            device=device,
-        )
-        replay = replay_policy(
-            name=f'device_select_{device}',
-            steps=eval_steps,
-            chooser=lambda obs, policy=result.policy: policy.decide(obs).action,
-            config=config,
-        )
-        hold = replay_policy(
-            name=f'device_select_hold_{device}',
-            steps=eval_steps,
-            chooser=lambda _obs: 'hold',
-            config=config,
-        )
-        score = (replay.total_reward - hold.total_reward) + replay.action_diversity * 0.25 + replay.win_rate * 0.05
-        diagnostics.append({
-            'device': device,
-            'score': float(score),
-            'reward': float(replay.total_reward),
-            'hold_reward': float(hold.total_reward),
-            'uplift_vs_hold': float(replay.total_reward - hold.total_reward),
-            'action_diversity': float(replay.action_diversity),
-            'win_rate': float(replay.win_rate),
-        })
-        if score > best_score:
-            best_score = score
-            best_device = device
-    return best_device, diagnostics
+        for timesteps in candidate_timesteps:
+            result = train_neural_ppo(
+                train_steps,
+                config=config,
+                total_timesteps=timesteps,
+                device=device,
+            )
+            replay = replay_policy(
+                name=f'profile_select_{device}_{timesteps}',
+                steps=eval_steps,
+                chooser=lambda obs, policy=result.policy: policy.decide(obs).action,
+                config=config,
+            )
+            hold = replay_policy(
+                name=f'profile_select_hold_{device}_{timesteps}',
+                steps=eval_steps,
+                chooser=lambda _obs: 'hold',
+                config=config,
+            )
+            uplift = float(replay.total_reward - hold.total_reward)
+            score = uplift + replay.action_diversity * 0.25 + replay.win_rate * 0.05
+            row = {
+                'device': device,
+                'timesteps': timesteps,
+                'score': float(score),
+                'reward': float(replay.total_reward),
+                'hold_reward': float(hold.total_reward),
+                'uplift_vs_hold': uplift,
+                'action_diversity': float(replay.action_diversity),
+                'win_rate': float(replay.win_rate),
+            }
+            diagnostics.append(row)
+            if score > best_score:
+                best_score = score
+                best_profile = {'device': device, 'timesteps': timesteps}
+    return best_profile, diagnostics
 
 
 def _build_neural_payload(dataset, config) -> dict:
@@ -103,13 +108,15 @@ def _build_neural_payload(dataset, config) -> dict:
             'reason': 'dataset.train is empty',
         }
 
-    selected_device, device_diagnostics = _select_policy_device(dataset=dataset, config=config, preferred_device=preferred_device)
+    selected_profile, selection_diagnostics = _select_policy_profile(dataset=dataset, config=config, preferred_device=preferred_device)
+    selected_device = selected_profile['device']
+    selected_timesteps = int(selected_profile['timesteps'])
 
     try:
         neural_result = train_neural_ppo(
             steps,
             config=config,
-            total_timesteps=4096,
+            total_timesteps=selected_timesteps,
             device=selected_device,
         )
     except Exception as exc:
@@ -161,7 +168,8 @@ def _build_neural_payload(dataset, config) -> dict:
         'available': True,
         'requested_device': preferred_device,
         'selected_device': selected_device,
-        'device_selection': device_diagnostics,
+        'selected_timesteps': selected_timesteps,
+        'profile_selection': selection_diagnostics,
         'torch_cuda_available': bool(torch and torch.cuda.is_available()),
         'report': asdict(neural_result.report),
         'frontier': frontier,
