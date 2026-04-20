@@ -18,7 +18,8 @@
     consensus: {},
     curated: {},
     rlArtifacts: {},
-    chart: null
+    chart: null,
+    rlCharts: {}
   };
 
   var STORAGE_KEYS = {
@@ -268,6 +269,20 @@
     if (!canvas || typeof Chart !== 'function') return;
     if (state.chart) state.chart.destroy();
     state.chart = new Chart(canvas.getContext('2d'), configObj);
+  }
+
+  function ensureRlChart(id, configObj){
+    var canvas = $(id);
+    if (!canvas || typeof Chart !== 'function') return;
+    if (state.rlCharts[id]) state.rlCharts[id].destroy();
+    state.rlCharts[id] = new Chart(canvas.getContext('2d'), configObj);
+  }
+
+  function clearRlCharts(){
+    Object.keys(state.rlCharts).forEach(function(key){
+      if (state.rlCharts[key]) state.rlCharts[key].destroy();
+    });
+    state.rlCharts = {};
   }
 
   function metricPayload(bundle, profile){
@@ -619,14 +634,147 @@
     return scoring.length ? scoring[0].idx : -1;
   }
 
+  function setRlPanelsVisible(isVisible){
+    var panel = $('intel-rl-premium-panels');
+    if (!panel) return;
+    panel.hidden = !isVisible;
+    if (!isVisible) {
+      clearRlCharts();
+      ['intel-rl-probability-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline'].forEach(function(id){
+        if ($(id)) $(id).innerHTML = '';
+      });
+    }
+  }
+
+  function renderRlProbabilitySurface(neuralFrontier){
+    if (!neuralFrontier || !neuralFrontier.probabilities) return;
+    var labels = Object.keys(neuralFrontier.probabilities).map(function(key){ return titleize(key); });
+    var values = Object.keys(neuralFrontier.probabilities).map(function(key){ return Math.round(Number(neuralFrontier.probabilities[key] || 0) * 100); });
+    ensureRlChart('intel-rl-action-chart', {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Action probability',
+          data: values,
+          backgroundColor: ['rgba(250,204,21,0.72)','rgba(148,163,184,0.55)','rgba(34,197,94,0.55)','rgba(59,130,246,0.55)','rgba(192,132,252,0.55)'],
+          borderColor: ['#facc15','#94a3b8','#22c55e','#3b82f6','#c084fc'],
+          borderWidth: 1,
+          borderRadius: 10
+        }]
+      },
+      options: chartOptions(100)
+    });
+    var pills = $('intel-rl-probability-pills');
+    if (pills) {
+      pills.innerHTML = Object.keys(neuralFrontier.probabilities).sort(function(a, b){
+        return Number(neuralFrontier.probabilities[b]) - Number(neuralFrontier.probabilities[a]);
+      }).map(function(key){
+        return '<div class="intel-rl-pill"><strong>' + titleize(key) + '</strong> ' + Math.round(Number(neuralFrontier.probabilities[key] || 0) * 100) + '%</div>';
+      }).join('');
+    }
+  }
+
+  function renderRlPolicyComparison(frontier, neuralFrontier){
+    if (!frontier || !neuralFrontier) return;
+    var actionOrder = ['reduce_risk', 'hold', 'add_continuation', 'add_hedge', 'relative_value_rotation'];
+    var actionScores = {};
+    actionOrder.forEach(function(action){ actionScores[action] = 0; });
+    actionScores[String(frontier.offline_action || 'hold')] = Math.round(Number(frontier.offline_confidence || 0) * 100);
+    var ppoScores = {};
+    actionOrder.forEach(function(action){ ppoScores[action] = 0; });
+    ppoScores[String(frontier.ppo_action || 'hold')] = Math.round(Number(frontier.ppo_confidence || 0) * 100);
+    var neuralScores = {};
+    actionOrder.forEach(function(action){ neuralScores[action] = Math.round(Number((neuralFrontier.probabilities || {})[action] || 0) * 100); });
+    ensureRlChart('intel-rl-policy-compare-chart', {
+      type: 'bar',
+      data: {
+        labels: actionOrder.map(function(action){ return titleize(action); }),
+        datasets: [
+          { label: 'Offline', data: actionOrder.map(function(action){ return actionScores[action]; }), backgroundColor: 'rgba(34,197,94,0.55)', borderColor: '#22c55e', borderRadius: 8, borderWidth: 1 },
+          { label: 'PPO bootstrap', data: actionOrder.map(function(action){ return ppoScores[action]; }), backgroundColor: 'rgba(56,189,248,0.55)', borderColor: '#38bdf8', borderRadius: 8, borderWidth: 1 },
+          { label: 'Neural PPO', data: actionOrder.map(function(action){ return neuralScores[action]; }), backgroundColor: 'rgba(250,204,21,0.62)', borderColor: '#facc15', borderRadius: 8, borderWidth: 1 }
+        ]
+      },
+      options: multiChartOptions()
+    });
+  }
+
+  function renderRlWalkForward(walkForward){
+    var target = $('intel-rl-windows');
+    if (!target) return;
+    var windows = safeArray(walkForward && walkForward.windows);
+    target.innerHTML = windows.map(function(window){
+      return '<div class="intel-rl-window"><div class="intel-kicker">Window ' + window.window_index + '</div><strong>' + String(window.dominant_action || 'hold').replace(/_/g, ' ') + '</strong><span>' + window.start_timestamp + ' → ' + window.end_timestamp + '</span><span>Reward ' + Number(window.total_reward || 0).toFixed(4) + ' · Equity ' + Number(window.final_equity || 0).toFixed(3) + '</span><span>Drawdown ' + Math.round(Number(window.max_drawdown || 0) * 100) + '% · Eval steps ' + window.eval_steps + '</span></div>';
+    }).join('');
+  }
+
+  function renderRlEpisodeReplay(replayItems){
+    var target = $('intel-rl-timeline');
+    if (!target) return;
+    target.innerHTML = safeArray(replayItems).slice(0, 5).map(function(item, idx){
+      return '<div class="intel-rl-step"><div class="intel-kicker">Replay step ' + (idx + 1) + '</div><strong>' + titleize(item.commodity) + ' · ' + (item.timestamp || 'n/a') + '</strong><span>Expert ' + String(item.expert_action || 'hold').replace(/_/g, ' ') + ' · Offline ' + String(item.offline_action || 'hold').replace(/_/g, ' ') + ' · PPO ' + String(item.ppo_action || 'hold').replace(/_/g, ' ') + ' · Neural ' + String(item.neural_action || 'hold').replace(/_/g, ' ') + '</span><span>Target return ' + fmtPct(Number(item.target_return || 0) * 100) + ' · Neural confidence ' + Math.round(Number(item.neural_confidence || 0) * 100) + '%</span></div>';
+    }).join('');
+  }
+
+  function renderRlRewardStack(replaySummary){
+    if (!replaySummary || !replaySummary.reward_decomposition) return;
+    var breakdown = replaySummary.reward_decomposition;
+    ensureRlChart('intel-rl-reward-chart', {
+      type: 'bar',
+      data: {
+        labels: ['PnL', 'Turnover', 'Drawdown', 'Concentration', 'Event gap', 'Abstain'],
+        datasets: [{
+          label: 'Reward component',
+          data: [
+            Number(breakdown.pnl || 0),
+            -Number(breakdown.turnover_cost || 0),
+            -Number(breakdown.drawdown_cost || 0),
+            -Number(breakdown.concentration_cost || 0),
+            -Number(breakdown.event_gap_cost || 0),
+            Number(breakdown.abstain_bonus || 0)
+          ],
+          backgroundColor: ['rgba(34,197,94,0.62)','rgba(244,63,94,0.62)','rgba(244,63,94,0.72)','rgba(251,146,60,0.72)','rgba(168,85,247,0.68)','rgba(34,211,238,0.62)'],
+          borderColor: ['#22c55e','#f43f5e','#f43f5e','#fb923c','#a855f7','#22d3ee'],
+          borderWidth: 1,
+          borderRadius: 10
+        }]
+      },
+      options: multiChartOptions()
+    });
+  }
+
+  function renderRlTracePills(frontier, neuralFrontier, walkForward, replaySummary){
+    var target = $('intel-rl-trace-pills');
+    if (!target) return;
+    var pills = [];
+    if (frontier) pills.push('<div class="intel-rl-pill">Offline ' + String(frontier.offline_action || 'hold').replace(/_/g, ' ') + ' · ' + Math.round(Number(frontier.offline_confidence || 0) * 100) + '%</div>');
+    if (frontier) pills.push('<div class="intel-rl-pill">PPO ' + String(frontier.ppo_action || 'hold').replace(/_/g, ' ') + ' · ' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '%</div>');
+    if (neuralFrontier) pills.push('<div class="intel-rl-pill">Neural ' + String(neuralFrontier.action || 'hold').replace(/_/g, ' ') + ' · ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '%</div>');
+    if (walkForward) pills.push('<div class="intel-rl-pill">Walk-forward ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% positive windows</div>');
+    if (replaySummary) pills.push('<div class="intel-rl-pill">Replay final equity ' + Number(replaySummary.final_equity || 0).toFixed(3) + '</div>');
+    target.innerHTML = pills.join('');
+  }
+
+  function renderRlPremiumPanels(frontier, neuralFrontier, walkForward, replaySummary, episodeReplay){
+    setRlPanelsVisible(config.demoKind === 'rl-policy-lab' && !!neuralFrontier);
+    if (config.demoKind !== 'rl-policy-lab' || !neuralFrontier) return;
+    renderRlProbabilitySurface(neuralFrontier);
+    renderRlPolicyComparison(frontier, neuralFrontier);
+    renderRlWalkForward(walkForward);
+    renderRlEpisodeReplay(episodeReplay);
+    renderRlRewardStack(replaySummary);
+    renderRlTracePills(frontier, neuralFrontier, walkForward, replaySummary);
+  }
+
   function renderPolicyLab(bundle){
     var frontier = getRlFrontierForSelected();
     var benchmark = getRlBenchmark();
     var neural = getNeuralPolicy();
     var neuralFrontier = getNeuralFrontierForSelected();
-    var neuralPerformance = getNeuralPerformance();
     var walkForward = neural && neural.walk_forward ? neural.walk_forward : null;
     var replaySummary = neural && neural.replay_summary ? neural.replay_summary : null;
+    var episodeReplay = safeArray(state.rlArtifacts && state.rlArtifacts.episode_replay);
     var items = buildPolicyScores(bundle);
     var actionLabels = items.map(function(item){ return item.state; });
     var offlineAction = frontier ? String(frontier.offline_action || 'hold') : '';
@@ -706,6 +854,7 @@
         { title: 'Walk-forward robustness', copy: walkForward ? ('Positive windows ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% · Mean reward ' + Number(walkForward.mean_reward || 0).toFixed(4) + ' · Mean max drawdown ' + Number(walkForward.mean_max_drawdown || 0).toFixed(4) + '.') : 'Walk-forward report unavailable.' },
         { title: 'Reward decomposition', copy: replaySummary ? ('PnL ' + Number((replaySummary.reward_decomposition || {}).pnl || 0).toFixed(4) + ' · Turnover -' + Number((replaySummary.reward_decomposition || {}).turnover_cost || 0).toFixed(4) + ' · Drawdown -' + Number((replaySummary.reward_decomposition || {}).drawdown_cost || 0).toFixed(4) + ' · Event gap -' + Number((replaySummary.reward_decomposition || {}).event_gap_cost || 0).toFixed(4) + '.') : 'Reward decomposition unavailable.' }
       ]);
+      renderRlPremiumPanels(frontier, neuralFrontier, walkForward, replaySummary, episodeReplay);
       return;
     }
 
@@ -716,12 +865,14 @@
         { title: 'PPO fine-tuned → ' + String(frontier.ppo_action || 'hold').replace(/_/g, ' '), copy: 'PPO confidence ' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '%. Timestamp ' + (frontier.timestamp || 'n/a') + '.' },
         { title: 'Benchmark snapshot', copy: benchmark ? 'Offline reward ' + Number(benchmark.offline.mean_reward || 0).toFixed(4) + ' · PPO reward ' + Number(benchmark.ppo.mean_reward || 0).toFixed(4) + ' · Rule reward ' + Number(benchmark.rule_based.mean_reward || 0).toFixed(4) + '.' : 'Benchmark artifact not available.' }
       ]);
+      renderRlPremiumPanels(frontier, null, null, null, episodeReplay);
       return;
     }
     renderSummary('RL Policy Lab should feel like a policy frontier, not a fake autopilot. The highest-scoring state/action pair is your current default.');
     renderInsights(items.map(function(item){
       return { title: item.state + ' · ' + item.score + '/100', copy: item.action };
     }));
+    renderRlPremiumPanels(null, null, null, null, null);
   }
 
   function chartOptions(max){
@@ -855,6 +1006,7 @@
   function renderAll(){
     var bundle = getBundle(state.selected);
     var profile = getProfile();
+    if (config.demoKind !== 'rl-policy-lab') setRlPanelsVisible(false);
     switch (config.demoKind) {
       case 'event-probability': renderEventProbability(bundle); break;
       case 'ripple-ranker': renderRippleRanker(bundle); break;

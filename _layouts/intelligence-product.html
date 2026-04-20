@@ -85,6 +85,21 @@ layout: default
 .intel-insight-card { padding:14px 16px; border-radius:14px; background:rgba(8,12,20,0.44); border:1px solid rgba(255,255,255,0.08); }
 .intel-insight-title { color:#f8fafc; font-weight:800; line-height:1.45; }
 .intel-insight-copy { color:#94a3b8; font-size:0.9rem; line-height:1.7; margin-top:6px; }
+.intel-rl-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; margin-top:18px; }
+.intel-rl-card { padding:18px 20px; border-radius:16px; border:1px solid rgba(255,255,255,0.08); background:rgba(8,12,20,0.42); }
+.intel-rl-card h3 { margin:0 0 8px; color:#f8fafc; font-size:1.02rem; }
+.intel-rl-card p { margin:0; color:#94a3b8; line-height:1.7; }
+.intel-rl-chart-wrap { position:relative; min-height:220px; margin-top:14px; }
+.intel-rl-pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.intel-rl-pill { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:#e2e8f0; font-size:0.8rem; }
+.intel-rl-windows { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; margin-top:14px; }
+.intel-rl-window { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
+.intel-rl-window strong { display:block; color:#f8fafc; margin-top:4px; }
+.intel-rl-window span { display:block; color:#94a3b8; font-size:0.85rem; line-height:1.55; margin-top:4px; }
+.intel-rl-timeline { display:grid; gap:10px; margin-top:14px; }
+.intel-rl-step { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
+.intel-rl-step strong { color:#f8fafc; display:block; }
+.intel-rl-step span { display:block; color:#94a3b8; font-size:0.86rem; line-height:1.6; margin-top:4px; }
 .intel-success-value { color:#f8fafc; font-size:1.8rem; font-weight:800; line-height:1.1; }
 .intel-price-tier { color:#f8fafc; font-size:1rem; font-weight:800; }
 .intel-price-badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:rgba(168,85,247,0.12); color:#c084fc; border:1px solid rgba(168,85,247,0.18); font-size:0.74rem; font-weight:800; }
@@ -177,6 +192,45 @@ layout: default
         <div class="intel-workspace-meta" id="intel-workspace-meta">Saved workspaces stay in this browser so you can reopen the same module/commodity combination instantly.</div>
         <div class="intel-insight-list" id="intel-demo-insights"></div>
       </div>
+    </div>
+    <div class="intel-rl-grid" id="intel-rl-premium-panels" hidden>
+      <section class="intel-rl-card">
+        <div class="intel-kicker">Policy probability surface</div>
+        <h3>Which action is the model leaning toward?</h3>
+        <p>See how confidence is distributed across defensive, neutral, and continuation actions instead of trusting a single headline action.</p>
+        <div class="intel-rl-chart-wrap"><canvas id="intel-rl-action-chart"></canvas></div>
+        <div class="intel-rl-pill-row" id="intel-rl-probability-pills"></div>
+      </section>
+      <section class="intel-rl-card">
+        <div class="intel-kicker">Policy evolution</div>
+        <h3>How did the policy change through training?</h3>
+        <p>Compare offline policy, PPO bootstrap, and neural PPO so people can see the decision layer actually moving.</p>
+        <div class="intel-rl-chart-wrap"><canvas id="intel-rl-policy-compare-chart"></canvas></div>
+      </section>
+      <section class="intel-rl-card">
+        <div class="intel-kicker">Walk-forward windows</div>
+        <h3>Did it hold up on unseen periods?</h3>
+        <p>Each window shows out-of-sample reward, drawdown, and dominant action so the policy cannot hide behind one lucky backtest.</p>
+        <div class="intel-rl-windows" id="intel-rl-windows"></div>
+      </section>
+      <section class="intel-rl-card">
+        <div class="intel-kicker">Episode replay</div>
+        <h3>What decisions did the policy actually make?</h3>
+        <p>Replay the latest path step-by-step to show how the model reacts as the state shifts instead of pretending it is a black box.</p>
+        <div class="intel-rl-timeline" id="intel-rl-timeline"></div>
+      </section>
+      <section class="intel-rl-card">
+        <div class="intel-kicker">Reward stack</div>
+        <h3>Where did performance come from?</h3>
+        <p>Break PnL, turnover, drawdown, concentration, and event-gap costs apart so users understand what is helping and hurting the policy.</p>
+        <div class="intel-rl-chart-wrap"><canvas id="intel-rl-reward-chart"></canvas></div>
+      </section>
+      <section class="intel-rl-card">
+        <div class="intel-kicker">Decision trace</div>
+        <h3>What is the model deciding right now?</h3>
+        <p>Current recommendation, confidence spread, and replay stats make the model feel alive instead of static marketing copy.</p>
+        <div class="intel-rl-pill-row" id="intel-rl-trace-pills"></div>
+      </section>
     </div>
   </section>
 
