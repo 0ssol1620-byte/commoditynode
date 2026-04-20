@@ -594,6 +594,29 @@
     return neural && neural.performance ? neural.performance : null;
   }
 
+  function getPolicyStateIndex(items, actionName){
+    var action = String(actionName || '').toLowerCase();
+    if (!action) return -1;
+    var scoring = items.map(function(item, idx){
+      var haystack = (String(item.state || '') + ' ' + String(item.action || '')).toLowerCase();
+      var score = 0;
+      if (action === 'reduce_risk') {
+        if (haystack.indexOf('reduce') !== -1 || haystack.indexOf('trim') !== -1 || haystack.indexOf('wait') !== -1 || haystack.indexOf('bear') !== -1) score += 3;
+      } else if (action === 'hold') {
+        if (haystack.indexOf('wait') !== -1 || haystack.indexOf('low agreement') !== -1) score += 3;
+      } else if (action === 'add_continuation') {
+        if (haystack.indexOf('trend') !== -1 || haystack.indexOf('continuation') !== -1 || haystack.indexOf('accumulate') !== -1 || haystack.indexOf('favor miner beta') !== -1) score += 3;
+      } else if (action === 'add_hedge') {
+        if (haystack.indexOf('hedge') !== -1 || haystack.indexOf('options') !== -1 || haystack.indexOf('protect') !== -1) score += 3;
+      } else if (action === 'relative_value_rotation') {
+        if (haystack.indexOf('relative value') !== -1 || haystack.indexOf('relative-value') !== -1 || haystack.indexOf('rotation') !== -1) score += 3;
+      }
+      if (action.replace(/_/g, ' ') && haystack.indexOf(action.replace(/_/g, ' ')) !== -1) score += 4;
+      return { idx: idx, score: score };
+    }).sort(function(a, b){ return b.score - a.score; });
+    return scoring.length ? scoring[0].idx : -1;
+  }
+
   function renderPolicyLab(bundle){
     var frontier = getRlFrontierForSelected();
     var benchmark = getRlBenchmark();
@@ -618,11 +641,12 @@
     };
 
     if (frontier) {
+      var offlineIndex = getPolicyStateIndex(items, offlineAction);
+      var ppoIndex = getPolicyStateIndex(items, ppoAction);
       chartData.datasets.push({
         label: 'Offline policy',
-        data: items.map(function(item){
-          var isChosen = String(item.state || '').toLowerCase().indexOf(offlineAction.replace(/_/g, ' ').toLowerCase()) !== -1;
-          return isChosen ? Math.round(Number(frontier.offline_confidence || 0) * 100) : 0;
+        data: items.map(function(_item, idx){
+          return idx === offlineIndex ? Math.round(Number(frontier.offline_confidence || 0) * 100) : 0;
         }),
         backgroundColor: 'rgba(34,197,94,0.58)',
         borderColor: '#22c55e',
@@ -631,9 +655,8 @@
       });
       chartData.datasets.push({
         label: 'PPO bootstrap',
-        data: items.map(function(item){
-          var isChosen = String(item.state || '').toLowerCase().indexOf(ppoAction.replace(/_/g, ' ').toLowerCase()) !== -1;
-          return isChosen ? Math.round(Number(frontier.ppo_confidence || 0) * 100) : 0;
+        data: items.map(function(_item, idx){
+          return idx === ppoIndex ? Math.round(Number(frontier.ppo_confidence || 0) * 100) : 0;
         }),
         backgroundColor: 'rgba(56,189,248,0.58)',
         borderColor: '#38bdf8',
@@ -643,11 +666,11 @@
     }
 
     if (neuralFrontier) {
+      var neuralIndex = getPolicyStateIndex(items, neuralAction);
       chartData.datasets.push({
         label: 'Neural PPO',
-        data: items.map(function(item){
-          var isChosen = String(item.state || '').toLowerCase().indexOf(neuralAction.replace(/_/g, ' ').toLowerCase()) !== -1;
-          return isChosen ? Math.round(Number(neuralFrontier.confidence || 0) * 100) : 0;
+        data: items.map(function(_item, idx){
+          return idx === neuralIndex ? Math.round(Number(neuralFrontier.confidence || 0) * 100) : 0;
         }),
         backgroundColor: 'rgba(250,204,21,0.62)',
         borderColor: '#facc15',
