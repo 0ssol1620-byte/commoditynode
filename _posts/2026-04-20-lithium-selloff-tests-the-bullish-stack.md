@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Lithium Selloff Tests the Bullish Stack as Albemarle Drops 8.29%"
-date: 2026-04-20 10:06:00 +0900
+date: 2026-04-20 09:46:00 +0900
 categories: [battery, lithium]
 tags: [lithium, albemarle, alb, batteries, ev-battery, supply-discipline]
 commodity_name: Lithium
