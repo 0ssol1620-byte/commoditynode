@@ -197,6 +197,16 @@ code, kbd, pre {
 }
 
 /* Nav Dropdown */
+@media (max-width: 1180px) {
+  .main-nav { gap: 2px; }
+  .main-nav a,
+  .nav-dropdown-toggle {
+    font-size: 0.82rem;
+    padding: 8px 10px;
+  }
+}
+
+/* Nav Dropdown */
 .nav-dropdown {
   position: relative;
   display: flex;
