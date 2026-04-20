@@ -679,6 +679,113 @@
       .join(' ');
   }
 
+  function formatRelativeProfileTime(isoString) {
+    if (!isoString) return 'Not saved yet';
+    var date = new Date(isoString);
+    if (Number.isNaN(date.getTime())) return 'Saved recently';
+    var diffMs = Date.now() - date.getTime();
+    if (diffMs < 60 * 1000) return 'Updated just now';
+    if (diffMs < 60 * 60 * 1000) return 'Updated ' + Math.max(1, Math.round(diffMs / (60 * 1000))) + 'm ago';
+    if (diffMs < 24 * 60 * 60 * 1000) return 'Updated ' + Math.max(1, Math.round(diffMs / (60 * 60 * 1000))) + 'h ago';
+    return 'Updated ' + date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function getEventPlaybookHref(eventKey) {
+    var map = {
+      opec: '/before-opec-oil-playbook/',
+      wasde: '/before-wasde-grains-playbook/',
+      fed: '/before-fed-metals-playbook/'
+    };
+    return map[String(eventKey || '').toLowerCase()] || '';
+  }
+
+  function normalizePathname(path) {
+    var value = String(path || '/').split('?')[0].split('#')[0] || '/';
+    if (value.length > 1 && value.endsWith('/')) return value.slice(0, -1);
+    return value || '/';
+  }
+
+  function selectProfileAction(candidates, disallowedHrefs) {
+    var blocked = (disallowedHrefs || []).map(normalizePathname);
+    var currentPath = typeof window !== 'undefined' ? normalizePathname(window.location.pathname || '/') : '/';
+    for (var i = 0; i < (candidates || []).length; i += 1) {
+      var candidate = candidates[i];
+      if (!candidate || !candidate.href) continue;
+      var candidatePath = normalizePathname(candidate.href);
+      if (candidatePath === currentPath) continue;
+      if (blocked.indexOf(candidatePath) !== -1) continue;
+      return candidate;
+    }
+    var genericFallbacks = [
+      { href: '/start/', label: 'Build my workflow' },
+      { href: '/simulator/', label: 'Run simulator with my watchlist' },
+      { href: '/pricing/', label: 'See Free vs Pro' },
+      { href: '/reports/', label: 'Open live reports' }
+    ];
+    for (var j = 0; j < genericFallbacks.length; j += 1) {
+      var fallback = genericFallbacks[j];
+      var fallbackPath = normalizePathname(fallback.href);
+      if (fallbackPath === currentPath) continue;
+      if (blocked.indexOf(fallbackPath) !== -1) continue;
+      return fallback;
+    }
+    return { href: '/start/', label: 'Build my workflow' };
+  }
+
+  function buildProfileRecommendations(profile) {
+    profile = profile || getProfile();
+    var firstCommodity = profile.commodities[0] || '';
+    var firstEvent = profile.events[0] || '';
+    var firstCommodityHref = firstCommodity ? '/commodities/' + firstCommodity.replace(/_/g, '-').replace(/\s+/g, '-').toLowerCase() + '/' : '/start/';
+    var firstEventHref = getEventPlaybookHref(firstEvent);
+    var roleHrefMap = {
+      investor: '/for-self-directed-investors/',
+      analyst: '/for-equity-analysts/',
+      operator: '/for-operators-and-procurement/'
+    };
+    var roleHref = roleHrefMap[String(profile.role || '').toLowerCase()] || '/start/';
+    var hasSaved = !!(profile.role || profile.commodities.length || profile.watchlist.length || profile.events.length);
+    var primaryAction = selectProfileAction([
+      firstCommodity ? { href: firstCommodityHref, label: 'Open ' + titleize(firstCommodity) + ' hub' } : null,
+      firstEventHref ? { href: firstEventHref, label: 'Open ' + titleize(firstEvent) + ' playbook' } : null,
+      profile.watchlist.length ? { href: '/simulator/', label: 'Run simulator with my watchlist' } : null,
+      profile.role ? { href: roleHref, label: 'Continue my workflow' } : null,
+      { href: '/start/', label: 'Build my workflow' },
+      { href: '/pricing/', label: 'See Free vs Pro' }
+    ]);
+    var secondaryAction = selectProfileAction([
+      profile.watchlist.length ? { href: '/simulator/', label: 'Run simulator with my watchlist' } : null,
+      firstEventHref ? { href: firstEventHref, label: 'Open ' + titleize(firstEvent) + ' playbook' } : null,
+      firstCommodity ? { href: firstCommodityHref, label: 'Open ' + titleize(firstCommodity) + ' hub' } : null,
+      { href: '/pricing/', label: 'See Free vs Pro' },
+      { href: '/start/', label: 'Build my workflow' }
+    ], [primaryAction.href]);
+    var nextStep = 'Save a role, commodity, and watchlist once, then return to the live setup that matters.';
+
+    if (firstCommodity && profile.watchlist.length) {
+      nextStep = 'You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.';
+    } else if (firstCommodity && profile.events.length) {
+      nextStep = 'You have both a tracked commodity and event playbook saved. The fastest route now is hub first, then the relevant event workflow.';
+    } else if (firstCommodity) {
+      nextStep = 'You have a tracked commodity saved. Next step: add watchlist names so simulator relevance becomes personal instead of generic.';
+    } else if (profile.role) {
+      nextStep = 'Role saved. Next step: save 2–3 commodities so CommodityNode can route you into the right live setups faster.';
+    }
+
+    return {
+      hasSaved: hasSaved,
+      primaryHref: primaryAction.href,
+      primaryLabel: primaryAction.label,
+      secondaryHref: secondaryAction.href,
+      secondaryLabel: secondaryAction.label,
+      nextStep: nextStep,
+      updatedText: formatRelativeProfileTime(profile.updatedAt),
+      commodityCount: profile.commodities.length,
+      watchlistCount: profile.watchlist.length,
+      eventCount: profile.events.length
+    };
+  }
+
   window.CNTrack = function(eventName, props) {
     if (typeof window.gtag !== 'function') return;
     window.gtag('event', eventName, Object.assign({
@@ -697,27 +804,61 @@
 
   function renderProfileSurfaces(profile) {
     profile = profile || getProfile();
-    document.querySelectorAll('[data-profile-empty]').forEach(el => {
-      el.style.display = profile.role || profile.commodities.length || profile.watchlist.length || profile.events.length ? 'none' : '';
+    var recommendation = buildProfileRecommendations(profile);
+    document.querySelectorAll('[data-profile-empty]').forEach(function(el) {
+      el.style.display = recommendation.hasSaved ? 'none' : '';
     });
-    document.querySelectorAll('[data-profile-role]').forEach(el => {
+    document.querySelectorAll('[data-profile-has-saved]').forEach(function(el) {
+      el.style.display = recommendation.hasSaved ? '' : 'none';
+    });
+    document.querySelectorAll('[data-profile-role]').forEach(function(el) {
       el.textContent = profile.role ? titleize(profile.role) : 'Not set yet';
     });
-    document.querySelectorAll('[data-profile-commodities]').forEach(el => {
+    document.querySelectorAll('[data-profile-commodities]').forEach(function(el) {
       el.textContent = profile.commodities.length ? profile.commodities.map(titleize).join(', ') : 'No tracked commodities yet';
     });
-    document.querySelectorAll('[data-profile-watchlist]').forEach(el => {
+    document.querySelectorAll('[data-profile-watchlist]').forEach(function(el) {
       el.textContent = profile.watchlist.length ? profile.watchlist.join(', ') : 'No saved watchlist names yet';
     });
-    document.querySelectorAll('[data-profile-events]').forEach(el => {
+    document.querySelectorAll('[data-profile-events]').forEach(function(el) {
       el.textContent = profile.events.length ? profile.events.map(titleize).join(', ') : 'No event playbooks saved yet';
     });
-    document.querySelectorAll('[data-profile-summary]').forEach(el => {
-      if (profile.role || profile.commodities.length || profile.watchlist.length) {
-        const bits = [];
+    document.querySelectorAll('[data-profile-commodity-count]').forEach(function(el) {
+      el.textContent = String(recommendation.commodityCount);
+    });
+    document.querySelectorAll('[data-profile-watchlist-count]').forEach(function(el) {
+      el.textContent = String(recommendation.watchlistCount);
+    });
+    document.querySelectorAll('[data-profile-event-count]').forEach(function(el) {
+      el.textContent = String(recommendation.eventCount);
+    });
+    document.querySelectorAll('[data-profile-updated]').forEach(function(el) {
+      el.textContent = recommendation.updatedText;
+    });
+    document.querySelectorAll('[data-profile-next-step]').forEach(function(el) {
+      el.textContent = recommendation.nextStep;
+    });
+    document.querySelectorAll('[data-profile-primary-link]').forEach(function(el) {
+      el.setAttribute('href', recommendation.primaryHref);
+      el.setAttribute('data-cta', 'profile_personalized_primary');
+    });
+    document.querySelectorAll('[data-profile-primary-label]').forEach(function(el) {
+      el.textContent = recommendation.primaryLabel;
+    });
+    document.querySelectorAll('[data-profile-secondary-link]').forEach(function(el) {
+      el.setAttribute('href', recommendation.secondaryHref);
+      el.setAttribute('data-cta', 'profile_personalized_secondary');
+    });
+    document.querySelectorAll('[data-profile-secondary-label]').forEach(function(el) {
+      el.textContent = recommendation.secondaryLabel;
+    });
+    document.querySelectorAll('[data-profile-summary]').forEach(function(el) {
+      if (recommendation.hasSaved) {
+        var bits = [];
         if (profile.role) bits.push(titleize(profile.role));
         if (profile.commodities.length) bits.push(profile.commodities.length + ' commodity workflows saved');
         if (profile.watchlist.length) bits.push(profile.watchlist.length + ' watchlist names');
+        if (profile.events.length) bits.push(profile.events.length + ' event playbooks');
         el.textContent = bits.join(' · ');
       } else {
         el.textContent = 'Build your workflow once, then use CommodityNode as a faster daily decision surface.';
@@ -760,6 +901,19 @@
       if (value) {
         window.CNProfile.save({ role: value });
       }
+    }
+
+    const personalizedCta = event.target.closest('[data-profile-primary-link], [data-profile-secondary-link]');
+    if (personalizedCta && window.CNTrack) {
+      const profile = getProfile();
+      window.CNTrack('profile_personalized_cta_click', {
+        slot: personalizedCta.hasAttribute('data-profile-primary-link') ? 'primary' : 'secondary',
+        target_path: personalizedCta.getAttribute('href') || '',
+        role: profile.role || '',
+        saved_commodities_count: (profile.commodities || []).length,
+        saved_watchlist_count: (profile.watchlist || []).length,
+        saved_events_count: (profile.events || []).length
+      });
     }
   });
 

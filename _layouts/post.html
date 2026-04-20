@@ -90,6 +90,45 @@ layout: default
 }
 </script>
 
+<style>
+.report-workflow-strip {
+  margin-top: 18px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(34,211,238,0.14);
+  background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(168,85,247,0.05));
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.report-workflow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.report-workflow-card {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(8,12,20,0.38);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.report-workflow-card strong {
+  display: block;
+  margin-top: 4px;
+  color: #f8fafc;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+@media (max-width: 860px) {
+  .report-workflow-strip,
+  .report-workflow-grid,
+  .report-quick-answer {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+
 {% if page.categories contains "Commodities" or page.categories contains "Energy" or page.categories contains "Metals" or page.categories contains "Precious Metals" or page.categories contains "Agriculture" or page.categories contains "Soft Commodities" or page.categories contains "Critical Materials" %}
 <script type="application/ld+json">
 {
@@ -180,7 +219,7 @@ layout: default
     </div>
   </div>
 
-  <section aria-label="Search intent quick answer" data-animate style="margin-top:18px;padding:18px 20px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:start;">
+  <section class="report-quick-answer" aria-label="Search intent quick answer" data-animate style="margin-top:18px;padding:18px 20px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:1.3fr 1fr;gap:18px;align-items:start;">
     <div>
       <div style="font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Quick answer</div>
       <h2 style="margin:0 0 10px;font-size:1.15rem;line-height:1.35;">Why is {{ commodity_display }} {{ move_word }} today?</h2>
@@ -198,6 +237,39 @@ layout: default
           <li>Which stocks and sectors are affected</li>
           <li>What to watch over the next 24–72 hours</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="report-workflow-strip" aria-label="Saved workflow continuation" data-animate>
+    <div>
+      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Continue your saved workflow</div>
+      <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Save this commodity and the exposed names when the setup matters so CommodityNode can route you back into the right live pages faster.</div>
+      <div data-profile-has-saved style="display:none;">
+        <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
+        <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+        <a href="/start/" class="btn btn-secondary" data-profile-primary-link style="min-width:200px;justify-content:center;"><span data-profile-primary-label>Build my workflow</span></a>
+        <a href="/simulator/" class="btn btn-secondary" data-profile-secondary-link style="min-width:200px;justify-content:center;"><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
+      </div>
+    </div>
+    <div class="report-workflow-grid">
+      <div class="report-workflow-card">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Saved role</div>
+        <strong data-profile-role>Not set yet</strong>
+      </div>
+      <div class="report-workflow-card">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Saved commodities</div>
+        <strong data-profile-commodities>No tracked commodities yet</strong>
+      </div>
+      <div class="report-workflow-card">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Watchlist</div>
+        <strong data-profile-watchlist>No saved watchlist names yet</strong>
+      </div>
+      <div class="report-workflow-card">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Freshness</div>
+        <strong data-profile-updated>Not saved yet</strong>
       </div>
     </div>
   </section>

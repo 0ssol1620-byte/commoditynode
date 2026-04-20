@@ -418,6 +418,7 @@ image: "/assets/images/og-default.png"
           <p class="section-desc" style="max-width:760px;">Save your role, key commodities, watchlist names, and event playbooks so CommodityNode can route you straight to the setups that matter. This is how the product stops being a read and starts becoming a repeatable edge.</p>
           <div data-profile-empty style="margin-top:12px;color:var(--text2);line-height:1.7;">No workflow saved yet. Start with a role, a few commodities, and the names you actually care about.</div>
           <div style="margin-top:14px;color:#e2e8f0;font-size:0.92rem;font-weight:700;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
+          <p data-profile-has-saved style="display:none;margin:10px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
         </div>
         <div style="display:grid;gap:10px;">
           <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
@@ -432,9 +433,13 @@ image: "/assets/images/og-default.png"
             <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved watchlist</div>
             <div style="color:#cbd5e1;line-height:1.65;" data-profile-watchlist>No saved watchlist names yet</div>
           </div>
+          <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved playbooks</div>
+            <div style="color:#cbd5e1;line-height:1.65;" data-profile-events>No event playbooks saved yet</div>
+          </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <a href="/start/" class="btn btn-primary" data-cta="home_build_workflow" style="min-width:220px;justify-content:center;">Build my workflow</a>
-            <a href="/pricing/" class="btn btn-secondary" data-cta="home_compare_free_pro" style="min-width:220px;justify-content:center;">Compare Free vs Pro</a>
+            <a href="/start/" class="btn btn-primary" data-cta="home_build_workflow" data-profile-primary-link style="min-width:220px;justify-content:center;"><span data-profile-primary-label>Build my workflow</span></a>
+            <a href="/pricing/" class="btn btn-secondary" data-cta="home_compare_free_pro" data-profile-secondary-link style="min-width:220px;justify-content:center;"><span data-profile-secondary-label>Compare Free vs Pro</span></a>
           </div>
         </div>
       </div>
