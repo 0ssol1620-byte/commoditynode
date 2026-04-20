@@ -57,6 +57,14 @@ description: "Premium decision-support products on top of CommodityNode's commod
 @media (max-width: 900px) {
   .lab-kpis, .lab-module-grid, .lab-two-col, .lab-four-grid, .lab-policy-grid { grid-template-columns: 1fr; }
 }
+.lab-compare-table { width:100%; border-collapse:collapse; margin-top:16px; }
+.lab-compare-table th, .lab-compare-table td { padding:14px 12px; border-bottom:1px solid rgba(255,255,255,0.08); text-align:left; color:#cbd5e1; vertical-align:top; }
+.lab-compare-table th { color:#f8fafc; font-size:0.82rem; letter-spacing:0.08em; text-transform:uppercase; }
+.lab-rec-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:16px; }
+.lab-rec-card { padding:16px 18px; border-radius:16px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.03); display:grid; gap:8px; }
+@media (max-width: 900px) {
+  .lab-rec-grid { grid-template-columns:1fr; }
+}
 </style>
 
 <section class="intelligence-lab-hero">
@@ -212,14 +220,37 @@ description: "Premium decision-support products on top of CommodityNode's commod
   </div>
 
   <section class="lab-card" style="margin-top:18px;">
-    <div class="lab-card-kicker">Commercial packaging</div>
-    <h2>How this turns into revenue</h2>
-    <div class="lab-four-grid" style="margin-top:16px;">
-      <div class="lab-mini-card"><div class="lab-row-title">Pro</div><div class="lab-row-sub">Event Probability Studio, Explainability, basic Ripple Ranker, anomaly and regime surfaces.</div></div>
-      <div class="lab-mini-card"><div class="lab-row-title">Desk</div><div class="lab-row-sub">Exposure Screener, Stress Test, Hedge Optimizer, Event Study Library, export workflow.</div></div>
-      <div class="lab-mini-card"><div class="lab-row-title">Enterprise</div><div class="lab-row-sub">Saved policy workspaces, API access, custom watchlists, recurring reports, alerting.</div></div>
-      <div class="lab-mini-card"><div class="lab-row-title">RL / Policy Lab</div><div class="lab-row-sub">Sell as a trust-first policy simulator, not an autopilot trading bot.</div></div>
-    </div>
+    <div class="lab-card-kicker">Role-aware product routing</div>
+    <h2>Recommended next products for your workflow</h2>
+    <p id="lab-recommendation-copy">Save your role and watchlist so CommodityNode can push you into the most relevant Intelligence Lab products first.</p>
+    <div id="lab-recommendation-grid" class="lab-rec-grid"></div>
+  </section>
+
+  <section class="lab-card" style="margin-top:18px;">
+    <div class="lab-card-kicker">Product comparison matrix</div>
+    <h2>Which Intelligence Lab products belong in which tier?</h2>
+    <table class="lab-compare-table">
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Primary job</th>
+          <th>Best buyer</th>
+          <th>Best tier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Event Probability Studio</td><td>Event prep and odds</td><td>Macro / event-driven users</td><td>Pro / Desk</td></tr>
+        <tr><td>Ripple Ranker</td><td>Name and sector ranking</td><td>Investors and analysts</td><td>Pro / Desk</td></tr>
+        <tr><td>Exposure Screener</td><td>Saved watchlist overlap</td><td>Users with watchlists, desks</td><td>Desk</td></tr>
+        <tr><td>Portfolio Stress Test</td><td>Scenario P/L and concentration</td><td>PMs and active investors</td><td>Desk / Enterprise</td></tr>
+        <tr><td>Hedge Optimizer</td><td>Hedge shortlist and fit</td><td>Desk / enterprise users</td><td>Desk / Enterprise</td></tr>
+        <tr><td>Forecast Explainability</td><td>Trust and model interpretation</td><td>Paying forecast users</td><td>Pro</td></tr>
+        <tr><td>Regime Shift Detector</td><td>State labeling</td><td>Macro / systematic users</td><td>Pro</td></tr>
+        <tr><td>Anomaly Monitor</td><td>Mismatch alerts</td><td>Advanced users</td><td>Pro / Desk</td></tr>
+        <tr><td>Event Study Library</td><td>Historical reaction research</td><td>Research desks</td><td>Desk</td></tr>
+        <tr><td>RL Policy Lab</td><td>Policy support, not autopilot</td><td>Enterprise / premium desk</td><td>Enterprise</td></tr>
+      </tbody>
+    </table>
   </section>
 </div>
 

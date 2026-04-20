@@ -2,6 +2,29 @@
 layout: default
 ---
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "{{ page.title | escape }}",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Web",
+  "url": "{{ page.url | absolute_url }}",
+  "description": "{{ page.description | escape }}",
+  "featureList": {{ page.visualization_points | jsonify }},
+  "offers": {
+    "@type": "Offer",
+    "category": "{{ page.best_tier | escape }}",
+    "url": "https://commoditynode.com/pricing/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "CommodityNode",
+    "url": "https://commoditynode.com"
+  }
+}
+</script>
+
 <style>
 .intel-product-hero { padding: 72px 0 34px; background: linear-gradient(180deg, rgba(34,211,238,0.05), rgba(168,85,247,0.03)); border-bottom: 1px solid rgba(255,255,255,0.06); }
 .intel-product-shell { max-width: 1080px; margin: 0 auto; padding: 0 24px 56px; }
@@ -37,8 +60,8 @@ layout: default
     <h1>{{ page.title }}</h1>
     <p>{{ page.description }}</p>
     <div class="intel-actions">
-      <a href="/pricing/" class="intel-btn intel-btn-primary">Unlock {{ page.title }} access</a>
-      <a href="/intelligence-lab/" class="intel-btn intel-btn-secondary">Back to Intelligence Lab</a>
+      <a href="/pricing/" class="intel-btn intel-btn-primary" data-cta="intelligence_product_unlock_{{ page.title | slugify }}">Unlock {{ page.title }} access</a>
+      <a href="/intelligence-lab/" class="intel-btn intel-btn-secondary" data-cta="intelligence_product_back_{{ page.title | slugify }}">Back to Intelligence Lab</a>
     </div>
     <div class="intel-product-grid">
       <div class="intel-card"><div class="intel-kicker">Ideal buyer</div><div class="intel-stat">{{ page.ideal_for }}</div></div>
@@ -58,8 +81,8 @@ layout: default
         <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
       </div>
       <div class="intel-actions">
-        <a href="/start/" class="intel-btn intel-btn-secondary" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
-        <a href="/simulator/" class="intel-btn intel-btn-secondary" data-profile-secondary-link><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
+        <a href="/start/" class="intel-btn intel-btn-secondary" data-profile-primary-link data-cta="intelligence_product_profile_primary_{{ page.title | slugify }}"><span data-profile-primary-label>Build my workflow</span></a>
+        <a href="/simulator/" class="intel-btn intel-btn-secondary" data-profile-secondary-link data-cta="intelligence_product_profile_secondary_{{ page.title | slugify }}"><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
       </div>
     </div>
     <div class="intel-workflow-grid">
@@ -134,8 +157,8 @@ layout: default
       {% endfor %}
     </ul>
     <div class="intel-actions">
-      <a href="/pricing/" class="intel-btn intel-btn-primary">See pricing for {{ page.best_tier }}</a>
-      <a href="/enterprise/" class="intel-btn intel-btn-secondary">Package {{ page.title }} for Desk / Enterprise</a>
+      <a href="/pricing/" class="intel-btn intel-btn-primary" data-cta="intelligence_product_footer_pricing_{{ page.title | slugify }}">See pricing for {{ page.best_tier }}</a>
+      <a href="/enterprise/" class="intel-btn intel-btn-secondary" data-cta="intelligence_product_footer_enterprise_{{ page.title | slugify }}">Package {{ page.title }} for Desk / Enterprise</a>
     </div>
   </section>
 </div>

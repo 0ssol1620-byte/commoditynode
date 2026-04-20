@@ -840,14 +840,20 @@
     });
     document.querySelectorAll('[data-profile-primary-link]').forEach(function(el) {
       el.setAttribute('href', recommendation.primaryHref);
-      el.setAttribute('data-cta', 'profile_personalized_primary');
+      var existingPrimaryCta = el.getAttribute('data-cta') || '';
+      if (!existingPrimaryCta || existingPrimaryCta === 'home_build_workflow' || existingPrimaryCta === 'profile_personalized_primary') {
+        el.setAttribute('data-cta', 'profile_personalized_primary');
+      }
     });
     document.querySelectorAll('[data-profile-primary-label]').forEach(function(el) {
       el.textContent = recommendation.primaryLabel;
     });
     document.querySelectorAll('[data-profile-secondary-link]').forEach(function(el) {
       el.setAttribute('href', recommendation.secondaryHref);
-      el.setAttribute('data-cta', 'profile_personalized_secondary');
+      var existingSecondaryCta = el.getAttribute('data-cta') || '';
+      if (!existingSecondaryCta || existingSecondaryCta === 'home_compare_free_pro' || existingSecondaryCta === 'profile_personalized_secondary') {
+        el.setAttribute('data-cta', 'profile_personalized_secondary');
+      }
     });
     document.querySelectorAll('[data-profile-secondary-label]').forEach(function(el) {
       el.textContent = recommendation.secondaryLabel;

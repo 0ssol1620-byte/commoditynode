@@ -285,6 +285,56 @@
     }).join('');
   }
 
+  function getRecommendedProducts(profile) {
+    profile = profile || (window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { role: '', watchlist: [], commodities: [] });
+    var role = String(profile.role || '').toLowerCase();
+    var map = {
+      investor: [
+        { title: 'Ripple Ranker', href: '/intelligence-lab/ripple-ranker/', why: 'Best if you want stock and sector names first.' },
+        { title: 'Portfolio Stress Test', href: '/intelligence-lab/portfolio-stress-test/', why: 'Useful when a commodity move can change what you do with actual positions.' },
+        { title: 'Forecast Explainability Studio', href: '/intelligence-lab/forecast-explainability-studio/', why: 'Good for deciding whether the model deserves trust before you size risk.' }
+      ],
+      analyst: [
+        { title: 'Event Probability Studio', href: '/intelligence-lab/event-probability-studio/', why: 'Best for catalyst prep and scenario framing before writing the note.' },
+        { title: 'Ripple Ranker', href: '/intelligence-lab/ripple-ranker/', why: 'Turns commodity tape into named downstream impact quickly.' },
+        { title: 'Event Study Library', href: '/intelligence-lab/event-study-library/', why: 'Lets you anchor research in historical analogs.' }
+      ],
+      operator: [
+        { title: 'Exposure Screener', href: '/intelligence-lab/exposure-screener/', why: 'Best for supplier, budget, and watchlist overlap workflows.' },
+        { title: 'Hedge Optimizer', href: '/intelligence-lab/hedge-optimizer/', why: 'Useful when you need a cleaner risk-mitigation path than headline guesswork.' },
+        { title: 'Regime Shift Detector', href: '/intelligence-lab/regime-shift-detector/', why: 'Helps you decide whether the move is noise, trend, or a real state change.' }
+      ]
+    };
+    var fallback = [
+      { title: 'Event Probability Studio', href: '/intelligence-lab/event-probability-studio/', why: 'The cleanest entry point if you are still learning the product stack.' },
+      { title: 'Ripple Ranker', href: '/intelligence-lab/ripple-ranker/', why: 'A fast answer to which names and sectors actually matter.' },
+      { title: 'RL Policy Lab', href: '/intelligence-lab/rl-policy-lab/', why: 'The premium trust-first view for users who want policy support, not hype.' }
+    ];
+    var list = map[role] || fallback;
+    if ((profile.watchlist || []).length && list.every(function(item){ return item.title !== 'Exposure Screener'; })) {
+      list = [{ title: 'Exposure Screener', href: '/intelligence-lab/exposure-screener/', why: 'You already saved a watchlist, so this product becomes immediately more valuable.' }].concat(list).slice(0, 3);
+    }
+    return list;
+  }
+
+  function renderRecommendations() {
+    var grid = $('lab-recommendation-grid');
+    var copy = $('lab-recommendation-copy');
+    if (!grid) return;
+    var profile = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { role: '', watchlist: [], commodities: [] };
+    var recs = getRecommendedProducts(profile);
+    if (copy) {
+      copy.textContent = profile.role ? 'Based on your saved role and workflow, these are the strongest next Intelligence Lab products to open.' : 'Save your role and watchlist so CommodityNode can push you into the most relevant Intelligence Lab products first.';
+    }
+    grid.innerHTML = recs.map(function(item, idx){
+      return '<a class="lab-rec-card" href="' + item.href + '" data-cta="lab_recommended_product_' + (idx + 1) + '" style="text-decoration:none;">'
+        + '<div class="lab-card-kicker">Recommended product</div>'
+        + '<div class="lab-row-title">' + item.title + '</div>'
+        + '<div class="lab-row-sub">' + item.why + '</div>'
+        + '</a>';
+    }).join('');
+  }
+
   function renderAll(){
     var bundle = getCommodityBundle(state.selected);
     renderHero(bundle);
@@ -298,6 +348,7 @@
     renderAnomaly(bundle);
     renderEventStudies(bundle);
     renderPolicyLab(bundle);
+    renderRecommendations();
   }
 
   function fillSelector(){
@@ -311,6 +362,7 @@
     select.value = state.selected;
     select.addEventListener('change', function(){
       state.selected = this.value;
+      if (window.CNTrack) window.CNTrack('intelligence_lab_select_commodity', { commodity: state.selected });
       renderAll();
     });
   }
@@ -319,9 +371,15 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-lab-anchor]'), function(btn){
       btn.addEventListener('click', function(){
         var anchor = btn.getAttribute('data-lab-anchor');
+        if (window.CNTrack) window.CNTrack('intelligence_lab_jump_module', { module: anchor });
         var target = document.getElementById(anchor);
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
+    });
+    document.addEventListener('click', function(event){
+      var link = event.target.closest('a[href*="/intelligence-lab/"]');
+      if (!link) return;
+      if (window.CNTrack) window.CNTrack('intelligence_lab_open_product_page', { href: link.getAttribute('href') || '' });
     });
   }
 
