@@ -22,6 +22,10 @@ def test_reward_breakdown_matches_total_reward():
         event_gap_penalty=0.07,
         event_risk=0.3,
         abstain_bonus=0.01,
+        action_taken='reduce_risk',
+        expert_action='reduce_risk',
+        expert_alignment_bonus=0.03,
+        wrong_way_penalty=0.035,
     )
     breakdown = compute_reward_breakdown(**kwargs)
     total = compute_reward(**kwargs)
@@ -32,6 +36,9 @@ def test_reward_breakdown_matches_total_reward():
         - breakdown['concentration_cost']
         - breakdown['event_gap_cost']
         + breakdown['abstain_bonus']
+        + breakdown['expert_alignment_bonus']
+        - breakdown['wrong_way_cost']
     )
     assert abs(total - recomposed) < 1e-9
     assert breakdown['turnover_cost'] > 0
+    assert breakdown['expert_alignment_bonus'] == 0.03

@@ -41,15 +41,34 @@ def load_json(path: str | Path) -> dict:
     return json.loads(Path(path).read_text(encoding='utf-8'))
 
 
-def choose_expert_action(direction: str, agreement_score: float, anomaly_score: float, event_risk: float) -> str:
-    if anomaly_score >= 0.7:
+def choose_expert_action(
+    direction: str,
+    agreement_score: float,
+    anomaly_score: float,
+    event_risk: float,
+    realized_return: float,
+    model_spread: float,
+    trend_3: float,
+    volatility_5: float,
+    risk_pressure: float,
+) -> str:
+    bullish_signal = max(realized_return, trend_3)
+    bearish_signal = min(realized_return, trend_3)
+
+    if risk_pressure >= 0.34 or (anomaly_score >= 0.45 and bearish_signal < 0):
         return 'reduce_risk'
-    if event_risk >= 0.55 and agreement_score < 0.55:
+    if event_risk >= 0.3 and volatility_5 >= 0.04 and abs(realized_return) >= 0.001:
         return 'add_hedge'
-    if direction == 'bullish' and agreement_score >= 0.6:
+    if model_spread >= 0.055 and volatility_5 >= 0.02:
+        return 'relative_value_rotation'
+    if direction == 'bullish' or (bullish_signal >= 0.001 and agreement_score >= 0.55 and model_spread < 0.05):
         return 'add_continuation'
-    if direction == 'bearish' and agreement_score >= 0.6:
+    if direction == 'bearish' or (bearish_signal <= -0.001 and agreement_score >= 0.52):
         return 'reduce_risk'
+    if event_risk >= 0.3 and (volatility_5 >= 0.03 or risk_pressure >= 0.3):
+        return 'add_hedge'
+    if model_spread >= 0.04:
+        return 'relative_value_rotation'
     return 'hold'
 
 
@@ -92,6 +111,11 @@ def build_steps_for_commodity(
         timesfm_value = float(timesfm_median[idx]) if idx < len(timesfm_median) else None
         model_spread = compute_model_spread(nxt, chronos_value, timesfm_value)
         anomaly = compute_anomaly_score(direction, realized_return, score, model_spread)
+        trend_3 = float(sum(safe_pct_change(float(median[j]), float(median[j - 1])) for j in range(max(1, idx - 2), idx + 1)) / max(1, min(3, idx)))
+        volatility_5 = float(min(1.0, sum(abs(safe_pct_change(float(median[j]), float(median[j - 1]))) for j in range(max(1, idx - 4), idx + 1)) / max(1, min(5, idx)) * 20.0))
+        forecast_magnitude = min(1.0, abs(realized_return) * 25.0)
+        agreement_event_mix = float(score * (1.0 - event_risk))
+        risk_pressure = float(min(1.0, anomaly * 0.5 + event_risk * 0.3 + model_spread * 0.2))
         observation = {
             'forecast_return': realized_return,
             'agreement_score': score,
@@ -103,11 +127,11 @@ def build_steps_for_commodity(
             'ripple_max_score': float(max((item.get('score', 0) for item in intelligence_entry.get('ripple_ranker', [])), default=0.0)) / 100.0,
             'hedge_count': float(len(intelligence_entry.get('hedges', []))),
             'policy_action_count': float(len(intelligence_entry.get('policy_actions', []))),
-            'forecast_magnitude': min(1.0, abs(realized_return) * 25.0),
-            'trend_3': float(sum(safe_pct_change(float(median[j]), float(median[j - 1])) for j in range(max(1, idx - 2), idx + 1)) / max(1, min(3, idx))),
-            'volatility_5': float(min(1.0, sum(abs(safe_pct_change(float(median[j]), float(median[j - 1]))) for j in range(max(1, idx - 4), idx + 1)) / max(1, min(5, idx)) * 20.0)),
-            'agreement_event_mix': float(score * (1.0 - event_risk)),
-            'risk_pressure': float(min(1.0, anomaly * 0.5 + event_risk * 0.3 + model_spread * 0.2)),
+            'forecast_magnitude': forecast_magnitude,
+            'trend_3': trend_3,
+            'volatility_5': volatility_5,
+            'agreement_event_mix': agreement_event_mix,
+            'risk_pressure': risk_pressure,
         }
         metadata = {
             'current_price': current,
@@ -122,7 +146,17 @@ def build_steps_for_commodity(
                 timestamp=str(dates[idx]),
                 observation=observation,
                 target_return=realized_return,
-                expert_action=choose_expert_action(direction, score, anomaly, event_risk),
+                expert_action=choose_expert_action(
+                    direction,
+                    score,
+                    anomaly,
+                    event_risk,
+                    realized_return,
+                    model_spread,
+                    trend_3,
+                    volatility_5,
+                    risk_pressure,
+                ),
                 metadata=metadata,
             )
         )

@@ -18,8 +18,8 @@ def test_neural_walk_forward_and_replay():
     from rl.neural_ppo import train_neural_ppo
 
     dataset = build_trajectory_dataset(commodity_keys=('crude_oil', 'gold', 'copper'))
-    steps = list(dataset.train[:64])
-    result = train_neural_ppo(steps, total_timesteps=64, device='cpu')
+    steps = list(dataset.train[:96])
+    result = train_neural_ppo(steps, total_timesteps=96, device='cpu')
     replay = replay_policy(
         name='neural',
         steps=list(dataset.test[:24] or dataset.val[:24]),
@@ -27,10 +27,11 @@ def test_neural_walk_forward_and_replay():
     )
     assert replay.final_equity > 0
     assert 'pnl' in replay.reward_decomposition
+    assert 0.0 <= replay.action_diversity <= 1.0
 
     walk = evaluate_neural_walk_forward(
         dataset,
-        total_timesteps=64,
+        total_timesteps=96,
         window_count=2,
         eval_window_size=12,
         min_train_steps=48,
@@ -38,3 +39,5 @@ def test_neural_walk_forward_and_replay():
     )
     assert len(walk.windows) == 2
     assert 0.0 <= walk.positive_window_rate <= 1.0
+    assert isinstance(walk.vs_hold_reward_uplift, float)
+    assert 0.0 <= walk.mean_action_diversity <= 1.0

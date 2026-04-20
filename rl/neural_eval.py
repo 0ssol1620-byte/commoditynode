@@ -19,6 +19,7 @@ class PolicyReplaySummary:
     max_drawdown: float
     win_rate: float
     action_counts: dict[str, int]
+    action_diversity: float
     reward_decomposition: dict[str, float]
 
 
@@ -43,6 +44,8 @@ class WalkForwardEvaluation:
     mean_final_equity: float
     mean_max_drawdown: float
     positive_window_rate: float
+    vs_hold_reward_uplift: float
+    mean_action_diversity: float
 
 
 ActionChooser = Callable[[dict], str]
@@ -124,6 +127,7 @@ def replay_policy(
         max_drawdown=max_drawdown,
         win_rate=wins / max(1, count),
         action_counts=action_counts,
+        action_diversity=sum(1 for value in action_counts.values() if value > 0) / max(1, len(config.action.discrete_actions)),
         reward_decomposition=breakdown_totals,
     )
 
@@ -147,6 +151,8 @@ def evaluate_neural_walk_forward(
         raise ValueError('walk-forward split unavailable')
     stride = max(1, available // max(1, window_count))
     windows: list[WalkForwardWindowResult] = []
+    hold_rewards: list[float] = []
+    action_diversities: list[float] = []
 
     for idx in range(window_count):
         train_end = min_train_steps + idx * stride
@@ -168,6 +174,14 @@ def evaluate_neural_walk_forward(
             chooser=lambda obs, policy=neural_result.policy: policy.decide(obs).action,
             config=config,
         )
+        hold_replay = replay_policy(
+            name=f'walk_forward_hold_{idx + 1}',
+            steps=eval_steps,
+            chooser=lambda _obs: 'hold',
+            config=config,
+        )
+        hold_rewards.append(hold_replay.total_reward)
+        action_diversities.append(replay.action_diversity)
         dominant_action = 'hold'
         if replay.action_counts:
             dominant_action = max(replay.action_counts, key=replay.action_counts.get)
@@ -195,4 +209,6 @@ def evaluate_neural_walk_forward(
         mean_final_equity=sum(window.final_equity for window in windows) / len(windows),
         mean_max_drawdown=sum(window.max_drawdown for window in windows) / len(windows),
         positive_window_rate=sum(1 for window in windows if window.total_reward > 0) / len(windows),
+        vs_hold_reward_uplift=(sum(window.total_reward for window in windows) - sum(hold_rewards)) / len(windows),
+        mean_action_diversity=sum(action_diversities) / max(1, len(action_diversities)),
     )

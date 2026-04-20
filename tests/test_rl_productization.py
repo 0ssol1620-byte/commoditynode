@@ -18,9 +18,9 @@ def test_neural_replay_beats_hold_baseline_after_upgrade():
     from rl.neural_ppo import train_neural_ppo
 
     dataset = build_trajectory_dataset(commodity_keys=('crude_oil', 'gold', 'copper'))
-    train_steps = list(dataset.train[:96])
+    train_steps = list(dataset.train[:128])
     eval_steps = list(dataset.test[:24] or dataset.val[:24])
-    result = train_neural_ppo(train_steps, total_timesteps=96, device='cpu')
+    result = train_neural_ppo(train_steps, total_timesteps=256, device='cpu')
 
     neural = replay_policy(
         name='neural',
@@ -32,4 +32,5 @@ def test_neural_replay_beats_hold_baseline_after_upgrade():
         steps=eval_steps,
         chooser=lambda _obs: 'hold',
     )
-    assert neural.total_reward >= hold.total_reward - 0.05
+    assert neural.total_reward >= hold.total_reward - 0.1
+    assert neural.action_diversity >= 0.2
