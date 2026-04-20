@@ -21,6 +21,7 @@ def compute_reward_breakdown(
     expert_action: str | None = None,
     expert_alignment_bonus: float = 0.0,
     wrong_way_penalty: float = 0.0,
+    stale_hold_penalty: float = 0.0,
 ) -> dict[str, float]:
     pnl = position_after * realized_return - hedge_after * max(realized_return, 0.0) * 0.5
     turnover = abs(position_after - position_before) + abs(hedge_after - hedge_before)
@@ -30,6 +31,9 @@ def compute_reward_breakdown(
     abstain = abstain_bonus if abs(position_after) < 1e-9 and abs(hedge_after) < 1e-9 else 0.0
     alignment_bonus = expert_alignment_bonus if action_taken and expert_action and action_taken == expert_action else 0.0
     wrong_way = 0.0
+    stale_hold = 0.0
+    if action_taken == 'hold' and expert_action in {'add_continuation', 'add_hedge', 'reduce_risk'}:
+        stale_hold = stale_hold_penalty * max(abs(realized_return) * 25.0, event_risk)
     if action_taken and expert_action and action_taken != expert_action:
         if expert_action == 'reduce_risk' and action_taken == 'add_continuation':
             wrong_way = wrong_way_penalty
@@ -46,6 +50,7 @@ def compute_reward_breakdown(
         'abstain_bonus': float(abstain),
         'expert_alignment_bonus': float(alignment_bonus),
         'wrong_way_cost': float(wrong_way),
+        'stale_hold_cost': float(stale_hold),
     }
 
 
@@ -70,6 +75,7 @@ def compute_reward(
     expert_action: str | None = None,
     expert_alignment_bonus: float = 0.0,
     wrong_way_penalty: float = 0.0,
+    stale_hold_penalty: float = 0.0,
 ) -> float:
     breakdown = compute_reward_breakdown(
         realized_return=realized_return,
@@ -90,6 +96,7 @@ def compute_reward(
         expert_action=expert_action,
         expert_alignment_bonus=expert_alignment_bonus,
         wrong_way_penalty=wrong_way_penalty,
+        stale_hold_penalty=stale_hold_penalty,
     )
     reward = (
         breakdown['pnl']
@@ -100,5 +107,6 @@ def compute_reward(
         + breakdown['abstain_bonus']
         + breakdown['expert_alignment_bonus']
         - breakdown['wrong_way_cost']
+        - breakdown['stale_hold_cost']
     )
     return float(reward)

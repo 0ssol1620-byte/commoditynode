@@ -69,6 +69,9 @@ def replay_policy(
         'concentration_cost': 0.0,
         'event_gap_cost': 0.0,
         'abstain_bonus': 0.0,
+        'expert_alignment_bonus': 0.0,
+        'wrong_way_cost': 0.0,
+        'stale_hold_cost': 0.0,
     }
     peak_equity = env.state.peak_equity
     max_drawdown = 0.0
@@ -95,6 +98,11 @@ def replay_policy(
             event_gap_penalty=config.reward.event_gap_penalty,
             event_risk=float(step.observation.get('event_risk', 0.0)),
             abstain_bonus=config.reward.abstain_bonus,
+            action_taken=result.info['action'],
+            expert_action=step.expert_action,
+            expert_alignment_bonus=config.reward.expert_alignment_bonus,
+            wrong_way_penalty=config.reward.wrong_way_penalty,
+            stale_hold_penalty=config.reward.stale_hold_penalty,
         )
         for key in breakdown_totals:
             breakdown_totals[key] += float(breakdown[key])

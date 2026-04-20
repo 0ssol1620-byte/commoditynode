@@ -92,6 +92,7 @@ class CommodityTradingEnv:
             expert_action=step.expert_action,
             expert_alignment_bonus=self.config.reward.expert_alignment_bonus,
             wrong_way_penalty=self.config.reward.wrong_way_penalty,
+            stale_hold_penalty=self.config.reward.stale_hold_penalty,
         )
         self.state.equity += reward
         self.state.peak_equity = max(self.state.peak_equity, self.state.equity)
