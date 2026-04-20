@@ -1,5 +1,5 @@
 {
-  "updated_from_commit": "e7e7737+",
+  "updated_from_commit": "1bddf0d+",
   "config": {
     "name": "commoditynode-rl-policy-lab",
     "commodity_keys": [
@@ -130,6 +130,102 @@
       }
     }
   },
+  "neural_policy": {
+    "available": true,
+    "requested_device": "cuda",
+    "torch_cuda_available": true,
+    "report": {
+      "timesteps": 512,
+      "final_action": "reduce_risk",
+      "confidence": 0.23352305591106415,
+      "mean_reward_estimate": -0.006811397824679281,
+      "device_used": "cuda"
+    },
+    "frontier": [
+      {
+        "commodity": "crude_oil",
+        "timestamp": "2026-07-15",
+        "action": "reduce_risk",
+        "confidence": 0.2315,
+        "probabilities": {
+          "reduce_risk": 0.2315,
+          "hold": 0.2069,
+          "add_continuation": 0.1726,
+          "add_hedge": 0.2138,
+          "relative_value_rotation": 0.1752
+        }
+      },
+      {
+        "commodity": "gold",
+        "timestamp": "2026-07-15",
+        "action": "reduce_risk",
+        "confidence": 0.2308,
+        "probabilities": {
+          "reduce_risk": 0.2308,
+          "hold": 0.2065,
+          "add_continuation": 0.1731,
+          "add_hedge": 0.2154,
+          "relative_value_rotation": 0.1742
+        }
+      },
+      {
+        "commodity": "copper",
+        "timestamp": "2026-07-16",
+        "action": "reduce_risk",
+        "confidence": 0.2308,
+        "probabilities": {
+          "reduce_risk": 0.2308,
+          "hold": 0.2065,
+          "add_continuation": 0.1731,
+          "add_hedge": 0.2153,
+          "relative_value_rotation": 0.1742
+        }
+      },
+      {
+        "commodity": "natural_gas",
+        "timestamp": "2026-07-15",
+        "action": "reduce_risk",
+        "confidence": 0.2287,
+        "probabilities": {
+          "reduce_risk": 0.2287,
+          "hold": 0.2064,
+          "add_continuation": 0.1746,
+          "add_hedge": 0.2141,
+          "relative_value_rotation": 0.1762
+        }
+      },
+      {
+        "commodity": "wheat",
+        "timestamp": "2026-07-15",
+        "action": "reduce_risk",
+        "confidence": 0.2228,
+        "probabilities": {
+          "reduce_risk": 0.2228,
+          "hold": 0.2058,
+          "add_continuation": 0.1794,
+          "add_hedge": 0.2112,
+          "relative_value_rotation": 0.1809
+        }
+      }
+    ],
+    "performance": {
+      "cpu": {
+        "device": "cpu",
+        "seconds": 2.81676392396912,
+        "final_action": "hold",
+        "confidence": 0.2304118573665619,
+        "mean_reward_estimate": 0.010000000000000007
+      },
+      "gpu": {
+        "device": "cuda",
+        "seconds": 1.8386783880414441,
+        "final_action": "reduce_risk",
+        "confidence": 0.24038536846637726,
+        "mean_reward_estimate": 0.010000000000000007
+      },
+      "speedup_vs_cpu": 1.531950308596127
+    }
+  },
   "policy_frontier": [
     {
       "commodity": "crude_oil",
@@ -149,6 +245,15 @@
         "ripple_max_score": 0.92,
         "hedge_count": 3.0,
         "policy_action_count": 3.0
+      },
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2315,
+      "neural_probabilities": {
+        "reduce_risk": 0.2315,
+        "hold": 0.2069,
+        "add_continuation": 0.1726,
+        "add_hedge": 0.2138,
+        "relative_value_rotation": 0.1752
       }
     },
     {
@@ -169,6 +274,15 @@
         "ripple_max_score": 0.91,
         "hedge_count": 3.0,
         "policy_action_count": 3.0
+      },
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2308,
+      "neural_probabilities": {
+        "reduce_risk": 0.2308,
+        "hold": 0.2065,
+        "add_continuation": 0.1731,
+        "add_hedge": 0.2154,
+        "relative_value_rotation": 0.1742
       }
     },
     {
@@ -189,6 +303,15 @@
         "ripple_max_score": 0.95,
         "hedge_count": 3.0,
         "policy_action_count": 3.0
+      },
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2308,
+      "neural_probabilities": {
+        "reduce_risk": 0.2308,
+        "hold": 0.2065,
+        "add_continuation": 0.1731,
+        "add_hedge": 0.2153,
+        "relative_value_rotation": 0.1742
       }
     },
     {
@@ -209,6 +332,15 @@
         "ripple_max_score": 0.88,
         "hedge_count": 3.0,
         "policy_action_count": 2.0
+      },
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2287,
+      "neural_probabilities": {
+        "reduce_risk": 0.2287,
+        "hold": 0.2064,
+        "add_continuation": 0.1746,
+        "add_hedge": 0.2141,
+        "relative_value_rotation": 0.1762
       }
     },
     {
@@ -229,6 +361,15 @@
         "ripple_max_score": 0.85,
         "hedge_count": 2.0,
         "policy_action_count": 1.0
+      },
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2228,
+      "neural_probabilities": {
+        "reduce_risk": 0.2228,
+        "hold": 0.2058,
+        "add_continuation": 0.1794,
+        "add_hedge": 0.2112,
+        "relative_value_rotation": 0.1809
       }
     }
   ],
@@ -241,7 +382,9 @@
       "offline_action": "reduce_risk",
       "offline_confidence": 0.2734,
       "ppo_action": "hold",
-      "ppo_confidence": 0.3399
+      "ppo_confidence": 0.3399,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2308
     },
     {
       "commodity": "natural_gas",
@@ -251,7 +394,9 @@
       "offline_action": "reduce_risk",
       "offline_confidence": 0.2712,
       "ppo_action": "hold",
-      "ppo_confidence": 0.3519
+      "ppo_confidence": 0.3519,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2287
     },
     {
       "commodity": "wheat",
@@ -261,7 +406,9 @@
       "offline_action": "reduce_risk",
       "offline_confidence": 0.2442,
       "ppo_action": "hold",
-      "ppo_confidence": 0.3564
+      "ppo_confidence": 0.3564,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2228
     },
     {
       "commodity": "copper",
@@ -271,7 +418,9 @@
       "offline_action": "reduce_risk",
       "offline_confidence": 0.2676,
       "ppo_action": "hold",
-      "ppo_confidence": 0.3465
+      "ppo_confidence": 0.3465,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2308
     },
     {
       "commodity": "crude_oil",
@@ -281,7 +430,9 @@
       "offline_action": "reduce_risk",
       "offline_confidence": 0.399,
       "ppo_action": "reduce_risk",
-      "ppo_confidence": 0.345
+      "ppo_confidence": 0.345,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.2315
     }
   ]
 }

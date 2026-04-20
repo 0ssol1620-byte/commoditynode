@@ -26,6 +26,7 @@ def main() -> None:
         'final_action': result.report.final_action,
         'confidence': result.report.confidence,
         'mean_reward_estimate': result.report.mean_reward_estimate,
+        'device_used': result.report.device_used,
     }, indent=2), encoding='utf-8')
     print(str(OUTPUT))
 

@@ -15,3 +15,11 @@ def test_export_payload_contains_frontier_and_replay():
     assert len(payload['policy_frontier']) > 0
     assert len(payload['episode_replay']) > 0
     assert 'benchmark' in payload
+    assert 'neural_policy' in payload
+    assert isinstance(payload['neural_policy'], dict)
+    if payload['neural_policy'].get('available'):
+        assert payload['neural_policy']['report']['timesteps'] == 512
+        assert len(payload['neural_policy'].get('frontier', [])) > 0
+        first = payload['policy_frontier'][0]
+        assert 'neural_action' in first
+        assert 'neural_confidence' in first

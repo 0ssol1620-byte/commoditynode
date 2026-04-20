@@ -28,3 +28,7 @@ def test_train_neural_ppo_smoke():
     obs, info = env.reset()
     assert obs.shape[0] > 0
     assert info['commodity'] == 'crude_oil'
+    first_decision = result.policy.decide(obs)
+    dict_decision = result.policy.decide(steps[0].observation)
+    assert first_decision.action in ('reduce_risk', 'hold', 'add_continuation', 'add_hedge', 'relative_value_rotation')
+    assert dict_decision.action in ('reduce_risk', 'hold', 'add_continuation', 'add_hedge', 'relative_value_rotation')

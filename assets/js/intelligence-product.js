@@ -335,8 +335,10 @@
         tertiary = { value: workspace ? 'Saved' : 'Unsaved', copy: workspace ? 'Historical context for ' + titleize(state.selected) + ' is saved locally for reopening later.' : 'Save the workspace to keep this analog set attached to the commodity.' };
         break;
       case 'rl-policy-lab':
-        primary = { value: buildPolicyScores(bundle)[0] ? buildPolicyScores(bundle)[0].score + '/100' : '—', copy: 'Current policy confidence score.' };
-        secondary = { value: roleText, copy: profile.role ? 'Saved role shapes whether policy support should emphasize research discipline, capital protection, or operating response.' : 'Save a role so this policy layer stops acting like a generic demo and starts acting like a workflow tool.' };
+        var neuralFrontierMetric = getNeuralFrontierForSelected();
+        var neuralPerformanceMetric = getNeuralPerformance();
+        primary = neuralFrontierMetric ? { value: Math.round(Number(neuralFrontierMetric.confidence || 0) * 100) + '%', copy: 'Neural PPO confidence for ' + String(neuralFrontierMetric.action || 'hold').replace(/_/g, ' ') + '.' } : { value: buildPolicyScores(bundle)[0] ? buildPolicyScores(bundle)[0].score + '/100' : '—', copy: 'Current policy confidence score.' };
+        secondary = neuralPerformanceMetric && neuralPerformanceMetric.speedup_vs_cpu ? { value: Number(neuralPerformanceMetric.speedup_vs_cpu).toFixed(2) + 'x', copy: 'GPU speedup vs CPU for the current neural PPO benchmark.' } : { value: roleText, copy: profile.role ? 'Saved role shapes whether policy support should emphasize research discipline, capital protection, or operating response.' : 'Save a role so this policy layer stops acting like a generic demo and starts acting like a workflow tool.' };
         tertiary = { value: alert && alert.enabled ? 'Enabled' : 'Off', copy: alert && alert.enabled ? 'Policy reminder is active for ' + titleize(state.selected) + '.' : 'Toggle the reminder to preserve this policy state for later review.' };
         break;
     }
@@ -574,33 +576,110 @@
     return state.rlArtifacts && state.rlArtifacts.benchmark ? state.rlArtifacts.benchmark : null;
   }
 
+  function getNeuralPolicy(){
+    return state.rlArtifacts && state.rlArtifacts.neural_policy ? state.rlArtifacts.neural_policy : null;
+  }
+
+  function getNeuralFrontierForSelected(){
+    var neural = getNeuralPolicy();
+    var items = safeArray(neural && neural.frontier);
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].commodity === state.selected) return items[i];
+    }
+    return null;
+  }
+
+  function getNeuralPerformance(){
+    var neural = getNeuralPolicy();
+    return neural && neural.performance ? neural.performance : null;
+  }
+
   function renderPolicyLab(bundle){
     var frontier = getRlFrontierForSelected();
     var benchmark = getRlBenchmark();
+    var neural = getNeuralPolicy();
+    var neuralFrontier = getNeuralFrontierForSelected();
+    var neuralPerformance = getNeuralPerformance();
     var items = buildPolicyScores(bundle);
+    var actionLabels = items.map(function(item){ return item.state; });
+    var offlineAction = frontier ? String(frontier.offline_action || 'hold') : '';
+    var ppoAction = frontier ? String(frontier.ppo_action || 'hold') : '';
+    var neuralAction = neuralFrontier ? String(neuralFrontier.action || 'hold') : '';
+    var chartData = {
+      labels: actionLabels,
+      datasets: [{
+        label: 'Heuristic prior',
+        data: items.map(function(item){ return item.score; }),
+        backgroundColor: 'rgba(168,85,247,0.32)',
+        borderColor: 'rgba(168,85,247,0.95)',
+        borderRadius: 10,
+        borderWidth: 1
+      }]
+    };
+
     if (frontier) {
-      items = items.map(function(item){
-        var isChosen = String(item.state || '').toLowerCase().indexOf(String(frontier.ppo_action || '').replace(/_/g, ' ').toLowerCase()) !== -1;
-        return Object.assign({}, item, {
-          score: isChosen ? Math.max(item.score, Math.round(Number(frontier.ppo_confidence || 0) * 100)) : item.score
-        });
+      chartData.datasets.push({
+        label: 'Offline policy',
+        data: items.map(function(item){
+          var isChosen = String(item.state || '').toLowerCase().indexOf(offlineAction.replace(/_/g, ' ').toLowerCase()) !== -1;
+          return isChosen ? Math.round(Number(frontier.offline_confidence || 0) * 100) : 0;
+        }),
+        backgroundColor: 'rgba(34,197,94,0.58)',
+        borderColor: '#22c55e',
+        borderRadius: 10,
+        borderWidth: 1
+      });
+      chartData.datasets.push({
+        label: 'PPO bootstrap',
+        data: items.map(function(item){
+          var isChosen = String(item.state || '').toLowerCase().indexOf(ppoAction.replace(/_/g, ' ').toLowerCase()) !== -1;
+          return isChosen ? Math.round(Number(frontier.ppo_confidence || 0) * 100) : 0;
+        }),
+        backgroundColor: 'rgba(56,189,248,0.58)',
+        borderColor: '#38bdf8',
+        borderRadius: 10,
+        borderWidth: 1
       });
     }
+
+    if (neuralFrontier) {
+      chartData.datasets.push({
+        label: 'Neural PPO',
+        data: items.map(function(item){
+          var isChosen = String(item.state || '').toLowerCase().indexOf(neuralAction.replace(/_/g, ' ').toLowerCase()) !== -1;
+          return isChosen ? Math.round(Number(neuralFrontier.confidence || 0) * 100) : 0;
+        }),
+        backgroundColor: 'rgba(250,204,21,0.62)',
+        borderColor: '#facc15',
+        borderRadius: 10,
+        borderWidth: 1
+      });
+    }
+
     ensureChart({
       type: 'bar',
-      data: {
-        labels: items.map(function(item){ return item.state; }),
-        datasets: [{
-          label: 'Policy score',
-          data: items.map(function(item){ return item.score; }),
-          backgroundColor: 'rgba(168,85,247,0.62)',
-          borderColor: '#a855f7',
-          borderRadius: 10,
-          borderWidth: 1
-        }]
-      },
-      options: chartOptions(100)
+      data: chartData,
+      options: multiChartOptions()
     });
+
+    if (frontier && neuralFrontier) {
+      var summaryText = 'Neural PPO loaded for ' + titleize(state.selected) + ': ' + neuralAction.replace(/_/g, ' ') + ' (' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '% confidence';
+      if (neural && neural.report && neural.report.device_used) {
+        summaryText += ', device ' + String(neural.report.device_used).toUpperCase();
+      }
+      if (neuralPerformance && neuralPerformance.speedup_vs_cpu) {
+        summaryText += ', ' + Number(neuralPerformance.speedup_vs_cpu).toFixed(2) + 'x faster than CPU in the latest benchmark';
+      }
+      summaryText += ').';
+      renderSummary(summaryText);
+      renderInsights([
+        { title: 'Offline policy → ' + offlineAction.replace(/_/g, ' '), copy: 'Offline confidence ' + Math.round(Number(frontier.offline_confidence || 0) * 100) + '%.' },
+        { title: 'PPO bootstrap → ' + ppoAction.replace(/_/g, ' '), copy: 'Bootstrap confidence ' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '%. Timestamp ' + (frontier.timestamp || 'n/a') + '.' },
+        { title: 'Neural PPO → ' + neuralAction.replace(/_/g, ' '), copy: (neural && neural.report ? 'Timesteps ' + Number(neural.report.timesteps || 0) + ' · Mean reward ' + Number(neural.report.mean_reward_estimate || 0).toFixed(4) + '.' : 'Neural report unavailable.') + (neuralPerformance ? ' CPU ' + Number((neuralPerformance.cpu || {}).seconds || 0).toFixed(2) + 's vs GPU ' + Number((neuralPerformance.gpu || {}).seconds || 0).toFixed(2) + 's.' : '') }
+      ]);
+      return;
+    }
+
     if (frontier) {
       renderSummary('Real RL artifacts loaded. PPO action for ' + titleize(state.selected) + ': ' + String(frontier.ppo_action || 'hold').replace(/_/g, ' ') + ' (' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '% confidence).');
       renderInsights([

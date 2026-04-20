@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Sequence
+from typing import Mapping, Sequence
 
 from .config import RLExperimentConfig, get_default_rl_config
 from .dataset import RLTrajectoryStep
@@ -14,6 +14,7 @@ class NeuralPPOTrainingReport:
     final_action: str
     confidence: float
     mean_reward_estimate: float
+    device_used: str
 
 
 class GymCommodityEnv(__import__('gymnasium').Env):
@@ -59,22 +60,34 @@ class NeuralPPODecision:
 
 
 class NeuralPPOPolicy:
-    def __init__(self, model, action_names: Sequence[str]):
+    def __init__(self, model, action_names: Sequence[str], feature_keys: Sequence[str]):
         self.model = model
         self.action_names = tuple(action_names)
+        self.feature_keys = tuple(feature_keys)
 
-    def decide(self, observation_vector) -> NeuralPPODecision:
+    def _coerce_observation(self, observation):
         import numpy as np
+
+        if isinstance(observation, Mapping):
+            return np.asarray([float(observation.get(key, 0.0)) for key in self.feature_keys], dtype=np.float32)
+        return np.asarray(observation, dtype=np.float32)
+
+    def action_probabilities(self, observation) -> dict[str, float]:
         import torch
 
         device = getattr(self.model, 'device', 'cpu')
-        obs_tensor = torch.as_tensor(np.asarray(observation_vector, dtype=np.float32), device=device).reshape(1, -1)
+        obs_vector = self._coerce_observation(observation)
+        obs_tensor = torch.as_tensor(obs_vector, device=device).reshape(1, -1)
         distribution = self.model.policy.get_distribution(obs_tensor)
         probs = distribution.distribution.probs.detach().cpu().numpy()[0]
-        action_idx = int(probs.argmax())
+        return {action: float(probs[idx]) for idx, action in enumerate(self.action_names)}
+
+    def decide(self, observation) -> NeuralPPODecision:
+        probs = self.action_probabilities(observation)
+        action = max(probs, key=probs.get)
         return NeuralPPODecision(
-            action=self.action_names[action_idx],
-            confidence=float(probs[action_idx]),
+            action=action,
+            confidence=float(probs[action]),
         )
 
 
@@ -115,7 +128,7 @@ def train_neural_ppo(
     )
     model.learn(total_timesteps=total_timesteps, progress_bar=False)
     obs, _ = env.reset()
-    decision = NeuralPPOPolicy(model, env.action_names).decide(obs)
+    decision = NeuralPPOPolicy(model, env.action_names, env.feature_keys).decide(obs)
 
     # quick deterministic roll-forward estimate
     obs, _ = env.reset()
@@ -127,11 +140,12 @@ def train_neural_ppo(
         total_reward += float(reward)
         done = bool(terminated or truncated)
 
-    policy = NeuralPPOPolicy(model, env.action_names)
+    policy = NeuralPPOPolicy(model, env.action_names, env.feature_keys)
     report = NeuralPPOTrainingReport(
         timesteps=total_timesteps,
         final_action=decision.action,
         confidence=decision.confidence,
         mean_reward_estimate=total_reward / max(1, len(steps)),
+        device_used=str(getattr(model, 'device', device)),
     )
     return NeuralPPOTrainingResult(policy=policy, report=report)
