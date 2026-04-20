@@ -67,6 +67,15 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 chooser=lambda obs, policy=result.policy: policy.decide(obs).action,
                 config=config,
             )
+            walk = evaluate_neural_walk_forward(
+                dataset=dataset,
+                config=config,
+                total_timesteps=timesteps,
+                window_count=3,
+                eval_window_size=24,
+                min_train_steps=96,
+                device=device,
+            )
             hold = replay_policy(
                 name=f'profile_select_hold_{device}_{timesteps}',
                 steps=eval_steps,
@@ -74,7 +83,7 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 config=config,
             )
             uplift = float(replay.total_reward - hold.total_reward)
-            score = uplift + replay.action_diversity * 0.25 + replay.win_rate * 0.05
+            score = uplift + float(walk.vs_hold_reward_uplift) * 0.75 + replay.action_diversity * 0.2 + float(walk.mean_action_diversity) * 0.1 + replay.win_rate * 0.05
             row = {
                 'device': device,
                 'timesteps': timesteps,
@@ -82,7 +91,10 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 'reward': float(replay.total_reward),
                 'hold_reward': float(hold.total_reward),
                 'uplift_vs_hold': uplift,
+                'walk_uplift_vs_hold': float(walk.vs_hold_reward_uplift),
+                'walk_positive_rate': float(walk.positive_window_rate),
                 'action_diversity': float(replay.action_diversity),
+                'walk_action_diversity': float(walk.mean_action_diversity),
                 'win_rate': float(replay.win_rate),
             }
             diagnostics.append(row)

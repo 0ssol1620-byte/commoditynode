@@ -41,7 +41,7 @@ class RewardConfig:
     pnl_weight: float = 1.0
     turnover_penalty: float = 0.03
     drawdown_penalty: float = 0.08
-    concentration_penalty: float = 0.04
+    concentration_penalty: float = 0.01
     event_gap_penalty: float = 0.05
     abstain_bonus: float = 0.005
     expert_alignment_bonus: float = 0.16
