@@ -56,6 +56,9 @@ class CommodityTradingEnv:
     def valid_action_mask(self) -> dict[str, bool]:
         return action_mask(self.state.position, self.state.hedge, self.config.action.max_position_abs)
 
+    def action_mask_array(self):
+        return [bool(self.valid_action_mask().get(action, False)) for action in self.config.action.discrete_actions]
+
     def step(self, action: str) -> RLStepResult:
         if action not in ACTION_DELTAS:
             raise ValueError(f'unknown action: {action}')
@@ -85,6 +88,10 @@ class CommodityTradingEnv:
             event_gap_penalty=self.config.reward.event_gap_penalty,
             event_risk=float(step.observation.get('event_risk', 0.0)),
             abstain_bonus=self.config.reward.abstain_bonus,
+            action_taken=action,
+            expert_action=step.expert_action,
+            expert_alignment_bonus=self.config.reward.expert_alignment_bonus,
+            wrong_way_penalty=self.config.reward.wrong_way_penalty,
         )
         self.state.equity += reward
         self.state.peak_equity = max(self.state.peak_equity, self.state.equity)

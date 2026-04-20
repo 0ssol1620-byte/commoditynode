@@ -17,6 +17,10 @@ def compute_reward_breakdown(
     event_gap_penalty: float = 0.07,
     event_risk: float = 0.0,
     abstain_bonus: float = 0.01,
+    action_taken: str | None = None,
+    expert_action: str | None = None,
+    expert_alignment_bonus: float = 0.0,
+    wrong_way_penalty: float = 0.0,
 ) -> dict[str, float]:
     pnl = position_after * realized_return - hedge_after * max(realized_return, 0.0) * 0.5
     turnover = abs(position_after - position_before) + abs(hedge_after - hedge_before)
@@ -24,6 +28,15 @@ def compute_reward_breakdown(
     concentration = max(0.0, abs(position_after) - 0.7) + max(0.0, abs(hedge_after) - 0.7)
     event_gap = event_risk * max(0.0, abs(position_after) - abs(hedge_after))
     abstain = abstain_bonus if abs(position_after) < 1e-9 and abs(hedge_after) < 1e-9 else 0.0
+    alignment_bonus = expert_alignment_bonus if action_taken and expert_action and action_taken == expert_action else 0.0
+    wrong_way = 0.0
+    if action_taken and expert_action and action_taken != expert_action:
+        if expert_action == 'reduce_risk' and action_taken == 'add_continuation':
+            wrong_way = wrong_way_penalty
+        elif expert_action == 'add_continuation' and action_taken == 'reduce_risk':
+            wrong_way = wrong_way_penalty * 0.75
+        elif expert_action == 'add_hedge' and action_taken not in {'add_hedge', 'hold'}:
+            wrong_way = wrong_way_penalty * 0.5
     return {
         'pnl': float(pnl_weight * pnl),
         'turnover_cost': float(turnover_penalty * turnover),
@@ -31,6 +44,8 @@ def compute_reward_breakdown(
         'concentration_cost': float(concentration_penalty * concentration),
         'event_gap_cost': float(event_gap_penalty * event_gap),
         'abstain_bonus': float(abstain),
+        'expert_alignment_bonus': float(alignment_bonus),
+        'wrong_way_cost': float(wrong_way),
     }
 
 
@@ -51,6 +66,10 @@ def compute_reward(
     event_gap_penalty: float = 0.07,
     event_risk: float = 0.0,
     abstain_bonus: float = 0.01,
+    action_taken: str | None = None,
+    expert_action: str | None = None,
+    expert_alignment_bonus: float = 0.0,
+    wrong_way_penalty: float = 0.0,
 ) -> float:
     breakdown = compute_reward_breakdown(
         realized_return=realized_return,
@@ -67,6 +86,10 @@ def compute_reward(
         event_gap_penalty=event_gap_penalty,
         event_risk=event_risk,
         abstain_bonus=abstain_bonus,
+        action_taken=action_taken,
+        expert_action=expert_action,
+        expert_alignment_bonus=expert_alignment_bonus,
+        wrong_way_penalty=wrong_way_penalty,
     )
     reward = (
         breakdown['pnl']
@@ -75,5 +98,7 @@ def compute_reward(
         - breakdown['concentration_cost']
         - breakdown['event_gap_cost']
         + breakdown['abstain_bonus']
+        + breakdown['expert_alignment_bonus']
+        - breakdown['wrong_way_cost']
     )
     return float(reward)

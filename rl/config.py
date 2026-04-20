@@ -39,11 +39,13 @@ class ActionConfig:
 class RewardConfig:
     mode: RewardMode = 'risk_adjusted_pnl'
     pnl_weight: float = 1.0
-    turnover_penalty: float = 0.05
-    drawdown_penalty: float = 0.15
-    concentration_penalty: float = 0.08
-    event_gap_penalty: float = 0.07
-    abstain_bonus: float = 0.01
+    turnover_penalty: float = 0.03
+    drawdown_penalty: float = 0.08
+    concentration_penalty: float = 0.04
+    event_gap_penalty: float = 0.05
+    abstain_bonus: float = 0.005
+    expert_alignment_bonus: float = 0.03
+    wrong_way_penalty: float = 0.035
 
 
 @dataclass(frozen=True)

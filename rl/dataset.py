@@ -103,6 +103,11 @@ def build_steps_for_commodity(
             'ripple_max_score': float(max((item.get('score', 0) for item in intelligence_entry.get('ripple_ranker', [])), default=0.0)) / 100.0,
             'hedge_count': float(len(intelligence_entry.get('hedges', []))),
             'policy_action_count': float(len(intelligence_entry.get('policy_actions', []))),
+            'forecast_magnitude': min(1.0, abs(realized_return) * 25.0),
+            'trend_3': float(sum(safe_pct_change(float(median[j]), float(median[j - 1])) for j in range(max(1, idx - 2), idx + 1)) / max(1, min(3, idx))),
+            'volatility_5': float(min(1.0, sum(abs(safe_pct_change(float(median[j]), float(median[j - 1]))) for j in range(max(1, idx - 4), idx + 1)) / max(1, min(5, idx)) * 20.0)),
+            'agreement_event_mix': float(score * (1.0 - event_risk)),
+            'risk_pressure': float(min(1.0, anomaly * 0.5 + event_risk * 0.3 + model_spread * 0.2)),
         }
         metadata = {
             'current_price': current,
