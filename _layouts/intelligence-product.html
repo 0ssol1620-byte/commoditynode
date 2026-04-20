@@ -2,6 +2,7 @@
 layout: default
 ---
 
+{% assign product_slug = page.url | split: '/' | slice: 2, 1 | first %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -24,33 +25,73 @@ layout: default
   }
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script type="application/json" id="intel-product-config">{
+  "slug": {{ product_slug | jsonify }},
+  "title": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "demoKind": {{ page.demo_kind | jsonify }},
+  "defaultCommodity": {{ page.default_commodity | jsonify }},
+  "bestTier": {{ page.best_tier | jsonify }},
+  "alertLabel": {{ page.alert_label | jsonify }},
+  "pricing": {
+    "free": {{ page.pricing_free | jsonify }},
+    "pro": {{ page.pricing_pro | jsonify }},
+    "desk": {{ page.pricing_desk | jsonify }},
+    "enterprise": {{ page.pricing_enterprise | jsonify }},
+    "roi": {{ page.pricing_roi | jsonify }}
+  },
+  "metrics": {
+    "primary": {{ page.metric_primary_label | jsonify }},
+    "secondary": {{ page.metric_secondary_label | jsonify }},
+    "tertiary": {{ page.metric_tertiary_label | jsonify }}
+  }
+}</script>
 
 <style>
 .intel-product-hero { padding: 72px 0 34px; background: linear-gradient(180deg, rgba(34,211,238,0.05), rgba(168,85,247,0.03)); border-bottom: 1px solid rgba(255,255,255,0.06); }
-.intel-product-shell { max-width: 1080px; margin: 0 auto; padding: 0 24px 56px; }
+.intel-product-shell { max-width: 1120px; margin: 0 auto; padding: 0 24px 56px; }
 .intel-product-hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 0.98; margin: 0 0 12px; color: #f8fafc; }
 .intel-product-hero p { color: #94a3b8; line-height: 1.75; max-width: 760px; }
-.intel-product-grid, .intel-product-two, .intel-product-four { display:grid; gap:14px; }
+.intel-product-grid, .intel-product-two, .intel-product-four, .intel-pricing-grid, .intel-success-grid { display:grid; gap:14px; }
 .intel-product-grid { grid-template-columns: repeat(3, minmax(0,1fr)); margin-top: 20px; }
 .intel-product-two { grid-template-columns: 1.1fr 0.9fr; }
 .intel-product-four { grid-template-columns: repeat(2, minmax(0,1fr)); }
-.intel-card { padding: 20px 22px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); }
+.intel-pricing-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.intel-success-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.intel-card, .intel-price-card, .intel-success-card { padding: 20px 22px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); }
+.intel-price-card.featured { border-color: rgba(34,211,238,0.32); background: linear-gradient(135deg, rgba(34,211,238,0.09), rgba(168,85,247,0.05)); }
 .intel-kicker { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #22d3ee; font-weight: 800; margin-bottom: 8px; }
-.intel-card h2 { margin: 0 0 10px; color:#f8fafc; font-size: 1.2rem; }
-.intel-card p, .intel-card li { color:#94a3b8; line-height:1.75; }
+.intel-card h2, .intel-price-card h2, .intel-success-card h2 { margin: 0 0 10px; color:#f8fafc; font-size: 1.2rem; }
+.intel-card p, .intel-card li, .intel-price-card p, .intel-success-card p { color:#94a3b8; line-height:1.75; }
 .intel-stat { font-size: 1.1rem; font-weight: 800; color:#f8fafc; }
-.intel-chip { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(34,211,238,0.09); border:1px solid rgba(34,211,238,0.18); color:#22d3ee; font-size:0.8rem; font-weight:700; }
+.intel-chip, .intel-status-pill { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(34,211,238,0.09); border:1px solid rgba(34,211,238,0.18); color:#22d3ee; font-size:0.8rem; font-weight:700; }
+.intel-status-pill.off { color:#94a3b8; border-color: rgba(148,163,184,0.18); background: rgba(148,163,184,0.08); }
 .intel-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
-.intel-btn { display:inline-flex; align-items:center; justify-content:center; min-width:220px; padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:800; }
+.intel-btn { display:inline-flex; align-items:center; justify-content:center; min-width:220px; padding:12px 18px; border-radius:12px; text-decoration:none; font-weight:800; cursor:pointer; border:none; }
 .intel-btn-primary { background:#22d3ee; color:#06131a; }
 .intel-btn-secondary { background:rgba(255,255,255,0.04); color:#e2e8f0; border:1px solid rgba(255,255,255,0.08); }
+.intel-btn-ghost { background: transparent; color:#cbd5e1; border:1px dashed rgba(255,255,255,0.16); }
 .intel-list { margin: 0; padding-left: 18px; }
 .intel-workflow-strip { margin-top:18px; padding:18px 20px; border-radius:16px; border:1px solid rgba(34,211,238,0.14); background:linear-gradient(135deg, rgba(34,211,238,0.08), rgba(168,85,247,0.05)); display:grid; grid-template-columns:1.1fr 1fr; gap:14px; }
 .intel-workflow-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
 .intel-workflow-card { padding:12px 14px; border-radius:14px; background:rgba(8,12,20,0.38); border:1px solid rgba(255,255,255,0.08); }
 .intel-workflow-card strong { display:block; margin-top:4px; color:#f8fafc; font-size:0.9rem; line-height:1.5; }
-@media (max-width: 900px) {
-  .intel-product-grid, .intel-product-two, .intel-product-four, .intel-workflow-strip, .intel-workflow-grid { grid-template-columns: 1fr; }
+.intel-demo-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+.intel-demo-select { background: rgba(8,12,20,0.9); color:#f8fafc; border:1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 14px; min-width: 220px; }
+.intel-chart-wrap { position:relative; min-height:280px; }
+.intel-summary { margin-top:14px; color:#cbd5e1; line-height:1.7; }
+.intel-insight-list { display:grid; gap:10px; margin-top:16px; }
+.intel-insight-card { padding:14px 16px; border-radius:14px; background:rgba(8,12,20,0.44); border:1px solid rgba(255,255,255,0.08); }
+.intel-insight-title { color:#f8fafc; font-weight:800; line-height:1.45; }
+.intel-insight-copy { color:#94a3b8; font-size:0.9rem; line-height:1.7; margin-top:6px; }
+.intel-success-value { color:#f8fafc; font-size:1.8rem; font-weight:800; line-height:1.1; }
+.intel-price-tier { color:#f8fafc; font-size:1rem; font-weight:800; }
+.intel-price-badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:rgba(168,85,247,0.12); color:#c084fc; border:1px solid rgba(168,85,247,0.18); font-size:0.74rem; font-weight:800; }
+.intel-workspace-row { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
+.intel-workspace-meta { color:#94a3b8; line-height:1.7; margin-top:8px; }
+@media (max-width: 980px) {
+  .intel-product-grid, .intel-product-two, .intel-product-four, .intel-workflow-strip, .intel-workflow-grid, .intel-pricing-grid, .intel-success-grid { grid-template-columns: 1fr; }
 }
 </style>
 
@@ -106,6 +147,61 @@ layout: default
     </section>
   </div>
 
+  <section class="intel-card" id="intel-demo-section" style="margin-top:18px;">
+    <div class="intel-demo-head">
+      <div>
+        <div class="intel-kicker">Interactive demo embed</div>
+        <h2 style="margin-bottom:8px;">Preview the module on a live commodity</h2>
+        <p style="margin:0;color:#94a3b8;line-height:1.7;max-width:700px;">The demo uses the current CommodityNode data stack and your saved workflow context so each product page behaves like a real product surface instead of static sales copy.</p>
+      </div>
+      <div>
+        <label for="intel-demo-commodity" class="intel-kicker" style="display:block;">Commodity selector</label>
+        <select id="intel-demo-commodity" class="intel-demo-select"></select>
+      </div>
+    </div>
+    <div class="intel-product-two">
+      <div>
+        <div class="intel-chart-wrap"><canvas id="intel-demo-chart"></canvas></div>
+        <div class="intel-summary" id="intel-demo-summary">Loading demo...</div>
+      </div>
+      <div>
+        <div class="intel-workspace-row">
+          <div class="intel-status-pill off" id="intel-alert-status">Alert inactive</div>
+          <div class="intel-status-pill" id="intel-workspace-status">Workspace not saved yet</div>
+        </div>
+        <div class="intel-actions">
+          <button type="button" class="intel-btn intel-btn-secondary" id="intel-save-workspace" data-cta="intelligence_product_save_workspace_{{ page.title | slugify }}">Save workspace</button>
+          <button type="button" class="intel-btn intel-btn-secondary" id="intel-export-brief" data-cta="intelligence_product_export_brief_{{ page.title | slugify }}">Export brief</button>
+          <button type="button" class="intel-btn intel-btn-ghost" id="intel-toggle-alert" data-cta="intelligence_product_toggle_alert_{{ page.title | slugify }}">Enable alert</button>
+        </div>
+        <div class="intel-workspace-meta" id="intel-workspace-meta">Saved workspaces stay in this browser so you can reopen the same module/commodity combination instantly.</div>
+        <div class="intel-insight-list" id="intel-demo-insights"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intel-card" style="margin-top:18px;">
+    <div class="intel-kicker">Success dashboard</div>
+    <h2>Operational readiness for this module</h2>
+    <div class="intel-success-grid" style="margin-top:16px;">
+      <div class="intel-success-card">
+        <div class="intel-kicker">{{ page.metric_primary_label }}</div>
+        <div class="intel-success-value" id="intel-metric-primary">—</div>
+        <p id="intel-metric-primary-copy">—</p>
+      </div>
+      <div class="intel-success-card">
+        <div class="intel-kicker">{{ page.metric_secondary_label }}</div>
+        <div class="intel-success-value" id="intel-metric-secondary">—</div>
+        <p id="intel-metric-secondary-copy">—</p>
+      </div>
+      <div class="intel-success-card">
+        <div class="intel-kicker">{{ page.metric_tertiary_label }}</div>
+        <div class="intel-success-value" id="intel-metric-tertiary">—</div>
+        <p id="intel-metric-tertiary-copy">—</p>
+      </div>
+    </div>
+  </section>
+
   <div class="intel-product-two" style="margin-top:18px;">
     <section class="intel-card">
       <div class="intel-kicker">Visualization system</div>
@@ -149,6 +245,41 @@ layout: default
   </div>
 
   <section class="intel-card" style="margin-top:18px;">
+    <div class="intel-kicker">Product-specific pricing block</div>
+    <h2>Which plan should unlock {{ page.title }}?</h2>
+    <p style="max-width:760px;">{{ page.pricing_roi }}</p>
+    <div class="intel-pricing-grid" style="margin-top:16px;">
+      <div class="intel-price-card">
+        <div class="intel-kicker">Free</div>
+        <div class="intel-price-tier">Public preview</div>
+        <p>{{ page.pricing_free }}</p>
+      </div>
+      <div class="intel-price-card {% if page.best_tier contains 'Pro' %}featured{% endif %}">
+        <div class="intel-kicker">Pro</div>
+        <div class="intel-price-tier">Self-directed edge</div>
+        <p>{{ page.pricing_pro }}</p>
+        {% if page.best_tier contains 'Pro' %}<div style="margin-top:12px;"><span class="intel-price-badge">Best fit · {{ page.best_tier }}</span></div>{% endif %}
+      </div>
+      <div class="intel-price-card {% if page.best_tier contains 'Desk' %}featured{% endif %}">
+        <div class="intel-kicker">Desk</div>
+        <div class="intel-price-tier">Workflow depth</div>
+        <p>{{ page.pricing_desk }}</p>
+        {% if page.best_tier contains 'Desk' %}<div style="margin-top:12px;"><span class="intel-price-badge">Best fit · {{ page.best_tier }}</span></div>{% endif %}
+      </div>
+      <div class="intel-price-card {% if page.best_tier contains 'Enterprise' %}featured{% endif %}">
+        <div class="intel-kicker">Enterprise</div>
+        <div class="intel-price-tier">Team / API / exports</div>
+        <p>{{ page.pricing_enterprise }}</p>
+        {% if page.best_tier contains 'Enterprise' %}<div style="margin-top:12px;"><span class="intel-price-badge">Best fit · {{ page.best_tier }}</span></div>{% endif %}
+      </div>
+    </div>
+    <div class="intel-actions">
+      <a href="/pricing/" class="intel-btn intel-btn-primary" data-cta="intelligence_product_footer_pricing_{{ page.title | slugify }}">See pricing for {{ page.best_tier }}</a>
+      <a href="/enterprise/" class="intel-btn intel-btn-secondary" data-cta="intelligence_product_footer_enterprise_{{ page.title | slugify }}">{{ page.enterprise_cta_label }}</a>
+    </div>
+  </section>
+
+  <section class="intel-card" style="margin-top:18px;">
     <div class="intel-kicker">Execution notes</div>
     <h2>What “extreme polish” means for this module</h2>
     <ul class="intel-list">
@@ -156,9 +287,7 @@ layout: default
       <li>{{ item }}</li>
       {% endfor %}
     </ul>
-    <div class="intel-actions">
-      <a href="/pricing/" class="intel-btn intel-btn-primary" data-cta="intelligence_product_footer_pricing_{{ page.title | slugify }}">See pricing for {{ page.best_tier }}</a>
-      <a href="/enterprise/" class="intel-btn intel-btn-secondary" data-cta="intelligence_product_footer_enterprise_{{ page.title | slugify }}">Package {{ page.title }} for Desk / Enterprise</a>
-    </div>
   </section>
 </div>
+
+<script src="/assets/js/intelligence-product.js"></script>
