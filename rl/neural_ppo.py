@@ -67,7 +67,8 @@ class NeuralPPOPolicy:
         import numpy as np
         import torch
 
-        obs_tensor = torch.as_tensor(np.asarray(observation_vector, dtype=np.float32)).reshape(1, -1)
+        device = getattr(self.model, 'device', 'cpu')
+        obs_tensor = torch.as_tensor(np.asarray(observation_vector, dtype=np.float32), device=device).reshape(1, -1)
         distribution = self.model.policy.get_distribution(obs_tensor)
         probs = distribution.distribution.probs.detach().cpu().numpy()[0]
         action_idx = int(probs.argmax())
@@ -88,6 +89,7 @@ def train_neural_ppo(
     config: RLExperimentConfig | None = None,
     total_timesteps: int = 256,
     learning_rate: float = 3e-4,
+    device: str = 'auto',
 ) -> NeuralPPOTrainingResult:
     from stable_baselines3 import PPO
 
@@ -109,6 +111,7 @@ def train_neural_ppo(
         vf_coef=0.5,
         verbose=0,
         seed=config.training.seed,
+        device=device,
     )
     model.learn(total_timesteps=total_timesteps, progress_bar=False)
     obs, _ = env.reset()
