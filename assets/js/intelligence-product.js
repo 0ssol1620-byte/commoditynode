@@ -17,6 +17,7 @@
     prices: {},
     consensus: {},
     curated: {},
+    rlArtifacts: {},
     chart: null
   };
 
@@ -66,7 +67,8 @@
     return {
       price: state.prices[key] || {},
       forecast: state.consensus[key] || {},
-      curated: state.curated[key] || {}
+      curated: state.curated[key] || {},
+      rl: state.rlArtifacts || {}
     };
   }
 
@@ -560,8 +562,30 @@
     }));
   }
 
+  function getRlFrontierForSelected(){
+    var items = safeArray(state.rlArtifacts.policy_frontier);
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].commodity === state.selected) return items[i];
+    }
+    return null;
+  }
+
+  function getRlBenchmark(){
+    return state.rlArtifacts && state.rlArtifacts.benchmark ? state.rlArtifacts.benchmark : null;
+  }
+
   function renderPolicyLab(bundle){
+    var frontier = getRlFrontierForSelected();
+    var benchmark = getRlBenchmark();
     var items = buildPolicyScores(bundle);
+    if (frontier) {
+      items = items.map(function(item){
+        var isChosen = String(item.state || '').toLowerCase().indexOf(String(frontier.ppo_action || '').replace(/_/g, ' ').toLowerCase()) !== -1;
+        return Object.assign({}, item, {
+          score: isChosen ? Math.max(item.score, Math.round(Number(frontier.ppo_confidence || 0) * 100)) : item.score
+        });
+      });
+    }
     ensureChart({
       type: 'bar',
       data: {
@@ -577,6 +601,15 @@
       },
       options: chartOptions(100)
     });
+    if (frontier) {
+      renderSummary('Real RL artifacts loaded. PPO action for ' + titleize(state.selected) + ': ' + String(frontier.ppo_action || 'hold').replace(/_/g, ' ') + ' (' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '% confidence).');
+      renderInsights([
+        { title: 'Offline policy → ' + String(frontier.offline_action || 'hold').replace(/_/g, ' '), copy: 'Offline confidence ' + Math.round(Number(frontier.offline_confidence || 0) * 100) + '%.' },
+        { title: 'PPO fine-tuned → ' + String(frontier.ppo_action || 'hold').replace(/_/g, ' '), copy: 'PPO confidence ' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '%. Timestamp ' + (frontier.timestamp || 'n/a') + '.' },
+        { title: 'Benchmark snapshot', copy: benchmark ? 'Offline reward ' + Number(benchmark.offline.mean_reward || 0).toFixed(4) + ' · PPO reward ' + Number(benchmark.ppo.mean_reward || 0).toFixed(4) + ' · Rule reward ' + Number(benchmark.rule_based.mean_reward || 0).toFixed(4) + '.' : 'Benchmark artifact not available.' }
+      ]);
+      return;
+    }
     renderSummary('RL Policy Lab should feel like a policy frontier, not a fake autopilot. The highest-scoring state/action pair is your current default.');
     renderInsights(items.map(function(item){
       return { title: item.state + ' · ' + item.score + '/100', copy: item.action };
@@ -822,11 +855,13 @@
     Promise.allSettled([
       fetchJson('/assets/data/prices.json'),
       fetchJson('/assets/data/forecast-consensus.json'),
-      fetchJson('/assets/data/intelligence-lab.json')
+      fetchJson('/assets/data/intelligence-lab.json'),
+      fetchJson('/assets/data/rl-policy-lab.json')
     ]).then(function(results){
       state.prices = results[0].status === 'fulfilled' ? (results[0].value || {}) : {};
       state.consensus = results[1].status === 'fulfilled' ? (results[1].value || {}) : {};
       state.curated = results[2].status === 'fulfilled' ? (results[2].value || {}) : {};
+      state.rlArtifacts = results[3].status === 'fulfilled' ? (results[3].value || {}) : {};
       if (!Object.keys(state.curated).length) {
         renderSummary('Demo data is temporarily unavailable. Please retry.');
         return;

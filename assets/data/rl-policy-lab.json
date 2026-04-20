@@ -1,0 +1,287 @@
+{
+  "updated_from_commit": "e7e7737+",
+  "config": {
+    "name": "commoditynode-rl-policy-lab",
+    "commodity_keys": [
+      "crude_oil",
+      "gold",
+      "copper",
+      "natural_gas",
+      "wheat"
+    ],
+    "observation": {
+      "context_length": 128,
+      "forecast_horizon": 30,
+      "include_forecast_spread": true,
+      "include_agreement": true,
+      "include_anomaly": true,
+      "include_event_flags": true,
+      "include_alpha_signals": true,
+      "include_direction_signal": true,
+      "include_position_state": true
+    },
+    "action": {
+      "mode": "discrete",
+      "discrete_actions": [
+        "reduce_risk",
+        "hold",
+        "add_continuation",
+        "add_hedge",
+        "relative_value_rotation"
+      ],
+      "max_position_abs": 1.0,
+      "max_hedge_abs": 1.0
+    },
+    "reward": {
+      "mode": "risk_adjusted_pnl",
+      "pnl_weight": 1.0,
+      "turnover_penalty": 0.05,
+      "drawdown_penalty": 0.15,
+      "concentration_penalty": 0.08,
+      "event_gap_penalty": 0.07,
+      "abstain_bonus": 0.01
+    },
+    "training": {
+      "seed": 42,
+      "train_split": 0.7,
+      "val_split": 0.15,
+      "test_split": 0.15,
+      "offline_algorithm": "iql",
+      "online_algorithm": "ppo",
+      "offline_steps": 5000,
+      "online_steps": 2500,
+      "learning_rate": 0.0003
+    }
+  },
+  "offline_report": {
+    "algorithm": "iql",
+    "train_steps": 311,
+    "val_steps": 66,
+    "average_train_return": -0.00011588941736206464,
+    "average_val_return": -0.0001408790685153544,
+    "action_distribution": {
+      "reduce_risk": 62,
+      "hold": 249,
+      "add_continuation": 0,
+      "add_hedge": 0,
+      "relative_value_rotation": 0
+    }
+  },
+  "ppo_report": {
+    "algorithm": "ppo",
+    "episodes": 4,
+    "mean_reward": 0.6800000000000004,
+    "best_reward": 0.6800000000000004,
+    "action_bias": {
+      "reduce_risk": 0.09804578456377405,
+      "hold": 0.8471873371971111,
+      "add_continuation": 0.0,
+      "add_hedge": 0.0,
+      "relative_value_rotation": 0.0
+    }
+  },
+  "benchmark": {
+    "offline": {
+      "name": "offline",
+      "mean_reward": 0.010000000000000005,
+      "total_reward": 0.6800000000000004,
+      "steps": 68,
+      "action_counts": {
+        "reduce_risk": 68
+      }
+    },
+    "ppo": {
+      "name": "ppo",
+      "mean_reward": 0.010000000000000005,
+      "total_reward": 0.6800000000000004,
+      "steps": 68,
+      "action_counts": {
+        "hold": 55,
+        "reduce_risk": 13
+      }
+    },
+    "rule_based": {
+      "name": "rule_based",
+      "mean_reward": 0.010000000000000005,
+      "total_reward": 0.6800000000000004,
+      "steps": 68,
+      "action_counts": {
+        "hold": 55,
+        "reduce_risk": 13
+      }
+    },
+    "no_trade": {
+      "name": "no_trade",
+      "mean_reward": 0.010000000000000005,
+      "total_reward": 0.6800000000000004,
+      "steps": 68,
+      "action_counts": {
+        "hold": 68
+      }
+    },
+    "directional": {
+      "name": "directional",
+      "mean_reward": -0.07388657317350655,
+      "total_reward": -0.8127523049085721,
+      "steps": 11,
+      "action_counts": {
+        "add_continuation": 5,
+        "hold": 6
+      }
+    }
+  },
+  "policy_frontier": [
+    {
+      "commodity": "crude_oil",
+      "timestamp": "2026-07-15",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.3994,
+      "ppo_action": "reduce_risk",
+      "ppo_confidence": 0.3454,
+      "observation": {
+        "forecast_return": -0.0021559657834092534,
+        "agreement_score": 0.743,
+        "anomaly_score": 0.32775511125679196,
+        "event_risk": 0.31,
+        "model_spread": 0.06942204450271679,
+        "direction_bullish": 0.0,
+        "direction_bearish": 1.0,
+        "ripple_max_score": 0.92,
+        "hedge_count": 3.0,
+        "policy_action_count": 3.0
+      }
+    },
+    {
+      "commodity": "gold",
+      "timestamp": "2026-07-15",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.2667,
+      "ppo_action": "hold",
+      "ppo_confidence": 0.3426,
+      "observation": {
+        "forecast_return": 0.001168044705857229,
+        "agreement_score": 0.6072,
+        "anomaly_score": 0.45109675212241834,
+        "event_risk": 0.33,
+        "model_spread": 0.08616670084896734,
+        "direction_bullish": 0.0,
+        "direction_bearish": 0.0,
+        "ripple_max_score": 0.91,
+        "hedge_count": 3.0,
+        "policy_action_count": 3.0
+      }
+    },
+    {
+      "commodity": "copper",
+      "timestamp": "2026-07-16",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.2647,
+      "ppo_action": "hold",
+      "ppo_confidence": 0.3477,
+      "observation": {
+        "forecast_return": -0.0002453104812990284,
+        "agreement_score": 0.5749,
+        "anomaly_score": 0.43704324936203637,
+        "event_risk": 0.31,
+        "model_spread": 0.07279329974481455,
+        "direction_bullish": 0.0,
+        "direction_bearish": 0.0,
+        "ripple_max_score": 0.95,
+        "hedge_count": 3.0,
+        "policy_action_count": 3.0
+      }
+    },
+    {
+      "commodity": "natural_gas",
+      "timestamp": "2026-07-15",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.2661,
+      "ppo_action": "hold",
+      "ppo_confidence": 0.3539,
+      "observation": {
+        "forecast_return": -0.0028129657228018507,
+        "agreement_score": 0.4802,
+        "anomaly_score": 0.4541393360608271,
+        "event_risk": 0.31,
+        "model_spread": 0.056903734424330846,
+        "direction_bullish": 0.0,
+        "direction_bearish": 0.0,
+        "ripple_max_score": 0.88,
+        "hedge_count": 3.0,
+        "policy_action_count": 2.0
+      }
+    },
+    {
+      "commodity": "wheat",
+      "timestamp": "2026-07-15",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.243,
+      "ppo_action": "hold",
+      "ppo_confidence": 0.3568,
+      "observation": {
+        "forecast_return": 0.00012228388674624877,
+        "agreement_score": 0.5751,
+        "anomaly_score": 0.3199971567024259,
+        "event_risk": 0.3,
+        "model_spread": 0.026022862680970364,
+        "direction_bullish": 0.0,
+        "direction_bearish": 0.0,
+        "ripple_max_score": 0.85,
+        "hedge_count": 2.0,
+        "policy_action_count": 1.0
+      }
+    }
+  ],
+  "episode_replay": [
+    {
+      "commodity": "gold",
+      "timestamp": "2026-08-04",
+      "target_return": -0.000628,
+      "expert_action": "hold",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.2734,
+      "ppo_action": "hold",
+      "ppo_confidence": 0.3399
+    },
+    {
+      "commodity": "natural_gas",
+      "timestamp": "2026-08-04",
+      "target_return": 0.002313,
+      "expert_action": "hold",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.2712,
+      "ppo_action": "hold",
+      "ppo_confidence": 0.3519
+    },
+    {
+      "commodity": "wheat",
+      "timestamp": "2026-08-04",
+      "target_return": -0.000179,
+      "expert_action": "hold",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.2442,
+      "ppo_action": "hold",
+      "ppo_confidence": 0.3564
+    },
+    {
+      "commodity": "copper",
+      "timestamp": "2026-08-05",
+      "target_return": -8.2e-05,
+      "expert_action": "hold",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.2676,
+      "ppo_action": "hold",
+      "ppo_confidence": 0.3465
+    },
+    {
+      "commodity": "crude_oil",
+      "timestamp": "2026-08-05",
+      "target_return": 0.00019,
+      "expert_action": "reduce_risk",
+      "offline_action": "reduce_risk",
+      "offline_confidence": 0.399,
+      "ppo_action": "reduce_risk",
+      "ppo_confidence": 0.345
+    }
+  ]
+}
