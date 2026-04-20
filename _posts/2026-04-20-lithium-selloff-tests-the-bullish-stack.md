@@ -5,7 +5,7 @@ date: 2026-04-20 09:46:00 +0900
 categories: [battery, lithium]
 tags: [lithium, albemarle, alb, batteries, ev-battery, supply-discipline]
 commodity_name: Lithium
-direction: bullish
+direction: bearish
 sensitivity: high
 confidence: medium
 canonical_url: https://commoditynode.com/lithium-selloff-tests-the-bullish-stack/
