@@ -162,14 +162,14 @@
           <a href="{{ '/industries/' | relative_url }}" {% if page.url contains '/industries' %}class="active"{% endif %}>Industries</a>
           <a href="{{ '/companies/' | relative_url }}" {% if page.url contains '/companies' %}class="active"{% endif %}>Companies</a>
           <a href="{{ '/reports/' | relative_url }}" {% if page.url contains '/reports' %}class="active"{% endif %}>Reports</a>
-          <a href="{{ '/simulator/' | relative_url }}" {% if page.url contains '/simulator' %}class="active"{% endif %}>Simulator</a>
-          <a href="{{ '/signals/' | relative_url }}" {% if page.url contains '/signals' %}class="active"{% endif %}>Signals</a>
           <a href="{{ '/intelligence-lab/' | relative_url }}" {% if page.url contains '/intelligence-lab' %}class="active"{% endif %}>Intelligence Lab</a>
+          <a href="{{ '/intelligence-lab/rl-policy-lab/' | relative_url }}" {% if page.url contains '/intelligence-lab/rl-policy-lab' %}class="active"{% endif %}>Policy Lab</a>
+          <a href="{{ '/simulator/' | relative_url }}" {% if page.url contains '/simulator' %}class="active"{% endif %}>Simulator</a>
           <a href="{{ '/pricing/' | relative_url }}" {% if page.url contains '/pricing' %}class="active"{% endif %}>Pricing</a>
           <div class="nav-dropdown">
             <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">More <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
             <div class="nav-dropdown-menu">
-              <a href="{{ '/intelligence-lab/rl-policy-lab/' | relative_url }}" {% if page.url contains '/intelligence-lab/rl-policy-lab' %}class="active"{% endif %}>RL Policy Lab</a>
+              <a href="{{ '/signals/' | relative_url }}" {% if page.url contains '/signals' %}class="active"{% endif %}>Signals</a>
               <a href="{{ '/correlation/' | relative_url }}" {% if page.url contains '/correlation' %}class="active"{% endif %}>Correlation Matrix</a>
               <a href="{{ '/disruptions/' | relative_url }}" {% if page.url contains '/disruptions' %}class="active"{% endif %}>Disruption Tracker</a>
               <a href="{{ '/range-tracker/' | relative_url }}" {% if page.url contains '/range-tracker' %}class="active"{% endif %}>52W Range</a>
@@ -177,9 +177,9 @@
               <a href="{{ '/calendar/' | relative_url }}" {% if page.url contains '/calendar' %}class="active"{% endif %}>Calendar</a>
               <a href="{{ '/themes/' | relative_url }}" {% if page.url contains '/themes' %}class="active"{% endif %}>Themes</a>
               <a href="{{ '/enterprise/' | relative_url }}" {% if page.url contains '/enterprise' %}class="active"{% endif %}>Enterprise</a>
+              <a href="{{ '/about/' | relative_url }}" {% if page.url contains '/about' %}class="active"{% endif %}>About</a>
             </div>
           </div>
-          <a href="{{ '/about/' | relative_url }}"       {% if page.url contains '/about' %}class="active"{% endif %}>About</a>
           <!-- 모바일 메뉴 내 auth 영역 -->
           <div id="clerk-auth-nav" class="clerk-auth-nav"></div>
         </nav>
