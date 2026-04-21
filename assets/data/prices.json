@@ -4,99 +4,99 @@
     "name": "Crude Oil",
     "unit": "$/barrel",
     "proxy_type": "futures",
-    "price": 82.59,
+    "price": 86.63,
     "change_pct": null,
     "high_52w": 119.48,
     "low_52w": 54.98,
-    "updated_at": "2026-04-20T00:53:43.239014+00:00"
+    "updated_at": "2026-04-21T01:36:22.271685+00:00"
   },
   "gold": {
     "symbol": "GC=F",
     "name": "Gold",
     "unit": "$/oz",
     "proxy_type": "futures",
-    "price": 4784.7,
-    "change_pct": -1.5,
+    "price": 4835.7,
+    "change_pct": -0.45,
     "high_52w": 5586.2,
     "low_52w": 3125.0,
-    "updated_at": "2026-04-20T00:53:43.710260+00:00"
+    "updated_at": "2026-04-21T01:36:22.739261+00:00"
   },
   "copper": {
     "symbol": "HG=F",
     "name": "Copper",
     "unit": "$/lb",
     "proxy_type": "futures",
-    "price": 6.0525,
-    "change_pct": -0.84,
+    "price": 6.032,
+    "change_pct": -1.17,
     "high_52w": 6.51,
     "low_52w": 4.32,
-    "updated_at": "2026-04-20T00:53:44.229969+00:00"
+    "updated_at": "2026-04-21T01:36:23.263146+00:00"
   },
   "natural_gas": {
     "symbol": "NG=F",
     "name": "Natural Gas",
     "unit": "$/MMBtu",
     "proxy_type": "futures",
-    "price": 2.674,
-    "change_pct": 1.02,
+    "price": 2.662,
+    "change_pct": -13.99,
     "high_52w": 7.83,
     "low_52w": 2.56,
-    "updated_at": "2026-04-20T00:53:44.917343+00:00"
+    "updated_at": "2026-04-21T01:36:24.046999+00:00"
   },
   "wheat": {
     "symbol": "ZW=F",
     "name": "Wheat",
     "unit": "cents/bushel",
     "proxy_type": "futures",
-    "price": 608.25,
-    "change_pct": 2.88,
+    "price": 607.0,
+    "change_pct": 2.66,
     "high_52w": 635.0,
     "low_52w": 492.25,
-    "updated_at": "2026-04-20T00:53:45.430618+00:00"
+    "updated_at": "2026-04-21T01:36:24.563730+00:00"
   },
   "silver": {
     "symbol": "SI=F",
     "name": "Silver",
     "unit": "$/oz",
     "proxy_type": "futures",
-    "price": 79.54,
-    "change_pct": -2.69,
+    "price": 79.69,
+    "change_pct": -2.51,
     "high_52w": 121.3,
     "low_52w": 31.68,
-    "updated_at": "2026-04-20T00:53:45.955792+00:00"
+    "updated_at": "2026-04-21T01:36:25.131153+00:00"
   },
   "corn": {
     "symbol": "ZC=F",
     "name": "Corn",
     "unit": "cents/bushel",
     "proxy_type": "futures",
-    "price": 451.5,
-    "change_pct": 0.61,
+    "price": 459.75,
+    "change_pct": 2.45,
     "high_52w": 487.25,
     "low_52w": 368.75,
-    "updated_at": "2026-04-20T00:53:46.540357+00:00"
+    "updated_at": "2026-04-21T01:36:25.727973+00:00"
   },
   "aluminum": {
     "symbol": "ALI=F",
     "name": "Aluminum",
     "unit": "$/tonne",
     "proxy_type": "futures",
-    "price": 3554.75,
-    "change_pct": -1.17,
+    "price": 3493.75,
+    "change_pct": -2.86,
     "high_52w": 3647.75,
     "low_52w": 2263.5,
-    "updated_at": "2026-04-20T00:53:47.021313+00:00"
+    "updated_at": "2026-04-21T01:36:26.201183+00:00"
   },
   "coffee": {
     "symbol": "KC=F",
     "name": "Coffee",
     "unit": "cents/lb",
     "proxy_type": "futures",
-    "price": 272.3,
-    "change_pct": -8.15,
+    "price": 287.85,
+    "change_pct": -0.5,
     "high_52w": 437.95,
     "low_52w": 278.65,
-    "updated_at": "2026-04-20T00:53:47.489602+00:00"
+    "updated_at": "2026-04-21T01:36:26.712113+00:00"
   },
   "lumber": {
     "symbol": "LBS=F",
@@ -107,18 +107,18 @@
     "change_pct": -1.12,
     "high_52w": 395.7,
     "low_52w": 335.0,
-    "updated_at": "2026-04-20T00:53:48.001291+00:00"
+    "updated_at": "2026-04-21T01:36:27.410331+00:00"
   },
   "palladium": {
     "symbol": "PA=F",
     "name": "Palladium",
     "unit": "$/oz",
     "proxy_type": "futures",
-    "price": 1600.8,
-    "change_pct": 1.93,
+    "price": 1571.5,
+    "change_pct": -1.19,
     "high_52w": 2169.9,
     "low_52w": 925.7,
-    "updated_at": "2026-04-20T00:53:48.584512+00:00"
+    "updated_at": "2026-04-21T01:36:27.981934+00:00"
   },
   "zinc": {
     "symbol": "ZNC=F",
@@ -129,194 +129,194 @@
     "change_pct": null,
     "high_52w": 2530.0,
     "low_52w": 2297.0,
-    "updated_at": "2026-04-20T00:53:49.053567+00:00"
+    "updated_at": "2026-04-21T01:36:28.589650+00:00"
   },
   "sugar": {
     "symbol": "SB=F",
     "name": "Sugar",
     "unit": "cents/lb",
     "proxy_type": "futures",
-    "price": 13.5,
-    "change_pct": -1.17,
+    "price": 13.63,
+    "change_pct": 2.4,
     "high_52w": 18.29,
     "low_52w": 13.22,
-    "updated_at": "2026-04-20T00:53:49.520494+00:00"
+    "updated_at": "2026-04-21T01:36:29.105802+00:00"
   },
   "soybeans": {
     "symbol": "ZS=F",
     "name": "Soybeans",
     "unit": "cents/bushel",
     "proxy_type": "futures",
-    "price": 1182.75,
-    "change_pct": 1.33,
+    "price": 1184.0,
+    "change_pct": 1.43,
     "high_52w": 1223.25,
     "low_52w": 960.75,
-    "updated_at": "2026-04-20T00:53:50.033459+00:00"
+    "updated_at": "2026-04-21T01:36:29.680402+00:00"
   },
   "platinum": {
     "symbol": "PL=F",
     "name": "Platinum",
     "unit": "$/oz",
     "proxy_type": "futures",
-    "price": 2141.7,
-    "change_pct": 2.27,
+    "price": 2086.6,
+    "change_pct": -1.78,
     "high_52w": 2852.4,
     "low_52w": 953.4,
-    "updated_at": "2026-04-20T00:53:50.497788+00:00"
+    "updated_at": "2026-04-21T01:36:30.208432+00:00"
   },
   "cotton": {
     "symbol": "CT=F",
     "name": "Cotton",
     "unit": "cents/lb",
     "proxy_type": "futures",
-    "price": 78.85,
-    "change_pct": 4.16,
+    "price": 79.87,
+    "change_pct": 3.19,
     "high_52w": 77.5,
     "low_52w": 60.71,
-    "updated_at": "2026-04-20T00:53:51.012967+00:00"
+    "updated_at": "2026-04-21T01:36:30.743653+00:00"
   },
   "cocoa": {
     "symbol": "CC=F",
     "name": "Cocoa",
     "unit": "$/tonne",
     "proxy_type": "futures",
-    "price": 3380.0,
-    "change_pct": 0.39,
+    "price": 3367.0,
+    "change_pct": 5.68,
     "high_52w": 11280.0,
     "low_52w": 2798.0,
-    "updated_at": "2026-04-20T00:53:51.517412+00:00"
+    "updated_at": "2026-04-21T01:36:31.214808+00:00"
   },
   "rice": {
     "symbol": "ZR=F",
     "name": "Rice",
     "unit": "cents/cwt",
     "proxy_type": "futures",
-    "price": 11.375,
+    "price": 11.35,
     "change_pct": null,
     "high_52w": 1380.0,
-    "low_52w": 11.36,
-    "updated_at": "2026-04-20T00:53:52.084374+00:00"
+    "low_52w": 11.34,
+    "updated_at": "2026-04-21T01:36:31.692319+00:00"
   },
   "oats": {
     "symbol": "ZO=F",
     "name": "Oats",
     "unit": "cents/bushel",
     "proxy_type": "futures",
-    "price": 343.75,
-    "change_pct": 3.7,
+    "price": 336.5,
+    "change_pct": 1.51,
     "high_52w": 403.5,
     "low_52w": 272.0,
-    "updated_at": "2026-04-20T00:53:52.555817+00:00"
+    "updated_at": "2026-04-21T01:36:32.172035+00:00"
   },
   "orange_juice": {
     "symbol": "OJ=F",
     "name": "Orange Juice",
     "unit": "cents/lb",
     "proxy_type": "futures",
-    "price": 188.05,
-    "change_pct": 6.79,
+    "price": 178.45,
+    "change_pct": -4.11,
     "high_52w": 344.3,
     "low_52w": 132.5,
-    "updated_at": "2026-04-20T00:53:53.023680+00:00"
+    "updated_at": "2026-04-21T01:36:32.676353+00:00"
   },
   "soybean_oil": {
     "symbol": "ZL=F",
     "name": "Soybean Oil",
     "unit": "cents/lb",
     "proxy_type": "futures",
-    "price": 68.5,
-    "change_pct": 0.5,
+    "price": 69.48,
+    "change_pct": 1.94,
     "high_52w": 70.49,
     "low_52w": 45.74,
-    "updated_at": "2026-04-20T00:53:53.488662+00:00"
+    "updated_at": "2026-04-21T01:36:33.195155+00:00"
   },
   "soybean_meal": {
     "symbol": "ZM=F",
     "name": "Soybean Meal",
     "unit": "$/short ton",
     "proxy_type": "futures",
-    "price": 325.3,
-    "change_pct": -1.96,
+    "price": 321.0,
+    "change_pct": -3.25,
     "high_52w": 339.6,
     "low_52w": 258.6,
-    "updated_at": "2026-04-20T00:53:53.951203+00:00"
+    "updated_at": "2026-04-21T01:36:33.709492+00:00"
   },
   "live_cattle": {
     "symbol": "LE=F",
     "name": "Live Cattle",
     "unit": "cents/lb",
     "proxy_type": "futures",
-    "price": 247.35,
-    "change_pct": -1.18,
+    "price": 246.15,
+    "change_pct": -1.52,
     "high_52w": 253.6,
     "low_52w": 204.55,
-    "updated_at": "2026-04-20T00:53:54.513736+00:00"
+    "updated_at": "2026-04-21T01:36:34.226074+00:00"
   },
   "feeder_cattle": {
     "symbol": "GF=F",
     "name": "Feeder Cattle",
     "unit": "cents/lb",
     "proxy_type": "futures",
-    "price": 365.275,
-    "change_pct": -2.09,
+    "price": 361.75,
+    "change_pct": -2.58,
     "high_52w": 381.02,
     "low_52w": 285.1,
-    "updated_at": "2026-04-20T00:53:55.020219+00:00"
+    "updated_at": "2026-04-21T01:36:34.694408+00:00"
   },
   "lean_hogs": {
     "symbol": "HE=F",
     "name": "Lean Hogs",
     "unit": "cents/lb",
     "proxy_type": "futures",
-    "price": 101.05,
-    "change_pct": 7.44,
+    "price": 101.775,
+    "change_pct": 8.97,
     "high_52w": 113.7,
     "low_52w": 77.35,
-    "updated_at": "2026-04-20T00:53:55.627176+00:00"
+    "updated_at": "2026-04-21T01:36:35.310832+00:00"
   },
   "jet_fuel": {
     "symbol": "HO=F",
     "name": "Jet Fuel (HO proxy)",
     "unit": "$/gallon",
     "proxy_type": "futures",
-    "price": 3.3019,
-    "change_pct": null,
+    "price": 3.4326,
+    "change_pct": 1.04,
     "high_52w": 4.84,
     "low_52w": 1.93,
-    "updated_at": "2026-04-20T00:53:56.344217+00:00"
+    "updated_at": "2026-04-21T01:36:36.177599+00:00"
   },
   "diesel": {
     "symbol": "HO=F",
     "name": "Diesel (Heating Oil)",
     "unit": "$/gallon",
     "proxy_type": "futures",
-    "price": 3.3019,
-    "change_pct": null,
+    "price": 3.4326,
+    "change_pct": 1.04,
     "high_52w": 4.84,
     "low_52w": 1.93,
-    "updated_at": "2026-04-20T00:53:57.133690+00:00"
+    "updated_at": "2026-04-21T01:36:36.867428+00:00"
   },
   "uranium": {
     "symbol": "URA",
     "name": "Uranium (URA ETF)",
     "unit": "$/share",
     "proxy_type": "etf_proxy",
-    "price": 55.86,
-    "change_pct": 1.07,
+    "price": 56.05,
+    "change_pct": 0.34,
     "high_52w": 62.28,
     "low_52w": 22.12,
-    "updated_at": "2026-04-20T00:53:57.671869+00:00"
+    "updated_at": "2026-04-21T01:36:37.404677+00:00"
   },
   "steel": {
     "symbol": "SLX",
     "name": "Steel (SLX ETF)",
     "unit": "$/share",
     "proxy_type": "etf_proxy",
-    "price": 101.52,
-    "change_pct": 1.92,
+    "price": 101.94,
+    "change_pct": 0.41,
     "high_52w": 103.0,
     "low_52w": 55.55,
-    "updated_at": "2026-04-20T00:53:58.167484+00:00"
+    "updated_at": "2026-04-21T01:36:37.928574+00:00"
   },
   "nickel": {
     "symbol": "JJN",
@@ -327,18 +327,18 @@
     "change_pct": null,
     "high_52w": 42.4,
     "low_52w": 27.05,
-    "updated_at": "2026-04-20T00:53:58.647584+00:00"
+    "updated_at": "2026-04-21T01:36:38.395868+00:00"
   },
   "lithium": {
     "symbol": "ALB",
     "name": "Lithium (ALB)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 197.75,
-    "change_pct": -8.29,
+    "price": 194.83,
+    "change_pct": -1.48,
     "high_52w": 215.71,
     "low_52w": 50.85,
-    "updated_at": "2026-04-20T00:53:59.193122+00:00"
+    "updated_at": "2026-04-21T01:36:39.120461+00:00"
   },
   "tin": {
     "symbol": "JJN",
@@ -349,160 +349,160 @@
     "change_pct": null,
     "high_52w": 42.4,
     "low_52w": 27.05,
-    "updated_at": "2026-04-20T00:53:59.655033+00:00"
+    "updated_at": "2026-04-21T01:36:39.707047+00:00"
   },
   "iron_ore": {
     "symbol": "VALE",
     "name": "Iron Ore (VALE)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 17.78,
-    "change_pct": 2.01,
+    "price": 17.82,
+    "change_pct": 0.22,
     "high_52w": 17.94,
     "low_52w": 8.97,
-    "updated_at": "2026-04-20T00:54:00.154319+00:00"
+    "updated_at": "2026-04-21T01:36:40.268109+00:00"
   },
   "cobalt": {
     "symbol": "GLNCY",
     "name": "Cobalt (Glencore)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 14.9,
-    "change_pct": -1.32,
+    "price": 14.87,
+    "change_pct": -0.2,
     "high_52w": 15.44,
     "low_52w": 6.31,
-    "updated_at": "2026-04-20T00:54:00.673690+00:00"
+    "updated_at": "2026-04-21T01:36:40.792180+00:00"
   },
   "coal": {
     "symbol": "BTU",
     "name": "Coal (BTU)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 25.65,
-    "change_pct": -4.75,
+    "price": 25.72,
+    "change_pct": 0.27,
     "high_52w": 41.14,
     "low_52w": 11.9,
-    "updated_at": "2026-04-20T00:54:01.202940+00:00"
+    "updated_at": "2026-04-21T01:36:41.320566+00:00"
   },
   "lng": {
     "symbol": "LNG",
     "name": "LNG (Cheniere)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 251.07,
-    "change_pct": -4.44,
+    "price": 252.35,
+    "change_pct": 0.51,
     "high_52w": 300.89,
     "low_52w": 186.2,
-    "updated_at": "2026-04-20T00:54:01.673075+00:00"
+    "updated_at": "2026-04-21T01:36:41.913366+00:00"
   },
   "potash": {
     "symbol": "NTR",
     "name": "Potash (NTR)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 70.62,
-    "change_pct": -5.25,
+    "price": 71.17,
+    "change_pct": 0.78,
     "high_52w": 85.36,
     "low_52w": 51.98,
-    "updated_at": "2026-04-20T00:54:02.161002+00:00"
+    "updated_at": "2026-04-21T01:36:43.443482+00:00"
   },
   "ammonia": {
     "symbol": "CF",
     "name": "Ammonia (CF proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 112.68,
-    "change_pct": -9.65,
+    "price": 115.94,
+    "change_pct": 2.89,
     "high_52w": 141.96,
     "low_52w": 73.56,
-    "updated_at": "2026-04-20T00:54:02.720708+00:00"
+    "updated_at": "2026-04-21T01:36:43.982306+00:00"
   },
   "manganese": {
     "symbol": "VALE",
     "name": "Manganese (VALE proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 17.78,
-    "change_pct": 2.01,
+    "price": 17.82,
+    "change_pct": 0.22,
     "high_52w": 17.94,
     "low_52w": 8.97,
-    "updated_at": "2026-04-20T00:54:03.347043+00:00"
+    "updated_at": "2026-04-21T01:36:44.473194+00:00"
   },
   "vanadium": {
     "symbol": "RIO",
     "name": "Vanadium (RIO proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 100.15,
-    "change_pct": 0.44,
+    "price": 99.83,
+    "change_pct": -0.32,
     "high_52w": 101.53,
     "low_52w": 55.64,
-    "updated_at": "2026-04-20T00:54:03.903470+00:00"
+    "updated_at": "2026-04-21T01:36:45.045080+00:00"
   },
   "graphite": {
     "symbol": "MP",
     "name": "Graphite (MP proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 60.99,
-    "change_pct": -2.1,
+    "price": 66.23,
+    "change_pct": 8.59,
     "high_52w": 100.25,
     "low_52w": 18.64,
-    "updated_at": "2026-04-20T00:54:04.413463+00:00"
+    "updated_at": "2026-04-21T01:36:45.556271+00:00"
   },
   "rare_earth": {
     "symbol": "MP",
     "name": "Rare Earth (MP proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 60.99,
-    "change_pct": -2.1,
+    "price": 66.23,
+    "change_pct": 8.59,
     "high_52w": 100.25,
     "low_52w": 18.64,
-    "updated_at": "2026-04-20T00:54:04.953554+00:00"
+    "updated_at": "2026-04-21T01:36:45.964602+00:00"
   },
   "rhodium": {
     "symbol": "SBSW",
     "name": "Rhodium (SBSW proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 13.8,
-    "change_pct": 5.42,
+    "price": 13.48,
+    "change_pct": -2.32,
     "high_52w": 21.29,
     "low_52w": 4.43,
-    "updated_at": "2026-04-20T00:54:05.479654+00:00"
+    "updated_at": "2026-04-21T01:36:46.502870+00:00"
   },
   "hydrogen": {
     "symbol": "PLUG",
     "name": "Hydrogen (PLUG proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 2.78,
-    "change_pct": -2.8,
+    "price": 3.22,
+    "change_pct": 15.83,
     "high_52w": 4.58,
     "low_52w": 0.69,
-    "updated_at": "2026-04-20T00:54:05.984511+00:00"
+    "updated_at": "2026-04-21T01:36:47.023832+00:00"
   },
   "rubber": {
     "symbol": "GT",
     "name": "Rubber (GT proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 7.06,
-    "change_pct": 7.13,
+    "price": 7.22,
+    "change_pct": 2.27,
     "high_52w": 12.03,
     "low_52w": 6.14,
-    "updated_at": "2026-04-20T00:54:06.539702+00:00"
+    "updated_at": "2026-04-21T01:36:47.603061+00:00"
   },
   "ethanol": {
     "symbol": "REX",
     "name": "Ethanol (REX proxy)",
     "unit": "$/share",
     "proxy_type": "equity_proxy",
-    "price": 43.05,
-    "change_pct": -1.19,
+    "price": 43.71,
+    "change_pct": 1.53,
     "high_52w": 48.66,
     "low_52w": 19.44,
-    "updated_at": "2026-04-20T00:54:07.010042+00:00"
+    "updated_at": "2026-04-21T01:36:48.126853+00:00"
   }
 }
