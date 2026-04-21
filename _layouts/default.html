@@ -157,29 +157,49 @@
         </a>
 
         <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
-          <a href="{{ '/' | relative_url }}"             {% if page.url == '/' %}class="active"{% endif %}>Home</a>
-          <a href="{{ '/commodities/' | relative_url }}" {% if page.url contains '/commodities' %}class="active"{% endif %}>Commodities</a>
-          <a href="{{ '/industries/' | relative_url }}" {% if page.url contains '/industries' %}class="active"{% endif %}>Industries</a>
-          <a href="{{ '/companies/' | relative_url }}" {% if page.url contains '/companies' %}class="active"{% endif %}>Companies</a>
-          <a href="{{ '/reports/' | relative_url }}" {% if page.url contains '/reports' %}class="active"{% endif %}>Reports</a>
-          <a href="{{ '/intelligence-lab/' | relative_url }}" {% if page.url contains '/intelligence-lab' %}class="active"{% endif %}>Intelligence Lab</a>
-          <a href="{{ '/intelligence-lab/rl-policy-lab/' | relative_url }}" {% if page.url contains '/intelligence-lab/rl-policy-lab' %}class="active"{% endif %}>Policy Lab</a>
-          <a href="{{ '/simulator/' | relative_url }}" {% if page.url contains '/simulator' %}class="active"{% endif %}>Simulator</a>
-          <a href="{{ '/pricing/' | relative_url }}" {% if page.url contains '/pricing' %}class="active"{% endif %}>Pricing</a>
-          <div class="nav-dropdown">
-            <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">More <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
+          <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a>
+
+          <div class="nav-dropdown nav-dropdown--markets">
+            <button class="nav-dropdown-toggle {% if page.url contains '/commodities' or page.url contains '/industries' or page.url contains '/companies' or page.url contains '/themes' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Markets <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
             <div class="nav-dropdown-menu">
-              <a href="{{ '/signals/' | relative_url }}" {% if page.url contains '/signals' %}class="active"{% endif %}>Signals</a>
-              <a href="{{ '/correlation/' | relative_url }}" {% if page.url contains '/correlation' %}class="active"{% endif %}>Correlation Matrix</a>
-              <a href="{{ '/disruptions/' | relative_url }}" {% if page.url contains '/disruptions' %}class="active"{% endif %}>Disruption Tracker</a>
-              <a href="{{ '/range-tracker/' | relative_url }}" {% if page.url contains '/range-tracker' %}class="active"{% endif %}>52W Range</a>
-              <a href="{{ '/stress-test/' | relative_url }}" {% if page.url contains '/stress-test' %}class="active"{% endif %}>Stress Test</a>
-              <a href="{{ '/calendar/' | relative_url }}" {% if page.url contains '/calendar' %}class="active"{% endif %}>Calendar</a>
+              <a href="{{ '/commodities/' | relative_url }}" {% if page.url contains '/commodities' %}class="active"{% endif %}>Commodity Hubs</a>
+              <a href="{{ '/industries/' | relative_url }}" {% if page.url contains '/industries' %}class="active"{% endif %}>Industries</a>
+              <a href="{{ '/companies/' | relative_url }}" {% if page.url contains '/companies' %}class="active"{% endif %}>Companies</a>
               <a href="{{ '/themes/' | relative_url }}" {% if page.url contains '/themes' %}class="active"{% endif %}>Themes</a>
-              <a href="{{ '/enterprise/' | relative_url }}" {% if page.url contains '/enterprise' %}class="active"{% endif %}>Enterprise</a>
-              <a href="{{ '/about/' | relative_url }}" {% if page.url contains '/about' %}class="active"{% endif %}>About</a>
+              <a href="{{ '/range-tracker/' | relative_url }}" {% if page.url contains '/range-tracker' %}class="active"{% endif %}>52-Week Range</a>
             </div>
           </div>
+
+          <a href="{{ '/reports/' | relative_url }}" {% if page.url contains '/reports' %}class="active"{% endif %}>Reports</a>
+
+          <div class="nav-dropdown nav-dropdown--tools">
+            <button class="nav-dropdown-toggle {% if page.url contains '/intelligence-lab' or page.url contains '/simulator' or page.url contains '/signals' or page.url contains '/correlation' or page.url contains '/disruptions' or page.url contains '/stress-test' or page.url contains '/calendar' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Tools <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
+            <div class="nav-dropdown-menu nav-dropdown-menu--wide">
+              <a href="{{ '/intelligence-lab/' | relative_url }}" {% if page.url == '/intelligence-lab/' %}class="active"{% endif %}><span class="nav-item-title">Intelligence Lab</span><span class="nav-item-desc">Flagship decision suite</span></a>
+              <a href="{{ '/intelligence-lab/rl-policy-lab/' | relative_url }}" {% if page.url contains '/rl-policy-lab' %}class="active"{% endif %}><span class="nav-item-title">RL Policy Lab</span><span class="nav-item-desc">Explainable policy console</span></a>
+              <a href="{{ '/simulator/' | relative_url }}" {% if page.url contains '/simulator' %}class="active"{% endif %}><span class="nav-item-title">Scenario Simulator</span><span class="nav-item-desc">Run shock scenarios</span></a>
+              <a href="{{ '/stress-test/' | relative_url }}" {% if page.url contains '/stress-test' %}class="active"{% endif %}><span class="nav-item-title">Portfolio Stress Test</span><span class="nav-item-desc">Test watchlist exposure</span></a>
+              <a href="{{ '/signals/' | relative_url }}" {% if page.url contains '/signals' %}class="active"{% endif %}><span class="nav-item-title">Signals</span><span class="nav-item-desc">Cross-commodity edges</span></a>
+              <a href="{{ '/correlation/' | relative_url }}" {% if page.url contains '/correlation' %}class="active"{% endif %}><span class="nav-item-title">Correlation Matrix</span><span class="nav-item-desc">15×15 co-movement</span></a>
+              <a href="{{ '/disruptions/' | relative_url }}" {% if page.url contains '/disruptions' %}class="active"{% endif %}><span class="nav-item-title">Disruption Tracker</span><span class="nav-item-desc">Supply-chain events</span></a>
+              <a href="{{ '/calendar/' | relative_url }}" {% if page.url contains '/calendar' %}class="active"{% endif %}><span class="nav-item-title">Event Calendar</span><span class="nav-item-desc">OPEC · WASDE · Fed</span></a>
+            </div>
+          </div>
+
+          <a href="{{ '/pricing/' | relative_url }}" {% if page.url contains '/pricing' %}class="active"{% endif %}>Pricing</a>
+
+          <div class="nav-dropdown nav-dropdown--about">
+            <button class="nav-dropdown-toggle {% if page.url contains '/about' or page.url contains '/enterprise' or page.url contains '/methodology' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">About <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
+            <div class="nav-dropdown-menu">
+              <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>About CommodityNode</a>
+              <a href="{{ '/methodology/' | relative_url }}" {% if page.url contains '/methodology' %}class="active"{% endif %}>Methodology & Caveats</a>
+              <a href="{{ '/about/editorial-team/' | relative_url }}" {% if page.url contains 'editorial-team' %}class="active"{% endif %}>Editorial Team</a>
+              <a href="{{ '/about/editorial-process/' | relative_url }}" {% if page.url contains 'editorial-process' %}class="active"{% endif %}>Editorial Process</a>
+              <a href="{{ '/enterprise/' | relative_url }}" {% if page.url contains '/enterprise' %}class="active"{% endif %}>Enterprise & Team</a>
+              <a href="{{ '/contact/' | relative_url }}" {% if page.url contains '/contact' %}class="active"{% endif %}>Contact</a>
+            </div>
+          </div>
+
           <!-- 모바일 메뉴 내 auth 영역 -->
           <div id="clerk-auth-nav" class="clerk-auth-nav"></div>
         </nav>
@@ -324,24 +344,45 @@
   {% endif %}
   {% endunless %}
 
-  <!-- Nav Dropdown -->
+  <!-- Nav Dropdowns (multi) -->
   <script>
   (function(){
-    var toggle = document.querySelector('.nav-dropdown-toggle');
-    var dropdown = document.querySelector('.nav-dropdown');
-    if(toggle && dropdown){
+    var dropdowns = document.querySelectorAll('.nav-dropdown');
+    dropdowns.forEach(function(dropdown){
+      var toggle = dropdown.querySelector('.nav-dropdown-toggle');
+      if(!toggle) return;
       toggle.addEventListener('click', function(e){
         e.stopPropagation();
-        dropdown.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', dropdown.classList.contains('open'));
-      });
-      document.addEventListener('click', function(e){
-        if(!dropdown.contains(e.target)){
-          dropdown.classList.remove('open');
-          toggle.setAttribute('aria-expanded','false');
+        var isOpen = dropdown.classList.contains('open');
+        dropdowns.forEach(function(d){
+          d.classList.remove('open');
+          var t = d.querySelector('.nav-dropdown-toggle');
+          if(t) t.setAttribute('aria-expanded','false');
+        });
+        if(!isOpen){
+          dropdown.classList.add('open');
+          toggle.setAttribute('aria-expanded','true');
         }
       });
-    }
+    });
+    document.addEventListener('click', function(e){
+      dropdowns.forEach(function(dropdown){
+        if(!dropdown.contains(e.target)){
+          dropdown.classList.remove('open');
+          var t = dropdown.querySelector('.nav-dropdown-toggle');
+          if(t) t.setAttribute('aria-expanded','false');
+        }
+      });
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        dropdowns.forEach(function(dropdown){
+          dropdown.classList.remove('open');
+          var t = dropdown.querySelector('.nav-dropdown-toggle');
+          if(t) t.setAttribute('aria-expanded','false');
+        });
+      }
+    });
   })();
   </script>
 

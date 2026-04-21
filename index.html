@@ -80,93 +80,105 @@ image: "/assets/images/og-default.png"
 <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#22d3ee,#a855f7);width:0%;z-index:9998;transition:width 0.1s;pointer-events:none;"></div>
 
 <!-- ===== HERO ===== -->
-<section class="hero" aria-label="Hero">
+<section class="hero hero--terminal" aria-label="Hero">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="container">
-    <div class="hero-content">
-      <div class="hero-badge" data-animate>
-        <span class="live-dot" aria-hidden="true"></span>
-        Live Market Intelligence
-      </div>
-
-      <h1 data-animate data-delay="100">
-        See which <span class="highlight">commodity shocks</span> hit your watchlist, supply chain, and sector exposure next
-      </h1>
-
-      <p class="hero-kicker" data-animate data-delay="130">
-        CommodityNode turns live commodity moves into decision-ready context for investors, analysts, and operators tracking second-order market impact.
-      </p>
-
-      <div class="hero-trust-strip" data-animate data-delay="150">
-        <span class="trust-item">{{ site.coverage_counts.commodity_hubs | default: site.commodities.size }} commodity hubs</span>
-        <span class="trust-sep">·</span>
-        <span class="trust-item">AI 90-day forecast</span>
-        <span class="trust-sep">·</span>
-        <span class="trust-item">10 premium decision products</span>
-        <span class="trust-sep">·</span>
-        <span class="trust-item">Real-time disruption alerts</span>
-      </div>
-
-      <p class="hero-desc" data-animate data-delay="200">
-        Track how oil, metals, agriculture, and energy shocks propagate through
-        companies, ETFs, industries, and second-order supply-chain relationships — with live pricing, scenario ranges, and linked Signal Reports.
-      </p>
-
-      <div class="hero-answer-grid" data-animate data-delay="240">
-        <div class="hero-answer-card">
-          <span>Best for</span>
-          <strong>Commodity-sensitive watchlists and portfolios</strong>
-          <p>Use it when oil, metals, grains, or gas can change your equity exposure faster than the next analyst note.</p>
+    <div class="hero-layout">
+      <div class="hero-content">
+        <div class="hero-badge" data-animate>
+          <span class="live-dot" aria-hidden="true"></span>
+          Live Market Intelligence · Institutional grade
         </div>
-        <div class="hero-answer-card hero-answer-card--accent">
-          <span>Flagship suite</span>
-          <strong>Intelligence Lab is the fastest route into the site’s flagship decision workflow</strong>
-          <p>Open the lab when you want event odds, ripple ranking, explainability, anomaly surfaces, stress tests, and a trust-first policy decision console from one hub.</p>
+
+        <h1 data-animate data-delay="100">
+          See which <span class="highlight">commodity shock</span> matters to your watchlist before the market reprices.
+        </h1>
+
+        <p class="hero-desc hero-desc--tight" data-animate data-delay="160">
+          Track oil, metals, agriculture, and supply-chain shocks across your watchlist, sector exposure, and scenario risk — with decision-ready context, not just charts.
+        </p>
+
+        <div class="hero-actions" data-animate data-delay="220">
+          <a href="/start/" class="btn btn-primary btn-primary--xl" data-cta="hero_build_watchlist_intelligence">
+            Build my watchlist intelligence
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
+          </a>
+          <a href="/intelligence-lab/" class="btn btn-secondary" data-cta="hero_see_risk_map">See today’s commodity risk map</a>
         </div>
-        <div class="hero-answer-card hero-answer-card--accent-2">
-          <span>Fastest workflow</span>
-          <strong>Open Intelligence Lab → choose the product → finish the decision</strong>
-          <p>Start with the main decision surface, then drop to hubs or the simulator only when you need commodity-specific depth.</p>
+
+        <div class="hero-trust-strip" data-animate data-delay="260">
+          <span class="trust-item"><strong>{{ site.coverage_counts.commodity_hubs | default: site.commodities.size }}</strong> commodity hubs</span>
+          <span class="trust-sep">·</span>
+          <span class="trust-item"><strong>Chronos-2 + TimesFM</strong> 90-day consensus</span>
+          <span class="trust-sep">·</span>
+          <span class="trust-item"><strong>10</strong> premium decision products</span>
+          <span class="trust-sep">·</span>
+          <span class="trust-item">Real-time disruption alerts</span>
+        </div>
+
+        <div class="hero-persona-row" data-animate data-delay="300" role="group" aria-label="Choose your role">
+          <a href="/for-self-directed-investors/" class="hero-persona-chip" data-cta="hero_persona_investor">
+            <span class="hero-persona-kicker">For investors</span>
+            <span class="hero-persona-desc">Which names change when the commodity move matters</span>
+          </a>
+          <a href="/for-equity-analysts/" class="hero-persona-chip" data-cta="hero_persona_analyst">
+            <span class="hero-persona-kicker">For analysts</span>
+            <span class="hero-persona-desc">Faster route from price tape to sector and company read</span>
+          </a>
+          <a href="/for-operators-and-procurement/" class="hero-persona-chip" data-cta="hero_persona_operator">
+            <span class="hero-persona-kicker">For operators</span>
+            <span class="hero-persona-desc">Catch input-cost shocks before margin pressure</span>
+          </a>
+        </div>
+
+        <div class="hero-micro-links" data-animate data-delay="340">
+          <a href="/reports/" class="hero-micro-link">Today’s live reports →</a>
+          <a href="/commodities/" class="hero-micro-link">Open commodity hubs →</a>
+          <a href="/methodology/" class="hero-micro-link">Methodology →</a>
         </div>
       </div>
 
-      <div class="hero-actions" data-animate data-delay="300">
-        <a href="/intelligence-lab/" class="btn btn-primary">Open Intelligence Lab</a>
-        <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary">Open RL Policy Lab</a>
-        <a href="/simulator/" class="btn btn-secondary">Model a Shock Scenario</a>
-      </div>
+      <!-- ===== HERO VISUAL: Terminal ===== -->
+      <aside class="hero-terminal" aria-label="Live commodity impact terminal" data-animate data-delay="380">
+        <div class="hero-terminal-head">
+          <span class="hero-terminal-dot" data-status="live"></span>
+          <span class="hero-terminal-title">Today’s Commodity Shock Map</span>
+          <span class="hero-terminal-time" id="hero-terminal-time">—</span>
+        </div>
 
-      <div class="hero-product-shelf" data-animate data-delay="315">
-        <a href="/intelligence-lab/event-probability-studio/" class="hero-product-card" data-cta="hero_open_event_probability">
-          <span>Featured catalyst engine</span>
-          <strong>Event Probability Studio</strong>
-          <p>Lead with catalyst odds when people need the quickest route from a market move to an actionable decision workflow.</p>
-        </a>
-        <a href="/intelligence-lab/exposure-screener/" class="hero-product-card" data-cta="hero_open_exposure_screener">
-          <span>Exposure translation</span>
-          <strong>Exposure Screener</strong>
-          <p>Translate the move into named sectors, companies, and watchlist relevance without extra clicks.</p>
-        </a>
-        <a href="/intelligence-lab/rl-policy-lab/" class="hero-product-card hero-product-card--accent" data-cta="hero_open_rl_policy_lab_featured">
-          <span>Policy flagship</span>
-          <strong>RL Policy Lab</strong>
-          <p>Surface the explainable policy console as a front-and-center premium layer for scenario, regime, and audit-friendly action guidance.</p>
-        </a>
-      </div>
+        <div class="hero-shock-rail" id="hero-shock-rail" aria-live="polite">
+          <div class="hero-shock-skel"></div>
+          <div class="hero-shock-skel"></div>
+          <div class="hero-shock-skel"></div>
+          <div class="hero-shock-skel"></div>
+          <div class="hero-shock-skel"></div>
+        </div>
 
-      <div class="hero-proof-note" data-animate data-delay="320">Built for investors, analysts, and operators who need a repeatable workflow before the market reprices.</div>
+        <div class="hero-heatmap" id="hero-heatmap" aria-label="Commodity to sector impact heatmap">
+          <div class="hero-heatmap-head">
+            <span>Impact</span>
+            <span class="hero-heatmap-legend">
+              <span class="heat-dot heat-pos-3"></span>
+              <span class="heat-dot heat-pos-2"></span>
+              <span class="heat-dot heat-pos-1"></span>
+              <span class="heat-dot heat-neu"></span>
+              <span class="heat-dot heat-neg-1"></span>
+              <span class="heat-dot heat-neg-2"></span>
+              <span class="heat-dot heat-neg-3"></span>
+            </span>
+          </div>
+          <div class="hero-heatmap-grid" id="hero-heatmap-grid"></div>
+        </div>
 
-      <div class="hero-micro-links" data-animate data-delay="340" style="display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:0.84rem;color:var(--text3);">
-        <a href="/start/" style="color:#22d3ee;text-decoration:none;font-weight:700;">Build my workflow</a>
-        <span aria-hidden="true">·</span>
-        <a href="/reports/" style="color:var(--text2);text-decoration:none;">Today’s live reports</a>
-        <span aria-hidden="true">·</span>
-        <a href="/commodities/" style="color:var(--text2);text-decoration:none;">Open commodity hubs</a>
-        <span aria-hidden="true">·</span>
-        <a href="/methodology/" style="color:var(--text2);text-decoration:none;">Methodology</a>
-        <span aria-hidden="true">·</span>
-        <a href="/pricing.txt" style="color:var(--text2);text-decoration:none;">Machine-readable pricing</a>
-      </div>
+        <div class="hero-scenario-chips" aria-label="Scenario quick-access">
+          <span class="hero-chip-kicker">Run scenario</span>
+          <a href="/simulator/?scenario=iran" class="hero-scenario-chip" data-cta="hero_scenario_iran">Iran · Hormuz</a>
+          <a href="/simulator/?scenario=china" class="hero-scenario-chip" data-cta="hero_scenario_china">China slowdown</a>
+          <a href="/simulator/?scenario=opec" class="hero-scenario-chip" data-cta="hero_scenario_opec">OPEC cut</a>
+          <a href="/simulator/?scenario=fed" class="hero-scenario-chip" data-cta="hero_scenario_fed">Fed cuts</a>
+        </div>
+      </aside>
+    </div>
 
       <!-- Dynamic Market Intelligence Headline -->
       <div class="hero-dynamic" id="hero-dynamic">
@@ -408,9 +420,141 @@ image: "/assets/images/og-default.png"
         }).catch(function(){var e=document.getElementById('hero-wti-change');if(e){e.textContent='—';e.className='value';} });
       });
       </script>
-    </div>
   </div>
 </section>
+
+<!-- ===== HERO SHOCK RAIL + HEATMAP DATA BINDING ===== -->
+<script>
+(function(){
+  // Commodity → sector impact weights (-3..+3 per sector for positive price delta)
+  // Values are direction at +1% move; inverted for negative moves.
+  var HEAT_ROWS = [
+    { key:'crude_oil', label:'Crude' },
+    { key:'natural_gas', label:'Nat Gas' },
+    { key:'gold', label:'Gold' },
+    { key:'copper', label:'Copper' },
+    { key:'wheat', label:'Wheat' },
+    { key:'lithium', label:'Lithium' },
+    { key:'uranium', label:'Uranium' }
+  ];
+  var HEAT_COLS = [
+    { key:'energy', label:'Energy' },
+    { key:'airlines', label:'Airlines' },
+    { key:'metals', label:'Metals/Mining' },
+    { key:'utilities', label:'Utilities' },
+    { key:'agri', label:'Agri/Food' },
+    { key:'ev', label:'EV/Battery' },
+    { key:'chem', label:'Chemicals' }
+  ];
+  // Base sensitivity matrix at +1% move (row → col)
+  var HEAT_WEIGHTS = {
+    crude_oil:   { energy:+3, airlines:-3, metals:+1, utilities:-1, agri:-1, ev:-1, chem:-2 },
+    natural_gas: { energy:+2, airlines:-1, metals:+0, utilities:-2, agri:-2, ev:+0, chem:-2 },
+    gold:        { energy:+0, airlines:+0, metals:+3, utilities:+1, agri:+0, ev:+0, chem:+0 },
+    copper:      { energy:+1, airlines:+0, metals:+3, utilities:+1, agri:+0, ev:+2, chem:+1 },
+    wheat:       { energy:+0, airlines:+0, metals:+0, utilities:+0, agri:+3, ev:+0, chem:-1 },
+    lithium:     { energy:+0, airlines:+0, metals:+1, utilities:+0, agri:+0, ev:+3, chem:+1 },
+    uranium:     { energy:+1, airlines:+0, metals:+2, utilities:+3, agri:+0, ev:+0, chem:+0 }
+  };
+  function clampBucket(v){
+    if (v >= 2.5) return 'heat-pos-3';
+    if (v >= 1.5) return 'heat-pos-2';
+    if (v >= 0.5) return 'heat-pos-1';
+    if (v <= -2.5) return 'heat-neg-3';
+    if (v <= -1.5) return 'heat-neg-2';
+    if (v <= -0.5) return 'heat-neg-1';
+    return 'heat-neu';
+  }
+  function formatPct(pct){
+    if (pct === null || pct === undefined || isNaN(pct)) return '—';
+    var sign = pct >= 0 ? '+' : '';
+    return sign + Number(pct).toFixed(1) + '%';
+  }
+  function renderShockRail(prices){
+    var rail = document.getElementById('hero-shock-rail');
+    if (!rail) return;
+    var entries = Object.entries(prices)
+      .filter(function(e){ return typeof e[1].change_pct === 'number' && e[1].change_pct !== 0 && !isNaN(e[1].change_pct); })
+      .sort(function(a,b){ return Math.abs(b[1].change_pct) - Math.abs(a[1].change_pct); })
+      .slice(0, 5);
+    if (!entries.length){ rail.innerHTML = '<div class="hero-shock-empty">Live data loading…</div>'; return; }
+    rail.innerHTML = entries.map(function(e){
+      var d = e[1];
+      var dir = d.change_pct >= 0 ? 'up' : 'down';
+      var slug = e[0].replace(/_/g,'-');
+      return '<a class="hero-shock-pill" href="/commodities/' + slug + '/" data-cta="hero_shock_'+slug+'">'
+        + '<span class="hero-shock-name">' + (d.name || e[0]) + '</span>'
+        + '<span class="hero-shock-val '+dir+'">' + formatPct(d.change_pct) + '</span>'
+        + '</a>';
+    }).join('');
+    var tEl = document.getElementById('hero-terminal-time');
+    if (tEl){
+      try {
+        var now = new Date();
+        var hh = String(now.getHours()).padStart(2,'0');
+        var mm = String(now.getMinutes()).padStart(2,'0');
+        tEl.textContent = 'Updated ' + hh + ':' + mm;
+      } catch(_){}
+    }
+  }
+  function renderHeatmap(prices){
+    var grid = document.getElementById('hero-heatmap-grid');
+    if (!grid) return;
+    var html = '';
+    // Header row
+    html += '<div class="hero-heatmap-row hero-heatmap-row--head">';
+    html += '<div class="hero-heatmap-axis"></div>';
+    HEAT_COLS.forEach(function(c){
+      html += '<div class="hero-heatmap-col-label" title="'+c.label+'">'+c.label+'</div>';
+    });
+    html += '</div>';
+    HEAT_ROWS.forEach(function(r){
+      var p = prices[r.key] || {};
+      var pct = typeof p.change_pct === 'number' ? p.change_pct : 0;
+      html += '<div class="hero-heatmap-row">';
+      html += '<div class="hero-heatmap-row-label">'
+            + '<span class="hero-heatmap-row-name">'+r.label+'</span>'
+            + '<span class="hero-heatmap-row-chg '+(pct>=0?'up':'down')+'">'+formatPct(pct)+'</span>'
+            + '</div>';
+      HEAT_COLS.forEach(function(c){
+        var w = (HEAT_WEIGHTS[r.key] && HEAT_WEIGHTS[r.key][c.key]) || 0;
+        var score = w * (pct/1.0); // scale by actual %
+        // Clamp score for visual bucket
+        var bucket = clampBucket(Math.max(-3, Math.min(3, score/2)));
+        var titleTxt = r.label+' × '+c.label+': '+(score>=0?'+':'')+score.toFixed(2);
+        html += '<div class="hero-heatmap-cell '+bucket+'" title="'+titleTxt+'" data-row="'+r.key+'" data-col="'+c.key+'"></div>';
+      });
+      html += '</div>';
+    });
+    grid.innerHTML = html;
+  }
+  // Fallback static data if fetch fails
+  var FALLBACK = {
+    crude_oil: { name:'Crude', change_pct: 1.2 },
+    natural_gas: { name:'Nat Gas', change_pct: -2.8 },
+    gold: { name:'Gold', change_pct: 0.4 },
+    copper: { name:'Copper', change_pct: -1.1 },
+    wheat: { name:'Wheat', change_pct: 2.1 },
+    lithium: { name:'Lithium', change_pct: -0.6 },
+    uranium: { name:'Uranium', change_pct: 1.8 },
+    silver: { name:'Silver', change_pct: -1.4 }
+  };
+  function hydrate(prices){
+    try { renderShockRail(prices); } catch(e){}
+    try { renderHeatmap(prices); } catch(e){}
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    fetch('/assets/data/prices.json').then(function(r){ return r.json(); })
+      .then(hydrate)
+      .catch(function(){ hydrate(FALLBACK); });
+    // Safety: if still skeleton after 1.2s, hydrate fallback
+    setTimeout(function(){
+      var rail = document.getElementById('hero-shock-rail');
+      if (rail && rail.querySelector('.hero-shock-skel')) hydrate(FALLBACK);
+    }, 1200);
+  });
+})();
+</script>
 
 <section class="section" aria-labelledby="publisher-trust-title" style="padding-top:24px;">
   <div class="container">
