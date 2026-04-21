@@ -13,8 +13,69 @@ description: "Choose your role, save your commodities and watchlist, and build a
     </div>
     <h1>Build your daily commodity workflow in under 2 minutes</h1>
     <p class="post-meta-bar">Save your role, key commodities, watchlist names, and event interests so CommodityNode can route you into the setups that actually matter.</p>
+
+    <!-- Progress -->
+    <div class="start-progress" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-label="Onboarding progress">
+      <div class="start-progress-step" data-step="role">
+        <span class="start-progress-dot">1</span>
+        <span class="start-progress-label">Role</span>
+      </div>
+      <div class="start-progress-line" aria-hidden="true"></div>
+      <div class="start-progress-step" data-step="commodities">
+        <span class="start-progress-dot">2</span>
+        <span class="start-progress-label">Commodities</span>
+      </div>
+      <div class="start-progress-line" aria-hidden="true"></div>
+      <div class="start-progress-step" data-step="watchlist">
+        <span class="start-progress-dot">3</span>
+        <span class="start-progress-label">Watchlist</span>
+      </div>
+      <div class="start-progress-line" aria-hidden="true"></div>
+      <div class="start-progress-step" data-step="events">
+        <span class="start-progress-dot">4</span>
+        <span class="start-progress-label">Events</span>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- Preset presets bar -->
+<section class="section" style="padding-top:8px;padding-bottom:0;">
+  <div class="container" style="max-width:1180px;">
+    <div class="start-presets" data-animate>
+      <div class="start-presets-head">
+        <span class="start-presets-kicker">Start with a preset</span>
+        <span class="start-presets-sub">One click loads a saved workflow tailored to a common theme. Edit from there.</span>
+      </div>
+      <div class="start-presets-grid">
+        <button type="button" class="start-preset-card" data-preset="copper-bull" data-cta="start_preset_copper_bull">
+          <span class="start-preset-kicker">Copper bull case</span>
+          <span class="start-preset-title">Industrial metal tightening</span>
+          <span class="start-preset-desc">Copper · Aluminum · Nickel · FCX · SCCO · TSLA · GM · BHP</span>
+          <span class="start-preset-meta">Investor · OPEC/Fed events</span>
+        </button>
+        <button type="button" class="start-preset-card" data-preset="energy-shock" data-cta="start_preset_energy_shock">
+          <span class="start-preset-kicker">Energy shock watchlist</span>
+          <span class="start-preset-title">Oil · gas · Hormuz risk</span>
+          <span class="start-preset-desc">Crude oil · Natural gas · XOM · CVX · DAL · AAL · LUV · UNG</span>
+          <span class="start-preset-meta">Operator · Geopolitics</span>
+        </button>
+        <button type="button" class="start-preset-card" data-preset="food-inflation" data-cta="start_preset_food_inflation">
+          <span class="start-preset-kicker">Food inflation tracker</span>
+          <span class="start-preset-title">Grains · softs · consumer</span>
+          <span class="start-preset-desc">Wheat · Corn · Coffee · Sugar · SBUX · ADM · TSN · KHC</span>
+          <span class="start-preset-meta">Analyst · WASDE events</span>
+        </button>
+        <button type="button" class="start-preset-card" data-preset="battery-chain" data-cta="start_preset_battery_chain">
+          <span class="start-preset-kicker">Battery chain</span>
+          <span class="start-preset-title">EV raw-materials exposure</span>
+          <span class="start-preset-desc">Lithium · Nickel · Cobalt · ALB · SQM · TSLA · BYD · PANA</span>
+          <span class="start-preset-meta">Investor · China macro</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section">
   <div class="container" style="max-width:1080px;display:grid;gap:18px;">
@@ -159,5 +220,63 @@ description: "Choose your role, save your commodities and watchlist, and build a
   });
   document.addEventListener('cn:profile-updated', render);
   render();
+
+  // ===== Preset loader =====
+  var PRESETS = {
+    'copper-bull':    { role: 'self-directed-investor', commodities:['copper','aluminum','nickel'], watchlist:['FCX','SCCO','TSLA','GM','BHP'], events:['fed','opec'] },
+    'energy-shock':   { role: 'operator-procurement',    commodities:['crude-oil','natural-gas'],     watchlist:['XOM','CVX','DAL','AAL','LUV','UNG'], events:['opec','geopolitics'] },
+    'food-inflation': { role: 'equity-analyst',          commodities:['wheat','corn','coffee','sugar'],watchlist:['SBUX','ADM','TSN','KHC'], events:['wasde','fed'] },
+    'battery-chain':  { role: 'self-directed-investor', commodities:['lithium','nickel','cobalt'],   watchlist:['ALB','SQM','TSLA','BYD','PANA'], events:['geopolitics','fed'] }
+  };
+  function loadPreset(key){
+    var p = PRESETS[key];
+    if (!p || !window.CNProfile || !window.CNProfile.save) return;
+    window.CNProfile.save({ role: p.role });
+    (p.commodities || []).forEach(function(c){ if (window.CNProfile.addCommodity) window.CNProfile.addCommodity(c); });
+    (p.watchlist || []).forEach(function(w){ if (window.CNProfile.addWatchlist) window.CNProfile.addWatchlist([w]); });
+    (p.events || []).forEach(function(e){ if (window.CNProfile.addEvent) window.CNProfile.addEvent(e); });
+    if (window.CNTrack) window.CNTrack('preset_loaded', { preset: key });
+    if (window.CNEvents) window.CNEvents.send('preview_generated', { source:'preset', preset:key });
+    // Scroll to saved panel
+    var saved = document.getElementById('start-profile-summary');
+    if (saved) saved.scrollIntoView({ behavior:'smooth', block:'center' });
+    render();
+    updateProgress();
+    flashPresetButton(key);
+  }
+  function flashPresetButton(key){
+    var btn = document.querySelector('[data-preset="'+key+'"]');
+    if (!btn) return;
+    btn.classList.add('start-preset-card--loaded');
+    setTimeout(function(){ btn.classList.remove('start-preset-card--loaded'); }, 1400);
+  }
+  document.querySelectorAll('[data-preset]').forEach(function(btn){
+    btn.addEventListener('click', function(){ loadPreset(btn.getAttribute('data-preset')); });
+  });
+
+  // ===== Step progress indicator =====
+  function updateProgress(){
+    var p = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { role:'',commodities:[],watchlist:[],events:[] };
+    var steps = [
+      { key:'role',        done: !!p.role },
+      { key:'commodities', done: (p.commodities||[]).length > 0 },
+      { key:'watchlist',   done: (p.watchlist||[]).length > 0 },
+      { key:'events',      done: (p.events||[]).length > 0 }
+    ];
+    var doneCount = 0;
+    steps.forEach(function(s){
+      var el = document.querySelector('.start-progress-step[data-step="'+s.key+'"]');
+      if (!el) return;
+      if (s.done){ el.classList.add('is-done'); doneCount++; }
+      else el.classList.remove('is-done');
+    });
+    var bar = document.querySelector('.start-progress');
+    if (bar) bar.setAttribute('aria-valuenow', String(doneCount));
+    if (doneCount === 4 && window.CNEvents){
+      try { window.CNEvents.send('onboarding_complete', { steps: doneCount }); } catch(e){}
+    }
+  }
+  document.addEventListener('cn:profile-updated', updateProgress);
+  updateProgress();
 })();
 </script>

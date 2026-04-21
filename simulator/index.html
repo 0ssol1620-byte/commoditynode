@@ -613,6 +613,40 @@ permalink: /simulator/
   </div>
 </section>
 
+<!-- Quick scenario presets (blueprint §3-5) -->
+<section class="sim-quick-presets" aria-label="Quick scenario presets">
+  <div class="container">
+    <div class="sim-quick-shell">
+      <div class="sim-quick-head">
+        <span class="sim-quick-kicker">One-tap presets</span>
+        <span class="sim-quick-sub">Pick a typical shock to load commodity, magnitude, and recommended follow-up in one click.</span>
+      </div>
+      <div class="sim-quick-row" role="group">
+        <button type="button" class="sim-quick-card" data-quick="oil-spike-20" data-cta="sim_quick_oil_spike">
+          <span class="sim-quick-pip" data-tone="bull">+20%</span>
+          <span class="sim-quick-name">Oil spike</span>
+          <span class="sim-quick-desc">Crude oil supply shock — energy &amp; airlines repricing</span>
+        </button>
+        <button type="button" class="sim-quick-card" data-quick="copper-deficit" data-cta="sim_quick_copper_deficit">
+          <span class="sim-quick-pip" data-tone="bull">+15%</span>
+          <span class="sim-quick-name">Copper deficit deepens</span>
+          <span class="sim-quick-desc">Industrial-metal tightening — miners, EV chain</span>
+        </button>
+        <button type="button" class="sim-quick-card" data-quick="food-inflation" data-cta="sim_quick_food_inflation">
+          <span class="sim-quick-pip" data-tone="bull">+12%</span>
+          <span class="sim-quick-name">Food inflation resurges</span>
+          <span class="sim-quick-desc">Wheat/corn/coffee — staples &amp; restaurants</span>
+        </button>
+        <button type="button" class="sim-quick-card" data-quick="usd-weakens-freight" data-cta="sim_quick_usd_freight">
+          <span class="sim-quick-pip" data-tone="bear">-8%</span>
+          <span class="sim-quick-name">USD weakens / freight rises</span>
+          <span class="sim-quick-desc">Dollar drift + tanker rates — exporters, refiners</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="container" style="padding: 24px 20px 80px;">
 
   <div class="sim-top-grid" style="max-width:1120px;margin:0 auto 18px;">
@@ -2197,5 +2231,66 @@ window.addEventListener('resize', function(){
   }, 160);
 });
 
+})();
+</script>
+
+<!-- Quick presets + follow-up actions (blueprint §3-5) -->
+<script>
+(function(){
+  // Map each quick-preset to (commodity, base shock magnitude name)
+  var QUICK = {
+    'oil-spike-20':       { commodity:'crude_oil', preset:'demand_surge', tone:'bull', headline:'Oil spike +20%',           sectors:['Energy','Airlines','Chemicals','Refiners'], names:['XOM','CVX','OXY','DAL','AAL','LUV','DOW','LYB'] },
+    'copper-deficit':     { commodity:'copper',    preset:'demand_surge', tone:'bull', headline:'Copper deficit deepens',  sectors:['Miners','EV chain','Capital goods'],         names:['FCX','SCCO','BHP','RIO','TSLA','GM','NUE'] },
+    'food-inflation':     { commodity:'wheat',     preset:'demand_surge', tone:'bull', headline:'Food inflation +12%',     sectors:['Agribusiness','Restaurants','Staples'],     names:['ADM','BG','SBUX','MCD','TSN','KHC','GIS'] },
+    'usd-weakens-freight':{ commodity:'crude_oil', preset:'recession',    tone:'bear', headline:'USD softens · freight up',sectors:['Tankers','Refiners','Exporters'],          names:['FRO','EURN','STNG','VLO','PSX','CAT','BA'] }
+  };
+
+  function followUpHTML(q){
+    return ''
+      + '<div class="sim-followup" data-animate>'
+      + '<div class="sim-followup-head">'
+      + '<span class="sim-followup-kicker">After this scenario</span>'
+      + '<strong>' + q.headline + '</strong>'
+      + '<p>Most exposed: ' + q.sectors.join(' · ') + '. Common watchlist names: ' + q.names.join(', ') + '.</p>'
+      + '</div>'
+      + '<div class="sim-followup-actions">'
+      + '<a href="/intelligence-lab/exposure-screener/" class="btn btn-primary" data-cta="sim_followup_open_exposure">Open exposure screener</a>'
+      + '<a href="/reports/" class="btn btn-secondary" data-cta="sim_followup_open_reports">Read related reports</a>'
+      + '<a href="/start/" class="btn btn-secondary" data-cta="sim_followup_save_workflow">Save to my workflow</a>'
+      + '<a href="/pricing/" class="btn btn-secondary" data-cta="sim_followup_upgrade">Compare scenarios with Pro</a>'
+      + '</div>'
+      + '</div>';
+  }
+
+  function ensureFollowupHost(){
+    var host = document.getElementById('sim-followup-host');
+    if (host) return host;
+    host = document.createElement('div');
+    host.id = 'sim-followup-host';
+    host.className = 'sim-followup-host';
+    // Insert after main chart container
+    var chart = document.querySelector('.sim-chart-container');
+    if (chart && chart.parentNode){
+      chart.parentNode.insertBefore(host, chart.nextSibling);
+    } else {
+      document.body.appendChild(host);
+    }
+    return host;
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('[data-quick]').forEach(function(card){
+      card.addEventListener('click', function(){
+        var key = card.getAttribute('data-quick');
+        var q = QUICK[key]; if (!q) return;
+        try { window.selectCommodity && window.selectCommodity(q.commodity); } catch(e){}
+        try { window.applyPreset && window.applyPreset(q.preset); } catch(e){}
+        var host = ensureFollowupHost();
+        host.innerHTML = followUpHTML(q);
+        host.scrollIntoView({ behavior:'smooth', block:'start' });
+        if (window.CNEvents) window.CNEvents.send('sample_run', { source:'simulator_quick', preset:key });
+      });
+    });
+  });
 })();
 </script>

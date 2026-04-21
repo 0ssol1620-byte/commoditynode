@@ -75,8 +75,88 @@ no_loader: true
     <p style="font-size:0.78rem;color:#475569;margin-top:14px;">Or email <strong style="color:#64748b;">enterprise@commoditynode.com</strong></p>
   </div>
 
+  <!-- Architecture & Delivery diagram (blueprint §3-8) -->
+  <h2 style="font-size:1.4rem;font-weight:800;color:#e2e8f0;margin-bottom:16px;" data-animate>How CommodityNode plugs into your team</h2>
+  <p style="color:#94a3b8;line-height:1.7;margin-bottom:24px;font-size:0.95rem;" data-animate>From source feeds to your team's surface — every layer is logged, versioned, and exportable.</p>
+
+  <div class="ent-arch" data-animate>
+    <div class="ent-arch-row">
+      <div class="ent-arch-box ent-arch-box--source">
+        <span class="ent-arch-kicker">Layer 1 · Sources</span>
+        <strong>Live feeds</strong>
+        <p>Futures &amp; spot prices, USDA WASDE, EIA, central-bank schedules, supply-chain alerts.</p>
+      </div>
+      <span class="ent-arch-arrow" aria-hidden="true">→</span>
+      <div class="ent-arch-box ent-arch-box--norm">
+        <span class="ent-arch-kicker">Layer 2 · Normalization</span>
+        <strong>Curated entity graph</strong>
+        <p>62 commodity hubs, 74 companies, 31 industries, 23 themes — versioned and machine-readable.</p>
+      </div>
+      <span class="ent-arch-arrow" aria-hidden="true">→</span>
+      <div class="ent-arch-box ent-arch-box--model">
+        <span class="ent-arch-kicker">Layer 3 · Models</span>
+        <strong>Forecast &amp; scenario stack</strong>
+        <p>Chronos-2 + TimesFM consensus, regime detector, anomaly monitor, RL policy console.</p>
+      </div>
+    </div>
+    <div class="ent-arch-row ent-arch-row--out">
+      <div class="ent-arch-box ent-arch-box--surface">
+        <span class="ent-arch-kicker">Layer 4 · Surfaces</span>
+        <strong>Team workspace</strong>
+        <p>Shared watchlists, scenario history, saved playbooks, role-aware dashboards.</p>
+      </div>
+      <span class="ent-arch-arrow" aria-hidden="true">→</span>
+      <div class="ent-arch-box ent-arch-box--surface">
+        <span class="ent-arch-kicker">Layer 4 · Delivery</span>
+        <strong>Exports &amp; alerts</strong>
+        <p>CSV/JSON exports, email + webhook alerts, Slack &amp; Teams integration, branded PDF briefs.</p>
+      </div>
+      <span class="ent-arch-arrow" aria-hidden="true">→</span>
+      <div class="ent-arch-box ent-arch-box--surface">
+        <span class="ent-arch-kicker">Layer 4 · API</span>
+        <strong>API access</strong>
+        <p>Programmatic access to prices, forecasts, signals, and exposure scores. SLA on Enterprise.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Use cases by team -->
+  <h2 style="font-size:1.4rem;font-weight:800;color:#e2e8f0;margin:48px 0 16px;" data-animate>Use cases by team</h2>
+  <div class="ent-usecase-grid" data-animate>
+    <article class="ent-usecase-card">
+      <span class="ent-usecase-kicker">Research desk</span>
+      <strong>Sector-rotation triage at the morning meeting</strong>
+      <p>Pull yesterday's commodity moves, agreement scores, and most-exposed names for the morning brief — exported to a shared deck in two clicks.</p>
+      <ul>
+        <li>Top 10 commodity moves ranked by impact magnitude</li>
+        <li>Sector-rotation candidates with confidence flag</li>
+        <li>Branded PDF brief for the team</li>
+      </ul>
+    </article>
+    <article class="ent-usecase-card">
+      <span class="ent-usecase-kicker">Portfolio risk</span>
+      <strong>Watchlist stress-tested before the open</strong>
+      <p>Scenario Simulator runs your watchlist against four standing playbooks (Iran · China · OPEC · Fed) and flags positions that breach the team's stress threshold.</p>
+      <ul>
+        <li>Saved scenario set with team-shared assumptions</li>
+        <li>Position-level pain/relief table with confidence band</li>
+        <li>Webhook to risk dashboard</li>
+      </ul>
+    </article>
+    <article class="ent-usecase-card">
+      <span class="ent-usecase-kicker">Supply chain</span>
+      <strong>Input-cost early warning for procurement</strong>
+      <p>Disruption Tracker plus commodity sensitivity maps tell procurement which contract renewal windows need reopening this quarter.</p>
+      <ul>
+        <li>Custom commodity coverage (steel, freight, LNG, grains)</li>
+        <li>Email alerts on threshold breaches</li>
+        <li>Quarterly methodology + caveat review</li>
+      </ul>
+    </article>
+  </div>
+
   <!-- Sample API schema -->
-  <h2 style="font-size:1.2rem;font-weight:700;color:#e2e8f0;margin-bottom:16px;" data-animate>Sample API Response Schema</h2>
+  <h2 style="font-size:1.2rem;font-weight:700;color:#e2e8f0;margin-bottom:16px;margin-top:48px;" data-animate>Sample API Response Schema</h2>
   <pre style="background:rgba(5,5,8,0.95);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:24px;font-size:0.78rem;color:#94a3b8;overflow-x:auto;line-height:1.8;margin-bottom:40px;" data-animate><code>{
   "commodity": "crude_oil",
   "symbol": "CL=F",

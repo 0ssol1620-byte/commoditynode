@@ -160,6 +160,96 @@ description: "Premium decision-support products on top of CommodityNode's commod
   </div>
 </section>
 
+<!-- Tool categorization + role guidance (blueprint §3-4) -->
+<section class="section lab-category-section" aria-labelledby="lab-category-title">
+  <div class="lab-shell" style="padding-bottom:0;">
+    <header style="display:grid;gap:8px;margin-bottom:16px;">
+      <p class="section-label" style="color:#22d3ee;">Decision workbench</p>
+      <h2 class="section-title" id="lab-category-title" style="margin:0;">Ten tools, four categories, one workflow.</h2>
+      <p class="section-desc" style="max-width:780px;color:#94a3b8;line-height:1.72;">Each tool answers one question about the same commodity shock. New users start with the first recommendation in their role — experienced users can jump straight to the module they trust most.</p>
+    </header>
+
+    <div class="lab-category-grid">
+      <article class="lab-category-card lab-category-card--forecast">
+        <div class="lab-category-head">
+          <span class="lab-category-kicker">Forecast &amp; probability</span>
+          <span class="lab-category-count">3 tools</span>
+        </div>
+        <p class="lab-category-desc">Price path, model agreement, and event odds before the tape tells you.</p>
+        <ul class="lab-category-list">
+          <li><a href="#event-probability-studio" data-cta="lab_cat_event_prob" data-tt="~30 sec"><strong>Event Probability Studio</strong><span>Catalyst odds under current regime · <em>Investor, Analyst</em></span></a></li>
+          <li><a href="#forecast-explainability" data-cta="lab_cat_explainability" data-tt="~45 sec"><strong>Forecast Explainability Studio</strong><span>Why models agree or diverge · <em>Analyst</em></span></a></li>
+          <li><a href="#event-study-library" data-cta="lab_cat_event_study" data-tt="~1 min"><strong>Event Study Library</strong><span>How similar events priced historically · <em>Analyst</em></span></a></li>
+        </ul>
+      </article>
+      <article class="lab-category-card lab-category-card--stress">
+        <div class="lab-category-head">
+          <span class="lab-category-kicker">Stress &amp; scenario</span>
+          <span class="lab-category-count">2 tools</span>
+        </div>
+        <p class="lab-category-desc">Run the shock against stated exposure, then compare scenarios.</p>
+        <ul class="lab-category-list">
+          <li><a href="#stress-test-lab" data-cta="lab_cat_stress" data-tt="~60 sec"><strong>Portfolio Stress Test</strong><span>Position-level pain or relief · <em>Investor, Analyst, Operator</em></span></a></li>
+          <li><a href="/simulator/" data-cta="lab_cat_simulator" data-tt="~90 sec"><strong>Scenario Simulator</strong><span>Iran · China · OPEC · Fed presets · <em>All roles</em></span></a></li>
+        </ul>
+      </article>
+      <article class="lab-category-card lab-category-card--portfolio">
+        <div class="lab-category-head">
+          <span class="lab-category-kicker">Portfolio &amp; hedge</span>
+          <span class="lab-category-count">3 tools</span>
+        </div>
+        <p class="lab-category-desc">Map live exposure to your watchlist and design a clean hedge.</p>
+        <ul class="lab-category-list">
+          <li><a href="#ripple-ranker" data-cta="lab_cat_ripple" data-tt="~30 sec"><strong>Ripple Ranker</strong><span>Highest-beta downstream names · <em>Investor</em></span></a></li>
+          <li><a href="#exposure-screener" data-cta="lab_cat_exposure" data-tt="~45 sec"><strong>Exposure Screener</strong><span>Watchlist × live commodity state · <em>Investor, Analyst</em></span></a></li>
+          <li><a href="#hedge-optimizer" data-cta="lab_cat_hedge" data-tt="~60 sec"><strong>Hedge Optimizer</strong><span>Regime-fit hedge candidates · <em>Analyst, Operator</em></span></a></li>
+        </ul>
+      </article>
+      <article class="lab-category-card lab-category-card--anomaly">
+        <div class="lab-category-head">
+          <span class="lab-category-kicker">Anomaly &amp; regime</span>
+          <span class="lab-category-count">2 tools</span>
+        </div>
+        <p class="lab-category-desc">Spot mismatches and regime shifts before the narrative updates.</p>
+        <ul class="lab-category-list">
+          <li><a href="#regime-shift-detector" data-cta="lab_cat_regime" data-tt="~30 sec"><strong>Regime Shift Detector</strong><span>State label for the current tape · <em>Analyst</em></span></a></li>
+          <li><a href="#anomaly-monitor" data-cta="lab_cat_anomaly" data-tt="~30 sec"><strong>Anomaly Monitor</strong><span>Spot vs model divergence · <em>Analyst, Operator</em></span></a></li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Recommended first -->
+    <div class="lab-recommended" data-animate data-delay="80">
+      <div class="lab-recommended-head">
+        <span class="lab-recommended-kicker">Recommended first</span>
+        <span class="lab-recommended-sub" id="lab-recommended-sub">Pick your role — we'll highlight the fastest entry into the lab.</span>
+      </div>
+      <div class="lab-role-pills">
+        <button type="button" class="lab-role-pill" data-role="investor" data-cta="lab_role_investor">Investor</button>
+        <button type="button" class="lab-role-pill" data-role="analyst" data-cta="lab_role_analyst">Analyst</button>
+        <button type="button" class="lab-role-pill" data-role="operator" data-cta="lab_role_operator">Operator</button>
+      </div>
+      <div class="lab-recommended-grid">
+        <a href="#event-probability-studio" class="lab-recommended-card" data-role="investor">
+          <span class="lab-recommended-rank">#1</span>
+          <div><strong>Event Probability Studio</strong><p>See which catalyst odds most likely move your names next.</p></div>
+          <span class="lab-recommended-time">~30 sec</span>
+        </a>
+        <a href="#ripple-ranker" class="lab-recommended-card" data-role="investor">
+          <span class="lab-recommended-rank">#2</span>
+          <div><strong>Ripple Ranker</strong><p>Rank downstream names by sensitivity before the narrative catches up.</p></div>
+          <span class="lab-recommended-time">~30 sec</span>
+        </a>
+        <a href="#exposure-screener" class="lab-recommended-card" data-role="investor">
+          <span class="lab-recommended-rank">#3</span>
+          <div><strong>Exposure Screener</strong><p>Overlay your saved watchlist with the live commodity state.</p></div>
+          <span class="lab-recommended-time">~45 sec</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="lab-shell" id="intelligence-lab-shell">
   <div class="lab-toolbar">
     <div>
@@ -318,3 +408,53 @@ description: "Premium decision-support products on top of CommodityNode's commod
 </div>
 
 <script src="/assets/js/intelligence-lab.js"></script>
+<script>
+(function(){
+  var REC = {
+    investor: [
+      ['#event-probability-studio', 'Event Probability Studio', 'See which catalyst odds most likely move your names next.', '~30 sec'],
+      ['#ripple-ranker',            'Ripple Ranker',           'Rank downstream names by sensitivity before consensus catches up.', '~30 sec'],
+      ['#exposure-screener',        'Exposure Screener',       'Overlay your saved watchlist with the live commodity state.', '~45 sec']
+    ],
+    analyst: [
+      ['#forecast-explainability',  'Forecast Explainability', 'Why models agree (or diverge) on the current setup.', '~45 sec'],
+      ['#regime-shift-detector',    'Regime Shift Detector',   'Label the current tape so the next call frames cleaner.', '~30 sec'],
+      ['#event-study-library',      'Event Study Library',     'How comparable events priced in historically.', '~60 sec']
+    ],
+    operator: [
+      ['#stress-test-lab',          'Portfolio Stress Test',   'Translate input-cost shock into margin pain or relief.', '~60 sec'],
+      ['#hedge-optimizer',          'Hedge Optimizer',         'Regime-fit hedges for input-cost or supply exposure.', '~60 sec'],
+      ['#anomaly-monitor',          'Anomaly Monitor',         'Spot vs model divergence — early input-cost warning.', '~30 sec']
+    ]
+  };
+  function paint(role){
+    var grid = document.querySelector('.lab-recommended-grid'); if (!grid) return;
+    var cards = REC[role] || REC.investor;
+    grid.innerHTML = cards.map(function(c, i){
+      return '<a href="'+c[0]+'" class="lab-recommended-card" data-role="'+role+'">' +
+        '<span class="lab-recommended-rank">#'+(i+1)+'</span>' +
+        '<div><strong>'+c[1]+'</strong><p>'+c[2]+'</p></div>' +
+        '<span class="lab-recommended-time">'+c[3]+'</span>' +
+        '</a>';
+    }).join('');
+    document.querySelectorAll('.lab-role-pill').forEach(function(p){
+      p.classList.toggle('is-active', p.getAttribute('data-role') === role);
+    });
+    var sub = document.getElementById('lab-recommended-sub');
+    if (sub) sub.textContent = 'For ' + role + 's: start here, then drop into the matching module.';
+    if (window.CNEvents) window.CNEvents.send('role_card_select', { source:'intelligence_lab', role: role });
+  }
+  // Bind clicks
+  document.querySelectorAll('.lab-role-pill').forEach(function(p){
+    p.addEventListener('click', function(){ paint(p.getAttribute('data-role')); });
+  });
+  // Default — try to read saved profile role
+  document.addEventListener('DOMContentLoaded', function(){
+    try {
+      var saved = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : null;
+      var role = saved && saved.role ? (saved.role.indexOf('investor') !== -1 ? 'investor' : (saved.role.indexOf('analyst') !== -1 ? 'analyst' : (saved.role.indexOf('operator') !== -1 ? 'operator' : 'investor'))) : 'investor';
+      paint(role);
+    } catch(e){ paint('investor'); }
+  });
+})();
+</script>

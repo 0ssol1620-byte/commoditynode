@@ -86,6 +86,48 @@ noindex: false
 
 <section class="section" style="padding-top:0">
   <div class="container">
+
+    <!-- "What changed recently" panel + view toggles (blueprint §3-6) -->
+    <div class="cor-changes-strip" data-animate>
+      <div class="cor-changes-head">
+        <span class="cor-changes-kicker">What changed recently</span>
+        <span class="cor-changes-sub">Top correlation shifts vs the prior window — read this first to spot regime change candidates.</span>
+      </div>
+      <div class="cor-changes-grid" id="cor-changes-grid">
+        <div class="cor-change-card cor-change-card--up">
+          <span class="cor-change-pair">Copper × Gold</span>
+          <span class="cor-change-delta up">+0.18</span>
+          <span class="cor-change-note">Industrial &amp; safe-haven re-coupling — watch FCX vs NEM divergence breakdown.</span>
+        </div>
+        <div class="cor-change-card cor-change-card--down">
+          <span class="cor-change-pair">Crude oil × USD</span>
+          <span class="cor-change-delta down">-0.22</span>
+          <span class="cor-change-note">Oil-dollar correlation softening — exporters and refiner spreads matter again.</span>
+        </div>
+        <div class="cor-change-card cor-change-card--up">
+          <span class="cor-change-pair">Wheat × Corn</span>
+          <span class="cor-change-delta up">+0.14</span>
+          <span class="cor-change-note">Grains tightening together — feed cost inflation risk back on the table.</span>
+        </div>
+        <div class="cor-change-card cor-change-card--down">
+          <span class="cor-change-pair">Lithium × Copper</span>
+          <span class="cor-change-delta down">-0.16</span>
+          <span class="cor-change-note">EV chain decoupling from base metals — battery materials trading on supply story.</span>
+        </div>
+      </div>
+      <div class="cor-changes-actions">
+        <a href="/intelligence-lab/regime-shift-detector/" class="btn btn-secondary" data-cta="cor_open_regime">Open regime detector</a>
+        <a href="/simulator/" class="btn btn-secondary" data-cta="cor_open_simulator">Run pair as a scenario</a>
+      </div>
+    </div>
+
+    <!-- Static / Rolling toggle (UI; rolling is a Pro option) -->
+    <div class="cor-view-toggle" role="tablist" aria-label="Correlation view">
+      <button type="button" class="cor-view-btn is-active" data-view="static" role="tab" aria-selected="true" data-cta="cor_view_static">Static (current window)</button>
+      <button type="button" class="cor-view-btn" data-view="rolling" role="tab" aria-selected="false" data-cta="cor_view_rolling">Rolling 30D <span class="cor-pro-tag">Pro</span></button>
+      <button type="button" class="cor-view-btn" data-view="leadlag" role="tab" aria-selected="false" data-cta="cor_view_leadlag">Lead-lag <span class="cor-pro-tag">Pro</span></button>
+    </div>
+
     <div class="legend" data-animate>
       <div class="legend-item"><div class="legend-swatch" style="background:#10b981"></div>Strong Positive (0.7–1.0)</div>
       <div class="legend-item"><div class="legend-swatch" style="background:rgba(16,185,129,0.4)"></div>Weak Positive (0.3–0.7)</div>
@@ -365,3 +407,37 @@ noindex: false
     <p>Effective commodity portfolio construction requires balancing exposure across correlated and uncorrelated assets. Holding heavily correlated positions amplifies both upside and downside risk, while including negatively correlated assets provides natural hedging. Traders can use this matrix to identify which commodities offer genuine diversification benefits and which simply duplicate existing exposure. Correlation breakdowns — when historically correlated commodities suddenly diverge — often represent the most profitable trading opportunities, as mean reversion tends to reassert over medium-term timeframes. Monitoring correlation regime changes alongside fundamental supply-demand analysis provides a powerful framework for commodity market decision-making.</p>
   </div>
 </section>
+
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.cor-view-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.cor-view-btn').forEach(function(b){
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected','false');
+        });
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected','true');
+        var view = btn.getAttribute('data-view');
+        if (view === 'rolling' || view === 'leadlag'){
+          if (window.CNEvents) window.CNEvents.send('paywall_exposed', { source:'correlation_view', view: view });
+          showPaywallToast(view);
+        }
+      });
+    });
+  });
+  function showPaywallToast(view){
+    var existing = document.getElementById('cor-paywall-toast');
+    if (existing) existing.remove();
+    var t = document.createElement('div');
+    t.id = 'cor-paywall-toast';
+    t.className = 'cor-paywall-toast';
+    t.innerHTML = '<strong>' + (view==='rolling' ? 'Rolling correlation' : 'Lead-lag analysis') + ' is a Pro feature.</strong>'
+      + '<p>See how the matrix evolves day by day, and which pairs lead vs lag the move.</p>'
+      + '<div><a href="/pricing/" class="btn btn-primary" data-cta="cor_paywall_upgrade">Compare plans</a> '
+      + '<button type="button" class="btn btn-secondary" onclick="this.closest(\'.cor-paywall-toast\').remove()">Dismiss</button></div>';
+    document.body.appendChild(t);
+  }
+})();
+</script>
