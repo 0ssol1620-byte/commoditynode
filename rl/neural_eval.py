@@ -32,6 +32,8 @@ class PolicyReplaySummary:
     regime_balance_score: float
     action_value_by_regime: dict[str, dict[str, float]]
     non_hold_value_add: float
+    target_action_match_rate: float
+    target_action_distribution_gap: float
     reward_decomposition: dict[str, float]
 
 
@@ -153,6 +155,8 @@ def replay_policy(
         regime: {action: 0 for action in config.action.discrete_actions}
         for regime in ('continuation', 'risk_off', 'hedge', 'rotation')
     }
+    target_action_counts = {action: 0 for action in config.action.discrete_actions}
+    target_action_matches = 0
     non_hold_value_add = 0.0
     peak_equity = env.state.peak_equity
     max_drawdown = 0.0
@@ -165,6 +169,10 @@ def replay_policy(
         result = env.step(action)
         action_counts[result.info['action']] = action_counts.get(result.info['action'], 0) + 1
         regime_profile = infer_regime_profile(step.observation, direction=step.metadata.get('direction'))
+        target_action = regime_profile.target_action if regime_profile.target_action in target_action_counts else 'hold'
+        target_action_counts[target_action] = target_action_counts.get(target_action, 0) + 1
+        if result.info['action'] == target_action:
+            target_action_matches += 1
         hold_counterfactual = compute_reward(
             realized_return=step.target_return,
             position_before=before_position,
@@ -253,6 +261,14 @@ def replay_policy(
             action_value_by_regime[regime][action_name] = 0.0 if reward_count == 0 else reward_sum / reward_count
     dominant_action_share = _dominant_action_share(action_counts)
     regime_balance_score = _regime_balance_score(action_counts, regime_hit_rate, regime_active_counts, config.action.discrete_actions)
+    target_action_match_rate = target_action_matches / total_actions
+    target_total = sum(target_action_counts.values()) or 1
+    distribution_gap = 0.0
+    for action_name in config.action.discrete_actions:
+        actual_share = action_counts.get(action_name, 0) / total_actions
+        target_share = target_action_counts.get(action_name, 0) / target_total
+        distribution_gap += abs(actual_share - target_share)
+    target_action_distribution_gap = min(1.0, distribution_gap / 2.0)
 
     return PolicyReplaySummary(
         name=name,
@@ -273,6 +289,8 @@ def replay_policy(
         regime_balance_score=regime_balance_score,
         action_value_by_regime=action_value_by_regime,
         non_hold_value_add=non_hold_value_add,
+        target_action_match_rate=target_action_match_rate,
+        target_action_distribution_gap=target_action_distribution_gap,
         reward_decomposition=breakdown_totals,
     )
 

@@ -62,6 +62,8 @@ def score_profile_row(row: dict) -> float:
     regime_balance_score = float(row.get('regime_balance_score', 0.0))
     intervention_rate = float(row.get('intervention_rate', 0.0))
     non_hold_value_add = float(row.get('non_hold_value_add', 0.0))
+    target_action_match_rate = float(row.get('target_action_match_rate', 0.0))
+    target_action_distribution_gap = float(row.get('target_action_distribution_gap', 1.0))
     hold_share = float(row.get('hold_share', 0.0))
     win_rate = float(row.get('win_rate', 0.0))
     continuation_floor_penalty = max(0.0, 0.22 - continuation_hit) * 2.1
@@ -78,6 +80,8 @@ def score_profile_row(row: dict) -> float:
         + regime_balance_score * 0.58
         + intervention_rate * 0.04
         + non_hold_value_add * 0.08
+        + target_action_match_rate * 0.5
+        - target_action_distribution_gap * 0.52
         - hold_share * 0.18
         - dominant_action_share * 0.34
         - continuation_floor_penalty
@@ -146,6 +150,8 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 'regime_active_counts': replay.regime_active_counts,
                 'regime_balance_score': float(replay.regime_balance_score),
                 'non_hold_value_add': float(replay.non_hold_value_add),
+                'target_action_match_rate': float(replay.target_action_match_rate),
+                'target_action_distribution_gap': float(replay.target_action_distribution_gap),
                 'walk_action_diversity': float(walk.mean_action_diversity),
                 'win_rate': float(replay.win_rate),
             }

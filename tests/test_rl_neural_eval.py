@@ -38,6 +38,8 @@ def test_neural_walk_forward_and_replay():
     assert 0.0 <= replay.regime_balance_score <= 1.0
     assert isinstance(replay.non_hold_value_add, float)
     assert set(replay.action_value_by_regime.keys()) == {'continuation', 'risk_off', 'hedge', 'rotation'}
+    assert 0.0 <= replay.target_action_match_rate <= 1.0
+    assert 0.0 <= replay.target_action_distribution_gap <= 1.0
 
     walk = evaluate_neural_walk_forward(
         dataset,

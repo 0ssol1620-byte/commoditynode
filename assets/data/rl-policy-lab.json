@@ -1,5 +1,5 @@
 {
-  "updated_from_commit": "3d972a8+",
+  "updated_from_commit": "309cfcf+",
   "config": {
     "name": "commoditynode-rl-policy-lab",
     "commodity_keys": [
@@ -167,9 +167,11 @@
         },
         "regime_balance_score": 0.4212391774891775,
         "non_hold_value_add": 2.344381854091517,
+        "target_action_match_rate": 0.20833333333333334,
+        "target_action_distribution_gap": 0.5416666666666666,
         "walk_action_diversity": 0.6666666666666666,
         "win_rate": 0.20833333333333334,
-        "score": 1.947060673377294
+        "score": 1.7695606733772937
       },
       {
         "device": "cpu",
@@ -198,9 +200,11 @@
         },
         "regime_balance_score": 0.3419642857142857,
         "non_hold_value_add": 4.416847761525819,
+        "target_action_match_rate": 0.20408163265306123,
+        "target_action_distribution_gap": 0.6326530612244898,
         "walk_action_diversity": 0.39999999999999997,
         "win_rate": 0.20408163265306123,
-        "score": 1.4972960270830742
+        "score": 1.27035725157287
       },
       {
         "device": "cuda",
@@ -229,9 +233,11 @@
         },
         "regime_balance_score": 0.4212391774891775,
         "non_hold_value_add": 2.344381854091517,
+        "target_action_match_rate": 0.20833333333333334,
+        "target_action_distribution_gap": 0.5416666666666666,
         "walk_action_diversity": 0.4666666666666666,
         "win_rate": 0.20833333333333334,
-        "score": 1.9190827383485916
+        "score": 1.7415827383485913
       },
       {
         "device": "cuda",
@@ -260,9 +266,11 @@
         },
         "regime_balance_score": 0.3961309523809524,
         "non_hold_value_add": 4.345225193350296,
+        "target_action_match_rate": 0.20833333333333334,
+        "target_action_distribution_gap": 0.625,
         "walk_action_diversity": 0.26666666666666666,
         "win_rate": 0.20833333333333334,
-        "score": 1.9301919767079374
+        "score": 1.7093586433746037
       }
     ],
     "torch_cuda_available": true,
@@ -432,6 +440,8 @@
         }
       },
       "non_hold_value_add": 2.344381854091517,
+      "target_action_match_rate": 0.20833333333333334,
+      "target_action_distribution_gap": 0.5416666666666666,
       "reward_decomposition": {
         "pnl": 0.02367163924019989,
         "turnover_cost": 0.20549999999999996,
@@ -535,6 +545,8 @@
         }
       },
       "non_hold_value_add": 0.0,
+      "target_action_match_rate": 0.0,
+      "target_action_distribution_gap": 1.0,
       "reward_decomposition": {
         "pnl": 0.0,
         "turnover_cost": 0.0,

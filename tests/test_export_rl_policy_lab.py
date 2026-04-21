@@ -15,6 +15,8 @@ def test_score_profile_row_prefers_balanced_multi_regime_policy():
         'action_diversity': 0.6,
         'action_entropy': 0.42,
         'walk_action_diversity': 0.6,
+        'target_action_match_rate': 0.19,
+        'target_action_distribution_gap': 0.55,
         'regime_hit_rate': {
             'continuation': 0.0,
             'hedge': 0.04,
@@ -34,6 +36,8 @@ def test_score_profile_row_prefers_balanced_multi_regime_policy():
         'action_diversity': 1.0,
         'action_entropy': 0.74,
         'walk_action_diversity': 0.8,
+        'target_action_match_rate': 0.52,
+        'target_action_distribution_gap': 0.18,
         'regime_hit_rate': {
             'continuation': 0.28,
             'hedge': 0.17,
@@ -90,6 +94,8 @@ def test_export_payload_contains_frontier_and_replay():
         assert 'regime_balance_score' in payload['neural_policy']['replay_summary']
         assert 'action_value_by_regime' in payload['neural_policy']['replay_summary']
         assert 'non_hold_value_add' in payload['neural_policy']['replay_summary']
+        assert 'target_action_match_rate' in payload['neural_policy']['replay_summary']
+        assert 'target_action_distribution_gap' in payload['neural_policy']['replay_summary']
         assert 'vs_hold_reward_uplift' in payload['neural_policy']['walk_forward']
         first_profile = payload['neural_policy']['profile_selection'][0]
         assert 'action_entropy' in first_profile
