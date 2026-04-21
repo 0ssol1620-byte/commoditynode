@@ -41,6 +41,52 @@ def _current_commit_marker() -> str:
         return 'unknown'
 
 
+def score_profile_row(row: dict) -> float:
+    uplift = float(row.get('uplift_vs_hold', row.get('reward', 0.0) - row.get('hold_reward', 0.0)))
+    walk_uplift = float(row.get('walk_uplift_vs_hold', 0.0))
+    action_diversity = float(row.get('action_diversity', 0.0))
+    action_entropy = float(row.get('action_entropy', 0.0))
+    walk_action_diversity = float(row.get('walk_action_diversity', 0.0))
+    regime_scores = row.get('regime_hit_rate') or {}
+    continuation_hit = float(regime_scores.get('continuation', 0.0))
+    risk_off_hit = float(regime_scores.get('risk_off', 0.0))
+    hedge_hit = float(regime_scores.get('hedge', 0.0))
+    rotation_hit = float(regime_scores.get('rotation', 0.0))
+    regime_quality = (
+        continuation_hit * 0.38
+        + hedge_hit * 0.28
+        + risk_off_hit * 0.2
+        + rotation_hit * 0.14
+    )
+    dominant_action_share = float(row.get('dominant_action_share', 1.0))
+    regime_balance_score = float(row.get('regime_balance_score', 0.0))
+    intervention_rate = float(row.get('intervention_rate', 0.0))
+    non_hold_value_add = float(row.get('non_hold_value_add', 0.0))
+    hold_share = float(row.get('hold_share', 0.0))
+    win_rate = float(row.get('win_rate', 0.0))
+    continuation_floor_penalty = max(0.0, 0.22 - continuation_hit) * 2.1
+    hedge_floor_penalty = max(0.0, 0.14 - hedge_hit) * 1.7
+    concentration_penalty = max(0.0, dominant_action_share - 0.52) * 2.2
+    negative_uplift_penalty = max(0.0, -uplift) * 2.4
+    return (
+        uplift * 0.58
+        + walk_uplift * 0.9
+        + action_diversity * 0.12
+        + action_entropy * 0.22
+        + walk_action_diversity * 0.08
+        + regime_quality * 0.94
+        + regime_balance_score * 0.58
+        + intervention_rate * 0.04
+        + non_hold_value_add * 0.08
+        - hold_share * 0.18
+        - dominant_action_share * 0.34
+        - continuation_floor_penalty
+        - hedge_floor_penalty
+        - concentration_penalty
+        - negative_uplift_penalty
+        + win_rate * 0.03
+    )
+
 
 def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict, list[dict]]:
     candidate_devices = ['cpu']
@@ -49,7 +95,7 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
     candidate_timesteps = [1024, 2048]
 
     train_steps = list(dataset.train)
-    eval_steps = list(dataset.val or dataset.test or dataset.train)
+    eval_steps = list((dataset.test + dataset.val) or dataset.test or dataset.val or dataset.train)
     diagnostics: list[dict] = []
     best_profile = {'device': candidate_devices[0], 'timesteps': candidate_timesteps[0]}
     best_score = float('-inf')
@@ -83,39 +129,9 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 config=config,
             )
             uplift = float(replay.total_reward - hold.total_reward)
-            regime_scores = replay.regime_hit_rate or {}
-            continuation_hit = float(regime_scores.get('continuation', 0.0))
-            risk_off_hit = float(regime_scores.get('risk_off', 0.0))
-            hedge_hit = float(regime_scores.get('hedge', 0.0))
-            rotation_hit = float(regime_scores.get('rotation', 0.0))
-            regime_quality = (
-                continuation_hit * 0.34
-                + hedge_hit * 0.26
-                + risk_off_hit * 0.24
-                + rotation_hit * 0.16
-            )
-            dominant_action_share = float(replay.dominant_action_share)
-            regime_balance_score = float(replay.regime_balance_score)
-            continuation_hedge_floor_penalty = max(0.0, 0.16 - continuation_hit) * 1.8 + max(0.0, 0.1 - hedge_hit) * 1.2
-            score = (
-                uplift * 0.68
-                + float(walk.vs_hold_reward_uplift) * 0.8
-                + replay.action_diversity * 0.12
-                + float(replay.action_entropy) * 0.12
-                + float(walk.mean_action_diversity) * 0.06
-                + regime_quality * 0.72
-                + regime_balance_score * 0.42
-                + replay.intervention_rate * 0.06
-                + float(replay.non_hold_value_add) * 0.08
-                - replay.hold_share * 0.1
-                - dominant_action_share * 0.36
-                - continuation_hedge_floor_penalty
-                + replay.win_rate * 0.04
-            )
             row = {
                 'device': device,
                 'timesteps': timesteps,
-                'score': float(score),
                 'reward': float(replay.total_reward),
                 'hold_reward': float(hold.total_reward),
                 'uplift_vs_hold': uplift,
@@ -133,9 +149,10 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 'walk_action_diversity': float(walk.mean_action_diversity),
                 'win_rate': float(replay.win_rate),
             }
+            row['score'] = float(score_profile_row(row))
             diagnostics.append(row)
-            if score > best_score:
-                best_score = score
+            if row['score'] > best_score:
+                best_score = row['score']
                 best_profile = {'device': device, 'timesteps': timesteps}
     return best_profile, diagnostics
 

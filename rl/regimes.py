@@ -86,6 +86,12 @@ def infer_regime_profile(observation: dict, direction: str | None = None) -> Reg
     if top_strength < 0.3:
         target_action = 'hold'
         top_strength = 0.0
+    elif hedge >= 0.66 and event_risk >= 0.42 and hedge >= risk_off - 0.03:
+        target_action = 'add_hedge'
+        top_strength = hedge
+    elif continuation >= 0.58 and continuation >= max(risk_off, hedge) - 0.05:
+        target_action = 'add_continuation'
+        top_strength = continuation
     elif risk_off >= 0.52 and risk_off >= continuation + 0.02:
         target_action = 'reduce_risk'
         top_strength = risk_off

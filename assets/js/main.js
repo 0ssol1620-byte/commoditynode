@@ -173,7 +173,7 @@
   const canvas = document.getElementById('hero-canvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    let W, H, nodes, animFrame, pointer = { x: 0, y: 0, active: false };
+    let W, H, nodes, animFrame, pointer = { x: 0, y: 0, active: false }, isVisible = true;
 
     function resize() {
       const dpr = window.devicePixelRatio || 1;
@@ -187,6 +187,11 @@
     const NODE_COUNT = 44;
     const CONNECT_DIST = 190;
     const COLORS = ['#22d3ee', '#fbbf24', '#10b981', '#a855f7', '#f43f5e', '#ffffff'];
+    const BEACONS = [
+      { x: 0.18, y: 0.22, color: 'rgba(34,211,238,0.22)', radius: 0.24 },
+      { x: 0.76, y: 0.18, color: 'rgba(168,85,247,0.20)', radius: 0.2 },
+      { x: 0.62, y: 0.72, color: 'rgba(16,185,129,0.14)', radius: 0.22 }
+    ];
 
     function initNodes() {
       nodes = Array.from({ length: NODE_COUNT }, (_, i) => ({
@@ -198,12 +203,45 @@
         depth: 0.35 + Math.random() * 0.9,
         color: COLORS[i % COLORS.length],
         pulse: Math.random() * Math.PI * 2,
+        orbit: Math.random() * Math.PI * 2,
       }));
     }
 
     let lastTime = performance.now();
 
+    function drawSweepBands(now) {
+      for (let i = 0; i < 3; i++) {
+        const phase = now * 0.00016 + i * 1.7;
+        const baseY = H * (0.22 + i * 0.22) + Math.sin(phase) * 18;
+        const gradient = ctx.createLinearGradient(0, baseY - 32, W, baseY + 32);
+        gradient.addColorStop(0, 'rgba(34,211,238,0)');
+        gradient.addColorStop(0.25, i === 1 ? 'rgba(168,85,247,0.02)' : 'rgba(34,211,238,0.03)');
+        gradient.addColorStop(0.75, i === 2 ? 'rgba(16,185,129,0.025)' : 'rgba(34,211,238,0.015)');
+        gradient.addColorStop(1, 'rgba(2,6,23,0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, baseY - 38, W, 76);
+      }
+    }
+
+    function drawBeacons(now) {
+      const pointerScale = pointer.active ? 1.08 : 1.0;
+      BEACONS.forEach((beacon, idx) => {
+        const driftX = Math.sin(now * 0.00025 + idx) * 14;
+        const driftY = Math.cos(now * 0.00022 + idx * 1.3) * 10;
+        const x = W * beacon.x + driftX;
+        const y = H * beacon.y + driftY;
+        const radius = Math.max(W, H) * beacon.radius * pointerScale;
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+        gradient.addColorStop(0, beacon.color);
+        gradient.addColorStop(0.45, beacon.color.replace(/0\.\d+\)/, '0.06)'));
+        gradient.addColorStop(1, 'rgba(2,6,23,0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, W, H);
+      });
+    }
+
     function drawFrame(now) {
+      if (!isVisible) return;
       const dt = Math.min((now - lastTime) / 1000, 0.1);
       lastTime = now;
       ctx.clearRect(0, 0, W, H);
@@ -215,6 +253,9 @@
       ctx.fillStyle = ambient;
       ctx.fillRect(0, 0, W, H);
 
+      drawBeacons(now);
+      drawSweepBands(now);
+
       const violet = ctx.createRadialGradient(W * 0.84, H * 0.16, 12, W * 0.84, H * 0.16, W * 0.22);
       violet.addColorStop(0, 'rgba(168,85,247,0.14)');
       violet.addColorStop(1, 'rgba(168,85,247,0)');
@@ -224,8 +265,9 @@
       nodes.forEach(n => {
         const pullX = pointer.active ? ((pointer.x - W * 0.5) / W) * 0.08 * n.depth : 0;
         const pullY = pointer.active ? ((pointer.y - H * 0.5) / H) * 0.08 * n.depth : 0;
-        n.x += (n.vx + pullX) * dt * 60;
-        n.y += (n.vy + pullY) * dt * 60;
+        n.orbit += dt * (0.45 + n.depth * 0.25);
+        n.x += (n.vx + pullX + Math.cos(n.orbit) * 0.012 * n.depth) * dt * 60;
+        n.y += (n.vy + pullY + Math.sin(n.orbit) * 0.014 * n.depth) * dt * 60;
         n.pulse += dt * (1 + n.depth * 0.6);
         if (n.x < -24) n.x = W + 24;
         if (n.x > W + 24) n.x = -24;
@@ -273,22 +315,47 @@
       animFrame = requestAnimationFrame(drawFrame);
     }
 
+    function stop() {
+      if (animFrame) {
+        cancelAnimationFrame(animFrame);
+        animFrame = null;
+      }
+    }
+
     function start() {
       resize();
       initNodes();
-      if (animFrame) cancelAnimationFrame(animFrame);
+      stop();
       lastTime = performance.now();
+      isVisible = true;
       animFrame = requestAnimationFrame(drawFrame);
     }
 
-    window.addEventListener('mousemove', (e) => {
+    function updatePointer(clientX, clientY) {
       const rect = canvas.getBoundingClientRect();
-      pointer.x = e.clientX - rect.left;
-      pointer.y = e.clientY - rect.top;
+      pointer.x = clientX - rect.left;
+      pointer.y = clientY - rect.top;
       pointer.active = pointer.x >= 0 && pointer.x <= rect.width && pointer.y >= 0 && pointer.y <= rect.height;
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      updatePointer(e.clientX, e.clientY);
+    }, { passive: true });
+    window.addEventListener('touchmove', (e) => {
+      if (!e.touches || !e.touches[0]) return;
+      updatePointer(e.touches[0].clientX, e.touches[0].clientY);
     }, { passive: true });
     window.addEventListener('mouseleave', () => { pointer.active = false; });
+    window.addEventListener('touchend', () => { pointer.active = false; }, { passive: true });
     window.addEventListener('resize', () => { resize(); initNodes(); });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        isVisible = false;
+        stop();
+      } else {
+        start();
+      }
+    });
     start();
   }
 

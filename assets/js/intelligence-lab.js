@@ -146,7 +146,7 @@
     stopHeroField();
     var ctx = canvas.getContext('2d');
     if (!ctx) return;
-    state.heroField = { frame: null, resizeHandler: null, particles: [] };
+    state.heroField = { frame: null, resizeHandler: null, particles: [], pointer: { x: 0, y: 0, active: false }, visible: true };
     var field = state.heroField;
 
     function rebuild(){
@@ -158,8 +158,8 @@
       field.width = rect.width;
       field.height = rect.height;
       field.particles = [];
-      var accent = ['rgba(34,211,238,0.85)', 'rgba(168,85,247,0.78)', 'rgba(255,255,255,0.34)'];
-      for (var i = 0; i < 48; i++) {
+      var accent = ['rgba(34,211,238,0.85)', 'rgba(168,85,247,0.78)', 'rgba(255,255,255,0.34)', 'rgba(16,185,129,0.48)'];
+      for (var i = 0; i < 56; i++) {
         field.particles.push({
           x: Math.random() * field.width,
           y: Math.random() * field.height,
@@ -167,17 +167,38 @@
           speedX: -0.18 + Math.random() * 0.36,
           speedY: -0.16 + Math.random() * 0.32,
           drift: Math.random() * Math.PI * 2,
+          orbit: Math.random() * Math.PI * 2,
+          depth: 0.35 + Math.random() * 0.95,
           color: accent[i % accent.length],
           alpha: 0.08 + Math.random() * 0.28
         });
       }
     }
 
+    function updatePointer(clientX, clientY){
+      var rect = hero.getBoundingClientRect();
+      field.pointer.x = clientX - rect.left;
+      field.pointer.y = clientY - rect.top;
+      field.pointer.active = field.pointer.x >= 0 && field.pointer.x <= rect.width && field.pointer.y >= 0 && field.pointer.y <= rect.height;
+    }
+
     field.resizeHandler = rebuild;
     window.addEventListener('resize', field.resizeHandler);
+    hero.addEventListener('mousemove', function(e){ updatePointer(e.clientX, e.clientY); }, { passive: true });
+    hero.addEventListener('touchmove', function(e){ if (e.touches && e.touches[0]) updatePointer(e.touches[0].clientX, e.touches[0].clientY); }, { passive: true });
+    hero.addEventListener('mouseleave', function(){ field.pointer.active = false; });
+    hero.addEventListener('touchend', function(){ field.pointer.active = false; }, { passive: true });
+    document.addEventListener('visibilitychange', function(){
+      field.visible = !document.hidden;
+      if (field.visible && !field.frame) field.frame = requestAnimationFrame(draw);
+    });
     rebuild();
 
     function draw(){
+      if (!field.visible) {
+        field.frame = null;
+        return;
+      }
       ctx.clearRect(0, 0, field.width, field.height);
       var gradient = ctx.createRadialGradient(field.width * 0.5, field.height * 0.32, 12, field.width * 0.5, field.height * 0.32, field.width * 0.55);
       gradient.addColorStop(0, 'rgba(34,211,238,0.08)');
@@ -186,16 +207,36 @@
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, field.width, field.height);
 
+      var sideAura = ctx.createRadialGradient(field.width * 0.82, field.height * 0.16, 10, field.width * 0.82, field.height * 0.16, field.width * 0.22);
+      sideAura.addColorStop(0, 'rgba(168,85,247,0.12)');
+      sideAura.addColorStop(1, 'rgba(168,85,247,0)');
+      ctx.fillStyle = sideAura;
+      ctx.fillRect(0, 0, field.width, field.height);
+
+      for (var band = 0; band < 3; band++) {
+        var phase = Date.now() * 0.00014 + band * 1.6;
+        var y = field.height * (0.26 + band * 0.2) + Math.sin(phase) * 16;
+        var lineGradient = ctx.createLinearGradient(0, y - 26, field.width, y + 26);
+        lineGradient.addColorStop(0, 'rgba(34,211,238,0)');
+        lineGradient.addColorStop(0.5, band === 1 ? 'rgba(168,85,247,0.03)' : 'rgba(34,211,238,0.035)');
+        lineGradient.addColorStop(1, 'rgba(2,6,23,0)');
+        ctx.fillStyle = lineGradient;
+        ctx.fillRect(0, y - 30, field.width, 60);
+      }
+
       for (var i = 0; i < field.particles.length; i++) {
         var p = field.particles[i];
-        p.x += p.speedX + Math.sin((Date.now() / 900) + p.drift) * 0.08;
-        p.y += p.speedY + Math.cos((Date.now() / 1100) + p.drift) * 0.08;
+        var pullX = field.pointer.active ? ((field.pointer.x - field.width * 0.5) / field.width) * 0.12 * p.depth : 0;
+        var pullY = field.pointer.active ? ((field.pointer.y - field.height * 0.5) / field.height) * 0.12 * p.depth : 0;
+        p.orbit += 0.008 + p.depth * 0.004;
+        p.x += p.speedX + Math.sin((Date.now() / 900) + p.drift) * 0.08 + Math.cos(p.orbit) * 0.05 * p.depth + pullX;
+        p.y += p.speedY + Math.cos((Date.now() / 1100) + p.drift) * 0.08 + Math.sin(p.orbit) * 0.05 * p.depth + pullY;
         if (p.x < -10) p.x = field.width + 10;
         if (p.x > field.width + 10) p.x = -10;
         if (p.y < -10) p.y = field.height + 10;
         if (p.y > field.height + 10) p.y = -10;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size * p.depth, 0, Math.PI * 2);
         ctx.fillStyle = p.color.replace(/0\.\d+\)$/, p.alpha.toFixed(2) + ')');
         ctx.fill();
       }
@@ -211,7 +252,7 @@
           ctx.beginPath();
           ctx.moveTo(pa.x, pa.y);
           ctx.lineTo(pb.x, pb.y);
-          ctx.strokeStyle = 'rgba(148,163,184,' + ((1 - dist / 120) * 0.09).toFixed(3) + ')';
+          ctx.strokeStyle = 'rgba(148,163,184,' + ((1 - dist / 120) * 0.09 * Math.min(pa.depth, pb.depth)).toFixed(3) + ')';
           ctx.lineWidth = 1;
           ctx.stroke();
         }

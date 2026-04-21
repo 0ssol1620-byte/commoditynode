@@ -6,6 +6,51 @@ from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 
+def test_score_profile_row_prefers_balanced_multi_regime_policy():
+    from scripts.export_rl_policy_lab import score_profile_row
+
+    concentrated = {
+        'uplift_vs_hold': 5.9,
+        'walk_uplift_vs_hold': 2.8,
+        'action_diversity': 0.6,
+        'action_entropy': 0.42,
+        'walk_action_diversity': 0.6,
+        'regime_hit_rate': {
+            'continuation': 0.0,
+            'hedge': 0.04,
+            'risk_off': 0.86,
+            'rotation': 0.58,
+        },
+        'regime_balance_score': 0.43,
+        'intervention_rate': 1.0,
+        'non_hold_value_add': 10.6,
+        'hold_share': 0.0,
+        'dominant_action_share': 0.66,
+        'win_rate': 0.53,
+    }
+    balanced = {
+        'uplift_vs_hold': 5.3,
+        'walk_uplift_vs_hold': 2.5,
+        'action_diversity': 1.0,
+        'action_entropy': 0.74,
+        'walk_action_diversity': 0.8,
+        'regime_hit_rate': {
+            'continuation': 0.28,
+            'hedge': 0.17,
+            'risk_off': 0.79,
+            'rotation': 0.42,
+        },
+        'regime_balance_score': 0.62,
+        'intervention_rate': 0.97,
+        'non_hold_value_add': 9.5,
+        'hold_share': 0.03,
+        'dominant_action_share': 0.38,
+        'win_rate': 0.51,
+    }
+
+    assert score_profile_row(balanced) > score_profile_row(concentrated)
+
+
 def test_export_payload_contains_frontier_and_replay():
     pytest = __import__('pytest')
     try:

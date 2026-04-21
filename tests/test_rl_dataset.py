@@ -56,3 +56,35 @@ def test_dataset_contains_live_regime_coverage():
     assert counts['risk_off'] > 0
     assert counts['hedge'] > 0
     assert counts['rotation'] > 0
+
+
+def test_regime_profile_prefers_continuation_and_hedge_when_signal_is_dominant():
+    continuation_profile = infer_regime_profile(
+        {
+            'agreement_score': 0.78,
+            'anomaly_score': 0.12,
+            'event_risk': 0.08,
+            'model_spread': 0.02,
+            'trend_3': 0.0046,
+            'forecast_return': 0.0049,
+            'volatility_5': 0.03,
+            'risk_pressure': 0.18,
+        },
+        direction='bullish',
+    )
+    assert continuation_profile.target_action == 'add_continuation'
+
+    hedge_profile = infer_regime_profile(
+        {
+            'agreement_score': 0.51,
+            'anomaly_score': 0.66,
+            'event_risk': 0.74,
+            'model_spread': 0.19,
+            'trend_3': -0.0004,
+            'forecast_return': 0.0015,
+            'volatility_5': 0.24,
+            'risk_pressure': 0.58,
+        },
+        direction='neutral',
+    )
+    assert hedge_profile.target_action == 'add_hedge'

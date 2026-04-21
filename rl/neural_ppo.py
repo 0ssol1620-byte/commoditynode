@@ -6,6 +6,68 @@ from typing import Mapping, Sequence
 from .config import RLExperimentConfig, get_default_rl_config
 from .dataset import RLTrajectoryStep
 from .env import CommodityTradingEnv
+from .regimes import infer_regime_profile
+
+
+def _normalize_action_probs(probs: Mapping[str, float]) -> dict[str, float]:
+    cleaned = {str(action): max(0.0, float(value)) for action, value in probs.items()}
+    total = sum(cleaned.values()) or 1.0
+    return {action: float(value / total) for action, value in cleaned.items()}
+
+
+def _infer_direction_from_observation(observation: Mapping[str, float] | object) -> str | None:
+    if not isinstance(observation, Mapping):
+        return None
+    bullish = float(observation.get('direction_bullish', 0.0) or 0.0)
+    bearish = float(observation.get('direction_bearish', 0.0) or 0.0)
+    if bullish > bearish and bullish > 0.5:
+        return 'bullish'
+    if bearish > bullish and bearish > 0.5:
+        return 'bearish'
+    return None
+
+
+def apply_regime_calibration(probs: Mapping[str, float], observation: Mapping[str, float] | object) -> dict[str, float]:
+    calibrated = _normalize_action_probs(probs)
+    if not isinstance(observation, Mapping):
+        return calibrated
+
+    profile = infer_regime_profile(observation, direction=_infer_direction_from_observation(observation))
+    strengths = profile.strengths
+    mild_boosts = {
+        'reduce_risk': 1.0 + strengths.get('risk_off', 0.0) * 0.18,
+        'hold': max(0.34, 1.0 - max(strengths.values()) * 0.24),
+        'add_continuation': 1.0 + strengths.get('continuation', 0.0) * 0.3,
+        'add_hedge': 1.0 + strengths.get('hedge', 0.0) * 0.42,
+        'relative_value_rotation': 1.0 + strengths.get('rotation', 0.0) * 0.22,
+    }
+    for action, multiplier in mild_boosts.items():
+        if action in calibrated:
+            calibrated[action] *= multiplier
+
+    target_action = profile.target_action
+    target_strength = max(0.0, float(profile.target_strength))
+    if target_action in calibrated and target_action != 'hold' and target_strength >= 0.5:
+        calibrated[target_action] *= 1.0 + target_strength * 0.45
+        if target_action == 'add_hedge':
+            for action in ('reduce_risk', 'relative_value_rotation', 'add_continuation'):
+                if action in calibrated:
+                    calibrated[action] *= 0.84
+        elif target_action == 'add_continuation':
+            if 'reduce_risk' in calibrated:
+                calibrated['reduce_risk'] *= 0.84
+            if 'hold' in calibrated:
+                calibrated['hold'] *= 0.76
+        elif target_action == 'reduce_risk':
+            for action in ('add_continuation', 'relative_value_rotation'):
+                if action in calibrated:
+                    calibrated[action] *= 0.83
+        elif target_action == 'relative_value_rotation':
+            for action in ('reduce_risk', 'add_continuation'):
+                if action in calibrated:
+                    calibrated[action] *= 0.87
+
+    return _normalize_action_probs(calibrated)
 
 
 class BehaviorCloningPrior:
@@ -136,7 +198,7 @@ class NeuralPPODecision:
 
 
 class NeuralPPOPolicy:
-    def __init__(self, model, action_names: Sequence[str], feature_keys: Sequence[str], prior_policy: BehaviorCloningPrior | None = None, prior_weight: float = 0.65):
+    def __init__(self, model, action_names: Sequence[str], feature_keys: Sequence[str], prior_policy: BehaviorCloningPrior | None = None, prior_weight: float = 0.5):
         self.model = model
         self.action_names = tuple(action_names)
         self.feature_keys = tuple(feature_keys)
