@@ -26,6 +26,7 @@ layout: default
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script type="application/json" id="intel-product-config">{
   "slug": {{ product_slug | jsonify }},
   "title": {{ page.title | jsonify }},
@@ -97,6 +98,24 @@ layout: default
 .intel-rl-window strong { display:block; color:#f8fafc; margin-top:4px; }
 .intel-rl-window span { display:block; color:#94a3b8; font-size:0.85rem; line-height:1.55; margin-top:4px; }
 .intel-rl-timeline { display:grid; gap:10px; margin-top:14px; }
+.intel-rl-field-shell { margin-top:16px; padding:18px 20px; border-radius:18px; border:1px solid rgba(34,211,238,0.16); background:linear-gradient(135deg, rgba(4,15,25,0.94), rgba(20,12,34,0.92)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 24px 60px rgba(2,6,23,0.3); }
+.intel-rl-field-wrap { position:relative; min-height:320px; border-radius:16px; overflow:hidden; background:radial-gradient(circle at 50% 45%, rgba(34,211,238,0.08), rgba(15,23,42,0.78) 48%, rgba(2,6,23,0.96) 100%); border:1px solid rgba(255,255,255,0.06); }
+.intel-rl-field-wrap canvas { width:100%; height:320px; display:block; }
+.intel-rl-field-overlay { position:absolute; inset:0; pointer-events:none; }
+.intel-rl-field-center { position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:132px; height:132px; border-radius:999px; border:1px solid rgba(34,211,238,0.24); background:radial-gradient(circle, rgba(34,211,238,0.2), rgba(14,22,36,0.24) 68%, rgba(2,6,23,0.02) 100%); display:flex; align-items:center; justify-content:center; text-align:center; padding:18px; box-shadow:0 0 40px rgba(34,211,238,0.18); }
+.intel-rl-field-center strong { display:block; color:#f8fafc; font-size:1rem; line-height:1.2; }
+.intel-rl-field-center span { display:block; color:#94a3b8; font-size:0.76rem; margin-top:6px; line-height:1.45; }
+.intel-rl-field-node { position:absolute; width:116px; min-height:54px; padding:10px 12px; border-radius:16px; border:1px solid rgba(255,255,255,0.1); background:rgba(8,12,20,0.74); backdrop-filter: blur(14px); box-shadow:0 12px 28px rgba(2,6,23,0.24); }
+.intel-rl-field-node strong { display:block; color:#f8fafc; font-size:0.82rem; line-height:1.35; }
+.intel-rl-field-node span { display:block; color:#94a3b8; font-size:0.75rem; margin-top:4px; }
+.intel-rl-field-node.active { border-color: rgba(34,211,238,0.42); box-shadow:0 0 0 1px rgba(34,211,238,0.14), 0 18px 34px rgba(34,211,238,0.12); }
+.intel-rl-field-node--reduce_risk { left:5%; top:16%; }
+.intel-rl-field-node--hold { left:76%; top:16%; }
+.intel-rl-field-node--add_continuation { left:74%; top:68%; }
+.intel-rl-field-node--add_hedge { left:6%; top:68%; }
+.intel-rl-field-node--relative_value_rotation { left:38%; top:6%; }
+.intel-rl-field-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin-top:12px; }
+.intel-rl-field-meta .intel-rl-pill { justify-content:center; }
 .intel-rl-step { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
 .intel-rl-step strong { color:#f8fafc; display:block; }
 .intel-rl-step span { display:block; color:#94a3b8; font-size:0.86rem; line-height:1.6; margin-top:4px; }
@@ -209,6 +228,28 @@ layout: default
           <div class="intel-rl-pill-row" id="intel-rl-trust-strip"></div>
         </section>
       </div>
+      <section class="intel-rl-field-shell">
+        <div class="intel-kicker">Animated policy field</div>
+        <h3 style="margin:0 0 10px;color:#f8fafc;">See policy pressure moving across the action space</h3>
+        <p style="margin:0;color:#94a3b8;line-height:1.7;">This field turns the current action probabilities into a living motion surface so the model feels like an active decision engine instead of a static table.</p>
+        <div class="intel-rl-field-wrap" id="intel-rl-field-wrap">
+          <canvas id="intel-rl-field-canvas"></canvas>
+          <div class="intel-rl-field-overlay">
+            <div class="intel-rl-field-center">
+              <div>
+                <strong id="intel-rl-field-center-action">Loading…</strong>
+                <span id="intel-rl-field-center-copy">Probability-weighted policy field</span>
+              </div>
+            </div>
+            <div class="intel-rl-field-node intel-rl-field-node--reduce_risk" id="intel-rl-node-reduce_risk"><strong>Reduce risk</strong><span>0%</span></div>
+            <div class="intel-rl-field-node intel-rl-field-node--hold" id="intel-rl-node-hold"><strong>Hold</strong><span>0%</span></div>
+            <div class="intel-rl-field-node intel-rl-field-node--add_continuation" id="intel-rl-node-add_continuation"><strong>Add continuation</strong><span>0%</span></div>
+            <div class="intel-rl-field-node intel-rl-field-node--add_hedge" id="intel-rl-node-add_hedge"><strong>Add hedge</strong><span>0%</span></div>
+            <div class="intel-rl-field-node intel-rl-field-node--relative_value_rotation" id="intel-rl-node-relative_value_rotation"><strong>Relative-value rotation</strong><span>0%</span></div>
+          </div>
+        </div>
+        <div class="intel-rl-field-meta" id="intel-rl-field-meta"></div>
+      </section>
       <section class="intel-card" style="margin-top:16px;">
         <div class="intel-kicker">Baseline comparison</div>
         <h3>How does the recommended action compare with baseline policies?</h3>

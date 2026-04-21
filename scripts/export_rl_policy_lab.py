@@ -46,9 +46,9 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
     candidate_devices = ['cpu']
     if preferred_device == 'cuda':
         candidate_devices.append('cuda')
-    candidate_timesteps = [512, 1024, 2048]
+    candidate_timesteps = [1024, 2048]
 
-    train_steps = list(dataset.train[:192] or dataset.train)
+    train_steps = list(dataset.train)
     eval_steps = list(dataset.val or dataset.test or dataset.train)
     diagnostics: list[dict] = []
     best_profile = {'device': candidate_devices[0], 'timesteps': candidate_timesteps[0]}
@@ -83,7 +83,23 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 config=config,
             )
             uplift = float(replay.total_reward - hold.total_reward)
-            score = uplift + float(walk.vs_hold_reward_uplift) * 0.75 + replay.action_diversity * 0.2 + float(walk.mean_action_diversity) * 0.1 + replay.win_rate * 0.05
+            regime_scores = replay.regime_hit_rate or {}
+            continuation_hit = float(regime_scores.get('continuation', 0.0))
+            risk_off_hit = float(regime_scores.get('risk_off', 0.0))
+            hedge_hit = float(regime_scores.get('hedge', 0.0))
+            rotation_hit = float(regime_scores.get('rotation', 0.0))
+            regime_quality = (continuation_hit + risk_off_hit + hedge_hit + rotation_hit) / 4.0
+            score = (
+                uplift * 0.9
+                + float(walk.vs_hold_reward_uplift) * 0.9
+                + replay.action_diversity * 0.18
+                + float(replay.action_entropy) * 0.12
+                + float(walk.mean_action_diversity) * 0.08
+                + regime_quality * 0.25
+                + replay.intervention_rate * 0.05
+                - replay.hold_share * 0.12
+                + replay.win_rate * 0.04
+            )
             row = {
                 'device': device,
                 'timesteps': timesteps,
@@ -94,6 +110,10 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 'walk_uplift_vs_hold': float(walk.vs_hold_reward_uplift),
                 'walk_positive_rate': float(walk.positive_window_rate),
                 'action_diversity': float(replay.action_diversity),
+                'action_entropy': float(replay.action_entropy),
+                'hold_share': float(replay.hold_share),
+                'intervention_rate': float(replay.intervention_rate),
+                'regime_hit_rate': replay.regime_hit_rate,
                 'walk_action_diversity': float(walk.mean_action_diversity),
                 'win_rate': float(replay.win_rate),
             }
@@ -153,7 +173,7 @@ def _build_neural_payload(dataset, config) -> dict:
     walk_forward = evaluate_neural_walk_forward(
         dataset=dataset,
         config=config,
-        total_timesteps=2048,
+        total_timesteps=selected_timesteps,
         window_count=3,
         eval_window_size=24,
         min_train_steps=96,

@@ -19,7 +19,8 @@
     curated: {},
     rlArtifacts: {},
     chart: null,
-    rlCharts: {}
+    rlCharts: {},
+    rlField: { frame: 0, particles: [], resizeBound: false }
   };
 
   var STORAGE_KEYS = {
@@ -283,6 +284,13 @@
       if (state.rlCharts[key]) state.rlCharts[key].destroy();
     });
     state.rlCharts = {};
+  }
+
+  function stopRlFieldAnimation(){
+    if (state.rlField && state.rlField.frame) {
+      cancelAnimationFrame(state.rlField.frame);
+      state.rlField.frame = 0;
+    }
   }
 
   function metricPayload(bundle, profile){
@@ -641,10 +649,20 @@
     if (panel) panel.hidden = !isVisible;
     if (consolePanel) consolePanel.hidden = !isVisible;
     if (!isVisible) {
+      stopRlFieldAnimation();
       clearRlCharts();
-      ['intel-rl-probability-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body'].forEach(function(id){
+      ['intel-rl-probability-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body', 'intel-rl-field-meta'].forEach(function(id){
         if ($(id)) $(id).innerHTML = '';
       });
+      ['intel-rl-node-reduce_risk','intel-rl-node-hold','intel-rl-node-add_continuation','intel-rl-node-add_hedge','intel-rl-node-relative_value_rotation'].forEach(function(id){
+        var node = $(id);
+        if (!node) return;
+        node.classList.remove('active');
+        var span = node.querySelector('span');
+        if (span) span.textContent = '0%';
+      });
+      if ($('intel-rl-field-center-action')) $('intel-rl-field-center-action').textContent = 'Unavailable';
+      if ($('intel-rl-field-center-copy')) $('intel-rl-field-center-copy').textContent = 'Probability-weighted field';
       if ($('intel-rl-decision-title')) $('intel-rl-decision-title').textContent = 'Recommendation unavailable';
       if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'RL decision data is unavailable for the current selection.';
     }
@@ -726,6 +744,7 @@
       { label: 'Baseline edge', value: hasReplayUplift ? fmtSigned(replayUplift, 2) + ' replay uplift' : 'Unknown', tone: !hasReplayUplift ? 'unclear' : replayUplift >= 0 ? 'better' : 'worse' },
       { label: 'Walk-forward', value: hasWalk ? Math.round(positiveRate * 100) + '% positive windows · ' + fmtSigned(walkUplift, 2) : 'Unknown', tone: !hasWalk ? 'unclear' : positiveRate >= 0.67 ? 'better' : 'worse' },
       { label: 'Action diversity', value: hasDiversity ? Math.round(diversity * 100) + '% of action set' : 'Unknown', tone: !hasDiversity ? 'unclear' : diversity >= 0.6 ? 'better' : 'unclear' },
+      { label: 'Action entropy', value: replaySummary && replaySummary.action_entropy != null ? Math.round(Number(replaySummary.action_entropy || 0) * 100) + '%' : 'Unknown', tone: replaySummary && replaySummary.action_entropy != null ? (Number(replaySummary.action_entropy || 0) >= 0.45 ? 'better' : 'unclear') : 'unclear' },
       { label: 'Confidence', value: fmtConfidence(confidence), tone: !hasConfidence ? 'unclear' : confidence >= 0.45 ? 'better' : confidence >= 0.3 ? 'unclear' : 'worse' }
     ];
     if (replaySummary && replaySummary.total_reward != null && Number(replaySummary.total_reward) < 0) {
@@ -817,11 +836,13 @@
     var verdict = getRlVerdict(neural.vs_hold_reward_uplift, walkForward && walkForward.vs_hold_reward_uplift);
     var toneStyles = getRlToneStyles(verdict.tone);
     if ($('intel-rl-decision-title')) $('intel-rl-decision-title').textContent = titleize(neuralFrontier.action || 'hold') + ' · ' + verdict.label;
-    if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'The current policy favors ' + String(neuralFrontier.action || 'hold').replace(/_/g, ' ') + ' with ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '% confidence. Replay uplift versus hold is ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + ', while walk-forward uplift is ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + '.';
+    if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'The current policy favors ' + String(neuralFrontier.action || 'hold').replace(/_/g, ' ') + ' with ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '% confidence. Replay uplift versus hold is ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + ', walk-forward uplift is ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + ', and intervention rate is ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) : 0) + '%.';
     var pills = [];
     pills.push('<div class="intel-rl-pill"><strong>Confidence</strong> ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '%</div>');
     pills.push('<div class="intel-rl-pill" style="' + toneStyles.pill + '"><strong>Replay uplift</strong> ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + '</div>');
     pills.push('<div class="intel-rl-pill" style="' + getRlToneStyles((walkForward && walkForward.vs_hold_reward_uplift || 0) >= 0 ? 'better' : 'worse').pill + '"><strong>Walk uplift</strong> ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + '</div>');
+    pills.push('<div class="intel-rl-pill"><strong>Entropy</strong> ' + (replaySummary ? Math.round(Number(replaySummary.action_entropy || 0) * 100) : 0) + '%</div>');
+    pills.push('<div class="intel-rl-pill"><strong>Intervention</strong> ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) : 0) + '%</div>');
     pills.push('<div class="intel-rl-pill" style="' + toneStyles.pill + '"><strong>Verdict</strong> ' + verdict.label + '</div>');
     if (frontier) pills.push('<div class="intel-rl-pill"><strong>Baseline</strong> ' + titleize(frontier.offline_action || 'hold') + '</div>');
     if (replaySummary) pills.push('<div class="intel-rl-pill"><strong>Replay win rate</strong> ' + fmtConfidence(replaySummary.win_rate) + '</div>');
@@ -1006,6 +1027,178 @@
         return '<div class="intel-rl-pill"><strong>' + titleize(key) + '</strong> ' + Math.round(Number(neuralFrontier.probabilities[key] || 0) * 100) + '%</div>';
       }).join('');
     }
+  }
+
+  function animateRlSurfaces(){
+    if (!window.gsap || config.demoKind !== 'rl-policy-lab') return;
+    var targets = [
+      $('intel-rl-decision-console'),
+      document.querySelector('.intel-rl-field-shell'),
+      $('intel-rl-premium-panels')
+    ].filter(Boolean);
+    targets.forEach(function(node, idx){
+      window.gsap.killTweensOf(node);
+      window.gsap.fromTo(node, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: idx * 0.05 });
+    });
+    var pills = Array.prototype.slice.call(document.querySelectorAll('#intel-rl-decision-pills .intel-rl-pill, #intel-rl-trust-strip .intel-rl-pill, #intel-rl-field-meta .intel-rl-pill'));
+    if (pills.length) {
+      window.gsap.killTweensOf(pills);
+      window.gsap.fromTo(pills, { opacity: 0, y: 10, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power2.out', stagger: 0.03, delay: 0.12 });
+    }
+  }
+
+  function renderRlPolicyField(neuralFrontier, replaySummary, walkForward){
+    var wrap = $('intel-rl-field-wrap');
+    var canvas = $('intel-rl-field-canvas');
+    var meta = $('intel-rl-field-meta');
+    if (!wrap || !canvas || !neuralFrontier) return;
+
+    var context = canvas.getContext('2d');
+    if (!context) return;
+    stopRlFieldAnimation();
+
+    var probabilities = neuralFrontier.probabilities || {};
+    var actions = ['reduce_risk', 'hold', 'add_continuation', 'add_hedge', 'relative_value_rotation'];
+    var colors = {
+      reduce_risk: 'rgba(248,113,113,1)',
+      hold: 'rgba(148,163,184,1)',
+      add_continuation: 'rgba(34,197,94,1)',
+      add_hedge: 'rgba(56,189,248,1)',
+      relative_value_rotation: 'rgba(192,132,252,1)'
+    };
+
+    function updateNodeLabels(){
+      actions.forEach(function(action){
+        var node = $('intel-rl-node-' + action);
+        if (!node) return;
+        var span = node.querySelector('span');
+        if (span) span.textContent = Math.round(Number(probabilities[action] || 0) * 100) + '%';
+        node.classList.toggle('active', action === neuralFrontier.action);
+      });
+      if ($('intel-rl-field-center-action')) $('intel-rl-field-center-action').textContent = titleize(neuralFrontier.action || 'hold');
+      var entropyText = replaySummary && replaySummary.action_entropy != null ? Math.round(Number(replaySummary.action_entropy || 0) * 100) + '% entropy' : 'Probability-weighted field';
+      if ($('intel-rl-field-center-copy')) $('intel-rl-field-center-copy').textContent = entropyText;
+      if (meta) {
+        var regime = replaySummary && replaySummary.regime_hit_rate ? replaySummary.regime_hit_rate : {};
+        meta.innerHTML = [
+          '<div class="intel-rl-pill"><strong>Intervention</strong> ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) + '%' : '—') + '</div>',
+          '<div class="intel-rl-pill"><strong>Hold share</strong> ' + (replaySummary ? Math.round(Number(replaySummary.hold_share || 0) * 100) + '%' : '—') + '</div>',
+          '<div class="intel-rl-pill"><strong>Continuation hit</strong> ' + (regime.continuation != null ? Math.round(Number(regime.continuation || 0) * 100) + '%' : '—') + '</div>',
+          '<div class="intel-rl-pill"><strong>Hedge hit</strong> ' + (regime.hedge != null ? Math.round(Number(regime.hedge || 0) * 100) + '%' : '—') + '</div>',
+          '<div class="intel-rl-pill"><strong>Walk uplift</strong> ' + (walkForward && walkForward.vs_hold_reward_uplift != null ? fmtSigned(walkForward.vs_hold_reward_uplift, 2) : '—') + '</div>'
+        ].join('');
+      }
+    }
+
+    function getGeometry(){
+      var rect = wrap.getBoundingClientRect();
+      var dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(1, Math.floor(320 * dpr));
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var width = rect.width;
+      var height = 320;
+      return {
+        width: width,
+        height: height,
+        center: { x: width * 0.5, y: height * 0.5 },
+        anchors: {
+          reduce_risk: { x: width * 0.16, y: height * 0.28 },
+          hold: { x: width * 0.84, y: height * 0.28 },
+          add_continuation: { x: width * 0.82, y: height * 0.78 },
+          add_hedge: { x: width * 0.18, y: height * 0.78 },
+          relative_value_rotation: { x: width * 0.5, y: height * 0.14 }
+        }
+      };
+    }
+
+    function rebuildParticles(){
+      state.rlField.particles = [];
+      actions.forEach(function(action){
+        var count = Math.max(3, Math.round(6 + Number(probabilities[action] || 0) * 18));
+        for (var i = 0; i < count; i++) {
+          state.rlField.particles.push({
+            action: action,
+            progress: Math.random(),
+            speed: 0.003 + Math.random() * 0.006 + Number(probabilities[action] || 0) * 0.01,
+            size: 1.4 + Number(probabilities[action] || 0) * 4 + Math.random() * 1.4,
+            alpha: 0.15 + Number(probabilities[action] || 0) * 0.7,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      });
+    }
+
+    updateNodeLabels();
+    rebuildParticles();
+    if (!state.rlField.resizeBound) {
+      window.addEventListener('resize', function(){
+        if (config.demoKind === 'rl-policy-lab' && getNeuralFrontierForSelected()) {
+          var neural = getNeuralPolicy();
+          renderRlPolicyField(getNeuralFrontierForSelected(), neural && neural.replay_summary, neural && neural.walk_forward);
+        }
+      });
+      state.rlField.resizeBound = true;
+    }
+
+    function drawFrame(){
+      var geo = getGeometry();
+      var width = geo.width;
+      var height = geo.height;
+      context.clearRect(0, 0, width, height);
+
+      var ambient = context.createRadialGradient(geo.center.x, geo.center.y, 12, geo.center.x, geo.center.y, width * 0.5);
+      ambient.addColorStop(0, 'rgba(34,211,238,0.14)');
+      ambient.addColorStop(0.55, 'rgba(34,211,238,0.02)');
+      ambient.addColorStop(1, 'rgba(2,6,23,0)');
+      context.fillStyle = ambient;
+      context.fillRect(0, 0, width, height);
+
+      actions.forEach(function(action){
+        var anchor = geo.anchors[action];
+        var strength = Number(probabilities[action] || 0);
+        var ctrl = { x: (anchor.x + geo.center.x) / 2, y: (anchor.y + geo.center.y) / 2 - (action === 'relative_value_rotation' ? 24 : 0) + (action === 'add_hedge' ? 18 : 0) - (action === 'hold' ? 12 : 0) };
+        context.beginPath();
+        context.moveTo(anchor.x, anchor.y);
+        context.quadraticCurveTo(ctrl.x, ctrl.y, geo.center.x, geo.center.y);
+        context.strokeStyle = 'rgba(255,255,255,' + (0.06 + strength * 0.22) + ')';
+        context.lineWidth = 1 + strength * 3;
+        context.stroke();
+
+        context.beginPath();
+        context.arc(anchor.x, anchor.y, 5 + strength * 10, 0, Math.PI * 2);
+        context.fillStyle = colors[action].replace(',1)', ',' + (0.12 + strength * 0.18) + ')');
+        context.fill();
+      });
+
+      state.rlField.particles.forEach(function(particle){
+        particle.progress += particle.speed;
+        if (particle.progress >= 1) particle.progress -= 1;
+        var anchor = geo.anchors[particle.action];
+        var ctrl = { x: (anchor.x + geo.center.x) / 2, y: (anchor.y + geo.center.y) / 2 - (particle.action === 'relative_value_rotation' ? 24 : 0) + (particle.action === 'add_hedge' ? 18 : 0) - (particle.action === 'hold' ? 12 : 0) };
+        var t = particle.progress;
+        var omt = 1 - t;
+        var x = omt * omt * anchor.x + 2 * omt * t * ctrl.x + t * t * geo.center.x;
+        var y = omt * omt * anchor.y + 2 * omt * t * ctrl.y + t * t * geo.center.y + Math.sin((t * Math.PI * 2) + particle.phase) * 2.5;
+        context.beginPath();
+        context.arc(x, y, particle.size, 0, Math.PI * 2);
+        context.fillStyle = colors[particle.action].replace(',1)', ',' + particle.alpha + ')');
+        context.fill();
+      });
+
+      context.beginPath();
+      context.arc(geo.center.x, geo.center.y, 26 + Math.sin(Date.now() / 260) * 6, 0, Math.PI * 2);
+      context.strokeStyle = 'rgba(34,211,238,0.22)';
+      context.lineWidth = 2;
+      context.stroke();
+
+      state.rlField.frame = requestAnimationFrame(drawFrame);
+    }
+
+    if (window.gsap) {
+      window.gsap.fromTo('.intel-rl-field-node', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.04, ease: 'power2.out' });
+    }
+    drawFrame();
   }
 
   function renderRlPolicyComparison(frontier, neuralFrontier){
@@ -1197,7 +1390,9 @@
       renderRlWhyPanel(frontier, neuralFrontier, episodeReplay);
       renderRlScenarioPanel(frontier, neuralFrontier);
       renderRlAuditTrail(frontier, neural, walkForward, replaySummary, episodeReplay);
+      renderRlPolicyField(neuralFrontier, replaySummary, walkForward);
       renderRlPremiumPanels(frontier, neuralFrontier, walkForward, replaySummary, episodeReplay);
+      animateRlSurfaces();
       return;
     }
 

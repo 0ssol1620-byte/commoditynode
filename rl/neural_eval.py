@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 from typing import Callable, Sequence
 
 from .config import RLExperimentConfig, get_default_rl_config
@@ -20,6 +21,10 @@ class PolicyReplaySummary:
     win_rate: float
     action_counts: dict[str, int]
     action_diversity: float
+    action_entropy: float
+    hold_share: float
+    intervention_rate: float
+    regime_hit_rate: dict[str, float]
     reward_decomposition: dict[str, float]
 
 
@@ -51,6 +56,42 @@ class WalkForwardEvaluation:
 ActionChooser = Callable[[dict], str]
 
 
+def _regime_targets(observation: dict) -> dict[str, tuple[bool, str]]:
+    agreement = float(observation.get('agreement_score', 0.5) or 0.5)
+    anomaly = float(observation.get('anomaly_score', 0.0) or 0.0)
+    event_risk = float(observation.get('event_risk', 0.0) or 0.0)
+    spread = float(observation.get('model_spread', 0.0) or 0.0)
+    trend = float(observation.get('trend_3', 0.0) or 0.0)
+    forecast_return = float(observation.get('forecast_return', 0.0) or 0.0)
+    volatility = float(observation.get('volatility_5', 0.0) or 0.0)
+    risk_pressure = float(observation.get('risk_pressure', 0.0) or 0.0)
+
+    bullish = agreement >= 0.62 and forecast_return > 0.01 and trend > 0
+    bearish = (agreement >= 0.58 and forecast_return < -0.01 and trend < 0) or risk_pressure >= 0.45 or anomaly >= 0.6
+    hedging = event_risk >= 0.45 or volatility >= 0.28
+    rotation = spread >= 0.18 and agreement < 0.7
+
+    return {
+        'continuation': (bullish, 'add_continuation'),
+        'risk_off': (bearish, 'reduce_risk'),
+        'hedge': (hedging, 'add_hedge'),
+        'rotation': (rotation, 'relative_value_rotation'),
+    }
+
+
+def _normalized_entropy(action_counts: dict[str, int], action_count: int) -> float:
+    total = sum(max(0, int(v)) for v in action_counts.values())
+    if total <= 0 or action_count <= 1:
+        return 0.0
+    entropy = 0.0
+    for value in action_counts.values():
+        if value <= 0:
+            continue
+        p = value / total
+        entropy -= p * math.log(p)
+    return entropy / math.log(action_count)
+
+
 def replay_policy(
     name: str,
     steps: Sequence[RLTrajectoryStep],
@@ -76,6 +117,12 @@ def replay_policy(
         'wrong_way_cost': 0.0,
         'stale_hold_cost': 0.0,
     }
+    regime_hits = {
+        'continuation': {'hit': 0, 'total': 0},
+        'risk_off': {'hit': 0, 'total': 0},
+        'hedge': {'hit': 0, 'total': 0},
+        'rotation': {'hit': 0, 'total': 0},
+    }
     peak_equity = env.state.peak_equity
     max_drawdown = 0.0
     while not done:
@@ -86,6 +133,12 @@ def replay_policy(
         action = chooser(obs)
         result = env.step(action)
         action_counts[result.info['action']] = action_counts.get(result.info['action'], 0) + 1
+        for regime_name, (is_active, target_action) in _regime_targets(step.observation).items():
+            if not is_active:
+                continue
+            regime_hits[regime_name]['total'] += 1
+            if result.info['action'] == target_action:
+                regime_hits[regime_name]['hit'] += 1
         breakdown = compute_reward_breakdown(
             realized_return=step.target_return,
             position_before=before_position,
@@ -119,6 +172,12 @@ def replay_policy(
         obs = result.observation
         done = bool(result.terminated or result.truncated)
 
+    hold_count = action_counts.get('hold', 0)
+    total_actions = max(1, count)
+    regime_hit_rate = {}
+    for key, values in regime_hits.items():
+        regime_hit_rate[key] = 0.0 if values['total'] == 0 else values['hit'] / values['total']
+
     return PolicyReplaySummary(
         name=name,
         total_reward=total_reward,
@@ -128,6 +187,10 @@ def replay_policy(
         win_rate=wins / max(1, count),
         action_counts=action_counts,
         action_diversity=sum(1 for value in action_counts.values() if value > 0) / max(1, len(config.action.discrete_actions)),
+        action_entropy=_normalized_entropy(action_counts, len(config.action.discrete_actions)),
+        hold_share=hold_count / total_actions,
+        intervention_rate=1.0 - (hold_count / total_actions),
+        regime_hit_rate=regime_hit_rate,
         reward_decomposition=breakdown_totals,
     )
 

@@ -1,5 +1,5 @@
 {
-  "updated_from_commit": "3cc2a2b+",
+  "updated_from_commit": "bfdf017+",
   "config": {
     "name": "commoditynode-rl-policy-lab",
     "commodity_keys": [
@@ -60,285 +60,313 @@
     "algorithm": "iql",
     "train_steps": 311,
     "val_steps": 66,
-    "average_train_return": -0.00011588941736206464,
-    "average_val_return": -0.0001408790685153544,
+    "average_train_return": 0.0004565978683516784,
+    "average_val_return": 4.496392642022049e-05,
     "action_distribution": {
-      "reduce_risk": 39,
-      "hold": 89,
-      "add_continuation": 18,
-      "add_hedge": 91,
-      "relative_value_rotation": 74
+      "reduce_risk": 131,
+      "hold": 58,
+      "add_continuation": 23,
+      "add_hedge": 81,
+      "relative_value_rotation": 18
     }
   },
   "ppo_report": {
     "algorithm": "ppo",
     "episodes": 4,
-    "mean_reward": -0.7632989091754423,
-    "best_reward": -0.7632989091754423,
+    "mean_reward": -0.7779089401696835,
+    "best_reward": -0.7779089401696835,
     "action_bias": {
-      "reduce_risk": 0.04685838062777222,
-      "hold": 0.0248708312241342,
-      "add_continuation": 0.028976308663711786,
-      "add_hedge": 7.862471368080028,
-      "relative_value_rotation": 0.038482372964760085
+      "reduce_risk": 0.7907711445169157,
+      "hold": 0.014468827576329113,
+      "add_continuation": 0.038652122863500955,
+      "add_hedge": 7.130608007023501,
+      "relative_value_rotation": 0.0037827406486777067
     }
   },
   "benchmark": {
     "offline": {
       "name": "offline",
-      "mean_reward": -0.02062970024798493,
-      "total_reward": -0.7632989091754423,
-      "steps": 37,
+      "mean_reward": -0.05186059601131223,
+      "total_reward": -0.7779089401696835,
+      "steps": 15,
       "action_counts": {
-        "add_hedge": 37
+        "add_hedge": 15
       }
     },
     "ppo": {
       "name": "ppo",
-      "mean_reward": -0.02062970024798493,
-      "total_reward": -0.7632989091754423,
-      "steps": 37,
+      "mean_reward": -0.05186059601131223,
+      "total_reward": -0.7779089401696835,
+      "steps": 15,
       "action_counts": {
-        "add_hedge": 37
+        "add_hedge": 15
       }
     },
     "rule_based": {
       "name": "rule_based",
-      "mean_reward": -0.014328054480895493,
-      "total_reward": -0.8310271598919386,
-      "steps": 58,
+      "mean_reward": -0.06328843176761839,
+      "total_reward": -0.8227496129790391,
+      "steps": 13,
       "action_counts": {
-        "hold": 47,
-        "reduce_risk": 11
+        "reduce_risk": 3,
+        "hold": 10
       }
     },
     "no_trade": {
       "name": "no_trade",
-      "mean_reward": -0.014328054480895493,
-      "total_reward": -0.8310271598919386,
-      "steps": 58,
+      "mean_reward": -0.06328843176761839,
+      "total_reward": -0.8227496129790391,
+      "steps": 13,
       "action_counts": {
-        "hold": 58
+        "hold": 13
       }
     },
     "directional": {
       "name": "directional",
-      "mean_reward": -0.03740743474549873,
-      "total_reward": -0.8229635644009721,
-      "steps": 22,
+      "mean_reward": -0.10385736191410257,
+      "total_reward": -0.8308588953128205,
+      "steps": 8,
       "action_counts": {
-        "add_continuation": 9,
-        "hold": 13
+        "add_continuation": 2,
+        "hold": 6
       }
     }
   },
   "neural_policy": {
     "available": true,
     "requested_device": "cuda",
-    "selected_device": "cuda",
-    "selected_timesteps": 1024,
+    "selected_device": "cpu",
+    "selected_timesteps": 2048,
     "profile_selection": [
       {
         "device": "cpu",
-        "timesteps": 512,
-        "score": 0.1772448733565578,
-        "reward": -0.8043920839396315,
-        "hold_reward": -0.20109043568350277,
-        "uplift_vs_hold": -0.6033016482561286,
-        "walk_uplift_vs_hold": 0.70108711842265,
-        "walk_positive_rate": 1.0,
-        "action_diversity": 0.8,
-        "walk_action_diversity": 0.8666666666666667,
-        "win_rate": 0.16129032258064516
-      },
-      {
-        "device": "cpu",
         "timesteps": 1024,
-        "score": 0.1772448733565578,
-        "reward": -0.8043920839396315,
-        "hold_reward": -0.20109043568350277,
-        "uplift_vs_hold": -0.6033016482561286,
-        "walk_uplift_vs_hold": 0.70108711842265,
+        "score": 4.838537304793636,
+        "reward": 3.143646146451889,
+        "hold_reward": -0.7641959902854681,
+        "uplift_vs_hold": 3.907842136737357,
+        "walk_uplift_vs_hold": 1.1693554769578718,
         "walk_positive_rate": 1.0,
         "action_diversity": 0.8,
-        "walk_action_diversity": 0.8666666666666667,
-        "win_rate": 0.16129032258064516
+        "action_entropy": 0.5103779158652212,
+        "hold_share": 0.6363636363636364,
+        "intervention_rate": 0.36363636363636365,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.8076923076923077,
+          "hedge": 0.0,
+          "rotation": 0.0
+        },
+        "walk_action_diversity": 0.6666666666666666,
+        "win_rate": 0.45454545454545453
       },
       {
         "device": "cpu",
         "timesteps": 2048,
-        "score": 0.06106823907617956,
-        "reward": -0.8302581833972745,
-        "hold_reward": -0.20109043568350277,
-        "uplift_vs_hold": -0.6291677477137718,
-        "walk_uplift_vs_hold": 0.6610809325781727,
+        "score": 4.992143860552795,
+        "reward": 3.143646146451889,
+        "hold_reward": -0.7641959902854681,
+        "uplift_vs_hold": 3.907842136737357,
+        "walk_uplift_vs_hold": 1.3341035018754563,
+        "walk_positive_rate": 1.0,
+        "action_diversity": 0.8,
+        "action_entropy": 0.5103779158652212,
+        "hold_share": 0.6363636363636364,
+        "intervention_rate": 0.36363636363636365,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.8076923076923077,
+          "hedge": 0.0,
+          "rotation": 0.0
+        },
+        "walk_action_diversity": 0.7333333333333334,
+        "win_rate": 0.45454545454545453
+      },
+      {
+        "device": "cuda",
+        "timesteps": 1024,
+        "score": 4.879149241048757,
+        "reward": 3.143646146451889,
+        "hold_reward": -0.7641959902854681,
+        "uplift_vs_hold": 3.907842136737357,
+        "walk_uplift_vs_hold": 1.2085539246487473,
+        "walk_positive_rate": 1.0,
+        "action_diversity": 0.8,
+        "action_entropy": 0.5103779158652212,
+        "hold_share": 0.6363636363636364,
+        "intervention_rate": 0.36363636363636365,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.8076923076923077,
+          "hedge": 0.0,
+          "rotation": 0.0
+        },
+        "walk_action_diversity": 0.7333333333333334,
+        "win_rate": 0.45454545454545453
+      },
+      {
+        "device": "cuda",
+        "timesteps": 2048,
+        "score": 4.878589462381517,
+        "reward": 3.180659042071403,
+        "hold_reward": -0.7641959902854681,
+        "uplift_vs_hold": 3.9448550323568714,
+        "walk_uplift_vs_hold": 1.22621999776819,
         "walk_positive_rate": 1.0,
         "action_diversity": 0.6,
-        "walk_action_diversity": 0.6666666666666666,
-        "win_rate": 0.15517241379310345
-      },
-      {
-        "device": "cuda",
-        "timesteps": 512,
-        "score": -0.11146745326282577,
-        "reward": -0.8104931022348756,
-        "hold_reward": -0.20109043568350277,
-        "uplift_vs_hold": -0.6094026665513728,
-        "walk_uplift_vs_hold": 0.33245528438472927,
-        "walk_positive_rate": 1.0,
-        "action_diversity": 0.8,
-        "walk_action_diversity": 0.8000000000000002,
-        "win_rate": 0.171875
-      },
-      {
-        "device": "cuda",
-        "timesteps": 1024,
-        "score": 0.41951838232563526,
-        "reward": -0.4168266773903846,
-        "hold_reward": -0.20109043568350277,
-        "uplift_vs_hold": -0.21573624170688183,
-        "walk_uplift_vs_hold": 0.5148849532554772,
-        "walk_positive_rate": 1.0,
-        "action_diversity": 0.8,
-        "walk_action_diversity": 0.8000000000000002,
-        "win_rate": 0.18181818181818182
-      },
-      {
-        "device": "cuda",
-        "timesteps": 2048,
-        "score": -0.02011096395171592,
-        "reward": -0.8104931022348756,
-        "hold_reward": -0.20109043568350277,
-        "uplift_vs_hold": -0.6094026665513728,
-        "walk_uplift_vs_hold": 0.4542639367995424,
-        "walk_positive_rate": 1.0,
-        "action_diversity": 0.8,
-        "walk_action_diversity": 0.8000000000000002,
-        "win_rate": 0.171875
+        "action_entropy": 0.45858217230738474,
+        "hold_share": 0.6666666666666666,
+        "intervention_rate": 0.33333333333333337,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.7692307692307693,
+          "hedge": 0.0,
+          "rotation": 0.0
+        },
+        "walk_action_diversity": 0.7333333333333334,
+        "win_rate": 0.45454545454545453
       }
     ],
     "torch_cuda_available": true,
     "report": {
-      "timesteps": 1024,
-      "final_action": "add_continuation",
-      "confidence": 0.5524355708168303,
-      "mean_reward_estimate": 0.028318233188740584,
-      "device_used": "cuda"
+      "timesteps": 2048,
+      "final_action": "hold",
+      "confidence": 0.39385922381191263,
+      "mean_reward_estimate": -0.0027738391983428926,
+      "device_used": "cpu"
     },
     "frontier": [
       {
         "commodity": "crude_oil",
-        "timestamp": "2026-07-15",
-        "action": "reduce_risk",
-        "confidence": 0.3581,
+        "timestamp": "2026-07-16",
+        "action": "hold",
+        "confidence": 0.3564,
         "probabilities": {
-          "reduce_risk": 0.3581,
-          "hold": 0.0645,
-          "add_continuation": 0.0784,
-          "add_hedge": 0.1565,
-          "relative_value_rotation": 0.3425
+          "reduce_risk": 0.143,
+          "hold": 0.3564,
+          "add_continuation": 0.2837,
+          "add_hedge": 0.1197,
+          "relative_value_rotation": 0.0971
         }
       },
       {
         "commodity": "gold",
-        "timestamp": "2026-07-15",
-        "action": "relative_value_rotation",
-        "confidence": 0.3995,
+        "timestamp": "2026-07-16",
+        "action": "reduce_risk",
+        "confidence": 0.714,
         "probabilities": {
-          "reduce_risk": 0.1844,
-          "hold": 0.0772,
-          "add_continuation": 0.0958,
-          "add_hedge": 0.2431,
-          "relative_value_rotation": 0.3995
+          "reduce_risk": 0.714,
+          "hold": 0.1002,
+          "add_continuation": 0.0355,
+          "add_hedge": 0.0456,
+          "relative_value_rotation": 0.1046
         }
       },
       {
         "commodity": "copper",
-        "timestamp": "2026-07-16",
+        "timestamp": "2026-07-17",
         "action": "relative_value_rotation",
-        "confidence": 0.3334,
+        "confidence": 0.3673,
         "probabilities": {
-          "reduce_risk": 0.2082,
-          "hold": 0.0884,
-          "add_continuation": 0.1084,
-          "add_hedge": 0.2616,
-          "relative_value_rotation": 0.3334
+          "reduce_risk": 0.2096,
+          "hold": 0.1899,
+          "add_continuation": 0.1099,
+          "add_hedge": 0.1233,
+          "relative_value_rotation": 0.3673
         }
       },
       {
         "commodity": "natural_gas",
-        "timestamp": "2026-07-15",
-        "action": "add_hedge",
-        "confidence": 0.6753,
+        "timestamp": "2026-07-16",
+        "action": "reduce_risk",
+        "confidence": 0.7749,
         "probabilities": {
-          "reduce_risk": 0.1004,
-          "hold": 0.0784,
-          "add_continuation": 0.0773,
-          "add_hedge": 0.6753,
-          "relative_value_rotation": 0.0685
+          "reduce_risk": 0.7749,
+          "hold": 0.0983,
+          "add_continuation": 0.0362,
+          "add_hedge": 0.0489,
+          "relative_value_rotation": 0.0418
         }
       },
       {
         "commodity": "wheat",
-        "timestamp": "2026-07-15",
+        "timestamp": "2026-07-16",
         "action": "hold",
-        "confidence": 0.5123,
+        "confidence": 0.4443,
         "probabilities": {
-          "reduce_risk": 0.1459,
-          "hold": 0.5123,
-          "add_continuation": 0.2055,
-          "add_hedge": 0.0731,
-          "relative_value_rotation": 0.0633
+          "reduce_risk": 0.1293,
+          "hold": 0.4443,
+          "add_continuation": 0.2568,
+          "add_hedge": 0.0746,
+          "relative_value_rotation": 0.0949
         }
       }
     ],
     "replay_summary": {
       "name": "neural_policy",
-      "total_reward": -0.7900054890955186,
-      "mean_reward": -0.029259462559093282,
-      "final_equity": 0.20999451090448118,
-      "max_drawdown": 0.8345515726655726,
-      "win_rate": 0.1111111111111111,
+      "total_reward": 0.4017586782077702,
+      "mean_reward": 0.005908215855996621,
+      "final_equity": 1.4017586782077696,
+      "max_drawdown": 0.136523705988672,
+      "win_rate": 0.22058823529411764,
       "action_counts": {
-        "relative_value_rotation": 1,
+        "hold": 51,
         "add_hedge": 2,
-        "hold": 16,
-        "reduce_risk": 8
+        "add_continuation": 1,
+        "reduce_risk": 14
       },
       "action_diversity": 0.8,
+      "action_entropy": 0.43923189631758186,
+      "hold_share": 0.75,
+      "intervention_rate": 0.25,
+      "regime_hit_rate": {
+        "continuation": 0.0,
+        "risk_off": 0.8666666666666667,
+        "hedge": 0.0,
+        "rotation": 0.0
+      },
       "reward_decomposition": {
-        "pnl": -0.03239753510024628,
-        "turnover_cost": 0.07500000000000001,
-        "drawdown_cost": 0.5941079539952723,
-        "concentration_cost": 0.12950000000000006,
+        "pnl": -0.03592241150780886,
+        "turnover_cost": 0.09,
+        "drawdown_cost": 0.25631891028442094,
+        "concentration_cost": 0.35700000000000026,
         "event_gap_cost": 0.0,
-        "abstain_bonus": 0.0,
-        "expert_alignment_bonus": 0.48,
+        "abstain_bonus": 0.005,
+        "expert_alignment_bonus": 2.4,
         "wrong_way_cost": 0.06,
-        "stale_hold_cost": 0.3790000000000001
+        "stale_hold_cost": 1.2040000000000004
       }
     },
     "hold_baseline": {
       "name": "hold_baseline",
-      "total_reward": -0.8310271598919386,
-      "mean_reward": -0.014328054480895493,
-      "final_equity": 0.16897284010806146,
-      "max_drawdown": 0.8657407350833115,
-      "win_rate": 0.1896551724137931,
+      "total_reward": -0.8227496129790391,
+      "mean_reward": -0.06328843176761839,
+      "final_equity": 0.17725038702096096,
+      "max_drawdown": 0.822749612979039,
+      "win_rate": 0.0,
       "action_counts": {
-        "hold": 58
+        "hold": 13
       },
       "action_diversity": 0.2,
+      "action_entropy": 0.0,
+      "hold_share": 1.0,
+      "intervention_rate": 0.0,
+      "regime_hit_rate": {
+        "continuation": 0.0,
+        "risk_off": 0.0,
+        "hedge": 0.0,
+        "rotation": 0.0
+      },
       "reward_decomposition": {
         "pnl": 0.0,
         "turnover_cost": 0.0,
-        "drawdown_cost": 1.0117959197070694,
+        "drawdown_cost": 0.38338013769797974,
         "concentration_cost": 0.0,
         "event_gap_cost": 0.0,
-        "abstain_bonus": 0.29000000000000015,
-        "expert_alignment_bonus": 1.28,
+        "abstain_bonus": 0.06499999999999999,
+        "expert_alignment_bonus": 0.0,
         "wrong_way_cost": 0.0,
-        "stale_hold_cost": 1.3892312401848692
+        "stale_hold_cost": 0.5043694752810596
       }
     },
     "walk_forward": {
@@ -347,47 +375,47 @@
           "window_index": 1,
           "train_steps": 96,
           "eval_steps": 24,
-          "start_timestamp": "2026-05-18",
-          "end_timestamp": "2026-05-22",
-          "total_reward": 0.6205239070066897,
-          "mean_reward": 0.025855162791945403,
-          "final_equity": 1.6205239070066892,
-          "max_drawdown": 0.22248095761738154,
-          "dominant_action": "relative_value_rotation"
+          "start_timestamp": "2026-05-19",
+          "end_timestamp": "2026-05-25",
+          "total_reward": 1.4241410378105441,
+          "mean_reward": 0.05933920990877267,
+          "final_equity": 2.4241410378105437,
+          "max_drawdown": 0.06457639165474233,
+          "dominant_action": "reduce_risk"
         },
         {
           "window_index": 2,
           "train_steps": 128,
           "eval_steps": 24,
-          "start_timestamp": "2026-06-16",
-          "end_timestamp": "2026-06-23",
-          "total_reward": 0.7005461412219361,
-          "mean_reward": 0.029189422550914005,
-          "final_equity": 1.7005461412219365,
-          "max_drawdown": 0.08457161585541911,
+          "start_timestamp": "2026-06-17",
+          "end_timestamp": "2026-06-24",
+          "total_reward": 1.7318016410156964,
+          "mean_reward": 0.07215840170898735,
+          "final_equity": 2.731801641015697,
+          "max_drawdown": 0.052727421445807,
           "dominant_action": "reduce_risk"
         },
         {
           "window_index": 3,
           "train_steps": 128,
           "eval_steps": 24,
-          "start_timestamp": "2026-07-16",
-          "end_timestamp": "2026-07-23",
-          "total_reward": 1.2002704788980627,
-          "mean_reward": 0.050011269954085946,
-          "final_equity": 2.2002704788980623,
-          "max_drawdown": 0.05591341576278351,
+          "start_timestamp": "2026-07-17",
+          "end_timestamp": "2026-07-24",
+          "total_reward": 0.8781816411792377,
+          "mean_reward": 0.03659090171580157,
+          "final_equity": 1.8781816411792371,
+          "max_drawdown": 0.13200467910422153,
           "dominant_action": "reduce_risk"
         }
       ],
-      "mean_reward": 0.03501861843231512,
-      "mean_final_equity": 1.8404468423755624,
-      "mean_max_drawdown": 0.12098866307852807,
+      "mean_reward": 0.05602950444452053,
+      "mean_final_equity": 2.344708106668493,
+      "mean_max_drawdown": 0.08310283073492362,
       "positive_window_rate": 1.0,
-      "vs_hold_reward_uplift": 0.4542639367995424,
-      "mean_action_diversity": 0.8000000000000002
+      "vs_hold_reward_uplift": 1.3341035018754563,
+      "mean_action_diversity": 0.7333333333333334
     },
-    "vs_hold_reward_uplift": 0.04102167079642005,
+    "vs_hold_reward_uplift": 1.2245082911868095,
     "performance": {
       "cpu": {
         "device": "cpu",
@@ -453,235 +481,235 @@
   "policy_frontier": [
     {
       "commodity": "crude_oil",
-      "timestamp": "2026-07-15",
+      "timestamp": "2026-07-16",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9992,
+      "offline_confidence": 0.9985,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9984,
+      "ppo_confidence": 0.9967,
       "observation": {
-        "forecast_return": -0.0021559657834092534,
-        "agreement_score": 0.743,
-        "anomaly_score": 0.32775511125679196,
+        "forecast_return": 0.00032809666454269507,
+        "agreement_score": 0.5618,
+        "anomaly_score": 0.30205387832931935,
         "event_risk": 0.31,
-        "model_spread": 0.06942204450271679,
+        "model_spread": 0.01565355133172775,
         "direction_bullish": 0.0,
-        "direction_bearish": 1.0,
+        "direction_bearish": 0.0,
         "ripple_max_score": 0.92,
         "hedge_count": 3.0,
         "policy_action_count": 3.0,
-        "forecast_magnitude": 0.05389914458523133,
-        "trend_3": -0.00039489733254616856,
-        "volatility_5": 0.019889671297034263,
-        "agreement_event_mix": 0.51267,
-        "risk_pressure": 0.27076196452893936
+        "forecast_magnitude": 0.008202416613567376,
+        "trend_3": 0.0006967589503129292,
+        "volatility_5": 0.018773563826198644,
+        "agreement_event_mix": 0.38764199999999993,
+        "risk_pressure": 0.2471576494310052
       },
-      "neural_action": "reduce_risk",
-      "neural_confidence": 0.3581,
+      "neural_action": "hold",
+      "neural_confidence": 0.3564,
       "neural_probabilities": {
-        "reduce_risk": 0.3581,
-        "hold": 0.0645,
-        "add_continuation": 0.0784,
-        "add_hedge": 0.1565,
-        "relative_value_rotation": 0.3425
+        "reduce_risk": 0.143,
+        "hold": 0.3564,
+        "add_continuation": 0.2837,
+        "add_hedge": 0.1197,
+        "relative_value_rotation": 0.0971
       }
     },
     {
       "commodity": "gold",
-      "timestamp": "2026-07-15",
+      "timestamp": "2026-07-16",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9995,
+      "offline_confidence": 0.9984,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9988,
+      "ppo_confidence": 0.9965,
       "observation": {
-        "forecast_return": 0.001168044705857229,
-        "agreement_score": 0.6072,
-        "anomaly_score": 0.45109675212241834,
+        "forecast_return": 0.0005573307079699872,
+        "agreement_score": 0.6159,
+        "anomaly_score": 0.6579452122429541,
         "event_risk": 0.33,
-        "model_spread": 0.08616670084896734,
+        "model_spread": 0.17099408489718163,
         "direction_bullish": 0.0,
         "direction_bearish": 0.0,
         "ripple_max_score": 0.91,
         "hedge_count": 3.0,
         "policy_action_count": 3.0,
-        "forecast_magnitude": 0.029201117646430727,
-        "trend_3": 0.0009079967917467891,
-        "volatility_5": 0.033000998275282925,
-        "agreement_event_mix": 0.4068239999999999,
-        "risk_pressure": 0.3417817162310026
+        "forecast_magnitude": 0.01393326769924968,
+        "trend_3": 0.0019074593383468239,
+        "volatility_5": 0.042263173787779204,
+        "agreement_event_mix": 0.41265299999999994,
+        "risk_pressure": 0.46217142310091336
       },
-      "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.3995,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.714,
       "neural_probabilities": {
-        "reduce_risk": 0.1844,
-        "hold": 0.0772,
-        "add_continuation": 0.0958,
-        "add_hedge": 0.2431,
-        "relative_value_rotation": 0.3995
+        "reduce_risk": 0.714,
+        "hold": 0.1002,
+        "add_continuation": 0.0355,
+        "add_hedge": 0.0456,
+        "relative_value_rotation": 0.1046
       }
     },
     {
       "commodity": "copper",
-      "timestamp": "2026-07-16",
+      "timestamp": "2026-07-17",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9994,
+      "offline_confidence": 0.9985,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9988,
+      "ppo_confidence": 0.9967,
       "observation": {
-        "forecast_return": -0.0002453104812990284,
-        "agreement_score": 0.5749,
-        "anomaly_score": 0.43704324936203637,
+        "forecast_return": -0.00045372425114871567,
+        "agreement_score": 0.594,
+        "anomaly_score": 0.3687196725099866,
         "event_risk": 0.31,
-        "model_spread": 0.07279329974481455,
+        "model_spread": 0.05004786900399464,
         "direction_bullish": 0.0,
         "direction_bearish": 0.0,
         "ripple_max_score": 0.95,
         "hedge_count": 3.0,
         "policy_action_count": 3.0,
-        "forecast_magnitude": 0.00613276203247571,
-        "trend_3": 0.0006718664627423351,
-        "volatility_5": 0.017129081769522582,
-        "agreement_event_mix": 0.39668099999999995,
-        "risk_pressure": 0.32608028462998107
+        "forecast_magnitude": 0.011343106278717891,
+        "trend_3": 0.0003002457239540995,
+        "volatility_5": 0.018207171279103585,
+        "agreement_event_mix": 0.40985999999999995,
+        "risk_pressure": 0.2873694100557922
       },
       "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.3334,
+      "neural_confidence": 0.3673,
       "neural_probabilities": {
-        "reduce_risk": 0.2082,
-        "hold": 0.0884,
-        "add_continuation": 0.1084,
-        "add_hedge": 0.2616,
-        "relative_value_rotation": 0.3334
+        "reduce_risk": 0.2096,
+        "hold": 0.1899,
+        "add_continuation": 0.1099,
+        "add_hedge": 0.1233,
+        "relative_value_rotation": 0.3673
       }
     },
     {
       "commodity": "natural_gas",
-      "timestamp": "2026-07-15",
+      "timestamp": "2026-07-16",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9994,
+      "offline_confidence": 0.9983,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9988,
+      "ppo_confidence": 0.9963,
       "observation": {
-        "forecast_return": -0.0028129657228018507,
-        "agreement_score": 0.4802,
-        "anomaly_score": 0.4541393360608271,
+        "forecast_return": -0.0019492835066029586,
+        "agreement_score": 0.5302,
+        "anomaly_score": 0.7281876029771435,
         "event_risk": 0.31,
-        "model_spread": 0.056903734424330846,
+        "model_spread": 0.17852304119085738,
         "direction_bullish": 0.0,
         "direction_bearish": 0.0,
         "ripple_max_score": 0.88,
         "hedge_count": 3.0,
         "policy_action_count": 2.0,
-        "forecast_magnitude": 0.07032414307004627,
-        "trend_3": -0.0003066733552256288,
-        "volatility_5": 0.07865831644978838,
-        "agreement_event_mix": 0.33133799999999997,
-        "risk_pressure": 0.33145041491527977
+        "forecast_magnitude": 0.04873208766507396,
+        "trend_3": -0.0010816814164572306,
+        "volatility_5": 0.08576929832658202,
+        "agreement_event_mix": 0.365838,
+        "risk_pressure": 0.49279840972674316
       },
-      "neural_action": "add_hedge",
-      "neural_confidence": 0.6753,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.7749,
       "neural_probabilities": {
-        "reduce_risk": 0.1004,
-        "hold": 0.0784,
-        "add_continuation": 0.0773,
-        "add_hedge": 0.6753,
-        "relative_value_rotation": 0.0685
+        "reduce_risk": 0.7749,
+        "hold": 0.0983,
+        "add_continuation": 0.0362,
+        "add_hedge": 0.0489,
+        "relative_value_rotation": 0.0418
       }
     },
     {
       "commodity": "wheat",
-      "timestamp": "2026-07-15",
+      "timestamp": "2026-07-16",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9994,
+      "offline_confidence": 0.9985,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9988,
+      "ppo_confidence": 0.9967,
       "observation": {
-        "forecast_return": 0.00012228388674624877,
-        "agreement_score": 0.5751,
-        "anomaly_score": 0.3199971567024259,
+        "forecast_return": -0.0003509552682487106,
+        "agreement_score": 0.5881,
+        "anomaly_score": 0.3045950390614419,
         "event_risk": 0.3,
-        "model_spread": 0.026022862680970364,
+        "model_spread": 0.022982015624576753,
         "direction_bullish": 0.0,
         "direction_bearish": 0.0,
         "ripple_max_score": 0.85,
         "hedge_count": 2.0,
         "policy_action_count": 1.0,
-        "forecast_magnitude": 0.003057097168656219,
-        "trend_3": 0.0002675465906638319,
-        "volatility_5": 0.014852810892488438,
-        "agreement_event_mix": 0.40256999999999993,
-        "risk_pressure": 0.255203150887407
+        "forecast_magnitude": 0.008773881706217766,
+        "trend_3": 0.00017509557913704543,
+        "volatility_5": 0.010178093527736874,
+        "agreement_event_mix": 0.4116699999999999,
+        "risk_pressure": 0.2468939226556363
       },
       "neural_action": "hold",
-      "neural_confidence": 0.5123,
+      "neural_confidence": 0.4443,
       "neural_probabilities": {
-        "reduce_risk": 0.1459,
-        "hold": 0.5123,
-        "add_continuation": 0.2055,
-        "add_hedge": 0.0731,
-        "relative_value_rotation": 0.0633
+        "reduce_risk": 0.1293,
+        "hold": 0.4443,
+        "add_continuation": 0.2568,
+        "add_hedge": 0.0746,
+        "relative_value_rotation": 0.0949
       }
     }
   ],
   "episode_replay": [
     {
       "commodity": "gold",
-      "timestamp": "2026-08-04",
-      "target_return": -0.000628,
+      "timestamp": "2026-08-05",
+      "target_return": -0.004091,
       "expert_action": "reduce_risk",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9995,
+      "offline_confidence": 0.9984,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9988,
-      "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.3995
+      "ppo_confidence": 0.9964,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.714
     },
     {
       "commodity": "natural_gas",
-      "timestamp": "2026-08-04",
-      "target_return": 0.002313,
+      "timestamp": "2026-08-05",
+      "target_return": -0.060062,
       "expert_action": "reduce_risk",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9994,
+      "offline_confidence": 0.9984,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9988,
-      "neural_action": "add_hedge",
-      "neural_confidence": 0.6753
+      "ppo_confidence": 0.9965,
+      "neural_action": "reduce_risk",
+      "neural_confidence": 0.7749
     },
     {
       "commodity": "wheat",
-      "timestamp": "2026-08-04",
-      "target_return": -0.000179,
-      "expert_action": "hold",
+      "timestamp": "2026-08-05",
+      "target_return": -0.016086,
+      "expert_action": "add_hedge",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9994,
+      "offline_confidence": 0.9984,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9988,
+      "ppo_confidence": 0.9966,
       "neural_action": "hold",
-      "neural_confidence": 0.5123
+      "neural_confidence": 0.4443
     },
     {
       "commodity": "copper",
-      "timestamp": "2026-08-05",
-      "target_return": -8.2e-05,
+      "timestamp": "2026-08-06",
+      "target_return": 0.001273,
       "expert_action": "reduce_risk",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9994,
+      "offline_confidence": 0.9985,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9988,
+      "ppo_confidence": 0.9967,
       "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.3334
+      "neural_confidence": 0.3673
     },
     {
       "commodity": "crude_oil",
-      "timestamp": "2026-08-05",
-      "target_return": 0.00019,
-      "expert_action": "relative_value_rotation",
+      "timestamp": "2026-08-06",
+      "target_return": 0.00109,
+      "expert_action": "add_continuation",
       "offline_action": "add_hedge",
-      "offline_confidence": 0.9992,
+      "offline_confidence": 0.9985,
       "ppo_action": "add_hedge",
-      "ppo_confidence": 0.9984,
-      "neural_action": "reduce_risk",
-      "neural_confidence": 0.3581
+      "ppo_confidence": 0.9967,
+      "neural_action": "hold",
+      "neural_confidence": 0.3564
     }
   ]
 }
