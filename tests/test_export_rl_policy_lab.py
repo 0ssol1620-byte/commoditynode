@@ -55,6 +55,55 @@ def test_score_profile_row_prefers_balanced_multi_regime_policy():
     assert score_profile_row(balanced) > score_profile_row(concentrated)
 
 
+def test_score_profile_row_rejects_single_action_collapse_even_with_high_uplift():
+    from scripts.export_rl_policy_lab import score_profile_row
+
+    single_action = {
+        'uplift_vs_hold': 8.39,
+        'walk_uplift_vs_hold': 2.0,
+        'action_diversity': 0.2,
+        'action_entropy': 0.0,
+        'walk_action_diversity': 0.2,
+        'target_action_match_rate': 0.39,
+        'target_action_distribution_gap': 0.60,
+        'regime_hit_rate': {
+            'continuation': 0.0,
+            'hedge': 0.0,
+            'risk_off': 0.0,
+            'rotation': 1.0,
+        },
+        'regime_balance_score': 0.16,
+        'intervention_rate': 1.0,
+        'non_hold_value_add': 16.9,
+        'hold_share': 0.0,
+        'dominant_action_share': 1.0,
+        'win_rate': 0.40,
+    }
+    balanced = {
+        'uplift_vs_hold': 4.8,
+        'walk_uplift_vs_hold': 1.8,
+        'action_diversity': 0.8,
+        'action_entropy': 0.58,
+        'walk_action_diversity': 0.67,
+        'target_action_match_rate': 0.32,
+        'target_action_distribution_gap': 0.28,
+        'regime_hit_rate': {
+            'continuation': 0.55,
+            'hedge': 0.22,
+            'risk_off': 0.41,
+            'rotation': 0.29,
+        },
+        'regime_balance_score': 0.48,
+        'intervention_rate': 1.0,
+        'non_hold_value_add': 7.2,
+        'hold_share': 0.0,
+        'dominant_action_share': 0.54,
+        'win_rate': 0.36,
+    }
+
+    assert score_profile_row(balanced) > score_profile_row(single_action)
+
+
 def test_export_payload_contains_frontier_and_replay():
     pytest = __import__('pytest')
     try:
@@ -76,12 +125,14 @@ def test_export_payload_contains_frontier_and_replay():
     assert isinstance(payload['neural_policy'], dict)
     if payload['neural_policy'].get('available'):
         assert payload['neural_policy']['report']['timesteps'] in {1024, 2048}
+        assert payload['neural_policy']['report']['prior_weight'] in {0.0, 0.2, 0.35, 0.5}
         assert len(payload['neural_policy'].get('frontier', [])) > 0
         assert 'walk_forward' in payload['neural_policy']
         assert 'replay_summary' in payload['neural_policy']
         assert 'hold_baseline' in payload['neural_policy']
         assert 'vs_hold_reward_uplift' in payload['neural_policy']
         assert 'selected_timesteps' in payload['neural_policy']
+        assert 'selected_prior_weight' in payload['neural_policy']
         assert 'profile_selection' in payload['neural_policy']
         assert 'action_diversity' in payload['neural_policy']['replay_summary']
         assert 'action_entropy' in payload['neural_policy']['replay_summary']
@@ -98,6 +149,7 @@ def test_export_payload_contains_frontier_and_replay():
         assert 'target_action_distribution_gap' in payload['neural_policy']['replay_summary']
         assert 'vs_hold_reward_uplift' in payload['neural_policy']['walk_forward']
         first_profile = payload['neural_policy']['profile_selection'][0]
+        assert 'prior_weight' in first_profile
         assert 'action_entropy' in first_profile
         assert 'hold_share' in first_profile
         assert 'intervention_rate' in first_profile

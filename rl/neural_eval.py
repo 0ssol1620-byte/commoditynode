@@ -303,6 +303,7 @@ def evaluate_neural_walk_forward(
     eval_window_size: int = 24,
     min_train_steps: int = 72,
     device: str = 'auto',
+    prior_weight: float = 0.5,
 ) -> WalkForwardEvaluation:
     config = config or get_default_rl_config()
     all_steps = list(dataset.train + dataset.val + dataset.test)
@@ -330,6 +331,7 @@ def evaluate_neural_walk_forward(
             config=config,
             total_timesteps=total_timesteps,
             device=device,
+            prior_weight=prior_weight,
         )
         replay = replay_policy(
             name=f'walk_forward_{idx + 1}',

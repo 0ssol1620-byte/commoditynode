@@ -1,5 +1,5 @@
 {
-  "updated_from_commit": "309cfcf+",
+  "updated_from_commit": "7dc71e7+",
   "config": {
     "name": "commoditynode-rl-policy-lab",
     "commodity_keys": [
@@ -138,11 +138,115 @@
     "available": true,
     "requested_device": "cuda",
     "selected_device": "cpu",
-    "selected_timesteps": 1024,
+    "selected_timesteps": 2048,
+    "selected_prior_weight": 0.2,
     "profile_selection": [
       {
         "device": "cpu",
         "timesteps": 1024,
+        "prior_weight": 0.0,
+        "reward": 7.599428644485405,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 8.392153152361066,
+        "walk_uplift_vs_hold": 1.9013887480210627,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.2,
+        "action_entropy": 0.0,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 1.0,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.0,
+          "hedge": 0.0,
+          "rotation": 1.0
+        },
+        "regime_active_counts": {
+          "continuation": 40,
+          "risk_off": 44,
+          "hedge": 48,
+          "rotation": 89
+        },
+        "regime_balance_score": 0.1625,
+        "non_hold_value_add": 16.969802952397096,
+        "target_action_match_rate": 0.39552238805970147,
+        "target_action_distribution_gap": 0.6044776119402986,
+        "walk_action_diversity": 0.26666666666666666,
+        "win_rate": 0.39552238805970147,
+        "score": 0.5159781817886504
+      },
+      {
+        "device": "cpu",
+        "timesteps": 1024,
+        "prior_weight": 0.2,
+        "reward": -0.801726215538115,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": -0.009001707662454339,
+        "walk_uplift_vs_hold": 1.9700873320694592,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.6,
+        "action_entropy": 0.3683766572179283,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 0.7758620689655172,
+        "regime_hit_rate": {
+          "continuation": 0.8666666666666667,
+          "risk_off": 0.0,
+          "hedge": 0.05,
+          "rotation": 0.1111111111111111
+        },
+        "regime_active_counts": {
+          "continuation": 15,
+          "risk_off": 16,
+          "hedge": 20,
+          "rotation": 36
+        },
+        "regime_balance_score": 0.344073275862069,
+        "non_hold_value_add": 4.788044399775918,
+        "target_action_match_rate": 0.1724137931034483,
+        "target_action_distribution_gap": 0.6379310344827587,
+        "walk_action_diversity": 0.26666666666666666,
+        "win_rate": 0.1724137931034483,
+        "score": 0.8691850995188424
+      },
+      {
+        "device": "cpu",
+        "timesteps": 1024,
+        "prior_weight": 0.35,
+        "reward": -0.7573050200388489,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 0.0354194878368117,
+        "walk_uplift_vs_hold": 1.9306497249158925,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.8,
+        "action_entropy": 0.5241500622338287,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 0.6923076923076923,
+        "regime_hit_rate": {
+          "continuation": 0.75,
+          "risk_off": 0.1,
+          "hedge": 0.08333333333333333,
+          "rotation": 0.07692307692307693
+        },
+        "regime_active_counts": {
+          "continuation": 8,
+          "risk_off": 10,
+          "hedge": 12,
+          "rotation": 13
+        },
+        "regime_balance_score": 0.42134615384615387,
+        "non_hold_value_add": 2.494405107990387,
+        "target_action_match_rate": 0.19230769230769232,
+        "target_action_distribution_gap": 0.5384615384615384,
+        "walk_action_diversity": 0.3333333333333333,
+        "win_rate": 0.19230769230769232,
+        "score": 1.4478330243935107
+      },
+      {
+        "device": "cpu",
+        "timesteps": 1024,
+        "prior_weight": 0.5,
         "reward": -0.7625777960046783,
         "hold_reward": -0.7927245078756606,
         "uplift_vs_hold": 0.03014671187098228,
@@ -171,11 +275,114 @@
         "target_action_distribution_gap": 0.5416666666666666,
         "walk_action_diversity": 0.6666666666666666,
         "win_rate": 0.20833333333333334,
-        "score": 1.7695606733772937
+        "score": 1.328816299682039
       },
       {
         "device": "cpu",
         "timesteps": 2048,
+        "prior_weight": 0.0,
+        "reward": 0.9897919876129078,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 1.7825164954885684,
+        "walk_uplift_vs_hold": 1.5229313924696157,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.4,
+        "action_entropy": 0.39655118372673487,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 0.664179104477612,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.0,
+          "hedge": 0.625,
+          "rotation": 0.29213483146067415
+        },
+        "regime_active_counts": {
+          "continuation": 40,
+          "risk_off": 44,
+          "hedge": 48,
+          "rotation": 89
+        },
+        "regime_balance_score": 0.32071498197216164,
+        "non_hold_value_add": 11.826059840300907,
+        "target_action_match_rate": 0.17164179104477612,
+        "target_action_distribution_gap": 0.6119402985074627,
+        "walk_action_diversity": 0.26666666666666666,
+        "win_rate": 0.17164179104477612,
+        "score": 1.0803253157563824
+      },
+      {
+        "device": "cpu",
+        "timesteps": 2048,
+        "prior_weight": 0.2,
+        "reward": -0.7535355084272992,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 0.039188999448361406,
+        "walk_uplift_vs_hold": 1.3692417912929162,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.6,
+        "action_entropy": 0.6165394559097065,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 0.5,
+        "regime_hit_rate": {
+          "continuation": 0.12,
+          "risk_off": 0.0,
+          "hedge": 0.47058823529411764,
+          "rotation": 0.296875
+        },
+        "regime_active_counts": {
+          "continuation": 25,
+          "risk_off": 30,
+          "hedge": 34,
+          "rotation": 64
+        },
+        "regime_balance_score": 0.4248396139705882,
+        "non_hold_value_add": 7.691535857564032,
+        "target_action_match_rate": 0.16326530612244897,
+        "target_action_distribution_gap": 0.4489795918367347,
+        "walk_action_diversity": 0.3333333333333333,
+        "win_rate": 0.16326530612244897,
+        "score": 1.764143532603274
+      },
+      {
+        "device": "cpu",
+        "timesteps": 2048,
+        "prior_weight": 0.35,
+        "reward": -0.8824410192316643,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": -0.08971651135600367,
+        "walk_uplift_vs_hold": 1.2937568039725889,
+        "walk_positive_rate": 0.3333333333333333,
+        "action_diversity": 0.4,
+        "action_entropy": 0.3544752659756229,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 0.7424242424242424,
+        "regime_hit_rate": {
+          "continuation": 0.8,
+          "risk_off": 0.0,
+          "hedge": 0.0,
+          "rotation": 0.17073170731707318
+        },
+        "regime_active_counts": {
+          "continuation": 15,
+          "risk_off": 18,
+          "hedge": 22,
+          "rotation": 41
+        },
+        "regime_balance_score": 0.2993588322246859,
+        "non_hold_value_add": 5.023822998344299,
+        "target_action_match_rate": 0.16666666666666666,
+        "target_action_distribution_gap": 0.6212121212121212,
+        "walk_action_diversity": 0.39999999999999997,
+        "win_rate": 0.16666666666666666,
+        "score": -0.6117867932714134
+      },
+      {
+        "device": "cpu",
+        "timesteps": 2048,
+        "prior_weight": 0.5,
         "reward": -0.8118258528960772,
         "hold_reward": -0.7927245078756606,
         "uplift_vs_hold": -0.019101345020416605,
@@ -204,11 +411,114 @@
         "target_action_distribution_gap": 0.6326530612244898,
         "walk_action_diversity": 0.39999999999999997,
         "win_rate": 0.20408163265306123,
-        "score": 1.27035725157287
+        "score": 0.5211966436204768
       },
       {
         "device": "cuda",
         "timesteps": 1024,
+        "prior_weight": 0.0,
+        "reward": 7.599428644485405,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 8.392153152361066,
+        "walk_uplift_vs_hold": 2.003168129159564,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.2,
+        "action_entropy": 0.0,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 1.0,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.0,
+          "hedge": 0.0,
+          "rotation": 1.0
+        },
+        "regime_active_counts": {
+          "continuation": 40,
+          "risk_off": 44,
+          "hedge": 48,
+          "rotation": 89
+        },
+        "regime_balance_score": 0.1625,
+        "non_hold_value_add": 16.969802952397096,
+        "target_action_match_rate": 0.39552238805970147,
+        "target_action_distribution_gap": 0.6044776119402986,
+        "walk_action_diversity": 0.20000000000000004,
+        "win_rate": 0.39552238805970147,
+        "score": 0.5927706076555541
+      },
+      {
+        "device": "cuda",
+        "timesteps": 1024,
+        "prior_weight": 0.2,
+        "reward": -0.783152411258392,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 0.009572096617268655,
+        "walk_uplift_vs_hold": 2.003168129159564,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.4,
+        "action_entropy": 0.3276526929751946,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 0.7796610169491526,
+        "regime_hit_rate": {
+          "continuation": 0.8666666666666667,
+          "risk_off": 0.0,
+          "hedge": 0.0,
+          "rotation": 0.13513513513513514
+        },
+        "regime_active_counts": {
+          "continuation": 15,
+          "risk_off": 16,
+          "hedge": 20,
+          "rotation": 37
+        },
+        "regime_balance_score": 0.2898213467704993,
+        "non_hold_value_add": 4.87543968311242,
+        "target_action_match_rate": 0.1694915254237288,
+        "target_action_distribution_gap": 0.6440677966101696,
+        "walk_action_diversity": 0.20000000000000004,
+        "win_rate": 0.1694915254237288,
+        "score": 0.016469957738764775
+      },
+      {
+        "device": "cuda",
+        "timesteps": 1024,
+        "prior_weight": 0.35,
+        "reward": -0.7573050200388489,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 0.0354194878368117,
+        "walk_uplift_vs_hold": 2.003168129159564,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.8,
+        "action_entropy": 0.5241500622338287,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 0.6923076923076923,
+        "regime_hit_rate": {
+          "continuation": 0.75,
+          "risk_off": 0.1,
+          "hedge": 0.08333333333333333,
+          "rotation": 0.07692307692307693
+        },
+        "regime_active_counts": {
+          "continuation": 8,
+          "risk_off": 10,
+          "hedge": 12,
+          "rotation": 13
+        },
+        "regime_balance_score": 0.42134615384615387,
+        "non_hold_value_add": 2.494405107990387,
+        "target_action_match_rate": 0.19230769230769232,
+        "target_action_distribution_gap": 0.5384615384615384,
+        "walk_action_diversity": 0.20000000000000004,
+        "win_rate": 0.19230769230769232,
+        "score": 1.4939647825399882
+      },
+      {
+        "device": "cuda",
+        "timesteps": 1024,
+        "prior_weight": 0.5,
         "reward": -0.7625777960046783,
         "hold_reward": -0.7927245078756606,
         "uplift_vs_hold": 0.03014671187098228,
@@ -237,11 +547,114 @@
         "target_action_distribution_gap": 0.5416666666666666,
         "walk_action_diversity": 0.4666666666666666,
         "win_rate": 0.20833333333333334,
-        "score": 1.7415827383485913
+        "score": 1.2979030699892204
       },
       {
         "device": "cuda",
         "timesteps": 2048,
+        "prior_weight": 0.0,
+        "reward": 7.599428644485405,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 8.392153152361066,
+        "walk_uplift_vs_hold": 2.003168129159564,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.2,
+        "action_entropy": 0.0,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 1.0,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.0,
+          "hedge": 0.0,
+          "rotation": 1.0
+        },
+        "regime_active_counts": {
+          "continuation": 40,
+          "risk_off": 44,
+          "hedge": 48,
+          "rotation": 89
+        },
+        "regime_balance_score": 0.1625,
+        "non_hold_value_add": 16.969802952397096,
+        "target_action_match_rate": 0.39552238805970147,
+        "target_action_distribution_gap": 0.6044776119402986,
+        "walk_action_diversity": 0.20000000000000004,
+        "win_rate": 0.39552238805970147,
+        "score": 0.5927706076555541
+      },
+      {
+        "device": "cuda",
+        "timesteps": 2048,
+        "prior_weight": 0.2,
+        "reward": 7.599428644485405,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": 8.392153152361066,
+        "walk_uplift_vs_hold": 2.003168129159564,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.2,
+        "action_entropy": 0.0,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 1.0,
+        "regime_hit_rate": {
+          "continuation": 0.0,
+          "risk_off": 0.0,
+          "hedge": 0.0,
+          "rotation": 1.0
+        },
+        "regime_active_counts": {
+          "continuation": 40,
+          "risk_off": 44,
+          "hedge": 48,
+          "rotation": 89
+        },
+        "regime_balance_score": 0.1625,
+        "non_hold_value_add": 16.969802952397096,
+        "target_action_match_rate": 0.39552238805970147,
+        "target_action_distribution_gap": 0.6044776119402986,
+        "walk_action_diversity": 0.20000000000000004,
+        "win_rate": 0.39552238805970147,
+        "score": 0.5927706076555541
+      },
+      {
+        "device": "cuda",
+        "timesteps": 2048,
+        "prior_weight": 0.35,
+        "reward": -0.802186209096879,
+        "hold_reward": -0.7927245078756606,
+        "uplift_vs_hold": -0.009461701221218366,
+        "walk_uplift_vs_hold": 2.003168129159564,
+        "walk_positive_rate": 0.6666666666666666,
+        "action_diversity": 0.4,
+        "action_entropy": 0.35208122504802164,
+        "hold_share": 0.0,
+        "intervention_rate": 1.0,
+        "dominant_action_share": 0.746031746031746,
+        "regime_hit_rate": {
+          "continuation": 0.8,
+          "risk_off": 0.0,
+          "hedge": 0.0,
+          "rotation": 0.15
+        },
+        "regime_active_counts": {
+          "continuation": 15,
+          "risk_off": 17,
+          "hedge": 21,
+          "rotation": 40
+        },
+        "regime_balance_score": 0.29576388888888894,
+        "non_hold_value_add": 5.0648999002271475,
+        "target_action_match_rate": 0.15873015873015872,
+        "target_action_distribution_gap": 0.6190476190476191,
+        "walk_action_diversity": 0.20000000000000004,
+        "win_rate": 0.15873015873015872,
+        "score": 0.15913719430654685
+      },
+      {
+        "device": "cuda",
+        "timesteps": 2048,
+        "prior_weight": 0.5,
         "reward": -0.8099506986879698,
         "hold_reward": -0.7927245078756606,
         "uplift_vs_hold": -0.01722619081230914,
@@ -270,15 +683,16 @@
         "target_action_distribution_gap": 0.625,
         "walk_action_diversity": 0.26666666666666666,
         "win_rate": 0.20833333333333334,
-        "score": 1.7093586433746037
+        "score": 0.9787744428762735
       }
     ],
     "torch_cuda_available": true,
     "report": {
-      "timesteps": 1024,
+      "timesteps": 2048,
+      "prior_weight": 0.2,
       "final_action": "relative_value_rotation",
-      "confidence": 0.415655513172354,
-      "mean_reward_estimate": 0.05384591114441198,
+      "confidence": 0.5731095228017097,
+      "mean_reward_estimate": 0.005352222440423473,
       "device_used": "cpu"
     },
     "frontier": [
@@ -286,173 +700,172 @@
         "commodity": "crude_oil",
         "timestamp": "2026-07-16",
         "action": "relative_value_rotation",
-        "confidence": 0.3762,
+        "confidence": 0.5426,
         "probabilities": {
-          "reduce_risk": 0.0744,
-          "hold": 0.2105,
-          "add_continuation": 0.2092,
-          "add_hedge": 0.1297,
-          "relative_value_rotation": 0.3762
+          "reduce_risk": 0.0893,
+          "hold": 0.099,
+          "add_continuation": 0.1667,
+          "add_hedge": 0.1025,
+          "relative_value_rotation": 0.5426
         }
       },
       {
         "commodity": "gold",
         "timestamp": "2026-07-16",
-        "action": "add_hedge",
-        "confidence": 0.3943,
+        "action": "relative_value_rotation",
+        "confidence": 0.4683,
         "probabilities": {
-          "reduce_risk": 0.1996,
-          "hold": 0.0896,
-          "add_continuation": 0.1386,
-          "add_hedge": 0.3943,
-          "relative_value_rotation": 0.1779
+          "reduce_risk": 0.1385,
+          "hold": 0.0501,
+          "add_continuation": 0.1374,
+          "add_hedge": 0.2057,
+          "relative_value_rotation": 0.4683
         }
       },
       {
         "commodity": "copper",
         "timestamp": "2026-07-17",
         "action": "relative_value_rotation",
-        "confidence": 0.3503,
+        "confidence": 0.5337,
         "probabilities": {
-          "reduce_risk": 0.0748,
-          "hold": 0.2321,
-          "add_continuation": 0.2063,
-          "add_hedge": 0.1365,
-          "relative_value_rotation": 0.3503
+          "reduce_risk": 0.0892,
+          "hold": 0.1074,
+          "add_continuation": 0.1652,
+          "add_hedge": 0.1046,
+          "relative_value_rotation": 0.5337
         }
       },
       {
         "commodity": "natural_gas",
         "timestamp": "2026-07-16",
-        "action": "reduce_risk",
-        "confidence": 0.532,
+        "action": "relative_value_rotation",
+        "confidence": 0.4527,
         "probabilities": {
-          "reduce_risk": 0.532,
-          "hold": 0.0506,
-          "add_continuation": 0.1151,
-          "add_hedge": 0.1452,
-          "relative_value_rotation": 0.1571
+          "reduce_risk": 0.2737,
+          "hold": 0.0361,
+          "add_continuation": 0.1306,
+          "add_hedge": 0.1069,
+          "relative_value_rotation": 0.4527
         }
       },
       {
         "commodity": "wheat",
         "timestamp": "2026-07-16",
         "action": "relative_value_rotation",
-        "confidence": 0.48,
+        "confidence": 0.5353,
         "probabilities": {
-          "reduce_risk": 0.0812,
-          "hold": 0.1083,
-          "add_continuation": 0.2124,
-          "add_hedge": 0.1181,
-          "relative_value_rotation": 0.48
+          "reduce_risk": 0.1055,
+          "hold": 0.0685,
+          "add_continuation": 0.1809,
+          "add_hedge": 0.1099,
+          "relative_value_rotation": 0.5353
         }
       }
     ],
     "replay_summary": {
       "name": "neural_policy",
-      "total_reward": -0.7625777960046783,
-      "mean_reward": -0.03177407483352827,
-      "final_equity": 0.2374222039953216,
-      "max_drawdown": 0.7969005994484739,
-      "win_rate": 0.20833333333333334,
+      "total_reward": 0.6703389803030787,
+      "mean_reward": 0.009857926180927628,
+      "final_equity": 1.6703389803030781,
+      "max_drawdown": 0.36000801567131147,
+      "win_rate": 0.20588235294117646,
       "action_counts": {
-        "add_hedge": 1,
-        "reduce_risk": 1,
-        "add_continuation": 17,
-        "relative_value_rotation": 5
+        "relative_value_rotation": 35,
+        "add_continuation": 14,
+        "add_hedge": 19
       },
-      "action_diversity": 0.8,
-      "action_entropy": 0.5193706490693314,
+      "action_diversity": 0.6,
+      "action_entropy": 0.6359381200122921,
       "hold_share": 0.0,
       "intervention_rate": 1.0,
-      "dominant_action_share": 0.7083333333333334,
+      "dominant_action_share": 0.5147058823529411,
       "regime_hit_rate": {
-        "continuation": 0.8571428571428571,
-        "risk_off": 0.1111111111111111,
-        "hedge": 0.09090909090909091,
-        "rotation": 0.0
+        "continuation": 0.1875,
+        "risk_off": 0.0,
+        "hedge": 0.18181818181818182,
+        "rotation": 0.4634146341463415
       },
       "regime_active_counts": {
-        "continuation": 7,
-        "risk_off": 9,
-        "hedge": 11,
-        "rotation": 11
+        "continuation": 16,
+        "risk_off": 18,
+        "hedge": 22,
+        "rotation": 41
       },
       "regime_confusion_matrix": {
         "continuation": {
           "reduce_risk": 0,
           "hold": 0,
-          "add_continuation": 6,
-          "add_hedge": 0,
-          "relative_value_rotation": 1
+          "add_continuation": 3,
+          "add_hedge": 2,
+          "relative_value_rotation": 11
         },
         "risk_off": {
-          "reduce_risk": 1,
+          "reduce_risk": 0,
           "hold": 0,
-          "add_continuation": 7,
-          "add_hedge": 1,
-          "relative_value_rotation": 0
+          "add_continuation": 2,
+          "add_hedge": 4,
+          "relative_value_rotation": 12
         },
         "hedge": {
-          "reduce_risk": 1,
+          "reduce_risk": 0,
           "hold": 0,
-          "add_continuation": 9,
-          "add_hedge": 1,
-          "relative_value_rotation": 0
+          "add_continuation": 3,
+          "add_hedge": 4,
+          "relative_value_rotation": 15
         },
         "rotation": {
           "reduce_risk": 0,
           "hold": 0,
-          "add_continuation": 10,
-          "add_hedge": 1,
-          "relative_value_rotation": 0
+          "add_continuation": 8,
+          "add_hedge": 14,
+          "relative_value_rotation": 19
         }
       },
-      "regime_balance_score": 0.4212391774891775,
+      "regime_balance_score": 0.4135353829724795,
       "action_value_by_regime": {
         "continuation": {
           "reduce_risk": 0.0,
           "hold": 0.0,
-          "add_continuation": -0.028652895944801183,
-          "add_hedge": 0.0,
-          "relative_value_rotation": -0.04196181275518126
+          "add_continuation": 0.014826083514215915,
+          "add_hedge": -0.05618841353374025,
+          "relative_value_rotation": -0.01684178572511801
         },
         "risk_off": {
-          "reduce_risk": 0.21434364856290603,
+          "reduce_risk": 0.0,
           "hold": 0.0,
-          "add_continuation": -0.07770604748393249,
-          "add_hedge": -0.04534854886989761,
-          "relative_value_rotation": 0.0
+          "add_continuation": 0.044210902763881205,
+          "add_hedge": -0.04520748610518671,
+          "relative_value_rotation": -0.021389218049638805
         },
         "hedge": {
-          "reduce_risk": 0.21434364856290603,
+          "reduce_risk": 0.0,
           "hold": 0.0,
-          "add_continuation": -0.079653797239786,
-          "add_hedge": -0.04534854886989761,
-          "relative_value_rotation": 0.0
+          "add_continuation": 0.014826083514215915,
+          "add_hedge": -0.04520748610518671,
+          "relative_value_rotation": -0.023361838467997723
         },
         "rotation": {
           "reduce_risk": 0.0,
           "hold": 0.0,
-          "add_continuation": -0.06457333117960487,
-          "add_hedge": -0.04534854886989761,
-          "relative_value_rotation": 0.0
+          "add_continuation": -0.01978352112410879,
+          "add_hedge": -0.03534271900739217,
+          "relative_value_rotation": 0.0852427387928865
         }
       },
-      "non_hold_value_add": 2.344381854091517,
-      "target_action_match_rate": 0.20833333333333334,
-      "target_action_distribution_gap": 0.5416666666666666,
+      "non_hold_value_add": 5.55674751007379,
+      "target_action_match_rate": 0.20588235294117646,
+      "target_action_distribution_gap": 0.35294117647058815,
       "reward_decomposition": {
-        "pnl": 0.02367163924019989,
-        "turnover_cost": 0.20549999999999996,
-        "drawdown_cost": 0.7337494114371033,
-        "concentration_cost": 0.02700000000000001,
-        "event_gap_cost": 0.227225,
+        "pnl": -0.03152046978876372,
+        "turnover_cost": 0.2415,
+        "drawdown_cost": 0.5117158735083701,
+        "concentration_cost": 0.04950000000000003,
+        "event_gap_cost": 0.184875,
         "abstain_bonus": 0.0,
-        "expert_alignment_bonus": 0.6,
-        "wrong_way_cost": 0.49922751303886886,
+        "expert_alignment_bonus": 1.6800000000000006,
+        "wrong_way_cost": 0.5960179524054412,
         "stale_hold_cost": 0.0,
-        "regime_opportunity_bonus": 0.30645248923109375,
+        "regime_opportunity_bonus": 0.6054682760056531,
         "missed_regime_cost": 0.0
       }
     },
@@ -569,10 +982,10 @@
           "eval_steps": 24,
           "start_timestamp": "2026-05-19",
           "end_timestamp": "2026-05-25",
-          "total_reward": 1.769694409093687,
-          "mean_reward": 0.07373726704557029,
-          "final_equity": 2.7696944090936877,
-          "max_drawdown": 0.14881316133506395,
+          "total_reward": 2.0428988539029946,
+          "mean_reward": 0.08512078557929144,
+          "final_equity": 3.042898853902995,
+          "max_drawdown": 0.10397890684367093,
           "dominant_action": "relative_value_rotation"
         },
         {
@@ -581,10 +994,10 @@
           "eval_steps": 24,
           "start_timestamp": "2026-06-17",
           "end_timestamp": "2026-06-24",
-          "total_reward": 0.7613962459062966,
-          "mean_reward": 0.03172484357942903,
-          "final_equity": 1.7613962459062957,
-          "max_drawdown": 0.13287041129317737,
+          "total_reward": 0.6746248254518029,
+          "mean_reward": 0.028109367727158455,
+          "final_equity": 1.674624825451803,
+          "max_drawdown": 0.12547501571434272,
           "dominant_action": "relative_value_rotation"
         },
         {
@@ -593,21 +1006,21 @@
           "eval_steps": 24,
           "start_timestamp": "2026-07-17",
           "end_timestamp": "2026-07-24",
-          "total_reward": 0.17267795824602777,
-          "mean_reward": 0.007194914926917824,
-          "final_equity": 1.172677958246028,
-          "max_drawdown": 0.1949972411684783,
+          "total_reward": -0.09405801895743776,
+          "mean_reward": -0.003919084123226574,
+          "final_equity": 0.9059419810425622,
+          "max_drawdown": 0.253931954848182,
           "dominant_action": "add_continuation"
         }
       ],
-      "mean_reward": 0.03755234185063905,
-      "mean_final_equity": 1.9012562044153374,
-      "mean_max_drawdown": 0.15889360459890653,
-      "positive_window_rate": 1.0,
-      "vs_hold_reward_uplift": 1.7505500611401288,
-      "mean_action_diversity": 0.6666666666666666
+      "mean_reward": 0.03643702306107444,
+      "mean_final_equity": 1.8744885534657867,
+      "mean_max_drawdown": 0.16112862580206522,
+      "positive_window_rate": 0.6666666666666666,
+      "vs_hold_reward_uplift": 1.7237824101905783,
+      "mean_action_diversity": 0.39999999999999997
     },
-    "vs_hold_reward_uplift": 0.03014671187098228,
+    "vs_hold_reward_uplift": 1.4630634881787392,
     "performance": {
       "cpu": {
         "device": "cpu",
@@ -696,13 +1109,13 @@
         "risk_pressure": 0.2471576494310052
       },
       "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.3762,
+      "neural_confidence": 0.5426,
       "neural_probabilities": {
-        "reduce_risk": 0.0744,
-        "hold": 0.2105,
-        "add_continuation": 0.2092,
-        "add_hedge": 0.1297,
-        "relative_value_rotation": 0.3762
+        "reduce_risk": 0.0893,
+        "hold": 0.099,
+        "add_continuation": 0.1667,
+        "add_hedge": 0.1025,
+        "relative_value_rotation": 0.5426
       }
     },
     {
@@ -729,14 +1142,14 @@
         "agreement_event_mix": 0.41265299999999994,
         "risk_pressure": 0.46217142310091336
       },
-      "neural_action": "add_hedge",
-      "neural_confidence": 0.3943,
+      "neural_action": "relative_value_rotation",
+      "neural_confidence": 0.4683,
       "neural_probabilities": {
-        "reduce_risk": 0.1996,
-        "hold": 0.0896,
-        "add_continuation": 0.1386,
-        "add_hedge": 0.3943,
-        "relative_value_rotation": 0.1779
+        "reduce_risk": 0.1385,
+        "hold": 0.0501,
+        "add_continuation": 0.1374,
+        "add_hedge": 0.2057,
+        "relative_value_rotation": 0.4683
       }
     },
     {
@@ -764,13 +1177,13 @@
         "risk_pressure": 0.2873694100557922
       },
       "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.3503,
+      "neural_confidence": 0.5337,
       "neural_probabilities": {
-        "reduce_risk": 0.0748,
-        "hold": 0.2321,
-        "add_continuation": 0.2063,
-        "add_hedge": 0.1365,
-        "relative_value_rotation": 0.3503
+        "reduce_risk": 0.0892,
+        "hold": 0.1074,
+        "add_continuation": 0.1652,
+        "add_hedge": 0.1046,
+        "relative_value_rotation": 0.5337
       }
     },
     {
@@ -797,14 +1210,14 @@
         "agreement_event_mix": 0.365838,
         "risk_pressure": 0.49279840972674316
       },
-      "neural_action": "reduce_risk",
-      "neural_confidence": 0.532,
+      "neural_action": "relative_value_rotation",
+      "neural_confidence": 0.4527,
       "neural_probabilities": {
-        "reduce_risk": 0.532,
-        "hold": 0.0506,
-        "add_continuation": 0.1151,
-        "add_hedge": 0.1452,
-        "relative_value_rotation": 0.1571
+        "reduce_risk": 0.2737,
+        "hold": 0.0361,
+        "add_continuation": 0.1306,
+        "add_hedge": 0.1069,
+        "relative_value_rotation": 0.4527
       }
     },
     {
@@ -832,13 +1245,13 @@
         "risk_pressure": 0.2468939226556363
       },
       "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.48,
+      "neural_confidence": 0.5353,
       "neural_probabilities": {
-        "reduce_risk": 0.0812,
-        "hold": 0.1083,
-        "add_continuation": 0.2124,
-        "add_hedge": 0.1181,
-        "relative_value_rotation": 0.48
+        "reduce_risk": 0.1055,
+        "hold": 0.0685,
+        "add_continuation": 0.1809,
+        "add_hedge": 0.1099,
+        "relative_value_rotation": 0.5353
       }
     }
   ],
@@ -852,8 +1265,8 @@
       "offline_confidence": 0.8278,
       "ppo_action": "add_hedge",
       "ppo_confidence": 0.6858,
-      "neural_action": "add_hedge",
-      "neural_confidence": 0.3943
+      "neural_action": "relative_value_rotation",
+      "neural_confidence": 0.4683
     },
     {
       "commodity": "natural_gas",
@@ -864,8 +1277,8 @@
       "offline_confidence": 0.8267,
       "ppo_action": "add_hedge",
       "ppo_confidence": 0.6841,
-      "neural_action": "reduce_risk",
-      "neural_confidence": 0.532
+      "neural_action": "relative_value_rotation",
+      "neural_confidence": 0.4527
     },
     {
       "commodity": "wheat",
@@ -877,7 +1290,7 @@
       "ppo_action": "add_hedge",
       "ppo_confidence": 0.6833,
       "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.48
+      "neural_confidence": 0.5353
     },
     {
       "commodity": "copper",
@@ -889,7 +1302,7 @@
       "ppo_action": "add_hedge",
       "ppo_confidence": 0.6855,
       "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.3503
+      "neural_confidence": 0.5337
     },
     {
       "commodity": "crude_oil",
@@ -901,7 +1314,7 @@
       "ppo_action": "add_hedge",
       "ppo_confidence": 0.6849,
       "neural_action": "relative_value_rotation",
-      "neural_confidence": 0.3762
+      "neural_confidence": 0.5426
     }
   ]
 }

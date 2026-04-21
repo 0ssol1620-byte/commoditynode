@@ -70,24 +70,34 @@ def score_profile_row(row: dict) -> float:
     hedge_floor_penalty = max(0.0, 0.14 - hedge_hit) * 1.7
     concentration_penalty = max(0.0, dominant_action_share - 0.52) * 2.2
     negative_uplift_penalty = max(0.0, -uplift) * 2.4
+    diversity_floor_penalty = max(0.0, 0.55 - action_diversity) * 4.4
+    entropy_floor_penalty = max(0.0, 0.32 - action_entropy) * 1.8
+    balance_floor_penalty = max(0.0, 0.3 - regime_balance_score) * 3.6
+    single_action_collapse_penalty = max(0.0, dominant_action_share - 0.82) * 7.5
+    distribution_gap_penalty = max(0.0, target_action_distribution_gap - 0.4) * 2.4
     return (
-        uplift * 0.58
-        + walk_uplift * 0.9
-        + action_diversity * 0.12
-        + action_entropy * 0.22
-        + walk_action_diversity * 0.08
-        + regime_quality * 0.94
-        + regime_balance_score * 0.58
+        uplift * 0.52
+        + walk_uplift * 0.82
+        + action_diversity * 0.18
+        + action_entropy * 0.24
+        + walk_action_diversity * 0.1
+        + regime_quality * 1.12
+        + regime_balance_score * 0.74
         + intervention_rate * 0.04
-        + non_hold_value_add * 0.08
-        + target_action_match_rate * 0.5
-        - target_action_distribution_gap * 0.52
+        + non_hold_value_add * 0.06
+        + target_action_match_rate * 0.58
+        - target_action_distribution_gap * 0.56
         - hold_share * 0.18
-        - dominant_action_share * 0.34
+        - dominant_action_share * 0.5
         - continuation_floor_penalty
         - hedge_floor_penalty
         - concentration_penalty
         - negative_uplift_penalty
+        - diversity_floor_penalty
+        - entropy_floor_penalty
+        - balance_floor_penalty
+        - single_action_collapse_penalty
+        - distribution_gap_penalty
         + win_rate * 0.03
     )
 
@@ -97,69 +107,74 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
     if preferred_device == 'cuda':
         candidate_devices.append('cuda')
     candidate_timesteps = [1024, 2048]
+    candidate_prior_weights = [0.0, 0.2, 0.35, 0.5]
 
     train_steps = list(dataset.train)
     eval_steps = list((dataset.test + dataset.val) or dataset.test or dataset.val or dataset.train)
     diagnostics: list[dict] = []
-    best_profile = {'device': candidate_devices[0], 'timesteps': candidate_timesteps[0]}
+    best_profile = {'device': candidate_devices[0], 'timesteps': candidate_timesteps[0], 'prior_weight': candidate_prior_weights[0]}
     best_score = float('-inf')
     for device in candidate_devices:
         for timesteps in candidate_timesteps:
-            result = train_neural_ppo(
-                train_steps,
-                config=config,
-                total_timesteps=timesteps,
-                device=device,
-            )
-            replay = replay_policy(
-                name=f'profile_select_{device}_{timesteps}',
-                steps=eval_steps,
-                chooser=lambda obs, policy=result.policy: policy.decide(obs).action,
-                config=config,
-            )
-            walk = evaluate_neural_walk_forward(
-                dataset=dataset,
-                config=config,
-                total_timesteps=timesteps,
-                window_count=3,
-                eval_window_size=24,
-                min_train_steps=96,
-                device=device,
-            )
-            hold = replay_policy(
-                name=f'profile_select_hold_{device}_{timesteps}',
-                steps=eval_steps,
-                chooser=lambda _obs: 'hold',
-                config=config,
-            )
-            uplift = float(replay.total_reward - hold.total_reward)
-            row = {
-                'device': device,
-                'timesteps': timesteps,
-                'reward': float(replay.total_reward),
-                'hold_reward': float(hold.total_reward),
-                'uplift_vs_hold': uplift,
-                'walk_uplift_vs_hold': float(walk.vs_hold_reward_uplift),
-                'walk_positive_rate': float(walk.positive_window_rate),
-                'action_diversity': float(replay.action_diversity),
-                'action_entropy': float(replay.action_entropy),
-                'hold_share': float(replay.hold_share),
-                'intervention_rate': float(replay.intervention_rate),
-                'dominant_action_share': float(replay.dominant_action_share),
-                'regime_hit_rate': replay.regime_hit_rate,
-                'regime_active_counts': replay.regime_active_counts,
-                'regime_balance_score': float(replay.regime_balance_score),
-                'non_hold_value_add': float(replay.non_hold_value_add),
-                'target_action_match_rate': float(replay.target_action_match_rate),
-                'target_action_distribution_gap': float(replay.target_action_distribution_gap),
-                'walk_action_diversity': float(walk.mean_action_diversity),
-                'win_rate': float(replay.win_rate),
-            }
-            row['score'] = float(score_profile_row(row))
-            diagnostics.append(row)
-            if row['score'] > best_score:
-                best_score = row['score']
-                best_profile = {'device': device, 'timesteps': timesteps}
+            for prior_weight in candidate_prior_weights:
+                result = train_neural_ppo(
+                    train_steps,
+                    config=config,
+                    total_timesteps=timesteps,
+                    device=device,
+                    prior_weight=prior_weight,
+                )
+                replay = replay_policy(
+                    name=f'profile_select_{device}_{timesteps}_{prior_weight}',
+                    steps=eval_steps,
+                    chooser=lambda obs, policy=result.policy: policy.decide(obs).action,
+                    config=config,
+                )
+                walk = evaluate_neural_walk_forward(
+                    dataset=dataset,
+                    config=config,
+                    total_timesteps=timesteps,
+                    window_count=3,
+                    eval_window_size=24,
+                    min_train_steps=96,
+                    device=device,
+                    prior_weight=prior_weight,
+                )
+                hold = replay_policy(
+                    name=f'profile_select_hold_{device}_{timesteps}_{prior_weight}',
+                    steps=eval_steps,
+                    chooser=lambda _obs: 'hold',
+                    config=config,
+                )
+                uplift = float(replay.total_reward - hold.total_reward)
+                row = {
+                    'device': device,
+                    'timesteps': timesteps,
+                    'prior_weight': float(prior_weight),
+                    'reward': float(replay.total_reward),
+                    'hold_reward': float(hold.total_reward),
+                    'uplift_vs_hold': uplift,
+                    'walk_uplift_vs_hold': float(walk.vs_hold_reward_uplift),
+                    'walk_positive_rate': float(walk.positive_window_rate),
+                    'action_diversity': float(replay.action_diversity),
+                    'action_entropy': float(replay.action_entropy),
+                    'hold_share': float(replay.hold_share),
+                    'intervention_rate': float(replay.intervention_rate),
+                    'dominant_action_share': float(replay.dominant_action_share),
+                    'regime_hit_rate': replay.regime_hit_rate,
+                    'regime_active_counts': replay.regime_active_counts,
+                    'regime_balance_score': float(replay.regime_balance_score),
+                    'non_hold_value_add': float(replay.non_hold_value_add),
+                    'target_action_match_rate': float(replay.target_action_match_rate),
+                    'target_action_distribution_gap': float(replay.target_action_distribution_gap),
+                    'walk_action_diversity': float(walk.mean_action_diversity),
+                    'win_rate': float(replay.win_rate),
+                }
+                row['score'] = float(score_profile_row(row))
+                diagnostics.append(row)
+                if row['score'] > best_score:
+                    best_score = row['score']
+                    best_profile = {'device': device, 'timesteps': timesteps, 'prior_weight': float(prior_weight)}
     return best_profile, diagnostics
 
 
@@ -182,6 +197,7 @@ def _build_neural_payload(dataset, config) -> dict:
     selected_profile, selection_diagnostics = _select_policy_profile(dataset=dataset, config=config, preferred_device=preferred_device)
     selected_device = selected_profile['device']
     selected_timesteps = int(selected_profile['timesteps'])
+    selected_prior_weight = float(selected_profile.get('prior_weight', 0.5))
 
     try:
         neural_result = train_neural_ppo(
@@ -189,6 +205,7 @@ def _build_neural_payload(dataset, config) -> dict:
             config=config,
             total_timesteps=selected_timesteps,
             device=selected_device,
+            prior_weight=selected_prior_weight,
         )
     except Exception as exc:
         return {
@@ -240,6 +257,7 @@ def _build_neural_payload(dataset, config) -> dict:
         'requested_device': preferred_device,
         'selected_device': selected_device,
         'selected_timesteps': selected_timesteps,
+        'selected_prior_weight': selected_prior_weight,
         'profile_selection': selection_diagnostics,
         'torch_cuda_available': bool(torch and torch.cuda.is_available()),
         'report': asdict(neural_result.report),

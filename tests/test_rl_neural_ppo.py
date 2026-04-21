@@ -63,8 +63,10 @@ def test_train_neural_ppo_smoke():
 
     dataset = build_trajectory_dataset(commodity_keys=('crude_oil',))
     steps = list(dataset.train[:64])
-    result = train_neural_ppo(steps, total_timesteps=128)
+    result = train_neural_ppo(steps, total_timesteps=128, prior_weight=0.0)
     assert result.report.timesteps == 128
+    assert result.report.prior_weight == 0.0
+    assert result.policy.prior_weight == 0.0
     assert result.report.final_action in ('reduce_risk', 'hold', 'add_continuation', 'add_hedge', 'relative_value_rotation')
     assert 0.0 <= result.report.confidence <= 1.0
 

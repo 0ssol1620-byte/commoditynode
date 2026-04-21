@@ -146,6 +146,7 @@ def train_behavior_cloning_prior(
 @dataclass(frozen=True)
 class NeuralPPOTrainingReport:
     timesteps: int
+    prior_weight: float
     final_action: str
     confidence: float
     mean_reward_estimate: float
@@ -251,6 +252,7 @@ def train_neural_ppo(
     total_timesteps: int = 256,
     learning_rate: float = 3e-4,
     device: str = 'auto',
+    prior_weight: float = 0.5,
 ) -> NeuralPPOTrainingResult:
     import random
     import numpy as np
@@ -301,7 +303,7 @@ def train_neural_ppo(
     )
     model.learn(total_timesteps=total_timesteps, progress_bar=False)
     obs, _ = env.reset()
-    decision = NeuralPPOPolicy(model, env.action_names, env.feature_keys, prior_policy=bc_prior).decide(obs)
+    decision = NeuralPPOPolicy(model, env.action_names, env.feature_keys, prior_policy=bc_prior, prior_weight=prior_weight).decide(obs)
 
     obs, _ = env.reset()
     done = False
@@ -315,9 +317,10 @@ def train_neural_ppo(
         total_reward += float(reward)
         done = bool(terminated or truncated)
 
-    policy = NeuralPPOPolicy(model, env.action_names, env.feature_keys, prior_policy=bc_prior)
+    policy = NeuralPPOPolicy(model, env.action_names, env.feature_keys, prior_policy=bc_prior, prior_weight=prior_weight)
     report = NeuralPPOTrainingReport(
         timesteps=total_timesteps,
+        prior_weight=float(prior_weight),
         final_action=decision.action,
         confidence=decision.confidence,
         mean_reward_estimate=total_reward / max(1, len(steps)),
