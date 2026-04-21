@@ -31,6 +31,18 @@ noindex: false
 .insight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-top:40px}
 .insight-card{background:rgba(15,15,25,0.8);border:1px solid rgba(34,211,238,0.12);border-radius:14px;padding:24px;backdrop-filter:blur(8px)}
 .insight-card h3{font-size:1rem;font-weight:700;color:#e2e8f0;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.corr-analytics-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,0.9fr);gap:20px;align-items:start}
+.corr-chart-card{background:rgba(15,15,25,0.82);border:1px solid rgba(34,211,238,0.12);border-radius:18px;padding:20px;backdrop-filter:blur(10px)}
+.corr-chart-card h3{margin:0 0 8px;color:#e2e8f0;font-size:1rem;font-weight:800}
+.corr-chart-card p{margin:0 0 14px;color:#94a3b8;line-height:1.7;font-size:0.88rem}
+.corr-chart-stage{height:620px}
+.corr-drilldown-stage{height:300px}
+.corr-pair-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.corr-pair-metric{padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05)}
+.corr-pair-metric span{display:block;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#94a3b8;margin-bottom:6px}
+.corr-pair-metric strong{color:#f8fafc;font-size:1rem}
+.corr-side-stack{display:grid;gap:16px}
+.corr-selected-pair{margin-bottom:12px;padding:12px 14px;border-radius:12px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.12);color:#cbd5e1;font-size:0.86rem;line-height:1.7}
 .insight-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
 .insight-item:last-child{border-bottom:none}
 .insight-pair{color:#e2e8f0;font-weight:600;font-size:0.9rem}
@@ -68,8 +80,14 @@ noindex: false
   .heatmap-table{font-size:0.6rem}
   .heatmap-cell{width:38px;height:34px;font-size:0.6rem}
   .insight-grid{grid-template-columns:1fr}
+  .corr-analytics-grid{grid-template-columns:1fr}
+  .corr-chart-stage{height:420px}
+  .corr-drilldown-stage{height:260px}
+  .corr-pair-meta{grid-template-columns:1fr}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="/assets/js/phase1-analytics.js"></script>
 
 <section class="corr-hero">
   <div class="container">
@@ -93,7 +111,7 @@ noindex: false
         <span class="cor-changes-kicker">What changed recently</span>
         <span class="cor-changes-sub">Top correlation shifts vs the prior window — read this first to spot regime change candidates.</span>
       </div>
-      <div class="cor-changes-grid" id="cor-changes-grid">
+      <div class="cor-changes-grid" id="cor-changes-strip-summary">
         <div class="cor-change-card cor-change-card--up">
           <span class="cor-change-pair">Copper × Gold</span>
           <span class="cor-change-delta up">+0.18</span>
@@ -142,13 +160,17 @@ noindex: false
       Scroll to see full matrix
     </div>
 
-    <div class="heatmap-wrapper" data-animate data-delay="100">
-      <div id="corr-loading" style="text-align:center;padding:40px;color:var(--text3);font-size:0.88rem;">
-        Loading 90-day correlation data...
-      </div>
-      <table class="heatmap-table" id="corr-matrix" style="display:none"></table>
-      <!-- Static fallback for crawlers / no-JS -->
-      <noscript>
+    <div class="corr-analytics-grid" data-animate data-delay="100">
+      <div class="corr-chart-card">
+        <h3>Investigable heatmap</h3>
+        <p>Click any pair to inspect the latest rolling relationship and compare normalized paths over the active lookback window.</p>
+        <div id="corr-loading" style="text-align:center;padding:40px;color:var(--text3);font-size:0.88rem;">
+          Loading 90-day correlation data...
+        </div>
+        <div id="corr-heatmap-chart" class="corr-chart-stage" style="display:none"></div>
+        <table class="heatmap-table" id="corr-matrix" style="display:none"></table>
+        <!-- Static fallback for crawlers / no-JS -->
+        <noscript>
         <table class="heatmap-table" style="margin:0 auto" aria-label="Commodity Correlation Matrix (30-day)">
           <thead><tr>
             <th></th><th>Oil</th><th>Gold</th><th>Cu</th><th>Ag</th><th>Gas</th><th>Wht</th><th>Corn</th><th>Soy</th><th>Cof</th><th>Sug</th>
@@ -168,6 +190,20 @@ noindex: false
         </table>
         <p style="text-align:center;color:#64748b;font-size:0.8rem;margin-top:12px">Static snapshot (30-day Pearson). Enable JavaScript for live interactive matrix.</p>
       </noscript>
+      </div>
+      <div class="corr-side-stack">
+        <div class="corr-chart-card">
+          <h3>Pair drilldown</h3>
+          <p id="corr-selected-pair" class="corr-selected-pair">Select a pair from the heatmap to compare normalized performance over the active lookback window.</p>
+          <div id="corr-drilldown-chart" class="corr-drilldown-stage"></div>
+          <div class="corr-pair-meta" id="corr-pair-meta"></div>
+        </div>
+        <div class="corr-chart-card">
+          <h3>Recent relationship changes</h3>
+          <p>Top shifts versus the prior window, sorted by absolute delta so regime changes surface before the story does.</p>
+          <div id="cor-changes-grid"></div>
+        </div>
+      </div>
     </div>
 
     <div class="corr-tooltip" id="corr-tooltip"></div>
@@ -185,7 +221,6 @@ noindex: false
 (function(){
   'use strict';
 
-  // 20 commodities sourced from chart-data.json 1Y candles
   var COMMODITIES = [
     {key:'CL=F', name:'Crude Oil',   short:'Oil'},
     {key:'GC=F', name:'Gold',        short:'Gold'},
@@ -209,8 +244,10 @@ noindex: false
     {key:'NTR',  name:'Potash',      short:'Pot'}
   ];
 
-  var logReturnData = {}; // key → array of log returns from 1Y candle closes
-  var currentPeriod = 30; // number of candles to use
+  var analytics = window.CNPhase1Analytics;
+  var logReturnData = {};
+  var currentPeriod = 30;
+  var charts = { heatmap: null, drilldown: null };
 
   function computeLogReturns(closes){
     var lr=[];
@@ -221,128 +258,143 @@ noindex: false
     return lr;
   }
 
-  function pearson(a, b, n){
-    var len=Math.min(a.length,b.length,n);
-    if(len<4) return 0;
-    var xa=a.slice(-len), xb=b.slice(-len);
-    var ma=0, mb=0;
-    for(var i=0;i<len;i++){ma+=xa[i];mb+=xb[i];}
-    ma/=len; mb/=len;
-    var num=0, da=0, db=0;
-    for(var i=0;i<len;i++){
-      var ea=xa[i]-ma, eb=xb[i]-mb;
-      num+=ea*eb; da+=ea*ea; db+=eb*eb;
-    }
-    var den=Math.sqrt(da*db);
-    return den<1e-12?0:Math.max(-1,Math.min(1,num/den));
-  }
-
-  function getCellColor(v){
-    if(v>=0.999) return {bg:'#22d3ee',text:'#050508'};
-    if(v>=0.7)  return {bg:'rgba(16,185,129,'+(.5+.5*(v-.7)/.3)+')',text:'#fff'};
-    if(v>=0.3)  return {bg:'rgba(16,185,129,'+(.15+.35*(v-.3)/.4)+')',text:'#e2e8f0'};
-    if(v>=-0.3) return {bg:'#1e1e2e',text:'#64748b'};
-    if(v>=-0.7) return {bg:'rgba(244,63,94,'+(.15+.35*(-.3-v)/.4)+')',text:'#e2e8f0'};
-    return {bg:'rgba(244,63,94,'+(.5+.5*(-.7-v)/.3)+')',text:'#fff'};
-  }
-
   function strengthLabel(v){
     var a=Math.abs(v);
-    if(a>=0.7) return 'Strong '+(v>0?'Positive':'Negative');
-    if(a>=0.3) return 'Moderate '+(v>0?'Positive':'Negative');
-    return 'Weak / Neutral';
+    if(a>=0.7) return 'Strong '+(v>0?'positive':'negative');
+    if(a>=0.3) return 'Moderate '+(v>0?'positive':'negative');
+    return 'Weak / neutral';
   }
 
-  function activeCommodities(){
-    return COMMODITIES.filter(function(c){
-      return logReturnData[c.key]&&logReturnData[c.key].length>=4;
+  function ensureChart(slot, id){
+    if (!window.echarts) return null;
+    if (!charts[slot]) charts[slot] = window.echarts.init(document.getElementById(id), null, { renderer: 'canvas' });
+    return charts[slot];
+  }
+
+  function renderChangeCards(items){
+    var host = document.getElementById('cor-changes-grid');
+    if (!host) return;
+    host.innerHTML = items.map(function(item){
+      var up = item.delta >= 0;
+      return '<div class="cor-change-card ' + (up ? 'cor-change-card--up' : 'cor-change-card--down') + '">'
+        + '<span class="cor-change-pair">' + item.pair + '</span>'
+        + '<span class="cor-change-delta ' + (up ? 'up' : 'down') + '">' + (up ? '+' : '') + item.delta.toFixed(2) + '</span>'
+        + '<span class="cor-change-note">Current correlation ' + item.value.toFixed(2) + '. ' + strengthLabel(item.value) + ' relationship relative to the prior window.</span>'
+        + '</div>';
+    }).join('');
+  }
+
+  function renderInsightCards(result){
+    var insightHtml='<div class="insight-card"><h3>Strongest positive relationships</h3>';
+    result.topPositive.forEach(function(p){
+      insightHtml+='<div class="insight-item"><span class="insight-pair">'+p.pair+'</span><span class="insight-val positive">'+p.value.toFixed(3)+'</span></div>';
     });
+    insightHtml+='</div><div class="insight-card"><h3>Strongest negative relationships</h3>';
+    result.topNegative.forEach(function(p){
+      insightHtml+='<div class="insight-item"><span class="insight-pair">'+p.pair+'</span><span class="insight-val negative">'+p.value.toFixed(3)+'</span></div>';
+    });
+    insightHtml+='</div>';
+    document.getElementById('insight-grid').innerHTML = insightHtml;
+  }
+
+  function renderPairDrilldown(result, pair){
+    if (!pair) return;
+    var drill = result.buildPairDrilldown(pair.a.key, pair.b.key);
+    var delta = drill.latestCorrelation - drill.previousCorrelation;
+    document.getElementById('corr-selected-pair').innerHTML = '<strong style="color:#f8fafc;">'+drill.pair+'</strong><br>Rolling correlation is ' + drill.latestCorrelation.toFixed(2) + ' vs ' + drill.previousCorrelation.toFixed(2) + ' in the prior window.';
+    document.getElementById('corr-pair-meta').innerHTML = ''
+      + '<div class="corr-pair-metric"><span>Current</span><strong>' + drill.latestCorrelation.toFixed(3) + '</strong></div>'
+      + '<div class="corr-pair-metric"><span>Prior window</span><strong>' + drill.previousCorrelation.toFixed(3) + '</strong></div>'
+      + '<div class="corr-pair-metric"><span>Delta</span><strong style="color:' + (delta >= 0 ? '#34d399' : '#fb7185') + '">' + (delta >= 0 ? '+' : '') + delta.toFixed(3) + '</strong></div>';
+    var chart = ensureChart('drilldown', 'corr-drilldown-chart');
+    if (!chart) return;
+    chart.setOption({
+      backgroundColor: 'transparent',
+      animationDuration: 320,
+      tooltip: { trigger: 'axis', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
+      legend: { top: 0, textStyle: { color:'#cbd5e1' } },
+      grid: { top: 42, left: 52, right: 18, bottom: 34 },
+      xAxis: { type: 'category', data: drill.labels, axisLabel: { color:'#94a3b8' }, axisLine: { lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
+      yAxis: { type: 'value', axisLabel:{ color:'#94a3b8' }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.06)' } } },
+      series: [
+        { name: pair.a.short, type:'line', smooth:true, symbol:'none', lineStyle:{ width:3, color:'#22d3ee' }, data: drill.seriesA },
+        { name: pair.b.short, type:'line', smooth:true, symbol:'none', lineStyle:{ width:3, color:'#a855f7' }, data: drill.seriesB }
+      ]
+    });
+  }
+
+  function renderHeatmap(result){
+    var chart = ensureChart('heatmap', 'corr-heatmap-chart');
+    var heatmapEl = document.getElementById('corr-heatmap-chart');
+    if (!chart || !heatmapEl) {
+      document.getElementById('corr-matrix').style.display = '';
+      return;
+    }
+    var heatData = [];
+    result.pairs.forEach(function(item){
+      heatData.push([item.i, item.j, Number(item.value.toFixed(4))]);
+      heatData.push([item.j, item.i, Number(item.value.toFixed(4))]);
+    });
+    result.active.forEach(function(_, index){ heatData.push([index, index, 1]); });
+    chart.off('click');
+    chart.setOption({
+      backgroundColor: 'transparent',
+      animationDuration: 300,
+      tooltip: {
+        position: 'top',
+        backgroundColor:'rgba(13,13,24,0.96)',
+        borderColor:'rgba(255,255,255,0.08)',
+        formatter: function(params){
+          var x = params.data[0], y = params.data[1], v = params.data[2];
+          return '<strong>' + result.active[y].name + ' × ' + result.active[x].name + '</strong><br>' + v.toFixed(3) + '<br>' + strengthLabel(v);
+        }
+      },
+      grid: { top: 60, left: 90, right: 24, bottom: 80 },
+      xAxis: { type:'category', data: result.active.map(function(item){ return item.short; }), splitArea:{ show:true }, axisLabel:{ color:'#cbd5e1', interval:0, rotate:30 } },
+      yAxis: { type:'category', data: result.active.map(function(item){ return item.short; }), splitArea:{ show:true }, axisLabel:{ color:'#cbd5e1' } },
+      visualMap: { min:-1, max:1, orient:'horizontal', left:'center', bottom:22, text:['Positive','Negative'], textStyle:{ color:'#94a3b8' }, inRange:{ color:['#7f1d1d','#1e293b','#0f766e'] } },
+      series: [{
+        name:'Correlation',
+        type:'heatmap',
+        data: heatData,
+        label:{ show:true, color:'#f8fafc', formatter:function(params){ return Number(params.data[2]).toFixed(2); } },
+        emphasis:{ itemStyle:{ shadowBlur:12, shadowColor:'rgba(34,211,238,0.35)' } }
+      }]
+    });
+    chart.on('click', function(params){
+      var pair = result.pairs.find(function(item){
+        return (item.i === params.data[1] && item.j === params.data[0]) || (item.i === params.data[0] && item.j === params.data[1]);
+      });
+      renderPairDrilldown(result, pair || result.topPositive[0]);
+    });
+    heatmapEl.style.display = '';
   }
 
   function buildMatrix(){
-    var comms=activeCommodities();
-    var n=comms.length;
-    if(n===0){
+    if (!analytics) {
+      document.getElementById('corr-loading').textContent='Analytics helper unavailable.';
+      return;
+    }
+    var result = analytics.computeCorrelationAnalytics(logReturnData, COMMODITIES, currentPeriod);
+    if (!result.active.length) {
       document.getElementById('corr-loading').textContent='No data available.';
       return;
     }
-
-    var matrix=[], pairs=[];
-    for(var i=0;i<n;i++){
-      matrix[i]=[];
-      for(var j=0;j<n;j++){
-        if(i===j){matrix[i][j]=1;continue;}
-        var a=logReturnData[comms[i].key], b=logReturnData[comms[j].key];
-        matrix[i][j]=(!a||!b)?0:pearson(a,b,currentPeriod);
-        if(j>i) pairs.push({i:i,j:j,v:matrix[i][j]});
-      }
-    }
-
-    var table=document.getElementById('corr-matrix');
-    var html='<thead><tr><th></th>';
-    comms.forEach(function(c){html+='<th>'+c.short+'</th>';});
-    html+='</tr></thead><tbody>';
-    for(var i=0;i<n;i++){
-      html+='<tr><th class="row-header">'+comms[i].short+'</th>';
-      for(var j=0;j<n;j++){
-        var v=matrix[i][j];
-        var col=getCellColor(v);
-        html+='<td class="heatmap-cell" data-i="'+i+'" data-j="'+j+'" data-v="'+v.toFixed(4)+'" style="background:'+col.bg+';color:'+col.text+'">'+v.toFixed(2)+'</td>';
-      }
-      html+='</tr>';
-    }
-    html+='</tbody>';
-    table.innerHTML=html;
-
-    var tooltip=document.getElementById('corr-tooltip');
-    table.querySelectorAll('.heatmap-cell').forEach(function(cell){
-      cell.addEventListener('mouseenter',function(){
-        var ci=+this.dataset.i, cj=+this.dataset.j, cv=+this.dataset.v;
-        tooltip.innerHTML='<div class="pair">'+comms[ci].name+' / '+comms[cj].name+'</div>'+
-          '<div style="font-size:1.1rem;font-weight:800;color:'+(cv>=0?'#10b981':'#f43f5e')+'">'+cv.toFixed(4)+'</div>'+
-          '<div class="strength">'+strengthLabel(cv)+'</div>';
-        tooltip.style.display='block';
-      });
-      cell.addEventListener('mousemove',function(e){
-        tooltip.style.left=(e.clientX+16)+'px';
-        tooltip.style.top=(e.clientY-40)+'px';
-      });
-      cell.addEventListener('mouseleave',function(){tooltip.style.display='none';});
-    });
-
-    pairs.sort(function(a,b){return b.v-a.v;});
-    var topPos=pairs.slice(0,3);
-    var topNeg=pairs.filter(function(p){return p.v<0;}).sort(function(a,b){return a.v-b.v;}).slice(0,3);
-
-    var insightHtml='<div class="insight-card"><h3>Strongest Positive Correlations</h3>';
-    topPos.forEach(function(p){
-      insightHtml+='<div class="insight-item"><span class="insight-pair">'+comms[p.i].name+' / '+comms[p.j].name+'</span><span class="insight-val positive">'+p.v.toFixed(3)+'</span></div>';
-    });
-    insightHtml+='</div><div class="insight-card"><h3>Strongest Negative Correlations</h3>';
-    topNeg.forEach(function(p){
-      insightHtml+='<div class="insight-item"><span class="insight-pair">'+comms[p.i].name+' / '+comms[p.j].name+'</span><span class="insight-val negative">'+p.v.toFixed(3)+'</span></div>';
-    });
-    insightHtml+='</div>';
-    document.getElementById('insight-grid').innerHTML=insightHtml;
-
-    // Approximate calendar days: weekly candles × 7
-    var approxDays=Math.min(currentPeriod,comms.reduce(function(mn,c){
-      return Math.min(mn,(logReturnData[c.key]||[]).length);
-    },999))*7;
-    var text='Over the past ~'+approxDays+' days ('+currentPeriod+' weekly candles), ';
-    if(topPos.length) text+=comms[topPos[0].i].name+' and '+comms[topPos[0].j].name+
-      ' show the strongest positive correlation ('+topPos[0].v.toFixed(2)+'), meaning they tend to move together — a long position in both offers limited diversification. ';
-    if(topNeg.length&&topNeg[0].v<-0.2) text+='Meanwhile, '+comms[topNeg[0].i].name+' and '+comms[topNeg[0].j].name+
-      ' are inversely correlated ('+topNeg[0].v.toFixed(2)+'), making them potential hedging pairs. ';
-    text+='Log-return Pearson calculated from 1-year weekly OHLCV candle data.';
-    document.getElementById('trader-text').textContent=text;
-
+    renderHeatmap(result);
+    renderPairDrilldown(result, result.topChanges[0] || result.topPositive[0]);
+    renderChangeCards(result.topChanges);
+    renderInsightCards(result);
+    var approxDays = Math.min(currentPeriod, result.active.reduce(function(minimum, item){
+      return Math.min(minimum, (logReturnData[item.key] || []).length);
+    }, 999)) * 7;
+    var topPos = result.topPositive[0];
+    var topNeg = result.topNegative[0];
+    document.getElementById('trader-text').textContent = 'Over the past ~' + approxDays + ' days, ' + topPos.pair + ' is the tightest positive relationship at ' + topPos.value.toFixed(2) + '. ' + (topNeg ? topNeg.pair + ' remains the cleanest hedge-style inverse pair at ' + topNeg.value.toFixed(2) + '. ' : '') + 'Use the drilldown to check whether the relationship is stable or regime-sensitive before you size the trade.';
     document.getElementById('corr-loading').style.display='none';
-    document.getElementById('corr-matrix').style.display='';
+    document.getElementById('corr-heatmap-chart').style.display='';
   }
 
   document.getElementById('corr-loading').textContent='Loading correlation data from candle history...';
-
   fetch('/assets/data/chart-data.json')
     .then(function(r){return r.json();})
     .then(function(data){
@@ -351,11 +403,9 @@ noindex: false
         if(!d||!d['1Y']||!d['1Y'].candles) return;
         var candles=d['1Y'].candles;
         if(candles.length<5) return;
-        // Skip flat/stale data
-        var totalVol=candles.reduce(function(s,c){return s+c.v;},0);
+        var totalVol=candles.reduce(function(s,candle){return s + candle.v;},0);
         if(totalVol===0) return;
-        var closes=candles.map(function(c){return c.c;});
-        logReturnData[c.key]=computeLogReturns(closes);
+        logReturnData[c.key]=computeLogReturns(candles.map(function(candle){return candle.c;}));
       });
       buildMatrix();
     })
@@ -367,17 +417,13 @@ noindex: false
   document.querySelectorAll('.period-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
       var period = +this.dataset.period;
-      // 60D and 90D require Pro
       if (period > 30) {
         var isProUser = window.CNAuth && window.CNAuth.isPro();
         if (!isProUser) {
           if (window.CNAuth && window.CNAuth.showProModal) {
-            window.CNAuth.showProModal(
-              'Extended Correlation Lookback',
-              'Extended lookback periods reveal regime changes and structural shifts. Pro members get full 30/60/90-day rolling correlations — see how commodity relationships evolve over time.'
-            );
+            window.CNAuth.showProModal('Extended Correlation Lookback', 'Extended lookback periods reveal regime changes and structural shifts. Pro members get full 30/60/90-day rolling correlations.');
           }
-          return; // Don't switch period
+          return;
         }
       }
       document.querySelectorAll('.period-btn').forEach(function(b){b.classList.remove('active');});
@@ -385,6 +431,11 @@ noindex: false
       currentPeriod=period;
       buildMatrix();
     });
+  });
+
+  window.addEventListener('resize', function(){
+    if (charts.heatmap) charts.heatmap.resize();
+    if (charts.drilldown) charts.drilldown.resize();
   });
 })();
 </script>

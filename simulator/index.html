@@ -215,6 +215,34 @@ permalink: /simulator/
   height: 400px;
   padding: 8px 0 0;
 }
+.sim-analytics-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:0 0 18px;
+}
+.sim-analytics-card {
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:18px;
+  padding:18px;
+  display:grid;
+  gap:10px;
+}
+.sim-analytics-card h3 {
+  margin:0;
+  color:#f8fafc;
+  font-size:0.98rem;
+  font-weight:800;
+}
+.sim-analytics-card p {
+  margin:0;
+  color:#94a3b8;
+  font-size:0.84rem;
+  line-height:1.65;
+}
+.sim-analytics-stage { height: 280px; }
+.sim-analytics-readout { color:#cbd5e1; font-size:0.84rem; line-height:1.6; }
 .sim-legend {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -565,6 +593,11 @@ permalink: /simulator/
   .sim-top-grid,
   .sim-step-strip,
   .sim-saved-strip,
+  .sim-saved-grid,
+  .sim-analytics-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .sim-saved-strip,
   .sim-saved-grid { grid-template-columns: 1fr; }
   .sim-decision-flow { grid-template-columns: 1fr; }
   .sim-stats-row { grid-template-columns: 1fr; }
@@ -593,6 +626,8 @@ permalink: /simulator/
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="/assets/js/phase1-analytics.js"></script>
 <noscript>
   <div style="max-width:700px;margin:40px auto;padding:32px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;text-align:center;">
     <h2 style="color:#f0f0f5;font-size:1.2rem;margin-bottom:12px;">JavaScript Required</h2>
@@ -829,6 +864,24 @@ permalink: /simulator/
       <div class="sim-stat-change" id="stat-90d-change">—</div>
       <div style="font-size:0.74rem;color:#94a3b8;margin-top:6px;line-height:1.5;">Use Pro for stock-level winners, losers, and deeper scenario translation after the forecast read.</div>
     </div>
+  </div>
+
+  <div class="sim-analytics-grid">
+    <section class="sim-analytics-card">
+      <h3>Impact tornado</h3>
+      <p>Ranks the sectors with the largest scenario-adjusted pressure or upside, so the first downstream read is obvious.</p>
+      <div id="sim-impact-tornado-chart" class="sim-analytics-stage"></div>
+    </section>
+    <section class="sim-analytics-card">
+      <h3>Scenario compare</h3>
+      <p>Compares preset and geopolitical drivers by relevance, not just raw magnitude, so active shocks stand out.</p>
+      <div id="sim-scenario-compare-chart" class="sim-analytics-stage"></div>
+    </section>
+    <section class="sim-analytics-card">
+      <h3>Decision gauge</h3>
+      <p id="sim-decision-readout" class="sim-analytics-readout">Readiness updates after each commodity or scenario change.</p>
+      <div id="sim-decision-gauge-chart" class="sim-analytics-stage"></div>
+    </section>
   </div>
 
   <!-- Layout: Scenario + Impact -->
@@ -1377,6 +1430,7 @@ var state = {
   forecastData: null,
   consensusData: null,
   chart: null,
+  echarts: {},
   pendingScenarioIds: []
 };
 
@@ -2010,6 +2064,88 @@ function getActiveScenarioSummary() {
   };
 }
 
+function ensureEchart(key, id) {
+  if (!window.echarts) return null;
+  var el = document.getElementById(id);
+  if (!el) return null;
+  if (!state.echarts[key]) state.echarts[key] = window.echarts.init(el, null, { renderer: 'canvas' });
+  return state.echarts[key];
+}
+
+function renderDecisionSurface() {
+  var analytics = window.CNPhase1Analytics;
+  if (!analytics) return;
+  var key = state.commodity;
+  var d = state.forecastData && state.forecastData[key];
+  var c = state.consensusData && state.consensusData[key] ? state.consensusData[key] : null;
+  var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
+  var activeMedian = consensus && consensus.median ? consensus.median : ((d && d.timesfm_forecast && d.timesfm_forecast.median) ? d.timesfm_forecast.median : (d && d.forecast ? d.forecast.median : null));
+  var metrics = analytics.buildSimulatorDecisionMetrics({
+    commodity: key,
+    scenarioAdj: calcScenarioAdjustment() || 10,
+    industries: INDUSTRY_IMPACTS[key] || INDUSTRY_IMPACTS['crude_oil'],
+    companies: COMPANY_IMPACTS[key] || COMPANY_IMPACTS['crude_oil'],
+    scenarios: SCENARIOS[key] || SCENARIOS['crude_oil'],
+    activeScenarioIds: Object.keys(state.scenarios || {}).filter(function(item){ return item.indexOf('preset_') !== 0; }),
+    agreementScore: c && c.agreement ? c.agreement.score : 0.55,
+    currentPrice: d ? d.current_price : null,
+    forecast30d: activeMedian && activeMedian.length > 29 ? activeMedian[29] : null,
+    forecast90d: activeMedian && activeMedian.length > 89 ? activeMedian[89] : null
+  });
+  var tornadoChart = ensureEchart('tornado', 'sim-impact-tornado-chart');
+  if (tornadoChart) {
+    var impactRows = metrics.impactTable.slice(0, 6).reverse();
+    tornadoChart.setOption({
+      backgroundColor:'transparent',
+      animationDuration:280,
+      grid:{ top:12, left:78, right:18, bottom:22 },
+      xAxis:{ type:'value', axisLabel:{ color:'#94a3b8' }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.06)' } } },
+      yAxis:{ type:'category', data:impactRows.map(function(item){ return item.name; }), axisLabel:{ color:'#cbd5e1' } },
+      tooltip:{ trigger:'axis', axisPointer:{ type:'shadow' }, backgroundColor:'rgba(13,13,20,0.95)' },
+      series:[{ type:'bar', data:impactRows.map(function(item){ return { value:item.score, itemStyle:{ color:item.score >= 0 ? '#22c55e' : '#f43f5e' } }; }), barWidth:16, borderRadius:8 }]
+    });
+  }
+  var scenarioChart = ensureEchart('scenarioCompare', 'sim-scenario-compare-chart');
+  if (scenarioChart) {
+    var rows = metrics.scenarioTable.slice(0, 5);
+    scenarioChart.setOption({
+      backgroundColor:'transparent',
+      animationDuration:280,
+      grid:{ top:20, left:44, right:18, bottom:32 },
+      xAxis:{ type:'category', data:rows.map(function(item){ return item.name; }), axisLabel:{ color:'#94a3b8', interval:0, rotate:20 } },
+      yAxis:{ type:'value', axisLabel:{ color:'#94a3b8' }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.06)' } } },
+      tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,20,0.95)' },
+      series:[{ type:'bar', data:rows.map(function(item){ return { value:Number(item.relevance.toFixed(1)), itemStyle:{ color:item.active ? '#22d3ee' : (item.impact >= 0 ? '#c084fc' : '#f59e0b') } }; }), barWidth:24, borderRadius:[8,8,0,0] }]
+    });
+  }
+  var gaugeChart = ensureEchart('decisionGauge', 'sim-decision-gauge-chart');
+  if (gaugeChart) {
+    gaugeChart.setOption({
+      backgroundColor:'transparent',
+      series:[{
+        type:'gauge',
+        startAngle:210,
+        endAngle:-30,
+        min:0,
+        max:100,
+        progress:{ show:true, width:14, itemStyle:{ color:metrics.readiness.score >= 72 ? '#22c55e' : metrics.readiness.score >= 50 ? '#f59e0b' : '#f43f5e' } },
+        axisLine:{ lineStyle:{ width:14, color:[[1,'rgba(255,255,255,0.08)']] } },
+        splitLine:{ show:false },
+        axisTick:{ show:false },
+        axisLabel:{ show:false },
+        pointer:{ show:false },
+        detail:{ valueAnimation:true, formatter:function(v){ return Math.round(v) + '\n' + metrics.readiness.band; }, color:'#f8fafc', fontSize:18, offsetCenter:[0,'18%'] },
+        title:{ show:false },
+        data:[{ value:metrics.readiness.score }]
+      }]
+    });
+  }
+  var readout = document.getElementById('sim-decision-readout');
+  if (readout) {
+    readout.textContent = metrics.readiness.band + ' · 30D ' + (metrics.readiness.trend30 >= 0 ? '+' : '') + metrics.readiness.trend30.toFixed(1) + '% · 90D ' + (metrics.readiness.trend90 >= 0 ? '+' : '') + metrics.readiness.trend90.toFixed(1) + '%. Use the tornado chart first, then verify active shocks in scenario compare.';
+  }
+}
+
 // ── Impact ────────────────────────────────────────────────────────────────
 function renderOutcomeSummary(){
   var key = state.commodity;
@@ -2099,6 +2235,7 @@ function renderImpact(){
   }
   renderOutcomeSummary();
   renderWatchlistRelevance();
+  renderDecisionSurface();
   var saveBtn = document.getElementById('sim-save-workflow-btn');
   if (saveBtn) saveBtn.setAttribute('data-save-commodity', key.replace(/_/g,'-'));
 }

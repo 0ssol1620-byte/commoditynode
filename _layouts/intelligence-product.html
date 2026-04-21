@@ -123,6 +123,34 @@ layout: default
 .intel-rl-step { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
 .intel-rl-step strong { color:#f8fafc; display:block; }
 .intel-rl-step span { display:block; color:#94a3b8; font-size:0.86rem; line-height:1.6; margin-top:4px; }
+.intel-rl-console-band { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:10px; margin-top:16px; }
+.intel-rl-stat-card { position:relative; overflow:hidden; padding:14px 16px; border-radius:16px; border:1px solid rgba(255,255,255,0.08); background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); box-shadow:inset 0 1px 0 rgba(255,255,255,0.04); }
+.intel-rl-stat-card::after { content:''; position:absolute; inset:auto -20% -40% 48%; height:100px; background:radial-gradient(circle, rgba(34,211,238,0.14), rgba(34,211,238,0) 72%); pointer-events:none; }
+.intel-rl-stat-label { color:#94a3b8; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:800; }
+.intel-rl-stat-value { margin-top:8px; color:#f8fafc; font-size:1.28rem; font-weight:800; line-height:1.1; }
+.intel-rl-stat-copy { margin-top:6px; color:#94a3b8; font-size:0.84rem; line-height:1.6; }
+.intel-rl-band-note { margin-top:14px; padding:12px 14px; border-radius:14px; border:1px solid rgba(34,211,238,0.12); background:linear-gradient(135deg, rgba(34,211,238,0.08), rgba(168,85,247,0.05)); color:#cbd5e1; line-height:1.7; }
+.intel-rl-band-note strong { color:#f8fafc; }
+.intel-rl-stack { display:grid; gap:10px; margin-top:14px; }
+.intel-rl-driver { padding:12px 14px; border-radius:14px; background:rgba(8,12,20,0.42); border:1px solid rgba(255,255,255,0.08); }
+.intel-rl-driver-head { display:flex; align-items:center; justify-content:space-between; gap:10px; color:#f8fafc; font-weight:800; }
+.intel-rl-driver-head span { color:#cbd5e1; font-size:0.85rem; }
+.intel-rl-driver-bar { position:relative; height:8px; margin-top:10px; border-radius:999px; background:rgba(255,255,255,0.06); overflow:hidden; }
+.intel-rl-driver-bar i { position:absolute; inset:0 auto 0 0; border-radius:999px; background:linear-gradient(90deg, rgba(34,211,238,0.8), rgba(168,85,247,0.7)); }
+.intel-rl-driver-copy { margin-top:8px; color:#94a3b8; font-size:0.84rem; line-height:1.65; }
+.intel-rl-governance { display:grid; gap:10px; margin-top:14px; }
+.intel-rl-governance-card { padding:14px 16px; border-radius:14px; background:rgba(8,12,20,0.42); border:1px solid rgba(255,255,255,0.08); }
+.intel-rl-governance-card strong { display:block; color:#f8fafc; }
+.intel-rl-governance-card span { display:block; color:#94a3b8; font-size:0.86rem; line-height:1.65; margin-top:6px; }
+.intel-rl-mini-grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; margin-top:12px; }
+.intel-rl-mini-stat { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
+.intel-rl-mini-stat .label { display:block; color:#94a3b8; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; }
+.intel-rl-mini-stat .value { display:block; margin-top:6px; color:#f8fafc; font-size:1rem; font-weight:800; }
+.intel-rl-mini-stat .copy { display:block; margin-top:5px; color:#94a3b8; font-size:0.82rem; line-height:1.55; }
+.intel-rl-regime-matrix { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px; margin-top:14px; }
+.intel-rl-regime-cell { padding:14px 16px; border-radius:14px; background:rgba(8,12,20,0.4); border:1px solid rgba(255,255,255,0.08); }
+.intel-rl-regime-cell strong { display:block; color:#f8fafc; }
+.intel-rl-regime-cell span { display:block; color:#94a3b8; font-size:0.84rem; line-height:1.62; margin-top:6px; }
 .intel-table-wrap { overflow:auto; -webkit-overflow-scrolling:touch; }
 @keyframes intelFloatAura {
   0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.45; }
@@ -146,7 +174,10 @@ layout: default
   .intel-demo-select { width: 100%; min-width: 0; }
   .intel-chart-wrap { min-height: 230px; }
   .intel-rl-grid,
+  .intel-rl-console-band,
   .intel-rl-windows { grid-template-columns: 1fr; }
+  .intel-rl-mini-grid,
+  .intel-rl-regime-matrix { grid-template-columns: 1fr; }
   .intel-rl-pill-row {
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -304,6 +335,13 @@ layout: default
           <div class="intel-rl-pill-row" id="intel-rl-trust-strip"></div>
         </section>
       </div>
+      <section class="intel-card" style="margin-top:16px;">
+        <div class="intel-kicker">Policy observability board</div>
+        <h3>What state is the model seeing right now?</h3>
+        <p>Expose the live recommendation, state pressure, profile governance, and baseline edge in one board so the user can audit the setup before acting.</p>
+        <div class="intel-rl-console-band" id="intel-rl-console-band"></div>
+        <div class="intel-rl-band-note" id="intel-rl-console-note">Loading the current state, profile choice, and baseline edge…</div>
+      </section>
       <section class="intel-rl-field-shell">
         <div class="intel-kicker">Animated policy field</div>
         <h3 style="margin:0 0 10px;color:#f8fafc;">See policy pressure moving across the action space</h3>
@@ -383,6 +421,13 @@ layout: default
         <div class="intel-rl-chart-wrap"><canvas id="intel-rl-policy-compare-chart"></canvas></div>
       </section>
       <section class="intel-rl-card">
+        <div class="intel-kicker">State vector</div>
+        <h3>Which signals are dominating the current state?</h3>
+        <p>Normalize the live observation so users can see whether agreement, event risk, volatility, disagreement, or trend is actually pushing the policy.</p>
+        <div class="intel-rl-chart-wrap"><canvas id="intel-rl-state-chart"></canvas></div>
+        <div class="intel-rl-pill-row" id="intel-rl-state-pills"></div>
+      </section>
+      <section class="intel-rl-card">
         <div class="intel-kicker">Regime pressure map</div>
         <h3>Where is the policy actually earning trust?</h3>
         <p>Contrast hit-rate and opportunity density across continuation, risk-off, hedge, and rotation regimes so blind spots are visible immediately.</p>
@@ -396,10 +441,22 @@ layout: default
         <div class="intel-rl-windows" id="intel-rl-windows"></div>
       </section>
       <section class="intel-rl-card">
+        <div class="intel-kicker">Profile governance</div>
+        <h3>Why is this profile the active export?</h3>
+        <p>Show device, timesteps, prior weight, and selection score so users know the current recommendation came from governed profile selection, not hand-picked marketing output.</p>
+        <div class="intel-rl-governance" id="intel-rl-governance-panel"></div>
+      </section>
+      <section class="intel-rl-card">
         <div class="intel-kicker">Episode replay</div>
         <h3>What decisions did the policy actually make?</h3>
         <p>Replay the latest path step-by-step to show how the model reacts as the state shifts instead of pretending it is a black box.</p>
         <div class="intel-rl-timeline" id="intel-rl-timeline"></div>
+      </section>
+      <section class="intel-rl-card">
+        <div class="intel-kicker">Regime playbook matrix</div>
+        <h3>What does the policy want to do across regimes?</h3>
+        <p>Surface the best action and realized value in continuation, risk-off, hedge, and rotation states so the page feels like a regime console instead of a single headline action.</p>
+        <div class="intel-rl-regime-matrix" id="intel-rl-regime-matrix"></div>
       </section>
       <section class="intel-rl-card">
         <div class="intel-kicker">Reward stack</div>

@@ -7,6 +7,7 @@
     consensus: {},
     curated: {},
     charts: {},
+    echarts: {},
     heroField: null
   };
 
@@ -130,6 +131,50 @@
     }
     state.charts[id] = new Chart(canvas.getContext('2d'), config);
     return state.charts[id];
+  }
+
+  function ensureEchart(id){
+    if (!window.echarts) return null;
+    var el = $(id);
+    if (!el) return null;
+    if (!state.echarts[id]) state.echarts[id] = window.echarts.init(el, null, { renderer: 'canvas' });
+    return state.echarts[id];
+  }
+
+  function renderCommandCenter(bundle){
+    var analytics = window.CNPhase1Analytics;
+    if (!analytics) return;
+    var profile = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { role: '', watchlist: [] };
+    var summary = analytics.buildLabCommandCenter(bundle.curated || bundle, profile);
+    var commandChart = ensureEchart('lab-command-chart');
+    var categoryChart = ensureEchart('lab-category-chart');
+    var compareChart = ensureEchart('lab-compare-chart');
+    if (categoryChart) {
+      categoryChart.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,20,0.95)' },
+        series:[{ type:'pie', radius:['44%','72%'], label:{ color:'#cbd5e1', formatter:'{b}\n{d}%' }, data: summary.categoryScores.map(function(item, idx){ return { value:item.score, name:item.label, itemStyle:{ color:['#22d3ee','#a855f7','#f59e0b'][idx % 3] } }; }) }]
+      });
+    }
+    if (commandChart) {
+      commandChart.setOption({
+        backgroundColor:'transparent',
+        tooltip:{ trigger:'axis', axisPointer:{ type:'shadow' }, backgroundColor:'rgba(13,13,20,0.95)' },
+        grid:{ top:18, left:42, right:18, bottom:28 },
+        xAxis:{ type:'value', axisLabel:{ color:'#94a3b8' }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.06)' } } },
+        yAxis:{ type:'category', data:summary.topEvents.map(function(item){ return item.label; }), axisLabel:{ color:'#cbd5e1' } },
+        series:[{ type:'bar', data:summary.topEvents.map(function(item, idx){ return { value:Math.round((item.base_probability || item.probability || 0) * 100), itemStyle:{ color: idx === 0 ? '#22d3ee' : '#5eead4' } }; }), barWidth:18, borderRadius:8 }]
+      });
+    }
+    if (compareChart) {
+      compareChart.setOption({
+        backgroundColor:'transparent',
+        grid:{ top:20, left:18, right:18, bottom:18, containLabel:true },
+        xAxis:{ type:'value', show:false },
+        yAxis:{ type:'category', data:summary.compareRows.map(function(item){ return item.module; }), axisLabel:{ color:'#cbd5e1', width:130, overflow:'truncate' } },
+        series:[{ type:'bar', data:summary.compareRows.map(function(_, idx){ return { value: idx + 1, itemStyle:{ color:['#22d3ee','#a855f7','#f59e0b','#34d399'][idx % 4] } }; }), barWidth:14, borderRadius:7, label:{ show:true, position:'right', color:'#94a3b8', formatter:function(params){ return summary.compareRows[params.dataIndex].lens + ' · ' + summary.compareRows[params.dataIndex].signal; } } }]
+      });
+    }
   }
 
   function stopHeroField(){
@@ -485,6 +530,7 @@
   function renderAll(){
     var bundle = getCommodityBundle(state.selected);
     renderHero(bundle);
+    renderCommandCenter(bundle);
     renderEventStudio(bundle);
     renderRippleRanker(bundle);
     renderExposureScreener(bundle);
@@ -571,6 +617,12 @@
       if (shell) shell.innerHTML = '<div class="lab-error">Intelligence Lab failed to initialize. Please retry. ' + (err && err.message ? err.message : '') + '</div>';
     });
   }
+
+  window.addEventListener('resize', function(){
+    Object.keys(state.echarts).forEach(function(key){
+      if (state.echarts[key] && state.echarts[key].resize) state.echarts[key].resize();
+    });
+  });
 
   document.addEventListener('DOMContentLoaded', init);
 })();

@@ -620,6 +620,12 @@
     return neural && neural.performance ? neural.performance : null;
   }
 
+  function getSelectedProfile(neural){
+    return safeArray(neural && neural.profile_selection).find(function(item){
+      return String(item.device || '') === String(neural && neural.selected_device || '') && Number(item.timesteps || 0) === Number(neural && neural.selected_timesteps || 0) && Number(item.prior_weight || 0) === Number(neural && neural.selected_prior_weight || 0);
+    }) || null;
+  }
+
   function getPolicyStateIndex(items, actionName){
     var action = String(actionName || '').toLowerCase();
     if (!action) return -1;
@@ -651,7 +657,7 @@
     if (!isVisible) {
       stopRlFieldAnimation();
       clearRlCharts();
-      ['intel-rl-probability-pills', 'intel-rl-regime-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body', 'intel-rl-field-meta'].forEach(function(id){
+      ['intel-rl-probability-pills', 'intel-rl-regime-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body', 'intel-rl-field-meta', 'intel-rl-console-band', 'intel-rl-console-note', 'intel-rl-state-pills', 'intel-rl-governance-panel', 'intel-rl-regime-matrix'].forEach(function(id){
         if ($(id)) $(id).innerHTML = '';
       });
       ['intel-rl-node-reduce_risk','intel-rl-node-hold','intel-rl-node-add_continuation','intel-rl-node-add_hedge','intel-rl-node-relative_value_rotation'].forEach(function(id){
@@ -907,13 +913,16 @@
     if (!analogs.length) analogs = sameCommodityAnalogs.slice(0, 3);
     var topAction = titleize(neuralFrontier.action || 'hold');
     var reasonCopy = 'The policy favors ' + topAction + ' because ' + drivers.positive.slice(0, 2).map(function(item){ return item.label.toLowerCase(); }).join(' and ') + ' are currently outweighing a passive hold posture.';
+    function renderDriver(item, mode){
+      var score = mode === 'positive' ? Number(item.support || 0) : Number(item.opposition || 0);
+      var copy = mode === 'positive' ? item.positive : item.negative;
+      return '<div class="intel-rl-driver"><div class="intel-rl-driver-head"><strong>' + escapeHtml(item.label) + '</strong><span>' + fmtMetric(item.value, 2, false) + '</span></div><div class="intel-rl-driver-bar"><i style="width:' + Math.round(clamp(score * 100, 8, 100)) + '%;"></i></div><div class="intel-rl-driver-copy">' + escapeHtml(copy) + '</div></div>';
+    }
     target.innerHTML = [
-      '<div class="intel-insight-list">',
       '<div class="intel-insight-card"><div class="intel-insight-title">Reason code</div><div class="intel-insight-copy">' + escapeHtml(reasonCopy) + '</div></div>',
-      '<div class="intel-insight-card"><div class="intel-insight-title">Top positive drivers</div><div class="intel-insight-copy">' + drivers.positive.map(function(item){ return escapeHtml(item.label + ' · ' + item.positive + ' (' + fmtMetric(item.value, 2, false) + ')'); }).join('<br>') + '</div></div>',
-      '<div class="intel-insight-card"><div class="intel-insight-title">Top negative drivers</div><div class="intel-insight-copy">' + drivers.negative.map(function(item){ return escapeHtml(item.label + ' · ' + item.negative + ' (' + fmtMetric(item.value, 2, false) + ')'); }).join('<br>') + '</div></div>',
-      '<div class="intel-insight-card"><div class="intel-insight-title">Historical analogs</div><div class="intel-insight-copy">' + (analogs.length ? analogs.map(function(item){ return escapeHtml((item.timestamp || 'n/a') + ' · ' + titleize(item.neural_action || 'hold') + ' · target ' + fmtPct(Number(item.target_return || 0) * 100) + ' · confidence ' + fmtConfidence(item.neural_confidence)); }).join('<br>') : 'No same-commodity analogs available in the latest replay sample.') + '</div></div>',
-      '</div>'
+      '<div class="intel-rl-stack">' + drivers.positive.map(function(item){ return renderDriver(item, 'positive'); }).join('') + '</div>',
+      '<div class="intel-rl-stack">' + drivers.negative.map(function(item){ return renderDriver(item, 'negative'); }).join('') + '</div>',
+      '<div class="intel-insight-card"><div class="intel-insight-title">Historical analogs</div><div class="intel-insight-copy">' + (analogs.length ? analogs.map(function(item){ return escapeHtml((item.timestamp || 'n/a') + ' · ' + titleize(item.neural_action || 'hold') + ' · target ' + fmtPct(Number(item.target_return || 0) * 100) + ' · confidence ' + fmtConfidence(item.neural_confidence)); }).join('<br>') : 'No same-commodity analogs available in the latest replay sample.') + '</div></div>'
     ].join('');
   }
 
@@ -1020,9 +1029,7 @@
     var target = $('intel-rl-audit-trail');
     if (!target || !neural) return;
     var events = [];
-    var selectedProfile = safeArray(neural.profile_selection).find(function(item){
-      return String(item.device || '') === String(neural.selected_device || '') && Number(item.timesteps || 0) === Number(neural.selected_timesteps || 0);
-    });
+    var selectedProfile = getSelectedProfile(neural);
     events.push({ title: 'Policy artifact refreshed', copy: 'Commit ' + String(state.rlArtifacts && state.rlArtifacts.updated_from_commit || 'unknown') + ' selected the current balanced export profile after held-out replay and walk-forward scoring.' });
     if (selectedProfile) events.push({ title: 'Profile selection winner', copy: 'Selection score ' + fmtMetric(selectedProfile.score, 3, false) + ' with replay uplift ' + fmtSigned(selectedProfile.uplift_vs_hold || 0, 2) + ', walk uplift ' + fmtSigned(selectedProfile.walk_uplift_vs_hold || 0, 2) + ', regime balance ' + fmtConfidence(selectedProfile.regime_balance_score) + ', and dominant action share ' + fmtConfidence(selectedProfile.dominant_action_share) + '.' });
     if (frontier) events.push({ title: 'Recommendation issued', copy: titleize(state.selected) + ' was assigned ' + titleize(frontier.neural_action || frontier.ppo_action || 'hold') + ' at ' + Math.round(Number(frontier.neural_confidence || 0) * 100) + '% confidence.' });
@@ -1034,6 +1041,102 @@
     });
     target.innerHTML = events.map(function(item, idx){
       return '<div class="intel-rl-step"><div class="intel-kicker">Event ' + (idx + 1) + '</div><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.copy) + '</span></div>';
+    }).join('');
+  }
+
+  function renderRlObservabilityBoard(frontier, neural, neuralFrontier, walkForward, replaySummary){
+    var band = $('intel-rl-console-band');
+    var note = $('intel-rl-console-note');
+    if (!band || !neuralFrontier || !neural) return;
+    var verdict = getRlVerdict(neural.vs_hold_reward_uplift, walkForward && walkForward.vs_hold_reward_uplift);
+    var selectedProfile = getSelectedProfile(neural);
+    var observation = frontier && frontier.observation ? frontier.observation : {};
+    var pressure = Number(observation.risk_pressure || 0);
+    var agreement = Number(observation.agreement_score || 0);
+    var eventRisk = Number(observation.event_risk || 0);
+    var bandCards = [
+      { label: 'Active action', value: titleize(neuralFrontier.action || 'hold'), copy: 'Live policy output for ' + titleize(state.selected) + '.' },
+      { label: 'Confidence', value: fmtConfidence(neuralFrontier.confidence), copy: 'Current probability assigned to the active action.' },
+      { label: 'Replay edge', value: fmtSigned(neural.vs_hold_reward_uplift || 0, 2), copy: 'Reward uplift versus a passive hold baseline.' },
+      { label: 'Walk robustness', value: walkForward ? fmtConfidence(walkForward.positive_window_rate) : '—', copy: walkForward ? 'Positive unseen windows with walk uplift ' + fmtSigned(walkForward.vs_hold_reward_uplift || 0, 2) + '.' : 'Walk-forward report unavailable.' },
+      { label: 'Risk pressure', value: Math.round(pressure * 100) + '%', copy: 'Composite defensive pressure from anomaly, event, spread, and trend.' },
+      { label: 'Governance', value: selectedProfile ? fmtMetric(selectedProfile.score, 3, false) : verdict.label, copy: selectedProfile ? 'Selection score for ' + String(neural.selected_device || 'n/a') + ' · ' + String(neural.selected_timesteps || 'n/a') + ' steps.' : 'Profile selection details unavailable.' }
+    ];
+    band.innerHTML = bandCards.map(function(item){
+      return '<div class="intel-rl-stat-card"><div class="intel-rl-stat-label">' + escapeHtml(item.label) + '</div><div class="intel-rl-stat-value">' + escapeHtml(item.value) + '</div><div class="intel-rl-stat-copy">' + escapeHtml(item.copy) + '</div></div>';
+    }).join('');
+    if (note) {
+      note.innerHTML = '<strong>State note:</strong> Agreement is ' + fmtConfidence(agreement) + ', event risk is ' + fmtConfidence(eventRisk) + ', and the current baseline verdict is ' + escapeHtml(verdict.label) + '. This board is showing decision support observability only — not autonomous execution.';
+    }
+  }
+
+  function renderRlStateVector(frontier, neuralFrontier){
+    if (!frontier || !neuralFrontier) return;
+    var observation = frontier.observation || {};
+    var metrics = [
+      { key: 'agreement_score', label: 'Agreement', value: clamp(Number(observation.agreement_score || 0) * 100, 0, 100), copy: 'Higher agreement supports directional conviction.' },
+      { key: 'event_risk', label: 'Event risk', value: clamp(Number(observation.event_risk || 0) * 100, 0, 100), copy: 'Catalyst pressure raises hedge and defense value.' },
+      { key: 'volatility_5', label: 'Volatility', value: clamp(Number(observation.volatility_5 || 0) * 100, 0, 100), copy: 'Short-horizon turbulence in the state.' },
+      { key: 'model_spread', label: 'Disagreement', value: clamp(Number(observation.model_spread || 0) * 100, 0, 100), copy: 'Model spread pushes rotation or caution.' },
+      { key: 'risk_pressure', label: 'Risk pressure', value: clamp(Number(observation.risk_pressure || 0) * 100, 0, 100), copy: 'Composite defensive pressure felt by the policy.' },
+      { key: 'trend_3', label: 'Trend', value: clamp(50 + Number(observation.trend_3 || 0) * 1000, 0, 100), copy: 'Short trend normalized around neutral.' }
+    ];
+    ensureRlChart('intel-rl-state-chart', {
+      type: 'bar',
+      data: {
+        labels: metrics.map(function(item){ return item.label; }),
+        datasets: [{
+          label: 'Normalized state weight',
+          data: metrics.map(function(item){ return item.value; }),
+          backgroundColor: ['rgba(34,211,238,0.65)','rgba(248,113,113,0.65)','rgba(251,191,36,0.65)','rgba(192,132,252,0.65)','rgba(59,130,246,0.65)','rgba(34,197,94,0.65)'],
+          borderColor: ['#22d3ee','#f87171','#fbbf24','#c084fc','#3b82f6','#22c55e'],
+          borderWidth: 1,
+          borderRadius: 10
+        }]
+      },
+      options: chartOptions(100)
+    });
+    var pills = $('intel-rl-state-pills');
+    if (pills) {
+      pills.innerHTML = metrics.map(function(item){
+        return '<div class="intel-rl-pill"><strong>' + escapeHtml(item.label) + '</strong> ' + Math.round(item.value) + '%</div>';
+      }).join('');
+    }
+  }
+
+  function renderRlGovernancePanel(neural, walkForward, replaySummary){
+    var target = $('intel-rl-governance-panel');
+    if (!target || !neural) return;
+    var selectedProfile = getSelectedProfile(neural);
+    var cards = [];
+    cards.push('<div class="intel-rl-governance-card"><strong>Selected export profile</strong><span>' + escapeHtml(String(neural.selected_device || 'n/a') + ' · ' + String(neural.selected_timesteps || 'n/a') + ' steps · prior weight ' + fmtMetric(neural.selected_prior_weight, 2, false)) + '</span></div>');
+    if (selectedProfile) {
+      cards.push('<div class="intel-rl-governance-card"><strong>Why it won</strong><span>Selection score ' + escapeHtml(fmtMetric(selectedProfile.score, 3, false)) + ' with replay uplift ' + escapeHtml(fmtSigned(selectedProfile.uplift_vs_hold || 0, 2)) + ', walk uplift ' + escapeHtml(fmtSigned(selectedProfile.walk_uplift_vs_hold || 0, 2)) + ', regime balance ' + escapeHtml(fmtConfidence(selectedProfile.regime_balance_score)) + ', and dominant action share ' + escapeHtml(fmtConfidence(selectedProfile.dominant_action_share)) + '.</span></div>');
+    }
+    cards.push('<div class="intel-rl-mini-grid">' + [
+      { label: 'Walk uplift', value: walkForward ? fmtSigned(walkForward.vs_hold_reward_uplift || 0, 2) : '—', copy: 'Out-of-sample uplift versus hold.' },
+      { label: 'Replay diversity', value: replaySummary ? fmtConfidence(replaySummary.action_diversity) : '—', copy: 'How much of the action set is used.' },
+      { label: 'Dominant share', value: replaySummary ? fmtConfidence(replaySummary.dominant_action_share) : '—', copy: 'How concentrated the active policy is.' }
+    ].map(function(item){
+      return '<div class="intel-rl-mini-stat"><span class="label">' + escapeHtml(item.label) + '</span><span class="value">' + escapeHtml(item.value) + '</span><span class="copy">' + escapeHtml(item.copy) + '</span></div>';
+    }).join('') + '</div>');
+    target.innerHTML = cards.join('');
+  }
+
+  function renderRlRegimeMatrix(replaySummary){
+    var target = $('intel-rl-regime-matrix');
+    if (!target || !replaySummary) return;
+    var keys = ['continuation', 'risk_off', 'hedge', 'rotation'];
+    var hit = replaySummary.regime_hit_rate || {};
+    var active = replaySummary.regime_active_counts || {};
+    var actionValue = replaySummary.action_value_by_regime || {};
+    target.innerHTML = keys.map(function(key){
+      var values = actionValue[key] || {};
+      var bestAction = Object.keys(values).sort(function(a, b){ return Number(values[b] || -999) - Number(values[a] || -999); })[0] || 'hold';
+      var bestValue = values[bestAction] != null ? Number(values[bestAction]) : 0;
+      var hitRate = Number(hit[key] || 0);
+      var tone = hitRate >= 0.5 ? 'stable' : hitRate >= 0.25 ? 'mixed' : 'fragile';
+      return '<div class="intel-rl-regime-cell"><div class="intel-kicker">' + escapeHtml(titleize(key)) + ' · ' + tone + '</div><strong>' + escapeHtml(titleize(bestAction)) + ' ' + fmtSigned(bestValue, 2) + '</strong><span>Hit rate ' + Math.round(hitRate * 100) + '% across ' + Number(active[key] || 0) + ' observed opportunities.</span><span>This is the highest-value action in the current replay decomposition for this regime.</span></div>';
     }).join('');
   }
 
@@ -1396,14 +1499,17 @@
     target.innerHTML = pills.join('');
   }
 
-  function renderRlPremiumPanels(frontier, neuralFrontier, walkForward, replaySummary, episodeReplay){
+  function renderRlPremiumPanels(frontier, neural, neuralFrontier, walkForward, replaySummary, episodeReplay){
     setRlPanelsVisible(config.demoKind === 'rl-policy-lab' && !!neuralFrontier);
     if (config.demoKind !== 'rl-policy-lab' || !neuralFrontier) return;
     renderRlProbabilitySurface(neuralFrontier);
     renderRlPolicyComparison(frontier, neuralFrontier);
+    renderRlStateVector(frontier, neuralFrontier);
     renderRlRegimeBalance(replaySummary);
     renderRlWalkForward(walkForward);
+    renderRlGovernancePanel(neural, walkForward, replaySummary);
     renderRlEpisodeReplay(episodeReplay);
+    renderRlRegimeMatrix(replaySummary);
     renderRlRewardStack(replaySummary);
     renderRlTracePills(frontier, neuralFrontier, walkForward, replaySummary);
   }
@@ -1500,12 +1606,13 @@
       ]);
       renderRlDecisionCard(frontier, neural, neuralFrontier, walkForward, replaySummary);
       renderRlTrustStrip(neural, walkForward, replaySummary, neuralFrontier);
+      renderRlObservabilityBoard(frontier, neural, neuralFrontier, walkForward, replaySummary);
       renderRlBaselineTable(frontier, benchmark, neural, neuralFrontier, walkForward, replaySummary);
       renderRlWhyPanel(frontier, neuralFrontier, episodeReplay);
       renderRlScenarioPanel(frontier, neuralFrontier);
       renderRlAuditTrail(frontier, neural, walkForward, replaySummary, episodeReplay);
       renderRlPolicyField(neuralFrontier, replaySummary, walkForward);
-      renderRlPremiumPanels(frontier, neuralFrontier, walkForward, replaySummary, episodeReplay);
+      renderRlPremiumPanels(frontier, neural, neuralFrontier, walkForward, replaySummary, episodeReplay);
       animateRlSurfaces();
       return;
     }
@@ -1517,14 +1624,14 @@
         { title: 'PPO fine-tuned → ' + String(frontier.ppo_action || 'hold').replace(/_/g, ' '), copy: 'PPO confidence ' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '%. Timestamp ' + (frontier.timestamp || 'n/a') + '.' },
         { title: 'Benchmark snapshot', copy: benchmark ? 'Offline reward ' + Number(benchmark.offline.mean_reward || 0).toFixed(4) + ' · PPO reward ' + Number(benchmark.ppo.mean_reward || 0).toFixed(4) + ' · Rule reward ' + Number(benchmark.rule_based.mean_reward || 0).toFixed(4) + '.' : 'Benchmark artifact not available.' }
       ]);
-      renderRlPremiumPanels(frontier, null, null, null, episodeReplay);
+      renderRlPremiumPanels(frontier, null, null, null, null, episodeReplay);
       return;
     }
     renderSummary('RL Policy Lab should surface a policy frontier with baseline comparison, explanation, and auditability. The highest-scoring state/action pair is the current default.');
     renderInsights(items.map(function(item){
       return { title: item.state + ' · ' + item.score + '/100', copy: item.action };
     }));
-    renderRlPremiumPanels(null, null, null, null, null);
+    renderRlPremiumPanels(null, null, null, null, null, null);
   }
 
   function chartOptions(max){

@@ -138,13 +138,55 @@ image: "/assets/images/og-default.png"
         </div>
       </div>
 
-      <!-- ===== HERO VISUAL: Terminal ===== -->
-      <aside class="hero-terminal" aria-label="Live commodity impact terminal" data-animate data-delay="380">
+      <!-- ===== HERO VISUAL: Impact Constellation ===== -->
+      <aside class="hero-terminal hero-terminal--flagship" aria-label="Live commodity impact terminal" data-animate data-delay="380">
         <div class="hero-terminal-head">
           <span class="hero-terminal-dot" data-status="live"></span>
-          <span class="hero-terminal-title">Today’s Commodity Shock Map</span>
+          <span class="hero-terminal-title">Impact Constellation · shock propagation</span>
           <span class="hero-terminal-time" id="hero-terminal-time">—</span>
         </div>
+
+        <section class="hero-impact-card" id="hero-impact-card" aria-labelledby="hero-impact-title">
+          <div class="hero-impact-copy">
+            <div class="hero-impact-kicker">Active propagation</div>
+            <div class="hero-impact-title-row">
+              <h2 id="hero-impact-title" class="hero-impact-title">Loading live shock…</h2>
+              <span class="hero-impact-change" id="hero-impact-change">—</span>
+            </div>
+            <p class="hero-impact-summary" id="hero-impact-summary">Mapping the first-order sector impact and the second-order company themes around the biggest live move.</p>
+            <div class="hero-impact-metrics" id="hero-impact-metrics" aria-live="polite">
+              <div class="hero-impact-metric">
+                <span class="hero-impact-metric-label">Primary beneficiaries</span>
+                <strong id="hero-impact-positive">—</strong>
+              </div>
+              <div class="hero-impact-metric">
+                <span class="hero-impact-metric-label">Primary pressure</span>
+                <strong id="hero-impact-negative">—</strong>
+              </div>
+              <div class="hero-impact-metric">
+                <span class="hero-impact-metric-label">Uncertain / watch</span>
+                <strong id="hero-impact-watch">—</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-impact-scene-wrap">
+            <div class="hero-impact-scene" id="hero-impact-scene">
+              <canvas id="hero-impact-canvas" aria-hidden="true"></canvas>
+              <div class="hero-impact-tooltip" id="hero-impact-tooltip" hidden></div>
+              <div class="hero-impact-overlay hero-impact-overlay--center" id="hero-impact-center-node">
+                <span class="hero-impact-overlay-kicker">Shock</span>
+                <strong id="hero-impact-center-label">Commodity</strong>
+                <span id="hero-impact-center-subcopy">Select a mover</span>
+              </div>
+            </div>
+            <div class="hero-impact-legend" aria-label="Impact legend">
+              <span><i class="hero-impact-dot hero-impact-dot--positive"></i> Beneficiary</span>
+              <span><i class="hero-impact-dot hero-impact-dot--negative"></i> Pressure</span>
+              <span><i class="hero-impact-dot hero-impact-dot--watch"></i> Watchlist</span>
+            </div>
+          </div>
+        </section>
 
         <div class="hero-shock-rail" id="hero-shock-rail" aria-live="polite">
           <div class="hero-shock-skel"></div>
@@ -156,7 +198,7 @@ image: "/assets/images/og-default.png"
 
         <div class="hero-heatmap" id="hero-heatmap" aria-label="Commodity to sector impact heatmap">
           <div class="hero-heatmap-head">
-            <span>Impact</span>
+            <span>Sector translation</span>
             <span class="hero-heatmap-legend">
               <span class="heat-dot heat-pos-3"></span>
               <span class="heat-dot heat-pos-2"></span>
@@ -482,7 +524,7 @@ image: "/assets/images/og-default.png"
       var d = e[1];
       var dir = d.change_pct >= 0 ? 'up' : 'down';
       var slug = e[0].replace(/_/g,'-');
-      return '<a class="hero-shock-pill" href="/commodities/' + slug + '/" data-cta="hero_shock_'+slug+'">'
+      return '<a class="hero-shock-pill" href="/commodities/' + slug + '/" data-commodity="' + e[0] + '" data-cta="hero_shock_'+slug+'">'
         + '<span class="hero-shock-name">' + (d.name || e[0]) + '</span>'
         + '<span class="hero-shock-val '+dir+'">' + formatPct(d.change_pct) + '</span>'
         + '</a>';

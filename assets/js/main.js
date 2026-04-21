@@ -169,194 +169,591 @@
     });
   }
 
-  /* ---------- Hero Canvas Animation ---------- */
-  const canvas = document.getElementById('hero-canvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let W, H, nodes, animFrame, pointer = { x: 0, y: 0, active: false }, isVisible = true;
+  /* ---------- Hero Impact Constellation ---------- */
+  const heroCanvas = document.getElementById('hero-canvas');
+  const impactCanvas = document.getElementById('hero-impact-canvas');
+  const impactSceneEl = document.getElementById('hero-impact-scene');
+  if (heroCanvas || impactCanvas) {
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fallbackPrices = {
+      crude_oil: { name: 'Crude Oil', change_pct: 2.4 },
+      natural_gas: { name: 'Natural Gas', change_pct: -1.7 },
+      copper: { name: 'Copper', change_pct: 1.1 },
+      wheat: { name: 'Wheat', change_pct: -0.9 },
+      lithium: { name: 'Lithium', change_pct: -2.2 },
+      gold: { name: 'Gold', change_pct: 0.8 },
+      uranium: { name: 'Uranium', change_pct: 1.9 },
+      coffee: { name: 'Coffee', change_pct: 1.4 }
+    };
+    const impactLibrary = {
+      crude_oil: {
+        sectors: [
+          { label: 'Integrated Energy', bias: 1, note: 'cash flow expands on stronger realized pricing' },
+          { label: 'Airlines', bias: -1, note: 'fuel-sensitive margins compress first' },
+          { label: 'Chemicals', bias: -1, note: 'feedstock pressure moves faster than selling-price relief' },
+          { label: 'Transport', bias: -0.8, note: 'diesel and logistics costs re-rate quickly' }
+        ],
+        themes: [
+          { label: 'XOM / CVX', bias: 1, note: 'upstream torque improves' },
+          { label: 'DAL / UAL', bias: -1, note: 'jet-fuel pressure comes back into focus' },
+          { label: 'Refining spread', bias: 0.4, note: 'follow crack-spread durability' },
+          { label: 'Inflation pulse', bias: -0.4, note: 'macro repricing risk rises with sustained oil strength' }
+        ]
+      },
+      natural_gas: {
+        sectors: [
+          { label: 'Gas Producers', bias: 1, note: 'realized price leverage improves' },
+          { label: 'Utilities', bias: -1, note: 'fuel procurement costs lift faster than regulated recovery' },
+          { label: 'Fertilizers', bias: -0.9, note: 'nitrogen economics tighten' },
+          { label: 'LNG Exporters', bias: 0.8, note: 'global spread narratives strengthen' }
+        ],
+        themes: [
+          { label: 'EQT / LNG', bias: 1, note: 'gas-linked torque gets cleaner' },
+          { label: 'CF / Utilities', bias: -1, note: 'input-cost pressure returns' },
+          { label: 'Power stack', bias: -0.5, note: 'dispatch economics need a refresh' },
+          { label: 'Europe supply', bias: 0.4, note: 'watch storage and import sensitivity' }
+        ]
+      },
+      copper: {
+        sectors: [
+          { label: 'Miners', bias: 1, note: 'operating leverage improves on industrial demand strength' },
+          { label: 'Grid / Infra', bias: 0.7, note: 'demand signal supports capex narratives' },
+          { label: 'Industrial Cyclicals', bias: 0.5, note: 'macro tone improves if copper leads' },
+          { label: 'Fabricators', bias: -0.6, note: 'input-cost squeeze hits converters' }
+        ],
+        themes: [
+          { label: 'FCX / SCCO', bias: 1, note: 'miner beta turns on quickly' },
+          { label: 'China demand', bias: 0.8, note: 'growth read-through improves' },
+          { label: 'Wire / cable', bias: -0.5, note: 'cost absorption matters' },
+          { label: 'EV metals basket', bias: 0.4, note: 'cross-metal momentum can broaden' }
+        ]
+      },
+      gold: {
+        sectors: [
+          { label: 'Gold Miners', bias: 1, note: 'safe-haven demand supports miner cash flow' },
+          { label: 'Risk Assets', bias: -0.5, note: 'defensive rotation often accompanies strong gold tape' },
+          { label: 'Royalty Names', bias: 0.8, note: 'high-margin exposure benefits' },
+          { label: 'Rates-sensitive Growth', bias: -0.4, note: 'risk appetite can cool when gold leads' }
+        ],
+        themes: [
+          { label: 'NEM / GOLD', bias: 1, note: 'beta improves with bullion' },
+          { label: 'Real yields', bias: -0.7, note: 'watch rate path and policy tone' },
+          { label: 'Hedging demand', bias: 0.5, note: 'portfolio defense narrative strengthens' },
+          { label: 'Silver sympathy', bias: 0.3, note: 'precious-metal complex can broaden' }
+        ]
+      },
+      wheat: {
+        sectors: [
+          { label: 'Grain Traders', bias: 1, note: 'volatility and merchandising opportunity improve' },
+          { label: 'Food Producers', bias: -1, note: 'input-cost pressure moves into packaged food' },
+          { label: 'Livestock', bias: -0.8, note: 'feed costs rebuild quickly' },
+          { label: 'Farm Inputs', bias: 0.4, note: 'planting economics may improve' }
+        ],
+        themes: [
+          { label: 'ADM / BG', bias: 1, note: 'grain handling urgency improves' },
+          { label: 'Staples margins', bias: -1, note: 'watch pass-through timing' },
+          { label: 'Feed channel', bias: -0.7, note: 'protein complex feels it next' },
+          { label: 'Weather risk', bias: 0.5, note: 'follow supply narrative, not just tape' }
+        ]
+      },
+      lithium: {
+        sectors: [
+          { label: 'Lithium Producers', bias: 1, note: 'pricing power stabilizes upstream names' },
+          { label: 'Battery Buyers', bias: -0.8, note: 'cost relief disappears on renewed tightness' },
+          { label: 'EV Supply Chain', bias: -0.5, note: 'downstream margin assumptions need refresh' },
+          { label: 'Materials Traders', bias: 0.4, note: 'inventory narratives re-open' }
+        ],
+        themes: [
+          { label: 'ALB / SQM', bias: 1, note: 'upstream sensitivity rises sharply' },
+          { label: 'TSLA cost stack', bias: -0.7, note: 'battery economics get tighter' },
+          { label: 'Cathode makers', bias: -0.5, note: 'watch pricing pass-through' },
+          { label: 'China inventory', bias: 0.4, note: 'follow destocking vs rebound risk' }
+        ]
+      },
+      uranium: {
+        sectors: [
+          { label: 'Uranium Miners', bias: 1, note: 'supply scarcity narratives get stronger' },
+          { label: 'Nuclear Utilities', bias: 0.6, note: 'procurement urgency returns' },
+          { label: 'Clean Power Themes', bias: 0.4, note: 'nuclear optionality improves' },
+          { label: 'Merchant Buyers', bias: -0.3, note: 'term contracting pressure rises' }
+        ],
+        themes: [
+          { label: 'CCJ / UUUU', bias: 1, note: 'equity torque remains high' },
+          { label: 'SMR supply chain', bias: 0.5, note: 'nuclear appetite broadens' },
+          { label: 'Term contracting', bias: 0.7, note: 'follow utility restocking urgency' },
+          { label: 'Political risk', bias: -0.2, note: 'policy and permitting still matter' }
+        ]
+      },
+      coffee: {
+        sectors: [
+          { label: 'Coffee Producers', bias: 1, note: 'scarcity premium supports growers and traders' },
+          { label: 'Roasters', bias: -1, note: 'input inflation pressures branded margins' },
+          { label: 'Restaurants', bias: -0.5, note: 'beverage cost relief disappears' },
+          { label: 'Consumer Staples', bias: -0.4, note: 'packaging and mix need re-checks' }
+        ],
+        themes: [
+          { label: 'SBUX margin', bias: -0.8, note: 'coffee procurement comes back into focus' },
+          { label: 'Brazil crop', bias: 0.5, note: 'weather still sets the tone' },
+          { label: 'Arabica spread', bias: 0.4, note: 'quality tightness can extend' },
+          { label: 'Consumer pass-through', bias: -0.4, note: 'pricing power matters more than traffic' }
+        ]
+      }
+    };
+    const defaultImpact = {
+      sectors: [
+        { label: 'Upstream', bias: 1, note: 'producers usually win first' },
+        { label: 'Downstream Buyers', bias: -1, note: 'input costs or relief translate quickly' },
+        { label: 'Sector Basket', bias: 0.5, note: 'cross-asset sentiment can broaden' },
+        { label: 'Macro Spillover', bias: -0.4, note: 'watch inflation and risk appetite' }
+      ],
+      themes: [
+        { label: 'Watchlist names', bias: 1, note: 're-rank the most exposed names' },
+        { label: 'Margin pressure', bias: -1, note: 'input sensitivity matters most' },
+        { label: 'Scenario path', bias: 0.3, note: 'test persistence, not just direction' },
+        { label: 'Risk transfer', bias: -0.2, note: 'second-order effects show up next' }
+      ]
+    };
 
-    function resize() {
-      const dpr = window.devicePixelRatio || 1;
-      W = canvas.offsetWidth;
-      H = canvas.offsetHeight;
-      canvas.width = Math.max(1, Math.floor(W * dpr));
-      canvas.height = Math.max(1, Math.floor(H * dpr));
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const bgCtx = heroCanvas ? heroCanvas.getContext('2d') : null;
+    const impactCtx = impactCanvas ? impactCanvas.getContext('2d') : null;
+    const impactTooltip = document.getElementById('hero-impact-tooltip');
+    const impactTitle = document.getElementById('hero-impact-title');
+    const impactChange = document.getElementById('hero-impact-change');
+    const impactSummary = document.getElementById('hero-impact-summary');
+    const impactPositive = document.getElementById('hero-impact-positive');
+    const impactNegative = document.getElementById('hero-impact-negative');
+    const impactWatch = document.getElementById('hero-impact-watch');
+    const impactCenterLabel = document.getElementById('hero-impact-center-label');
+    const impactCenterSubcopy = document.getElementById('hero-impact-center-subcopy');
+
+    let backgroundStars = [];
+    let movers = [];
+    let activeScene = null;
+    let activeIndex = 0;
+    let sceneNodes = [];
+    let hoveredNode = null;
+    let animationFrame = null;
+    let rotationTimer = null;
+    let pageVisible = !document.hidden;
+    let isMobileViewport = window.innerWidth <= 768;
+    let heroPointer = { x: 0, y: 0, active: false };
+
+    function sentimentColor(sentiment, alpha) {
+      if (sentiment > 0.15) return 'rgba(16,185,129,' + alpha + ')';
+      if (sentiment < -0.15) return 'rgba(244,63,94,' + alpha + ')';
+      return 'rgba(251,191,36,' + alpha + ')';
     }
 
-    const NODE_COUNT = 44;
-    const CONNECT_DIST = 190;
-    const COLORS = ['#22d3ee', '#fbbf24', '#10b981', '#a855f7', '#f43f5e', '#ffffff'];
-    const BEACONS = [
-      { x: 0.18, y: 0.22, color: 'rgba(34,211,238,0.22)', radius: 0.24 },
-      { x: 0.76, y: 0.18, color: 'rgba(168,85,247,0.20)', radius: 0.2 },
-      { x: 0.62, y: 0.72, color: 'rgba(16,185,129,0.14)', radius: 0.22 }
-    ];
-
-    function initNodes() {
-      nodes = Array.from({ length: NODE_COUNT }, (_, i) => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.55,
-        vy: (Math.random() - 0.5) * 0.55,
-        r: 1.8 + Math.random() * 3.8,
-        depth: 0.35 + Math.random() * 0.9,
-        color: COLORS[i % COLORS.length],
-        pulse: Math.random() * Math.PI * 2,
-        orbit: Math.random() * Math.PI * 2,
-      }));
+    function formatPct(value) {
+      if (typeof value !== 'number' || Number.isNaN(value)) return '—';
+      return (value >= 0 ? '+' : '') + value.toFixed(1) + '%';
     }
 
-    let lastTime = performance.now();
+    function titleFromKey(key, entry) {
+      return (entry && entry.name) || key.replace(/_/g, ' ').replace(/\b\w/g, function (m) { return m.toUpperCase(); });
+    }
 
-    function drawSweepBands(now) {
-      for (let i = 0; i < 3; i++) {
-        const phase = now * 0.00016 + i * 1.7;
-        const baseY = H * (0.22 + i * 0.22) + Math.sin(phase) * 18;
-        const gradient = ctx.createLinearGradient(0, baseY - 32, W, baseY + 32);
-        gradient.addColorStop(0, 'rgba(34,211,238,0)');
-        gradient.addColorStop(0.25, i === 1 ? 'rgba(168,85,247,0.02)' : 'rgba(34,211,238,0.03)');
-        gradient.addColorStop(0.75, i === 2 ? 'rgba(16,185,129,0.025)' : 'rgba(34,211,238,0.015)');
-        gradient.addColorStop(1, 'rgba(2,6,23,0)');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, baseY - 38, W, 76);
+    function deriveNodes(list, direction, radius, multiplier) {
+      return list.map(function (item, idx) {
+        var sentiment = (item.bias || 0) * direction;
+        return {
+          id: item.label + '-' + idx,
+          label: item.label,
+          note: item.note,
+          sentiment: sentiment,
+          radius: radius,
+          size: (item.size || 1) * multiplier,
+          angle: (Math.PI * 2 * idx) / Math.max(list.length, 1),
+          layerOffset: idx * 0.6
+        };
+      });
+    }
+
+    function buildSceneData(key, entry) {
+      var library = impactLibrary[key] || defaultImpact;
+      var change = entry && typeof entry.change_pct === 'number' ? entry.change_pct : 0;
+      var direction = change >= 0 ? 1 : -1;
+      var sectors = deriveNodes(library.sectors, direction, 0.34, 8);
+      var themes = deriveNodes(library.themes, direction, 0.6, 6.4);
+      var sortedSectors = sectors.slice().sort(function (a, b) { return b.sentiment - a.sentiment; });
+      var positives = sortedSectors.filter(function (item) { return item.sentiment > 0.15; }).slice(0, 2).map(function (item) { return item.label; });
+      var negatives = sortedSectors.slice().sort(function (a, b) { return a.sentiment - b.sentiment; }).filter(function (item) { return item.sentiment < -0.15; }).slice(0, 2).map(function (item) { return item.label; });
+      var watch = themes.filter(function (item) { return Math.abs(item.sentiment) <= 0.15; }).slice(0, 1).map(function (item) { return item.label; });
+      var summary = (change >= 0 ? titleFromKey(key, entry) + ' is rising' : titleFromKey(key, entry) + ' is falling')
+        + '. First-order translation hits ' + (positives[0] || 'upstream winners')
+        + ' versus ' + (negatives[0] || 'downstream pressure')
+        + ', while second-order themes decide whether the move spreads or fades.';
+      return {
+        key: key,
+        title: titleFromKey(key, entry),
+        change: change,
+        direction: direction,
+        sectors: sectors,
+        themes: themes,
+        positives: positives,
+        negatives: negatives,
+        watch: watch,
+        summary: summary
+      };
+    }
+
+    function updateImpactCopy(scene) {
+      if (!scene) return;
+      activeScene = scene;
+      if (impactTitle) impactTitle.textContent = scene.title;
+      if (impactChange) {
+        impactChange.textContent = formatPct(scene.change);
+        impactChange.classList.toggle('is-negative', scene.change < 0);
+      }
+      if (impactSummary) impactSummary.textContent = scene.summary;
+      if (impactPositive) impactPositive.textContent = scene.positives.length ? scene.positives.join(' · ') : 'No clear beneficiary cluster';
+      if (impactNegative) impactNegative.textContent = scene.negatives.length ? scene.negatives.join(' · ') : 'No clear pressure cluster';
+      if (impactWatch) impactWatch.textContent = scene.watch.length ? scene.watch.join(' · ') : 'Cross-asset follow-through';
+      if (impactCenterLabel) impactCenterLabel.textContent = scene.title;
+      if (impactCenterSubcopy) {
+        impactCenterSubcopy.textContent = (scene.change >= 0 ? 'Upstream leverage + downstream pressure' : 'Cost relief + upstream stress') + ' · ' + formatPct(scene.change);
       }
     }
 
-    function drawBeacons(now) {
-      const pointerScale = pointer.active ? 1.08 : 1.0;
-      BEACONS.forEach((beacon, idx) => {
-        const driftX = Math.sin(now * 0.00025 + idx) * 14;
-        const driftY = Math.cos(now * 0.00022 + idx * 1.3) * 10;
-        const x = W * beacon.x + driftX;
-        const y = H * beacon.y + driftY;
-        const radius = Math.max(W, H) * beacon.radius * pointerScale;
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-        gradient.addColorStop(0, beacon.color);
-        gradient.addColorStop(0.45, beacon.color.replace(/0\.\d+\)/, '0.06)'));
-        gradient.addColorStop(1, 'rgba(2,6,23,0)');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, W, H);
+    function resizeCanvas(canvasEl, context) {
+      if (!canvasEl || !context) return { width: 0, height: 0 };
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var width = Math.max(1, Math.floor(canvasEl.offsetWidth));
+      var height = Math.max(1, Math.floor(canvasEl.offsetHeight));
+      if (canvasEl.width !== Math.floor(width * dpr) || canvasEl.height !== Math.floor(height * dpr)) {
+        canvasEl.width = Math.floor(width * dpr);
+        canvasEl.height = Math.floor(height * dpr);
+      }
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { width: width, height: height };
+    }
+
+    function initBackgroundStars(width, height) {
+      backgroundStars = Array.from({ length: 42 }, function (_, index) {
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: 0.7 + Math.random() * 2.8,
+          depth: 0.4 + Math.random() * 1.1,
+          phase: Math.random() * Math.PI * 2,
+          drift: 0.2 + Math.random() * 0.55,
+          color: index % 5 === 0 ? 'rgba(168,85,247,0.95)' : (index % 3 === 0 ? 'rgba(16,185,129,0.95)' : 'rgba(34,211,238,0.95)')
+        };
       });
     }
 
-    function drawFrame(now) {
-      if (!isVisible) return;
-      const dt = Math.min((now - lastTime) / 1000, 0.1);
-      lastTime = now;
-      ctx.clearRect(0, 0, W, H);
+    function drawBackground(now) {
+      if (!heroCanvas || !bgCtx || !pageVisible || prefersReducedMotion || isMobileViewport) return;
+      var size = resizeCanvas(heroCanvas, bgCtx);
+      var width = size.width;
+      var height = size.height;
+      if (!backgroundStars.length) initBackgroundStars(width, height);
+      bgCtx.clearRect(0, 0, width, height);
 
-      const ambient = ctx.createRadialGradient(W * 0.52, H * 0.36, 24, W * 0.52, H * 0.36, Math.max(W, H) * 0.6);
-      ambient.addColorStop(0, 'rgba(34,211,238,0.12)');
-      ambient.addColorStop(0.38, 'rgba(34,211,238,0.03)');
+      var ambient = bgCtx.createRadialGradient(width * 0.54, height * 0.38, 18, width * 0.54, height * 0.38, Math.max(width, height) * 0.66);
+      ambient.addColorStop(0, 'rgba(34,211,238,0.18)');
+      ambient.addColorStop(0.35, 'rgba(34,211,238,0.05)');
       ambient.addColorStop(1, 'rgba(2,6,23,0)');
-      ctx.fillStyle = ambient;
-      ctx.fillRect(0, 0, W, H);
+      bgCtx.fillStyle = ambient;
+      bgCtx.fillRect(0, 0, width, height);
 
-      drawBeacons(now);
-      drawSweepBands(now);
+      var pointerX = heroPointer.active ? (heroPointer.x / Math.max(width, 1) - 0.5) * 24 : 0;
+      var pointerY = heroPointer.active ? (heroPointer.y / Math.max(height, 1) - 0.5) * 20 : 0;
+      var cx = width * 0.62 + pointerX;
+      var cy = height * 0.44 + pointerY;
+      var ring1 = Math.min(width, height) * 0.17;
+      var ring2 = ring1 * 1.72;
+      var rotation = now * 0.00022;
+      var pulse = 1 + Math.sin(now * 0.0015) * 0.05;
 
-      const violet = ctx.createRadialGradient(W * 0.84, H * 0.16, 12, W * 0.84, H * 0.16, W * 0.22);
-      violet.addColorStop(0, 'rgba(168,85,247,0.14)');
-      violet.addColorStop(1, 'rgba(168,85,247,0)');
-      ctx.fillStyle = violet;
-      ctx.fillRect(0, 0, W, H);
+      [ring1, ring2].forEach(function (ring, idx) {
+        bgCtx.beginPath();
+        bgCtx.arc(cx, cy, ring * pulse, 0, Math.PI * 2);
+        bgCtx.strokeStyle = idx === 0 ? 'rgba(34,211,238,0.18)' : 'rgba(168,85,247,0.14)';
+        bgCtx.lineWidth = idx === 0 ? 1.1 : 0.9;
+        bgCtx.setLineDash(idx === 0 ? [] : [8, 10]);
+        bgCtx.stroke();
+      });
+      bgCtx.setLineDash([]);
 
-      nodes.forEach(n => {
-        const pullX = pointer.active ? ((pointer.x - W * 0.5) / W) * 0.08 * n.depth : 0;
-        const pullY = pointer.active ? ((pointer.y - H * 0.5) / H) * 0.08 * n.depth : 0;
-        n.orbit += dt * (0.45 + n.depth * 0.25);
-        n.x += (n.vx + pullX + Math.cos(n.orbit) * 0.012 * n.depth) * dt * 60;
-        n.y += (n.vy + pullY + Math.sin(n.orbit) * 0.014 * n.depth) * dt * 60;
-        n.pulse += dt * (1 + n.depth * 0.6);
-        if (n.x < -24) n.x = W + 24;
-        if (n.x > W + 24) n.x = -24;
-        if (n.y < -24) n.y = H + 24;
-        if (n.y > H + 24) n.y = -24;
+      backgroundStars.forEach(function (star) {
+        var x = star.x + Math.sin(now * 0.00018 * star.drift + star.phase) * 16 * star.depth;
+        var y = star.y + Math.cos(now * 0.00016 * star.drift + star.phase) * 11 * star.depth;
+        var glow = star.size * (1 + Math.sin(now * 0.001 + star.phase) * 0.25);
+        var grad = bgCtx.createRadialGradient(x, y, 0, x, y, glow * 4.8);
+        grad.addColorStop(0, star.color.replace('0.95', '0.18'));
+        grad.addColorStop(1, 'rgba(2,6,23,0)');
+        bgCtx.fillStyle = grad;
+        bgCtx.beginPath();
+        bgCtx.arc(x, y, glow * 4.8, 0, Math.PI * 2);
+        bgCtx.fill();
+        bgCtx.fillStyle = star.color;
+        bgCtx.beginPath();
+        bgCtx.arc(x, y, glow, 0, Math.PI * 2);
+        bgCtx.fill();
       });
 
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.22 * Math.min(a.depth, b.depth);
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.strokeStyle = `rgba(34,211,238,${alpha})`;
-            ctx.lineWidth = 0.7 + Math.min(a.depth, b.depth) * 0.35;
-            ctx.stroke();
-          }
+      if (!activeScene) return;
+      var allNodes = activeScene.sectors.concat(activeScene.themes);
+      allNodes.forEach(function (node, index) {
+        var angle = node.angle + rotation * (node.radius < 0.5 ? 1 : -0.75);
+        var radius = (node.radius < 0.5 ? ring1 : ring2) * (0.96 + Math.sin(now * 0.001 + node.layerOffset) * 0.02);
+        var x = cx + Math.cos(angle) * radius;
+        var y = cy + Math.sin(angle) * radius * 0.72;
+        var color = sentimentColor(node.sentiment, 0.96);
+        bgCtx.beginPath();
+        bgCtx.moveTo(cx, cy);
+        bgCtx.lineTo(x, y);
+        bgCtx.strokeStyle = sentimentColor(node.sentiment, node.radius < 0.5 ? 0.24 : 0.14);
+        bgCtx.lineWidth = node.radius < 0.5 ? 1 : 0.8;
+        bgCtx.stroke();
+
+        var glow = node.size + (index % 2 === 0 ? 1.4 : 0.6);
+        var g = bgCtx.createRadialGradient(x, y, 0, x, y, glow * 4.5);
+        g.addColorStop(0, color.replace(/0\.96\)/, '0.16)'));
+        g.addColorStop(1, 'rgba(2,6,23,0)');
+        bgCtx.fillStyle = g;
+        bgCtx.beginPath();
+        bgCtx.arc(x, y, glow * 4.5, 0, Math.PI * 2);
+        bgCtx.fill();
+        bgCtx.fillStyle = color;
+        bgCtx.beginPath();
+        bgCtx.arc(x, y, glow, 0, Math.PI * 2);
+        bgCtx.fill();
+      });
+
+      var coreGlow = bgCtx.createRadialGradient(cx, cy, 0, cx, cy, ring1 * 0.95);
+      coreGlow.addColorStop(0, 'rgba(34,211,238,0.18)');
+      coreGlow.addColorStop(0.6, 'rgba(34,211,238,0.03)');
+      coreGlow.addColorStop(1, 'rgba(2,6,23,0)');
+      bgCtx.fillStyle = coreGlow;
+      bgCtx.beginPath();
+      bgCtx.arc(cx, cy, ring1 * 0.95, 0, Math.PI * 2);
+      bgCtx.fill();
+    }
+
+    function drawImpactScene(now) {
+      if (!impactCanvas || !impactCtx || !activeScene) return;
+      var size = resizeCanvas(impactCanvas, impactCtx);
+      var width = size.width;
+      var height = size.height;
+      impactCtx.clearRect(0, 0, width, height);
+      sceneNodes = [];
+
+      var cx = width * 0.5;
+      var cy = height * 0.52;
+      var ring1 = Math.min(width, height) * 0.24;
+      var ring2 = Math.min(width, height) * 0.4;
+      var rotationA = prefersReducedMotion ? 0 : now * 0.0004;
+      var rotationB = prefersReducedMotion ? 0 : -now * 0.00026;
+
+      [ring1, ring2].forEach(function (ring, idx) {
+        impactCtx.beginPath();
+        impactCtx.arc(cx, cy, ring, 0, Math.PI * 2);
+        impactCtx.strokeStyle = idx === 0 ? 'rgba(34,211,238,0.16)' : 'rgba(148,163,184,0.12)';
+        impactCtx.lineWidth = 1;
+        impactCtx.setLineDash(idx === 0 ? [] : [6, 8]);
+        impactCtx.stroke();
+      });
+      impactCtx.setLineDash([]);
+
+      var field = activeScene.sectors.concat(activeScene.themes);
+      field.forEach(function (node) {
+        var rotation = node.radius < 0.5 ? rotationA : rotationB;
+        var ring = node.radius < 0.5 ? ring1 : ring2;
+        var x = cx + Math.cos(node.angle + rotation) * ring;
+        var y = cy + Math.sin(node.angle + rotation) * ring * 0.78;
+        var sizeBase = (node.radius < 0.5 ? 5.4 : 4.4) + node.size * 0.25;
+        var color = sentimentColor(node.sentiment, 0.96);
+        sceneNodes.push({ x: x, y: y, label: node.label, note: node.note, sentiment: node.sentiment, size: sizeBase });
+
+        impactCtx.beginPath();
+        impactCtx.moveTo(cx, cy);
+        impactCtx.lineTo(x, y);
+        impactCtx.strokeStyle = sentimentColor(node.sentiment, node.radius < 0.5 ? 0.26 : 0.14);
+        impactCtx.lineWidth = node.radius < 0.5 ? 1.2 : 0.85;
+        impactCtx.stroke();
+
+        var glow = impactCtx.createRadialGradient(x, y, 0, x, y, sizeBase * 4.6);
+        glow.addColorStop(0, color.replace(/0\.96\)/, '0.2)'));
+        glow.addColorStop(1, 'rgba(2,6,23,0)');
+        impactCtx.fillStyle = glow;
+        impactCtx.beginPath();
+        impactCtx.arc(x, y, sizeBase * 4.6, 0, Math.PI * 2);
+        impactCtx.fill();
+
+        impactCtx.fillStyle = color;
+        impactCtx.beginPath();
+        impactCtx.arc(x, y, sizeBase, 0, Math.PI * 2);
+        impactCtx.fill();
+      });
+
+      if (hoveredNode) {
+        impactCtx.beginPath();
+        impactCtx.arc(hoveredNode.x, hoveredNode.y, hoveredNode.size + 6, 0, Math.PI * 2);
+        impactCtx.strokeStyle = 'rgba(255,255,255,0.3)';
+        impactCtx.lineWidth = 1;
+        impactCtx.stroke();
+      }
+
+      var core = impactCtx.createRadialGradient(cx, cy, 0, cx, cy, ring1 * 0.65);
+      core.addColorStop(0, activeScene.change >= 0 ? 'rgba(34,211,238,0.25)' : 'rgba(244,63,94,0.22)');
+      core.addColorStop(0.5, 'rgba(34,211,238,0.06)');
+      core.addColorStop(1, 'rgba(2,6,23,0)');
+      impactCtx.fillStyle = core;
+      impactCtx.beginPath();
+      impactCtx.arc(cx, cy, ring1 * 0.65, 0, Math.PI * 2);
+      impactCtx.fill();
+    }
+
+    function renderFrame(now) {
+      if (!pageVisible) return;
+      drawBackground(now);
+      drawImpactScene(now || performance.now());
+      if (!prefersReducedMotion) animationFrame = window.requestAnimationFrame(renderFrame);
+    }
+
+    function renderStatic() {
+      drawBackground(performance.now());
+      drawImpactScene(performance.now());
+    }
+
+    function syncShockRailSelection(key) {
+      document.querySelectorAll('#hero-shock-rail .hero-shock-pill').forEach(function (pill) {
+        pill.classList.toggle('is-active', pill.getAttribute('data-commodity') === key);
+      });
+    }
+
+    function setActiveSceneByIndex(index) {
+      if (!movers.length) return;
+      activeIndex = (index + movers.length) % movers.length;
+      var pair = movers[activeIndex];
+      updateImpactCopy(buildSceneData(pair[0], pair[1]));
+      syncShockRailSelection(pair[0]);
+      renderStatic();
+    }
+
+    function startRotation() {
+      if (prefersReducedMotion || movers.length < 2) return;
+      window.clearInterval(rotationTimer);
+      rotationTimer = window.setInterval(function () {
+        if (hoveredNode) return;
+        setActiveSceneByIndex(activeIndex + 1);
+      }, 4400);
+    }
+
+    function handlePointer(clientX, clientY) {
+      if (!impactSceneEl || !sceneNodes.length) return;
+      var rect = impactSceneEl.getBoundingClientRect();
+      var x = clientX - rect.left;
+      var y = clientY - rect.top;
+      var nearest = null;
+      var nearestDistance = Infinity;
+      sceneNodes.forEach(function (node) {
+        var dx = node.x - x;
+        var dy = node.y - y;
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          nearest = node;
+        }
+      });
+      hoveredNode = nearestDistance <= 26 ? nearest : null;
+      if (impactTooltip) {
+        if (hoveredNode) {
+          impactTooltip.hidden = false;
+          impactTooltip.innerHTML = '<strong>' + hoveredNode.label + '</strong><br>' + hoveredNode.note;
+          impactTooltip.style.left = hoveredNode.x + 'px';
+          impactTooltip.style.top = hoveredNode.y + 'px';
+        } else {
+          impactTooltip.hidden = true;
         }
       }
-
-      nodes.forEach(n => {
-        const pulse = 1 + Math.sin(n.pulse) * 0.28;
-        const glowRadius = n.r * (5 + n.depth * 2.5) * pulse;
-        const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowRadius);
-        grd.addColorStop(0, n.color + '44');
-        grd.addColorStop(1, 'transparent');
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, glowRadius, 0, Math.PI * 2);
-        ctx.fillStyle = grd;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r * pulse * n.depth, 0, Math.PI * 2);
-        ctx.fillStyle = n.color;
-        ctx.shadowBlur = 14;
-        ctx.shadowColor = n.color;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      });
-
-      animFrame = requestAnimationFrame(drawFrame);
+      renderStatic();
     }
 
-    function stop() {
-      if (animFrame) {
-        cancelAnimationFrame(animFrame);
-        animFrame = null;
+    function syncHeroPointer(clientX, clientY) {
+      if (!heroCanvas) return;
+      var rect = heroCanvas.getBoundingClientRect();
+      heroPointer.x = clientX - rect.left;
+      heroPointer.y = clientY - rect.top;
+      heroPointer.active = heroPointer.x >= 0 && heroPointer.x <= rect.width && heroPointer.y >= 0 && heroPointer.y <= rect.height;
+    }
+
+    function loadHeroData(prices) {
+      movers = Object.entries(prices)
+        .filter(function (entry) { return entry[1] && typeof entry[1].change_pct === 'number' && !Number.isNaN(entry[1].change_pct); })
+        .sort(function (a, b) { return Math.abs(b[1].change_pct) - Math.abs(a[1].change_pct); })
+        .slice(0, 5);
+      if (!movers.length) movers = Object.entries(fallbackPrices);
+      setActiveSceneByIndex(0);
+      window.setTimeout(function () {
+        if (activeScene) syncShockRailSelection(activeScene.key);
+      }, 180);
+      startRotation();
+      if (prefersReducedMotion) {
+        renderStatic();
+      } else if (!animationFrame) {
+        animationFrame = window.requestAnimationFrame(renderFrame);
       }
     }
 
-    function start() {
-      resize();
-      initNodes();
-      stop();
-      lastTime = performance.now();
-      isVisible = true;
-      animFrame = requestAnimationFrame(drawFrame);
+    if (impactSceneEl) {
+      impactSceneEl.addEventListener('mousemove', function (event) {
+        handlePointer(event.clientX, event.clientY);
+      }, { passive: true });
+      impactSceneEl.addEventListener('mouseleave', function () {
+        hoveredNode = null;
+        if (impactTooltip) impactTooltip.hidden = true;
+        renderStatic();
+      });
+      impactSceneEl.addEventListener('click', function () {
+        if (movers.length > 1) setActiveSceneByIndex(activeIndex + 1);
+      });
     }
 
-    function updatePointer(clientX, clientY) {
-      const rect = canvas.getBoundingClientRect();
-      pointer.x = clientX - rect.left;
-      pointer.y = clientY - rect.top;
-      pointer.active = pointer.x >= 0 && pointer.x <= rect.width && pointer.y >= 0 && pointer.y <= rect.height;
-    }
-
-    window.addEventListener('mousemove', (e) => {
-      updatePointer(e.clientX, e.clientY);
-    }, { passive: true });
-    window.addEventListener('touchmove', (e) => {
-      if (!e.touches || !e.touches[0]) return;
-      updatePointer(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: true });
-    window.addEventListener('mouseleave', () => { pointer.active = false; });
-    window.addEventListener('touchend', () => { pointer.active = false; }, { passive: true });
-    window.addEventListener('resize', () => { resize(); initNodes(); });
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        isVisible = false;
-        stop();
-      } else {
-        start();
+    document.addEventListener('click', function (event) {
+      var pill = event.target.closest('#hero-shock-rail .hero-shock-pill');
+      if (!pill) return;
+      var key = pill.getAttribute('data-commodity');
+      if (!key) return;
+      var foundIndex = movers.findIndex(function (entry) { return entry[0] === key; });
+      if (foundIndex >= 0) {
+        event.preventDefault();
+        setActiveSceneByIndex(foundIndex);
       }
     });
-    start();
+
+    window.addEventListener('mousemove', function (event) {
+      syncHeroPointer(event.clientX, event.clientY);
+    }, { passive: true });
+    window.addEventListener('touchmove', function (event) {
+      if (!event.touches || !event.touches[0]) return;
+      syncHeroPointer(event.touches[0].clientX, event.touches[0].clientY);
+    }, { passive: true });
+    window.addEventListener('mouseleave', function () {
+      heroPointer.active = false;
+    });
+    window.addEventListener('resize', function () {
+      isMobileViewport = window.innerWidth <= 768;
+      backgroundStars = [];
+      renderStatic();
+    });
+    document.addEventListener('visibilitychange', function () {
+      pageVisible = !document.hidden;
+      if (pageVisible) {
+        renderStatic();
+        if (!prefersReducedMotion && !animationFrame) animationFrame = window.requestAnimationFrame(renderFrame);
+      } else if (animationFrame) {
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = null;
+      }
+    });
+
+    fetch('/assets/data/prices.json')
+      .then(function (response) { return response.json(); })
+      .then(loadHeroData)
+      .catch(function () { loadHeroData(fallbackPrices); });
   }
 
   /* ---------- Live Ticker ---------- */
