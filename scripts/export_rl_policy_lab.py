@@ -89,15 +89,20 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
             hedge_hit = float(regime_scores.get('hedge', 0.0))
             rotation_hit = float(regime_scores.get('rotation', 0.0))
             regime_quality = (continuation_hit + risk_off_hit + hedge_hit + rotation_hit) / 4.0
+            dominant_action_share = float(replay.dominant_action_share)
+            regime_balance_score = float(replay.regime_balance_score)
             score = (
-                uplift * 0.9
+                uplift * 0.8
                 + float(walk.vs_hold_reward_uplift) * 0.9
-                + replay.action_diversity * 0.18
-                + float(replay.action_entropy) * 0.12
-                + float(walk.mean_action_diversity) * 0.08
-                + regime_quality * 0.25
-                + replay.intervention_rate * 0.1
-                - replay.hold_share * 0.2
+                + replay.action_diversity * 0.15
+                + float(replay.action_entropy) * 0.1
+                + float(walk.mean_action_diversity) * 0.06
+                + regime_quality * 0.22
+                + regime_balance_score * 0.24
+                + replay.intervention_rate * 0.08
+                + float(replay.non_hold_value_add) * 0.12
+                - replay.hold_share * 0.16
+                - dominant_action_share * 0.18
                 + replay.win_rate * 0.04
             )
             row = {
@@ -113,8 +118,11 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 'action_entropy': float(replay.action_entropy),
                 'hold_share': float(replay.hold_share),
                 'intervention_rate': float(replay.intervention_rate),
+                'dominant_action_share': float(replay.dominant_action_share),
                 'regime_hit_rate': replay.regime_hit_rate,
                 'regime_active_counts': replay.regime_active_counts,
+                'regime_balance_score': float(replay.regime_balance_score),
+                'non_hold_value_add': float(replay.non_hold_value_add),
                 'walk_action_diversity': float(walk.mean_action_diversity),
                 'win_rate': float(replay.win_rate),
             }

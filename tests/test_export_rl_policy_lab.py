@@ -38,15 +38,23 @@ def test_export_payload_contains_frontier_and_replay():
         assert 'action_entropy' in payload['neural_policy']['replay_summary']
         assert 'hold_share' in payload['neural_policy']['replay_summary']
         assert 'intervention_rate' in payload['neural_policy']['replay_summary']
+        assert 'dominant_action_share' in payload['neural_policy']['replay_summary']
         assert 'regime_hit_rate' in payload['neural_policy']['replay_summary']
         assert 'regime_active_counts' in payload['neural_policy']['replay_summary']
+        assert 'regime_confusion_matrix' in payload['neural_policy']['replay_summary']
+        assert 'regime_balance_score' in payload['neural_policy']['replay_summary']
+        assert 'action_value_by_regime' in payload['neural_policy']['replay_summary']
+        assert 'non_hold_value_add' in payload['neural_policy']['replay_summary']
         assert 'vs_hold_reward_uplift' in payload['neural_policy']['walk_forward']
         first_profile = payload['neural_policy']['profile_selection'][0]
         assert 'action_entropy' in first_profile
         assert 'hold_share' in first_profile
         assert 'intervention_rate' in first_profile
+        assert 'dominant_action_share' in first_profile
         assert 'regime_hit_rate' in first_profile
         assert 'regime_active_counts' in first_profile
+        assert 'regime_balance_score' in first_profile
+        assert 'non_hold_value_add' in first_profile
         performance = payload['neural_policy'].get('performance', {})
         assert ('tiers' in performance) or ('speedup_vs_cpu' in performance)
         first = payload['policy_frontier'][0]

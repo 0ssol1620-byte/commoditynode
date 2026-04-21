@@ -9,7 +9,7 @@ from .dataset import RLTrajectoryDataset, RLTrajectoryStep
 from .env import CommodityTradingEnv
 from .neural_ppo import train_neural_ppo
 from .regimes import infer_regime_profile, infer_regime_targets
-from .reward import compute_reward_breakdown
+from .reward import compute_reward, compute_reward_breakdown
 
 
 @dataclass(frozen=True)
@@ -25,8 +25,13 @@ class PolicyReplaySummary:
     action_entropy: float
     hold_share: float
     intervention_rate: float
+    dominant_action_share: float
     regime_hit_rate: dict[str, float]
     regime_active_counts: dict[str, int]
+    regime_confusion_matrix: dict[str, dict[str, int]]
+    regime_balance_score: float
+    action_value_by_regime: dict[str, dict[str, float]]
+    non_hold_value_add: float
     reward_decomposition: dict[str, float]
 
 
@@ -75,6 +80,34 @@ def _normalized_entropy(action_counts: dict[str, int], action_count: int) -> flo
     return entropy / math.log(action_count)
 
 
+def _dominant_action_share(action_counts: dict[str, int]) -> float:
+    total = sum(max(0, int(v)) for v in action_counts.values())
+    if total <= 0:
+        return 1.0
+    return max(action_counts.values()) / total
+
+
+def _regime_balance_score(
+    action_counts: dict[str, int],
+    regime_hit_rate: dict[str, float],
+    regime_active_counts: dict[str, int],
+    action_names: Sequence[str],
+) -> float:
+    active_hits = [float(regime_hit_rate[key]) for key, count in regime_active_counts.items() if count > 0]
+    hit_component = sum(active_hits) / len(active_hits) if active_hits else 0.0
+    non_hold_actions = [name for name in action_names if name != 'hold']
+    non_hold_counts = [max(0, int(action_counts.get(name, 0))) for name in non_hold_actions]
+    non_hold_total = sum(non_hold_counts)
+    if non_hold_total <= 0:
+        concentration_component = 0.0
+        coverage_component = 0.0
+    else:
+        dominant_non_hold = max(non_hold_counts) / non_hold_total
+        concentration_component = 1.0 - dominant_non_hold
+        coverage_component = sum(1 for value in non_hold_counts if value > 0) / max(1, len(non_hold_counts))
+    return max(0.0, min(1.0, hit_component * 0.45 + concentration_component * 0.35 + coverage_component * 0.2))
+
+
 def replay_policy(
     name: str,
     steps: Sequence[RLTrajectoryStep],
@@ -108,6 +141,19 @@ def replay_policy(
         'hedge': {'hit': 0, 'total': 0},
         'rotation': {'hit': 0, 'total': 0},
     }
+    regime_confusion = {
+        regime: {action: 0 for action in config.action.discrete_actions}
+        for regime in ('continuation', 'risk_off', 'hedge', 'rotation')
+    }
+    regime_action_reward_sums = {
+        regime: {action: 0.0 for action in config.action.discrete_actions}
+        for regime in ('continuation', 'risk_off', 'hedge', 'rotation')
+    }
+    regime_action_reward_counts = {
+        regime: {action: 0 for action in config.action.discrete_actions}
+        for regime in ('continuation', 'risk_off', 'hedge', 'rotation')
+    }
+    non_hold_value_add = 0.0
     peak_equity = env.state.peak_equity
     max_drawdown = 0.0
     while not done:
@@ -119,12 +165,42 @@ def replay_policy(
         result = env.step(action)
         action_counts[result.info['action']] = action_counts.get(result.info['action'], 0) + 1
         regime_profile = infer_regime_profile(step.observation, direction=step.metadata.get('direction'))
+        hold_counterfactual = compute_reward(
+            realized_return=step.target_return,
+            position_before=before_position,
+            position_after=before_position,
+            hedge_before=before_hedge,
+            hedge_after=before_hedge,
+            peak_equity=peak_equity,
+            equity_after=before_equity,
+            pnl_weight=config.reward.pnl_weight,
+            turnover_penalty=config.reward.turnover_penalty,
+            drawdown_penalty=config.reward.drawdown_penalty,
+            concentration_penalty=config.reward.concentration_penalty,
+            event_gap_penalty=config.reward.event_gap_penalty,
+            event_risk=float(step.observation.get('event_risk', 0.0)),
+            abstain_bonus=config.reward.abstain_bonus,
+            action_taken='hold',
+            expert_action=step.expert_action,
+            expert_alignment_bonus=config.reward.expert_alignment_bonus,
+            wrong_way_penalty=config.reward.wrong_way_penalty,
+            stale_hold_penalty=config.reward.stale_hold_penalty,
+            regime_target_action=regime_profile.target_action,
+            regime_target_strength=regime_profile.target_strength,
+            regime_opportunity_bonus=config.reward.regime_opportunity_bonus,
+            missed_regime_penalty=config.reward.missed_regime_penalty,
+        )
         for regime_name, (is_active, target_action, _strength) in _regime_targets(step.observation, direction=step.metadata.get('direction')).items():
             if not is_active:
                 continue
             regime_hits[regime_name]['total'] += 1
+            regime_confusion[regime_name][result.info['action']] += 1
+            regime_action_reward_sums[regime_name][result.info['action']] += float(result.reward)
+            regime_action_reward_counts[regime_name][result.info['action']] += 1
             if result.info['action'] == target_action:
                 regime_hits[regime_name]['hit'] += 1
+        if result.info['action'] != 'hold':
+            non_hold_value_add += float(result.reward - hold_counterfactual)
         breakdown = compute_reward_breakdown(
             realized_return=step.target_return,
             position_before=before_position,
@@ -165,8 +241,18 @@ def replay_policy(
     hold_count = action_counts.get('hold', 0)
     total_actions = max(1, count)
     regime_hit_rate = {}
+    regime_active_counts = {}
     for key, values in regime_hits.items():
+        regime_active_counts[key] = int(values['total'])
         regime_hit_rate[key] = 0.0 if values['total'] == 0 else values['hit'] / values['total']
+    action_value_by_regime = {}
+    for regime, rewards in regime_action_reward_sums.items():
+        action_value_by_regime[regime] = {}
+        for action_name, reward_sum in rewards.items():
+            reward_count = int(regime_action_reward_counts[regime][action_name])
+            action_value_by_regime[regime][action_name] = 0.0 if reward_count == 0 else reward_sum / reward_count
+    dominant_action_share = _dominant_action_share(action_counts)
+    regime_balance_score = _regime_balance_score(action_counts, regime_hit_rate, regime_active_counts, config.action.discrete_actions)
 
     return PolicyReplaySummary(
         name=name,
@@ -180,8 +266,13 @@ def replay_policy(
         action_entropy=_normalized_entropy(action_counts, len(config.action.discrete_actions)),
         hold_share=hold_count / total_actions,
         intervention_rate=1.0 - (hold_count / total_actions),
+        dominant_action_share=dominant_action_share,
         regime_hit_rate=regime_hit_rate,
-        regime_active_counts={key: int(values['total']) for key, values in regime_hits.items()},
+        regime_active_counts=regime_active_counts,
+        regime_confusion_matrix=regime_confusion,
+        regime_balance_score=regime_balance_score,
+        action_value_by_regime=action_value_by_regime,
+        non_hold_value_add=non_hold_value_add,
         reward_decomposition=breakdown_totals,
     )
 

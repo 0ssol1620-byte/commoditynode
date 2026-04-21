@@ -738,12 +738,19 @@
     var positiveRate = hasWalk ? Number(walkForward.positive_window_rate) : null;
     var hasDiversity = replaySummary && replaySummary.action_diversity != null;
     var diversity = hasDiversity ? Number(replaySummary.action_diversity) : null;
+    var hasBalance = replaySummary && replaySummary.regime_balance_score != null;
+    var balance = hasBalance ? Number(replaySummary.regime_balance_score) : null;
+    var dominantShare = replaySummary && replaySummary.dominant_action_share != null ? Number(replaySummary.dominant_action_share) : null;
+    var nonHoldValueAdd = replaySummary && replaySummary.non_hold_value_add != null ? Number(replaySummary.non_hold_value_add) : null;
     var flags = [
       { label: 'Model', value: titleize(neural.selected_device || neural.report && neural.report.device_used || 'cpu') + ' · ' + Number(neural.selected_timesteps || neural.report && neural.report.timesteps || 0) + ' steps', tone: 'unclear' },
       { label: 'Freshness', value: commit, tone: 'unclear' },
       { label: 'Baseline edge', value: hasReplayUplift ? fmtSigned(replayUplift, 2) + ' replay uplift' : 'Unknown', tone: !hasReplayUplift ? 'unclear' : replayUplift >= 0 ? 'better' : 'worse' },
       { label: 'Walk-forward', value: hasWalk ? Math.round(positiveRate * 100) + '% positive windows · ' + fmtSigned(walkUplift, 2) : 'Unknown', tone: !hasWalk ? 'unclear' : positiveRate >= 0.67 ? 'better' : 'worse' },
       { label: 'Action diversity', value: hasDiversity ? Math.round(diversity * 100) + '% of action set' : 'Unknown', tone: !hasDiversity ? 'unclear' : diversity >= 0.6 ? 'better' : 'unclear' },
+      { label: 'Regime balance', value: hasBalance ? Math.round(balance * 100) + '%' : 'Unknown', tone: !hasBalance ? 'unclear' : balance >= 0.45 ? 'better' : balance >= 0.28 ? 'unclear' : 'worse' },
+      { label: 'Dominant action', value: dominantShare != null ? Math.round(dominantShare * 100) + '% share' : 'Unknown', tone: dominantShare == null ? 'unclear' : dominantShare <= 0.55 ? 'better' : dominantShare <= 0.75 ? 'unclear' : 'worse' },
+      { label: 'Intervention edge', value: nonHoldValueAdd != null ? fmtSigned(nonHoldValueAdd, 2) + ' vs hold' : 'Unknown', tone: nonHoldValueAdd == null ? 'unclear' : nonHoldValueAdd >= 0 ? 'better' : 'worse' },
       { label: 'Action entropy', value: replaySummary && replaySummary.action_entropy != null ? Math.round(Number(replaySummary.action_entropy || 0) * 100) + '%' : 'Unknown', tone: replaySummary && replaySummary.action_entropy != null ? (Number(replaySummary.action_entropy || 0) >= 0.45 ? 'better' : 'unclear') : 'unclear' },
       { label: 'Confidence', value: fmtConfidence(confidence), tone: !hasConfidence ? 'unclear' : confidence >= 0.45 ? 'better' : confidence >= 0.3 ? 'unclear' : 'worse' }
     ];
@@ -836,13 +843,16 @@
     var verdict = getRlVerdict(neural.vs_hold_reward_uplift, walkForward && walkForward.vs_hold_reward_uplift);
     var toneStyles = getRlToneStyles(verdict.tone);
     if ($('intel-rl-decision-title')) $('intel-rl-decision-title').textContent = titleize(neuralFrontier.action || 'hold') + ' · ' + verdict.label;
-    if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'The current policy favors ' + String(neuralFrontier.action || 'hold').replace(/_/g, ' ') + ' with ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '% confidence. Replay uplift versus hold is ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + ', walk-forward uplift is ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + ', and intervention rate is ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) : 0) + '%.';
+    if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'The current policy favors ' + String(neuralFrontier.action || 'hold').replace(/_/g, ' ') + ' with ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '% confidence. Replay uplift versus hold is ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + ', walk-forward uplift is ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + ', and intervention rate is ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) : 0) + '%. Current regime balance is ' + (replaySummary && replaySummary.regime_balance_score != null ? Math.round(Number(replaySummary.regime_balance_score || 0) * 100) : 0) + '% with non-hold value add ' + (replaySummary && replaySummary.non_hold_value_add != null ? fmtSigned(replaySummary.non_hold_value_add, 2) : '—') + '.';
     var pills = [];
     pills.push('<div class="intel-rl-pill"><strong>Confidence</strong> ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '%</div>');
     pills.push('<div class="intel-rl-pill" style="' + toneStyles.pill + '"><strong>Replay uplift</strong> ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + '</div>');
     pills.push('<div class="intel-rl-pill" style="' + getRlToneStyles((walkForward && walkForward.vs_hold_reward_uplift || 0) >= 0 ? 'better' : 'worse').pill + '"><strong>Walk uplift</strong> ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + '</div>');
     pills.push('<div class="intel-rl-pill"><strong>Entropy</strong> ' + (replaySummary ? Math.round(Number(replaySummary.action_entropy || 0) * 100) : 0) + '%</div>');
     pills.push('<div class="intel-rl-pill"><strong>Intervention</strong> ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) : 0) + '%</div>');
+    if (replaySummary && replaySummary.regime_balance_score != null) pills.push('<div class="intel-rl-pill"><strong>Regime balance</strong> ' + Math.round(Number(replaySummary.regime_balance_score || 0) * 100) + '%</div>');
+    if (replaySummary && replaySummary.dominant_action_share != null) pills.push('<div class="intel-rl-pill"><strong>Dominant action</strong> ' + Math.round(Number(replaySummary.dominant_action_share || 0) * 100) + '%</div>');
+    if (replaySummary && replaySummary.non_hold_value_add != null) pills.push('<div class="intel-rl-pill"><strong>Intervention edge</strong> ' + fmtSigned(replaySummary.non_hold_value_add || 0, 2) + '</div>');
     pills.push('<div class="intel-rl-pill" style="' + toneStyles.pill + '"><strong>Verdict</strong> ' + verdict.label + '</div>');
     if (frontier) pills.push('<div class="intel-rl-pill"><strong>Baseline</strong> ' + titleize(frontier.offline_action || 'hold') + '</div>');
     if (replaySummary) pills.push('<div class="intel-rl-pill"><strong>Replay win rate</strong> ' + fmtConfidence(replaySummary.win_rate) + '</div>');
@@ -913,6 +923,7 @@
     var observation = frontier.observation || {};
     var currentAction = String(neuralFrontier && neuralFrontier.action || frontier.neural_action || frontier.ppo_action || frontier.offline_action || 'hold');
     var currentConfidence = Number(neuralFrontier && neuralFrontier.confidence || frontier.neural_confidence || 0);
+    var currentProbabilities = neuralFrontier && neuralFrontier.probabilities ? neuralFrontier.probabilities : scoreScenarioActions(observation);
     var baseState = {
       event_risk: Number(observation.event_risk || 0),
       volatility_5: Number(observation.volatility_5 || 0),
@@ -935,6 +946,7 @@
         '<button type="button" class="intel-btn intel-btn-ghost" data-rl-preset="consensus_recovery">Consensus recovery</button>' +
         '<button type="button" class="intel-btn intel-btn-ghost" data-rl-preset="risk_off">Risk-off regime</button>' +
       '</div>' +
+      '<div class="intel-rl-pill-row" id="intel-rl-scenario-metrics" style="margin-top:12px;"></div>' +
       '<div class="intel-summary" id="intel-rl-scenario-result" style="margin-top:12px;">Scenario approximation is loading…</div>';
 
     function computeScenario(){
@@ -948,13 +960,38 @@
       var probabilities = scoreScenarioActions(scenarioObs);
       var ranked = Object.keys(probabilities).sort(function(a, b){ return probabilities[b] - probabilities[a]; });
       var action = ranked[0] || 'hold';
+      var altAction = ranked[1] || 'hold';
       var result = $('intel-rl-scenario-result');
-      var delta = Number(probabilities[action] || 0) - (action === currentAction ? currentConfidence : Number((neuralFrontier && neuralFrontier.probabilities || {})[action] || 0));
+      var metrics = $('intel-rl-scenario-metrics');
+      var referenceConfidence = action === currentAction ? currentConfidence : Number(currentProbabilities[action] || 0);
+      var confidenceDelta = Number(probabilities[action] || 0) - referenceConfidence;
+      var keepCurrent = action === currentAction;
+      var eventDelta = Number(scenarioObs.event_risk || 0) - Number(baseState.event_risk || 0);
+      var volDelta = Number(scenarioObs.volatility_5 || 0) - Number(baseState.volatility_5 || 0);
+      var spreadDelta = Number(scenarioObs.model_spread || 0) - Number(baseState.model_spread || 0);
+      var agreementDelta = Number(scenarioObs.agreement_score || 0) - Number(baseState.agreement_score || 0);
+      var trendDelta = Number(scenarioObs.trend_3 || 0) - Number(baseState.trend_3 || 0);
+      var strongestDriver = 'model disagreement';
+      var driverMagnitude = Math.abs(spreadDelta);
+      if (Math.abs(eventDelta) > driverMagnitude) { strongestDriver = 'event risk'; driverMagnitude = Math.abs(eventDelta); }
+      if (Math.abs(volDelta) > driverMagnitude) { strongestDriver = 'volatility'; driverMagnitude = Math.abs(volDelta); }
+      if (Math.abs(agreementDelta) > driverMagnitude) { strongestDriver = 'agreement'; driverMagnitude = Math.abs(agreementDelta); }
+      if (Math.abs(trendDelta) > driverMagnitude) { strongestDriver = 'trend'; driverMagnitude = Math.abs(trendDelta); }
       var summary = 'Scenario approximation → ' + titleize(action) + ' (' + Math.round(Number(probabilities[action] || 0) * 100) + '% confidence). ';
-      summary += action === currentAction ? 'This keeps the current recommendation intact' : 'This would flip the recommendation away from ' + titleize(currentAction);
-      summary += ' · delta vs current signal ' + fmtSigned(delta, 2) + '. ';
-      summary += 'Top alternatives: ' + ranked.slice(1, 3).map(function(key){ return titleize(key) + ' ' + fmtConfidence(probabilities[key]); }).join(' · ') + '.';
+      summary += keepCurrent ? 'This keeps the current recommendation intact' : 'This would flip the recommendation away from ' + titleize(currentAction);
+      summary += ' · delta vs current signal ' + fmtSigned(confidenceDelta, 2) + '. ';
+      summary += 'The strongest flip driver is ' + strongestDriver + ', while the top fallback is ' + titleize(altAction) + ' at ' + fmtConfidence(probabilities[altAction]) + '.';
       if (result) result.textContent = summary;
+      if (metrics) {
+        metrics.innerHTML = [
+          '<div class="intel-rl-pill"><strong>Current</strong> ' + titleize(currentAction) + ' ' + fmtConfidence(currentConfidence) + '</div>',
+          '<div class="intel-rl-pill"><strong>Scenario</strong> ' + titleize(action) + ' ' + fmtConfidence(probabilities[action]) + '</div>',
+          '<div class="intel-rl-pill"><strong>Confidence delta</strong> ' + fmtSigned(confidenceDelta, 2) + '</div>',
+          '<div class="intel-rl-pill"><strong>Flip status</strong> ' + (keepCurrent ? 'No flip' : 'Flip to ' + titleize(action)) + '</div>',
+          '<div class="intel-rl-pill"><strong>Pressure delta</strong> ' + fmtSigned(Number(scenarioObs.risk_pressure || 0) - Number(observation.risk_pressure || 0), 2) + '</div>',
+          '<div class="intel-rl-pill"><strong>Top alternative</strong> ' + titleize(altAction) + ' ' + fmtConfidence(probabilities[altAction]) + '</div>'
+        ].join('');
+      }
       ['event', 'vol', 'agreement', 'spread', 'trend'].forEach(function(key){
         var input = $('intel-rl-scenario-' + key);
         var out = $('intel-rl-scenario-' + key + '-value');
@@ -987,7 +1024,7 @@
       return String(item.device || '') === String(neural.selected_device || '') && Number(item.timesteps || 0) === Number(neural.selected_timesteps || 0);
     });
     events.push({ title: 'Policy artifact refreshed', copy: 'Commit ' + String(state.rlArtifacts && state.rlArtifacts.updated_from_commit || 'unknown') + ' selected ' + titleize(neural.selected_device || 'cpu') + ' with ' + Number(neural.selected_timesteps || 0) + ' timesteps.' });
-    if (selectedProfile) events.push({ title: 'Profile selection winner', copy: 'Selection score ' + fmtMetric(selectedProfile.score, 3, false) + ' with replay uplift ' + fmtSigned(selectedProfile.uplift_vs_hold || 0, 2) + ' and walk uplift ' + fmtSigned(selectedProfile.walk_uplift_vs_hold || 0, 2) + '.' });
+    if (selectedProfile) events.push({ title: 'Profile selection winner', copy: 'Selection score ' + fmtMetric(selectedProfile.score, 3, false) + ' with replay uplift ' + fmtSigned(selectedProfile.uplift_vs_hold || 0, 2) + ', walk uplift ' + fmtSigned(selectedProfile.walk_uplift_vs_hold || 0, 2) + ', regime balance ' + fmtConfidence(selectedProfile.regime_balance_score) + ', and dominant action share ' + fmtConfidence(selectedProfile.dominant_action_share) + '.' });
     if (frontier) events.push({ title: 'Recommendation issued', copy: titleize(state.selected) + ' was assigned ' + titleize(frontier.neural_action || frontier.ppo_action || 'hold') + ' at ' + Math.round(Number(frontier.neural_confidence || 0) * 100) + '% confidence.' });
     if (walkForward) events.push({ title: 'Walk-forward review', copy: 'Positive windows ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% with uplift vs hold ' + fmtSigned(walkForward.vs_hold_reward_uplift || 0, 2) + '.' });
     if (replaySummary) events.push({ title: 'Replay outcome snapshot', copy: 'Replay final equity ' + Number(replaySummary.final_equity || 0).toFixed(3) + ' and action diversity ' + Math.round(Number(replaySummary.action_diversity || 0) * 100) + '%.' });
@@ -1040,10 +1077,15 @@
       window.gsap.killTweensOf(node);
       window.gsap.fromTo(node, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: idx * 0.05 });
     });
-    var pills = Array.prototype.slice.call(document.querySelectorAll('#intel-rl-decision-pills .intel-rl-pill, #intel-rl-trust-strip .intel-rl-pill, #intel-rl-field-meta .intel-rl-pill'));
+    var pills = Array.prototype.slice.call(document.querySelectorAll('#intel-rl-decision-pills .intel-rl-pill, #intel-rl-trust-strip .intel-rl-pill, #intel-rl-field-meta .intel-rl-pill, #intel-rl-regime-pills .intel-rl-pill, #intel-rl-scenario-metrics .intel-rl-pill'));
     if (pills.length) {
       window.gsap.killTweensOf(pills);
       window.gsap.fromTo(pills, { opacity: 0, y: 10, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power2.out', stagger: 0.03, delay: 0.12 });
+    }
+    var center = document.querySelector('.intel-rl-field-center');
+    if (center) {
+      window.gsap.killTweensOf(center);
+      window.gsap.fromTo(center, { boxShadow: '0 0 0 rgba(34,211,238,0.0)', scale: 0.98 }, { boxShadow: '0 0 42px rgba(34,211,238,0.22)', scale: 1, duration: 0.8, ease: 'power2.out' });
     }
   }
 
@@ -1278,9 +1320,19 @@
     });
     var pills = $('intel-rl-regime-pills');
     if (pills) {
+      var extras = [];
+      if (replaySummary.regime_balance_score != null) extras.push('<div class="intel-rl-pill"><strong>Balance score</strong> ' + Math.round(Number(replaySummary.regime_balance_score || 0) * 100) + '%</div>');
+      if (replaySummary.non_hold_value_add != null) extras.push('<div class="intel-rl-pill"><strong>Non-hold edge</strong> ' + fmtSigned(replaySummary.non_hold_value_add || 0, 2) + '</div>');
+      keys.forEach(function(key){
+        var actionValues = replaySummary.action_value_by_regime && replaySummary.action_value_by_regime[key] ? replaySummary.action_value_by_regime[key] : null;
+        if (!actionValues) return;
+        var bestAction = Object.keys(actionValues).sort(function(a, b){ return Number(actionValues[b] || -999) - Number(actionValues[a] || -999); })[0];
+        if (!bestAction) return;
+        extras.push('<div class="intel-rl-pill"><strong>' + titleize(key) + ' value</strong> ' + titleize(bestAction) + ' ' + fmtSigned(actionValues[bestAction] || 0, 2) + '</div>');
+      });
       pills.innerHTML = keys.map(function(key){
         return '<div class="intel-rl-pill"><strong>' + titleize(key) + '</strong> ' + Math.round(Number(hit[key] || 0) * 100) + '% · ' + Number(active[key] || 0) + ' active</div>';
-      }).join('');
+      }).concat(extras).join('');
     }
   }
 

@@ -1,5 +1,5 @@
 {
-  "updated_from_commit": "1e9464c+",
+  "updated_from_commit": "6a6822e+",
   "config": {
     "name": "commoditynode-rl-policy-lab",
     "commodity_keys": [
@@ -143,7 +143,7 @@
       {
         "device": "cpu",
         "timesteps": 1024,
-        "score": 7.4153933711232884,
+        "score": 8.04453933071898,
         "reward": 4.557833148043336,
         "hold_reward": -0.7883545833548312,
         "uplift_vs_hold": 5.346187731398167,
@@ -153,6 +153,7 @@
         "action_entropy": 0.7556891781968038,
         "hold_share": 0.030303030303030304,
         "intervention_rate": 0.9696969696969697,
+        "dominant_action_share": 0.4090909090909091,
         "regime_hit_rate": {
           "continuation": 0.25,
           "risk_off": 0.8846153846153846,
@@ -165,13 +166,15 @@
           "hedge": 26,
           "rotation": 48
         },
+        "regime_balance_score": 0.5808293269230769,
+        "non_hold_value_add": 9.887750262091332,
         "walk_action_diversity": 0.6666666666666666,
         "win_rate": 0.5454545454545454
       },
       {
         "device": "cpu",
         "timesteps": 2048,
-        "score": 7.549592724042251,
+        "score": 8.156785616131117,
         "reward": 4.765649653024503,
         "hold_reward": -0.7883545833548312,
         "uplift_vs_hold": 5.554004236379334,
@@ -181,6 +184,7 @@
         "action_entropy": 0.628172369330016,
         "hold_share": 0.0,
         "intervention_rate": 1.0,
+        "dominant_action_share": 0.5151515151515151,
         "regime_hit_rate": {
           "continuation": 0.20833333333333334,
           "risk_off": 0.8076923076923077,
@@ -193,13 +197,15 @@
           "hedge": 26,
           "rotation": 48
         },
+        "regime_balance_score": 0.5398892773892774,
+        "non_hold_value_add": 10.047139692611655,
         "walk_action_diversity": 0.6,
         "win_rate": 0.5454545454545454
       },
       {
         "device": "cuda",
         "timesteps": 1024,
-        "score": 7.350365106876514,
+        "score": 7.9607112180500845,
         "reward": 4.161824053977818,
         "hold_reward": -0.7883545833548312,
         "uplift_vs_hold": 4.950178637332649,
@@ -209,6 +215,7 @@
         "action_entropy": 0.7048420966882314,
         "hold_share": 0.015151515151515152,
         "intervention_rate": 0.9848484848484849,
+        "dominant_action_share": 0.4393939393939394,
         "regime_hit_rate": {
           "continuation": 0.16666666666666666,
           "risk_off": 0.8846153846153846,
@@ -221,13 +228,15 @@
           "hedge": 26,
           "rotation": 48
         },
+        "regime_balance_score": 0.5629567307692307,
+        "non_hold_value_add": 9.465058817494501,
         "walk_action_diversity": 0.6,
         "win_rate": 0.5151515151515151
       },
       {
         "device": "cuda",
         "timesteps": 2048,
-        "score": 7.950318001172969,
+        "score": 8.51309136009112,
         "reward": 4.852184144637822,
         "hold_reward": -0.7883545833548312,
         "uplift_vs_hold": 5.640538727992653,
@@ -237,6 +246,7 @@
         "action_entropy": 0.4517619581776745,
         "hold_share": 0.0,
         "intervention_rate": 1.0,
+        "dominant_action_share": 0.6212121212121212,
         "regime_hit_rate": {
           "continuation": 0.0,
           "risk_off": 0.8076923076923077,
@@ -249,6 +259,8 @@
           "hedge": 26,
           "rotation": 48
         },
+        "regime_balance_score": 0.43870556526806526,
+        "non_hold_value_add": 10.023333090674752,
         "walk_action_diversity": 0.6,
         "win_rate": 0.5454545454545454
       }
@@ -345,6 +357,7 @@
       "action_entropy": 0.5408388777295632,
       "hold_share": 0.0,
       "intervention_rate": 1.0,
+      "dominant_action_share": 0.5,
       "regime_hit_rate": {
         "continuation": 0.0,
         "risk_off": 0.7222222222222222,
@@ -357,6 +370,68 @@
         "hedge": 22,
         "rotation": 41
       },
+      "regime_confusion_matrix": {
+        "continuation": {
+          "reduce_risk": 11,
+          "hold": 0,
+          "add_continuation": 0,
+          "add_hedge": 1,
+          "relative_value_rotation": 4
+        },
+        "risk_off": {
+          "reduce_risk": 13,
+          "hold": 0,
+          "add_continuation": 1,
+          "add_hedge": 2,
+          "relative_value_rotation": 2
+        },
+        "hedge": {
+          "reduce_risk": 17,
+          "hold": 0,
+          "add_continuation": 1,
+          "add_hedge": 2,
+          "relative_value_rotation": 2
+        },
+        "rotation": {
+          "reduce_risk": 19,
+          "hold": 0,
+          "add_continuation": 0,
+          "add_hedge": 2,
+          "relative_value_rotation": 20
+        }
+      },
+      "regime_balance_score": 0.5213553215077605,
+      "action_value_by_regime": {
+        "continuation": {
+          "reduce_risk": 0.02556088519426174,
+          "hold": 0.0,
+          "add_continuation": 0.0,
+          "add_hedge": -0.05033927244059529,
+          "relative_value_rotation": -0.02541920545818979
+        },
+        "risk_off": {
+          "reduce_risk": 0.12058462060349033,
+          "hold": 0.0,
+          "add_continuation": -0.13142332844806545,
+          "add_hedge": -0.047843910655246444,
+          "relative_value_rotation": -0.011791384987721205
+        },
+        "hedge": {
+          "reduce_risk": 0.0840141734801977,
+          "hold": 0.0,
+          "add_continuation": -0.13142332844806545,
+          "add_hedge": -0.047843910655246444,
+          "relative_value_rotation": -0.011791384987721205
+        },
+        "rotation": {
+          "reduce_risk": 0.04506069340737471,
+          "hold": 0.0,
+          "add_continuation": 0.0,
+          "add_hedge": -0.047843910655246444,
+          "relative_value_rotation": 0.1367059151826917
+        }
+      },
+      "non_hold_value_add": 8.44907309983602,
       "reward_decomposition": {
         "pnl": -0.006334222044824705,
         "turnover_cost": 0.7110000000000003,
@@ -385,6 +460,7 @@
       "action_entropy": 0.0,
       "hold_share": 1.0,
       "intervention_rate": 0.0,
+      "dominant_action_share": 1.0,
       "regime_hit_rate": {
         "continuation": 0.0,
         "risk_off": 0.0,
@@ -397,6 +473,68 @@
         "hedge": 3,
         "rotation": 1
       },
+      "regime_confusion_matrix": {
+        "continuation": {
+          "reduce_risk": 0,
+          "hold": 1,
+          "add_continuation": 0,
+          "add_hedge": 0,
+          "relative_value_rotation": 0
+        },
+        "risk_off": {
+          "reduce_risk": 0,
+          "hold": 3,
+          "add_continuation": 0,
+          "add_hedge": 0,
+          "relative_value_rotation": 0
+        },
+        "hedge": {
+          "reduce_risk": 0,
+          "hold": 3,
+          "add_continuation": 0,
+          "add_hedge": 0,
+          "relative_value_rotation": 0
+        },
+        "rotation": {
+          "reduce_risk": 0,
+          "hold": 1,
+          "add_continuation": 0,
+          "add_hedge": 0,
+          "relative_value_rotation": 0
+        }
+      },
+      "regime_balance_score": 0.0,
+      "action_value_by_regime": {
+        "continuation": {
+          "reduce_risk": 0.0,
+          "hold": -0.14021040876782914,
+          "add_continuation": 0.0,
+          "add_hedge": 0.0,
+          "relative_value_rotation": 0.0
+        },
+        "risk_off": {
+          "reduce_risk": 0.0,
+          "hold": -0.21750469970261052,
+          "add_continuation": 0.0,
+          "add_hedge": 0.0,
+          "relative_value_rotation": 0.0
+        },
+        "hedge": {
+          "reduce_risk": 0.0,
+          "hold": -0.21750469970261052,
+          "add_continuation": 0.0,
+          "add_hedge": 0.0,
+          "relative_value_rotation": 0.0
+        },
+        "rotation": {
+          "reduce_risk": 0.0,
+          "hold": -0.13568248937218857,
+          "add_continuation": 0.0,
+          "add_hedge": 0.0,
+          "relative_value_rotation": 0.0
+        }
+      },
+      "non_hold_value_add": 0.0,
       "reward_decomposition": {
         "pnl": 0.0,
         "turnover_cost": 0.0,

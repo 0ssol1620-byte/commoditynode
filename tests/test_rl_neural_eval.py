@@ -31,8 +31,13 @@ def test_neural_walk_forward_and_replay():
     assert 0.0 <= replay.action_entropy <= 1.0
     assert 0.0 <= replay.hold_share <= 1.0
     assert 0.0 <= replay.intervention_rate <= 1.0
+    assert 0.0 <= replay.dominant_action_share <= 1.0
     assert set(replay.regime_hit_rate.keys()) == {'continuation', 'risk_off', 'hedge', 'rotation'}
     assert set(replay.regime_active_counts.keys()) == {'continuation', 'risk_off', 'hedge', 'rotation'}
+    assert set(replay.regime_confusion_matrix.keys()) == {'continuation', 'risk_off', 'hedge', 'rotation'}
+    assert 0.0 <= replay.regime_balance_score <= 1.0
+    assert isinstance(replay.non_hold_value_add, float)
+    assert set(replay.action_value_by_regime.keys()) == {'continuation', 'risk_off', 'hedge', 'rotation'}
 
     walk = evaluate_neural_walk_forward(
         dataset,

@@ -87,18 +87,22 @@ layout: default
 .intel-insight-title { color:#f8fafc; font-weight:800; line-height:1.45; }
 .intel-insight-copy { color:#94a3b8; font-size:0.9rem; line-height:1.7; margin-top:6px; }
 .intel-rl-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; margin-top:18px; }
-.intel-rl-card { padding:18px 20px; border-radius:16px; border:1px solid rgba(255,255,255,0.08); background:rgba(8,12,20,0.42); }
+.intel-rl-card { position:relative; overflow:hidden; padding:18px 20px; border-radius:16px; border:1px solid rgba(255,255,255,0.08); background:linear-gradient(180deg, rgba(8,12,20,0.56), rgba(8,12,20,0.32)); box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 20px 60px rgba(2,6,23,0.24); }
+.intel-rl-card::after { content:''; position:absolute; inset:auto -30% -40% 45%; height:140px; background:radial-gradient(circle, rgba(34,211,238,0.12), rgba(34,211,238,0) 68%); pointer-events:none; }
 .intel-rl-card h3 { margin:0 0 8px; color:#f8fafc; font-size:1.02rem; }
 .intel-rl-card p { margin:0; color:#94a3b8; line-height:1.7; }
 .intel-rl-chart-wrap { position:relative; min-height:220px; margin-top:14px; }
 .intel-rl-pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
-.intel-rl-pill { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:#e2e8f0; font-size:0.8rem; }
+.intel-rl-pill { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:#e2e8f0; font-size:0.8rem; backdrop-filter: blur(10px); }
 .intel-rl-windows { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; margin-top:14px; }
 .intel-rl-window { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
 .intel-rl-window strong { display:block; color:#f8fafc; margin-top:4px; }
 .intel-rl-window span { display:block; color:#94a3b8; font-size:0.85rem; line-height:1.55; margin-top:4px; }
 .intel-rl-timeline { display:grid; gap:10px; margin-top:14px; }
-.intel-rl-field-shell { margin-top:16px; padding:18px 20px; border-radius:18px; border:1px solid rgba(34,211,238,0.16); background:linear-gradient(135deg, rgba(4,15,25,0.94), rgba(20,12,34,0.92)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 24px 60px rgba(2,6,23,0.3); }
+.intel-rl-field-shell { position:relative; margin-top:16px; padding:18px 20px; border-radius:18px; border:1px solid rgba(34,211,238,0.16); background:linear-gradient(135deg, rgba(4,15,25,0.94), rgba(20,12,34,0.92)); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 24px 60px rgba(2,6,23,0.3); overflow:hidden; }
+.intel-rl-field-shell::before, .intel-rl-field-shell::after { content:''; position:absolute; border-radius:999px; filter: blur(12px); opacity:0.55; pointer-events:none; }
+.intel-rl-field-shell::before { width:220px; height:220px; right:-60px; top:-70px; background:radial-gradient(circle, rgba(34,211,238,0.22), rgba(34,211,238,0) 70%); animation:intelFloatAura 8s ease-in-out infinite; }
+.intel-rl-field-shell::after { width:180px; height:180px; left:-40px; bottom:-70px; background:radial-gradient(circle, rgba(192,132,252,0.18), rgba(192,132,252,0) 72%); animation:intelFloatAura 10s ease-in-out infinite reverse; }
 .intel-rl-field-wrap { position:relative; min-height:320px; border-radius:16px; overflow:hidden; background:radial-gradient(circle at 50% 45%, rgba(34,211,238,0.08), rgba(15,23,42,0.78) 48%, rgba(2,6,23,0.96) 100%); border:1px solid rgba(255,255,255,0.06); }
 .intel-rl-field-wrap canvas { width:100%; height:320px; display:block; }
 .intel-rl-field-overlay { position:absolute; inset:0; pointer-events:none; }
@@ -119,6 +123,10 @@ layout: default
 .intel-rl-step { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
 .intel-rl-step strong { color:#f8fafc; display:block; }
 .intel-rl-step span { display:block; color:#94a3b8; font-size:0.86rem; line-height:1.6; margin-top:4px; }
+@keyframes intelFloatAura {
+  0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.45; }
+  50% { transform: translate3d(0,-12px,0) scale(1.08); opacity: 0.72; }
+}
 .intel-success-value { color:#f8fafc; font-size:1.8rem; font-weight:800; line-height:1.1; }
 .intel-price-tier { color:#f8fafc; font-size:1rem; font-weight:800; }
 .intel-price-badge { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; background:rgba(168,85,247,0.12); color:#c084fc; border:1px solid rgba(168,85,247,0.18); font-size:0.74rem; font-weight:800; }
