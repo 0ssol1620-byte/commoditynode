@@ -651,7 +651,7 @@
     if (!isVisible) {
       stopRlFieldAnimation();
       clearRlCharts();
-      ['intel-rl-probability-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body', 'intel-rl-field-meta'].forEach(function(id){
+      ['intel-rl-probability-pills', 'intel-rl-regime-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body', 'intel-rl-field-meta'].forEach(function(id){
         if ($(id)) $(id).innerHTML = '';
       });
       ['intel-rl-node-reduce_risk','intel-rl-node-hold','intel-rl-node-add_continuation','intel-rl-node-add_hedge','intel-rl-node-relative_value_rotation'].forEach(function(id){
@@ -1080,11 +1080,13 @@
       if ($('intel-rl-field-center-copy')) $('intel-rl-field-center-copy').textContent = entropyText;
       if (meta) {
         var regime = replaySummary && replaySummary.regime_hit_rate ? replaySummary.regime_hit_rate : {};
+        var activeCounts = replaySummary && replaySummary.regime_active_counts ? replaySummary.regime_active_counts : {};
         meta.innerHTML = [
           '<div class="intel-rl-pill"><strong>Intervention</strong> ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) + '%' : '—') + '</div>',
           '<div class="intel-rl-pill"><strong>Hold share</strong> ' + (replaySummary ? Math.round(Number(replaySummary.hold_share || 0) * 100) + '%' : '—') + '</div>',
-          '<div class="intel-rl-pill"><strong>Continuation hit</strong> ' + (regime.continuation != null ? Math.round(Number(regime.continuation || 0) * 100) + '%' : '—') + '</div>',
-          '<div class="intel-rl-pill"><strong>Hedge hit</strong> ' + (regime.hedge != null ? Math.round(Number(regime.hedge || 0) * 100) + '%' : '—') + '</div>',
+          '<div class="intel-rl-pill"><strong>Risk-off hit</strong> ' + (regime.risk_off != null ? Math.round(Number(regime.risk_off || 0) * 100) + '%' : '—') + '</div>',
+          '<div class="intel-rl-pill"><strong>Rotation hit</strong> ' + (regime.rotation != null ? Math.round(Number(regime.rotation || 0) * 100) + '%' : '—') + '</div>',
+          '<div class="intel-rl-pill"><strong>Active regimes</strong> ' + Object.keys(activeCounts).map(function(key){ return Number(activeCounts[key] || 0); }).reduce(function(sum, value){ return sum + value; }, 0) + '</div>',
           '<div class="intel-rl-pill"><strong>Walk uplift</strong> ' + (walkForward && walkForward.vs_hold_reward_uplift != null ? fmtSigned(walkForward.vs_hold_reward_uplift, 2) : '—') + '</div>'
         ].join('');
       }
@@ -1226,6 +1228,62 @@
     });
   }
 
+  function renderRlRegimeBalance(replaySummary){
+    if (!replaySummary) return;
+    var hit = replaySummary.regime_hit_rate || {};
+    var active = replaySummary.regime_active_counts || {};
+    var labels = ['Continuation', 'Risk-off', 'Hedge', 'Rotation'];
+    var keys = ['continuation', 'risk_off', 'hedge', 'rotation'];
+    ensureRlChart('intel-rl-regime-chart', {
+      type: 'radar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Hit rate',
+            data: keys.map(function(key){ return Math.round(Number(hit[key] || 0) * 100); }),
+            backgroundColor: 'rgba(34,211,238,0.16)',
+            borderColor: '#22d3ee',
+            pointBackgroundColor: '#22d3ee',
+            pointBorderColor: '#22d3ee',
+            borderWidth: 2
+          },
+          {
+            label: 'Opportunity count',
+            data: keys.map(function(key){ return Number(active[key] || 0); }),
+            backgroundColor: 'rgba(168,85,247,0.12)',
+            borderColor: '#a855f7',
+            pointBackgroundColor: '#c084fc',
+            pointBorderColor: '#c084fc',
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          r: {
+            angleLines: { color: 'rgba(148,163,184,0.12)' },
+            grid: { color: 'rgba(148,163,184,0.12)' },
+            pointLabels: { color: '#cbd5e1', font: { size: 11, weight: '600' } },
+            ticks: { display: false },
+            suggestedMin: 0
+          }
+        },
+        plugins: {
+          legend: { labels: { color: '#cbd5e1', boxWidth: 12 } }
+        }
+      }
+    });
+    var pills = $('intel-rl-regime-pills');
+    if (pills) {
+      pills.innerHTML = keys.map(function(key){
+        return '<div class="intel-rl-pill"><strong>' + titleize(key) + '</strong> ' + Math.round(Number(hit[key] || 0) * 100) + '% · ' + Number(active[key] || 0) + ' active</div>';
+      }).join('');
+    }
+  }
+
   function renderRlWalkForward(walkForward){
     var target = $('intel-rl-windows');
     if (!target) return;
@@ -1249,7 +1307,7 @@
     ensureRlChart('intel-rl-reward-chart', {
       type: 'bar',
       data: {
-        labels: ['PnL', 'Turnover', 'Drawdown', 'Concentration', 'Event gap', 'Abstain'],
+        labels: ['PnL', 'Turnover', 'Drawdown', 'Concentration', 'Event gap', 'Expert align', 'Regime bonus', 'Missed regime', 'Stale hold'],
         datasets: [{
           label: 'Reward component',
           data: [
@@ -1258,10 +1316,13 @@
             -Number(breakdown.drawdown_cost || 0),
             -Number(breakdown.concentration_cost || 0),
             -Number(breakdown.event_gap_cost || 0),
-            Number(breakdown.abstain_bonus || 0)
+            Number(breakdown.expert_alignment_bonus || 0),
+            Number(breakdown.regime_opportunity_bonus || 0),
+            -Number(breakdown.missed_regime_cost || 0),
+            -Number(breakdown.stale_hold_cost || 0)
           ],
-          backgroundColor: ['rgba(34,197,94,0.62)','rgba(244,63,94,0.62)','rgba(244,63,94,0.72)','rgba(251,146,60,0.72)','rgba(168,85,247,0.68)','rgba(34,211,238,0.62)'],
-          borderColor: ['#22c55e','#f43f5e','#f43f5e','#fb923c','#a855f7','#22d3ee'],
+          backgroundColor: ['rgba(34,197,94,0.62)','rgba(244,63,94,0.62)','rgba(244,63,94,0.72)','rgba(251,146,60,0.72)','rgba(168,85,247,0.68)','rgba(34,211,238,0.62)','rgba(250,204,21,0.72)','rgba(239,68,68,0.52)','rgba(148,163,184,0.58)'],
+          borderColor: ['#22c55e','#f43f5e','#f43f5e','#fb923c','#a855f7','#22d3ee','#facc15','#ef4444','#94a3b8'],
           borderWidth: 1,
           borderRadius: 10
         }]
@@ -1288,6 +1349,7 @@
     if (config.demoKind !== 'rl-policy-lab' || !neuralFrontier) return;
     renderRlProbabilitySurface(neuralFrontier);
     renderRlPolicyComparison(frontier, neuralFrontier);
+    renderRlRegimeBalance(replaySummary);
     renderRlWalkForward(walkForward);
     renderRlEpisodeReplay(episodeReplay);
     renderRlRewardStack(replaySummary);

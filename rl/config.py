@@ -43,10 +43,12 @@ class RewardConfig:
     drawdown_penalty: float = 0.08
     concentration_penalty: float = 0.01
     event_gap_penalty: float = 0.05
-    abstain_bonus: float = 0.005
-    expert_alignment_bonus: float = 0.16
+    abstain_bonus: float = 0.003
+    expert_alignment_bonus: float = 0.12
     wrong_way_penalty: float = 0.06
-    stale_hold_penalty: float = 0.1
+    stale_hold_penalty: float = 0.14
+    regime_opportunity_bonus: float = 0.11
+    missed_regime_penalty: float = 0.13
 
 
 @dataclass(frozen=True)

@@ -6,16 +6,17 @@ from typing import Any
 from .config import RLExperimentConfig, get_default_rl_config
 from .dataset import RLTrajectoryStep
 from .features import action_mask
+from .regimes import infer_regime_profile
 from .reward import compute_reward
 from .types import RLStepResult
 
 
-ACTION_DELTAS = {
-    'reduce_risk': {'position': -0.5, 'hedge': 0.0},
-    'hold': {'position': 0.0, 'hedge': 0.0},
-    'add_continuation': {'position': 0.5, 'hedge': 0.0},
-    'add_hedge': {'position': 0.0, 'hedge': 0.5},
-    'relative_value_rotation': {'position': 0.25, 'hedge': 0.25},
+ACTION_TARGETS = {
+    'reduce_risk': {'position': -0.35, 'hedge': 0.25},
+    'hold': None,
+    'add_continuation': {'position': 0.85, 'hedge': 0.0},
+    'add_hedge': {'position': 0.1, 'hedge': 0.85},
+    'relative_value_rotation': {'position': 0.35, 'hedge': 0.35},
 }
 
 
@@ -60,19 +61,17 @@ class CommodityTradingEnv:
         return [bool(self.valid_action_mask().get(action, False)) for action in self.config.action.discrete_actions]
 
     def step(self, action: str) -> RLStepResult:
-        if action not in ACTION_DELTAS:
+        if action not in ACTION_TARGETS:
             raise ValueError(f'unknown action: {action}')
-        mask = self.valid_action_mask()
-        if not mask.get(action, False):
-            action = 'hold'
 
         before_position = self.state.position
         before_hedge = self.state.hedge
-        delta = ACTION_DELTAS[action]
-        self.state.position = max(-self.config.action.max_position_abs, min(self.config.action.max_position_abs, self.state.position + delta['position']))
-        self.state.hedge = max(-self.config.action.max_hedge_abs, min(self.config.action.max_hedge_abs, self.state.hedge + delta['hedge']))
-
         step = self._current_step()
+        targets = ACTION_TARGETS[action]
+        if targets is not None:
+            self.state.position = max(-self.config.action.max_position_abs, min(self.config.action.max_position_abs, float(targets['position'])))
+            self.state.hedge = max(-self.config.action.max_hedge_abs, min(self.config.action.max_hedge_abs, float(targets['hedge'])))
+        regime = infer_regime_profile(step.observation, direction=step.metadata.get('direction'))
         reward = compute_reward(
             realized_return=step.target_return,
             position_before=before_position,
@@ -93,6 +92,10 @@ class CommodityTradingEnv:
             expert_alignment_bonus=self.config.reward.expert_alignment_bonus,
             wrong_way_penalty=self.config.reward.wrong_way_penalty,
             stale_hold_penalty=self.config.reward.stale_hold_penalty,
+            regime_target_action=regime.target_action,
+            regime_target_strength=regime.target_strength,
+            regime_opportunity_bonus=self.config.reward.regime_opportunity_bonus,
+            missed_regime_penalty=self.config.reward.missed_regime_penalty,
         )
         self.state.equity += reward
         self.state.peak_equity = max(self.state.peak_equity, self.state.equity)

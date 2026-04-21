@@ -8,6 +8,7 @@ from .config import RLExperimentConfig, get_default_rl_config
 from .dataset import RLTrajectoryDataset, RLTrajectoryStep
 from .env import CommodityTradingEnv
 from .neural_ppo import train_neural_ppo
+from .regimes import infer_regime_profile, infer_regime_targets
 from .reward import compute_reward_breakdown
 
 
@@ -25,6 +26,7 @@ class PolicyReplaySummary:
     hold_share: float
     intervention_rate: float
     regime_hit_rate: dict[str, float]
+    regime_active_counts: dict[str, int]
     reward_decomposition: dict[str, float]
 
 
@@ -56,27 +58,8 @@ class WalkForwardEvaluation:
 ActionChooser = Callable[[dict], str]
 
 
-def _regime_targets(observation: dict) -> dict[str, tuple[bool, str]]:
-    agreement = float(observation.get('agreement_score', 0.5) or 0.5)
-    anomaly = float(observation.get('anomaly_score', 0.0) or 0.0)
-    event_risk = float(observation.get('event_risk', 0.0) or 0.0)
-    spread = float(observation.get('model_spread', 0.0) or 0.0)
-    trend = float(observation.get('trend_3', 0.0) or 0.0)
-    forecast_return = float(observation.get('forecast_return', 0.0) or 0.0)
-    volatility = float(observation.get('volatility_5', 0.0) or 0.0)
-    risk_pressure = float(observation.get('risk_pressure', 0.0) or 0.0)
-
-    bullish = agreement >= 0.62 and forecast_return > 0.01 and trend > 0
-    bearish = (agreement >= 0.58 and forecast_return < -0.01 and trend < 0) or risk_pressure >= 0.45 or anomaly >= 0.6
-    hedging = event_risk >= 0.45 or volatility >= 0.28
-    rotation = spread >= 0.18 and agreement < 0.7
-
-    return {
-        'continuation': (bullish, 'add_continuation'),
-        'risk_off': (bearish, 'reduce_risk'),
-        'hedge': (hedging, 'add_hedge'),
-        'rotation': (rotation, 'relative_value_rotation'),
-    }
+def _regime_targets(observation: dict, direction: str | None = None) -> dict[str, tuple[bool, str, float]]:
+    return infer_regime_targets(observation, direction=direction)
 
 
 def _normalized_entropy(action_counts: dict[str, int], action_count: int) -> float:
@@ -116,6 +99,8 @@ def replay_policy(
         'expert_alignment_bonus': 0.0,
         'wrong_way_cost': 0.0,
         'stale_hold_cost': 0.0,
+        'regime_opportunity_bonus': 0.0,
+        'missed_regime_cost': 0.0,
     }
     regime_hits = {
         'continuation': {'hit': 0, 'total': 0},
@@ -133,7 +118,8 @@ def replay_policy(
         action = chooser(obs)
         result = env.step(action)
         action_counts[result.info['action']] = action_counts.get(result.info['action'], 0) + 1
-        for regime_name, (is_active, target_action) in _regime_targets(step.observation).items():
+        regime_profile = infer_regime_profile(step.observation, direction=step.metadata.get('direction'))
+        for regime_name, (is_active, target_action, _strength) in _regime_targets(step.observation, direction=step.metadata.get('direction')).items():
             if not is_active:
                 continue
             regime_hits[regime_name]['total'] += 1
@@ -159,6 +145,10 @@ def replay_policy(
             expert_alignment_bonus=config.reward.expert_alignment_bonus,
             wrong_way_penalty=config.reward.wrong_way_penalty,
             stale_hold_penalty=config.reward.stale_hold_penalty,
+            regime_target_action=regime_profile.target_action,
+            regime_target_strength=regime_profile.target_strength,
+            regime_opportunity_bonus=config.reward.regime_opportunity_bonus,
+            missed_regime_penalty=config.reward.missed_regime_penalty,
         )
         for key in breakdown_totals:
             breakdown_totals[key] += float(breakdown[key])
@@ -191,6 +181,7 @@ def replay_policy(
         hold_share=hold_count / total_actions,
         intervention_rate=1.0 - (hold_count / total_actions),
         regime_hit_rate=regime_hit_rate,
+        regime_active_counts={key: int(values['total']) for key, values in regime_hits.items()},
         reward_decomposition=breakdown_totals,
     )
 

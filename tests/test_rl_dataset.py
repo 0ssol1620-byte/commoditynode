@@ -7,6 +7,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from rl.config import get_default_rl_config
 from rl.dataset import build_steps_for_commodity, build_trajectory_dataset
+from rl.regimes import infer_regime_profile
 
 
 def _sample_bundle():
@@ -42,3 +43,16 @@ def test_dataset_steps_include_model_spread_and_anomaly():
     assert 'model_spread' in sample.observation
     assert 'anomaly_score' in sample.observation
     assert 0.0 <= sample.observation['agreement_score'] <= 1.0
+
+
+def test_dataset_contains_live_regime_coverage():
+    dataset = build_trajectory_dataset(config=get_default_rl_config())
+    counts = {'continuation': 0, 'risk_off': 0, 'hedge': 0, 'rotation': 0}
+    for step in dataset.train + dataset.val + dataset.test:
+        profile = infer_regime_profile(step.observation, direction=step.metadata.get('direction'))
+        for key, is_active in profile.active.items():
+            counts[key] += 1 if is_active else 0
+    assert counts['continuation'] > 0
+    assert counts['risk_off'] > 0
+    assert counts['hedge'] > 0
+    assert counts['rotation'] > 0

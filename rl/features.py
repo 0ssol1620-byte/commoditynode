@@ -53,9 +53,9 @@ def compute_anomaly_score(direction: str, realized_return: float, agreement_scor
 
 def action_mask(position: float, hedge: float, max_abs: float = 1.0) -> dict[str, bool]:
     return {
-        'reduce_risk': abs(position) > 1e-9 or abs(hedge) > 1e-9,
+        'reduce_risk': True,
         'hold': True,
-        'add_continuation': abs(position) < max_abs,
-        'add_hedge': abs(hedge) < max_abs,
+        'add_continuation': True,
+        'add_hedge': True,
         'relative_value_rotation': True,
     }

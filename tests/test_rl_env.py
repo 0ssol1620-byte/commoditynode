@@ -52,3 +52,13 @@ def test_env_terminates_at_end_of_steps():
     result = env.step('hold')
     assert result.terminated is True
     assert result.observation['done'] == 1.0
+
+
+def test_env_repeated_interventions_do_not_silently_fallback_to_hold():
+    env = CommodityTradingEnv(_make_steps())
+    env.reset()
+    first = env.step('add_hedge')
+    assert first.info['action'] == 'add_hedge'
+    assert first.observation['hedge'] > 0
+    second = env.step('add_hedge')
+    assert second.info['action'] == 'add_hedge'

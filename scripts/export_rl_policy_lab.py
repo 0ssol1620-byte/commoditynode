@@ -96,8 +96,8 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 + float(replay.action_entropy) * 0.12
                 + float(walk.mean_action_diversity) * 0.08
                 + regime_quality * 0.25
-                + replay.intervention_rate * 0.05
-                - replay.hold_share * 0.12
+                + replay.intervention_rate * 0.1
+                - replay.hold_share * 0.2
                 + replay.win_rate * 0.04
             )
             row = {
@@ -114,6 +114,7 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                 'hold_share': float(replay.hold_share),
                 'intervention_rate': float(replay.intervention_rate),
                 'regime_hit_rate': replay.regime_hit_rate,
+                'regime_active_counts': replay.regime_active_counts,
                 'walk_action_diversity': float(walk.mean_action_diversity),
                 'win_rate': float(replay.win_rate),
             }

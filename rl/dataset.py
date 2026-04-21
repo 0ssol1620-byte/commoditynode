@@ -13,6 +13,7 @@ from .features import (
     event_risk_score,
     safe_pct_change,
 )
+from .regimes import infer_regime_profile
 
 ROOT = Path(__file__).resolve().parents[1]
 FORECAST_PATH = ROOT / 'assets' / 'data' / 'forecast.json'
@@ -41,35 +42,9 @@ def load_json(path: str | Path) -> dict:
     return json.loads(Path(path).read_text(encoding='utf-8'))
 
 
-def choose_expert_action(
-    direction: str,
-    agreement_score: float,
-    anomaly_score: float,
-    event_risk: float,
-    realized_return: float,
-    model_spread: float,
-    trend_3: float,
-    volatility_5: float,
-    risk_pressure: float,
-) -> str:
-    bullish_signal = max(realized_return, trend_3)
-    bearish_signal = min(realized_return, trend_3)
-
-    if risk_pressure >= 0.34 or (anomaly_score >= 0.45 and bearish_signal < 0):
-        return 'reduce_risk'
-    if event_risk >= 0.3 and volatility_5 >= 0.04 and abs(realized_return) >= 0.001:
-        return 'add_hedge'
-    if model_spread >= 0.055 and volatility_5 >= 0.02:
-        return 'relative_value_rotation'
-    if direction == 'bullish' or (bullish_signal >= 0.001 and agreement_score >= 0.55 and model_spread < 0.05):
-        return 'add_continuation'
-    if direction == 'bearish' or (bearish_signal <= -0.001 and agreement_score >= 0.52):
-        return 'reduce_risk'
-    if event_risk >= 0.3 and (volatility_5 >= 0.03 or risk_pressure >= 0.3):
-        return 'add_hedge'
-    if model_spread >= 0.04:
-        return 'relative_value_rotation'
-    return 'hold'
+def choose_expert_action(observation: dict[str, float], direction: str) -> str:
+    profile = infer_regime_profile(observation, direction=direction)
+    return profile.target_action
 
 
 def build_steps_for_commodity(
@@ -146,17 +121,7 @@ def build_steps_for_commodity(
                 timestamp=str(dates[idx]),
                 observation=observation,
                 target_return=realized_return,
-                expert_action=choose_expert_action(
-                    direction,
-                    score,
-                    anomaly,
-                    event_risk,
-                    realized_return,
-                    model_spread,
-                    trend_3,
-                    volatility_5,
-                    risk_pressure,
-                ),
+                expert_action=choose_expert_action(observation, direction),
                 metadata=metadata,
             )
         )

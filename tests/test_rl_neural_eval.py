@@ -32,6 +32,7 @@ def test_neural_walk_forward_and_replay():
     assert 0.0 <= replay.hold_share <= 1.0
     assert 0.0 <= replay.intervention_rate <= 1.0
     assert set(replay.regime_hit_rate.keys()) == {'continuation', 'risk_off', 'hedge', 'rotation'}
+    assert set(replay.regime_active_counts.keys()) == {'continuation', 'risk_off', 'hedge', 'rotation'}
 
     walk = evaluate_neural_walk_forward(
         dataset,
