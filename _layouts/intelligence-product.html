@@ -26,6 +26,7 @@ layout: default
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="/assets/js/premium-analytics.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script type="application/json" id="intel-product-config">{
   "slug": {{ product_slug | jsonify }},
@@ -341,6 +342,7 @@ layout: default
         <p>Expose the live recommendation, state pressure, profile governance, and baseline edge in one board so the user can audit the setup before acting.</p>
         <div class="intel-rl-console-band" id="intel-rl-console-band"></div>
         <div class="intel-rl-band-note" id="intel-rl-console-note">Loading the current state, profile choice, and baseline edge…</div>
+        <div class="intel-rl-chart-wrap" style="min-height:240px;margin-top:14px;"><canvas id="intel-rl-observability-chart"></canvas></div>
       </section>
       <section class="intel-rl-field-shell">
         <div class="intel-kicker">Animated policy field</div>

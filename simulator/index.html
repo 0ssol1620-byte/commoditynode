@@ -628,6 +628,7 @@ permalink: /simulator/
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="/assets/js/phase1-analytics.js"></script>
+<script src="/assets/js/premium-analytics.js"></script>
 <noscript>
   <div style="max-width:700px;margin:40px auto;padding:32px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;text-align:center;">
     <h2 style="color:#f0f0f5;font-size:1.2rem;margin-bottom:12px;">JavaScript Required</h2>
@@ -881,6 +882,16 @@ permalink: /simulator/
       <h3>Decision gauge</h3>
       <p id="sim-decision-readout" class="sim-analytics-readout">Readiness updates after each commodity or scenario change.</p>
       <div id="sim-decision-gauge-chart" class="sim-analytics-stage"></div>
+    </section>
+    <section class="sim-analytics-card">
+      <h3>Forecast cone</h3>
+      <p>Shows the public path, downside, and upside band so confidence is visible instead of implied.</p>
+      <div id="sim-forecast-cone-chart" class="sim-analytics-stage"></div>
+    </section>
+    <section class="sim-analytics-card">
+      <h3>Event timeline</h3>
+      <p>Turns preset scenarios into an event beam so the active catalysts read like a sequence, not a flat checklist.</p>
+      <div id="sim-event-timeline-chart" class="sim-analytics-stage"></div>
     </section>
   </div>
 
@@ -2143,6 +2154,44 @@ function renderDecisionSurface() {
   var readout = document.getElementById('sim-decision-readout');
   if (readout) {
     readout.textContent = metrics.readiness.band + ' · 30D ' + (metrics.readiness.trend30 >= 0 ? '+' : '') + metrics.readiness.trend30.toFixed(1) + '% · 90D ' + (metrics.readiness.trend90 >= 0 ? '+' : '') + metrics.readiness.trend90.toFixed(1) + '%. Use the tornado chart first, then verify active shocks in scenario compare.';
+  }
+  if (window.CNPremiumAnalytics) {
+    var coneChart = ensureEchart('forecastCone', 'sim-forecast-cone-chart');
+    if (coneChart) {
+      var historySeries = d && d.history ? d.history.slice(-16) : [];
+      var lowSeries = consensus && consensus.p10 ? consensus.p10.slice(0, 16) : ((d && d.forecast && (d.forecast.p10 || d.forecast.p25)) ? (d.forecast.p10 || d.forecast.p25).slice(0, 16) : []);
+      var highSeries = consensus && consensus.p90 ? consensus.p90.slice(0, 16) : ((d && d.forecast && (d.forecast.p90 || d.forecast.p75)) ? (d.forecast.p90 || d.forecast.p75).slice(0, 16) : []);
+      var cone = window.CNPremiumAnalytics.buildForecastConeSeries(historySeries, (activeMedian || []).slice(0, 16), lowSeries, highSeries);
+      coneChart.setOption({
+        backgroundColor:'transparent',
+        animationDuration:360,
+        tooltip:{ trigger:'axis', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
+        legend:{ top:0, textStyle:{ color:'#cbd5e1' } },
+        grid:{ top:38, left:44, right:18, bottom:28 },
+        xAxis:{ type:'category', data: cone.labels, axisLabel:{ color:'#94a3b8', interval:function(i){ return i % 4 === 0; } }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
+        yAxis:{ type:'value', axisLabel:{ color:'#94a3b8' }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.06)' } } },
+        series:[
+          { name:'History', type:'line', symbol:'none', smooth:true, lineStyle:{ width:2.5, color:'#94a3b8' }, data: cone.history },
+          { name:'Forecast low', type:'line', symbol:'none', smooth:true, lineStyle:{ width:0 }, stack:'cone', data: cone.low },
+          { name:'Confidence band', type:'line', symbol:'none', smooth:true, stack:'cone', areaStyle:{ color:'rgba(34,211,238,0.16)' }, lineStyle:{ width:0 }, data: cone.band },
+          { name:'Median', type:'line', symbol:'none', smooth:true, lineStyle:{ width:3, color:'#22d3ee' }, data: cone.median }
+        ]
+      });
+    }
+    var timelineChart = ensureEchart('eventTimeline', 'sim-event-timeline-chart');
+    if (timelineChart) {
+      var timeline = window.CNPremiumAnalytics.buildEventTimeline(metrics.scenarioTable.slice(0, 5).map(function(item){
+        return { label:item.name, impact:item.impact, note:item.active ? 'Active scenario' : 'Scenario available' };
+      }));
+      timelineChart.setOption({
+        backgroundColor:'transparent',
+        grid:{ top:20, right:18, bottom:36, left:24 },
+        xAxis:{ type:'category', data: timeline.map(function(item){ return item.label; }), axisLabel:{ color:'#94a3b8', interval:0, rotate:18 }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
+        yAxis:{ type:'value', show:false, min:0, max:100 },
+        tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
+        series:[{ type:'bar', data: timeline.map(function(item){ return { value:item.score, itemStyle:{ color:item.direction === 'up' ? '#22d3ee' : '#f43f5e' } }; }), barWidth:18, showBackground:true, backgroundStyle:{ color:'rgba(255,255,255,0.04)' } }]
+      });
+    }
   }
 }
 

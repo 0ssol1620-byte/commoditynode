@@ -88,6 +88,7 @@ noindex: false
 </style>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="/assets/js/phase1-analytics.js"></script>
+<script src="/assets/js/premium-analytics.js"></script>
 
 <section class="corr-hero">
   <div class="container">
@@ -206,6 +207,12 @@ noindex: false
       </div>
     </div>
 
+    <div class="corr-chart-card" style="margin-top:18px;">
+      <h3>Correlation network graph</h3>
+      <p>Shows which commodities are currently acting like the central connectors instead of just listing pairwise values.</p>
+      <div id="corr-network-chart" class="corr-drilldown-stage" style="height:360px"></div>
+    </div>
+
     <div class="corr-tooltip" id="corr-tooltip"></div>
 
     <div class="insight-grid" id="insight-grid" data-animate data-delay="200"></div>
@@ -282,6 +289,30 @@ noindex: false
         + '<span class="cor-change-note">Current correlation ' + item.value.toFixed(2) + '. ' + strengthLabel(item.value) + ' relationship relative to the prior window.</span>'
         + '</div>';
     }).join('');
+  }
+
+  function renderNetworkGraph(result){
+    if (!window.CNPremiumAnalytics) return;
+    var chart = ensureChart('network', 'corr-network-chart');
+    if (!chart) return;
+    var graph = window.CNPremiumAnalytics.buildCorrelationNetwork(result.active, result.pairs.slice(0, 28));
+    chart.setOption({
+      backgroundColor:'transparent',
+      animationDuration:360,
+      tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)', textStyle:{ color:'#e2e8f0' } },
+      series:[{
+        type:'graph',
+        layout:'force',
+        roam:true,
+        draggable:true,
+        force:{ repulsion:160, edgeLength:[70,140], gravity:0.08 },
+        label:{ show:true, color:'#e2e8f0', fontSize:11 },
+        data: graph.nodes,
+        links: graph.links,
+        lineStyle:{ opacity:0.42 },
+        itemStyle:{ color:'#22d3ee', borderColor:'rgba(255,255,255,0.12)', borderWidth:1 }
+      }]
+    });
   }
 
   function renderInsightCards(result){
@@ -384,6 +415,7 @@ noindex: false
     renderPairDrilldown(result, result.topChanges[0] || result.topPositive[0]);
     renderChangeCards(result.topChanges);
     renderInsightCards(result);
+    renderNetworkGraph(result);
     var approxDays = Math.min(currentPeriod, result.active.reduce(function(minimum, item){
       return Math.min(minimum, (logReturnData[item.key] || []).length);
     }, 999)) * 7;

@@ -422,7 +422,6 @@ layout: default
   });
 })();
 </script>
-
 <script>
 (function(){
   window.COMMODITY_GRAPH_DISABLE_LEGACY = true;
@@ -467,6 +466,41 @@ layout: default
   };
 })();
 </script>
+<script>
+(function(){
+  function renderPremiumCommoditySurfaces(){
+    if (!window.CNPremiumAnalytics || !window.echarts || !window.COMMODITY_PAGE_META) return;
+    var meta = window.COMMODITY_PAGE_META;
+    var wheelEl = document.getElementById('commodity-exposure-wheel-chart');
+    if (wheelEl) {
+      var wheel = window.CNPremiumAnalytics.buildExposureWheel({ companies: meta.companies || [], themes: meta.themes || [], substitutes: meta.substitutes || [], reports: meta.reports || [] });
+      var wheelChart = window.echarts.init(wheelEl);
+      wheelChart.setOption({
+        backgroundColor:'transparent',
+        animationDuration:360,
+        tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
+        series:[{ type:'pie', radius:['26%','78%'], roseType:'area', data: wheel.map(function(item){ return { value:item.value, name:item.group + ' · ' + item.name, itemStyle:{ color:item.group === 'Companies' ? '#22d3ee' : item.group === 'Themes' ? '#a855f7' : item.group === 'Substitutes' ? '#f59e0b' : '#34d399' } }; }), label:{ color:'#e2e8f0', fontSize:10 } }]
+      });
+    }
+    var timelineEl = document.getElementById('commodity-event-timeline-chart');
+    if (timelineEl) {
+      var timeline = window.CNPremiumAnalytics.buildEventTimeline((meta.reports || []).slice(0, 5).map(function(report, idx){ return { label:(report.title || 'Report ' + (idx+1)).slice(0, 22), impact: 60 - idx * 8, date: report.date || '' }; }));
+      var timelineChart = window.echarts.init(timelineEl);
+      timelineChart.setOption({
+        backgroundColor:'transparent',
+        grid:{ top:20, right:18, bottom:34, left:24 },
+        xAxis:{ type:'category', data: timeline.map(function(item){ return item.label; }), axisLabel:{ color:'#94a3b8', interval:0, rotate:18 }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
+        yAxis:{ type:'value', show:false, min:0, max:100 },
+        tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
+        series:[{ type:'bar', data: timeline.map(function(item){ return { value:item.score, itemStyle:{ color:'#22d3ee' } }; }), barWidth:18, showBackground:true, backgroundStyle:{ color:'rgba(255,255,255,0.04)' } }]
+      });
+    }
+  }
+  document.addEventListener('DOMContentLoaded', renderPremiumCommoditySurfaces);
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="/assets/js/premium-analytics.js"></script>
 <script src="{{ '/assets/js/commodity-local-graph.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 
 <div class="container" style="padding-top:24px;padding-bottom:80px;">
@@ -587,6 +621,20 @@ layout: default
     </div>
   </section>
 
+  <section style="margin:18px 0 20px;padding:22px 24px;border-radius:18px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,0.95fr);gap:16px;align-items:start;">
+    <div>
+      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Exposure wheel</div>
+      <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.12rem;">Scan the surrounding dependency system.</h2>
+      <p style="margin:0 0 14px;color:#94a3b8;line-height:1.72;">This compresses company, theme, substitute, and report context into one premium surface so the hub reads like a decision cockpit rather than a long explainer.</p>
+      <div id="commodity-exposure-wheel-chart" style="height:320px;"></div>
+    </div>
+    <div>
+      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Event timeline</div>
+      <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.12rem;">See the latest catalysts as an event beam.</h2>
+      <p style="margin:0 0 14px;color:#94a3b8;line-height:1.72;">Use the linked report cadence and key catalyst beats as a fast narrative index before you read deeper.</p>
+      <div id="commodity-event-timeline-chart" style="height:320px;"></div>
+    </div>
+  </section>
   <section class="profile-continuation-strip" aria-label="Saved workflow continuation">
     <div>
       <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Continue your saved workflow</div>

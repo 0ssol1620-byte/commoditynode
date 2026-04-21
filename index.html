@@ -1045,6 +1045,110 @@ image: "/assets/images/og-default.png"
   </div>
 </section>
 
+<section class="section" style="padding-top:14px;">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,0.95fr);gap:18px;align-items:start;">
+      <section style="padding:22px;border-radius:22px;border:1px solid rgba(255,255,255,0.08);background:linear-gradient(135deg,rgba(8,12,20,0.8),rgba(8,12,20,0.5));backdrop-filter:blur(12px);">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;">
+          <div>
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Flagship decision strip</div>
+            <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.22rem;">Turn the shock into a scan-first workflow.</h2>
+            <p style="margin:0;color:#94a3b8;line-height:1.72;max-width:62ch;">Instead of reading blocks of copy, scan the live move, forecast pressure, regime, and confidence first — then open the downstream path only when the move deserves more work.</p>
+          </div>
+          <a href="/simulator/" class="btn btn-secondary" data-cta="home_open_flagship_decision_strip">Open scenario workflow</a>
+        </div>
+        <div id="home-kpi-spark-wall" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px;"></div>
+      </section>
+      <section style="padding:22px;border-radius:22px;border:1px solid rgba(34,211,238,0.14);background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.05));backdrop-filter:blur(12px);">
+        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Impact flow Sankey</div>
+        <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.12rem;">See where today’s commodity shock transmits next.</h2>
+        <p id="home-impact-sankey-copy" style="margin:0 0 14px;color:#cbd5e1;line-height:1.7;">Loading the strongest commodity transmission path across sectors and names.</p>
+        <div id="home-impact-sankey-chart" style="height:340px;"></div>
+      </section>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="/assets/js/premium-analytics.js"></script>
+<script>
+(function(){
+  function ensureChart(){
+    return window.echarts && document.getElementById('home-impact-sankey-chart') ? window.echarts.init(document.getElementById('home-impact-sankey-chart')) : null;
+  }
+  function render(payload){
+    var analytics = window.CNPremiumAnalytics;
+    if (!analytics) return;
+    var metrics = analytics.buildKpiStrip([
+      { id:'live', label:'Live move', value: payload.liveMoveText || 'Loading…', change: payload.liveMove || 0, implication:'Biggest tape move worth opening first.', spark:[0.004,0.008,-0.003,0.011,-0.004,0.012] },
+      { id:'forecast', label:'90D setup', value: payload.forecastText || 'Consensus +4.8%', change: payload.forecastMove || 4.8, implication:'Use the cone before assuming one clean line.', spark:[0.002,0.004,0.006,0.008,0.004,0.01] },
+      { id:'regime', label:'Regime', value: payload.regime || 'Trend extension', change: payload.regimeScore || 2.4, implication:'Regime tells you whether continuation or hedge logic fits.', spark:[0.001,0.002,0.004,0.005,0.003,0.006] },
+      { id:'confidence', label:'Agreement', value: payload.confidence || '67%', change: payload.confidenceDelta || 1.7, implication:'Model agreement determines whether this deserves action or watchlist status.', spark:[0.003,0.002,0.005,0.004,0.006,0.007] }
+    ]);
+    var wall = document.getElementById('home-kpi-spark-wall');
+    if (wall) {
+      wall.innerHTML = metrics.map(function(item){
+        return '<article style="padding:16px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);display:grid;gap:10px;">'
+          + '<div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#94a3b8;font-weight:800;">'+item.label+'</div>'
+          + '<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">'
+          + '<strong style="color:#f8fafc;font-size:1.02rem;line-height:1.35;">'+item.value+'</strong>'
+          + '<span style="font-size:0.8rem;font-weight:700;color:'+(item.direction==='up' ? '#34d399' : '#fb7185')+';">'+item.change+'</span>'
+          + '</div>'
+          + '<svg viewBox="0 0 120 28" aria-hidden="true" style="width:100%;height:28px;overflow:visible;">'
+          + '<polyline fill="none" stroke="'+(item.direction==='up' ? '#22d3ee' : '#f43f5e')+'" stroke-width="2.4" points="'+item.spark.map(function(v, idx){ return (idx * 20)+','+(24 - Math.min(20, Math.max(2, v/6))); }).join(' ')+'"></polyline>'
+          + '</svg>'
+          + '<div style="font-size:0.84rem;color:#94a3b8;line-height:1.6;">'+item.implication+'</div>'
+          + '</article>';
+      }).join('');
+    }
+    var sankeyPayload = analytics.buildImpactSankeyData({
+      source: { name: payload.source || 'Crude oil shock', value: 100 },
+      sectors: payload.sectors || [
+        { name:'Airlines', value:26, tone:'negative' },
+        { name:'Chemicals', value:20, tone:'negative' },
+        { name:'Exploration & Production', value:34, tone:'positive' },
+        { name:'Refiners', value:16, tone:'watch' }
+      ],
+      companies: payload.companies || [
+        { name:'DAL', sector:'Airlines', value:11, tone:'negative' },
+        { name:'AAL', sector:'Airlines', value:9, tone:'negative' },
+        { name:'DOW', sector:'Chemicals', value:8, tone:'negative' },
+        { name:'XOM', sector:'Exploration & Production', value:12, tone:'positive' },
+        { name:'CVX', sector:'Exploration & Production', value:10, tone:'positive' },
+        { name:'VLO', sector:'Refiners', value:7, tone:'watch' }
+      ]
+    });
+    var chart = ensureChart();
+    if (chart) {
+      chart.setOption({
+        backgroundColor: 'transparent',
+        animationDuration: 500,
+        tooltip: { trigger:'item', backgroundColor:'rgba(8,12,20,0.96)', borderColor:'rgba(255,255,255,0.08)', textStyle:{ color:'#e2e8f0' } },
+        series: [{
+          type: 'sankey',
+          top: 12,
+          bottom: 12,
+          left: 12,
+          right: 12,
+          emphasis: { focus: 'adjacency' },
+          data: sankeyPayload.nodes,
+          links: sankeyPayload.links,
+          lineStyle: { color:'gradient', opacity:0.45, curveness:0.5 },
+          itemStyle: { borderWidth: 0, color: function(params){ var cat = params.data.category; return cat === 'positive' ? '#22c55e' : cat === 'negative' ? '#f43f5e' : cat === 'watch' ? '#fbbf24' : '#22d3ee'; } },
+          label: { color:'#e2e8f0', fontSize:11 }
+        }]
+      });
+    }
+    var copy = document.getElementById('home-impact-sankey-copy');
+    if (copy) copy.textContent = payload.copy || 'Oil up means airlines and chemicals absorb the pressure first, while upstream energy names gain leverage and refiners sit in the watch bucket.';
+  }
+  fetch('/assets/data/prices.json').then(function(r){ return r.ok ? r.json() : {}; }).then(function(data){
+    var entries = Object.entries(data || {}).filter(function(entry){ return typeof entry[1].change_pct === 'number'; }).sort(function(a,b){ return Math.abs(b[1].change_pct) - Math.abs(a[1].change_pct); });
+    var top = entries[0] || ['crude_oil', { name:'Crude Oil', change_pct: 3.4 }];
+    render({ source: top[1].name || 'Commodity shock', liveMove: top[1].change_pct || 0, liveMoveText: (top[1].name || top[0]) + ' ' + ((top[1].change_pct || 0) > 0 ? '+' : '') + (top[1].change_pct || 0).toFixed(1) + '%', confidence: '67%', forecastText: 'Consensus +4.8%', copy: (top[1].name || 'Commodity') + ' is the dominant mover, so open the downstream transmission path before reading longer narrative blocks.' });
+  }).catch(function(){ render({}); });
+  window.addEventListener('resize', function(){ if (window.echarts) { var el = document.getElementById('home-impact-sankey-chart'); if (el) { var inst = window.echarts.getInstanceByDom(el); if (inst) inst.resize(); } } });
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 (function() {

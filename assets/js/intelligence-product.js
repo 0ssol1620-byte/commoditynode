@@ -1044,6 +1044,46 @@
     }).join('');
   }
 
+  function renderRlObservabilityRadar(frontier, neuralFrontier, replaySummary){
+    var analytics = window.CNPremiumAnalytics;
+    if (!analytics || !frontier || !neuralFrontier) return;
+    var observation = frontier.observation || {};
+    var board = analytics.buildPolicyObservability({
+      actions: Object.keys(neuralFrontier.probabilities || {}).map(function(key){ return { label: titleize(key), probability: neuralFrontier.probabilities[key] }; }),
+      drivers: [
+        { label:'Agreement', score: clamp((1 - Number(observation.disagreement_7 || 0)) * 100, 0, 100) },
+        { label:'Event risk', score: clamp(Number(observation.event_risk || 0) * 100, 0, 100) },
+        { label:'Volatility', score: clamp(Number(observation.volatility_20 || 0) * 100, 0, 100) },
+        { label:'Trend', score: clamp(50 + Number(observation.trend_3 || 0) * 1000, 0, 100) }
+      ],
+      stateVector: [
+        { label:'Agreement', value: clamp((1 - Number(observation.disagreement_7 || 0)) * 100, 0, 100) },
+        { label:'Event risk', value: clamp(Number(observation.event_risk || 0) * 100, 0, 100) },
+        { label:'Volatility', value: clamp(Number(observation.volatility_20 || 0) * 100, 0, 100) },
+        { label:'Trend', value: clamp(50 + Number(observation.trend_3 || 0) * 1000, 0, 100) },
+        { label:'Replay trust', value: clamp(50 + Number((replaySummary && replaySummary.vs_hold_reward_uplift) || 0) * 100, 0, 100) }
+      ]
+    });
+    ensureRlChart('intel-rl-observability-chart', {
+      type: 'radar',
+      data: {
+        labels: board.stateVector.map(function(item){ return item.label; }),
+        datasets: [{
+          label: 'Observability',
+          data: board.stateVector.map(function(item){ return item.value; }),
+          borderColor: '#22d3ee',
+          backgroundColor: 'rgba(34,211,238,0.18)',
+          pointBackgroundColor: '#a855f7',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        scales: { r: { min:0, max:100, grid:{ color:'rgba(255,255,255,0.08)' }, angleLines:{ color:'rgba(255,255,255,0.08)' }, pointLabels:{ color:'#cbd5e1', font:{ size:11 } }, ticks:{ display:false }, suggestedMin:0, suggestedMax:100 } },
+        plugins: { legend: { display:false } }
+      }
+    });
+  }
+
   function renderRlObservabilityBoard(frontier, neural, neuralFrontier, walkForward, replaySummary){
     var band = $('intel-rl-console-band');
     var note = $('intel-rl-console-note');
@@ -1607,6 +1647,7 @@
       renderRlDecisionCard(frontier, neural, neuralFrontier, walkForward, replaySummary);
       renderRlTrustStrip(neural, walkForward, replaySummary, neuralFrontier);
       renderRlObservabilityBoard(frontier, neural, neuralFrontier, walkForward, replaySummary);
+    renderRlObservabilityRadar(frontier, neuralFrontier, replaySummary);
       renderRlBaselineTable(frontier, benchmark, neural, neuralFrontier, walkForward, replaySummary);
       renderRlWhyPanel(frontier, neuralFrontier, episodeReplay);
       renderRlScenarioPanel(frontier, neuralFrontier);
