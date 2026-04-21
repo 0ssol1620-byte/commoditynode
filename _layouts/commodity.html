@@ -233,11 +233,17 @@ layout: default
           <div style="padding:12px 14px;border-radius:12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);font-size:0.88rem;color:var(--text2);line-height:1.6;">
             <strong style="color:#f8fafc;display:block;margin-bottom:4px;">Best next step</strong>
             {% if latest_related_post %}
-            Read <a href="{{ latest_related_post.url }}" style="color:var(--accent);">the newest linked report</a>, then open the simulator only if the move is important enough to change a position.
+            Read <a href="{{ latest_related_post.url }}" style="color:var(--accent);">the newest linked report</a> for the narrative, then run the simulator when you need to translate this move into sectors, names, and scenario risk.
             {% else %}
             Use this hub as the primary reference page, then compare it against the <a href="/reports/" style="color:var(--accent);">Research Archive</a> for narrative context.
             {% endif %}
           </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          {% if latest_related_post %}
+          <a href="{{ latest_related_post.url }}" class="btn btn-secondary" data-cta="commodity_open_linked_report" style="min-width:180px;justify-content:center;">Read linked report</a>
+          {% endif %}
+          <a href="/simulator/" class="btn btn-primary" data-cta="commodity_run_scenario_simulator" style="min-width:180px;justify-content:center;">Run scenario simulator</a>
         </div>
       </div>
       <div style="padding:16px 18px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:10px;">
@@ -583,7 +589,7 @@ layout: default
   <section class="profile-continuation-strip" aria-label="Saved workflow continuation">
     <div>
       <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Continue your saved workflow</div>
-      <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Follow this commodity, save the exposed names, then return here whenever this market starts mattering again.</div>
+      <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Follow this commodity and save the exposed names so this hub becomes your return point whenever this market starts mattering again.</div>
       <div data-profile-has-saved style="display:none;">
         <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
         <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
