@@ -203,6 +203,10 @@
     if (mobileWrap) mobileWrap.innerHTML = '';
   }
 
+  function shouldShowMeterBadge(user) {
+    return !!(user && isPostPage() && !isPro(user) && !isAdmin(user));
+  }
+
   function buildUserMenu(user) {
     var avatar = user.imageUrl || '';
     var name = user.firstName || user.username || 'User';
@@ -212,6 +216,8 @@
       : '<div class="clerk-avatar clerk-avatar-fallback">' + initial + '</div>';
 
     var proBadge = isPro(user) ? '<span style="font-size:0.65rem;font-weight:800;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;padding:2px 7px;border-radius:20px;margin-right:6px;vertical-align:middle;">PRO</span>' : '';
+    var meterBadgeHtml = shouldShowMeterBadge(user) ? '<div class="clerk-meter-badge" id="clerk-meter-badge"></div>' : '';
+    var meterBadgeNavHtml = shouldShowMeterBadge(user) ? '<div class="clerk-meter-badge" id="clerk-meter-badge-nav"></div>' : '';
 
     // 데스크탑 헤더
     var wrap = document.getElementById('clerk-auth-area');
@@ -219,7 +225,7 @@
       wrap.innerHTML =
         '<div class="clerk-user-menu">' +
           proBadge +
-          '<div class="clerk-meter-badge" id="clerk-meter-badge"></div>' +
+          meterBadgeHtml +
           '<div class="clerk-avatar-wrap" id="clerk-avatar-wrap" title="Account settings" style="cursor:pointer;">' +
             avatarHtml +
           '</div>' +
@@ -249,7 +255,7 @@
     var navWrap = document.getElementById('clerk-auth-nav');
     if (navWrap) {
       navWrap.innerHTML =
-        '<div class="clerk-meter-badge" id="clerk-meter-badge-nav"></div>' +
+        meterBadgeNavHtml +
         '<div class="clerk-user-info">' +
           avatarHtml +
           '<span>' + name + '</span>' +

@@ -109,6 +109,10 @@
   background: rgba(244, 63, 94, 0.08);
 }
 
+.clerk-meter-badge:empty {
+  display: none;
+}
+
 /* ---------- Blur Wrapper ---------- */
 .cn-blur-wrapper {
   position: relative;
