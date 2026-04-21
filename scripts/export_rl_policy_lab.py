@@ -88,21 +88,28 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
             risk_off_hit = float(regime_scores.get('risk_off', 0.0))
             hedge_hit = float(regime_scores.get('hedge', 0.0))
             rotation_hit = float(regime_scores.get('rotation', 0.0))
-            regime_quality = (continuation_hit + risk_off_hit + hedge_hit + rotation_hit) / 4.0
+            regime_quality = (
+                continuation_hit * 0.34
+                + hedge_hit * 0.26
+                + risk_off_hit * 0.24
+                + rotation_hit * 0.16
+            )
             dominant_action_share = float(replay.dominant_action_share)
             regime_balance_score = float(replay.regime_balance_score)
+            continuation_hedge_floor_penalty = max(0.0, 0.16 - continuation_hit) * 1.8 + max(0.0, 0.1 - hedge_hit) * 1.2
             score = (
-                uplift * 0.8
-                + float(walk.vs_hold_reward_uplift) * 0.9
-                + replay.action_diversity * 0.15
-                + float(replay.action_entropy) * 0.1
+                uplift * 0.68
+                + float(walk.vs_hold_reward_uplift) * 0.8
+                + replay.action_diversity * 0.12
+                + float(replay.action_entropy) * 0.12
                 + float(walk.mean_action_diversity) * 0.06
-                + regime_quality * 0.22
-                + regime_balance_score * 0.24
-                + replay.intervention_rate * 0.08
-                + float(replay.non_hold_value_add) * 0.12
-                - replay.hold_share * 0.16
-                - dominant_action_share * 0.18
+                + regime_quality * 0.72
+                + regime_balance_score * 0.42
+                + replay.intervention_rate * 0.06
+                + float(replay.non_hold_value_add) * 0.08
+                - replay.hold_share * 0.1
+                - dominant_action_share * 0.36
+                - continuation_hedge_floor_penalty
                 + replay.win_rate * 0.04
             )
             row = {

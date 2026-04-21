@@ -173,24 +173,29 @@
   const canvas = document.getElementById('hero-canvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    let W, H, nodes, animFrame;
+    let W, H, nodes, animFrame, pointer = { x: 0, y: 0, active: false };
 
     function resize() {
-      W = canvas.width  = canvas.offsetWidth;
-      H = canvas.height = canvas.offsetHeight;
+      const dpr = window.devicePixelRatio || 1;
+      W = canvas.offsetWidth;
+      H = canvas.offsetHeight;
+      canvas.width = Math.max(1, Math.floor(W * dpr));
+      canvas.height = Math.max(1, Math.floor(H * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    const NODE_COUNT = 28;
-    const CONNECT_DIST = 160;
-    const COLORS = ['#22d3ee', '#fbbf24', '#10b981', '#a855f7', '#f43f5e'];
+    const NODE_COUNT = 44;
+    const CONNECT_DIST = 190;
+    const COLORS = ['#22d3ee', '#fbbf24', '#10b981', '#a855f7', '#f43f5e', '#ffffff'];
 
     function initNodes() {
       nodes = Array.from({ length: NODE_COUNT }, (_, i) => ({
         x: Math.random() * W,
         y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        r: 2 + Math.random() * 3,
+        vx: (Math.random() - 0.5) * 0.55,
+        vy: (Math.random() - 0.5) * 0.55,
+        r: 1.8 + Math.random() * 3.8,
+        depth: 0.35 + Math.random() * 0.9,
         color: COLORS[i % COLORS.length],
         pulse: Math.random() * Math.PI * 2,
       }));
@@ -199,54 +204,67 @@
     let lastTime = performance.now();
 
     function drawFrame(now) {
-      const dt = Math.min((now - lastTime) / 1000, 0.1); // delta in seconds, cap at 100ms
+      const dt = Math.min((now - lastTime) / 1000, 0.1);
       lastTime = now;
       ctx.clearRect(0, 0, W, H);
 
-      // Update (time-based: consistent speed regardless of frame rate)
+      const ambient = ctx.createRadialGradient(W * 0.52, H * 0.36, 24, W * 0.52, H * 0.36, Math.max(W, H) * 0.6);
+      ambient.addColorStop(0, 'rgba(34,211,238,0.12)');
+      ambient.addColorStop(0.38, 'rgba(34,211,238,0.03)');
+      ambient.addColorStop(1, 'rgba(2,6,23,0)');
+      ctx.fillStyle = ambient;
+      ctx.fillRect(0, 0, W, H);
+
+      const violet = ctx.createRadialGradient(W * 0.84, H * 0.16, 12, W * 0.84, H * 0.16, W * 0.22);
+      violet.addColorStop(0, 'rgba(168,85,247,0.14)');
+      violet.addColorStop(1, 'rgba(168,85,247,0)');
+      ctx.fillStyle = violet;
+      ctx.fillRect(0, 0, W, H);
+
       nodes.forEach(n => {
-        n.x += n.vx * dt * 60; // normalize to ~60fps feel
-        n.y += n.vy * dt * 60;
-        n.pulse += dt * 1.2; // ~0.02 per frame at 60fps
-        if (n.x < 0 || n.x > W) n.vx *= -1;
-        if (n.y < 0 || n.y > H) n.vy *= -1;
+        const pullX = pointer.active ? ((pointer.x - W * 0.5) / W) * 0.08 * n.depth : 0;
+        const pullY = pointer.active ? ((pointer.y - H * 0.5) / H) * 0.08 * n.depth : 0;
+        n.x += (n.vx + pullX) * dt * 60;
+        n.y += (n.vy + pullY) * dt * 60;
+        n.pulse += dt * (1 + n.depth * 0.6);
+        if (n.x < -24) n.x = W + 24;
+        if (n.x > W + 24) n.x = -24;
+        if (n.y < -24) n.y = H + 24;
+        if (n.y > H + 24) n.y = -24;
       });
 
-      // Draw edges
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const a = nodes[i], b = nodes[j];
           const dx = a.x - b.x, dy = a.y - b.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.35;
+            const alpha = (1 - dist / CONNECT_DIST) * 0.22 * Math.min(a.depth, b.depth);
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
             ctx.strokeStyle = `rgba(34,211,238,${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.lineWidth = 0.7 + Math.min(a.depth, b.depth) * 0.35;
             ctx.stroke();
           }
         }
       }
 
-      // Draw nodes
       nodes.forEach(n => {
-        const pulse = 1 + Math.sin(n.pulse) * 0.3;
-        // Glow
-        const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 6 * pulse);
-        grd.addColorStop(0, n.color + '55');
+        const pulse = 1 + Math.sin(n.pulse) * 0.28;
+        const glowRadius = n.r * (5 + n.depth * 2.5) * pulse;
+        const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowRadius);
+        grd.addColorStop(0, n.color + '44');
         grd.addColorStop(1, 'transparent');
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r * 6 * pulse, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, glowRadius, 0, Math.PI * 2);
         ctx.fillStyle = grd;
         ctx.fill();
 
-        // Core
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, n.r * pulse * n.depth, 0, Math.PI * 2);
         ctx.fillStyle = n.color;
-        ctx.shadowBlur = 12;
+        ctx.shadowBlur = 14;
         ctx.shadowColor = n.color;
         ctx.fill();
         ctx.shadowBlur = 0;
@@ -263,6 +281,13 @@
       animFrame = requestAnimationFrame(drawFrame);
     }
 
+    window.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      pointer.x = e.clientX - rect.left;
+      pointer.y = e.clientY - rect.top;
+      pointer.active = pointer.x >= 0 && pointer.x <= rect.width && pointer.y >= 0 && pointer.y <= rect.height;
+    }, { passive: true });
+    window.addEventListener('mouseleave', () => { pointer.active = false; });
     window.addEventListener('resize', () => { resize(); initNodes(); });
     start();
   }
