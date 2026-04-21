@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Research Archive
+title: CommodityNode Signal Reports & Impact Maps
 permalink: /reports/
 description: "Browse CommodityNode Signal Reports, Impact Maps, and Ripple Chain research across 60+ commodities, supply shocks, and portfolio-sensitive sectors."
 no_loader: true
@@ -12,7 +12,7 @@ no_loader: true
       <span class="badge badge-cyan">Archive</span>
       <span class="badge badge-gold">{{ site.posts.size }} Signal Reports</span>
     </div>
-    <h1>Research Archive</h1>
+    <h1>CommodityNode Signal Reports &amp; Impact Maps</h1>
     <p class="post-meta-bar">Browse every CommodityNode Impact Map, Signal Report, and Ripple Chain analysis in one place.</p>
   </div>
 </div>
@@ -99,7 +99,7 @@ no_loader: true
             <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">When Pro matters</div>
             <p style="margin:0;color:var(--text2);line-height:1.6;font-size:0.88rem;">When you need stock-level, scenario-level, and forward-looking confirmation — not just the narrative.</p>
           </div>
-          <a href="/pricing/" class="btn btn-secondary" data-cta="archive_pro_workflow_context" style="min-width:180px;justify-content:center;">See Pro workflow</a>
+          <a href="/pro/" class="btn btn-secondary" data-cta="archive_pro_workflow_context" style="min-width:180px;justify-content:center;">See Pro workflow</a>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;">
@@ -140,7 +140,7 @@ no_loader: true
           <label class="archive-search" aria-label="Sort archive">
             <span>Sort</span>
             <div class="archive-search-row">
-              <select id="archive-sort-select" data-sort-select class="archive-select">
+              <select id="archive-sort-select" data-sort-select class="archive-select" aria-label="Sort reports by recency or title">
                 <option value="latest">Latest first</option>
                 <option value="oldest">Oldest first</option>
                 <option value="title_asc">Title A–Z</option>
@@ -150,7 +150,7 @@ no_loader: true
           <label class="archive-search" aria-label="Recent archive range">
             <span>Recent window</span>
             <div class="archive-search-row">
-              <select id="archive-recency-select" data-recency-select class="archive-select">
+              <select id="archive-recency-select" data-recency-select class="archive-select" aria-label="Filter reports by recent publication window">
                 <option value="all">All time</option>
                 <option value="30">Last 30 days</option>
                 <option value="90">Last 90 days</option>
@@ -182,7 +182,7 @@ no_loader: true
           <div class="archive-shortcuts">
             <a href="/signals/" data-cta="archive_open_signals">Open live signals</a>
             <a href="/commodities/" data-cta="archive_jump_hubs">Jump to commodity hubs</a>
-            <a href="/pricing/" data-cta="archive_see_pricing">See Pro workflow</a>
+            <a href="/pro/" data-cta="archive_see_pricing">See Pro workflow</a>
           </div>
         </div>
       </div>
@@ -276,7 +276,7 @@ no_loader: true
   }
 
   function formatChange(change){
-    if (typeof change !== 'number') return 'Daily change unavailable';
+    if (typeof change !== 'number') return 'Daily change unavailable · delayed or proxy feed';
     return (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
   }
 

@@ -693,7 +693,7 @@ image: "/assets/images/og-default.png"
           </div>
           <div style="display:flex;gap:10px;flex-wrap:wrap;">
             <a href="/start/" class="btn btn-primary" data-cta="home_build_workflow" data-profile-primary-link style="min-width:220px;justify-content:center;"><span data-profile-primary-label>Build my workflow</span></a>
-            <a href="/pricing/" class="btn btn-secondary" data-cta="home_compare_free_pro" data-profile-secondary-link style="min-width:220px;justify-content:center;"><span data-profile-secondary-label>Compare Free vs Pro</span></a>
+            <a href="/pro/" class="btn btn-secondary" data-cta="home_compare_free_pro" data-profile-secondary-link style="min-width:220px;justify-content:center;"><span data-profile-secondary-label>See Pro workflow</span></a>
           </div>
         </div>
       </div>
@@ -1846,7 +1846,7 @@ function renderPreviewRanges(prices) {
       + '</div>'
       + '<div class="preview-range-info">'
       + '<span class="preview-range-price">$' + d.price + '</span>'
-      + '<span class="preview-range-chg" style="color:'+chgColor+'">' + (hasChange ? (sign + d.change_pct + '%') : 'Daily change unavailable') + '</span>'
+      + '<span class="preview-range-chg" style="color:'+chgColor+'">' + (hasChange ? (sign + d.change_pct + '%') : 'Daily change unavailable · delayed or proxy feed') + '</span>'
       + '<span class="preview-range-pct">' + pct + '% of range</span>'
       + '</div></div>';
   }).join('');

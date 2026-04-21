@@ -373,7 +373,8 @@ layout: default
       changeEl.style.background = c.change_pct >= 0 ? 'rgba(16,185,129,0.2)' : 'rgba(244,63,94,0.2)';
       changeEl.style.color = c.change_pct >= 0 ? '#10b981' : '#f43f5e';
     } else {
-      changeEl.textContent = 'Daily change unavailable';
+      changeEl.textContent = 'Daily change unavailable · delayed or proxy feed';
+      changeEl.title = 'This commodity uses a delayed, unstable, or proxy price feed right now. See methodology for details.';
       changeEl.style.background = 'rgba(148,163,184,0.16)';
       changeEl.style.color = '#94a3b8';
     }
