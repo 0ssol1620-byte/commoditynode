@@ -109,6 +109,20 @@ description: "Premium decision-support products on top of CommodityNode's commod
   .lab-card p,
   .lab-card-copy { font-size: 0.88rem; line-height: 1.65; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .lab-hero-canvas,
+  .lab-hero-orb {
+    display: none !important;
+  }
+  .lab-card,
+  .lab-rec-card,
+  .lab-btn,
+  .lab-anchor-btn {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
 </style>
 
 <section class="intelligence-lab-hero">

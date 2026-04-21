@@ -186,6 +186,23 @@ layout: default
   .intel-success-value { font-size: 1.55rem; }
   .intel-kicker { font-size: 0.7rem; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .intel-rl-field-shell::before,
+  .intel-rl-field-shell::after,
+  .intel-card,
+  .intel-rl-card,
+  .intel-btn {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  #intel-rl-field-canvas {
+    display: none;
+  }
+  .intel-rl-field-wrap {
+    min-height: 220px;
+  }
+}
 </style>
 
 <section class="intel-product-hero">
