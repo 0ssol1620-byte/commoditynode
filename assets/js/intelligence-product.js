@@ -743,7 +743,7 @@
     var dominantShare = replaySummary && replaySummary.dominant_action_share != null ? Number(replaySummary.dominant_action_share) : null;
     var nonHoldValueAdd = replaySummary && replaySummary.non_hold_value_add != null ? Number(replaySummary.non_hold_value_add) : null;
     var flags = [
-      { label: 'Model', value: titleize(neural.selected_device || neural.report && neural.report.device_used || 'cpu') + ' · ' + Number(neural.selected_timesteps || neural.report && neural.report.timesteps || 0) + ' steps', tone: 'unclear' },
+      { label: 'Policy profile', value: 'Balanced export selection', tone: 'unclear' },
       { label: 'Freshness', value: commit, tone: 'unclear' },
       { label: 'Baseline edge', value: hasReplayUplift ? fmtSigned(replayUplift, 2) + ' replay uplift' : 'Unknown', tone: !hasReplayUplift ? 'unclear' : replayUplift >= 0 ? 'better' : 'worse' },
       { label: 'Walk-forward', value: hasWalk ? Math.round(positiveRate * 100) + '% positive windows · ' + fmtSigned(walkUplift, 2) : 'Unknown', tone: !hasWalk ? 'unclear' : positiveRate >= 0.67 ? 'better' : 'worse' },
@@ -1023,7 +1023,7 @@
     var selectedProfile = safeArray(neural.profile_selection).find(function(item){
       return String(item.device || '') === String(neural.selected_device || '') && Number(item.timesteps || 0) === Number(neural.selected_timesteps || 0);
     });
-    events.push({ title: 'Policy artifact refreshed', copy: 'Commit ' + String(state.rlArtifacts && state.rlArtifacts.updated_from_commit || 'unknown') + ' selected ' + titleize(neural.selected_device || 'cpu') + ' with ' + Number(neural.selected_timesteps || 0) + ' timesteps.' });
+    events.push({ title: 'Policy artifact refreshed', copy: 'Commit ' + String(state.rlArtifacts && state.rlArtifacts.updated_from_commit || 'unknown') + ' selected the current balanced export profile after held-out replay and walk-forward scoring.' });
     if (selectedProfile) events.push({ title: 'Profile selection winner', copy: 'Selection score ' + fmtMetric(selectedProfile.score, 3, false) + ' with replay uplift ' + fmtSigned(selectedProfile.uplift_vs_hold || 0, 2) + ', walk uplift ' + fmtSigned(selectedProfile.walk_uplift_vs_hold || 0, 2) + ', regime balance ' + fmtConfidence(selectedProfile.regime_balance_score) + ', and dominant action share ' + fmtConfidence(selectedProfile.dominant_action_share) + '.' });
     if (frontier) events.push({ title: 'Recommendation issued', copy: titleize(state.selected) + ' was assigned ' + titleize(frontier.neural_action || frontier.ppo_action || 'hold') + ' at ' + Math.round(Number(frontier.neural_confidence || 0) * 100) + '% confidence.' });
     if (walkForward) events.push({ title: 'Walk-forward review', copy: 'Positive windows ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% with uplift vs hold ' + fmtSigned(walkForward.vs_hold_reward_uplift || 0, 2) + '.' });
@@ -1494,7 +1494,7 @@
       renderInsights([
         { title: 'Offline policy → ' + offlineAction.replace(/_/g, ' '), copy: 'Offline confidence ' + Math.round(Number(frontier.offline_confidence || 0) * 100) + '%.' },
         { title: 'PPO bootstrap → ' + ppoAction.replace(/_/g, ' '), copy: 'Bootstrap confidence ' + Math.round(Number(frontier.ppo_confidence || 0) * 100) + '%. Timestamp ' + (frontier.timestamp || 'n/a') + '.' },
-        { title: 'Neural PPO → ' + neuralAction.replace(/_/g, ' '), copy: (neural && neural.report ? 'Timesteps ' + Number(neural.report.timesteps || 0) + ' · Mean reward ' + Number(neural.report.mean_reward_estimate || 0).toFixed(4) + ' · Final equity ' + Number((replaySummary || {}).final_equity || 0).toFixed(3) + ' · Replay uplift vs hold ' + (Number(neural.vs_hold_reward_uplift || 0) >= 0 ? '+' : '') + Number(neural.vs_hold_reward_uplift || 0).toFixed(4) + '.' : 'Neural report unavailable.') },
+        { title: 'Neural PPO → ' + neuralAction.replace(/_/g, ' '), copy: (neural && neural.report ? 'Mean reward ' + Number(neural.report.mean_reward_estimate || 0).toFixed(4) + ' · Final equity ' + Number((replaySummary || {}).final_equity || 0).toFixed(3) + ' · Replay uplift vs hold ' + (Number(neural.vs_hold_reward_uplift || 0) >= 0 ? '+' : '') + Number(neural.vs_hold_reward_uplift || 0).toFixed(4) + '.' : 'Neural report unavailable.') },
         { title: 'Walk-forward robustness', copy: walkForward ? ('Positive windows ' + Math.round(Number(walkForward.positive_window_rate || 0) * 100) + '% · Mean reward ' + Number(walkForward.mean_reward || 0).toFixed(4) + ' · Mean max drawdown ' + Number(walkForward.mean_max_drawdown || 0).toFixed(4) + ' · Uplift vs hold ' + (Number(walkForward.vs_hold_reward_uplift || 0) >= 0 ? '+' : '') + Number(walkForward.vs_hold_reward_uplift || 0).toFixed(4) + '.') : 'Walk-forward report unavailable.' },
         { title: 'Reward decomposition', copy: replaySummary ? ('PnL ' + Number((replaySummary.reward_decomposition || {}).pnl || 0).toFixed(4) + ' · Turnover -' + Number((replaySummary.reward_decomposition || {}).turnover_cost || 0).toFixed(4) + ' · Drawdown -' + Number((replaySummary.reward_decomposition || {}).drawdown_cost || 0).toFixed(4) + ' · Event gap -' + Number((replaySummary.reward_decomposition || {}).event_gap_cost || 0).toFixed(4) + '.') : 'Reward decomposition unavailable.' }
       ]);
