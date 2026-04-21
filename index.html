@@ -38,6 +38,44 @@ image: "/assets/images/og-default.png"
 }
 </script>
 
+<style>
+@media (max-width: 768px) {
+  #actionable-setups-grid { grid-template-columns: 1fr !important; }
+  #actionable-setups-grid article,
+  [data-cta="home_intelligence_lab_flagship"],
+  [data-cta="home_intelligence_lab_rl_featured"],
+  [data-cta="home_intelligence_lab_event_featured"],
+  [data-cta="home_role_investor"],
+  [data-cta="home_role_analyst"],
+  [data-cta="home_role_operator"] {
+    padding: 16px !important;
+    border-radius: 16px !important;
+  }
+  [data-cta="home_open_todays_reports"],
+  [data-cta="home_go_straight_simulator"],
+  [data-cta="home_open_intelligence_lab"],
+  [data-cta="home_open_rl_policy_lab"],
+  [data-cta="home_build_workflow"],
+  [data-cta="home_compare_free_pro"] {
+    width: 100%;
+    min-width: 0 !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #actionable-setups-grid article strong,
+  [data-cta="home_role_investor"] > div:nth-child(2),
+  [data-cta="home_role_analyst"] > div:nth-child(2),
+  [data-cta="home_role_operator"] > div:nth-child(2) {
+    line-height: 1.45;
+  }
+  #actionable-setups-grid .btn {
+    width: 100%;
+    min-width: 0 !important;
+  }
+}
+</style>
+
 <!-- Scroll Progress Indicator -->
 <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#22d3ee,#a855f7);width:0%;z-index:9998;transition:width 0.1s;pointer-events:none;"></div>
 

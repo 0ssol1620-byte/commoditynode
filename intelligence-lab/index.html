@@ -70,6 +70,45 @@ description: "Premium decision-support products on top of CommodityNode's commod
 @media (max-width: 900px) {
   .lab-rec-grid { grid-template-columns:1fr; }
 }
+@media (max-width: 768px) {
+  .intelligence-lab-hero { padding: 68px 0 28px; }
+  .lab-shell { padding: 0 16px 42px; }
+  .lab-kpis { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+  .lab-kpi, .lab-card, .lab-rec-card, .lab-policy-card { padding: 18px 16px; border-radius: 16px; }
+  .lab-toolbar { margin: 22px 0 16px; }
+  .lab-select { width: 100%; min-width: 0; }
+  .lab-anchor-row {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .lab-anchor-btn { flex: 0 0 auto; white-space: nowrap; }
+  .lab-row-card, .lab-mini-card {
+    padding: 14px;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .lab-row-card { flex-direction: column; }
+  .lab-row-metric { text-align: left; }
+  .lab-chart { min-height: 220px; }
+  .lab-callout-actions { gap: 8px; }
+  .lab-btn { width: 100%; min-width: 0; }
+  .lab-compare-table { min-width: 680px; }
+  .lab-card > .lab-two-col { gap: 14px; }
+}
+@media (max-width: 560px) {
+  .intelligence-lab-hero h1 { line-height: 1.04; }
+  .intelligence-lab-hero p { font-size: 0.95rem; line-height: 1.72; }
+  .lab-kpis { grid-template-columns: 1fr; }
+  .lab-kpi strong,
+  .lab-row-title { font-size: 0.95rem; }
+  .lab-row-sub,
+  .lab-card p,
+  .lab-card-copy { font-size: 0.88rem; line-height: 1.65; }
+}
 </style>
 
 <section class="intelligence-lab-hero">
@@ -237,7 +276,8 @@ description: "Premium decision-support products on top of CommodityNode's commod
   <section class="lab-card" style="margin-top:18px;">
     <div class="lab-card-kicker">Product comparison matrix</div>
     <h2>Which Intelligence Lab products belong in which tier?</h2>
-    <table class="lab-compare-table">
+    <div style="overflow:auto;-webkit-overflow-scrolling:touch;">
+      <table class="lab-compare-table">
       <thead>
         <tr>
           <th>Module</th>
@@ -258,7 +298,8 @@ description: "Premium decision-support products on top of CommodityNode's commod
         <tr><td>Event Study Library</td><td>Historical reaction research</td><td>Research desks</td><td>Desk</td></tr>
         <tr><td>RL Policy Lab</td><td>Scenario-dependent policy audit trail</td><td>Enterprise / premium desk</td><td>Enterprise</td></tr>
       </tbody>
-    </table>
+      </table>
+    </div>
   </section>
 </div>
 

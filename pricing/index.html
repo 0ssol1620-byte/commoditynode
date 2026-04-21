@@ -562,6 +562,104 @@ no_loader: true
   .compare-row { grid-template-columns: 1fr; }
   .compare-row > div:first-child { padding-bottom: 6px; }
   .pricing-proof-header { flex-direction: column; align-items: flex-start; }
+  .pricing-value-shell,
+  .pricing-compare-shell,
+  .pricing-plan-section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .pricing-hero-proof,
+  .pricing-use-case-card,
+  .pricing-proof-grid,
+  .pricing-saved-strip,
+  .pricing-compare-strip,
+  .pricing-grid {
+    max-width: none;
+  }
+  .pricing-hero-actions,
+  .pricing-saved-actions,
+  .social-proof-strip {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pricing-hero-actions .pricing-btn,
+  .pricing-saved-actions .pricing-btn,
+  .pricing-plan-section .pricing-btn,
+  .pricing-role-card .pricing-btn,
+  .pricing-proof-card .pricing-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: center;
+  }
+  .social-proof-strip {
+    gap: 12px;
+    text-align: left;
+  }
+  .sp-divider {
+    display: none;
+  }
+  .sp-item {
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .pricing-use-case-card,
+  .pricing-saved-strip,
+  .pricing-proof-card,
+  .pricing-role-card,
+  .pricing-compare-card {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+  .pricing-proof-grid,
+  .pricing-role-grid {
+    gap: 12px;
+  }
+  .compare-row > div {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+  .compare-row.compare-head > div {
+    padding-bottom: 10px;
+  }
+  .billing-toggle {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .billing-btn {
+    flex: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .pricing-hero h1 {
+    line-height: 1.05;
+  }
+  .pricing-hero-sub {
+    font-size: 0.96rem !important;
+    line-height: 1.72;
+  }
+  .pricing-hero-proof {
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+  .pricing-hero-decision-card strong,
+  .pricing-proof-card p,
+  .pricing-role-card p,
+  .pricing-compare-card p,
+  .plan-billed {
+    font-size: 0.88rem;
+    line-height: 1.62;
+  }
+  .pricing-price {
+    font-size: 2.3rem;
+  }
+  .compare-row > div:first-child {
+    border-bottom: none;
+    padding-bottom: 2px;
+  }
+}
 }
 .plan-billed { font-size:0.8rem; font-weight:600; margin-top:6px; color:#94a3b8; line-height:1.55; }
 .plan-billed-pro { color:#a855f7; }

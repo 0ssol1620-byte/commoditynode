@@ -123,6 +123,7 @@ layout: default
 .intel-rl-step { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
 .intel-rl-step strong { color:#f8fafc; display:block; }
 .intel-rl-step span { display:block; color:#94a3b8; font-size:0.86rem; line-height:1.6; margin-top:4px; }
+.intel-table-wrap { overflow:auto; -webkit-overflow-scrolling:touch; }
 @keyframes intelFloatAura {
   0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.45; }
   50% { transform: translate3d(0,-12px,0) scale(1.08); opacity: 0.72; }
@@ -134,6 +135,56 @@ layout: default
 .intel-workspace-meta { color:#94a3b8; line-height:1.7; margin-top:8px; }
 @media (max-width: 980px) {
   .intel-product-grid, .intel-product-two, .intel-product-four, .intel-workflow-strip, .intel-workflow-grid, .intel-pricing-grid, .intel-success-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .intel-product-shell { padding: 0 16px 42px; }
+  .intel-product-hero { padding: 62px 0 24px; }
+  .intel-card, .intel-price-card, .intel-success-card, .intel-rl-card, .intel-rl-field-shell { padding: 18px 16px; border-radius: 16px; }
+  .intel-actions { gap: 8px; }
+  .intel-btn { width: 100%; min-width: 0; min-height: 46px; }
+  .intel-demo-head { margin-bottom: 10px; }
+  .intel-demo-select { width: 100%; min-width: 0; }
+  .intel-chart-wrap { min-height: 230px; }
+  .intel-rl-grid,
+  .intel-rl-windows { grid-template-columns: 1fr; }
+  .intel-rl-pill-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .intel-rl-pill { flex: 0 0 auto; white-space: nowrap; }
+  .intel-rl-field-wrap,
+  .intel-rl-field-wrap canvas { height: 280px; min-height: 280px; }
+  .intel-rl-field-node { width: 96px; min-height: 48px; padding: 8px 10px; }
+  .intel-rl-field-node strong { font-size: 0.76rem; }
+  .intel-rl-field-node span { font-size: 0.7rem; }
+  .intel-rl-field-center { width: 104px; height: 104px; padding: 14px; }
+  .intel-rl-field-center strong { font-size: 0.88rem; }
+  .intel-rl-field-center span { font-size: 0.7rem; }
+  .intel-rl-field-node--reduce_risk { left: 3%; top: 14%; }
+  .intel-rl-field-node--hold { left: 67%; top: 14%; }
+  .intel-rl-field-node--relative_value_rotation { left: 34%; top: 4%; }
+  .intel-rl-field-node--add_hedge { left: 4%; top: 72%; }
+  .intel-rl-field-node--add_continuation { left: 64%; top: 72%; }
+  .intel-table { min-width: 720px; }
+}
+@media (max-width: 560px) {
+  .intel-product-hero h1 { line-height: 1.04; }
+  .intel-product-hero p,
+  .intel-card p,
+  .intel-price-card p,
+  .intel-success-card p,
+  .intel-summary,
+  .intel-insight-copy,
+  .intel-rl-card p,
+  .intel-rl-window span,
+  .intel-rl-step span { font-size: 0.9rem; line-height: 1.68; }
+  .intel-chip,
+  .intel-status-pill { width: 100%; justify-content: center; }
+  .intel-success-value { font-size: 1.55rem; }
+  .intel-kicker { font-size: 0.7rem; }
 }
 </style>
 
@@ -262,7 +313,7 @@ layout: default
         <div class="intel-kicker">Baseline comparison</div>
         <h3>How does the recommended action compare with baseline policies?</h3>
         <p>Show hold, offline, PPO bootstrap, and Neural PPO side-by-side so the user can see whether the recommendation is actually better than the current baseline.</p>
-        <div style="overflow:auto;">
+        <div class="intel-table-wrap">
           <table class="intel-table" id="intel-rl-baseline-table">
             <thead>
               <tr>

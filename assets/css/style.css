@@ -3881,6 +3881,114 @@ html { scroll-behavior: smooth; }
   .hero-product-shelf { grid-template-columns: 1fr; }
 }
 
+@media(max-width:768px) {
+  .hero-trust-strip {
+    gap: 8px;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .hero-trust-strip .trust-sep {
+    display: none;
+  }
+  .hero-trust-strip .trust-item {
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    line-height: 1.35;
+  }
+  .hero-answer-grid {
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .hero-answer-card,
+  .hero-product-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+  .hero-product-card strong,
+  .hero-answer-card strong {
+    font-size: 0.98rem;
+    line-height: 1.42;
+  }
+  .hero-product-card p,
+  .hero-answer-card p,
+  .hero-proof-note,
+  .hero-micro-links {
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+  .hero-micro-links {
+    gap: 10px;
+  }
+  .hero-micro-links span[aria-hidden="true"] {
+    display: none;
+  }
+  .guided-entry {
+    padding: 48px 0 28px;
+  }
+  .guided-header {
+    margin-bottom: 24px;
+  }
+  .guided-card {
+    padding: 18px 16px;
+    gap: 14px;
+    border-radius: 16px;
+  }
+  .guided-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+  .guided-title-sm {
+    font-size: 0.92rem;
+  }
+  .guided-desc {
+    font-size: 0.84rem;
+    line-height: 1.6;
+  }
+}
+
+@media(max-width:560px) {
+  .hero {
+    padding-top: 36px;
+  }
+  .hero-badge {
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    line-height: 1.08;
+    margin-bottom: 18px;
+  }
+  .hero-kicker,
+  .hero-desc {
+    font-size: 0.96rem;
+    line-height: 1.72;
+    margin-bottom: 24px;
+  }
+  .hero-actions {
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 46px;
+  }
+  .hero-stats {
+    gap: 14px;
+  }
+  .hero-stat {
+    min-width: 0;
+  }
+  .hero-product-shelf {
+    margin-top: 14px;
+  }
+  .hero-proof-note {
+    margin-top: 10px;
+  }
+}
+
 /* ===== GUIDED ENTRY ===== */
 .guided-entry { padding: 60px 0 40px; }
 .guided-header { text-align: center; margin-bottom: 36px; }
