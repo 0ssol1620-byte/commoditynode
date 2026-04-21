@@ -1208,7 +1208,7 @@
     var genericFallbacks = [
       { href: '/start/', label: 'Build my workflow' },
       { href: '/simulator/', label: 'Run simulator with my watchlist' },
-      { href: '/pricing/', label: 'See Free vs Pro' },
+      { href: '/pro/', label: 'See Pro workflow' },
       { href: '/reports/', label: 'Open live reports' }
     ];
     for (var j = 0; j < genericFallbacks.length; j += 1) {
@@ -1240,13 +1240,13 @@
       profile.watchlist.length ? { href: '/simulator/', label: 'Run simulator with my watchlist' } : null,
       profile.role ? { href: roleHref, label: 'Continue my workflow' } : null,
       { href: '/start/', label: 'Build my workflow' },
-      { href: '/pricing/', label: 'See Free vs Pro' }
+      { href: '/pro/', label: 'See Pro workflow' }
     ]);
     var secondaryAction = selectProfileAction([
       profile.watchlist.length ? { href: '/simulator/', label: 'Run simulator with my watchlist' } : null,
       firstEventHref ? { href: firstEventHref, label: 'Open ' + titleize(firstEvent) + ' playbook' } : null,
       firstCommodity ? { href: firstCommodityHref, label: 'Open ' + titleize(firstCommodity) + ' hub' } : null,
-      { href: '/pricing/', label: 'See Free vs Pro' },
+      { href: '/pro/', label: 'See Pro workflow' },
       { href: '/start/', label: 'Build my workflow' }
     ], [primaryAction.href]);
     var nextStep = 'Save a role, commodity, and watchlist once, then return to the live setup that matters.';
