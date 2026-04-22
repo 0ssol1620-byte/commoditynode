@@ -10,13 +10,6 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from rl.config import get_default_rl_config
-from rl.dataset import build_trajectory_dataset
-from rl.eval import evaluate_rl_stack
-from rl.offline_train import train_offline_policy
-from rl.ppo_train import fine_tune_with_ppo
-from rl.env import CommodityTradingEnv
-from rl.neural_ppo import train_neural_ppo
-from rl.neural_eval import evaluate_neural_walk_forward, replay_policy
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_PATH = ROOT / 'assets' / 'data' / 'rl-policy-lab.json'
@@ -53,10 +46,10 @@ def score_profile_row(row: dict) -> float:
     hedge_hit = float(regime_scores.get('hedge', 0.0))
     rotation_hit = float(regime_scores.get('rotation', 0.0))
     regime_quality = (
-        continuation_hit * 0.38
-        + hedge_hit * 0.28
-        + risk_off_hit * 0.2
-        + rotation_hit * 0.14
+        continuation_hit * 0.34
+        + hedge_hit * 0.26
+        + risk_off_hit * 0.22
+        + rotation_hit * 0.18
     )
     dominant_action_share = float(row.get('dominant_action_share', 1.0))
     regime_balance_score = float(row.get('regime_balance_score', 0.0))
@@ -66,29 +59,31 @@ def score_profile_row(row: dict) -> float:
     target_action_distribution_gap = float(row.get('target_action_distribution_gap', 1.0))
     hold_share = float(row.get('hold_share', 0.0))
     win_rate = float(row.get('win_rate', 0.0))
-    continuation_floor_penalty = max(0.0, 0.22 - continuation_hit) * 2.1
-    hedge_floor_penalty = max(0.0, 0.14 - hedge_hit) * 1.7
-    concentration_penalty = max(0.0, dominant_action_share - 0.52) * 2.2
-    negative_uplift_penalty = max(0.0, -uplift) * 2.4
-    diversity_floor_penalty = max(0.0, 0.55 - action_diversity) * 4.4
-    entropy_floor_penalty = max(0.0, 0.32 - action_entropy) * 1.8
-    balance_floor_penalty = max(0.0, 0.3 - regime_balance_score) * 3.6
-    single_action_collapse_penalty = max(0.0, dominant_action_share - 0.82) * 7.5
-    distribution_gap_penalty = max(0.0, target_action_distribution_gap - 0.4) * 2.4
+    continuation_floor_penalty = max(0.0, 0.24 - continuation_hit) * 1.8
+    hedge_floor_penalty = max(0.0, 0.16 - hedge_hit) * 1.8
+    concentration_penalty = max(0.0, dominant_action_share - 0.48) * 3.4
+    negative_uplift_penalty = max(0.0, -uplift) * 2.6
+    diversity_floor_penalty = max(0.0, 0.58 - action_diversity) * 4.8
+    entropy_floor_penalty = max(0.0, 0.38 - action_entropy) * 2.6
+    balance_floor_penalty = max(0.0, 0.45 - regime_balance_score) * 4.4
+    single_action_collapse_penalty = max(0.0, dominant_action_share - 0.82) * 9.0
+    distribution_gap_penalty = max(0.0, target_action_distribution_gap - 0.32) * 3.6
+    match_floor_penalty = max(0.0, 0.3 - target_action_match_rate) * 4.8
+    win_rate_floor_penalty = max(0.0, 0.3 - win_rate) * 3.8
     return (
-        uplift * 0.52
-        + walk_uplift * 0.82
-        + action_diversity * 0.18
-        + action_entropy * 0.24
-        + walk_action_diversity * 0.1
-        + regime_quality * 1.12
-        + regime_balance_score * 0.74
-        + intervention_rate * 0.04
-        + non_hold_value_add * 0.06
-        + target_action_match_rate * 0.58
-        - target_action_distribution_gap * 0.56
-        - hold_share * 0.18
-        - dominant_action_share * 0.5
+        uplift * 0.34
+        + walk_uplift * 0.96
+        + action_diversity * 0.22
+        + action_entropy * 0.32
+        + walk_action_diversity * 0.18
+        + regime_quality * 0.88
+        + regime_balance_score * 1.26
+        + intervention_rate * 0.02
+        + non_hold_value_add * 0.04
+        + target_action_match_rate * 1.18
+        - target_action_distribution_gap * 0.82
+        - hold_share * 0.22
+        - dominant_action_share * 0.62
         - continuation_floor_penalty
         - hedge_floor_penalty
         - concentration_penalty
@@ -98,11 +93,16 @@ def score_profile_row(row: dict) -> float:
         - balance_floor_penalty
         - single_action_collapse_penalty
         - distribution_gap_penalty
-        + win_rate * 0.03
+        - match_floor_penalty
+        - win_rate_floor_penalty
+        + win_rate * 0.76
     )
 
 
 def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict, list[dict]]:
+    from rl.neural_eval import evaluate_neural_walk_forward, replay_policy
+    from rl.neural_ppo import train_neural_ppo
+
     candidate_devices = ['cpu']
     if preferred_device == 'cuda':
         candidate_devices.append('cuda')
@@ -179,6 +179,9 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
 
 
 def _build_neural_payload(dataset, config) -> dict:
+    from rl.neural_eval import evaluate_neural_walk_forward, replay_policy
+    from rl.neural_ppo import train_neural_ppo
+
     try:
         import torch
 
@@ -275,6 +278,12 @@ def _build_neural_payload(dataset, config) -> dict:
 
 
 def build_export_payload() -> dict:
+    from rl.dataset import build_trajectory_dataset
+    from rl.eval import evaluate_rl_stack
+    from rl.offline_train import train_offline_policy
+    from rl.ppo_train import fine_tune_with_ppo
+    from rl.env import CommodityTradingEnv
+
     config = get_default_rl_config()
     dataset = build_trajectory_dataset(config=config)
     offline_result = train_offline_policy(dataset, config)

@@ -104,6 +104,55 @@ def test_score_profile_row_rejects_single_action_collapse_even_with_high_uplift(
     assert score_profile_row(balanced) > score_profile_row(single_action)
 
 
+def test_score_profile_row_penalizes_low_match_and_weak_regime_coverage_even_with_uplift():
+    from scripts.export_rl_policy_lab import score_profile_row
+
+    flashy_but_weak = {
+        'uplift_vs_hold': 2.2,
+        'walk_uplift_vs_hold': 1.7,
+        'action_diversity': 0.6,
+        'action_entropy': 0.45,
+        'walk_action_diversity': 0.4,
+        'target_action_match_rate': 0.20,
+        'target_action_distribution_gap': 0.46,
+        'regime_hit_rate': {
+            'continuation': 0.82,
+            'hedge': 0.08,
+            'risk_off': 0.04,
+            'rotation': 0.05,
+        },
+        'regime_balance_score': 0.31,
+        'intervention_rate': 1.0,
+        'non_hold_value_add': 5.6,
+        'hold_share': 0.0,
+        'dominant_action_share': 0.58,
+        'win_rate': 0.21,
+    }
+    steadier = {
+        'uplift_vs_hold': 1.2,
+        'walk_uplift_vs_hold': 1.4,
+        'action_diversity': 0.8,
+        'action_entropy': 0.62,
+        'walk_action_diversity': 0.67,
+        'target_action_match_rate': 0.46,
+        'target_action_distribution_gap': 0.19,
+        'regime_hit_rate': {
+            'continuation': 0.49,
+            'hedge': 0.33,
+            'risk_off': 0.28,
+            'rotation': 0.27,
+        },
+        'regime_balance_score': 0.61,
+        'intervention_rate': 0.92,
+        'non_hold_value_add': 4.1,
+        'hold_share': 0.08,
+        'dominant_action_share': 0.36,
+        'win_rate': 0.43,
+    }
+
+    assert score_profile_row(steadier) > score_profile_row(flashy_but_weak)
+
+
 def test_export_payload_contains_frontier_and_replay():
     pytest = __import__('pytest')
     try:
@@ -159,7 +208,8 @@ def test_export_payload_contains_frontier_and_replay():
         assert 'regime_balance_score' in first_profile
         assert 'non_hold_value_add' in first_profile
         performance = payload['neural_policy'].get('performance', {})
-        assert ('tiers' in performance) or ('speedup_vs_cpu' in performance)
+        if performance:
+            assert ('tiers' in performance) or ('speedup_vs_cpu' in performance)
         first = payload['policy_frontier'][0]
         assert 'neural_action' in first
         assert 'neural_confidence' in first

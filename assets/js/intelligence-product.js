@@ -362,10 +362,9 @@
         var neuralPolicyMetric = getNeuralPolicy();
         var walkForwardMetric = neuralPolicyMetric && neuralPolicyMetric.walk_forward ? neuralPolicyMetric.walk_forward : null;
         var replayMetric = neuralPolicyMetric && neuralPolicyMetric.replay_summary ? neuralPolicyMetric.replay_summary : null;
-        var upliftMetric = neuralPolicyMetric && neuralPolicyMetric.vs_hold_reward_uplift != null ? Number(neuralPolicyMetric.vs_hold_reward_uplift) : null;
-        primary = neuralFrontierMetric ? { value: Math.round(Number(neuralFrontierMetric.confidence || 0) * 100) + '%', copy: 'Neural PPO confidence for ' + String(neuralFrontierMetric.action || 'hold').replace(/_/g, ' ') + '.' } : { value: buildPolicyScores(bundle)[0] ? buildPolicyScores(bundle)[0].score + '/100' : '—', copy: 'Current policy confidence score.' };
-        secondary = walkForwardMetric ? { value: (Number(walkForwardMetric.vs_hold_reward_uplift || 0) >= 0 ? '+' : '') + Number(walkForwardMetric.vs_hold_reward_uplift || 0).toFixed(2), copy: 'Average walk-forward reward uplift versus a hold baseline.' } : { value: roleText, copy: profile.role ? 'Saved role shapes whether policy support should emphasize research discipline, capital protection, or operating response.' : 'Save a role so this policy layer stops acting like a generic demo and starts acting like a workflow tool.' };
-        tertiary = replayMetric ? { value: upliftMetric == null ? Math.round(Number(replayMetric.win_rate || 0) * 100) + '%' : ((upliftMetric >= 0 ? '+' : '') + upliftMetric.toFixed(2)), copy: upliftMetric == null ? 'Replay win rate from the latest policy run.' : 'Replay reward uplift versus the hold baseline.' } : { value: alert && alert.enabled ? 'Enabled' : 'Off', copy: alert && alert.enabled ? 'Policy reminder is active for ' + titleize(state.selected) + '.' : 'Toggle the reminder to preserve this policy state for later review.' };
+        primary = walkForwardMetric ? { value: Math.round(Number(walkForwardMetric.positive_window_rate || 0) * 100) + '%', copy: 'Positive unseen windows — the cleanest headline test of whether this policy survives beyond replay.' } : { value: buildPolicyScores(bundle)[0] ? buildPolicyScores(bundle)[0].score + '/100' : '—', copy: 'Current policy support score.' };
+        secondary = walkForwardMetric ? { value: (Number(walkForwardMetric.vs_hold_reward_uplift || 0) >= 0 ? '+' : '') + Number(walkForwardMetric.vs_hold_reward_uplift || 0).toFixed(2), copy: 'Walk-forward uplift versus the hold baseline. This matters more than raw training confidence.' } : { value: roleText, copy: profile.role ? 'Saved role shapes whether policy support should emphasize research discipline, capital protection, or operating response.' : 'Save a role so this policy layer stops acting like a generic demo and starts acting like a workflow tool.' };
+        tertiary = replayMetric ? { value: Math.round(Number(replayMetric.target_action_match_rate || 0) * 100) + '%', copy: 'Target match rate from replay. Treat this as policy alignment quality, not marketing confidence.' } : { value: alert && alert.enabled ? 'Enabled' : 'Off', copy: alert && alert.enabled ? 'Policy reminder is active for ' + titleize(state.selected) + '.' : 'Toggle the reminder to preserve this policy state for later review.' };
         break;
     }
 
@@ -734,34 +733,30 @@
 
   function getRlTrustFlags(neural, walkForward, replaySummary, neuralFrontier){
     if (!neural) return [];
-    var commit = String(state.rlArtifacts && state.rlArtifacts.updated_from_commit || 'unknown');
-    var hasConfidence = neuralFrontier && neuralFrontier.confidence != null || neural.report && neural.report.confidence != null;
-    var confidence = hasConfidence ? Number(neuralFrontier && neuralFrontier.confidence != null ? neuralFrontier.confidence : neural.report && neural.report.confidence) : null;
-    var hasReplayUplift = neural.vs_hold_reward_uplift != null;
-    var replayUplift = hasReplayUplift ? Number(neural.vs_hold_reward_uplift) : null;
     var hasWalk = walkForward && walkForward.vs_hold_reward_uplift != null && walkForward.positive_window_rate != null;
     var walkUplift = hasWalk ? Number(walkForward.vs_hold_reward_uplift) : null;
     var positiveRate = hasWalk ? Number(walkForward.positive_window_rate) : null;
-    var hasDiversity = replaySummary && replaySummary.action_diversity != null;
-    var diversity = hasDiversity ? Number(replaySummary.action_diversity) : null;
-    var hasBalance = replaySummary && replaySummary.regime_balance_score != null;
-    var balance = hasBalance ? Number(replaySummary.regime_balance_score) : null;
+    var replayUplift = neural.vs_hold_reward_uplift != null ? Number(neural.vs_hold_reward_uplift) : null;
+    var matchRate = replaySummary && replaySummary.target_action_match_rate != null ? Number(replaySummary.target_action_match_rate) : null;
+    var distributionGap = replaySummary && replaySummary.target_action_distribution_gap != null ? Number(replaySummary.target_action_distribution_gap) : null;
+    var balance = replaySummary && replaySummary.regime_balance_score != null ? Number(replaySummary.regime_balance_score) : null;
     var dominantShare = replaySummary && replaySummary.dominant_action_share != null ? Number(replaySummary.dominant_action_share) : null;
-    var nonHoldValueAdd = replaySummary && replaySummary.non_hold_value_add != null ? Number(replaySummary.non_hold_value_add) : null;
+    var winRate = replaySummary && replaySummary.win_rate != null ? Number(replaySummary.win_rate) : null;
     var flags = [
-      { label: 'Policy profile', value: 'Balanced export selection', tone: 'unclear' },
-      { label: 'Freshness', value: commit, tone: 'unclear' },
-      { label: 'Baseline edge', value: hasReplayUplift ? fmtSigned(replayUplift, 2) + ' replay uplift' : 'Unknown', tone: !hasReplayUplift ? 'unclear' : replayUplift >= 0 ? 'better' : 'worse' },
-      { label: 'Walk-forward', value: hasWalk ? Math.round(positiveRate * 100) + '% positive windows · ' + fmtSigned(walkUplift, 2) : 'Unknown', tone: !hasWalk ? 'unclear' : positiveRate >= 0.67 ? 'better' : 'worse' },
-      { label: 'Action diversity', value: hasDiversity ? Math.round(diversity * 100) + '% of action set' : 'Unknown', tone: !hasDiversity ? 'unclear' : diversity >= 0.6 ? 'better' : 'unclear' },
-      { label: 'Regime balance', value: hasBalance ? Math.round(balance * 100) + '%' : 'Unknown', tone: !hasBalance ? 'unclear' : balance >= 0.45 ? 'better' : balance >= 0.28 ? 'unclear' : 'worse' },
-      { label: 'Dominant action', value: dominantShare != null ? Math.round(dominantShare * 100) + '% share' : 'Unknown', tone: dominantShare == null ? 'unclear' : dominantShare <= 0.55 ? 'better' : dominantShare <= 0.75 ? 'unclear' : 'worse' },
-      { label: 'Intervention edge', value: nonHoldValueAdd != null ? fmtSigned(nonHoldValueAdd, 2) + ' vs hold' : 'Unknown', tone: nonHoldValueAdd == null ? 'unclear' : nonHoldValueAdd >= 0 ? 'better' : 'worse' },
-      { label: 'Action entropy', value: replaySummary && replaySummary.action_entropy != null ? Math.round(Number(replaySummary.action_entropy || 0) * 100) + '%' : 'Unknown', tone: replaySummary && replaySummary.action_entropy != null ? (Number(replaySummary.action_entropy || 0) >= 0.45 ? 'better' : 'unclear') : 'unclear' },
-      { label: 'Confidence', value: fmtConfidence(confidence), tone: !hasConfidence ? 'unclear' : confidence >= 0.45 ? 'better' : confidence >= 0.3 ? 'unclear' : 'worse' }
+      { label: 'Positive windows', value: positiveRate != null ? Math.round(positiveRate * 100) + '%' : 'Unknown', tone: positiveRate == null ? 'unclear' : positiveRate >= 0.75 ? 'better' : positiveRate >= 0.6 ? 'unclear' : 'worse' },
+      { label: 'Walk uplift', value: walkUplift != null ? fmtSigned(walkUplift, 2) : 'Unknown', tone: walkUplift == null ? 'unclear' : walkUplift >= 0 ? 'better' : 'worse' },
+      { label: 'Replay uplift', value: replayUplift != null ? fmtSigned(replayUplift, 2) : 'Unknown', tone: replayUplift == null ? 'unclear' : replayUplift >= 0 ? 'better' : 'worse' },
+      { label: 'Target match', value: matchRate != null ? Math.round(matchRate * 100) + '%' : 'Unknown', tone: matchRate == null ? 'unclear' : matchRate >= 0.45 ? 'better' : matchRate >= 0.3 ? 'unclear' : 'worse' },
+      { label: 'Distribution gap', value: distributionGap != null ? Math.round(distributionGap * 100) + '%' : 'Unknown', tone: distributionGap == null ? 'unclear' : distributionGap <= 0.25 ? 'better' : distributionGap <= 0.4 ? 'unclear' : 'worse' },
+      { label: 'Regime balance', value: balance != null ? Math.round(balance * 100) + '%' : 'Unknown', tone: balance == null ? 'unclear' : balance >= 0.6 ? 'better' : balance >= 0.45 ? 'unclear' : 'worse' },
+      { label: 'Dominant action concentration', value: dominantShare != null ? Math.round(dominantShare * 100) + '%' : 'Unknown', tone: dominantShare == null ? 'unclear' : dominantShare <= 0.4 ? 'better' : dominantShare <= 0.55 ? 'unclear' : 'worse' },
+      { label: 'Replay win rate', value: winRate != null ? Math.round(winRate * 100) + '%' : 'Unknown', tone: winRate == null ? 'unclear' : winRate >= 0.4 ? 'better' : winRate >= 0.3 ? 'unclear' : 'worse' }
     ];
     if (replaySummary && replaySummary.total_reward != null && Number(replaySummary.total_reward) < 0) {
       flags.push({ label: 'Warning', value: 'Replay total reward still negative', tone: 'worse' });
+    }
+    if (neuralFrontier && neuralFrontier.action) {
+      flags.unshift({ label: 'Current action', value: titleize(neuralFrontier.action), tone: 'unclear' });
     }
     return flags;
   }
@@ -849,16 +844,15 @@
     var verdict = getRlVerdict(neural.vs_hold_reward_uplift, walkForward && walkForward.vs_hold_reward_uplift);
     var toneStyles = getRlToneStyles(verdict.tone);
     if ($('intel-rl-decision-title')) $('intel-rl-decision-title').textContent = titleize(neuralFrontier.action || 'hold') + ' · ' + verdict.label;
-    if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'The current policy favors ' + String(neuralFrontier.action || 'hold').replace(/_/g, ' ') + ' with ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '% confidence. Replay uplift versus hold is ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + ', walk-forward uplift is ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + ', and intervention rate is ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) : 0) + '%. Current regime balance is ' + (replaySummary && replaySummary.regime_balance_score != null ? Math.round(Number(replaySummary.regime_balance_score || 0) * 100) : 0) + '% with non-hold value add ' + (replaySummary && replaySummary.non_hold_value_add != null ? fmtSigned(replaySummary.non_hold_value_add, 2) : '—') + '.';
+    if ($('intel-rl-decision-copy')) $('intel-rl-decision-copy').textContent = 'Use this as decision support, not autonomous execution. The current recommendation is ' + String(neuralFrontier.action || 'hold').replace(/_/g, ' ') + ', with walk-forward uplift ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + ', positive windows ' + (walkForward ? Math.round(Number(walkForward.positive_window_rate || 0) * 100) : 0) + '%, target match ' + (replaySummary ? Math.round(Number(replaySummary.target_action_match_rate || 0) * 100) : 0) + '%, and regime balance ' + (replaySummary && replaySummary.regime_balance_score != null ? Math.round(Number(replaySummary.regime_balance_score || 0) * 100) : 0) + '%.';
     var pills = [];
-    pills.push('<div class="intel-rl-pill"><strong>Confidence</strong> ' + Math.round(Number(neuralFrontier.confidence || 0) * 100) + '%</div>');
-    pills.push('<div class="intel-rl-pill" style="' + toneStyles.pill + '"><strong>Replay uplift</strong> ' + fmtSigned(neural.vs_hold_reward_uplift || 0, 2) + '</div>');
+    pills.push('<div class="intel-rl-pill"><strong>Current action</strong> ' + titleize(neuralFrontier.action || 'hold') + '</div>');
+    pills.push('<div class="intel-rl-pill" style="' + getRlToneStyles((walkForward && walkForward.positive_window_rate || 0) >= 0.75 ? 'better' : (walkForward && walkForward.positive_window_rate || 0) >= 0.6 ? 'unclear' : 'worse').pill + '"><strong>Positive windows</strong> ' + (walkForward ? Math.round(Number(walkForward.positive_window_rate || 0) * 100) : 0) + '%</div>');
     pills.push('<div class="intel-rl-pill" style="' + getRlToneStyles((walkForward && walkForward.vs_hold_reward_uplift || 0) >= 0 ? 'better' : 'worse').pill + '"><strong>Walk uplift</strong> ' + fmtSigned(walkForward && walkForward.vs_hold_reward_uplift || 0, 2) + '</div>');
-    pills.push('<div class="intel-rl-pill"><strong>Entropy</strong> ' + (replaySummary ? Math.round(Number(replaySummary.action_entropy || 0) * 100) : 0) + '%</div>');
-    pills.push('<div class="intel-rl-pill"><strong>Intervention</strong> ' + (replaySummary ? Math.round(Number(replaySummary.intervention_rate || 0) * 100) : 0) + '%</div>');
+    if (replaySummary) pills.push('<div class="intel-rl-pill"><strong>Target match</strong> ' + fmtConfidence(replaySummary.target_action_match_rate) + '</div>');
     if (replaySummary && replaySummary.regime_balance_score != null) pills.push('<div class="intel-rl-pill"><strong>Regime balance</strong> ' + Math.round(Number(replaySummary.regime_balance_score || 0) * 100) + '%</div>');
-    if (replaySummary && replaySummary.dominant_action_share != null) pills.push('<div class="intel-rl-pill"><strong>Dominant action</strong> ' + Math.round(Number(replaySummary.dominant_action_share || 0) * 100) + '%</div>');
-    if (replaySummary && replaySummary.non_hold_value_add != null) pills.push('<div class="intel-rl-pill"><strong>Intervention edge</strong> ' + fmtSigned(replaySummary.non_hold_value_add || 0, 2) + '</div>');
+    if (replaySummary && replaySummary.dominant_action_share != null) pills.push('<div class="intel-rl-pill"><strong>Dominant action concentration</strong> ' + Math.round(Number(replaySummary.dominant_action_share || 0) * 100) + '%</div>');
+    if (replaySummary && replaySummary.target_action_distribution_gap != null) pills.push('<div class="intel-rl-pill"><strong>Distribution gap</strong> ' + Math.round(Number(replaySummary.target_action_distribution_gap || 0) * 100) + '%</div>');
     pills.push('<div class="intel-rl-pill" style="' + toneStyles.pill + '"><strong>Verdict</strong> ' + verdict.label + '</div>');
     if (frontier) pills.push('<div class="intel-rl-pill"><strong>Baseline</strong> ' + titleize(frontier.offline_action || 'hold') + '</div>');
     if (replaySummary) pills.push('<div class="intel-rl-pill"><strong>Replay win rate</strong> ' + fmtConfidence(replaySummary.win_rate) + '</div>');
@@ -1100,7 +1094,7 @@
       { label: 'Replay edge', value: fmtSigned(neural.vs_hold_reward_uplift || 0, 2), copy: 'Reward uplift versus a passive hold baseline.' },
       { label: 'Walk robustness', value: walkForward ? fmtConfidence(walkForward.positive_window_rate) : '—', copy: walkForward ? 'Positive unseen windows with walk uplift ' + fmtSigned(walkForward.vs_hold_reward_uplift || 0, 2) + '.' : 'Walk-forward report unavailable.' },
       { label: 'Risk pressure', value: Math.round(pressure * 100) + '%', copy: 'Composite defensive pressure from anomaly, event, spread, and trend.' },
-      { label: 'Governance', value: selectedProfile ? fmtMetric(selectedProfile.score, 3, false) : verdict.label, copy: selectedProfile ? 'Selection score for ' + String(neural.selected_device || 'n/a') + ' · ' + String(neural.selected_timesteps || 'n/a') + ' steps.' : 'Profile selection details unavailable.' }
+      { label: 'Governance', value: selectedProfile ? fmtMetric(selectedProfile.score, 3, false) : verdict.label, copy: selectedProfile ? 'Composite shipping score built from walk uplift, target match, regime balance, and concentration penalties.' : 'Profile selection details unavailable.' }
     ];
     band.innerHTML = bandCards.map(function(item){
       return '<div class="intel-rl-stat-card"><div class="intel-rl-stat-label">' + escapeHtml(item.label) + '</div><div class="intel-rl-stat-value">' + escapeHtml(item.value) + '</div><div class="intel-rl-stat-copy">' + escapeHtml(item.copy) + '</div></div>';
@@ -1149,14 +1143,14 @@
     if (!target || !neural) return;
     var selectedProfile = getSelectedProfile(neural);
     var cards = [];
-    cards.push('<div class="intel-rl-governance-card"><strong>Selected export profile</strong><span>' + escapeHtml(String(neural.selected_device || 'n/a') + ' · ' + String(neural.selected_timesteps || 'n/a') + ' steps · prior weight ' + fmtMetric(neural.selected_prior_weight, 2, false)) + '</span></div>');
+    cards.push('<div class="intel-rl-governance-card"><strong>Shipping policy profile</strong><span>This export is chosen for decision quality, not hardware prestige. The shipping profile must survive walk-forward checks, avoid one-action collapse, and keep regime concentration in view.</span></div>');
     if (selectedProfile) {
-      cards.push('<div class="intel-rl-governance-card"><strong>Why it won</strong><span>Selection score ' + escapeHtml(fmtMetric(selectedProfile.score, 3, false)) + ' with replay uplift ' + escapeHtml(fmtSigned(selectedProfile.uplift_vs_hold || 0, 2)) + ', walk uplift ' + escapeHtml(fmtSigned(selectedProfile.walk_uplift_vs_hold || 0, 2)) + ', regime balance ' + escapeHtml(fmtConfidence(selectedProfile.regime_balance_score)) + ', and dominant action share ' + escapeHtml(fmtConfidence(selectedProfile.dominant_action_share)) + '.</span></div>');
+      cards.push('<div class="intel-rl-governance-card"><strong>Why this profile ships</strong><span>Composite score ' + escapeHtml(fmtMetric(selectedProfile.score, 3, false)) + ' with positive windows ' + escapeHtml(fmtConfidence(selectedProfile.walk_positive_rate)) + ', walk uplift ' + escapeHtml(fmtSigned(selectedProfile.walk_uplift_vs_hold || 0, 2)) + ', target match ' + escapeHtml(fmtConfidence(selectedProfile.target_action_match_rate)) + ', regime balance ' + escapeHtml(fmtConfidence(selectedProfile.regime_balance_score)) + ', and dominant action concentration ' + escapeHtml(fmtConfidence(selectedProfile.dominant_action_share)) + '.</span></div>');
     }
     cards.push('<div class="intel-rl-mini-grid">' + [
       { label: 'Walk uplift', value: walkForward ? fmtSigned(walkForward.vs_hold_reward_uplift || 0, 2) : '—', copy: 'Out-of-sample uplift versus hold.' },
-      { label: 'Replay diversity', value: replaySummary ? fmtConfidence(replaySummary.action_diversity) : '—', copy: 'How much of the action set is used.' },
-      { label: 'Dominant share', value: replaySummary ? fmtConfidence(replaySummary.dominant_action_share) : '—', copy: 'How concentrated the active policy is.' }
+      { label: 'Target match', value: replaySummary ? fmtConfidence(replaySummary.target_action_match_rate) : '—', copy: 'How often replayed actions match the target policy.' },
+      { label: 'Dominant concentration', value: replaySummary ? fmtConfidence(replaySummary.dominant_action_share) : '—', copy: 'How concentrated the live policy still is.' }
     ].map(function(item){
       return '<div class="intel-rl-mini-stat"><span class="label">' + escapeHtml(item.label) + '</span><span class="value">' + escapeHtml(item.value) + '</span><span class="copy">' + escapeHtml(item.copy) + '</span></div>';
     }).join('') + '</div>');
