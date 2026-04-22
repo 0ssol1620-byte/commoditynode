@@ -966,14 +966,14 @@ image: "/assets/images/og-default.png"
 
     <div class="forecast-top-bar" data-animate>
       <div class="forecast-tabs">
-        <button class="forecast-tab active" data-commodity="gold">Gold</button>
-        <button class="forecast-tab" data-commodity="copper">Copper</button>
-        <button class="forecast-tab" data-commodity="crude_oil">Crude Oil</button>
+        <button type="button" class="forecast-tab active" data-commodity="gold">Gold</button>
+        <button type="button" class="forecast-tab" data-commodity="copper">Copper</button>
+        <button type="button" class="forecast-tab" data-commodity="crude_oil">Crude Oil</button>
       </div>
       <div class="forecast-horizon-tabs">
-        <button class="horizon-tab active" data-days="30">30D</button>
-        <button class="horizon-tab" data-days="60">60D</button>
-        <button class="horizon-tab" data-days="90">90D</button>
+        <button type="button" class="horizon-tab active" data-days="30">30D</button>
+        <button type="button" class="horizon-tab" data-days="60">60D</button>
+        <button type="button" class="horizon-tab" data-days="90">90D</button>
       </div>
     </div>
 
@@ -1154,8 +1154,7 @@ image: "/assets/images/og-default.png"
 (function() {
   'use strict';
 
-  var forecastData = null;
-  var consensusData = null;
+  var summaryData = null;
   var fcChart = null;
   var currentCommodity = 'gold';
   var currentHorizon = 30;
@@ -1166,17 +1165,16 @@ image: "/assets/images/og-default.png"
     crude_oil: { name: 'Crude Oil', unit: '$', decimals: 2 }
   };
 
-  Promise.all([
-    fetch('/assets/data/forecast.json').then(function(r) { return r.json(); }),
-    fetch('/assets/data/forecast-consensus.json').then(function(r) { return r.ok ? r.json() : {}; }).catch(function(){ return {}; })
-  ])
-    .then(function(responses) {
-      forecastData = responses[0] || {};
-      consensusData = responses[1] || {};
+  // Home pulls a trimmed summary (~40KB) instead of the full
+  // ~2MB forecast bundle. Full data is loaded lazily on hub/simulator pages.
+  fetch('/assets/data/home-forecast-summary.json')
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(data) {
+      summaryData = (data && data.commodities) ? data.commodities : {};
       renderForecastChart('gold');
       renderSummaryBar();
     })
-    .catch(function(e) { console.error('Forecast load error', e); });
+    .catch(function(e) { console.error('Home forecast summary load error', e); });
 
   function fmt(val, meta) {
     if (val === null || val === undefined || Number.isNaN(Number(val))) return '—';
@@ -1187,13 +1185,11 @@ image: "/assets/images/og-default.png"
   }
 
   function getBundle(key) {
-    var d = forecastData && forecastData[key] ? forecastData[key] : null;
+    var d = summaryData && summaryData[key] ? summaryData[key] : null;
     if (!d) return null;
-    var c = consensusData && consensusData[key] ? consensusData[key] : null;
-    var chronos = c && c.models ? c.models.chronos2 : null;
-    var timesfm = c && c.models ? c.models.timesfm : null;
-    var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
-    return { raw: d, entry: c, consensus: consensus, chronos: chronos, timesfm: timesfm };
+    var models = d.models || {};
+    var consensus = d.consensus && d.consensus.status === 'ready' ? d.consensus : null;
+    return { raw: d, entry: d, consensus: consensus, chronos: models.chronos2 || null, timesfm: models.timesfm || null };
   }
 
   function forecastLineFromHistory(joinPrice, histDates, arr) {
@@ -1222,9 +1218,9 @@ image: "/assets/images/og-default.png"
 
     var fcDates = (activeForecast.dates || []).slice(0, fcLen);
     var fcMedian = (activeForecast.median || []).slice(0, fcLen);
-    var fcP10 = ((activeForecast.p10_extreme || activeForecast.p10 || activeForecast.p25) || []).slice(0, fcLen);
-    var fcP90 = ((activeForecast.p90_extreme || activeForecast.p90 || activeForecast.p75) || []).slice(0, fcLen);
-    var chronosMedian = bundle.chronos && bundle.chronos.raw && bundle.chronos.raw.forecast ? (bundle.chronos.raw.forecast.median || []).slice(0, fcLen) : [];
+    var fcP10 = (activeForecast.p10 || []).slice(0, fcLen);
+    var fcP90 = (activeForecast.p90 || []).slice(0, fcLen);
+    var chronosMedian = bundle.chronos ? (bundle.chronos.median || []).slice(0, fcLen) : [];
     var timesfmMedian = bundle.timesfm ? (bundle.timesfm.median || []).slice(0, fcLen) : [];
 
     var allLabels = histDates.concat(fcDates);
@@ -1393,7 +1389,7 @@ image: "/assets/images/og-default.png"
       var pct = d.current_price && target90 ? ((target90 - d.current_price) / d.current_price * 100) : 0;
       var dir = pct >= 0 ? 'up' : 'down';
       var level = bundle.entry && bundle.entry.agreement ? bundle.entry.agreement.level : 'moderate';
-      return '<div class="fc-summary-item" data-commodity="' + k + '" onclick="window._fcSwitch && window._fcSwitch(\'' + k + '\')">'
+      return '<div class="fc-summary-item" data-commodity="' + k + '" role="button" tabindex="0">'
         + '<div class="fc-sum-header">'
         + '<div class="fc-sum-name">' + meta.name + '</div>'
         + '<div class="fc-sum-badge ' + dir + '">' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%</div>'
@@ -1432,6 +1428,21 @@ image: "/assets/images/og-default.png"
         renderForecastChart(currentCommodity, currentHorizon);
       });
     });
+    var bar = document.getElementById('forecast-summary-bar');
+    if (bar) {
+      bar.addEventListener('click', function(ev) {
+        var item = ev.target.closest('.fc-summary-item');
+        if (item && item.dataset.commodity) window._fcSwitch(item.dataset.commodity);
+      });
+      bar.addEventListener('keydown', function(ev) {
+        if (ev.key !== 'Enter' && ev.key !== ' ') return;
+        var item = ev.target.closest('.fc-summary-item');
+        if (item && item.dataset.commodity) {
+          ev.preventDefault();
+          window._fcSwitch(item.dataset.commodity);
+        }
+      });
+    }
   });
 })();
 </script>
@@ -1476,18 +1487,18 @@ image: "/assets/images/og-default.png"
           <div class="universe-controls">
             <div class="universe-control-group">
               <span class="universe-control-label">Cluster</span>
-              <button class="universe-filter is-active" data-filter="all">All</button>
-              <button class="universe-filter" data-filter="energy">Energy</button>
-              <button class="universe-filter" data-filter="precious">Precious</button>
-              <button class="universe-filter" data-filter="industrial">Industrial</button>
-              <button class="universe-filter" data-filter="agriculture">Agriculture</button>
+              <button type="button" class="universe-filter is-active" data-filter="all">All</button>
+              <button type="button" class="universe-filter" data-filter="energy">Energy</button>
+              <button type="button" class="universe-filter" data-filter="precious">Precious</button>
+              <button type="button" class="universe-filter" data-filter="industrial">Industrial</button>
+              <button type="button" class="universe-filter" data-filter="agriculture">Agriculture</button>
             </div>
             <div class="universe-control-group universe-search-group">
               <span class="universe-control-label">Search</span>
               <input type="text" class="universe-search" placeholder="Search stars, satellites, companies…" aria-label="Search universe">
             </div>
           </div>
-          <button class="universe-reset-btn">Reset viewpoint</button>
+          <button type="button" class="universe-reset-btn">Reset viewpoint</button>
         </div>
 
         <div class="universe-frame">

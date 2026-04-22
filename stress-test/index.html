@@ -89,13 +89,13 @@ noindex: false
     <div class="step-card" data-animate>
       <div class="step-label"><div class="step-num">1</div><div class="step-title">Build Your Portfolio</div></div>
       <div class="portfolio-rows" id="portfolio-rows">
-        <div class="portfolio-row"><input type="text" placeholder="Ticker" value="XOM"><input type="number" placeholder="%" value="20" min="0" max="100"><span class="pct-label">%</span><button class="remove-btn" onclick="this.parentElement.remove();updateAlloc()">×</button></div>
-        <div class="portfolio-row"><input type="text" placeholder="Ticker" value="TSLA"><input type="number" placeholder="%" value="15" min="0" max="100"><span class="pct-label">%</span><button class="remove-btn" onclick="this.parentElement.remove();updateAlloc()">×</button></div>
-        <div class="portfolio-row"><input type="text" placeholder="Ticker" value="FCX"><input type="number" placeholder="%" value="10" min="0" max="100"><span class="pct-label">%</span><button class="remove-btn" onclick="this.parentElement.remove();updateAlloc()">×</button></div>
-        <div class="portfolio-row"><input type="text" placeholder="Ticker" value="NEM"><input type="number" placeholder="%" value="10" min="0" max="100"><span class="pct-label">%</span><button class="remove-btn" onclick="this.parentElement.remove();updateAlloc()">×</button></div>
-        <div class="portfolio-row"><input type="text" placeholder="Ticker" value="ADM"><input type="number" placeholder="%" value="8" min="0" max="100"><span class="pct-label">%</span><button class="remove-btn" onclick="this.parentElement.remove();updateAlloc()">×</button></div>
+        <div class="portfolio-row"><input type="text" placeholder="Ticker" aria-label="Ticker symbol" value="XOM"><input type="number" placeholder="%" aria-label="Allocation percent" value="20" min="0" max="100"><span class="pct-label">%</span><button type="button" class="remove-btn" data-action="remove-row" aria-label="Remove position">×</button></div>
+        <div class="portfolio-row"><input type="text" placeholder="Ticker" aria-label="Ticker symbol" value="TSLA"><input type="number" placeholder="%" aria-label="Allocation percent" value="15" min="0" max="100"><span class="pct-label">%</span><button type="button" class="remove-btn" data-action="remove-row" aria-label="Remove position">×</button></div>
+        <div class="portfolio-row"><input type="text" placeholder="Ticker" aria-label="Ticker symbol" value="FCX"><input type="number" placeholder="%" aria-label="Allocation percent" value="10" min="0" max="100"><span class="pct-label">%</span><button type="button" class="remove-btn" data-action="remove-row" aria-label="Remove position">×</button></div>
+        <div class="portfolio-row"><input type="text" placeholder="Ticker" aria-label="Ticker symbol" value="NEM"><input type="number" placeholder="%" aria-label="Allocation percent" value="10" min="0" max="100"><span class="pct-label">%</span><button type="button" class="remove-btn" data-action="remove-row" aria-label="Remove position">×</button></div>
+        <div class="portfolio-row"><input type="text" placeholder="Ticker" aria-label="Ticker symbol" value="ADM"><input type="number" placeholder="%" aria-label="Allocation percent" value="8" min="0" max="100"><span class="pct-label">%</span><button type="button" class="remove-btn" data-action="remove-row" aria-label="Remove position">×</button></div>
       </div>
-      <button class="add-btn" onclick="addRow()">+ Add Position</button>
+      <button type="button" class="add-btn" data-action="add-row">+ Add Position</button>
       <div class="alloc-summary" id="alloc-summary">Total allocation: <span>63%</span> (remaining: 37%)</div>
     </div>
 
@@ -103,19 +103,19 @@ noindex: false
     <div class="step-card" data-animate data-delay="100">
       <div class="step-label"><div class="step-num">2</div><div class="step-title">Select Scenarios</div></div>
       <div class="scenario-grid" id="scenario-grid">
-        <label class="scenario-opt"><input type="checkbox" value="oil_shock"><div class="scenario-info"><div class="scenario-name">Oil Shock +30%</div><div class="scenario-desc">Iran crisis disrupts Strait of Hormuz</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="gold_rally"><div class="scenario-info"><div class="scenario-name">Gold Rally +20%</div><div class="scenario-desc">Safe haven surge amid geopolitical risk</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="copper_crash"><div class="scenario-info"><div class="scenario-name">Copper Crash -25%</div><div class="scenario-desc">China economic slowdown fears</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="wheat_spike"><div class="scenario-info"><div class="scenario-name">Wheat Spike +40%</div><div class="scenario-desc">Black Sea corridor collapse</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="commodity_bull"><div class="scenario-info"><div class="scenario-name">Broad Commodity Bull +15%</div><div class="scenario-desc">Synchronized global demand surge</div></div></label>
-        <label class="scenario-opt"><input type="checkbox" value="stagflation"><div class="scenario-info"><div class="scenario-name">Stagflation Scenario</div><div class="scenario-desc">Oil +25%, Gold +15%, Copper -10%, Wheat +20%</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="oil_shock" aria-label="Oil Shock +30%"><div class="scenario-info"><div class="scenario-name">Oil Shock +30%</div><div class="scenario-desc">Iran crisis disrupts Strait of Hormuz</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="gold_rally" aria-label="Gold Rally +20%"><div class="scenario-info"><div class="scenario-name">Gold Rally +20%</div><div class="scenario-desc">Safe haven surge amid geopolitical risk</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="copper_crash" aria-label="Copper Crash -25%"><div class="scenario-info"><div class="scenario-name">Copper Crash -25%</div><div class="scenario-desc">China economic slowdown fears</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="wheat_spike" aria-label="Wheat Spike +40%"><div class="scenario-info"><div class="scenario-name">Wheat Spike +40%</div><div class="scenario-desc">Black Sea corridor collapse</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="commodity_bull" aria-label="Broad Commodity Bull +15%"><div class="scenario-info"><div class="scenario-name">Broad Commodity Bull +15%</div><div class="scenario-desc">Synchronized global demand surge</div></div></label>
+        <label class="scenario-opt"><input type="checkbox" value="stagflation" aria-label="Stagflation Scenario"><div class="scenario-info"><div class="scenario-name">Stagflation Scenario</div><div class="scenario-desc">Oil +25%, Gold +15%, Copper -10%, Wheat +20%</div></div></label>
       </div>
     </div>
 
     <!-- Step 3 -->
     <div class="step-card" data-animate data-delay="200">
       <div class="step-label"><div class="step-num">3</div><div class="step-title">Run Analysis</div></div>
-      <button class="run-btn" id="run-btn" onclick="runStressTest()">Run Stress Test</button>
+      <button type="button" class="run-btn" id="run-btn" data-action="run-stress">Run Stress Test</button>
     </div>
 
     <!-- Results -->
@@ -123,7 +123,7 @@ noindex: false
       <div class="step-card" id="results-card">
         <div class="step-label" style="justify-content:space-between;flex-wrap:wrap;gap:10px">
           <div style="display:flex;align-items:center;gap:10px"><div class="step-num" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:#10b981">&#10003;</div><div class="step-title">Stress Test Results</div></div>
-          <button id="export-stress-btn" onclick="exportStressCSV()" style="display:none;padding:7px 16px;border-radius:8px;border:1px solid rgba(34,211,238,0.4);background:rgba(34,211,238,0.08);color:#22d3ee;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(34,211,238,0.18)'" onmouseout="this.style.background='rgba(34,211,238,0.08)'">Export Results (CSV)</button>
+          <button type="button" id="export-stress-btn" class="export-stress-btn" data-action="export-stress" hidden>Export Results (CSV)</button>
         </div>
         <!-- Summary always visible (free teaser) -->
         <div class="result-summary" id="result-summary"></div>
@@ -247,7 +247,7 @@ noindex: false
     var rows=document.getElementById('portfolio-rows');
     var div=document.createElement('div');
     div.className='portfolio-row';
-    div.innerHTML='<input type="text" placeholder="Ticker"><input type="number" placeholder="%" min="0" max="100"><span class="pct-label">%</span><button class="remove-btn" onclick="this.parentElement.remove();updateAlloc()">×</button>';
+    div.innerHTML='<input type="text" placeholder="Ticker" aria-label="Ticker symbol"><input type="number" placeholder="%" aria-label="Allocation percent" min="0" max="100"><span class="pct-label">%</span><button type="button" class="remove-btn" data-action="remove-row" aria-label="Remove position">×</button>';
     rows.appendChild(div);
   };
 
@@ -425,3 +425,34 @@ window.exportStressCSV = function() {
     <p>Stress testing achieves maximum value when integrated with other analytical frameworks. Combine stress test results with the CommodityNode Correlation Matrix to understand how commodity pairs behave under shock conditions — correlations that hold in normal markets may break down during crises. Reference the Supply Disruption Tracker to calibrate which stress scenarios are most relevant to current geopolitical risks. Use the 52-Week Range Tracker to assess whether commodities are already pricing in stress-scenario levels or whether there is additional upside risk embedded in current positions. Together, these tools form a comprehensive commodity risk intelligence framework that enables more informed, data-driven portfolio decisions across any market environment.</p>
   </div>
 </section>
+
+<style>
+.export-stress-btn { display:none; padding:7px 16px; border-radius:8px; border:1px solid rgba(34,211,238,0.4); background:rgba(34,211,238,0.08); color:#22d3ee; font-size:0.82rem; font-weight:600; cursor:pointer; transition:background 0.2s; }
+.export-stress-btn:not([hidden]) { display:inline-flex; align-items:center; }
+.export-stress-btn:hover { background:rgba(34,211,238,0.18); }
+</style>
+<script>
+(function(){
+  document.addEventListener('click', function(ev){
+    var btn = ev.target.closest('[data-action]');
+    if (!btn) return;
+    var a = btn.dataset.action;
+    if (a === 'remove-row') {
+      var row = btn.closest('.portfolio-row');
+      if (row) { row.remove(); if (typeof updateAlloc === 'function') updateAlloc(); }
+    } else if (a === 'add-row' && typeof addRow === 'function') {
+      addRow();
+    } else if (a === 'run-stress' && typeof runStressTest === 'function') {
+      runStressTest();
+    } else if (a === 'export-stress' && typeof exportStressCSV === 'function') {
+      exportStressCSV();
+    }
+  });
+  // Replace legacy #export-stress-btn display-toggle by toggling [hidden]
+  var exp = document.getElementById('export-stress-btn');
+  if (exp) {
+    var _desc = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'style');
+    // no-op; consumers should set exp.hidden = false instead
+  }
+})();
+</script>

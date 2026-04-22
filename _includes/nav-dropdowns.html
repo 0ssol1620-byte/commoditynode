@@ -1,0 +1,41 @@
+<!-- Nav Dropdowns (multi) -->
+<script>
+(function(){
+  var dropdowns = document.querySelectorAll('.nav-dropdown');
+  dropdowns.forEach(function(dropdown){
+    var toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    if(!toggle) return;
+    toggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = dropdown.classList.contains('open');
+      dropdowns.forEach(function(d){
+        d.classList.remove('open');
+        var t = d.querySelector('.nav-dropdown-toggle');
+        if(t) t.setAttribute('aria-expanded','false');
+      });
+      if(!isOpen){
+        dropdown.classList.add('open');
+        toggle.setAttribute('aria-expanded','true');
+      }
+    });
+  });
+  document.addEventListener('click', function(e){
+    dropdowns.forEach(function(dropdown){
+      if(!dropdown.contains(e.target)){
+        dropdown.classList.remove('open');
+        var t = dropdown.querySelector('.nav-dropdown-toggle');
+        if(t) t.setAttribute('aria-expanded','false');
+      }
+    });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      dropdowns.forEach(function(dropdown){
+        dropdown.classList.remove('open');
+        var t = dropdown.querySelector('.nav-dropdown-toggle');
+        if(t) t.setAttribute('aria-expanded','false');
+      });
+    }
+  });
+})();
+</script>

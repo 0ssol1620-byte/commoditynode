@@ -111,9 +111,9 @@ noindex: false
     <div class="cal-layout" data-animate data-delay="100">
       <div class="cal-main">
         <div class="month-nav">
-          <button id="prev-month">← Prev</button>
+          <button type="button" id="prev-month">← Prev</button>
           <div class="current-month" id="current-month"></div>
-          <button id="next-month">Next →</button>
+          <button type="button" id="next-month">Next →</button>
         </div>
         <div class="cal-grid" id="cal-grid"></div>
         <h3 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:16px">Events This Month</h3>
@@ -140,7 +140,7 @@ noindex: false
 <!-- Event Modal -->
 <div class="modal-overlay" id="event-modal">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeModal()">×</button>
+    <button type="button" class="modal-close" data-action="close-cal-modal">×</button>
     <div id="modal-body"></div>
   </div>
 </div>
@@ -214,7 +214,7 @@ noindex: false
       if(dayEvents.length){
         html+='<div class="event-dots">';
         dayEvents.forEach(function(ev){
-          html+='<div class="event-dot '+ev.type+'" onclick="openModal(\''+ev.date+'\',\''+ev.title.replace(/'/g,"\\'")+'\')"></div>';
+          html+='<div class="event-dot '+ev.type+'" data-event-date="'+ev.date+'" data-event-title="'+encodeURIComponent(ev.title)+'" role="button" tabindex="0" aria-label="'+ev.title.replace(/"/g,'&quot;')+'"></div>';
         });
         html+='</div>';
       }
@@ -236,7 +236,7 @@ noindex: false
       var parts=ev.date.split('-');
       var day=+parts[2];
       var mon=MONTHS[+parts[1]-1].substring(0,3);
-      listHtml+='<div class="event-card" onclick="openModal(\''+ev.date+'\',\''+ev.title.replace(/'/g,"\\'")+'\')"><div class="event-date-col"><div class="day">'+day+'</div><div class="month">'+mon+'</div></div><div class="event-info"><div class="title">'+ev.title+'</div><div class="tags"><span class="event-type-badge '+ev.type+'">'+ev.type+'</span>';
+      listHtml+='<div class="event-card" data-event-date="'+ev.date+'" data-event-title="'+encodeURIComponent(ev.title)+'" role="button" tabindex="0"><div class="event-date-col"><div class="day">'+day+'</div><div class="month">'+mon+'</div></div><div class="event-info"><div class="title">'+ev.title+'</div><div class="tags"><span class="event-type-badge '+ev.type+'">'+ev.type+'</span>';
       ev.commodities.forEach(function(c){listHtml+='<span class="commodity-mini-tag">'+c+'</span>';});
       listHtml+='</div></div></div>';
     });
@@ -314,3 +314,25 @@ noindex: false
     <p>The most effective approach to calendar-based trading involves cross-referencing event dates with current market positioning, technical setups, and fundamental context. A WASDE report in a market that is already overbought and near 52-week highs carries different implications than the same report in an oversold market. Use the calendar alongside our Range Tracker and Correlation Matrix to build a complete picture of market conditions heading into key events. Click on any event for detailed historical impact analysis and the specific commodities most likely to be affected. Set up your watchlist accordingly and ensure position sizes are appropriate for the expected volatility around major releases.</p>
   </div>
 </section>
+
+<script>
+(function(){
+  function openFromEl(el){
+    if (!el || typeof openModal !== 'function') return;
+    var date = el.dataset.eventDate;
+    var title = el.dataset.eventTitle ? decodeURIComponent(el.dataset.eventTitle) : '';
+    openModal(date, title);
+  }
+  document.addEventListener('click', function(ev){
+    var act = ev.target.closest('[data-action="close-cal-modal"]');
+    if (act && typeof closeModal === 'function') { closeModal(); return; }
+    var target = ev.target.closest('[data-event-date][data-event-title]');
+    if (target) openFromEl(target);
+  });
+  document.addEventListener('keydown', function(ev){
+    if (ev.key !== 'Enter' && ev.key !== ' ') return;
+    var target = ev.target.closest('[data-event-date][data-event-title]');
+    if (target) { ev.preventDefault(); openFromEl(target); }
+  });
+})();
+</script>

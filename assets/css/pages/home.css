@@ -1,0 +1,4 @@
+/*! Home-page specific styles.
+ * Reserved for home-only rules. Global home styles stay in style.css for now
+ * to avoid regressions during phase-1 modularization.
+ */

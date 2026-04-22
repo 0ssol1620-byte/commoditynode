@@ -1,0 +1,32 @@
+<!-- Vendor / page-intent JS loading policy.
+     Docs:
+       - main.js / clerk-auth.js: all pages
+       - Three.js stack: only home / commodity / pages opting in via page.universe
+       - impact-graph.js: all pages except layout=simple
+       - price-chart.js: most pages unless page.no_chart
+       - universe-3d.js: home + commodity hubs only -->
+<!-- Core helpers load first so modules can use CNFetch / CNDom / CNEmit. -->
+<script src="{{ '/assets/js/core/dom.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ '/assets/js/core/fetch.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ '/assets/js/core/events.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+<script src="{{ '/assets/js/clerk-auth.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+{% unless page.layout == 'simple' %}
+{% if page.layout == 'home' or page.layout == 'commodity' or page.url == '/' or page.universe %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js" defer></script>
+{% endif %}
+<script src="{{ '/assets/js/impact-graph.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+{% unless page.no_chart %}
+<script src="{{ '/assets/js/price-chart.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+{% endunless %}
+{% if page.url == '/' or page.layout == 'commodity' %}
+<script src="{{ '/assets/js/universe-3d.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+{% endif %}
+{% endunless %}

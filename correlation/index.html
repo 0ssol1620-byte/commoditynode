@@ -96,9 +96,9 @@ noindex: false
     <h1 data-animate>Commodity <span>Correlation Matrix</span></h1>
     <p data-animate data-delay="100">Rolling Pearson correlation between 20 major commodities — calculated from live candle data</p>
     <div class="period-toggle" data-animate data-delay="200">
-      <button class="period-btn active" data-period="30">30D</button>
-      <button class="period-btn" data-period="60">60D <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
-      <button class="period-btn" data-period="90">90D <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button type="button" class="period-btn active" data-period="30">30D</button>
+      <button type="button" class="period-btn" data-period="60">60D <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button type="button" class="period-btn" data-period="90">90D <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
     </div>
   </div>
 </section>
@@ -519,8 +519,17 @@ noindex: false
     t.innerHTML = '<strong>' + (view==='rolling' ? 'Rolling correlation' : 'Lead-lag analysis') + ' is a Pro feature.</strong>'
       + '<p>See how the matrix evolves day by day, and which pairs lead vs lag the move.</p>'
       + '<div><a href="/pricing/" class="btn btn-primary" data-cta="cor_paywall_upgrade">Compare plans</a> '
-      + '<button type="button" class="btn btn-secondary" onclick="this.closest(\'.cor-paywall-toast\').remove()">Dismiss</button></div>';
+      + '<button type="button" class="btn btn-secondary" data-action="dismiss-paywall-toast">Dismiss</button></div>';
     document.body.appendChild(t);
   }
+})();
+</script>
+
+<script>
+(function(){
+  document.addEventListener('click', function(ev){
+    var act = ev.target.closest('[data-action="dismiss-paywall-toast"]');
+    if (act) { var t = act.closest('.cor-paywall-toast'); if (t) t.remove(); }
+  });
 })();
 </script>

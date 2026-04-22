@@ -149,6 +149,7 @@ layout: default
     grid-template-columns: 1fr;
   }
 }
+.substitute-card:hover { border-color: var(--accent) !important; transform: translateY(-2px); }
 </style>
 
 <header class="post-header">
@@ -615,8 +616,8 @@ layout: default
         <div style="color:#d1fae5;line-height:1.7;font-size:0.88rem;">Read the move → check model agreement → see exposed names → run a scenario → upgrade only if you need the full stock-level workflow.</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn btn-secondary" data-save-commodity="{{ page.commodity_slug }}" data-cta="commodity_save_workflow" style="min-width:180px;justify-content:center;">Follow this commodity</button>
-        {% if page.companies %}<button class="btn btn-secondary" data-save-watchlist="{{ page.companies | slice: 0, 6 | join: ', ' }}" data-cta="commodity_save_exposed_names" style="min-width:180px;justify-content:center;">Save exposed names</button>{% endif %}
+        <button type="button" class="btn btn-secondary" data-save-commodity="{{ page.commodity_slug }}" data-cta="commodity_save_workflow" style="min-width:180px;justify-content:center;">Follow this commodity</button>
+        {% if page.companies %}<button type="button" class="btn btn-secondary" data-save-watchlist="{{ page.companies | slice: 0, 6 | join: ', ' }}" data-cta="commodity_save_exposed_names" style="min-width:180px;justify-content:center;">Save exposed names</button>{% endif %}
       </div>
     </div>
   </section>
@@ -889,7 +890,7 @@ layout: default
           {% assign c_slug = c.name | remove: '.md' %}
           {% if c_slug == sub_slug %}
             {% assign found = true %}
-            <a href="{{ c.url | relative_url }}" style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
+            <a href="{{ c.url | relative_url }}" class="substitute-card" style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color 0.2s,transform 0.2s;">
               <span style="font-size:0.9rem;font-weight:600;color:var(--text);">{{ c.title | split: ':' | first | split: 'Price Impact' | first | strip }}</span>
               <span style="font-size:0.75rem;color:var(--text3);">&rarr;</span>
             </a>

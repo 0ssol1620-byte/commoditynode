@@ -84,7 +84,7 @@
           <a href="{{ '/simulator/' | relative_url }}" {% if page.url contains '/simulator' %}class="active"{% endif %}>Simulator</a>
           <a href="{{ '/signals/' | relative_url }}" {% if page.url contains '/signals' %}class="active"{% endif %}>Signals</a>
           <div class="nav-dropdown">
-            <button class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">More <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
+            <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">More <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
             <div class="nav-dropdown-menu">
               <a href="{{ '/correlation/' | relative_url }}" {% if page.url contains '/correlation' %}class="active"{% endif %}>Correlation Matrix</a>
               <a href="{{ '/disruptions/' | relative_url }}" {% if page.url contains '/disruptions' %}class="active"{% endif %}>Disruption Tracker</a>
@@ -103,7 +103,7 @@
         <div id="clerk-auth-area" class="clerk-auth-area"></div>
         <div id="clerk-auth-area-mobile" class="clerk-auth-area-mobile"></div>
 
-        <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <button type="button" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -229,9 +229,19 @@
   </script>
 
   <!-- Scroll to Top -->
-  <button id="scroll-top" aria-label="Scroll to top" style="position:fixed;bottom:24px;right:24px;width:40px;height:40px;background:rgba(10,10,20,0.92);border:1px solid rgba(34,211,238,0.3);border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:50;transition:all 0.25s ease;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,0.4);" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <button type="button" id="scroll-top" aria-label="Scroll to top" style="position:fixed;bottom:24px;right:24px;width:40px;height:40px;background:rgba(10,10,20,0.92);border:1px solid rgba(34,211,238,0.3);border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:50;transition:all 0.25s ease;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,0.4);" data-action="scroll-top">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
   </button>
 
+
+<script>
+(function(){
+  document.addEventListener('click', function(ev){
+    var el = ev.target.closest('[data-action="scroll-top"]');
+    if (!el) return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
 </body>
 </html>

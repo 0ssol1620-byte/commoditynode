@@ -1,0 +1,88 @@
+<!-- Measurement event taxonomy (blueprint §11) -->
+<script>
+(function(){
+  var EV = {
+    hero_cta_primary_click: 'hero_cta_primary_click',
+    hero_cta_secondary_click: 'hero_cta_secondary_click',
+    role_card_select: 'role_card_select',
+    report_preview_click: 'report_preview_click',
+    home_pricing_click: 'home_pricing_click',
+    onboarding_start: 'onboarding_start',
+    role_selected: 'role_selected',
+    commodity_selected: 'commodity_selected',
+    watchlist_added: 'watchlist_added',
+    preview_generated: 'preview_generated',
+    sign_up_click: 'sign_up_click',
+    onboarding_complete: 'onboarding_complete',
+    pricing_view: 'pricing_view',
+    billing_toggle_change: 'billing_toggle_change',
+    plan_card_click: 'plan_card_click',
+    checkout_start: 'checkout_start',
+    faq_expand: 'faq_expand',
+    report_open: 'report_open',
+    report_scroll_50: 'report_scroll_50',
+    related_tool_click: 'related_tool_click',
+    upgrade_cta_click: 'upgrade_cta_click',
+    tool_open: 'tool_open',
+    sample_run: 'sample_run',
+    save_scenario_click: 'save_scenario_click',
+    paywall_exposed: 'paywall_exposed',
+    upgrade_from_tool: 'upgrade_from_tool'
+  };
+  function send(name, params){
+    params = params || {};
+    try { if (window.gtag) window.gtag('event', name, params); } catch(_){}
+    try { if (window.dataLayer) window.dataLayer.push(Object.assign({event:name}, params)); } catch(_){}
+    try { if (window.CNTrack) window.CNTrack(name, params); } catch(_){}
+    try { window.dispatchEvent(new CustomEvent('cn:event', { detail: { name: name, params: params } })); } catch(_){}
+  }
+  window.CNEvents = { names: EV, send: send };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var ctaMap = {
+      header_start_free: EV.hero_cta_primary_click,
+      header_see_demo: EV.hero_cta_secondary_click,
+      hero_build_watchlist_intelligence: EV.hero_cta_primary_click,
+      hero_see_risk_map: EV.hero_cta_secondary_click,
+      hero_persona_investor: EV.role_card_select,
+      hero_persona_analyst: EV.role_card_select,
+      hero_persona_operator: EV.role_card_select,
+      home_pricing_teaser: EV.home_pricing_click,
+      start_role_selected: EV.role_selected,
+      start_save_watchlist: EV.watchlist_added,
+      start_open_signup: EV.sign_up_click,
+      pricing_results_start_pro: EV.checkout_start,
+      pricing_results_start_free: EV.sign_up_click,
+      pricing_results_contact_enterprise: EV.upgrade_cta_click,
+      home_build_workflow: EV.hero_cta_primary_click,
+      home_compare_free_pro: EV.home_pricing_click,
+      home_go_straight_simulator: EV.tool_open,
+      home_open_intelligence_lab: EV.tool_open,
+      home_open_rl_policy_lab: EV.tool_open,
+      hero_open_event_probability: EV.tool_open,
+      hero_open_exposure_screener: EV.tool_open,
+      hero_scenario_iran: EV.tool_open,
+      hero_scenario_china: EV.tool_open,
+      hero_scenario_opec: EV.tool_open,
+      hero_scenario_fed: EV.tool_open
+    };
+    document.addEventListener('click', function(e){
+      var el = e.target.closest('[data-cta]');
+      if (!el) return;
+      var cta = el.getAttribute('data-cta');
+      var evt = ctaMap[cta] || cta;
+      send(evt, { cta: cta, href: el.getAttribute('href') || '', text: (el.textContent||'').trim().slice(0,80) });
+    }, true);
+
+    if (document.body.classList.contains('post-body') || /\/reports\//.test(location.pathname)) {
+      var fired = false;
+      window.addEventListener('scroll', function(){
+        if (fired) return;
+        var s = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
+        if (s > 0.5) { fired = true; send(EV.report_scroll_50, { url: location.pathname }); }
+      }, { passive: true });
+    }
+    if (/\/pricing\//.test(location.pathname)) { send(EV.pricing_view, { url: location.pathname }); }
+  });
+})();
+</script>

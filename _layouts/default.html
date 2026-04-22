@@ -15,7 +15,6 @@
   <meta name="theme-color" content="#050508">
 
   {% seo %}
-
   {% include google-analytics.html %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,26 +22,21 @@
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style" onload="this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 
+  <link rel="stylesheet" href="{{ '/assets/css/tokens.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-  <!-- canonical is handled by jekyll-seo-tag above; set page.canonical_url in front matter to override -->
+  <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <meta name="data-version" content="{{ site.time | date: '%Y%m%d%H%M' }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
 
   <link rel="preconnect" href="https://d3js.org">
   <script src="https://d3js.org/d3.v7.min.js" defer></script>
 
-  <!-- OG/Twitter tags handled by jekyll-seo-tag above; only add supplementary tags here -->
-  <meta property="og:image:alt"   content="{{ page.title | default: site.title }}">
+  <meta property="og:image:alt" content="{{ page.title | default: site.title }}">
   {% if page.layout == 'post' and page.date %}
   <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
   {% endif %}
 
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/site.webmanifest">
+  {% include head/icons.html %}
 
   <!-- Clerk Auth -->
   <script
@@ -57,172 +51,18 @@
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9573862786626060" crossorigin="anonymous"></script>
 
-  <!-- Organization + WebSite Schema (GEO: entity recognition by AI search engines) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "CommodityNode",
-    "url": "https://commoditynode.com",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://commoditynode.com/assets/images/logo.svg",
-      "width": 200,
-      "height": 60
-    },
-    "description": "Interactive analysis of how commodity price movements ripple through global industries, ETFs, and stocks.",
-    "sameAs": [
-      "https://www.threads.net/@commoditynode",
-      "https://twitter.com/commoditynode"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer support",
-      "email": "contact@commoditynode.com"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "CommodityNode",
-    "url": "https://commoditynode.com",
-    "description": "Commodity price impact maps for markets, supply chains and equities.",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://commoditynode.com/reports/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
+  {% include head/schema-orgs.html %}
 </head>
 <body>
 
 <!-- Skip to content (a11y) -->
 <a href="#main-content" class="skip-to-content">Skip to main content</a>
 
-<!-- Measurement event taxonomy (blueprint §11) -->
-<script>
-(function(){
-  // Standardized event names used across the site
-  var EV = {
-    hero_cta_primary_click: 'hero_cta_primary_click',
-    hero_cta_secondary_click: 'hero_cta_secondary_click',
-    role_card_select: 'role_card_select',
-    report_preview_click: 'report_preview_click',
-    home_pricing_click: 'home_pricing_click',
-    onboarding_start: 'onboarding_start',
-    role_selected: 'role_selected',
-    commodity_selected: 'commodity_selected',
-    watchlist_added: 'watchlist_added',
-    preview_generated: 'preview_generated',
-    sign_up_click: 'sign_up_click',
-    onboarding_complete: 'onboarding_complete',
-    pricing_view: 'pricing_view',
-    billing_toggle_change: 'billing_toggle_change',
-    plan_card_click: 'plan_card_click',
-    checkout_start: 'checkout_start',
-    faq_expand: 'faq_expand',
-    report_open: 'report_open',
-    report_scroll_50: 'report_scroll_50',
-    related_tool_click: 'related_tool_click',
-    upgrade_cta_click: 'upgrade_cta_click',
-    tool_open: 'tool_open',
-    sample_run: 'sample_run',
-    save_scenario_click: 'save_scenario_click',
-    paywall_exposed: 'paywall_exposed',
-    upgrade_from_tool: 'upgrade_from_tool'
-  };
-  function send(name, params){
-    params = params || {};
-    try { if (window.gtag) window.gtag('event', name, params); } catch(_){}
-    try { if (window.dataLayer) window.dataLayer.push(Object.assign({event:name}, params)); } catch(_){}
-    try { if (window.CNTrack) window.CNTrack(name, params); } catch(_){}
-    try { window.dispatchEvent(new CustomEvent('cn:event', { detail: { name: name, params: params } })); } catch(_){}
-  }
-  window.CNEvents = { names: EV, send: send };
-
-  document.addEventListener('DOMContentLoaded', function(){
-    // Auto-wire data-cta attributes. Map common cta codes to taxonomy.
-    var ctaMap = {
-      header_start_free: EV.hero_cta_primary_click,
-      header_see_demo: EV.hero_cta_secondary_click,
-      hero_build_watchlist_intelligence: EV.hero_cta_primary_click,
-      hero_see_risk_map: EV.hero_cta_secondary_click,
-      hero_persona_investor: EV.role_card_select,
-      hero_persona_analyst: EV.role_card_select,
-      hero_persona_operator: EV.role_card_select,
-      home_pricing_teaser: EV.home_pricing_click,
-      start_role_selected: EV.role_selected,
-      start_save_watchlist: EV.watchlist_added,
-      start_open_signup: EV.sign_up_click,
-      pricing_results_start_pro: EV.checkout_start,
-      pricing_results_start_free: EV.sign_up_click,
-      pricing_results_contact_enterprise: EV.upgrade_cta_click,
-      home_build_workflow: EV.hero_cta_primary_click,
-      home_compare_free_pro: EV.home_pricing_click,
-      home_go_straight_simulator: EV.tool_open,
-      home_open_intelligence_lab: EV.tool_open,
-      home_open_rl_policy_lab: EV.tool_open,
-      hero_open_event_probability: EV.tool_open,
-      hero_open_exposure_screener: EV.tool_open,
-      hero_scenario_iran: EV.tool_open,
-      hero_scenario_china: EV.tool_open,
-      hero_scenario_opec: EV.tool_open,
-      hero_scenario_fed: EV.tool_open
-    };
-    document.addEventListener('click', function(e){
-      var el = e.target.closest('[data-cta]');
-      if (!el) return;
-      var cta = el.getAttribute('data-cta');
-      var evt = ctaMap[cta] || cta; // fall back to cta code as event name
-      send(evt, { cta: cta, href: el.getAttribute('href') || '', text: (el.textContent||'').trim().slice(0,80) });
-    }, true);
-
-    // Report scroll-depth 50%
-    if (document.body.classList.contains('post-body') || /\/reports\//.test(location.pathname)) {
-      var fired = false;
-      window.addEventListener('scroll', function(){
-        if (fired) return;
-        var s = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
-        if (s > 0.5) { fired = true; send(EV.report_scroll_50, { url: location.pathname }); }
-      }, { passive: true });
-    }
-    // Pricing view
-    if (/\/pricing\//.test(location.pathname)) { send(EV.pricing_view, { url: location.pathname }); }
-  });
-})();
-</script>
+{% include analytics/event-taxonomy.html %}
 
 <!-- AdSense Auto Ads (managed by Google automatically) -->
 
-{% unless page.no_loader %}
-<div id="page-loader" style="position:fixed;inset:0;background:#050510;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.4s ease;">
-  <div style="position:relative;width:80px;height:80px;margin-bottom:20px;">
-    <svg width="80" height="80" viewBox="0 0 80 80">
-      <circle cx="40" cy="40" r="4" fill="#fbbf24"/>
-      <circle cx="40" cy="40" r="16" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="1" stroke-dasharray="2 3"/>
-      <circle cx="40" cy="40" r="28" fill="none" stroke="rgba(34,211,238,0.2)" stroke-width="1" stroke-dasharray="2 4"/>
-      <circle cx="40" cy="40" r="38" fill="none" stroke="rgba(34,211,238,0.1)" stroke-width="1" stroke-dasharray="2 5"/>
-      <circle r="5" fill="#22d3ee" opacity="0.9"><animateMotion dur="1.5s" repeatCount="indefinite" path="M40,40 m-28,0 a28,28 0 1,1 56,0 a28,28 0 1,1 -56,0"/></circle>
-      <circle r="4" fill="#10b981" opacity="0.8"><animateMotion dur="2.5s" repeatCount="indefinite" path="M40,40 m-38,0 a38,38 0 1,1 76,0 a38,38 0 1,1 -76,0"/></circle>
-      <circle r="3" fill="#fbbf24" opacity="0.7"><animateMotion dur="3.5s" repeatCount="indefinite" path="M40,40 m-16,0 a16,16 0 1,1 32,0 a16,16 0 1,1 -32,0"/></circle>
-    </svg>
-  </div>
-  <div style="color:#22d3ee;font-family:'DM Sans',system-ui,sans-serif;font-size:0.9rem;letter-spacing:0.15em;text-transform:uppercase;opacity:0.8;">CommodityNode</div>
-  <div style="color:#475569;font-size:0.75rem;margin-top:6px;letter-spacing:0.05em;">Loading Intelligence...</div>
-</div>
-<script>
-(function(){
-  function hideLoader(){
-    var l=document.getElementById('page-loader');
-    if(l){l.style.opacity='0';setTimeout(function(){l.style.display='none';},400);}
-  }
-  document.addEventListener('DOMContentLoaded',hideLoader);
-})();
-</script>
-{% endunless %}
+{% include loader.html %}
 
   <div id="page-transition" class="page-transition" aria-hidden="true"></div>
 
@@ -236,7 +76,6 @@
       <div class="header-inner">
         <a href="{{ '/' | relative_url }}" class="logo" aria-label="{{ site.title }} home">
           <span class="logo-icon" aria-hidden="true">
-            <!-- Node-graph SVG icon -->
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <circle cx="11" cy="11" r="3.5" fill="#ffffff"/>
               <circle cx="4"  cy="5"  r="2.2" fill="#ffffff"/>
@@ -254,7 +93,7 @@
 
         <nav class="main-nav" id="main-nav" role="navigation" aria-label="Main navigation">
           <div class="nav-dropdown nav-dropdown--research">
-            <button class="nav-dropdown-toggle {% if page.url contains '/reports' or page.url contains '/commodities' or page.url contains '/industries' or page.url contains '/companies' or page.url contains '/themes' or page.url contains '/range-tracker' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Research <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
+            <button type="button" class="nav-dropdown-toggle {% if page.url contains '/reports' or page.url contains '/commodities' or page.url contains '/industries' or page.url contains '/companies' or page.url contains '/themes' or page.url contains '/range-tracker' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Research <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
             <div class="nav-dropdown-menu nav-dropdown-menu--wide">
               <a href="{{ '/reports/' | relative_url }}" {% if page.url contains '/reports' %}class="active"{% endif %}><span class="nav-item-title">Research Archive</span><span class="nav-item-desc">Live signal reports</span></a>
               <a href="{{ '/commodities/' | relative_url }}" {% if page.url contains '/commodities' %}class="active"{% endif %}><span class="nav-item-title">Commodity Hubs</span><span class="nav-item-desc">{{ site.coverage_counts.commodity_hubs | default: 62 }} tracked</span></a>
@@ -266,7 +105,7 @@
           </div>
 
           <div class="nav-dropdown nav-dropdown--tools">
-            <button class="nav-dropdown-toggle {% if page.url contains '/intelligence-lab' or page.url contains '/simulator' or page.url contains '/stress-test' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Tools <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
+            <button type="button" class="nav-dropdown-toggle {% if page.url contains '/intelligence-lab' or page.url contains '/simulator' or page.url contains '/stress-test' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Tools <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
             <div class="nav-dropdown-menu nav-dropdown-menu--wide">
               <a href="{{ '/intelligence-lab/' | relative_url }}" {% if page.url == '/intelligence-lab/' %}class="active"{% endif %}><span class="nav-item-title">Intelligence Lab</span><span class="nav-item-desc">Flagship decision suite</span></a>
               <a href="{{ '/simulator/' | relative_url }}" {% if page.url contains '/simulator' %}class="active"{% endif %}><span class="nav-item-title">Scenario Simulator</span><span class="nav-item-desc">Run shock scenarios · 4 presets</span></a>
@@ -276,7 +115,7 @@
           </div>
 
           <div class="nav-dropdown nav-dropdown--signals">
-            <button class="nav-dropdown-toggle {% if page.url contains '/signals' or page.url contains '/correlation' or page.url contains '/disruptions' or page.url contains '/calendar' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Signals <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
+            <button type="button" class="nav-dropdown-toggle {% if page.url contains '/signals' or page.url contains '/correlation' or page.url contains '/disruptions' or page.url contains '/calendar' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Signals <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
             <div class="nav-dropdown-menu nav-dropdown-menu--wide">
               <a href="{{ '/signals/' | relative_url }}" {% if page.url contains '/signals' %}class="active"{% endif %}><span class="nav-item-title">Signals</span><span class="nav-item-desc">Cross-commodity edges</span></a>
               <a href="{{ '/correlation/' | relative_url }}" {% if page.url contains '/correlation' %}class="active"{% endif %}><span class="nav-item-title">Correlation Matrix</span><span class="nav-item-desc">Co-movement & regime</span></a>
@@ -286,19 +125,15 @@
           </div>
 
           <a href="{{ '/pricing/' | relative_url }}" {% if page.url contains '/pricing' %}class="active"{% endif %}>Pricing</a>
-
           <a href="{{ '/enterprise/' | relative_url }}" {% if page.url contains '/enterprise' %}class="active"{% endif %}>Enterprise</a>
 
-          <!-- Header CTAs (desktop) -->
           <div class="nav-cta-group" aria-label="Primary calls to action">
             <a href="/start/" class="nav-cta nav-cta--primary" data-cta="header_start_free">Start Free</a>
             <a href="/intelligence-lab/" class="nav-cta nav-cta--secondary" data-cta="header_see_demo">See Demo</a>
           </div>
 
-          <!-- 모바일 메뉴 내 auth 영역 -->
           <div id="clerk-auth-nav" class="clerk-auth-nav"></div>
 
-          <!-- Secondary small links under main nav on mobile -->
           <div class="nav-secondary">
             <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>About</a>
             <a href="{{ '/methodology/' | relative_url }}" {% if page.url contains '/methodology' %}class="active"{% endif %}>Methodology</a>
@@ -307,11 +142,9 @@
         </nav>
 
         <div id="clerk-auth-area" class="clerk-auth-area"></div>
-
-        <!-- 모바일 전용 아바타 (햄버거 옆) -->
         <div id="clerk-auth-area-mobile" class="clerk-auth-area-mobile"></div>
 
-        <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <button type="button" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -358,7 +191,6 @@
           </p>
           <div class="footer-social">
             <a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fcommoditynode.com%2Ffeed.xml" class="social-link" title="Subscribe via Feedly" aria-label="Subscribe via Feedly" target="_blank" rel="noopener">
-              <!-- RSS SVG icon -->
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <circle cx="3" cy="13" r="1.5" fill="currentColor"/>
                 <path d="M2 9.5A6.5 6.5 0 0 1 8.5 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
@@ -366,7 +198,6 @@
               </svg>
             </a>
             <a href="{{ '/about/' | relative_url }}" class="social-link" title="About" aria-label="About CommodityNode">
-              <!-- Info SVG icon -->
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <circle cx="8" cy="8" r="6.5" stroke="currentColor" stroke-width="1.4"/>
                 <line x1="8" y1="7" x2="8" y2="11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -424,74 +255,8 @@
     </div>
   </footer>
 
-  <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
-  <script src="{{ '/assets/js/clerk-auth.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
-  {% unless page.layout == 'simple' %}
-  {% if page.layout == 'home' or page.layout == 'commodity' or page.url == '/' or page.universe %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js" defer></script>
-  {% endif %}
-  <script src="{{ '/assets/js/impact-graph.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
-  {% unless page.no_chart %}
-  <script src="{{ '/assets/js/price-chart.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
-  {% endunless %}
-  {% if page.url == '/' or page.layout == 'commodity' %}
-  <script src="{{ '/assets/js/universe-3d.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
-  {% endif %}
-  {% endunless %}
-
-  <!-- Nav Dropdowns (multi) -->
-  <script>
-  (function(){
-    var dropdowns = document.querySelectorAll('.nav-dropdown');
-    dropdowns.forEach(function(dropdown){
-      var toggle = dropdown.querySelector('.nav-dropdown-toggle');
-      if(!toggle) return;
-      toggle.addEventListener('click', function(e){
-        e.stopPropagation();
-        var isOpen = dropdown.classList.contains('open');
-        dropdowns.forEach(function(d){
-          d.classList.remove('open');
-          var t = d.querySelector('.nav-dropdown-toggle');
-          if(t) t.setAttribute('aria-expanded','false');
-        });
-        if(!isOpen){
-          dropdown.classList.add('open');
-          toggle.setAttribute('aria-expanded','true');
-        }
-      });
-    });
-    document.addEventListener('click', function(e){
-      dropdowns.forEach(function(dropdown){
-        if(!dropdown.contains(e.target)){
-          dropdown.classList.remove('open');
-          var t = dropdown.querySelector('.nav-dropdown-toggle');
-          if(t) t.setAttribute('aria-expanded','false');
-        }
-      });
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape'){
-        dropdowns.forEach(function(dropdown){
-          dropdown.classList.remove('open');
-          var t = dropdown.querySelector('.nav-dropdown-toggle');
-          if(t) t.setAttribute('aria-expanded','false');
-        });
-      }
-    });
-  })();
-  </script>
-
-  <!-- Scroll to Top -->
-  <button id="scroll-top" aria-label="Scroll to top" style="position:fixed;bottom:24px;right:24px;width:40px;height:40px;background:rgba(10,10,20,0.92);border:1px solid rgba(34,211,238,0.3);border-radius:50%;display:none;align-items:center;justify-content:center;cursor:pointer;z-index:50;transition:all 0.25s ease;backdrop-filter:blur(8px);box-shadow:0 4px 20px rgba(0,0,0,0.4);" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-  </button>
-
+  {% include vendor-loader.html %}
+  {% include nav-dropdowns.html %}
+  {% include scroll-top.html %}
 </body>
 </html>

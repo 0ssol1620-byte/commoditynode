@@ -1,0 +1,38 @@
+/*! CommodityNode component primitives
+ * Reusable component styles factored out of style.css.
+ * New components land here before being optionally absorbed into style.css.
+ */
+
+/* Shared substitute-card hover (commodity layout related-hubs). */
+.substitute-card { transition: border-color var(--motion-fast), transform var(--motion-fast); }
+.substitute-card:hover { border-color: var(--accent) !important; transform: translateY(-2px); }
+
+/* Generic focus ring for keyboard users. */
+:where(a, button, [role="button"], input, select, textarea):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Hidden-visually helper: available to screen readers, painted off-screen. */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important;
+  overflow: hidden !important; clip: rect(0,0,0,0) !important;
+  white-space: nowrap !important; border: 0 !important;
+}
+
+/* Skip-to-content accessibility link. */
+.skip-to-content {
+  position: absolute;
+  top: -40px; left: 8px;
+  padding: 8px 12px;
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  border-radius: 6px;
+  z-index: 10000;
+  transition: top var(--motion-fast);
+}
+.skip-to-content:focus { top: 8px; }

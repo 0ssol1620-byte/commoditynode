@@ -6,74 +6,128 @@ description: "AI price forecasts, scenario simulation, and ripple chain analysis
 noindex: false
 ---
 
+{% assign pricing = site.data.pricing %}
+{% assign pro_plan = pricing.plans | where: "id", "pro_monthly" | first %}
+{% assign pro_url = pricing.checkout.pro_monthly %}
+{% assign trial_copy = pricing.guarantees.trial_copy %}
+{% assign refund_copy = pricing.guarantees.refund_copy %}
+{% assign cancel_copy = pricing.guarantees.cancel_copy %}
+
 <!-- 1. Hero: Problem + Solution -->
-<section style="padding:80px 24px 60px;text-align:center;max-width:800px;margin:0 auto;">
-  <h1 style="font-size:2.2rem;line-height:1.3;color:var(--text);margin-bottom:16px;">Stop Guessing How Commodity Prices Hit Your Portfolio</h1>
-  <p style="font-size:1.1rem;color:var(--text2);line-height:1.7;margin-bottom:32px;">When oil jumps 15%, it doesn't just affect energy stocks. The ripple reaches airlines, plastics, logistics, and a dozen more sectors. CommodityNode maps these connections so you can act before the market catches up.</p>
-  <a href="/pricing/" style="display:inline-block;padding:14px 32px;background:var(--accent);color:#000;font-weight:600;border-radius:8px;text-decoration:none;font-size:1rem;">Start Free Trial →</a>
+<section class="pro-hero">
+  <h1>Stop guessing how commodity prices hit your portfolio</h1>
+  <p>When oil jumps 15%, it doesn't just affect energy stocks. The ripple reaches airlines, plastics, logistics, and a dozen more sectors. CommodityNode maps these connections so you can act before the market catches up.</p>
+  <a class="pro-hero-cta" href="{{ pro_url }}" data-checkout-source="pro_page_hero">Start {{ pro_plan.name }} — {{ pro_plan.price_label }}/month →</a>
+  <p class="pro-hero-trust">{{ trial_copy }}</p>
 </section>
 
 <!-- 2. Visual Example -->
-<section style="padding:40px 24px;max-width:1000px;margin:0 auto;">
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:32px;text-align:center;">
-    <p style="color:var(--text3);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">Example: Copper Price Shock +12%</p>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;text-align:center;">
-      <div style="padding:16px;background:rgba(34,211,238,0.06);border-radius:8px;">
-        <div style="color:#22d3ee;font-size:1.4rem;font-weight:700;">FCX</div>
-        <div style="color:#22c55e;font-size:0.9rem;">+8.4% sensitivity</div>
-        <div style="color:var(--text3);font-size:0.78rem;">Freeport-McMoRan</div>
+<section class="pro-example">
+  <div class="pro-example-shell">
+    <p class="pro-example-kicker">Example: Copper Price Shock +12%</p>
+    <div class="pro-example-grid">
+      <div class="pro-example-card pro-example-card--cyan">
+        <div class="pro-example-sym">FCX</div>
+        <div class="pro-example-delta pro-example-delta--up">+8.4% sensitivity</div>
+        <div class="pro-example-label">Freeport-McMoRan</div>
       </div>
-      <div style="padding:16px;background:rgba(251,191,36,0.06);border-radius:8px;">
-        <div style="color:#fbbf24;font-size:1.4rem;font-weight:700;">SCCO</div>
-        <div style="color:#22c55e;font-size:0.9rem;">+6.2% sensitivity</div>
-        <div style="color:var(--text3);font-size:0.78rem;">Southern Copper</div>
+      <div class="pro-example-card pro-example-card--amber">
+        <div class="pro-example-sym">SCCO</div>
+        <div class="pro-example-delta pro-example-delta--up">+6.2% sensitivity</div>
+        <div class="pro-example-label">Southern Copper</div>
       </div>
-      <div style="padding:16px;background:rgba(239,68,68,0.06);border-radius:8px;">
-        <div style="color:#ef4444;font-size:1.4rem;font-weight:700;">TSLA</div>
-        <div style="color:#ef4444;font-size:0.9rem;">-2.1% cost pressure</div>
-        <div style="color:var(--text3);font-size:0.78rem;">Tesla (input cost)</div>
+      <div class="pro-example-card pro-example-card--red">
+        <div class="pro-example-sym">TSLA</div>
+        <div class="pro-example-delta pro-example-delta--down">-2.1% cost pressure</div>
+        <div class="pro-example-label">Tesla (input cost)</div>
       </div>
-      <div style="padding:16px;background:rgba(168,85,247,0.06);border-radius:8px;">
-        <div style="color:#a855f7;font-size:1.4rem;font-weight:700;">COPX</div>
-        <div style="color:#22c55e;font-size:0.9rem;">+7.1% exposure</div>
-        <div style="color:var(--text3);font-size:0.78rem;">Copper Miners ETF</div>
+      <div class="pro-example-card pro-example-card--violet">
+        <div class="pro-example-sym">COPX</div>
+        <div class="pro-example-delta pro-example-delta--up">+7.1% exposure</div>
+        <div class="pro-example-label">Copper Miners ETF</div>
       </div>
     </div>
-    <p style="color:var(--text3);font-size:0.8rem;margin-top:16px;">CommodityNode maps these ripple effects across 60+ commodities and 200+ equities in real time.</p>
+    <p class="pro-example-footnote">CommodityNode maps these ripple effects across 60+ commodities and 200+ equities in real time.</p>
   </div>
 </section>
 
 <!-- 3. What You Get -->
-<section style="padding:60px 24px;max-width:900px;margin:0 auto;">
-  <h2 style="text-align:center;font-size:1.6rem;margin-bottom:40px;color:var(--text);">What Pro Gives You</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;">
-    <div style="padding:24px;border:1px solid var(--border);border-radius:10px;">
-      <div style="color:#22d3ee;font-weight:700;font-size:1rem;margin-bottom:8px;">AI 90-Day Forecasts</div>
-      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">Probabilistic price forecasts with confidence bands. Updated daily. See where prices are heading before you position.</p>
+<section class="pro-benefits">
+  <h2 class="pro-benefits-title">What {{ pro_plan.name }} gives you</h2>
+  <div class="pro-benefits-grid">
+    {% for item in pricing.benefits.pro_bullets %}
+    <div class="pro-benefit">
+      <div class="pro-benefit-head">{{ item.headline }}</div>
+      <p>{{ item.body }}</p>
     </div>
-    <div style="padding:24px;border:1px solid var(--border);border-radius:10px;">
-      <div style="color:#fbbf24;font-weight:700;font-size:1rem;margin-bottom:8px;">Scenario Simulator</div>
-      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">Model price shocks (+15% oil, -20% lithium) and see which stocks and ETFs get hit. Test your thesis before you trade.</p>
-    </div>
-    <div style="padding:24px;border:1px solid var(--border);border-radius:10px;">
-      <div style="color:#a855f7;font-weight:700;font-size:1rem;margin-bottom:8px;">Unlimited Signal Reports</div>
-      <p style="color:var(--text2);font-size:0.88rem;margin:0;line-height:1.6;">Real-time analysis when commodity prices move. Direction, magnitude, and specific equities affected — published within hours of major moves.</p>
-    </div>
+    {% endfor %}
   </div>
 </section>
 
 <!-- 4. Trust Section -->
-<section style="padding:40px 24px 60px;max-width:800px;margin:0 auto;text-align:center;">
-  <h2 style="font-size:1.3rem;margin-bottom:20px;color:var(--text);">Built on Data, Not Opinions</h2>
-  <p style="color:var(--text2);font-size:0.92rem;line-height:1.7;">Every impact score uses 5-year rolling regressions with Pearson correlation (p < 0.05). Sensitivity ratings are derived from SEC 10-K hedging disclosures. We show our methodology, our confidence levels, and our limitations. <a href="/methodology/" style="color:#22d3ee;">Read our methodology →</a></p>
+<section class="pro-trust">
+  <h2>Built on data, not opinions</h2>
+  <p>Every impact score uses 5-year rolling regressions with Pearson correlation (p &lt; 0.05). Sensitivity ratings are derived from SEC 10-K hedging disclosures. We show our methodology, our confidence levels, and our limitations. <a href="/methodology/">Read our methodology →</a></p>
 </section>
 
 <!-- 5. Final CTA -->
-<section style="padding:48px 24px 80px;text-align:center;">
-  <div style="max-width:600px;margin:0 auto;padding:40px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.15);border-radius:14px;">
-    <h2 style="font-size:1.5rem;color:var(--text);margin-bottom:12px;">Start Your Free Trial</h2>
-    <p style="color:var(--text2);font-size:0.95rem;margin-bottom:24px;">7 days of full Pro access. No credit card required. Cancel anytime.</p>
-    <a href="https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71" style="display:inline-block;padding:14px 36px;background:var(--accent);color:#000;font-weight:600;border-radius:8px;text-decoration:none;font-size:1.05rem;">Unlock Forecasts & Simulator →</a>
-    <p style="color:var(--text3);font-size:0.8rem;margin-top:12px;">Or <a href="/pricing/" style="color:#22d3ee;">compare plans</a></p>
+<section class="pro-final">
+  <div class="pro-final-card">
+    <h2>Start your free trial</h2>
+    <p>{{ trial_copy }}</p>
+    <a class="pro-final-cta js-pro-checkout" href="{{ pro_url }}" data-checkout-source="pro_page_final">Unlock forecasts &amp; simulator →</a>
+    <p class="pro-final-sub">{{ refund_copy }} · {{ cancel_copy }} · Or <a href="/pricing/">compare plans</a></p>
   </div>
 </section>
+
+<style>
+/* Pro landing — styles extracted from inline attrs so CSP/design audits stay clean. */
+.pro-hero { padding:80px 24px 60px; text-align:center; max-width:820px; margin:0 auto; }
+.pro-hero h1 { font-size:2.2rem; line-height:1.3; color:var(--text); margin:0 0 16px; }
+.pro-hero p { font-size:1.1rem; color:var(--text2); line-height:1.7; margin:0 0 28px; }
+.pro-hero-cta { display:inline-block; padding:14px 32px; background:var(--accent); color:#000; font-weight:700; border-radius:10px; text-decoration:none; font-size:1rem; }
+.pro-hero-trust { color:var(--text3); font-size:0.85rem; margin-top:14px; }
+
+.pro-example { padding:24px 24px 40px; max-width:1020px; margin:0 auto; }
+.pro-example-shell { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:32px; text-align:center; }
+.pro-example-kicker { color:var(--text3); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.1em; margin:0 0 18px; }
+.pro-example-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; text-align:center; }
+.pro-example-card { padding:16px; border-radius:10px; }
+.pro-example-card--cyan { background:rgba(34,211,238,0.06); }
+.pro-example-card--amber { background:rgba(251,191,36,0.06); }
+.pro-example-card--red { background:rgba(239,68,68,0.06); }
+.pro-example-card--violet { background:rgba(168,85,247,0.06); }
+.pro-example-sym { font-size:1.4rem; font-weight:700; }
+.pro-example-card--cyan .pro-example-sym { color:#22d3ee; }
+.pro-example-card--amber .pro-example-sym { color:#fbbf24; }
+.pro-example-card--red .pro-example-sym { color:#ef4444; }
+.pro-example-card--violet .pro-example-sym { color:#a855f7; }
+.pro-example-delta { font-size:0.9rem; margin-top:4px; }
+.pro-example-delta--up { color:#22c55e; }
+.pro-example-delta--down { color:#ef4444; }
+.pro-example-label { color:var(--text3); font-size:0.78rem; margin-top:4px; }
+.pro-example-footnote { color:var(--text3); font-size:0.8rem; margin:18px 0 0; }
+
+.pro-benefits { padding:60px 24px; max-width:960px; margin:0 auto; }
+.pro-benefits-title { text-align:center; font-size:1.6rem; margin:0 0 40px; color:var(--text); }
+.pro-benefits-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:20px; }
+.pro-benefit { padding:22px 22px 24px; border:1px solid var(--border); border-radius:12px; background:rgba(255,255,255,0.02); }
+.pro-benefit-head { color:#22d3ee; font-weight:700; font-size:1rem; margin-bottom:8px; }
+.pro-benefits-grid .pro-benefit:nth-child(2) .pro-benefit-head { color:#fbbf24; }
+.pro-benefits-grid .pro-benefit:nth-child(3) .pro-benefit-head { color:#a855f7; }
+.pro-benefits-grid .pro-benefit:nth-child(4) .pro-benefit-head { color:#34d399; }
+.pro-benefit p { color:var(--text2); font-size:0.9rem; margin:0; line-height:1.6; }
+
+.pro-trust { padding:40px 24px 60px; max-width:820px; margin:0 auto; text-align:center; }
+.pro-trust h2 { font-size:1.3rem; margin:0 0 18px; color:var(--text); }
+.pro-trust p { color:var(--text2); font-size:0.94rem; line-height:1.7; margin:0; }
+.pro-trust a { color:#22d3ee; }
+
+.pro-final { padding:48px 24px 80px; text-align:center; }
+.pro-final-card { max-width:620px; margin:0 auto; padding:40px; background:rgba(34,211,238,0.04); border:1px solid rgba(34,211,238,0.15); border-radius:14px; }
+.pro-final-card h2 { font-size:1.5rem; color:var(--text); margin:0 0 12px; }
+.pro-final-card p { color:var(--text2); font-size:0.95rem; margin:0 0 20px; }
+.pro-final-cta { display:inline-block; padding:14px 36px; background:var(--accent); color:#000; font-weight:700; border-radius:10px; text-decoration:none; font-size:1.05rem; }
+.pro-final-sub { color:var(--text3); font-size:0.8rem; margin:14px 0 0; }
+.pro-final-sub a { color:#22d3ee; }
+</style>

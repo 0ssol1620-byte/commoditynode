@@ -153,9 +153,9 @@ noindex: false
       <p style="color:#64748b;font-size:0.78rem;margin:0;">Signals are backtested on 10+ years of historical data. Win rates reflect closed signals only. Past performance does not guarantee future results. <a href="/methodology/" style="color:#22d3ee;">See methodology →</a></p>
     </div>
     <div class="tab-bar" data-animate data-delay="150">
-      <button class="tab-btn active" data-tab="active">Active Signals</button>
-      <button class="tab-btn" data-tab="history">Signal History</button>
-      <button class="tab-btn" data-tab="patterns">Pattern Library</button>
+      <button type="button" class="tab-btn active" data-tab="active">Active Signals</button>
+      <button type="button" class="tab-btn" data-tab="history">Signal History</button>
+      <button type="button" class="tab-btn" data-tab="patterns">Pattern Library</button>
     </div>
 
     <!-- Active Signals -->
@@ -182,7 +182,7 @@ noindex: false
             <span class="sig-commodity">Silver ↑</span>
             <span class="sig-commodity">Gold (neutral)</span>
           </div>
-          <button class="sig-action" onclick="openSignalModal('Gold-Silver Ratio Compression', 71, '60d')">View Analysis →</button>
+          <button type="button" class="sig-action" data-signal="Gold-Silver Ratio Compression" data-score="71" data-window="60d" data-action="open-signal">View Analysis →</button>
         </div>
 
         <div class="sig-card bullish">
@@ -202,7 +202,7 @@ noindex: false
             <span class="sig-commodity">Copper ↑</span>
             <span class="sig-commodity">Gold ↓/flat</span>
           </div>
-          <button class="sig-action" onclick="openSignalModal('Copper-Gold Ratio Economic Signal', 68, '90d')">View Analysis →</button>
+          <button type="button" class="sig-action" data-signal="Copper-Gold Ratio Economic Signal" data-score="68" data-window="90d" data-action="open-signal">View Analysis →</button>
         </div>
 
         <div class="sig-card bullish">
@@ -222,7 +222,7 @@ noindex: false
             <span class="sig-commodity">Crude Oil ↑</span>
             <span class="sig-commodity">Brent ↑</span>
           </div>
-          <button class="sig-action" onclick="openSignalModal('Oil Contango Structure Signal', 64, '45d')">View Analysis →</button>
+          <button type="button" class="sig-action" data-signal="Oil Contango Structure Signal" data-score="64" data-window="45d" data-action="open-signal">View Analysis →</button>
         </div>
 
         <div class="sig-card bearish">
@@ -242,7 +242,7 @@ noindex: false
             <span class="sig-commodity">Wheat ↓</span>
             <span class="sig-commodity">Corn ↑</span>
           </div>
-          <button class="sig-action" onclick="openSignalModal('Wheat-Corn Spread Compression', 61, '60d')">View Analysis →</button>
+          <button type="button" class="sig-action" data-signal="Wheat-Corn Spread Compression" data-score="61" data-window="60d" data-action="open-signal">View Analysis →</button>
         </div>
 
         <div class="sig-card bearish">
@@ -263,7 +263,7 @@ noindex: false
             <span class="sig-commodity">Silver ↓</span>
             <span class="sig-commodity">Copper ↓</span>
           </div>
-          <button class="sig-action" onclick="openSignalModal('DXY Recovery Risk — Dollar Bounce Warning', 73, '30d')">View Analysis →</button>
+          <button type="button" class="sig-action" data-signal="DXY Recovery Risk — Dollar Bounce Warning" data-score="73" data-window="30d" data-action="open-signal">View Analysis →</button>
         </div>
 
         <div class="sig-card bullish">
@@ -284,7 +284,7 @@ noindex: false
             <span class="sig-commodity">Corn ↑</span>
             <span class="sig-commodity">Nat Gas (driver)</span>
           </div>
-          <button class="sig-action" onclick="openSignalModal('Energy-Agriculture Linkage Signal', 66, '2-4w')">View Analysis →</button>
+          <button type="button" class="sig-action" data-signal="Energy-Agriculture Linkage Signal" data-score="66" data-window="2-4w" data-action="open-signal">View Analysis →</button>
         </div>
 
         <div class="sig-card bearish">
@@ -305,7 +305,7 @@ noindex: false
             <span class="sig-commodity">Airlines ↓</span>
             <span class="sig-commodity">Gold (mixed)</span>
           </div>
-          <button class="sig-action" onclick="openSignalModal('Iran-Hormuz Oil War Premium', 70, '60-90d')">View Analysis →</button>
+          <button type="button" class="sig-action" data-signal="Iran-Hormuz Oil War Premium" data-score="70" data-window="60-90d" data-action="open-signal">View Analysis →</button>
         </div>
 
         <div class="sig-card bullish">
@@ -326,7 +326,7 @@ noindex: false
             <span class="sig-commodity">FCX ↑</span>
             <span class="sig-commodity">SCCO ↑</span>
           </div>
-          <button class="sig-action" onclick="openSignalModal('Copper DRC Supply Shock', 72, '90d')">View Analysis →</button>
+          <button type="button" class="sig-action" data-signal="Copper DRC Supply Shock" data-score="72" data-window="90d" data-action="open-signal">View Analysis →</button>
         </div>
 
       </div>
@@ -428,7 +428,7 @@ noindex: false
         <div class="pro-gate" id="pro-gate" style="display:none">
           <h3>Pro Feature</h3>
           <p>Full pattern library requires Pro access</p>
-          <button onclick="if(window.Clerk){window.Clerk.openSignIn();return;} window.location.href='/pricing/';">Sign In</button>
+          <button type="button" data-action="clerk-signin">Sign In</button>
         </div>
       </div>
     </div>
@@ -484,7 +484,7 @@ noindex: false
 <!-- Signal Pro Modal -->
 <div id="signal-pro-modal" class="sig-modal-backdrop">
   <div class="sig-modal-box">
-    <button onclick="closeSignalModal()" class="sig-modal-close">&times;</button>
+    <button type="button" data-action="close-signal-modal" class="sig-modal-close">&times;</button>
     <div class="sig-modal-header">
       <div class="sig-modal-tag">Pro Analysis</div>
       <h3 class="sig-modal-title" id="signal-modal-name">Signal Analysis</h3>
@@ -510,7 +510,7 @@ noindex: false
         <li>New signal alerts via email</li>
       </ul>
     </div>
-    <button onclick="if(window.Clerk){window.Clerk.openSignUp();return;} window.location.href='/pricing/';" class="sig-modal-cta">
+    <button type="button" data-action="clerk-signup" class="sig-modal-cta">
       Unlock Pro Analysis — $19/month
     </button>
     <p class="sig-modal-fine">Cancel anytime. Most members recover cost in first week.</p>
@@ -554,3 +554,22 @@ document.getElementById('signal-pro-modal').addEventListener('click', function(e
     <p>The Signal Engine is designed to complement, not replace, fundamental analysis and individual commodity research. Active signals should be cross-referenced with the Disruption Tracker (for geopolitical risk context), the Correlation Matrix (for portfolio diversification implications), and the Market Calendar (for upcoming catalysts that could accelerate or invalidate the signal). The most effective approach is to use signals as a screening tool to identify high-probability setups, then conduct deeper analysis on the specific commodities involved before establishing positions. Monitor the Signal History tab regularly to calibrate your confidence in different pattern types and adjust position sizing accordingly.</p>
   </div>
 </section>
+
+<script>
+(function(){
+  document.addEventListener('click', function(ev){
+    var act = ev.target.closest('[data-action]');
+    if (!act) return;
+    var a = act.dataset.action;
+    if (a === 'open-signal' && typeof openSignalModal === 'function') {
+      openSignalModal(act.dataset.signal, parseInt(act.dataset.score,10), act.dataset.window);
+    } else if (a === 'close-signal-modal' && typeof closeSignalModal === 'function') {
+      closeSignalModal();
+    } else if (a === 'clerk-signin') {
+      if (window.Clerk) window.Clerk.openSignIn(); else window.location.href = '/pricing/';
+    } else if (a === 'clerk-signup') {
+      if (window.Clerk) window.Clerk.openSignUp(); else window.location.href = '/pricing/';
+    }
+  });
+})();
+</script>

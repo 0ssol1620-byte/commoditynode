@@ -92,9 +92,9 @@ sitemap: false
         <h2>Your API Key <span class="badge" id="key-status-badge" style="background:rgba(100,116,139,0.15);color:#64748b">Loading</span></h2>
         <div class="key-display" id="key-display">
           <span class="key-val" id="key-val">Loading...</span>
-          <button class="copy-btn" id="copy-btn" onclick="copyKey()" style="display:none">Copy</button>
+          <button type="button" class="copy-btn" id="copy-btn" data-action="copy-key" style="display:none">Copy</button>
         </div>
-        <button class="gen-btn" id="gen-btn" onclick="generateKey()">
+        <button type="button" class="gen-btn" id="gen-btn" data-action="generate-key">
           <span id="gen-btn-text">Generate New Key</span>
         </button>
         <div class="warn-box" id="warn-box">
@@ -103,7 +103,7 @@ sitemap: false
         <div class="new-key-reveal" id="new-key-reveal">
           <div class="nk-label"><span class="status-dot"></span>New Key Generated — Copy it now!</div>
           <div class="nk-val" id="new-key-val"></div>
-          <button class="copy-btn" onclick="copyNewKey()" style="font-size:0.82rem">Copy Full Key</button>
+          <button type="button" class="copy-btn" data-action="copy-new-key" style="font-size:0.82rem">Copy Full Key</button>
           <p style="color:#64748b;font-size:0.75rem;margin:10px 0 0">This key will not be shown again in full. Store it securely.</p>
         </div>
       </div>
@@ -154,9 +154,9 @@ sitemap: false
       <div class="api-card">
         <h2>Code Examples</h2>
         <div class="code-tabs">
-          <div class="code-tab active" onclick="switchTab('curl')">cURL</div>
-          <div class="code-tab" onclick="switchTab('python')">Python</div>
-          <div class="code-tab" onclick="switchTab('js')">JavaScript</div>
+          <button type="button" class="code-tab active" data-tab="curl">cURL</button>
+          <button type="button" class="code-tab" data-tab="python">Python</button>
+          <button type="button" class="code-tab" data-tab="js">JavaScript</button>
         </div>
 
         <div class="code-block active" id="tab-curl"><span class="cm"># Fetch crude oil candles (3-month period)</span>
@@ -362,5 +362,21 @@ console.log(prices.crude_oil?.price);</div>
       showContent(window.CNAuth && window.CNAuth.isEnterprise());
     }
   }, 3000);
+})();
+</script>
+
+<script>
+(function(){
+  document.addEventListener('click', function(ev){
+    var act = ev.target.closest('[data-action]');
+    if (act) {
+      var a = act.dataset.action;
+      if (a === 'copy-key' && typeof copyKey === 'function') return copyKey();
+      if (a === 'generate-key' && typeof generateKey === 'function') return generateKey();
+      if (a === 'copy-new-key' && typeof copyNewKey === 'function') return copyNewKey();
+    }
+    var tab = ev.target.closest('[data-tab]');
+    if (tab && typeof switchTab === 'function') switchTab(tab.dataset.tab);
+  });
 })();
 </script>

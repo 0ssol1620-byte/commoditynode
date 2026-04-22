@@ -1,0 +1,71 @@
+/*! CommodityNode design tokens
+ * Central source for color, radius, shadow, motion, typography tokens.
+ * Keep in sync with the :root block in style.css — this file is the canonical reference.
+ */
+:root {
+  /* Surface backgrounds */
+  --bg:        #050508;
+  --bg2:       #0d0d14;
+  --bg3:       #13131e;
+  --bg4:       #1a1a28;
+  --surface:   rgba(255,255,255,0.04);
+  --surface2:  rgba(255,255,255,0.07);
+  --glass:     rgba(13,13,20,0.7);
+
+  /* Text */
+  --text:      #f0f0f5;
+  --text2:     #9494a8;
+  --text3:     #5a5a72;
+
+  /* Brand + semantic */
+  --accent:    #22d3ee;
+  --accent2:   #06b6d4;
+  --accent3:   #0891b2;
+  --gold:      #fbbf24;
+  --gold2:     #f59e0b;
+  --amber-bright: #F59E0B;
+  --red:       #f43f5e;
+  --green:     #10b981;
+  --purple:    #a855f7;
+
+  /* Borders */
+  --border:    rgba(255,255,255,0.08);
+  --border2:   rgba(34,211,238,0.2);
+
+  /* Radius */
+  --radius:    14px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+
+  /* Shadow / glow */
+  --shadow:    0 4px 24px rgba(0,0,0,0.5);
+  --shadow-lg: 0 8px 48px rgba(0,0,0,0.7);
+  --glow-cyan: 0 0 20px rgba(34,211,238,0.3), 0 0 60px rgba(34,211,238,0.1);
+  --glow-gold: 0 0 20px rgba(251,191,36,0.3), 0 0 60px rgba(251,191,36,0.1);
+
+  /* Motion */
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  --motion-fast: 160ms cubic-bezier(0.4,0,0.2,1);
+  --motion-base: 240ms cubic-bezier(0.4,0,0.2,1);
+  --motion-slow: 320ms cubic-bezier(0.4,0,0.2,1);
+
+  /* Typography */
+  --font-display: 'Syne', Georgia, serif;
+  --font-body:    'DM Sans', -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  /* Spacing scale */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+}
+
+/* Honor user reduced-motion preference globally. */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}

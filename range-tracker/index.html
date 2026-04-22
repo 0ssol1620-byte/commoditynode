@@ -74,11 +74,11 @@ noindex: false
     <div class="insight-summary" id="insight-summary" data-animate data-delay="150"></div>
 
     <div class="sort-bar" data-animate data-delay="200">
-      <button class="sort-btn active" data-sort="position">By Position</button>
-      <button class="sort-btn" data-sort="name">By Name <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
-      <button class="sort-btn" data-sort="high">Nearest High <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
-      <button class="sort-btn" data-sort="low">Nearest Low <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
-      <button id="export-csv-btn" onclick="exportRangeCSV()" style="display:none;padding:7px 16px;border-radius:8px;border:1px solid rgba(34,211,238,0.4);background:rgba(34,211,238,0.08);color:#22d3ee;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(34,211,238,0.18)'" onmouseout="this.style.background='rgba(34,211,238,0.08)'">Export All Data (CSV)</button>
+      <button type="button" class="sort-btn active" data-sort="position">By Position</button>
+      <button type="button" class="sort-btn" data-sort="name">By Name <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button type="button" class="sort-btn" data-sort="high">Nearest High <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button type="button" class="sort-btn" data-sort="low">Nearest Low <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button type="button" id="export-csv-btn" class="range-export-btn" data-action="export-range-csv" hidden>Export All Data (CSV)</button>
     </div>
     <script>
     document.addEventListener('cn:authready', function() {
@@ -339,3 +339,17 @@ noindex: false
     <p>Range position alone is insufficient for making trading decisions — context matters enormously. A commodity near its 52-week high may have fundamentally justified reasons for being there, such as a verified supply deficit or surging demand from a new use case. Similarly, a commodity near its annual low may be reflecting genuine structural oversupply that is unlikely to resolve quickly. The most effective approach combines range position with correlation analysis, supply disruption tracking, and seasonal pattern recognition to build a complete picture. Our suite of commodity analytics tools is designed to work together, providing multiple perspectives on each market to support well-informed trading decisions. Use the Range Tracker as a screening tool to identify commodities worth deeper investigation, then drill into individual commodity pages for comprehensive fundamental and technical analysis.</p>
   </div>
 </section>
+
+<style>
+.range-export-btn { display:none; padding:7px 16px; border-radius:8px; border:1px solid rgba(34,211,238,0.4); background:rgba(34,211,238,0.08); color:#22d3ee; font-size:0.82rem; font-weight:600; cursor:pointer; transition:background 0.2s; }
+.range-export-btn:not([hidden]) { display:inline-flex; align-items:center; }
+.range-export-btn:hover { background:rgba(34,211,238,0.18); }
+</style>
+<script>
+(function(){
+  document.addEventListener('click', function(ev){
+    var act = ev.target.closest('[data-action="export-range-csv"]');
+    if (act && typeof exportRangeCSV === 'function') exportRangeCSV();
+  });
+})();
+</script>

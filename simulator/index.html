@@ -716,9 +716,9 @@ permalink: /simulator/
     <div class="sim-selector-grid" id="sim-selector"></div>
     <div class="sim-step-label" style="margin-top:8px;">Step 2 · Apply baseline shock</div>
     <div class="sim-preset-row">
-      <button class="preset-shock" data-preset="supply_cut" data-tone="bear" onclick="applyPreset('supply_cut')">Supply Disruption +15%</button>
-      <button class="preset-shock" data-preset="demand_surge" data-tone="bull" onclick="applyPreset('demand_surge')">Demand Surge +10%</button>
-      <button class="preset-shock" data-preset="recession" data-tone="neutral" onclick="applyPreset('recession')">Recession -20%</button>
+      <button type="button" class="preset-shock" data-preset="supply_cut" data-tone="bear" data-preset-apply="supply_cut">Supply Disruption +15%</button>
+      <button type="button" class="preset-shock" data-preset="demand_surge" data-tone="bull" data-preset-apply="demand_surge">Demand Surge +10%</button>
+      <button type="button" class="preset-shock" data-preset="recession" data-tone="neutral" data-preset-apply="recession">Recession -20%</button>
     </div>
   </div>
 
@@ -730,13 +730,13 @@ permalink: /simulator/
         <div class="sim-chart-subtitle" id="sim-chart-subtitle">Historical prices + consensus forecast with Chronos-2 and TimesFM comparison</div>
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
           <div id="sim-active-scenario-badge" style="display:none;"></div>
-          <button type="button" onclick="copySimulatorShareLink()" style="padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.04);color:#cbd5e1;font-size:0.78rem;font-weight:700;cursor:pointer;">Copy share link</button>
+          <button type="button" data-action="copy-share" style="padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.04);color:#cbd5e1;font-size:0.78rem;font-weight:700;cursor:pointer;">Copy share link</button>
         </div>
       </div>
       <div class="sim-period-btns">
-        <button class="sim-period-btn active" data-period="3m" onclick="setPeriod('3m',this)">3M</button>
-        <button class="sim-period-btn" data-period="6m" onclick="setPeriod('6m',this)">6M</button>
-        <button class="sim-period-btn" data-period="1y" onclick="setPeriod('1y',this)">1Y</button>
+        <button type="button" class="sim-period-btn active" data-period="3m" data-period-set="3m">3M</button>
+        <button type="button" class="sim-period-btn" data-period="6m" data-period-set="6m">6M</button>
+        <button type="button" class="sim-period-btn" data-period="1y" data-period-set="1y">1Y</button>
       </div>
     </div>
     <div class="sim-chart-stage">
@@ -841,7 +841,7 @@ permalink: /simulator/
         <div id="sim-watchlist-brief" style="color:#ddd6fe;line-height:1.7;font-size:0.88rem;">Save a watchlist to see which names line up with this commodity shock.</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn btn-secondary" data-save-commodity="crude-oil" data-cta="simulator_save_current_workflow" id="sim-save-workflow-btn" style="min-width:180px;justify-content:center;">Save this workflow</button>
+        <button type="button" class="btn btn-secondary" data-save-commodity="crude-oil" data-cta="simulator_save_current_workflow" id="sim-save-workflow-btn" style="min-width:180px;justify-content:center;">Save this workflow</button>
         <a href="/start/" class="btn btn-secondary" data-cta="simulator_build_watchlist" style="min-width:180px;justify-content:center;">Build watchlist</a>
       </div>
     </div>
@@ -1494,10 +1494,13 @@ function isCompactMobile() {
 }
 
 // ── Fetch forecast data ───────────────────────────────────────────────────
+// Build-time version param stays stable for a given deploy so browser
+// and CDN caches do their job; a new build bumps the version automatically.
+var DATA_VERSION = '{{ site.time | date: "%Y%m%d%H%M" }}';
 function loadForecast() {
   Promise.all([
-    fetch('/assets/data/forecast.json?v=' + Date.now()).then(function(r){ return r.json(); }),
-    fetch('/assets/data/forecast-consensus.json?v=' + Date.now())
+    fetch('/assets/data/forecast.json?v=' + DATA_VERSION).then(function(r){ return r.json(); }),
+    fetch('/assets/data/forecast-consensus.json?v=' + DATA_VERSION)
       .then(function(r){ return r.ok ? r.json() : {}; })
       .catch(function(){ return {}; })
   ])
@@ -1558,7 +1561,7 @@ function renderSelector(){
     var chg = d ? d.change_90d_pct : null;
     var chgClass = chg === null ? 'neutral' : chg >= 0 ? 'up' : 'down';
     var chgStr = chg === null ? '90d: —' : '90d: ' + (chg >= 0 ? '+' : '') + chg + '%';
-    return '<button class="sim-commodity-btn' + (item.key===state.commodity?' active':'') + '" onclick="selectCommodity(\''+item.key+'\')">'
+    return '<button type="button" class="sim-commodity-btn' + (item.key===state.commodity?' active':'') + '" data-sim-commodity="'+item.key+'">'
       + '<span class="btn-name">' + item.icon + ' ' + item.name + '</span>'
       + '<span class="btn-price">' + price + '</span>'
       + '<span class="btn-change ' + chgClass + '">' + chgStr + '</span>'
@@ -2010,7 +2013,7 @@ function renderScenarios(){
     var badgeClass = s.dir === 'up' ? 'badge-up' : 'badge-down';
     var sign = s.dir === 'up' ? '+' : '';
     return '<div class="sim-scenario-item">'
-      + '<label class="sim-toggle"><input type="checkbox" ' + checked + ' onchange="toggleScenario(\''+s.id+'\','+s.impact+',this)"><span class="sim-toggle-slider"></span></label>'
+      + '<label class="sim-toggle"><input type="checkbox" ' + checked + ' data-scenario-id="' + s.id + '" data-scenario-impact="' + s.impact + '" aria-label="Toggle scenario: ' + (s.name || '').replace(/"/g,'&quot;') + '"><span class="sim-toggle-slider"></span></label>'
       + '<div class="sim-scenario-info"><div class="sim-scenario-name">' + s.name + '</div><div class="sim-scenario-impact">' + s.desc + '</div></div>'
       + '<span class="sim-scenario-badge ' + badgeClass + '">' + sign + s.impact + '%</span>'
       + '</div>';
@@ -2055,7 +2058,7 @@ function showSimulatorCTA() {
     + '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">'
     + '<a href="/stress-test/" style="padding:12px 24px;background:linear-gradient(135deg,#22d3ee,#a855f7);border-radius:10px;color:#050508;font-weight:800;font-size:0.88rem;text-decoration:none;">Run Portfolio Stress Test →</a>'
     + '<a href="/pricing/" style="display:inline-block;padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e2e8f0;font-weight:600;font-size:0.88rem;cursor:pointer;text-decoration:none;">Unlock company sensitivity — Pro</a>'
-    + '<button onclick="exportScenariosCSV()" style="padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#9494a8;font-weight:600;font-size:0.88rem;cursor:pointer;">Export scenarios as CSV</button>'
+    + '<button type="button" class="sim-export-btn" data-action="sim-export">Export scenarios as CSV</button>'
     + '</div>';
   var target = document.querySelector('.sim-scenario-panel') || document.querySelector('.sim-main-grid');
   if (target) target.parentNode.insertBefore(cta, target.nextSibling);
@@ -2477,6 +2480,34 @@ window.addEventListener('resize', function(){
         if (window.CNEvents) window.CNEvents.send('sample_run', { source:'simulator_quick', preset:key });
       });
     });
+  });
+})();
+</script>
+
+<style>
+.sim-export-btn { padding:12px 24px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#9494a8; font-weight:600; font-size:0.88rem; cursor:pointer; }
+.sim-export-btn:hover { background:rgba(255,255,255,0.08); }
+</style>
+<script>
+(function(){
+  document.addEventListener('click', function(ev){
+    var preset = ev.target.closest('[data-preset-apply]');
+    if (preset && typeof applyPreset === 'function') { applyPreset(preset.dataset.presetApply); return; }
+    var period = ev.target.closest('[data-period-set]');
+    if (period && typeof setPeriod === 'function') { setPeriod(period.dataset.periodSet, period); return; }
+    var com = ev.target.closest('[data-sim-commodity]');
+    if (com && typeof selectCommodity === 'function') { selectCommodity(com.dataset.simCommodity); return; }
+    var act = ev.target.closest('[data-action]');
+    if (!act) return;
+    var a = act.dataset.action;
+    if (a === 'copy-share' && typeof copySimulatorShareLink === 'function') copySimulatorShareLink();
+    else if (a === 'sim-export' && typeof exportScenariosCSV === 'function') exportScenariosCSV();
+  });
+  document.addEventListener('change', function(ev){
+    var cb = ev.target.closest('input[type="checkbox"][data-scenario-id][data-scenario-impact]');
+    if (cb && typeof toggleScenario === 'function') {
+      toggleScenario(cb.dataset.scenarioId, parseFloat(cb.dataset.scenarioImpact), cb);
+    }
   });
 })();
 </script>

@@ -325,8 +325,8 @@ layout: default
               {% endif %}
             </div>
             <div style="display:flex;gap:10px;flex-wrap:wrap;">
-              <button class="btn btn-secondary" data-save-commodity="{{ page.commodity_name | slugify }}" data-cta="report_save_commodity_workflow" style="min-width:190px;justify-content:center;">Save commodity workflow</button>
-              <button class="btn btn-secondary" data-save-watchlist="{{ exposure_preview | join: ', ' }}" data-cta="report_save_watchlist_preview" style="min-width:190px;justify-content:center;">Save named exposure</button>
+              <button type="button" class="btn btn-secondary" data-save-commodity="{{ page.commodity_name | slugify }}" data-cta="report_save_commodity_workflow" style="min-width:190px;justify-content:center;">Save commodity workflow</button>
+              <button type="button" class="btn btn-secondary" data-save-watchlist="{{ exposure_preview | join: ', ' }}" data-cta="report_save_watchlist_preview" style="min-width:190px;justify-content:center;">Save named exposure</button>
             </div>
           </div>
         </div>
