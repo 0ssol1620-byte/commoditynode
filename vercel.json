@@ -49,6 +49,16 @@
       "source": "/companion-day",
       "destination": "/calendar/",
       "permanent": true
+    },
+    {
+      "source": "/companies/archer-daniels",
+      "destination": "/companies/adm/",
+      "permanent": true
+    },
+    {
+      "source": "/companies/archer-daniels/",
+      "destination": "/companies/adm/",
+      "permanent": true
     }
   ],
   "headers": [

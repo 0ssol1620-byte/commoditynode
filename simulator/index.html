@@ -633,7 +633,7 @@ permalink: /simulator/
   <div style="max-width:700px;margin:40px auto;padding:32px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;text-align:center;">
     <h2 style="color:#f0f0f5;font-size:1.2rem;margin-bottom:12px;">JavaScript Required</h2>
     <p style="color:#9494a8;font-size:0.9rem;line-height:1.6;">The Scenario Simulator requires JavaScript to run interactive charts and scenario modeling. Please enable JavaScript in your browser settings, then reload this page.</p>
-    <p style="color:#64748b;font-size:0.82rem;margin-top:16px;">In the meantime, explore our <a href="/" style="color:#22d3ee;">commodity hubs</a> for static analysis and signal reports.</p>
+    <p style="color:#64748b;font-size:0.82rem;margin-top:16px;">In the meantime, explore our <a href="/" class="text-accent">commodity hubs</a> for static analysis and signal reports.</p>
   </div>
 </noscript>
 
@@ -689,18 +689,18 @@ permalink: /simulator/
     <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:12px;">
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;">
         <div>
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Fastest workflow</div>
+          <div class="eyebrow-cyan eyebrow-cyan--mb6">Fastest workflow</div>
           <div style="color:#f0f0f5;font-weight:700;font-size:0.98rem;line-height:1.45;">Select the commodity → apply the base shock → read the downstream sector pressure and likely follow-through.</div>
         </div>
         <a href="/methodology/" style="font-size:0.82rem;color:#22d3ee;text-decoration:none;font-weight:700;white-space:nowrap;">Chronos-2 + TimesFM methodology →</a>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div class="chip-group-wrap">
         <div style="padding:10px 12px;border-radius:999px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.16);font-size:0.8rem;color:#cbd5e1;">Use before OPEC, WASDE, Fed, or earnings-linked commodity shocks.</div>
         <div style="padding:10px 12px;border-radius:999px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.16);font-size:0.8rem;color:#ddd6fe;">Free = sector direction and model context. Pro = stock-level names and deeper workflow.</div>
       </div>
     </div>
     <div style="padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;gap:10px;">
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">High-intent event entry points</div>
+      <div class="eyebrow-cyan">High-intent event entry points</div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;">
         <a href="/before-opec-oil-playbook/" data-cta="simulator_open_event_playbook" style="padding:10px 12px;border-radius:999px;background:rgba(8,12,20,0.36);border:1px solid rgba(255,255,255,0.08);color:#e2e8f0;text-decoration:none;font-size:0.8rem;font-weight:700;">Before OPEC → oil workflow</a>
         <a href="/before-wasde-grains-playbook/" style="padding:10px 12px;border-radius:999px;background:rgba(8,12,20,0.36);border:1px solid rgba(255,255,255,0.08);color:#e2e8f0;text-decoration:none;font-size:0.8rem;font-weight:700;">Before WASDE → grains workflow</a>
@@ -729,7 +729,7 @@ permalink: /simulator/
         <div class="sim-chart-title" id="sim-chart-title">Select a scenario to view analysis</div>
         <div class="sim-chart-subtitle" id="sim-chart-subtitle">Historical prices + consensus forecast with Chronos-2 and TimesFM comparison</div>
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
-          <div id="sim-active-scenario-badge" style="display:none;"></div>
+          <div id="sim-active-scenario-badge" class="hidden"></div>
           <button type="button" data-action="copy-share" style="padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.04);color:#cbd5e1;font-size:0.78rem;font-weight:700;cursor:pointer;">Copy share link</button>
         </div>
       </div>
@@ -756,32 +756,32 @@ permalink: /simulator/
 
   <div class="sim-saved-strip">
     <div>
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Saved workflow context</div>
+      <div class="eyebrow-cyan">Saved workflow context</div>
       <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Save the commodity and your watchlist once, then this simulator becomes a much sharper daily decision surface.</div>
-      <div data-profile-has-saved style="display:none;">
+      <div data-profile-has-saved class="hidden">
         <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
         <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-        <a href="/start/" class="btn btn-secondary" data-profile-primary-link style="min-width:200px;justify-content:center;"><span data-profile-primary-label>Build my workflow</span></a>
-        <a href="/pro/" class="btn btn-secondary" data-profile-secondary-link style="min-width:200px;justify-content:center;"><span data-profile-secondary-label>See Pro workflow</span></a>
+        <a href="/start/" class="btn btn-secondary min-w-200-center" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
+        <a href="/pro/" class="btn btn-secondary min-w-200-center" data-profile-secondary-link><span data-profile-secondary-label>See Pro workflow</span></a>
       </div>
     </div>
     <div class="sim-saved-grid">
       <div class="sim-saved-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Saved role</div>
+        <div class="eyebrow-cyan">Saved role</div>
         <strong data-profile-role>Not set yet</strong>
       </div>
       <div class="sim-saved-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Saved commodities</div>
+        <div class="eyebrow-cyan">Saved commodities</div>
         <strong data-profile-commodities>No tracked commodities yet</strong>
       </div>
       <div class="sim-saved-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Watchlist</div>
+        <div class="eyebrow-cyan">Watchlist</div>
         <strong data-profile-watchlist>No saved watchlist names yet</strong>
       </div>
       <div class="sim-saved-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Freshness</div>
+        <div class="eyebrow-cyan">Freshness</div>
         <strong data-profile-updated>Not saved yet</strong>
       </div>
     </div>
@@ -804,35 +804,35 @@ permalink: /simulator/
           <span>Use sector direction first, then unlock stock-level sensitivity when naming the trade matters.</span>
         </div>
       </div>
-      <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model comparison. Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a></p>
+      <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model comparison. Not investment advice. <a href="/methodology/" class="text-accent">See methodology</a></p>
     </div>
 
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 14px;">
-    <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Where the free workflow stops</div>
-      <p style="margin:0;color:var(--text2);line-height:1.65;">Free shows the move, forecast direction, and sector-level pressure. Pro matters when you need named winners, losers, and conviction before you act.</p>
+    <div class="surface-card surface-card--compact">
+      <div class="eyebrow-cyan">Where the free workflow stops</div>
+      <p class="body-text-65">Free shows the move, forecast direction, and sector-level pressure. Pro matters when you need named winners, losers, and conviction before you act.</p>
     </div>
     <div style="padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
       <div>
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Best use of Pro</div>
+        <div class="eyebrow-cyan eyebrow-cyan--mb6">Best use of Pro</div>
         <p style="margin:0;color:var(--text2);line-height:1.6;font-size:0.88rem;">Run the scenario, verify model agreement, then name the actual winners and losers before the market fully reprices.</p>
       </div>
-      <a href="/pricing/" class="btn btn-primary" data-cta="simulator_unlock_full_workflow" style="min-width:220px;justify-content:center;">Unlock stock-level decision workflow</a>
+      <a href="/pricing/" class="btn btn-primary min-w-220-center" data-cta="simulator_unlock_full_workflow">Unlock stock-level decision workflow</a>
     </div>
     <div style="padding:16px 18px;border-radius:16px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
       <div>
         <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;margin-bottom:6px;">New premium layer</div>
         <p style="margin:0;color:#ddd6fe;line-height:1.6;font-size:0.88rem;">If you want event odds, ripple ranking, stress tests, hedge ideas, explainability, anomaly detection, and a trust-first policy decision console, open Intelligence Lab.</p>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="/intelligence-lab/" class="btn btn-secondary" data-cta="simulator_open_intelligence_lab" style="min-width:220px;justify-content:center;">Open Intelligence Lab</a>
-        <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary" data-cta="simulator_open_rl_policy_lab" style="min-width:220px;justify-content:center;">Open RL Policy Lab</a>
+      <div class="chip-group-wrap">
+        <a href="/intelligence-lab/" class="btn btn-secondary min-w-220-center" data-cta="simulator_open_intelligence_lab">Open Intelligence Lab</a>
+        <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary min-w-220-center" data-cta="simulator_open_rl_policy_lab">Open RL Policy Lab</a>
       </div>
     </div>
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:0 0 16px;">
     <div style="padding:18px 20px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Outcome summary</div>
+      <div class="eyebrow-cyan">Outcome summary</div>
       <div id="sim-outcome-brief" style="color:var(--text2);line-height:1.7;font-size:0.9rem;">Run a baseline or event scenario to see likely winners, losers, and the confidence-sensitive read.</div>
     </div>
     <div style="padding:18px 20px;border-radius:16px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:grid;gap:10px;">
@@ -840,9 +840,9 @@ permalink: /simulator/
         <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;margin-bottom:6px;">Watchlist relevance</div>
         <div id="sim-watchlist-brief" style="color:#ddd6fe;line-height:1.7;font-size:0.88rem;">Save a watchlist to see which names line up with this commodity shock.</div>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button type="button" class="btn btn-secondary" data-save-commodity="crude-oil" data-cta="simulator_save_current_workflow" id="sim-save-workflow-btn" style="min-width:180px;justify-content:center;">Save this workflow</button>
-        <a href="/start/" class="btn btn-secondary" data-cta="simulator_build_watchlist" style="min-width:180px;justify-content:center;">Build watchlist</a>
+      <div class="chip-group-wrap">
+        <button type="button" class="btn btn-secondary min-w-180-center" data-save-commodity="crude-oil" data-cta="simulator_save_current_workflow" id="sim-save-workflow-btn">Save this workflow</button>
+        <a href="/start/" class="btn btn-secondary min-w-180-center" data-cta="simulator_build_watchlist">Build watchlist</a>
       </div>
     </div>
   </div>
@@ -1663,7 +1663,7 @@ function renderChart(){
   var noteEl = document.getElementById('sim-forecast-note');
   if (subtitleEl) subtitleEl.textContent = 'Historical prices + consensus curve with Chronos-2 and TimesFM comparison';
   if (legendEl) legendEl.textContent = 'Consensus';
-  if (noteEl) noteEl.innerHTML = 'Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model spread tracking. Not investment advice. <a href="/methodology/" style="color:#22d3ee;">See methodology</a>';
+  if (noteEl) noteEl.innerHTML = 'Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model spread tracking. Not investment advice. <a href="/methodology/" class="text-accent">See methodology</a>';
 
   var scenarioAdj = calcScenarioAdjustment();
   var histLabels = [], histPrices = [];
@@ -1932,20 +1932,20 @@ function renderChart(){
     strip.innerHTML = ''
       + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
       + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Agreement</div>'
-      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + level.toUpperCase() + '</div>'
+      + '<div class="title-bold-white">' + level.toUpperCase() + '</div>'
       + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
       + '</div>'
       + '<div style="padding:12px 14px;background:rgba(226,232,240,0.05);border:1px solid rgba(226,232,240,0.12);border-radius:12px;">'
       + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#e2e8f0;font-weight:700;margin-bottom:6px;">Consensus 90D</div>'
-      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(c90, key) + '</div>'
+      + '<div class="title-bold-white">' + fmtPrice(c90, key) + '</div>'
       + '</div>'
       + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
       + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#a855f7;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
-      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(ch90, key) + '</div>'
+      + '<div class="title-bold-white">' + fmtPrice(ch90, key) + '</div>'
       + '</div>'
       + '<div style="padding:12px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.16);border-radius:12px;">'
       + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
-      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(tf90, key) + '</div>'
+      + '<div class="title-bold-white">' + fmtPrice(tf90, key) + '</div>'
       + '</div>';
 
     if (compareStrip) {
@@ -1953,17 +1953,17 @@ function renderChart(){
       compareStrip.innerHTML = ''
         + '<div style="padding:12px 14px;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.18);border-radius:12px;">'
         + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#c084fc;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
-        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(ch90, key) + '</div>'
+        + '<div class="title-bold-white">' + fmtPrice(ch90, key) + '</div>'
         + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Visible in the main chart as a dashed comparison line</div>'
         + '</div>'
         + '<div style="padding:12px 14px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.18);border-radius:12px;">'
         + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
-        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(tf90, key) + '</div>'
+        + '<div class="title-bold-white">' + fmtPrice(tf90, key) + '</div>'
         + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Visible in the main chart as a dashed comparison line</div>'
         + '</div>'
         + '<div style="padding:12px 14px;background:rgba(94,234,212,0.08);border:1px solid rgba(94,234,212,0.18);border-radius:12px;">'
         + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#5eead4;font-weight:700;margin-bottom:6px;">Model spread</div>'
-        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + (spread != null ? fmtPrice(spread, key) : '—') + '</div>'
+        + '<div class="title-bold-white">' + (spread != null ? fmtPrice(spread, key) : '—') + '</div>'
         + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Absolute gap between Chronos-2 and TimesFM at 90D</div>'
         + '</div>';
     }
@@ -2208,9 +2208,9 @@ function renderOutcomeSummary(){
   var industries = (INDUSTRY_IMPACTS[key] || INDUSTRY_IMPACTS['crude_oil']).slice().sort(function(a,b){ return Math.abs(b.base) - Math.abs(a.base); }).slice(0, 2).map(function(item){ return item.name; });
   var el = document.getElementById('sim-outcome-brief');
   if (!el) return;
-  el.innerHTML = 'Most decision-relevant sectors right now: <strong style="color:#f8fafc;">' + industries.join(', ') + '</strong>. '
-    + (positive.length ? 'Likely beneficiaries to verify next: <strong style="color:#f8fafc;">' + positive.join(', ') + '</strong>. ' : '')
-    + (negative.length ? 'Likely pressure points: <strong style="color:#f8fafc;">' + negative.join(', ') + '</strong>. ' : '')
+  el.innerHTML = 'Most decision-relevant sectors right now: <strong class="white-text">' + industries.join(', ') + '</strong>. '
+    + (positive.length ? 'Likely beneficiaries to verify next: <strong class="white-text">' + positive.join(', ') + '</strong>. ' : '')
+    + (negative.length ? 'Likely pressure points: <strong class="white-text">' + negative.join(', ') + '</strong>. ' : '')
     + 'Use Pro when you need the named winners and losers, not just the direction.';
 }
 
@@ -2234,7 +2234,7 @@ function renderWatchlistRelevance(){
     el.textContent = 'Saved watchlist: ' + profile.watchlist.join(', ') + '. None of those names are in this commodity sensitivity map yet, so use the hub and sector layer first.';
     return;
   }
-  el.innerHTML = 'Saved watchlist overlap: <strong style="color:#f8fafc;">' + matches.slice(0, 3).map(function(item){
+  el.innerHTML = 'Saved watchlist overlap: <strong class="white-text">' + matches.slice(0, 3).map(function(item){
     return item.name + ' ' + (item.impact >= 0 ? '+' : '') + item.impact.toFixed(1) + '%';
   }).join(' · ') + '</strong>.';
 }

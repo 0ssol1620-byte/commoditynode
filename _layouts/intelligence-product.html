@@ -259,7 +259,7 @@ layout: default
     <div>
       <div class="intel-kicker">Continue your saved workflow</div>
       <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Build your commodity workflow, save the names you care about, then return here when this module becomes decision-critical.</div>
-      <div data-profile-has-saved style="display:none;">
+      <div data-profile-has-saved class="hidden">
         <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
         <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
       </div>
@@ -276,7 +276,7 @@ layout: default
     </div>
   </section>
 
-  <div class="intel-product-two" style="margin-top:18px;">
+  <div class="intel-product-two mt-18">
     <section class="intel-card">
       <div class="intel-kicker">What problem this solves</div>
       <h2>{{ page.problem_title | default: 'Why this matters' }}</h2>
@@ -289,11 +289,11 @@ layout: default
     </section>
   </div>
 
-  <section class="intel-card" id="intel-demo-section" style="margin-top:18px;">
+  <section class="intel-card mt-18" id="intel-demo-section">
     <div class="intel-demo-head">
       <div>
         <div class="intel-kicker">Interactive demo embed</div>
-        <h2 style="margin-bottom:8px;">Preview the module on a live commodity</h2>
+        <h2 class="mb-8">Preview the module on a live commodity</h2>
         <p style="margin:0;color:#94a3b8;line-height:1.7;max-width:700px;">The demo uses the current CommodityNode data stack and your saved workflow context so each product page behaves like a real product surface instead of static sales copy.</p>
       </div>
       <div>
@@ -320,7 +320,7 @@ layout: default
         <div class="intel-insight-list" id="intel-demo-insights"></div>
       </div>
     </div>
-    <section class="intel-card" id="intel-rl-decision-console" hidden style="margin-top:18px;">
+    <section class="intel-card mt-18" id="intel-rl-decision-console" hidden>
       <div class="intel-kicker">Decision console</div>
       <div class="intel-product-two" style="gap:16px;align-items:start;">
         <section class="intel-card" style="margin:0;">
@@ -336,7 +336,7 @@ layout: default
           <div class="intel-rl-pill-row" id="intel-rl-trust-strip"></div>
         </section>
       </div>
-      <section class="intel-card" style="margin-top:16px;">
+      <section class="intel-card mt-16">
         <div class="intel-kicker">Policy observability board</div>
         <h3>What state is the model seeing right now?</h3>
         <p>Expose the live recommendation, state pressure, profile governance, and baseline edge in one board so the user can audit the setup before acting.</p>
@@ -366,7 +366,7 @@ layout: default
         </div>
         <div class="intel-rl-field-meta" id="intel-rl-field-meta"></div>
       </section>
-      <section class="intel-card" style="margin-top:16px;">
+      <section class="intel-card mt-16">
         <div class="intel-kicker">Baseline comparison</div>
         <h3>How does the recommended action compare with baseline policies?</h3>
         <p>Show hold, offline, PPO bootstrap, and Neural PPO side-by-side so the user can see whether the recommendation is actually better than the current baseline.</p>
@@ -401,7 +401,7 @@ layout: default
           <div id="intel-rl-scenario-panel"></div>
         </section>
       </div>
-      <section class="intel-card" style="margin-top:16px;">
+      <section class="intel-card mt-16">
         <div class="intel-kicker">Policy audit trail</div>
         <h3>What changed, and when?</h3>
         <p>Keep a timeline of recommendation events, profile selection changes, alerts, and replay evidence so users can audit the recommendation path instead of trusting a static score.</p>
@@ -475,10 +475,10 @@ layout: default
     </div>
   </section>
 
-  <section class="intel-card" style="margin-top:18px;">
+  <section class="intel-card mt-18">
     <div class="intel-kicker">Success dashboard</div>
     <h2>Operational readiness for this module</h2>
-    <div class="intel-success-grid" style="margin-top:16px;">
+    <div class="intel-success-grid mt-16">
       <div class="intel-success-card">
         <div class="intel-kicker">{{ page.metric_primary_label }}</div>
         <div class="intel-success-value" id="intel-metric-primary">—</div>
@@ -497,7 +497,7 @@ layout: default
     </div>
   </section>
 
-  <div class="intel-product-two" style="margin-top:18px;">
+  <div class="intel-product-two mt-18">
     <section class="intel-card">
       <div class="intel-kicker">Visualization system</div>
       <h2>How it should look on the site</h2>
@@ -518,7 +518,7 @@ layout: default
     </section>
   </div>
 
-  <div class="intel-product-four" style="margin-top:18px;">
+  <div class="intel-product-four mt-18">
     <section class="intel-card">
       <div class="intel-kicker">Inputs</div>
       <h2>Data required</h2>
@@ -539,11 +539,11 @@ layout: default
     </section>
   </div>
 
-  <section class="intel-card" style="margin-top:18px;">
+  <section class="intel-card mt-18">
     <div class="intel-kicker">Product-specific pricing block</div>
     <h2>Which plan should unlock {{ page.title }}?</h2>
     <p style="max-width:760px;">{{ page.pricing_roi }}</p>
-    <div class="intel-pricing-grid" style="margin-top:16px;">
+    <div class="intel-pricing-grid mt-16">
       <div class="intel-price-card">
         <div class="intel-kicker">Free</div>
         <div class="intel-price-tier">Public preview</div>
@@ -574,7 +574,7 @@ layout: default
     </div>
   </section>
 
-  <section class="intel-card" style="margin-top:18px;">
+  <section class="intel-card mt-18">
     <div class="intel-kicker">Execution notes</div>
     <h2>Implementation standards for this module</h2>
     <ul class="intel-list">

@@ -1,0 +1,44 @@
+{%- comment -%}
+  Next-best-path component.
+  Variables (all optional):
+    include.title        — heading (default: "Your next best path")
+    include.lede         — supporting sentence
+    include.primary_href / include.primary_label  (default: simulator)
+    include.secondary_href / include.secondary_label (default: reports)
+    include.tertiary_href / include.tertiary_label  (default: start)
+    include.freshness_note — e.g. "Updated {{ page.updated_at }}"
+{%- endcomment -%}
+{% assign nbp_title = include.title | default: "Your next best path" %}
+{% assign nbp_lede = include.lede | default: "One chart rarely ends the question. Pick the path that turns this page into a decision." %}
+{% assign nbp_p_href = include.primary_href | default: "/simulator/" %}
+{% assign nbp_p_label = include.primary_label | default: "Run the scenario in the simulator" %}
+{% assign nbp_s_href = include.secondary_href | default: "/reports/" %}
+{% assign nbp_s_label = include.secondary_label | default: "Open today's live signal reports" %}
+{% assign nbp_t_href = include.tertiary_href | default: "/start/" %}
+{% assign nbp_t_label = include.tertiary_label | default: "Add to your watchlist workflow" %}
+
+<section class="next-best-path" aria-label="Next best path">
+  <div class="next-best-path__head">
+    <p class="section-label mb-8">Next best path</p>
+    <h2>{{ nbp_title }}</h2>
+    <p class="next-best-path__lede">{{ nbp_lede }}</p>
+    {% if include.freshness_note %}<p class="next-best-path__freshness">{{ include.freshness_note }}</p>{% endif %}
+  </div>
+  <div class="next-best-path__grid">
+    <a class="next-best-path__card next-best-path__card--primary" href="{{ nbp_p_href }}" data-cta="nbp_primary">
+      <span class="next-best-path__kicker">Run</span>
+      <strong>{{ nbp_p_label }}</strong>
+      <span class="next-best-path__arrow" aria-hidden="true">→</span>
+    </a>
+    <a class="next-best-path__card" href="{{ nbp_s_href }}" data-cta="nbp_secondary">
+      <span class="next-best-path__kicker">Read</span>
+      <strong>{{ nbp_s_label }}</strong>
+      <span class="next-best-path__arrow" aria-hidden="true">→</span>
+    </a>
+    <a class="next-best-path__card" href="{{ nbp_t_href }}" data-cta="nbp_tertiary">
+      <span class="next-best-path__kicker">Save</span>
+      <strong>{{ nbp_t_label }}</strong>
+      <span class="next-best-path__arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>

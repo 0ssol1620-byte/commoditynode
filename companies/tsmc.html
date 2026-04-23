@@ -16,7 +16,7 @@ permalink: /companies/tsmc/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -25,48 +25,48 @@ permalink: /companies/tsmc/
         <p>The world's largest dedicated semiconductor foundry, manufacturing chips for Apple, NVIDIA, AMD, and hundreds of other companies at the most advanced process nodes.</p>
 
         <h2>Commodity Exposures</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/copper/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Copper</a>
-          <a href="/commodities/gold/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Gold</a>
-          <a href="/commodities/natural-gas/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Natural Gas</a>
-          <a href="/commodities/silver/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Silver</a>
+        <div class="entity-chip-row">
+          <a href="/commodities/copper/" class="entity-chip entity-chip--cyan">Copper</a>
+          <a href="/commodities/gold/" class="entity-chip entity-chip--cyan">Gold</a>
+          <a href="/commodities/natural-gas/" class="entity-chip entity-chip--cyan">Natural Gas</a>
+          <a href="/commodities/silver/" class="entity-chip entity-chip--cyan">Silver</a>
         </div>
 
         <h2>Price Sensitivity</h2>
         <p>TSMC's manufacturing processes consume extraordinary quantities of ultra-pure water (over 150,000 tonnes per day), electricity (equivalent to a medium-sized city), and specialty chemicals. Advanced EUV lithography at 3nm and below requires even more energy per wafer. TSMC's expansion to Arizona and Japan is creating massive construction commodity demand. The company's dominance of advanced chip manufacturing makes it a critical node in global commodity supply chains for electronics.</p>
 
         <h2>Related ETFs</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">SMH</span>
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">SOXX</span>
+        <div class="entity-chip-row">
+          <span class="entity-chip entity-chip--violet">SMH</span>
+          <span class="entity-chip entity-chip--violet">SOXX</span>
         </div>
       </div>
     </div>
 
     <aside class="toc-sidebar">
       <p class="toc-title">Quick Stats</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Sector</span>
-          <span style="color:var(--text2)">Technology</span>
+      <div class="kpi-row">
+        <div class="kpi-row-cell">
+          <span class="text-muted">Sector</span>
+          <span class="text-body2">Technology</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Primary Exposure</span>
-          <span style="color:var(--accent)">Copper</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Primary Exposure</span>
+          <span class="text-accent">Copper</span>
         </div>
       </div>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        <ul class="toc-explore-list">
+          <li><a href="/companies/" class="link-micro">All Companies</a></li>
+          <li><a href="/industries/" class="link-micro">Industries</a></li>
+          <li><a href="/commodities/" class="link-micro">Commodities</a></li>
         </ul>
       </div>
     </aside>
   </div>
 
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     <div class="posts-grid">
     {% for post in site.posts %}

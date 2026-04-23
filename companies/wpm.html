@@ -16,7 +16,7 @@ permalink: /companies/wpm/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -25,47 +25,47 @@ permalink: /companies/wpm/
         <p>The world's largest precious metals streaming company, providing upfront capital to miners in exchange for the right to purchase a percentage of production at predetermined prices.</p>
 
         <h2>Commodity Exposures</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/gold/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Gold</a>
-          <a href="/commodities/silver/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Silver</a>
-          <a href="/commodities/palladium/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Palladium</a>
+        <div class="entity-chip-row">
+          <a href="/commodities/gold/" class="entity-chip entity-chip--cyan">Gold</a>
+          <a href="/commodities/silver/" class="entity-chip entity-chip--cyan">Silver</a>
+          <a href="/commodities/palladium/" class="entity-chip entity-chip--cyan">Palladium</a>
         </div>
 
         <h2>Price Sensitivity</h2>
         <p>Wheaton's streaming model provides leveraged exposure to gold and silver prices with lower operating risk than traditional miners. With cash costs of approximately $5/oz for silver and $250/oz for gold, Wheaton's margins expand dramatically as precious metal prices rise. The company has streaming agreements with 23 operating mines, providing diversified production without direct mine operating risk.</p>
 
         <h2>Related ETFs</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">GDX</span>
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">SIL</span>
+        <div class="entity-chip-row">
+          <span class="entity-chip entity-chip--violet">GDX</span>
+          <span class="entity-chip entity-chip--violet">SIL</span>
         </div>
       </div>
     </div>
 
     <aside class="toc-sidebar">
       <p class="toc-title">Quick Stats</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Sector</span>
-          <span style="color:var(--text2)">Materials</span>
+      <div class="kpi-row">
+        <div class="kpi-row-cell">
+          <span class="text-muted">Sector</span>
+          <span class="text-body2">Materials</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Primary Exposure</span>
-          <span style="color:var(--accent)">Gold</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Primary Exposure</span>
+          <span class="text-accent">Gold</span>
         </div>
       </div>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        <ul class="toc-explore-list">
+          <li><a href="/companies/" class="link-micro">All Companies</a></li>
+          <li><a href="/industries/" class="link-micro">Industries</a></li>
+          <li><a href="/commodities/" class="link-micro">Commodities</a></li>
         </ul>
       </div>
     </aside>
   </div>
 
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     <div class="posts-grid">
     {% for post in site.posts %}

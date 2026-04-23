@@ -186,11 +186,11 @@ layout: default
     <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
       <div style="padding:14px 16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);border-radius:12px;">
         <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Published by</div>
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">CommodityNode Research · independent commodity publisher. <a href="/about/editorial-team/" style="color:var(--accent);">Meet the editorial team</a>.</div>
+        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">CommodityNode Research · independent commodity publisher. <a href="/about/editorial-team/" class="text-accent">Meet the editorial team</a>.</div>
       </div>
       <div style="padding:14px 16px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);border-radius:12px;">
         <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">Review standard</div>
-        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">Read with the <a href="/methodology/" style="color:var(--accent);">methodology</a> and <a href="/about/editorial-process/" style="color:var(--accent);">editorial process</a> in mind. Corrections: <a href="mailto:contact@commoditynode.com" style="color:var(--accent);">contact@commoditynode.com</a>.</div>
+        <div style="font-size:0.92rem;color:var(--text2);line-height:1.6;">Read with the <a href="/methodology/" class="text-accent">methodology</a> and <a href="/about/editorial-process/" class="text-accent">editorial process</a> in mind. Corrections: <a href="mailto:contact@commoditynode.com" class="text-accent">contact@commoditynode.com</a>.</div>
       </div>
     </div>
   </div>
@@ -223,12 +223,12 @@ layout: default
     <div>
       <div style="font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Quick answer</div>
       <h2 style="margin:0 0 10px;font-size:1.15rem;line-height:1.35;">Why is {{ commodity_display }} {{ move_word }} today?</h2>
-      <p style="margin:0;color:var(--text2);line-height:1.7;">{{ page.description | default: site.description }}</p>
+      <p class="body-text">{{ page.description | default: site.description }}</p>
     </div>
-    <div style="display:grid;gap:10px;">
+    <div class="grid-gap-10">
       <div style="padding:12px 14px;border-radius:12px;background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.14);">
         <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#818cf8;font-weight:700;margin-bottom:6px;">Best next step</div>
-        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Open the <a href="/commodities/{{ commodity_slug }}/" style="color:var(--accent);">{{ commodity_display }} hub</a> to verify the live tape, check forecast direction, and decide whether this move is important enough to change a position.</div>
+        <div style="font-size:0.9rem;color:var(--text2);line-height:1.6;">Open the <a href="/commodities/{{ commodity_slug }}/" class="text-accent">{{ commodity_display }} hub</a> to verify the live tape, check forecast direction, and decide whether this move is important enough to change a position.</div>
       </div>
       <div style="padding:12px 14px;border-radius:12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);">
         <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">What this page answers</div>
@@ -243,32 +243,32 @@ layout: default
 
   <section class="report-workflow-strip" aria-label="Saved workflow continuation" data-animate>
     <div>
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Continue your saved workflow</div>
+      <div class="eyebrow-cyan">Continue your saved workflow</div>
       <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Save this commodity and the exposed names when the setup matters so CommodityNode can route you back into the right live pages and scenarios faster.</div>
-      <div data-profile-has-saved style="display:none;">
+      <div data-profile-has-saved class="hidden">
         <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
         <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-        <a href="/start/" class="btn btn-secondary" data-profile-primary-link style="min-width:200px;justify-content:center;"><span data-profile-primary-label>Build my workflow</span></a>
-        <a href="/simulator/" class="btn btn-secondary" data-profile-secondary-link style="min-width:200px;justify-content:center;"><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
+        <a href="/start/" class="btn btn-secondary min-w-200-center" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
+        <a href="/simulator/" class="btn btn-secondary min-w-200-center" data-profile-secondary-link><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
       </div>
     </div>
     <div class="report-workflow-grid">
       <div class="report-workflow-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Saved role</div>
+        <div class="eyebrow-cyan">Saved role</div>
         <strong data-profile-role>Not set yet</strong>
       </div>
       <div class="report-workflow-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Saved commodities</div>
+        <div class="eyebrow-cyan">Saved commodities</div>
         <strong data-profile-commodities>No tracked commodities yet</strong>
       </div>
       <div class="report-workflow-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Watchlist</div>
+        <div class="eyebrow-cyan">Watchlist</div>
         <strong data-profile-watchlist>No saved watchlist names yet</strong>
       </div>
       <div class="report-workflow-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Freshness</div>
+        <div class="eyebrow-cyan">Freshness</div>
         <strong data-profile-updated>Not saved yet</strong>
       </div>
     </div>
@@ -302,13 +302,13 @@ layout: default
       <div style="margin:28px 0;display:grid;gap:14px;">
         <div style="padding:18px 20px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:1.1fr 1fr;gap:14px;align-items:center;">
           <div>
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">If this matters to your watchlist</div>
+            <div class="eyebrow-cyan eyebrow-cyan--mb6">If this matters to your watchlist</div>
             <div style="color:#f8fafc;font-weight:700;font-size:1rem;line-height:1.35;">Use the report to understand the move. Use the hub and simulator when the move is important enough to change an actual position.</div>
             <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;font-size:0.9rem;">This is where CommodityNode becomes more than narrative: you verify the live tape, check model disagreement, then translate the move into named exposure and scenario confidence.</p>
           </div>
-          <div style="display:grid;gap:10px;">
+          <div class="grid-gap-10">
             <div style="padding:12px 14px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.84rem;color:#cbd5e1;line-height:1.6;">
-              <strong style="color:#f8fafc;display:block;margin-bottom:4px;">Named exposure preview</strong>
+              <strong class="title-white-block">Named exposure preview</strong>
               {% assign exposure_preview = page.tags | slice: 0, 4 %}
               {% if exposure_preview and exposure_preview.size > 0 %}
                 {{ exposure_preview | join: ', ' }}
@@ -317,14 +317,14 @@ layout: default
               {% endif %}
             </div>
             <div style="padding:12px 14px;border-radius:14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);font-size:0.84rem;color:#ddd6fe;line-height:1.6;">
-              <strong style="color:#f8fafc;display:block;margin-bottom:4px;">Disagreement matters</strong>
+              <strong class="title-white-block">Disagreement matters</strong>
               {% if page.confidence %}
               Current confidence is {{ page.confidence }}. When the setup is not one-way obvious, model spread and scenario testing matter more than a single narrative read.
               {% else %}
               Use disagreement between tape, narrative, and forecast path as the cue to go deeper instead of stopping at the article.
               {% endif %}
             </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <div class="chip-group-wrap">
               <button type="button" class="btn btn-secondary" data-save-commodity="{{ page.commodity_name | slugify }}" data-cta="report_save_commodity_workflow" style="min-width:190px;justify-content:center;">Save commodity workflow</button>
               <button type="button" class="btn btn-secondary" data-save-watchlist="{{ exposure_preview | join: ', ' }}" data-cta="report_save_watchlist_preview" style="min-width:190px;justify-content:center;">Save named exposure</button>
             </div>
@@ -349,18 +349,18 @@ layout: default
             <div style="color:var(--text);font-weight:700;font-size:1rem;">You have the narrative. The next step is live context, forward view, and scenario translation.</div>
             <div style="color:var(--text3);font-size:0.84rem;margin-top:6px;line-height:1.65;">Open the hub to verify the live tape, then use the simulator when the move is important enough to affect a position.</div>
           </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
-            <a href="/commodities/{{ page.commodity_name | slugify }}/" class="btn btn-primary" data-cta="report_open_live_hub" style="min-width:180px;justify-content:center;">Open live hub</a>
-            <a href="/simulator/" class="btn btn-secondary" data-cta="report_model_the_move" style="min-width:180px;justify-content:center;">Run this move in the simulator</a>
+          <div class="chip-group-end">
+            <a href="/commodities/{{ page.commodity_name | slugify }}/" class="btn btn-primary min-w-180-center" data-cta="report_open_live_hub">Open live hub</a>
+            <a href="/simulator/" class="btn btn-secondary min-w-180-center" data-cta="report_model_the_move">Run this move in the simulator</a>
           </div>
         </div>
         <div style="padding:18px 20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
           <div>
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Free gets you here</div>
+            <div class="eyebrow-cyan eyebrow-cyan--mb6">Free gets you here</div>
             <p style="margin:0;color:var(--text2);line-height:1.65;font-size:0.88rem;">You understand why the move matters and which commodity hub anchors the story.</p>
           </div>
           <div>
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Pro matters here</div>
+            <div class="eyebrow-cyan eyebrow-cyan--mb6">Pro matters here</div>
             <p style="margin:0;color:var(--text2);line-height:1.65;font-size:0.88rem;">When you need forecast confidence, named winners and losers, and scenario testing before the repricing is obvious.</p>
           </div>
           <div style="display:flex;align-items:end;justify-content:flex-end;">
@@ -371,7 +371,7 @@ layout: default
       {% endif %}
 
       <div style="margin:24px 0;text-align:center;">
-        <p style="color:var(--text3);font-size:0.85rem;">Want the next Signal Report? <a href="/start/" style="color:#22d3ee;">Sign up free</a> — we publish within hours of major commodity moves.</p>
+        <p style="color:var(--text3);font-size:0.85rem;">Want the next Signal Report? <a href="/start/" class="text-accent">Sign up free</a> — we publish within hours of major commodity moves.</p>
       </div>
 
       <section class="methodology-note" aria-labelledby="methodology-title">
@@ -384,37 +384,37 @@ layout: default
     <aside class="toc-sidebar" aria-label="Table of contents">
       <p class="toc-title">In This Article</p>
       <ul class="toc-nav" id="toc-list"></ul>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Quick Stats</p>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-            <span style="color:var(--text3)">Published</span>
-            <span style="color:var(--text2)">{{ page.date | date: "%b %d" }}</span>
+        <div class="kpi-row">
+          <div class="kpi-row-cell">
+            <span class="text-muted">Published</span>
+            <span class="text-body2">{{ page.date | date: "%b %d" }}</span>
           </div>
           {% if page.reading_time %}
-          <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-            <span style="color:var(--text3)">Read time</span>
-            <span style="color:var(--text2)">{{ page.reading_time }} min</span>
+          <div class="kpi-row-cell">
+            <span class="text-muted">Read time</span>
+            <span class="text-body2">{{ page.reading_time }} min</span>
           </div>
           {% endif %}
-          <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-            <span style="color:var(--text3)">Topics</span>
-            <span style="color:var(--accent)">{{ page.tags.size }}</span>
+          <div class="kpi-row-cell">
+            <span class="text-muted">Topics</span>
+            <span class="text-accent">{{ page.tags.size }}</span>
           </div>
           {% if page.direction %}
-          <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-            <span style="color:var(--text3)">Direction</span>
+          <div class="kpi-row-cell">
+            <span class="text-muted">Direction</span>
             <span style="color:{% if page.direction == 'bullish' %}var(--green){% else %}var(--red){% endif %}">{{ page.direction | capitalize }}</span>
           </div>
           {% endif %}
           {% if primary_tag %}
-          <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-            <span style="color:var(--text3)">Next hop</span>
+          <div class="kpi-row-cell">
+            <span class="text-muted">Next hop</span>
             {% assign primary_tag_slug = primary_tag | slugify %}
             {% if commodity_slugs contains primary_tag_slug %}
-            <a href="/commodities/{{ primary_tag_slug }}/" style="color:var(--text2)">{{ primary_tag }}</a>
+            <a href="/commodities/{{ primary_tag_slug }}/" class="text-body2">{{ primary_tag }}</a>
             {% else %}
-            <span style="color:var(--text2)">{{ primary_tag }}</span>
+            <span class="text-body2">{{ primary_tag }}</span>
             {% endif %}
           </div>
           {% endif %}
@@ -423,8 +423,22 @@ layout: default
     </aside>
   </div>
 
+  <!-- Next best path — same action vocabulary as commodity hubs. -->
+  <div class="mt-48" data-animate>
+    {% include next-best-path.html
+        title="From this report to your next move."
+        lede="Reading is step one. Translate this analysis into a scenario, a watchlist update, or a commodity hub deep-dive."
+        primary_href="/simulator/"
+        primary_label="Run this thesis in the simulator"
+        secondary_href="/commodities/"
+        secondary_label="Open the related commodity hub"
+        tertiary_href="/start/"
+        tertiary_label="Save this setup to your workflow"
+    %}
+  </div>
+
   <!-- Newsletter -->
-  <div style="margin-top:48px;" data-animate>
+  <div data-animate class="mt-48">
     {% include newsletter.html %}
   </div>
 

@@ -214,7 +214,7 @@ layout: default
           {% if latest_related_post %}
           <a href="{{ latest_related_post.url }}" style="color:var(--accent);font-weight:600;">{{ latest_related_post.title }}</a>
           {% else %}
-          Browse the <a href="/reports/" style="color:var(--accent);">Research Archive</a> for the latest linked narrative.
+          Browse the <a href="/reports/" class="text-accent">Research Archive</a> for the latest linked narrative.
           {% endif %}
         </div>
       </div>
@@ -228,29 +228,29 @@ layout: default
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
           <div style="padding:12px 14px;border-radius:12px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.88rem;color:var(--text2);line-height:1.6;">
-            <strong style="color:#f8fafc;display:block;margin-bottom:4px;">Who this page is for</strong>
+            <strong class="title-white-block">Who this page is for</strong>
             Investors, analysts, and operators who need the fastest path from {{ page.title | split: ':' | first | strip }} price action to company, sector, and portfolio impact.
           </div>
           <div style="padding:12px 14px;border-radius:12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);font-size:0.88rem;color:var(--text2);line-height:1.6;">
-            <strong style="color:#f8fafc;display:block;margin-bottom:4px;">Best next step</strong>
+            <strong class="title-white-block">Best next step</strong>
             {% if latest_related_post %}
-            Read <a href="{{ latest_related_post.url }}" style="color:var(--accent);">the newest linked report</a> for the narrative, then run the simulator when you need to translate this move into sectors, names, and scenario risk.
+            Read <a href="{{ latest_related_post.url }}" class="text-accent">the newest linked report</a> for the narrative, then run the simulator when you need to translate this move into sectors, names, and scenario risk.
             {% else %}
-            Use this hub as the primary reference page, then compare it against the <a href="/reports/" style="color:var(--accent);">Research Archive</a> for narrative context.
+            Use this hub as the primary reference page, then compare it against the <a href="/reports/" class="text-accent">Research Archive</a> for narrative context.
             {% endif %}
           </div>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <div class="chip-group-wrap">
           {% if latest_related_post %}
-          <a href="{{ latest_related_post.url }}" class="btn btn-secondary" data-cta="commodity_open_linked_report" style="min-width:180px;justify-content:center;">Read linked report</a>
+          <a href="{{ latest_related_post.url }}" class="btn btn-secondary min-w-180-center" data-cta="commodity_open_linked_report">Read linked report</a>
           {% endif %}
-          <a href="/simulator/" class="btn btn-primary" data-cta="commodity_run_scenario_simulator" style="min-width:180px;justify-content:center;">Run scenario simulator</a>
+          <a href="/simulator/" class="btn btn-primary min-w-180-center" data-cta="commodity_run_scenario_simulator">Run scenario simulator</a>
         </div>
       </div>
       <div style="padding:16px 18px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:10px;">
         <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;">Trust & freshness</div>
         <div style="font-size:0.88rem;color:var(--text2);line-height:1.65;">CommodityNode labels direct futures, proxy benchmarks, and analysis-only pages explicitly. When a daily feed is unreliable, we suppress false precision instead of forcing a number.</div>
-        <div style="font-size:0.84rem;color:var(--text3);line-height:1.65;">{% if latest_related_post %}Latest report update: <strong style="color:var(--text2)">{{ latest_related_post.date | date: "%b %d, %Y" }}</strong>.{% else %}No linked report yet for this hub.{% endif %} Review our <a href="/about/editorial-team/" style="color:var(--accent);">editorial team</a>, <a href="/about/editorial-process/" style="color:var(--accent);">review process</a>, and <a href="/methodology/" style="color:var(--accent);">methodology</a>. Corrections: <a href="mailto:contact@commoditynode.com" style="color:var(--accent);">contact@commoditynode.com</a>.</div>
+        <div style="font-size:0.84rem;color:var(--text3);line-height:1.65;">{% if latest_related_post %}Latest report update: <strong class="text-body2">{{ latest_related_post.date | date: "%b %d, %Y" }}</strong>.{% else %}No linked report yet for this hub.{% endif %} Review our <a href="/about/editorial-team/" class="text-accent">editorial team</a>, <a href="/about/editorial-process/" class="text-accent">review process</a>, and <a href="/methodology/" class="text-accent">methodology</a>. Corrections: <a href="mailto:contact@commoditynode.com" class="text-accent">contact@commoditynode.com</a>.</div>
         {% if page.substitutes and page.substitutes.size > 0 %}
         <div style="font-size:0.84rem;color:var(--text3);line-height:1.65;">Compare against substitute chains like
           {% for substitute in page.substitutes limit:3 %}
@@ -262,7 +262,7 @@ layout: default
                 {% assign substitute_url = c.url %}
               {% endif %}
             {% endfor %}
-            {% if substitute_url != '' %}<a href="{{ substitute_url | relative_url }}" style="color:var(--accent);">{{ substitute }}</a>{% else %}<span style="color:var(--text2);">{{ substitute }}</span>{% endif %}{% unless forloop.last %}, {% endunless %}
+            {% if substitute_url != '' %}<a href="{{ substitute_url | relative_url }}" class="text-accent">{{ substitute }}</a>{% else %}<span class="text-body2">{{ substitute }}</span>{% endif %}{% unless forloop.last %}, {% endunless %}
           {% endfor %}.
         </div>
         {% endif %}
@@ -320,7 +320,7 @@ layout: default
         banner.style.display = 'block';
         banner.innerHTML = '<div style="display:flex;align-items:center;gap:12px;padding:12px 0;">'
           + '<div style="color:var(--text3);font-size:0.85rem;">Live price data not available for this commodity. '
-          + '<a href="/methodology/" style="color:var(--accent);">See our coverage →</a></div></div>';
+          + '<a href="/methodology/" class="text-accent">See our coverage →</a></div></div>';
       }
       return;
     }
@@ -517,9 +517,9 @@ layout: default
       <div style="max-width:760px;">
         <div style="font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Best next steps</div>
         <h2 style="margin:0 0 8px;font-size:1.2rem;">Use this hub as your anchor page</h2>
-        <p style="margin:0;color:var(--text2);line-height:1.7;">For AI search and human readers alike, the strongest workflow is: current price context → impact map → latest Signal Reports → adjacent commodity comparison. That is the shortest path from raw move to decision-useful context.</p>
+        <p class="body-text">For AI search and human readers alike, the strongest workflow is: current price context → impact map → latest Signal Reports → adjacent commodity comparison. That is the shortest path from raw move to decision-useful context.</p>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div class="chip-group-wrap">
         <a href="/reports/" class="btn btn-secondary">Browse Signal Reports</a>
         <a href="/commodities/" class="btn btn-secondary">Compare Commodity Hubs</a>
       </div>
@@ -590,9 +590,9 @@ layout: default
         <div class="cf-metric-val down" id="cf-p10">—</div>
       </div>
     </div>
-    <div class="cf-no-data" id="cf-no-data" style="display:none">
+    <div class="cf-no-data hidden" id="cf-no-data">
       <div style="padding:12px 16px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:8px;text-align:center;">
-        <p style="margin:0;color:var(--text3);font-size:0.85rem;">AI forecast for this commodity is being calibrated. <a href="/simulator/" style="color:#22d3ee;">Try the Scenario Simulator →</a></p>
+        <p style="margin:0;color:var(--text3);font-size:0.85rem;">AI forecast for this commodity is being calibrated. <a href="/simulator/" class="text-accent">Try the Scenario Simulator →</a></p>
       </div>
     </div>
   </div>
@@ -600,13 +600,13 @@ layout: default
 
   <section style="margin:20px 0 18px;padding:22px 24px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:center;">
     <div>
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Decision cockpit</div>
+      <div class="eyebrow-cyan">Decision cockpit</div>
       <h2 style="font-size:1.15rem;margin:0 0 8px;color:#f8fafc;">This move matters because {{ page.title | split: ':' | first | strip }} transmits into downstream names, sectors, and scenarios — not just a chart.</h2>
       <p style="margin:0;color:var(--text2);line-height:1.75;">Use this hub to validate the live tape, identify who is exposed, and decide whether the move deserves deeper scenario work. Free is strongest for understanding the setup. Pro matters when named winners, losers, and confidence become decision-critical.</p>
     </div>
-    <div style="display:grid;gap:10px;">
+    <div class="grid-gap-10">
       <div style="padding:12px 14px;border-radius:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Who is exposed</div>
+        <div class="eyebrow-cyan eyebrow-cyan--mb6">Who is exposed</div>
         <div style="color:#cbd5e1;line-height:1.7;font-size:0.88rem;">
           {% if page.companies %}{{ page.companies | slice: 0, 4 | join: ', ' }}{% endif %}{% if page.etfs and page.etfs.size > 0 %}{% if page.companies and page.companies.size > 0 %} · {% endif %}{{ page.etfs | slice: 0, 3 | join: ', ' }}{% endif %}
         </div>
@@ -615,22 +615,22 @@ layout: default
         <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:800;margin-bottom:6px;">Decision path</div>
         <div style="color:#d1fae5;line-height:1.7;font-size:0.88rem;">Read the move → check model agreement → see exposed names → run a scenario → upgrade only if you need the full stock-level workflow.</div>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button type="button" class="btn btn-secondary" data-save-commodity="{{ page.commodity_slug }}" data-cta="commodity_save_workflow" style="min-width:180px;justify-content:center;">Follow this commodity</button>
-        {% if page.companies %}<button type="button" class="btn btn-secondary" data-save-watchlist="{{ page.companies | slice: 0, 6 | join: ', ' }}" data-cta="commodity_save_exposed_names" style="min-width:180px;justify-content:center;">Save exposed names</button>{% endif %}
+      <div class="chip-group-wrap">
+        <button type="button" class="btn btn-secondary min-w-180-center" data-save-commodity="{{ page.commodity_slug }}" data-cta="commodity_save_workflow">Follow this commodity</button>
+        {% if page.companies %}<button type="button" class="btn btn-secondary min-w-180-center" data-save-watchlist="{{ page.companies | slice: 0, 6 | join: ', ' }}" data-cta="commodity_save_exposed_names">Save exposed names</button>{% endif %}
       </div>
     </div>
   </section>
 
   <section style="margin:18px 0 20px;padding:22px 24px;border-radius:18px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,0.95fr);gap:16px;align-items:start;">
     <div>
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Exposure wheel</div>
+      <div class="eyebrow-cyan">Exposure wheel</div>
       <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.12rem;">Scan the surrounding dependency system.</h2>
       <p style="margin:0 0 14px;color:#94a3b8;line-height:1.72;">This compresses company, theme, substitute, and report context into one premium surface so the hub reads like a decision cockpit rather than a long explainer.</p>
       <div id="commodity-exposure-wheel-chart" style="height:320px;"></div>
     </div>
     <div>
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Event timeline</div>
+      <div class="eyebrow-cyan">Event timeline</div>
       <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.12rem;">See the latest catalysts as an event beam.</h2>
       <p style="margin:0 0 14px;color:#94a3b8;line-height:1.72;">Use the linked report cadence and key catalyst beats as a fast narrative index before you read deeper.</p>
       <div id="commodity-event-timeline-chart" style="height:320px;"></div>
@@ -638,32 +638,32 @@ layout: default
   </section>
   <section class="profile-continuation-strip" aria-label="Saved workflow continuation">
     <div>
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Continue your saved workflow</div>
+      <div class="eyebrow-cyan">Continue your saved workflow</div>
       <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Follow this commodity and save the exposed names so this hub becomes your return point whenever this market starts mattering again.</div>
-      <div data-profile-has-saved style="display:none;">
+      <div data-profile-has-saved class="hidden">
         <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
         <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-        <a href="/start/" class="btn btn-secondary" data-profile-primary-link style="min-width:200px;justify-content:center;"><span data-profile-primary-label>Build my workflow</span></a>
-        <a href="/simulator/" class="btn btn-secondary" data-profile-secondary-link style="min-width:200px;justify-content:center;"><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
+        <a href="/start/" class="btn btn-secondary min-w-200-center" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
+        <a href="/simulator/" class="btn btn-secondary min-w-200-center" data-profile-secondary-link><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
       </div>
     </div>
     <div class="profile-continuation-grid">
       <div class="profile-continuation-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Saved role</div>
+        <div class="eyebrow-cyan">Saved role</div>
         <strong data-profile-role>Not set yet</strong>
       </div>
       <div class="profile-continuation-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Saved commodities</div>
+        <div class="eyebrow-cyan">Saved commodities</div>
         <strong data-profile-commodities>No tracked commodities yet</strong>
       </div>
       <div class="profile-continuation-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Watchlist</div>
+        <div class="eyebrow-cyan">Watchlist</div>
         <strong data-profile-watchlist>No saved watchlist names yet</strong>
       </div>
       <div class="profile-continuation-card">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Freshness</div>
+        <div class="eyebrow-cyan">Freshness</div>
         <strong data-profile-updated>Not saved yet</strong>
       </div>
     </div>
@@ -695,19 +695,19 @@ layout: default
           </thead>
           <tbody>
             {% if page.etfs %}
-            <tr style="border-bottom:1px solid var(--border);">
+            <tr class="border-bottom-rule">
               <td style="padding:6px 10px;font-weight:600;">Key ETFs</td>
               <td style="padding:6px 10px;">{% for etf in page.etfs %}{{ etf }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
             </tr>
             {% endif %}
             {% if page.companies %}
-            <tr style="border-bottom:1px solid var(--border);">
+            <tr class="border-bottom-rule">
               <td style="padding:6px 10px;font-weight:600;">Key Companies</td>
               <td style="padding:6px 10px;">{% for company in page.companies %}<a href="/companies/{{ company | downcase }}/" style="color:#22d3ee;text-decoration:none;">{{ company }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
             </tr>
             {% endif %}
             {% if page.substitutes %}
-            <tr style="border-bottom:1px solid var(--border);">
+            <tr class="border-bottom-rule">
               <td style="padding:6px 10px;font-weight:600;">Substitutes</td>
               <td style="padding:6px 10px;">{% for sub in page.substitutes %}{{ sub }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
             </tr>
@@ -726,7 +726,7 @@ layout: default
         <h2 style="font-size:1.25rem;margin-bottom:16px;">Substitutes &amp; Alternatives</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
           {% for sub in page.substitutes %}
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">{{ sub }}</span>
+          <span class="entity-chip entity-chip--violet">{{ sub }}</span>
           {% endfor %}
         </div>
       </div>
@@ -740,7 +740,7 @@ layout: default
           {% for theme in page.themes %}
           {% assign theme_slug_mapped = site.data.theme_slugs[theme] %}
           {% if theme_slug_mapped %}
-          <a href="/themes/{{ theme_slug_mapped }}/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">{{ theme }}</a>
+          <a href="/themes/{{ theme_slug_mapped }}/" class="entity-chip entity-chip--gold">{{ theme }}</a>
           {% else %}
           <span style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.15);border-radius:20px;color:rgba(251,191,36,0.6);font-size:0.85rem;">{{ theme }}</span>
           {% endif %}
@@ -754,24 +754,24 @@ layout: default
     <aside class="toc-sidebar" aria-label="Commodity Quick Stats">
       <!-- Quick Stats -->
       <p class="toc-title">Quick Stats</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+      <div class="kpi-row">
         {% if page.sector %}
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Sector</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Sector</span>
           <span style="color:var(--gold)">{{ page.sector }}</span>
         </div>
         {% endif %}
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Signal Reports</span>
-          <span style="color:var(--accent)">{{ related_posts.size }}</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Signal Reports</span>
+          <span class="text-accent">{{ related_posts.size }}</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Latest</span>
-          <span style="color:var(--text2)">{% if related_posts.size > 0 %}{{ related_posts.first.date | date: "%b %d" }}{% else %}—{% endif %}</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Latest</span>
+          <span class="text-body2">{% if related_posts.size > 0 %}{{ related_posts.first.date | date: "%b %d" }}{% else %}—{% endif %}</span>
         </div>
         {% if page.symbol %}
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Symbol</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Symbol</span>
           <span style="color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:0.75rem;">{{ page.symbol }}</span>
         </div>
         {% endif %}
@@ -779,7 +779,7 @@ layout: default
 
       <!-- Top ETFs -->
       {% if page.etfs %}
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Top ETFs</p>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
           {% for etf in page.etfs %}
@@ -791,7 +791,7 @@ layout: default
 
       <!-- Key Companies -->
       {% if page.companies %}
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Key Companies</p>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
           {% for company in page.companies %}
@@ -808,7 +808,7 @@ layout: default
 
       <!-- Related Reports -->
       {% if related_posts.size > 0 %}
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Related Reports</p>
         <ul style="list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:8px;">
           {% for post in related_posts limit:5 %}
@@ -822,7 +822,7 @@ layout: default
         </ul>
       </div>
       {% else %}
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Coverage Status</p>
         <div style="margin-top:8px;padding:12px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:8px;">
           <p style="font-size:0.75rem;color:var(--text3);margin-bottom:8px;">Signal reports coming soon for this commodity.</p>
@@ -843,20 +843,20 @@ layout: default
       {% endif %}
 
       <!-- Explore More -->
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Commodities</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
-          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Companies</a></li>
-          <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Themes</a></li>
+        <ul class="toc-explore-list">
+          <li><a href="/commodities/" class="link-micro">All Commodities</a></li>
+          <li><a href="/industries/" class="link-micro">Industries</a></li>
+          <li><a href="/companies/" class="link-micro">Companies</a></li>
+          <li><a href="/themes/" class="link-micro">Themes</a></li>
         </ul>
       </div>
 
       <!-- Methodology Trust Card -->
       <div style="margin-top:20px;padding:14px 16px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:8px;">
         <div style="color:#22d3ee;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Methodology</div>
-        <p style="color:var(--text3);font-size:0.78rem;margin:0;line-height:1.5;">Impact scores use 5-year rolling regressions (Pearson, p&lt;0.05). Sensitivity from SEC 10-K hedging data. <a href="/methodology/" style="color:#22d3ee;">Learn more →</a></p>
+        <p style="color:var(--text3);font-size:0.78rem;margin:0;line-height:1.5;">Impact scores use 5-year rolling regressions (Pearson, p&lt;0.05). Sensitivity from SEC 10-K hedging data. <a href="/methodology/" class="text-accent">Learn more →</a></p>
       </div>
     </aside>
   </div>
@@ -875,7 +875,7 @@ layout: default
 
 <!-- Related Commodities -->
 {% if page.substitutes %}
-<section class="related-posts section" style="padding-top:0;">
+<section class="related-posts section pt-0">
   <div class="container">
     <div class="section-header" data-animate>
       <p class="section-label">Related</p>
@@ -905,17 +905,22 @@ layout: default
 </section>
 {% endif %}
 
-<!-- Conversion CTAs -->
-<section style="margin:48px 0;padding:32px 24px;background:linear-gradient(135deg,rgba(34,211,238,0.04),rgba(168,85,247,0.04));border:1px solid rgba(34,211,238,0.1);border-radius:12px;text-align:center;">
-  <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:8px;">Go Deeper on {{ page.title | split: ':' | first | strip }}</h2>
-  <p style="color:var(--text2);font-size:0.9rem;margin-bottom:20px;">Model price shock scenarios, access AI forecasts, and track sensitivity across related equities.</p>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <a href="/simulator/" style="padding:10px 20px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:8px;color:#22d3ee;text-decoration:none;font-size:0.9rem;font-weight:500;">Open Scenario Simulator →</a>
-    <a href="/signals/" style="padding:10px 20px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:8px;color:#fbbf24;text-decoration:none;font-size:0.9rem;font-weight:500;">Browse Signal Reports →</a>
-    <a href="/pricing/" style="padding:10px 20px;background:var(--accent);border-radius:8px;color:#000;text-decoration:none;font-size:0.9rem;font-weight:600;">Unlock Pro →</a>
-  </div>
-  <p style="color:var(--text3);font-size:0.82rem;margin-top:16px;">Get notified on {{ page.title | split: ':' | first | strip }} price moves → <a href="/start/" style="color:#22d3ee;">Create free account</a></p>
-</section>
+<!-- Conversion CTAs — unified "next best path" component. -->
+{% assign cn_title = page.title | split: ':' | first | strip %}
+{% capture nbp_primary_label %}Run a scenario on {{ cn_title }}{% endcapture %}
+{% capture nbp_secondary_label %}Read latest signal reports for {{ cn_title }}{% endcapture %}
+{% capture nbp_tertiary_label %}Add {{ cn_title }} to your watchlist{% endcapture %}
+{% include next-best-path.html
+    title="Turn this commodity page into a decision."
+    lede="One chart rarely ends the question. Pick the path that turns this page into a scenario or a watchlist move."
+    primary_href="/simulator/"
+    primary_label=nbp_primary_label
+    secondary_href="/reports/"
+    secondary_label=nbp_secondary_label
+    tertiary_href="/start/"
+    tertiary_label=nbp_tertiary_label
+    freshness_note=page.updated_at
+%}
 
 <!-- Newsletter CTA Strip -->
 <section style="background:linear-gradient(135deg,rgba(34,211,238,0.08) 0%,rgba(168,85,247,0.08) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 24px;">
@@ -929,11 +934,11 @@ layout: default
 
 <!-- Full Signal Reports Grid -->
 {% if related_posts.size == 0 %}
-<section class="section" style="padding-top:0;">
+<section class="section pt-0">
   <div class="container">
     <div style="background:#111827;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:24px;text-align:center;margin-top:24px;">
       <p style="color:#64748b;font-size:0.9rem;margin:0 0 8px;">Signal reports for this commodity are in development.</p>
-      <p style="color:#475569;font-size:0.82rem;margin:0;">Explore related commodities or <a href="/reports/" style="color:#22d3ee;">browse all reports →</a></p>
+      <p style="color:#475569;font-size:0.82rem;margin:0;">Explore related commodities or <a href="/reports/" class="text-accent">browse all reports →</a></p>
     </div>
   </div>
 </section>
@@ -1158,20 +1163,20 @@ layout: default
         strip.innerHTML = ''
           + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
           + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Agreement</div>'
-          + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + level.toUpperCase() + '</div>'
+          + '<div class="title-bold-white">' + level.toUpperCase() + '</div>'
           + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
           + '</div>'
           + '<div style="padding:12px 14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.16);border-radius:12px;">'
           + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:700;margin-bottom:6px;">Consensus 90D</div>'
-          + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(target, meta) + '</div>'
+          + '<div class="title-bold-white">' + fmt(target, meta) + '</div>'
           + '</div>'
           + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
           + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#a855f7;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
-          + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(chronos ? chronos.forecast_90d : null, meta) + '</div>'
+          + '<div class="title-bold-white">' + fmt(chronos ? chronos.forecast_90d : null, meta) + '</div>'
           + '</div>'
           + '<div style="padding:12px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.16);border-radius:12px;">'
           + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
-          + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(timesfm ? timesfm.forecast_90d : null, meta) + '</div>'
+          + '<div class="title-bold-white">' + fmt(timesfm ? timesfm.forecast_90d : null, meta) + '</div>'
           + '</div>';
       }
     })

@@ -47,17 +47,17 @@ no_loader: true
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px;">
         <div style="padding:18px;border-radius:16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;gap:10px;">
           <div>
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Today’s live movers</div>
+            <div class="eyebrow-cyan">Today’s live movers</div>
             <div style="color:#cbd5e1;line-height:1.65;">Use today’s strongest tape first, then decide whether the move deserves deeper report and simulator work.</div>
           </div>
-          <div id="archive-live-movers-grid" style="display:grid;gap:10px;"></div>
+          <div id="archive-live-movers-grid" class="grid-gap-10"></div>
         </div>
         <div style="padding:18px;border-radius:16px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:grid;gap:10px;">
           <div>
             <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;margin-bottom:8px;">Biggest model split right now</div>
             <div style="color:#ddd6fe;line-height:1.65;">These are the setups where forecast agreement is weakest, so the archive should feed directly into the hub and simulator instead of stopping at the headline.</div>
           </div>
-          <div id="archive-model-split-grid" style="display:grid;gap:10px;"></div>
+          <div id="archive-model-split-grid" class="grid-gap-10"></div>
         </div>
       </div>
       {% assign newest_post = site.posts.first %}
@@ -66,24 +66,24 @@ no_loader: true
       <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;margin-top:16px;">
         <article style="padding:20px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;gap:12px;">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Best current setup</div>
+            <div class="eyebrow-cyan">Best current setup</div>
             <div style="font-size:0.8rem;color:#cbd5e1;">{{ newest_post.date | date: "%b %d, %Y" }}</div>
           </div>
           <h2 style="margin:0;font-size:1.2rem;line-height:1.3;"><a href="{{ newest_post.url | relative_url }}" style="color:#f8fafc;text-decoration:none;">{{ newest_post.title }}</a></h2>
-          <p style="margin:0;color:var(--text2);line-height:1.7;">{{ newest_post.description | default: newest_post.excerpt | strip_html | truncatewords: 34 }}</p>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <p class="body-text">{{ newest_post.description | default: newest_post.excerpt | strip_html | truncatewords: 34 }}</p>
+          <div class="chip-group-wrap">
             <a href="{{ newest_post.url | relative_url }}" class="btn btn-primary" data-cta="archive_best_current_setup" style="min-width:190px;justify-content:center;">Open live setup</a>
-            <a href="/simulator/" class="btn btn-secondary" data-cta="archive_best_current_setup_simulator" style="min-width:180px;justify-content:center;">Model this move</a>
+            <a href="/simulator/" class="btn btn-secondary min-w-180-center" data-cta="archive_best_current_setup_simulator">Model this move</a>
           </div>
         </article>
         <div style="display:grid;gap:12px;">
-          <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Highest urgency</div>
+          <div class="surface-card surface-card--compact">
+            <div class="eyebrow-cyan">Highest urgency</div>
             <a href="{{ second_post.url | relative_url }}" style="display:block;color:#f8fafc;text-decoration:none;font-weight:700;line-height:1.45;">{{ second_post.title }}</a>
             <p style="margin:8px 0 0;color:var(--text3);font-size:0.84rem;line-height:1.6;">{{ second_post.description | default: second_post.excerpt | strip_html | truncatewords: 18 }}</p>
           </div>
-          <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Best next action</div>
+          <div class="surface-card surface-card--compact">
+            <div class="eyebrow-cyan">Best next action</div>
             <a href="{{ third_post.url | relative_url }}" style="display:block;color:#f8fafc;text-decoration:none;font-weight:700;line-height:1.45;">{{ third_post.title }}</a>
             <p style="margin:8px 0 0;color:var(--text3);font-size:0.84rem;line-height:1.6;">Read the narrative, then open the related hub or simulator before the market fully reprices.</p>
           </div>
@@ -91,32 +91,32 @@ no_loader: true
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;">
         <div style="padding:14px 16px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Today’s market regime</div>
-          <p style="margin:0;color:var(--text2);line-height:1.65;">Use this archive as a decision shelf: strongest setup first, disagreement next, then supporting context only if the move still matters to a position.</p>
+          <div class="eyebrow-cyan">Today’s market regime</div>
+          <p class="body-text-65">Use this archive as a decision shelf: strongest setup first, disagreement next, then supporting context only if the move still matters to a position.</p>
         </div>
         <div style="padding:14px 16px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
           <div>
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">When Pro matters</div>
+            <div class="eyebrow-cyan eyebrow-cyan--mb6">When Pro matters</div>
             <p style="margin:0;color:var(--text2);line-height:1.6;font-size:0.88rem;">When you need stock-level, scenario-level, and forward-looking confirmation — not just the narrative.</p>
           </div>
-          <a href="/pro/" class="btn btn-secondary" data-cta="archive_pro_workflow_context" style="min-width:180px;justify-content:center;">See Pro workflow</a>
+          <a href="/pro/" class="btn btn-secondary min-w-180-center" data-cta="archive_pro_workflow_context">See Pro workflow</a>
         </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;">
         <a href="/before-opec-oil-playbook/" data-cta="archive_best_event_setup" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;gap:6px;">
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Best event setup</div>
-          <div style="color:#f8fafc;font-weight:700;">Before OPEC: run the oil workflow before the repricing</div>
-          <p style="margin:0;color:var(--text2);line-height:1.65;">The strongest event surfaces are the ones where a commodity move can immediately change a watchlist.</p>
+          <div class="eyebrow-cyan">Best event setup</div>
+          <div class="bold-white">Before OPEC: run the oil workflow before the repricing</div>
+          <p class="body-text-65">The strongest event surfaces are the ones where a commodity move can immediately change a watchlist.</p>
         </a>
         <a href="/before-wasde-grains-playbook/" data-cta="archive_wasde_playbook" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);display:grid;gap:6px;">
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Input-cost relief</div>
-          <div style="color:#f8fafc;font-weight:700;">Before WASDE: decide where grains change food and feed margins</div>
-          <p style="margin:0;color:var(--text2);line-height:1.65;">Use the archive to find consumer, processor, and livestock sensitivity before the monthly crop narrative resets.</p>
+          <div class="eyebrow-cyan">Input-cost relief</div>
+          <div class="bold-white">Before WASDE: decide where grains change food and feed margins</div>
+          <p class="body-text-65">Use the archive to find consumer, processor, and livestock sensitivity before the monthly crop narrative resets.</p>
         </a>
         <a href="/before-fed-metals-playbook/" data-cta="archive_fed_playbook" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:grid;gap:6px;">
           <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;">Biggest model disagreement</div>
-          <div style="color:#f8fafc;font-weight:700;">Before Fed: use model spread, not one clean line, on gold and copper</div>
-          <p style="margin:0;color:var(--text2);line-height:1.65;">Disagreement is not noise. It is often the reason a setup deserves deeper scenario work.</p>
+          <div class="bold-white">Before Fed: use model spread, not one clean line, on gold and copper</div>
+          <p class="body-text-65">Disagreement is not noise. It is often the reason a setup deserves deeper scenario work.</p>
         </a>
       </div>
       <div class="archive-toolbar">

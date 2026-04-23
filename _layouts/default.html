@@ -25,6 +25,10 @@
   <link rel="stylesheet" href="{{ '/assets/css/tokens.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   <link rel="stylesheet" href="{{ '/assets/css/components.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  {% if page.url contains '/pricing' %}<link rel="stylesheet" href="{{ '/assets/css/pages/pricing.css' | relative_url }}?v={{ site.time | date: '%s' }}">{% endif %}
+  {% if page.url == '/' %}<link rel="stylesheet" href="{{ '/assets/css/pages/home.css' | relative_url }}?v={{ site.time | date: '%s' }}">{% endif %}
+  {% if page.url contains '/start' %}<link rel="stylesheet" href="{{ '/assets/css/pages/start.css' | relative_url }}?v={{ site.time | date: '%s' }}">{% endif %}
+  {% if page.url contains '/simulator' or page.url contains '/stress-test' or page.url contains '/correlation' or page.url contains '/range-tracker' or page.url contains '/disruptions' or page.url contains '/calendar' %}<link rel="stylesheet" href="{{ '/assets/css/pages/tools.css' | relative_url }}?v={{ site.time | date: '%s' }}">{% endif %}
   <meta name="data-version" content="{{ site.time | date: '%Y%m%d%H%M' }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
 
@@ -105,22 +109,22 @@
           </div>
 
           <div class="nav-dropdown nav-dropdown--tools">
-            <button type="button" class="nav-dropdown-toggle {% if page.url contains '/intelligence-lab' or page.url contains '/simulator' or page.url contains '/stress-test' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Tools <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
-            <div class="nav-dropdown-menu nav-dropdown-menu--wide">
-              <a href="{{ '/intelligence-lab/' | relative_url }}" {% if page.url == '/intelligence-lab/' %}class="active"{% endif %}><span class="nav-item-title">Intelligence Lab</span><span class="nav-item-desc">Flagship decision suite</span></a>
-              <a href="{{ '/simulator/' | relative_url }}" {% if page.url contains '/simulator' %}class="active"{% endif %}><span class="nav-item-title">Scenario Simulator</span><span class="nav-item-desc">Run shock scenarios · 4 presets</span></a>
-              <a href="{{ '/stress-test/' | relative_url }}" {% if page.url contains '/stress-test' %}class="active"{% endif %}><span class="nav-item-title">Portfolio Stress Test</span><span class="nav-item-desc">Watchlist × shock</span></a>
-              <a href="{{ '/intelligence-lab/rl-policy-lab/' | relative_url }}" {% if page.url contains '/rl-policy-lab' %}class="active"{% endif %}><span class="nav-item-title">RL Policy Lab</span><span class="nav-item-desc">Explainable policy console</span></a>
-            </div>
-          </div>
-
-          <div class="nav-dropdown nav-dropdown--signals">
-            <button type="button" class="nav-dropdown-toggle {% if page.url contains '/signals' or page.url contains '/correlation' or page.url contains '/disruptions' or page.url contains '/calendar' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Signals <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
-            <div class="nav-dropdown-menu nav-dropdown-menu--wide">
-              <a href="{{ '/signals/' | relative_url }}" {% if page.url contains '/signals' %}class="active"{% endif %}><span class="nav-item-title">Signals</span><span class="nav-item-desc">Cross-commodity edges</span></a>
-              <a href="{{ '/correlation/' | relative_url }}" {% if page.url contains '/correlation' %}class="active"{% endif %}><span class="nav-item-title">Correlation Matrix</span><span class="nav-item-desc">Co-movement & regime</span></a>
-              <a href="{{ '/disruptions/' | relative_url }}" {% if page.url contains '/disruptions' %}class="active"{% endif %}><span class="nav-item-title">Disruption Tracker</span><span class="nav-item-desc">Supply-chain events</span></a>
-              <a href="{{ '/calendar/' | relative_url }}" {% if page.url contains '/calendar' %}class="active"{% endif %}><span class="nav-item-title">Event Calendar</span><span class="nav-item-desc">OPEC · WASDE · Fed</span></a>
+            <button type="button" class="nav-dropdown-toggle {% if page.url contains '/intelligence-lab' or page.url contains '/simulator' or page.url contains '/stress-test' or page.url contains '/signals' or page.url contains '/correlation' or page.url contains '/disruptions' or page.url contains '/calendar' %}active{% endif %}" aria-expanded="false" aria-haspopup="true">Tools <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="1 1 5 5 9 1"/></svg></button>
+            <div class="nav-dropdown-menu nav-dropdown-menu--wide nav-dropdown-menu--tools">
+              <div class="nav-dropdown-group">
+                <p class="nav-dropdown-heading">Decision tools</p>
+                <a href="{{ '/intelligence-lab/' | relative_url }}" {% if page.url == '/intelligence-lab/' %}class="active"{% endif %}><span class="nav-item-title">Intelligence Lab</span><span class="nav-item-desc">Flagship decision suite</span></a>
+                <a href="{{ '/simulator/' | relative_url }}" {% if page.url contains '/simulator' %}class="active"{% endif %}><span class="nav-item-title">Scenario Simulator</span><span class="nav-item-desc">Run shock scenarios</span></a>
+                <a href="{{ '/stress-test/' | relative_url }}" {% if page.url contains '/stress-test' %}class="active"{% endif %}><span class="nav-item-title">Portfolio Stress Test</span><span class="nav-item-desc">Watchlist × shock</span></a>
+                <a href="{{ '/intelligence-lab/rl-policy-lab/' | relative_url }}" {% if page.url contains '/rl-policy-lab' %}class="active"{% endif %}><span class="nav-item-title">RL Policy Lab</span><span class="nav-item-desc">Explainable policy console</span></a>
+              </div>
+              <div class="nav-dropdown-group">
+                <p class="nav-dropdown-heading">Signals &amp; events</p>
+                <a href="{{ '/signals/' | relative_url }}" {% if page.url contains '/signals' %}class="active"{% endif %}><span class="nav-item-title">Signals</span><span class="nav-item-desc">Cross-commodity edges</span></a>
+                <a href="{{ '/correlation/' | relative_url }}" {% if page.url contains '/correlation' %}class="active"{% endif %}><span class="nav-item-title">Correlation Matrix</span><span class="nav-item-desc">Co-movement &amp; regime</span></a>
+                <a href="{{ '/disruptions/' | relative_url }}" {% if page.url contains '/disruptions' %}class="active"{% endif %}><span class="nav-item-title">Disruption Tracker</span><span class="nav-item-desc">Supply-chain events</span></a>
+                <a href="{{ '/calendar/' | relative_url }}" {% if page.url contains '/calendar' %}class="active"{% endif %}><span class="nav-item-title">Event Calendar</span><span class="nav-item-desc">OPEC · WASDE · Fed</span></a>
+              </div>
             </div>
           </div>
 
@@ -129,12 +133,12 @@
 
           <div class="nav-cta-group" aria-label="Primary calls to action">
             <a href="/start/" class="nav-cta nav-cta--primary" data-cta="header_start_free">Start Free</a>
-            <a href="/intelligence-lab/" class="nav-cta nav-cta--secondary" data-cta="header_see_demo">See Demo</a>
           </div>
 
           <div id="clerk-auth-nav" class="clerk-auth-nav"></div>
 
-          <div class="nav-secondary">
+          <!-- Mobile-only utility links; desktop surfaces About/Methodology/Contact via footer only. -->
+          <div class="nav-secondary nav-secondary--mobile-only">
             <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>About</a>
             <a href="{{ '/methodology/' | relative_url }}" {% if page.url contains '/methodology' %}class="active"{% endif %}>Methodology</a>
             <a href="{{ '/contact/' | relative_url }}" {% if page.url contains '/contact' %}class="active"{% endif %}>Contact</a>
@@ -187,7 +191,7 @@
             <a href="/llms.txt" style="color:var(--text2);text-decoration:none;">LLM access notes</a>
           </div>
           <p style="font-size:0.8rem;color:var(--text3);margin:0 0 14px;line-height:1.6;">
-            Independent publisher. Corrections and editorial questions: <a href="mailto:contact@commoditynode.com" style="color:var(--text2);">contact@commoditynode.com</a>
+            Independent publisher. Corrections and editorial questions: <a href="mailto:contact@commoditynode.com" class="text-body2">contact@commoditynode.com</a>
           </p>
           <div class="footer-social">
             <a href="https://feedly.com/i/subscription/feed%2Fhttps%3A%2F%2Fcommoditynode.com%2Ffeed.xml" class="social-link" title="Subscribe via Feedly" aria-label="Subscribe via Feedly" target="_blank" rel="noopener">

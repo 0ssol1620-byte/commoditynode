@@ -1,19 +1,57 @@
-// price-chart.js v7 — Pure Canvas candlestick (no external plugin)
+// price-chart.js v8 — Pure Canvas candlestick (per-symbol slice fetch with full-file fallback)
 (function () {
   'use strict';
 
   const PERIODS = ['1M','3M','1Y','5Y'];
   let _data = null;
+  const _symbolCache = new Map();
 
-  async function getData() {
+  function symbolSlug(symbol) {
+    return String(symbol || '').split(/[=\.]/)[0].toLowerCase();
+  }
+
+  function dataVersion() {
+    var meta = document.querySelector('meta[name="data-version"]');
+    return (meta && meta.content) || '';
+  }
+
+  function versioned(url) {
+    var v = dataVersion();
+    return v ? url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + encodeURIComponent(v) : url;
+  }
+
+  // Per-symbol slice under /assets/data/chart-data/{slug}.json.
+  // Falls back to the aggregate chart-data.json for symbols without a slice.
+  async function getSymbolData(symbol) {
+    if (!symbol) return getAllData();
+    const slug = symbolSlug(symbol);
+    if (_symbolCache.has(slug)) return _symbolCache.get(slug);
+    const promise = (async () => {
+      try {
+        const r = await fetch(versioned(`/assets/data/chart-data/${slug}.json`));
+        if (r.ok) {
+          const payload = await r.json();
+          return { [symbol]: payload };
+        }
+      } catch (_) { /* fall through */ }
+      return getAllData();
+    })();
+    _symbolCache.set(slug, promise);
+    return promise;
+  }
+
+  async function getAllData() {
     if (_data) return _data;
     try {
-      const r = await fetch('/assets/data/chart-data.json');
+      const r = await fetch(versioned('/assets/data/chart-data.json'));
       if (!r.ok) throw new Error(r.status);
       _data = await r.json();
       return _data;
     } catch(e) { console.warn('chart-data:', e.message); return null; }
   }
+
+  // Legacy shim so callers that still use getData() keep working.
+  async function getData(symbol) { return symbol ? getSymbolData(symbol) : getAllData(); }
 
   function fmt(p, unit) {
     if (p == null || isNaN(p)) return '—';
@@ -250,7 +288,7 @@
 
     const loading = el.querySelector('.cn-chart-loading');
     const canvas  = el.querySelector('canvas');
-    const allData = await getData();
+    const allData = await getData(symbol);
     let period = '3M';
 
     // If no data at all or symbol not in chart data, show unavailable immediately

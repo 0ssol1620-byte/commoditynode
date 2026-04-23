@@ -34,10 +34,13 @@ jobs:
       - name: Build home forecast summary (trimmed payload)
         run: python scripts/build_home_forecast_summary.py
 
+      - name: Slice chart-data per symbol
+        run: python scripts/build_chart_slices.py
+
       - name: Commit and push if changed
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "GitHub Actions"
-          git add assets/data/prices.json _data/prices.json assets/data/chart-data.json assets/data/forecast.json assets/data/forecast-consensus.json assets/data/home-forecast-summary.json scripts/forecast_timesfm.py
+          git add assets/data/prices.json _data/prices.json assets/data/chart-data.json assets/data/chart-data assets/data/forecast.json assets/data/forecast-consensus.json assets/data/home-forecast-summary.json scripts/forecast_timesfm.py
           git diff --staged --quiet || git commit -m "📊 Auto-update: commodity data $(date +'%Y-%m-%d')"
           git push

@@ -173,7 +173,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
 <section class="section lab-category-section" aria-labelledby="lab-category-title">
   <div class="lab-shell" style="padding-bottom:0;">
     <header style="display:grid;gap:8px;margin-bottom:16px;">
-      <p class="section-label" style="color:#22d3ee;">Decision workbench</p>
+      <p class="section-label text-accent">Decision workbench</p>
       <h2 class="section-title" id="lab-category-title" style="margin:0;">Ten tools, four categories, one workflow.</h2>
       <p class="section-desc" style="max-width:780px;color:#94a3b8;line-height:1.72;">Each tool answers one question about the same commodity shock. New users start with the first recommendation in their role — experienced users can jump straight to the module they trust most.</p>
     </header>
@@ -304,7 +304,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
       <div class="lab-card-kicker">1. Event Probability Studio</div>
       <h2>Price moves are not enough. You need event odds.</h2>
       <p>Use the current tape, forecast stack, and catalyst map to estimate what is most likely to matter next.</p>
-      <div class="lab-two-col" style="margin-top:16px;">
+      <div class="lab-two-col mt-16">
         <div class="lab-chart"><canvas id="event-probability-chart"></canvas></div>
         <div id="event-probability-list" class="lab-four-grid" style="grid-template-columns:1fr;"></div>
       </div>
@@ -315,7 +315,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
       <div class="lab-card-kicker">2. Ripple Ranker</div>
       <h2>Which names and sectors are most sensitive right now?</h2>
       <p>Rank the highest-beta downstream names before the market narrative fully catches up.</p>
-      <div id="ripple-ranker-list" style="margin-top:16px;"></div>
+      <div id="ripple-ranker-list" class="mt-16"></div>
       <div class="lab-callout-actions"><a href="/intelligence-lab/ripple-ranker/" class="lab-btn lab-btn-secondary">Open product page</a></div>
     </section>
 
@@ -323,7 +323,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
       <div class="lab-card-kicker">3. Exposure Screener</div>
       <h2>Screen your saved watchlist against the live commodity state.</h2>
       <p id="exposure-screener-copy">No saved watchlist overlap yet.</p>
-      <div id="exposure-screener-list" class="lab-four-grid" style="margin-top:16px;"></div>
+      <div id="exposure-screener-list" class="lab-four-grid mt-16"></div>
       <div class="lab-callout-actions"><a href="/intelligence-lab/exposure-screener/" class="lab-btn lab-btn-secondary">Open product page</a></div>
     </section>
 
@@ -331,7 +331,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
       <div class="lab-card-kicker">4. Portfolio Stress Test</div>
       <h2>Translate the commodity shock into position-level pain or relief.</h2>
       <p>Simple, explainable stress ladders outperform vague “AI conviction” when actual capital is at risk.</p>
-      <div id="stress-test-list" style="margin-top:16px;"></div>
+      <div id="stress-test-list" class="mt-16"></div>
       <div class="lab-callout-actions"><a href="/intelligence-lab/portfolio-stress-test/" class="lab-btn lab-btn-secondary">Open product page</a></div>
     </section>
 
@@ -339,7 +339,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
       <div class="lab-card-kicker">5. Hedge Optimizer</div>
       <h2>Show the cleanest hedge candidates, not just the loudest trade.</h2>
       <p>Use agreement, direction, and exposure maps to recommend hedges that fit the current regime.</p>
-      <div id="hedge-optimizer-list" style="margin-top:16px;"></div>
+      <div id="hedge-optimizer-list" class="mt-16"></div>
       <div class="lab-callout-actions"><a href="/intelligence-lab/hedge-optimizer/" class="lab-btn lab-btn-secondary">Open product page</a></div>
     </section>
 
@@ -347,7 +347,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
       <div class="lab-card-kicker">6. Forecast Explainability Studio</div>
       <h2>Explain why the models agree — or why they do not.</h2>
       <p id="explainability-copy">Agreement score —.</p>
-      <div class="lab-chart" style="margin-top:16px;"><canvas id="forecast-explainability-chart"></canvas></div>
+      <div class="lab-chart mt-16"><canvas id="forecast-explainability-chart"></canvas></div>
       <div class="lab-callout-actions"><a href="/intelligence-lab/forecast-explainability-studio/" class="lab-btn lab-btn-secondary">Open product page</a></div>
     </section>
 
@@ -380,7 +380,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
       <div class="lab-card-kicker">9. Event Study Library</div>
       <h2>Build the historical reaction layer around recurring catalysts.</h2>
       <p>Event studies monetize well because they turn “what happened before?” into a reusable desk workflow.</p>
-      <div id="event-study-list" class="lab-four-grid" style="margin-top:16px;"></div>
+      <div id="event-study-list" class="lab-four-grid mt-16"></div>
       <div class="lab-callout-actions"><a href="/intelligence-lab/event-study-library/" class="lab-btn lab-btn-secondary">Open product page</a></div>
     </section>
 
@@ -390,7 +390,7 @@ description: "Premium decision-support products on top of CommodityNode's commod
       <p>
         The user-facing form is a policy layer: given trend, disagreement, volatility, catalyst risk, and scenario pressure, which action is most defensible and how would that recommendation flip?
       </p>
-      <div class="lab-callout" style="margin-top:16px;">
+      <div class="lab-callout mt-16">
         <div class="lab-card-kicker">Recommended policy state</div>
         <div id="policy-lab-recommendation" class="lab-row-title">—</div>
       </div>
@@ -399,14 +399,14 @@ description: "Premium decision-support products on top of CommodityNode's commod
     </section>
   </div>
 
-  <section class="lab-card" style="margin-top:18px;">
+  <section class="lab-card mt-18">
     <div class="lab-card-kicker">Role-aware product routing</div>
     <h2>Recommended next products for your workflow</h2>
     <p id="lab-recommendation-copy">Save your role and watchlist so CommodityNode can push you into the most relevant Intelligence Lab products first.</p>
     <div id="lab-recommendation-grid" class="lab-rec-grid"></div>
   </section>
 
-  <section class="lab-card" style="margin-top:18px;">
+  <section class="lab-card mt-18">
     <div class="lab-card-kicker">Product comparison matrix</div>
     <h2>Which Intelligence Lab products belong in which tier?</h2>
     <div style="overflow:auto;-webkit-overflow-scrolling:touch;">

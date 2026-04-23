@@ -15,7 +15,7 @@ permalink: /themes/nuclear-renaissance/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -24,17 +24,17 @@ permalink: /themes/nuclear-renaissance/
         <p>The nuclear energy sector is experiencing its most significant positive inflection point since the 1970s. After a decade of post-Fukushima headwinds that shuttered mines and curtailed exploration spending, primary uranium supply has fallen well below reactor consumption requirements. Meanwhile, demand is accelerating from three converging forces: 60+ reactors under construction globally (led by China and India), the emergence of small modular reactors (SMRs) as a viable technology for AI data center baseload power, and the reclassification of nuclear as "green" by the EU taxonomy and other frameworks essential to net-zero commitments. The uranium contracting cycle is shifting decisively from spot purchases to long-term contracts at prices that incentivize new mine development, signaling a multi-year bull market for the fuel.</p>
 
         <h2>Related Commodities</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/uranium/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Uranium</a>
+        <div class="entity-chip-row">
+          <a href="/commodities/uranium/" class="entity-chip entity-chip--cyan">Uranium</a>
         </div>
         <p>Uranium (U3O8) is the sole fuel input for nuclear fission reactors. Unlike fossil fuels, uranium's cost represents only 5-10% of the total cost of nuclear-generated electricity, meaning utilities are price-inelastic buyers -- they will contract at almost any price rather than risk fuel supply disruption. This dynamic creates a uniquely favorable supply-demand setup where small production shortfalls can drive outsized price moves. Secondary supply sources (government stockpile drawdowns, underfeeding, megatons-to-megawatts) that masked the primary supply deficit for years are now largely exhausted.</p>
 
         <h2>Key Companies</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/companies/ccj/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">CCJ (Cameco)</a>
-          <span style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.12);border-radius:20px;color:rgba(251,191,36,0.5);font-size:0.85rem;">NXE (NexGen Energy)</span>
-          <span style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.12);border-radius:20px;color:rgba(251,191,36,0.5);font-size:0.85rem;">LEU (Centrus Energy)</span>
-          <span style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.12);border-radius:20px;color:rgba(251,191,36,0.5);font-size:0.85rem;">UEC (Uranium Energy Corp)</span>
+        <div class="entity-chip-row">
+          <a href="/companies/ccj/" class="entity-chip entity-chip--gold">CCJ (Cameco)</a>
+          <span class="entity-chip entity-chip--gold-dim">NXE (NexGen Energy)</span>
+          <span class="entity-chip entity-chip--gold-dim">LEU (Centrus Energy)</span>
+          <span class="entity-chip entity-chip--gold-dim">UEC (Uranium Energy Corp)</span>
         </div>
 
         <h2>Investment Implications</h2>
@@ -44,29 +44,29 @@ permalink: /themes/nuclear-renaissance/
 
     <aside class="toc-sidebar">
       <p class="toc-title">Theme Details</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Commodities</span>
-          <span style="color:var(--accent)">1</span>
+      <div class="kpi-row">
+        <div class="kpi-row-cell">
+          <span class="text-muted">Commodities</span>
+          <span class="text-accent">1</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Horizon</span>
-          <span style="color:var(--text2)">10-20 years</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Horizon</span>
+          <span class="text-body2">10-20 years</span>
         </div>
       </div>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Themes</a></li>
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+        <ul class="toc-explore-list">
+          <li><a href="/themes/" class="link-micro">All Themes</a></li>
+          <li><a href="/commodities/" class="link-micro">Commodities</a></li>
+          <li><a href="/industries/" class="link-micro">Industries</a></li>
         </ul>
       </div>
     </aside>
   </div>
 
   <!-- Related Posts -->
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     <div class="posts-grid">
     {% for post in site.posts %}
@@ -92,6 +92,6 @@ permalink: /themes/nuclear-renaissance/
   <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:8px;">Deep Dive</p>
   <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:12px;">Explore the Full Nuclear Energy Chain</h2>
   <p style="color:var(--text2);margin-bottom:24px;max-width:520px;margin-left:auto;margin-right:auto;">From uranium mines to reactor operators — the complete nuclear commodity impact map.</p>
-  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;"><a href="/commodities/uranium/" class="btn btn-primary">Uranium Impact Map</a><a href="/commodities/copper/" class="btn btn-secondary">Copper Impact Map</a><a href="/commodities/natural-gas/" class="btn btn-secondary">Natural Gas Map</a></div>
+  <div class="chip-group-center"><a href="/commodities/uranium/" class="btn btn-primary">Uranium Impact Map</a><a href="/commodities/copper/" class="btn btn-secondary">Copper Impact Map</a><a href="/commodities/natural-gas/" class="btn btn-secondary">Natural Gas Map</a></div>
 </div>
 </div>

@@ -53,7 +53,7 @@ sitemap: false
 </div>
 
 <!-- Gate: not enterprise -->
-<div id="api-gate" style="display:none">
+<div id="api-gate" class="hidden">
   <div class="gate-msg">
     <div style="font-size:2.5rem;margin-bottom:12px">🔑</div>
     <h2>Enterprise Feature</h2>
@@ -63,7 +63,7 @@ sitemap: false
 </div>
 
 <!-- Main content: enterprise users -->
-<div id="api-content" style="display:none">
+<div id="api-content" class="hidden">
   <section class="api-hero">
     <div class="container">
       <p class="section-label">Enterprise</p>
@@ -72,7 +72,7 @@ sitemap: false
     </div>
   </section>
 
-  <section class="section" style="padding-top:0">
+  <section class="section pt-0">
     <div class="container api-container">
 
       <!-- Rate Limits -->
@@ -92,7 +92,7 @@ sitemap: false
         <h2>Your API Key <span class="badge" id="key-status-badge" style="background:rgba(100,116,139,0.15);color:#64748b">Loading</span></h2>
         <div class="key-display" id="key-display">
           <span class="key-val" id="key-val">Loading...</span>
-          <button type="button" class="copy-btn" id="copy-btn" data-action="copy-key" style="display:none">Copy</button>
+          <button type="button" class="copy-btn hidden" id="copy-btn" data-action="copy-key">Copy</button>
         </div>
         <button type="button" class="gen-btn" id="gen-btn" data-action="generate-key">
           <span id="gen-btn-text">Generate New Key</span>

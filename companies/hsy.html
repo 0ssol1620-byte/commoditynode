@@ -16,7 +16,7 @@ permalink: /companies/hsy/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -25,9 +25,9 @@ permalink: /companies/hsy/
         <p>The Hershey Company is the largest chocolate manufacturer in North America, producing iconic brands including Hershey's, Reese's, Kit Kat (U.S. license), Kisses, and Jolly Rancher. The company generates approximately $11 billion in annual revenue, with North America representing over 90% of sales. Beyond chocolate, Hershey has expanded into salty snacks (SkinnyPop, Dot's Pretzels) and international markets, but cocoa-based confectionery remains the core business. As one of the world's largest buyers of cocoa beans, Hershey's financial performance is deeply intertwined with global cocoa markets.</p>
 
         <h2>Commodity Exposures</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/cocoa/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Cocoa</a>
-          <a href="/commodities/sugar/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Sugar</a>
+        <div class="entity-chip-row">
+          <a href="/commodities/cocoa/" class="entity-chip entity-chip--cyan">Cocoa</a>
+          <a href="/commodities/sugar/" class="entity-chip entity-chip--cyan">Sugar</a>
         </div>
         <p>Cocoa is Hershey's largest and most volatile commodity input. The company purchases cocoa beans primarily from West Africa (Ivory Coast and Ghana supply approximately 60% of global cocoa), and processes them into cocoa liquor, butter, and powder at its own facilities. Cocoa prices are influenced by West African weather patterns, political stability in producing nations, and global inventory levels. Sugar is the second-largest ingredient cost, though U.S. sugar prices are structurally elevated above world prices due to federal price support programs and import quotas. Dairy (milk, whey) is the third significant input, particularly for milk chocolate formulations. Packaging costs (aluminum foil, plastic) represent an additional material expense. Hershey typically hedges cocoa and sugar purchases 3-12 months forward using commodity futures and over-the-counter contracts.</p>
 
@@ -35,37 +35,37 @@ permalink: /companies/hsy/
         <p>Cocoa is the largest single input cost, and Hershey's hedging programs smooth but do not eliminate price exposure over a 6-12 month window. The 2023-2024 cocoa price surge — which saw ICE cocoa futures more than triple — demonstrated the limits of hedging: as existing contracts rolled off, Hershey faced sharply higher costs that pressured gross margins by 200-400 basis points. The company has historically passed through ingredient cost inflation via 5-10% list price increases, but consumer pushback and volume elasticity become factors during extreme spikes. Hershey's stock shows approximately -0.35 correlation with cocoa futures, reflecting the inverse margin impact. Each 10% sustained increase in cocoa prices, once it flows through hedges, compresses gross margins by roughly 50-80 basis points.</p>
 
         <h2>Related ETFs</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">XLP</span>
+        <div class="entity-chip-row">
+          <span class="entity-chip entity-chip--violet">XLP</span>
         </div>
       </div>
     </div>
 
     <aside class="toc-sidebar">
       <p class="toc-title">Quick Stats</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Sector</span>
-          <span style="color:var(--text2)">Consumer / Confectionery</span>
+      <div class="kpi-row">
+        <div class="kpi-row-cell">
+          <span class="text-muted">Sector</span>
+          <span class="text-body2">Consumer / Confectionery</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Primary Exposure</span>
-          <span style="color:var(--accent)">Cocoa</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Primary Exposure</span>
+          <span class="text-accent">Cocoa</span>
         </div>
       </div>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        <ul class="toc-explore-list">
+          <li><a href="/companies/" class="link-micro">All Companies</a></li>
+          <li><a href="/industries/" class="link-micro">Industries</a></li>
+          <li><a href="/commodities/" class="link-micro">Commodities</a></li>
         </ul>
       </div>
     </aside>
   </div>
 
   <!-- Related Posts -->
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     <div class="posts-grid">
     {% for post in site.posts %}

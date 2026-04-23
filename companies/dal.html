@@ -16,7 +16,7 @@ permalink: /companies/dal/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -25,9 +25,9 @@ permalink: /companies/dal/
         <p>Delta Air Lines is one of the world's largest airlines by revenue and passenger traffic, operating a hub-and-spoke network centered on Atlanta, with major hubs in Minneapolis, Detroit, Salt Lake City, New York-JFK, and international gateways in Amsterdam and Seoul. Unlike most airlines, Delta took the unusual step of purchasing the Trainer oil refinery near Philadelphia in 2012 to gain partial control over its fuel costs. This vertically integrated approach makes Delta's commodity exposure profile unique among major carriers.</p>
 
         <h2>Commodity Exposures</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/jet-fuel/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Jet Fuel (inverse)</a>
-          <a href="/commodities/crude-oil/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Crude Oil (inverse)</a>
+        <div class="entity-chip-row">
+          <a href="/commodities/jet-fuel/" class="entity-chip entity-chip--cyan">Jet Fuel (inverse)</a>
+          <a href="/commodities/crude-oil/" class="entity-chip entity-chip--cyan">Crude Oil (inverse)</a>
         </div>
         <p>Jet fuel is the airline's second-largest operating expense after labor, typically representing 20-25% of total operating costs. Delta consumes approximately 4 billion gallons of jet fuel annually. The relationship is inverse: rising fuel prices compress margins and earnings, while falling fuel prices expand profitability. The Trainer refinery processes approximately 200,000 barrels per day, primarily producing jet fuel, gasoline, and diesel. This gives Delta a built-in hedge — when crude prices spike, refining margins at Trainer can partially offset higher fuel costs at the airline. However, the hedge is imperfect and covers only a fraction of total consumption.</p>
 
@@ -35,37 +35,37 @@ permalink: /companies/dal/
         <p>Delta estimates that each $1/barrel change in the price of crude oil impacts annual fuel expense by approximately $90-100 million. The stock shows an inverse correlation of roughly -0.55 to WTI crude on a 6-month rolling basis, though this relationship is nonlinear — extreme fuel spikes have outsized negative impacts because airlines cannot immediately pass costs through to ticket prices. Fuel surcharges and fare adjustments typically lag by 2-4 weeks. The Trainer refinery reduces net fuel cost sensitivity by an estimated 10-15% compared to peers.</p>
 
         <h2>Related ETFs</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">JETS</span>
+        <div class="entity-chip-row">
+          <span class="entity-chip entity-chip--violet">JETS</span>
         </div>
       </div>
     </div>
 
     <aside class="toc-sidebar">
       <p class="toc-title">Quick Stats</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Sector</span>
-          <span style="color:var(--text2)">Airlines</span>
+      <div class="kpi-row">
+        <div class="kpi-row-cell">
+          <span class="text-muted">Sector</span>
+          <span class="text-body2">Airlines</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Primary Exposure</span>
-          <span style="color:var(--accent)">Jet Fuel (inverse)</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Primary Exposure</span>
+          <span class="text-accent">Jet Fuel (inverse)</span>
         </div>
       </div>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        <ul class="toc-explore-list">
+          <li><a href="/companies/" class="link-micro">All Companies</a></li>
+          <li><a href="/industries/" class="link-micro">Industries</a></li>
+          <li><a href="/commodities/" class="link-micro">Commodities</a></li>
         </ul>
       </div>
     </aside>
   </div>
 
   <!-- Related Posts -->
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     <div class="posts-grid">
     {% for post in site.posts %}

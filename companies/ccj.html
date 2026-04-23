@@ -16,7 +16,7 @@ permalink: /companies/ccj/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -25,8 +25,8 @@ permalink: /companies/ccj/
         <p>Cameco is the world's largest publicly traded uranium producer, headquartered in Saskatoon, Saskatchewan. The company operates the McArthur River/Key Lake complex — the world's highest-grade uranium mine — and the Cigar Lake mine, both in northern Saskatchewan's prolific Athabasca Basin. Cameco also holds a 40% interest in the Inkai joint venture in Kazakhstan. Beyond mining, Cameco provides uranium refining and conversion services through its Port Hope and Blind River facilities in Ontario, and acquired Westinghouse Electric in 2023 (via a consortium with Brookfield), adding nuclear reactor technology and fuel fabrication to its vertically integrated platform.</p>
 
         <h2>Commodity Exposures</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/uranium/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Uranium</a>
+        <div class="entity-chip-row">
+          <a href="/commodities/uranium/" class="entity-chip entity-chip--cyan">Uranium</a>
         </div>
         <p>Cameco is a pure-play uranium company — uranium concentrate (U3O8) and uranium fuel services account for virtually all revenue. The company operates with a mix of long-term contracts and spot/near-term sales. Approximately 60-70% of annual deliveries are under long-term contracts with utilities, which include both fixed-price and market-related pricing mechanisms. This contract portfolio creates a lag between spot uranium price movements and realized revenue: when spot prices surge, Cameco's average realized price increases gradually over 2-4 years as new contracts are signed at higher levels and legacy contracts roll off. The Westinghouse acquisition added reactor services and fuel assembly revenue that is less commodity-sensitive and more tied to the installed base of nuclear reactors globally.</p>
 
@@ -34,38 +34,38 @@ permalink: /companies/ccj/
         <p>Cameco's stock correlates approximately 0.75-0.85 with spot uranium prices (UxC U3O8 indicator), with the stock typically showing 1.5-2.5x leverage to uranium price moves due to operating and financial leverage. However, the contract mix creates meaningful divergence in any given quarter — in a rapidly rising uranium market, Cameco's realized price lags spot, and vice versa. The company's all-in production cost is approximately $30-35/lb U3O8 (including Inkai), meaning substantial free cash flow generation at spot prices above $60/lb. The McArthur River mine can be idled and restarted based on market conditions, as demonstrated during the 2016-2022 period, giving Cameco strategic supply-side optionality.</p>
 
         <h2>Related ETFs</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">URA</span>
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">URNM</span>
+        <div class="entity-chip-row">
+          <span class="entity-chip entity-chip--violet">URA</span>
+          <span class="entity-chip entity-chip--violet">URNM</span>
         </div>
       </div>
     </div>
 
     <aside class="toc-sidebar">
       <p class="toc-title">Quick Stats</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Sector</span>
-          <span style="color:var(--text2)">Uranium Mining</span>
+      <div class="kpi-row">
+        <div class="kpi-row-cell">
+          <span class="text-muted">Sector</span>
+          <span class="text-body2">Uranium Mining</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Primary Exposure</span>
-          <span style="color:var(--accent)">Uranium</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Primary Exposure</span>
+          <span class="text-accent">Uranium</span>
         </div>
       </div>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        <ul class="toc-explore-list">
+          <li><a href="/companies/" class="link-micro">All Companies</a></li>
+          <li><a href="/industries/" class="link-micro">Industries</a></li>
+          <li><a href="/commodities/" class="link-micro">Commodities</a></li>
         </ul>
       </div>
     </aside>
   </div>
 
   <!-- Related Posts -->
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     <div class="posts-grid">
     {% for post in site.posts %}

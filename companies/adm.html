@@ -16,7 +16,7 @@ permalink: /companies/adm/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -25,10 +25,10 @@ permalink: /companies/adm/
         <p>Archer-Daniels-Midland is one of the world's largest agricultural processors and commodity trading companies, operating over 800 facilities globally across grain origination, oilseed processing, corn wet milling, and specialty ingredients. ADM processes approximately 90 million tonnes of agricultural commodities annually and is one of the "ABCD" quartet of global grain traders (alongside Bunge, Cargill, and Louis Dreyfus). The company's business model is built on origination margins, processing spreads, and logistics advantages rather than outright commodity price speculation.</p>
 
         <h2>Commodity Exposures</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/soybeans/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Soybeans</a>
-          <a href="/commodities/corn/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Corn</a>
-          <a href="/commodities/wheat/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Wheat</a>
+        <div class="entity-chip-row">
+          <a class="entity-chip entity-chip--cyan" href="/commodities/soybeans/">Soybeans</a>
+          <a class="entity-chip entity-chip--cyan" href="/commodities/corn/">Corn</a>
+          <a class="entity-chip entity-chip--cyan" href="/commodities/wheat/">Wheat</a>
         </div>
         <p>Soybeans are ADM's most important commodity — the Ag Services & Oilseeds segment, driven by soybean crushing, is typically the largest earnings contributor. ADM profits from the "crush spread" (the margin between soybean prices and the combined value of soybean meal and oil) rather than the absolute price of soybeans. Corn processing is the second major exposure, with ADM operating extensive corn wet milling facilities that produce high-fructose corn syrup, ethanol, starches, and sweeteners. Wheat is handled primarily through the origination and trading operations. High grain price volatility generally benefits ADM's trading operations, as wider bid-ask spreads and increased hedging activity drive higher origination margins.</p>
 
@@ -36,37 +36,32 @@ permalink: /companies/adm/
         <p>ADM's relationship to grain prices is nuanced — the company generally benefits from volatile and rising prices rather than high absolute levels. Elevated grain prices increase the dollar value of inventory and boost origination margins as farmers sell more aggressively. However, ADM hedges its commodity positions extensively, so direct price exposure is limited. The crush spread (soybean meal + oil minus soybeans) and the ethanol-corn spread are the true earnings drivers. ADM's stock shows moderate 0.40-0.50 correlation with CBOT corn and soybean futures, reflecting this indirect relationship.</p>
 
         <h2>Related ETFs</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">MOO</span>
+        <div class="entity-chip-row">
+          <span class="entity-chip entity-chip--violet">MOO</span>
+          <span class="entity-chip entity-chip--violet">DBA</span>
         </div>
       </div>
     </div>
 
     <aside class="toc-sidebar">
       <p class="toc-title">Quick Stats</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Sector</span>
-          <span style="color:var(--text2)">Agriculture</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Primary Exposure</span>
-          <span style="color:var(--accent)">Soybeans</span>
-        </div>
+      <div class="kpi-row">
+        <div><span class="kpi-label">Sector</span><span class="kpi-value">Agriculture</span></div>
+        <div><span class="kpi-label">Primary Exposure</span><span class="kpi-value kpi-value--accent">Soybeans</span></div>
       </div>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        <ul class="toc-explore">
+          <li><a href="/companies/">All Companies</a></li>
+          <li><a href="/industries/">Industries</a></li>
+          <li><a href="/commodities/">Commodities</a></li>
         </ul>
       </div>
     </aside>
   </div>
 
   <!-- Related Posts -->
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     <div class="posts-grid">
     {% for post in site.posts %}
@@ -87,4 +82,19 @@ permalink: /companies/adm/
     {% endfor %}
     </div>
   </section>
+
+  <div class="mt-48" data-animate>
+    {% include next-best-path.html
+        title="Take ADM's exposure lens into a decision."
+        lede="Translate this company read into a scenario, pick up the related commodity hubs, or save ADM into a watchlist workflow."
+        primary_href="/simulator/"
+        primary_label="Run a grain scenario and see ADM's impact"
+        secondary_href="/commodities/soybeans/"
+        secondary_label="Open the Soybeans commodity hub"
+        tertiary_href="/start/"
+        tertiary_label="Add ADM to your watchlist"
+    %}
+  </div>
+
+  {% include newsletter.html %}
 </div>

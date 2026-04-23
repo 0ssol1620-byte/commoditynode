@@ -78,26 +78,26 @@ description: "Choose your role, save your commodities and watchlist, and build a
 </section>
 
 <section class="section">
-  <div class="container" style="max-width:1080px;display:grid;gap:18px;">
+  <div class="container stack-1080">
     <div style="padding:22px 24px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center;">
       <div>
-        <div style="font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Why this exists</div>
-        <h2 style="margin:0 0 10px;font-size:1.2rem;">The fastest way to feel value is to tell CommodityNode what decisions you actually make.</h2>
-        <p style="margin:0;color:var(--text2);line-height:1.7;">General market noise is cheap. Context that is already aligned to your role, names, and event calendar is not. Build your workflow once, then reuse it every day.</p>
+        <div class="eyebrow-cyan eyebrow-cyan--74">Why this exists</div>
+        <h2 class="title-1-2rem">The fastest way to feel value is to tell CommodityNode what decisions you actually make.</h2>
+        <p class="body-text">General market noise is cheap. Context that is already aligned to your role, names, and event calendar is not. Build your workflow once, then reuse it every day.</p>
       </div>
-      <div style="display:grid;gap:10px;">
+      <div class="grid-gap-10">
         <div style="padding:14px 16px;border-radius:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved workflow</div>
+          <div class="eyebrow-cyan eyebrow-cyan--mb6">Saved workflow</div>
           <div id="start-profile-summary" style="color:#cbd5e1;line-height:1.7;">Not configured yet.</div>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button type="button" id="start-open-signup" class="btn btn-primary" data-cta="start_open_signup" style="min-width:220px;justify-content:center;">Save my workflow and start free</button>
-          <a href="/pricing/" class="btn btn-secondary" data-cta="start_compare_plans" style="min-width:220px;justify-content:center;">See where Free ends and Pro starts</a>
+        <div class="chip-group-wrap">
+          <button type="button" id="start-open-signup" class="btn btn-primary min-w-220-center" data-cta="start_open_signup">Save my workflow and start free</button>
+          <a href="/pricing/" class="btn btn-secondary min-w-220-center" data-cta="start_compare_plans">See where Free ends and Pro starts</a>
         </div>
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+    <div class="auto-grid-220">
       <div style="padding:14px 16px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);color:#cbd5e1;line-height:1.65;">Save the commodities you actually track.</div>
       <div style="padding:14px 16px;border-radius:14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);color:#ddd6fe;line-height:1.65;">Bring your watchlist into the workflow.</div>
       <div style="padding:14px 16px;border-radius:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);color:#d1fae5;line-height:1.65;">Route straight into the setups that matter before repricing.</div>
@@ -136,25 +136,179 @@ description: "Choose your role, save your commodities and watchlist, and build a
 
     <div style="padding:22px 24px;border-radius:18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);display:grid;gap:14px;">
       <div>
-        <div style="font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">4. Save your watchlist</div>
-        <p style="margin:0;color:var(--text2);line-height:1.7;">Add a few names you actually care about. CommodityNode uses this to surface the names most likely to change when a commodity shock matters.</p>
+        <div class="eyebrow-cyan eyebrow-cyan--74">4. Save your watchlist</div>
+        <p class="body-text">Add a few names you actually care about. CommodityNode uses this to surface the names most likely to change when a commodity shock matters.</p>
       </div>
       <label style="display:grid;gap:8px;">
-        <span style="color:#f8fafc;font-weight:700;">Tickers or names</span>
+        <span class="bold-white">Tickers or names</span>
         <input id="start-watchlist-input" type="text" placeholder="Example: XOM, DAL, FCX, TSLA, SBUX" style="padding:14px 16px;border-radius:12px;background:#111827;border:1px solid rgba(255,255,255,0.08);color:#f8fafc;" />
       </label>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button type="button" id="start-save-watchlist" class="btn btn-primary" data-cta="start_save_watchlist" style="min-width:220px;justify-content:center;">Save watchlist</button>
-        <a href="/simulator/" class="btn btn-secondary" data-cta="start_open_simulator" style="min-width:220px;justify-content:center;">Run a scenario with this workflow</a>
-        <a href="/reports/" class="btn btn-secondary" data-cta="start_open_reports" style="min-width:220px;justify-content:center;">Open today’s live setups</a>
+      <div class="chip-group-wrap">
+        <button type="button" id="start-save-watchlist" class="btn btn-primary min-w-220-center" data-cta="start_save_watchlist">Save watchlist</button>
+        <a href="/simulator/" class="btn btn-secondary min-w-220-center" data-cta="start_open_simulator">Run a scenario with this workflow</a>
+        <a href="/reports/" class="btn btn-secondary min-w-220-center" data-cta="start_open_reports">Open today’s live setups</a>
       </div>
       <div id="start-watchlist-status" style="color:#cbd5e1;font-size:0.9rem;line-height:1.65;">Nothing saved yet.</div>
     </div>
   </div>
 </section>
 
+<!-- Personalized preview: "here's your first 3 setups, 2 reports, 1 tool path" -->
+<section class="section start-preview-section" id="start-personalized-preview" data-state="empty" aria-labelledby="start-preview-title">
+  <div class="container start-preview-container">
+    <header class="start-preview-head">
+      <p class="section-label mb-8">Your first value</p>
+      <h2 id="start-preview-title">Your personalized workflow is ready.</h2>
+      <p class="start-preview-lede" id="start-preview-lede">Pick a preset or save a role to see your first 3 setups, 2 reports, and 1 tool path.</p>
+    </header>
+
+    <div class="start-preview-grid">
+      <div class="start-preview-col">
+        <p class="start-preview-col-title">3 setups for you</p>
+        <ul class="start-preview-list" id="start-preview-setups"></ul>
+      </div>
+      <div class="start-preview-col">
+        <p class="start-preview-col-title">2 reports to read first</p>
+        <ul class="start-preview-list" id="start-preview-reports"></ul>
+      </div>
+      <div class="start-preview-col">
+        <p class="start-preview-col-title">1 tool path to try</p>
+        <ul class="start-preview-list" id="start-preview-toolpath"></ul>
+      </div>
+    </div>
+
+    <div class="start-preview-actions">
+      <a class="btn btn-primary" href="/simulator/" data-cta="start_preview_simulator">Open the simulator →</a>
+      <a class="btn btn-secondary" href="/reports/" data-cta="start_preview_reports">Open today's live reports</a>
+    </div>
+  </div>
+</section>
+
 <script>
 (function(){
+  // Preview catalog — keyed by role/commodity/event to generate personalized recs.
+  var CATALOG = {
+    roleSetups: {
+      'self-directed-investor': [
+        { title: 'Before Fed — metals playbook',          href: '/before-fed-metals-playbook/' },
+        { title: 'Before OPEC — oil playbook',            href: '/before-opec-oil-playbook/' },
+        { title: 'Before WASDE — grains playbook',        href: '/before-wasde-grains-playbook/' }
+      ],
+      'equity-analyst': [
+        { title: 'Agriculture margin workflow',           href: '/agriculture-margin-workflow/' },
+        { title: 'Battery materials workflow',            href: '/battery-materials-workflow/' },
+        { title: 'CommodityNode vs Bloomberg (analyst)',  href: '/commoditynode-vs-bloomberg-self-directed/' }
+      ],
+      'operator-procurement': [
+        { title: 'Battery materials workflow',            href: '/battery-materials-workflow/' },
+        { title: 'Agriculture margin workflow',           href: '/agriculture-margin-workflow/' },
+        { title: 'Disruption tracker',                    href: '/disruptions/' }
+      ]
+    },
+    commodityReports: {
+      'crude-oil': [
+        { title: 'Oil contango structure signal',         href: '/reports/?q=oil' },
+        { title: 'Before OPEC — oil playbook',            href: '/before-opec-oil-playbook/' }
+      ],
+      'gold': [
+        { title: 'Gold-silver ratio compression',         href: '/reports/?q=gold' },
+        { title: 'Before Fed — metals playbook',          href: '/before-fed-metals-playbook/' }
+      ],
+      'copper': [
+        { title: 'Copper-gold ratio economic signal',     href: '/reports/?q=copper' },
+        { title: 'Copper DRC supply shock',               href: '/reports/?q=copper' }
+      ],
+      'lithium': [
+        { title: 'Battery materials workflow',            href: '/battery-materials-workflow/' },
+        { title: 'Lithium supply chain report',           href: '/reports/?q=lithium' }
+      ],
+      'wheat': [
+        { title: 'Wheat-corn spread compression',         href: '/reports/?q=wheat' },
+        { title: 'Before WASDE — grains playbook',        href: '/before-wasde-grains-playbook/' }
+      ],
+      'coffee': [
+        { title: 'Energy-agriculture linkage signal',     href: '/reports/?q=coffee' },
+        { title: 'Agriculture margin workflow',           href: '/agriculture-margin-workflow/' }
+      ],
+      'natural-gas': [
+        { title: 'Energy-agriculture linkage signal',     href: '/reports/?q=natural+gas' },
+        { title: 'Before OPEC — oil playbook',            href: '/before-opec-oil-playbook/' }
+      ]
+    },
+    eventToolpath: {
+      'opec':        { title: 'Simulator → Iran/Hormuz scenario', href: '/simulator/?scenario=iran' },
+      'wasde':       { title: 'Simulator → Grain shock scenario', href: '/simulator/?scenario=china' },
+      'fed':         { title: 'Simulator → Fed cuts scenario',     href: '/simulator/?scenario=fed' },
+      'geopolitics': { title: 'Disruption tracker — live events',  href: '/disruptions/' }
+    },
+    defaultToolpath: { title: 'Open the scenario simulator', href: '/simulator/' }
+  };
+
+  function uniq(arr){ var seen = {}; return arr.filter(function(x){ var k = x.href || x.title; if (seen[k]) return false; seen[k]=true; return true; }); }
+
+  function renderPreview(profile){
+    var section = document.getElementById('start-personalized-preview');
+    if (!section) return;
+    var hasAny = !!(profile.role || (profile.commodities||[]).length || (profile.events||[]).length || (profile.watchlist||[]).length);
+    section.dataset.state = hasAny ? 'ready' : 'empty';
+
+    var setupsEl  = document.getElementById('start-preview-setups');
+    var reportsEl = document.getElementById('start-preview-reports');
+    var toolEl    = document.getElementById('start-preview-toolpath');
+    var lede      = document.getElementById('start-preview-lede');
+
+    if (!hasAny) {
+      if (setupsEl)  setupsEl.innerHTML  = '<li class="start-preview-placeholder">Save a role to see recommended setups.</li>';
+      if (reportsEl) reportsEl.innerHTML = '<li class="start-preview-placeholder">Pick commodities to unlock your first reads.</li>';
+      if (toolEl)    toolEl.innerHTML    = '<li class="start-preview-placeholder">Add events to surface a scenario path.</li>';
+      if (lede)      lede.textContent    = 'Pick a preset or save a role to see your first 3 setups, 2 reports, and 1 tool path.';
+      return;
+    }
+
+    var setups = (CATALOG.roleSetups[profile.role] || []).slice();
+    if (setups.length < 3) {
+      Object.keys(CATALOG.roleSetups).forEach(function(k){ setups = setups.concat(CATALOG.roleSetups[k] || []); });
+    }
+    setups = uniq(setups).slice(0, 3);
+
+    var reports = [];
+    (profile.commodities || []).forEach(function(c){
+      (CATALOG.commodityReports[c] || []).forEach(function(r){ reports.push(r); });
+    });
+    if (reports.length < 2) reports = reports.concat([
+      { title: 'Open the full signal archive', href: '/reports/' },
+      { title: 'See today’s live reports',   href: '/reports/' }
+    ]);
+    reports = uniq(reports).slice(0, 2);
+
+    var tool = null;
+    (profile.events || []).some(function(e){ if (CATALOG.eventToolpath[e]) { tool = CATALOG.eventToolpath[e]; return true; } return false; });
+    if (!tool) tool = CATALOG.defaultToolpath;
+
+    function fill(el, items){
+      if (!el) return;
+      el.innerHTML = items.map(function(it){
+        return '<li><a class="start-preview-link" href="'+ it.href +'">'+ it.title +' →</a></li>';
+      }).join('');
+    }
+    fill(setupsEl, setups);
+    fill(reportsEl, reports);
+    fill(toolEl, [tool]);
+
+    if (lede) {
+      var parts = [];
+      if (profile.role) parts.push(profile.role.replace(/-/g,' '));
+      if ((profile.commodities||[]).length) parts.push('tracking ' + profile.commodities.slice(0,3).join(', '));
+      lede.textContent = parts.length
+        ? 'Tailored for ' + parts.join(' · ') + '. Save more to sharpen the picks.'
+        : 'Here’s a first pass. Pick a role to tighten these recommendations.';
+    }
+
+    if (window.CNEvents) {
+      try { window.CNEvents.send('preview_generated', { source:'start_personalized', role: profile.role || '', commodities: (profile.commodities||[]).length, events: (profile.events||[]).length }); } catch(e) {}
+    }
+  }
+
   function render(){
     var profile = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { role:'', commodities:[], watchlist:[], events:[] };
     var summary = [];
@@ -166,6 +320,7 @@ description: "Choose your role, save your commodities and watchlist, and build a
     if (summaryEl) summaryEl.textContent = summary.length ? summary.join(' · ') : 'Not configured yet.';
     var statusEl = document.getElementById('start-watchlist-status');
     if (statusEl) statusEl.textContent = profile.watchlist.length ? 'Saved watchlist: ' + profile.watchlist.join(', ') : 'Nothing saved yet.';
+    renderPreview(profile);
   }
 
   document.querySelectorAll('[data-role]').forEach(function(btn){

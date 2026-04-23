@@ -15,7 +15,7 @@ permalink: /industries/semiconductors/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -24,40 +24,40 @@ permalink: /industries/semiconductors/
         <p>Semiconductor manufacturing is surprisingly commodity-intensive despite producing tiny chips. Each wafer fab consumes enormous quantities of ultra-pure water, electricity (often natural gas-derived), and specialty chemicals. Copper has replaced aluminum as the primary interconnect material in advanced nodes, while gold remains essential for wire bonding in packaging. The industry's explosive growth driven by AI is creating unprecedented demand for power (natural gas, uranium) and cooling infrastructure (copper for heat exchangers). A single large fab consumes as much electricity as a small city.</p>
 
         <h2>Commodity Exposure</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/copper/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Copper</a>
-          <a href="/commodities/gold/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Gold</a>
-          <a href="/commodities/silver/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Silver</a>
-          <a href="/commodities/natural-gas/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">Natural Gas</a>
+        <div class="entity-chip-row">
+          <a href="/commodities/copper/" class="entity-chip entity-chip--cyan">Copper</a>
+          <a href="/commodities/gold/" class="entity-chip entity-chip--cyan">Gold</a>
+          <a href="/commodities/silver/" class="entity-chip entity-chip--cyan">Silver</a>
+          <a href="/commodities/natural-gas/" class="entity-chip entity-chip--cyan">Natural Gas</a>
         </div>
 
         <h2>Key Companies</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/companies/nvidia/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">NVDA (NVIDIA)</a>
-          <a href="/companies/tsmc/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">TSM (TSMC)</a>
-          <a href="/companies/intel/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;transition:all 0.2s;">INTC (Intel)</a>
+        <div class="entity-chip-row">
+          <a href="/companies/nvidia/" class="entity-chip entity-chip--gold">NVDA (NVIDIA)</a>
+          <a href="/companies/tsmc/" class="entity-chip entity-chip--gold">TSM (TSMC)</a>
+          <a href="/companies/intel/" class="entity-chip entity-chip--gold">INTC (Intel)</a>
         </div>
 
         <h2>Related ETFs</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <span style="display:inline-block;padding:6px 14px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:20px;color:#8b5cf6;font-size:0.85rem;">SMH (VanEck Semiconductor ETF)</span>
-          <span style="display:inline-block;padding:6px 14px;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:20px;color:#8b5cf6;font-size:0.85rem;">SOXX (iShares Semiconductor ETF)</span>
+        <div class="entity-chip-row">
+          <span class="entity-chip entity-chip--violet">SMH (VanEck Semiconductor ETF)</span>
+          <span class="entity-chip entity-chip--violet">SOXX (iShares Semiconductor ETF)</span>
         </div>
       </div>
     </div>
 
     <aside class="toc-sidebar">
       <p class="toc-title">Quick Links</p>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Commodities</a></li>
-        <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Industries</a></li>
-        <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
-        <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Themes</a></li>
+      <ul class="toc-explore-list">
+        <li><a href="/commodities/" class="link-micro">All Commodities</a></li>
+        <li><a href="/industries/" class="link-micro">All Industries</a></li>
+        <li><a href="/companies/" class="link-micro">All Companies</a></li>
+        <li><a href="/themes/" class="link-micro">All Themes</a></li>
       </ul>
     </aside>
   </div>
 
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     {% assign all_posts = site.posts %}
     <div class="posts-grid">

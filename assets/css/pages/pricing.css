@@ -1,4 +1,137 @@
-/*! Pricing-page styles.
- * Reserved for pricing-only rules. Page currently uses style.css + inline;
- * move rules here progressively.
- */
+/*! Pricing-page styles. */
+
+.pricing-trigger-ladder {
+  padding: 52px 24px 16px;
+}
+.pricing-trigger-head {
+  max-width: 820px;
+  margin: 0 auto 32px;
+  text-align: center;
+}
+.pricing-trigger-head h2 {
+  font-size: 1.75rem;
+  color: var(--text);
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+.pricing-trigger-lede {
+  color: var(--text2);
+  font-size: 0.98rem;
+  margin: 0 auto;
+  max-width: 640px;
+  line-height: 1.6;
+}
+
+.pricing-trigger-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 1080px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+@media (max-width: 960px) {
+  .pricing-trigger-grid { grid-template-columns: 1fr; }
+}
+
+.trigger-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 26px 22px 22px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: border-color var(--motion-fast), transform var(--motion-fast);
+}
+.trigger-card:hover { border-color: rgba(34,211,238,0.3); transform: translateY(-2px); }
+.trigger-card--featured {
+  background: linear-gradient(180deg, rgba(34,211,238,0.08) 0%, rgba(34,211,238,0.02) 60%);
+  border-color: rgba(34,211,238,0.35);
+  box-shadow: 0 10px 40px rgba(34,211,238,0.08);
+}
+.trigger-card header h3 {
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: 1.35;
+  margin: 10px 0 14px;
+}
+.trigger-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  background: rgba(148,148,168,0.12);
+  color: var(--text2);
+}
+.trigger-chip--free { background: rgba(148,148,168,0.14); color: var(--text2); }
+.trigger-chip--pro { background: rgba(34,211,238,0.14); color: var(--accent); }
+.trigger-chip--enterprise { background: rgba(168,85,247,0.14); color: var(--purple); }
+
+.trigger-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.trigger-card li {
+  color: var(--text2);
+  font-size: 0.88rem;
+  line-height: 1.5;
+  padding-left: 18px;
+  position: relative;
+}
+.trigger-card li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--text3);
+}
+.trigger-card--featured li::before { background: var(--accent); }
+.trigger-card--enterprise li::before { background: var(--purple); }
+
+.trigger-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: background var(--motion-fast), border-color var(--motion-fast);
+}
+.trigger-cta:hover { background: rgba(255,255,255,0.08); border-color: rgba(34,211,238,0.4); }
+.trigger-cta--primary {
+  background: var(--accent);
+  color: #050508;
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(34,211,238,0.28);
+}
+.trigger-cta--primary:hover { background: var(--accent2); color: #050508; border-color: transparent; }
+.trigger-fine {
+  color: var(--text3);
+  font-size: 0.78rem;
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+.pricing-trigger-footer {
+  text-align: center;
+  color: var(--text3);
+  font-size: 0.86rem;
+  margin: 28px auto 0;
+  max-width: 640px;
+}

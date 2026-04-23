@@ -16,7 +16,7 @@ permalink: /companies/aa/
   </div>
 </header>
 
-<div class="container" style="padding:48px 24px 80px;">
+<div class="container section-pad-lg">
   <div class="post-layout">
     <div class="post-body-container">
       <div class="post-content">
@@ -25,8 +25,8 @@ permalink: /companies/aa/
         <p>Alcoa is a pure-play aluminum company operating across the full value chain: bauxite mining, alumina refining, and primary aluminum smelting. Formed in 2016 when the legacy Alcoa Inc. separated into Alcoa Corporation (upstream) and Arconic (downstream fabrication), the company is now one of the world's largest aluminum producers. Key operations include the Point Comfort alumina refinery in Texas, the Portland smelter in Australia, and bauxite mining operations in Western Australia and Brazil. Alcoa is positioned in the first quartile of the global aluminum cost curve, giving it structural advantages during price downturns.</p>
 
         <h2>Commodity Exposures</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <a href="/commodities/aluminum/" style="display:inline-block;padding:6px 14px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:20px;color:#22d3ee;font-size:0.85rem;text-decoration:none;">Aluminum</a>
+        <div class="entity-chip-row">
+          <a href="/commodities/aluminum/" class="entity-chip entity-chip--cyan">Aluminum</a>
         </div>
         <p>Aluminum is effectively Alcoa's only commodity exposure — the company is the closest thing to a pure-play aluminum stock available in U.S. equity markets. Revenue is driven by the LME aluminum price plus regional market premiums (Midwest premium in North America, European duty-paid premium, Japan CIF premium). The company produces approximately 2.5 million tonnes of alumina and 2.2 million tonnes of primary aluminum annually. A critical second-order exposure is energy costs: aluminum smelting is one of the most electricity-intensive industrial processes, consuming approximately 13-15 MWh per tonne of aluminum produced. Electricity represents 25-35% of smelting costs, meaning Alcoa's margins are simultaneously a function of aluminum prices and power prices. The company has pursued long-term power contracts and some captive hydroelectric generation to manage this dual exposure.</p>
 
@@ -34,38 +34,38 @@ permalink: /companies/aa/
         <p>Alcoa exhibits approximately 0.88 correlation with LME aluminum prices — one of the highest single-commodity correlations of any major equity. Each $100/tonne change in the LME aluminum price impacts annual revenue by approximately $200-250 million and EBITDA by roughly $150-180 million. The stock acts as a leveraged call option on aluminum: in strong aluminum markets, operating leverage drives outsized earnings growth, while in weak markets, Alcoa must idle high-cost smelters to preserve cash. Energy costs create an important wrinkle — a simultaneous rise in aluminum and electricity prices can produce flat margins, while the ideal environment for Alcoa is rising aluminum prices with stable or falling energy costs.</p>
 
         <h2>Related ETFs</h2>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">XME</span>
-          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">XLB</span>
+        <div class="entity-chip-row">
+          <span class="entity-chip entity-chip--violet">XME</span>
+          <span class="entity-chip entity-chip--violet">XLB</span>
         </div>
       </div>
     </div>
 
     <aside class="toc-sidebar">
       <p class="toc-title">Quick Stats</p>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Sector</span>
-          <span style="color:var(--text2)">Aluminum</span>
+      <div class="kpi-row">
+        <div class="kpi-row-cell">
+          <span class="text-muted">Sector</span>
+          <span class="text-body2">Aluminum</span>
         </div>
-        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-          <span style="color:var(--text3)">Primary Exposure</span>
-          <span style="color:var(--accent)">Aluminum</span>
+        <div class="kpi-row-cell">
+          <span class="text-muted">Primary Exposure</span>
+          <span class="text-accent">Aluminum</span>
         </div>
       </div>
-      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
+      <div class="sidebar-divider">
         <p class="toc-title">Explore More</p>
-        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
-          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Companies</a></li>
-          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
-          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Commodities</a></li>
+        <ul class="toc-explore-list">
+          <li><a href="/companies/" class="link-micro">All Companies</a></li>
+          <li><a href="/industries/" class="link-micro">Industries</a></li>
+          <li><a href="/commodities/" class="link-micro">Commodities</a></li>
         </ul>
       </div>
     </aside>
   </div>
 
   <!-- Related Posts -->
-  <section class="section" style="margin-top:48px;">
+  <section class="section mt-48">
     <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
     <div class="posts-grid">
     {% for post in site.posts %}

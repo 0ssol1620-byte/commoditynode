@@ -731,9 +731,9 @@ no_loader: true
     </div>
     <div class="pricing-saved-strip">
       <div>
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Your saved workflow</div>
+        <div class="eyebrow-cyan">Your saved workflow</div>
         <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Start free, save the commodities and names you care about, then return once you need the stock-level answer instead of the sector-level preview.</div>
-        <div data-profile-has-saved style="display:none;">
+        <div data-profile-has-saved class="hidden">
           <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
           <p style="margin:10px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
         </div>
@@ -744,20 +744,20 @@ no_loader: true
       </div>
       <div class="pricing-saved-proof-grid">
         <div class="pricing-saved-pill">
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Role</div>
+          <div class="eyebrow-cyan">Role</div>
           <strong data-profile-role>Not set yet</strong>
         </div>
         <div class="pricing-saved-pill">
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Commodities</div>
+          <div class="eyebrow-cyan">Commodities</div>
           <strong data-profile-commodities>No tracked commodities yet</strong>
         </div>
         <div class="pricing-saved-proof-card">
           <span>Watchlist overlap</span>
-          <p><strong style="color:#f8fafc;" data-profile-watchlist-count>0</strong> saved names · <span data-profile-watchlist>No saved watchlist names yet</span></p>
+          <p><strong data-profile-watchlist-count class="white-text">0</strong> saved names · <span data-profile-watchlist>No saved watchlist names yet</span></p>
         </div>
         <div class="pricing-saved-proof-card">
           <span>Event readiness</span>
-          <p><strong style="color:#f8fafc;" data-profile-event-count>0</strong> playbooks saved · <span data-profile-events>No event playbooks saved yet</span></p>
+          <p><strong data-profile-event-count class="white-text">0</strong> playbooks saved · <span data-profile-events>No event playbooks saved yet</span></p>
         </div>
         <div class="pricing-saved-proof-card" style="grid-column:1 / -1;">
           <span>Freshness</span>
@@ -785,10 +785,67 @@ no_loader: true
   </div>
 </section>
 
-<section class="pricing-plan-section" id="pricing-story-shell" style="padding-top:0;">
+<!-- Trigger-based pricing ladder — answers "which plan is for me" before the comparison table. -->
+<section class="pricing-trigger-ladder" aria-labelledby="pricing-trigger-title">
+  <div class="container">
+    <div class="pricing-trigger-head">
+      <p class="section-label mb-8">Decide first — compare later</p>
+      <h2 id="pricing-trigger-title">Which side of the line are you on today?</h2>
+      <p class="pricing-trigger-lede">Three quick triggers. If one describes how you work with commodity moves, skip the comparison — the plan is already picked for you.</p>
+    </div>
+
+    <div class="pricing-trigger-grid">
+      <article class="trigger-card trigger-card--free">
+        <header>
+          <span class="trigger-chip trigger-chip--free">Free is enough when…</span>
+          <h3>You read to stay informed, not to act.</h3>
+        </header>
+        <ul>
+          <li>You open a commodity headline once or twice a week.</li>
+          <li>You use the public forecast stack to check direction, not to size trades.</li>
+          <li>You want the 3 most important Signal Reports per month and don't need a full archive.</li>
+        </ul>
+        <a class="trigger-cta" href="/start/" data-cta="trigger_start_free">Start Free →</a>
+      </article>
+
+      <article class="trigger-card trigger-card--pro trigger-card--featured">
+        <header>
+          <span class="trigger-chip trigger-chip--pro">Pro becomes necessary when…</span>
+          <h3>Commodity moves actually change what you'd do next.</h3>
+        </header>
+        <ul>
+          <li>You want to run a scenario on your watchlist before OPEC, WASDE, or a Fed decision.</li>
+          <li>You need unlimited Signal Reports and company-level sensitivity, not just headlines.</li>
+          <li>You're ready to translate "oil up 12%" into specific names before the repricing.</li>
+        </ul>
+        <a class="trigger-cta trigger-cta--primary js-pro-checkout" href="{{ site.data.pricing.checkout.pro_monthly }}" data-checkout-source="pricing_trigger_card" data-cta="trigger_start_pro">Start Pro — {{ site.data.pricing.plans | where: "id","pro_monthly" | first | map: "price_label" | first | default: "$19" }}/month →</a>
+        <p class="trigger-fine">{{ site.data.pricing.guarantees.trial_copy }}</p>
+      </article>
+
+      <article class="trigger-card trigger-card--enterprise">
+        <header>
+          <span class="trigger-chip trigger-chip--enterprise">Enterprise is for…</span>
+          <h3>Teams, desks, and procurement runs on this.</h3>
+        </header>
+        <ul>
+          <li>You share dashboards across analysts, PMs, or procurement leads.</li>
+          <li>You need API access, custom exports, or private alert routing.</li>
+          <li>You want onboarding, priority support, and shared workflow templates.</li>
+        </ul>
+        <a class="trigger-cta" href="/enterprise/" data-cta="trigger_talk_enterprise">Talk to us →</a>
+      </article>
+    </div>
+
+    <p class="pricing-trigger-footer">
+      Not sure yet? Keep scrolling — the rest of this page is the evidence that backs each trigger.
+    </p>
+  </div>
+</section>
+
+<section class="pricing-plan-section pt-0" id="pricing-story-shell">
   <div class="pricing-proof-header">
     <div>
-      <p class="section-label" style="margin-bottom:8px;">Scroll-driven narrative</p>
+      <p class="section-label mb-8">Scroll-driven narrative</p>
       <h2 style="font-size:1.5rem;margin:0;color:var(--text);">Compress the sales story into a decision workflow.</h2>
     </div>
     <p style="color:#94a3b8;max-width:470px;line-height:1.6;margin:0;">This block replaces repeated prose with a step-by-step visual: validate the move, translate it into exposed names, then decide whether Pro changes what you do next.</p>
@@ -796,7 +853,7 @@ no_loader: true
   <div style="display:grid;grid-template-columns:minmax(0,0.92fr) minmax(360px,1.08fr);gap:18px;align-items:start;">
     <div id="pricing-story-steps" style="display:grid;gap:12px;"></div>
     <div style="position:sticky;top:96px;padding:20px;border-radius:20px;border:1px solid rgba(34,211,238,0.14);background:linear-gradient(135deg,rgba(8,12,20,0.78),rgba(8,12,20,0.54));backdrop-filter:blur(12px);">
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Workflow animation</div>
+      <div class="eyebrow-cyan">Workflow animation</div>
       <h3 id="pricing-story-title" style="margin:0 0 8px;color:#f8fafc;font-size:1.1rem;">Loading workflow…</h3>
       <p id="pricing-story-copy" style="margin:0 0 14px;color:#cbd5e1;line-height:1.7;">The pricing story is being translated into a chart-led workflow.</p>
       <div id="pricing-story-chart" style="height:320px;"></div>
@@ -804,15 +861,15 @@ no_loader: true
   </div>
 </section>
 
-<section class="pricing-plan-section" style="padding-top:0;">
+<section class="pricing-plan-section pt-0">
   <div class="pricing-proof-header">
     <div>
-      <p class="section-label" style="margin-bottom:8px;">What changes when the move really matters</p>
+      <p class="section-label mb-8">What changes when the move really matters</p>
       <h2 style="font-size:1.5rem;margin:0;color:var(--text);">Free shows the setup. Pro finishes the decision.</h2>
     </div>
     <p style="color:#94a3b8;max-width:470px;line-height:1.6;margin:0;">This is the moment users hit in the simulator: the move is clear, the sector pressure is visible, but the stock-level answer is still what matters.</p>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+  <div class="auto-grid-220">
     <div class="pricing-proof-card pricing-proof-card--cyan">
       <span class="pricing-proof-card-label">Free reveals</span>
       <p>The move, forecast direction, and sector-level pressure so you can tell whether the setup is worth deeper work.</p>
@@ -829,7 +886,7 @@ no_loader: true
 </section>
 
 <!-- Billing Toggle -->
-<div class="billing-toggle" id="billing-toggle" style="display:none;">
+<div class="billing-toggle hidden" id="billing-toggle">
   <button type="button" class="billing-btn active" data-billing="monthly" data-billing-set="monthly">Monthly</button>
   <button type="button" class="billing-btn" data-billing="annual" data-billing-set="annual">Annual <span class="save-badge">Save 35%</span></button>
 </div>
@@ -896,14 +953,14 @@ no_loader: true
 <section class="pricing-plan-section">
   <div class="pricing-proof-header">
     <div>
-      <p class="section-label" style="margin-bottom:8px;">New monetizable layer</p>
+      <p class="section-label mb-8">New monetizable layer</p>
       <h2 style="font-size:1.5rem;margin:0;color:var(--text);">Intelligence Lab turns the forecast stack into 10 separate products.</h2>
     </div>
     <p style="color:#94a3b8;max-width:430px;line-height:1.6;margin:0;">This is where CommodityNode becomes more than forecasts: event odds, ripple ranking, stress tests, hedges, explainability, anomaly detection, event studies, and a premium policy decision console.</p>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+  <div class="auto-grid-220">
     <div class="pricing-proof-card pricing-proof-card--cyan"><span class="pricing-proof-card-label">Pro modules</span><p>Event Probability Studio, Explainability, Regime Shift, and Anomaly Monitor give users a reason to stay inside the workflow after reading the report.</p></div>
-    <div class="pricing-proof-card"><span class="pricing-proof-card-label" style="color:#22d3ee;">Desk modules</span><p>Ripple Ranker, Exposure Screener, Stress Test, Hedge Optimizer, and Event Study Library move the product closer to an actual desk tool.</p></div>
+    <div class="pricing-proof-card"><span class="pricing-proof-card-label text-accent">Desk modules</span><p>Ripple Ranker, Exposure Screener, Stress Test, Hedge Optimizer, and Event Study Library move the product closer to an actual desk tool.</p></div>
     <div class="pricing-proof-card pricing-proof-card--green"><span class="pricing-proof-card-label">Premium differentiation</span><p>The RL Policy Lab is positioned as policy support, scenario decisioning, and audit-friendly action guidance — a premium trust-first layer, not an autopilot trading promise.</p></div>
   </div>
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
@@ -917,7 +974,7 @@ no_loader: true
 <section class="section" aria-labelledby="pricing-results-title" style="padding-top:8px;">
   <div class="container">
     <header style="max-width:1160px;margin:0 auto 20px;text-align:center;">
-      <p class="section-label" style="margin-bottom:8px;">Choose by outcome, not feature count</p>
+      <p class="section-label mb-8">Choose by outcome, not feature count</p>
       <h2 class="section-title" id="pricing-results-title" style="margin-bottom:10px;">Pick the plan that finishes the decision you actually make.</h2>
       <p class="section-desc" style="max-width:720px;margin:0 auto;">Most people do not pay for more data. They pay for a faster path from commodity move → named exposure → scenario context → action.</p>
     </header>
@@ -1041,17 +1098,17 @@ no_loader: true
     <div class="pricing-desc">Finish the workflow in one place: unlimited reports, model agreement, scenario testing, and stock-level translation when the move is important enough to affect a real position.</div>
     <a id="pro-cta-btn" href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary" data-cta="pricing_start_pro" style="text-decoration:none;display:block;text-align:center;" data-checkout-source="pricing_start_pro">Start Pro — finish this workflow →</a>
     <ul class="pricing-features">
-      <li class="yes"><span class="feat-check">✓</span> <strong>Make faster multi-commodity decisions</strong> without hitting a wall<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Unlimited Signal Reports across all 60 commodity hubs</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Make faster multi-commodity decisions</strong> without hitting a wall<br><span class="footnote-muted">Unlimited Signal Reports across all 60 commodity hubs</span></li>
       <li class="yes"><span class="feat-check">✓</span> Full Trading Notes (unblurred)</li>
-      <li class="yes"><span class="feat-check">✓</span> <strong>See scenario ranges before consensus catches up</strong> — not after<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">AI 90-day price forecast with confidence intervals, updated daily</span></li>
-      <li class="yes"><span class="feat-check">✓</span> <strong>Stress-test your exposure</strong> before the market reprices<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Full Scenario Simulator — model OPEC, WASDE, and Fed events</span></li>
-      <li class="yes"><span class="feat-check">✓</span> <strong>Know which stocks move</strong> before earnings do<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Company sensitivity analysis across all commodity hubs</span></li>
-      <li class="yes"><span class="feat-check">✓</span> <strong>Full market context</strong> across energy, metals, and agriculture<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">60 commodity hubs with impact analysis, 19 with live AI price forecasts</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>See scenario ranges before consensus catches up</strong> — not after<br><span class="footnote-muted">AI 90-day price forecast with confidence intervals, updated daily</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Stress-test your exposure</strong> before the market reprices<br><span class="footnote-muted">Full Scenario Simulator — model OPEC, WASDE, and Fed events</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Know which stocks move</strong> before earnings do<br><span class="footnote-muted">Company sensitivity analysis across all commodity hubs</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Full market context</strong> across energy, metals, and agriculture<br><span class="footnote-muted">60 commodity hubs with impact analysis, 19 with live AI price forecasts</span></li>
       <li class="yes"><span class="feat-check">✓</span> Priority email support</li>
       <li class="yes"><span class="feat-check">✓</span> Weekly Pro briefing</li>
     </ul>
     <div style="margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.08);display:grid;gap:8px;">
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">When Pro becomes worth it</div>
+      <div class="eyebrow-cyan">When Pro becomes worth it</div>
       <div style="font-size:0.86rem;color:var(--text2);line-height:1.65;">When you stop asking why the commodity moved and start asking what to do with it.</div>
       <div style="font-size:0.86rem;color:var(--text2);line-height:1.65;">When sector direction is not enough and the named exposure matters.</div>
       <div style="font-size:0.86rem;color:var(--text2);line-height:1.65;">When event risk is large enough that delay is more expensive than the subscription.</div>
@@ -1067,11 +1124,11 @@ no_loader: true
     <button type="button" class="pricing-btn pricing-btn-ghost" data-cta="pricing_talk_sales" data-goto="/contact/">Talk to Sales About Team Access →</button>
     <ul class="pricing-features">
       <li class="yes"><span class="feat-check">✓</span> Everything in Pro</li>
-      <li class="yes"><span class="feat-check">✓</span> CSV / JSON data export<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Download clean datasets for your own models</span></li>
-      <li class="yes"><span class="feat-check">✓</span> API access (forecast data)<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Integrate signals directly into your trading systems</span></li>
-      <li class="yes"><span class="feat-check">✓</span> <strong>Quantify tail risk</strong> before it hits your portfolio<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Full stress test breakdown across your commodity exposure</span></li>
-      <li class="yes"><span class="feat-check">✓</span> Custom commodity alerts<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Get notified when key thresholds are hit, before the news cycle</span></li>
-      <li class="yes"><span class="feat-check">✓</span> 5 team seats<br><span style="font-size:0.72rem;color:#64748b;margin-left:20px;">Share access across your research desk</span></li>
+      <li class="yes"><span class="feat-check">✓</span> CSV / JSON data export<br><span class="footnote-muted">Download clean datasets for your own models</span></li>
+      <li class="yes"><span class="feat-check">✓</span> API access (forecast data)<br><span class="footnote-muted">Integrate signals directly into your trading systems</span></li>
+      <li class="yes"><span class="feat-check">✓</span> <strong>Quantify tail risk</strong> before it hits your portfolio<br><span class="footnote-muted">Full stress test breakdown across your commodity exposure</span></li>
+      <li class="yes"><span class="feat-check">✓</span> Custom commodity alerts<br><span class="footnote-muted">Get notified when key thresholds are hit, before the news cycle</span></li>
+      <li class="yes"><span class="feat-check">✓</span> 5 team seats<br><span class="footnote-muted">Share access across your research desk</span></li>
       <li class="yes"><span class="feat-check">✓</span> Dedicated analyst support</li>
       <li class="yes"><span class="feat-check">✓</span> Custom report requests</li>
     </ul>
@@ -1081,7 +1138,7 @@ no_loader: true
 <section class="pricing-plan-section">
   <div class="pricing-proof-header">
     <div>
-      <p class="section-label" style="margin-bottom:8px;">Used in real decision loops</p>
+      <p class="section-label mb-8">Used in real decision loops</p>
       <h2 style="font-size:1.5rem;margin:0;color:var(--text);">How professionals use CommodityNode</h2>
     </div>
     <p style="color:#94a3b8;max-width:420px;line-height:1.6;margin:0;">The product is strongest when a commodity move can directly change your watchlist, margin assumptions, or portfolio risk.</p>
@@ -1105,14 +1162,14 @@ no_loader: true
 <section class="pricing-plan-section">
   <div class="pricing-proof-header">
     <div>
-      <p class="section-label" style="margin-bottom:8px;">Should you actually pay?</p>
+      <p class="section-label mb-8">Should you actually pay?</p>
       <h2 style="font-size:1.5rem;margin:0;color:var(--text);">Pay for Pro when commodity moves actually change what you do next.</h2>
     </div>
     <p style="color:#94a3b8;max-width:430px;line-height:1.6;margin:0;">The strongest buyers are not casual readers. They are people whose watchlists, sector views, or input-cost assumptions move when commodities move.</p>
   </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
     <div style="padding:20px 22px;border-radius:16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);">
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Pay for Pro if…</div>
+      <div class="eyebrow-cyan">Pay for Pro if…</div>
       <ul style="margin:0;color:var(--text2);line-height:1.8;">
         <li>commodity moves regularly change the stocks or sectors you track</li>
         <li>you care about event setups like OPEC, WASDE, or Fed-driven metals repricing</li>
@@ -1121,7 +1178,7 @@ no_loader: true
       </ul>
     </div>
     <div style="padding:20px 22px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
-      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Do not pay yet if…</div>
+      <div class="eyebrow-cyan">Do not pay yet if…</div>
       <ul style="margin:0;color:var(--text2);line-height:1.8;">
         <li>you mainly want generic market headlines or free charting tools</li>
         <li>you do not act on commodity-linked setups in portfolios, sectors, or budgets</li>
@@ -1142,7 +1199,7 @@ no_loader: true
 <section class="pricing-plan-section">
   <div class="pricing-proof-header">
     <div>
-      <p class="section-label" style="margin-bottom:8px;">Role-based value</p>
+      <p class="section-label mb-8">Role-based value</p>
       <h2 style="font-size:1.5rem;margin:0;color:var(--text);">Why the same subscription earns its keep in different jobs</h2>
     </div>
     <p style="color:#94a3b8;max-width:430px;line-height:1.6;margin:0;">The use case changes by role. The underlying value stays the same: faster, more structured translation from commodity move to decision.</p>
@@ -1178,18 +1235,18 @@ no_loader: true
 <section class="pricing-plan-section">
   <div class="pricing-proof-header">
     <div>
-      <p class="section-label" style="margin-bottom:8px;">What your first 10 minutes should look like</p>
+      <p class="section-label mb-8">What your first 10 minutes should look like</p>
       <h2 style="font-size:1.5rem;margin:0;color:var(--text);">The onboarding path should create a value moment before you ever think about retention.</h2>
     </div>
     <p style="color:#94a3b8;max-width:430px;line-height:1.6;margin:0;">Build a role-aware workflow, save the commodities and names you actually care about, then go straight into the most relevant live setup.</p>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+  <div class="auto-grid-220">
     <div class="pricing-proof-card pricing-proof-card--cyan">
       <span class="pricing-proof-card-label">Minute 1–2</span>
       <p>Choose your role and save the commodities that actually move your world.</p>
     </div>
     <div class="pricing-proof-card">
-      <span class="pricing-proof-card-label" style="color:#22d3ee;">Minute 3–5</span>
+      <span class="pricing-proof-card-label text-accent">Minute 3–5</span>
       <p>Save your watchlist names or exposure points so the simulator can tell you when a commodity shock overlaps with your real decisions.</p>
     </div>
     <div class="pricing-proof-card pricing-proof-card--green">
@@ -1259,7 +1316,7 @@ no_loader: true
   if (!stepsHost || !chartEl || !window.echarts) return;
   stepsHost.innerHTML = steps.map(function(step, idx){
     return '<article class="pricing-story-step" data-step-index="'+idx+'" style="padding:16px 18px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);display:grid;gap:8px;">'
-      + '<div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">'+step.kicker+'</div>'
+      + '<div class="eyebrow-cyan">'+step.kicker+'</div>'
       + '<strong style="color:#f8fafc;font-size:1rem;line-height:1.45;">'+step.title+'</strong>'
       + '<p style="margin:0;color:#94a3b8;line-height:1.68;font-size:0.9rem;">'+step.body+'</p>'
       + '<span style="font-size:0.82rem;font-weight:700;color:#34d399;">Decision depth '+step.delta+'</span>'
