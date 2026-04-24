@@ -27,6 +27,10 @@ def test_rl_policy_lab_ships_referenced_premium_3d_policy_manifold():
     assert 'State vector → policy candidates → reward replay → final action' in layout
     assert 'intel-rl-model-theater-canvas' in layout
     assert 'renderRlModelTheater' in script
+    assert 'drawRewardRibbon' in script
+    assert 'drawPolicyDistributionRing' in script
+    assert 'drawReplayTimeline' in script
+    assert 'drawModelConfidenceBands' in script
     assert 'Policy state manifold' in layout
     assert 'intel-rl-manifold-canvas' in layout
     assert 'intel-rl-manifold-webgl-badge' in layout

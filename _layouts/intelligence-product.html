@@ -101,8 +101,8 @@ layout: default
 .intel-rl-model-action span { display:block; color:#facc15; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:900; }
 .intel-rl-model-action strong { display:block; margin-top:6px; font-size:1rem; }
 .intel-rl-model-grid { position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(280px,0.75fr); gap:16px; align-items:stretch; }
-.intel-rl-model-canvas-wrap { position:relative; min-height:420px; border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:radial-gradient(circle at 50% 45%, rgba(34,211,238,0.13), rgba(15,23,42,0.84) 48%, rgba(2,6,23,0.98)); overflow:hidden; }
-.intel-rl-model-canvas-wrap canvas { width:100%; height:420px; display:block; }
+.intel-rl-model-canvas-wrap { position:relative; min-height:500px; border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:radial-gradient(circle at 50% 45%, rgba(34,211,238,0.13), rgba(15,23,42,0.84) 48%, rgba(2,6,23,0.98)); overflow:hidden; }
+.intel-rl-model-canvas-wrap canvas { width:100%; height:500px; display:block; }
 .intel-rl-model-badge { position:absolute; left:16px; top:16px; z-index:2; display:inline-flex; padding:7px 11px; border-radius:999px; background:rgba(2,6,23,0.68); border:1px solid rgba(34,211,238,0.22); color:#cbd5e1; font-size:0.72rem; font-weight:900; letter-spacing:0.05em; text-transform:uppercase; backdrop-filter:blur(12px); }
 .intel-rl-model-metrics { display:grid; gap:10px; }
 .intel-rl-model-metric { padding:13px 15px; border-radius:16px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.04); }
@@ -194,6 +194,13 @@ layout: default
 .intel-workspace-meta { color:#94a3b8; line-height:1.7; margin-top:8px; }
 @media (max-width: 980px) {
   .intel-product-grid, .intel-product-two, .intel-product-four, .intel-workflow-strip, .intel-workflow-grid, .intel-pricing-grid, .intel-success-grid, .intel-rl-model-grid, .intel-rl-model-steps { grid-template-columns: 1fr; }
+  .intel-rl-model-theater { padding:14px; border-radius:20px; }
+  .intel-rl-model-canvas-wrap { min-height:500px; }
+  .intel-rl-model-canvas-wrap canvas { height:500px; }
+  .intel-rl-model-metrics { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+  .intel-rl-model-metric { padding:11px 12px; }
+  .intel-rl-model-metric strong { font-size:1.08rem; }
+  .intel-rl-model-metric em { font-size:0.76rem; }
 }
 @media (max-width: 768px) {
   .intel-product-shell { padding: 0 16px 42px; }

@@ -1320,104 +1320,258 @@
       var rect = canvas.parentElement.getBoundingClientRect();
       var dpr = window.devicePixelRatio || 1;
       var width = Math.max(1, rect.width);
-      var height = 420;
+      var compact = width < 560;
+      var height = compact ? 500 : 460;
       canvas.width = Math.floor(width * dpr);
       canvas.height = Math.floor(height * dpr);
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      return { width: width, height: height, center: { x: width * 0.5, y: height * 0.52 }, radius: Math.min(width, height) * 0.32 };
+      return {
+        width: width,
+        height: height,
+        compact: compact,
+        center: { x: width * 0.5, y: compact ? height * 0.48 : height * 0.50 },
+        radius: Math.min(width, height) * (compact ? 0.29 : 0.34)
+      };
     }
 
-    function drawNode(x, y, radius, color, label, value, active){
+    function rgba(hex, alpha){
+      var value = String(hex || '#ffffff').replace('#', '');
+      if (value.length === 3) value = value.split('').map(function(v){ return v + v; }).join('');
+      var r = parseInt(value.slice(0, 2), 16) || 255;
+      var g = parseInt(value.slice(2, 4), 16) || 255;
+      var b = parseInt(value.slice(4, 6), 16) || 255;
+      return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+    }
+
+    function drawRoundedLabel(text, x, y, fill, align){
       context.save();
-      context.shadowColor = color;
-      context.shadowBlur = active ? 28 : 12;
+      context.font = '900 11px Inter, system-ui, sans-serif';
+      context.textAlign = align || 'center';
+      var metrics = context.measureText(text);
+      var padX = 9;
+      var width = metrics.width + padX * 2;
+      var height = 22;
+      var left = align === 'left' ? x : x - width / 2;
+      context.fillStyle = 'rgba(2,6,23,0.72)';
+      context.strokeStyle = rgba(fill, 0.42);
+      context.lineWidth = 1;
       context.beginPath();
-      context.arc(x, y, radius, 0, Math.PI * 2);
-      context.fillStyle = color + (active ? 'ee' : '99');
+      context.roundRect(left, y - height + 6, width, height, 10);
       context.fill();
-      context.shadowBlur = 0;
-      context.strokeStyle = active ? 'rgba(255,255,255,0.82)' : 'rgba(255,255,255,0.28)';
-      context.lineWidth = active ? 2 : 1;
       context.stroke();
-      context.fillStyle = '#e2e8f0';
-      context.font = '800 11px Inter, system-ui, sans-serif';
-      context.textAlign = 'center';
-      context.fillText(label, x, y + radius + 18);
-      context.fillStyle = '#94a3b8';
-      context.font = '700 10px Inter, system-ui, sans-serif';
-      context.fillText(Math.round(value * 100) + '%', x, y + radius + 33);
+      context.fillStyle = '#f8fafc';
+      context.fillText(text, align === 'left' ? x + padX : x, y);
       context.restore();
+    }
+
+    function drawPolicyDistributionRing(geo, t){
+      var start = -Math.PI / 2;
+      var total = actions.reduce(function(sum, action){ return sum + Math.max(0.01, Number(probabilities[action] || 0)); }, 0) || 1;
+      var ringRadius = geo.radius * 0.95;
+      context.save();
+      context.lineCap = 'round';
+      context.lineWidth = geo.compact ? 12 : 15;
+      actions.forEach(function(action){
+        var value = Math.max(0.01, Number(probabilities[action] || 0));
+        var arc = Math.PI * 2 * value / total;
+        context.beginPath();
+        context.strokeStyle = rgba(colors[action], action === selected ? 0.95 : 0.5);
+        context.shadowColor = colors[action];
+        context.shadowBlur = action === selected ? 20 : 8;
+        context.arc(geo.center.x, geo.center.y, ringRadius, start + 0.02, start + arc - 0.02);
+        context.stroke();
+        start += arc;
+      });
+      context.restore();
+      for (var i = 0; i < 42; i++) {
+        var a = -Math.PI / 2 + (Math.PI * 2 * i / 42) + t * 0.08;
+        var r = ringRadius + 23 + Math.sin(t * 1.6 + i) * 5;
+        context.fillStyle = i % 5 === 0 ? 'rgba(250,204,21,0.65)' : 'rgba(34,211,238,0.28)';
+        context.beginPath();
+        context.arc(geo.center.x + Math.cos(a) * r, geo.center.y + Math.sin(a) * r, i % 5 === 0 ? 2.6 : 1.4, 0, Math.PI * 2);
+        context.fill();
+      }
+    }
+
+    function drawModelConfidenceBands(geo, t){
+      context.save();
+      for (var i = 0; i < 5; i++) {
+        var scale = 0.52 + i * 0.13 + Math.sin(t * 0.9 + i) * 0.008;
+        context.beginPath();
+        context.ellipse(geo.center.x, geo.center.y + i * 2, geo.radius * scale * 1.35, geo.radius * scale * 0.42, -0.18, 0, Math.PI * 2);
+        context.strokeStyle = 'rgba(148,163,184,' + (0.08 + confidence * 0.06) + ')';
+        context.lineWidth = 1;
+        context.stroke();
+      }
+      context.restore();
+    }
+
+    function drawRewardRibbon(geo, t){
+      var amp = Math.max(18, Math.min(72, Math.abs(rewardEdge) * 3));
+      context.save();
+      context.lineWidth = geo.compact ? 5 : 7;
+      context.lineCap = 'round';
+      context.shadowColor = rewardEdge >= 0 ? '#22c55e' : '#f87171';
+      context.shadowBlur = 18;
+      for (var band = 0; band < 3; band++) {
+        context.beginPath();
+        for (var i = 0; i <= 70; i++) {
+          var p = i / 70;
+          var x = geo.width * (0.10 + p * 0.80);
+          var y = geo.height * (0.74 + band * 0.035) + Math.sin(p * Math.PI * 2 + t * 1.7 + band) * (amp * (0.18 + band * 0.04));
+          if (i === 0) context.moveTo(x, y); else context.lineTo(x, y);
+        }
+        context.strokeStyle = band === 0 ? 'rgba(34,197,94,0.62)' : (band === 1 ? 'rgba(34,211,238,0.34)' : 'rgba(168,85,247,0.28)');
+        context.stroke();
+      }
+      drawRoundedLabel('REWARD REPLAY EDGE ' + fmtSigned(rewardEdge, 2), geo.width * 0.08, geo.height * 0.70, '#22c55e', 'left');
+      context.restore();
+    }
+
+    function drawReplayTimeline(geo, t){
+      var y = geo.compact ? geo.height - 54 : geo.height - 42;
+      var left = geo.width * 0.08;
+      var right = geo.width * 0.92;
+      context.save();
+      context.strokeStyle = 'rgba(148,163,184,0.26)';
+      context.lineWidth = 1;
+      context.beginPath();
+      context.moveTo(left, y);
+      context.lineTo(right, y);
+      context.stroke();
+      var labels = ['state', 'policy', 'reward', 'guardrail', 'action'];
+      labels.forEach(function(label, idx){
+        var p = idx / (labels.length - 1);
+        var x = left + (right - left) * p;
+        var active = ((t * 0.45) % 1) >= p - 0.12;
+        context.fillStyle = active ? '#22d3ee' : '#475569';
+        context.shadowColor = active ? '#22d3ee' : 'transparent';
+        context.shadowBlur = active ? 12 : 0;
+        context.beginPath();
+        context.arc(x, y, active ? 5 : 3.5, 0, Math.PI * 2);
+        context.fill();
+        context.shadowBlur = 0;
+        context.fillStyle = active ? '#cbd5e1' : '#64748b';
+        context.font = '800 9px Inter, system-ui, sans-serif';
+        context.textAlign = 'center';
+        context.fillText(label.toUpperCase(), x, y + 22);
+      });
+      context.restore();
+    }
+
+    function drawActionCard(action, idx, geo, t){
+      var value = Number(probabilities[action] || 0);
+      var selectedAction = action === selected;
+      var side = idx % 2 === 0 ? -1 : 1;
+      var row = Math.floor(idx / 2);
+      var x = geo.center.x + side * geo.radius * (1.12 + value * 0.32);
+      var y = geo.center.y - geo.radius * 0.52 + row * geo.radius * 0.50 + Math.sin(t + idx) * 3;
+      if (geo.compact) {
+        var angle = -Math.PI / 2 + idx * (Math.PI * 2 / actions.length);
+        x = geo.center.x + Math.cos(angle) * geo.radius * 1.22;
+        y = geo.center.y + Math.sin(angle) * geo.radius * 1.03;
+      }
+      var w = geo.compact ? 92 : 126;
+      var h = geo.compact ? 44 : 50;
+      context.save();
+      context.shadowColor = colors[action];
+      context.shadowBlur = selectedAction ? 24 : 8;
+      context.fillStyle = selectedAction ? rgba(colors[action], 0.2) : 'rgba(15,23,42,0.72)';
+      context.strokeStyle = selectedAction ? rgba(colors[action], 0.92) : 'rgba(255,255,255,0.12)';
+      context.lineWidth = selectedAction ? 2 : 1;
+      context.beginPath();
+      context.roundRect(x - w / 2, y - h / 2, w, h, 14);
+      context.fill();
+      context.stroke();
+      context.fillStyle = selectedAction ? '#f8fafc' : '#cbd5e1';
+      context.font = '900 ' + (geo.compact ? 9 : 11) + 'px Inter, system-ui, sans-serif';
+      context.textAlign = 'center';
+      context.fillText(titleize(action).replace('Relative Value ', 'RV '), x, y - 3);
+      context.fillStyle = colors[action];
+      context.font = '900 ' + (geo.compact ? 13 : 15) + 'px JetBrains Mono, monospace';
+      context.fillText(Math.round(value * 100) + '%', x, y + 16);
+      context.restore();
+      return { x: x, y: y, value: value, active: selectedAction };
     }
 
     function frame(){
       var geo = geometry();
       var t = Date.now() / 1000;
       context.clearRect(0, 0, geo.width, geo.height);
-      var grd = context.createRadialGradient(geo.center.x, geo.center.y, 20, geo.center.x, geo.center.y, geo.width * 0.62);
-      grd.addColorStop(0, 'rgba(34,211,238,0.18)');
-      grd.addColorStop(0.45, 'rgba(168,85,247,0.08)');
+      var grd = context.createRadialGradient(geo.center.x, geo.center.y, 20, geo.center.x, geo.center.y, geo.width * 0.72);
+      grd.addColorStop(0, 'rgba(250,204,21,0.14)');
+      grd.addColorStop(0.26, 'rgba(34,211,238,0.14)');
+      grd.addColorStop(0.58, 'rgba(168,85,247,0.08)');
       grd.addColorStop(1, 'rgba(2,6,23,0)');
       context.fillStyle = grd;
       context.fillRect(0, 0, geo.width, geo.height);
-
-      context.strokeStyle = 'rgba(148,163,184,0.08)';
-      context.lineWidth = 1;
-      for (var gx = -geo.width; gx < geo.width * 2; gx += 34) {
-        context.beginPath(); context.moveTo(gx + Math.sin(t) * 10, geo.height); context.lineTo(gx + geo.width * 0.28, geo.height * 0.08); context.stroke();
-      }
-      for (var gy = 70; gy < geo.height; gy += 34) {
-        context.beginPath(); context.moveTo(0, gy); context.lineTo(geo.width, gy + Math.sin(t + gy) * 8); context.stroke();
-      }
-
-      var selectedAngle = 0;
-      actions.forEach(function(action, idx){
-        var angle = -Math.PI / 2 + idx * (Math.PI * 2 / actions.length) + Math.sin(t * 0.22) * 0.04;
-        if (action === selected) selectedAngle = angle;
-        var value = Number(probabilities[action] || 0);
-        var x = geo.center.x + Math.cos(angle) * geo.radius * (0.92 + value * 0.36);
-        var y = geo.center.y + Math.sin(angle) * geo.radius * (0.82 + pressure * 0.2);
-        context.beginPath();
-        context.moveTo(geo.center.x, geo.center.y);
-        context.lineTo(x, y);
-        context.strokeStyle = action === selected ? 'rgba(250,204,21,0.58)' : 'rgba(255,255,255,0.12)';
-        context.lineWidth = 1 + value * 4;
-        context.stroke();
-        drawNode(x, y, 8 + value * 22, colors[action], titleize(action), value, action === selected);
-      });
-
-      var pulse = 1 + Math.sin(t * 3) * 0.06;
       context.save();
-      context.shadowColor = '#facc15';
-      context.shadowBlur = 34;
-      context.beginPath();
-      context.arc(geo.center.x, geo.center.y, 48 * pulse, 0, Math.PI * 2);
-      context.fillStyle = 'rgba(250,204,21,0.18)';
-      context.fill();
-      context.strokeStyle = 'rgba(250,204,21,0.8)';
-      context.lineWidth = 2;
-      context.stroke();
-      context.fillStyle = '#f8fafc';
-      context.textAlign = 'center';
-      context.font = '900 16px Inter, system-ui, sans-serif';
-      context.fillText(titleize(selected), geo.center.x, geo.center.y - 4);
-      context.fillStyle = '#facc15';
-      context.font = '800 11px Inter, system-ui, sans-serif';
-      context.fillText('FINAL ACTION · ' + Math.round(confidence * 100) + '%', geo.center.x, geo.center.y + 18);
+      context.strokeStyle = 'rgba(148,163,184,0.055)';
+      context.lineWidth = 1;
+      for (var gx = -geo.width; gx < geo.width * 2; gx += 32) {
+        context.beginPath(); context.moveTo(gx + Math.sin(t) * 6, geo.height); context.lineTo(gx + geo.width * 0.24, geo.height * 0.08); context.stroke();
+      }
+      for (var gy = 70; gy < geo.height; gy += 30) {
+        context.beginPath(); context.moveTo(0, gy); context.lineTo(geo.width, gy + Math.sin(t + gy) * 5); context.stroke();
+      }
       context.restore();
 
-      var rx = geo.center.x + Math.cos(selectedAngle) * geo.radius * 0.54;
-      var ry = geo.center.y + Math.sin(selectedAngle) * geo.radius * 0.46;
-      context.fillStyle = 'rgba(34,211,238,0.86)';
-      for (var i = 0; i < 16; i++) {
-        var p = (t * 0.28 + i / 16) % 1;
-        var x = geo.center.x * (1 - p) + rx * p + Math.sin(t * 2 + i) * 12;
-        var y = geo.center.y * (1 - p) + ry * p + Math.cos(t * 2 + i) * 8;
-        context.globalAlpha = 1 - p;
+      drawModelConfidenceBands(geo, t);
+      drawPolicyDistributionRing(geo, t);
+      var cards = actions.map(function(action, idx){ return drawActionCard(action, idx, geo, t); });
+      cards.forEach(function(card, idx){
+        var action = actions[idx];
+        var alpha = card.active ? 0.72 : 0.18;
+        context.save();
+        context.strokeStyle = card.active ? rgba(colors[action], alpha) : 'rgba(255,255,255,0.10)';
+        context.lineWidth = card.active ? 2.5 : 1;
+        context.setLineDash(card.active ? [] : [4, 8]);
         context.beginPath();
-        context.arc(x, y, 2 + (1 - p) * 3, 0, Math.PI * 2);
+        context.moveTo(geo.center.x, geo.center.y);
+        context.bezierCurveTo(geo.center.x, card.y, card.x, geo.center.y, card.x, card.y);
+        context.stroke();
+        context.restore();
+      });
+
+      var pulse = 1 + Math.sin(t * 3) * 0.045;
+      context.save();
+      context.shadowColor = '#facc15';
+      context.shadowBlur = 38;
+      var coreGradient = context.createRadialGradient(geo.center.x, geo.center.y, 6, geo.center.x, geo.center.y, 70 * pulse);
+      coreGradient.addColorStop(0, 'rgba(250,204,21,0.52)');
+      coreGradient.addColorStop(0.55, 'rgba(34,197,94,0.20)');
+      coreGradient.addColorStop(1, 'rgba(34,211,238,0.04)');
+      context.beginPath();
+      context.arc(geo.center.x, geo.center.y, 62 * pulse, 0, Math.PI * 2);
+      context.fillStyle = coreGradient;
+      context.fill();
+      context.strokeStyle = 'rgba(250,204,21,0.82)';
+      context.lineWidth = 2;
+      context.stroke();
+      context.shadowBlur = 0;
+      context.fillStyle = '#f8fafc';
+      context.textAlign = 'center';
+      context.font = '900 ' + (geo.compact ? 14 : 18) + 'px Inter, system-ui, sans-serif';
+      context.fillText(titleize(selected), geo.center.x, geo.center.y - 8);
+      context.fillStyle = '#facc15';
+      context.font = '900 11px JetBrains Mono, monospace';
+      context.fillText('FINAL ACTION · ' + Math.round(confidence * 100) + '%', geo.center.x, geo.center.y + 16);
+      context.restore();
+
+      for (var i = 0; i < 26; i++) {
+        var p = (t * 0.32 + i / 26) % 1;
+        var angle = -Math.PI / 2 + p * Math.PI * 2;
+        var x = geo.center.x + Math.cos(angle) * geo.radius * (0.34 + p * 0.64);
+        var y = geo.center.y + Math.sin(angle) * geo.radius * (0.20 + p * 0.45);
+        context.globalAlpha = 1 - p * 0.8;
+        context.fillStyle = i % 3 === 0 ? '#facc15' : '#22d3ee';
+        context.beginPath();
+        context.arc(x, y, 1.8 + (1 - p) * 2.8, 0, Math.PI * 2);
         context.fill();
       }
       context.globalAlpha = 1;
+      drawRewardRibbon(geo, t);
+      drawReplayTimeline(geo, t);
       state.rlModelTheater.frame = requestAnimationFrame(frame);
     }
 
