@@ -14,12 +14,14 @@
 
   var state = {
     selected: config.defaultCommodity || 'crude_oil',
+    currentBundle: null,
     prices: {},
     consensus: {},
     curated: {},
     rlArtifacts: {},
     chart: null,
     rlCharts: {},
+    rlModelTheater: { frame: 0, resizeBound: false },
     rlField: { frame: 0, particles: [], resizeBound: false },
     policyManifold: { frame: 0, resizeBound: false, renderer: null, scene: null, controls: null }
   };
@@ -285,6 +287,13 @@
       if (state.rlCharts[key]) state.rlCharts[key].destroy();
     });
     state.rlCharts = {};
+  }
+
+  function stopRlModelTheaterAnimation(){
+    if (state.rlModelTheater && state.rlModelTheater.frame) {
+      cancelAnimationFrame(state.rlModelTheater.frame);
+      state.rlModelTheater.frame = 0;
+    }
   }
 
   function stopRlFieldAnimation(){
@@ -1234,6 +1243,7 @@
     if (!window.gsap || config.demoKind !== 'rl-policy-lab') return;
     var targets = [
       $('intel-rl-decision-console'),
+      $('intel-rl-model-theater'),
       document.querySelector('.intel-rl-field-shell'),
       $('intel-rl-premium-panels')
     ].filter(Boolean);
@@ -1251,6 +1261,177 @@
       window.gsap.killTweensOf(center);
       window.gsap.fromTo(center, { boxShadow: '0 0 0 rgba(34,211,238,0.0)', scale: 0.98 }, { boxShadow: '0 0 42px rgba(34,211,238,0.22)', scale: 1, duration: 0.8, ease: 'power2.out' });
     }
+  }
+
+  function renderRlModelTheater(bundle, frontier, neural, neuralFrontier, walkForward, replaySummary){
+    var theater = $('intel-rl-model-theater');
+    var canvas = $('intel-rl-model-theater-canvas');
+    if (!theater || !canvas || !neuralFrontier) return;
+    var context = canvas.getContext('2d');
+    if (!context) return;
+    stopRlModelTheaterAnimation();
+
+    var probabilities = neuralFrontier.probabilities || {};
+    var actions = ['reduce_risk', 'hold', 'add_continuation', 'add_hedge', 'relative_value_rotation'];
+    var colors = {
+      reduce_risk: '#f87171',
+      hold: '#94a3b8',
+      add_continuation: '#22c55e',
+      add_hedge: '#38bdf8',
+      relative_value_rotation: '#c084fc'
+    };
+    var selected = String(neuralFrontier.action || 'hold');
+    var confidence = Number(neuralFrontier.confidence || probabilities[selected] || 0);
+    var agreement = getAgreement(bundle || {});
+    var anomaly = computeAnomaly(bundle || {});
+    var events = computeEventProbabilities(bundle || {});
+    var eventRisk = events[0] ? Number(events[0].probability || 0) : 0;
+    var spread = agreement && agreement.dispersion != null ? Number(agreement.dispersion || 0) : 0;
+    var pressure = Math.max(0, Math.min(1, (
+      Number((anomaly && anomaly.score) || 0) / 99 * 0.35 +
+      eventRisk * 0.25 +
+      Math.abs(spread) * 0.2 +
+      confidence * 0.2
+    )));
+    var probs = actions.map(function(action){ return Number(probabilities[action] || 0); });
+    var disagreement = Math.max.apply(null, probs) - Math.min.apply(null, probs);
+    var rewardEdge = neural && neural.vs_hold_reward_uplift != null ? Number(neural.vs_hold_reward_uplift || 0) : 0;
+    var walkRate = walkForward && walkForward.positive_window_rate != null ? Number(walkForward.positive_window_rate || 0) : 0;
+    var drag = replaySummary && replaySummary.reward_decomposition ? (
+      Number(replaySummary.reward_decomposition.turnover_cost || 0) +
+      Number(replaySummary.reward_decomposition.drawdown_cost || 0) +
+      Number(replaySummary.reward_decomposition.event_gap_cost || 0)
+    ) : 0;
+
+    if ($('intel-rl-model-action')) $('intel-rl-model-action').textContent = titleize(selected);
+    if ($('intel-rl-model-confidence')) $('intel-rl-model-confidence').textContent = Math.round(confidence * 100) + '% confidence · policy energy ' + disagreement.toFixed(2);
+    var metrics = $('intel-rl-model-metrics');
+    if (metrics) {
+      metrics.innerHTML = [
+        '<div class="intel-rl-model-metric"><span>State pressure</span><strong>' + Math.round(pressure * 100) + '%</strong><em>Composite from anomaly, event risk, spread, and short trend.</em></div>',
+        '<div class="intel-rl-model-metric"><span>Model disagreement</span><strong>' + Math.round(disagreement * 100) + '%</strong><em>Policy probability spread across candidate actions.</em></div>',
+        '<div class="intel-rl-model-metric"><span>Walk-forward guardrail</span><strong>' + Math.round(walkRate * 100) + '%</strong><em>Positive unseen windows used as the trust gate.</em></div>',
+        '<div class="intel-rl-model-metric"><span>Reward replay edge</span><strong>' + fmtSigned(rewardEdge, 2) + '</strong><em>Replay uplift versus passive hold baseline.</em></div>',
+        '<div class="intel-rl-model-metric"><span>Reward stack drag</span><strong>-' + Math.abs(drag).toFixed(2) + '</strong><em>Turnover, drawdown, and event-gap penalties.</em></div>'
+      ].join('');
+    }
+
+    function geometry(){
+      var rect = canvas.parentElement.getBoundingClientRect();
+      var dpr = window.devicePixelRatio || 1;
+      var width = Math.max(1, rect.width);
+      var height = 420;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { width: width, height: height, center: { x: width * 0.5, y: height * 0.52 }, radius: Math.min(width, height) * 0.32 };
+    }
+
+    function drawNode(x, y, radius, color, label, value, active){
+      context.save();
+      context.shadowColor = color;
+      context.shadowBlur = active ? 28 : 12;
+      context.beginPath();
+      context.arc(x, y, radius, 0, Math.PI * 2);
+      context.fillStyle = color + (active ? 'ee' : '99');
+      context.fill();
+      context.shadowBlur = 0;
+      context.strokeStyle = active ? 'rgba(255,255,255,0.82)' : 'rgba(255,255,255,0.28)';
+      context.lineWidth = active ? 2 : 1;
+      context.stroke();
+      context.fillStyle = '#e2e8f0';
+      context.font = '800 11px Inter, system-ui, sans-serif';
+      context.textAlign = 'center';
+      context.fillText(label, x, y + radius + 18);
+      context.fillStyle = '#94a3b8';
+      context.font = '700 10px Inter, system-ui, sans-serif';
+      context.fillText(Math.round(value * 100) + '%', x, y + radius + 33);
+      context.restore();
+    }
+
+    function frame(){
+      var geo = geometry();
+      var t = Date.now() / 1000;
+      context.clearRect(0, 0, geo.width, geo.height);
+      var grd = context.createRadialGradient(geo.center.x, geo.center.y, 20, geo.center.x, geo.center.y, geo.width * 0.62);
+      grd.addColorStop(0, 'rgba(34,211,238,0.18)');
+      grd.addColorStop(0.45, 'rgba(168,85,247,0.08)');
+      grd.addColorStop(1, 'rgba(2,6,23,0)');
+      context.fillStyle = grd;
+      context.fillRect(0, 0, geo.width, geo.height);
+
+      context.strokeStyle = 'rgba(148,163,184,0.08)';
+      context.lineWidth = 1;
+      for (var gx = -geo.width; gx < geo.width * 2; gx += 34) {
+        context.beginPath(); context.moveTo(gx + Math.sin(t) * 10, geo.height); context.lineTo(gx + geo.width * 0.28, geo.height * 0.08); context.stroke();
+      }
+      for (var gy = 70; gy < geo.height; gy += 34) {
+        context.beginPath(); context.moveTo(0, gy); context.lineTo(geo.width, gy + Math.sin(t + gy) * 8); context.stroke();
+      }
+
+      var selectedAngle = 0;
+      actions.forEach(function(action, idx){
+        var angle = -Math.PI / 2 + idx * (Math.PI * 2 / actions.length) + Math.sin(t * 0.22) * 0.04;
+        if (action === selected) selectedAngle = angle;
+        var value = Number(probabilities[action] || 0);
+        var x = geo.center.x + Math.cos(angle) * geo.radius * (0.92 + value * 0.36);
+        var y = geo.center.y + Math.sin(angle) * geo.radius * (0.82 + pressure * 0.2);
+        context.beginPath();
+        context.moveTo(geo.center.x, geo.center.y);
+        context.lineTo(x, y);
+        context.strokeStyle = action === selected ? 'rgba(250,204,21,0.58)' : 'rgba(255,255,255,0.12)';
+        context.lineWidth = 1 + value * 4;
+        context.stroke();
+        drawNode(x, y, 8 + value * 22, colors[action], titleize(action), value, action === selected);
+      });
+
+      var pulse = 1 + Math.sin(t * 3) * 0.06;
+      context.save();
+      context.shadowColor = '#facc15';
+      context.shadowBlur = 34;
+      context.beginPath();
+      context.arc(geo.center.x, geo.center.y, 48 * pulse, 0, Math.PI * 2);
+      context.fillStyle = 'rgba(250,204,21,0.18)';
+      context.fill();
+      context.strokeStyle = 'rgba(250,204,21,0.8)';
+      context.lineWidth = 2;
+      context.stroke();
+      context.fillStyle = '#f8fafc';
+      context.textAlign = 'center';
+      context.font = '900 16px Inter, system-ui, sans-serif';
+      context.fillText(titleize(selected), geo.center.x, geo.center.y - 4);
+      context.fillStyle = '#facc15';
+      context.font = '800 11px Inter, system-ui, sans-serif';
+      context.fillText('FINAL ACTION · ' + Math.round(confidence * 100) + '%', geo.center.x, geo.center.y + 18);
+      context.restore();
+
+      var rx = geo.center.x + Math.cos(selectedAngle) * geo.radius * 0.54;
+      var ry = geo.center.y + Math.sin(selectedAngle) * geo.radius * 0.46;
+      context.fillStyle = 'rgba(34,211,238,0.86)';
+      for (var i = 0; i < 16; i++) {
+        var p = (t * 0.28 + i / 16) % 1;
+        var x = geo.center.x * (1 - p) + rx * p + Math.sin(t * 2 + i) * 12;
+        var y = geo.center.y * (1 - p) + ry * p + Math.cos(t * 2 + i) * 8;
+        context.globalAlpha = 1 - p;
+        context.beginPath();
+        context.arc(x, y, 2 + (1 - p) * 3, 0, Math.PI * 2);
+        context.fill();
+      }
+      context.globalAlpha = 1;
+      state.rlModelTheater.frame = requestAnimationFrame(frame);
+    }
+
+    if (!state.rlModelTheater.resizeBound) {
+      window.addEventListener('resize', function(){
+        if (config.demoKind === 'rl-policy-lab') {
+          var neural = getNeuralPolicy();
+          renderRlModelTheater(state.currentBundle || {}, getRlFrontierForSelected(), neural, getNeuralFrontierForSelected(), neural && neural.walk_forward, neural && neural.replay_summary);
+        }
+      });
+      state.rlModelTheater.resizeBound = true;
+    }
+    theater.hidden = false;
+    frame();
   }
 
   function renderRlPolicyField(neuralFrontier, replaySummary, walkForward){
@@ -1886,6 +2067,7 @@
   }
 
   function renderPolicyLab(bundle){
+    state.currentBundle = bundle || null;
     var frontier = getRlFrontierForSelected();
     var benchmark = getRlBenchmark();
     var neural = getNeuralPolicy();
@@ -1976,6 +2158,7 @@
         { title: 'Reward decomposition', copy: replaySummary ? ('PnL ' + Number((replaySummary.reward_decomposition || {}).pnl || 0).toFixed(4) + ' · Turnover -' + Number((replaySummary.reward_decomposition || {}).turnover_cost || 0).toFixed(4) + ' · Drawdown -' + Number((replaySummary.reward_decomposition || {}).drawdown_cost || 0).toFixed(4) + ' · Event gap -' + Number((replaySummary.reward_decomposition || {}).event_gap_cost || 0).toFixed(4) + '.') : 'Reward decomposition unavailable.' }
       ]);
       renderRlDecisionCard(frontier, neural, neuralFrontier, walkForward, replaySummary);
+      renderRlModelTheater(bundle, frontier, neural, neuralFrontier, walkForward, replaySummary);
       renderRlTrustStrip(neural, walkForward, replaySummary, neuralFrontier);
       renderRlObservabilityBoard(frontier, neural, neuralFrontier, walkForward, replaySummary);
     renderRlObservabilityRadar(frontier, neuralFrontier, replaySummary);

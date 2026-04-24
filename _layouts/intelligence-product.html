@@ -92,6 +92,27 @@ layout: default
 .intel-rl-card::after { content:''; position:absolute; inset:auto -30% -40% 45%; height:140px; background:radial-gradient(circle, rgba(34,211,238,0.12), rgba(34,211,238,0) 68%); pointer-events:none; }
 .intel-rl-card h3 { margin:0 0 8px; color:#f8fafc; font-size:1.02rem; }
 .intel-rl-card p { margin:0; color:#94a3b8; line-height:1.7; }
+.intel-rl-model-theater { position:relative; margin-top:18px; padding:20px; border-radius:22px; border:1px solid rgba(34,211,238,0.18); background:linear-gradient(135deg, rgba(2,6,23,0.96), rgba(12,18,38,0.94) 48%, rgba(30,18,52,0.92)); box-shadow:0 28px 80px rgba(2,6,23,0.42), inset 0 1px 0 rgba(255,255,255,0.05); overflow:hidden; }
+.intel-rl-model-theater::before { content:''; position:absolute; inset:-120px -80px auto auto; width:360px; height:360px; border-radius:999px; background:radial-gradient(circle, rgba(34,211,238,0.22), rgba(168,85,247,0.08) 45%, rgba(34,211,238,0) 72%); filter:blur(8px); pointer-events:none; }
+.intel-rl-model-head { position:relative; display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:16px; }
+.intel-rl-model-head h3 { margin:0; color:#f8fafc; font-size:clamp(1.25rem,2vw,1.75rem); letter-spacing:-0.02em; }
+.intel-rl-model-head p { margin:8px 0 0; color:#94a3b8; line-height:1.7; max-width:720px; }
+.intel-rl-model-action { min-width:220px; padding:14px 16px; border-radius:18px; border:1px solid rgba(250,204,21,0.22); background:rgba(250,204,21,0.08); color:#f8fafc; }
+.intel-rl-model-action span { display:block; color:#facc15; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:900; }
+.intel-rl-model-action strong { display:block; margin-top:6px; font-size:1rem; }
+.intel-rl-model-grid { position:relative; display:grid; grid-template-columns:minmax(0,1.25fr) minmax(280px,0.75fr); gap:16px; align-items:stretch; }
+.intel-rl-model-canvas-wrap { position:relative; min-height:420px; border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:radial-gradient(circle at 50% 45%, rgba(34,211,238,0.13), rgba(15,23,42,0.84) 48%, rgba(2,6,23,0.98)); overflow:hidden; }
+.intel-rl-model-canvas-wrap canvas { width:100%; height:420px; display:block; }
+.intel-rl-model-badge { position:absolute; left:16px; top:16px; z-index:2; display:inline-flex; padding:7px 11px; border-radius:999px; background:rgba(2,6,23,0.68); border:1px solid rgba(34,211,238,0.22); color:#cbd5e1; font-size:0.72rem; font-weight:900; letter-spacing:0.05em; text-transform:uppercase; backdrop-filter:blur(12px); }
+.intel-rl-model-metrics { display:grid; gap:10px; }
+.intel-rl-model-metric { padding:13px 15px; border-radius:16px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.04); }
+.intel-rl-model-metric span { display:block; color:#94a3b8; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:900; }
+.intel-rl-model-metric strong { display:block; margin-top:7px; color:#f8fafc; font-size:1.28rem; }
+.intel-rl-model-metric em { display:block; margin-top:5px; color:#94a3b8; font-size:0.82rem; line-height:1.55; font-style:normal; }
+.intel-rl-model-steps { position:relative; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-top:14px; }
+.intel-rl-model-step { padding:12px 14px; border-radius:15px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.035); }
+.intel-rl-model-step strong { display:block; color:#f8fafc; }
+.intel-rl-model-step span { display:block; color:#94a3b8; font-size:0.82rem; line-height:1.55; margin-top:5px; }
 .intel-rl-chart-wrap { position:relative; min-height:220px; margin-top:14px; }
 .intel-rl-pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
 .intel-rl-pill { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); color:#e2e8f0; font-size:0.8rem; backdrop-filter: blur(10px); }
@@ -172,7 +193,7 @@ layout: default
 .intel-workspace-row { display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
 .intel-workspace-meta { color:#94a3b8; line-height:1.7; margin-top:8px; }
 @media (max-width: 980px) {
-  .intel-product-grid, .intel-product-two, .intel-product-four, .intel-workflow-strip, .intel-workflow-grid, .intel-pricing-grid, .intel-success-grid { grid-template-columns: 1fr; }
+  .intel-product-grid, .intel-product-two, .intel-product-four, .intel-workflow-strip, .intel-workflow-grid, .intel-pricing-grid, .intel-success-grid, .intel-rl-model-grid, .intel-rl-model-steps { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
   .intel-product-shell { padding: 0 16px 42px; }
@@ -331,6 +352,38 @@ layout: default
         <div class="intel-insight-list" id="intel-demo-insights"></div>
       </div>
     </div>
+    <section class="intel-rl-model-theater" id="intel-rl-model-theater" aria-label="Live RL model visualization">
+      <div class="intel-rl-model-head">
+        <div>
+          <div class="intel-kicker">LIVE RL MODEL THEATER</div>
+          <h3>State vector → policy candidates → reward replay → final action</h3>
+          <p>Watch the active commodity move through the real RL loop: state pressure enters the model, candidate policies compete, replay rewards push back, and the final action resolves in the center.</p>
+        </div>
+        <div class="intel-rl-model-action">
+          <span>Current action</span>
+          <strong id="intel-rl-model-action">Loading policy…</strong>
+          <em id="intel-rl-model-confidence">Waiting for neural artifacts</em>
+        </div>
+      </div>
+      <div class="intel-rl-model-grid">
+        <div class="intel-rl-model-canvas-wrap">
+          <canvas id="intel-rl-model-theater-canvas" aria-label="Live Neural PPO replay model visualization"></canvas>
+          <div class="intel-rl-model-badge" id="intel-rl-model-badge">Neural PPO replay</div>
+        </div>
+        <div class="intel-rl-model-metrics" id="intel-rl-model-metrics">
+          <div class="intel-rl-model-metric"><span>State pressure</span><strong>—</strong><em>Agreement, event risk, spread, and short trend.</em></div>
+          <div class="intel-rl-model-metric"><span>Model disagreement</span><strong>—</strong><em>Policy spread across candidate actions.</em></div>
+          <div class="intel-rl-model-metric"><span>Walk-forward guardrail</span><strong>—</strong><em>Positive unseen windows before trusting the action.</em></div>
+          <div class="intel-rl-model-metric"><span>Reward replay edge</span><strong>—</strong><em>Reward uplift versus passive hold.</em></div>
+        </div>
+      </div>
+      <div class="intel-rl-model-steps">
+        <div class="intel-rl-model-step"><strong>1. State vector</strong><span>Agreement, trend, risk, spread, volatility, and event pressure.</span></div>
+        <div class="intel-rl-model-step"><strong>2. Policy candidates</strong><span>Reduce, hold, continuation, hedge, and rotation compete.</span></div>
+        <div class="intel-rl-model-step"><strong>3. Reward replay</strong><span>PnL, drawdown, turnover, and event-gap penalties score the path.</span></div>
+        <div class="intel-rl-model-step"><strong>4. Final action</strong><span>The selected policy is shipped with walk-forward guardrails.</span></div>
+      </div>
+    </section>
     <section class="intel-card mt-18" id="intel-rl-decision-console" hidden>
       <div class="intel-kicker">Decision console</div>
       <div class="intel-product-two" style="gap:16px;align-items:start;">
