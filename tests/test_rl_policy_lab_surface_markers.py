@@ -35,3 +35,11 @@ def test_rl_policy_lab_ships_referenced_premium_3d_policy_manifold():
     assert 'state-space replay' in script
     assert 'Action probability simplex' in script
     assert 'Dominant action concentration' in script
+    assert 'intelligence-product.js?v={{ site.time | date:' in layout
+
+
+def test_vercel_rebuild_cleans_stale_jekyll_artifacts_for_rl_webgl_deploys():
+    vercel = (ROOT / 'vercel.json').read_text(encoding='utf-8')
+
+    assert 'rm -rf _site .jekyll-cache' in vercel
+    assert 'bundle exec jekyll build' in vercel
