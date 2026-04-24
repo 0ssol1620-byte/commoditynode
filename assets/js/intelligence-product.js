@@ -21,7 +21,7 @@
     chart: null,
     rlCharts: {},
     rlField: { frame: 0, particles: [], resizeBound: false },
-    policyManifold: { frame: 0, resizeBound: false }
+    policyManifold: { frame: 0, resizeBound: false, renderer: null, scene: null, controls: null }
   };
 
   var STORAGE_KEYS = {
@@ -298,6 +298,24 @@
     if (state.policyManifold && state.policyManifold.frame) {
       cancelAnimationFrame(state.policyManifold.frame);
       state.policyManifold.frame = 0;
+    }
+    if (state.policyManifold && state.policyManifold.controls && state.policyManifold.controls.dispose) {
+      state.policyManifold.controls.dispose();
+      state.policyManifold.controls = null;
+    }
+    if (state.policyManifold && state.policyManifold.scene) {
+      state.policyManifold.scene.traverse(function(obj){
+        if (obj.geometry && obj.geometry.dispose) obj.geometry.dispose();
+        if (obj.material) {
+          if (Array.isArray(obj.material)) obj.material.forEach(function(mat){ if (mat && mat.dispose) mat.dispose(); });
+          else if (obj.material.dispose) obj.material.dispose();
+        }
+      });
+      state.policyManifold.scene = null;
+    }
+    if (state.policyManifold && state.policyManifold.renderer) {
+      if (state.policyManifold.renderer.dispose) state.policyManifold.renderer.dispose();
+      state.policyManifold.renderer = null;
     }
   }
 
@@ -1391,13 +1409,165 @@
     drawFrame();
   }
 
+  function renderRlPolicyManifoldWebGL(stage, canvas, points, colors, totalReward, targetMatch, distributionGap){
+    var THREE = window.THREE;
+    var badge = $('intel-rl-manifold-webgl-badge');
+    if (!THREE || !THREE.WebGLRenderer || !canvas || !stage) {
+      if (badge) badge.textContent = 'Canvas fallback';
+      return false;
+    }
+    try {
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+      renderer.setClearColor(0x020617, 0);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+      var scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x020617, 0.085);
+      var camera = new THREE.PerspectiveCamera(48, 1, 0.1, 100);
+      camera.position.set(5.2, 4.4, 7.2);
+      camera.lookAt(0, 0.6, 0);
+
+      var controls = window.THREE.OrbitControls ? new THREE.OrbitControls(camera, canvas) : null; // OrbitControls
+      if (controls) {
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.07;
+        controls.enablePan = false;
+        controls.minDistance = 4.2;
+        controls.maxDistance = 10.5;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.42;
+      }
+
+      var ambient = new THREE.AmbientLight(0x8bdff2, 0.55);
+      scene.add(ambient);
+      var key = new THREE.PointLight(0x22d3ee, 1.3, 18);
+      key.position.set(-3, 5, 5);
+      scene.add(key);
+      var fill = new THREE.PointLight(0xa855f7, 1.05, 18);
+      fill.position.set(4, 2.5, -4);
+      scene.add(fill);
+
+      var group = new THREE.Group();
+      group.name = 'CommodityNode RL policy universe';
+      scene.add(group);
+
+      var grid = new THREE.GridHelper(8.2, 16, 0x38bdf8, 0x334155);
+      grid.position.y = -1.45;
+      grid.material.opacity = 0.26;
+      grid.material.transparent = true;
+      group.add(grid);
+
+      var ringMat = new THREE.MeshBasicMaterial({ color: 0x22d3ee, transparent: true, opacity: 0.16, side: THREE.DoubleSide });
+      [1.6, 2.6, 3.6].forEach(function(radius, idx){
+        var ring = new THREE.Mesh(new THREE.RingGeometry(radius, radius + 0.015, 96), ringMat.clone());
+        ring.rotation.x = -Math.PI / 2;
+        ring.position.y = -1.42 + idx * 0.025;
+        group.add(ring);
+      });
+
+      var simplex = new THREE.Group();
+      simplex.name = 'Action probability simplex';
+      var simplexMat = new THREE.LineBasicMaterial({ color: 0xfacc15, transparent: true, opacity: 0.42 });
+      var simplexGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-2.8, -0.95, 2.55), new THREE.Vector3(2.75, -0.95, 2.2),
+        new THREE.Vector3(2.75, -0.95, 2.2), new THREE.Vector3(0.25, 1.25, -2.65),
+        new THREE.Vector3(0.25, 1.25, -2.65), new THREE.Vector3(-2.8, -0.95, 2.55)
+      ]);
+      simplex.add(new THREE.LineSegments(simplexGeo, simplexMat));
+      group.add(simplex);
+
+      var rewardScale = Math.max(Math.abs(totalReward), 1);
+      function vecFor(point){
+        var risk = clamp(Number(point.risk || 0), 0, 1);
+        var spread = clamp(Number(point.spread || 0), 0, 1);
+        var reward = clamp(Number(point.reward || 0) / rewardScale, -0.6, 1.1);
+        var probability = clamp(Number(point.confidence || 0), 0.04, 1);
+        return new THREE.Vector3(
+          (risk - 0.5) * 5.9,
+          -1.0 + reward * 2.5 + probability * 0.7,
+          (spread - 0.5) * 5.2
+        );
+      }
+
+      var pathPoints = points.map(vecFor);
+      if (pathPoints.length > 1) {
+        var path = new THREE.Line(
+          new THREE.BufferGeometry().setFromPoints(pathPoints),
+          new THREE.LineBasicMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.32 })
+        );
+        group.add(path);
+      }
+
+      points.forEach(function(point){
+        var pos = vecFor(point);
+        var color = new THREE.Color(colors[point.action] || '#22d3ee');
+        var radius = point.live ? 0.23 : 0.11 + clamp(Number(point.confidence || 0), 0, 1) * 0.18;
+        var material = new THREE.MeshStandardMaterial({
+          color: color,
+          emissive: color,
+          emissiveIntensity: point.live ? 0.75 : 0.32,
+          metalness: 0.28,
+          roughness: 0.32,
+          transparent: true,
+          opacity: point.live ? 0.98 : 0.72
+        });
+        var node = new THREE.Mesh(new THREE.SphereGeometry(radius, 28, 18), material);
+        node.position.copy(pos);
+        node.name = point.live ? 'Live policy node' : 'Replay policy node';
+        group.add(node);
+
+        var halo = new THREE.Mesh(
+          new THREE.RingGeometry(radius * 1.8, radius * 2.05, 48),
+          new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: point.live ? 0.34 : 0.16, side: THREE.DoubleSide })
+        );
+        halo.position.copy(pos);
+        halo.lookAt(camera.position);
+        group.add(halo);
+      });
+
+      var altitude = new THREE.ArrowHelper(new THREE.Vector3(0, 1, 0), new THREE.Vector3(-3.6, -1.3, -3.0), 3.2, 0x22d3ee, 0.22, 0.12);
+      group.add(altitude);
+
+      function resize(){
+        var rect = stage.getBoundingClientRect();
+        var width = Math.max(320, rect.width || stage.clientWidth || 720);
+        var height = Math.max(280, rect.height || 360);
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      }
+
+      function animate(){
+        resize();
+        group.rotation.y += controls ? 0 : 0.004;
+        simplex.rotation.y -= 0.0025;
+        if (controls) controls.update();
+        renderer.render(scene, camera);
+        state.policyManifold.frame = requestAnimationFrame(animate);
+      }
+
+      stage.dataset.renderMode = 'threejs-webgl';
+      if (badge) badge.textContent = 'Three.js WebGL · Orbit controls';
+      state.policyManifold.renderer = renderer;
+      state.policyManifold.scene = scene;
+      state.policyManifold.controls = controls;
+      window.__cnRlPolicyManifoldMode = 'threejs-webgl';
+      window.__cnRlPolicyManifoldStats = { points: points.length, targetMatch: targetMatch, distributionGap: distributionGap, totalReward: totalReward };
+      animate();
+      return true;
+    } catch (err) {
+      console.warn('Falling back to canvas RL policy manifold', err);
+      if (badge) badge.textContent = 'Canvas fallback';
+      window.__cnRlPolicyManifoldMode = 'canvas-fallback';
+      return false;
+    }
+  }
+
   function renderRlPolicyManifold(frontier, neuralFrontier, replaySummary, episodeReplay){
     var stage = $('intel-rl-manifold-stage');
     var canvas = $('intel-rl-manifold-canvas');
     var legend = $('intel-rl-manifold-legend');
     if (!stage || !canvas || !neuralFrontier) return;
-    var context = canvas.getContext('2d');
-    if (!context) return;
     stopRlManifoldAnimation();
 
     var colors = {
@@ -1459,6 +1629,12 @@
         '<div class="intel-rl-pill"><strong>Reward altitude</strong> ' + fmtSigned(totalReward, 2) + '</div>'
       ].join('');
     }
+
+    if (renderRlPolicyManifoldWebGL(stage, canvas, points, colors, totalReward, targetMatch, distributionGap)) {
+      return;
+    }
+    var context = canvas.getContext('2d');
+    if (!context) return;
 
     function geometry(){
       var rect = stage.getBoundingClientRect();

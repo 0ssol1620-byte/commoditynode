@@ -127,6 +127,8 @@ layout: default
 .intel-rl-manifold-stage canvas { width:100%; height:360px; display:block; }
 .intel-rl-manifold-legend { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:12px; }
 .intel-rl-manifold-axis { position:absolute; left:16px; bottom:14px; right:16px; display:flex; justify-content:space-between; gap:10px; color:#94a3b8; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; pointer-events:none; }
+.intel-rl-manifold-webgl-badge { position:absolute; top:14px; right:14px; z-index:2; display:inline-flex; align-items:center; gap:8px; padding:7px 10px; border-radius:999px; border:1px solid rgba(34,211,238,0.24); background:rgba(2,6,23,0.62); color:#cbd5e1; font-size:0.72rem; font-weight:800; letter-spacing:0.04em; text-transform:uppercase; backdrop-filter:blur(12px); box-shadow:0 10px 30px rgba(2,6,23,0.28); }
+.intel-rl-manifold-webgl-badge::before { content:''; width:7px; height:7px; border-radius:999px; background:#22d3ee; box-shadow:0 0 14px rgba(34,211,238,0.9); }
 .intel-rl-reference-strip { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; color:#cbd5e1; }
 .intel-rl-step { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
 .intel-rl-step strong { color:#f8fafc; display:block; }
@@ -375,19 +377,21 @@ layout: default
         </div>
         <div class="intel-rl-field-meta" id="intel-rl-field-meta"></div>
       </section>
-      <section class="intel-rl-manifold-shell" data-rl-reference="wandb-tensorboard-gymnasium">
+      <section class="intel-rl-manifold-shell" data-rl-reference="wandb-tensorboard-gymnasium-threejs">
         <div class="intel-kicker">Policy state manifold</div>
-        <h3 style="margin:0 0 10px;color:#f8fafc;">Map the agent inside a 3D-style state-space replay</h3>
-        <p style="margin:0;color:#94a3b8;line-height:1.7;">Inspired by W&B run comparison, TensorBoard observability, and Gymnasium environment replay: each point projects regime pressure, disagreement, and expected reward into a premium policy manifold.</p>
+        <h3 style="margin:0 0 10px;color:#f8fafc;">Map the agent inside a real 3D WebGL policy universe</h3>
+        <p style="margin:0;color:#94a3b8;line-height:1.7;">Inspired by W&B run comparison, TensorBoard observability, Gymnasium environment replay, and Three.js orbit scenes: each node projects regime pressure, model spread, action probability, and expected reward into an inspectable RL manifold.</p>
         <div class="intel-rl-manifold-stage" id="intel-rl-manifold-stage">
-          <canvas id="intel-rl-manifold-canvas" aria-label="3D-style RL policy state manifold"></canvas>
-          <div class="intel-rl-manifold-axis"><span>Regime pressure</span><span>Model spread</span><span>Reward altitude</span></div>
+          <canvas id="intel-rl-manifold-canvas" aria-label="Three.js WebGL RL policy state manifold"></canvas>
+          <div class="intel-rl-manifold-webgl-badge" id="intel-rl-manifold-webgl-badge">Three.js WebGL</div>
+          <div class="intel-rl-manifold-axis"><span>Regime pressure</span><span>Action probability simplex</span><span>Reward altitude</span></div>
         </div>
         <div class="intel-rl-manifold-legend" id="intel-rl-manifold-legend"></div>
         <div class="intel-rl-reference-strip">
           <span class="intel-rl-pill"><strong>Reference</strong> W&B run comparison</span>
           <span class="intel-rl-pill"><strong>Reference</strong> TensorBoard metrics</span>
           <span class="intel-rl-pill"><strong>Reference</strong> Gymnasium replay</span>
+          <span class="intel-rl-pill"><strong>Renderer</strong> Three.js WebGL orbit controls</span>
         </div>
       </section>
       <section class="intel-card mt-16">
