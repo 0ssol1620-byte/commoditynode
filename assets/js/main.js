@@ -532,6 +532,74 @@
       bgCtx.fill();
     }
 
+
+    function drawImpactHaloGrid(width, height, cx, cy, ring1, ring2, now) {
+      var scan = impactCtx.createLinearGradient(0, 0, width, height);
+      scan.addColorStop(0, 'rgba(34,211,238,0.08)');
+      scan.addColorStop(0.48, 'rgba(168,85,247,0.04)');
+      scan.addColorStop(1, 'rgba(16,185,129,0.06)');
+      impactCtx.fillStyle = scan;
+      impactCtx.fillRect(0, 0, width, height);
+
+      [ring1 * 0.72, ring1, ring2].forEach(function (ring, idx) {
+        impactCtx.beginPath();
+        impactCtx.ellipse(cx, cy, ring, ring * 0.78, 0, 0, Math.PI * 2);
+        impactCtx.strokeStyle = idx === 2 ? 'rgba(148,163,184,0.12)' : 'rgba(34,211,238,0.14)';
+        impactCtx.lineWidth = idx === 1 ? 1.3 : 1;
+        impactCtx.setLineDash(idx === 2 ? [6, 8] : []);
+        impactCtx.stroke();
+      });
+      impactCtx.setLineDash([]);
+
+      for (var i = 0; i < 18; i++) {
+        var angle = (Math.PI * 2 * i / 18) + (prefersReducedMotion ? 0 : now * 0.00016);
+        impactCtx.beginPath();
+        impactCtx.moveTo(cx + Math.cos(angle) * ring1 * 0.36, cy + Math.sin(angle) * ring1 * 0.28);
+        impactCtx.lineTo(cx + Math.cos(angle) * ring2 * 1.03, cy + Math.sin(angle) * ring2 * 0.8);
+        impactCtx.strokeStyle = 'rgba(148,163,184,0.045)';
+        impactCtx.lineWidth = 1;
+        impactCtx.stroke();
+      }
+    }
+
+    function drawImpactRibbons(cx, cy, x, y, sentiment, strength, now) {
+      var color = sentimentColor(sentiment, 0.72);
+      var phase = prefersReducedMotion ? 0 : Math.sin(now * 0.002 + strength) * 6;
+      var dx = x - cx;
+      var dy = y - cy;
+      var nx = -dy * 0.08;
+      var ny = dx * 0.08;
+      var ribbon = impactCtx.createLinearGradient(cx, cy, x, y);
+      ribbon.addColorStop(0, 'rgba(255,255,255,0.02)');
+      ribbon.addColorStop(0.35, sentimentColor(sentiment, 0.11 + Math.min(0.18, Math.abs(sentiment) * 0.05)));
+      ribbon.addColorStop(1, color);
+      impactCtx.beginPath();
+      impactCtx.moveTo(cx + nx * 0.25, cy + ny * 0.25);
+      impactCtx.bezierCurveTo(cx + dx * 0.32 + nx + phase, cy + dy * 0.22 + ny, cx + dx * 0.68 - nx, cy + dy * 0.72 - ny - phase, x, y);
+      impactCtx.strokeStyle = ribbon;
+      impactCtx.lineWidth = 1.4 + Math.min(4, Math.abs(sentiment) * 1.8 + strength * 0.08);
+      impactCtx.shadowBlur = 10;
+      impactCtx.shadowColor = sentimentColor(sentiment, 0.35);
+      impactCtx.stroke();
+      impactCtx.shadowBlur = 0;
+    }
+
+    function drawImpactNodeLabel(node, x, y, color) {
+      if (isMobileViewport || Math.abs(node.sentiment) < 0.18) return;
+      var label = String(node.label || '').slice(0, 18);
+      impactCtx.save();
+      impactCtx.font = '800 10px Inter, system-ui, sans-serif';
+      impactCtx.textAlign = x < impactCanvas.offsetWidth * 0.5 ? 'right' : 'left';
+      impactCtx.fillStyle = 'rgba(2,6,23,0.58)';
+      var metrics = impactCtx.measureText(label);
+      var bx = x + (x < impactCanvas.offsetWidth * 0.5 ? -metrics.width - 18 : 18);
+      var by = y - 10;
+      impactCtx.fillRect(bx - 6, by - 12, metrics.width + 12, 18);
+      impactCtx.fillStyle = color;
+      impactCtx.fillText(label, x + (x < impactCanvas.offsetWidth * 0.5 ? -18 : 18), y + 1);
+      impactCtx.restore();
+    }
+
     function drawImpactScene(now) {
       if (!impactCanvas || !impactCtx || !activeScene) return;
       var size = resizeCanvas(impactCanvas, impactCtx);
@@ -547,15 +615,7 @@
       var rotationA = prefersReducedMotion ? 0 : now * 0.0004;
       var rotationB = prefersReducedMotion ? 0 : -now * 0.00026;
 
-      [ring1, ring2].forEach(function (ring, idx) {
-        impactCtx.beginPath();
-        impactCtx.arc(cx, cy, ring, 0, Math.PI * 2);
-        impactCtx.strokeStyle = idx === 0 ? 'rgba(34,211,238,0.16)' : 'rgba(148,163,184,0.12)';
-        impactCtx.lineWidth = 1;
-        impactCtx.setLineDash(idx === 0 ? [] : [6, 8]);
-        impactCtx.stroke();
-      });
-      impactCtx.setLineDash([]);
+      drawImpactHaloGrid(width, height, cx, cy, ring1, ring2, now);
 
       var field = activeScene.sectors.concat(activeScene.themes);
       field.forEach(function (node) {
@@ -567,12 +627,7 @@
         var color = sentimentColor(node.sentiment, 0.96);
         sceneNodes.push({ x: x, y: y, label: node.label, note: node.note, sentiment: node.sentiment, size: sizeBase });
 
-        impactCtx.beginPath();
-        impactCtx.moveTo(cx, cy);
-        impactCtx.lineTo(x, y);
-        impactCtx.strokeStyle = sentimentColor(node.sentiment, node.radius < 0.5 ? 0.26 : 0.14);
-        impactCtx.lineWidth = node.radius < 0.5 ? 1.2 : 0.85;
-        impactCtx.stroke();
+        drawImpactRibbons(cx, cy, x, y, node.sentiment, node.size, now);
 
         var glow = impactCtx.createRadialGradient(x, y, 0, x, y, sizeBase * 4.6);
         glow.addColorStop(0, color.replace(/0\.96\)/, '0.2)'));
@@ -586,6 +641,7 @@
         impactCtx.beginPath();
         impactCtx.arc(x, y, sizeBase, 0, Math.PI * 2);
         impactCtx.fill();
+        drawImpactNodeLabel(node, x, y, color);
       });
 
       if (hoveredNode) {

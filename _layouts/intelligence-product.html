@@ -125,21 +125,16 @@ layout: default
 .intel-rl-field-shell::before, .intel-rl-field-shell::after { content:''; position:absolute; border-radius:999px; filter: blur(12px); opacity:0.55; pointer-events:none; }
 .intel-rl-field-shell::before { width:220px; height:220px; right:-60px; top:-70px; background:radial-gradient(circle, rgba(34,211,238,0.22), rgba(34,211,238,0) 70%); animation:intelFloatAura 8s ease-in-out infinite; }
 .intel-rl-field-shell::after { width:180px; height:180px; left:-40px; bottom:-70px; background:radial-gradient(circle, rgba(192,132,252,0.18), rgba(192,132,252,0) 72%); animation:intelFloatAura 10s ease-in-out infinite reverse; }
-.intel-rl-field-wrap { position:relative; min-height:320px; border-radius:16px; overflow:hidden; background:radial-gradient(circle at 50% 45%, rgba(34,211,238,0.08), rgba(15,23,42,0.78) 48%, rgba(2,6,23,0.96) 100%); border:1px solid rgba(255,255,255,0.06); }
-.intel-rl-field-wrap canvas { width:100%; height:320px; display:block; }
+.intel-rl-field-wrap { position:relative; min-height:360px; border-radius:18px; overflow:hidden; background:radial-gradient(circle at 50% 42%, rgba(34,211,238,0.13), rgba(15,23,42,0.78) 48%, rgba(2,6,23,0.98) 100%); border:1px solid rgba(255,255,255,0.075); box-shadow:inset 0 1px 0 rgba(255,255,255,0.04); }
+.intel-rl-field-wrap canvas { width:100%; height:360px; display:block; }
 .intel-rl-field-overlay { position:absolute; inset:0; pointer-events:none; }
-.intel-rl-field-center { position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:132px; height:132px; border-radius:999px; border:1px solid rgba(34,211,238,0.24); background:radial-gradient(circle, rgba(34,211,238,0.2), rgba(14,22,36,0.24) 68%, rgba(2,6,23,0.02) 100%); display:flex; align-items:center; justify-content:center; text-align:center; padding:18px; box-shadow:0 0 40px rgba(34,211,238,0.18); }
-.intel-rl-field-center strong { display:block; color:#f8fafc; font-size:1rem; line-height:1.2; }
-.intel-rl-field-center span { display:block; color:#94a3b8; font-size:0.76rem; margin-top:6px; line-height:1.45; }
-.intel-rl-field-node { position:absolute; width:116px; min-height:54px; padding:10px 12px; border-radius:16px; border:1px solid rgba(255,255,255,0.1); background:rgba(8,12,20,0.74); backdrop-filter: blur(14px); box-shadow:0 12px 28px rgba(2,6,23,0.24); }
-.intel-rl-field-node strong { display:block; color:#f8fafc; font-size:0.82rem; line-height:1.35; }
-.intel-rl-field-node span { display:block; color:#94a3b8; font-size:0.75rem; margin-top:4px; }
-.intel-rl-field-node.active { border-color: rgba(34,211,238,0.42); box-shadow:0 0 0 1px rgba(34,211,238,0.14), 0 18px 34px rgba(34,211,238,0.12); }
-.intel-rl-field-node--reduce_risk { left:5%; top:16%; }
-.intel-rl-field-node--hold { left:76%; top:16%; }
-.intel-rl-field-node--add_continuation { left:74%; top:68%; }
-.intel-rl-field-node--add_hedge { left:6%; top:68%; }
-.intel-rl-field-node--relative_value_rotation { left:38%; top:6%; }
+.intel-rl-field-overlay--surface { background:linear-gradient(180deg, rgba(2,6,23,0), rgba(2,6,23,0.18)); }
+.intel-rl-field-center { position:absolute; left:50%; top:50%; transform:translate(-50%, -50%); width:128px; height:128px; border-radius:999px; border:1px solid rgba(34,211,238,0.28); background:radial-gradient(circle, rgba(34,211,238,0.2), rgba(14,22,36,0.42) 68%, rgba(2,6,23,0.12) 100%); display:flex; align-items:center; justify-content:center; text-align:center; padding:18px; box-shadow:0 0 52px rgba(34,211,238,0.24), inset 0 0 24px rgba(34,211,238,0.08); backdrop-filter: blur(10px); }
+.intel-rl-field-center strong { display:block; color:#f8fafc; font-size:0.96rem; line-height:1.2; }
+.intel-rl-field-center span { display:block; color:#bae6fd; font-size:0.72rem; margin-top:6px; line-height:1.45; }
+.intel-rl-surface-legend { position:absolute; left:14px; right:14px; bottom:14px; display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; }
+.intel-rl-surface-legend .intel-rl-surface-key { display:inline-flex; align-items:center; gap:7px; padding:7px 10px; border-radius:999px; border:1px solid rgba(255,255,255,0.08); background:rgba(2,6,23,0.58); color:#dbeafe; font-size:0.72rem; font-weight:800; backdrop-filter:blur(12px); box-shadow:0 10px 24px rgba(2,6,23,0.22); }
+.intel-rl-surface-key i { width:8px; height:8px; border-radius:999px; display:inline-block; box-shadow:0 0 14px currentColor; }
 .intel-rl-field-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin-top:12px; }
 .intel-rl-field-meta .intel-rl-pill { justify-content:center; }
 .intel-rl-manifold-shell { position:relative; margin-top:16px; padding:18px 20px; border-radius:18px; border:1px solid rgba(168,85,247,0.18); background:linear-gradient(135deg, rgba(9,13,25,0.95), rgba(18,13,35,0.94)); box-shadow:0 24px 70px rgba(2,6,23,0.34), inset 0 1px 0 rgba(255,255,255,0.05); overflow:hidden; }
@@ -227,18 +222,12 @@ layout: default
   .intel-rl-field-wrap,
   .intel-rl-field-wrap canvas,
   .intel-rl-manifold-stage,
-  .intel-rl-manifold-stage canvas { height: 280px; min-height: 280px; }
-  .intel-rl-field-node { width: 96px; min-height: 48px; padding: 8px 10px; }
-  .intel-rl-field-node strong { font-size: 0.76rem; }
-  .intel-rl-field-node span { font-size: 0.7rem; }
+  .intel-rl-manifold-stage canvas { height: 300px; min-height: 300px; }
   .intel-rl-field-center { width: 104px; height: 104px; padding: 14px; }
-  .intel-rl-field-center strong { font-size: 0.88rem; }
-  .intel-rl-field-center span { font-size: 0.7rem; }
-  .intel-rl-field-node--reduce_risk { left: 3%; top: 14%; }
-  .intel-rl-field-node--hold { left: 67%; top: 14%; }
-  .intel-rl-field-node--relative_value_rotation { left: 34%; top: 4%; }
-  .intel-rl-field-node--add_hedge { left: 4%; top: 72%; }
-  .intel-rl-field-node--add_continuation { left: 64%; top: 72%; }
+  .intel-rl-field-center strong { font-size: 0.84rem; }
+  .intel-rl-field-center span { font-size: 0.66rem; }
+  .intel-rl-surface-legend { left:10px; right:10px; bottom:10px; gap:6px; }
+  .intel-rl-surface-legend .intel-rl-surface-key { padding:6px 8px; font-size:0.66rem; }
   .intel-table { min-width: 720px; }
 }
 @media (max-width: 560px) {
@@ -419,20 +408,16 @@ layout: default
         <div class="intel-kicker">Animated policy field</div>
         <h3 style="margin:0 0 10px;color:#f8fafc;">See policy pressure moving across the action space</h3>
         <p style="margin:0;color:#94a3b8;line-height:1.7;">This field turns the current action probabilities into a living motion surface so the model feels like an active decision engine instead of a static table.</p>
-        <div class="intel-rl-field-wrap" id="intel-rl-field-wrap">
-          <canvas id="intel-rl-field-canvas"></canvas>
-          <div class="intel-rl-field-overlay">
+        <div class="intel-rl-field-wrap" id="intel-rl-field-wrap" data-visual="action-space-surface">
+          <canvas id="intel-rl-field-canvas" aria-label="Animated Neural PPO action-space probability surface"></canvas>
+          <div class="intel-rl-field-overlay intel-rl-field-overlay--surface">
             <div class="intel-rl-field-center">
               <div>
                 <strong id="intel-rl-field-center-action">Loading…</strong>
-                <span id="intel-rl-field-center-copy">Probability-weighted policy field</span>
+                <span id="intel-rl-field-center-copy">Policy frontier surface</span>
               </div>
             </div>
-            <div class="intel-rl-field-node intel-rl-field-node--reduce_risk" id="intel-rl-node-reduce_risk"><strong>Reduce risk</strong><span>0%</span></div>
-            <div class="intel-rl-field-node intel-rl-field-node--hold" id="intel-rl-node-hold"><strong>Hold</strong><span>0%</span></div>
-            <div class="intel-rl-field-node intel-rl-field-node--add_continuation" id="intel-rl-node-add_continuation"><strong>Add continuation</strong><span>0%</span></div>
-            <div class="intel-rl-field-node intel-rl-field-node--add_hedge" id="intel-rl-node-add_hedge"><strong>Add hedge</strong><span>0%</span></div>
-            <div class="intel-rl-field-node intel-rl-field-node--relative_value_rotation" id="intel-rl-node-relative_value_rotation"><strong>Relative-value rotation</strong><span>0%</span></div>
+            <div class="intel-rl-surface-legend" id="intel-rl-surface-legend" aria-label="Action-space surface legend"></div>
           </div>
         </div>
         <div class="intel-rl-field-meta" id="intel-rl-field-meta"></div>

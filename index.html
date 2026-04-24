@@ -79,7 +79,13 @@ image: "/assets/images/og-default.png"
 <!-- Scroll Progress Indicator -->
 <div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#22d3ee,#a855f7);width:0%;z-index:9998;transition:width 0.1s;pointer-events:none;"></div>
 
-<!-- ===== HERO ===== -->
+<!-- ===== IMPACT COMMAND HERO (top-tier upgrade 2026-04-24) =====
+     New first-view: single headline + shock constellation + live shocks.
+     The legacy terminal hero below provides the live ticker and persona
+     chips used for personalization and attribution events. -->
+{% include components/impact-hero.html %}
+
+<!-- ===== HERO (legacy — live terminal / personalization / impact metrics) ===== -->
 <section class="hero hero--terminal" aria-label="Hero">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="container">
@@ -1059,11 +1065,22 @@ image: "/assets/images/og-default.png"
         </div>
         <div id="home-kpi-spark-wall" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px;"></div>
       </section>
-      <section style="padding:22px;border-radius:22px;border:1px solid rgba(34,211,238,0.14);background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.05));backdrop-filter:blur(12px);">
-        <div class="eyebrow-cyan">Impact flow Sankey</div>
-        <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.12rem;">See where today’s commodity shock transmits next.</h2>
-        <p id="home-impact-sankey-copy" style="margin:0 0 14px;color:#cbd5e1;line-height:1.7;">Loading the strongest commodity transmission path across sectors and names.</p>
-        <div id="home-impact-sankey-chart" style="height:340px;"></div>
+      <section class="home-impact-sankey-card" data-visual="premium-impact-sankey">
+        <div class="home-impact-sankey-head">
+          <div>
+            <div class="eyebrow-cyan">Impact flow Sankey</div>
+            <h2>See where today’s commodity shock transmits next.</h2>
+            <p id="home-impact-sankey-copy">Loading the strongest commodity transmission path across sectors and names.</p>
+          </div>
+          <div class="home-impact-sankey-badge">Live path</div>
+        </div>
+        <div id="home-impact-sankey-chart" class="home-impact-sankey-chart"></div>
+        <div id="home-impact-sankey-legend" class="home-impact-sankey-legend" aria-label="Impact flow legend">
+          <span><i class="sankey-dot sankey-dot--source"></i> Shock</span>
+          <span><i class="sankey-dot sankey-dot--positive"></i> Beneficiary</span>
+          <span><i class="sankey-dot sankey-dot--negative"></i> Pressure</span>
+          <span><i class="sankey-dot sankey-dot--watch"></i> Watch</span>
+        </div>
       </section>
     </div>
   </div>
@@ -1129,12 +1146,23 @@ image: "/assets/images/og-default.png"
           bottom: 12,
           left: 12,
           right: 12,
-          emphasis: { focus: 'adjacency' },
+          emphasis: { focus: 'adjacency', blurScope: 'coordinateSystem' },
+          nodeAlign: 'right',
+          nodeGap: 13,
+          nodeWidth: 15,
+          layoutIterations: 96,
+          draggable: false,
           data: sankeyPayload.nodes,
           links: sankeyPayload.links,
-          lineStyle: { color:'gradient', opacity:0.45, curveness:0.5 },
-          itemStyle: { borderWidth: 0, color: function(params){ var cat = params.data.category; return cat === 'positive' ? '#22c55e' : cat === 'negative' ? '#f43f5e' : cat === 'watch' ? '#fbbf24' : '#22d3ee'; } },
-          label: { color:'#e2e8f0', fontSize:11 }
+          levels: [
+            { depth: 0, itemStyle: { color: '#22d3ee' }, lineStyle: { opacity: 0.62 } },
+            { depth: 1, lineStyle: { opacity: 0.5 } },
+            { depth: 2, label: { position: 'right' }, lineStyle: { opacity: 0.38 } }
+          ],
+          edgeLabel: { show: false, color:'#94a3b8', fontSize:10 },
+          lineStyle: { color:'gradient', opacity:0.58, curveness:0.56, shadowBlur:10, shadowColor:'rgba(34,211,238,0.18)' },
+          itemStyle: { borderWidth: 1, borderColor:'rgba(255,255,255,0.18)', color: function(params){ var cat = params.data.category; return cat === 'positive' ? '#22c55e' : cat === 'negative' ? '#f43f5e' : cat === 'watch' ? '#fbbf24' : '#22d3ee'; }, shadowBlur:12, shadowColor:'rgba(2,6,23,0.28)' },
+          label: { color:'#e2e8f0', fontSize:11, fontWeight:700, overflow:'break', width:92 }
         }]
       });
     }

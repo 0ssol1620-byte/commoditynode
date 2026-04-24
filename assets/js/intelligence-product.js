@@ -1592,6 +1592,7 @@
     var wrap = $('intel-rl-field-wrap');
     var canvas = $('intel-rl-field-canvas');
     var meta = $('intel-rl-field-meta');
+    var legend = $('intel-rl-surface-legend');
     if (!wrap || !canvas || !neuralFrontier) return;
 
     var context = canvas.getContext('2d');
@@ -1600,25 +1601,31 @@
 
     var probabilities = neuralFrontier.probabilities || {};
     var actions = ['reduce_risk', 'hold', 'add_continuation', 'add_hedge', 'relative_value_rotation'];
-    var colors = {
-      reduce_risk: 'rgba(248,113,113,1)',
-      hold: 'rgba(148,163,184,1)',
-      add_continuation: 'rgba(34,197,94,1)',
-      add_hedge: 'rgba(56,189,248,1)',
-      relative_value_rotation: 'rgba(192,132,252,1)'
+    var labels = {
+      reduce_risk: 'Reduce risk',
+      hold: 'Hold',
+      add_continuation: 'Add continuation',
+      add_hedge: 'Add hedge',
+      relative_value_rotation: 'Relative-value rotation'
     };
+    var colors = {
+      reduce_risk: '#f87171',
+      hold: '#94a3b8',
+      add_continuation: '#22c55e',
+      add_hedge: '#38bdf8',
+      relative_value_rotation: '#c084fc'
+    };
+    var selected = neuralFrontier.action || 'hold';
 
-    function updateNodeLabels(){
-      actions.forEach(function(action){
-        var node = $('intel-rl-node-' + action);
-        if (!node) return;
-        var span = node.querySelector('span');
-        if (span) span.textContent = Math.round(Number(probabilities[action] || 0) * 100) + '%';
-        node.classList.toggle('active', action === neuralFrontier.action);
-      });
-      if ($('intel-rl-field-center-action')) $('intel-rl-field-center-action').textContent = titleize(neuralFrontier.action || 'hold');
-      var entropyText = replaySummary && replaySummary.action_entropy != null ? Math.round(Number(replaySummary.action_entropy || 0) * 100) + '% entropy' : 'Probability-weighted field';
-      if ($('intel-rl-field-center-copy')) $('intel-rl-field-center-copy').textContent = entropyText;
+    function updateSurfaceLabels(){
+      if ($('intel-rl-field-center-action')) $('intel-rl-field-center-action').textContent = titleize(selected);
+      var entropyText = replaySummary && replaySummary.action_entropy != null ? Math.round(Number(replaySummary.action_entropy || 0) * 100) + '% entropy' : 'Policy frontier surface';
+      if ($('intel-rl-field-center-copy')) $('intel-rl-field-center-copy').textContent = 'Policy frontier · ' + entropyText;
+      if (legend) {
+        legend.innerHTML = actions.slice().sort(function(a, b){ return Number(probabilities[b] || 0) - Number(probabilities[a] || 0); }).map(function(action){
+          return '<span class="intel-rl-surface-key"><i style="background:' + colors[action] + ';color:' + colors[action] + '"></i>' + labels[action] + ' ' + Math.round(Number(probabilities[action] || 0) * 100) + '%</span>';
+        }).join('');
+      }
       if (meta) {
         var regime = replaySummary && replaySummary.regime_hit_rate ? replaySummary.regime_hit_rate : {};
         var activeCounts = replaySummary && replaySummary.regime_active_counts ? replaySummary.regime_active_counts : {};
@@ -1635,45 +1642,131 @@
 
     function getGeometry(){
       var rect = wrap.getBoundingClientRect();
-      var dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-      canvas.height = Math.max(1, Math.floor(320 * dpr));
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var width = Math.max(1, Math.floor(rect.width));
+      var compact = width < 560;
+      var height = compact ? 300 : 360;
+      canvas.width = Math.max(1, Math.floor(width * dpr));
+      canvas.height = Math.max(1, Math.floor(height * dpr));
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var width = rect.width;
-      var height = 320;
+      return { width: width, height: height, compact: compact, cx: width * 0.5, cy: height * 0.52, rx: width * (compact ? 0.39 : 0.36), ry: height * (compact ? 0.26 : 0.28) };
+    }
+
+    function rgba(hex, alpha){
+      var value = String(hex || '#ffffff').replace('#', '');
+      if (value.length === 3) value = value.split('').map(function(v){ return v + v; }).join('');
+      var r = parseInt(value.slice(0, 2), 16) || 255;
+      var g = parseInt(value.slice(2, 4), 16) || 255;
+      var b = parseInt(value.slice(4, 6), 16) || 255;
+      return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+    }
+
+    function actionPoint(action, geo, t){
+      var idx = actions.indexOf(action);
+      var angle = -Math.PI / 2 + (Math.PI * 2 * idx / actions.length) + Math.sin(t * 0.001 + idx) * 0.035;
+      var probability = Number(probabilities[action] || 0);
+      var rewardLift = walkForward && walkForward.vs_hold_reward_uplift != null ? Number(walkForward.vs_hold_reward_uplift || 0) : 0;
+      var pressure = 0.72 + probability * 0.34 + Math.max(-0.08, Math.min(0.12, rewardLift * 0.012));
       return {
-        width: width,
-        height: height,
-        center: { x: width * 0.5, y: height * 0.5 },
-        anchors: {
-          reduce_risk: { x: width * 0.16, y: height * 0.28 },
-          hold: { x: width * 0.84, y: height * 0.28 },
-          add_continuation: { x: width * 0.82, y: height * 0.78 },
-          add_hedge: { x: width * 0.18, y: height * 0.78 },
-          relative_value_rotation: { x: width * 0.5, y: height * 0.14 }
-        }
+        action: action,
+        label: labels[action],
+        p: probability,
+        x: geo.cx + Math.cos(angle) * geo.rx * pressure,
+        y: geo.cy + Math.sin(angle) * geo.ry * pressure,
+        angle: angle,
+        color: colors[action]
       };
     }
 
-    function rebuildParticles(){
-      state.rlField.particles = [];
-      actions.forEach(function(action){
-        var count = Math.max(3, Math.round(6 + Number(probabilities[action] || 0) * 18));
-        for (var i = 0; i < count; i++) {
-          state.rlField.particles.push({
-            action: action,
-            progress: Math.random(),
-            speed: 0.003 + Math.random() * 0.006 + Number(probabilities[action] || 0) * 0.01,
-            size: 1.4 + Number(probabilities[action] || 0) * 4 + Math.random() * 1.4,
-            alpha: 0.15 + Number(probabilities[action] || 0) * 0.7,
-            phase: Math.random() * Math.PI * 2
-          });
+    function drawActionSpaceSurface(geo, points, now){
+      var gradient = context.createLinearGradient(0, 0, geo.width, geo.height);
+      gradient.addColorStop(0, 'rgba(14,165,233,0.12)');
+      gradient.addColorStop(0.45, 'rgba(168,85,247,0.08)');
+      gradient.addColorStop(1, 'rgba(34,197,94,0.10)');
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, geo.width, geo.height);
+
+      context.save();
+      context.translate(geo.cx, geo.cy);
+      for (var ring = 1; ring <= 4; ring++) {
+        context.beginPath();
+        context.ellipse(0, 0, geo.rx * ring / 4, geo.ry * ring / 4, 0, 0, Math.PI * 2);
+        context.strokeStyle = ring === 4 ? 'rgba(34,211,238,0.2)' : 'rgba(148,163,184,0.08)';
+        context.lineWidth = ring === 4 ? 1.4 : 1;
+        context.setLineDash(ring === 4 ? [] : [4, 9]);
+        context.stroke();
+      }
+      context.setLineDash([]);
+      context.restore();
+
+      var sorted = points.slice().sort(function(a, b){ return a.angle - b.angle; });
+      context.beginPath();
+      sorted.forEach(function(point, idx){
+        if (idx === 0) context.moveTo(point.x, point.y);
+        else context.lineTo(point.x, point.y);
+      });
+      context.closePath();
+      var fill = context.createLinearGradient(geo.cx - geo.rx, geo.cy - geo.ry, geo.cx + geo.rx, geo.cy + geo.ry);
+      fill.addColorStop(0, 'rgba(34,211,238,0.18)');
+      fill.addColorStop(0.5, 'rgba(168,85,247,0.14)');
+      fill.addColorStop(1, 'rgba(34,197,94,0.12)');
+      context.fillStyle = fill;
+      context.fill();
+      context.strokeStyle = 'rgba(226,232,240,0.38)';
+      context.lineWidth = 1.5;
+      context.stroke();
+
+      points.forEach(function(point, idx){
+        var pulse = 0.5 + Math.sin(now * 0.003 + idx) * 0.5;
+        var radius = 10 + point.p * 28;
+        var glow = context.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius * 2.6);
+        glow.addColorStop(0, rgba(point.color, 0.34 + point.p * 0.2));
+        glow.addColorStop(1, 'rgba(2,6,23,0)');
+        context.fillStyle = glow;
+        context.beginPath();
+        context.arc(point.x, point.y, radius * (1.4 + pulse * 0.12), 0, Math.PI * 2);
+        context.fill();
+
+        context.fillStyle = rgba(point.color, 0.95);
+        context.beginPath();
+        context.arc(point.x, point.y, 5 + point.p * 12, 0, Math.PI * 2);
+        context.fill();
+
+        context.font = '800 11px Inter, system-ui, sans-serif';
+        context.textAlign = point.x < geo.cx - 20 ? 'right' : (point.x > geo.cx + 20 ? 'left' : 'center');
+        context.fillStyle = 'rgba(226,232,240,0.9)';
+        context.fillText(point.label, point.x + (point.x < geo.cx - 20 ? -12 : point.x > geo.cx + 20 ? 12 : 0), point.y - 12);
+        context.fillStyle = rgba(point.color, 0.95);
+        context.fillText(Math.round(point.p * 100) + '%', point.x + (point.x < geo.cx - 20 ? -12 : point.x > geo.cx + 20 ? 12 : 0), point.y + 4);
+      });
+
+      context.save();
+      context.font = '900 10px Inter, system-ui, sans-serif';
+      context.textAlign = 'left';
+      context.fillStyle = 'rgba(186,230,253,0.86)';
+      context.fillText('Policy frontier', 16, 24);
+      context.fillStyle = 'rgba(148,163,184,0.76)';
+      context.fillText('risk ← action pressure → continuation', 16, 42);
+      context.restore();
+    }
+
+    function drawActionFlowParticles(geo, points, now){
+      points.forEach(function(point, idx){
+        var streams = Math.max(3, Math.round(5 + point.p * 15));
+        for (var i = 0; i < streams; i++) {
+          var phase = (now * (0.00018 + point.p * 0.00018) + i / streams + idx * 0.13) % 1;
+          var x = geo.cx + (point.x - geo.cx) * phase;
+          var y = geo.cy + (point.y - geo.cy) * phase + Math.sin(phase * Math.PI * 2 + idx) * 5;
+          var alpha = Math.sin(phase * Math.PI) * (0.18 + point.p * 0.56);
+          context.fillStyle = rgba(point.color, alpha);
+          context.beginPath();
+          context.arc(x, y, 1.2 + point.p * 3.8, 0, Math.PI * 2);
+          context.fill();
         }
       });
     }
 
-    updateNodeLabels();
-    rebuildParticles();
+    updateSurfaceLabels();
     if (!state.rlField.resizeBound) {
       window.addEventListener('resize', function(){
         if (config.demoKind === 'rl-policy-lab' && getNeuralFrontierForSelected()) {
@@ -1686,60 +1779,16 @@
 
     function drawFrame(){
       var geo = getGeometry();
-      var width = geo.width;
-      var height = geo.height;
-      context.clearRect(0, 0, width, height);
-
-      var ambient = context.createRadialGradient(geo.center.x, geo.center.y, 12, geo.center.x, geo.center.y, width * 0.5);
-      ambient.addColorStop(0, 'rgba(34,211,238,0.14)');
-      ambient.addColorStop(0.55, 'rgba(34,211,238,0.02)');
-      ambient.addColorStop(1, 'rgba(2,6,23,0)');
-      context.fillStyle = ambient;
-      context.fillRect(0, 0, width, height);
-
-      actions.forEach(function(action){
-        var anchor = geo.anchors[action];
-        var strength = Number(probabilities[action] || 0);
-        var ctrl = { x: (anchor.x + geo.center.x) / 2, y: (anchor.y + geo.center.y) / 2 - (action === 'relative_value_rotation' ? 24 : 0) + (action === 'add_hedge' ? 18 : 0) - (action === 'hold' ? 12 : 0) };
-        context.beginPath();
-        context.moveTo(anchor.x, anchor.y);
-        context.quadraticCurveTo(ctrl.x, ctrl.y, geo.center.x, geo.center.y);
-        context.strokeStyle = 'rgba(255,255,255,' + (0.06 + strength * 0.22) + ')';
-        context.lineWidth = 1 + strength * 3;
-        context.stroke();
-
-        context.beginPath();
-        context.arc(anchor.x, anchor.y, 5 + strength * 10, 0, Math.PI * 2);
-        context.fillStyle = colors[action].replace(',1)', ',' + (0.12 + strength * 0.18) + ')');
-        context.fill();
-      });
-
-      state.rlField.particles.forEach(function(particle){
-        particle.progress += particle.speed;
-        if (particle.progress >= 1) particle.progress -= 1;
-        var anchor = geo.anchors[particle.action];
-        var ctrl = { x: (anchor.x + geo.center.x) / 2, y: (anchor.y + geo.center.y) / 2 - (particle.action === 'relative_value_rotation' ? 24 : 0) + (particle.action === 'add_hedge' ? 18 : 0) - (particle.action === 'hold' ? 12 : 0) };
-        var t = particle.progress;
-        var omt = 1 - t;
-        var x = omt * omt * anchor.x + 2 * omt * t * ctrl.x + t * t * geo.center.x;
-        var y = omt * omt * anchor.y + 2 * omt * t * ctrl.y + t * t * geo.center.y + Math.sin((t * Math.PI * 2) + particle.phase) * 2.5;
-        context.beginPath();
-        context.arc(x, y, particle.size, 0, Math.PI * 2);
-        context.fillStyle = colors[particle.action].replace(',1)', ',' + particle.alpha + ')');
-        context.fill();
-      });
-
-      context.beginPath();
-      context.arc(geo.center.x, geo.center.y, 26 + Math.sin(Date.now() / 260) * 6, 0, Math.PI * 2);
-      context.strokeStyle = 'rgba(34,211,238,0.22)';
-      context.lineWidth = 2;
-      context.stroke();
-
+      context.clearRect(0, 0, geo.width, geo.height);
+      var now = Date.now();
+      var points = actions.map(function(action){ return actionPoint(action, geo, now); });
+      drawActionSpaceSurface(geo, points, now);
+      drawActionFlowParticles(geo, points, now);
       state.rlField.frame = requestAnimationFrame(drawFrame);
     }
 
     if (window.gsap) {
-      window.gsap.fromTo('.intel-rl-field-node', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.04, ease: 'power2.out' });
+      window.gsap.fromTo('.intel-rl-surface-legend .intel-rl-surface-key', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.04, ease: 'power2.out' });
     }
     drawFrame();
   }
