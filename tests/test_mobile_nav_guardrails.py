@@ -23,3 +23,12 @@ def test_nav_dropdowns_close_on_mobile_scroll_and_resize():
     assert "window.addEventListener('scroll'" in include
     assert "window.addEventListener('resize'" in include
     assert "dropdown.classList.remove('open')" in include
+
+
+def test_tools_dropdown_is_not_displayed_by_default():
+    components = (ROOT / 'assets/css/components.css').read_text(encoding='utf-8')
+
+    assert '.nav-dropdown-menu--tools {' in components
+    assert 'display: none;' in components
+    assert '.nav-dropdown.open .nav-dropdown-menu--tools' in components
+    assert 'display: grid;' in components
