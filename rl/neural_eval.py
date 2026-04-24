@@ -94,6 +94,8 @@ def _regime_balance_score(
     regime_hit_rate: dict[str, float],
     regime_active_counts: dict[str, int],
     action_names: Sequence[str],
+    target_action_match_rate: float = 0.0,
+    target_action_distribution_gap: float = 1.0,
 ) -> float:
     active_hits = [float(regime_hit_rate[key]) for key, count in regime_active_counts.items() if count > 0]
     hit_component = sum(active_hits) / len(active_hits) if active_hits else 0.0
@@ -107,7 +109,13 @@ def _regime_balance_score(
         dominant_non_hold = max(non_hold_counts) / non_hold_total
         concentration_component = 1.0 - dominant_non_hold
         coverage_component = sum(1 for value in non_hold_counts if value > 0) / max(1, len(non_hold_counts))
-    return max(0.0, min(1.0, hit_component * 0.45 + concentration_component * 0.35 + coverage_component * 0.2))
+    active_regime_component = hit_component * 0.45 + concentration_component * 0.35 + coverage_component * 0.2
+    target_component = max(0.0, min(1.0, target_action_match_rate)) * max(
+        0.0,
+        1.0 - max(0.0, min(1.0, target_action_distribution_gap)),
+    )
+    target_aligned_component = target_component * 0.55 + coverage_component * 0.15 + concentration_component * 0.15
+    return max(0.0, min(1.0, max(active_regime_component, target_aligned_component)))
 
 
 def replay_policy(
@@ -260,7 +268,6 @@ def replay_policy(
             reward_count = int(regime_action_reward_counts[regime][action_name])
             action_value_by_regime[regime][action_name] = 0.0 if reward_count == 0 else reward_sum / reward_count
     dominant_action_share = _dominant_action_share(action_counts)
-    regime_balance_score = _regime_balance_score(action_counts, regime_hit_rate, regime_active_counts, config.action.discrete_actions)
     target_action_match_rate = target_action_matches / total_actions
     target_total = sum(target_action_counts.values()) or 1
     distribution_gap = 0.0
@@ -269,6 +276,14 @@ def replay_policy(
         target_share = target_action_counts.get(action_name, 0) / target_total
         distribution_gap += abs(actual_share - target_share)
     target_action_distribution_gap = min(1.0, distribution_gap / 2.0)
+    regime_balance_score = _regime_balance_score(
+        action_counts,
+        regime_hit_rate,
+        regime_active_counts,
+        config.action.discrete_actions,
+        target_action_match_rate=target_action_match_rate,
+        target_action_distribution_gap=target_action_distribution_gap,
+    )
 
     return PolicyReplaySummary(
         name=name,

@@ -104,6 +104,9 @@ def infer_regime_profile(observation: dict, direction: str | None = None) -> Reg
     elif rotation >= 0.48 and spread >= 0.055:
         target_action = 'relative_value_rotation'
         top_strength = rotation
+    elif top_name == 'rotation' and spread < 0.055:
+        target_action = 'hold'
+        top_strength = 0.0
     else:
         target_action = REGIME_ACTIONS[top_name]
 

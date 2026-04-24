@@ -53,3 +53,43 @@ def test_neural_walk_forward_and_replay():
     assert 0.0 <= walk.positive_window_rate <= 1.0
     assert isinstance(walk.vs_hold_reward_uplift, float)
     assert 0.0 <= walk.mean_action_diversity <= 1.0
+
+
+def test_regime_balance_respects_target_action_when_secondary_risk_regimes_overlap():
+    from rl.dataset import RLTrajectoryStep
+    from rl.neural_eval import replay_policy
+
+    overlapping_continuation_obs = {
+        'agreement_score': 0.8163,
+        'anomaly_score': 0.5294,
+        'event_risk': 0.31,
+        'model_spread': 0.0161,
+        'trend_3': -0.0169,
+        'forecast_return': -0.0474,
+        'volatility_5': 0.216,
+        'risk_pressure': 0.3609,
+        'direction_bullish': 1.0,
+        'direction_bearish': 0.0,
+    }
+    steps = tuple(
+        RLTrajectoryStep(
+            commodity='natural_gas',
+            timestamp=f'2026-08-{idx + 1:02d}',
+            observation=overlapping_continuation_obs,
+            target_return=0.002,
+            expert_action='add_continuation',
+            metadata={'direction': 'bullish'},
+        )
+        for idx in range(8)
+    )
+
+    replay = replay_policy(
+        name='overlap_target_match',
+        steps=steps,
+        chooser=lambda _obs: 'add_continuation',
+    )
+
+    assert replay.target_action_match_rate == 1.0
+    assert replay.regime_hit_rate['risk_off'] == 0.0
+    assert replay.regime_hit_rate['hedge'] == 0.0
+    assert replay.regime_balance_score >= 0.55

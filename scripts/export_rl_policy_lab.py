@@ -25,6 +25,24 @@ def _load_benchmark_artifact() -> dict | None:
         return None
 
 
+def _preserve_existing_neural_payload(reason: str, requested_device: str) -> dict:
+    if OUTPUT_PATH.exists():
+        try:
+            existing_payload = json.loads(OUTPUT_PATH.read_text(encoding='utf-8'))
+            neural_payload = existing_payload.get('neural_policy') or {}
+            if neural_payload.get('available'):
+                preserved = dict(neural_payload)
+                preserved['preserved_from_existing_export'] = True
+                preserved['preservation_reason'] = reason
+                return preserved
+        except (OSError, json.JSONDecodeError, TypeError):
+            pass
+    return {
+        'available': False,
+        'requested_device': requested_device,
+        'reason': reason,
+    }
+
 
 def _current_commit_marker() -> str:
     try:
@@ -110,10 +128,15 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
     candidate_prior_weights = [0.0, 0.2, 0.35, 0.5]
 
     train_steps = list(dataset.train)
-    eval_steps = list((dataset.test + dataset.val) or dataset.test or dataset.val or dataset.train)
+    eval_steps = list(dataset.test or dataset.val or dataset.train)
     diagnostics: list[dict] = []
-    best_profile = {'device': candidate_devices[0], 'timesteps': candidate_timesteps[0], 'prior_weight': candidate_prior_weights[0]}
-    best_score = float('-inf')
+    hold_cache = replay_policy(
+        name='profile_select_hold_baseline',
+        steps=eval_steps,
+        chooser=lambda _obs: 'hold',
+        config=config,
+    )
+
     for device in candidate_devices:
         for timesteps in candidate_timesteps:
             for prior_weight in candidate_prior_weights:
@@ -130,32 +153,16 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                     chooser=lambda obs, policy=result.policy: policy.decide(obs).action,
                     config=config,
                 )
-                walk = evaluate_neural_walk_forward(
-                    dataset=dataset,
-                    config=config,
-                    total_timesteps=timesteps,
-                    window_count=3,
-                    eval_window_size=24,
-                    min_train_steps=96,
-                    device=device,
-                    prior_weight=prior_weight,
-                )
-                hold = replay_policy(
-                    name=f'profile_select_hold_{device}_{timesteps}_{prior_weight}',
-                    steps=eval_steps,
-                    chooser=lambda _obs: 'hold',
-                    config=config,
-                )
-                uplift = float(replay.total_reward - hold.total_reward)
+                uplift = float(replay.total_reward - hold_cache.total_reward)
                 row = {
                     'device': device,
                     'timesteps': timesteps,
                     'prior_weight': float(prior_weight),
                     'reward': float(replay.total_reward),
-                    'hold_reward': float(hold.total_reward),
+                    'hold_reward': float(hold_cache.total_reward),
                     'uplift_vs_hold': uplift,
-                    'walk_uplift_vs_hold': float(walk.vs_hold_reward_uplift),
-                    'walk_positive_rate': float(walk.positive_window_rate),
+                    'walk_uplift_vs_hold': 0.0,
+                    'walk_positive_rate': 0.0,
                     'action_diversity': float(replay.action_diversity),
                     'action_entropy': float(replay.action_entropy),
                     'hold_share': float(replay.hold_share),
@@ -167,14 +174,38 @@ def _select_policy_profile(dataset, config, preferred_device: str) -> tuple[dict
                     'non_hold_value_add': float(replay.non_hold_value_add),
                     'target_action_match_rate': float(replay.target_action_match_rate),
                     'target_action_distribution_gap': float(replay.target_action_distribution_gap),
-                    'walk_action_diversity': float(walk.mean_action_diversity),
+                    'walk_action_diversity': 0.0,
                     'win_rate': float(replay.win_rate),
+                    'walk_evaluated': False,
                 }
                 row['score'] = float(score_profile_row(row))
                 diagnostics.append(row)
-                if row['score'] > best_score:
-                    best_score = row['score']
-                    best_profile = {'device': device, 'timesteps': timesteps, 'prior_weight': float(prior_weight)}
+
+    shortlist_size = min(4, len(diagnostics))
+    shortlist = sorted(diagnostics, key=lambda row: row['score'], reverse=True)[:shortlist_size]
+    for row in shortlist:
+        walk = evaluate_neural_walk_forward(
+            dataset=dataset,
+            config=config,
+            total_timesteps=int(row['timesteps']),
+            window_count=3,
+            eval_window_size=24,
+            min_train_steps=96,
+            device=str(row['device']),
+            prior_weight=float(row['prior_weight']),
+        )
+        row['walk_uplift_vs_hold'] = float(walk.vs_hold_reward_uplift)
+        row['walk_positive_rate'] = float(walk.positive_window_rate)
+        row['walk_action_diversity'] = float(walk.mean_action_diversity)
+        row['walk_evaluated'] = True
+        row['score'] = float(score_profile_row(row))
+
+    best_row = max(diagnostics, key=lambda row: row['score'])
+    best_profile = {
+        'device': best_row['device'],
+        'timesteps': int(best_row['timesteps']),
+        'prior_weight': float(best_row['prior_weight']),
+    }
     return best_profile, diagnostics
 
 
@@ -197,7 +228,18 @@ def _build_neural_payload(dataset, config) -> dict:
             'reason': 'dataset.train is empty',
         }
 
-    selected_profile, selection_diagnostics = _select_policy_profile(dataset=dataset, config=config, preferred_device=preferred_device)
+    try:
+        selected_profile, selection_diagnostics = _select_policy_profile(dataset=dataset, config=config, preferred_device=preferred_device)
+    except ModuleNotFoundError as exc:
+        return _preserve_existing_neural_payload(
+            reason=f'missing neural RL dependency: {exc.name}',
+            requested_device=preferred_device,
+        )
+    except ImportError as exc:
+        return _preserve_existing_neural_payload(
+            reason=f'missing neural RL dependency: {exc}',
+            requested_device=preferred_device,
+        )
     selected_device = selected_profile['device']
     selected_timesteps = int(selected_profile['timesteps'])
     selected_prior_weight = float(selected_profile.get('prior_weight', 0.5))

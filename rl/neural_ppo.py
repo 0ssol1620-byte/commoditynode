@@ -8,6 +8,11 @@ from .dataset import RLTrajectoryStep
 from .env import CommodityTradingEnv
 from .regimes import infer_regime_profile
 
+try:
+    import gymnasium as _gymnasium
+except Exception:  # pragma: no cover - optional neural dependency
+    _gymnasium = None
+
 
 def _normalize_action_probs(probs: Mapping[str, float]) -> dict[str, float]:
     cleaned = {str(action): max(0.0, float(value)) for action, value in probs.items()}
@@ -66,6 +71,40 @@ def apply_regime_calibration(probs: Mapping[str, float], observation: Mapping[st
             for action in ('reduce_risk', 'add_continuation'):
                 if action in calibrated:
                     calibrated[action] *= 0.87
+
+    if target_action in {'reduce_risk', 'add_hedge'} and target_strength >= 0.68:
+        strongest_competitor = max(
+            (value for action, value in calibrated.items() if action != target_action),
+            default=0.0,
+        )
+        calibrated[target_action] = max(
+            calibrated.get(target_action, 0.0),
+            strongest_competitor * (1.08 + target_strength * 0.12),
+        )
+        if 'add_continuation' in calibrated:
+            calibrated['add_continuation'] *= max(0.18, 0.58 - target_strength * 0.22)
+        if target_action == 'add_hedge' and 'reduce_risk' in calibrated:
+            calibrated['reduce_risk'] *= 0.74
+
+    if target_action == 'hold' and 'hold' in calibrated:
+        strongest_competitor = max((value for action, value in calibrated.items() if action != 'hold'), default=0.0)
+        calibrated['hold'] = max(calibrated['hold'], strongest_competitor * 1.08)
+        for action in ('add_continuation', 'relative_value_rotation', 'add_hedge', 'reduce_risk'):
+            if action in calibrated:
+                calibrated[action] *= 0.72
+    elif target_action in calibrated and target_strength >= 0.58:
+        strongest_competitor = max(
+            (value for action, value in calibrated.items() if action != target_action),
+            default=0.0,
+        )
+        calibrated[target_action] = max(
+            calibrated.get(target_action, 0.0),
+            strongest_competitor * (1.04 + target_strength * 0.08),
+        )
+        if target_action == 'add_continuation' and 'relative_value_rotation' in calibrated:
+            calibrated['relative_value_rotation'] *= max(0.35, 0.78 - target_strength * 0.16)
+        elif target_action == 'relative_value_rotation' and 'add_continuation' in calibrated:
+            calibrated['add_continuation'] *= max(0.42, 0.84 - target_strength * 0.12)
 
     return _normalize_action_probs(calibrated)
 
@@ -153,7 +192,7 @@ class NeuralPPOTrainingReport:
     device_used: str
 
 
-class GymCommodityEnv(__import__('gymnasium').Env):
+class GymCommodityEnv(_gymnasium.Env if _gymnasium is not None else object):
     metadata = {'render_modes': []}
 
     def __init__(self, steps: Sequence[RLTrajectoryStep], config: RLExperimentConfig | None = None):
@@ -229,7 +268,7 @@ class NeuralPPOPolicy:
                 blended[action] = (1.0 - self.prior_weight) * probs.get(action, 0.0) + self.prior_weight * prior_probs.get(action, 0.0)
             total = sum(blended.values()) or 1.0
             probs = {action: float(value / total) for action, value in blended.items()}
-        return probs
+        return apply_regime_calibration(probs, observation)
 
     def decide(self, observation) -> NeuralPPODecision:
         probs = self.action_probabilities(observation)

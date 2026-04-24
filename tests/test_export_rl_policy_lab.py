@@ -153,6 +153,96 @@ def test_score_profile_row_penalizes_low_match_and_weak_regime_coverage_even_wit
     assert score_profile_row(steadier) > score_profile_row(flashy_but_weak)
 
 
+def test_profile_selection_runs_walk_forward_only_for_shortlisted_profiles(monkeypatch):
+    from types import SimpleNamespace
+    import rl.neural_eval as neural_eval
+    import rl.neural_ppo as neural_ppo
+    from rl.config import get_default_rl_config
+    from scripts.export_rl_policy_lab import _select_policy_profile
+
+    calls = {'train': 0, 'walk': 0}
+    config = get_default_rl_config()
+    steps = [SimpleNamespace(observation={}, target_return=0.0, expert_action='hold') for _ in range(12)]
+    dataset = SimpleNamespace(train=tuple(steps), val=tuple(steps[:3]), test=tuple(steps[:4]))
+
+    class FakePolicy:
+        def decide(self, _obs):
+            return SimpleNamespace(action='add_continuation')
+
+    def fake_train(*_args, **kwargs):
+        calls['train'] += 1
+        return SimpleNamespace(policy=FakePolicy(), report=SimpleNamespace(timesteps=kwargs.get('total_timesteps', 0)))
+
+    def fake_replay(*_args, **_kwargs):
+        idx = calls['train']
+        return SimpleNamespace(
+            total_reward=float(idx),
+            action_diversity=0.8,
+            action_entropy=0.7,
+            hold_share=0.05,
+            intervention_rate=0.95,
+            dominant_action_share=0.4,
+            regime_hit_rate={'continuation': 0.6, 'risk_off': 0.4, 'hedge': 0.3, 'rotation': 0.3},
+            regime_active_counts={},
+            regime_balance_score=0.65,
+            non_hold_value_add=1.0,
+            target_action_match_rate=0.5,
+            target_action_distribution_gap=0.2,
+            win_rate=0.55,
+        )
+
+    def fake_walk(*_args, **_kwargs):
+        calls['walk'] += 1
+        return SimpleNamespace(
+            vs_hold_reward_uplift=1.0,
+            positive_window_rate=1.0,
+            mean_action_diversity=0.8,
+        )
+
+    monkeypatch.setattr(neural_ppo, 'train_neural_ppo', fake_train)
+    monkeypatch.setattr(neural_eval, 'replay_policy', fake_replay)
+    monkeypatch.setattr(neural_eval, 'evaluate_neural_walk_forward', fake_walk)
+
+    _profile, diagnostics = _select_policy_profile(dataset, config, preferred_device='cuda')
+
+    assert len(diagnostics) > calls['walk']
+    assert calls['walk'] <= 4
+    assert any(row.get('walk_evaluated') for row in diagnostics)
+
+
+def test_neural_payload_degrades_gracefully_when_neural_dependencies_are_missing(tmp_path, monkeypatch):
+    from rl.config import get_default_rl_config
+    from rl.dataset import build_trajectory_dataset
+    import scripts.export_rl_policy_lab as export_module
+
+    config = get_default_rl_config()
+    dataset = build_trajectory_dataset(config=config)
+    existing_export = tmp_path / 'rl-policy-lab.json'
+    existing_export.write_text(
+        json.dumps({
+            'neural_policy': {
+                'available': True,
+                'selected_device': 'cuda',
+                'frontier': [{'commodity': 'gold', 'action': 'add_hedge'}],
+            }
+        }),
+        encoding='utf-8',
+    )
+    monkeypatch.setattr(export_module, 'OUTPUT_PATH', existing_export)
+    monkeypatch.setattr(
+        export_module,
+        '_select_policy_profile',
+        lambda *_args, **_kwargs: (_ for _ in ()).throw(ModuleNotFoundError("No module named 'torch'", name='torch')),
+    )
+
+    payload = export_module._build_neural_payload(dataset, config)
+
+    assert payload['available'] is True
+    assert payload['selected_device'] == 'cuda'
+    assert payload['preserved_from_existing_export'] is True
+    assert 'missing neural RL dependency' in payload['preservation_reason']
+
+
 def test_export_payload_contains_frontier_and_replay():
     pytest = __import__('pytest')
     try:

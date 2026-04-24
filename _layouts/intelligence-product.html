@@ -121,6 +121,13 @@ layout: default
 .intel-rl-field-node--relative_value_rotation { left:38%; top:6%; }
 .intel-rl-field-meta { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px; margin-top:12px; }
 .intel-rl-field-meta .intel-rl-pill { justify-content:center; }
+.intel-rl-manifold-shell { position:relative; margin-top:16px; padding:18px 20px; border-radius:18px; border:1px solid rgba(168,85,247,0.18); background:linear-gradient(135deg, rgba(9,13,25,0.95), rgba(18,13,35,0.94)); box-shadow:0 24px 70px rgba(2,6,23,0.34), inset 0 1px 0 rgba(255,255,255,0.05); overflow:hidden; }
+.intel-rl-manifold-shell::before { content:''; position:absolute; inset:-35% -20% auto auto; width:320px; height:320px; border-radius:999px; background:radial-gradient(circle, rgba(168,85,247,0.18), rgba(168,85,247,0) 70%); filter:blur(8px); pointer-events:none; }
+.intel-rl-manifold-stage { position:relative; min-height:360px; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,0.07); background:radial-gradient(circle at 50% 42%, rgba(34,211,238,0.09), rgba(15,23,42,0.74) 46%, rgba(2,6,23,0.97) 100%); }
+.intel-rl-manifold-stage canvas { width:100%; height:360px; display:block; }
+.intel-rl-manifold-legend { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-top:12px; }
+.intel-rl-manifold-axis { position:absolute; left:16px; bottom:14px; right:16px; display:flex; justify-content:space-between; gap:10px; color:#94a3b8; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; pointer-events:none; }
+.intel-rl-reference-strip { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; color:#cbd5e1; }
 .intel-rl-step { padding:12px 14px; border-radius:14px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); }
 .intel-rl-step strong { color:#f8fafc; display:block; }
 .intel-rl-step span { display:block; color:#94a3b8; font-size:0.86rem; line-height:1.6; margin-top:4px; }
@@ -188,7 +195,9 @@ layout: default
   }
   .intel-rl-pill { flex: 0 0 auto; white-space: nowrap; }
   .intel-rl-field-wrap,
-  .intel-rl-field-wrap canvas { height: 280px; min-height: 280px; }
+  .intel-rl-field-wrap canvas,
+  .intel-rl-manifold-stage,
+  .intel-rl-manifold-stage canvas { height: 280px; min-height: 280px; }
   .intel-rl-field-node { width: 96px; min-height: 48px; padding: 8px 10px; }
   .intel-rl-field-node strong { font-size: 0.76rem; }
   .intel-rl-field-node span { font-size: 0.7rem; }
@@ -365,6 +374,21 @@ layout: default
           </div>
         </div>
         <div class="intel-rl-field-meta" id="intel-rl-field-meta"></div>
+      </section>
+      <section class="intel-rl-manifold-shell" data-rl-reference="wandb-tensorboard-gymnasium">
+        <div class="intel-kicker">Policy state manifold</div>
+        <h3 style="margin:0 0 10px;color:#f8fafc;">Map the agent inside a 3D-style state-space replay</h3>
+        <p style="margin:0;color:#94a3b8;line-height:1.7;">Inspired by W&B run comparison, TensorBoard observability, and Gymnasium environment replay: each point projects regime pressure, disagreement, and expected reward into a premium policy manifold.</p>
+        <div class="intel-rl-manifold-stage" id="intel-rl-manifold-stage">
+          <canvas id="intel-rl-manifold-canvas" aria-label="3D-style RL policy state manifold"></canvas>
+          <div class="intel-rl-manifold-axis"><span>Regime pressure</span><span>Model spread</span><span>Reward altitude</span></div>
+        </div>
+        <div class="intel-rl-manifold-legend" id="intel-rl-manifold-legend"></div>
+        <div class="intel-rl-reference-strip">
+          <span class="intel-rl-pill"><strong>Reference</strong> W&B run comparison</span>
+          <span class="intel-rl-pill"><strong>Reference</strong> TensorBoard metrics</span>
+          <span class="intel-rl-pill"><strong>Reference</strong> Gymnasium replay</span>
+        </div>
       </section>
       <section class="intel-card mt-16">
         <div class="intel-kicker">Baseline comparison</div>

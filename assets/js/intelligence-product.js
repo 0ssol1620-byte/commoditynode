@@ -20,7 +20,8 @@
     rlArtifacts: {},
     chart: null,
     rlCharts: {},
-    rlField: { frame: 0, particles: [], resizeBound: false }
+    rlField: { frame: 0, particles: [], resizeBound: false },
+    policyManifold: { frame: 0, resizeBound: false }
   };
 
   var STORAGE_KEYS = {
@@ -290,6 +291,13 @@
     if (state.rlField && state.rlField.frame) {
       cancelAnimationFrame(state.rlField.frame);
       state.rlField.frame = 0;
+    }
+  }
+
+  function stopRlManifoldAnimation(){
+    if (state.policyManifold && state.policyManifold.frame) {
+      cancelAnimationFrame(state.policyManifold.frame);
+      state.policyManifold.frame = 0;
     }
   }
 
@@ -655,8 +663,9 @@
     if (consolePanel) consolePanel.hidden = !isVisible;
     if (!isVisible) {
       stopRlFieldAnimation();
+      stopRlManifoldAnimation();
       clearRlCharts();
-      ['intel-rl-probability-pills', 'intel-rl-regime-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body', 'intel-rl-field-meta', 'intel-rl-console-band', 'intel-rl-console-note', 'intel-rl-state-pills', 'intel-rl-governance-panel', 'intel-rl-regime-matrix'].forEach(function(id){
+      ['intel-rl-probability-pills', 'intel-rl-regime-pills', 'intel-rl-trace-pills', 'intel-rl-windows', 'intel-rl-timeline', 'intel-rl-trust-strip', 'intel-rl-decision-pills', 'intel-rl-why-panel', 'intel-rl-scenario-panel', 'intel-rl-audit-trail', 'intel-rl-baseline-table-body', 'intel-rl-field-meta', 'intel-rl-manifold-legend', 'intel-rl-console-band', 'intel-rl-console-note', 'intel-rl-state-pills', 'intel-rl-governance-panel', 'intel-rl-regime-matrix'].forEach(function(id){
         if ($(id)) $(id).innerHTML = '';
       });
       ['intel-rl-node-reduce_risk','intel-rl-node-hold','intel-rl-node-add_continuation','intel-rl-node-add_hedge','intel-rl-node-relative_value_rotation'].forEach(function(id){
@@ -1382,6 +1391,158 @@
     drawFrame();
   }
 
+  function renderRlPolicyManifold(frontier, neuralFrontier, replaySummary, episodeReplay){
+    var stage = $('intel-rl-manifold-stage');
+    var canvas = $('intel-rl-manifold-canvas');
+    var legend = $('intel-rl-manifold-legend');
+    if (!stage || !canvas || !neuralFrontier) return;
+    var context = canvas.getContext('2d');
+    if (!context) return;
+    stopRlManifoldAnimation();
+
+    var colors = {
+      reduce_risk: '#f87171',
+      hold: '#94a3b8',
+      add_continuation: '#22c55e',
+      add_hedge: '#38bdf8',
+      relative_value_rotation: '#c084fc'
+    };
+    var probabilities = neuralFrontier.probabilities || {};
+    var observation = frontier && frontier.observation ? frontier.observation : {};
+    var replay = safeArray(episodeReplay).slice(0, 18);
+    var totalReward = Number((replaySummary && replaySummary.total_reward) || 0);
+    var targetMatch = Number((replaySummary && replaySummary.target_action_match_rate) || 0);
+    var distributionGap = Number((replaySummary && replaySummary.target_action_distribution_gap) || 0);
+
+    function buildPoints(){
+      var baseRisk = clamp(Number(observation.risk_pressure || observation.event_risk || 0.18), 0, 1);
+      var baseSpread = clamp(Number(observation.model_spread || observation.disagreement_7 || 0.08) * 8, 0.04, 1);
+      var points = replay.length ? replay.map(function(item, idx){
+        var action = String(item.neural_action || neuralFrontier.action || 'hold');
+        var reward = Number(item.reward != null ? item.reward : item.target_return || 0);
+        return {
+          action: action,
+          label: titleize(item.commodity || state.selected),
+          risk: clamp(baseRisk + (idx % 5 - 2) * 0.045 + Number(item.event_risk || 0) * 0.15, 0.03, 0.97),
+          spread: clamp(baseSpread + ((idx * 7) % 9 - 4) * 0.035, 0.04, 0.96),
+          reward: reward,
+          confidence: clamp(Number(item.neural_confidence || probabilities[action] || neuralFrontier.confidence || 0.35), 0.08, 1)
+        };
+      }) : Object.keys(probabilities).map(function(action, idx){
+        return {
+          action: action,
+          label: titleize(action),
+          risk: clamp(baseRisk + (idx - 2) * 0.08, 0.04, 0.96),
+          spread: clamp(baseSpread + (idx % 2 ? 0.16 : -0.08), 0.04, 0.96),
+          reward: Number(probabilities[action] || 0) * Math.max(totalReward, 1),
+          confidence: clamp(Number(probabilities[action] || 0), 0.06, 1)
+        };
+      });
+      points.push({
+        action: String(neuralFrontier.action || 'hold'),
+        label: 'Live policy',
+        risk: baseRisk,
+        spread: baseSpread,
+        reward: totalReward,
+        confidence: clamp(Number(neuralFrontier.confidence || 0.5), 0.1, 1),
+        live: true
+      });
+      return points;
+    }
+
+    var points = buildPoints();
+    if (legend) {
+      legend.innerHTML = [
+        '<div class="intel-rl-pill"><strong>state-space replay</strong> ' + points.length + ' projected states</div>',
+        '<div class="intel-rl-pill"><strong>Target match</strong> ' + fmtConfidence(targetMatch) + '</div>',
+        '<div class="intel-rl-pill"><strong>Distribution gap</strong> ' + fmtConfidence(distributionGap) + '</div>',
+        '<div class="intel-rl-pill"><strong>Reward altitude</strong> ' + fmtSigned(totalReward, 2) + '</div>'
+      ].join('');
+    }
+
+    function geometry(){
+      var rect = stage.getBoundingClientRect();
+      var dpr = window.devicePixelRatio || 1;
+      var width = Math.max(1, rect.width || stage.clientWidth || 720);
+      var height = Math.max(280, rect.height || 360);
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { width: width, height: height, origin: { x: width * 0.18, y: height * 0.76 }, depth: width * 0.46, rise: height * 0.42 };
+    }
+
+    function project(point, geo, phase){
+      var x = geo.origin.x + point.risk * geo.depth + point.spread * geo.depth * 0.42;
+      var y = geo.origin.y - point.spread * geo.rise - clamp((point.reward + 0.08) / Math.max(Math.abs(totalReward), 1), 0, 1.2) * geo.rise * 0.42;
+      y += Math.sin(phase + point.risk * 4 + point.spread * 5) * (point.live ? 5 : 2);
+      return { x: x, y: y };
+    }
+
+    function draw(){
+      var geo = geometry();
+      var phase = Date.now() / 900;
+      context.clearRect(0, 0, geo.width, geo.height);
+      var grad = context.createLinearGradient(0, 0, geo.width, geo.height);
+      grad.addColorStop(0, 'rgba(34,211,238,0.08)');
+      grad.addColorStop(0.48, 'rgba(168,85,247,0.08)');
+      grad.addColorStop(1, 'rgba(2,6,23,0.02)');
+      context.fillStyle = grad;
+      context.fillRect(0, 0, geo.width, geo.height);
+
+      context.strokeStyle = 'rgba(148,163,184,0.16)';
+      context.lineWidth = 1;
+      for (var i = 0; i <= 5; i++) {
+        var gx = geo.origin.x + i * geo.depth / 5;
+        var gy = geo.origin.y - i * geo.rise / 5;
+        context.beginPath();
+        context.moveTo(gx, geo.origin.y);
+        context.lineTo(gx + geo.depth * 0.42, geo.origin.y - geo.rise);
+        context.stroke();
+        context.beginPath();
+        context.moveTo(geo.origin.x, gy);
+        context.lineTo(geo.origin.x + geo.depth * 1.42, gy - geo.rise * 0.05);
+        context.stroke();
+      }
+
+      points.sort(function(a, b){ return (a.spread + a.risk) - (b.spread + b.risk); }).forEach(function(point, idx){
+        var p = project(point, geo, phase + idx * 0.2);
+        var radius = point.live ? 10 + Math.sin(phase * 2) * 2 : 4 + point.confidence * 8;
+        var color = colors[point.action] || '#22d3ee';
+        context.beginPath();
+        context.arc(p.x, p.y, radius + 8, 0, Math.PI * 2);
+        context.fillStyle = color.replace(')', ',0.12)').replace('rgb', 'rgba');
+        context.fill();
+        context.beginPath();
+        context.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        context.fillStyle = color;
+        context.globalAlpha = point.live ? 0.95 : 0.42 + point.confidence * 0.42;
+        context.fill();
+        context.globalAlpha = 1;
+        if (point.live || idx % 5 === 0) {
+          context.fillStyle = '#cbd5e1';
+          context.font = '600 11px Inter, system-ui, sans-serif';
+          context.fillText(point.label, p.x + radius + 6, p.y + 3);
+        }
+      });
+
+      context.fillStyle = 'rgba(203,213,225,0.8)';
+      context.font = '700 11px Inter, system-ui, sans-serif';
+      context.fillText('Expected reward altitude', geo.origin.x + geo.depth * 0.78, geo.origin.y - geo.rise - 18);
+      state.policyManifold.frame = requestAnimationFrame(draw);
+    }
+
+    if (!state.policyManifold.resizeBound) {
+      window.addEventListener('resize', function(){
+        if (config.demoKind === 'rl-policy-lab' && getNeuralFrontierForSelected()) {
+          var neural = getNeuralPolicy();
+          renderRlPolicyManifold(getRlFrontierForSelected(), getNeuralFrontierForSelected(), neural && neural.replay_summary, safeArray(state.rlArtifacts && state.rlArtifacts.episode_replay));
+        }
+      });
+      state.policyManifold.resizeBound = true;
+    }
+    draw();
+  }
+
   function renderRlPolicyComparison(frontier, neuralFrontier){
     if (!frontier || !neuralFrontier) return;
     var actionOrder = ['reduce_risk', 'hold', 'add_continuation', 'add_hedge', 'relative_value_rotation'];
@@ -1647,6 +1808,7 @@
       renderRlScenarioPanel(frontier, neuralFrontier);
       renderRlAuditTrail(frontier, neural, walkForward, replaySummary, episodeReplay);
       renderRlPolicyField(neuralFrontier, replaySummary, walkForward);
+      renderRlPolicyManifold(frontier, neuralFrontier, replaySummary, episodeReplay);
       renderRlPremiumPanels(frontier, neural, neuralFrontier, walkForward, replaySummary, episodeReplay);
       animateRlSurfaces();
       return;
