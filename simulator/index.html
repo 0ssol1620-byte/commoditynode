@@ -231,6 +231,9 @@ permalink: /simulator/
   min-height:430px;
   overflow:hidden;
 }
+.sim-analytics-card:last-child:nth-child(odd) {
+  grid-column:1 / -1;
+}
 .sim-analytics-card h3 {
   margin:0;
   color:#f8fafc;
@@ -2184,10 +2187,10 @@ function renderDecisionSurface() {
       backgroundColor:'transparent',
       animationDuration:280,
       grid:{ top:16, left:118, right:22, bottom:36, containLabel:false },
-      xAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:11, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
-      yAxis:{ type:'category', data:impactRows.map(function(item){ return item.name; }), axisLabel:{ color:'#f8fafc', fontSize:11, fontWeight:600, margin:14, overflow:'truncate', width:104 } },
+      xAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:12, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
+      yAxis:{ type:'category', data:impactRows.map(function(item){ return item.name; }), axisLabel:{ color:'#f8fafc', fontSize:12, fontWeight:600, margin:14, overflow:'truncate', width:104 } },
       tooltip:{ trigger:'axis', axisPointer:{ type:'shadow' }, backgroundColor:'rgba(13,13,20,0.95)' },
-      series:[{ type:'bar', label:{ show:true, position:'right', color:'#f8fafc', fontSize:10, fontWeight:700 }, data:impactRows.map(function(item){ return { value:item.score, itemStyle:{ color:item.score >= 0 ? '#22c55e' : '#f43f5e' } }; }), barMaxWidth:20, borderRadius:8 }]
+      series:[{ type:'bar', label:{ show:true, position:'right', color:'#f8fafc', fontSize:11, fontWeight:700 }, data:impactRows.map(function(item){ return { value:item.score, itemStyle:{ color:item.score >= 0 ? '#22c55e' : '#f43f5e' } }; }), barMaxWidth:20, borderRadius:8 }]
     });
   }
   var scenarioChart = ensureEchart('scenarioCompare', 'sim-scenario-compare-chart');
@@ -2206,16 +2209,16 @@ function renderDecisionSurface() {
           rotate:0,
           hideOverlap:false,
           margin:14,
-          fontSize:11,
+          fontSize:12,
           fontWeight:600,
           lineHeight:14,
           formatter:formatCompactScenarioLabel
         },
         axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } }
       },
-      yAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:11, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
+      yAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:12, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
       tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,20,0.95)', formatter:function(p){ return '<strong>' + p.name + '</strong><br/>Relevance: ' + p.value; } },
-      series:[{ type:'bar', label:{ show:true, position:'top', color:'#f8fafc', fontSize:11, fontWeight:700 }, data:rows.map(function(item){ return { value:Number(item.relevance.toFixed(1)), itemStyle:{ color:item.active ? '#22d3ee' : (item.impact >= 0 ? '#c084fc' : '#f59e0b') } }; }), barMaxWidth:30, borderRadius:[8,8,0,0] }]
+      series:[{ type:'bar', label:{ show:true, position:'top', color:'#f8fafc', fontSize:12, fontWeight:700 }, data:rows.map(function(item){ return { value:Number(item.relevance.toFixed(1)), itemStyle:{ color:item.active ? '#22d3ee' : (item.impact >= 0 ? '#c084fc' : '#f59e0b') } }; }), barMaxWidth:30, borderRadius:[8,8,0,0] }]
     });
   }
   var gaugeChart = ensureEchart('decisionGauge', 'sim-decision-gauge-chart');
@@ -2256,10 +2259,10 @@ function renderDecisionSurface() {
         backgroundColor:'transparent',
         animationDuration:360,
         tooltip:{ trigger:'axis', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
-        legend:{ top:0, left:0, right:0, itemWidth:14, itemHeight:8, itemGap:10, textStyle:{ color:'#f1f5f9', fontSize:11, fontWeight:600 }, type:'plain' },
+        legend:{ top:0, left:0, right:0, itemWidth:14, itemHeight:8, itemGap:10, textStyle:{ color:'#f1f5f9', fontSize:12, fontWeight:600 }, type:'plain' },
         grid:{ top:58, left:52, right:22, bottom:42, containLabel:true },
-        xAxis:{ type:'category', data: cone.labels, axisLabel:{ color:'#f1f5f9', fontSize:11, margin:12, interval:function(i){ return i % 4 === 0; } }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } } },
-        yAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:11, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
+        xAxis:{ type:'category', data: cone.labels, axisLabel:{ color:'#f1f5f9', fontSize:12, margin:12, interval:function(i){ return i % 4 === 0; } }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } } },
+        yAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:12, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
         series:[
           { name:'History', type:'line', symbol:'none', smooth:true, lineStyle:{ width:2.5, color:'#cbd5e1' }, data: cone.history },
           { name:'Forecast low', type:'line', symbol:'none', smooth:true, lineStyle:{ width:0 }, stack:'cone', data: cone.low },
@@ -2285,7 +2288,7 @@ function renderDecisionSurface() {
             interval:0,
             rotate:0,
             margin:14,
-            fontSize:11,
+            fontSize:12,
             fontWeight:600,
             lineHeight:14,
             formatter:formatCompactScenarioLabel
@@ -2294,7 +2297,7 @@ function renderDecisionSurface() {
         },
         yAxis:{ type:'value', show:false, min:0, max:Math.ceil(timelineMax * 1.28) },
         tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)', formatter:function(p){ return '<strong>' + p.name + '</strong><br/>Event score: ' + p.value; } },
-        series:[{ type:'bar', data: timeline.map(function(item){ return { value:item.score, itemStyle:{ color:item.direction === 'up' ? '#22d3ee' : '#f43f5e' } }; }), barMaxWidth:24, showBackground:true, backgroundStyle:{ color:'rgba(255,255,255,0.04)' }, label:{ show:true, position:'top', color:'#f8fafc', fontSize:10, fontWeight:700 } }]
+        series:[{ type:'bar', data: timeline.map(function(item){ return { value:item.score, itemStyle:{ color:item.direction === 'up' ? '#22d3ee' : '#f43f5e' } }; }), barMaxWidth:24, showBackground:true, backgroundStyle:{ color:'rgba(255,255,255,0.04)' }, label:{ show:true, position:'top', color:'#f8fafc', fontSize:11, fontWeight:700 } }]
       });
     }
   }
