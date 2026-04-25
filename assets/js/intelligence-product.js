@@ -1608,13 +1608,6 @@
       add_hedge: 'Add hedge',
       relative_value_rotation: 'Relative-value rotation'
     };
-    var compactLabels = {
-      reduce_risk: 'Risk',
-      hold: 'Hold',
-      add_continuation: 'Continue',
-      add_hedge: 'Hedge',
-      relative_value_rotation: 'Rotation'
-    };
     var colors = {
       reduce_risk: '#f87171',
       hold: '#94a3b8',
@@ -1739,17 +1732,21 @@
         context.arc(point.x, point.y, 5 + point.p * 12, 0, Math.PI * 2);
         context.fill();
 
-        var labelText = geo.compact ? compactLabels[point.action] : point.label;
-        var labelOffset = geo.compact ? 8 : 12;
+        drawCanvasActionLabel(geo, point);
+      });
+
+      function drawCanvasActionLabel(geo, point){
+        if (geo.compact) return;
+        var labelOffset = 12;
         var labelX = point.x + (point.x < geo.cx - 20 ? -labelOffset : point.x > geo.cx + 20 ? labelOffset : 0);
-        var clampLabelX = Math.max(34, Math.min(geo.width - 34, labelX));
-        context.font = geo.compact ? '800 10px Inter, system-ui, sans-serif' : '800 11px Inter, system-ui, sans-serif';
+        var clampLabelX = Math.max(48, Math.min(geo.width - 48, labelX));
+        context.font = '800 11px Inter, system-ui, sans-serif';
         context.textAlign = clampLabelX < point.x - 2 ? 'right' : (clampLabelX > point.x + 2 ? 'left' : 'center');
         context.fillStyle = 'rgba(226,232,240,0.9)';
-        context.fillText(labelText, clampLabelX, point.y - 12);
+        context.fillText(point.label, clampLabelX, point.y - 12);
         context.fillStyle = rgba(point.color, 0.95);
         context.fillText(Math.round(point.p * 100) + '%', clampLabelX, point.y + 4);
-      });
+      }
 
       context.save();
       context.font = '900 10px Inter, system-ui, sans-serif';

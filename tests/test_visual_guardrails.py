@@ -40,9 +40,10 @@ def test_rl_policy_field_mobile_layout_keeps_legend_outside_canvas_and_shortens_
     field_start = js.index('function renderRlPolicyField')
     field_end = js.index('function renderRlPolicyManifoldWebGL')
     field_body = js[field_start:field_end]
-    assert 'compactLabels' in field_body
+    assert 'function drawCanvasActionLabel' in field_body
+    assert 'if (geo.compact) return;' in field_body
     assert 'clampLabelX' in field_body
-    assert "relative_value_rotation: 'Rotation'" in field_body
+    assert "relative_value_rotation: 'Rotation'" not in field_body
 
 
 def test_homepage_impact_sankey_is_premium_and_not_inline_toy_chart():
