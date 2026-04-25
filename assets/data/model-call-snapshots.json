@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-25T05:53:59+00:00",
+  "generated_at": "2026-04-25T06:15:18+00:00",
   "positioning": "live catalyst -> forecast range -> RL policy -> impact workflow -> timestamped proof",
   "claim_scope": "All performance language is scoped to historical replay, walk-forward checks, or timestamped model-call outcome tracking.",
   "rl_summary": {
@@ -17,15 +17,21 @@
       "created_at": "2026-04-25T05:49:47.945190+00:00",
       "commodity": "Crude Oil",
       "commodity_slug": "crude-oil",
-      "source_report_url": "/oil-risk-premium-saudi-strikes-q2-2026/",
+      "source_report_url": "/oil-jumps-on-middle-east-risk-but-model-stack-splits/",
+      "source_report_title": "Oil Jumps on Middle East Risk, but the Model Stack Splits the Trade",
       "price_at_prediction": 94.4,
       "price_unit": "$/barrel",
-      "forecast_30d": 93.3314,
-      "forecast_90d": 90.7929,
-      "forecast_direction": "bearish",
+      "price_change_pct_at_call": 2.22,
+      "forecast_30d": 93.33144999999999,
+      "forecast_90d": 90.79294999999999,
+      "forecast_direction": "mixed",
       "forecast_agreement": {
-        "level": "moderate",
-        "score": 0.6482
+        "level": "divergent",
+        "score": 0.5491
+      },
+      "forecast_models": {
+        "chronos2_90d": 97.5084,
+        "timesfm_90d": 84.0775
       },
       "rl_action": "Add Continuation",
       "rl_probability": 0.3101,
@@ -38,17 +44,332 @@
         "Regime calibration"
       ],
       "news_catalysts": [
-        "OPEC supply discipline",
-        "Middle East risk premium",
-        "Refinery margin split"
+        "Oil Jumps on Middle East Risk, but the Model Stack Splits the Trade",
+        "Crude oil rose 2.22% to $94.40 as Middle East risk and physical tightness headlines returned, but CommodityNode's refreshed Chronos-2 and TimesFM stack is split across the 90-day path."
       ],
-      "decision_implication": "Crude Oil: translate the catalyst into forecast range, RL policy action, and exposed sector/name workflow before the next repricing.",
+      "decision_implication": "Crude Oil: convert the latest catalyst into forecast range, RL policy action, and downstream impact workflow.",
       "impact_targets": [
         "Airlines",
         "E&P producers",
         "Refiners"
       ],
       "proof_label": "Replay-backed policy readout · timestamped model call",
+      "status": "pending_outcome",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-25-cotton",
+      "created_at": "2026-04-25T05:49:55.963071+00:00",
+      "commodity": "Cotton",
+      "commodity_slug": "cotton",
+      "source_report_url": "/cotton-breaks-to-fresh-high-as-textile-risk-reprices/",
+      "source_report_title": "Cotton Breaks to a Fresh High as Textile Risk Reprices",
+      "price_at_prediction": 79.32,
+      "price_unit": "cents/lb",
+      "price_change_pct_at_call": 3.28,
+      "forecast_30d": 80.01939999999999,
+      "forecast_90d": 79.48179999999999,
+      "forecast_direction": "bullish",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.7459
+      },
+      "forecast_models": {
+        "chronos2_90d": 78.0398,
+        "timesfm_90d": 80.9238
+      },
+      "rl_action": "Hold / Wait",
+      "rl_probability": 0.0,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Cotton Breaks to a Fresh High as Textile Risk Reprices",
+        "Cotton rose 3.28% to $79.32, pushing above its prior 52-week high as textile and yarn supply-chain headlines meet a moderately bullish CommodityNode forecast stack."
+      ],
+      "decision_implication": "Cotton: convert the latest catalyst into forecast range, RL policy action, and downstream impact workflow.",
+      "impact_targets": [
+        "Textiles",
+        "Apparel brands",
+        "Retailers"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "status": "pending_outcome",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-25-natural-gas",
+      "created_at": "2026-04-25T05:49:49.696282+00:00",
+      "commodity": "Natural Gas",
+      "commodity_slug": "natural-gas",
+      "source_report_url": "/natural-gas-breaks-lower-even-as-bullish-stack-holds/",
+      "source_report_title": "Natural Gas Breaks Lower Even as the Bullish Stack Still Holds",
+      "price_at_prediction": 2.683,
+      "price_unit": "$/MMBtu",
+      "price_change_pct_at_call": 2.64,
+      "forecast_30d": 2.44115,
+      "forecast_90d": 2.5016,
+      "forecast_direction": "mixed",
+      "forecast_agreement": {
+        "level": "divergent",
+        "score": 0.4863
+      },
+      "forecast_models": {
+        "chronos2_90d": 2.3886,
+        "timesfm_90d": 2.6146
+      },
+      "rl_action": "Add Continuation",
+      "rl_probability": 0.6646,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Natural Gas Breaks Lower Even as the Bullish Stack Still Holds",
+        "Natural gas fell 13.47% to $2.678/MMBtu, but CommodityNode's refreshed forecast stack still points higher over 30 and 90 days, keeping the setup decisively tension-filled rather than cleanly bearish."
+      ],
+      "decision_implication": "Natural Gas: convert the latest catalyst into forecast range, RL policy action, and downstream impact workflow.",
+      "impact_targets": [
+        "Utilities",
+        "Fertilizers",
+        "LNG exporters"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "status": "pending_outcome",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-25-cocoa",
+      "created_at": "2026-04-25T05:49:56.432478+00:00",
+      "commodity": "Cocoa",
+      "commodity_slug": "cocoa",
+      "source_report_url": "/cocoa-jumps-ivory-coast-pricing-tension-split-forecast-stack/",
+      "source_report_title": "Cocoa Jumps as Ivory Coast Pricing Tension Meets a Split Forecast Stack",
+      "price_at_prediction": 3437.0,
+      "price_unit": "$/tonne",
+      "price_change_pct_at_call": 2.02,
+      "forecast_30d": 3105.3766,
+      "forecast_90d": 2887.4360500000003,
+      "forecast_direction": "bearish",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.7928
+      },
+      "forecast_models": {
+        "chronos2_90d": 2580.0264,
+        "timesfm_90d": 3194.8457
+      },
+      "rl_action": "Hold / Wait",
+      "rl_probability": 0.0,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Cocoa Jumps as Ivory Coast Pricing Tension Meets a Split Forecast Stack",
+        "Cocoa rose 5.68% to 3367 as Ivory Coast pricing headlines tightened the narrative again, but CommodityNode's refreshed model stack is still sharply split on whether this is a rebound or the start of a stronger reset."
+      ],
+      "decision_implication": "Cocoa: convert the latest catalyst into forecast range, RL policy action, and downstream impact workflow.",
+      "impact_targets": [
+        "Chocolate makers",
+        "Confectionery",
+        "Food staples"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "status": "pending_outcome",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-25-lithium",
+      "created_at": "2026-04-25T05:50:03.888463+00:00",
+      "commodity": "Lithium (ALB)",
+      "commodity_slug": "lithium",
+      "source_report_url": "/lithium-selloff-tests-the-bullish-stack/",
+      "source_report_title": "Lithium Selloff Tests the Bullish Stack as Albemarle Drops 8.29%",
+      "price_at_prediction": 188.33,
+      "price_unit": "$/share",
+      "price_change_pct_at_call": -2.49,
+      "forecast_30d": 191.32325,
+      "forecast_90d": 195.20055000000002,
+      "forecast_direction": "mixed",
+      "forecast_agreement": {
+        "level": "divergent",
+        "score": 0.508
+      },
+      "forecast_models": {
+        "chronos2_90d": 202.0114,
+        "timesfm_90d": 188.3897
+      },
+      "rl_action": "Hold / Wait",
+      "rl_probability": 0.0,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Lithium Selloff Tests the Bullish Stack as Albemarle Drops 8.29%",
+        "Lithium proxy ALB fell 8.29% to 197.75, but CommodityNode's refreshed consensus still points above spot over 30 to 90 days, keeping the medium-term recovery thesis alive under stress."
+      ],
+      "decision_implication": "Lithium (ALB): convert the latest catalyst into forecast range, RL policy action, and downstream impact workflow.",
+      "impact_targets": [
+        "Battery makers",
+        "EV OEMs",
+        "Critical-mineral miners"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "status": "pending_outcome",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-25-coffee",
+      "created_at": "2026-04-25T05:49:52.133300+00:00",
+      "commodity": "Coffee",
+      "commodity_slug": "coffee",
+      "source_report_url": "/coffee-premium-unwind-extends/",
+      "source_report_title": "Coffee Premium Unwind Extends as Supply Relief Headlines Keep Hitting the Tape",
+      "price_at_prediction": 294.85,
+      "price_unit": "cents/lb",
+      "price_change_pct_at_call": -6.8,
+      "forecast_30d": 310.23405,
+      "forecast_90d": 304.38755000000003,
+      "forecast_direction": "bearish",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.75
+      },
+      "forecast_models": {
+        "chronos2_90d": 307.4445,
+        "timesfm_90d": 301.3306
+      },
+      "rl_action": "Hold / Wait",
+      "rl_probability": 0.0,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Coffee Premium Unwind Extends as Supply Relief Headlines Keep Hitting the Tape",
+        "Coffee fell another 8.15% to 272.3 cents/lb, and the refreshed CommodityNode forecast stack still points lower as supply-relief headlines and a firmer dollar keep pressuring the premium."
+      ],
+      "decision_implication": "Coffee: convert the latest catalyst into forecast range, RL policy action, and downstream impact workflow.",
+      "impact_targets": [
+        "Coffee chains",
+        "Roasters",
+        "Consumer staples"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "status": "pending_outcome",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-25-orange-juice",
+      "created_at": "2026-04-25T05:49:57.909675+00:00",
+      "commodity": "Orange Juice",
+      "commodity_slug": "orange-juice",
+      "source_report_url": "/orange-juice-extends-higher-as-models-lean-with-tape/",
+      "source_report_title": "Orange Juice Extends Higher as the Forecast Stack Finally Starts Leaning With the Tape",
+      "price_at_prediction": 161.9,
+      "price_unit": "cents/lb",
+      "price_change_pct_at_call": 2.96,
+      "forecast_30d": 138.4202,
+      "forecast_90d": 136.59215,
+      "forecast_direction": "bearish",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.6524
+      },
+      "forecast_models": {
+        "chronos2_90d": 126.4568,
+        "timesfm_90d": 146.7275
+      },
+      "rl_action": "Hold / Wait",
+      "rl_probability": 0.0,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Orange Juice Extends Higher as the Forecast Stack Finally Starts Leaning With the Tape",
+        "Orange juice rose another 6.79% to 188.05, and CommodityNode's refreshed forecast stack is now modestly bullish across both major models, suggesting the tape has stronger follow-through than it did earlier in the week."
+      ],
+      "decision_implication": "Orange Juice: convert the latest catalyst into forecast range, RL policy action, and downstream impact workflow.",
+      "impact_targets": [
+        "Beverage makers",
+        "Grocery retail",
+        "Agriculture processors"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "status": "pending_outcome",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-25-silver",
+      "created_at": "2026-04-25T05:49:50.678883+00:00",
+      "commodity": "Silver",
+      "commodity_slug": "silver",
+      "source_report_url": "/silver-rips-higher-but-model-split-warns-on-follow-through/",
+      "source_report_title": "Silver Rips Higher, but the Model Split Warns That Momentum Is Not the Whole Story",
+      "price_at_prediction": 76.414,
+      "price_unit": "$/oz",
+      "price_change_pct_at_call": 1.26,
+      "forecast_30d": 75.26315,
+      "forecast_90d": 73.882,
+      "forecast_direction": "bearish",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.7029
+      },
+      "forecast_models": {
+        "chronos2_90d": 75.3876,
+        "timesfm_90d": 72.3764
+      },
+      "rl_action": "Hold / Wait",
+      "rl_probability": 0.0,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Silver Rips Higher, but the Model Split Warns That Momentum Is Not the Whole Story",
+        "Silver rose 3.68% to 81.5, but CommodityNode's refreshed forecast stack is split, with Chronos-2 still above spot at 90 days while TimesFM points materially lower."
+      ],
+      "decision_implication": "Silver: convert the latest catalyst into forecast range, RL policy action, and downstream impact workflow.",
+      "impact_targets": [
+        "Solar manufacturers",
+        "Electronics",
+        "Precious-metal miners"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "status": "pending_outcome",
       "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
     },
     {
@@ -125,45 +446,6 @@
         "Miners",
         "Electrical equipment",
         "Homebuilders"
-      ],
-      "proof_label": "Replay-backed policy readout · timestamped model call",
-      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
-    },
-    {
-      "id": "model-call-2026-04-25-natural-gas",
-      "created_at": "2026-04-25T05:49:49.696282+00:00",
-      "commodity": "Natural Gas",
-      "commodity_slug": "natural-gas",
-      "source_report_url": "/natural-gas-lng-qatar-storage-build-2026/",
-      "price_at_prediction": 2.683,
-      "price_unit": "$/MMBtu",
-      "forecast_30d": 2.4411,
-      "forecast_90d": 2.5016,
-      "forecast_direction": "mixed",
-      "forecast_agreement": {
-        "level": "divergent",
-        "score": 0.5226
-      },
-      "rl_action": "Add Continuation",
-      "rl_probability": 0.6646,
-      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
-      "model_stack": [
-        "Chronos-2 forecast",
-        "TimesFM forecast",
-        "Neural PPO policy",
-        "Behavior-prior blend 0.2",
-        "Regime calibration"
-      ],
-      "news_catalysts": [
-        "LNG export pull",
-        "Storage comfort vs winter risk",
-        "Power burn volatility"
-      ],
-      "decision_implication": "Natural Gas: translate the catalyst into forecast range, RL policy action, and exposed sector/name workflow before the next repricing.",
-      "impact_targets": [
-        "Utilities",
-        "Fertilizers",
-        "LNG exporters"
       ],
       "proof_label": "Replay-backed policy readout · timestamped model call",
       "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."

@@ -490,19 +490,30 @@ image: "/assets/images/og-default.png"
 <script>
 (function(){
   function safeText(value){ return String(value == null ? '' : value); }
-  function safeSitePath(value){ return /^\/[a-z0-9\-/_]*\/?$/i.test(String(value || '')) ? value : '/reports/'; }
+  function safeSitePath(value){
+    var path = String(value || '');
+    return path.indexOf('//') !== 0 && /^\/[a-z0-9\-/_]*\/?$/i.test(path) ? path : '/reports/';
+  }
   function appendText(el, value){ el.textContent = safeText(value); return el; }
-  fetch('/assets/data/model-call-snapshots.json').then(function(r){ return r.json(); }).then(function(data){
+  Promise.all([
+    fetch('/assets/data/model-call-snapshots.json').then(function(r){ return r.json(); }),
+    fetch('/assets/data/news-catalysts.json').then(function(r){ return r.json(); }).catch(function(){ return {catalysts:{}}; })
+  ]).then(function(payloads){
+    var data = payloads[0] || {};
+    var catalystMap = (payloads[1] && payloads[1].catalysts) || {};
     var host = document.getElementById('home-model-proof-calls');
     if (!host || !data.calls) return;
     host.textContent = '';
     data.calls.slice(0,3).forEach(function(call){
       var article = document.createElement('article');
       article.setAttribute('style', 'padding:16px;border-radius:18px;border:1px solid rgba(34,211,238,0.14);background:rgba(8,12,20,0.46);display:grid;gap:8px;');
+      var commodityKey = safeText(call.commodity_slug).replace(/-/g, '_');
+      var catalyst = (catalystMap[commodityKey] || [])[0] || {};
       var kicker = appendText(document.createElement('div'), call.commodity); kicker.className = 'eyebrow-cyan';
       var title = appendText(document.createElement('strong'), safeText(call.rl_action) + ' · ' + Math.round((call.rl_probability||0)*100) + '% policy probability');
       title.setAttribute('style', 'color:#f8fafc;line-height:1.35;');
-      var copy = appendText(document.createElement('p'), (call.news_catalysts || []).slice(0,2).join(' · ') + ' → ' + safeText(call.forecast_direction) + ' forecast path.');
+      var catalystText = catalyst.headline || (call.news_catalysts || []).slice(0,2).join(' · ');
+      var copy = appendText(document.createElement('p'), safeText(catalystText) + ' → ' + safeText(call.forecast_direction) + ' forecast path.');
       copy.className = 'body-text-65';
       var link = appendText(document.createElement('a'), 'Open model call →');
       link.href = safeSitePath(call.source_report_url);

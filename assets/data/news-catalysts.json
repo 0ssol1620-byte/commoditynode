@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-25T06:15:18+00:00",
+  "scope": "Latest catalyst summaries are editorial/model workflow context, not investment advice.",
+  "catalysts": {
+    "crude_oil": [
+      {
+        "headline": "Oil Jumps on Middle East Risk, but the Model Stack Splits the Trade",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:47.945190+00:00",
+        "url": "/oil-jumps-on-middle-east-risk-but-model-stack-splits/",
+        "summary": "Crude oil rose 2.22% to $94.40 as Middle East risk and physical tightness headlines returned, but CommodityNode's refreshed Chronos-2 and TimesFM stack is split across the 90-day path.",
+        "model_reaction": "Crude Oil: mixed forecast path with Add Continuation RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "cotton": [
+      {
+        "headline": "Cotton Breaks to a Fresh High as Textile Risk Reprices",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:55.963071+00:00",
+        "url": "/cotton-breaks-to-fresh-high-as-textile-risk-reprices/",
+        "summary": "Cotton rose 3.28% to $79.32, pushing above its prior 52-week high as textile and yarn supply-chain headlines meet a moderately bullish CommodityNode forecast stack.",
+        "model_reaction": "Cotton: bullish forecast path with Hold / Wait RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "natural_gas": [
+      {
+        "headline": "Natural Gas Breaks Lower Even as the Bullish Stack Still Holds",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:49.696282+00:00",
+        "url": "/natural-gas-breaks-lower-even-as-bullish-stack-holds/",
+        "summary": "Natural gas fell 13.47% to $2.678/MMBtu, but CommodityNode's refreshed forecast stack still points higher over 30 and 90 days, keeping the setup decisively tension-filled rather than cleanly bearish.",
+        "model_reaction": "Natural Gas: mixed forecast path with Add Continuation RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "cocoa": [
+      {
+        "headline": "Cocoa Jumps as Ivory Coast Pricing Tension Meets a Split Forecast Stack",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:56.432478+00:00",
+        "url": "/cocoa-jumps-ivory-coast-pricing-tension-split-forecast-stack/",
+        "summary": "Cocoa rose 5.68% to 3367 as Ivory Coast pricing headlines tightened the narrative again, but CommodityNode's refreshed model stack is still sharply split on whether this is a rebound or the start of a stronger reset.",
+        "model_reaction": "Cocoa: bearish forecast path with Hold / Wait RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "lithium": [
+      {
+        "headline": "Lithium Selloff Tests the Bullish Stack as Albemarle Drops 8.29%",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:50:03.888463+00:00",
+        "url": "/lithium-selloff-tests-the-bullish-stack/",
+        "summary": "Lithium proxy ALB fell 8.29% to 197.75, but CommodityNode's refreshed consensus still points above spot over 30 to 90 days, keeping the medium-term recovery thesis alive under stress.",
+        "model_reaction": "Lithium (ALB): mixed forecast path with Hold / Wait RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "coffee": [
+      {
+        "headline": "Coffee Premium Unwind Extends as Supply Relief Headlines Keep Hitting the Tape",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:52.133300+00:00",
+        "url": "/coffee-premium-unwind-extends/",
+        "summary": "Coffee fell another 8.15% to 272.3 cents/lb, and the refreshed CommodityNode forecast stack still points lower as supply-relief headlines and a firmer dollar keep pressuring the premium.",
+        "model_reaction": "Coffee: bearish forecast path with Hold / Wait RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "orange_juice": [
+      {
+        "headline": "Orange Juice Extends Higher as the Forecast Stack Finally Starts Leaning With the Tape",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:57.909675+00:00",
+        "url": "/orange-juice-extends-higher-as-models-lean-with-tape/",
+        "summary": "Orange juice rose another 6.79% to 188.05, and CommodityNode's refreshed forecast stack is now modestly bullish across both major models, suggesting the tape has stronger follow-through than it did earlier in the week.",
+        "model_reaction": "Orange Juice: bearish forecast path with Hold / Wait RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "silver": [
+      {
+        "headline": "Silver Rips Higher, but the Model Split Warns That Momentum Is Not the Whole Story",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:50.678883+00:00",
+        "url": "/silver-rips-higher-but-model-split-warns-on-follow-through/",
+        "summary": "Silver rose 3.68% to 81.5, but CommodityNode's refreshed forecast stack is split, with Chronos-2 still above spot at 90 days while TimesFM points materially lower.",
+        "model_reaction": "Silver: bearish forecast path with Hold / Wait RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "gold": [
+      {
+        "headline": "Gold",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:48.450366+00:00",
+        "url": "/gold-warsh-dollar-selloff-2026/",
+        "summary": "Real-rate regime uncertainty",
+        "model_reaction": "Gold: bullish forecast path with Add Continuation RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "copper": [
+      {
+        "headline": "Copper",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:48.961138+00:00",
+        "url": "/copper-rebounds-china-vs-tight-supply/",
+        "summary": "Grid and EV infrastructure demand",
+        "model_reaction": "Copper: mixed forecast path with Hold / Wait RL action; research workflow signal, not investment advice."
+      }
+    ],
+    "wheat": [
+      {
+        "headline": "Wheat",
+        "source": "CommodityNode editorial / manual news synthesis",
+        "published_at": "2026-04-25T05:49:50.162893+00:00",
+        "url": "/wheat-black-sea-supply-risk-2026/",
+        "summary": "Food input-cost sensitivity",
+        "model_reaction": "Wheat: bullish forecast path with Hold / Wait RL action; research workflow signal, not investment advice."
+      }
+    ]
+  }
+}
