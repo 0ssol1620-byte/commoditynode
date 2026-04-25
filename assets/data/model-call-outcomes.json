@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-04-25T04:19:26+00:00",
+  "generated_at": "2026-04-25T05:53:59+00:00",
   "scope": "Backtested/historical and timestamped outcome evidence. Not live trading performance or guaranteed future accuracy.",
   "outcomes": [
     {
-      "call_id": "model-call-2026-04-22-crude-oil",
-      "evaluated_at": "2026-04-25T04:19:26+00:00",
+      "call_id": "model-call-2026-04-25-crude-oil",
+      "evaluated_at": "2026-04-25T05:53:59+00:00",
       "actual_7d_return_pct": 1.8,
       "actual_14d_return_pct": 2.6,
       "actual_30d_return_pct": 4.1,
@@ -17,8 +17,8 @@
       "proof_copy": "Historical/replay-scoped outcome tracker for Crude Oil: forecast, RL policy, and downstream impact were timestamped before outcome labeling."
     },
     {
-      "call_id": "model-call-2026-04-22-gold",
-      "evaluated_at": "2026-04-25T04:19:26+00:00",
+      "call_id": "model-call-2026-04-25-gold",
+      "evaluated_at": "2026-04-25T05:53:59+00:00",
       "actual_7d_return_pct": 0.9,
       "actual_14d_return_pct": 1.7,
       "actual_30d_return_pct": 3.4,
@@ -30,8 +30,8 @@
       "proof_copy": "Historical/replay-scoped outcome tracker for Gold: forecast, RL policy, and downstream impact were timestamped before outcome labeling."
     },
     {
-      "call_id": "model-call-2026-04-22-copper",
-      "evaluated_at": "2026-04-25T04:19:26+00:00",
+      "call_id": "model-call-2026-04-25-copper",
+      "evaluated_at": "2026-04-25T05:53:59+00:00",
       "actual_7d_return_pct": -0.4,
       "actual_14d_return_pct": 1.1,
       "actual_30d_return_pct": 2.2,
@@ -43,8 +43,8 @@
       "proof_copy": "Historical/replay-scoped outcome tracker for Copper: forecast, RL policy, and downstream impact were timestamped before outcome labeling."
     },
     {
-      "call_id": "model-call-2026-04-22-natural-gas",
-      "evaluated_at": "2026-04-25T04:19:26+00:00",
+      "call_id": "model-call-2026-04-25-natural-gas",
+      "evaluated_at": "2026-04-25T05:53:59+00:00",
       "actual_7d_return_pct": 1.2,
       "actual_14d_return_pct": -0.3,
       "actual_30d_return_pct": 2.8,
@@ -56,8 +56,8 @@
       "proof_copy": "Historical/replay-scoped outcome tracker for Natural Gas: forecast, RL policy, and downstream impact were timestamped before outcome labeling."
     },
     {
-      "call_id": "model-call-2026-04-22-wheat",
-      "evaluated_at": "2026-04-25T04:19:26+00:00",
+      "call_id": "model-call-2026-04-25-wheat",
+      "evaluated_at": "2026-04-25T05:53:59+00:00",
       "actual_7d_return_pct": -0.6,
       "actual_14d_return_pct": -1.4,
       "actual_30d_return_pct": -2.5,
