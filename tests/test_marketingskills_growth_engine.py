@@ -79,3 +79,46 @@ def test_main_js_has_semantic_growth_tracking_for_new_funnel():
     assert "watchlist_risk_scan_generated" in main
     assert "target.closest('[data-checkout-plan]')" in main
     assert "target.closest('[data-lead-magnet]')" in main
+
+
+def test_programmatic_watchlist_risk_scan_intent_pages_exist():
+    pages = {
+        "watchlist-risk-scan/oil-stocks/index.html": [
+            "permalink: /watchlist-risk-scan/oil-stocks/",
+            "Oil Stock Watchlist Risk Scan",
+            "XOM, CVX, COP, DAL, JETS",
+            "Crude oil / energy shock",
+            "data-intent-page=\"oil-stocks\"",
+        ],
+        "watchlist-risk-scan/gold-miners/index.html": [
+            "permalink: /watchlist-risk-scan/gold-miners/",
+            "Gold Miner Watchlist Risk Scan",
+            "NEM, GOLD, AEM, GDX, GLD",
+            "Gold / macro hedge shock",
+            "data-intent-page=\"gold-miners\"",
+        ],
+        "watchlist-risk-scan/airlines-jet-fuel/index.html": [
+            "permalink: /watchlist-risk-scan/airlines-jet-fuel/",
+            "Airline Jet Fuel Risk Scan",
+            "DAL, UAL, AAL, LUV, JETS",
+            "Crude oil / energy shock",
+            "data-intent-page=\"airlines-jet-fuel\"",
+        ],
+        "watchlist-risk-scan/ev-battery-metals/index.html": [
+            "permalink: /watchlist-risk-scan/ev-battery-metals/",
+            "EV Battery Metals Risk Scan",
+            "TSLA, ALB, LIT, RIVN, GM",
+            "Lithium / battery chain shock",
+            "data-intent-page=\"ev-battery-metals\"",
+        ],
+    }
+
+    for path, required_markers in pages.items():
+        html = read(path)
+        assert "layout: default" in html
+        assert "data-growth-surface=\"watchlist-intent-page\"" in html
+        assert "data-lead-magnet=\"watchlist-risk-scan" in html
+        assert "data-cta=\"intent_open_watchlist_scan\"" in html
+        assert "not investment advice" in html.lower()
+        for marker in required_markers:
+            assert marker in html
