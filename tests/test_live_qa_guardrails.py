@@ -27,6 +27,14 @@ def test_all_commodity_symbols_have_chart_slice_or_known_placeholder():
     assert not missing, "Missing chart slices/placeholders: " + ", ".join(sorted(missing))
 
 
+def test_ticker_bar_clips_marquee_overflow_for_full_site_browser_qa():
+    css = (ROOT / "assets" / "css" / "style.css").read_text(encoding="utf-8")
+    ticker_rule = css[css.index(".ticker-bar {"):css.index(".ticker-track {")]
+    assert "overflow: clip;" in ticker_rule
+    assert "contain: paint;" in ticker_rule
+    assert "isolation: isolate;" in ticker_rule
+
+
 def test_intelligence_product_mobile_css_uses_device_width_fallbacks():
     """Mobile emulation can widen layout viewport when desktop-only cards force min-content width."""
     layout = (ROOT / "_layouts" / "intelligence-product.html").read_text(encoding="utf-8")
