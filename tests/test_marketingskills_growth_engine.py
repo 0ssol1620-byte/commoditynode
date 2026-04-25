@@ -82,6 +82,9 @@ def test_main_js_has_semantic_growth_tracking_for_new_funnel():
 
 
 def test_programmatic_watchlist_risk_scan_intent_pages_exist():
+    config = read("_config.yml")
+    assert "  - watchlist-risk-scan" in config
+
     pages = {
         "watchlist-risk-scan/oil-stocks/index.html": [
             "permalink: /watchlist-risk-scan/oil-stocks/",
