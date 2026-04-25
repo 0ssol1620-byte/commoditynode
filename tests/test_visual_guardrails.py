@@ -26,7 +26,9 @@ def test_rl_policy_field_mobile_layout_keeps_legend_outside_canvas_and_shortens_
     layout = (ROOT / "_layouts/intelligence-product.html").read_text(encoding="utf-8")
     js = (ROOT / "assets/js/intelligence-product.js").read_text(encoding="utf-8")
 
-    mobile_css = layout[layout.index('@media (max-width: 768px) {'):layout.index('@media (max-width: 560px) {')]
+    mobile_start = layout.index('@media (max-width: 768px), (max-device-width: 768px) {')
+    mobile_end = layout.index('@media (max-width: 560px), (max-device-width: 560px) {')
+    mobile_css = layout[mobile_start:mobile_end]
     assert '.intel-rl-field-overlay--surface {' in mobile_css
     assert 'height: 300px;' in mobile_css
     assert 'bottom: auto;' in mobile_css
