@@ -88,6 +88,8 @@ def test_sitewide_model_proof_surfaces_are_present():
             'Forecast → RL policy → stock-level translation',
             'data-cta="sim_model_context_pricing"',
             'getHistorySlice(d.history)',
+            'Array.isArray(historySlice.prices)',
+            'historySlice.prices.slice(-16)',
         ],
         'pricing/index.html': [
             'pricing-model-proof',
@@ -106,6 +108,14 @@ def test_sitewide_model_proof_surfaces_are_present():
         body = read(rel)
         for marker in markers:
             assert marker in body, f'{marker} missing from {rel}'
+
+
+def test_simulator_forecast_cone_uses_history_prices_array():
+    simulator = read('simulator/index.html')
+    assert 'getHistorySlice(d.history).slice' not in simulator
+    assert 'var historySlice = d && d.history ? getHistorySlice(d.history) : null;' in simulator
+    assert 'Array.isArray(historySlice.prices)' in simulator
+    assert 'historySlice.prices.slice(-16)' in simulator
 
 
 def test_model_proof_copy_avoids_unscoped_performance_claims():

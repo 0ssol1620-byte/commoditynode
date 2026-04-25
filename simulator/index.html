@@ -2195,7 +2195,8 @@ function renderDecisionSurface() {
   if (window.CNPremiumAnalytics) {
     var coneChart = ensureEchart('forecastCone', 'sim-forecast-cone-chart');
     if (coneChart) {
-      var historySeries = d && d.history ? getHistorySlice(d.history).slice(-16) : [];
+      var historySlice = d && d.history ? getHistorySlice(d.history) : null;
+      var historySeries = historySlice && Array.isArray(historySlice.prices) ? historySlice.prices.slice(-16) : [];
       var lowSeries = consensus && consensus.p10 ? consensus.p10.slice(0, 16) : ((d && d.forecast && (d.forecast.p10 || d.forecast.p25)) ? (d.forecast.p10 || d.forecast.p25).slice(0, 16) : []);
       var highSeries = consensus && consensus.p90 ? consensus.p90.slice(0, 16) : ((d && d.forecast && (d.forecast.p90 || d.forecast.p75)) ? (d.forecast.p90 || d.forecast.p75).slice(0, 16) : []);
       var cone = window.CNPremiumAnalytics.buildForecastConeSeries(historySeries, (activeMedian || []).slice(0, 16), lowSeries, highSeries);
