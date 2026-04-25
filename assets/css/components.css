@@ -324,9 +324,9 @@
  * commodity universe). Other pages never get the Three.js stack.
  */
 @media (max-width: 720px) {
-  /* Drop ambient canvases on small devices — animation cost outweighs value. */
-  #hero-canvas,
-  #hero-impact-canvas { display: none !important; }
+  /* Drop only the ambient hero background on small devices; keep the impact
+     canvas visible because it carries the actual shock path visualization. */
+  #hero-canvas { display: none !important; }
   /* Collapse 3D universe to a static proof card instead of rendering Three.js. */
   #universe-canvas { min-height: 260px; }
   .universe-frame .universe-orbit-info { display: none !important; }

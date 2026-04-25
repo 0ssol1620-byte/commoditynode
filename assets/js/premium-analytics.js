@@ -79,21 +79,26 @@
     var maxForecast = Math.max(median.length, low.length, high.length);
     var total = maxHistory + maxForecast;
 
+    var lastHistory = history.length ? toNumber(history[history.length - 1], null) : null;
     for (var i = 0; i < total; i++) {
       if (i < maxHistory) {
         labels.push('H-' + (maxHistory - i));
-        historySeries.push(toNumber(history[i], null));
-        medianSeries.push(null);
-        lowSeries.push(null);
-        bandSeries.push(null);
+        var historyValue = toNumber(history[i], null);
+        historySeries.push(historyValue);
+        // Anchor the forecast median/band on the final historical point so the
+        // cone reads as one continuous decision path instead of a broken line.
+        medianSeries.push(i === maxHistory - 1 ? historyValue : null);
+        lowSeries.push(i === maxHistory - 1 ? historyValue : null);
+        bandSeries.push(i === maxHistory - 1 ? 0 : null);
       } else {
         var j = i - maxHistory;
         labels.push('F+' + (j + 1));
         historySeries.push(null);
         medianSeries.push(toNumber(median[j], null));
-        lowSeries.push(toNumber(low[j], null));
-        var hi = toNumber(high[j], null);
         var lo = toNumber(low[j], null);
+        var hi = toNumber(high[j], null);
+        if (lo == null && lastHistory != null && j === 0) lo = lastHistory;
+        lowSeries.push(lo);
         bandSeries.push(hi == null || lo == null ? null : Number((hi - lo).toFixed(2)));
       }
     }

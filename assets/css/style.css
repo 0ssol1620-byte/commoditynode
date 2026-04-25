@@ -2019,28 +2019,36 @@ a:focus-visible, button:focus-visible {
     overflow: hidden;
     animation: none !important;
     transform: none !important;
-    gap: 12px;
+    gap: 10px;
   }
   .ticker-track .ticker-item:nth-child(n+3) {
     display: none;
   }
   .ticker-item {
     min-width: 0;
-    flex: 1 1 0;
+    flex: 0 1 auto;
     display: inline-flex;
     align-items: center;
     gap: 5px;
   }
-  .ticker-item .name,
-  .ticker-item .price,
-  .ticker-item .change {
+  .ticker-item .name {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 72px;
   }
-  .ticker-item .name { max-width: 84px; }
-  .ticker-item .price { max-width: 64px; }
-  .ticker-item .change { max-width: 72px; }
+  .ticker-item .price,
+  .ticker-item .change {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    flex: 0 0 auto;
+    max-width: none;
+  }
+}
+@media (max-width: 430px) {
+  .ticker-track .ticker-item:nth-child(n+2) { display: none; }
+  .ticker-item .name { max-width: 92px; }
 }
 
 /* ════════════════════════════════════
@@ -7146,8 +7154,8 @@ html { scroll-behavior: smooth; }
   .hero--terminal { padding: 48px 0 32px; min-height: 0; }
   .hero-persona-row { grid-template-columns: 1fr; }
   .hero-terminal { padding: 16px; }
-  .hero-impact-card { padding: 14px; gap: 14px; }
-  .hero-impact-scene { min-height: 280px; }
+  .hero-impact-card { padding: 12px; gap: 14px; border-radius: 18px; }
+  .hero-impact-scene { min-height: 300px; }
   .hero-impact-title { font-size: 1.02rem; }
   .hero-impact-summary { font-size: 0.88rem; }
   .hero-shock-pill { min-width: 92px; }
@@ -7161,16 +7169,24 @@ html { scroll-behavior: smooth; }
 }
 @media (max-width: 560px){
   .hero-impact-title-row { align-items: flex-start; }
-  .hero-impact-scene { min-height: 240px; }
-  .hero-impact-overlay { min-width: 104px; padding: 8px 10px; }
+  .hero-impact-scene { min-height: 292px; }
+  .hero-impact-overlay { min-width: 122px; max-width: 176px; padding: 10px 12px; }
+  .hero-impact-overlay span:last-child { font-size: 0.68rem; }
   .hero-impact-tooltip { display: none !important; }
 }
 @media (max-width: 520px){
-  .hero-heatmap-row { grid-template-columns: 78px repeat(7, minmax(0,1fr)); gap: 3px; }
-  .hero-heatmap-row-label { padding: 3px 4px; gap: 3px; }
-  .hero-heatmap-row-chg { font-size: 0.62rem; }
-  .hero-heatmap-cell { height: 18px; border-radius: 4px; }
-  .hero-heatmap-row--head .hero-heatmap-col-label { font-size: 0.54rem; }
+  .hero-heatmap { overflow-x: auto; overscroll-behavior-inline: contain; padding-bottom: 14px; }
+  .hero-heatmap-grid { min-width: 520px; }
+  .hero-heatmap-row { grid-template-columns: 92px repeat(7, minmax(42px,1fr)); gap: 4px; }
+  .hero-heatmap-row-label { padding: 4px 5px; gap: 4px; }
+  .hero-heatmap-row-chg { font-size: 0.66rem; }
+  .hero-heatmap-cell { height: 20px; border-radius: 4px; }
+  .hero-heatmap-row--head .hero-heatmap-col-label { font-size: 0; overflow: visible; text-overflow: clip; }
+  .hero-heatmap-row--head .hero-heatmap-col-label::after {
+    content: attr(data-short-label);
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+  }
 }
 
 

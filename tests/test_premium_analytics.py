@@ -55,6 +55,9 @@ console.log(JSON.stringify({
   sankeyNodes: sankey.nodes.length,
   sankeyLinks: sankey.links.length,
   forecastLabels: cone.labels.length,
+  forecastMedianAnchor: cone.median[2],
+  forecastLowAnchor: cone.low[2],
+  forecastBandAnchor: cone.band[2],
   networkLinks: network.links.length,
   exposureItems: wheel.length,
   topAction: policy.topAction.label,
@@ -65,6 +68,9 @@ console.log(JSON.stringify({
     assert output["sankeyNodes"] == 5
     assert output["sankeyLinks"] == 4
     assert output["forecastLabels"] == 5
+    assert output["forecastMedianAnchor"] == 72
+    assert output["forecastLowAnchor"] == 72
+    assert output["forecastBandAnchor"] == 0
     assert output["networkLinks"] == 1
     assert output["exposureItems"] >= 4
     assert output["topAction"] == "Reduce risk"

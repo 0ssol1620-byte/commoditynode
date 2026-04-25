@@ -540,13 +540,13 @@ image: "/assets/images/og-default.png"
     { key:'uranium', label:'Uranium' }
   ];
   var HEAT_COLS = [
-    { key:'energy', label:'Energy' },
-    { key:'airlines', label:'Airlines' },
-    { key:'metals', label:'Metals/Mining' },
-    { key:'utilities', label:'Utilities' },
-    { key:'agri', label:'Agri/Food' },
-    { key:'ev', label:'EV/Battery' },
-    { key:'chem', label:'Chemicals' }
+    { key:'energy', label:'Energy', short:'EN' },
+    { key:'airlines', label:'Airlines', short:'AIR' },
+    { key:'metals', label:'Metals/Mining', short:'MET' },
+    { key:'utilities', label:'Utilities', short:'UTL' },
+    { key:'agri', label:'Agri/Food', short:'AG' },
+    { key:'ev', label:'EV/Battery', short:'EV' },
+    { key:'chem', label:'Chemicals', short:'CHEM' }
   ];
   // Base sensitivity matrix at +1% move (row → col)
   var HEAT_WEIGHTS = {
@@ -607,7 +607,7 @@ image: "/assets/images/og-default.png"
     html += '<div class="hero-heatmap-row hero-heatmap-row--head">';
     html += '<div class="hero-heatmap-axis"></div>';
     HEAT_COLS.forEach(function(c){
-      html += '<div class="hero-heatmap-col-label" title="'+c.label+'">'+c.label+'</div>';
+      html += '<div class="hero-heatmap-col-label" title="'+c.label+'" data-full-label="'+c.label+'" data-short-label="'+(c.short || c.label)+'">'+c.label+'</div>';
     });
     html += '</div>';
     HEAT_ROWS.forEach(function(r){
