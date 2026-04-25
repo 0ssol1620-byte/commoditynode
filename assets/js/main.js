@@ -1339,6 +1339,13 @@
     }, props || {}));
   };
 
+  window.CNGrowthEvents = {
+    checkout_start: 'checkout_start',
+    pricing_plan_selected: 'pricing_plan_selected',
+    lead_magnet_opened: 'lead_magnet_opened',
+    watchlist_risk_scan_generated: 'watchlist_risk_scan_generated'
+  };
+
   window.CNProfile = {
     get: getProfile,
     save: saveProfile,
@@ -1476,6 +1483,28 @@
   });
 
   document.addEventListener('click', function(event) {
+    const checkoutPlan = event.target.closest('[data-checkout-plan]');
+    if (checkoutPlan && window.CNTrack) {
+      window.CNTrack('checkout_start', {
+        source: checkoutPlan.getAttribute('data-checkout-source') || checkoutPlan.getAttribute('data-cta') || 'unknown',
+        plan: checkoutPlan.getAttribute('data-checkout-plan') || checkoutPlan.getAttribute('data-plan') || 'pro',
+        billing_mode: checkoutPlan.getAttribute('data-billing') || '',
+        cta_label: checkoutPlan.getAttribute('data-cta') || checkoutPlan.textContent.trim().slice(0, 80)
+      });
+      window.CNTrack('pricing_plan_selected', {
+        plan: checkoutPlan.getAttribute('data-checkout-plan') || checkoutPlan.getAttribute('data-plan') || 'pro',
+        source: checkoutPlan.getAttribute('data-checkout-source') || 'pricing'
+      });
+    }
+
+    const leadMagnet = event.target.closest('[data-lead-magnet]');
+    if (leadMagnet && window.CNTrack) {
+      window.CNTrack('lead_magnet_opened', {
+        lead_magnet: leadMagnet.getAttribute('data-lead-magnet') || '',
+        cta_label: leadMagnet.getAttribute('data-cta') || ''
+      });
+    }
+
     const target = event.target.closest('[data-cta]');
     if (!target || typeof window.gtag !== 'function') return;
     window.gtag('event', 'cta_click', {

@@ -1,182 +1,147 @@
 # CommodityNode Product Marketing Context
 
-Last updated: 2026-04-19
-Source: live site review + repo review + pricing/reports/simulator/homepage inspection
+_Last updated: 2026-04-25_
 
 ## 1. Product Overview
 
-CommodityNode is a commodity intelligence platform that translates raw commodity price moves into stock, sector, industry, ETF, and supply-chain decisions.
+**One-line description**
+CommodityNode is a commodity decision intelligence platform that turns news catalysts, price moves, forecasts, RL policy signals, and stock/sector impact into decision-ready workflows.
 
-It combines:
-- live commodity price tracking
-- commodity hubs / impact maps
-- signal reports
-- AI 90-day forecasts (Chronos-2 + TimesFM 2.5 consensus)
-- scenario simulator
-- company sensitivity analysis
+**What it does**
+CommodityNode helps investors, analysts, and operators understand which commodity shocks matter, which equities/sectors are affected, and what the model stack currently implies. The site connects live commodity prices, Chronos-2/TimesFM forecast consensus, RL Policy Lab research signals, scenario simulation, impact maps, and timestamped model-call proof surfaces.
 
-Product category:
-- commodity intelligence platform
-- commodity research workflow
-- macro-to-equity translation tool
+**Product category**
+Commodity intelligence, market intelligence, commodity research, financial decision support, supply-chain risk intelligence.
 
-Product type:
-- B2C/B2B web SaaS with free + paid subscription tiers
+**Product type**
+Web SaaS / research intelligence platform with public content, free workflow previews, and Pro/Enterprise monetization paths.
 
-Business model:
-- Free tier
-- Pro: $19/month
-- Enterprise: $99/month
+**Business model and pricing**
+- Free: public commodity hubs, limited Signal Reports, forecast/simulator preview context.
+- Pro: deeper workflow, unlimited signal reports, company sensitivity, trading notes, model proof/readout, stock-level translation.
+- Enterprise: team seats, API/data export, custom integration, priority support.
 
 ## 2. Target Audience
 
-Primary audience:
-- self-directed investors
-- macro-aware traders
-- equity analysts covering commodity-sensitive names
-- portfolio managers / research desks with commodity exposure
+### Primary audience
+Self-directed investors, active traders, commodity-sensitive equity investors, equity analysts, and market researchers who track companies/sectors exposed to commodities.
 
-Secondary audience:
-- operators and procurement-sensitive decision makers tracking supply-chain risk
+### Secondary audience
+Procurement, supply-chain, and operations teams that need to monitor input-cost shocks and disruption risk.
 
-Primary use case:
-- understand what a commodity move means for portfolios, sectors, and individual names before the street reprices
+### Decision-makers
+- Individual investor / trader deciding whether Pro saves research time or improves decision discipline.
+- Analyst / portfolio researcher deciding whether CommodityNode accelerates commodity-to-equity translation.
+- Operator / procurement lead deciding whether impact maps improve early-warning visibility.
+- Enterprise buyer deciding whether API/data export and team workflows are worth procurement.
 
-Jobs to be done:
-1. Translate raw commodity price action into equity and sector implications
-2. Stress-test holdings against supply shocks, demand shifts, and macro scenarios
-3. Get a fast narrative + forecast + sensitivity view without manually stitching together news, charts, and analyst notes
+### Jobs to be done
+1. “When oil/gold/copper/wheat moves, tell me which stocks/sectors actually matter.”
+2. “Turn today’s news into a forecast, policy action, and impact map — not another generic market summary.”
+3. “Show me proof of how past model calls behaved before I pay.”
+4. “Give me a workflow I can repeat daily without manually stitching news, charts, forecasts, and watchlists together.”
 
 ## 3. Personas
 
 ### Self-directed investor
-Cares about:
-- where to look next
-- what stocks benefit / get hurt
-- whether the move is tactical or structural
+- Cares about: actionable stock/ETF implications, speed, trust, affordability.
+- Challenge: commodity headlines are noisy; hard to translate into portfolio impact.
+- Promise: decision-ready commodity shock workflow before the market reprices.
 
-### Macro / event-driven trader
-Cares about:
-- scenario setup before OPEC / Fed / WASDE / geopolitical events
-- model agreement vs disagreement
-- tradeable downstream winners and losers
+### Equity analyst / market researcher
+- Cares about: explainability, source trail, sector/company read-through, repeatable framework.
+- Challenge: converting price tape/news into company-level implications takes time.
+- Promise: faster route from catalyst to sector/company readout with model proof context.
 
-### Equity analyst
-Cares about:
-- stock sensitivity to commodity inputs
-- earnings / margin implications
-- second-order effects across suppliers and adjacent sectors
+### Operator / procurement lead
+- Cares about: input-cost risk, supplier exposure, disruption monitoring, timing.
+- Challenge: commodity spikes hit margins before internal teams react.
+- Promise: catch input-cost and supply-chain shocks early enough to plan.
 
-### Portfolio manager / research desk
-Cares about:
-- repeatable workflow
-- broad commodity coverage
-- fast portfolio translation and team-scale visibility
+### Enterprise/team buyer
+- Cares about: workflow scalability, API/data export, permissions, support, compliance language.
+- Challenge: individual tools do not integrate into team process.
+- Promise: institutional commodity intelligence layer for team workflows.
 
 ## 4. Problems & Pain Points
 
-Before CommodityNode, users typically:
-- see a commodity move but do not know which stocks or sectors it actually changes
-- need to manually connect futures prices, macro news, earnings implications, and portfolio exposure
-- rely on generic finance news that describes the move but does not translate it into position-level decisions
-- miss second-order supply-chain effects
-- do not know whether a move is short-lived noise or part of a 30–90 day regime shift
+- Commodity research is fragmented across news, charts, analyst notes, models, and spreadsheets.
+- Generic AI summaries miss market structure and company-specific implications.
+- Traditional chart tools show price but not second-order impact.
+- Users distrust black-box predictions unless proof, scope, and historical outcomes are visible.
+- Investors/operators need early signal triage, not hindsight commentary.
 
-## 5. Current Alternatives
+## 5. Competitive Landscape
 
-Direct / adjacent alternatives:
-- Bloomberg / institutional terminals
-- general finance media (WSJ, Bloomberg news, Reuters, Seeking Alpha)
-- TradingView / price-chart-first tools
-- sell-side analyst notes
-- manually maintained watchlists and spreadsheets
+### Direct/near competitors
+- TradingView / chart platforms: strong charting, weak catalyst-to-impact workflow.
+- Koyfin / financial data terminals: broad data, less commodity-specific decision graph.
+- Bloomberg/Refinitiv: institutional depth, expensive, not self-serve lightweight.
+- Generic AI market summaries: accessible but shallow, weak proof and data governance.
 
-What users do instead:
-- read commodity news
-- check charts separately
-- manually infer which names are exposed
-- wait for analyst notes or earnings commentary
+### Differentiation
+- News catalyst → forecast consensus → RL policy action → sector/stock impact → outcome proof narrative.
+- Commodity-first impact maps and company sensitivity workflow.
+- Public model-call snapshots and outcome governance with scoped claims.
+- Pro conversion path based on completed workflow, not just data access.
 
-## 6. Value Proposition
+## 6. Messaging Principles
 
-Core value proposition:
-- CommodityNode turns raw commodity moves into decision-ready context for stocks, sectors, and supply chains.
+### Core narrative
+“Commodity shocks do not matter equally. CommodityNode shows which shocks affect your watchlist, why the model stack cares, and what happened after prior calls.”
 
-Key transformation:
-- from “commodity X moved”
-- to “here is what it means, who it hits, what the forecast says, and what to watch next”
+### Safe proof language
+Canonical proof-to-upgrade path: news catalyst → forecast consensus → RL policy action → sector/stock impact → outcome proof → Pro upgrade
 
-Differentiators:
-- commodity-to-equity translation layer
-- integrated workflow: hub → signal report → forecast → simulator
-- scenario-first decision support
-- live signal reports paired with structured data and forecast context
-- stock / company sensitivity framing rather than commodity charts alone
+Use:
+- “historical replay”
+- “research simulation”
+- “not investment advice”
+- “not a return guarantee”
+- “replay/walk-forward scoped”
 
-## 7. Reasons to Believe
+Avoid:
+- guaranteed returns
+- guaranteed win rates
+- “beats the market” without audited proof
+- implying live-trading performance when only replay/walk-forward data exists
 
-Proof points currently visible on site:
-- 172 live signal reports
-- 62 commodity hubs tracked
-- daily / live refresh framing
-- AI forecast stack with Chronos-2 + TimesFM 2.5 comparison
-- scenario simulator with sector and company sensitivity
-- methodology, editorial team, editorial process, and transparency pages
+### High-converting CTA language
+Prefer value-based CTAs:
+- Build my watchlist intelligence
+- See today’s commodity risk map
+- Unlock the full model readout
+- Compare Free vs Pro workflow
+- Start with my first 3 setups
 
-## 8. Positioning
+Avoid vague CTAs:
+- Learn more
+- Submit
+- Click here
 
-Best current positioning sentence:
-- From raw commodity moves to stock and sector decisions.
+## 7. Primary Conversion Goals
 
-Expanded positioning:
-- CommodityNode is the decision workflow for investors and analysts who need to understand how commodity shocks ripple through equities, sectors, and supply chains before consensus catches up.
+1. Public visitor starts `/start/` workflow.
+2. Visitor reads a signal report and opens relevant commodity/company/simulator workflow.
+3. Visitor compares Free vs Pro and clicks checkout.
+4. Visitor engages with model proof/outcome sections enough to trust Pro.
+5. Enterprise visitor requests API/team access.
 
-## 9. Messaging Pillars
+## 8. Current Assets
 
-1. Translation
-- Turn commodity moves into stock, sector, and supply-chain implications
+- Homepage with premium 3D/impact narrative and proof command center.
+- Reports archive and timestamped model-call proof shelf.
+- Commodity hubs with impact maps and model reaction surfaces.
+- Simulator with model-call context and pricing CTA.
+- RL Policy Lab with replay/walk-forward scoped proof archive.
+- Pricing page with Free/Pro/Enterprise packaging.
+- Start workflow collecting role, commodities, watchlist, and events.
+- Programmatic commodity/company/theme/industry pages.
 
-2. Speed
-- Get there before analyst notes and earnings commentary fully catch up
+## 9. Open Marketing Questions
 
-3. Workflow
-- One path: live hub → signal report → forecast → scenario test
-
-4. Confidence framing
-- Use model agreement, forecast ranges, and narrative context instead of trusting one line or one headline
-
-## 10. Objections
-
-Likely objections:
-- “Is this just another chart/news site?”
-- “Why not use Bloomberg / TradingView / free finance sites?”
-- “Are the AI forecasts trustworthy?”
-- “Is this useful for individual investors, or only professionals?”
-- “Will this actually help me make better decisions, or just give me more information?”
-
-## 11. Conversion Goals
-
-Primary conversion:
-- Pro signup ($19/month)
-
-Secondary conversions:
-- start free
-- read signal reports
-- open commodity hubs
-- run simulator
-- move from report to hub / pricing
-
-## 12. Best-fit Messaging Angles
-
-- See the commodity shock before the street reprices
-- Translate raw commodity moves into positions
-- Know who wins, who loses, and why
-- Understand the move before the next analyst note lands
-- Stop reading commodity headlines in isolation
-
-## 13. Channel Priorities
-
-1. SEO via commodity, theme, company, and report pages
-2. Daily hot-move content distribution on social / newsletters
-3. Event-driven content around OPEC, Fed, WASDE, China demand, geopolitics
-4. Conversion surfaces on homepage, reports archive, pricing, and simulator
+- Which visitor segment currently converts best: investor, analyst, operator, or enterprise?
+- Which pages drive most checkout clicks?
+- Which proof surfaces create trust vs. cognitive overload?
+- What is the strongest lead magnet: watchlist risk scan, commodity shock checklist, or model-call archive digest?
+- Should Pro be framed primarily as “decision workflow,” “model proof,” or “portfolio/watchlist translation”?

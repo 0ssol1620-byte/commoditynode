@@ -697,12 +697,19 @@ no_loader: true
         <p>Use full forecast ranges, scenario depth, and stock-level winners and losers when the move is important enough to change what you do next.</p>
       </div>
     </div>
+    <section class="pricing-value-ladder" aria-label="Pricing value ladder" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px auto 0;max-width:980px;">
+      <div class="pricing-compare-card"><span>Free proves relevance</span><strong>Know if the shock matters</strong><p>Save a role, commodities, and watchlist names; then validate the public report, hub, and simulator preview before paying.</p></div>
+      <div class="pricing-compare-card featured"><span>Pro finishes the decision workflow</span><strong>From model readout to action path</strong><p>Unlock deeper forecast bands, RL policy context, stock-level translation, and repeatable proof/outcome review.</p></div>
+      <div class="pricing-compare-card"><span>Enterprise operationalizes the workflow</span><strong>Team/API decision infrastructure</strong><p>Scale CommodityNode into shared research, exports, and workflow governance for teams that need the signal everywhere.</p></div>
+    </section>
     <div class="pricing-hero-actions">
       {% assign _pro_monthly = site.data.pricing.plans | where: "id", "pro_monthly" | first %}
-      <a id="hero-pro-cta-btn" href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary js-pro-checkout" data-checkout-source="pricing_hero_start_pro" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start Pro — {{ _pro_monthly.price_label }}/month</a>
+      {% assign _pro_annual = site.data.pricing.plans | where: "id", "pro_annual" | first %}
+      <a id="hero-pro-cta-btn" href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary js-pro-checkout" data-checkout-source="pricing_hero_start_pro" data-checkout-plan="pro_monthly" data-plan="pro_monthly" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start Pro — {{ _pro_monthly.price_label }}/month</a>
+      <a href="{{ site.data.pricing.checkout.pro_annual }}" class="pricing-btn pricing-btn-secondary js-pro-checkout" data-checkout-source="pricing_hero_start_pro_annual" data-checkout-plan="pro_annual" data-plan="pro_annual" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start annual — {{ _pro_annual.price_label }}/year</a>
+      <a href="/watchlist-risk-scan/" class="pricing-btn pricing-btn-ghost" data-cta="pricing_try_watchlist_risk_scan" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Try Watchlist Risk Scan</a>
       <button type="button" class="pricing-btn pricing-btn-ghost" data-cta="pricing_start_free_hero" data-goto="/start/" style="width:auto;min-width:180px;margin-bottom:0;padding:12px 18px;">Start Free</button>
     </div>
-    {% assign _pro_annual = site.data.pricing.plans | where: "id", "pro_annual" | first %}
     {% assign _annual_save = _pro_annual.billing | split: "save " | last | split: "%" | first | default: "21" %}
     <div class="billing-toggle" id="billing-toggle-hero" style="margin:0 auto 18px;">
       <button type="button" class="billing-btn active" data-billing="monthly" data-billing-set="monthly">Monthly</button>
