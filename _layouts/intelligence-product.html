@@ -219,15 +219,34 @@ layout: default
     scrollbar-width: thin;
   }
   .intel-rl-pill { flex: 0 0 auto; white-space: nowrap; }
-  .intel-rl-field-wrap,
+  .intel-rl-field-wrap {
+    height: auto;
+    min-height: 456px;
+    overflow: visible;
+    padding-bottom: 142px;
+  }
   .intel-rl-field-wrap canvas,
   .intel-rl-manifold-stage,
   .intel-rl-manifold-stage canvas { height: 300px; min-height: 300px; }
-  .intel-rl-field-center { width: 104px; height: 104px; padding: 14px; }
-  .intel-rl-field-center strong { font-size: 0.84rem; }
-  .intel-rl-field-center span { font-size: 0.66rem; }
-  .intel-rl-surface-legend { left:10px; right:10px; bottom:10px; gap:6px; }
-  .intel-rl-surface-legend .intel-rl-surface-key { padding:6px 8px; font-size:0.66rem; }
+  .intel-rl-field-overlay--surface {
+    inset: 0 0 auto 0;
+    height: 300px;
+    bottom: auto;
+  }
+  .intel-rl-field-center { width: 96px; height: 96px; padding: 12px; top: 48%; }
+  .intel-rl-field-center strong { font-size: 0.76rem; }
+  .intel-rl-field-center span { font-size: 0.6rem; line-height: 1.35; }
+  .intel-rl-surface-legend {
+    left: 0;
+    right: 0;
+    top: 312px;
+    bottom: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 0 4px;
+  }
+  .intel-rl-surface-legend .intel-rl-surface-key { justify-content:space-between; padding:7px 10px; font-size:0.66rem; }
   .intel-table { min-width: 720px; }
 }
 @media (max-width: 560px) {

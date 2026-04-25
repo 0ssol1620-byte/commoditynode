@@ -1608,6 +1608,13 @@
       add_hedge: 'Add hedge',
       relative_value_rotation: 'Relative-value rotation'
     };
+    var compactLabels = {
+      reduce_risk: 'Risk',
+      hold: 'Hold',
+      add_continuation: 'Continue',
+      add_hedge: 'Hedge',
+      relative_value_rotation: 'Rotation'
+    };
     var colors = {
       reduce_risk: '#f87171',
       hold: '#94a3b8',
@@ -1649,7 +1656,7 @@
       canvas.width = Math.max(1, Math.floor(width * dpr));
       canvas.height = Math.max(1, Math.floor(height * dpr));
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      return { width: width, height: height, compact: compact, cx: width * 0.5, cy: height * 0.52, rx: width * (compact ? 0.39 : 0.36), ry: height * (compact ? 0.26 : 0.28) };
+      return { width: width, height: height, compact: compact, cx: width * 0.5, cy: height * (compact ? 0.48 : 0.52), rx: width * (compact ? 0.27 : 0.36), ry: height * (compact ? 0.23 : 0.28) };
     }
 
     function rgba(hex, alpha){
@@ -1732,12 +1739,16 @@
         context.arc(point.x, point.y, 5 + point.p * 12, 0, Math.PI * 2);
         context.fill();
 
-        context.font = '800 11px Inter, system-ui, sans-serif';
-        context.textAlign = point.x < geo.cx - 20 ? 'right' : (point.x > geo.cx + 20 ? 'left' : 'center');
+        var labelText = geo.compact ? compactLabels[point.action] : point.label;
+        var labelOffset = geo.compact ? 8 : 12;
+        var labelX = point.x + (point.x < geo.cx - 20 ? -labelOffset : point.x > geo.cx + 20 ? labelOffset : 0);
+        var clampLabelX = Math.max(34, Math.min(geo.width - 34, labelX));
+        context.font = geo.compact ? '800 10px Inter, system-ui, sans-serif' : '800 11px Inter, system-ui, sans-serif';
+        context.textAlign = clampLabelX < point.x - 2 ? 'right' : (clampLabelX > point.x + 2 ? 'left' : 'center');
         context.fillStyle = 'rgba(226,232,240,0.9)';
-        context.fillText(point.label, point.x + (point.x < geo.cx - 20 ? -12 : point.x > geo.cx + 20 ? 12 : 0), point.y - 12);
+        context.fillText(labelText, clampLabelX, point.y - 12);
         context.fillStyle = rgba(point.color, 0.95);
-        context.fillText(Math.round(point.p * 100) + '%', point.x + (point.x < geo.cx - 20 ? -12 : point.x > geo.cx + 20 ? 12 : 0), point.y + 4);
+        context.fillText(Math.round(point.p * 100) + '%', clampLabelX, point.y + 4);
       });
 
       context.save();

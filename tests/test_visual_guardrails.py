@@ -22,6 +22,29 @@ def test_rl_policy_field_uses_premium_action_space_surface_not_node_diagram():
     assert 'Policy frontier' in field_body
 
 
+def test_rl_policy_field_mobile_layout_keeps_legend_outside_canvas_and_shortens_labels():
+    layout = (ROOT / "_layouts/intelligence-product.html").read_text(encoding="utf-8")
+    js = (ROOT / "assets/js/intelligence-product.js").read_text(encoding="utf-8")
+
+    mobile_css = layout[layout.index('@media (max-width: 768px) {'):layout.index('@media (max-width: 560px) {')]
+    assert '.intel-rl-field-overlay--surface {' in mobile_css
+    assert 'height: 300px;' in mobile_css
+    assert 'bottom: auto;' in mobile_css
+    assert '.intel-rl-surface-legend {' in mobile_css
+    assert 'top: 312px;' in mobile_css
+    assert 'bottom: auto;' in mobile_css
+    assert 'grid-template-columns: 1fr;' in mobile_css
+    assert 'min-height: 456px;' in mobile_css
+    assert 'overflow: visible;' in mobile_css
+
+    field_start = js.index('function renderRlPolicyField')
+    field_end = js.index('function renderRlPolicyManifoldWebGL')
+    field_body = js[field_start:field_end]
+    assert 'compactLabels' in field_body
+    assert 'clampLabelX' in field_body
+    assert "relative_value_rotation: 'Rotation'" in field_body
+
+
 def test_homepage_impact_sankey_is_premium_and_not_inline_toy_chart():
     home = (ROOT / "index.html").read_text(encoding="utf-8")
 
