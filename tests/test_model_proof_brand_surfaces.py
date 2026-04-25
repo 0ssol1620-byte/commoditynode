@@ -87,6 +87,7 @@ def test_sitewide_model_proof_surfaces_are_present():
             'Model call context',
             'Forecast → RL policy → stock-level translation',
             'data-cta="sim_model_context_pricing"',
+            'getHistorySlice(d.history)',
         ],
         'pricing/index.html': [
             'pricing-model-proof',
