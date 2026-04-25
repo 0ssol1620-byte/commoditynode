@@ -34,7 +34,7 @@ def test_rl_policy_field_mobile_layout_keeps_legend_outside_canvas_and_shortens_
     assert 'top: 312px;' in mobile_css
     assert 'bottom: auto;' in mobile_css
     assert 'grid-template-columns: 1fr;' in mobile_css
-    assert 'min-height: 456px;' in mobile_css
+    assert 'min-height: 532px;' in mobile_css
     assert 'overflow: visible;' in mobile_css
 
     field_start = js.index('function renderRlPolicyField')
