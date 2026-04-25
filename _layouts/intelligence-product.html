@@ -52,7 +52,9 @@ layout: default
 
 <style>
 .intel-product-hero { padding: 72px 0 34px; background: linear-gradient(180deg, rgba(34,211,238,0.05), rgba(168,85,247,0.03)); border-bottom: 1px solid rgba(255,255,255,0.06); }
-.intel-product-shell { max-width: 1120px; margin: 0 auto; padding: 0 24px 56px; }
+.intel-product-shell { max-width: 1120px; margin: 0 auto; padding: 0 24px 56px; overflow-x: hidden; }
+.intel-product-shell, .intel-product-shell * { box-sizing: border-box; min-width: 0; max-width: 100%; }
+.intel-table { max-width: none; }
 .intel-product-hero h1 { font-size: clamp(2.2rem, 4vw, 3.2rem); line-height: 0.98; margin: 0 0 12px; color: #f8fafc; }
 .intel-product-hero p { color: #94a3b8; line-height: 1.75; max-width: 760px; }
 .intel-product-grid, .intel-product-two, .intel-product-four, .intel-pricing-grid, .intel-success-grid { display:grid; gap:14px; }

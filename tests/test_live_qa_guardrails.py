@@ -30,6 +30,7 @@ def test_all_commodity_symbols_have_chart_slice_or_known_placeholder():
 def test_intelligence_product_mobile_css_uses_device_width_fallbacks():
     """Mobile emulation can widen layout viewport when desktop-only cards force min-content width."""
     layout = (ROOT / "_layouts" / "intelligence-product.html").read_text(encoding="utf-8")
+    assert ".intel-product-shell, .intel-product-shell * { box-sizing: border-box; min-width: 0; max-width: 100%; }" in layout
     assert "@media (max-width: 980px), (max-device-width: 980px)" in layout
     assert "@media (max-width: 768px), (max-device-width: 768px)" in layout
     assert "@media (max-width: 560px), (max-device-width: 560px)" in layout
