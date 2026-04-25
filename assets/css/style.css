@@ -1998,6 +1998,51 @@ a:focus-visible, button:focus-visible {
 .ticker-track:hover { animation-play-state: paused; }
 .ticker-item { flex-shrink: 0; }
 
+@media (max-width: 640px) {
+  .ticker-bar {
+    gap: 8px;
+    min-height: 34px;
+    padding-right: 10px;
+  }
+  .ticker-label {
+    display: inline-flex;
+    align-items: center;
+    align-self: stretch;
+    padding: 0 10px;
+    font-size: 0.64rem;
+  }
+  .ticker-track {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
+    overflow: hidden;
+    animation: none !important;
+    transform: none !important;
+    gap: 12px;
+  }
+  .ticker-track .ticker-item:nth-child(n+3) {
+    display: none;
+  }
+  .ticker-item {
+    min-width: 0;
+    flex: 1 1 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .ticker-item .name,
+  .ticker-item .price,
+  .ticker-item .change {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ticker-item .name { max-width: 84px; }
+  .ticker-item .price { max-width: 64px; }
+  .ticker-item .change { max-width: 72px; }
+}
+
 /* ════════════════════════════════════
    PRICE CARD — symbol label
    ════════════════════════════════════ */

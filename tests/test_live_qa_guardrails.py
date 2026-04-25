@@ -35,6 +35,16 @@ def test_ticker_bar_clips_marquee_overflow_for_full_site_browser_qa():
     assert "isolation: isolate;" in ticker_rule
 
 
+def test_mobile_ticker_uses_compact_static_items_instead_of_clipped_marquee():
+    css = (ROOT / "assets" / "css" / "style.css").read_text(encoding="utf-8")
+    assert "@media (max-width: 640px)" in css
+    mobile_ticker = css[css.index("@media (max-width: 640px)"):css.index("/* ════════════════════════════════════\n   PRICE CARD")]
+    assert "animation: none !important;" in mobile_ticker
+    assert "transform: none !important;" in mobile_ticker
+    assert ".ticker-track .ticker-item:nth-child(n+3)" in mobile_ticker
+    assert "text-overflow: ellipsis;" in mobile_ticker
+
+
 def test_intelligence_product_mobile_css_uses_device_width_fallbacks():
     """Mobile emulation can widen layout viewport when desktop-only cards force min-content width."""
     layout = (ROOT / "_layouts" / "intelligence-product.html").read_text(encoding="utf-8")
