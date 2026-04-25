@@ -217,32 +217,36 @@ permalink: /simulator/
 }
 .sim-analytics-grid {
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
-  margin:0 0 18px;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));
+  gap:16px;
+  margin:0 0 22px;
 }
 .sim-analytics-card {
   background:rgba(255,255,255,0.025);
   border:1px solid rgba(255,255,255,0.08);
-  border-radius:18px;
-  padding:18px;
+  border-radius:20px;
+  padding:20px;
   display:grid;
-  gap:10px;
+  gap:12px;
+  min-height:430px;
+  overflow:hidden;
 }
 .sim-analytics-card h3 {
   margin:0;
   color:#f8fafc;
-  font-size:0.98rem;
+  font-size:1.05rem;
   font-weight:800;
+  letter-spacing:-0.01em;
 }
 .sim-analytics-card p {
   margin:0;
-  color:#94a3b8;
-  font-size:0.84rem;
-  line-height:1.65;
+  color:#e2e8f0;
+  font-size:0.9rem;
+  line-height:1.68;
+  max-width:62ch;
 }
-.sim-analytics-stage { height: 280px; }
-.sim-analytics-readout { color:#cbd5e1; font-size:0.84rem; line-height:1.6; }
+.sim-analytics-stage { height: 330px; min-height:330px; }
+.sim-analytics-readout { color:#f1f5f9; font-size:0.9rem; line-height:1.68; }
 .sim-legend {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -614,6 +618,10 @@ permalink: /simulator/
   .sim-chart-container { border-radius: 22px; padding: 18px 16px; }
   .sim-chart-header { gap: 12px; }
   .sim-chart-stage { height: 320px; }
+  .sim-analytics-card { min-height:460px; padding:18px 16px; }
+  .sim-analytics-stage { height:360px; min-height:360px; }
+  .sim-analytics-card p,
+  .sim-analytics-readout { font-size:0.88rem; line-height:1.72; }
   .sim-period-btns { width: 100%; justify-content: space-between; }
   .sim-period-btn { flex: 1; text-align: center; padding: 10px 0; }
   .sim-legend { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -2114,6 +2122,33 @@ function getActiveScenarioSummary() {
   };
 }
 
+function formatCompactScenarioLabel(label) {
+  var text = String(label || '')
+    .replace(/\s*\([^)]*\)/g, '')
+    .replace(/\b(OPEC|DXY|USD|SPR|LNG|AI|EV)\b/g, function(m){ return m; })
+    .replace(/\s+/g, ' ')
+    .trim();
+  var aliases = [
+    [/Hormuz|missile|conflict|Iran/i, 'Hormuz\nshock'],
+    [/shadow.*fleet|sanction/i, 'Shadow\nfleet'],
+    [/1M|1\.0M|million|bbl/i, '1M bbl/d\nshock'],
+    [/500k|0\.5M/i, '500k bbl/d\nshock'],
+    [/DXY|USD|dollar/i, 'DXY\nmove'],
+    [/central bank|1,200t|BRICS/i, 'Central\nbanks'],
+    [/risk-on|S&P/i, 'Risk-on\nrotation'],
+    [/AI data|data center/i, 'AI data\ncenters'],
+    [/recession|demand/i, 'Demand\nshock']
+  ];
+  for (var i=0; i<aliases.length; i++) {
+    if (aliases[i][0].test(text)) return aliases[i][1];
+  }
+  if (text.length <= 18) return text;
+  var words = text.split(' ');
+  var first = words.slice(0, 2).join(' ');
+  var second = words.slice(2, 4).join(' ');
+  return (first.length > 18 ? first.slice(0, 17) + '…' : first) + (second ? '\n' + (second.length > 18 ? second.slice(0, 17) + '…' : second) : '');
+}
+
 function ensureEchart(key, id) {
   if (!window.echarts) return null;
   var el = document.getElementById(id);
@@ -2148,11 +2183,11 @@ function renderDecisionSurface() {
     tornadoChart.setOption({
       backgroundColor:'transparent',
       animationDuration:280,
-      grid:{ top:12, left:78, right:18, bottom:22 },
-      xAxis:{ type:'value', axisLabel:{ color:'#94a3b8' }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.06)' } } },
-      yAxis:{ type:'category', data:impactRows.map(function(item){ return item.name; }), axisLabel:{ color:'#cbd5e1' } },
+      grid:{ top:16, left:118, right:22, bottom:36, containLabel:false },
+      xAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:11, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
+      yAxis:{ type:'category', data:impactRows.map(function(item){ return item.name; }), axisLabel:{ color:'#f8fafc', fontSize:11, fontWeight:600, margin:14, overflow:'truncate', width:104 } },
       tooltip:{ trigger:'axis', axisPointer:{ type:'shadow' }, backgroundColor:'rgba(13,13,20,0.95)' },
-      series:[{ type:'bar', data:impactRows.map(function(item){ return { value:item.score, itemStyle:{ color:item.score >= 0 ? '#22c55e' : '#f43f5e' } }; }), barWidth:16, borderRadius:8 }]
+      series:[{ type:'bar', label:{ show:true, position:'right', color:'#f8fafc', fontSize:10, fontWeight:700 }, data:impactRows.map(function(item){ return { value:item.score, itemStyle:{ color:item.score >= 0 ? '#22c55e' : '#f43f5e' } }; }), barMaxWidth:20, borderRadius:8 }]
     });
   }
   var scenarioChart = ensureEchart('scenarioCompare', 'sim-scenario-compare-chart');
@@ -2161,11 +2196,26 @@ function renderDecisionSurface() {
     scenarioChart.setOption({
       backgroundColor:'transparent',
       animationDuration:280,
-      grid:{ top:20, left:44, right:18, bottom:32 },
-      xAxis:{ type:'category', data:rows.map(function(item){ return item.name; }), axisLabel:{ color:'#94a3b8', interval:0, rotate:20 } },
-      yAxis:{ type:'value', axisLabel:{ color:'#94a3b8' }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.06)' } } },
-      tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,20,0.95)' },
-      series:[{ type:'bar', data:rows.map(function(item){ return { value:Number(item.relevance.toFixed(1)), itemStyle:{ color:item.active ? '#22d3ee' : (item.impact >= 0 ? '#c084fc' : '#f59e0b') } }; }), barWidth:24, borderRadius:[8,8,0,0] }]
+      grid:{ top:20, left:52, right:20, bottom:76, containLabel:true },
+      xAxis:{
+        type:'category',
+        data:rows.map(function(item){ return item.name; }),
+        axisLabel:{
+          color:'#f1f5f9',
+          interval:0,
+          rotate:0,
+          hideOverlap:false,
+          margin:14,
+          fontSize:11,
+          fontWeight:600,
+          lineHeight:14,
+          formatter:formatCompactScenarioLabel
+        },
+        axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } }
+      },
+      yAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:11, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
+      tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,20,0.95)', formatter:function(p){ return '<strong>' + p.name + '</strong><br/>Relevance: ' + p.value; } },
+      series:[{ type:'bar', label:{ show:true, position:'top', color:'#f8fafc', fontSize:11, fontWeight:700 }, data:rows.map(function(item){ return { value:Number(item.relevance.toFixed(1)), itemStyle:{ color:item.active ? '#22d3ee' : (item.impact >= 0 ? '#c084fc' : '#f59e0b') } }; }), barMaxWidth:30, borderRadius:[8,8,0,0] }]
     });
   }
   var gaugeChart = ensureEchart('decisionGauge', 'sim-decision-gauge-chart');
@@ -2184,7 +2234,7 @@ function renderDecisionSurface() {
         axisTick:{ show:false },
         axisLabel:{ show:false },
         pointer:{ show:false },
-        detail:{ valueAnimation:true, formatter:function(v){ return Math.round(v) + '\n' + metrics.readiness.band; }, color:'#f8fafc', fontSize:18, offsetCenter:[0,'18%'] },
+        detail:{ valueAnimation:true, formatter:function(v){ return Math.round(v) + '\n' + metrics.readiness.band; }, color:'#f8fafc', fontSize:22, fontWeight:800, lineHeight:28, offsetCenter:[0,'18%'] },
         title:{ show:false },
         data:[{ value:metrics.readiness.score }]
       }]
@@ -2206,12 +2256,12 @@ function renderDecisionSurface() {
         backgroundColor:'transparent',
         animationDuration:360,
         tooltip:{ trigger:'axis', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
-        legend:{ top:0, textStyle:{ color:'#cbd5e1' } },
-        grid:{ top:38, left:44, right:18, bottom:28 },
-        xAxis:{ type:'category', data: cone.labels, axisLabel:{ color:'#94a3b8', interval:function(i){ return i % 4 === 0; } }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
-        yAxis:{ type:'value', axisLabel:{ color:'#94a3b8' }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.06)' } } },
+        legend:{ top:0, left:0, right:0, itemWidth:14, itemHeight:8, itemGap:10, textStyle:{ color:'#f1f5f9', fontSize:11, fontWeight:600 }, type:'plain' },
+        grid:{ top:58, left:52, right:22, bottom:42, containLabel:true },
+        xAxis:{ type:'category', data: cone.labels, axisLabel:{ color:'#f1f5f9', fontSize:11, margin:12, interval:function(i){ return i % 4 === 0; } }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } } },
+        yAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:11, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
         series:[
-          { name:'History', type:'line', symbol:'none', smooth:true, lineStyle:{ width:2.5, color:'#94a3b8' }, data: cone.history },
+          { name:'History', type:'line', symbol:'none', smooth:true, lineStyle:{ width:2.5, color:'#cbd5e1' }, data: cone.history },
           { name:'Forecast low', type:'line', symbol:'none', smooth:true, lineStyle:{ width:0 }, stack:'cone', data: cone.low },
           { name:'Confidence band', type:'line', symbol:'none', smooth:true, stack:'cone', areaStyle:{ color:'rgba(34,211,238,0.16)' }, lineStyle:{ width:0 }, data: cone.band },
           { name:'Median', type:'line', symbol:'none', smooth:true, lineStyle:{ width:3, color:'#22d3ee' }, data: cone.median }
@@ -2223,13 +2273,28 @@ function renderDecisionSurface() {
       var timeline = window.CNPremiumAnalytics.buildEventTimeline(metrics.scenarioTable.slice(0, 5).map(function(item){
         return { label:item.name, impact:item.impact, note:item.active ? 'Active scenario' : 'Scenario available' };
       }));
+      var timelineMax = Math.max.apply(null, timeline.map(function(item){ return item.score || 0; }).concat([10]));
       timelineChart.setOption({
         backgroundColor:'transparent',
-        grid:{ top:20, right:18, bottom:36, left:24 },
-        xAxis:{ type:'category', data: timeline.map(function(item){ return item.label; }), axisLabel:{ color:'#94a3b8', interval:0, rotate:18 }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
-        yAxis:{ type:'value', show:false, min:0, max:100 },
-        tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
-        series:[{ type:'bar', data: timeline.map(function(item){ return { value:item.score, itemStyle:{ color:item.direction === 'up' ? '#22d3ee' : '#f43f5e' } }; }), barWidth:18, showBackground:true, backgroundStyle:{ color:'rgba(255,255,255,0.04)' } }]
+        grid:{ top:22, right:20, bottom:80, left:32, containLabel:true },
+        xAxis:{
+          type:'category',
+          data: timeline.map(function(item){ return item.label; }),
+          axisLabel:{
+            color:'#f1f5f9',
+            interval:0,
+            rotate:0,
+            margin:14,
+            fontSize:11,
+            fontWeight:600,
+            lineHeight:14,
+            formatter:formatCompactScenarioLabel
+          },
+          axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } }
+        },
+        yAxis:{ type:'value', show:false, min:0, max:Math.ceil(timelineMax * 1.28) },
+        tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)', formatter:function(p){ return '<strong>' + p.name + '</strong><br/>Event score: ' + p.value; } },
+        series:[{ type:'bar', data: timeline.map(function(item){ return { value:item.score, itemStyle:{ color:item.direction === 'up' ? '#22d3ee' : '#f43f5e' } }; }), barMaxWidth:24, showBackground:true, backgroundStyle:{ color:'rgba(255,255,255,0.04)' }, label:{ show:true, position:'top', color:'#f8fafc', fontSize:10, fontWeight:700 } }]
       });
     }
   }
