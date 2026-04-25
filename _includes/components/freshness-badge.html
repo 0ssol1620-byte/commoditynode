@@ -1,0 +1,21 @@
+{%- comment -%}
+CommodityNode freshness badge — renders a compact data-freshness pill.
+
+Usage:
+  {% include components/freshness-badge.html
+       updated_at="2026-04-24T00:00:00Z"
+       source="Chronos + TimesFM consensus"
+       horizon="90-day"
+       confidence="Median q50, bands q10–q90"
+       status="fresh" %}
+
+Statuses: fresh | stale | offline (default fresh)
+{%- endcomment -%}
+{% assign _status = include.status | default: "fresh" %}
+{% assign _updated = include.updated_at | default: site.time | date: "%Y-%m-%d %H:%M UTC" %}
+<span class="cn-freshness cn-freshness--{{ _status }}"
+      data-updated-at="{{ include.updated_at | default: site.time }}"
+      title="Data source: {{ include.source | default: "CommodityNode research stack" }} · Horizon: {{ include.horizon | default: "90-day" }} · Confidence: {{ include.confidence | default: "Probabilistic bands" }}"
+      aria-label="Data {{ _status }}. Source: {{ include.source | default: "CommodityNode research stack" }}. Last updated {{ _updated }}.">
+  {% if _status == "fresh" %}Live · updated {{ _updated }}{% elsif _status == "stale" %}Stale · last {{ _updated }}{% else %}Source offline · last {{ _updated }}{% endif %}
+</span>

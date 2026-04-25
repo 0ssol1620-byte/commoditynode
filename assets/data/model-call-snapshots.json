@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-25T04:19:26+00:00",
+  "positioning": "live catalyst -> forecast range -> RL policy -> impact workflow -> timestamped proof",
+  "claim_scope": "All performance language is scoped to historical replay, walk-forward checks, or timestamped model-call outcome tracking.",
+  "rl_summary": {
+    "selected_timesteps": 1024,
+    "selected_prior_weight": 0.2,
+    "historical_replay_target_match_rate": 0.9117647058823529,
+    "historical_replay_win_rate": 0.9117647058823529,
+    "reward_uplift_vs_hold": 10.881021673018878,
+    "walk_forward_positive_window_rate": 1.0
+  },
+  "calls": [
+    {
+      "id": "model-call-2026-04-22-crude-oil",
+      "created_at": "2026-04-22T01:16:06.950623+00:00",
+      "commodity": "Crude Oil",
+      "commodity_slug": "crude-oil",
+      "source_report_url": "/oil-risk-premium-saudi-strikes-q2-2026/",
+      "price_at_prediction": 89.23,
+      "price_unit": "$/barrel",
+      "forecast_30d": 89.7989,
+      "forecast_90d": 89.4361,
+      "forecast_direction": "mixed",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.7245
+      },
+      "rl_action": "Add Continuation",
+      "rl_probability": 0.3101,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "OPEC supply discipline",
+        "Middle East risk premium",
+        "Refinery margin split"
+      ],
+      "decision_implication": "Crude Oil: translate the catalyst into forecast range, RL policy action, and exposed sector/name workflow before the next repricing.",
+      "impact_targets": [
+        "Airlines",
+        "E&P producers",
+        "Refiners"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-22-gold",
+      "created_at": "2026-04-22T01:16:07.501476+00:00",
+      "commodity": "Gold",
+      "commodity_slug": "gold",
+      "source_report_url": "/gold-warsh-dollar-selloff-2026/",
+      "price_at_prediction": 4757.7,
+      "price_unit": "$/oz",
+      "forecast_30d": 4413.8149,
+      "forecast_90d": 4430.0427,
+      "forecast_direction": "bearish",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.6999
+      },
+      "rl_action": "Add Continuation",
+      "rl_probability": 0.6579,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Dollar selloff pressure",
+        "Central-bank reserve demand",
+        "Real-rate regime uncertainty"
+      ],
+      "decision_implication": "Gold: translate the catalyst into forecast range, RL policy action, and exposed sector/name workflow before the next repricing.",
+      "impact_targets": [
+        "Gold miners",
+        "EM FX hedges",
+        "Royalty names"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-22-copper",
+      "created_at": "2026-04-22T01:16:08.102462+00:00",
+      "commodity": "Copper",
+      "commodity_slug": "copper",
+      "source_report_url": "/copper-rebounds-china-vs-tight-supply/",
+      "price_at_prediction": 6.0315,
+      "price_unit": "$/lb",
+      "forecast_30d": 6.0702,
+      "forecast_90d": 6.0709,
+      "forecast_direction": "mixed",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.7242
+      },
+      "rl_action": "Hold / Wait",
+      "rl_probability": 0.3677,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "China demand surprise",
+        "Tight mine supply",
+        "Grid and EV infrastructure demand"
+      ],
+      "decision_implication": "Copper: translate the catalyst into forecast range, RL policy action, and exposed sector/name workflow before the next repricing.",
+      "impact_targets": [
+        "Miners",
+        "Electrical equipment",
+        "Homebuilders"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-22-natural-gas",
+      "created_at": "2026-04-22T01:16:09.010884+00:00",
+      "commodity": "Natural Gas",
+      "commodity_slug": "natural-gas",
+      "source_report_url": "/natural-gas-lng-qatar-storage-build-2026/",
+      "price_at_prediction": 2.678,
+      "price_unit": "$/MMBtu",
+      "forecast_30d": 2.6897,
+      "forecast_90d": 3.0648,
+      "forecast_direction": "bullish",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.7732
+      },
+      "rl_action": "Add Continuation",
+      "rl_probability": 0.6646,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "LNG export pull",
+        "Storage comfort vs winter risk",
+        "Power burn volatility"
+      ],
+      "decision_implication": "Natural Gas: translate the catalyst into forecast range, RL policy action, and exposed sector/name workflow before the next repricing.",
+      "impact_targets": [
+        "Utilities",
+        "Fertilizers",
+        "LNG exporters"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    },
+    {
+      "id": "model-call-2026-04-22-wheat",
+      "created_at": "2026-04-22T01:16:09.537675+00:00",
+      "commodity": "Wheat",
+      "commodity_slug": "wheat",
+      "source_report_url": "/wheat-black-sea-supply-risk-2026/",
+      "price_at_prediction": 610.75,
+      "price_unit": "cents/bushel",
+      "forecast_30d": 609.0455,
+      "forecast_90d": 623.933,
+      "forecast_direction": "bullish",
+      "forecast_agreement": {
+        "level": "moderate",
+        "score": 0.74
+      },
+      "rl_action": "Hold / Wait",
+      "rl_probability": 0.3624,
+      "rl_policy_scope": "historical replay / walk-forward scoped, not a live trading guarantee",
+      "model_stack": [
+        "Chronos-2 forecast",
+        "TimesFM forecast",
+        "Neural PPO policy",
+        "Behavior-prior blend 0.2",
+        "Regime calibration"
+      ],
+      "news_catalysts": [
+        "Black Sea logistics risk",
+        "Weather volatility",
+        "Food input-cost sensitivity"
+      ],
+      "decision_implication": "Wheat: translate the catalyst into forecast range, RL policy action, and exposed sector/name workflow before the next repricing.",
+      "impact_targets": [
+        "Packaged food",
+        "Agriculture processors",
+        "Restaurants"
+      ],
+      "proof_label": "Replay-backed policy readout · timestamped model call",
+      "disclaimer": "Research workflow signal only; not investment advice and not a guarantee of future trading results."
+    }
+  ]
+}

@@ -466,6 +466,55 @@ image: "/assets/images/og-default.png"
 </section>
 
 <!-- ===== HERO SHOCK RAIL + HEATMAP DATA BINDING ===== -->
+
+<!-- ===== MODEL PROOF COMMAND CENTER ===== -->
+<section class="section model-proof-command-center" aria-labelledby="model-proof-title" data-animate>
+  <div class="container">
+    <div style="padding:24px;border-radius:26px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.07),rgba(2,6,23,0.88));border:1px solid rgba(34,211,238,0.16);box-shadow:0 28px 80px rgba(2,6,23,0.34);">
+      <div class="eyebrow-cyan">Model proof command center</div>
+      <h2 id="model-proof-title" style="margin:8px 0 10px;color:#f8fafc;font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.03em;">News catalyst → forecast range → RL action → impact workflow</h2>
+      <p class="body-text" style="max-width:820px;">CommodityNode is being positioned as a paid-grade decision engine: the live catalyst explains what changed, the time-series stack estimates the path, Neural PPO selects the defensible policy action, and the simulator translates it into sectors and names.</p>
+      <div id="home-model-proof-calls" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px;" aria-live="polite">
+        <article style="padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.035);"><div class="eyebrow-cyan">Replay proof</div><strong style="display:block;color:#f8fafc;margin-top:6px;">91% historical replay target-match</strong><p class="body-text-65">Scoped to replay / walk-forward validation, not a live trading guarantee.</p></article>
+        <article style="padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.035);"><div class="eyebrow-cyan">Policy engine</div><strong style="display:block;color:#f8fafc;margin-top:6px;">PPO + behavior prior + regime calibration</strong><p class="body-text-65">Designed to turn model state into an action, not just another chart.</p></article>
+        <article style="padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.035);"><div class="eyebrow-cyan">Timestamped calls</div><strong style="display:block;color:#f8fafc;margin-top:6px;">Snapshot archive + outcome tracker</strong><p class="body-text-65">Every proof card can point to the model call that existed before the outcome label.</p></article>
+      </div>
+      <div class="chip-group-wrap" style="margin-top:18px;">
+        <a href="/reports/" class="btn btn-primary" data-cta="home_model_proof_open_reports">Open timestamped reports</a>
+        <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary" data-cta="home_model_proof_open_rl_lab">Inspect RL Policy Lab</a>
+        <a href="/pricing/" class="btn btn-secondary" data-cta="home_model_proof_pricing">See Pro workflow</a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  function safeText(value){ return String(value == null ? '' : value); }
+  function safeSitePath(value){ return /^\/[a-z0-9\-/_]*\/?$/i.test(String(value || '')) ? value : '/reports/'; }
+  function appendText(el, value){ el.textContent = safeText(value); return el; }
+  fetch('/assets/data/model-call-snapshots.json').then(function(r){ return r.json(); }).then(function(data){
+    var host = document.getElementById('home-model-proof-calls');
+    if (!host || !data.calls) return;
+    host.textContent = '';
+    data.calls.slice(0,3).forEach(function(call){
+      var article = document.createElement('article');
+      article.setAttribute('style', 'padding:16px;border-radius:18px;border:1px solid rgba(34,211,238,0.14);background:rgba(8,12,20,0.46);display:grid;gap:8px;');
+      var kicker = appendText(document.createElement('div'), call.commodity); kicker.className = 'eyebrow-cyan';
+      var title = appendText(document.createElement('strong'), safeText(call.rl_action) + ' · ' + Math.round((call.rl_probability||0)*100) + '% policy probability');
+      title.setAttribute('style', 'color:#f8fafc;line-height:1.35;');
+      var copy = appendText(document.createElement('p'), (call.news_catalysts || []).slice(0,2).join(' · ') + ' → ' + safeText(call.forecast_direction) + ' forecast path.');
+      copy.className = 'body-text-65';
+      var link = appendText(document.createElement('a'), 'Open model call →');
+      link.href = safeSitePath(call.source_report_url);
+      link.className = 'text-accent';
+      link.setAttribute("data-cta", "home_model_proof_open_call");
+      article.append(kicker, title, copy, link);
+      host.appendChild(article);
+    });
+  }).catch(function(){});
+})();
+</script>
+
 <script>
 (function(){
   // Commodity → sector impact weights (-3..+3 per sector for positive price delta)

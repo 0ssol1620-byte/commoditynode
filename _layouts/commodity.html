@@ -221,6 +221,22 @@ layout: default
     </div>
 
     <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start;">
+
+<section class="commodity-model-reaction" aria-label="Current model reaction" style="margin-top:14px;padding:20px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(16,185,129,0.05));border:1px solid rgba(34,211,238,0.14);">
+  <div class="eyebrow-cyan">Current model reaction</div>
+  <h2 style="margin:8px 0 10px;color:#f8fafc;font-size:1.18rem;">Forecast layer + RL policy layer + impact layer</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;">
+    <div class="profile-continuation-card"><div class="eyebrow-cyan">Forecast layer</div><strong>30D/90D model path and agreement level anchor the direction.</strong></div>
+    <div class="profile-continuation-card"><div class="eyebrow-cyan">RL policy layer</div><strong>Neural PPO translates state into add, hold, hedge, rotate, or reduce-risk actions.</strong></div>
+    <div class="profile-continuation-card"><div class="eyebrow-cyan">Impact layer</div><strong>This hub turns the commodity move into sectors, ETFs, and named exposure.</strong></div>
+  </div>
+  <p class="body-text-65" style="margin-top:12px;">Historical replay and walk-forward proof are scoped as model validation, not a live trading guarantee. The conversion goal is clearer: understand the move for free, then use Pro to decide what to do with it.</p>
+  <div class="chip-group-wrap" style="margin-top:12px;">
+    <a href="/simulator/" class="btn btn-primary" data-cta="commodity_model_reaction_simulator">Translate to stock impact</a>
+    <a href="/reports/" class="btn btn-secondary" data-cta="commodity_model_reaction_reports">Open proof reports</a>
+  </div>
+</section>
+
       <div style="padding:16px 18px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:12px;">
         <div>
           <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Fastest route to value</div>
@@ -271,8 +287,31 @@ layout: default
   </div>
 </header>
 
-<!-- Live Price Banner -->
+<!-- Top-tier visual value moment — forecast fan + impact ladder + simulator CTA (blueprint §6.7) -->
 <div class="container" style="padding-top:24px;">
+  <section class="cn-chart-card" style="margin:0 0 18px;">
+    <div class="cn-chart-card__head">
+      <h2 class="cn-chart-card__title">{{ page.title | split: ":" | first | strip }} · 90-day forecast fan</h2>
+      {% include components/freshness-badge.html updated_at=site.time source="Chronos + TimesFM consensus" horizon="90-day" confidence="q10 / q50 / q90 probabilistic band" status="fresh" %}
+    </div>
+    <p class="cn-chart-card__sub">Probabilistic forecast band with confidence intervals. Tap a horizon to re-project. Simulator CTA runs this shock against your watchlist.</p>
+    <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:stretch;">
+      <div class="cn-chart-card__body" data-cn-forecast-fan data-commodity="{{ page.commodity_slug | default: "gold" }}" style="min-height:260px;"></div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="cn-workflow-strip__card" style="padding:14px;flex:1;">
+          <span class="cn-workflow-strip__kicker">Impact ladder</span>
+          <h3 class="cn-workflow-strip__title" style="font-size:0.95rem;">Who is exposed</h3>
+          <p class="cn-workflow-strip__desc" style="font-size:0.82rem;">{% if page.companies and page.companies.size > 0 %}Top named exposure: {{ page.companies | slice: 0, 4 | join: ", " }}{% if page.companies.size > 4 %} · +{{ page.companies.size | minus: 4 }} more in Pro{% endif %}.{% else %}Named companies, ETFs, and sectors ranked by historical sensitivity.{% endif %}</p>
+        </div>
+        <a href="/simulator/?preset={{ page.commodity_slug | default: "gold" }}-shock" class="cn-impact-hero__cta cn-impact-hero__cta--primary" data-cta="commodity_run_scenario" style="width:100%;justify-content:center;text-decoration:none;">Run {{ page.title | split: ":" | first | strip | downcase }} shock on my watchlist →</a>
+      </div>
+    </div>
+    <div class="cn-chart-card__foot">
+      <span>Horizon: 90-day · Model: Chronos + TimesFM consensus · Band: q10–q90</span>
+      <a href="/methodology/">Methodology</a>
+      <a href="#impact-map">Jump to impact map ↓</a>
+    </div>
+  </section>
   <div id="commodity-price-banner" style="display:none;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:20px 28px;margin-bottom:8px;">
     <div style="display:flex;align-items:center;flex-wrap:wrap;gap:24px;justify-content:space-between;">
       <div style="display:flex;align-items:center;gap:16px;">

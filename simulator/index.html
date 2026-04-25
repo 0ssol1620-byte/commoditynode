@@ -639,14 +639,48 @@ permalink: /simulator/
 
 <section class="sim-hero">
   <div class="container">
-    <div class="sim-hero-badge">
-      <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#22d3ee"/></svg>
-      Live Forecast Engine
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
+      <div class="sim-hero-badge">
+        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#22d3ee"/></svg>
+        Live Forecast Engine
+      </div>
+      {% include components/freshness-badge.html updated_at=site.time source="Chronos + TimesFM consensus" horizon="90-day" confidence="q10 / q50 / q90 probabilistic band" status="fresh" %}
     </div>
     <h1>Commodity Scenario<br>Simulator</h1>
     <p>Model price shock scenarios before macro events, supply disruptions, or earnings season. Select a commodity, apply a scenario, and see how the ripple effects propagate through related equities.</p>
     <a href="/before-opec-oil-playbook/" data-cta="simulator_open_event_playbook" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 14px;border-radius:999px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.18);color:#22d3ee;text-decoration:none;font-size:0.82rem;font-weight:700;">Before OPEC? Open the oil playbook →</a>
+
+    <!-- Cockpit strip: control rail / visual stage / insight rail framing (blueprint §6.6) -->
+    <div style="margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;">
+      <div class="cn-workflow-strip__card" style="padding:14px;">
+        <span class="cn-workflow-strip__kicker">Control rail</span>
+        <h3 class="cn-workflow-strip__title" style="font-size:0.95rem;">Pick commodity, shock, horizon</h3>
+        <p class="cn-workflow-strip__desc" style="font-size:0.82rem;">One-click preset or custom ±σ, magnitude, and universe. Everything below adapts to your choice.</p>
+      </div>
+      <div class="cn-workflow-strip__card" style="padding:14px;">
+        <span class="cn-workflow-strip__kicker">Visual stage</span>
+        <h3 class="cn-workflow-strip__title" style="font-size:0.95rem;">Price · forecast · propagation</h3>
+        <p class="cn-workflow-strip__desc" style="font-size:0.82rem;">Scenario fan chart, impact ladder, and sector pressure all render on the same stage so you read the move once.</p>
+      </div>
+      <div class="cn-workflow-strip__card" style="padding:14px;">
+        <span class="cn-workflow-strip__kicker">Insight rail</span>
+        <h3 class="cn-workflow-strip__title" style="font-size:0.95rem;">Named names · triggers · alerts</h3>
+        <p class="cn-workflow-strip__desc" style="font-size:0.82rem;">Most exposed assets, likely winners, pressure points, and alert triggers — Pro unlocks the named layer.</p>
+      </div>
+    </div>
   </div>
+</section>
+
+<section class="sim-model-context" aria-label="Model call context" style="max-width:1120px;margin:18px auto 0;padding:20px;border-radius:20px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.14);">
+  <div class="eyebrow-cyan">Model call context</div>
+  <h2 style="margin:8px 0 10px;color:#f8fafc;font-size:1.25rem;">Forecast → RL policy → stock-level translation</h2>
+  <p class="body-text">The simulator is where the model story becomes useful: take the forecast range and RL policy action, then test which sectors and names become exposed under the commodity shock.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:12px;">
+    <div class="sim-step-card"><span>Forecast range</span><strong>Chronos-2 + TimesFM path</strong><p>Start with direction, interval, and model agreement.</p></div>
+    <div class="sim-step-card sim-step-card--accent"><span>RL policy action</span><strong>Replay-backed policy selection</strong><p>Use historical replay / walk-forward scoped action probabilities.</p></div>
+    <div class="sim-step-card"><span>Pro conversion</span><strong>Named exposure depth</strong><p>Pro matters when sector pressure is not enough and stock-level conviction matters.</p></div>
+  </div>
+  <div class="chip-group-wrap" style="margin-top:14px;"><a href="/pricing/" class="btn btn-primary" data-cta="sim_model_context_pricing">Unlock stock-level decision workflow</a><a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary" data-cta="sim_model_context_rl_lab">Inspect RL policy</a></div>
 </section>
 
 <!-- Quick scenario presets (blueprint §3-5) -->

@@ -567,6 +567,18 @@ layout: default
     </div>
   </section>
 
+<section class="intel-card mt-18 rl-proof-archive" aria-labelledby="rl-proof-archive-title">
+  <div class="intel-kicker">Proof archive</div>
+  <h2 id="rl-proof-archive-title">Historical replay target-match + timestamped policy calls</h2>
+  <p style="max-width:820px;">The current Neural PPO export is framed as PPO + behavior prior 0.2 + regime calibration + governance scoring. Its strongest public proof should stay scoped: historical replay target-match, reward uplift versus hold, walk-forward checks, and timestamped model-call outcomes — not a live trading guarantee.</p>
+  <div class="intel-success-grid mt-16">
+    <div class="intel-success-card"><div class="intel-kicker">Replay target-match</div><div class="intel-success-value">91.18%</div><p>Historical replay / target-action match rate from the exported policy profile.</p></div>
+    <div class="intel-success-card"><div class="intel-kicker">Reward uplift</div><div class="intel-success-value">+10.88</div><p>Replay reward uplift versus passive hold baseline.</p></div>
+    <div class="intel-success-card"><div class="intel-kicker">Walk-forward</div><div class="intel-success-value">3/3</div><p>Positive walk-forward windows in the current validation packet.</p></div>
+  </div>
+  <div class="intel-actions"><a href="/pricing/" class="intel-btn intel-btn-primary" data-cta="rl_proof_archive_pricing">Use the policy workflow in Pro</a><a href="/reports/" class="intel-btn intel-btn-secondary" data-cta="rl_proof_archive_reports">Open timestamped calls</a></div>
+</section>
+
   <section class="intel-card mt-18">
     <div class="intel-kicker">Success dashboard</div>
     <h2>Operational readiness for this module</h2>

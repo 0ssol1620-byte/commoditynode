@@ -698,12 +698,15 @@ no_loader: true
       </div>
     </div>
     <div class="pricing-hero-actions">
-      <a id="hero-pro-cta-btn" href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary js-pro-checkout" data-checkout-source="pricing_hero_start_pro" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start Pro — $19/month</a>
+      {% assign _pro_monthly = site.data.pricing.plans | where: "id", "pro_monthly" | first %}
+      <a id="hero-pro-cta-btn" href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary js-pro-checkout" data-checkout-source="pricing_hero_start_pro" style="width:auto;min-width:220px;margin-bottom:0;padding:12px 18px;text-decoration:none;">Start Pro — {{ _pro_monthly.price_label }}/month</a>
       <button type="button" class="pricing-btn pricing-btn-ghost" data-cta="pricing_start_free_hero" data-goto="/start/" style="width:auto;min-width:180px;margin-bottom:0;padding:12px 18px;">Start Free</button>
     </div>
+    {% assign _pro_annual = site.data.pricing.plans | where: "id", "pro_annual" | first %}
+    {% assign _annual_save = _pro_annual.billing | split: "save " | last | split: "%" | first | default: "21" %}
     <div class="billing-toggle" id="billing-toggle-hero" style="margin:0 auto 18px;">
       <button type="button" class="billing-btn active" data-billing="monthly" data-billing-set="monthly">Monthly</button>
-      <button type="button" class="billing-btn" data-billing="annual" data-billing-set="annual">Annual <span class="save-badge">Save 35%</span></button>
+      <button type="button" class="billing-btn" data-billing="annual" data-billing-set="annual">Annual <span class="save-badge">Save {{ _annual_save }}%</span></button>
     </div>
     <div class="pricing-use-case-card">
       <div class="pricing-use-case-kicker">Real Use Case</div>
@@ -717,7 +720,7 @@ no_loader: true
       <div class="sp-divider"></div>
       <div class="sp-item"><span class="sp-num">Daily</span><span class="sp-label">Forecast + price refresh</span></div>
       <div class="sp-divider"></div>
-      <div class="sp-item"><span class="sp-num">$19</span><span class="sp-label">Pro starts per month</span></div>
+      <div class="sp-item"><span class="sp-num">{{ _pro_monthly.price_label }}</span><span class="sp-label">Pro starts per month</span></div>
     </div>
     <div class="pricing-proof-grid">
       <div class="pricing-proof-card pricing-proof-card--cyan">
@@ -783,6 +786,18 @@ no_loader: true
       </a>
     </div>
   </div>
+</section>
+
+<section class="pricing-model-proof" aria-labelledby="pricing-model-proof-title" style="max-width:980px;margin:24px auto 0;padding:22px 24px;border-radius:22px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.07));border:1px solid rgba(34,211,238,0.14);">
+  <div class="eyebrow-cyan">Model workflow proof</div>
+  <h2 id="pricing-model-proof-title" style="margin:8px 0 10px;color:#f8fafc;font-size:1.35rem;">What Pro adds to the model workflow</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;">
+    <div class="pricing-compare-card"><span>Free reveals</span><strong>News catalyst + public forecast stack</strong><p>Understand why a commodity moved and whether the public model path agrees.</p></div>
+    <div class="pricing-compare-card featured"><span>Pro clarifies</span><strong>Replay-backed policy selection</strong><p>Use historical replay, walk-forward checks, and RL policy probability to decide the next workflow step.</p></div>
+    <div class="pricing-compare-card"><span>Decision edge</span><strong>Stock-level translation</strong><p>Finish the path from commodity shock to named winners, pressure points, and scenario conviction.</p></div>
+  </div>
+  <p class="pricing-hero-proof">Historical replay target-match and walk-forward proof are validation context, not a live trading guarantee. The paid value is the complete decision workflow.</p>
+  <div class="pricing-hero-actions" style="margin-top:14px;"><a href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary" data-cta="pricing_model_proof_start_pro" data-checkout-source="pricing_model_proof_start_pro">Start Pro — finish this workflow →</a><a href="/intelligence-lab/rl-policy-lab/" class="pricing-btn pricing-btn-secondary" data-cta="pricing_model_proof_rl_lab">Inspect the RL proof</a></div>
 </section>
 
 <!-- Trigger-based pricing ladder — answers "which plan is for me" before the comparison table. -->
@@ -888,7 +903,7 @@ no_loader: true
 <!-- Billing Toggle -->
 <div class="billing-toggle hidden" id="billing-toggle">
   <button type="button" class="billing-btn active" data-billing="monthly" data-billing-set="monthly">Monthly</button>
-  <button type="button" class="billing-btn" data-billing="annual" data-billing-set="annual">Annual <span class="save-badge">Save 35%</span></button>
+  <button type="button" class="billing-btn" data-billing="annual" data-billing-set="annual">Annual <span class="save-badge">Save {{ _annual_save }}%</span></button>
 </div>
 
 <div class="pricing-compare-strip">
@@ -984,13 +999,13 @@ no_loader: true
         <span class="pricing-results-kicker">Best for investors</span>
         <h3 class="pricing-results-title">Know which watchlist names change when the commodity move matters</h3>
         <p class="pricing-results-desc">Translate oil, metals, grain, or gas moves into named winners and losers across your energy, miner, airline, and EV-chain exposure.</p>
-        <div class="pricing-results-plan"><span class="plan-cell plan-cell--pro">Pro · $19/mo</span></div>
+        <div class="pricing-results-plan"><span class="plan-cell plan-cell--pro">Pro · {{ _pro_monthly.price_label }}/mo</span></div>
       </div>
       <div class="pricing-results-card pricing-results-card--analyst">
         <span class="pricing-results-kicker">Best for analysts</span>
         <h3 class="pricing-results-title">Move from commodity tape to first-pass sector and company read faster</h3>
         <p class="pricing-results-desc">Use sensitivity maps, scenario overlays, explainability, and model agreement to frame a thesis before your first call of the day.</p>
-        <div class="pricing-results-plan"><span class="plan-cell plan-cell--pro">Pro · $19/mo</span></div>
+        <div class="pricing-results-plan"><span class="plan-cell plan-cell--pro">Pro · {{ _pro_monthly.price_label }}/mo</span></div>
       </div>
       <div class="pricing-results-card pricing-results-card--operator">
         <span class="pricing-results-kicker">Best for operators & teams</span>
@@ -1063,8 +1078,52 @@ no_loader: true
 
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;max-width:1160px;margin:0 auto 8px;">
       <a href="/start/" class="pricing-btn pricing-btn-ghost" data-cta="pricing_results_start_free" style="width:auto;min-width:220px;padding:12px 18px;text-decoration:none;display:inline-flex;justify-content:center;">Start Free — build my workflow</a>
-      <a href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary js-pro-checkout" data-checkout-source="pricing_results_start_pro" style="width:auto;min-width:220px;padding:12px 18px;text-decoration:none;display:inline-flex;justify-content:center;">Start Pro — $19/month</a>
+      <a href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary js-pro-checkout" data-checkout-source="pricing_results_start_pro" style="width:auto;min-width:220px;padding:12px 18px;text-decoration:none;display:inline-flex;justify-content:center;">Start Pro — {{ _pro_monthly.price_label }}/month</a>
       <a href="/enterprise/" class="pricing-btn pricing-btn-ghost" data-cta="pricing_results_contact_enterprise" style="width:auto;min-width:220px;padding:12px 18px;text-decoration:none;display:inline-flex;justify-content:center;">Talk to Enterprise</a>
+    </div>
+  </div>
+</section>
+
+<!-- Pro unlock visual — added in top-tier upgrade 2026-04-24.
+     Shows a 1:1 visual side-by-side of "what you see on Free" vs "what Pro unlocks"
+     so the decision is anchored on outcome, not feature count. -->
+<section class="pricing-plan-section pt-0" aria-labelledby="pricing-unlock-title">
+  <div class="pricing-proof-header">
+    <div>
+      <p class="section-label mb-8">Pro unlock — visual</p>
+      <h2 id="pricing-unlock-title" style="font-size:1.5rem;margin:0;color:var(--text);">What changes on the screen when you upgrade.</h2>
+    </div>
+    <p style="color:#94a3b8;max-width:470px;line-height:1.6;margin:0;">Most users do not read the Free tier and imagine Pro — they see Free and notice the 3 things the workflow cannot yet answer. This is those 3 things, side by side.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:18px;">
+    <div class="cn-chart-card" style="min-height:auto;">
+      <div class="cn-chart-card__head">
+        <h3 class="cn-chart-card__title">Free view — Gold shock</h3>
+        <span class="cn-freshness">Live · forecast stack</span>
+      </div>
+      <p class="cn-chart-card__sub">Sector-level pressure and the public forecast stack. You see the move, not who gets named.</p>
+      <div class="cn-chart-card__body" data-cn-forecast-fan data-commodity="gold" style="min-height:220px;"></div>
+      <div class="cn-chart-card__foot">
+        <span>Forecast stack: q10 / q50 / q90 · 90-day horizon</span>
+        <a href="/methodology/">Methodology</a>
+      </div>
+    </div>
+
+    <div class="cn-paywall" style="min-height:auto;">
+      <span class="cn-paywall__eyebrow">★ Pro unlock</span>
+      <h3 class="cn-paywall__title">Named winners, losers, alert triggers</h3>
+      <p class="cn-paywall__desc">Pro reveals the specific equities exposed to this move, the probability bands, and the trigger alerts that fire into your watchlist.</p>
+      <div class="cn-paywall__locked-preview" aria-label="Locked preview">
+        <strong style="display:block;margin-bottom:6px;color:#f0f9ff;">🔒 Pro unlocks:</strong>
+        • NEM, GOLD, AEM simulated 90-day scenario median: +4.2% / +3.8% / +3.1%<br>
+        • GDX/GLD/SLV ETF exposure delta + q-bands; research simulation, not a return guarantee<br>
+        • Alert triggers: "GLD &gt; $245 close" · "DXY &lt; 102" · "Real yield &lt; -0.5%"<br>
+        • Weekly Pro digest with scenario-ready playbooks
+      </div>
+      <div class="cn-paywall__actions">
+        <a class="cn-paywall__cta js-pro-checkout" href="{{ site.data.pricing.checkout.pro_monthly }}" data-checkout-source="pricing_unlock_visual" data-cta="pricing_unlock_start_pro">Unlock named winners — {{ _pro_monthly.price_label }}/mo →</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1093,7 +1152,7 @@ no_loader: true
   <!-- Pro -->
   <div class="pricing-card featured">
     <div class="pricing-tier">Pro</div>
-    <div class="pricing-price"><span id="pro-price">$19</span> <span id="pro-sub">/month</span></div>
+    <div class="pricing-price"><span id="pro-price">{{ _pro_monthly.price_label }}</span> <span id="pro-sub">/month</span></div>
     <div class="plan-billed plan-billed-pro" id="pro-billed">Best for investors and analysts running this workflow every week</div>
     <div class="pricing-desc">Finish the workflow in one place: unlimited reports, model agreement, scenario testing, and stock-level translation when the move is important enough to affect a real position.</div>
     <a id="pro-cta-btn" href="{{ site.data.pricing.checkout.pro_monthly }}" class="pricing-btn pricing-btn-primary" data-cta="pricing_start_pro" style="text-decoration:none;display:block;text-align:center;" data-checkout-source="pricing_start_pro">Start Pro — finish this workflow →</a>
@@ -1118,7 +1177,8 @@ no_loader: true
   <!-- Enterprise -->
   <div class="pricing-card">
     <div class="pricing-tier">Enterprise</div>
-    <div class="pricing-price"><span id="ent-price">$99</span> <span>/month</span></div>
+    {% assign _ent = site.data.pricing.plans | where: "id", "enterprise" | first %}
+    <div class="pricing-price"><span id="ent-price">{{ _ent.price_label }}</span> <span>{{ _ent.billing | default: "custom" }}</span></div>
     <div class="plan-billed" id="ent-billed">Best for research desks and teams that need shared workflows</div>
     <div class="pricing-desc">Use team seats, exports, alerts, and API-style access when commodity intelligence needs to become a shared operating workflow, not one person’s reading habit.</div>
     <button type="button" class="pricing-btn pricing-btn-ghost" data-cta="pricing_talk_sales" data-goto="/contact/">Talk to Sales About Team Access →</button>
@@ -1174,7 +1234,7 @@ no_loader: true
         <li>commodity moves regularly change the stocks or sectors you track</li>
         <li>you care about event setups like OPEC, WASDE, or Fed-driven metals repricing</li>
         <li>you need stock-level or scenario-level translation, not just a narrative summary</li>
-        <li>saving one bad decision or one missed setup is worth more than $19</li>
+        <li>saving one bad decision or one missed setup is worth more than {{ _pro_monthly.price_label }}</li>
       </ul>
     </div>
     <div style="padding:20px 22px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
@@ -1269,7 +1329,7 @@ no_loader: true
         <span>Pro only</span>
       </div>
       <button type="button" data-goto="/start/" class="teaser-cta">
-        Unlock with Pro — $19/month →
+        Unlock with Pro — {{ _pro_monthly.price_label }}/month →
       </button>
     </div>
   </div>
@@ -1390,33 +1450,38 @@ function setBilling(mode, btn) {
   var isAnnual = mode === 'annual';
   var activeUrl = isAnnual ? PRO_ANNUAL_URL : PRO_MONTHLY_URL;
 
+  // Central pricing is source-of-truth — baked from _data/pricing.yml
+  var PRO_MONTHLY_LABEL = {{ _pro_monthly.price_label | jsonify }};
+  var PRO_MONTHLY_AMOUNT = {{ _pro_monthly.price | default: 19 | jsonify }};
+  var PRO_ANNUAL_LABEL = {{ _pro_annual.price_label | jsonify }};
+  var PRO_ANNUAL_AMOUNT = {{ _pro_annual.price | default: 180 | jsonify }};
+  var PRO_ANNUAL_MONTHLY_EQUIV = PRO_ANNUAL_AMOUNT && PRO_MONTHLY_AMOUNT ? '$' + Math.round(PRO_ANNUAL_AMOUNT / 12) : PRO_ANNUAL_LABEL;
+
   // Pro CTA buttons + hero CTA URL/text update
   var proBtn = document.getElementById('pro-cta-btn');
   if (proBtn) {
     proBtn.href = activeUrl;
-    proBtn.textContent = isAnnual ? 'Start Pro — full workflow access ($149/year) →' : 'Start Pro — full workflow access →';
+    proBtn.textContent = isAnnual ? 'Start Pro — full workflow access (' + PRO_ANNUAL_LABEL + '/year) →' : 'Start Pro — full workflow access →';
   }
   var heroProBtn = document.getElementById('hero-pro-cta-btn');
   if (heroProBtn) {
     heroProBtn.href = activeUrl;
-    heroProBtn.textContent = isAnnual ? 'Start Pro — $149/year' : 'Start Pro — $19/month';
+    heroProBtn.textContent = isAnnual ? 'Start Pro — ' + PRO_ANNUAL_LABEL + '/year' : 'Start Pro — ' + PRO_MONTHLY_LABEL + '/month';
   }
   var costProBtn = document.getElementById('pricing-cost-pro-cta');
   if (costProBtn) costProBtn.href = activeUrl;
 
-  // Pro 카드 가격 업데이트
+  // Pro 카드 가격 업데이트 (annual = monthly-equivalent amount shown)
   var proPrice = document.getElementById('pro-price');
   var proSub = document.getElementById('pro-sub');
   var proBilled = document.getElementById('pro-billed');
-  if (proPrice) proPrice.textContent = isAnnual ? '$12' : '$19';
+  if (proPrice) proPrice.textContent = isAnnual ? PRO_ANNUAL_MONTHLY_EQUIV : PRO_MONTHLY_LABEL;
   if (proSub) proSub.textContent = '/month';
-  if (proBilled) proBilled.textContent = isAnnual ? 'Best for investors and analysts running this workflow every week · $149/yr billed annually' : 'Best for investors and analysts running this workflow every week';
+  if (proBilled) proBilled.textContent = isAnnual ? 'Best for investors and analysts running this workflow every week · ' + PRO_ANNUAL_LABEL + '/yr billed annually' : 'Best for investors and analysts running this workflow every week';
 
-  // Enterprise 카드 가격 업데이트
-  var entPrice = document.getElementById('ent-price');
+  // Enterprise는 Contact — toggle로 가격 변동 없음
   var entBilled = document.getElementById('ent-billed');
-  if (entPrice) entPrice.textContent = isAnnual ? '$79' : '$99';
-  if (entBilled) entBilled.textContent = isAnnual ? 'Best for research desks and teams that need shared workflows · annual pricing available' : 'Best for research desks and teams that need shared workflows';
+  if (entBilled) entBilled.textContent = 'Best for research desks and teams that need shared workflows';
 }
 
 document.addEventListener('DOMContentLoaded', function(){

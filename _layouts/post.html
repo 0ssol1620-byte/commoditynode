@@ -241,6 +241,22 @@ layout: default
     </div>
   </section>
 
+  <section class="report-model-readout" aria-label="Model Readout" data-animate style="margin-top:18px;padding:20px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.14);">
+    <div class="eyebrow-cyan">Model Readout</div>
+    <h2 style="margin:8px 0 10px;color:#f8fafc;font-size:1.25rem;">Catalyst → Forecast range → RL policy action → Decision implication</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
+      <div class="report-workflow-card"><div class="eyebrow-cyan">News catalyst</div><strong>{{ page.description | default: site.description | truncatewords: 18 }}</strong></div>
+      <div class="report-workflow-card"><div class="eyebrow-cyan">Forecast range</div><strong>Chronos-2 + TimesFM 30D/90D path check</strong></div>
+      <div class="report-workflow-card"><div class="eyebrow-cyan">RL policy action</div><strong>Neural PPO policy chooses a defensible action from the current state</strong></div>
+      <div class="report-workflow-card"><div class="eyebrow-cyan">Proof scope</div><strong>Historical replay / walk-forward scoped — not a live trading guarantee</strong></div>
+    </div>
+    <p class="body-text-65" style="margin-top:12px;">This report is the catalyst layer. The paid workflow finishes the job by checking forecast agreement, RL action probability, and stock-level exposure before the market reprices downstream names.</p>
+    <div class="chip-group-wrap" style="margin-top:12px;">
+      <a href="/simulator/" class="btn btn-primary" data-cta="report_model_readout_simulator">Model this move</a>
+      <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary" data-cta="report_model_readout_rl_lab">Inspect RL policy</a>
+    </div>
+  </section>
+
   <section class="report-workflow-strip" aria-label="Saved workflow continuation" data-animate>
     <div>
       <div class="eyebrow-cyan">Continue your saved workflow</div>
@@ -282,7 +298,50 @@ layout: default
         <p style="margin:0;color:#e2e8f0;">{{ page.signal_summary }}</p>
       </div>
       {% endif %}
+
+      {%- comment -%} Top-tier upgrade: hero visual + key takeaways + freshness (blueprint §6.8) {%- endcomment -%}
+      {% if page.hero_chart_commodity %}
+      <div class="cn-chart-card" style="margin:0 0 24px;">
+        <div class="cn-chart-card__head">
+          <h2 class="cn-chart-card__title">{{ page.hero_chart_commodity | capitalize }} · forecast snapshot</h2>
+          {% include components/freshness-badge.html updated_at=page.date source="Chronos + TimesFM consensus" horizon="90-day" status="fresh" %}
+        </div>
+        <div class="cn-chart-card__body" data-cn-forecast-fan data-commodity="{{ page.hero_chart_commodity }}" style="min-height:220px;"></div>
+        <div class="cn-chart-card__foot">
+          <span>Probabilistic q10–q90 band · {{ page.hero_chart_commodity }}</span>
+          <a href="/simulator/?preset={{ page.hero_chart_commodity }}-shock">Run this scenario →</a>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if page.key_takeaways %}
+      <section class="cn-paywall" style="margin:0 0 24px;background:linear-gradient(135deg,rgba(34,211,238,0.1),rgba(168,85,247,0.06));border-color:rgba(34,211,238,0.22);" aria-label="Key takeaways">
+        <span class="cn-paywall__eyebrow">★ Key takeaways</span>
+        <ul style="margin:10px 0 0;padding-left:18px;color:#e0f2fe;line-height:1.75;font-size:0.95rem;">
+          {% for takeaway in page.key_takeaways %}
+          <li style="margin-bottom:6px;">{{ takeaway }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
       {{ content }}
+
+      {%- comment -%} Related simulator CTA — every report ends in an action (blueprint §6.8) {%- endcomment -%}
+      {% assign _cta_commodity_raw = page.hero_chart_commodity | default: primary_tag | default: commodity_slug %}
+      {% assign _cta_commodity = _cta_commodity_raw | slugify %}
+      {% assign _known_commodity_slugs = site.commodities | map: 'slug' | join: ',' %}
+      {% if _cta_commodity and _known_commodity_slugs contains _cta_commodity %}
+      <section class="cn-paywall" style="margin:0 0 24px;" aria-label="Scenario simulator CTA">
+        <span class="cn-paywall__eyebrow">Scenario ready</span>
+        <h3 class="cn-paywall__title">Run this {{ _cta_commodity | replace: "-", " " }} move on your watchlist</h3>
+        <p class="cn-paywall__desc">Translate the commodity shock into sector pressure, named-company exposure, and alert triggers before the market reprices the downstream chain.</p>
+        <div class="cn-paywall__actions">
+          <a class="cn-paywall__cta" href="/simulator/?preset={{ _cta_commodity | url_encode }}-shock" data-cta="post_simulator_cta">Open in Simulator →</a>
+          <a class="cn-paywall__cta cn-paywall__cta--ghost" href="/commodities/{{ _cta_commodity | url_encode }}/" data-cta="post_commodity_hub">See the hub</a>
+        </div>
+      </section>
+      {% endif %}
 
       {% if page.tags.size > 0 %}
       <div class="post-tags" aria-label="Post tags">

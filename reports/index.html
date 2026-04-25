@@ -61,6 +61,48 @@ no_loader: true
         </div>
       </div>
       {% assign newest_post = site.posts.first %}
+
+<section class="archive-proof-shelf" aria-labelledby="archive-proof-title" style="margin-top:16px;padding:20px;border-radius:20px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.14);">
+  <div class="eyebrow-cyan">Timestamped proof shelf</div>
+  <h2 id="archive-proof-title" style="margin:8px 0 8px;color:#f8fafc;font-size:1.3rem;">Recent model calls that played out</h2>
+  <p class="body-text">Use this shelf to connect archived news catalysts to forecast ranges, RL policy actions, and historical/replay-scoped outcomes. It is proof architecture, not a guarantee of future returns.</p>
+  <div id="archive-proof-calls" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;"></div>
+</section>
+<script>
+(function(){
+  function safeText(value){ return String(value == null ? '' : value); }
+  function safeSitePath(value){ return /^\/[a-z0-9\-/_]*\/?$/i.test(String(value || '')) ? value : '/reports/'; }
+  function appendText(el, value){ el.textContent = safeText(value); return el; }
+  Promise.all([
+    fetch('/assets/data/model-call-snapshots.json').then(function(r){return r.json()}),
+    fetch('/assets/data/model-call-outcomes.json').then(function(r){return r.json()})
+  ]).then(function(pair){
+    var calls = pair[0].calls || [];
+    var outcomes = (pair[1].outcomes || []).reduce(function(map,o){ map[o.call_id]=o; return map; }, {});
+    var host = document.getElementById('archive-proof-calls');
+    if (!host) return;
+    host.textContent = '';
+    calls.slice(0,4).forEach(function(call){
+      var out = outcomes[call.id] || {};
+      var article = document.createElement('article');
+      article.setAttribute('style', 'padding:15px;border-radius:16px;background:rgba(8,12,20,0.45);border:1px solid rgba(255,255,255,0.08);display:grid;gap:8px;');
+      var kicker = appendText(document.createElement('div'), safeText(call.commodity) + ' · ' + safeText(call.rl_action));
+      kicker.className = 'eyebrow-cyan';
+      var title = appendText(document.createElement('strong'), '30D outcome: ' + (out.actual_30d_return_pct != null ? out.actual_30d_return_pct + '%' : 'tracking'));
+      title.setAttribute('style', 'color:#f8fafc;');
+      var copy = appendText(document.createElement('p'), out.proof_copy || call.proof_label);
+      copy.className = 'body-text-65';
+      var link = appendText(document.createElement('a'), 'Open timestamped call →');
+      link.href = safeSitePath(call.source_report_url);
+      link.className = 'text-accent';
+      link.setAttribute("data-cta", "archive_model_proof_open_call");
+      article.append(kicker, title, copy, link);
+      host.appendChild(article);
+    });
+  }).catch(function(){});
+})();
+</script>
+
       {% assign second_post = site.posts[1] %}
       {% assign third_post = site.posts[2] %}
       <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:14px;margin-top:16px;">
