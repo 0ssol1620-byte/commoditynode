@@ -120,7 +120,7 @@ Wheat is not just an agriculture chart. Use this page when you need to separate 
 - [Crude Oil](/commodities/crude-oil/) for freight, diesel, and logistics pass-through
 - [Gold](/commodities/gold/) when food inflation is feeding broader macro and risk-aversion flows
 
-## Latest Signal Reports
+## Latest Research Reports
 - [Food Price Disconnect: Wheat to Bread](/food-price-disconnect-wheat-bread/)
 - [Wheat & Flour Consumer Staples Chain](/wheat-flour-consumer-staples-chain/)
 - [Wheat Price Impact on Food Security](/wheat-price-impact-food/)

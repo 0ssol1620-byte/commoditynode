@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "CommodityNode Editorial Team"
-description: "The research team behind CommodityNode's commodity impact analysis, signal reports, and AI price forecasts."
+description: "The research team behind CommodityNode's commodity impact analysis, research reports, and AI price forecasts."
 permalink: /about/editorial-team/
 no_loader: true
 ---
@@ -12,7 +12,7 @@ no_loader: true
   "@type": "WebPage",
   "name": "CommodityNode Editorial Team",
   "url": "https://commoditynode.com/about/editorial-team/",
-  "description": "The research team behind CommodityNode's commodity impact analysis and signal reports.",
+  "description": "The research team behind CommodityNode's commodity impact analysis and research reports.",
   "author": {
     "@type": "Organization",
     "name": "CommodityNode Research",
@@ -50,7 +50,7 @@ no_loader: true
 <h3>What We Publish</h3>
 <ul>
   <li><strong>Commodity Impact Maps</strong> — How a 10% price move in a raw material ripples through industries, ETFs, and companies, based on historical regression and supply-chain input-output analysis</li>
-  <li><strong>Signal Reports</strong> — Specific price movements or structural market changes with quantified impact estimates, historical analogues, and relevant equities</li>
+  <li><strong>Research Reports</strong> — Specific price movements or structural market changes with quantified impact estimates, historical analogues, and relevant equities</li>
   <li><strong>Cross-Commodity Signals</strong> — Historically validated ratio and spread patterns with documented win rates and time horizons</li>
   <li><strong>AI Price Forecasts</strong> — 90-day projections that compare Chronos-2 and TimesFM 2.5 with consensus ranges and explicit uncertainty bands</li>
 </ul>

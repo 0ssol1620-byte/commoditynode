@@ -111,7 +111,7 @@ Lithium should be read differently from a liquid futures market. This page is mo
 - [Natural Gas](/commodities/natural-gas/) when power costs and fertilizer inputs are interacting with battery economics indirectly
 - [Gold](/commodities/gold/) if the market is trading macro risk rather than clean-energy growth
 
-## Latest Signal Reports
+## Latest Research Reports
 - [Lithium Surplus-to-Deficit Pivot](/lithium-surplus-deficit-pivot/)
 - [Lithium EV Supply Chain Analysis](/lithium-ev-supply-chain/)
 - [Lithium EV Battery Auto Chain](/lithium-ev-battery-auto-chain/)

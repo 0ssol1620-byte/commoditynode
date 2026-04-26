@@ -59,6 +59,6 @@ Ethylene is the **world's most-produced organic chemical** (~200 million tonnes/
 
 ## Coverage Status
 
-CommodityNode is expanding coverage of ethylene markets. Current analysis focuses on petrochemical supply chains, downstream plastics demand, and key producers. Additional Signal Reports covering ethylene-specific price drivers will be published as our dataset grows.
+CommodityNode is expanding coverage of ethylene markets. Current analysis focuses on petrochemical supply chains, downstream plastics demand, and key producers. Additional Research Reports covering ethylene-specific price drivers will be published as our dataset grows.
 
 For related analysis, explore our [Natural Gas](/commodities/natural-gas/) and [Crude Oil](/commodities/crude-oil/) hubs, which cover upstream feedstock dynamics that directly affect ethylene pricing.

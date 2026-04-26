@@ -101,7 +101,7 @@ Nuclear utilities face higher fuel procurement costs as legacy low-price contrac
 
 The uranium spot/term price spread is the key indicator of market tightness. When spot prices approach or exceed long-term contract levels, it signals that uncovered utility demand is pulling material from the spot market. Monitor the World Nuclear Association's reactor pipeline, Kazatomprom production guidance, and U.S. DOE enrichment inventories as fundamental drivers. URA and URNM ETFs provide liquid exposure but trade at significant premiums to NAV during bull markets. Numerco's daily spot price updates and TradeTech's weekly contract indicators provide the highest-frequency price data in this opaque market.
 
-## Latest Signal Reports
+## Latest Research Reports
 - [Uranium Resurgence: Policy & Supply](/uranium-resurgence-policy-supply/)
 - [Uranium & Nuclear Energy Stocks](/uranium-nuclear-energy-stocks/)
 - [Cameco: Uranium & Nuclear Energy](/cameco-uranium-nuclear-energy/)

@@ -23,7 +23,7 @@ disable_ads: true
   <div class="legal-kicker">CommodityNode policy</div>
 
   <h1>Model Limitations</h1>
-  <div class="legal-notice">CommodityNode model outputs are research estimates. They are not trading instructions, investment recommendations, or guaranteed outcomes.</div>
+  <div class="legal-notice">CommodityNode model outputs are research estimates. They are not trading instructions, regulated financial advice, or guaranteed outcomes.</div>
   <h2>Probabilistic outputs</h2>
   <p>Forecasts and simulations express possible ranges or scenario relationships. They can be wrong, especially during regime shifts, supply shocks, geopolitical events, exchange disruptions, or data outages.</p>
   <h2>Scenario tools</h2>

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "CommodityNode Editorial Process"
-description: "How CommodityNode researches, reviews, updates, and corrects commodity hubs, Signal Reports, and forecasting surfaces."
+description: "How CommodityNode researches, reviews, updates, and corrects commodity hubs, Research Reports, and forecasting surfaces."
 permalink: /about/editorial-process/
 no_loader: true
 ---
@@ -28,7 +28,7 @@ no_loader: true
       <span class="badge badge-gold">Editorial process</span>
     </div>
     <h1>CommodityNode Editorial Process</h1>
-    <p class="post-meta-bar">How commodity hubs, Signal Reports, and model-driven pages are researched, reviewed, refreshed, and corrected.</p>
+    <p class="post-meta-bar">How commodity hubs, Research Reports, and model-driven pages are researched, reviewed, refreshed, and corrected.</p>
   </div>
 </div>
 
@@ -53,7 +53,7 @@ no_loader: true
 <h2>1. What We Publish</h2>
 <ul>
   <li><strong>Commodity hubs</strong> — living reference pages that connect price action to equities, industries, and second-order impact.</li>
-  <li><strong>Signal Reports</strong> — time-sensitive notes explaining why a move matters now.</li>
+  <li><strong>Research Reports</strong> — time-sensitive notes explaining why a move matters now.</li>
   <li><strong>Forecast and scenario surfaces</strong> — probabilistic tools that show ranges, disagreement, and model spread rather than certainty.</li>
 </ul>
 
@@ -78,7 +78,7 @@ no_loader: true
 <p>Not every surface receives the same review intensity at the same moment. Our highest-priority review targets are:</p>
 <ul>
   <li>high-traffic commodity hubs</li>
-  <li>newly published Signal Reports</li>
+  <li>newly published Research Reports</li>
   <li>monetized or conversion-oriented pages</li>
   <li>pages tied to active supply disruptions or large market moves</li>
 </ul>

@@ -230,7 +230,7 @@ page_css:
         </div>
         <div class="hero-stat">
           <span class="value counting" data-count="{{ site.posts.size }}" data-suffix=" reports">{{ site.posts.size }} reports</span>
-          <span class="label">Signal Reports</span>
+          <span class="label">Research Reports</span>
         </div>
         <div class="hero-stat">
           {% assign commodity_count = site.coverage_counts.commodity_hubs | default: site.commodities.size %}
@@ -332,13 +332,13 @@ page_css:
 
       function getProUnlockTeaser(key) {
         var map = {
-          lithium: 'Pro unlock: stock-level battery chain sensitivity and scenario confidence.',
-          coffee: 'Pro unlock: margin winners vs losers instead of headline-level narrative only.',
+          lithium: 'Pro unlock: company-level battery chain sensitivity and scenario confidence.',
+          coffee: 'Pro unlock: margin-exposure comparison instead of headline-level narrative only.',
           orange_juice: 'Pro unlock: downstream beverage exposure and event-level scenario follow-through.',
-          crude_oil: 'Pro unlock: named winners and losers across energy, airlines, and chemicals.',
-          natural_gas: 'Pro unlock: utility, LNG, and fertilizer translation before the move is obvious.'
+          crude_oil: 'Pro unlock: company exposure context across energy, airlines, and chemicals.',
+          natural_gas: 'Pro unlock: utility, LNG, and fertilizer exposure translation for deeper review.'
         };
-        return map[key] || 'Pro unlock: named winners, losers, and scenario confidence before the market fully reprices.';
+        return map[key] || 'Pro unlock: company exposure context and scenario confidence for deeper review.';
       }
 
       function formatActionablePrice(entry) {
@@ -370,8 +370,8 @@ page_css:
           var actionLabel = hasLiveReport ? 'Read live report' : 'Open live hub';
           var secondaryLabel = hasLiveReport ? 'Open live hub' : 'Model scenario';
           var nextStepCopy = hasLiveReport
-            ? 'Read the live report first, then open the live hub to finish the decision workflow.'
-            : 'Open the live hub first, then use the simulator if you need scenario context before the market reprices.';
+            ? 'Read the live report first, then open the live hub to continue the research workflow.'
+            : 'Open the live hub first, then use the simulator if you need scenario context.';
           return '<article style="padding:18px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.018));border:1px solid rgba(255,255,255,0.08);box-shadow:0 16px 38px rgba(2,6,23,0.28);display:grid;gap:12px;">'
             + '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">'
             + '<div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Actionable setup ' + (idx + 1) + '</div>'
@@ -598,8 +598,8 @@ page_css:
   <div class="container">
     <header class="howit-header" data-animate>
       <p class="section-label">How it works</p>
-      <h2 class="section-title" id="howit-title">Three steps from commodity shock to action</h2>
-      <p class="section-desc">No new language to learn. Track the move, map who is hit, act with a scenario.</p>
+      <h2 class="section-title" id="howit-title">Three steps from commodity shock to research context</h2>
+      <p class="section-desc">No new language to learn. Track the move, map who is exposed, then stress-test scenarios for planning.</p>
     </header>
     <ol class="howit-steps" data-animate data-delay="100">
       <li class="howit-step">
@@ -630,7 +630,7 @@ page_css:
           <div class="howit-step-icon" aria-hidden="true">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
           </div>
-          <h3>Act with scenarios</h3>
+          <h3>Stress-test scenarios</h3>
           <p>Run Iran · China · OPEC · Fed scenarios against your watchlist and save a repeatable daily workflow.</p>
           <span class="howit-step-link">Run the simulator once the move deserves work</span>
         </div>
@@ -644,12 +644,12 @@ page_css:
     <div style="display:grid;gap:16px;max-width:1180px;margin:0 auto;">
       <div style="display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
         <div>
-          <p class="section-label" style="margin-bottom:8px;">Today’s actionable setups</p>
-          <h2 class="section-title" id="actionable-setups-title" style="margin-bottom:10px;">Start with the moves most likely to change a position now.</h2>
-          <p class="section-desc" style="max-width:720px;">Each setup starts with the live move, translates the downstream implication, then routes you into the hub or simulator before consensus catches up.</p>
+          <p class="section-label" style="margin-bottom:8px;">Today’s research setups</p>
+          <h2 class="section-title" id="actionable-setups-title" style="margin-bottom:10px;">Start with the commodity moves most likely to change business risk context now.</h2>
+          <p class="section-desc" style="max-width:720px;">Each setup starts with the live move, translates the downstream implication, then routes you into the hub or simulator for research context.</p>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <a href="/reports/" class="btn btn-secondary" data-cta="home_open_todays_reports" style="min-width:200px;justify-content:center;">Open today’s live setups</a>
+          <a href="/reports/" class="btn btn-secondary" data-cta="home_open_todays_reports" style="min-width:200px;justify-content:center;">Open today’s research setups</a>
           <a href="/simulator/" class="btn btn-primary" data-cta="home_go_straight_simulator" style="min-width:220px;justify-content:center;">Test a live scenario now</a>
         </div>
       </div>
@@ -657,7 +657,7 @@ page_css:
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
         <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
           <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Why this is different</div>
-          <p style="margin:0;color:var(--text2);line-height:1.65;">Headlines tell you what moved. Charts tell you where it traded. CommodityNode tells you which sectors, stocks, and scenarios change next.</p>
+          <p style="margin:0;color:var(--text2);line-height:1.65;">Headlines tell you what moved. Charts tell you where the price changed. CommodityNode shows which sectors, companies, and scenarios deserve deeper review.</p>
         </div>
         <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
           <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Best route to a decision</div>
@@ -678,7 +678,7 @@ page_css:
           <p class="section-desc" style="max-width:760px;">Save your role, key commodities, watchlist names, and event playbooks so CommodityNode can route you straight to the setups that matter. This is how the product stops being a read and starts becoming a repeatable edge.</p>
           <div data-profile-empty style="margin-top:12px;color:var(--text2);line-height:1.7;">No workflow saved yet. Start with a role, a few commodities, and the names you actually care about.</div>
           <div style="margin-top:14px;color:#e2e8f0;font-size:0.92rem;font-weight:700;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
-          <p data-profile-has-saved style="display:none;margin:10px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
+          <p data-profile-has-saved style="display:none;margin:10px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then review the scenario against your saved watchlist.</p>
         </div>
         <div style="display:grid;gap:10px;">
           <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
@@ -970,7 +970,7 @@ page_css:
       { id:'live', label:'Live move', value: payload.liveMoveText || 'Loading…', change: payload.liveMove || 0, implication:'Biggest tape move worth opening first.', spark:[0.004,0.008,-0.003,0.011,-0.004,0.012] },
       { id:'forecast', label:'90D setup', value: payload.forecastText || 'Consensus +4.8%', change: payload.forecastMove || 4.8, implication:'Use the cone before assuming one clean line.', spark:[0.002,0.004,0.006,0.008,0.004,0.01] },
       { id:'regime', label:'Regime', value: payload.regime || 'Trend extension', change: payload.regimeScore || 2.4, implication:'Regime tells you whether continuation or hedge logic fits.', spark:[0.001,0.002,0.004,0.005,0.003,0.006] },
-      { id:'confidence', label:'Agreement', value: payload.confidence || '67%', change: payload.confidenceDelta || 1.7, implication:'Model agreement determines whether this deserves action or watchlist status.', spark:[0.003,0.002,0.005,0.004,0.006,0.007] }
+      { id:'confidence', label:'Agreement', value: payload.confidence || '67%', change: payload.confidenceDelta || 1.7, implication:'Model agreement determines whether this deserves deeper review or watchlist status.', spark:[0.003,0.002,0.005,0.004,0.006,0.007] }
     ]);
     var wall = document.getElementById('home-kpi-spark-wall');
     if (wall) {
@@ -1071,7 +1071,7 @@ page_css:
         { id:'gold-theme-yields', label:'Real yields', short:'Theme', type:'theme', orbit:0.7, angle:1.35, speed:0.15, description:'Gold usually strengthens when real-yield pressure eases and policy tone softens.' },
         { id:'gold-theme-cbanks', label:'Central-bank bid', short:'Theme', type:'theme', orbit:0.96, angle:3.95, speed:0.08, description:'Reserve diversification keeps an underlying bid under the premium gold narrative.' },
         { id:'gold-report-weekly', label:'Macro note', short:'Report', type:'report', orbit:0.52, angle:5.45, speed:0.2, description:'The linked macro report explains whether this move is hedging demand, liquidity, or policy repricing.' },
-        { id:'gold-report-trigger', label:'Signal report', short:'Report', type:'report', orbit:1.15, angle:5.95, speed:0.06, description:'Research satellite — use it when the move matters enough to justify company-level action.' }
+        { id:'gold-report-trigger', label:'Research report', short:'Report', type:'report', orbit:1.15, angle:5.95, speed:0.06, description:'Research satellite — use it when the move matters enough to justify company-level review.' }
       ]
     },
     copper: {

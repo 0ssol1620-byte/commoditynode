@@ -104,7 +104,7 @@ But here's the twist: copper rises *because* demand is strong, and demand is str
 
 This is the reflexivity problem in commodity analysis. The impact map shows the *cost transmission* channel — higher copper = higher costs for consumers. But it doesn't fully capture the *demand validation* channel — higher copper signals strong end-market activity that benefits those same consumers.
 
-In practice, this means commodity price increases are initially negative for consumers (cost shock) but the net effect depends on *why* prices are rising. Demand-driven rallies (which signal strong end-markets) are less damaging than supply-shock rallies (which impose costs without corresponding demand). I try to note this distinction in the Signal Reports, but the impact maps themselves are agnostic about the cause of the price move.
+In practice, this means commodity price increases are initially negative for consumers (cost shock) but the net effect depends on *why* prices are rising. Demand-driven rallies (which signal strong end-markets) are less damaging than supply-shock rallies (which impose costs without corresponding demand). I try to note this distinction in the Research Reports, but the impact maps themselves are agnostic about the cause of the price move.
 
 ---
 

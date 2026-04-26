@@ -27,7 +27,7 @@ description: "CommodityNode is an independent commodity intelligence publisher m
       "https://www.threads.net/@commoditynode",
       "https://twitter.com/commoditynode"
     ],
-    "description": "Independent commodity intelligence publisher providing impact maps, Signal Reports, scenario tools, and forecast ranges across commodity-sensitive markets.",
+    "description": "Independent commodity intelligence publisher providing impact maps, Research Reports, scenario tools, and forecast ranges across commodity-sensitive markets.",
     "knowsAbout": [
       "Commodity Markets",
       "Supply Chain Risk",
@@ -108,7 +108,7 @@ description: "CommodityNode is an independent commodity intelligence publisher m
 <p>CommodityNode publishes under the <strong>CommodityNode Research</strong> identity. The site blends quantitative market data, documented methodology, and manual editorial judgment.</p>
 <ul>
   <li><strong>Commodity hubs</strong> are maintained as living reference pages with data labels, price context, and related research.</li>
-  <li><strong>Signal Reports</strong> explain why a move matters now, not just what the chart did.</li>
+  <li><strong>Research Reports</strong> explain why a move matters now, not just what the chart did.</li>
   <li><strong>Forecast and scenario tools</strong> are presented as probabilistic aids with explicit uncertainty ranges.</li>
   <li><strong>Corrections and freshness</strong> matter: we distinguish between automated price refreshes and editorial publication dates.</li>
 </ul>
@@ -147,7 +147,7 @@ description: "CommodityNode is an independent commodity intelligence publisher m
 <ul>
   <li><strong>General inquiries:</strong> <a href="mailto:contact@commoditynode.com">contact@commoditynode.com</a></li>
   <li><strong>Enterprise and team access:</strong> <a href="mailto:enterprise@commoditynode.com">enterprise@commoditynode.com</a></li>
-  <li><strong>Research archive:</strong> <a href="/reports/">Browse Signal Reports</a></li>
+  <li><strong>Research archive:</strong> <a href="/reports/">Browse Research Reports</a></li>
   <li><strong>Methods and caveats:</strong> <a href="/methodology/">Read the Methodology</a></li>
 </ul>
 

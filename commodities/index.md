@@ -19,7 +19,7 @@ description: "Explore how each commodity's price movements ripple through indust
 <div class="container" style="padding:48px 24px 80px;">
 
 <p style="color:var(--text2);font-size:1rem;line-height:1.7;max-width:720px;margin:0 auto 40px;">
-  Each commodity hub maps the full ripple chain — from price movement to affected industries, companies, and ETFs. Click any commodity to explore its interactive Impact Map, live price data, and Signal Reports.
+  Each commodity hub maps the full ripple chain — from price movement to affected industries, companies, and ETFs. Click any commodity to explore its interactive Impact Map, live price data, and Research Reports.
 </p>
 
 <!-- Energy -->
@@ -523,7 +523,7 @@ description: "Explore how each commodity's price movements ripple through indust
 
 
 <div style="text-align:center;padding:48px 24px 0;">
-  <p style="color:var(--text2);margin-bottom:20px;font-size:0.95rem;">Get weekly commodity signal reports delivered to your inbox.</p>
+  <p style="color:var(--text2);margin-bottom:20px;font-size:0.95rem;">Get weekly commodity research reports delivered to your inbox.</p>
   <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:16px;">
     <a href="/commodities/gold/" class="btn btn-primary">Gold Impact Map</a>
     <a href="/commodities/crude-oil/" class="btn btn-secondary">Oil Impact Map</a>

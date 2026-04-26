@@ -101,7 +101,7 @@ Solar panel manufacturers face higher silver paste costs that pressure module ma
 
 The gold/silver ratio is the primary spread indicator for silver traders. Historically averaging around 60:1, the ratio has ranged from 30:1 to 120:1. When the ratio exceeds 80-85, silver is considered historically cheap relative to gold, and mean-reversion trades (long silver / short gold) have generated strong risk-adjusted returns over 6-12 month horizons. Monitor COMEX positioning data and Indian import volumes as leading demand indicators. Solar installation growth rates and the Silver Institute's annual supply-demand balance provide the key fundamental framework for assessing structural deficit persistence.
 
-## Latest Signal Reports
+## Latest Research Reports
 - [Silver Price Impact: Solar & Electronics](/silver-price-impact-solar-electronics/)
 
 ## Key Impact Relationships

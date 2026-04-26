@@ -120,7 +120,7 @@ Use crude oil as the master energy hub when you need to know whether the market 
 - [Copper](/commodities/copper/) when oil and industrial metals are moving together on growth expectations
 - [Wheat](/commodities/wheat/) for diesel, freight, and food-input pass-through into inflation
 
-## Latest Signal Reports
+## Latest Research Reports
 - [Oil's Geopolitical Premium: Strait of Hormuz](/crude-oil-strait-hormuz-geopolitical-premium/)
 - [Oil Price Surge: Industry Impact Analysis](/oil-price-surge-industry-impact/)
 - [March 2026 Oil Market & OPEC Update](/march-2026-oil-market-opec/)

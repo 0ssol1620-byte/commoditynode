@@ -78,4 +78,4 @@ For investors, the OJ market represents one of the clearest examples of a struct
 
 ---
 
-*This analysis is for informational and educational purposes only. It does not constitute financial advice or investment recommendations. All data and projections are based on publicly available information and historical patterns that may not reflect future outcomes. Always conduct your own due diligence before making investment decisions.*
+*This analysis is for informational and educational purposes only. It does not constitute financial advice or regulated financial advice. All data and projections are based on publicly available information and historical patterns that may not reflect future outcomes. Always conduct your own due diligence before making investment decisions.*

@@ -61,6 +61,6 @@ Palm oil accounts for approximately **35% of global vegetable oil consumption**,
 
 ## Coverage Status
 
-CommodityNode is expanding coverage of palm oil markets. Current analysis focuses on oilseed supply chains, biodiesel demand, and food industry exposure. Additional Signal Reports covering palm oil-specific price drivers will be published as our dataset grows.
+CommodityNode is expanding coverage of palm oil markets. Current analysis focuses on oilseed supply chains, biodiesel demand, and food industry exposure. Additional Research Reports covering palm oil-specific price drivers will be published as our dataset grows.
 
 For related analysis, explore our [Soybeans](/commodities/soybeans/) and [Corn](/commodities/corn/) hubs, which cover substitute oilseed dynamics that directly affect palm oil pricing.

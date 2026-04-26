@@ -135,7 +135,7 @@ permalink: /themes/trump-tariffs/
   {% assign tariff_posts = site.posts | where_exp: "post", "post.tags contains 'tariffs'" %}
   {% if tariff_posts.size > 0 %}
   <section class="section mt-48">
-    <div class="section-header"><h2 class="section-title">Related Signal Reports</h2></div>
+    <div class="section-header"><h2 class="section-title">Related Research Reports</h2></div>
     <div class="posts-grid">
     {% for post in tariff_posts limit:6 %}
       <article class="post-card" data-animate>
@@ -156,7 +156,7 @@ permalink: /themes/trump-tariffs/
     <div style="max-width:640px;margin:0 auto;text-align:center;">
       <p style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:8px;">Weekly Intelligence</p>
       <h2 style="font-size:1.5rem;font-weight:800;margin-bottom:12px;">Get Tariff Impact Updates Weekly</h2>
-      <p style="color:var(--text2);margin-bottom:24px;font-size:0.95rem;">New signal reports on tariff-affected commodities and equities — every week, free.</p>
+      <p style="color:var(--text2);margin-bottom:24px;font-size:0.95rem;">New research reports on tariff-affected commodities and equities — every week, free.</p>
       {% include newsletter.html %}
     </div>
   </section>

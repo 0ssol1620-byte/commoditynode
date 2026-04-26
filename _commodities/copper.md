@@ -120,7 +120,7 @@ Copper works best as a regime-detection hub. Start here when you need to answer 
 - [Lithium](/commodities/lithium/) for EV and battery-chain confirmation
 - [Crude Oil](/commodities/crude-oil/) when macro growth and inflation are moving together
 
-## Latest Signal Reports
+## Latest Research Reports
 - [Copper Hits $5.70: EV Infrastructure Demand](/copper-hits-570-ev-infrastructure/)
 - [Copper Structural Deficit Analysis](/copper-structural-deficit/)
 - [Copper as Economic Indicator](/copper-economic-indicator/)

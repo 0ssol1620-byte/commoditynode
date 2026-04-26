@@ -120,7 +120,7 @@ Gold is most useful when you need to distinguish between inflation fear, real-yi
 - [Copper](/commodities/copper/) for risk-on versus risk-off comparison through the copper/gold ratio
 - [Crude Oil](/commodities/crude-oil/) when inflation pressure and geopolitical risk are rising together
 
-## Latest Signal Reports
+## Latest Research Reports
 - [Gold Price Regime Change](/gold-price-regime-change/)
 - [Gold Breaks $5,000: Mining Stocks Impact](/gold-breaks-5000-mining-stocks/)
 - [Gold Mining, Emerging Markets Chain](/gold-mining-emerging-markets-chain/)
