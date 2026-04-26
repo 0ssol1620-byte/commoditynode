@@ -1098,7 +1098,7 @@
       queryChips.forEach(chip => chip.classList.toggle('is-active', (chip.dataset.queryChip || '').toLowerCase() === currentSearch));
       if (searchStatus) {
         const filterLabel = currentFilter === 'all' ? 'all sectors' : currentFilter;
-        const directionLabel = currentDirection === 'all' ? 'all signals' : currentDirection;
+        const directionLabel = currentDirection === 'all' ? 'all research views' : currentDirection;
         const recencyLabel = currentRecency === 'all' ? 'all time' : `last ${currentRecency}d`;
         searchStatus.textContent = currentSearch
           ? `Showing ${visibleCards.length} report${visibleCards.length === 1 ? '' : 's'} for “${currentSearch}” in ${filterLabel} · ${directionLabel} · ${recencyLabel}.`
@@ -1586,7 +1586,7 @@ async function populateSignals() {
         el.className = 'value ' + (parseFloat(pct) > 0 ? 'positive' : 'negative');
       }
     }
-  } catch(e) { console.warn('signals:', e); }
+  } catch(e) { console.warn('risk-patterns:', e); }
 }
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', populateSignals);
 else populateSignals();
