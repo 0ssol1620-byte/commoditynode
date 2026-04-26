@@ -5,21 +5,21 @@
 {% assign upgrade_cta_id = include.cta_id | default: "upgrade_moment_compare_pro" %}
 {% assign upgrade_free_cta = include.free_cta | default: "Continue free" %}
 {% assign upgrade_free_href = include.free_href | default: "/start/" %}
-<section class="upgrade-moment" data-upgrade-moment="{{ include.moment | default: 'general' }}" aria-label="Upgrade moment" style="margin:18px 0;padding:18px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.16);">
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch;">
-    <div style="padding:14px;border-radius:14px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.08);">
+<section class="upgrade-moment" data-upgrade-moment="{{ include.moment | default: 'general' }}" aria-label="Upgrade moment" style="margin:18px 0;padding:clamp(14px,4vw,18px);border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.16);overflow:hidden;box-sizing:border-box;">
+  <div class="upgrade-moment__grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px;align-items:stretch;min-width:0;">
+    <div class="upgrade-moment__panel" style="padding:14px;border-radius:14px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.08);min-width:0;box-sizing:border-box;">
       <div class="eyebrow-cyan">Value preview</div>
-      <h3 style="margin:6px 0 8px;color:#f8fafc;font-size:1.05rem;">{{ upgrade_title }}</h3>
-      <p style="margin:0;color:#cbd5e1;line-height:1.65;font-size:0.9rem;">{{ upgrade_preview }}</p>
+      <h3 style="margin:6px 0 8px;color:#f8fafc;font-size:1.05rem;line-height:1.22;overflow-wrap:anywhere;">{{ upgrade_title }}</h3>
+      <p style="margin:0;color:#cbd5e1;line-height:1.65;font-size:0.9rem;overflow-wrap:anywhere;">{{ upgrade_preview }}</p>
     </div>
-    <div style="padding:14px;border-radius:14px;background:rgba(34,211,238,0.055);border:1px solid rgba(34,211,238,0.14);">
+    <div class="upgrade-moment__panel" style="padding:14px;border-radius:14px;background:rgba(34,211,238,0.055);border:1px solid rgba(34,211,238,0.14);min-width:0;box-sizing:border-box;">
       <div class="eyebrow-cyan">What Pro unlocks</div>
-      <p style="margin:6px 0 12px;color:#dbeafe;line-height:1.65;font-size:0.9rem;">{{ upgrade_unlock }}</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="/pricing/" class="btn btn-primary" data-cta="{{ upgrade_cta_id }}" data-lead-magnet="upgrade_moment" style="min-width:180px;justify-content:center;">{{ upgrade_cta }}</a>
-        <a href="{{ upgrade_free_href }}" class="btn btn-secondary" data-cta="{{ upgrade_cta_id }}_continue_free" style="min-width:150px;justify-content:center;">{{ upgrade_free_cta }}</a>
+      <p style="margin:6px 0 12px;color:#dbeafe;line-height:1.65;font-size:0.9rem;overflow-wrap:anywhere;">{{ upgrade_unlock }}</p>
+      <div class="upgrade-moment__actions" style="display:flex;gap:10px;flex-wrap:wrap;min-width:0;">
+        <a href="/pricing/" class="btn btn-primary" data-cta="{{ upgrade_cta_id }}" data-lead-magnet="upgrade_moment" style="min-width:min(100%,180px);max-width:100%;justify-content:center;white-space:normal;text-align:center;box-sizing:border-box;">{{ upgrade_cta }}</a>
+        <a href="{{ upgrade_free_href }}" class="btn btn-secondary" data-cta="{{ upgrade_cta_id }}_continue_free" style="min-width:min(100%,150px);max-width:100%;justify-content:center;white-space:normal;text-align:center;box-sizing:border-box;">{{ upgrade_free_cta }}</a>
       </div>
-      <p style="margin:10px 0 0;color:#94a3b8;font-size:0.78rem;line-height:1.55;">Historical replay and scenario output are research context, not a return guarantee or investment advice.</p>
+      <p style="margin:10px 0 0;color:#94a3b8;font-size:0.78rem;line-height:1.55;overflow-wrap:anywhere;">Historical replay and scenario output are research context, not a return guarantee or investment advice.</p>
     </div>
   </div>
 </section>
