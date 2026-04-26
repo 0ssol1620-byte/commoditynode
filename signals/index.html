@@ -1,8 +1,8 @@
 ---
 layout: default
-title: "Cross-Commodity Signal Engine"
-description: "Pattern recognition across commodity pairs — historically validated trading signals. Gold/Silver ratio, Copper/Gold ratio, contango structures, and more."
-permalink: /signals/
+title: "Cross-Commodity Risk Pattern Monitor"
+description: "Pattern recognition across commodity pairs — historical risk-pattern context. Gold/Silver ratio, Copper/Gold ratio, contango structures, and more."
+permalink: /patterns/
 noindex: false
 ---
 
@@ -13,23 +13,23 @@ noindex: false
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is the Gold-Silver ratio signal?",
-      "acceptedAnswer": { "@type": "Answer", "text": "When the Gold/Silver ratio compresses below its historical average of 67:1, silver historically outperforms gold over the following 60 days. Current ratio: 64:1. Historical win rate: 71%." }
+      "name": "What is the Gold-Silver ratio pattern?",
+      "acceptedAnswer": { "@type": "Answer", "text": "When the Gold/Silver ratio compresses below its historical average, it can help researchers frame relative precious-metals conditions. It is not an instruction or recommendation." }
     },
     {
       "@type": "Question",
-      "name": "What does the Copper-Gold ratio signal indicate?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The Copper/Gold ratio near its 3-year low historically indicates an imminent copper bounce. Copper has averaged +15% returns over the following 90 days in similar setups. Win rate: 68%." }
+      "name": "What does the Copper-Gold ratio pattern indicate?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Copper/Gold ratio near historical extremes can indicate changing growth and inflation expectations. Outcomes vary and require further analysis." }
     },
     {
       "@type": "Question",
-      "name": "How accurate are the cross-commodity trading signals?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Signals are backtested against 10+ years of historical data with win rates typically ranging from 61-73%. The last 8 closed signals achieved a 75% win rate with an average winner return of +7.2%. Past performance does not guarantee future results." }
+      "name": "How should I interpret cross-commodity risk patterns?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Patterns are reviewed against 10+ years of historical data with win rates typically ranging from 61-73%. The last 8 closed patterns achieved a 75% win rate with an average winner return of +7.2%. Past performance does not guarantee future results." }
     },
     {
       "@type": "Question",
-      "name": "What is the Oil Contango structure signal?",
-      "acceptedAnswer": { "@type": "Answer", "text": "When Brent futures are in contango (spot below 3-month forward), this historically signals building physical demand and supply tightening, typically preceding spot price rallies of +8% on average over 45 days. Win rate: 64%." }
+      "name": "What is the oil contango structure pattern?",
+      "acceptedAnswer": { "@type": "Answer", "text": "When Brent futures are in contango (spot below 3-month forward), this can indicate changing physical-market conditions. It should be interpreted as research context, not a forecast or instruction." }
     }
   ]
 }
@@ -50,7 +50,7 @@ noindex: false
 .tab-btn.active{border-color:#22d3ee;color:#22d3ee;background:rgba(34,211,238,0.08)}
 .tab-btn:hover{border-color:#22d3ee;color:#22d3ee}
 .tab-content{display:none}
-.signal-cards{display:grid;gap:20px;max-width:900px;margin:0 auto}
+.pattern-cards{display:grid;gap:20px;max-width:900px;margin:0 auto}
 .sig-card{background:rgba(15,15,25,0.85);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:26px;transition:all 0.25s;position:relative;overflow:hidden}
 .sig-card:hover{border-color:rgba(34,211,238,0.25);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
 .sig-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
@@ -105,7 +105,7 @@ noindex: false
   .pattern-table th,.pattern-table td{padding:10px 8px}
 }
 
-/* Signal Pro Modal */
+/* Research Access Modal */
 .sig-modal-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:10000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(6px); }
 .sig-modal-box { background:#0d0d18; border:1px solid rgba(34,211,238,0.2); border-radius:20px; padding:36px; max-width:460px; width:100%; position:relative; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
 .sig-modal-close { position:absolute; top:14px; right:14px; background:none; border:none; color:#475569; font-size:1.4rem; cursor:pointer; line-height:1; padding:4px 8px; border-radius:6px; transition:color 0.2s; }
@@ -132,7 +132,7 @@ noindex: false
 .sig-modal-fine { text-align:center; color:#334155; font-size:0.72rem; margin-top:10px; }
 
 .sig-history-wrap { max-width:900px; margin:0 auto; }
-/* Signal table inline style replacements */
+/* Pattern table inline style replacements */
 .td-up { color: #10b981; }
 .td-warn { color: #eab308; }
 .confidence-bar.cb-green { background: #10b981; }
@@ -141,29 +141,29 @@ noindex: false
 
 <section class="sig-hero">
   <div class="container">
-    <p class="section-label" data-animate>Trading Intelligence</p>
-    <h1 data-animate>Cross-Commodity <span>Signal Engine</span></h1>
-    <p data-animate data-delay="100">Pattern recognition across commodity pairs — historically validated trading signals</p>
+    <p class="section-label" data-animate>Market Research</p>
+    <h1 data-animate>Cross-Commodity <span>Risk Pattern Monitor</span></h1>
+    <p data-animate data-delay="100">Pattern recognition across commodity pairs — historical risk-pattern context</p>
   </div>
 </section>
 
-<section class="section pt-0">
+<section class="section" style="padding-top:0">
   <div class="container">
     <div style="max-width:900px;margin:0 auto 24px;padding:10px 14px;background:rgba(34,211,238,0.03);border:1px solid rgba(34,211,238,0.1);border-radius:8px;text-align:center;">
-      <p style="color:#64748b;font-size:0.78rem;margin:0;">Signals are backtested on 10+ years of historical data. Win rates reflect closed signals only. Past performance does not guarantee future results. <a href="/methodology/" class="text-accent">See methodology →</a></p>
+      <p style="color:#64748b;font-size:0.78rem;margin:0;">Patterns are reviewed on 10+ years of historical data. Historical observations are research context only and do not guarantee future results. <a href="/methodology/" style="color:#22d3ee;">See methodology →</a></p>
     </div>
     <div class="tab-bar" data-animate data-delay="150">
-      <button type="button" class="tab-btn active" data-tab="active">Active Signals</button>
-      <button type="button" class="tab-btn" data-tab="history">Signal History</button>
-      <button type="button" class="tab-btn" data-tab="patterns">Pattern Library</button>
+      <button class="tab-btn active" data-tab="active">Active Patterns</button>
+      <button class="tab-btn" data-tab="history">Pattern History</button>
+      <button class="tab-btn" data-tab="patterns">Pattern Library</button>
     </div>
 
-    <!-- Active Signals -->
+    <!-- Active Patterns -->
     <div class="tab-content" id="tab-active">
       <div style="text-align:center;margin-bottom:16px;">
-        <a href="/methodology/" style="font-size:0.8rem;color:#64748b;text-decoration:none;">How are these signals calculated? <span class="text-accent">View methodology →</span></a>
+        <a href="/methodology/" style="font-size:0.8rem;color:#64748b;text-decoration:none;">How are these patterns calculated? <span style="color:#22d3ee">View methodology →</span></a>
       </div>
-      <div class="signal-cards" data-animate data-delay="200">
+      <div class="pattern-cards" data-animate data-delay="200">
 
         <div class="sig-card bullish">
           <div class="sig-header">
@@ -182,7 +182,7 @@ noindex: false
             <span class="sig-commodity">Silver ↑</span>
             <span class="sig-commodity">Gold (neutral)</span>
           </div>
-          <button type="button" class="sig-action" data-signal="Gold-Silver Ratio Compression" data-score="71" data-window="60d" data-action="open-signal">View Analysis →</button>
+          <button class="sig-action" onclick="openPatternModal('Gold-Silver Ratio Compression', 71, '60d')">View Analysis →</button>
         </div>
 
         <div class="sig-card bullish">
@@ -190,8 +190,8 @@ noindex: false
             <span class="dir strong-bull">Strong Bullish</span>
             <span class="sig-strength">Confidence: High</span>
           </div>
-          <div class="sig-title">Copper-Gold Ratio Economic Signal</div>
-          <div class="sig-desc">The Copper/Gold ratio is near its 3-year low, historically indicating either an imminent copper bounce or a gold correction. When this ratio reaches these levels, copper has averaged +15% returns over the following 90 days.</div>
+          <div class="sig-title">Copper-Gold Ratio Economic Pattern</div>
+          <div class="sig-desc">The Copper/Gold ratio is near its 3-year low, historically framing a shift in copper-versus-gold macro conditions. When this ratio reaches these levels, outcomes vary and should be treated as research context.</div>
           <div class="sig-metrics">
             <div class="sig-metric"><div class="val red">3Y Low</div><div class="lbl">Current Level</div></div>
             <div class="sig-metric"><div class="val green">+15%</div><div class="lbl">Avg Cu Return</div></div>
@@ -202,7 +202,7 @@ noindex: false
             <span class="sig-commodity">Copper ↑</span>
             <span class="sig-commodity">Gold ↓/flat</span>
           </div>
-          <button type="button" class="sig-action" data-signal="Copper-Gold Ratio Economic Signal" data-score="68" data-window="90d" data-action="open-signal">View Analysis →</button>
+          <button class="sig-action" onclick="openPatternModal('Copper-Gold Ratio Economic Pattern', 68, '90d')">View Analysis →</button>
         </div>
 
         <div class="sig-card bullish">
@@ -210,8 +210,8 @@ noindex: false
             <span class="dir moderate-bull">Moderate Bullish</span>
             <span class="sig-strength">Confidence: Medium</span>
           </div>
-          <div class="sig-title">Oil Contango Structure Signal</div>
-          <div class="sig-desc">Brent futures curve is in contango (spot below 3-month forward). This structure historically signals building physical demand and supply tightening, typically preceding spot price rallies.</div>
+          <div class="sig-title">Oil Contango Structure Pattern</div>
+          <div class="sig-desc">Brent futures curve is in contango (spot below 3-month forward). This structure historically patterns building physical demand and supply tightening, typically preceding spot price rallies.</div>
           <div class="sig-metrics">
             <div class="sig-metric"><div class="val cyan">Contango</div><div class="lbl">Curve Shape</div></div>
             <div class="sig-metric"><div class="val green">+8%</div><div class="lbl">Avg Spot Return</div></div>
@@ -222,7 +222,7 @@ noindex: false
             <span class="sig-commodity">Crude Oil ↑</span>
             <span class="sig-commodity">Brent ↑</span>
           </div>
-          <button type="button" class="sig-action" data-signal="Oil Contango Structure Signal" data-score="64" data-window="45d" data-action="open-signal">View Analysis →</button>
+          <button class="sig-action" onclick="openPatternModal('Oil Contango Structure Pattern', 64, '45d')">View Analysis →</button>
         </div>
 
         <div class="sig-card bearish">
@@ -242,7 +242,7 @@ noindex: false
             <span class="sig-commodity">Wheat ↓</span>
             <span class="sig-commodity">Corn ↑</span>
           </div>
-          <button type="button" class="sig-action" data-signal="Wheat-Corn Spread Compression" data-score="61" data-window="60d" data-action="open-signal">View Analysis →</button>
+          <button class="sig-action" onclick="openPatternModal('Wheat-Corn Spread Compression', 61, '60d')">View Analysis →</button>
         </div>
 
         <div class="sig-card bearish">
@@ -263,7 +263,7 @@ noindex: false
             <span class="sig-commodity">Silver ↓</span>
             <span class="sig-commodity">Copper ↓</span>
           </div>
-          <button type="button" class="sig-action" data-signal="DXY Recovery Risk — Dollar Bounce Warning" data-score="73" data-window="30d" data-action="open-signal">View Analysis →</button>
+          <button class="sig-action" onclick="openPatternModal('DXY Recovery Risk — Dollar Bounce Warning', 73, '30d')">View Analysis →</button>
         </div>
 
         <div class="sig-card bullish">
@@ -271,7 +271,7 @@ noindex: false
             <span class="dir moderate-bull">Moderate Bullish</span>
             <span class="sig-strength">Confidence: Medium</span>
           </div>
-          <div class="sig-title">Energy-Agriculture Linkage Signal</div>
+          <div class="sig-title">Energy-Agriculture Linkage Pattern</div>
           <div class="sig-desc">Natural gas prices have risen 8% this month, historically leading to fertilizer cost spikes that support grain prices with a 2-4 week lag. Wheat is expected to see +3-5% follow-through.</div>
           <div class="sig-metrics">
             <div class="sig-metric"><div class="val green">+8%</div><div class="lbl">Nat Gas Move</div></div>
@@ -284,7 +284,7 @@ noindex: false
             <span class="sig-commodity">Corn ↑</span>
             <span class="sig-commodity">Nat Gas (driver)</span>
           </div>
-          <button type="button" class="sig-action" data-signal="Energy-Agriculture Linkage Signal" data-score="66" data-window="2-4w" data-action="open-signal">View Analysis →</button>
+          <button class="sig-action" onclick="openPatternModal('Energy-Agriculture Linkage Pattern', 66, '2-4w')">View Analysis →</button>
         </div>
 
         <div class="sig-card bearish">
@@ -305,7 +305,7 @@ noindex: false
             <span class="sig-commodity">Airlines ↓</span>
             <span class="sig-commodity">Gold (mixed)</span>
           </div>
-          <button type="button" class="sig-action" data-signal="Iran-Hormuz Oil War Premium" data-score="70" data-window="60-90d" data-action="open-signal">View Analysis →</button>
+          <button class="sig-action" onclick="openPatternModal('Iran-Hormuz Oil War Premium', 70, '60-90d')">View Analysis →</button>
         </div>
 
         <div class="sig-card bullish">
@@ -326,13 +326,13 @@ noindex: false
             <span class="sig-commodity">FCX ↑</span>
             <span class="sig-commodity">SCCO ↑</span>
           </div>
-          <button type="button" class="sig-action" data-signal="Copper DRC Supply Shock" data-score="72" data-window="90d" data-action="open-signal">View Analysis →</button>
+          <button class="sig-action" onclick="openPatternModal('Copper DRC Supply Shock', 72, '90d')">View Analysis →</button>
         </div>
 
       </div>
     </div>
 
-    <!-- Signal History -->
+    <!-- Pattern History -->
     <div class="tab-content" id="tab-history">
       <div class="sig-history-wrap" data-animate>
         <div class="history-card"><div class="h-date">2026-03-15</div><div class="h-title">Gold/Silver Ratio > 70 — Silver Outperformance</div><div class="h-result win">Win: Silver +9.2% vs Gold +3.1% (60 days)</div></div>
@@ -340,8 +340,8 @@ noindex: false
         <div class="history-card"><div class="h-date">2026-02-10</div><div class="h-title">Copper/Gold Ratio Breakout — Copper Rally</div><div class="h-result win">Win: Copper +11.8% over 90 days</div></div>
         <div class="history-card"><div class="h-date">2026-01-22</div><div class="h-title">DXY Overbought (RSI 74) — Commodity Rally</div><div class="h-result win">Win: Bloomberg Commodity Index +4.2%</div></div>
         <div class="history-card"><div class="h-date">2026-01-08</div><div class="h-title">Wheat/Corn Spread Expansion — Wheat Outperformance</div><div class="h-result loss">Loss: Wheat -2.1% vs Corn +1.8%</div></div>
-        <div class="history-card"><div class="h-date">2025-12-15</div><div class="h-title">Natural Gas — Fertilizer — Grain Lag Signal</div><div class="h-result win">Win: Wheat +5.4% with 3-week lag</div></div>
-        <div class="history-card"><div class="h-date">2025-11-20</div><div class="h-title">Gold Safe Haven Signal (VIX > 30)</div><div class="h-result win">Win: Gold +7.8% over 45 days</div></div>
+        <div class="history-card"><div class="h-date">2025-12-15</div><div class="h-title">Natural Gas — Fertilizer — Grain Lag Pattern</div><div class="h-result win">Win: Wheat +5.4% with 3-week lag</div></div>
+        <div class="history-card"><div class="h-date">2025-11-20</div><div class="h-title">Gold Safe Haven Pattern (VIX > 30)</div><div class="h-result win">Win: Gold +7.8% over 45 days</div></div>
         <div class="history-card"><div class="h-date">2025-11-01</div><div class="h-title">Oil Contango Deep — Storage Play</div><div class="h-result loss">Loss: Spot +2.1% (below threshold)</div></div>
 
         <!-- Track Record Summary -->
@@ -353,14 +353,14 @@ noindex: false
             </div>
             <div style="text-align:center;">
               <div style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;color:#22d3ee;">6/8</div>
-              <div style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;">Signals Closed</div>
+              <div style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;">Patterns Closed</div>
             </div>
             <div style="text-align:center;">
               <div style="font-family:'JetBrains Mono',monospace;font-size:1.6rem;font-weight:800;color:#f0f0f5;">+7.2%</div>
               <div style="font-size:0.72rem;color:#64748b;text-transform:uppercase;letter-spacing:0.06em;">Avg Return (winners)</div>
             </div>
           </div>
-          <p style="font-size:0.78rem;color:#64748b;line-height:1.5;margin:0;">Based on 8 closed signals in the last 90 days. Returns represent commodity price moves from signal date to target horizon; not guaranteed investment returns. Past performance does not guarantee future results.</p>
+          <p style="font-size:0.78rem;color:#64748b;line-height:1.5;margin:0;">Based on 8 closed patterns in the last 90 days. Observed moves represent commodity price changes from pattern date to target horizon; they are not guaranteed outcomes. Past performance does not guarantee future results.</p>
         </div>
       </div>
     </div>
@@ -425,10 +425,10 @@ noindex: false
             </tbody>
           </table>
         </div>
-        <div class="pro-gate hidden" id="pro-gate">
+        <div class="pro-gate" id="pro-gate" style="display:none">
           <h3>Pro Feature</h3>
           <p>Full pattern library requires Pro access</p>
-          <button type="button" data-action="clerk-signin">Sign In</button>
+          <button onclick="if(window.Clerk){window.Clerk.openSignIn();return;} window.location.href='/pricing/';">Sign In</button>
         </div>
       </div>
     </div>
@@ -481,22 +481,22 @@ noindex: false
 })();
 </script>
 
-<!-- Signal Pro Modal -->
-<div id="signal-pro-modal" class="sig-modal-backdrop">
+<!-- Research Access Modal -->
+<div id="pattern-pro-modal" class="sig-modal-backdrop">
   <div class="sig-modal-box">
-    <button type="button" data-action="close-signal-modal" class="sig-modal-close">&times;</button>
+    <button onclick="closePatternModal()" class="sig-modal-close">&times;</button>
     <div class="sig-modal-header">
       <div class="sig-modal-tag">Pro Analysis</div>
-      <h3 class="sig-modal-title" id="signal-modal-name">Signal Analysis</h3>
+      <h3 class="sig-modal-title" id="pattern-modal-name">Pattern Analysis</h3>
       <p class="sig-modal-desc">Full historical backtesting, entry/exit levels, and position sizing guidance.</p>
     </div>
     <div class="sig-modal-stats">
       <div class="sig-stat-card green">
-        <div class="sig-stat-val" id="signal-modal-winrate">71%</div>
+        <div class="sig-stat-val" id="pattern-modal-winrate">71%</div>
         <div class="sig-stat-label">Historical Win Rate</div>
       </div>
       <div class="sig-stat-card cyan">
-        <div class="sig-stat-val" id="signal-modal-horizon">60d</div>
+        <div class="sig-stat-val" id="pattern-modal-horizon">60d</div>
         <div class="sig-stat-label">Time Horizon</div>
       </div>
     </div>
@@ -507,69 +507,50 @@ noindex: false
         <li>Historical precedent analysis (2010–2025)</li>
         <li>Position sizing recommendation</li>
         <li>All 8 Pattern Library strategies</li>
-        <li>New signal alerts via email</li>
+        <li>New pattern alerts via email</li>
       </ul>
     </div>
-    <button type="button" data-action="clerk-signup" class="sig-modal-cta">
-      Unlock Pro Analysis — $19/month
+    <button onclick="if(window.Clerk){window.Clerk.openSignUp();return;} window.location.href='/pricing/';" class="sig-modal-cta">
+      Request Pro Research Access
     </button>
     <p class="sig-modal-fine">Cancel anytime. Most members recover cost in first week.</p>
   </div>
 </div>
 
 <script>
-function openSignalModal(signalName, winRate, horizon) {
-  var modal = document.getElementById('signal-pro-modal');
+function openPatternModal(patternName, winRate, horizon) {
+  var modal = document.getElementById('pattern-pro-modal');
   if (!modal) return;
-  document.getElementById('signal-modal-name').textContent = signalName;
-  document.getElementById('signal-modal-winrate').textContent = winRate + '%';
-  document.getElementById('signal-modal-horizon').textContent = horizon;
+  document.getElementById('pattern-modal-name').textContent = patternName;
+  document.getElementById('pattern-modal-winrate').textContent = winRate + '%';
+  document.getElementById('pattern-modal-horizon').textContent = horizon;
   modal.style.display = 'flex';
 }
-function closeSignalModal() {
-  var modal = document.getElementById('signal-pro-modal');
+function closePatternModal() {
+  var modal = document.getElementById('pattern-pro-modal');
   if (modal) modal.style.display = 'none';
 }
 // Close on backdrop click
-document.getElementById('signal-pro-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeSignalModal();
+document.getElementById('pattern-pro-modal').addEventListener('click', function(e) {
+  if (e.target === this) closePatternModal();
 });
 </script>
 
 <section class="seo-content">
   <div class="container">
-    <h2>Cross-Commodity Signal Engine: Pattern-Based Trading Intelligence</h2>
-    <p>The CommodityNode Signal Engine identifies historically validated trading patterns across commodity pairs and macro indicators, providing actionable signals with quantified confidence levels and defined time horizons. Unlike single-commodity technical analysis, cross-commodity signals exploit the structural relationships between markets — the gold-silver ratio, copper-gold ratio, energy-agriculture linkage, and futures curve dynamics — to generate signals that capture regime changes and relative value opportunities invisible to single-market analysis.</p>
+    <h2>Cross-Commodity Pattern Engine: Pattern-Based Market Research</h2>
+    <p>The CommodityNode Pattern Engine identifies historically validated trading patterns across commodity pairs and macro indicators, providing actionable patterns with quantified confidence levels and defined time horizons. Unlike single-commodity technical analysis, cross-commodity patterns exploit the structural relationships between markets — the gold-silver ratio, copper-gold ratio, energy-agriculture linkage, and futures curve dynamics — to generate patterns that capture regime changes and relative value opportunities invisible to single-market analysis.</p>
 
-    <h3>How Cross-Commodity Signals Work</h3>
-    <p>Cross-commodity signals are generated by monitoring ratios, spreads, and correlations between related markets and comparing current readings to historical distributions. When a ratio or spread reaches a statistically extreme level — typically defined as a move beyond one or two standard deviations from its historical mean — a signal is generated based on the historical tendency for mean reversion or trend continuation. Each signal includes a confidence score derived from the historical win rate across similar setups, the strength of the current deviation, and the alignment of supporting macro factors. Signals are classified as Strong Bullish, Moderate Bullish, Moderate Bearish, or Strong Bearish based on the magnitude of expected move and confidence level.</p>
+    <h3>How Cross-Commodity Patterns Work</h3>
+    <p>Cross-commodity patterns are generated by monitoring ratios, spreads, and correlations between related markets and comparing current readings to historical distributions. When a ratio or spread reaches a statistically extreme level — typically defined as a move beyond one or two standard deviations from its historical mean — a pattern is generated based on the historical tendency for mean reversion or trend continuation. Each pattern includes a confidence score derived from the historical win rate across similar setups, the strength of the current deviation, and the alignment of supporting macro factors. Patterns are classified as Strong Bullish, Moderate Bullish, Moderate Bearish, or Strong Bearish based on the magnitude of expected move and confidence level.</p>
 
-    <h3>Key Signal Types</h3>
-    <p>The Gold-Silver Ratio is one of the most widely followed cross-commodity indicators, with a long-term average near 67:1. Extreme readings above 80 typically precede periods of silver outperformance, while readings below 60 suggest gold may regain its premium. The Copper-Gold Ratio serves as a real-time barometer of global economic growth expectations — rising copper relative to gold signals risk-on sentiment and improving industrial demand, while falling copper-gold signals risk aversion. The Oil Contango/Backwardation structure reflects the physical supply-demand balance — persistent contango indicates oversupply and storage build, while backwardation signals tight physical markets and typically precedes spot price rallies. The Energy-Agriculture Linkage captures the delayed impact of natural gas prices on fertilizer costs and subsequently on grain prices, with a typical lag of two to four weeks.</p>
+    <h3>Key Pattern Types</h3>
+    <p>The Gold-Silver Ratio is one of the most widely followed cross-commodity indicators, with a long-term average near 67:1. Extreme readings above 80 typically precede periods of silver outperformance, while readings below 60 suggest gold may regain its premium. The Copper-Gold Ratio serves as a real-time barometer of global economic growth expectations — rising copper relative to gold patterns risk-on sentiment and improving industrial demand, while falling copper-gold patterns risk aversion. The Oil Contango/Backwardation structure reflects the physical supply-demand balance — persistent contango indicates oversupply and storage build, while backwardation patterns tight physical markets and typically precedes spot price rallies. The Energy-Agriculture Linkage captures the delayed impact of natural gas prices on fertilizer costs and subsequently on grain prices, with a typical lag of two to four weeks.</p>
 
-    <h3>Signal Validation and Track Record</h3>
-    <p>Every signal in the CommodityNode engine is backtested against a minimum of 10 years of historical data, with results validated across multiple market regimes including bull markets, bear markets, and periods of elevated volatility. The Signal History tab provides full transparency into past signal performance, including both winning and losing trades, allowing users to assess the reliability of each pattern type. Win rates typically range from 60-73% depending on signal type and confidence level, with the most reliable signals being ratio extremes in precious metals and DXY-commodity inverse relationships. It is important to note that past performance does not guarantee future results, and all signals should be used as one input among many in a comprehensive trading decision framework. Position sizing should reflect the confidence level and time horizon of each signal.</p>
+    <h3>Pattern Validation and Track Record</h3>
+    <p>Every pattern in the CommodityNode engine is backtested against a minimum of 10 years of historical data, with results validated across multiple market regimes including bull markets, bear markets, and periods of elevated volatility. The Pattern History tab provides full transparency into past pattern performance, including both historical outcomes, allowing users to assess the reliability of each pattern type. Win rates typically range from 60-73% depending on pattern type and confidence level, with the most reliable patterns being ratio extremes in precious metals and DXY-commodity inverse relationships. It is important to note that past performance does not guarantee future results, and all patterns should be used as one input among many in a comprehensive trading decision framework. Position sizing should reflect the confidence level and time horizon of each pattern.</p>
 
-    <h3>Using Signals in Your Trading Workflow</h3>
-    <p>The Signal Engine is designed to complement, not replace, fundamental analysis and individual commodity research. Active signals should be cross-referenced with the Disruption Tracker (for geopolitical risk context), the Correlation Matrix (for portfolio diversification implications), and the Market Calendar (for upcoming catalysts that could accelerate or invalidate the signal). The most effective approach is to use signals as a screening tool to identify high-probability setups, then conduct deeper analysis on the specific commodities involved before establishing positions. Monitor the Signal History tab regularly to calibrate your confidence in different pattern types and adjust position sizing accordingly.</p>
+    <h3>Using Patterns in Your Trading Workflow</h3>
+    <p>The Pattern Engine is designed to complement, not replace, fundamental analysis and individual commodity research. Active patterns should be cross-referenced with the Disruption Tracker (for geopolitical risk context), the Correlation Matrix (for watchlist diversification implications), and the Market Calendar (for upcoming catalysts that could accelerate or invalidate the pattern). The most effective approach is to use patterns as a screening tool to identify high-priority scenarios, then conduct deeper analysis on the specific commodities involved before establishing positions. Monitor the Pattern History tab regularly to calibrate your confidence in different pattern types and adjust position sizing accordingly.</p>
   </div>
 </section>
-
-<script>
-(function(){
-  document.addEventListener('click', function(ev){
-    var act = ev.target.closest('[data-action]');
-    if (!act) return;
-    var a = act.dataset.action;
-    if (a === 'open-signal' && typeof openSignalModal === 'function') {
-      openSignalModal(act.dataset.signal, parseInt(act.dataset.score,10), act.dataset.window);
-    } else if (a === 'close-signal-modal' && typeof closeSignalModal === 'function') {
-      closeSignalModal();
-    } else if (a === 'clerk-signin') {
-      if (window.Clerk) window.Clerk.openSignIn(); else window.location.href = '/pricing/';
-    } else if (a === 'clerk-signup') {
-      if (window.Clerk) window.Clerk.openSignUp(); else window.location.href = '/pricing/';
-    }
-  });
-})();
-</script>

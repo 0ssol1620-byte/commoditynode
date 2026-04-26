@@ -3,6 +3,7 @@ layout: default
 title: "Start Free — Build Your Commodity Workflow | CommodityNode"
 permalink: /start/
 description: "Choose your role, save your commodities and watchlist, and build a personalized CommodityNode workflow before you start using the product every day."
+disable_ads: true
 ---
 
 <div class="post-header">
@@ -52,7 +53,7 @@ description: "Choose your role, save your commodities and watchlist, and build a
           <span class="start-preset-kicker">Copper bull case</span>
           <span class="start-preset-title">Industrial metal tightening</span>
           <span class="start-preset-desc">Copper · Aluminum · Nickel · FCX · SCCO · TSLA · GM · BHP</span>
-          <span class="start-preset-meta">Investor · OPEC/Fed events</span>
+          <span class="start-preset-meta">Market watcher · OPEC/Fed events</span>
         </button>
         <button type="button" class="start-preset-card" data-preset="energy-shock" data-cta="start_preset_energy_shock">
           <span class="start-preset-kicker">Energy shock watchlist</span>
@@ -70,7 +71,7 @@ description: "Choose your role, save your commodities and watchlist, and build a
           <span class="start-preset-kicker">Battery chain</span>
           <span class="start-preset-title">EV raw-materials exposure</span>
           <span class="start-preset-desc">Lithium · Nickel · Cobalt · ALB · SQM · TSLA · BYD · PANA</span>
-          <span class="start-preset-meta">Investor · China macro</span>
+          <span class="start-preset-meta">Research · China macro</span>
         </button>
       </div>
     </div>
@@ -78,235 +79,179 @@ description: "Choose your role, save your commodities and watchlist, and build a
 </section>
 
 <section class="section">
-  <div class="container stack-1080">
+  <div class="container" style="max-width:1080px;display:grid;gap:18px;">
     <div style="padding:22px 24px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center;">
       <div>
-        <div class="eyebrow-cyan eyebrow-cyan--74">Why this exists</div>
-        <h2 class="title-1-2rem">The fastest way to feel value is to tell CommodityNode what decisions you actually make.</h2>
-        <p class="body-text">General market noise is cheap. Context that is already aligned to your role, names, and event calendar is not. Build your workflow once, then reuse it every day.</p>
+        <div style="font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Why this exists</div>
+        <h2 style="margin:0 0 10px;font-size:1.2rem;">The fastest way to feel value is to tell CommodityNode what decisions you actually make.</h2>
+        <p style="margin:0;color:var(--text2);line-height:1.7;">General market noise is cheap. Context that is already aligned to your role, names, and event calendar is not. Build your workflow once, then reuse it every day.</p>
       </div>
-      <div class="grid-gap-10">
+      <div style="display:grid;gap:10px;">
         <div style="padding:14px 16px;border-radius:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-          <div class="eyebrow-cyan eyebrow-cyan--mb6">Saved workflow</div>
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved workflow</div>
           <div id="start-profile-summary" style="color:#cbd5e1;line-height:1.7;">Not configured yet.</div>
         </div>
-        <div class="chip-group-wrap">
-          <button type="button" id="start-open-signup" class="btn btn-primary min-w-220-center" data-cta="start_open_signup">Save my workflow and start free</button>
-          <a href="/pricing/" class="btn btn-secondary min-w-220-center" data-cta="start_compare_plans">See where Free ends and Pro starts</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button id="start-open-signup" class="btn btn-primary" data-cta="start_open_signup" style="min-width:220px;justify-content:center;">Save my workflow and start free</button>
+          <a href="/pricing/" class="btn btn-secondary" data-cta="start_compare_plans" style="min-width:220px;justify-content:center;">See where Free ends and Pro starts</a>
         </div>
       </div>
     </div>
 
-    <div class="auto-grid-220">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
       <div style="padding:14px 16px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);color:#cbd5e1;line-height:1.65;">Save the commodities you actually track.</div>
       <div style="padding:14px 16px;border-radius:14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);color:#ddd6fe;line-height:1.65;">Bring your watchlist into the workflow.</div>
-      <div style="padding:14px 16px;border-radius:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);color:#d1fae5;line-height:1.65;">Route straight into the setups that matter before repricing.</div>
+      <div style="padding:14px 16px;border-radius:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);color:#d1fae5;line-height:1.65;">Route straight into research context that matters for business planning.</div>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;">
       <div style="padding:18px;border-radius:16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;gap:10px;">
         <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:800;">1. Choose your role</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;" id="role-buttons">
-          <button type="button" class="btn btn-secondary" data-role="self-directed-investor">Investor</button>
-          <button type="button" class="btn btn-secondary" data-role="equity-analyst">Analyst</button>
-          <button type="button" class="btn btn-secondary" data-role="operator-procurement">Operator</button>
+          <button class="btn btn-secondary" data-role="market-watcher">Market watcher</button>
+          <button class="btn btn-secondary" data-role="equity-analyst">Analyst</button>
+          <button class="btn btn-secondary" data-role="operator-procurement">Operator</button>
         </div>
       </div>
       <div style="padding:18px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);display:grid;gap:10px;">
         <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:800;">2. Save commodities</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;" id="commodity-buttons">
-          <button type="button" class="btn btn-secondary" data-commodity="crude-oil">Crude oil</button>
-          <button type="button" class="btn btn-secondary" data-commodity="gold">Gold</button>
-          <button type="button" class="btn btn-secondary" data-commodity="copper">Copper</button>
-          <button type="button" class="btn btn-secondary" data-commodity="lithium">Lithium</button>
-          <button type="button" class="btn btn-secondary" data-commodity="coffee">Coffee</button>
-          <button type="button" class="btn btn-secondary" data-commodity="wheat">Wheat</button>
+          <button class="btn btn-secondary" data-commodity="crude-oil">Crude oil</button>
+          <button class="btn btn-secondary" data-commodity="gold">Gold</button>
+          <button class="btn btn-secondary" data-commodity="copper">Copper</button>
+          <button class="btn btn-secondary" data-commodity="lithium">Lithium</button>
+          <button class="btn btn-secondary" data-commodity="coffee">Coffee</button>
+          <button class="btn btn-secondary" data-commodity="wheat">Wheat</button>
         </div>
       </div>
       <div style="padding:18px;border-radius:16px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);display:grid;gap:10px;">
         <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#10b981;font-weight:800;">3. Save events</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;" id="event-buttons">
-          <button type="button" class="btn btn-secondary" data-event="opec">OPEC</button>
-          <button type="button" class="btn btn-secondary" data-event="wasde">WASDE</button>
-          <button type="button" class="btn btn-secondary" data-event="fed">Fed</button>
-          <button type="button" class="btn btn-secondary" data-event="geopolitics">Geopolitics</button>
+          <button class="btn btn-secondary" data-event="opec">OPEC</button>
+          <button class="btn btn-secondary" data-event="wasde">WASDE</button>
+          <button class="btn btn-secondary" data-event="fed">Fed</button>
+          <button class="btn btn-secondary" data-event="geopolitics">Geopolitics</button>
         </div>
       </div>
     </div>
 
     <div style="padding:22px 24px;border-radius:18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);display:grid;gap:14px;">
       <div>
-        <div class="eyebrow-cyan eyebrow-cyan--74">4. Save your watchlist</div>
-        <p class="body-text">Add a few names you actually care about. CommodityNode uses this to surface the names most likely to change when a commodity shock matters.</p>
+        <div style="font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">4. Save your watchlist</div>
+        <p style="margin:0;color:var(--text2);line-height:1.7;">Add a few names you actually care about. CommodityNode uses this to surface the names most likely to change when a commodity shock matters.</p>
       </div>
       <label style="display:grid;gap:8px;">
-        <span class="bold-white">Tickers or names</span>
+        <span style="color:#f8fafc;font-weight:700;">Tickers or names</span>
         <input id="start-watchlist-input" type="text" placeholder="Example: XOM, DAL, FCX, TSLA, SBUX" style="padding:14px 16px;border-radius:12px;background:#111827;border:1px solid rgba(255,255,255,0.08);color:#f8fafc;" />
       </label>
-      <div class="chip-group-wrap">
-        <button type="button" id="start-save-watchlist" class="btn btn-primary min-w-220-center" data-cta="start_save_watchlist">Save watchlist</button>
-        <a href="/simulator/" class="btn btn-secondary min-w-220-center" data-cta="start_open_simulator">Run a scenario with this workflow</a>
-        <a href="/reports/" class="btn btn-secondary min-w-220-center" data-cta="start_open_reports">Open today’s live setups</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button id="start-save-watchlist" class="btn btn-primary" data-cta="start_save_watchlist" style="min-width:220px;justify-content:center;">Save watchlist</button>
+        <a href="/simulator/" class="btn btn-secondary" data-cta="start_open_simulator" style="min-width:220px;justify-content:center;">Run a scenario with this workflow</a>
+        <a href="/reports/" class="btn btn-secondary" data-cta="start_open_reports" style="min-width:220px;justify-content:center;">Open today’s live setups</a>
       </div>
       <div id="start-watchlist-status" style="color:#cbd5e1;font-size:0.9rem;line-height:1.65;">Nothing saved yet.</div>
     </div>
-  </div>
-</section>
 
-<!-- Personalized preview: "here's your first 3 setups, 2 reports, 1 tool path" -->
-<section class="section start-preview-section" id="start-personalized-preview" data-state="empty" aria-labelledby="start-preview-title">
-  <div class="container start-preview-container">
-    <header class="start-preview-head">
-      <p class="section-label mb-8">Your first value</p>
-      <h2 id="start-preview-title">Your personalized workflow is ready.</h2>
-      <p class="start-preview-lede" id="start-preview-lede">Pick a preset or save a role to see your first 3 setups, 2 reports, and 1 tool path.</p>
-    </header>
+    <section id="start-shock-memo" data-shock-memo-preview style="padding:24px;border-radius:24px;background:radial-gradient(circle at 20% 0%,rgba(34,211,238,0.14),transparent 34%),linear-gradient(135deg,rgba(15,23,42,0.98),rgba(2,6,23,0.94));border:1px solid rgba(34,211,238,0.18);box-shadow:0 28px 90px rgba(0,0,0,0.34);display:grid;gap:18px;">
+      <div style="display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:#22d3ee;font-weight:900;margin-bottom:8px;">Personalized Shock Memo</div>
+          <h2 style="margin:0 0 10px;font-size:clamp(1.45rem,3vw,2.25rem);letter-spacing:-0.04em;">See the first two answers free. Unlock the company-level research memo with Pro.</h2>
+          <p style="margin:0;color:#cbd5e1;line-height:1.75;max-width:760px;">CommodityNode turns your saved role, commodities, watchlist, and event calendar into a concrete shock memo: what moved, which names are exposed, what to watch next, and which Pro-only sensitivity table decides whether the scenario deserves deeper review.</p>
+        </div>
+        <div style="padding:10px 12px;border-radius:999px;background:rgba(16,185,129,0.11);border:1px solid rgba(16,185,129,0.24);color:#bbf7d0;font-size:0.8rem;font-weight:800;white-space:nowrap;">2 free insights · 1 locked Pro memo</div>
+      </div>
 
-    <div class="start-preview-grid">
-      <div class="start-preview-col">
-        <p class="start-preview-col-title">3 setups for you</p>
-        <ul class="start-preview-list" id="start-preview-setups"></ul>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+        <article data-free-insight="1" style="padding:18px;border-radius:18px;background:rgba(255,255,255,0.055);border:1px solid rgba(255,255,255,0.09);">
+          <div style="color:#22d3ee;font-size:0.72rem;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Free insight 1</div>
+          <h3 id="shock-memo-primary-title" style="margin:0 0 8px;font-size:1.05rem;">Primary commodity shock</h3>
+          <p id="shock-memo-primary-copy" style="margin:0;color:#cbd5e1;line-height:1.65;">Save at least one commodity to generate a live preview.</p>
+        </article>
+        <article data-free-insight="2" style="padding:18px;border-radius:18px;background:rgba(34,211,238,0.065);border:1px solid rgba(34,211,238,0.16);">
+          <div style="color:#22d3ee;font-size:0.72rem;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Free insight 2</div>
+          <h3 id="shock-memo-watchlist-title" style="margin:0 0 8px;font-size:1.05rem;">Watchlist impact preview</h3>
+          <p id="shock-memo-watchlist-copy" style="margin:0;color:#dbeafe;line-height:1.65;">Add a watchlist to see the names most likely to move.</p>
+        </article>
+        <article data-pro-locked-insight style="position:relative;overflow:hidden;padding:18px;border-radius:18px;background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(2,6,23,0.88));border:1px solid rgba(168,85,247,0.28);">
+          <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(2,6,23,0.25),rgba(2,6,23,0.78));backdrop-filter:blur(3px);pointer-events:none;"></div>
+          <div style="position:relative;z-index:1;display:grid;gap:10px;">
+            <div style="display:flex;align-items:center;gap:8px;color:#f0abfc;font-size:0.72rem;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;"><span aria-hidden="true">🔒</span> Pro locked insight</div>
+            <h3 id="shock-memo-locked-title" style="margin:0;font-size:1.05rem;">Company sensitivity table</h3>
+            <p id="shock-memo-locked-copy" style="margin:0;color:#e9d5ff;line-height:1.65;">Locked company_sensitivity ranks which saved names have direct cost, margin, or revenue exposure to the selected commodity shock.</p>
+            <a href="/pricing/" class="btn btn-primary" data-checkout-source="start_shock_memo_locked_insight" data-plan="pro" data-locked-feature="locked_company_sensitivity" style="justify-content:center;text-decoration:none;">Request full Shock Memo access</a>
+          </div>
+        </article>
       </div>
-      <div class="start-preview-col">
-        <p class="start-preview-col-title">2 reports to read first</p>
-        <ul class="start-preview-list" id="start-preview-reports"></ul>
-      </div>
-      <div class="start-preview-col">
-        <p class="start-preview-col-title">1 tool path to try</p>
-        <ul class="start-preview-list" id="start-preview-toolpath"></ul>
-      </div>
-    </div>
 
-    <div class="start-preview-actions">
-      <a class="btn btn-primary" href="/simulator/" data-cta="start_preview_simulator">Open the simulator →</a>
-      <a class="btn btn-secondary" href="/reports/" data-cta="start_preview_reports">Open today's live reports</a>
-    </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+        <button id="start-generate-shock-memo" class="btn btn-primary" data-cta="start_generate_shock_memo" style="min-width:220px;justify-content:center;">Generate my free Shock Memo</button>
+        <a href="/simulator/" class="btn btn-secondary" data-cta="start_shock_memo_open_simulator" style="min-width:220px;justify-content:center;">Stress test this shock</a>
+        <span id="shock-memo-status" style="color:#94a3b8;font-size:0.9rem;line-height:1.5;">Preview updates from your saved workflow.</span>
+      </div>
+    </section>
   </div>
 </section>
 
 <script>
 (function(){
-  // Preview catalog — keyed by role/commodity/event to generate personalized recs.
-  var CATALOG = {
-    roleSetups: {
-      'self-directed-investor': [
-        { title: 'Before Fed — metals playbook',          href: '/before-fed-metals-playbook/' },
-        { title: 'Before OPEC — oil playbook',            href: '/before-opec-oil-playbook/' },
-        { title: 'Before WASDE — grains playbook',        href: '/before-wasde-grains-playbook/' }
+  var SHOCK_MEMO_KEY = 'cn_shock_memo_v1';
+
+  function titleize(value){
+    return String(value || '').split(/[-_\s]+/g).filter(Boolean).map(function(part){ return part.charAt(0).toUpperCase() + part.slice(1); }).join(' ');
+  }
+
+  function getPrimaryCommodity(profile){
+    return (profile.commodities && profile.commodities[0]) || 'crude-oil';
+  }
+
+  function buildShockMemo(profile){
+    profile = profile || { role:'', commodities:[], watchlist:[], events:[] };
+    var commodity = getPrimaryCommodity(profile);
+    var commodityName = titleize(commodity);
+    var role = profile.role ? titleize(profile.role) : 'Investor';
+    var eventName = (profile.events && profile.events[0]) ? titleize(profile.events[0]) : 'supply / policy shock';
+    var watchlist = (profile.watchlist || []).slice(0, 5);
+    var exposed = watchlist.length ? watchlist.join(', ') : 'XOM, CVX, DAL, FCX, TSLA';
+    return {
+      generatedAt: new Date().toISOString(),
+      commodity: commodity,
+      commodityName: commodityName,
+      role: role,
+      freeInsights: [
+        commodityName + ' is the first shock surface because it is already saved in your workflow; treat the next move as an input-cost and repricing test, not a generic market headline.',
+        exposed + ' are the watchlist names to triage first; compare direct revenue exposure, margin pressure, and second-order demand sensitivity before acting.'
       ],
-      'equity-analyst': [
-        { title: 'Agriculture margin workflow',           href: '/agriculture-margin-workflow/' },
-        { title: 'Battery materials workflow',            href: '/battery-materials-workflow/' },
-        { title: 'CommodityNode vs Bloomberg (analyst)',  href: '/commoditynode-vs-bloomberg-self-directed/' }
-      ],
-      'operator-procurement': [
-        { title: 'Battery materials workflow',            href: '/battery-materials-workflow/' },
-        { title: 'Agriculture margin workflow',           href: '/agriculture-margin-workflow/' },
-        { title: 'Disruption tracker',                    href: '/disruptions/' }
-      ]
-    },
-    commodityReports: {
-      'crude-oil': [
-        { title: 'Oil contango structure signal',         href: '/reports/?q=oil' },
-        { title: 'Before OPEC — oil playbook',            href: '/before-opec-oil-playbook/' }
-      ],
-      'gold': [
-        { title: 'Gold-silver ratio compression',         href: '/reports/?q=gold' },
-        { title: 'Before Fed — metals playbook',          href: '/before-fed-metals-playbook/' }
-      ],
-      'copper': [
-        { title: 'Copper-gold ratio economic signal',     href: '/reports/?q=copper' },
-        { title: 'Copper DRC supply shock',               href: '/reports/?q=copper' }
-      ],
-      'lithium': [
-        { title: 'Battery materials workflow',            href: '/battery-materials-workflow/' },
-        { title: 'Lithium supply chain report',           href: '/reports/?q=lithium' }
-      ],
-      'wheat': [
-        { title: 'Wheat-corn spread compression',         href: '/reports/?q=wheat' },
-        { title: 'Before WASDE — grains playbook',        href: '/before-wasde-grains-playbook/' }
-      ],
-      'coffee': [
-        { title: 'Energy-agriculture linkage signal',     href: '/reports/?q=coffee' },
-        { title: 'Agriculture margin workflow',           href: '/agriculture-margin-workflow/' }
-      ],
-      'natural-gas': [
-        { title: 'Energy-agriculture linkage signal',     href: '/reports/?q=natural+gas' },
-        { title: 'Before OPEC — oil playbook',            href: '/before-opec-oil-playbook/' }
-      ]
-    },
-    eventToolpath: {
-      'opec':        { title: 'Simulator → Iran/Hormuz scenario', href: '/simulator/?scenario=iran' },
-      'wasde':       { title: 'Simulator → Grain shock scenario', href: '/simulator/?scenario=china' },
-      'fed':         { title: 'Simulator → Fed cuts scenario',     href: '/simulator/?scenario=fed' },
-      'geopolitics': { title: 'Disruption tracker — live events',  href: '/disruptions/' }
-    },
-    defaultToolpath: { title: 'Open the scenario simulator', href: '/simulator/' }
-  };
+      lockedFeature: 'locked_company_sensitivity',
+      lockedInsight: 'Pro ranks each saved name by direct commodity exposure, likely margin transmission, event catalyst proximity, and the stop-condition that would invalidate the trade.',
+      nextStep: 'Open the simulator for ' + commodityName + ', then unlock the company sensitivity table if this shock overlaps your actual watchlist.',
+      eventName: eventName
+    };
+  }
 
-  function uniq(arr){ var seen = {}; return arr.filter(function(x){ var k = x.href || x.title; if (seen[k]) return false; seen[k]=true; return true; }); }
+  function saveShockMemo(memo){
+    try { localStorage.setItem(SHOCK_MEMO_KEY, JSON.stringify(memo)); } catch(e) {}
+    return memo;
+  }
 
-  function renderPreview(profile){
-    var section = document.getElementById('start-personalized-preview');
-    if (!section) return;
-    var hasAny = !!(profile.role || (profile.commodities||[]).length || (profile.events||[]).length || (profile.watchlist||[]).length);
-    section.dataset.state = hasAny ? 'ready' : 'empty';
-
-    var setupsEl  = document.getElementById('start-preview-setups');
-    var reportsEl = document.getElementById('start-preview-reports');
-    var toolEl    = document.getElementById('start-preview-toolpath');
-    var lede      = document.getElementById('start-preview-lede');
-
-    if (!hasAny) {
-      if (setupsEl)  setupsEl.innerHTML  = '<li class="start-preview-placeholder">Save a role to see recommended setups.</li>';
-      if (reportsEl) reportsEl.innerHTML = '<li class="start-preview-placeholder">Pick commodities to unlock your first reads.</li>';
-      if (toolEl)    toolEl.innerHTML    = '<li class="start-preview-placeholder">Add events to surface a scenario path.</li>';
-      if (lede)      lede.textContent    = 'Pick a preset or save a role to see your first 3 setups, 2 reports, and 1 tool path.';
-      return;
-    }
-
-    var setups = (CATALOG.roleSetups[profile.role] || []).slice();
-    if (setups.length < 3) {
-      Object.keys(CATALOG.roleSetups).forEach(function(k){ setups = setups.concat(CATALOG.roleSetups[k] || []); });
-    }
-    setups = uniq(setups).slice(0, 3);
-
-    var reports = [];
-    (profile.commodities || []).forEach(function(c){
-      (CATALOG.commodityReports[c] || []).forEach(function(r){ reports.push(r); });
-    });
-    if (reports.length < 2) reports = reports.concat([
-      { title: 'Open the full signal archive', href: '/reports/' },
-      { title: 'See today’s live reports',   href: '/reports/' }
-    ]);
-    reports = uniq(reports).slice(0, 2);
-
-    var tool = null;
-    (profile.events || []).some(function(e){ if (CATALOG.eventToolpath[e]) { tool = CATALOG.eventToolpath[e]; return true; } return false; });
-    if (!tool) tool = CATALOG.defaultToolpath;
-
-    function fill(el, items){
-      if (!el) return;
-      el.innerHTML = items.map(function(it){
-        return '<li><a class="start-preview-link" href="'+ it.href +'">'+ it.title +' →</a></li>';
-      }).join('');
-    }
-    fill(setupsEl, setups);
-    fill(reportsEl, reports);
-    fill(toolEl, [tool]);
-
-    if (lede) {
-      var parts = [];
-      if (profile.role) parts.push(profile.role.replace(/-/g,' '));
-      if ((profile.commodities||[]).length) parts.push('tracking ' + profile.commodities.slice(0,3).join(', '));
-      lede.textContent = parts.length
-        ? 'Tailored for ' + parts.join(' · ') + '. Save more to sharpen the picks.'
-        : 'Here’s a first pass. Pick a role to tighten these recommendations.';
-    }
-
-    if (window.CNEvents) {
-      try { window.CNEvents.send('preview_generated', { source:'start_personalized', role: profile.role || '', commodities: (profile.commodities||[]).length, events: (profile.events||[]).length }); } catch(e) {}
-    }
+  function renderShockMemo(profile, persist){
+    var memo = buildShockMemo(profile);
+    if (persist) memo = saveShockMemo(memo);
+    var primaryTitle = document.getElementById('shock-memo-primary-title');
+    var primaryCopy = document.getElementById('shock-memo-primary-copy');
+    var watchTitle = document.getElementById('shock-memo-watchlist-title');
+    var watchCopy = document.getElementById('shock-memo-watchlist-copy');
+    var lockedTitle = document.getElementById('shock-memo-locked-title');
+    var lockedCopy = document.getElementById('shock-memo-locked-copy');
+    var status = document.getElementById('shock-memo-status');
+    if (primaryTitle) primaryTitle.textContent = memo.commodityName + ' shock summary';
+    if (primaryCopy) primaryCopy.textContent = memo.freeInsights[0];
+    if (watchTitle) watchTitle.textContent = 'Watchlist exposure preview';
+    if (watchCopy) watchCopy.textContent = memo.freeInsights[1];
+    if (lockedTitle) lockedTitle.textContent = 'Locked company sensitivity';
+    if (lockedCopy) lockedCopy.textContent = memo.lockedInsight;
+    if (status) status.textContent = persist ? 'Shock Memo saved locally. Pro unlock returns you to the full memo.' : 'Preview updates from your saved workflow.';
+    return memo;
   }
 
   function render(){
@@ -320,7 +265,7 @@ description: "Choose your role, save your commodities and watchlist, and build a
     if (summaryEl) summaryEl.textContent = summary.length ? summary.join(' · ') : 'Not configured yet.';
     var statusEl = document.getElementById('start-watchlist-status');
     if (statusEl) statusEl.textContent = profile.watchlist.length ? 'Saved watchlist: ' + profile.watchlist.join(', ') : 'Nothing saved yet.';
-    renderPreview(profile);
+    renderShockMemo(profile, false);
   }
 
   document.querySelectorAll('[data-role]').forEach(function(btn){
@@ -355,6 +300,23 @@ description: "Choose your role, save your commodities and watchlist, and build a
       if (values.length && window.CNProfile && window.CNProfile.addWatchlist) window.CNProfile.addWatchlist(values);
       if (values.length && window.CNTrack) window.CNTrack('saved_watchlist_added', { source: 'start_page', count: values.length });
       render();
+    });
+  }
+  var memoButton = document.getElementById('start-generate-shock-memo');
+  if (memoButton) {
+    memoButton.addEventListener('click', function(){
+      var profile = window.CNProfile && window.CNProfile.get ? window.CNProfile.get() : { role:'', commodities:[], watchlist:[], events:[] };
+      var memo = renderShockMemo(profile, true);
+      if (window.CNTrack) window.CNTrack('shock_memo_generated', {
+        source: 'start_page',
+        commodity: memo.commodity,
+        role: profile.role || '',
+        watchlist_count: (profile.watchlist || []).length,
+        locked_feature: memo.lockedFeature
+      });
+      if (window.CNEvents) window.CNEvents.send('preview_generated', { source:'start_shock_memo', commodity:memo.commodity, locked_feature:memo.lockedFeature });
+      var target = document.getElementById('start-shock-memo');
+      if (target) target.scrollIntoView({ behavior:'smooth', block:'center' });
     });
   }
   var signup = document.getElementById('start-open-signup');

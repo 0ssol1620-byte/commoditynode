@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "52-Week Range Tracker"
-description: "Visualize where each commodity trades relative to its 52-week high and low. Identify potential breakouts, oversold conditions, and trading opportunities."
+description: "Visualize where each commodity trades relative to its 52-week high and low. Identify potential breakouts, oversold conditions, and research opportunities."
 permalink: /range-tracker/
 noindex: false
 ---
@@ -65,20 +65,20 @@ noindex: false
     <p class="section-label" data-animate>Technical Analysis</p>
     <h1 data-animate>52-Week <span>Range Tracker</span></h1>
     <p data-animate data-delay="100">Where each commodity trades relative to its 52-week high and low</p>
-    <p class="intro-text" data-animate data-delay="150">Track where each commodity currently trades within its 52-week price range. Commodities near their annual highs may signal overbought conditions or strong upward momentum, while those trading near 52-week lows may represent potential value opportunities or indicate continued fundamental weakness. Use range position alongside trend analysis for best results.</p>
+    <p class="intro-text" data-animate data-delay="150">Track where each commodity currently trades within its 52-week price range. Commodities near their annual highs may indicate stretched range conditions or strong upward momentum, while those trading near 52-week lows may represent potential value opportunities or indicate continued fundamental weakness. Use range position alongside trend analysis for best results.</p>
   </div>
 </section>
 
-<section class="section pt-0">
+<section class="section" style="padding-top:0">
   <div class="container">
     <div class="insight-summary" id="insight-summary" data-animate data-delay="150"></div>
 
     <div class="sort-bar" data-animate data-delay="200">
-      <button type="button" class="sort-btn active" data-sort="position">By Position</button>
-      <button type="button" class="sort-btn" data-sort="name">By Name <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
-      <button type="button" class="sort-btn" data-sort="high">Nearest High <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
-      <button type="button" class="sort-btn" data-sort="low">Nearest Low <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
-      <button type="button" id="export-csv-btn" class="range-export-btn" data-action="export-range-csv" hidden>Export All Data (CSV)</button>
+      <button class="sort-btn active" data-sort="position">By Position</button>
+      <button class="sort-btn" data-sort="name">By Name <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button class="sort-btn" data-sort="high">Nearest High <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button class="sort-btn" data-sort="low">Nearest Low <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button id="export-csv-btn" onclick="exportRangeCSV()" style="display:none;padding:7px 16px;border-radius:8px;border:1px solid rgba(34,211,238,0.4);background:rgba(34,211,238,0.08);color:#22d3ee;font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(34,211,238,0.18)'" onmouseout="this.style.background='rgba(34,211,238,0.08)'">Export All Data (CSV)</button>
     </div>
     <script>
     document.addEventListener('cn:authready', function() {
@@ -115,16 +115,16 @@ noindex: false
     <!-- Static fallback for crawlers / no-JS -->
     <noscript>
       <div class="range-list" style="margin-top:20px">
-        <div class="range-row"><div class="range-name">Gold<small>GC=F</small></div><div class="range-price">$3,280</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:86%;background:#f97316;opacity:0.35"></div><div class="range-dot" style="left:86%;background:#f97316"></div></div><div class="range-labels"><span>$1,820</span><span>$3,500</span></div></div></div><div class="range-pct" style="color:#f97316">86.2%</div><div class="range-change up">+0.8%</div></div>
-        <div class="range-row"><div class="range-name">Silver<small>SI=F</small></div><div class="range-price">$33.20</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:85%;background:#f97316;opacity:0.35"></div><div class="range-dot" style="left:85%;background:#f97316"></div></div><div class="range-labels"><span>$21.5</span><span>$35.0</span></div></div></div><div class="range-pct" style="color:#f97316">85.1%</div><div class="range-change up">+1.1%</div></div>
-        <div class="range-row"><div class="range-name">Coffee<small>KC=F</small></div><div class="range-price">$320.00</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:73%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:73%;background:#22d3ee"></div></div><div class="range-labels"><span>$155</span><span>$380</span></div></div></div><div class="range-pct text-accent">73.3%</div><div class="range-change up">+2.1%</div></div>
-        <div class="range-row"><div class="range-name">Uranium<small>UX=F</small></div><div class="range-price">$90.00</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:44%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:44%;background:#22d3ee"></div></div><div class="range-labels"><span>$78</span><span>$105</span></div></div></div><div class="range-pct text-accent">44.4%</div><div class="range-change up">+1.5%</div></div>
-        <div class="range-row"><div class="range-name">Crude Oil<small>CL=F</small></div><div class="range-price">$78.50</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:45%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:45%;background:#22d3ee"></div></div><div class="range-labels"><span>$65.1</span><span>$95.2</span></div></div></div><div class="range-pct text-accent">44.9%</div><div class="range-change up">+1.2%</div></div>
-        <div class="range-row"><div class="range-name">Copper<small>HG=F</small></div><div class="range-price">$4.85</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:79%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:79%;background:#22d3ee"></div></div><div class="range-labels"><span>$3.52</span><span>$5.20</span></div></div></div><div class="range-pct text-accent">79.4%</div><div class="range-change down">-0.3%</div></div>
-        <div class="range-row"><div class="range-name">Natural Gas<small>NG=F</small></div><div class="range-price">$3.85</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:70%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:70%;background:#22d3ee"></div></div><div class="range-labels"><span>$1.60</span><span>$4.80</span></div></div></div><div class="range-pct text-accent">70.3%</div><div class="range-change down">-0.7%</div></div>
-        <div class="range-row"><div class="range-name">Wheat<small>ZW=F</small></div><div class="range-price">$545.00</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:29%;background:#a855f7;opacity:0.35"></div><div class="range-dot" style="left:29%;background:#a855f7"></div></div><div class="range-labels"><span>$490</span><span>$680</span></div></div></div><div class="range-pct" style="color:#a855f7">28.9%</div><div class="range-change up">+0.5%</div></div>
-        <div class="range-row"><div class="range-name">Lithium<small>LIT</small></div><div class="range-price">$14.20</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:26%;background:#a855f7;opacity:0.35"></div><div class="range-dot" style="left:26%;background:#a855f7"></div></div><div class="range-labels"><span>$11.5</span><span>$22.0</span></div></div></div><div class="range-pct" style="color:#a855f7">25.7%</div><div class="range-change down">-2.1%</div></div>
-        <div class="range-row"><div class="range-name">Palladium<small>PA=F</small></div><div class="range-price">$980.00</div><div class="range-bar-wrapper"><div class="w-100"><div class="range-bar-bg"><div class="range-bar-fill" style="width:57%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:57%;background:#22d3ee"></div></div><div class="range-labels"><span>$820</span><span>$1,100</span></div></div></div><div class="range-pct text-accent">57.1%</div><div class="range-change down">-1.4%</div></div>
+        <div class="range-row"><div class="range-name">Gold<small>GC=F</small></div><div class="range-price">$3,280</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:86%;background:#f97316;opacity:0.35"></div><div class="range-dot" style="left:86%;background:#f97316"></div></div><div class="range-labels"><span>$1,820</span><span>$3,500</span></div></div></div><div class="range-pct" style="color:#f97316">86.2%</div><div class="range-change up">+0.8%</div></div>
+        <div class="range-row"><div class="range-name">Silver<small>SI=F</small></div><div class="range-price">$33.20</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:85%;background:#f97316;opacity:0.35"></div><div class="range-dot" style="left:85%;background:#f97316"></div></div><div class="range-labels"><span>$21.5</span><span>$35.0</span></div></div></div><div class="range-pct" style="color:#f97316">85.1%</div><div class="range-change up">+1.1%</div></div>
+        <div class="range-row"><div class="range-name">Coffee<small>KC=F</small></div><div class="range-price">$320.00</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:73%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:73%;background:#22d3ee"></div></div><div class="range-labels"><span>$155</span><span>$380</span></div></div></div><div class="range-pct" style="color:#22d3ee">73.3%</div><div class="range-change up">+2.1%</div></div>
+        <div class="range-row"><div class="range-name">Uranium<small>UX=F</small></div><div class="range-price">$90.00</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:44%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:44%;background:#22d3ee"></div></div><div class="range-labels"><span>$78</span><span>$105</span></div></div></div><div class="range-pct" style="color:#22d3ee">44.4%</div><div class="range-change up">+1.5%</div></div>
+        <div class="range-row"><div class="range-name">Crude Oil<small>CL=F</small></div><div class="range-price">$78.50</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:45%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:45%;background:#22d3ee"></div></div><div class="range-labels"><span>$65.1</span><span>$95.2</span></div></div></div><div class="range-pct" style="color:#22d3ee">44.9%</div><div class="range-change up">+1.2%</div></div>
+        <div class="range-row"><div class="range-name">Copper<small>HG=F</small></div><div class="range-price">$4.85</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:79%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:79%;background:#22d3ee"></div></div><div class="range-labels"><span>$3.52</span><span>$5.20</span></div></div></div><div class="range-pct" style="color:#22d3ee">79.4%</div><div class="range-change down">-0.3%</div></div>
+        <div class="range-row"><div class="range-name">Natural Gas<small>NG=F</small></div><div class="range-price">$3.85</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:70%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:70%;background:#22d3ee"></div></div><div class="range-labels"><span>$1.60</span><span>$4.80</span></div></div></div><div class="range-pct" style="color:#22d3ee">70.3%</div><div class="range-change down">-0.7%</div></div>
+        <div class="range-row"><div class="range-name">Wheat<small>ZW=F</small></div><div class="range-price">$545.00</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:29%;background:#a855f7;opacity:0.35"></div><div class="range-dot" style="left:29%;background:#a855f7"></div></div><div class="range-labels"><span>$490</span><span>$680</span></div></div></div><div class="range-pct" style="color:#a855f7">28.9%</div><div class="range-change up">+0.5%</div></div>
+        <div class="range-row"><div class="range-name">Lithium<small>LIT</small></div><div class="range-price">$14.20</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:26%;background:#a855f7;opacity:0.35"></div><div class="range-dot" style="left:26%;background:#a855f7"></div></div><div class="range-labels"><span>$11.5</span><span>$22.0</span></div></div></div><div class="range-pct" style="color:#a855f7">25.7%</div><div class="range-change down">-2.1%</div></div>
+        <div class="range-row"><div class="range-name">Palladium<small>PA=F</small></div><div class="range-price">$980.00</div><div class="range-bar-wrapper"><div style="width:100%"><div class="range-bar-bg"><div class="range-bar-fill" style="width:57%;background:#22d3ee;opacity:0.35"></div><div class="range-dot" style="left:57%;background:#22d3ee"></div></div><div class="range-labels"><span>$820</span><span>$1,100</span></div></div></div><div class="range-pct" style="color:#22d3ee">57.1%</div><div class="range-change down">-1.4%</div></div>
       </div>
       <p style="text-align:center;color:#64748b;font-size:0.8rem;margin-top:16px">Static snapshot. Enable JavaScript for live data.</p>
     </noscript>
@@ -179,7 +179,7 @@ noindex: false
       var html='<div class="range-row">';
       html+='<div class="range-name">'+item.name+'<small>'+item.symbol+'</small></div>';
       html+='<div class="range-price">'+fmtPrice(item.price)+'</div>';
-      html+='<div class="range-bar-wrapper"><div class="w-100">';
+      html+='<div class="range-bar-wrapper"><div style="width:100%">';
       html+='<div class="range-bar-bg">';
       html+='<div class="range-bar-fill" style="width:'+item.pct.toFixed(1)+'%;background:'+c+';opacity:0.35"></div>';
       html+='<div class="range-dot" style="left:'+item.pct.toFixed(1)+'%;background:'+c+'"></div>';
@@ -201,7 +201,7 @@ noindex: false
         + '<div class="range-pro-overlay">'
           + '<h4>+' + lockedItems.length + ' More Commodities</h4>'
           + '<p>Pro members track all ' + items.length + ' commodity markets with full sorting and filtering.</p>'
-          + '<a href="/pricing/">See All Markets — Start 7-Day Free Trial &rarr;</a>'
+          + '<a href="/pricing/">See All Markets — Request Research Access &rarr;</a>'
         + '</div>'
         + '</div>';
     }
@@ -215,7 +215,7 @@ noindex: false
       '<div class="insight-pill"><div class="count red">'+nearHigh+'</div><div class="label">Near 52W High (&gt;90%)</div></div>'+
       '<div class="insight-pill"><div class="count green">'+nearLow+'</div><div class="label">Near 52W Low (&lt;10%)</div></div>'+
       '<div class="insight-pill"><div class="count orange">'+breakout+'</div><div class="label">Potential Breakout Zone (85–95%)</div></div>'+
-      '<div class="insight-pill"><div class="count text-accent">'+items.length+'</div><div class="label">Markets Tracked</div></div>';
+      '<div class="insight-pill"><div class="count" style="color:#22d3ee">'+items.length+'</div><div class="label">Markets Tracked</div></div>';
   }
 
   function processChartData(data){
@@ -299,8 +299,10 @@ noindex: false
     document.head.appendChild(s);
   }
 
-  fetch('/assets/data/chart-data.json')
-    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+  var rangeLoader = window.CNDataStore && window.CNDataStore.getChartData
+    ? window.CNDataStore.getChartData()
+    : fetch('/assets/data/chart-data.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});
+  rangeLoader
     .then(processChartData)
     .catch(function(){loadFallback();});
 
@@ -327,29 +329,15 @@ noindex: false
 <section class="seo-content">
   <div class="container">
     <h2>52-Week Range Analysis for Commodity Trading</h2>
-    <p>The 52-week range is one of the most widely followed technical indicators in commodity markets, providing immediate context for where current prices sit relative to their annual trading band. By expressing the current price as a percentage of the range between the 52-week low and high, traders can quickly identify commodities that are stretched to extremes — either approaching potential resistance at annual highs or finding possible support near annual lows. This range-based analysis is used by institutional commodity traders, CTAs (Commodity Trading Advisors), and hedge funds as a complementary tool alongside fundamental supply-demand analysis.</p>
+    <p>The 52-week range is one of the most widely followed technical indicators in commodity markets, providing immediate context for where current prices sit relative to their annual price range. By expressing the current price as a percentage of the range between the 52-week low and high, researchers can quickly identify commodities that are stretched to extremes — either approaching potential resistance at annual highs or finding possible support near annual lows. This range-based analysis is used by institutional commodity analysts, CTAs (Commodity Trading Advisors), and hedge funds as a complementary tool alongside fundamental supply-demand analysis.</p>
 
     <h3>Interpreting Range Position</h3>
     <p>A commodity trading above 90% of its 52-week range is considered near its annual high. This can signal strong upward momentum driven by favorable fundamentals — such as supply deficits or demand surges — but it can also indicate overbought conditions where mean-reversion risk increases. Conversely, commodities trading below 10% of their range are near annual lows, potentially representing value opportunities if the fundamental outlook is improving, or warning of continued downside if structural oversupply persists. The 30–70% zone is typically considered a neutral range where price action is driven more by short-term catalysts than extremes in positioning.</p>
 
     <h3>Breakout Zone Identification</h3>
-    <p>The 85–95% zone is particularly interesting for momentum traders, as commodities in this range are testing resistance but have not yet achieved a clean breakout above the annual high. A confirmed breakout above the 52-week high often triggers trend-following buy signals and can initiate sustained rallies as short sellers cover and new momentum buyers enter. The CommodityNode Range Tracker highlights commodities in this potential breakout zone so traders can prepare for these high-probability setups with appropriate position sizing and risk management.</p>
+    <p>The 85–95% zone is particularly interesting for market researchers, as commodities in this range are testing resistance but have not yet achieved a clean breakout above the annual high. A confirmed breakout above the 52-week high often triggers trend-following risk-pattern alerts and can initiate sustained rallies as short sellers cover and new momentum buyers enter. The CommodityNode Range Tracker highlights commodities in this potential breakout zone so researchers can prepare for these high-priority scenarios with appropriate position sizing and risk management.</p>
 
     <h3>Combining Range Analysis with Fundamentals</h3>
     <p>Range position alone is insufficient for making trading decisions — context matters enormously. A commodity near its 52-week high may have fundamentally justified reasons for being there, such as a verified supply deficit or surging demand from a new use case. Similarly, a commodity near its annual low may be reflecting genuine structural oversupply that is unlikely to resolve quickly. The most effective approach combines range position with correlation analysis, supply disruption tracking, and seasonal pattern recognition to build a complete picture. Our suite of commodity analytics tools is designed to work together, providing multiple perspectives on each market to support well-informed trading decisions. Use the Range Tracker as a screening tool to identify commodities worth deeper investigation, then drill into individual commodity pages for comprehensive fundamental and technical analysis.</p>
   </div>
 </section>
-
-<style>
-.range-export-btn { display:none; padding:7px 16px; border-radius:8px; border:1px solid rgba(34,211,238,0.4); background:rgba(34,211,238,0.08); color:#22d3ee; font-size:0.82rem; font-weight:600; cursor:pointer; transition:background 0.2s; }
-.range-export-btn:not([hidden]) { display:inline-flex; align-items:center; }
-.range-export-btn:hover { background:rgba(34,211,238,0.18); }
-</style>
-<script>
-(function(){
-  document.addEventListener('click', function(ev){
-    var act = ev.target.closest('[data-action="export-range-csv"]');
-    if (act && typeof exportRangeCSV === 'function') exportRangeCSV();
-  });
-})();
-</script>

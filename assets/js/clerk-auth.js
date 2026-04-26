@@ -1,6 +1,6 @@
 /* ============================================================
    CommodityNode — Clerk Auth System
-   Sign in/up, Trading Note blur, Report metering, Pro gating
+   Sign in/up, Research Note blur, Report metering, Pro gating
    ============================================================ */
 
 (function () {
@@ -47,8 +47,8 @@
 
   var METER_KEY = 'cn_meter';
   var PRO_LINK = '/pricing/';
-  var PRO_MONTHLY_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71';
-  var PRO_ANNUAL_URL = 'https://commoditynode.lemonsqueezy.com/checkout/buy/b7c7444b-606f-49c0-a6ab-8f78f653702f';
+  var PRO_MONTHLY_URL = '/pricing/';
+  var PRO_ANNUAL_URL = '/pricing/';
   var SIGNUP_STARTED_KEY = 'cn_signup_started';
   var SIGNUP_SOURCE_KEY = 'cn_signup_source';
   var SIGNUP_COMPLETE_KEY = 'cn_signup_complete_tracked';
@@ -141,14 +141,14 @@
         + '<h3 style="color:#e2e8f0;font-size:1.25rem;font-weight:800;margin-bottom:8px;">' + (featureName || 'Upgrade to Pro') + '</h3>'
         + (description ? '<p style="color:#94a3b8;font-size:0.88rem;margin-bottom:20px;line-height:1.65;">' + description + '</p>' : '<div style="margin-bottom:20px"></div>')
         + '<ul style="list-style:none;padding:0;margin:0 0 24px;display:flex;flex-direction:column;gap:9px;">'
-          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Unlimited Signal Reports</li>'
-          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> AI 90-Day Price Forecast</li>'
-          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Full Scenario Simulator</li>'
-          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Company Sensitivity Analysis</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Premium research archive</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Forecast uncertainty ranges</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Full scenario analytics simulator</li>'
+          + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Company exposure analysis</li>'
           + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> Extended Correlation Lookback (60/90D)</li>'
           + '<li style="color:#cbd5e1;font-size:0.85rem;display:flex;align-items:center;gap:10px;"><span style="color:#22d3ee;font-weight:800;font-size:1rem;">✓</span> All 39 Range Tracker Markets</li>'
         + '</ul>'
-        + '<a href="' + PRO_MONTHLY_URL + '" style="display:block;text-align:center;padding:14px 20px;border-radius:10px;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;font-weight:800;font-size:0.95rem;text-decoration:none;margin-bottom:10px;transition:opacity 0.2s;" onmouseover="this.style.opacity=\'0.9\'" onmouseout="this.style.opacity=\'1\'">Unlock Pro — Start 7-Day Free Trial &rarr;</a>'
+        + '<a href="' + PRO_MONTHLY_URL + '"  data-access-source="pro_modal" data-plan="pro" style="display:block;text-align:center;padding:14px 20px;border-radius:10px;background:linear-gradient(135deg,#22d3ee,#a855f7);color:#050508;font-weight:800;font-size:0.95rem;text-decoration:none;margin-bottom:10px;transition:opacity 0.2s;" onmouseover="this.style.opacity=\'0.9\'" onmouseout="this.style.opacity=\'1\'">View Research Access Plans &rarr;</a>'
         + '<button id="cn-pro-modal-later" style="display:block;width:100%;text-align:center;background:none;border:none;color:#64748b;font-size:0.82rem;cursor:pointer;padding:8px;">Maybe later</button>'
       + '</div>';
 
@@ -267,12 +267,12 @@
     }
   }
 
-  /* ---------- Trading Note Blur ---------- */
+  /* ---------- Research Note Blur ---------- */
 
   function findTradingNoteSection() {
     var headings = document.querySelectorAll('.post-content h2, .post-content h3');
     for (var i = 0; i < headings.length; i++) {
-      if (/trading\s*note/i.test(headings[i].textContent)) {
+      if (/trading\s*note|research\s*note/i.test(headings[i].textContent)) {
         return headings[i];
       }
     }
@@ -320,8 +320,8 @@
       overlay.innerHTML =
         '<div class="cn-blur-cta">' +
           icon +
-          '<h3>Sign up to read the Trading Note</h3>' +
-          '<p>Create a free account to access trading insights and analysis.</p>' +
+          '<h3>Sign up to read the Research Note</h3>' +
+          '<p>Create a free account to access market research context and analysis.</p>' +
           '<div class="cn-blur-cta-buttons">' +
             '<button class="clerk-btn clerk-btn-primary" id="blur-signup">Sign Up Free</button>' +
             '<button class="clerk-btn clerk-btn-ghost" id="blur-signin">Already have an account? Sign In</button>' +
@@ -342,13 +342,13 @@
         '<div class="trading-note-overlay">' +
           '<div class="tno-inner">' +
             (teaser ? '<p style="color:#cbd5e1;font-size:0.88rem;margin-bottom:14px;font-style:italic;opacity:0.8;border-left:2px solid rgba(34,211,238,0.4);padding-left:12px;">&ldquo;' + teaser + '&rdquo;</p>' : '') +
-            '<div class="tno-social-proof">Pro members made <strong>3 calls this week</strong> based on this signal.</div>' +
-            '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Unlock Full Trading Note</h4>' +
-            '<p style="color:#94a3b8;font-size:0.88rem">Entry levels, position sizing, and risk management guidance — available to Pro members.</p>' +
-            '<a href="' + PRO_MONTHLY_URL + '" class="clerk-btn clerk-btn-primary tno-btn" style="display:inline-block;text-decoration:none;margin-top:4px;">' +
-              'Start 7-Day Free Trial &rarr;' +
+            '<div class="tno-social-proof">Pro members use this section for deeper research context and exposure review.</div>' +
+            '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Unlock Full Research Note</h4>' +
+            '<p style="color:#94a3b8;font-size:0.88rem">Scenario context, exposure drivers, and monitoring notes — available to Pro members.</p>' +
+            '<a href="' + PRO_MONTHLY_URL + '" class="clerk-btn clerk-btn-primary tno-btn " data-access-source="trading_note_paywall" data-plan="pro" style="display:inline-block;text-decoration:none;margin-top:4px;">' +
+              'View Research Access Plans &rarr;' +
             '</a>' +
-            '<p class="tno-small">$19/mo · Cancel anytime · Most members recover cost in first week</p>' +
+            '<p class="tno-small">30-Day and Annual Research Access options available</p>' +
           '</div>' +
         '</div>';
     } else {
@@ -356,13 +356,13 @@
       overlay.innerHTML =
         '<div class="trading-note-overlay">' +
           '<div class="tno-inner">' +
-            '<div class="tno-social-proof">Pro members made <strong>3 calls this week</strong> based on this signal.</div>' +
-            '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Trading Note</h4>' +
-            '<p style="color:#94a3b8;font-size:0.88rem">Entry levels, position sizing, and risk management guidance — available to Pro members.</p>' +
-            '<a href="' + PRO_MONTHLY_URL + '" class="clerk-btn clerk-btn-primary tno-btn" style="display:inline-block;text-decoration:none;">' +
-              'Read Trading Note — Start 7-Day Free Trial' +
+            '<div class="tno-social-proof">Pro members use this section for deeper research context and exposure review.</div>' +
+            '<h4 style="color:#e2e8f0;font-size:1.1rem;margin-bottom:8px">Research Note</h4>' +
+            '<p style="color:#94a3b8;font-size:0.88rem">Scenario context, exposure drivers, and monitoring notes — available to Pro members.</p>' +
+            '<a href="' + PRO_MONTHLY_URL + '" class="clerk-btn clerk-btn-primary tno-btn " data-access-source="trading_note_paywall" data-plan="pro" style="display:inline-block;text-decoration:none;">' +
+              'Read Research Note — View Access Plans' +
             '</a>' +
-            '<p class="tno-small">Cancel anytime · Most members recover cost in first week</p>' +
+            '<p class="tno-small">Research access is manually verified before unlock</p>' +
           '</div>' +
         '</div>';
     }
@@ -398,8 +398,8 @@
       + '<div style="background:rgba(255,255,255,0.1);border-radius:4px;height:4px;width:200px">'
       + '<div style="background:' + (isLast ? '#ef4444' : '#22d3ee') + ';width:' + pct + '%;height:100%;border-radius:4px;transition:width 0.5s"></div>'
       + '</div></div>'
-      + '<div style="font-size:0.78rem;color:#94a3b8">Most Pro members recover $19 in a single informed trade.</div>'
-      + '<a href="' + PRO_MONTHLY_URL + '" style="padding:10px 20px;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;border-radius:8px;color:#050508;font-weight:800;font-size:0.88rem;cursor:pointer;white-space:nowrap;flex-shrink:0;text-decoration:none;display:inline-block;">Start 7-Day Free Trial</a>'
+      + '<div style="font-size:0.78rem;color:#94a3b8">Pro adds research archive, scenario analytics, and company exposure context.</div>'
+      + '<a href="' + PRO_MONTHLY_URL + '"  data-access-source="meter_upgrade_banner" data-plan="pro" style="padding:10px 20px;background:linear-gradient(135deg,#22d3ee,#a855f7);border:none;border-radius:8px;color:#050508;font-weight:800;font-size:0.88rem;cursor:pointer;white-space:nowrap;flex-shrink:0;text-decoration:none;display:inline-block;">View Access Plans</a>'
       + '<button onclick="document.getElementById(\'meter-upgrade-banner\').remove()" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1.2rem;padding:4px">\u00d7</button>';
     document.body.appendChild(banner);
   }

@@ -1,19 +1,19 @@
 # CommodityNode
 
-> CommodityNode is an independent commodity intelligence platform that maps how raw material price movements ripple through industries, stocks, and ETFs. It covers 60+ commodities with interactive Impact Maps, quantified sensitivity scores, and Signal Reports published when price moves create actionable intelligence.
+> CommodityNode is an independent commodity intelligence platform that maps how raw material price movements ripple through industries, stocks, and ETFs. It covers 60+ commodities with interactive Impact Maps, quantified sensitivity scores, and Research Reports published when price moves create actionable intelligence.
 
-CommodityNode is built for equity investors, portfolio managers, macro traders, supply chain professionals, and researchers who need to understand the second-order effects of commodity price changes. Core content is free; advanced AI forecasting tools and the Scenario Simulator are available via Pro subscription.
+CommodityNode is built for equity market watchers, watchlist managers, macro researchers, supply chain professionals, and researchers who need to understand the second-order effects of commodity price changes. Core content is free; advanced AI forecasting tools and the Scenario Simulator are available via Pro Research Access.
 
 ## Key Pages
 
 - [About CommodityNode](https://commoditynode.com/about/): Platform overview, founder credentials, editorial standards, and coverage scope
 - [Methodology](https://commoditynode.com/methodology/): How impact scores, correlations, sensitivity ratings, and confidence levels are calculated
-- [Pricing](https://commoditynode.com/pricing/): Free vs Pro subscription comparison
+- [Pricing](https://commoditynode.com/pricing/): Free vs Pro Research Access comparison
 - [Contact](https://commoditynode.com/contact/): Editorial inquiries, corrections, and partnerships
 
 ## Commodity Hub Pages (Impact Maps)
 
-Each commodity hub page includes: an interactive Impact Map (D3.js), quantified impact scores for related stocks and ETFs, correlation coefficients, a Key Impact Relationships table, and curated Signal Reports.
+Each commodity hub page includes: an interactive Impact Map (D3.js), quantified impact scores for related stocks and ETFs, correlation coefficients, a Key Impact Relationships table, and curated Research Reports.
 
 - [Gold](https://commoditynode.com/commodities/gold/): Safe-haven dynamics, miners (NEM, GOLD, AEM), GDX/GLD ETFs, central bank flows
 - [Crude Oil](https://commoditynode.com/commodities/crude-oil/): OPEC policy, airline margins, refiner spreads, XLE/XOP ETFs
@@ -40,9 +40,9 @@ Each commodity hub page includes: an interactive Impact Map (D3.js), quantified 
 - [Graphite](https://commoditynode.com/commodities/graphite/): EV battery anodes, China supply dominance
 - [Vanadium](https://commoditynode.com/commodities/vanadium/): Grid-scale energy storage, steel alloying
 
-## Signal Reports (Recent)
+## Research Reports (Recent)
 
-Signal Reports are published when commodity price moves create actionable intelligence. Each report includes directional bias, sensitivity rating, confidence level, and sector ripple analysis.
+Research Reports are published when commodity price moves create actionable intelligence. Each report includes directional bias, sensitivity rating, confidence level, and sector ripple analysis.
 
 - [Trump's 50% Metal Tariffs: Steel, Aluminum, Copper (April 2026)](https://commoditynode.com/trump-steel-aluminum-copper-tariffs-april-2026/): Section 232 restructuring analysis, winners (CLF, NUE, AA), losers (auto manufacturers), inflation implications
 - [Iran-Hormuz Crisis: Oil's Biggest Supply Shock (April 2026)](https://commoditynode.com/iran-hormuz-oil-shock-global-markets/): WTI at $111/barrel, airline margin destruction, refiner dynamics, scenario probabilities
@@ -54,7 +54,7 @@ Signal Reports are published when commodity price moves create actionable intell
 ## Tools
 
 - [Scenario Simulator](https://commoditynode.com/simulator/): Model commodity price scenarios and project impacts on related equities (Pro)
-- [Portfolio Stress Test](https://commoditynode.com/stress-test/): Assess commodity exposure across a portfolio (Pro)
+- [Portfolio Stress Test](https://commoditynode.com/stress-test/): Assess commodity exposure across a watchlist (Pro)
 - [Range Tracker](https://commoditynode.com/range-tracker/): Monitor commodities approaching historical price extremes
 - [Correlation Explorer](https://commoditynode.com/correlation/): Cross-commodity and commodity-equity correlation data
 
@@ -70,4 +70,4 @@ Correlations are Pearson coefficients over a rolling 3-year (156-week) window, r
 
 ## Licensing
 
-Content on CommodityNode is provided for informational purposes. Signal Reports and Impact Map data may be cited with attribution to CommodityNode (https://commoditynode.com). Nothing on this site constitutes investment advice.
+Content on CommodityNode is provided for informational purposes. Research Reports and Impact Map data may be cited with attribution to CommodityNode (https://commoditynode.com). Nothing on this site constitutes investment advice.

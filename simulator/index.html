@@ -1,8 +1,11 @@
 ---
 layout: default
 title: "Commodity Scenario Simulator — CommodityNode"
-description: "Interactive commodity price scenario simulator. Model the impact of crude oil, gold, copper, and 60+ commodity price shocks on industries, companies, and portfolios."
+description: "Interactive commodity price scenario simulator. Model the impact of crude oil, gold, copper, and 60+ commodity price shocks on industries, companies, and watchlists."
 permalink: /simulator/
+page_css:
+  - simulator
+disable_ads: true
 ---
 
 <script type="application/ld+json">
@@ -15,7 +18,7 @@ permalink: /simulator/
     { "@type": "HowToStep", "position": 1, "name": "Select a commodity", "text": "Choose a commodity from the selector grid — crude oil, gold, copper, wheat, and more." },
     { "@type": "HowToStep", "position": 2, "name": "Choose a scenario", "text": "Select a pre-built scenario such as Iran crisis, China slowdown, or Fed rate cut, or set a custom shock percentage." },
     { "@type": "HowToStep", "position": 3, "name": "Review industry impact and headline forecast context", "text": "See the estimated downstream sector impact, compare the public forecast stack, and decide whether the move deserves deeper work." },
-    { "@type": "HowToStep", "position": 4, "name": "Unlock company sensitivity and export scenarios", "text": "Pro subscribers unlock company-level sensitivity analysis and can export scenarios as CSV for deeper portfolio stress testing." }
+    { "@type": "HowToStep", "position": 4, "name": "Unlock company sensitivity and export scenarios", "text": "Pro subscribers unlock company-level sensitivity analysis and can export scenarios as CSV for deeper exposure stress testing." }
   ],
   "tool": { "@type": "HowToTool", "name": "CommodityNode Scenario Simulator" }
 }
@@ -165,6 +168,7 @@ permalink: /simulator/
   border-radius: 24px;
   padding: 24px;
   margin: 24px 0 16px;
+  overflow: hidden;
 }
 .sim-chart-header {
   display: flex;
@@ -213,48 +217,102 @@ permalink: /simulator/
 .sim-chart-stage {
   position: relative;
   height: 400px;
-  padding: 8px 0 0;
+  padding: 10px 0 12px;
+  margin-bottom: 12px;
 }
 .sim-analytics-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));
-  gap:16px;
-  margin:0 0 22px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin:0 0 18px;
 }
 .sim-analytics-card {
   background:rgba(255,255,255,0.025);
   border:1px solid rgba(255,255,255,0.08);
-  border-radius:20px;
-  padding:20px;
+  border-radius:18px;
+  padding:18px;
   display:grid;
-  gap:12px;
-  min-height:430px;
-  overflow:hidden;
-}
-.sim-analytics-card:last-child:nth-child(odd) {
-  grid-column:1 / -1;
+  gap:10px;
 }
 .sim-analytics-card h3 {
   margin:0;
   color:#f8fafc;
-  font-size:1.05rem;
+  font-size:0.98rem;
   font-weight:800;
-  letter-spacing:-0.01em;
 }
 .sim-analytics-card p {
   margin:0;
-  color:#e2e8f0;
-  font-size:0.9rem;
-  line-height:1.68;
-  max-width:62ch;
+  color:#94a3b8;
+  font-size:0.84rem;
+  line-height:1.65;
 }
-.sim-analytics-stage { height: 330px; min-height:330px; }
-.sim-analytics-readout { color:#f1f5f9; font-size:0.9rem; line-height:1.68; }
+.sim-analytics-stage { height: 280px; }
+.sim-analytics-card--timeline {
+  grid-column: 1 / -1;
+}
+.sim-analytics-card--timeline .sim-analytics-stage {
+  height: 230px;
+}
+.chart-end-strip--sim {
+  display: none;
+  gap: 8px;
+  grid-template-columns: 1fr;
+  margin: 10px 0 0;
+}
+.chart-end-strip--sim .chart-end-chip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.chart-end-strip--sim .chart-end-chip__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: .76rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  font-weight: 800;
+}
+.chart-end-strip--sim .chart-end-chip__label::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  background: var(--chip-color,#22d3ee);
+  box-shadow: 0 0 0 3px rgba(255,255,255,.04);
+}
+.chart-end-strip--sim .chart-end-chip__value {
+  flex: 0 0 auto;
+  font-size: .9rem;
+  color: #f8fafc;
+  font-weight: 800;
+}
+.sim-analytics-readout { color:#cbd5e1; font-size:0.84rem; line-height:1.6; }
+.sim-decision-frame {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(34,211,238,0.075), rgba(168,85,247,0.055));
+  border-color: rgba(34,211,238,0.16);
+}
+.sim-decision-inputs { display:flex; flex-wrap:wrap; gap:8px; margin:4px 0; }
+.sim-decision-inputs span { display:inline-flex; padding:7px 10px; border-radius:999px; background:rgba(2,6,23,0.35); border:1px solid rgba(255,255,255,0.08); color:#cbd5e1; font-size:0.78rem; font-weight:700; }
+.sim-decision-trust { color:#94a3b8; font-size:0.82rem; line-height:1.6; border-top:1px solid rgba(255,255,255,0.07); padding-top:10px; }
+.sim-decision-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.sim-decision-actions a { text-decoration:none; }
 .sim-legend {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 .sim-legend-item {
   display: inline-flex;
@@ -267,6 +325,13 @@ permalink: /simulator/
   padding: 9px 11px;
   border-radius: 14px;
   min-height: 46px;
+  min-width: 0;
+  overflow: hidden;
+}
+.sim-legend-item > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
 }
 .sim-legend-item strong {
   color: #f8fafc;
@@ -596,12 +661,36 @@ permalink: /simulator/
   font-size:0.9rem;
   line-height:1.5;
 }
+.sim-inline-kicker,.sim-saved-card-label{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#22d3ee;font-weight:800}
+.sim-inline-kicker{margin-bottom:8px;display:block}
+.sim-inline-copy{color:var(--text2);line-height:1.7}
+.sim-inline-copy-strong{color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45}
+.sim-inline-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.sim-inline-actions .btn{min-width:200px;justify-content:center}
+.sim-panel-note-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 14px}
+.sim-panel-note{padding:16px 18px;border-radius:16px}
+.sim-panel-note--neutral{background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08)}
+.sim-panel-note--accent{background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sim-panel-note--violet{background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sim-panel-note-title{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:800;margin-bottom:6px}
+.sim-panel-note-title--cyan{color:#22d3ee}.sim-panel-note-title--violet{color:#c084fc}
+.sim-panel-note-copy{margin:0;line-height:1.6;font-size:.88rem}.sim-panel-note-copy--neutral{color:var(--text2)}.sim-panel-note-copy--violet{color:#ddd6fe}
+.sim-inline-btn{min-width:220px;justify-content:center}
+.sim-outcome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:0 0 16px}
+.sim-outcome-card{padding:18px 20px;border-radius:16px;display:grid;gap:10px}.sim-outcome-card--neutral{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}.sim-outcome-card--violet{background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14)}
+.sim-outcome-actions{display:flex;gap:10px;flex-wrap:wrap}
+.sim-outcome-actions .btn{min-width:180px;justify-content:center}
 @media (max-width: 900px) {
   .sim-top-grid,
   .sim-step-strip,
   .sim-saved-strip,
   .sim-saved-grid,
   .sim-analytics-grid { grid-template-columns: 1fr; }
+  .sim-decision-frame { grid-column: auto; }
+  .chart-end-strip--sim { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .chart-end-strip--sim { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .sim-saved-strip,
@@ -618,17 +707,13 @@ permalink: /simulator/
   .sim-hero h1 { font-size: 2.2rem; }
   .sim-selector-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .sim-commodity-btn { min-height: 96px; padding: 14px 12px; }
-  .sim-chart-container { border-radius: 22px; padding: 18px 16px; }
+  .sim-chart-container { border-radius: 22px; padding: 18px 14px; }
   .sim-chart-header { gap: 12px; }
-  .sim-chart-stage { height: 320px; }
-  .sim-analytics-card { min-height:460px; padding:18px 16px; }
-  .sim-analytics-stage { height:360px; min-height:360px; }
-  .sim-analytics-card p,
-  .sim-analytics-readout { font-size:0.88rem; line-height:1.72; }
+  .sim-chart-stage { height: 340px; padding-bottom: 14px; margin-bottom: 10px; }
   .sim-period-btns { width: 100%; justify-content: space-between; }
   .sim-period-btn { flex: 1; text-align: center; padding: 10px 0; }
-  .sim-legend { grid-template-columns: 1fr 1fr; gap: 6px; }
-  .sim-legend-item { font-size: 0.72rem; padding: 7px 8px; min-height: 38px; }
+  .sim-legend { grid-template-columns: 1fr; gap: 7px; margin-top: 14px; }
+  .sim-legend-item { font-size: 0.74rem; padding: 8px 9px; min-height: 40px; }
   .sim-scenario-panel { padding: 18px 16px; }
   .sim-scenario-item { align-items: flex-start; }
   .sim-scenario-badge { margin-top: 2px; }
@@ -644,57 +729,21 @@ permalink: /simulator/
   <div style="max-width:700px;margin:40px auto;padding:32px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;text-align:center;">
     <h2 style="color:#f0f0f5;font-size:1.2rem;margin-bottom:12px;">JavaScript Required</h2>
     <p style="color:#9494a8;font-size:0.9rem;line-height:1.6;">The Scenario Simulator requires JavaScript to run interactive charts and scenario modeling. Please enable JavaScript in your browser settings, then reload this page.</p>
-    <p style="color:#64748b;font-size:0.82rem;margin-top:16px;">In the meantime, explore our <a href="/" class="text-accent">commodity hubs</a> for static analysis and signal reports.</p>
+    <p style="color:#64748b;font-size:0.82rem;margin-top:16px;">In the meantime, explore our <a href="/" style="color:#22d3ee;">commodity hubs</a> for static analysis and signal reports.</p>
   </div>
 </noscript>
 
 <section class="sim-hero">
   <div class="container">
-    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;">
-      <div class="sim-hero-badge">
-        <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#22d3ee"/></svg>
-        Live Forecast Engine
-      </div>
-      {% include components/freshness-badge.html updated_at=site.time source="Chronos + TimesFM consensus" horizon="90-day" confidence="q10 / q50 / q90 probabilistic band" status="fresh" %}
+    <div class="sim-hero-badge">
+      <svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#22d3ee"/></svg>
+      Live Forecast Engine
     </div>
     <h1>Commodity Scenario<br>Simulator</h1>
     <p>Model price shock scenarios before macro events, supply disruptions, or earnings season. Select a commodity, apply a scenario, and see how the ripple effects propagate through related equities.</p>
     <a href="/before-opec-oil-playbook/" data-cta="simulator_open_event_playbook" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:10px 14px;border-radius:999px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.18);color:#22d3ee;text-decoration:none;font-size:0.82rem;font-weight:700;">Before OPEC? Open the oil playbook →</a>
-
-    <!-- Cockpit strip: control rail / visual stage / insight rail framing (blueprint §6.6) -->
-    <div style="margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;">
-      <div class="cn-workflow-strip__card" style="padding:14px;">
-        <span class="cn-workflow-strip__kicker">Control rail</span>
-        <h3 class="cn-workflow-strip__title" style="font-size:0.95rem;">Pick commodity, shock, horizon</h3>
-        <p class="cn-workflow-strip__desc" style="font-size:0.82rem;">One-click preset or custom ±σ, magnitude, and universe. Everything below adapts to your choice.</p>
-      </div>
-      <div class="cn-workflow-strip__card" style="padding:14px;">
-        <span class="cn-workflow-strip__kicker">Visual stage</span>
-        <h3 class="cn-workflow-strip__title" style="font-size:0.95rem;">Price · forecast · propagation</h3>
-        <p class="cn-workflow-strip__desc" style="font-size:0.82rem;">Scenario fan chart, impact ladder, and sector pressure all render on the same stage so you read the move once.</p>
-      </div>
-      <div class="cn-workflow-strip__card" style="padding:14px;">
-        <span class="cn-workflow-strip__kicker">Insight rail</span>
-        <h3 class="cn-workflow-strip__title" style="font-size:0.95rem;">Named names · triggers · alerts</h3>
-        <p class="cn-workflow-strip__desc" style="font-size:0.82rem;">Most exposed assets, likely winners, pressure points, and alert triggers — Pro unlocks the named layer.</p>
-      </div>
-    </div>
   </div>
 </section>
-
-<section class="sim-model-context" aria-label="Model call context" style="max-width:1120px;margin:18px auto 0;padding:20px;border-radius:20px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.14);">
-  <div class="eyebrow-cyan">Model call context</div>
-  <h2 style="margin:8px 0 10px;color:#f8fafc;font-size:1.25rem;">Forecast → RL policy → stock-level translation</h2>
-  <p class="body-text">The simulator is where the model story becomes useful: take the forecast range and RL policy action, then test which sectors and names become exposed under the commodity shock.</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-top:12px;">
-    <div class="sim-step-card"><span>Forecast range</span><strong>Chronos-2 + TimesFM path</strong><p>Start with direction, interval, and model agreement.</p></div>
-    <div class="sim-step-card sim-step-card--accent"><span>RL policy action</span><strong>Replay-backed policy selection</strong><p>Use historical replay / walk-forward scoped action probabilities.</p></div>
-    <div class="sim-step-card"><span>Pro conversion</span><strong>Named exposure depth</strong><p>Pro matters when sector pressure is not enough and stock-level conviction matters.</p></div>
-  </div>
-  <div class="chip-group-wrap" style="margin-top:14px;"><a href="/pricing/" class="btn btn-primary" data-cta="sim_model_context_pricing">Unlock stock-level decision workflow</a><a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary" data-cta="sim_model_context_rl_lab">Inspect RL policy</a></div>
-</section>
-
-{% include components/upgrade-moment.html moment="simulator_after_preview" title="Your scenario preview is built" preview="The simulator shows the public commodity path and first-pass sector pressure. That is enough to validate whether the shock matters." unlock="Pro adds the company sensitivity layer, deeper scenario comparisons, saved workflow context, and stock-level decision translation." cta="Unlock simulator depth" cta_id="simulator_upgrade_after_preview" free_cta="Keep using preview" free_href="/simulator/" %}
 
 <!-- Quick scenario presets (blueprint §3-5) -->
 <section class="sim-quick-presets" aria-label="Quick scenario presets">
@@ -736,18 +785,18 @@ permalink: /simulator/
     <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:12px;">
       <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;">
         <div>
-          <div class="eyebrow-cyan eyebrow-cyan--mb6">Fastest workflow</div>
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Fastest workflow</div>
           <div style="color:#f0f0f5;font-weight:700;font-size:0.98rem;line-height:1.45;">Select the commodity → apply the base shock → read the downstream sector pressure and likely follow-through.</div>
         </div>
         <a href="/methodology/" style="font-size:0.82rem;color:#22d3ee;text-decoration:none;font-weight:700;white-space:nowrap;">Chronos-2 + TimesFM methodology →</a>
       </div>
-      <div class="chip-group-wrap">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <div style="padding:10px 12px;border-radius:999px;background:rgba(34,211,238,0.08);border:1px solid rgba(34,211,238,0.16);font-size:0.8rem;color:#cbd5e1;">Use before OPEC, WASDE, Fed, or earnings-linked commodity shocks.</div>
         <div style="padding:10px 12px;border-radius:999px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.16);font-size:0.8rem;color:#ddd6fe;">Free = sector direction and model context. Pro = stock-level names and deeper workflow.</div>
       </div>
     </div>
     <div style="padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;gap:10px;">
-      <div class="eyebrow-cyan">High-intent event entry points</div>
+      <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">High-intent event entry points</div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;">
         <a href="/before-opec-oil-playbook/" data-cta="simulator_open_event_playbook" style="padding:10px 12px;border-radius:999px;background:rgba(8,12,20,0.36);border:1px solid rgba(255,255,255,0.08);color:#e2e8f0;text-decoration:none;font-size:0.8rem;font-weight:700;">Before OPEC → oil workflow</a>
         <a href="/before-wasde-grains-playbook/" style="padding:10px 12px;border-radius:999px;background:rgba(8,12,20,0.36);border:1px solid rgba(255,255,255,0.08);color:#e2e8f0;text-decoration:none;font-size:0.8rem;font-weight:700;">Before WASDE → grains workflow</a>
@@ -763,9 +812,9 @@ permalink: /simulator/
     <div class="sim-selector-grid" id="sim-selector"></div>
     <div class="sim-step-label" style="margin-top:8px;">Step 2 · Apply baseline shock</div>
     <div class="sim-preset-row">
-      <button type="button" class="preset-shock" data-preset="supply_cut" data-tone="bear" data-preset-apply="supply_cut">Supply Disruption +15%</button>
-      <button type="button" class="preset-shock" data-preset="demand_surge" data-tone="bull" data-preset-apply="demand_surge">Demand Surge +10%</button>
-      <button type="button" class="preset-shock" data-preset="recession" data-tone="neutral" data-preset-apply="recession">Recession -20%</button>
+      <button class="preset-shock" data-preset="supply_cut" data-tone="bear" onclick="applyPreset('supply_cut')">Supply Disruption +15%</button>
+      <button class="preset-shock" data-preset="demand_surge" data-tone="bull" onclick="applyPreset('demand_surge')">Demand Surge +10%</button>
+      <button class="preset-shock" data-preset="recession" data-tone="neutral" onclick="applyPreset('recession')">Recession -20%</button>
     </div>
   </div>
 
@@ -776,19 +825,20 @@ permalink: /simulator/
         <div class="sim-chart-title" id="sim-chart-title">Select a scenario to view analysis</div>
         <div class="sim-chart-subtitle" id="sim-chart-subtitle">Historical prices + consensus forecast with Chronos-2 and TimesFM comparison</div>
         <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;">
-          <div id="sim-active-scenario-badge" class="hidden"></div>
-          <button type="button" data-action="copy-share" style="padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.04);color:#cbd5e1;font-size:0.78rem;font-weight:700;cursor:pointer;">Copy share link</button>
+          <div id="sim-active-scenario-badge" style="display:none;"></div>
+          <button type="button" onclick="copySimulatorShareLink()" style="padding:7px 11px;border-radius:999px;border:1px solid rgba(255,255,255,0.09);background:rgba(255,255,255,0.04);color:#cbd5e1;font-size:0.78rem;font-weight:700;cursor:pointer;">Copy share link</button>
         </div>
       </div>
       <div class="sim-period-btns">
-        <button type="button" class="sim-period-btn active" data-period="3m" data-period-set="3m">3M</button>
-        <button type="button" class="sim-period-btn" data-period="6m" data-period-set="6m">6M</button>
-        <button type="button" class="sim-period-btn" data-period="1y" data-period-set="1y">1Y</button>
+        <button class="sim-period-btn active" data-period="3m" onclick="setPeriod('3m',this)">3M</button>
+        <button class="sim-period-btn" data-period="6m" onclick="setPeriod('6m',this)">6M</button>
+        <button class="sim-period-btn" data-period="1y" onclick="setPeriod('1y',this)">1Y</button>
       </div>
     </div>
     <div class="sim-chart-stage">
       <canvas id="sim-chart"></canvas>
     </div>
+    <div class="chart-end-strip chart-end-strip--sim" id="sim-chart-end-strip" aria-label="Forecast endpoint labels"></div>
     <div class="sim-legend">
       <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#64748b"></div><span><strong>History</strong><br><span>Observed settlement path</span></span></div>
       <div class="sim-legend-item"><div class="sim-legend-dot" style="color:#5eead4;filter:drop-shadow(0 0 6px rgba(94,234,212,0.45))"></div><span><strong id="sim-legend-model">Consensus</strong><br><span>Primary forecast path</span></span></div>
@@ -803,32 +853,32 @@ permalink: /simulator/
 
   <div class="sim-saved-strip">
     <div>
-      <div class="eyebrow-cyan">Saved workflow context</div>
-      <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Save the commodity and your watchlist once, then this simulator becomes a much sharper daily decision surface.</div>
-      <div data-profile-has-saved class="hidden">
-        <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
-        <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
+      <div class="sim-inline-kicker">Saved workflow context</div>
+      <div data-profile-empty class="sim-inline-copy">No workflow saved yet. Save the commodity and your watchlist once, then this simulator becomes a much sharper daily decision surface.</div>
+      <div data-profile-has-saved style="display:none;">
+        <div class="sim-inline-copy-strong" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
+        <p class="sim-inline-copy" style="margin:8px 0 0;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-        <a href="/start/" class="btn btn-secondary min-w-200-center" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
+      <div class="sim-inline-actions">
+        <a href="/start/" class="btn btn-secondary" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
         <a href="/pro/" class="btn btn-secondary" data-profile-secondary-link><span data-profile-secondary-label>See Pro workflow</span></a>
       </div>
     </div>
     <div class="sim-saved-grid">
       <div class="sim-saved-card">
-        <div class="eyebrow-cyan">Saved role</div>
+        <div class="sim-saved-card-label">Saved role</div>
         <strong data-profile-role>Not set yet</strong>
       </div>
       <div class="sim-saved-card">
-        <div class="eyebrow-cyan">Saved commodities</div>
+        <div class="sim-saved-card-label">Saved commodities</div>
         <strong data-profile-commodities>No tracked commodities yet</strong>
       </div>
       <div class="sim-saved-card">
-        <div class="eyebrow-cyan">Watchlist</div>
+        <div class="sim-saved-card-label">Watchlist</div>
         <strong data-profile-watchlist>No saved watchlist names yet</strong>
       </div>
       <div class="sim-saved-card">
-        <div class="eyebrow-cyan">Freshness</div>
+        <div class="sim-saved-card-label">Freshness</div>
         <strong data-profile-updated>Not saved yet</strong>
       </div>
     </div>
@@ -836,7 +886,7 @@ permalink: /simulator/
 
     <div class="sim-decision-brief">
       <div class="sim-decision-label">Decision workflow</div>
-      <p class="sim-decision-copy">Start with the preset shock, confirm the forecast direction, then read industry impact first and upgrade to company sensitivity only when naming the trade matters.</p>
+      <p class="sim-decision-copy">Start with the preset shock, confirm the forecast direction, then read industry impact first and upgrade to company sensitivity only when company-level exposure matters.</p>
       <div class="sim-decision-flow">
         <div class="sim-decision-step">
           <strong>1. Set the base shock</strong>
@@ -848,48 +898,70 @@ permalink: /simulator/
         </div>
         <div class="sim-decision-step">
           <strong>3. Translate to positions</strong>
-          <span>Use sector direction first, then unlock stock-level sensitivity when naming the trade matters.</span>
+          <span>Use sector direction first, then unlock stock-level sensitivity when company-level exposure matters.</span>
         </div>
       </div>
-      <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model comparison. Not investment advice. <a href="/methodology/" class="text-accent">See methodology</a></p>
+      <p style="color:var(--text3);font-size:0.78rem;margin:0;" id="sim-forecast-note">Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model comparison. Research only. <a href="/methodology/" style="color:#22d3ee;">See methodology</a></p>
+      <div class="sim-proof-strip" id="sim-proof-strip">
+        <article class="sim-proof-card">
+          <span class="sim-proof-label">Model stack</span>
+          <strong class="sim-proof-value">Chronos-2 + TimesFM 2.5 + no-harm routing</strong>
+          <span class="sim-proof-meta">Production consensus chooses the route that held up better in holdout checks.</span>
+        </article>
+        <article class="sim-proof-card">
+          <span class="sim-proof-label">Benchmark basis</span>
+          <strong class="sim-proof-value">5Y · 30D · 8 windows</strong>
+          <span class="sim-proof-meta">Weighted-score evaluation with best-context comparisons before promotion.</span>
+        </article>
+        <article class="sim-proof-card">
+          <span class="sim-proof-label">Scenario use</span>
+          <strong class="sim-proof-value">Stress test, not prophecy</strong>
+          <span class="sim-proof-meta">Use the chart to compare paths and exposure, not to pretend precision is certainty.</span>
+        </article>
+        <article class="sim-proof-card">
+          <span class="sim-proof-label">Methodology</span>
+          <strong class="sim-proof-value" id="sim-proof-freshness">Daily forecast refresh</strong>
+          <span class="sim-proof-meta"><a class="sim-proof-link" href="/methodology/">Review methodology</a></span>
+        </article>
+      </div>
     </div>
 
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 14px;">
-    <div class="surface-card surface-card--compact">
-      <div class="eyebrow-cyan">Where the free workflow stops</div>
-      <p class="body-text-65">Free shows the move, forecast direction, and sector-level pressure. Pro matters when you need named winners, losers, and conviction before you act.</p>
+  <div class="sim-panel-note-grid">
+    <div class="sim-panel-note sim-panel-note--neutral">
+      <div class="sim-panel-note-title sim-panel-note-title--cyan">Where the free workflow stops</div>
+      <p class="sim-panel-note-copy sim-panel-note-copy--neutral">Free shows the move, forecast direction, and sector-level pressure. Pro matters when you need named winners, losers, and conviction before you act.</p>
     </div>
-    <div style="padding:16px 18px;border-radius:16px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+    <div class="sim-panel-note sim-panel-note--accent">
       <div>
-        <div class="eyebrow-cyan eyebrow-cyan--mb6">Best use of Pro</div>
-        <p style="margin:0;color:var(--text2);line-height:1.6;font-size:0.88rem;">Run the scenario, verify model agreement, then name the actual winners and losers before the market fully reprices.</p>
+        <div class="sim-panel-note-title sim-panel-note-title--cyan">Best use of Pro</div>
+        <p class="sim-panel-note-copy sim-panel-note-copy--neutral">Run the scenario, verify model agreement, then name the actual winners and losers before the market fully reprices.</p>
       </div>
-      <a href="/pricing/" class="btn btn-primary min-w-220-center" data-cta="simulator_unlock_full_workflow">Unlock stock-level decision workflow</a>
+      <a href="/pricing/" class="btn btn-primary sim-inline-btn" data-cta="simulator_unlock_full_workflow">Unlock stock-level decision workflow</a>
     </div>
-    <div style="padding:16px 18px;border-radius:16px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+    <div class="sim-panel-note sim-panel-note--violet">
       <div>
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;margin-bottom:6px;">New premium layer</div>
-        <p style="margin:0;color:#ddd6fe;line-height:1.6;font-size:0.88rem;">If you want event odds, ripple ranking, stress tests, hedge ideas, explainability, anomaly detection, and a trust-first policy decision console, open Intelligence Lab.</p>
+        <div class="sim-panel-note-title sim-panel-note-title--violet">New premium layer</div>
+        <p class="sim-panel-note-copy sim-panel-note-copy--violet">If you want event odds, ripple ranking, stress tests, hedge ideas, explainability, anomaly detection, and a trust-first policy decision console, open Intelligence Lab.</p>
       </div>
-      <div class="chip-group-wrap">
-        <a href="/intelligence-lab/" class="btn btn-secondary min-w-220-center" data-cta="simulator_open_intelligence_lab">Open Intelligence Lab</a>
-        <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary min-w-220-center" data-cta="simulator_open_rl_policy_lab">Open RL Policy Lab</a>
+      <div class="sim-inline-actions">
+        <a href="/intelligence-lab/" class="btn btn-secondary sim-inline-btn" data-cta="simulator_open_intelligence_lab">Open Intelligence Lab</a>
+        <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary sim-inline-btn" data-cta="simulator_open_rl_policy_lab">Open RL Policy Lab</a>
       </div>
     </div>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:0 0 16px;">
-    <div style="padding:18px 20px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
-      <div class="eyebrow-cyan">Outcome summary</div>
-      <div id="sim-outcome-brief" style="color:var(--text2);line-height:1.7;font-size:0.9rem;">Run a baseline or event scenario to see likely winners, losers, and the confidence-sensitive read.</div>
+  <div class="sim-outcome-grid">
+    <div class="sim-outcome-card sim-outcome-card--neutral">
+      <div class="sim-panel-note-title sim-panel-note-title--cyan">Outcome summary</div>
+      <div id="sim-outcome-brief" class="sim-inline-copy">Run a baseline or event scenario to see likely winners, losers, and the confidence-sensitive read.</div>
     </div>
-    <div style="padding:18px 20px;border-radius:16px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:grid;gap:10px;">
+    <div class="sim-outcome-card sim-outcome-card--violet">
       <div>
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;margin-bottom:6px;">Watchlist relevance</div>
-        <div id="sim-watchlist-brief" style="color:#ddd6fe;line-height:1.7;font-size:0.88rem;">Save a watchlist to see which names line up with this commodity shock.</div>
+        <div class="sim-panel-note-title sim-panel-note-title--violet">Watchlist relevance</div>
+        <div id="sim-watchlist-brief" class="sim-panel-note-copy sim-panel-note-copy--violet">Save a watchlist to see which names line up with this commodity shock.</div>
       </div>
-      <div class="chip-group-wrap">
-        <button type="button" class="btn btn-secondary min-w-180-center" data-save-commodity="crude-oil" data-cta="simulator_save_current_workflow" id="sim-save-workflow-btn">Save this workflow</button>
-        <a href="/start/" class="btn btn-secondary min-w-180-center" data-cta="simulator_build_watchlist">Build watchlist</a>
+      <div class="sim-outcome-actions">
+        <button class="btn btn-secondary" data-save-commodity="crude-oil" data-cta="simulator_save_current_workflow" id="sim-save-workflow-btn">Save this workflow</button>
+        <a href="/start/" class="btn btn-secondary" data-cta="simulator_build_watchlist">Build watchlist</a>
       </div>
     </div>
   </div>
@@ -915,6 +987,13 @@ permalink: /simulator/
   </div>
 
   <div class="sim-analytics-grid">
+    <section class="sim-analytics-card sim-decision-frame" id="sim-decision-frame" aria-labelledby="sim-decision-question">
+      <h3 id="sim-decision-question">Is this commodity shock worth acting on now?</h3>
+      <p id="sim-decision-result" class="sim-analytics-readout">Select a commodity and scenario to translate the move into a workflow.</p>
+      <div class="sim-decision-inputs" id="sim-decision-inputs"></div>
+      <div class="sim-decision-trust" id="sim-decision-trust">Decision frames route the workflow; they do not automate decisions.</div>
+      <div class="sim-decision-actions" id="sim-decision-actions"></div>
+    </section>
     <section class="sim-analytics-card">
       <h3>Impact tornado</h3>
       <p>Ranks the sectors with the largest scenario-adjusted pressure or upside, so the first downstream read is obvious.</p>
@@ -935,7 +1014,7 @@ permalink: /simulator/
       <p>Shows the public path, downside, and upside band so confidence is visible instead of implied.</p>
       <div id="sim-forecast-cone-chart" class="sim-analytics-stage"></div>
     </section>
-    <section class="sim-analytics-card">
+    <section class="sim-analytics-card sim-analytics-card--timeline">
       <h3>Event timeline</h3>
       <p>Turns preset scenarios into an event beam so the active catalysts read like a sequence, not a flat checklist.</p>
       <div id="sim-event-timeline-chart" class="sim-analytics-stage"></div>
@@ -1541,19 +1620,23 @@ function isCompactMobile() {
 }
 
 // ── Fetch forecast data ───────────────────────────────────────────────────
-// Build-time version param stays stable for a given deploy so browser
-// and CDN caches do their job; a new build bumps the version automatically.
-var DATA_VERSION = '{{ site.time | date: "%Y%m%d%H%M" }}';
 function loadForecast() {
-  Promise.all([
-    fetch('/assets/data/forecast.json?v=' + DATA_VERSION).then(function(r){ return r.json(); }),
-    fetch('/assets/data/forecast-consensus.json?v=' + DATA_VERSION)
-      .then(function(r){ return r.ok ? r.json() : {}; })
-      .catch(function(){ return {}; })
-  ])
-    .then(function(responses){
-      state.forecastData = responses[0] || {};
-      state.consensusData = responses[1] || {};
+  var loader = window.CNDataStore && window.CNDataStore.getForecastBundle
+    ? window.CNDataStore.getForecastBundle(true)
+    : Promise.all([
+        fetch('/assets/data/forecast.json?v=' + Date.now()).then(function(r){ return r.json(); }),
+        fetch('/assets/data/forecast-consensus.json?v=' + Date.now())
+          .then(function(r){ return r.ok ? r.json() : {}; })
+          .catch(function(){ return {}; })
+      ]).then(function(responses){
+        return { forecast: responses[0] || {}, consensus: responses[1] || {} };
+      });
+  loader
+    .then(function(bundle){
+      state.forecastData = bundle.forecast || {};
+      state.consensusData = bundle.consensus || {};
+      window.CNSimulatorConsensusData = state.consensusData;
+      window.CNSimulatorForecastData = state.forecastData;
       renderSelector();
       selectCommodity(state.commodity);
       if (state.pendingScenarioIds && state.pendingScenarioIds.length) {
@@ -1608,7 +1691,7 @@ function renderSelector(){
     var chg = d ? d.change_90d_pct : null;
     var chgClass = chg === null ? 'neutral' : chg >= 0 ? 'up' : 'down';
     var chgStr = chg === null ? '90d: —' : '90d: ' + (chg >= 0 ? '+' : '') + chg + '%';
-    return '<button type="button" class="sim-commodity-btn' + (item.key===state.commodity?' active':'') + '" data-sim-commodity="'+item.key+'">'
+    return '<button class="sim-commodity-btn' + (item.key===state.commodity?' active':'') + '" onclick="selectCommodity(\''+item.key+'\')">'
       + '<span class="btn-name">' + item.icon + ' ' + item.name + '</span>'
       + '<span class="btn-price">' + price + '</span>'
       + '<span class="btn-change ' + chgClass + '">' + chgStr + '</span>'
@@ -1675,17 +1758,52 @@ function formatAxisLabel(raw, compact){
 
 function buildTickIndexMap(total, forecastStart, compact){
   if (total <= 0) return {};
-  var targetTicks = compact ? 4 : 7;
-  var step = Math.max(1, Math.ceil((total - 1) / targetTicks));
+  var targetTicks = compact ? 4 : 6;
+  var minGap = compact ? 18 : 24;
+  var step = Math.max(minGap, Math.ceil((total - 1) / targetTicks));
   var map = {};
-  map[0] = true;
-  map[total - 1] = true;
-  for (var i = 0; i < total; i += step) map[i] = true;
-  if (forecastStart > 0 && forecastStart < total - 1) {
-    map[forecastStart] = true;
-    if (!compact && forecastStart - 1 > 0) map[forecastStart - 1] = true;
+  function addTick(index) {
+    index = Math.max(0, Math.min(total - 1, Math.round(index)));
+    Object.keys(map).forEach(function(existing) {
+      if (Math.abs(Number(existing) - index) < minGap) delete map[existing];
+    });
+    map[index] = true;
   }
+  addTick(0);
+  for (var i = step; i < total - 1; i += step) addTick(i);
+  if (forecastStart > minGap && forecastStart < total - minGap) addTick(forecastStart);
+  addTick(total - 1);
   return map;
+}
+
+function resolveSimulatorConsensusEntry(key) {
+  var stateStore = state && state.consensusData;
+  if (stateStore && stateStore[key]) return stateStore[key];
+  var globalStore = window.CNSimulatorConsensusData || {};
+  return globalStore && globalStore[key] ? globalStore[key] : null;
+}
+
+function resolveSimulatorConsensusPayload(entry) {
+  if (!entry || !entry.consensus) return null;
+  var consensus = entry.consensus;
+  var hasMedian = Array.isArray(consensus.median) && consensus.median.length > 0;
+  if (!hasMedian) return null;
+  if (consensus.status && consensus.status !== 'ready' && consensus.status !== 'ok') return null;
+  return consensus;
+}
+
+function resolveSimulatorModelPayload(entry, modelKey) {
+  return entry && entry.models && entry.models[modelKey] ? entry.models[modelKey] : null;
+}
+
+function simulatorRouteWeightText(consensus) {
+  if (!consensus) return 'single-model route';
+  var weights = consensus.weights_day_90 || consensus.weights || consensus.weights_day_30 || {};
+  var source = String(consensus.weight_source || '').replace(/-/g, ' ');
+  var chronos = Math.round((weights.chronos2 || 0) * 100);
+  var timesfm = Math.round((weights.timesfm || 0) * 100);
+  if (!chronos && !timesfm) return source || 'production consensus route';
+  return (source ? source + ' · ' : '') + 'Chronos ' + chronos + '% / TimesFM ' + timesfm + '%';
 }
 
 function renderChart(){
@@ -1697,10 +1815,10 @@ function renderChart(){
   if(!canvas) return;
 
   var d = state.forecastData && state.forecastData[key];
-  var c = state.consensusData && state.consensusData[key] ? state.consensusData[key] : null;
-  var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
-  var chronos = c && c.models ? c.models.chronos2 : null;
-  var timesfm = c && c.models ? c.models.timesfm : null;
+  var c = resolveSimulatorConsensusEntry(key);
+  var consensus = resolveSimulatorConsensusPayload(c);
+  var chronos = resolveSimulatorModelPayload(c, 'chronos2');
+  var timesfm = resolveSimulatorModelPayload(c, 'timesfm');
   var fallbackChronos = d && (d.ag_forecast || d.forecast) ? (d.ag_forecast || d.forecast) : null;
   var fallbackTimesfm = d && d.timesfm_forecast ? d.timesfm_forecast : null;
   var activeForecast = consensus || fallbackTimesfm || fallbackChronos || (d ? d.forecast : null);
@@ -1708,9 +1826,9 @@ function renderChart(){
   var subtitleEl = document.getElementById('sim-chart-subtitle');
   var legendEl = document.getElementById('sim-legend-model');
   var noteEl = document.getElementById('sim-forecast-note');
-  if (subtitleEl) subtitleEl.textContent = 'Historical prices + consensus curve with Chronos-2 and TimesFM comparison';
+  if (subtitleEl) subtitleEl.textContent = consensus ? simulatorRouteWeightText(consensus) : 'Historical prices + consensus curve with Chronos-2 and TimesFM comparison';
   if (legendEl) legendEl.textContent = 'Consensus';
-  if (noteEl) noteEl.innerHTML = 'Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model spread tracking. Not investment advice. <a href="/methodology/" class="text-accent">See methodology</a>';
+  if (noteEl) noteEl.innerHTML = 'Forecasts are probabilistic. Consensus combines Chronos-2 and TimesFM 2.5, with p10–p90 ranges and model spread tracking. Research only. <a href="/methodology/" style="color:#22d3ee;">See methodology</a>';
 
   var scenarioAdj = calcScenarioAdjustment();
   var histLabels = [], histPrices = [];
@@ -1775,6 +1893,80 @@ function renderChart(){
 
   if(state.chart){ state.chart.destroy(); }
 
+  function updateSimulatorProofFreshness() {
+    var el = document.getElementById('sim-proof-freshness');
+    if (el) el.textContent = 'Daily refresh · ' + new Date().toLocaleString('en-US', { month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+
+  function drawSimulatorLineEndLabels(chart) {
+    if (window.innerWidth <= 1100 || chart.width <= 760) return;
+    var area = chart && chart.chartArea;
+    if (!area) return;
+    var ctx2 = chart.ctx;
+    var wanted = ['Consensus', 'Chronos-2', 'TimesFM 2.5'];
+    var items = [];
+    chart.data.datasets.forEach(function(dataset, index){
+      if (wanted.indexOf(dataset.label) === -1 || chart.isDatasetVisible(index) === false) return;
+      var meta = chart.getDatasetMeta(index);
+      if (!meta || !meta.data || !meta.data.length) return;
+      var point = null;
+      for (var i = meta.data.length - 1; i >= 0; i -= 1) {
+        var raw = dataset.data[i];
+        var val = raw && typeof raw === 'object' ? raw.y : raw;
+        if (typeof val === 'number' && isFinite(val) && meta.data[i] && meta.data[i].x != null && meta.data[i].y != null) { point = meta.data[i]; break; }
+      }
+      if (!point) return;
+      items.push({ text: dataset.label.replace(' 2.5',''), color: dataset.borderColor, x: point.x, y: point.y });
+    });
+    items.sort(function(a,b){ return a.y - b.y; });
+    var gap = 22;
+    for (var j = 1; j < items.length; j += 1) if (items[j].y - items[j-1].y < gap) items[j].y = items[j-1].y + gap;
+    ctx2.save();
+    ctx2.font = '800 12.5px Inter, system-ui, sans-serif';
+    ctx2.textBaseline = 'middle';
+    items.forEach(function(item){
+      var textWidth = ctx2.measureText(item.text).width;
+      var boxWidth = textWidth + 20;
+      var boxHeight = 22;
+      var boxX = Math.max(area.left + 8, area.right - boxWidth - 10);
+      var boxY = Math.max(area.top + 8, Math.min(area.bottom - boxHeight - 6, item.y - boxHeight / 2));
+      ctx2.strokeStyle = item.color;
+      ctx2.lineWidth = 1.4;
+      ctx2.beginPath();
+      ctx2.moveTo(item.x + 2, item.y);
+      ctx2.lineTo(boxX - 6, boxY + boxHeight / 2);
+      ctx2.stroke();
+      ctx2.fillStyle = 'rgba(5,10,20,0.96)';
+      if (ctx2.roundRect) { ctx2.beginPath(); ctx2.roundRect(boxX, boxY, boxWidth, boxHeight, 8); ctx2.fill(); } else { ctx2.fillRect(boxX, boxY, boxWidth, boxHeight); }
+      ctx2.strokeStyle = item.color;
+      ctx2.lineWidth = 1.2;
+      ctx2.strokeRect(boxX, boxY, boxWidth, boxHeight);
+      ctx2.fillStyle = item.color;
+      ctx2.fillText(item.text, boxX + 10, boxY + boxHeight / 2 + 0.5);
+    });
+    ctx2.restore();
+  }
+
+  function renderSimulatorEndStrip(items) {
+    var el = document.getElementById('sim-chart-end-strip');
+    if (!el) return;
+    el.innerHTML = (items || []).filter(function(item) {
+      return item && item.value && item.value !== '—';
+    }).map(function(item) {
+      return '<div class="chart-end-chip">'
+        + '<span class="chart-end-chip__label" style="--chip-color:' + item.color + '">' + item.label + '</span>'
+        + '<strong class="chart-end-chip__value">' + item.value + '</strong>'
+        + '</div>';
+    }).join('');
+  }
+
+  updateSimulatorProofFreshness();
+  renderSimulatorEndStrip([
+    { label: 'Consensus', value: fmtPrice(fcstMedian[fcstMedian.length - 1], key), color: '#5eead4' },
+    { label: 'Chronos-2', value: fmtPrice(chronosMedian[chronosMedian.length - 1], key), color: 'rgba(192,132,252,0.99)' },
+    { label: 'TimesFM', value: fmtPrice(timesfmMedian[timesfmMedian.length - 1], key), color: 'rgba(250,204,21,1)' }
+  ]);
+
   var ctx = canvas.getContext('2d');
   state.chart = new Chart(ctx, {
     type: 'line',
@@ -1785,7 +1977,7 @@ function renderChart(){
           data: bandP90Dataset,
           borderColor: 'rgba(94,234,212,0)',
           borderWidth: 0,
-          backgroundColor: compact ? 'rgba(94,234,212,0.10)' : 'rgba(94,234,212,0.12)',
+          backgroundColor: compact ? 'rgba(94,234,212,0.055)' : 'rgba(94,234,212,0.06)',
           fill: '+1',
           pointRadius: 0,
           tension: 0.18,
@@ -1797,7 +1989,7 @@ function renderChart(){
           data: bandP10Dataset,
           borderColor: 'rgba(94,234,212,0)',
           borderWidth: 0,
-          backgroundColor: compact ? 'rgba(94,234,212,0.10)' : 'rgba(94,234,212,0.12)',
+          backgroundColor: compact ? 'rgba(94,234,212,0.055)' : 'rgba(94,234,212,0.06)',
           fill: false,
           pointRadius: 0,
           tension: 0.18,
@@ -1817,10 +2009,16 @@ function renderChart(){
         {
           label: 'Chronos-2',
           data: chronosDataset,
-          borderColor: 'rgba(192,132,252,0.96)',
-          borderWidth: compact ? 2.6 : 2.3,
-          borderDash: compact ? [7,4] : [8,5],
-          pointRadius: 0,
+          borderColor: 'rgba(192,132,252,0.99)',
+          borderWidth: compact ? 2.9 : 2.55,
+          borderDash: compact ? [8,4] : [10,5],
+          pointRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? (compact ? 3.2 : 3.8) : 0; },
+          pointHoverRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? (compact ? 4.5 : 5.2) : 0; },
+          pointBackgroundColor: 'rgba(192,132,252,1)',
+          pointBorderColor: 'rgba(15,23,42,0.95)',
+          pointBorderWidth: 1.2,
+          borderCapStyle: 'round',
+          borderJoinStyle: 'round',
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 4
@@ -1828,10 +2026,16 @@ function renderChart(){
         {
           label: 'TimesFM 2.5',
           data: timesfmDataset,
-          borderColor: 'rgba(251,191,36,0.98)',
-          borderWidth: compact ? 2.6 : 2.3,
-          borderDash: compact ? [4,4] : [5,5],
-          pointRadius: 0,
+          borderColor: 'rgba(250,204,21,1)',
+          borderWidth: compact ? 3.1 : 2.75,
+          borderDash: compact ? [2,5] : [3,7],
+          pointRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? (compact ? 3.4 : 4.1) : 0; },
+          pointHoverRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? (compact ? 4.7 : 5.4) : 0; },
+          pointBackgroundColor: 'rgba(250,204,21,1)',
+          pointBorderColor: 'rgba(15,23,42,0.95)',
+          pointBorderWidth: 1.2,
+          borderCapStyle: 'round',
+          borderJoinStyle: 'round',
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 3
@@ -1840,9 +2044,14 @@ function renderChart(){
           label: 'Consensus',
           data: consensusDataset,
           borderColor: '#5eead4',
-          borderWidth: compact ? 3.4 : 3.1,
-          pointRadius: 0,
-          pointHoverRadius: compact ? 4 : 5,
+          borderWidth: compact ? 2.7 : 2.45,
+          pointRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? (compact ? 3.2 : 3.8) : 0; },
+          pointHoverRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? (compact ? 4.5 : 5.2) : 0; },
+          pointBackgroundColor: '#5eead4',
+          pointBorderColor: 'rgba(15,23,42,0.95)',
+          pointBorderWidth: 1.1,
+          borderCapStyle: 'round',
+          borderJoinStyle: 'round',
           tension: 0.18,
           parsing: {xAxisKey:'x', yAxisKey:'y'},
           order: 2
@@ -1872,12 +2081,16 @@ function renderChart(){
         ctx2.fillText('Forecast starts', Math.min(x + 8, chartArea.right - 86), chartArea.top + 14);
         ctx2.restore();
       }
+    }, {
+      id: 'simLineEndLabels',
+      afterDatasetsDraw: function(chart) { drawSimulatorLineEndLabels(chart); }
     }],
     options: {
       responsive: true,
       maintainAspectRatio: false,
       animation: { duration: 400 },
       interaction: { mode: 'nearest', intersect: false },
+      layout: { padding: { right: window.innerWidth <= 1100 ? 0 : (compact ? 100 : 112), bottom: 8 } },
       scales: {
         x: {
           type: 'linear',
@@ -1901,7 +2114,9 @@ function renderChart(){
           grid: {
             drawTicks: false,
             color: function(context){
-              return Math.round(context.tick.value) === forecastStartIndex ? 'rgba(148,163,184,0.16)' : 'rgba(255,255,255,0.04)';
+              var index = Math.round(context.tick.value);
+              if (index === forecastStartIndex) return 'rgba(148,163,184,0.14)';
+              return tickIndexMap[index] ? 'rgba(255,255,255,0.026)' : 'rgba(255,255,255,0)';
             }
           },
           border: { color: 'rgba(255,255,255,0.08)' }
@@ -1976,23 +2191,30 @@ function renderChart(){
     var c90 = fcstMedian.length ? fcstMedian[Math.min(fcstMedian.length - 1, 89)] : null;
     var ch90 = chronosMedian.length ? chronosMedian[Math.min(chronosMedian.length - 1, 89)] : null;
     var tf90 = timesfmMedian.length ? timesfmMedian[Math.min(timesfmMedian.length - 1, 89)] : null;
+    var routeText = simulatorRouteWeightText(consensus);
+    var scenarioSuffix = calcScenarioAdjustment() ? '<div style="font-size:0.72rem;color:#94a3b8;margin-top:4px;">Values are scenario-adjusted; route weights remain production baseline.</div>' : '';
     strip.innerHTML = ''
       + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
       + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Agreement</div>'
-      + '<div class="title-bold-white">' + level.toUpperCase() + '</div>'
+      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + level.toUpperCase() + '</div>'
       + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
       + '</div>'
       + '<div style="padding:12px 14px;background:rgba(226,232,240,0.05);border:1px solid rgba(226,232,240,0.12);border-radius:12px;">'
       + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#e2e8f0;font-weight:700;margin-bottom:6px;">Consensus 90D</div>'
-      + '<div class="title-bold-white">' + fmtPrice(c90, key) + '</div>'
+      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(c90, key) + '</div>'
+      + '</div>'
+      + '<div style="padding:12px 14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.16);border-radius:12px;">'
+      + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:700;margin-bottom:6px;">Production Route</div>'
+      + '<div style="font-size:0.92rem;font-weight:800;color:#f8fafc;line-height:1.32;">' + routeText + '</div>'
+      + scenarioSuffix
       + '</div>'
       + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
       + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#a855f7;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
-      + '<div class="title-bold-white">' + fmtPrice(ch90, key) + '</div>'
+      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(ch90, key) + '</div>'
       + '</div>'
       + '<div style="padding:12px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.16);border-radius:12px;">'
       + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
-      + '<div class="title-bold-white">' + fmtPrice(tf90, key) + '</div>'
+      + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(tf90, key) + '</div>'
       + '</div>';
 
     if (compareStrip) {
@@ -2000,17 +2222,17 @@ function renderChart(){
       compareStrip.innerHTML = ''
         + '<div style="padding:12px 14px;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.18);border-radius:12px;">'
         + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#c084fc;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
-        + '<div class="title-bold-white">' + fmtPrice(ch90, key) + '</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(ch90, key) + '</div>'
         + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Visible in the main chart as a dashed comparison line</div>'
         + '</div>'
         + '<div style="padding:12px 14px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.18);border-radius:12px;">'
         + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
-        + '<div class="title-bold-white">' + fmtPrice(tf90, key) + '</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmtPrice(tf90, key) + '</div>'
         + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Visible in the main chart as a dashed comparison line</div>'
         + '</div>'
         + '<div style="padding:12px 14px;background:rgba(94,234,212,0.08);border:1px solid rgba(94,234,212,0.18);border-radius:12px;">'
         + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#5eead4;font-weight:700;margin-bottom:6px;">Model spread</div>'
-        + '<div class="title-bold-white">' + (spread != null ? fmtPrice(spread, key) : '—') + '</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + (spread != null ? fmtPrice(spread, key) : '—') + '</div>'
         + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Absolute gap between Chronos-2 and TimesFM at 90D</div>'
         + '</div>';
     }
@@ -2021,8 +2243,8 @@ function renderChart(){
 function renderStats(){
   var key = state.commodity;
   var d = state.forecastData && state.forecastData[key];
-  var c = state.consensusData && state.consensusData[key] ? state.consensusData[key] : null;
-  var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
+  var c = resolveSimulatorConsensusEntry(key);
+  var consensus = resolveSimulatorConsensusPayload(c);
   var activeMedian = consensus && consensus.median ? consensus.median : ((d && d.timesfm_forecast && d.timesfm_forecast.median) ? d.timesfm_forecast.median : (d && d.forecast ? d.forecast.median : null));
   var adj = 1 + calcScenarioAdjustment()/100;
   var itemMeta = SELECTOR_ITEMS.find(function(i){ return i.key===key; }) || {name:key};
@@ -2060,7 +2282,7 @@ function renderScenarios(){
     var badgeClass = s.dir === 'up' ? 'badge-up' : 'badge-down';
     var sign = s.dir === 'up' ? '+' : '';
     return '<div class="sim-scenario-item">'
-      + '<label class="sim-toggle"><input type="checkbox" ' + checked + ' data-scenario-id="' + s.id + '" data-scenario-impact="' + s.impact + '" aria-label="Toggle scenario: ' + (s.name || '').replace(/"/g,'&quot;') + '"><span class="sim-toggle-slider"></span></label>'
+      + '<label class="sim-toggle"><input type="checkbox" ' + checked + ' onchange="toggleScenario(\''+s.id+'\','+s.impact+',this)"><span class="sim-toggle-slider"></span></label>'
       + '<div class="sim-scenario-info"><div class="sim-scenario-name">' + s.name + '</div><div class="sim-scenario-impact">' + s.desc + '</div></div>'
       + '<span class="sim-scenario-badge ' + badgeClass + '">' + sign + s.impact + '%</span>'
       + '</div>';
@@ -2094,18 +2316,18 @@ window.toggleScenario = function(id, impact, checkbox){
 };
 
 function showSimulatorCTA() {
-  var existing = document.getElementById('sim-portfolio-cta');
+  var existing = document.getElementById('sim-watchlist-cta');
   if (existing) { existing.style.display = 'block'; return; }
   var cta = document.createElement('div');
-  cta.id = 'sim-portfolio-cta';
+  cta.id = 'sim-watchlist-cta';
   cta.style.cssText = 'margin-top:32px;padding:28px;background:linear-gradient(135deg,rgba(34,211,238,0.06),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.2);border-radius:16px;text-align:center;';
   cta.innerHTML = '<div style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#22d3ee;margin-bottom:12px">Next Step</div>'
-    + '<h3 style="font-size:1.2rem;color:#e2e8f0;margin-bottom:10px">Want to test your actual portfolio?</h3>'
+    + '<h3 style="font-size:1.2rem;color:#e2e8f0;margin-bottom:10px">Want to test your actual watchlist?</h3>'
     + '<p style="color:#94a3b8;font-size:0.88rem;margin-bottom:20px;max-width:420px;margin-left:auto;margin-right:auto;">Enter your real holdings and run stress tests across all 6 commodity scenarios. See exactly which positions are most at risk — before the market moves.</p>'
     + '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">'
     + '<a href="/stress-test/" style="padding:12px 24px;background:linear-gradient(135deg,#22d3ee,#a855f7);border-radius:10px;color:#050508;font-weight:800;font-size:0.88rem;text-decoration:none;">Run Portfolio Stress Test →</a>'
     + '<a href="/pricing/" style="display:inline-block;padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#e2e8f0;font-weight:600;font-size:0.88rem;cursor:pointer;text-decoration:none;">Unlock company sensitivity — Pro</a>'
-    + '<button type="button" class="sim-export-btn" data-action="sim-export">Export scenarios as CSV</button>'
+    + '<button onclick="exportScenariosCSV()" style="padding:12px 24px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#9494a8;font-weight:600;font-size:0.88rem;cursor:pointer;">Export scenarios as CSV</button>'
     + '</div>';
   var target = document.querySelector('.sim-scenario-panel') || document.querySelector('.sim-main-grid');
   if (target) target.parentNode.insertBefore(cta, target.nextSibling);
@@ -2125,33 +2347,6 @@ function getActiveScenarioSummary() {
   };
 }
 
-function formatCompactScenarioLabel(label) {
-  var text = String(label || '')
-    .replace(/\s*\([^)]*\)/g, '')
-    .replace(/\b(OPEC|DXY|USD|SPR|LNG|AI|EV)\b/g, function(m){ return m; })
-    .replace(/\s+/g, ' ')
-    .trim();
-  var aliases = [
-    [/Hormuz|missile|conflict|Iran/i, 'Hormuz\nshock'],
-    [/shadow.*fleet|sanction/i, 'Shadow\nfleet'],
-    [/1M|1\.0M|million|bbl/i, '1M bbl/d\nshock'],
-    [/500k|0\.5M/i, '500k bbl/d\nshock'],
-    [/DXY|USD|dollar/i, 'DXY\nmove'],
-    [/central bank|1,200t|BRICS/i, 'Central\nbanks'],
-    [/risk-on|S&P/i, 'Risk-on\nrotation'],
-    [/AI data|data center/i, 'AI data\ncenters'],
-    [/recession|demand/i, 'Demand\nshock']
-  ];
-  for (var i=0; i<aliases.length; i++) {
-    if (aliases[i][0].test(text)) return aliases[i][1];
-  }
-  if (text.length <= 18) return text;
-  var words = text.split(' ');
-  var first = words.slice(0, 2).join(' ');
-  var second = words.slice(2, 4).join(' ');
-  return (first.length > 18 ? first.slice(0, 17) + '…' : first) + (second ? '\n' + (second.length > 18 ? second.slice(0, 17) + '…' : second) : '');
-}
-
 function ensureEchart(key, id) {
   if (!window.echarts) return null;
   var el = document.getElementById(id);
@@ -2160,13 +2355,44 @@ function ensureEchart(key, id) {
   return state.echarts[key];
 }
 
+function renderSimulatorDecisionFrame(frame) {
+  if (!frame) return;
+  var q = document.getElementById('sim-decision-question');
+  var result = document.getElementById('sim-decision-result');
+  var inputs = document.getElementById('sim-decision-inputs');
+  var trust = document.getElementById('sim-decision-trust');
+  var actions = document.getElementById('sim-decision-actions');
+  if (q) q.textContent = frame.question || 'Is this commodity shock worth acting on now?';
+  if (result) result.textContent = frame.result || 'Use sector impact first, then verify deeper sensitivity.';
+  if (inputs) inputs.innerHTML = (frame.inputs || []).map(function(item){ return '<span>' + item + '</span>'; }).join('');
+  if (trust) trust.textContent = frame.trust || 'Decision frames route the workflow; they do not automate decisions.';
+  if (actions) actions.innerHTML = (frame.nextActions || []).map(function(action, idx){ return '<a class="btn ' + (idx === 0 ? 'btn-primary' : 'btn-secondary') + '" href="' + action.href + '">' + action.label + '</a>'; }).join('');
+}
+
+function compactScenarioLabel(label) {
+  label = String(label || '').replace(/\s+/g, ' ').trim();
+  var lower = label.toLowerCase();
+  if (lower.indexOf('iran') >= 0) return 'Iran conflict';
+  if (lower.indexOf('usd') >= 0 || lower.indexOf('dxy') >= 0) return 'USD -8%';
+  if (lower.indexOf('fed') >= 0 || lower.indexOf('rates') >= 0) return 'Fed cuts 3x';
+  if (lower.indexOf('central banks') >= 0 || lower.indexOf('1,200') >= 0 || lower.indexOf('1200') >= 0) return 'CB buys 1,200t';
+  if (lower.indexOf('risk-on') >= 0 || lower.indexOf('rally') >= 0) return 'Risk-on rally';
+  if (lower.indexOf('opec') >= 0) return 'OPEC shock';
+  if (lower.indexOf('china') >= 0) return 'China demand';
+  if (lower.indexOf('recession') >= 0) return 'Recession';
+  if (lower.indexOf('freight') >= 0) return 'Freight spike';
+  if (window.innerWidth <= 640 && label.length > 15) return label.slice(0, 14) + '…';
+  if (label.length > 20) return label.slice(0, 19) + '…';
+  return label;
+}
+
 function renderDecisionSurface() {
   var analytics = window.CNPhase1Analytics;
   if (!analytics) return;
   var key = state.commodity;
   var d = state.forecastData && state.forecastData[key];
-  var c = state.consensusData && state.consensusData[key] ? state.consensusData[key] : null;
-  var consensus = c && c.consensus && c.consensus.status === 'ready' ? c.consensus : null;
+  var c = resolveSimulatorConsensusEntry(key);
+  var consensus = resolveSimulatorConsensusPayload(c);
   var activeMedian = consensus && consensus.median ? consensus.median : ((d && d.timesfm_forecast && d.timesfm_forecast.median) ? d.timesfm_forecast.median : (d && d.forecast ? d.forecast.median : null));
   var metrics = analytics.buildSimulatorDecisionMetrics({
     commodity: key,
@@ -2180,17 +2406,18 @@ function renderDecisionSurface() {
     forecast30d: activeMedian && activeMedian.length > 29 ? activeMedian[29] : null,
     forecast90d: activeMedian && activeMedian.length > 89 ? activeMedian[89] : null
   });
+  renderSimulatorDecisionFrame(metrics.decisionFrame);
   var tornadoChart = ensureEchart('tornado', 'sim-impact-tornado-chart');
   if (tornadoChart) {
     var impactRows = metrics.impactTable.slice(0, 6).reverse();
     tornadoChart.setOption({
       backgroundColor:'transparent',
       animationDuration:280,
-      grid:{ top:16, left:118, right:22, bottom:36, containLabel:false },
-      xAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:12, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
-      yAxis:{ type:'category', data:impactRows.map(function(item){ return item.name; }), axisLabel:{ color:'#f8fafc', fontSize:12, fontWeight:600, margin:14, overflow:'truncate', width:104 } },
+      grid:{ top:12, left:96, right:18, bottom:26, containLabel:true },
+      xAxis:{ type:'value', axisLabel:{ color:'#94a3b8', fontSize:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.045)' } } },
+      yAxis:{ type:'category', data:impactRows.map(function(item){ return item.name; }), axisLabel:{ color:'#cbd5e1', width:82, overflow:'truncate', fontSize:11 } },
       tooltip:{ trigger:'axis', axisPointer:{ type:'shadow' }, backgroundColor:'rgba(13,13,20,0.95)' },
-      series:[{ type:'bar', label:{ show:true, position:'right', color:'#f8fafc', fontSize:11, fontWeight:700 }, data:impactRows.map(function(item){ return { value:item.score, itemStyle:{ color:item.score >= 0 ? '#22c55e' : '#f43f5e' } }; }), barMaxWidth:20, borderRadius:8 }]
+      series:[{ type:'bar', data:impactRows.map(function(item){ return { value:item.score, itemStyle:{ color:item.score >= 0 ? '#22c55e' : '#f43f5e' } }; }), barWidth:16, borderRadius:8 }]
     });
   }
   var scenarioChart = ensureEchart('scenarioCompare', 'sim-scenario-compare-chart');
@@ -2199,26 +2426,11 @@ function renderDecisionSurface() {
     scenarioChart.setOption({
       backgroundColor:'transparent',
       animationDuration:280,
-      grid:{ top:20, left:52, right:20, bottom:76, containLabel:true },
-      xAxis:{
-        type:'category',
-        data:rows.map(function(item){ return item.name; }),
-        axisLabel:{
-          color:'#f1f5f9',
-          interval:0,
-          rotate:0,
-          hideOverlap:false,
-          margin:14,
-          fontSize:12,
-          fontWeight:600,
-          lineHeight:14,
-          formatter:formatCompactScenarioLabel
-        },
-        axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } }
-      },
-      yAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:12, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
-      tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,20,0.95)', formatter:function(p){ return '<strong>' + p.name + '</strong><br/>Relevance: ' + p.value; } },
-      series:[{ type:'bar', label:{ show:true, position:'top', color:'#f8fafc', fontSize:12, fontWeight:700 }, data:rows.map(function(item){ return { value:Number(item.relevance.toFixed(1)), itemStyle:{ color:item.active ? '#22d3ee' : (item.impact >= 0 ? '#c084fc' : '#f59e0b') } }; }), barMaxWidth:30, borderRadius:[8,8,0,0] }]
+      grid:{ top:12, left:118, right:20, bottom:24, containLabel:true },
+      xAxis:{ type:'value', min:0, max:10, axisLabel:{ color:'#94a3b8', fontSize:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.045)' } } },
+      yAxis:{ type:'category', data:rows.map(function(item){ return compactScenarioLabel(item.name); }).reverse(), axisLabel:{ color:'#cbd5e1', width:104, overflow:'truncate', fontSize:11, fontWeight:700 }, axisTick:{ show:false }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
+      tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,20,0.95)' },
+      series:[{ type:'bar', data:rows.map(function(item){ return { value:Number(item.relevance.toFixed(1)), itemStyle:{ color:item.active ? '#22d3ee' : (item.impact >= 0 ? '#c084fc' : '#f59e0b') } }; }).reverse(), barWidth:16, borderRadius:[0,8,8,0], label:{ show:true, position:'right', color:'#f8fafc', fontSize:10, formatter:function(p){ return Number(p.value).toFixed(1); } } }]
     });
   }
   var gaugeChart = ensureEchart('decisionGauge', 'sim-decision-gauge-chart');
@@ -2237,7 +2449,7 @@ function renderDecisionSurface() {
         axisTick:{ show:false },
         axisLabel:{ show:false },
         pointer:{ show:false },
-        detail:{ valueAnimation:true, formatter:function(v){ return Math.round(v) + '\n' + metrics.readiness.band; }, color:'#f8fafc', fontSize:22, fontWeight:800, lineHeight:28, offsetCenter:[0,'18%'] },
+        detail:{ valueAnimation:true, formatter:function(v){ return Math.round(v) + '\n' + metrics.readiness.band; }, color:'#f8fafc', fontSize:window.innerWidth <= 640 ? 14 : 18, lineHeight:window.innerWidth <= 640 ? 20 : 24, offsetCenter:[0, window.innerWidth <= 640 ? '22%' : '18%'] },
         title:{ show:false },
         data:[{ value:metrics.readiness.score }]
       }]
@@ -2250,8 +2462,10 @@ function renderDecisionSurface() {
   if (window.CNPremiumAnalytics) {
     var coneChart = ensureEchart('forecastCone', 'sim-forecast-cone-chart');
     if (coneChart) {
-      var historySlice = d && d.history ? getHistorySlice(d.history) : null;
-      var historySeries = historySlice && Array.isArray(historySlice.prices) ? historySlice.prices.slice(-16) : [];
+      var rawHistory = d && d.history;
+      var historySeries = Array.isArray(rawHistory)
+        ? rawHistory.slice(-16)
+        : (rawHistory && Array.isArray(rawHistory.prices) ? rawHistory.prices.slice(-16) : []);
       var lowSeries = consensus && consensus.p10 ? consensus.p10.slice(0, 16) : ((d && d.forecast && (d.forecast.p10 || d.forecast.p25)) ? (d.forecast.p10 || d.forecast.p25).slice(0, 16) : []);
       var highSeries = consensus && consensus.p90 ? consensus.p90.slice(0, 16) : ((d && d.forecast && (d.forecast.p90 || d.forecast.p75)) ? (d.forecast.p90 || d.forecast.p75).slice(0, 16) : []);
       var cone = window.CNPremiumAnalytics.buildForecastConeSeries(historySeries, (activeMedian || []).slice(0, 16), lowSeries, highSeries);
@@ -2259,12 +2473,12 @@ function renderDecisionSurface() {
         backgroundColor:'transparent',
         animationDuration:360,
         tooltip:{ trigger:'axis', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
-        legend:{ top:0, left:0, right:0, itemWidth:14, itemHeight:8, itemGap:10, textStyle:{ color:'#f1f5f9', fontSize:12, fontWeight:600 }, type:'plain' },
-        grid:{ top:58, left:52, right:22, bottom:42, containLabel:true },
-        xAxis:{ type:'category', data: cone.labels, axisLabel:{ color:'#f1f5f9', fontSize:12, margin:12, interval:function(i){ return i % 4 === 0; } }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } } },
-        yAxis:{ type:'value', axisLabel:{ color:'#f1f5f9', fontSize:12, margin:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.07)' } } },
+        legend:{ top:0, textStyle:{ color:'#cbd5e1' } },
+        grid:{ top:38, left:46, right:18, bottom:32, containLabel:true },
+        xAxis:{ type:'category', data: cone.labels, axisLabel:{ color:'#94a3b8', interval:function(i){ return i % 4 === 0; }, fontSize:10, margin:10 }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
+        yAxis:{ type:'value', axisLabel:{ color:'#94a3b8', fontSize:10 }, splitLine:{ lineStyle:{ color:'rgba(255,255,255,0.045)' } } },
         series:[
-          { name:'History', type:'line', symbol:'none', smooth:true, lineStyle:{ width:2.5, color:'#cbd5e1' }, data: cone.history },
+          { name:'History', type:'line', symbol:'none', smooth:true, lineStyle:{ width:2.5, color:'#94a3b8' }, data: cone.history },
           { name:'Forecast low', type:'line', symbol:'none', smooth:true, lineStyle:{ width:0 }, stack:'cone', data: cone.low },
           { name:'Confidence band', type:'line', symbol:'none', smooth:true, stack:'cone', areaStyle:{ color:'rgba(34,211,238,0.16)' }, lineStyle:{ width:0 }, data: cone.band },
           { name:'Median', type:'line', symbol:'none', smooth:true, lineStyle:{ width:3, color:'#22d3ee' }, data: cone.median }
@@ -2276,28 +2490,13 @@ function renderDecisionSurface() {
       var timeline = window.CNPremiumAnalytics.buildEventTimeline(metrics.scenarioTable.slice(0, 5).map(function(item){
         return { label:item.name, impact:item.impact, note:item.active ? 'Active scenario' : 'Scenario available' };
       }));
-      var timelineMax = Math.max.apply(null, timeline.map(function(item){ return item.score || 0; }).concat([10]));
       timelineChart.setOption({
         backgroundColor:'transparent',
-        grid:{ top:22, right:20, bottom:80, left:32, containLabel:true },
-        xAxis:{
-          type:'category',
-          data: timeline.map(function(item){ return item.label; }),
-          axisLabel:{
-            color:'#f1f5f9',
-            interval:0,
-            rotate:0,
-            margin:14,
-            fontSize:12,
-            fontWeight:600,
-            lineHeight:14,
-            formatter:formatCompactScenarioLabel
-          },
-          axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.12)' } }
-        },
-        yAxis:{ type:'value', show:false, min:0, max:Math.ceil(timelineMax * 1.28) },
-        tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)', formatter:function(p){ return '<strong>' + p.name + '</strong><br/>Event score: ' + p.value; } },
-        series:[{ type:'bar', data: timeline.map(function(item){ return { value:item.score, itemStyle:{ color:item.direction === 'up' ? '#22d3ee' : '#f43f5e' } }; }), barMaxWidth:24, showBackground:true, backgroundStyle:{ color:'rgba(255,255,255,0.04)' }, label:{ show:true, position:'top', color:'#f8fafc', fontSize:11, fontWeight:700 } }]
+        grid:{ top:14, right:22, bottom:18, left:118, containLabel:true },
+        xAxis:{ type:'value', show:false, min:0, max:100 },
+        yAxis:{ type:'category', data: timeline.map(function(item){ return compactScenarioLabel(item.label); }).reverse(), axisLabel:{ color:'#cbd5e1', width:108, overflow:'truncate', fontSize:11, fontWeight:700 }, axisTick:{ show:false }, axisLine:{ lineStyle:{ color:'rgba(255,255,255,0.08)' } } },
+        tooltip:{ trigger:'item', backgroundColor:'rgba(13,13,24,0.96)', borderColor:'rgba(255,255,255,0.08)' },
+        series:[{ type:'bar', data: timeline.map(function(item){ return { value:item.score, itemStyle:{ color:item.direction === 'up' ? '#22d3ee' : '#f43f5e' } }; }).reverse(), barWidth:14, showBackground:true, backgroundStyle:{ color:'rgba(255,255,255,0.04)', borderRadius:[0,8,8,0] }, borderRadius:[0,8,8,0], label:{ show:true, position:'right', color:'#94a3b8', fontSize:10, formatter:function(p){ return Math.round(p.value); } } }]
       });
     }
   }
@@ -2313,9 +2512,9 @@ function renderOutcomeSummary(){
   var industries = (INDUSTRY_IMPACTS[key] || INDUSTRY_IMPACTS['crude_oil']).slice().sort(function(a,b){ return Math.abs(b.base) - Math.abs(a.base); }).slice(0, 2).map(function(item){ return item.name; });
   var el = document.getElementById('sim-outcome-brief');
   if (!el) return;
-  el.innerHTML = 'Most decision-relevant sectors right now: <strong class="white-text">' + industries.join(', ') + '</strong>. '
-    + (positive.length ? 'Likely beneficiaries to verify next: <strong class="white-text">' + positive.join(', ') + '</strong>. ' : '')
-    + (negative.length ? 'Likely pressure points: <strong class="white-text">' + negative.join(', ') + '</strong>. ' : '')
+  el.innerHTML = 'Most decision-relevant sectors right now: <strong style="color:#f8fafc;">' + industries.join(', ') + '</strong>. '
+    + (positive.length ? 'Likely beneficiaries to verify next: <strong style="color:#f8fafc;">' + positive.join(', ') + '</strong>. ' : '')
+    + (negative.length ? 'Likely pressure points: <strong style="color:#f8fafc;">' + negative.join(', ') + '</strong>. ' : '')
     + 'Use Pro when you need the named winners and losers, not just the direction.';
 }
 
@@ -2339,7 +2538,7 @@ function renderWatchlistRelevance(){
     el.textContent = 'Saved watchlist: ' + profile.watchlist.join(', ') + '. None of those names are in this commodity sensitivity map yet, so use the hub and sector layer first.';
     return;
   }
-  el.innerHTML = 'Saved watchlist overlap: <strong class="white-text">' + matches.slice(0, 3).map(function(item){
+  el.innerHTML = 'Saved watchlist overlap: <strong style="color:#f8fafc;">' + matches.slice(0, 3).map(function(item){
     return item.name + ' ' + (item.impact >= 0 ? '+' : '') + item.impact.toFixed(1) + '%';
   }).join(' · ') + '</strong>.';
 }
@@ -2585,34 +2784,6 @@ window.addEventListener('resize', function(){
         if (window.CNEvents) window.CNEvents.send('sample_run', { source:'simulator_quick', preset:key });
       });
     });
-  });
-})();
-</script>
-
-<style>
-.sim-export-btn { padding:12px 24px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:10px; color:#9494a8; font-weight:600; font-size:0.88rem; cursor:pointer; }
-.sim-export-btn:hover { background:rgba(255,255,255,0.08); }
-</style>
-<script>
-(function(){
-  document.addEventListener('click', function(ev){
-    var preset = ev.target.closest('[data-preset-apply]');
-    if (preset && typeof applyPreset === 'function') { applyPreset(preset.dataset.presetApply); return; }
-    var period = ev.target.closest('[data-period-set]');
-    if (period && typeof setPeriod === 'function') { setPeriod(period.dataset.periodSet, period); return; }
-    var com = ev.target.closest('[data-sim-commodity]');
-    if (com && typeof selectCommodity === 'function') { selectCommodity(com.dataset.simCommodity); return; }
-    var act = ev.target.closest('[data-action]');
-    if (!act) return;
-    var a = act.dataset.action;
-    if (a === 'copy-share' && typeof copySimulatorShareLink === 'function') copySimulatorShareLink();
-    else if (a === 'sim-export' && typeof exportScenariosCSV === 'function') exportScenariosCSV();
-  });
-  document.addEventListener('change', function(ev){
-    var cb = ev.target.closest('input[type="checkbox"][data-scenario-id][data-scenario-impact]');
-    if (cb && typeof toggleScenario === 'function') {
-      toggleScenario(cb.dataset.scenarioId, parseFloat(cb.dataset.scenarioImpact), cb);
-    }
   });
 })();
 </script>

@@ -1,17 +1,38 @@
 ---
 layout: default
-title: "Commodity Impact Maps for Markets and Supply Chains"
-description: "Commodity intelligence platform tracking ripple effects from oil, metals, agriculture, and energy across industries, stocks, ETFs, and supply chains."
+title: "Commodity Market Intelligence for Supply Chains and Macro Risk"
+description: "Commodity market intelligence and scenario analytics for supply-chain risk monitoring, procurement planning, macro research, and business planning."
 image: "/assets/images/og-default.png"
+page_css:
+  - home
 ---
+
+<script>
+(function(){
+  if (window.CNResolveDataStore && window.CNDataStoreFallback) return;
+  function fetchJson(url){
+    return fetch(url).then(function(res){ return res.ok ? res.json() : {}; }).catch(function(){ return {}; });
+  }
+  window.CNDataStoreFallback = window.CNDataStoreFallback || {
+    getPrices: function(){ return fetchJson('/assets/data/prices.json'); },
+    getForecastBundle: function(){
+      return Promise.all([
+        fetchJson('/assets/data/forecast.json'),
+        fetchJson('/assets/data/forecast-consensus.json')
+      ]).then(function(parts){ return { forecast: parts[0] || {}, consensus: parts[1] || {} }; });
+    }
+  };
+  window.CNResolveDataStore = function(){ return window.CNDataStore || window.CNDataStoreFallback; };
+})();
+</script>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Commodity Impact Maps for Markets and Supply Chains",
+  "name": "Commodity Market Intelligence for Supply Chains and Macro Risk",
   "url": "https://commoditynode.com/",
-  "description": "Commodity intelligence platform tracking ripple effects from oil, metals, agriculture, and energy across industries, stocks, ETFs, and supply chains.",
+  "description": "Commodity market intelligence and scenario analytics for supply-chain risk monitoring, procurement planning, macro research, and business planning.",
   "mainEntity": {
     "@type": "ItemList",
     "name": "Commodity Hubs",
@@ -38,46 +59,8 @@ image: "/assets/images/og-default.png"
 }
 </script>
 
-<style>
-@media (max-width: 768px) {
-  #actionable-setups-grid { grid-template-columns: 1fr !important; }
-  #actionable-setups-grid article,
-  [data-cta="home_intelligence_lab_flagship"],
-  [data-cta="home_intelligence_lab_rl_featured"],
-  [data-cta="home_intelligence_lab_event_featured"],
-  [data-cta="home_role_investor"],
-  [data-cta="home_role_analyst"],
-  [data-cta="home_role_operator"] {
-    padding: 16px !important;
-    border-radius: 16px !important;
-  }
-  [data-cta="home_open_todays_reports"],
-  [data-cta="home_go_straight_simulator"],
-  [data-cta="home_open_intelligence_lab"],
-  [data-cta="home_open_rl_policy_lab"],
-  [data-cta="home_build_workflow"],
-  [data-cta="home_compare_free_pro"] {
-    width: 100%;
-    min-width: 0 !important;
-  }
-}
-
-@media (max-width: 560px) {
-  #actionable-setups-grid article strong,
-  [data-cta="home_role_investor"] > div:nth-child(2),
-  [data-cta="home_role_analyst"] > div:nth-child(2),
-  [data-cta="home_role_operator"] > div:nth-child(2) {
-    line-height: 1.45;
-  }
-  #actionable-setups-grid .btn {
-    width: 100%;
-    min-width: 0 !important;
-  }
-}
-</style>
-
 <!-- Scroll Progress Indicator -->
-<div id="scroll-progress" style="position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#22d3ee,#a855f7);width:0%;z-index:9998;transition:width 0.1s;pointer-events:none;"></div>
+<div id="scroll-progress" class="page-home-scroll-progress"></div>
 
 <!-- ===== HERO ===== -->
 <section class="hero hero--terminal" aria-label="Hero">
@@ -91,16 +74,16 @@ image: "/assets/images/og-default.png"
         </div>
 
         <h1 data-animate data-delay="100">
-          See which <span class="highlight">commodity shock</span> matters to your watchlist before the market reprices.
+          Commodity market intelligence for supply chain, procurement, and macro risk decisions.
         </h1>
 
         <p class="hero-desc hero-desc--tight" data-animate data-delay="160">
-          Track oil, metals, agriculture, and supply-chain shocks across your watchlist, sector exposure, and scenario risk — with decision-ready context, not just charts.
+          Monitor commodity volatility, simulate price shocks, and generate research-grade scenario memos with AI-assisted analytics.
         </p>
 
         <div class="hero-actions" data-animate data-delay="220">
           <a href="/start/" class="btn btn-primary btn-primary--xl" data-cta="hero_build_watchlist_intelligence">
-            Build my watchlist intelligence
+            Generate a Free Shock Memo
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 6 15 12 9 18"/></svg>
           </a>
           <a href="/intelligence-lab/" class="btn btn-secondary" data-cta="hero_see_risk_map">See today’s commodity risk map</a>
@@ -118,8 +101,8 @@ image: "/assets/images/og-default.png"
 
         <div class="hero-persona-row" data-animate data-delay="300" role="group" aria-label="Choose your role">
           <a href="/for-self-directed-investors/" class="hero-persona-chip" data-cta="hero_persona_investor">
-            <span class="hero-persona-kicker">For investors</span>
-            <span class="hero-persona-desc">Which names change when the commodity move matters</span>
+            <span class="hero-persona-kicker">For market watchers</span>
+            <span class="hero-persona-desc">Research commodity-linked business and market risk without recommendations</span>
           </a>
           <a href="/for-equity-analysts/" class="hero-persona-chip" data-cta="hero_persona_analyst">
             <span class="hero-persona-kicker">For analysts</span>
@@ -147,30 +130,14 @@ image: "/assets/images/og-default.png"
         </div>
 
         <section class="hero-impact-card" id="hero-impact-card" aria-labelledby="hero-impact-title">
-          <div class="hero-impact-copy">
-            <div class="hero-impact-kicker">Active propagation</div>
-            <div class="hero-impact-title-row">
-              <h2 id="hero-impact-title" class="hero-impact-title">Loading live shock…</h2>
-              <span class="hero-impact-change" id="hero-impact-change">—</span>
-            </div>
-            <p class="hero-impact-summary" id="hero-impact-summary">Mapping the first-order sector impact and the second-order company themes around the biggest live move.</p>
-            <div class="hero-impact-metrics" id="hero-impact-metrics" aria-live="polite">
-              <div class="hero-impact-metric">
-                <span class="hero-impact-metric-label">Primary beneficiaries</span>
-                <strong id="hero-impact-positive">—</strong>
-              </div>
-              <div class="hero-impact-metric">
-                <span class="hero-impact-metric-label">Primary pressure</span>
-                <strong id="hero-impact-negative">—</strong>
-              </div>
-              <div class="hero-impact-metric">
-                <span class="hero-impact-metric-label">Uncertain / watch</span>
-                <strong id="hero-impact-watch">—</strong>
-              </div>
-            </div>
-          </div>
-
           <div class="hero-impact-scene-wrap">
+            <div class="hero-impact-scene-head">
+              <div>
+                <div class="hero-impact-kicker">Live propagation map</div>
+                <div class="hero-impact-scene-title">Commodity shock galaxy</div>
+              </div>
+              <div class="hero-impact-scene-note">Real-time node field</div>
+            </div>
             <div class="hero-impact-scene" id="hero-impact-scene">
               <canvas id="hero-impact-canvas" aria-hidden="true"></canvas>
               <div class="hero-impact-tooltip" id="hero-impact-tooltip" hidden></div>
@@ -184,6 +151,33 @@ image: "/assets/images/og-default.png"
               <span><i class="hero-impact-dot hero-impact-dot--positive"></i> Beneficiary</span>
               <span><i class="hero-impact-dot hero-impact-dot--negative"></i> Pressure</span>
               <span><i class="hero-impact-dot hero-impact-dot--watch"></i> Watchlist</span>
+            </div>
+          </div>
+
+          <div class="hero-impact-copy">
+            <div class="hero-impact-copy-head">
+              <div>
+                <div class="hero-impact-kicker">Active propagation</div>
+                <div class="hero-impact-title-row">
+                  <h2 id="hero-impact-title" class="hero-impact-title">Latest available shock: Natural Gas storage pressure</h2>
+                  <span class="hero-impact-change" id="hero-impact-change">Signal pending live refresh</span>
+                </div>
+              </div>
+            </div>
+            <p class="hero-impact-summary" id="hero-impact-summary">Mapping the first-order sector impact and the second-order company themes around the biggest live move.</p>
+            <div class="hero-impact-metrics" id="hero-impact-metrics" aria-live="polite">
+              <div class="hero-impact-metric">
+                <span class="hero-impact-metric-label">Beneficiary</span>
+                <strong id="hero-impact-positive">—</strong>
+              </div>
+              <div class="hero-impact-metric">
+                <span class="hero-impact-metric-label">Pressure</span>
+                <strong id="hero-impact-negative">—</strong>
+              </div>
+              <div class="hero-impact-metric">
+                <span class="hero-impact-metric-label">Watch next</span>
+                <strong id="hero-impact-watch">—</strong>
+              </div>
             </div>
           </div>
         </section>
@@ -380,7 +374,7 @@ image: "/assets/images/og-default.png"
             : 'Open the live hub first, then use the simulator if you need scenario context before the market reprices.';
           return '<article style="padding:18px;border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,0.035),rgba(255,255,255,0.018));border:1px solid rgba(255,255,255,0.08);box-shadow:0 16px 38px rgba(2,6,23,0.28);display:grid;gap:12px;">'
             + '<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">'
-            + '<div class="eyebrow-cyan">Actionable setup ' + (idx + 1) + '</div>'
+            + '<div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;">Actionable setup ' + (idx + 1) + '</div>'
             + '<div style="font-size:0.92rem;font-weight:800;color:' + dirColor + '">' + sign + d.change_pct.toFixed(1) + '%</div>'
             + '</div>'
             + '<div>'
@@ -390,23 +384,23 @@ image: "/assets/images/og-default.png"
             + '<p style="margin:0;color:var(--text2);line-height:1.7;font-size:0.9rem;">' + implication + '</p>'
             + '<div style="display:grid;gap:8px;">'
             + '<div style="padding:12px 14px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.84rem;color:#cbd5e1;line-height:1.6;">'
-            + '<strong class="title-white-block">Why it matters now</strong>'
+            + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Why it matters now</strong>'
             + getExposureTeaser(key)
             + '</div>'
             + '<div style="padding:12px 14px;border-radius:14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);font-size:0.84rem;color:#d8d4ff;line-height:1.6;">'
-            + '<strong class="title-white-block">Model read</strong>'
+            + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Model read</strong>'
             + getModelTeaser(key, d.change_pct)
             + '</div>'
             + '<div style="padding:12px 14px;border-radius:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);font-size:0.84rem;color:#d1fae5;line-height:1.6;">'
-            + '<strong class="title-white-block">Why people pay</strong>'
+            + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Why people pay</strong>'
             + getProUnlockTeaser(key)
             + '</div>'
             + '</div>'
             + '<div style="padding:12px 14px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.84rem;color:#cbd5e1;line-height:1.6;">'
-            + '<strong class="title-white-block">Best next step</strong>'
+            + '<strong style="color:#f8fafc;display:block;margin-bottom:4px;">Best next step</strong>'
             + nextStepCopy
             + '</div>'
-            + '<div class="chip-group-wrap">'
+            + '<div style="display:flex;gap:10px;flex-wrap:wrap;">'
             + '<a href="' + primaryHref + '" class="btn btn-primary" data-cta="home_actionable_setup_open" style="min-width:190px;justify-content:center;">' + actionLabel + '</a>'
             + '<a href="' + secondaryHref + '" class="btn btn-secondary" data-cta="home_actionable_setup_hub" style="min-width:170px;justify-content:center;">' + secondaryLabel + '</a>'
             + '</div>'
@@ -415,7 +409,7 @@ image: "/assets/images/og-default.png"
       }
 
       document.addEventListener('DOMContentLoaded', function(){
-        fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
+        (window.CNResolveDataStore ? window.CNResolveDataStore() : window.CNDataStore).getPrices().then(function(d){
           var oil=d.crude_oil; if(oil){
             var el=document.getElementById('hero-wti-change');
             if(el){
@@ -466,66 +460,6 @@ image: "/assets/images/og-default.png"
 </section>
 
 <!-- ===== HERO SHOCK RAIL + HEATMAP DATA BINDING ===== -->
-
-<!-- ===== MODEL PROOF COMMAND CENTER ===== -->
-<section class="section model-proof-command-center" aria-labelledby="model-proof-title" data-animate>
-  <div class="container">
-    <div style="padding:24px;border-radius:26px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.07),rgba(2,6,23,0.88));border:1px solid rgba(34,211,238,0.16);box-shadow:0 28px 80px rgba(2,6,23,0.34);">
-      <div class="eyebrow-cyan">Model proof command center</div>
-      <h2 id="model-proof-title" style="margin:8px 0 10px;color:#f8fafc;font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.03em;">News catalyst → forecast range → RL action → impact workflow</h2>
-      <p class="body-text" style="max-width:820px;">CommodityNode is being positioned as a paid-grade decision engine: the live catalyst explains what changed, the time-series stack estimates the path, Neural PPO selects the defensible policy action, and the simulator translates it into sectors and names.</p>
-      <div id="home-model-proof-calls" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:18px;" aria-live="polite">
-        <article style="padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.035);"><div class="eyebrow-cyan">Replay proof</div><strong style="display:block;color:#f8fafc;margin-top:6px;">91% historical replay target-match</strong><p class="body-text-65">Scoped to replay / walk-forward validation, not a live trading guarantee.</p></article>
-        <article style="padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.035);"><div class="eyebrow-cyan">Policy engine</div><strong style="display:block;color:#f8fafc;margin-top:6px;">PPO + behavior prior + regime calibration</strong><p class="body-text-65">Designed to turn model state into an action, not just another chart.</p></article>
-        <article style="padding:16px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.035);"><div class="eyebrow-cyan">Timestamped calls</div><strong style="display:block;color:#f8fafc;margin-top:6px;">Snapshot archive + outcome tracker</strong><p class="body-text-65">Every proof card can point to the model call that existed before the outcome label.</p></article>
-      </div>
-      <div class="chip-group-wrap" style="margin-top:18px;">
-        <a href="/reports/" class="btn btn-primary" data-cta="home_model_proof_open_reports">Open timestamped reports</a>
-        <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary" data-cta="home_model_proof_open_rl_lab">Inspect RL Policy Lab</a>
-        <a href="/pricing/" class="btn btn-secondary" data-cta="home_model_proof_pricing">See Pro workflow</a>
-      </div>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  function safeText(value){ return String(value == null ? '' : value); }
-  function safeSitePath(value){
-    var path = String(value || '');
-    return path.indexOf('//') !== 0 && /^\/[a-z0-9\-/_]*\/?$/i.test(path) ? path : '/reports/';
-  }
-  function appendText(el, value){ el.textContent = safeText(value); return el; }
-  Promise.all([
-    fetch('/assets/data/model-call-snapshots.json').then(function(r){ return r.json(); }),
-    fetch('/assets/data/news-catalysts.json').then(function(r){ return r.json(); }).catch(function(){ return {catalysts:{}}; })
-  ]).then(function(payloads){
-    var data = payloads[0] || {};
-    var catalystMap = (payloads[1] && payloads[1].catalysts) || {};
-    var host = document.getElementById('home-model-proof-calls');
-    if (!host || !data.calls) return;
-    host.textContent = '';
-    data.calls.slice(0,3).forEach(function(call){
-      var article = document.createElement('article');
-      article.setAttribute('style', 'padding:16px;border-radius:18px;border:1px solid rgba(34,211,238,0.14);background:rgba(8,12,20,0.46);display:grid;gap:8px;');
-      var commodityKey = safeText(call.commodity_slug).replace(/-/g, '_');
-      var catalyst = (catalystMap[commodityKey] || [])[0] || {};
-      var kicker = appendText(document.createElement('div'), call.commodity); kicker.className = 'eyebrow-cyan';
-      var title = appendText(document.createElement('strong'), safeText(call.rl_action) + ' · ' + Math.round((call.rl_probability||0)*100) + '% policy probability');
-      title.setAttribute('style', 'color:#f8fafc;line-height:1.35;');
-      var catalystText = catalyst.headline || (call.news_catalysts || []).slice(0,2).join(' · ');
-      var copy = appendText(document.createElement('p'), safeText(catalystText) + ' → ' + safeText(call.forecast_direction) + ' forecast path.');
-      copy.className = 'body-text-65';
-      var link = appendText(document.createElement('a'), 'Open model call →');
-      link.href = safeSitePath(call.source_report_url);
-      link.className = 'text-accent';
-      link.setAttribute("data-cta", "home_model_proof_open_call");
-      article.append(kicker, title, copy, link);
-      host.appendChild(article);
-    });
-  }).catch(function(){});
-})();
-</script>
-
 <script>
 (function(){
   // Commodity → sector impact weights (-3..+3 per sector for positive price delta)
@@ -540,13 +474,13 @@ image: "/assets/images/og-default.png"
     { key:'uranium', label:'Uranium' }
   ];
   var HEAT_COLS = [
-    { key:'energy', label:'Energy', short:'EN' },
-    { key:'airlines', label:'Airlines', short:'AIR' },
-    { key:'metals', label:'Metals/Mining', short:'MET' },
-    { key:'utilities', label:'Utilities', short:'UTL' },
-    { key:'agri', label:'Agri/Food', short:'AG' },
-    { key:'ev', label:'EV/Battery', short:'EV' },
-    { key:'chem', label:'Chemicals', short:'CHEM' }
+    { key:'energy', label:'Energy', shortLabel:'Energy' },
+    { key:'airlines', label:'Airlines', shortLabel:'Air' },
+    { key:'metals', label:'Metals/Mining', shortLabel:'Metals' },
+    { key:'utilities', label:'Utilities', shortLabel:'Util' },
+    { key:'agri', label:'Agri/Food', shortLabel:'Agri' },
+    { key:'ev', label:'EV/Battery', shortLabel:'EV' },
+    { key:'chem', label:'Chemicals', shortLabel:'Chem' }
   ];
   // Base sensitivity matrix at +1% move (row → col)
   var HEAT_WEIGHTS = {
@@ -607,7 +541,8 @@ image: "/assets/images/og-default.png"
     html += '<div class="hero-heatmap-row hero-heatmap-row--head">';
     html += '<div class="hero-heatmap-axis"></div>';
     HEAT_COLS.forEach(function(c){
-      html += '<div class="hero-heatmap-col-label" title="'+c.label+'" data-full-label="'+c.label+'" data-short-label="'+(c.short || c.label)+'">'+c.label+'</div>';
+      var displayLabel = (window.innerWidth <= 1360 && c.shortLabel) ? c.shortLabel : c.label;
+      html += '<div class="hero-heatmap-col-label" title="'+c.label+'"><span>'+displayLabel+'</span></div>';
     });
     html += '</div>';
     HEAT_ROWS.forEach(function(r){
@@ -646,7 +581,7 @@ image: "/assets/images/og-default.png"
     try { renderHeatmap(prices); } catch(e){}
   }
   document.addEventListener('DOMContentLoaded', function(){
-    fetch('/assets/data/prices.json').then(function(r){ return r.json(); })
+    (window.CNResolveDataStore ? window.CNResolveDataStore() : window.CNDataStore).getPrices()
       .then(hydrate)
       .catch(function(){ hydrate(FALLBACK); });
     // Safety: if still skeleton after 1.2s, hydrate fallback
@@ -675,7 +610,7 @@ image: "/assets/images/og-default.png"
           </div>
           <h3>Track the shock</h3>
           <p>Live commodity tape with 52-week range, agreement score, and disruption alerts — not another headline feed.</p>
-          <a href="/commodities/" class="howit-step-link" data-cta="howit_step_track">See live hubs →</a>
+          <span class="howit-step-link">See live hubs in the main navigation</span>
         </div>
       </li>
       <li class="howit-step">
@@ -686,7 +621,7 @@ image: "/assets/images/og-default.png"
           </div>
           <h3>Map the impact</h3>
           <p>Industries, sectors, and named companies ranked by sensitivity to each move — with confidence and model agreement.</p>
-          <a href="/intelligence-lab/" class="howit-step-link" data-cta="howit_step_map">Open Intelligence Lab →</a>
+          <span class="howit-step-link">Open Intelligence Lab from the main navigation</span>
         </div>
       </li>
       <li class="howit-step">
@@ -697,41 +632,10 @@ image: "/assets/images/og-default.png"
           </div>
           <h3>Act with scenarios</h3>
           <p>Run Iran · China · OPEC · Fed scenarios against your watchlist and save a repeatable daily workflow.</p>
-          <a href="/simulator/" class="howit-step-link" data-cta="howit_step_act">Run a scenario →</a>
+          <span class="howit-step-link">Run the simulator once the move deserves work</span>
         </div>
       </li>
     </ol>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="publisher-trust-title" style="padding-top:24px;">
-  <div class="container">
-    <div style="max-width:1120px;margin:0 auto;padding:20px 22px;border-radius:16px;background:rgba(10,15,24,0.72);border:1px solid rgba(34,211,238,0.12);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-      <div>
-        <div style="font-size:0.74rem;letter-spacing:0.12em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Publisher standards</div>
-        <h2 id="publisher-trust-title" style="font-size:1.15rem;color:#f8fafc;margin:0 0 8px;">Built as a real commodity publisher, not a generic summary site</h2>
-        <p style="font-size:0.92rem;color:var(--text2);margin:0;line-height:1.7;">CommodityNode pairs live market pages with documented methodology, editorial review, correction paths, and transparent data caveats.</p>
-      </div>
-      <div class="grid-gap-10">
-        <a href="/about/editorial-team/" style="text-decoration:none;color:var(--text2);padding:12px 14px;border-radius:12px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.12);">Editorial Team →</a>
-        <a href="/about/editorial-process/" style="text-decoration:none;color:var(--text2);padding:12px 14px;border-radius:12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.12);">Editorial Process →</a>
-      </div>
-      <div class="grid-gap-10">
-        <a href="/methodology/" style="text-decoration:none;color:var(--text2);padding:12px 14px;border-radius:12px;background:rgba(168,85,247,0.05);border:1px solid rgba(168,85,247,0.12);">Methodology & data caveats →</a>
-        <a href="/contact/" style="text-decoration:none;color:var(--text2);padding:12px 14px;border-radius:12px;background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.12);">Corrections & contact →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Today's Key Insights -->
-<section class="todays-insights" id="todays-insights">
-  <div class="container">
-    <div class="insights-header">
-      <span class="insights-label">Live Intelligence</span>
-      <span class="insights-time" id="insights-time">Updated daily</span>
-    </div>
-    <div class="insights-list" id="insights-list"></div>
   </div>
 </section>
 
@@ -740,24 +644,24 @@ image: "/assets/images/og-default.png"
     <div style="display:grid;gap:16px;max-width:1180px;margin:0 auto;">
       <div style="display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
         <div>
-          <p class="section-label mb-8">Today’s actionable setups</p>
+          <p class="section-label" style="margin-bottom:8px;">Today’s actionable setups</p>
           <h2 class="section-title" id="actionable-setups-title" style="margin-bottom:10px;">Start with the moves most likely to change a position now.</h2>
           <p class="section-desc" style="max-width:720px;">Each setup starts with the live move, translates the downstream implication, then routes you into the hub or simulator before consensus catches up.</p>
         </div>
-        <div class="chip-group-wrap">
-          <a href="/reports/" class="btn btn-secondary min-w-200-center" data-cta="home_open_todays_reports">Open today’s live setups</a>
-          <a href="/simulator/" class="btn btn-primary min-w-220-center" data-cta="home_go_straight_simulator">Test a live scenario now</a>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="/reports/" class="btn btn-secondary" data-cta="home_open_todays_reports" style="min-width:200px;justify-content:center;">Open today’s live setups</a>
+          <a href="/simulator/" class="btn btn-primary" data-cta="home_go_straight_simulator" style="min-width:220px;justify-content:center;">Test a live scenario now</a>
         </div>
       </div>
       <div id="actionable-setups-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;"></div>
-      <div class="auto-grid-220">
-        <div class="surface-card surface-card--compact">
-          <div class="eyebrow-cyan">Why this is different</div>
-          <p class="body-text-65">Headlines tell you what moved. Charts tell you where it traded. CommodityNode tells you which sectors, stocks, and scenarios change next.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
+        <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Why this is different</div>
+          <p style="margin:0;color:var(--text2);line-height:1.65;">Headlines tell you what moved. Charts tell you where it traded. CommodityNode tells you which sectors, stocks, and scenarios change next.</p>
         </div>
-        <div class="surface-card surface-card--compact">
-          <div class="eyebrow-cyan">Best route to a decision</div>
-          <p class="body-text-65">Open the setup → read the live narrative → verify the forecast → model the scenario. Pro becomes relevant only when you need to finish the workflow.</p>
+        <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
+          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:8px;">Best route to a decision</div>
+          <p style="margin:0;color:var(--text2);line-height:1.65;">Open the setup → read the live narrative → verify the forecast → model the scenario. Pro becomes relevant only when you need to finish the workflow.</p>
         </div>
       </div>
     </div>
@@ -769,33 +673,33 @@ image: "/assets/images/og-default.png"
     <div style="max-width:1180px;margin:0 auto;display:grid;gap:14px;">
       <div style="padding:22px 24px;border-radius:20px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.16);display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center;">
         <div>
-          <p class="section-label mb-8">Personalized command center</p>
+          <p class="section-label" style="margin-bottom:8px;">Personalized command center</p>
           <h2 class="section-title" id="personalized-workflow-title" style="margin-bottom:10px;">Build your commodity decision workflow once. Reuse it every day.</h2>
           <p class="section-desc" style="max-width:760px;">Save your role, key commodities, watchlist names, and event playbooks so CommodityNode can route you straight to the setups that matter. This is how the product stops being a read and starts becoming a repeatable edge.</p>
           <div data-profile-empty style="margin-top:12px;color:var(--text2);line-height:1.7;">No workflow saved yet. Start with a role, a few commodities, and the names you actually care about.</div>
           <div style="margin-top:14px;color:#e2e8f0;font-size:0.92rem;font-weight:700;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
           <p data-profile-has-saved style="display:none;margin:10px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
         </div>
-        <div class="grid-gap-10">
+        <div style="display:grid;gap:10px;">
           <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-            <div class="eyebrow-cyan eyebrow-cyan--mb6">Saved role</div>
-            <div data-profile-role class="bold-white">Not set yet</div>
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved role</div>
+            <div style="color:#f8fafc;font-weight:700;" data-profile-role>Not set yet</div>
           </div>
           <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-            <div class="eyebrow-cyan eyebrow-cyan--mb6">Saved commodities</div>
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved commodities</div>
             <div style="color:#cbd5e1;line-height:1.65;" data-profile-commodities>No tracked commodities yet</div>
           </div>
           <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-            <div class="eyebrow-cyan eyebrow-cyan--mb6">Saved watchlist</div>
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved watchlist</div>
             <div style="color:#cbd5e1;line-height:1.65;" data-profile-watchlist>No saved watchlist names yet</div>
           </div>
           <div style="padding:14px 16px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-            <div class="eyebrow-cyan eyebrow-cyan--mb6">Saved playbooks</div>
+            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:800;margin-bottom:6px;">Saved playbooks</div>
             <div style="color:#cbd5e1;line-height:1.65;" data-profile-events>No event playbooks saved yet</div>
           </div>
-          <div class="chip-group-wrap">
-            <a href="/start/" class="btn btn-primary min-w-220-center" data-cta="home_build_workflow" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
-            <a href="/pro/" class="btn btn-secondary min-w-220-center" data-cta="home_compare_free_pro" data-profile-secondary-link><span data-profile-secondary-label>See Pro workflow</span></a>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a href="/start/" class="btn btn-primary" data-cta="home_build_workflow" data-profile-primary-link style="min-width:220px;justify-content:center;"><span data-profile-primary-label>Build my workflow</span></a>
+            <a href="/pricing/" class="btn btn-secondary" data-cta="home_compare_free_pro" data-profile-secondary-link style="min-width:220px;justify-content:center;"><span data-profile-secondary-label>Compare plans</span></a>
           </div>
         </div>
       </div>
@@ -803,215 +707,6 @@ image: "/assets/images/og-default.png"
   </div>
 </section>
 
-<section class="section" aria-labelledby="role-pathways-title" style="padding-top:12px;">
-  <div class="container">
-    <div style="max-width:1180px;margin:0 auto;display:grid;gap:14px;">
-      <div>
-        <p class="section-label mb-8">Who this is for</p>
-        <h2 class="section-title" id="role-pathways-title" style="margin-bottom:10px;">Choose the workflow that matches the decision you need to make.</h2>
-        <p class="section-desc" style="max-width:760px;">CommodityNode converts the same move into different next steps depending on whether you invest around commodity-sensitive names, cover sectors, or manage real-world input-cost exposure.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
-        <a href="/for-self-directed-investors/" data-cta="home_role_investor" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;gap:10px;">
-          <div class="eyebrow-cyan">Self-directed investors</div>
-          <div style="font-size:1.05rem;font-weight:800;color:#f8fafc;">Know which names change when the commodity move actually matters.</div>
-          <p class="body-text">Best if you trade or invest around energy, metals, agriculture, airlines, industrials, or battery-material names.</p>
-        </a>
-        <a href="/for-equity-analysts/" data-cta="home_role_analyst" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.14);display:grid;gap:10px;">
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;">Equity and sector analysts</div>
-          <div style="font-size:1.05rem;font-weight:800;color:#f8fafc;">Move from commodity tape to first-pass sector and company read faster.</div>
-          <p class="body-text">Best if you need a quicker route from price move to thesis framing, model agreement, and downstream sensitivity.</p>
-        </a>
-        <a href="/for-operators-and-procurement/" data-cta="home_role_operator" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);display:grid;gap:10px;">
-          <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:800;">Operators and procurement</div>
-          <div style="font-size:1.05rem;font-weight:800;color:#f8fafc;">Track input-cost shocks before they show up in margin pressure.</div>
-          <p class="body-text">Best if commodity volatility changes supplier risk, purchasing timing, or budget assumptions in the real world.</p>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="why-pay-title" style="padding-top:10px;">
-  <div class="container">
-    <div style="max-width:1180px;margin:0 auto;display:grid;gap:14px;">
-      <div>
-        <p class="section-label mb-8">Why people pay</p>
-        <h2 class="section-title" id="why-pay-title" style="margin-bottom:10px;">People do not pay for more commodity data. They pay to finish a decision faster.</h2>
-        <p class="section-desc" style="max-width:780px;">The real product is not the chart. It is the path from move → meaning → exposure → scenario → action. Free explains the move. Pro matters when the move is important enough that named exposure, model disagreement, and scenario confidence affect what you do next.</p>
-      </div>
-      <div class="auto-grid-220">
-        <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
-          <div class="eyebrow-cyan">Before</div>
-          <p class="body-text">Read a headline. Open a chart. Guess which names matter. Build the scenario translation manually.</p>
-        </div>
-        <div style="padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);">
-          <div class="eyebrow-cyan">After</div>
-          <p class="body-text">Open the setup, verify the hub, check model agreement, then run a scenario before the repricing feels obvious.</p>
-        </div>
-        <div style="padding:16px 18px;border-radius:16px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);">
-          <div class="eyebrow-cyan">What Pro changes</div>
-          <p class="body-text">Named winners and losers, scenario-aware conviction, and a repeatable workflow that is strong enough to use every week.</p>
-        </div>
-      </div>
-      <div class="auto-grid-220">
-        <a href="/energy-workflow/" data-cta="home_energy_workflow" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:8px;">
-          <div class="eyebrow-cyan">Energy workflow</div>
-          <div class="bold-white">Oil → airlines, chemicals, and energy equities</div>
-          <p class="body-text-65">Best when OPEC, geopolitical chokepoints, or demand shocks matter more than the headline.</p>
-        </a>
-        <a href="/battery-materials-workflow/" data-cta="home_battery_workflow" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:8px;">
-          <div class="eyebrow-cyan">Battery materials workflow</div>
-          <div class="bold-white">Lithium, nickel, and cobalt → EV chain translation</div>
-          <p class="body-text-65">Best when raw-material volatility changes battery, EV, and supply-chain narratives fast.</p>
-        </a>
-        <a href="/agriculture-margin-workflow/" data-cta="home_agri_workflow" style="text-decoration:none;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:8px;">
-          <div class="eyebrow-cyan">Agriculture margin workflow</div>
-          <div class="bold-white">Coffee, grains, and softs → cost pressure and relief</div>
-          <p class="body-text-65">Best when commodity moves show up in food, beverage, livestock, or consumer margins.</p>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" aria-labelledby="intelligence-lab-title" style="padding-top:12px;">
-  <div class="container">
-    <div style="max-width:1180px;margin:0 auto;display:grid;gap:14px;">
-      <div style="display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-        <div>
-          <p class="section-label mb-8">Flagship decision suite</p>
-          <h2 class="section-title" id="intelligence-lab-title" style="margin-bottom:10px;">Put the premium decision products where people can actually find them.</h2>
-          <p class="section-desc" style="max-width:780px;">Intelligence Lab is now the front-door decision suite for event odds, ripple ranking, exposure screening, stress testing, hedge design, explainability, anomaly detection, event studies, and RL policy guidance.</p>
-        </div>
-        <div class="chip-group-wrap">
-          <a href="/intelligence-lab/" class="btn btn-primary min-w-220-center" data-cta="home_open_intelligence_lab">Open Intelligence Lab</a>
-          <a href="/intelligence-lab/rl-policy-lab/" class="btn btn-secondary min-w-220-center" data-cta="home_open_rl_policy_lab">Open RL Policy Lab</a>
-        </div>
-      </div>
-      <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,0.8fr);gap:14px;align-items:stretch;">
-        <a href="/intelligence-lab/" data-cta="home_intelligence_lab_flagship" style="text-decoration:none;padding:20px 22px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.08),rgba(168,85,247,0.06));border:1px solid rgba(34,211,238,0.16);display:grid;gap:12px;box-shadow:0 18px 40px rgba(2,6,23,0.24);">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-            <div class="eyebrow-cyan">Visible from the homepage</div>
-            <div style="font-size:0.78rem;color:#cbd5e1;">10 premium products live</div>
-          </div>
-          <div style="font-size:1.28rem;font-weight:800;color:#f8fafc;line-height:1.25;">Open the full decision suite from the main navigation and homepage.</div>
-          <p style="margin:0;color:var(--text2);line-height:1.72;">Use one flagship hub to route users into the highest-value products fast: Event Probability Studio, Ripple Ranker, Exposure Screener, Stress Test, Hedge Optimizer, Explainability, Regime Shift, Anomaly Monitor, Event Studies, and RL Policy Lab as the premium policy-audit surface.</p>
-          <div class="chip-group-wrap">
-            <span style="display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border-radius:999px;background:rgba(34,211,238,0.12);border:1px solid rgba(34,211,238,0.18);color:#ecfeff;font-weight:700;font-size:0.84rem;">Open flagship hub</span>
-            <span style="display:inline-flex;align-items:center;justify-content:center;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#cbd5e1;font-weight:700;font-size:0.84rem;">Route by product intent</span>
-          </div>
-        </a>
-        <div style="display:grid;gap:12px;">
-          <a href="/intelligence-lab/rl-policy-lab/" data-cta="home_intelligence_lab_rl_featured" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(168,85,247,0.07);border:1px solid rgba(168,85,247,0.16);display:grid;gap:8px;">
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#c084fc;font-weight:800;">Featured flagship</div>
-            <div style="color:#f8fafc;font-weight:800;font-size:1.02rem;line-height:1.35;">RL Policy Lab</div>
-            <p style="margin:0;color:#ddd6fe;line-height:1.65;font-size:0.88rem;">Show the explainable policy console directly from homepage entry points as premium decision support, not as a win-rate autopilot pitch.</p>
-          </a>
-          <a href="/intelligence-lab/event-probability-studio/" data-cta="home_intelligence_lab_event_featured" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;gap:8px;">
-            <div class="eyebrow-cyan">Fastest conversion path</div>
-            <div style="color:#f8fafc;font-weight:800;font-size:1.02rem;line-height:1.35;">Event Probability Studio</div>
-            <p style="margin:0;color:var(--text2);line-height:1.65;font-size:0.88rem;">Lead with catalyst odds and follow with exposure translation when conversion intent is highest.</p>
-          </a>
-          <a href="/pricing/" data-cta="home_compare_intelligence_lab_tiers" style="text-decoration:none;padding:18px;border-radius:18px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);display:grid;gap:8px;">
-            <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:800;">Commercial packaging</div>
-            <div style="color:#f8fafc;font-weight:800;font-size:1.02rem;line-height:1.35;">See how the lab monetizes</div>
-            <p style="margin:0;color:var(--text2);line-height:1.65;font-size:0.88rem;">Make the Pro, Desk, and Enterprise path obvious from the same surface that introduces the product.</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== GUIDED ENTRY ===== -->
-<section class="guided-entry" id="guided-entry">
-  <div class="container">
-    <header class="guided-header">
-      <p class="guided-label">Where do you want to start?</p>
-      <h2 class="guided-title">What do you want to know?</h2>
-    </header>
-    <div class="guided-grid" id="guided-grid">
-      <a href="/commodities/" class="guided-card" data-category="prices">
-        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-        <div class="guided-content"><div class="guided-title-sm">Track commodity prices</div><div class="guided-desc">Real-time prices for 60+ tracked commodities, AI 90-day forecasts, and full ripple chain analysis — from commodity to stocks.</div></div>
-        <div class="guided-arrow">→</div>
-      </a>
-      <a href="/stress-test/" class="guided-card" data-category="portfolio">
-        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <div class="guided-content"><div class="guided-title-sm">Test my portfolio</div><div class="guided-desc">See how commodity shocks — oil spikes, copper crashes — impact your actual stock holdings.</div></div>
-        <div class="guided-arrow">→</div>
-      </a>
-      <a href="/disruptions/" class="guided-card" data-category="risk">
-        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-        <div class="guided-content"><div class="guided-title-sm">Monitor supply risks</div><div class="guided-desc">Geopolitical disruptions, mine strikes, weather events — and their price impact estimates.</div></div>
-        <div class="guided-arrow">→</div>
-      </a>
-      <a href="/signals/" class="guided-card" data-category="signals">
-        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 010 8.49"/><path d="M7.76 7.76a6 6 0 000 8.49"/><path d="M20.07 4.93a10 10 0 010 14.14"/><path d="M3.93 4.93a10 10 0 000 14.14"/></svg></div>
-        <div class="guided-content"><div class="guided-title-sm">Find trading signals</div><div class="guided-desc">Gold-Silver ratio, Copper-Gold divergence — historically validated cross-commodity signals.</div></div>
-        <div class="guided-arrow">→</div>
-      </a>
-      <a href="/simulator/" class="guided-card" data-category="scenarios">
-        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
-        <div class="guided-content"><div class="guided-title-sm">Run scenario stress tests</div><div class="guided-desc">Simulate Iran crisis, China slowdown, or Fed cuts — see which industries and companies are hit.</div></div>
-        <div class="guided-arrow">→</div>
-      </a>
-      <a href="/intelligence-lab/" class="guided-card" data-category="intelligence-lab">
-        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="6" r="1.5"/><circle cx="19" cy="6" r="1.5"/><circle cx="5" cy="18" r="1.5"/><circle cx="19" cy="18" r="1.5"/><path d="M12 12L5 6"/><path d="M12 12L19 6"/><path d="M12 12L5 18"/><path d="M12 12L19 18"/></svg></div>
-        <div class="guided-content"><div class="guided-title-sm">Open Intelligence Lab</div><div class="guided-desc">Go straight to the premium decision layer: event odds, ripple ranking, explainability, anomaly surfaces, and trust-first policy support.</div></div>
-        <div class="guided-arrow">→</div>
-      </a>
-      <a href="/correlation/" class="guided-card" data-category="analysis">
-        <div class="guided-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
-        <div class="guided-content"><div class="guided-title-sm">Analyze correlations</div><div class="guided-desc">Which commodities move together? Gold-Silver, Oil-Copper, Wheat-Corn — 15×15 Pearson matrix.</div></div>
-        <div class="guided-arrow">→</div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== LIVE FEATURE PREVIEW ===== -->
-<section class="feature-preview" id="feature-preview">
-  <div class="container">
-    <header class="section-header" data-animate>
-      <p class="section-label">Live Preview</p>
-      <h2 class="section-title">See it in action</h2>
-      <p class="section-desc">Real data. Right now. No signup required.</p>
-    </header>
-    <div class="preview-grid">
-      <div class="preview-card" data-animate>
-        <div class="preview-card-header"><span class="preview-card-label">52-Week Range</span><a href="/range-tracker/" class="preview-card-link">Full tracker →</a></div>
-        <div class="preview-ranges" id="preview-ranges"><div class="preview-range-skeleton"></div><div class="preview-range-skeleton"></div><div class="preview-range-skeleton"></div></div>
-      </div>
-      <div class="preview-card" data-animate data-delay="100">
-        <div class="preview-card-header"><span class="preview-card-label">Active Disruption</span><a href="/disruptions/" class="preview-card-link">All events →</a></div>
-        <div class="preview-disruption">
-          <div class="preview-disrupt-badge critical">Critical</div>
-          <div class="preview-disrupt-title">Iran–Strait of Hormuz Tension</div>
-          <div class="preview-disrupt-desc">~21% of global oil transit at risk. Insurance premiums +300%. Goldman Sachs: Brent >$120 within 30 days if closed.</div>
-          <div class="preview-disrupt-tags"><span class="preview-tag">Crude Oil</span><span class="preview-tag">LNG</span><span class="preview-tag">Fertilizers</span></div>
-          <div class="preview-disrupt-impact up">Est. Impact: +15~22%</div>
-        </div>
-      </div>
-      <div class="preview-card" data-animate data-delay="200">
-        <div class="preview-card-header"><span class="preview-card-label">Active Signal</span><a href="/signals/" class="preview-card-link">All signals →</a></div>
-        <div class="preview-signal">
-          <div class="preview-signal-dir strong-bull">Strong Bullish</div>
-          <div class="preview-signal-name">Gold–Silver Ratio Compression</div>
-          <div class="preview-signal-desc">Current ratio 64:1 vs. historical avg 67:1. Silver historically outperforms Gold by +12% when ratio compresses from this level.</div>
-          <div class="preview-signal-meta">
-            <div class="preview-meta-item"><div class="preview-meta-val" style="color:#10b981">71%</div><div class="preview-meta-label">Win Rate</div></div>
-            <div class="preview-meta-item"><div class="preview-meta-val text-accent">60d</div><div class="preview-meta-label">Horizon</div></div>
-            <div class="preview-meta-item"><div class="preview-meta-val" style="color:#a855f7">+12%</div><div class="preview-meta-label">Avg Move</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- ===== AI FORECAST PREVIEW ===== -->
 <section class="ai-forecast-preview section" id="ai-forecast-preview">
@@ -1022,19 +717,133 @@ image: "/assets/images/og-default.png"
       <p class="section-desc">Consensus forecasts built from Chronos-2 and TimesFM 2.5, with agreement scoring and full scenario bands.</p>
     </header>
 
+    <div class="home-forecast-proof" data-animate data-delay="40">
+      <article class="page-proof-card">
+        <span class="page-proof-label">Model stack</span>
+        <strong class="page-proof-value">Chronos-2 + TimesFM 2.5 + no-harm routing</strong>
+        <span class="page-proof-meta">Consensus prefers the route that avoided harming holdout quality across the simulator universe.</span>
+      </article>
+      <article class="page-proof-card">
+        <span class="page-proof-label">Benchmark basis</span>
+        <strong class="page-proof-value">5Y · 30D · 8 windows · weighted score</strong>
+        <span class="page-proof-meta">Best-context comparisons were used before anything hit production.</span>
+      </article>
+      <article class="page-proof-card">
+        <span class="page-proof-label">Freshness</span>
+        <strong class="page-proof-value" id="home-forecast-freshness">Daily forecast refresh</strong>
+        <span class="page-proof-meta">When a feed is weak, CommodityNode suppresses fake precision instead of forcing numbers.</span>
+      </article>
+      <article class="page-proof-card">
+        <span class="page-proof-label">Use next</span>
+        <strong class="page-proof-value">Open the simulator when the move matters</strong>
+        <span class="page-proof-meta"><a class="page-proof-link" href="/methodology/">Methodology</a> · <a class="page-proof-link" href="/simulator/">Scenario workflow</a></span>
+      </article>
+    </div>
+
     <div id="home-consensus-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:0 0 14px;" data-animate data-delay="60"></div>
 
     <div class="forecast-top-bar" data-animate>
       <div class="forecast-tabs">
-        <button type="button" class="forecast-tab active" data-commodity="gold">Gold</button>
-        <button type="button" class="forecast-tab" data-commodity="copper">Copper</button>
-        <button type="button" class="forecast-tab" data-commodity="crude_oil">Crude Oil</button>
+        <button class="forecast-tab active" data-commodity="gold">Gold</button>
+        <button class="forecast-tab" data-commodity="copper">Copper</button>
+        <button class="forecast-tab" data-commodity="crude_oil">Crude Oil</button>
       </div>
       <div class="forecast-horizon-tabs">
-        <button type="button" class="horizon-tab active" data-days="30">30D</button>
-        <button type="button" class="horizon-tab" data-days="60">60D</button>
-        <button type="button" class="horizon-tab" data-days="90">90D</button>
+        <button class="horizon-tab" data-days="30">30D</button>
+        <button class="horizon-tab" data-days="60">60D</button>
+        <button class="horizon-tab active" data-days="90">90D</button>
       </div>
+    </div>
+
+    <div class="forecast-orbit-shell" data-animate data-delay="80">
+      <section class="forecast-orbit-stage" aria-labelledby="forecast-orbit-title">
+        <div class="forecast-orbit-stage-head">
+          <div>
+            <div class="forecast-orbit-kicker">Commodity galaxy</div>
+            <h3 class="forecast-orbit-title" id="forecast-orbit-title">Gold command planet</h3>
+            <p class="forecast-orbit-subtitle" id="forecast-orbit-subtitle">A premium orbit map showing which companies, themes, and reports cluster around the active commodity setup.</p>
+          </div>
+          <div class="forecast-orbit-status-card">
+            <span class="forecast-orbit-status-label">Live orbit state</span>
+            <strong id="forecast-orbit-status">Companies · Themes · Reports</strong>
+            <span id="forecast-orbit-status-meta">Confidence, direction, and linked intelligence update with the selected commodity.</span>
+          </div>
+        </div>
+
+        <div class="forecast-orbit-scene" id="forecast-orbit-scene">
+          <canvas id="forecast-orbit-canvas" aria-hidden="true"></canvas>
+          <div class="forecast-orbit-aurora" aria-hidden="true"></div>
+          <div class="forecast-orbit-grid" aria-hidden="true"></div>
+          <div class="forecast-orbit-pulse" aria-hidden="true"></div>
+          <div class="forecast-orbit-node-layer" id="forecast-orbit-node-layer" aria-label="Orbiting commodity satellites"></div>
+          <div class="forecast-orbit-corecard" id="forecast-orbit-corecard">
+            <span class="forecast-orbit-corecard-kicker">Command planet</span>
+            <strong id="forecast-orbit-core-name">Gold</strong>
+            <span id="forecast-orbit-core-price">Spot loading…</span>
+            <span id="forecast-orbit-core-range">Consensus loading…</span>
+          </div>
+        </div>
+
+        <div class="forecast-orbit-statbar" id="forecast-orbit-statbar" aria-label="Orbit module highlights">
+          <div class="forecast-orbit-stat-pill">
+            <span class="forecast-orbit-stat-label">Constellation</span>
+            <strong id="forecast-orbit-stat-count">7 satellites</strong>
+          </div>
+          <div class="forecast-orbit-stat-pill">
+            <span class="forecast-orbit-stat-label">Route bias</span>
+            <strong id="forecast-orbit-stat-bias">Defensive setup</strong>
+          </div>
+          <div class="forecast-orbit-stat-pill">
+            <span class="forecast-orbit-stat-label">Signal pulse</span>
+            <strong id="forecast-orbit-stat-signal">Report-linked</strong>
+          </div>
+        </div>
+
+        <div class="forecast-orbit-footer">
+          <span>Orbit view is the fast map: asset at the center, named exposure around it, report context one tap away.</span>
+          <strong id="forecast-orbit-footer-metric">Agreement score pending model sync</strong>
+        </div>
+      </section>
+
+      <aside class="forecast-orbit-side" aria-label="Commodity orbit details">
+        <div class="forecast-orbit-detail-card">
+          <div class="forecast-orbit-detail-head">
+            <span class="forecast-orbit-detail-type" id="forecast-orbit-detail-type">Company satellite</span>
+            <span class="forecast-orbit-detail-badge" id="forecast-orbit-detail-badge">Live</span>
+          </div>
+          <h4 class="forecast-orbit-detail-title" id="forecast-orbit-detail-title">Newmont orbiting Gold</h4>
+          <p class="forecast-orbit-detail-copy" id="forecast-orbit-detail-copy">Select a satellite to inspect how the active commodity route connects to a company, theme, or report.</p>
+          <div class="forecast-orbit-detail-metrics" id="forecast-orbit-detail-metrics" aria-label="Orbit detail metrics">
+            <div class="forecast-orbit-detail-metric">
+              <span class="forecast-orbit-detail-metric-label">Priority</span>
+              <strong id="forecast-orbit-detail-metric-a">Flagship</strong>
+            </div>
+            <div class="forecast-orbit-detail-metric">
+              <span class="forecast-orbit-detail-metric-label">Role</span>
+              <strong id="forecast-orbit-detail-metric-b">Named exposure</strong>
+            </div>
+            <div class="forecast-orbit-detail-metric">
+              <span class="forecast-orbit-detail-metric-label">Orbit lane</span>
+              <strong id="forecast-orbit-detail-metric-c">Inner ring</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="forecast-orbit-side-grid">
+          <article class="forecast-orbit-mini-card">
+            <span class="forecast-orbit-mini-kicker">Company satellites</span>
+            <div class="forecast-orbit-mini-list" id="forecast-company-list"></div>
+          </article>
+          <article class="forecast-orbit-mini-card">
+            <span class="forecast-orbit-mini-kicker">Theme satellites</span>
+            <div class="forecast-orbit-mini-list" id="forecast-theme-list"></div>
+          </article>
+          <article class="forecast-orbit-mini-card">
+            <span class="forecast-orbit-mini-kicker">Report satellites</span>
+            <div class="forecast-orbit-mini-list" id="forecast-report-list"></div>
+          </article>
+        </div>
+      </aside>
     </div>
 
     <div class="forecast-layout" data-animate data-delay="100">
@@ -1055,6 +864,7 @@ image: "/assets/images/og-default.png"
         <div class="fc-chart-canvas-wrap">
           <canvas id="fc-chart"></canvas>
         </div>
+        <div class="chart-end-strip chart-end-strip--home" id="home-chart-end-strip" aria-label="Forecast endpoint labels"></div>
       </div>
 
       <div class="forecast-metrics">
@@ -1105,40 +915,47 @@ image: "/assets/images/og-default.png"
   </div>
 </section>
 
-<section class="section" style="padding-top:14px;">
+<section class="section home-decision-shell">
   <div class="container">
-    <div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,0.95fr);gap:18px;align-items:start;">
-      <section style="padding:22px;border-radius:22px;border:1px solid rgba(255,255,255,0.08);background:linear-gradient(135deg,rgba(8,12,20,0.8),rgba(8,12,20,0.5));backdrop-filter:blur(12px);">
-        <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;">
+    <div class="home-decision-grid">
+      <section class="home-decision-panel">
+        <div class="home-decision-head">
           <div>
-            <div class="eyebrow-cyan">Flagship decision strip</div>
-            <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.22rem;">Turn the shock into a scan-first workflow.</h2>
-            <p style="margin:0;color:#94a3b8;line-height:1.72;max-width:62ch;">Instead of reading blocks of copy, scan the live move, forecast pressure, regime, and confidence first — then open the downstream path only when the move deserves more work.</p>
+            <div class="home-panel-kicker">Flagship decision strip</div>
+            <h2 class="home-panel-title">Turn the shock into a scan-first workflow.</h2>
+            <p class="home-panel-copy">Instead of reading blocks of copy, scan the live move, forecast pressure, regime, and confidence first — then open the downstream path only when the move deserves more work.</p>
           </div>
           <a href="/simulator/" class="btn btn-secondary" data-cta="home_open_flagship_decision_strip">Open scenario workflow</a>
         </div>
-        <div id="home-kpi-spark-wall" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:16px;"></div>
+        <div id="home-kpi-spark-wall"></div>
       </section>
-      <section class="home-impact-sankey-card" data-visual="premium-impact-sankey">
-        <div class="home-impact-sankey-head">
-          <div>
-            <div class="eyebrow-cyan">Impact flow Sankey</div>
-            <h2>See where today’s commodity shock transmits next.</h2>
-            <p id="home-impact-sankey-copy">Loading the strongest commodity transmission path across sectors and names.</p>
-          </div>
-          <div class="home-impact-sankey-badge">Live path</div>
-        </div>
-        <div id="home-impact-sankey-chart" class="home-impact-sankey-chart"></div>
-        <div id="home-impact-sankey-legend" class="home-impact-sankey-legend" aria-label="Impact flow legend">
-          <span><i class="sankey-dot sankey-dot--source"></i> Shock</span>
-          <span><i class="sankey-dot sankey-dot--positive"></i> Beneficiary</span>
-          <span><i class="sankey-dot sankey-dot--negative"></i> Pressure</span>
-          <span><i class="sankey-dot sankey-dot--watch"></i> Watch</span>
-        </div>
+      <section class="home-sankey-panel">
+        <div class="home-panel-kicker">Impact flow Sankey</div>
+        <h2 class="home-panel-title">See where today’s commodity shock transmits next.</h2>
+        <p id="home-impact-sankey-copy">Loading the strongest commodity transmission path across sectors and names.</p>
+        <div id="home-impact-sankey-chart"></div>
       </section>
     </div>
   </div>
 </section>
+<script>
+(function(){
+  if (window.CNResolveDataStore && window.CNDataStoreFallback) return;
+  function fetchJson(url){
+    return fetch(url).then(function(res){ return res.ok ? res.json() : {}; }).catch(function(){ return {}; });
+  }
+  window.CNDataStoreFallback = window.CNDataStoreFallback || {
+    getPrices: function(){ return fetchJson('/assets/data/prices.json'); },
+    getForecastBundle: function(){
+      return Promise.all([
+        fetchJson('/assets/data/forecast.json'),
+        fetchJson('/assets/data/forecast-consensus.json')
+      ]).then(function(parts){ return { forecast: parts[0] || {}, consensus: parts[1] || {} }; });
+    }
+  };
+  window.CNResolveDataStore = function(){ return window.CNDataStore || window.CNDataStoreFallback; };
+})();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script src="/assets/js/premium-analytics.js"></script>
 <script>
@@ -1158,17 +975,17 @@ image: "/assets/images/og-default.png"
     var wall = document.getElementById('home-kpi-spark-wall');
     if (wall) {
       wall.innerHTML = metrics.map(function(item){
-        return '<article style="padding:16px;border-radius:16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);display:grid;gap:10px;">'
-          + '<div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#94a3b8;font-weight:800;">'+item.label+'</div>'
-          + '<div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">'
-          + '<strong style="color:#f8fafc;font-size:1.02rem;line-height:1.35;">'+item.value+'</strong>'
-          + '<span style="font-size:0.8rem;font-weight:700;color:'+(item.direction==='up' ? '#34d399' : '#fb7185')+';">'+item.change+'</span>'
+        return '<article class="home-kpi-card">'
+          + '<div class="home-kpi-label">'+item.label+'</div>'
+          + '<div class="home-kpi-top">'
+          + '<strong class="home-kpi-value">'+item.value+'</strong>'
+          + '<span class="home-kpi-change" style="color:'+(item.direction==='up' ? '#34d399' : '#fb7185')+';">'+item.change+'</span>'
           + '</div>'
           + '<svg viewBox="0 0 120 28" aria-hidden="true" style="width:100%;height:28px;overflow:visible;">'
           + '<polyline fill="none" stroke="'+(item.direction==='up' ? '#22d3ee' : '#f43f5e')+'" stroke-width="2.4" points="'+item.spark.map(function(v, idx){ return (idx * 20)+','+(24 - Math.min(20, Math.max(2, v/6))); }).join(' ')+'"></polyline>'
           + '</svg>'
-          + '<div style="font-size:0.84rem;color:#94a3b8;line-height:1.6;">'+item.implication+'</div>'
-          + '</article>';
+          + '<div class="home-kpi-copy">'+item.implication+'</div>'
+          + '</article>'; 
       }).join('');
     }
     var sankeyPayload = analytics.buildImpactSankeyData({
@@ -1199,31 +1016,20 @@ image: "/assets/images/og-default.png"
           top: 12,
           bottom: 12,
           left: 12,
-          right: 12,
-          emphasis: { focus: 'adjacency', blurScope: 'coordinateSystem' },
-          nodeAlign: 'right',
-          nodeGap: 13,
-          nodeWidth: 15,
-          layoutIterations: 96,
-          draggable: false,
+          right: 82,
+          emphasis: { focus: 'adjacency' },
           data: sankeyPayload.nodes,
           links: sankeyPayload.links,
-          levels: [
-            { depth: 0, itemStyle: { color: '#22d3ee' }, lineStyle: { opacity: 0.62 } },
-            { depth: 1, lineStyle: { opacity: 0.5 } },
-            { depth: 2, label: { position: 'right' }, lineStyle: { opacity: 0.38 } }
-          ],
-          edgeLabel: { show: false, color:'#94a3b8', fontSize:10 },
-          lineStyle: { color:'gradient', opacity:0.58, curveness:0.56, shadowBlur:10, shadowColor:'rgba(34,211,238,0.18)' },
-          itemStyle: { borderWidth: 1, borderColor:'rgba(255,255,255,0.18)', color: function(params){ var cat = params.data.category; return cat === 'positive' ? '#22c55e' : cat === 'negative' ? '#f43f5e' : cat === 'watch' ? '#fbbf24' : '#22d3ee'; }, shadowBlur:12, shadowColor:'rgba(2,6,23,0.28)' },
-          label: { color:'#e2e8f0', fontSize:11, fontWeight:700, overflow:'break', width:92 }
+          lineStyle: { color:'gradient', opacity:0.45, curveness:0.5 },
+          itemStyle: { borderWidth: 0, color: function(params){ var cat = params.data.category; return cat === 'positive' ? '#22c55e' : cat === 'negative' ? '#f43f5e' : cat === 'watch' ? '#fbbf24' : '#22d3ee'; } },
+          label: { color:'#e2e8f0', fontSize:11, width:76, overflow:'truncate', ellipsis:'…' }
         }]
       });
     }
     var copy = document.getElementById('home-impact-sankey-copy');
     if (copy) copy.textContent = payload.copy || 'Oil up means airlines and chemicals absorb the pressure first, while upstream energy names gain leverage and refiners sit in the watch bucket.';
   }
-  fetch('/assets/data/prices.json').then(function(r){ return r.ok ? r.json() : {}; }).then(function(data){
+  (window.CNResolveDataStore ? window.CNResolveDataStore() : window.CNDataStore).getPrices().then(function(data){
     var entries = Object.entries(data || {}).filter(function(entry){ return typeof entry[1].change_pct === 'number'; }).sort(function(a,b){ return Math.abs(b[1].change_pct) - Math.abs(a[1].change_pct); });
     var top = entries[0] || ['crude_oil', { name:'Crude Oil', change_pct: 3.4 }];
     render({ source: top[1].name || 'Commodity shock', liveMove: top[1].change_pct || 0, liveMoveText: (top[1].name || top[0]) + ' ' + ((top[1].change_pct || 0) > 0 ? '+' : '') + (top[1].change_pct || 0).toFixed(1) + '%', confidence: '67%', forecastText: 'Consensus +4.8%', copy: (top[1].name || 'Commodity') + ' is the dominant mover, so open the downstream transmission path before reading longer narrative blocks.' });
@@ -1236,10 +1042,12 @@ image: "/assets/images/og-default.png"
 (function() {
   'use strict';
 
-  var summaryData = null;
+  var forecastData = null;
+  var consensusData = null;
   var fcChart = null;
   var currentCommodity = 'gold';
-  var currentHorizon = 30;
+  var currentHorizon = 90;
+  var orbitScene = null;
 
   var COMMODITY_META = {
     gold:      { name: 'Gold',      unit: '$', decimals: 0 },
@@ -1247,16 +1055,82 @@ image: "/assets/images/og-default.png"
     crude_oil: { name: 'Crude Oil', unit: '$', decimals: 2 }
   };
 
-  // Home pulls a trimmed summary (~40KB) instead of the full
-  // ~2MB forecast bundle. Full data is loaded lazily on hub/simulator pages.
-  fetch('/assets/data/home-forecast-summary.json')
-    .then(function(r) { return r.ok ? r.json() : null; })
-    .then(function(data) {
-      summaryData = (data && data.commodities) ? data.commodities : {};
+  var FORECAST_ORBIT_META = {
+    gold: {
+      title: 'Gold command planet',
+      subtitle: 'Safe-haven flow, real-yield pressure, miner beta, and linked research orbit the bullion gravity well.',
+      status: 'Defensive capital + miner torque + macro intelligence',
+      badge: 'Safe-haven regime',
+      accent: '#fbbf24',
+      glow: 'rgba(251,191,36,0.45)',
+      atmosphere: 'rgba(34,211,238,0.18)',
+      items: [
+        { id:'gold-company-nem', label:'Newmont', short:'NEM', type:'company', orbit:0.62, angle:0.35, speed:0.18, description:'Senior miner beta — cash-flow torque rises when bullion strength proves durable.' },
+        { id:'gold-company-gold', label:'Barrick', short:'GOLD', type:'company', orbit:0.8, angle:2.35, speed:0.12, description:'Large-cap producer satellite — watch operational leverage and geopolitical premium.' },
+        { id:'gold-company-rgld', label:'Royal Gold', short:'RGLD', type:'company', orbit:1.02, angle:4.9, speed:0.09, description:'Royalty satellite — high-margin exposure often reflects the cleanest gold sensitivity.' },
+        { id:'gold-theme-yields', label:'Real yields', short:'Theme', type:'theme', orbit:0.7, angle:1.35, speed:0.15, description:'Gold usually strengthens when real-yield pressure eases and policy tone softens.' },
+        { id:'gold-theme-cbanks', label:'Central-bank bid', short:'Theme', type:'theme', orbit:0.96, angle:3.95, speed:0.08, description:'Reserve diversification keeps an underlying bid under the premium gold narrative.' },
+        { id:'gold-report-weekly', label:'Macro note', short:'Report', type:'report', orbit:0.52, angle:5.45, speed:0.2, description:'The linked macro report explains whether this move is hedging demand, liquidity, or policy repricing.' },
+        { id:'gold-report-trigger', label:'Signal report', short:'Report', type:'report', orbit:1.15, angle:5.95, speed:0.06, description:'Research satellite — use it when the move matters enough to justify company-level action.' }
+      ]
+    },
+    copper: {
+      title: 'Copper demand planet',
+      subtitle: 'Grid buildout, miners, China demand, and disruption notes orbit the industrial-metal hub.',
+      status: 'Industrial demand + electrification + miner exposure',
+      badge: 'Growth barometer',
+      accent: '#f97316',
+      glow: 'rgba(249,115,22,0.42)',
+      atmosphere: 'rgba(34,211,238,0.16)',
+      items: [
+        { id:'copper-company-fcx', label:'Freeport', short:'FCX', type:'company', orbit:0.62, angle:0.15, speed:0.18, description:'High-beta copper producer — first stop when industrial demand acceleration becomes credible.' },
+        { id:'copper-company-scco', label:'SCCO', short:'SCCO', type:'company', orbit:0.83, angle:2.6, speed:0.11, description:'Low-cost miner satellite — margins amplify when copper deficits deepen.' },
+        { id:'copper-company-bhp', label:'BHP', short:'BHP', type:'company', orbit:1.05, angle:4.75, speed:0.07, description:'Diversified major — copper leadership can re-rate the whole bulk-metals complex.' },
+        { id:'copper-theme-grid', label:'Grid buildout', short:'Theme', type:'theme', orbit:0.72, angle:1.48, speed:0.14, description:'Transmission, data-center, and power-capex themes drive the structural copper scarcity story.' },
+        { id:'copper-theme-china', label:'China impulse', short:'Theme', type:'theme', orbit:0.98, angle:3.85, speed:0.09, description:'Copper still functions as the cleanest liquid read-through on Chinese industrial momentum.' },
+        { id:'copper-report-deficit', label:'Deficit note', short:'Report', type:'report', orbit:0.54, angle:5.55, speed:0.19, description:'Use the deficit report when supply tightness starts outrunning consensus positioning.' },
+        { id:'copper-report-ev', label:'AI infra note', short:'Report', type:'report', orbit:1.16, angle:6.08, speed:0.06, description:'Research satellite covering electrification, AI data-center load, and capital-goods spillover.' }
+      ]
+    },
+    crude_oil: {
+      title: 'Crude oil command planet',
+      subtitle: 'Integrated energy, airline pressure, geopolitical shocks, and report satellites orbit the oil macro engine.',
+      status: 'Geopolitics + downstream pressure + upstream cash-flow torque',
+      badge: 'Macro shock engine',
+      accent: '#38bdf8',
+      glow: 'rgba(56,189,248,0.4)',
+      atmosphere: 'rgba(168,85,247,0.2)',
+      items: [
+        { id:'oil-company-xom', label:'Exxon', short:'XOM', type:'company', orbit:0.62, angle:0.25, speed:0.18, description:'Integrated-energy satellite — upstream leverage and balance-sheet quality dominate in sustained oil strength.' },
+        { id:'oil-company-cvx', label:'Chevron', short:'CVX', type:'company', orbit:0.84, angle:2.45, speed:0.11, description:'Blue-chip oil beta — use it to gauge how durable the upstream cash-flow regime looks.' },
+        { id:'oil-company-dal', label:'Delta', short:'DAL', type:'company', orbit:1.06, angle:4.82, speed:0.07, description:'Pressure satellite — higher crude means fuel-sensitive sectors reprice before headlines catch up.' },
+        { id:'oil-theme-hormuz', label:'Hormuz risk', short:'Theme', type:'theme', orbit:0.7, angle:1.32, speed:0.14, description:'Shipping chokepoint risk turns oil from a tape move into a multi-asset shock map.' },
+        { id:'oil-theme-inflation', label:'Inflation pulse', short:'Theme', type:'theme', orbit:1.0, angle:3.88, speed:0.08, description:'Oil strength spills into rates, inflation expectations, and margin-sensitive downstream sectors.' },
+        { id:'oil-report-geo', label:'Crisis brief', short:'Report', type:'report', orbit:0.56, angle:5.62, speed:0.19, description:'Geopolitical report satellite — use when the market starts pricing convoy risk or insurance shocks.' },
+        { id:'oil-report-scenario', label:'Scenario map', short:'Report', type:'report', orbit:1.18, angle:6.05, speed:0.06, description:'Scenario report ties oil into airlines, chemicals, refiners, and broader macro spillover.' }
+      ]
+    }
+  };
+
+  function resolveDataStore() {
+    if (window.CNResolveDataStore) return window.CNResolveDataStore();
+    if (window.CNDataStore) return window.CNDataStore;
+    return {
+      getPrices: function() { return Promise.resolve({}); },
+      getForecastBundle: function() {
+        return Promise.resolve({ forecast: {}, consensus: {} });
+      }
+    };
+  }
+
+  resolveDataStore().getForecastBundle()
+    .then(function(bundle) {
+      forecastData = bundle.forecast || {};
+      consensusData = bundle.consensus || {};
       renderForecastChart('gold');
       renderSummaryBar();
     })
-    .catch(function(e) { console.error('Home forecast summary load error', e); });
+    .catch(function(e) { console.error('Forecast load error', e); });
 
   function fmt(val, meta) {
     if (val === null || val === undefined || Number.isNaN(Number(val))) return '—';
@@ -1267,16 +1141,431 @@ image: "/assets/images/og-default.png"
   }
 
   function getBundle(key) {
-    var d = summaryData && summaryData[key] ? summaryData[key] : null;
+    var d = forecastData && forecastData[key] ? forecastData[key] : null;
     if (!d) return null;
-    var models = d.models || {};
-    var consensus = d.consensus && d.consensus.status === 'ready' ? d.consensus : null;
-    return { raw: d, entry: d, consensus: consensus, chronos: models.chronos2 || null, timesfm: models.timesfm || null };
+    var c = consensusData && consensusData[key] ? consensusData[key] : null;
+    var chronos = c && c.models ? c.models.chronos2 : null;
+    var timesfm = c && c.models ? c.models.timesfm : null;
+    var consensus = null;
+    if (c && c.consensus) {
+      var hasMedian = Array.isArray(c.consensus.median) && c.consensus.median.length > 0;
+      var statusOk = !c.consensus.status || c.consensus.status === 'ready' || c.consensus.status === 'ok';
+      if (hasMedian && statusOk) consensus = c.consensus;
+    }
+    return { raw: d, entry: c, consensus: consensus, chronos: chronos, timesfm: timesfm };
   }
 
   function forecastLineFromHistory(joinPrice, histDates, arr) {
     var nullHist = histDates.slice(0, -1).map(function() { return null; });
     return nullHist.concat([joinPrice]).concat(arr || []);
+  }
+
+  function renderChartEndStrip(targetId, items) {
+    var el = document.getElementById(targetId);
+    if (!el) return;
+    el.innerHTML = (items || []).filter(function(item) {
+      return item && item.value !== null && item.value !== undefined && item.value !== '—';
+    }).map(function(item) {
+      return '<div class="chart-end-chip">'
+        + '<span class="chart-end-chip__label" style="--chip-color:' + item.color + '">' + item.label + '</span>'
+        + '<strong class="chart-end-chip__value">' + item.value + '</strong>'
+        + '</div>';
+    }).join('');
+  }
+
+  function getOrbitTone(item) {
+    if (item.type === 'company') return 'Company satellite';
+    if (item.type === 'theme') return 'Theme satellite';
+    return 'Report satellite';
+  }
+
+  function getOrbitBadge(item) {
+    if (item.type === 'company') return 'Listed exposure';
+    if (item.type === 'theme') return 'Macro theme';
+    return 'Linked research';
+  }
+
+  function renderOrbitMiniList(targetId, items) {
+    var el = document.getElementById(targetId);
+    if (!el) return;
+    el.innerHTML = (items || []).map(function(item) {
+      return '<button type="button" class="forecast-orbit-mini-pill" data-orbit-focus="' + item.id + '">' + item.label + '</button>';
+    }).join('');
+  }
+
+  function setOrbitDetail(config, item) {
+    var typeEl = document.getElementById('forecast-orbit-detail-type');
+    var badgeEl = document.getElementById('forecast-orbit-detail-badge');
+    var titleEl = document.getElementById('forecast-orbit-detail-title');
+    var copyEl = document.getElementById('forecast-orbit-detail-copy');
+    var metricA = document.getElementById('forecast-orbit-detail-metric-a');
+    var metricB = document.getElementById('forecast-orbit-detail-metric-b');
+    var metricC = document.getElementById('forecast-orbit-detail-metric-c');
+    var orbitLane = item.orbit <= 0.68 ? 'Inner ring' : (item.orbit <= 1 ? 'Mid ring' : 'Outer ring');
+    var priority = item.type === 'report' ? 'Catalyst' : (item.orbit <= 0.68 ? 'Flagship' : 'Satellite');
+    var role = item.type === 'company' ? 'Named exposure' : (item.type === 'theme' ? 'Macro driver' : 'Research trigger');
+    if (typeEl) typeEl.textContent = getOrbitTone(item);
+    if (badgeEl) badgeEl.textContent = getOrbitBadge(item);
+    if (titleEl) titleEl.textContent = item.label + ' orbiting ' + ((config && config.title ? config.title.split(' ')[0] : 'the commodity'));
+    if (copyEl) copyEl.textContent = item.description;
+    if (metricA) metricA.textContent = priority;
+    if (metricB) metricB.textContent = role;
+    if (metricC) metricC.textContent = orbitLane;
+    document.querySelectorAll('[data-orbit-focus]').forEach(function(node) {
+      node.classList.toggle('active', node.getAttribute('data-orbit-focus') === item.id);
+    });
+  }
+
+  function bindForecastOrbitInteractions(scene) {
+    if (!scene || !scene.host || scene.interactiveBound) return;
+    scene.interactiveBound = true;
+    scene.host.addEventListener('pointermove', function(event) {
+      var rect = scene.host.getBoundingClientRect();
+      var px = ((event.clientX - rect.left) / Math.max(rect.width, 1)) - 0.5;
+      var py = ((event.clientY - rect.top) / Math.max(rect.height, 1)) - 0.5;
+      scene.targetPointerX = Math.max(-1, Math.min(1, px * 2));
+      scene.targetPointerY = Math.max(-1, Math.min(1, py * 2));
+    });
+    scene.host.addEventListener('pointerleave', function() {
+      scene.targetPointerX = 0;
+      scene.targetPointerY = 0;
+    });
+  }
+
+  function drawForecastOrbitScene(scene, timestamp) {
+    if (!scene || !scene.ctx || !scene.config) return;
+    if (!scene.startedAt) scene.startedAt = timestamp;
+    var canvas = scene.canvas;
+    var rect = canvas.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var width = rect.width;
+    var height = rect.height;
+    if (canvas.width !== Math.round(width * dpr) || canvas.height !== Math.round(height * dpr)) {
+      canvas.width = Math.max(1, Math.round(width * dpr));
+      canvas.height = Math.max(1, Math.round(height * dpr));
+      scene.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    var ctx = scene.ctx;
+    var t = timestamp - scene.startedAt;
+    scene.pointerX += (scene.targetPointerX - scene.pointerX) * 0.08;
+    scene.pointerY += (scene.targetPointerY - scene.pointerY) * 0.08;
+    var cx = width * (0.48 + scene.pointerX * 0.018);
+    var cy = height * (0.54 + scene.pointerY * 0.02);
+    var baseRadius = Math.min(width, height) * (window.innerWidth <= 768 ? 0.16 : 0.2);
+    ctx.clearRect(0, 0, width, height);
+
+    var bg = ctx.createRadialGradient(cx, cy, baseRadius * 0.2, cx, cy, Math.max(width, height) * 0.72);
+    bg.addColorStop(0, 'rgba(34,211,238,0.12)');
+    bg.addColorStop(0.45, 'rgba(11,17,32,0.3)');
+    bg.addColorStop(1, 'rgba(4,7,13,0)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, width, height);
+
+    var aurora = ctx.createLinearGradient(0, height * 0.12, width, height * 0.88);
+    aurora.addColorStop(0, 'rgba(34,211,238,0.08)');
+    aurora.addColorStop(0.35, scene.config.atmosphere || 'rgba(168,85,247,0.08)');
+    aurora.addColorStop(0.7, 'rgba(251,191,36,0.08)');
+    aurora.addColorStop(1, 'rgba(4,7,13,0)');
+    ctx.fillStyle = aurora;
+    ctx.fillRect(0, 0, width, height);
+
+    for (var s = 0; s < 52; s += 1) {
+      var sx = (Math.sin((s + 1) * 53.17) * 0.5 + 0.5) * width;
+      var sy = (Math.cos((s + 3) * 71.33) * 0.5 + 0.5) * height;
+      var alpha = 0.08 + ((s % 5) * 0.03);
+      var twinkle = 0.65 + 0.35 * Math.sin(t * 0.0011 + s);
+      ctx.fillStyle = 'rgba(255,255,255,' + (alpha * twinkle).toFixed(2) + ')';
+      ctx.beginPath();
+      ctx.arc(sx, sy, (s % 3) + 0.7, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    [0.54, 0.74, 0.94, 1.12, 1.28].forEach(function(mult, idx) {
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, baseRadius * mult * 2.2, baseRadius * mult * (idx === 4 ? 1.32 : 1.18), -0.32, 0, Math.PI * 2);
+      ctx.strokeStyle = idx === 0 ? 'rgba(34,211,238,0.3)' : idx === 4 ? 'rgba(251,191,36,0.14)' : 'rgba(255,255,255,0.08)';
+      ctx.lineWidth = idx === 0 ? 1.6 : 1;
+      ctx.setLineDash(idx % 2 === 0 ? [] : [7, 9]);
+      ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    for (var ripple = 0; ripple < 2; ripple += 1) {
+      var rippleProgress = ((t * 0.00018) + ripple * 0.5) % 1;
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, baseRadius * (1.8 + rippleProgress * 1.8), baseRadius * (0.95 + rippleProgress * 1.05), -0.32, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(34,211,238,' + (0.16 - rippleProgress * 0.14).toFixed(3) + ')';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    }
+
+    var glow = ctx.createRadialGradient(cx, cy, baseRadius * 0.22, cx, cy, baseRadius * 3.1);
+    glow.addColorStop(0, scene.config.glow || 'rgba(251,191,36,0.45)');
+    glow.addColorStop(0.35, scene.config.atmosphere || 'rgba(34,211,238,0.18)');
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(cx, cy, baseRadius * 3.1, 0, Math.PI * 2);
+    ctx.fill();
+
+    var pulse = 1 + Math.sin(t * 0.0012) * 0.03;
+    var radius = baseRadius * pulse;
+    var planet = ctx.createRadialGradient(cx - radius * 0.3, cy - radius * 0.45, radius * 0.15, cx, cy, radius * 1.12);
+    planet.addColorStop(0, 'rgba(255,255,255,0.98)');
+    planet.addColorStop(0.12, '#fde68a');
+    planet.addColorStop(0.4, scene.config.accent || '#fbbf24');
+    planet.addColorStop(0.74, 'rgba(82,45,12,0.98)');
+    planet.addColorStop(1, 'rgba(12,7,4,1)');
+    ctx.fillStyle = planet;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(-0.42 + Math.sin(t * 0.0002) * 0.18 + scene.pointerX * 0.08);
+    for (var band = 0; band < 6; band += 1) {
+      ctx.beginPath();
+      ctx.ellipse(0, -radius * 0.22 + band * radius * 0.095, radius * (0.84 + band * 0.02), radius * 0.16, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = band % 2 === 0 ? 'rgba(255,247,214,0.2)' : 'rgba(34,211,238,0.12)';
+      ctx.lineWidth = band === 2 ? 2.4 : 1.1;
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    var shine = ctx.createLinearGradient(cx - radius, cy - radius, cx + radius * 0.8, cy + radius);
+    shine.addColorStop(0, 'rgba(255,255,255,0.24)');
+    shine.addColorStop(0.45, 'rgba(255,255,255,0.04)');
+    shine.addColorStop(1, 'rgba(0,0,0,0.18)');
+    ctx.fillStyle = shine;
+    ctx.beginPath();
+    ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    var flare = ctx.createRadialGradient(cx - radius * 0.48, cy - radius * 0.58, radius * 0.02, cx - radius * 0.48, cy - radius * 0.58, radius * 0.55);
+    flare.addColorStop(0, 'rgba(255,255,255,0.55)');
+    flare.addColorStop(0.28, 'rgba(255,255,255,0.16)');
+    flare.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = flare;
+    ctx.beginPath();
+    ctx.arc(cx - radius * 0.48, cy - radius * 0.58, radius * 0.55, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (scene.metrics && scene.metrics.targetText) {
+      ctx.save();
+      ctx.fillStyle = 'rgba(6,11,20,0.9)';
+      ctx.strokeStyle = 'rgba(34,211,238,0.24)';
+      ctx.lineWidth = 1;
+      var boxW = window.innerWidth <= 768 ? 152 : 182;
+      var boxH = 62;
+      var boxX = width - boxW - 18;
+      var boxY = 18;
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(boxX, boxY, boxW, boxH, 16);
+        ctx.fill();
+        ctx.stroke();
+      } else {
+        ctx.fillRect(boxX, boxY, boxW, boxH);
+        ctx.strokeRect(boxX, boxY, boxW, boxH);
+      }
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '700 11px DM Sans, sans-serif';
+      ctx.fillText(scene.metrics.horizon + ' consensus', boxX + 14, boxY + 19);
+      ctx.fillStyle = '#f8fafc';
+      ctx.font = '800 21px DM Sans, sans-serif';
+      ctx.fillText(scene.metrics.targetText, boxX + 14, boxY + 42);
+      ctx.fillStyle = 'rgba(34,211,238,0.85)';
+      ctx.font = '700 10px DM Sans, sans-serif';
+      ctx.fillText(scene.metrics.levelText + ' · ' + scene.metrics.agreementText, boxX + 14, boxY + 57);
+      ctx.restore();
+    }
+
+    scene.nodes.forEach(function(nodeObj, idx) {
+      var item = nodeObj.item;
+      var angle = item.angle + (t * 0.00016 * item.speed * 10);
+      var orbitRadius = baseRadius * 2.05 * item.orbit;
+      var x = cx + Math.cos(angle) * orbitRadius * (1.04 + scene.pointerX * 0.03 * item.orbit);
+      var y = cy + Math.sin(angle) * orbitRadius * (0.6 + scene.pointerY * 0.02);
+      var depth = (Math.sin(angle) + 1) / 2;
+      var scale = 0.8 + depth * 0.36;
+      nodeObj.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) translate(-50%,-50%) scale(' + scale.toFixed(3) + ')';
+      nodeObj.el.style.opacity = (0.56 + depth * 0.44).toFixed(2);
+      nodeObj.el.style.zIndex = String(20 + Math.round(depth * 30) + idx);
+      nodeObj.el.style.setProperty('--node-depth', depth.toFixed(3));
+    });
+
+    scene.rafId = requestAnimationFrame(function(nextTs) { drawForecastOrbitScene(scene, nextTs); });
+  }
+
+  function ensureOrbitScene() {
+    if (orbitScene) return orbitScene;
+    var canvas = document.getElementById('forecast-orbit-canvas');
+    var layer = document.getElementById('forecast-orbit-node-layer');
+    var host = document.getElementById('forecast-orbit-scene');
+    if (!canvas || !layer || !host) return null;
+    orbitScene = {
+      canvas: canvas,
+      layer: layer,
+      host: host,
+      ctx: canvas.getContext('2d'),
+      nodes: [],
+      config: null,
+      metrics: null,
+      startedAt: 0,
+      rafId: null,
+      pointerX: 0,
+      pointerY: 0,
+      targetPointerX: 0,
+      targetPointerY: 0,
+      interactiveBound: false
+    };
+    bindForecastOrbitInteractions(orbitScene);
+    return orbitScene;
+  }
+
+  function renderForecastOrbit(key, meta, bundle, targetPrice, agreement, horizonDays) {
+    var scene = ensureOrbitScene();
+    var config = FORECAST_ORBIT_META[key] || FORECAST_ORBIT_META.gold;
+    if (!scene || !config) return;
+    if (scene.rafId) {
+      cancelAnimationFrame(scene.rafId);
+      scene.rafId = null;
+    }
+    scene.startedAt = 0;
+    scene.config = config;
+    scene.metrics = {
+      targetText: fmt(targetPrice, meta),
+      currentText: fmt(bundle && bundle.raw ? bundle.raw.current_price : null, meta),
+      agreementText: agreement && typeof agreement.score === 'number' ? Math.round(agreement.score * 100) + '%' : '—',
+      levelText: agreement && agreement.level ? agreement.level.toUpperCase() : 'MODERATE',
+      horizon: String(horizonDays || 30) + 'D'
+    };
+    scene.layer.innerHTML = '';
+    scene.nodes = config.items.map(function(item) {
+      var node = document.createElement('button');
+      node.type = 'button';
+      node.className = 'forecast-orbit-node forecast-orbit-node--' + item.type;
+      node.setAttribute('data-orbit-focus', item.id);
+      node.innerHTML = '<span class="forecast-orbit-node-badge">' + item.short + '</span><span class="forecast-orbit-node-label">' + item.label + '</span><span class="forecast-orbit-node-shine" aria-hidden="true"></span>';
+      node.addEventListener('click', function() { setOrbitDetail(config, item); });
+      scene.layer.appendChild(node);
+      return { item: item, el: node };
+    });
+
+    var titleEl = document.getElementById('forecast-orbit-title');
+    var subtitleEl = document.getElementById('forecast-orbit-subtitle');
+    var statusEl = document.getElementById('forecast-orbit-status');
+    var statusMetaEl = document.getElementById('forecast-orbit-status-meta');
+    var coreName = document.getElementById('forecast-orbit-core-name');
+    var corePrice = document.getElementById('forecast-orbit-core-price');
+    var coreRange = document.getElementById('forecast-orbit-core-range');
+    var footerMetricEl = document.getElementById('forecast-orbit-footer-metric');
+    var statCountEl = document.getElementById('forecast-orbit-stat-count');
+    var statBiasEl = document.getElementById('forecast-orbit-stat-bias');
+    var statSignalEl = document.getElementById('forecast-orbit-stat-signal');
+    var companyCount = config.items.filter(function(item) { return item.type === 'company'; }).length;
+    var themeCount = config.items.filter(function(item) { return item.type === 'theme'; }).length;
+    var reportCount = config.items.filter(function(item) { return item.type === 'report'; }).length;
+    if (titleEl) titleEl.textContent = config.title;
+    if (subtitleEl) subtitleEl.textContent = config.subtitle;
+    if (statusEl) statusEl.textContent = config.status;
+    if (statusMetaEl) statusMetaEl.textContent = config.badge + ' · agreement ' + scene.metrics.levelText + ' · score ' + scene.metrics.agreementText;
+    if (coreName) coreName.textContent = meta.name;
+    if (corePrice) corePrice.textContent = 'Spot ' + scene.metrics.currentText;
+    if (coreRange) coreRange.textContent = scene.metrics.horizon + ' consensus ' + scene.metrics.targetText;
+    if (footerMetricEl) footerMetricEl.textContent = 'Agreement ' + scene.metrics.agreementText + ' · ' + scene.metrics.horizon + ' consensus ' + scene.metrics.targetText;
+    if (statCountEl) statCountEl.textContent = companyCount + ' companies · ' + themeCount + ' themes · ' + reportCount + ' reports';
+    if (statBiasEl) statBiasEl.textContent = config.badge + ' · ' + scene.metrics.horizon;
+    if (statSignalEl) statSignalEl.textContent = reportCount + ' report links · score ' + scene.metrics.agreementText;
+
+    renderOrbitMiniList('forecast-company-list', config.items.filter(function(item) { return item.type === 'company'; }));
+    renderOrbitMiniList('forecast-theme-list', config.items.filter(function(item) { return item.type === 'theme'; }));
+    renderOrbitMiniList('forecast-report-list', config.items.filter(function(item) { return item.type === 'report'; }));
+    document.querySelectorAll('.forecast-orbit-mini-pill').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = config.items.find(function(entry) { return entry.id === btn.getAttribute('data-orbit-focus'); });
+        if (item) setOrbitDetail(config, item);
+      });
+    });
+    setOrbitDetail(config, config.items[0]);
+    scene.rafId = requestAnimationFrame(function(ts) { drawForecastOrbitScene(scene, ts); });
+  }
+
+  function routeWeightText(consensus, fcLen) {
+    if (!consensus) return 'Single model route';
+    var weights = fcLen >= 75 ? consensus.weights_day_90 : (fcLen >= 45 ? consensus.weights : consensus.weights_day_30);
+    weights = weights || consensus.weights || {};
+    var chronos = Math.round(((weights.chronos2 || 0) * 100));
+    var timesfm = Math.round(((weights.timesfm || 0) * 100));
+    var source = consensus.weight_source === 'learned-endpoint-blend' ? 'learned route' : (consensus.weight_source || 'route');
+    return source + ' · Chronos ' + chronos + '% / TimesFM ' + timesfm + '%';
+  }
+
+  function hydrateForecastMetricText(key, meta, d, consensus, activeModel, targetPrice, pctChange, lastP90, lastP10, agreement, chronosMedian, timesfmMedian, fcMedian, fcLen, chronos90, timesfm90) {
+    var el = function(id) { return document.getElementById(id); };
+    if (el('fc-name')) el('fc-name').textContent = meta.name;
+    if (el('fc-current')) el('fc-current').textContent = fmt(d.current_price, meta);
+    if (el('fc-90d')) el('fc-90d').textContent = fmt(targetPrice, meta);
+    if (el('fc-90d-label')) el('fc-90d-label').textContent = fcLen + '-Day ' + (consensus ? 'Consensus' : 'Forecast');
+    if (el('fc-p90')) el('fc-p90').textContent = fmt(lastP90, meta);
+    if (el('fc-p10')) el('fc-p10').textContent = fmt(lastP10, meta);
+    if (el('home-model-label')) el('home-model-label').textContent = activeModel;
+    if (el('home-model-sub')) el('home-model-sub').textContent = consensus ? 'Chronos-2 + TimesFM 2.5' : activeModel + ' only';
+    if (el('home-forecast-subtitle')) el('home-forecast-subtitle').textContent = consensus ? 'Consensus forecast with dual-model comparison and agreement scoring' : ('90-day AI forecast with ' + activeModel + ' median and P10–P90 confidence band');
+    renderChartEndStrip('home-chart-end-strip', [
+      { label: 'Consensus', value: fmt(fcMedian[fcLen - 1], meta), color: '#22d3ee' },
+      { label: 'Chronos-2', value: fmt(chronosMedian[fcLen - 1], meta), color: 'rgba(216,180,254,1)' },
+      { label: 'TimesFM', value: fmt(timesfmMedian[fcLen - 1], meta), color: 'rgba(250,204,21,1)' }
+    ]);
+
+    var chgEl = el('fc-change');
+    if (chgEl) {
+      chgEl.textContent = pctChange === null ? '—' : ((pctChange >= 0 ? '+' : '') + pctChange.toFixed(1) + '%');
+      chgEl.className = 'fc-metric-change ' + (pctChange !== null && pctChange >= 0 ? 'up' : 'down');
+    }
+
+    var strip = el('home-consensus-strip');
+    if (strip) {
+      var level = agreement.level || 'moderate';
+      var palette = level === 'high' ? ['#10b981','rgba(16,185,129,0.08)','rgba(16,185,129,0.18)'] : level === 'divergent' ? ['#ef4444','rgba(239,68,68,0.08)','rgba(239,68,68,0.18)'] : ['#f59e0b','rgba(245,158,11,0.08)','rgba(245,158,11,0.18)'];
+      strip.innerHTML = ''
+        + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Model agreement</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + level.toUpperCase() + '</div>'
+        + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
+        + '</div>'
+        + '<div style="padding:12px 14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.16);border-radius:12px;">'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:700;margin-bottom:6px;">Consensus ' + fcLen + 'D</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(targetPrice, meta) + '</div>'
+        + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Target range ' + fmt(lastP10, meta) + '–' + fmt(lastP90, meta) + '</div>'
+        + '</div>'
+        + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#c084fc;font-weight:700;margin-bottom:6px;">Production route</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + routeWeightText(consensus, fcLen) + '</div>'
+        + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Chronos ' + fmt(chronos90, meta) + ' · TimesFM ' + fmt(timesfm90, meta) + '</div>'
+        + '</div>';
+    }
+  }
+
+  function renderStaticForecastFallback(meta, d, targetPrice, lastP90, lastP10, chronosEnd, timesfmEnd) {
+    var wrap = document.querySelector('.fc-chart-canvas-wrap');
+    if (!wrap || document.getElementById('home-chart-static-fallback')) return;
+    var fallback = document.createElement('div');
+    fallback.id = 'home-chart-static-fallback';
+    fallback.className = 'home-chart-static-fallback';
+    fallback.setAttribute('role', 'img');
+    fallback.setAttribute('aria-label', 'Static forecast summary rendered because the interactive chart library is not available');
+    fallback.innerHTML = ''
+      + '<div class="home-chart-static-fallback__title">Forecast summary</div>'
+      + '<div class="home-chart-static-fallback__grid">'
+      + '<span>Current</span><strong>' + fmt(d.current_price, meta) + '</strong>'
+      + '<span>Consensus</span><strong>' + fmt(targetPrice, meta) + '</strong>'
+      + '<span>Chronos-2</span><strong>' + fmt(chronosEnd, meta) + '</strong>'
+      + '<span>TimesFM</span><strong>' + fmt(timesfmEnd, meta) + '</strong>'
+      + '<span>P10–P90</span><strong>' + fmt(lastP10, meta) + '–' + fmt(lastP90, meta) + '</strong>'
+      + '</div>';
+    wrap.appendChild(fallback);
   }
 
   function renderForecastChart(key, horizonDays) {
@@ -1300,9 +1589,9 @@ image: "/assets/images/og-default.png"
 
     var fcDates = (activeForecast.dates || []).slice(0, fcLen);
     var fcMedian = (activeForecast.median || []).slice(0, fcLen);
-    var fcP10 = (activeForecast.p10 || []).slice(0, fcLen);
-    var fcP90 = (activeForecast.p90 || []).slice(0, fcLen);
-    var chronosMedian = bundle.chronos ? (bundle.chronos.median || []).slice(0, fcLen) : [];
+    var fcP10 = ((activeForecast.p10_extreme || activeForecast.p10 || activeForecast.p25) || []).slice(0, fcLen);
+    var fcP90 = ((activeForecast.p90_extreme || activeForecast.p90 || activeForecast.p75) || []).slice(0, fcLen);
+    var chronosMedian = bundle.chronos && bundle.chronos.raw && bundle.chronos.raw.forecast ? (bundle.chronos.raw.forecast.median || []).slice(0, fcLen) : [];
     var timesfmMedian = bundle.timesfm ? (bundle.timesfm.median || []).slice(0, fcLen) : [];
 
     var allLabels = histDates.concat(fcDates);
@@ -1313,11 +1602,29 @@ image: "/assets/images/og-default.png"
     var chronosLine = forecastLineFromHistory(joinPrice, histDates, chronosMedian);
     var timesfmLine = forecastLineFromHistory(joinPrice, histDates, timesfmMedian);
 
+    var targetPrice = fcMedian[fcLen - 1];
+    var pctChange = (d.current_price && targetPrice) ? ((targetPrice - d.current_price) / d.current_price * 100) : null;
+    var lastP90 = fcP90[fcLen - 1];
+    var lastP10 = fcP10[fcLen - 1];
+    var agreement = bundle.entry && bundle.entry.agreement ? bundle.entry.agreement : {};
+    var chronos90 = bundle.chronos ? bundle.chronos.forecast_90d : null;
+    var timesfm90 = bundle.timesfm ? bundle.timesfm.forecast_90d : null;
+
+    renderForecastOrbit(key, meta, bundle, targetPrice, agreement, fcLen);
+    hydrateForecastMetricText(key, meta, d, consensus, activeModel, targetPrice, pctChange, lastP90, lastP10, agreement, chronosMedian, timesfmMedian, fcMedian, fcLen, chronos90, timesfm90);
+
     var ctx = document.getElementById('fc-chart');
     if (!ctx) return;
+    var fallback = document.getElementById('home-chart-static-fallback');
+    if (!window.Chart) {
+      renderStaticForecastFallback(meta, d, targetPrice, lastP90, lastP10, chronosMedian[fcLen - 1], timesfmMedian[fcLen - 1]);
+      return;
+    }
+    if (fallback) fallback.remove();
     if (fcChart) { fcChart.destroy(); fcChart = null; }
 
-    fcChart = new Chart(ctx, {
+    try {
+      fcChart = new Chart(ctx, {
       type: 'line',
       data: {
         labels: allLabels,
@@ -1325,7 +1632,7 @@ image: "/assets/images/og-default.png"
           {
             label: 'Range Upper', data: p90Line,
             borderColor: 'transparent',
-            backgroundColor: 'rgba(34,211,238,0.12)',
+            backgroundColor: 'rgba(34,211,238,0.05)',
             fill: '+1', pointRadius: 0, tension: 0.35, order: 6
           },
           {
@@ -1342,21 +1649,45 @@ image: "/assets/images/og-default.png"
           },
           {
             label: 'Chronos-2', data: chronosLine,
-            borderColor: 'rgba(168,85,247,0.88)',
+            borderColor: 'rgba(216,180,254,1)',
             backgroundColor: 'transparent',
-            borderWidth: 1.6, pointRadius: 0, tension: 0.35, order: 3, borderDash: [6,4]
+            borderWidth: 2.4,
+            pointRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? 4.2 : 0; },
+            pointHoverRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? 5.8 : 0; },
+            pointBackgroundColor: 'rgba(216,180,254,1)',
+            pointBorderColor: 'rgba(15,23,42,0.95)',
+            pointBorderWidth: 1.2,
+            borderCapStyle: 'round',
+            borderJoinStyle: 'round',
+            tension: 0.35, order: 3, borderDash: [9,5]
           },
           {
             label: 'TimesFM 2.5', data: timesfmLine,
-            borderColor: 'rgba(251,191,36,0.96)',
+            borderColor: 'rgba(250,204,21,1)',
             backgroundColor: 'transparent',
-            borderWidth: 1.6, pointRadius: 0, tension: 0.35, order: 2, borderDash: [3,4]
+            borderWidth: 2.6,
+            pointRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? 4.6 : 0; },
+            pointHoverRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? 6.2 : 0; },
+            pointBackgroundColor: 'rgba(250,204,21,1)',
+            pointBorderColor: 'rgba(15,23,42,0.95)',
+            pointBorderWidth: 1.2,
+            borderCapStyle: 'round',
+            borderJoinStyle: 'round',
+            tension: 0.35, order: 2, borderDash: [2,6]
           },
           {
             label: 'Consensus', data: medianLine,
             borderColor: '#22d3ee',
             backgroundColor: 'transparent',
-            borderWidth: 2.8, pointRadius: 0, tension: 0.35, order: 1
+            borderWidth: 2.35,
+            pointRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? 4.2 : 0; },
+            pointHoverRadius: function(ctx) { return ctx.dataIndex === ctx.dataset.data.length - 1 ? 5.8 : 0; },
+            pointBackgroundColor: '#22d3ee',
+            pointBorderColor: 'rgba(15,23,42,0.95)',
+            pointBorderWidth: 1.1,
+            borderCapStyle: 'round',
+            borderJoinStyle: 'round',
+            tension: 0.35, order: 1
           }
         ]
       },
@@ -1366,6 +1697,7 @@ image: "/assets/images/og-default.png"
         interaction: { mode: 'index', intersect: false },
         animation: { duration: 400, easing: 'easeOutQuart' },
         plugins: {
+          lineEndLabels: { enabled: true },
           legend: { display: false },
           tooltip: {
             backgroundColor: 'rgba(10,10,20,0.96)',
@@ -1383,6 +1715,7 @@ image: "/assets/images/og-default.png"
             }
           }
         },
+        layout: { padding: { right: window.innerWidth <= 768 ? 0 : 110 } },
         scales: {
           x: {
             grid: { color: 'rgba(255,255,255,0.03)' },
@@ -1404,8 +1737,20 @@ image: "/assets/images/og-default.png"
             ticks: { color: '#94a3b8', font: { size: 11, weight: '600' }, callback: function(val) { return fmt(val, meta); } }
           }
         }
-      }
+      },
+      plugins: [{
+        id: 'homeForecastLineEndLabels',
+        afterDatasetsDraw: function(chart, args, pluginOptions) {
+          if (!pluginOptions || pluginOptions.enabled === false) return;
+          drawLineEndLabels(chart, ['Consensus', 'Chronos-2', 'TimesFM 2.5']);
+        }
+      }]
     });
+    } catch (chartError) {
+      console.warn('Forecast chart render fallback', chartError);
+      renderStaticForecastFallback(meta, d, targetPrice, lastP90, lastP10, chronosMedian[fcLen - 1], timesfmMedian[fcLen - 1]);
+      return;
+    }
 
     var targetPrice = fcMedian[fcLen - 1];
     var pctChange = (d.current_price && targetPrice) ? ((targetPrice - d.current_price) / d.current_price * 100) : null;
@@ -1414,6 +1759,7 @@ image: "/assets/images/og-default.png"
     var agreement = bundle.entry && bundle.entry.agreement ? bundle.entry.agreement : {};
     var chronos90 = bundle.chronos ? bundle.chronos.forecast_90d : null;
     var timesfm90 = bundle.timesfm ? bundle.timesfm.forecast_90d : null;
+    renderForecastOrbit(key, meta, bundle, targetPrice, agreement, fcLen);
 
     var el = function(id) { return document.getElementById(id); };
     if (el('fc-name')) el('fc-name').textContent = meta.name;
@@ -1425,6 +1771,11 @@ image: "/assets/images/og-default.png"
     if (el('home-model-label')) el('home-model-label').textContent = activeModel;
     if (el('home-model-sub')) el('home-model-sub').textContent = consensus ? 'Chronos-2 + TimesFM 2.5' : activeModel + ' only';
     if (el('home-forecast-subtitle')) el('home-forecast-subtitle').textContent = consensus ? 'Consensus forecast with dual-model comparison and agreement scoring' : ('90-day AI forecast with ' + activeModel + ' median and P10–P90 confidence band');
+    renderChartEndStrip('home-chart-end-strip', [
+      { label: 'Consensus', value: fmt(fcMedian[fcLen - 1], meta), color: '#22d3ee' },
+      { label: 'Chronos-2', value: fmt(chronosMedian[fcLen - 1], meta), color: 'rgba(216,180,254,1)' },
+      { label: 'TimesFM', value: fmt(timesfmMedian[fcLen - 1], meta), color: 'rgba(250,204,21,1)' }
+    ]);
 
     var chgEl = el('fc-change');
     if (chgEl) {
@@ -1439,20 +1790,18 @@ image: "/assets/images/og-default.png"
       strip.innerHTML = ''
         + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
         + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Model agreement</div>'
-        + '<div class="title-bold-white">' + level.toUpperCase() + '</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + level.toUpperCase() + '</div>'
         + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
         + '</div>'
         + '<div style="padding:12px 14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.16);border-radius:12px;">'
-        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:700;margin-bottom:6px;">Consensus 90D</div>'
-        + '<div class="title-bold-white">' + fmt(targetPrice, meta) + '</div>'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:700;margin-bottom:6px;">Consensus ' + fcLen + 'D</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + fmt(targetPrice, meta) + '</div>'
+        + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Target range ' + fmt(lastP10, meta) + '–' + fmt(lastP90, meta) + '</div>'
         + '</div>'
         + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
-        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#a855f7;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
-        + '<div class="title-bold-white">' + fmt(chronos90, meta) + '</div>'
-        + '</div>'
-        + '<div style="padding:12px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.16);border-radius:12px;">'
-        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
-        + '<div class="title-bold-white">' + fmt(timesfm90, meta) + '</div>'
+        + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#c084fc;font-weight:700;margin-bottom:6px;">Production route</div>'
+        + '<div style="font-size:1rem;font-weight:800;color:#f8fafc;">' + routeWeightText(consensus, fcLen) + '</div>'
+        + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Chronos ' + fmt(chronos90, meta) + ' · TimesFM ' + fmt(timesfm90, meta) + '</div>'
         + '</div>';
     }
   }
@@ -1471,7 +1820,7 @@ image: "/assets/images/og-default.png"
       var pct = d.current_price && target90 ? ((target90 - d.current_price) / d.current_price * 100) : 0;
       var dir = pct >= 0 ? 'up' : 'down';
       var level = bundle.entry && bundle.entry.agreement ? bundle.entry.agreement.level : 'moderate';
-      return '<div class="fc-summary-item" data-commodity="' + k + '" role="button" tabindex="0">'
+      return '<div class="fc-summary-item" data-commodity="' + k + '" onclick="window._fcSwitch && window._fcSwitch(\'' + k + '\')">'
         + '<div class="fc-sum-header">'
         + '<div class="fc-sum-name">' + meta.name + '</div>'
         + '<div class="fc-sum-badge ' + dir + '">' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%</div>'
@@ -1496,7 +1845,77 @@ image: "/assets/images/og-default.png"
     });
   };
 
+  function updateHomeForecastFreshness() {
+    var freshness = document.getElementById('home-forecast-freshness');
+    if (!freshness) return;
+    freshness.textContent = 'Daily refresh · ' + new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  }
+
+  function drawLineEndLabels(chart, labels) {
+    if (window.innerWidth <= 768 || chart.width <= 520) return;
+    var area = chart && chart.chartArea;
+    if (!area) return;
+    var ctx = chart.ctx;
+    var items = [];
+    chart.data.datasets.forEach(function(dataset, index) {
+      if (labels.indexOf(dataset.label) === -1 || chart.isDatasetVisible(index) === false) return;
+      var meta = chart.getDatasetMeta(index);
+      if (!meta || !meta.data || !meta.data.length) return;
+      var point = null;
+      for (var i = meta.data.length - 1; i >= 0; i -= 1) {
+        var raw = dataset.data[i];
+        var val = raw && typeof raw === 'object' ? raw.y : raw;
+        if (typeof val === 'number' && isFinite(val) && meta.data[i] && meta.data[i].x != null && meta.data[i].y != null) {
+          point = meta.data[i];
+          break;
+        }
+      }
+      if (!point) return;
+      items.push({ text: dataset.label.replace(' 2.5',''), color: dataset.borderColor, x: point.x, y: point.y });
+    });
+    items.sort(function(a, b) { return a.y - b.y; });
+    var minGap = 22;
+    for (var j = 1; j < items.length; j += 1) {
+      if (items[j].y - items[j - 1].y < minGap) items[j].y = items[j - 1].y + minGap;
+    }
+    for (var k = items.length - 2; k >= 0; k -= 1) {
+      if (items[k + 1].y > area.bottom - 8 && items[k].y > items[k + 1].y - minGap) items[k].y = items[k + 1].y - minGap;
+    }
+    ctx.save();
+    ctx.font = '800 12.5px DM Sans, Inter, system-ui, sans-serif';
+    ctx.textBaseline = 'middle';
+    items.forEach(function(item) {
+      var textWidth = ctx.measureText(item.text).width;
+      var boxWidth = textWidth + 20;
+      var boxHeight = 22;
+      var boxX = Math.max(area.left + 8, area.right - boxWidth - 10);
+      var boxY = Math.max(area.top + 8, Math.min(area.bottom - boxHeight - 6, item.y - boxHeight / 2));
+      ctx.strokeStyle = item.color;
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.moveTo(item.x + 2, item.y);
+      ctx.lineTo(boxX - 6, boxY + boxHeight / 2);
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(5,10,20,0.96)';
+      if (ctx.roundRect) {
+        ctx.beginPath();
+        ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 8);
+        ctx.fill();
+      } else {
+        ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+      }
+      ctx.strokeStyle = item.color;
+      ctx.lineWidth = 1.2;
+      ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+      ctx.fillStyle = item.color;
+      ctx.fillText(item.text, boxX + 10, boxY + boxHeight / 2 + 0.5);
+    });
+    ctx.restore();
+  }
+
+  updateHomeForecastFreshness();
   document.addEventListener('DOMContentLoaded', function() {
+    updateHomeForecastFreshness();
     document.querySelectorAll('.forecast-tab').forEach(function(btn) {
       btn.addEventListener('click', function() {
         window._fcSwitch(this.dataset.commodity);
@@ -1510,491 +1929,10 @@ image: "/assets/images/og-default.png"
         renderForecastChart(currentCommodity, currentHorizon);
       });
     });
-    var bar = document.getElementById('forecast-summary-bar');
-    if (bar) {
-      bar.addEventListener('click', function(ev) {
-        var item = ev.target.closest('.fc-summary-item');
-        if (item && item.dataset.commodity) window._fcSwitch(item.dataset.commodity);
-      });
-      bar.addEventListener('keydown', function(ev) {
-        if (ev.key !== 'Enter' && ev.key !== ' ') return;
-        var item = ev.target.closest('.fc-summary-item');
-        if (item && item.dataset.commodity) {
-          ev.preventDefault();
-          window._fcSwitch(item.dataset.commodity);
-        }
-      });
-    }
   });
 })();
 </script>
 
-
-<!-- Price Alert Banner -->
-<div style="padding:12px 24px 0;">
-  {% include price-alert.html %}
-</div>
-
-<!-- Newsletter -->
-<div class="container" style="padding-top:32px;padding-bottom:0;" data-animate>
-  {% include newsletter.html %}
-</div>
-
-<div class="divider"></div>
-
-<!-- ===== 3D UNIVERSE IMPACT MAP ===== -->
-<section class="section universe-stage" id="impact-preview" aria-labelledby="impact-preview-title">
-  <div class="container">
-    <div class="universe-stage-shell" data-animate>
-      <div class="universe-stage-copy">
-        <div class="universe-kicker-row">
-          <p class="section-label">Signature 3D Universe</p>
-          <span class="universe-kicker-pill">Live topology · {{ site.coverage_counts.commodity_hubs | default: site.commodities.size }} hubs</span>
-        </div>
-        <h2 class="section-title universe-stage-title" id="impact-preview-title">See the market as a living cosmic system.</h2>
-        <p class="section-desc universe-stage-desc">CommodityNode’s 3D universe turns commodities, companies, and second-order shocks into a cinematic exploration layer — built to feel like a flagship product surface, not another dashboard widget.</p>
-        <div class="universe-stage-actions">
-          <a href="/commodities/" class="btn btn-primary">Enter the Universe</a>
-          <a href="/reports/" class="btn btn-secondary">See Live Research</a>
-        </div>
-        <div class="universe-stage-proof">
-          <div class="universe-proof-item"><strong>{{ site.commodities | size | default: 60 }}</strong><span>commodity hubs</span></div>
-          <div class="universe-proof-item"><strong>{{ site.posts.size }}</strong><span>signal reports</span></div>
-          <div class="universe-proof-item"><strong>3D</strong><span>exploration layer</span></div>
-        </div>
-      </div>
-
-      <div class="universe-container" data-animate data-delay="150">
-        <div class="universe-stage-toolbar">
-          <div class="universe-controls">
-            <div class="universe-control-group">
-              <span class="universe-control-label">Cluster</span>
-              <button type="button" class="universe-filter is-active" data-filter="all">All</button>
-              <button type="button" class="universe-filter" data-filter="energy">Energy</button>
-              <button type="button" class="universe-filter" data-filter="precious">Precious</button>
-              <button type="button" class="universe-filter" data-filter="industrial">Industrial</button>
-              <button type="button" class="universe-filter" data-filter="agriculture">Agriculture</button>
-            </div>
-            <div class="universe-control-group universe-search-group">
-              <span class="universe-control-label">Search</span>
-              <input type="text" class="universe-search" placeholder="Search stars, satellites, companies…" aria-label="Search universe">
-            </div>
-          </div>
-          <button type="button" class="universe-reset-btn">Reset viewpoint</button>
-        </div>
-
-        <div class="universe-frame">
-          <div class="universe-frame-grid"></div>
-          <div class="universe-stage-caption universe-stage-caption-top">Cinematic market topology · drag, zoom, and click to reveal structure</div>
-          <div id="universe-canvas" class="universe-canvas"></div>
-          <div id="universe-tooltip" class="universe-tooltip"></div>
-          <div class="universe-orbit-info universe-orbit-info-left">
-            <span class="universe-orbit-label">Core star</span>
-            <strong>Commodity cluster</strong>
-            <small>Primary assets anchor the scene while satellites encode downstream exposure.</small>
-          </div>
-          <div class="universe-orbit-info universe-orbit-info-right">
-            <span class="universe-orbit-label">Interaction</span>
-            <strong>Zoom into a narrative</strong>
-            <small>Hover reveals context. Click opens the commodity hub or related impact chain.</small>
-          </div>
-          <div id="universe-hint" class="universe-hint">Drag to rotate · Scroll to zoom · Click a star to open its hub</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ===== DECISION SURFACES ===== -->
-<section class="section decision-surfaces" id="decision-surfaces" aria-labelledby="decision-surfaces-title">
-  <div class="container">
-    <header class="section-header decision-surfaces-header" data-animate>
-      <p class="section-label">Decision Flow</p>
-      <h2 class="section-title" id="decision-surfaces-title">Move from the price shock to the transmission path in one screen.</h2>
-      <p class="section-desc">Instead of stacking five separate explainer bands, CommodityNode now compresses the workflow into one operating surface: live movers, downstream ripple chains, fast entry points, and a sector matrix for instant triangulation.</p>
-    </header>
-
-    <div class="decision-surfaces-shell" data-animate data-delay="100">
-      <div class="decision-surfaces-primary">
-        <div class="decision-card decision-card--live">
-          <div class="decision-card-head">
-            <div>
-              <p class="signal-panel-label">Live Movers</p>
-              <h3>What is repricing right now?</h3>
-            </div>
-            <a href="/commodities/" class="decision-inline-link">Open all hubs →</a>
-          </div>
-          <div class="signals-grid decision-signals-grid">
-            <div class="signal-mover-card" id="signal-oil">
-              <div class="signal-mover-header">
-                <span class="signal-mover-tag">OIL</span>
-                <span class="signal-mover-direction" id="signal-oil-dir">&mdash;</span>
-              </div>
-              <div class="signal-mover-name">Crude Oil (WTI)</div>
-              <div class="signal-mover-price" id="signal-oil-price">&mdash;</div>
-              <a href="/commodities/crude-oil/" class="signal-mover-link">View Commodity Hub &rarr;</a>
-            </div>
-            <div class="signal-mover-card" id="signal-gold">
-              <div class="signal-mover-header">
-                <span class="signal-mover-tag" style="background:rgba(251,191,36,0.15);color:#fbbf24;">Au</span>
-                <span class="signal-mover-direction" id="signal-gold-dir">&mdash;</span>
-              </div>
-              <div class="signal-mover-name">Gold</div>
-              <div class="signal-mover-price" id="signal-gold-price">&mdash;</div>
-              <a href="/commodities/gold/" class="signal-mover-link">View Commodity Hub &rarr;</a>
-            </div>
-            <div class="signal-mover-card" id="signal-copper">
-              <div class="signal-mover-header">
-                <span class="signal-mover-tag" style="background:rgba(16,185,129,0.15);color:#10b981;">Cu</span>
-                <span class="signal-mover-direction" id="signal-copper-dir">&mdash;</span>
-              </div>
-              <div class="signal-mover-name">Copper</div>
-              <div class="signal-mover-price" id="signal-copper-price">&mdash;</div>
-              <a href="/commodities/copper/" class="signal-mover-link">View Commodity Hub &rarr;</a>
-            </div>
-            <div class="signal-mover-card" id="signal-gas">
-              <div class="signal-mover-header">
-                <span class="signal-mover-tag" style="background:rgba(168,85,247,0.15);color:#a855f7;">GAS</span>
-                <span class="signal-mover-direction" id="signal-gas-dir">&mdash;</span>
-              </div>
-              <div class="signal-mover-name">Natural Gas</div>
-              <div class="signal-mover-price" id="signal-gas-price">&mdash;</div>
-              <a href="/commodities/natural-gas/" class="signal-mover-link">View Commodity Hub &rarr;</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="decision-surface-split">
-          <article class="signal-panel signal-panel--featured decision-card decision-card--ripple" id="featured-ripple-panel">
-            <p class="signal-panel-label">Featured Ripple Chain</p>
-            <h3 id="featured-ripple-title">Crude Oil &rarr; Airlines &rarr; Logistics &rarr; Consumer Spending</h3>
-            <p id="featured-ripple-desc">Energy price shocks remain the clearest live example of first-order and second-order exposure chains on the platform.</p>
-            <div class="signal-chain" id="featured-ripple-chain">
-              <span class="signal-node up">Crude Oil</span>
-              <span class="signal-arrow">&rarr;</span>
-              <span class="signal-node down">Airlines</span>
-              <span class="signal-arrow">&rarr;</span>
-              <span class="signal-node down">Logistics</span>
-              <span class="signal-arrow">&rarr;</span>
-              <span class="signal-node down">Consumer</span>
-            </div>
-            <a href="/commodities/crude-oil/" class="btn btn-secondary" id="featured-ripple-link">View Impact Map</a>
-          </article>
-
-          <div class="decision-card decision-card--routes">
-            <p class="signal-panel-label">Fastest workflow</p>
-            <h3>Three ways to interrogate the same shock.</h3>
-            <div class="decision-route-list">
-              <a href="/commodities/" class="decision-route-card">
-                <span class="decision-route-step">01</span>
-                <div>
-                  <strong>Read the live commodity hub</strong>
-                  <span>Start with the asset, its linked companies, and the current price regime.</span>
-                </div>
-              </a>
-              <a href="/signals/" class="decision-route-card">
-                <span class="decision-route-step">02</span>
-                <div>
-                  <strong>Validate with the signal layer</strong>
-                  <span>Check whether the move is part of a broader cross-commodity or risk-off setup.</span>
-                </div>
-              </a>
-              <a href="/simulator/" class="decision-route-card">
-                <span class="decision-route-step">03</span>
-                <div>
-                  <strong>Stress test downstream names</strong>
-                  <span>Translate the commodity move into sector winners, losers, and scenario ranges.</span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <aside class="decision-surfaces-secondary">
-        <div class="decision-card decision-card--matrix">
-          <div class="decision-card-head">
-            <div>
-              <p class="signal-panel-label">Sector Matrix</p>
-              <h3>Which sectors are usually long or short the move?</h3>
-            </div>
-            <a href="/industries/" class="decision-inline-link">Industry view →</a>
-          </div>
-          <div class="matrix-scroll decision-matrix-scroll">
-            <table class="exposure-matrix exposure-matrix--compact">
-              <thead>
-                <tr>
-                  <th>Sector</th>
-                  <th><a href="/commodities/crude-oil/">Oil</a></th>
-                  <th><a href="/commodities/natural-gas/">Nat Gas</a></th>
-                  <th><a href="/commodities/copper/">Copper</a></th>
-                  <th><a href="/commodities/gold/">Gold</a></th>
-                  <th><a href="/commodities/wheat/">Wheat</a></th>
-                  <th><a href="/commodities/uranium/">Uranium</a></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="matrix-sector"><a href="/industries/energy-industry/">Energy</a></td>
-                  <td class="matrix-bull">++</td>
-                  <td class="matrix-bull">++</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-bull">++</td>
-                </tr>
-                <tr>
-                  <td class="matrix-sector"><a href="/industries/airlines/">Airlines</a></td>
-                  <td class="matrix-bear">--</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-neutral">-</td>
-                </tr>
-                <tr>
-                  <td class="matrix-sector"><a href="/industries/mining/">Mining</a></td>
-                  <td class="matrix-mild-bull">+</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-bull">++</td>
-                  <td class="matrix-bull">++</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-bull">++</td>
-                </tr>
-                <tr>
-                  <td class="matrix-sector"><a href="/industries/agriculture-industry/">Agriculture</a></td>
-                  <td class="matrix-mild-bear">-</td>
-                  <td class="matrix-bear">--</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-bull">++</td>
-                  <td class="matrix-neutral">-</td>
-                </tr>
-                <tr>
-                  <td class="matrix-sector"><a href="/industries/consumer-goods/">Consumer</a></td>
-                  <td class="matrix-mild-bear">-</td>
-                  <td class="matrix-mild-bear">-</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-neutral">-</td>
-                  <td class="matrix-bear">--</td>
-                  <td class="matrix-neutral">-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="decision-matrix-note">++ Strong bullish · + Mild bullish · - Neutral · -- Bearish, on commodity price increases.</p>
-        </div>
-
-        <div class="decision-card decision-card--links">
-          <p class="signal-panel-label">Explore by lens</p>
-          <h3>Jump straight to the surface that matches your job.</h3>
-          <div class="decision-link-grid">
-            <a href="/commodities/" class="decision-link-pill">Commodity hubs</a>
-            <a href="/companies/" class="decision-link-pill">Company sensitivity</a>
-            <a href="/disruptions/" class="decision-link-pill">Disruption tracker</a>
-            <a href="/correlation/" class="decision-link-pill">Correlation matrix</a>
-            <a href="/range-tracker/" class="decision-link-pill">52-week range</a>
-            <a href="/calendar/" class="decision-link-pill">Market calendar</a>
-          </div>
-        </div>
-      </aside>
-    </div>
-
-    <script>
-    fetch('/assets/data/prices.json').then(r=>r.json()).then(d=>{
-      var map={oil:'crude_oil',gold:'gold',copper:'copper',gas:'natural_gas'};
-      Object.keys(map).forEach(function(k){
-        var c=d[map[k]]; if(!c)return;
-        var dir=document.getElementById('signal-'+k+'-dir');
-        var price=document.getElementById('signal-'+k+'-price');
-        if(dir){
-          if(typeof c.change_pct === 'number'){
-            var sign=c.change_pct>=0?'+':'';
-            dir.textContent=sign+c.change_pct+'%';
-            dir.className='signal-mover-direction '+(c.change_pct>=0?'up':'down');
-          } else {
-            dir.textContent='—';
-            dir.className='signal-mover-direction';
-          }
-        }
-        if(price){price.textContent='$'+c.price;}
-      });
-    }).catch(function(){});
-    </script>
-    <script>
-    (function(){
-      var chains = {
-        crude_oil:   {nodes:["Crude Oil","Airlines","Logistics","Consumer Spending"], url:"/commodities/crude-oil/",  desc:"Energy price shocks compress airline margins, slow logistics, and reduce consumer discretionary spending."},
-        gold:        {nodes:["Gold","USD Index","Bond Yields","Risk Sentiment"],      url:"/commodities/gold/",       desc:"Gold surges signal risk-off sentiment — the USD weakens, bond yields shift, and portfolio hedging accelerates."},
-        coffee:      {nodes:["Coffee","Cafes & QSR","Packaged Goods","Consumer Spending"], url:"/commodities/coffee/", desc:"Coffee price spikes raise costs for cafes and packaged goods, squeezing margins across the consumer sector."},
-        copper:      {nodes:["Copper","Construction","EVs & Electronics","Manufacturing"],  url:"/commodities/copper/", desc:"Dr. Copper signals industrial activity — price moves ripple through construction, EVs, and manufacturing."},
-        natural_gas: {nodes:["Natural Gas","Utilities","Chemicals","Fertilizers"],    url:"/commodities/natural-gas/", desc:"Natural gas price shocks cascade through utility bills, chemical feedstock costs, and fertilizer prices."},
-        coal:        {nodes:["Coal","Power Generation","Steel Mills","Industrial Output"], url:"/commodities/coal/",   desc:"Coal price moves impact power generation costs, steel production economics, and broader industrial output."},
-        uranium:     {nodes:["Uranium","Nuclear Plants","Grid Stability","Energy Transition"], url:"/commodities/uranium/", desc:"Uranium price shifts affect nuclear economics, grid reliability planning, and the pace of energy transition."}
-      };
-      fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
-        var topKey=null, topAbs=0;
-        Object.keys(d).forEach(function(k){
-          if(typeof d[k].change_pct !== 'number') return;
-          var abs=Math.abs(d[k].change_pct);
-          if(abs>topAbs){topAbs=abs;topKey=k;}
-        });
-        if(!topKey||topAbs<2) return;
-        var chain=chains[topKey]||chains.crude_oil;
-        var titleEl=document.getElementById('featured-ripple-title');
-        var descEl=document.getElementById('featured-ripple-desc');
-        var chainEl=document.getElementById('featured-ripple-chain');
-        var linkEl=document.getElementById('featured-ripple-link');
-        if(!titleEl||!chainEl) return;
-        titleEl.innerHTML=chain.nodes.join(' &rarr; ');
-        if(descEl) descEl.textContent=chain.desc;
-        if(linkEl) linkEl.href=chain.url;
-        var dir=d[topKey].change_pct>=0?'up':'down';
-        var html='';
-        chain.nodes.forEach(function(n,i){
-          if(i>0) html+='<span class="signal-arrow">&rarr;</span>';
-          html+='<span class="signal-node '+(i===0?(dir):dir)+'">' + n + '</span>';
-        });
-        chainEl.innerHTML=html;
-      }).catch(function(){});
-    })();
-    </script>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ===== LIVE COMMODITY PRICES ===== -->
-<section class="live-prices section" aria-labelledby="prices-title">
-  <div class="container">
-    <header class="section-header" data-animate>
-      <p class="section-label">Real-Time Data</p>
-      <h2 class="section-title" id="prices-title">Live Commodity Prices</h2>
-      <p class="section-desc">Updated daily · <span id="last-update-time">daily</span></p>
-    </header>
-    <div class="price-grid" data-animate>
-      {% assign prices = site.data.prices %}
-      {% for item in prices %}
-      <div class="price-card {% if item[1].change_pct > 0 %}up{% else %}down{% endif %}">
-        <div class="price-symbol">{{ item[1].symbol }}</div>
-        <div class="price-name">{{ item[1].name }}</div>
-        <div class="price-value">${{ item[1].price }}</div>
-        <div class="price-change">{% if item[1].change_pct > 0 %}+{% endif %}{{ item[1].change_pct }}%</div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ===== LATEST SIGNAL REPORTS ===== -->
-<section class="section" id="latest" aria-labelledby="latest-title">
-  <div class="container">
-    <header class="section-header" data-animate>
-      <p class="section-label">Latest Analysis</p>
-      <h2 class="section-title" id="latest-title">Signal Reports &amp; Impact Maps</h2>
-      <p class="section-desc">
-        Curated Ripple Chains, company-exposure notes, and commodity intelligence.
-      </p>
-    </header>
-
-    <div class="posts-toolbar" data-animate data-delay="100">
-      <div class="filter-chips" role="tablist" aria-label="Filter Signal Reports">
-        <button class="filter-chip is-active" type="button" data-filter="all">All</button>
-        <button class="filter-chip" type="button" data-filter="energy">Energy</button>
-        <button class="filter-chip" type="button" data-filter="metals">Metals</button>
-        <button class="filter-chip" type="button" data-filter="agriculture">Agriculture</button>
-        <button class="filter-chip" type="button" data-filter="battery">Battery</button>
-      </div>
-      <a href="/reports/" class="posts-toolbar-link">Full archive &rarr;</a>
-    </div>
-
-    <div class="posts-grid posts-grid--paginated" id="home-posts-grid">
-      {% assign posts = site.posts %}
-      {% for post in posts limit:12 %}
-      {% assign categories_joined = post.categories | join: '|' | downcase %}
-      {% assign tags_joined = post.tags | join: '|' | downcase %}
-      {% assign first_tag = post.tags | first | slugify %}
-      <article class="post-card{% if forloop.first %} post-card--featured{% endif %} post-card--discoverable"
-               data-animate
-               data-delay="{{ forloop.index0 | times: 100 | modulo: 500 }}"
-               data-post-card
-               data-filter-tags="{{ categories_joined }}|{{ tags_joined }}"
-               data-search-text="{{ post.title | strip_html | escape }} {{ post.description | default: post.excerpt | strip_html | escape }} {{ post.tags | join: ' ' | escape }} {{ post.categories | join: ' ' | escape }}"
-               data-commodity="{{ first_tag }}">
-
-        {% if forloop.first %}
-        {% endif %}
-
-        <div class="post-card-accent" aria-hidden="true"></div>
-        <div class="post-card-body">
-          <div class="post-card-meta">
-            <time class="post-time" datetime="{{ post.date | date: '%Y-%m-%d' }}">
-              {{ post.date | date: "%b %d, %Y" }}
-            </time>
-            {% for cat in post.categories limit:2 %}
-            <span class="post-category">{{ cat }}</span>
-            {% endfor %}
-            {% if post.direction == "bullish" %}
-            <span class="post-card-direction bullish">&#9650; Bullish</span>
-            {% elsif post.direction == "bearish" %}
-            <span class="post-card-direction bearish">&#9660; Bearish</span>
-            {% endif %}
-            {% assign now_epoch = 'now' | date: '%s' | plus: 0 %}{% assign post_epoch = post.date | date: '%s' | plus: 0 %}{% assign post_age = now_epoch | minus: post_epoch %}
-            {% if post_age < 259200 %}
-            <span class="post-card-label post-card-label--new">NEW</span>
-            {% elsif post.updated %}
-            <span class="post-card-label post-card-label--updated">UPDATED</span>
-            {% elsif post.evergreen %}
-            <span class="post-card-label post-card-label--evergreen">EVERGREEN</span>
-            {% endif %}
-          </div>
-
-          <h2 class="post-card-title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          </h2>
-
-          <p class="post-card-excerpt">
-            {{ post.description | default: post.excerpt | strip_html | truncatewords: 35 }}
-          </p>
-
-          {% if post.tags and post.tags.size > 0 %}
-          <div class="post-card-tags">
-            {% for tag in post.tags limit:3 %}
-            <span class="post-tag-pill">{{ tag }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-
-          <div class="post-card-footer">
-            <a href="{{ post.url | relative_url }}" class="read-more">Open Signal Report &rarr;</a>
-            {% if post.reading_time %}
-            <span class="reading-time">{{ post.reading_time }} min read</span>
-            {% endif %}
-          </div>
-        </div>
-      </article>
-      {% endfor %}
-
-      {% if site.posts.size == 0 %}
-      <div class="feature-card text-center" style="grid-column:1/-1;padding:60px">
-        <p class="text-muted">Signal Reports coming soon.</p>
-      </div>
-      {% endif %}
-    </div>
-
-    <div class="posts-pagination" id="home-posts-pagination" data-animate data-delay="150" aria-live="polite"></div>
-
-    <div class="posts-section-footer" data-animate>
-      <a href="/reports/" class="btn btn-secondary min-w-220-center">Browse Full Research Archive &rarr;</a>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- ===== FINAL CTA — "What shock do you want to understand next?" ===== -->
 <section class="section final-cta-section" aria-labelledby="final-cta-title">

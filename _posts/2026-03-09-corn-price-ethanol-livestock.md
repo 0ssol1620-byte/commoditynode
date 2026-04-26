@@ -136,4 +136,4 @@ window.COMMODITY_DATA = {
 
 Corn's 20% move produces near-perfect **+19.5% CORN ETF** tracking and amplified **+18% gains for ethanol producers** like Green Plains. Poultry companies suffer most: Pilgrim's Pride drops **-10%** on average, while Tyson faces **-8%** headwinds as feed costs surge.
 
-**Weather watch:** The US Corn Belt (Iowa, Illinois, Nebraska) crop condition reports from USDA every Monday during the growing season (May-September) are the key price driver. A drought rating below 60% "Good/Excellent" is historically a buy signal for CORN ETF and sell signal for PPC/Tyson.
+**Weather watch:** The US Corn Belt (Iowa, Illinois, Nebraska) crop condition reports from USDA every Monday during the growing season (May-September) are the key price driver. A drought rating below 60% "Good/Excellent" is historically a major risk context marker for corn-linked instruments and poultry/meat processors.

@@ -23,14 +23,31 @@ layout: default
 </script>
 
 {% assign commodity_slug = page.commodity_slug | default: page.name | remove: '.md' %}
-{% assign related_posts = '' | split: '' %}
+{% assign exact_related_posts = '' | split: '' %}
+{% assign contextual_related_posts = '' | split: '' %}
 {% for post in site.posts %}
-  {% if post.tags contains commodity_slug %}
-    {% assign related_posts = related_posts | push: post %}
+  {% assign post_primary_source = post.commodity_slug | default: post.commodity_name | default: '' %}
+  {% assign post_primary_slug = '' %}
+  {% if post_primary_source != '' %}
+    {% assign post_primary_slug = post_primary_source | slugify %}
+  {% endif %}
+  {% if post_primary_slug == commodity_slug %}
+    {% assign exact_related_posts = exact_related_posts | push: post %}
+  {% elsif post.tags contains commodity_slug %}
+    {% assign contextual_related_posts = contextual_related_posts | push: post %}
   {% endif %}
 {% endfor %}
+{% assign related_posts = exact_related_posts %}
+{% if related_posts.size == 0 %}
+  {% assign related_posts = contextual_related_posts %}
+{% endif %}
 {% assign latest_related_posts = related_posts | slice: 0, 3 %}
 {% assign latest_related_post = related_posts | first %}
+{% assign commodity_default_coverage_tier = 'standard watchlist' %}
+{% assign commodity_default_coverage_note = 'This hub is maintained as a decision reference: live price context where available, Local Universe relationships, substitute chains, and next-step routes while deeper signal reports expand.' %}
+{% assign commodity_default_next_best_links = '/reports/|Browse all reports,/simulator/|Run scenario simulator,/intelligence-lab/|Open Intelligence Lab' | split: ',' %}
+{% assign commodity_coverage_tier = page.coverage_tier | default: commodity_default_coverage_tier %}
+{% assign commodity_coverage_note = page.coverage_note | default: commodity_default_coverage_note %}
 
 {% comment %}Breadcrumb — structured data + visible nav{% endcomment %}
 <nav aria-label="Breadcrumb" class="breadcrumb-nav" style="padding:12px 0 0;max-width:1280px;margin:0 auto;padding-left:24px;">
@@ -103,10 +120,10 @@ layout: default
     },
     {
       "@type": "Question",
-      "name": "How can investors track {{ page.title | split: ':' | first | strip | escape }} price impact on portfolios?",
+      "name": "How can market watchers track {{ page.title | split: ':' | first | strip | escape }} price impact on watchlists?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Investors can track {{ page.title | split: ':' | first | strip | escape }} price impact using CommodityNode's interactive Impact Map, which shows real-time correlation scores between commodity prices and related equities. The 52-Week Range Tracker provides historical context, while the Scenario Simulator models portfolio impact from hypothetical price moves. Signal Reports published on CommodityNode provide qualitative analysis of supply disruptions, demand shifts, and macro regime changes affecting {{ page.title | split: ':' | first | strip | escape }} markets. Available at https://commoditynode.com{{ page.url }}"
+        "text": "Market watchers can track {{ page.title | split: ':' | first | strip | escape }} price impact using CommodityNode's interactive Impact Map, which shows real-time correlation scores between commodity prices and related equities. The 52-Week Range Tracker provides historical context, while the Scenario Simulator models exposure impact from hypothetical price moves. Research Reports published on CommodityNode provide qualitative analysis of supply disruptions, demand shifts, and macro regime changes affecting {{ page.title | split: ':' | first | strip | escape }} markets. Available at https://commoditynode.com{{ page.url }}"
       }
     }
   ]
@@ -149,7 +166,6 @@ layout: default
     grid-template-columns: 1fr;
   }
 }
-.substitute-card:hover { border-color: var(--accent) !important; transform: translateY(-2px); }
 </style>
 
 <header class="post-header">
@@ -160,117 +176,113 @@ layout: default
       <span class="badge badge-cyan">{{ page.sector }}</span>
       {% endif %}
       {% if related_posts.size > 0 %}
-      <span class="badge" style="background:rgba(16,185,129,0.15);color:#10b981;border-color:rgba(16,185,129,0.3);">{{ related_posts.size }} Signal Reports</span>
+      <span class="badge commodity-badge-state">{{ related_posts.size }} Research Reports</span>
       {% else %}
-      <span class="badge" style="background:rgba(100,116,139,0.12);color:#64748b;border-color:rgba(100,116,139,0.2);">Coverage Expanding</span>
+      <span class="badge commodity-badge-state commodity-badge-state--muted">Coverage Expanding</span>
       {% endif %}
       {% assign sym_check = page.symbol | strip %}
       {% if sym_check == "" or sym_check == nil %}
-      <span class="badge" style="background:rgba(100,116,139,0.15);color:#64748b;border-color:rgba(100,116,139,0.2);" title="No publicly traded symbol — proxy or index data used">No Live Symbol</span>
+      <span class="badge commodity-badge-state commodity-badge-state--muted-strong" title="No publicly traded symbol — proxy or index data used">No Live Symbol</span>
       {% elsif page.symbol contains "=F" %}
-      <span class="badge" style="background:rgba(34,211,238,0.08);color:#22d3ee;border-color:rgba(34,211,238,0.2);" title="Direct commodity futures contract">Futures</span>
+      <span class="badge commodity-badge-state commodity-badge-state--futures" title="Direct commodity futures contract">Futures</span>
       {% else %}
-      <span class="badge" style="background:rgba(234,179,8,0.08);color:#eab308;border-color:rgba(234,179,8,0.2);" title="Proxy via ETF or equity — not a direct commodity price">Proxy: {{ page.symbol }}</span>
+      <span class="badge commodity-badge-state commodity-badge-state--proxy" title="Proxy via ETF or equity — not a direct commodity price">Proxy: {{ page.symbol }}</span>
       {% endif %}
     </div>
-    <h1>{{ page.title }}{% assign sym_strip = page.symbol | strip %}{% if sym_strip == "" or sym_strip == nil %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(100,116,139,0.15);color:#64748b;border:1px solid rgba(100,116,139,0.3);margin-left:8px;vertical-align:middle;">Analysis Only</span>{% elsif page.proxy_type == "futures" %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(16,185,129,0.15);color:#10b981;border:1px solid rgba(16,185,129,0.3);margin-left:8px;vertical-align:middle;">Direct Market Price</span>{% elsif page.proxy_type == "etf_proxy" or page.proxy_type == "equity_proxy" %}<span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:0.7rem;font-weight:600;background:rgba(245,158,11,0.15);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);margin-left:8px;vertical-align:middle;">Proxy Asset Benchmark</span>{% endif %}</h1>
+    <h1>{{ page.title }}{% assign sym_strip = page.symbol | strip %}{% if sym_strip == "" or sym_strip == nil %}<span class="commodity-header-title-chip commodity-header-title-chip--analysis">Analysis Only</span>{% elsif page.proxy_type == "futures" %}<span class="commodity-header-title-chip commodity-header-title-chip--futures">Direct Market Price</span>{% elsif page.proxy_type == "etf_proxy" or page.proxy_type == "equity_proxy" %}<span class="commodity-header-title-chip commodity-header-title-chip--proxy">Proxy Asset Benchmark</span>{% endif %}</h1>
     {% if page.data_type == 'direct_futures' %}
-    <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span style="display:inline-block;padding:4px 12px;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);border-radius:16px;color:#22c55e;font-size:0.78rem;font-weight:600;">Live Futures</span>
-      <span style="font-size:0.75rem;color:var(--text3);">Real-time futures contract data</span>
+    <div class="commodity-market-status">
+      <span class="commodity-market-chip commodity-market-chip--futures">Live Futures</span>
+      <span class="commodity-market-copy">Real-time futures contract data</span>
     </div>
     {% elsif page.data_type == 'proxy' %}
-    <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span style="display:inline-block;padding:4px 12px;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:16px;color:#f59e0b;font-size:0.78rem;font-weight:600;">Proxy-Based</span>
-      <span style="font-size:0.75rem;color:var(--text3);">Price tracked via {{ page.symbol }} (related equity/ETF)</span>
+    <div class="commodity-market-status">
+      <span class="commodity-market-chip commodity-market-chip--proxy">Proxy-Based</span>
+      <span class="commodity-market-copy">Price tracked via {{ page.symbol }} (related equity/ETF)</span>
     </div>
     {% elsif page.data_type == 'analysis_only' %}
-    <div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <span style="display:inline-block;padding:4px 12px;background:rgba(148,163,184,0.08);border:1px solid rgba(148,163,184,0.25);border-radius:16px;color:#94a3b8;font-size:0.78rem;font-weight:600;">Analysis Only</span>
-      <span style="font-size:0.75rem;color:var(--text3);">No live price benchmark available</span>
+    <div class="commodity-market-status">
+      <span class="commodity-market-chip commodity-market-chip--analysis">Analysis Only</span>
+      <span class="commodity-market-copy">No live price benchmark available</span>
     </div>
     {% endif %}
     {% if page.description %}
     <p class="post-meta-bar">{{ page.description }}</p>
-    <p style="font-size:0.75rem;color:var(--text3);margin-top:6px;">Price data: daily auto-update · Analysis published: <time datetime="{{ page.date | default: site.time | date: '%Y-%m-%d' }}">{{ page.date | default: site.time | date: "%b %d, %Y" }}</time></p>
+    <p class="commodity-header-meta-time">Price data: daily auto-update · Analysis published: <time datetime="{{ page.date | default: site.time | date: '%Y-%m-%d' }}">{{ page.date | default: site.time | date: "%b %d, %Y" }}</time></p>
     {% endif %}
 
-    <div style="margin-top:18px;padding:18px 20px;border-radius:14px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
-      <div style="padding:12px 14px;border-radius:12px;background:rgba(8,12,20,0.42);border:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Coverage status{% else %}{{ page.title | split: ':' | first | strip }} price today{% endif %}</div>
-        <div id="seo-price-today" style="font-size:1rem;color:var(--text2);line-height:1.6;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}No direct live benchmark is available for this hub. Use the analysis, linked reports, and impact map as the primary reference layer.{% else %}Live price loads below from the current market data feed.{% endif %}</div>
+    <div class="commodity-seo-summary-grid">
+      <div class="commodity-seo-card">
+        <div class="commodity-summary-title commodity-summary-title--cyan">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Coverage status{% else %}{{ page.title | split: ':' | first | strip }} price today{% endif %}</div>
+        <div id="seo-price-today" class="commodity-summary-body">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}No direct live benchmark is available for this hub. Use the analysis, linked reports, and impact map as the primary reference layer.{% else %}Live price loads below from the current market data feed.{% endif %}</div>
       </div>
-      <div style="padding:12px 14px;border-radius:12px;background:rgba(8,12,20,0.42);border:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:700;margin-bottom:6px;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Analysis outlook{% else %}{{ page.title | split: ':' | first | strip }} forecast{% endif %}</div>
-        <div id="seo-forecast-today" style="font-size:1rem;color:var(--text2);line-height:1.6;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Use the latest linked report, structural themes, and exposed names below to understand the current outlook.{% else %}Consensus 30-day and 90-day outlook loads from the forecast model below.{% endif %}</div>
+      <div class="commodity-seo-card">
+        <div class="commodity-summary-title commodity-summary-title--green">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Analysis outlook{% else %}{{ page.title | split: ':' | first | strip }} forecast{% endif %}</div>
+        <div id="seo-forecast-today" class="commodity-summary-body">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}Use the latest linked report, structural themes, and exposed names below to understand the current outlook.{% else %}Consensus 30-day and 90-day outlook loads from the forecast model below.{% endif %}</div>
       </div>
-      <div style="padding:12px 14px;border-radius:12px;background:rgba(8,12,20,0.42);border:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#f59e0b;font-weight:700;margin-bottom:6px;">Why it is moving</div>
-        <div id="seo-why-moving" style="font-size:1rem;color:var(--text2);line-height:1.6;">Use the latest linked report and the impact map to connect today’s move to supply, demand, and stock sensitivity.</div>
+      <div class="commodity-seo-card">
+        <div class="commodity-summary-title commodity-summary-title--amber">Why it is moving</div>
+        <div id="seo-why-moving" class="commodity-summary-body">Use the latest linked report and the impact map to connect today’s move to supply, demand, and stock sensitivity.</div>
       </div>
-      <div style="padding:12px 14px;border-radius:12px;background:rgba(8,12,20,0.42);border:1px solid rgba(255,255,255,0.06);">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#818cf8;font-weight:700;margin-bottom:6px;">Latest report for this hub</div>
-        <div style="font-size:1rem;color:var(--text2);line-height:1.6;">
+      <div class="commodity-seo-card">
+        <div class="commodity-summary-title commodity-summary-title--violet">Latest report for this hub</div>
+        <div class="commodity-summary-body">
           {% if latest_related_post %}
-          <a href="{{ latest_related_post.url }}" style="color:var(--accent);font-weight:600;">{{ latest_related_post.title }}</a>
+          <a href="{{ latest_related_post.url }}" class="commodity-summary-link">{{ latest_related_post.title }}</a>
           {% else %}
-          Browse the <a href="/reports/" class="text-accent">Research Archive</a> for the latest linked narrative.
+          Browse the <a href="/reports/" class="commodity-summary-link-inline">Research Archive</a> for the latest linked narrative.
           {% endif %}
         </div>
       </div>
     </div>
 
-    <div style="margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;align-items:start;">
-
-<section class="commodity-model-reaction" aria-label="Current model reaction" style="margin-top:14px;padding:20px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(16,185,129,0.05));border:1px solid rgba(34,211,238,0.14);">
-  <div class="eyebrow-cyan">Current model reaction</div>
-  <h2 style="margin:8px 0 10px;color:#f8fafc;font-size:1.18rem;">Forecast layer + RL policy layer + impact layer</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;">
-    <div class="profile-continuation-card"><div class="eyebrow-cyan">Forecast layer</div><strong>30D/90D model path and agreement level anchor the direction.</strong></div>
-    <div class="profile-continuation-card"><div class="eyebrow-cyan">RL policy layer</div><strong>Neural PPO translates state into add, hold, hedge, rotate, or reduce-risk actions.</strong></div>
-    <div class="profile-continuation-card"><div class="eyebrow-cyan">Impact layer</div><strong>This hub turns the commodity move into sectors, ETFs, and named exposure.</strong></div>
-  </div>
-  <p class="body-text-65" style="margin-top:12px;">Historical replay and walk-forward proof are scoped as model validation, not a live trading guarantee. The conversion goal is clearer: understand the move for free, then use Pro to decide what to do with it.</p>
-  <div class="chip-group-wrap" style="margin-top:12px;">
-    <a href="/simulator/" class="btn btn-primary" data-cta="commodity_model_reaction_simulator">Translate to stock impact</a>
-    <a href="/reports/" class="btn btn-secondary" data-cta="commodity_model_reaction_reports">Open proof reports</a>
-  </div>
-</section>
-
-{% include components/upgrade-moment.html moment="commodity_company_impact" title="This hub shows the commodity-level signal" preview="The public hub explains price, forecast context, substitutes, latest report linkage, and first-order exposed sectors." unlock="Pro unlocks the company impact depth: named winners and pressure points, saved watchlist fit, and scenario-specific model readout." cta="Unlock company impact" cta_id="commodity_upgrade_company_impact" free_cta="Keep exploring hub" free_href="#impact-map" %}
-
-      <div style="padding:16px 18px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:12px;">
+    <div class="commodity-summary-split">
+      <div class="commodity-summary-panel commodity-summary-panel--primary">
         <div>
-          <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:6px;">Fastest route to value</div>
-          <div style="font-size:0.98rem;color:var(--text);font-weight:700;line-height:1.45;">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}{% if latest_related_post %}Start with the linked report and the impact map, then use this hub to connect structural context to exposed names and substitute chains.{% else %}Start with the impact map and substitute-chain context below, then use this hub as the reference layer while coverage expands.{% endif %}{% else %}Start with the live price and forecast panel, then use the latest Signal Report and the impact map to decide who is exposed now.{% endif %}</div>
+          <div class="commodity-summary-kicker">Fastest route to value</div>
+          <div class="commodity-summary-strong commodity-summary-body">{% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}{% if latest_related_post %}Start with the linked report and the impact map, then use this hub to connect structural context to exposed names and substitute chains.{% else %}Start with the impact map and substitute-chain context below, then use this hub as the reference layer while coverage expands.{% endif %}{% else %}Start with the live price and forecast panel, then use the latest Signal Report and the impact map to decide who is exposed now.{% endif %}</div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;">
-          <div style="padding:12px 14px;border-radius:12px;background:rgba(34,211,238,0.05);border:1px solid rgba(34,211,238,0.14);font-size:0.88rem;color:var(--text2);line-height:1.6;">
-            <strong class="title-white-block">Who this page is for</strong>
-            Investors, analysts, and operators who need the fastest path from {{ page.title | split: ':' | first | strip }} price action to company, sector, and portfolio impact.
+        <div class="commodity-summary-grid">
+          <div class="commodity-summary-microcard commodity-summary-microcard--cyan">
+            <strong>Who this page is for</strong>
+            Analysts, procurement teams, and operators who need the fastest path from {{ page.title | split: ':' | first | strip }} price action to company, sector, and exposure impact.
           </div>
-          <div style="padding:12px 14px;border-radius:12px;background:rgba(16,185,129,0.05);border:1px solid rgba(16,185,129,0.14);font-size:0.88rem;color:var(--text2);line-height:1.6;">
-            <strong class="title-white-block">Best next step</strong>
+          <div class="commodity-summary-microcard commodity-summary-microcard--green">
+            <strong>Best next step</strong>
             {% if latest_related_post %}
-            Read <a href="{{ latest_related_post.url }}" class="text-accent">the newest linked report</a> for the narrative, then run the simulator when you need to translate this move into sectors, names, and scenario risk.
+            Read <a href="{{ latest_related_post.url }}" class="commodity-summary-link-inline">the newest linked report</a> for the narrative, then run the simulator when you need to translate this move into sectors, names, and scenario risk.
             {% else %}
-            Use this hub as the primary reference page, then compare it against the <a href="/reports/" class="text-accent">Research Archive</a> for narrative context.
+            Use this hub as the primary reference page, then compare it against the <a href="/reports/" class="commodity-summary-link-inline">Research Archive</a> for narrative context.
             {% endif %}
           </div>
         </div>
-        <div class="chip-group-wrap">
+        <div class="commodity-summary-actions">
           {% if latest_related_post %}
-          <a href="{{ latest_related_post.url }}" class="btn btn-secondary min-w-180-center" data-cta="commodity_open_linked_report">Read linked report</a>
+          <a href="{{ latest_related_post.url }}" class="btn btn-secondary" data-cta="commodity_open_linked_report">Read linked report</a>
           {% endif %}
-          <a href="/simulator/" class="btn btn-primary min-w-180-center" data-cta="commodity_run_scenario_simulator">Run scenario simulator</a>
+          <a href="/simulator/" class="btn btn-primary" data-cta="commodity_run_scenario_simulator">Run scenario simulator</a>
         </div>
       </div>
-      <div style="padding:16px 18px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;gap:10px;">
-        <div style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;">Trust & freshness</div>
-        <div style="font-size:0.88rem;color:var(--text2);line-height:1.65;">CommodityNode labels direct futures, proxy benchmarks, and analysis-only pages explicitly. When a daily feed is unreliable, we suppress false precision instead of forcing a number.</div>
-        <div style="font-size:0.84rem;color:var(--text3);line-height:1.65;">{% if latest_related_post %}Latest report update: <strong class="text-body2">{{ latest_related_post.date | date: "%b %d, %Y" }}</strong>.{% else %}No linked report yet for this hub.{% endif %} Review our <a href="/about/editorial-team/" class="text-accent">editorial team</a>, <a href="/about/editorial-process/" class="text-accent">review process</a>, and <a href="/methodology/" class="text-accent">methodology</a>. Corrections: <a href="mailto:contact@commoditynode.com" class="text-accent">contact@commoditynode.com</a>.</div>
+      <div class="commodity-summary-panel commodity-summary-panel--subtle">
+        <div class="commodity-summary-subkicker">Trust & freshness</div>
+        <div class="commodity-summary-body commodity-summary-body--compact">CommodityNode labels direct futures, proxy benchmarks, and analysis-only pages explicitly. When a daily feed is unreliable, we suppress false precision instead of forcing a number.</div>
+        <div class="commodity-summary-meta">{% if latest_related_post %}Latest report update: <strong>{{ latest_related_post.date | date: "%b %d, %Y" }}</strong>.{% else %}No linked report yet for this hub.{% endif %} Review our <a href="/about/editorial-team/" class="commodity-summary-link-inline">editorial team</a>, <a href="/about/editorial-process/" class="commodity-summary-link-inline">review process</a>, and <a href="/methodology/" class="commodity-summary-link-inline">methodology</a>. Corrections: <a href="mailto:contact@commoditynode.com" class="commodity-summary-link-inline">contact@commoditynode.com</a>.</div>
+        <div class="commodity-coverage-tier">Coverage tier · {{ commodity_coverage_tier }}</div>
+        <div class="commodity-summary-meta">{{ commodity_coverage_note }}</div>
+        <div class="commodity-coverage-links">
+          {% if page.next_best_links %}
+            {% for item in page.next_best_links %}
+            <a href="{{ item.url | relative_url }}">{{ item.title }} →</a>
+            {% endfor %}
+          {% else %}
+            {% for item in commodity_default_next_best_links %}
+              {% assign link_bits = item | split: '|' %}
+              <a href="{{ link_bits[0] | relative_url }}">{{ link_bits[1] }} →</a>
+            {% endfor %}
+          {% endif %}
+        </div>
         {% if page.substitutes and page.substitutes.size > 0 %}
-        <div style="font-size:0.84rem;color:var(--text3);line-height:1.65;">Compare against substitute chains like
+        <div class="commodity-summary-meta">Compare against substitute chains like
           {% for substitute in page.substitutes limit:3 %}
             {% assign substitute_slug = substitute | slugify %}
             {% assign substitute_url = '' %}
@@ -280,7 +292,7 @@ layout: default
                 {% assign substitute_url = c.url %}
               {% endif %}
             {% endfor %}
-            {% if substitute_url != '' %}<a href="{{ substitute_url | relative_url }}" class="text-accent">{{ substitute }}</a>{% else %}<span class="text-body2">{{ substitute }}</span>{% endif %}{% unless forloop.last %}, {% endunless %}
+            {% if substitute_url != '' %}<a href="{{ substitute_url | relative_url }}" class="commodity-summary-link-inline">{{ substitute }}</a>{% else %}<span class="commodity-summary-strong">{{ substitute }}</span>{% endif %}{% unless forloop.last %}, {% endunless %}
           {% endfor %}.
         </div>
         {% endif %}
@@ -289,31 +301,8 @@ layout: default
   </div>
 </header>
 
-<!-- Top-tier visual value moment — forecast fan + impact ladder + simulator CTA (blueprint §6.7) -->
+<!-- Live Price Banner -->
 <div class="container" style="padding-top:24px;">
-  <section class="cn-chart-card" style="margin:0 0 18px;">
-    <div class="cn-chart-card__head">
-      <h2 class="cn-chart-card__title">{{ page.title | split: ":" | first | strip }} · 90-day forecast fan</h2>
-      {% include components/freshness-badge.html updated_at=site.time source="Chronos + TimesFM consensus" horizon="90-day" confidence="q10 / q50 / q90 probabilistic band" status="fresh" %}
-    </div>
-    <p class="cn-chart-card__sub">Probabilistic forecast band with confidence intervals. Tap a horizon to re-project. Simulator CTA runs this shock against your watchlist.</p>
-    <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;align-items:stretch;">
-      <div class="cn-chart-card__body" data-cn-forecast-fan data-commodity="{{ page.commodity_slug | default: "gold" }}" style="min-height:260px;"></div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div class="cn-workflow-strip__card" style="padding:14px;flex:1;">
-          <span class="cn-workflow-strip__kicker">Impact ladder</span>
-          <h3 class="cn-workflow-strip__title" style="font-size:0.95rem;">Who is exposed</h3>
-          <p class="cn-workflow-strip__desc" style="font-size:0.82rem;">{% if page.companies and page.companies.size > 0 %}Top named exposure: {{ page.companies | slice: 0, 4 | join: ", " }}{% if page.companies.size > 4 %} · +{{ page.companies.size | minus: 4 }} more in Pro{% endif %}.{% else %}Named companies, ETFs, and sectors ranked by historical sensitivity.{% endif %}</p>
-        </div>
-        <a href="/simulator/?preset={{ page.commodity_slug | default: "gold" }}-shock" class="cn-impact-hero__cta cn-impact-hero__cta--primary" data-cta="commodity_run_scenario" style="width:100%;justify-content:center;text-decoration:none;">Run {{ page.title | split: ":" | first | strip | downcase }} shock on my watchlist →</a>
-      </div>
-    </div>
-    <div class="cn-chart-card__foot">
-      <span>Horizon: 90-day · Model: Chronos + TimesFM consensus · Band: q10–q90</span>
-      <a href="/methodology/">Methodology</a>
-      <a href="#impact-map">Jump to impact map ↓</a>
-    </div>
-  </section>
   <div id="commodity-price-banner" style="display:none;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:20px 28px;margin-bottom:8px;">
     <div style="display:flex;align-items:center;flex-wrap:wrap;gap:24px;justify-content:space-between;">
       <div style="display:flex;align-items:center;gap:16px;">
@@ -350,120 +339,14 @@ layout: default
 
 <script>
 (function(){
-  var slug = "{{ commodity_slug }}";
-  var explicitKey = "{{ page.commodity | default: page.commodity_slug | default: '' }}";
-  var key = (explicitKey && explicitKey.length ? explicitKey : slug).replace(/-/g, '_');
-  fetch('/assets/data/prices.json').then(function(r){return r.json()}).then(function(d){
-    var c = d[key] || d[slug.replace(/-/g, '_')] || d[slug] || null;
-    if (!c) {
-      var banner = document.getElementById('commodity-price-banner');
-      if (banner) {
-        banner.style.display = 'block';
-        banner.innerHTML = '<div style="display:flex;align-items:center;gap:12px;padding:12px 0;">'
-          + '<div style="color:var(--text3);font-size:0.85rem;">Live price data not available for this commodity. '
-          + '<a href="/methodology/" class="text-accent">See our coverage →</a></div></div>';
-      }
-      return;
-    }
-
-    console.log('commodity-banner-data', key, c);
-
-    // Update banner UI
-    var banner = document.getElementById('commodity-price-banner');
-    banner.style.display = 'block';
-
-    var livePrice = (typeof c.price === 'number') ? c.price : c.current_price;
-
-    // No market data for commodities without tradeable symbols
-    if (c.no_data || livePrice === 0 || livePrice == null) {
-      banner.innerHTML = '<div style="text-align:center;padding:16px;color:var(--text3);font-size:0.9rem;">No publicly traded price data available for this commodity. See impact analysis below.</div>';
-      var seoPriceEl = document.getElementById('seo-price-today');
-      if (seoPriceEl) seoPriceEl.textContent = 'No direct live benchmark is available for this hub. Review the analysis and linked report instead.';
-      window.dispatchEvent(new CustomEvent('commodity-price-loaded', {detail: {key: key, data: c, allPrices: d}}));
-      return;
-    }
-
-    var priceStr = (c.unit && c.unit.toLowerCase().indexOf('cents') !== -1) ? livePrice + '¢' : '$' + livePrice;
-    document.getElementById('banner-price').textContent = priceStr;
-    var unitLabel = '';
-    if(c.unit){
-      var u = c.unit.replace(/^\$\/?/,'').replace(/^cents\/?/i,'');
-      if(u) unitLabel = '/' + u;
-    }
-    if(unitLabel){
-      var unitEl = document.createElement('span');
-      unitEl.textContent = unitLabel;
-      unitEl.style.cssText = 'font-size:0.75rem;color:var(--text3);margin-left:4px;font-weight:400;';
-      document.getElementById('banner-price').appendChild(unitEl);
-    }
-    // proxy type badge
-    if (c.proxy_type && c.proxy_type !== 'futures') {
-      var proxyBadge = document.createElement('span');
-      var badgeText = c.proxy_type === 'etf_proxy' ? 'ETF Proxy' : 
-                      c.proxy_type === 'equity_proxy' ? 'Equity Proxy' : 'Proxy';
-      proxyBadge.style.cssText = 'display:inline-flex;align-items:center;gap:4px;padding:3px 8px;'
-        + 'background:rgba(234,179,8,0.1);border:1px solid rgba(234,179,8,0.2);'
-        + 'border-radius:5px;font-size:0.68rem;color:#eab308;font-weight:600;margin-left:10px;cursor:help;';
-      proxyBadge.textContent = badgeText;
-      proxyBadge.title = 'This price reflects a proxy asset (' + (c.symbol||'') + '), not a direct commodity futures price. See methodology for details.';
-      document.getElementById('banner-price').parentElement.appendChild(proxyBadge);
-    }
-    var changeEl = document.getElementById('banner-change');
-    if (typeof c.change_pct === 'number') {
-      var sign = c.change_pct >= 0 ? '+' : '';
-      changeEl.textContent = sign + c.change_pct + '%';
-      changeEl.style.background = c.change_pct >= 0 ? 'rgba(16,185,129,0.2)' : 'rgba(244,63,94,0.2)';
-      changeEl.style.color = c.change_pct >= 0 ? '#10b981' : '#f43f5e';
-    } else {
-      changeEl.textContent = 'Daily change unavailable · delayed or proxy feed';
-      changeEl.title = 'This commodity uses a delayed, unstable, or proxy price feed right now. See methodology for details.';
-      changeEl.style.background = 'rgba(148,163,184,0.16)';
-      changeEl.style.color = '#94a3b8';
-    }
-    // 52w estimates: +/-15% from current as reasonable range
-    var high = (livePrice * 1.15).toFixed(2);
-    var low = (livePrice * 0.85).toFixed(2);
-    var highIsEst = true, lowIsEst = true;
-    if(c.high_52w !== undefined && c.high_52w !== null) { high = c.high_52w; highIsEst = false; }
-    if(c.low_52w !== undefined && c.low_52w !== null) { low = c.low_52w; lowIsEst = false; }
-    var isCents = (c.unit && c.unit.toLowerCase().indexOf('cents') !== -1);
-    document.getElementById('banner-52h').textContent = (isCents ? high + '¢' : '$' + high) + (highIsEst ? ' (est.)' : '');
-    document.getElementById('banner-52l').textContent = (isCents ? low + '¢' : '$' + low) + (lowIsEst ? ' (est.)' : '');
-    if(c.updated_at){
-      var dt = new Date(c.updated_at);
-      document.getElementById('banner-updated').textContent = dt.toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
-    }
-    var seoPriceEl = document.getElementById('seo-price-today');
-    if (seoPriceEl) {
-      var ch = (typeof c.change_pct === 'number') ? c.change_pct : null;
-      var sign = ch !== null && ch >= 0 ? '+' : '';
-      seoPriceEl.textContent = (c.name || '{{ page.title | split: ':' | first | strip }}') + ' is ' + priceStr + (ch !== null ? ' (' + sign + ch + '% today).' : '.');
-    }
-    var whyMovingEl = document.getElementById('seo-why-moving');
-    if (whyMovingEl && typeof c.change_pct === 'number') {
-      var tone = c.change_pct >= 0 ? 'bullish momentum or supply tightening' : 'demand pressure, supply normalization, or macro risk repricing';
-      whyMovingEl.textContent = 'Today\'s move points to ' + tone + '. Use the latest linked report below to see the current narrative behind the price action.';
-    }
-
-    // Inject live data into window.COMMODITY_DATA so impact graph can use it
-    if(!window.COMMODITY_DATA) window.COMMODITY_DATA = {};
-    window.COMMODITY_DATA.livePrice = livePrice;
-    window.COMMODITY_DATA.liveChange = c.change_pct;
-    window.COMMODITY_DATA.liveUpdated = c.updated_at;
-    window.COMMODITY_DATA.allPrices = d;
-
-    // Dispatch event so impact-graph.js and price-chart.js can react
-    window.dispatchEvent(new CustomEvent('commodity-price-loaded', {detail: {key: key, data: c, allPrices: d}}));
-  }).catch(function(err){
-    console.warn('commodity banner load failed', err);
-    var banner = document.getElementById('commodity-price-banner');
-    if(banner){
-      banner.style.display = 'block';
-      banner.innerHTML = '<div style="text-align:center;padding:12px;color:var(--text3);font-size:0.9rem;">Live price data temporarily unavailable. Please check back later.</div>';
-    }
-  });
+  window.COMMODITY_PAGE_CONTEXT = {
+    slug: {{ commodity_slug | jsonify }},
+    explicitKey: {{ page.commodity | default: page.commodity_slug | default: '' | jsonify }},
+    titleBase: {{ page.title | split: ':' | first | strip | jsonify }}
+  };
 })();
 </script>
+<script src="{{ '/assets/js/commodity-page.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 <script>
 (function(){
   window.COMMODITY_GRAPH_DISABLE_LEGACY = true;
@@ -558,10 +441,10 @@ layout: default
       <div style="max-width:760px;">
         <div style="font-size:0.74rem;letter-spacing:0.1em;text-transform:uppercase;color:#22d3ee;font-weight:700;margin-bottom:8px;">Best next steps</div>
         <h2 style="margin:0 0 8px;font-size:1.2rem;">Use this hub as your anchor page</h2>
-        <p class="body-text">For AI search and human readers alike, the strongest workflow is: current price context → impact map → latest Signal Reports → adjacent commodity comparison. That is the shortest path from raw move to decision-useful context.</p>
+        <p style="margin:0;color:var(--text2);line-height:1.7;">For AI search and human readers alike, the strongest workflow is: current price context → impact map → latest Research Reports → adjacent commodity comparison. That is the shortest path from raw move to decision-useful context.</p>
       </div>
-      <div class="chip-group-wrap">
-        <a href="/reports/" class="btn btn-secondary">Browse Signal Reports</a>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="/reports/" class="btn btn-secondary">Browse Research Reports</a>
         <a href="/commodities/" class="btn btn-secondary">Compare Commodity Hubs</a>
       </div>
     </div>
@@ -609,9 +492,32 @@ layout: default
       </div>
     </div>
     <div id="cf-agreement-strip" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:0 0 14px;"></div>
+    <div class="cf-proof-strip" id="cf-proof-strip">
+      <article class="cf-proof-card">
+        <span class="cf-proof-label">Model stack</span>
+        <strong class="cf-proof-value">Chronos-2 + TimesFM 2.5 + no-harm route</strong>
+        <span class="cf-proof-meta">Consensus prefers the route that held up better than a naive equal blend.</span>
+      </article>
+      <article class="cf-proof-card">
+        <span class="cf-proof-label">Benchmark basis</span>
+        <strong class="cf-proof-value">5Y · 30D · 8 windows</strong>
+        <span class="cf-proof-meta">Weighted-score comparison with best-context checks before promotion.</span>
+      </article>
+      <article class="cf-proof-card">
+        <span class="cf-proof-label">Hub trust</span>
+        <strong class="cf-proof-value">Direct / proxy / analysis-only labeled</strong>
+        <span class="cf-proof-meta">When the feed is weak, the hub suppresses fake precision instead of bluffing.</span>
+      </article>
+      <article class="cf-proof-card">
+        <span class="cf-proof-label">Methodology</span>
+        <strong class="cf-proof-value" id="cf-proof-freshness">Daily forecast refresh</strong>
+        <span class="cf-proof-meta"><a class="cf-proof-link" href="/methodology/">Review methodology</a></span>
+      </article>
+    </div>
     <div class="cf-chart-wrap">
       <canvas id="commodity-fc-canvas"></canvas>
     </div>
+    <div class="chart-end-strip chart-end-strip--commodity" id="commodity-chart-end-strip" aria-label="Forecast endpoint labels"></div>
     <div class="cf-metrics" id="cf-metrics">
       <div class="cf-metric">
         <div class="cf-metric-label">Current</div>
@@ -631,80 +537,80 @@ layout: default
         <div class="cf-metric-val down" id="cf-p10">—</div>
       </div>
     </div>
-    <div class="cf-no-data hidden" id="cf-no-data">
+    <div class="cf-no-data" id="cf-no-data" style="display:none">
       <div style="padding:12px 16px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:8px;text-align:center;">
-        <p style="margin:0;color:var(--text3);font-size:0.85rem;">AI forecast for this commodity is being calibrated. <a href="/simulator/" class="text-accent">Try the Scenario Simulator →</a></p>
+        <p style="margin:0;color:var(--text3);font-size:0.85rem;">AI forecast for this commodity is being calibrated. <a href="/simulator/" style="color:#22d3ee;">Try the Scenario Simulator →</a></p>
       </div>
     </div>
   </div>
 
 
-  <section style="margin:20px 0 18px;padding:22px 24px;border-radius:18px;background:linear-gradient(135deg,rgba(34,211,238,0.07),rgba(168,85,247,0.05));border:1px solid rgba(34,211,238,0.14);display:grid;grid-template-columns:1.15fr 1fr;gap:16px;align-items:center;">
+  <section class="commodity-decision-hero">
     <div>
-      <div class="eyebrow-cyan">Decision cockpit</div>
-      <h2 style="font-size:1.15rem;margin:0 0 8px;color:#f8fafc;">This move matters because {{ page.title | split: ':' | first | strip }} transmits into downstream names, sectors, and scenarios — not just a chart.</h2>
-      <p style="margin:0;color:var(--text2);line-height:1.75;">Use this hub to validate the live tape, identify who is exposed, and decide whether the move deserves deeper scenario work. Free is strongest for understanding the setup. Pro matters when named winners, losers, and confidence become decision-critical.</p>
+      <div class="commodity-panel-kicker">Decision cockpit</div>
+      <h2 class="commodity-panel-title commodity-panel-title--md">This move matters because {{ page.title | split: ':' | first | strip }} transmits into downstream names, sectors, and scenarios — not just a chart.</h2>
+      <p class="commodity-panel-copy">Use this hub to validate the live tape, identify who is exposed, and decide whether the move deserves deeper scenario work. Free is strongest for understanding the setup. Pro matters when named winners, losers, and confidence become decision-critical.</p>
     </div>
-    <div class="grid-gap-10">
-      <div style="padding:12px 14px;border-radius:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);">
-        <div class="eyebrow-cyan eyebrow-cyan--mb6">Who is exposed</div>
-        <div style="color:#cbd5e1;line-height:1.7;font-size:0.88rem;">
+    <div class="commodity-panel-stack">
+      <div class="commodity-panel-card commodity-panel-card--neutral">
+        <div class="commodity-panel-subkicker">Who is exposed</div>
+        <div>
           {% if page.companies %}{{ page.companies | slice: 0, 4 | join: ', ' }}{% endif %}{% if page.etfs and page.etfs.size > 0 %}{% if page.companies and page.companies.size > 0 %} · {% endif %}{{ page.etfs | slice: 0, 3 | join: ', ' }}{% endif %}
         </div>
       </div>
-      <div style="padding:12px 14px;border-radius:14px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.14);">
-        <div style="font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:#10b981;font-weight:800;margin-bottom:6px;">Decision path</div>
-        <div style="color:#d1fae5;line-height:1.7;font-size:0.88rem;">Read the move → check model agreement → see exposed names → run a scenario → upgrade only if you need the full stock-level workflow.</div>
+      <div class="commodity-panel-card commodity-panel-card--positive">
+        <div class="commodity-panel-subkicker">Decision path</div>
+        <div>Read the move → check model agreement → see exposed names → run a scenario → upgrade only if you need the full stock-level workflow.</div>
       </div>
-      <div class="chip-group-wrap">
-        <button type="button" class="btn btn-secondary min-w-180-center" data-save-commodity="{{ page.commodity_slug }}" data-cta="commodity_save_workflow">Follow this commodity</button>
-        {% if page.companies %}<button type="button" class="btn btn-secondary min-w-180-center" data-save-watchlist="{{ page.companies | slice: 0, 6 | join: ', ' }}" data-cta="commodity_save_exposed_names">Save exposed names</button>{% endif %}
+      <div class="commodity-panel-actions">
+        <button class="btn btn-secondary" data-save-commodity="{{ page.commodity_slug }}" data-cta="commodity_save_workflow">Follow this commodity</button>
+        {% if page.companies %}<button class="btn btn-secondary" data-save-watchlist="{{ page.companies | slice: 0, 6 | join: ', ' }}" data-cta="commodity_save_exposed_names">Save exposed names</button>{% endif %}
       </div>
     </div>
   </section>
 
-  <section style="margin:18px 0 20px;padding:22px 24px;border-radius:18px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,0.95fr);gap:16px;align-items:start;">
+  <section class="commodity-analytics-panel">
     <div>
-      <div class="eyebrow-cyan">Exposure wheel</div>
-      <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.12rem;">Scan the surrounding dependency system.</h2>
-      <p style="margin:0 0 14px;color:#94a3b8;line-height:1.72;">This compresses company, theme, substitute, and report context into one premium surface so the hub reads like a decision cockpit rather than a long explainer.</p>
-      <div id="commodity-exposure-wheel-chart" style="height:320px;"></div>
+      <div class="commodity-panel-kicker">Exposure wheel</div>
+      <h2 class="commodity-panel-title commodity-panel-title--sm">Scan the surrounding dependency system.</h2>
+      <p class="commodity-panel-copy commodity-panel-copy--muted">This compresses company, theme, substitute, and report context into one premium surface so the hub reads like a decision cockpit rather than a long explainer.</p>
+      <div id="commodity-exposure-wheel-chart" class="commodity-chart-stage"></div>
     </div>
     <div>
-      <div class="eyebrow-cyan">Event timeline</div>
-      <h2 style="margin:0 0 8px;color:#f8fafc;font-size:1.12rem;">See the latest catalysts as an event beam.</h2>
-      <p style="margin:0 0 14px;color:#94a3b8;line-height:1.72;">Use the linked report cadence and key catalyst beats as a fast narrative index before you read deeper.</p>
-      <div id="commodity-event-timeline-chart" style="height:320px;"></div>
+      <div class="commodity-panel-kicker">Event timeline</div>
+      <h2 class="commodity-panel-title commodity-panel-title--sm">See the latest catalysts as an event beam.</h2>
+      <p class="commodity-panel-copy commodity-panel-copy--muted">Use the linked report cadence and key catalyst beats as a fast narrative index before you read deeper.</p>
+      <div id="commodity-event-timeline-chart" class="commodity-chart-stage"></div>
     </div>
   </section>
   <section class="profile-continuation-strip" aria-label="Saved workflow continuation">
     <div>
-      <div class="eyebrow-cyan">Continue your saved workflow</div>
-      <div data-profile-empty style="color:var(--text2);line-height:1.7;">No workflow saved yet. Follow this commodity and save the exposed names so this hub becomes your return point whenever this market starts mattering again.</div>
-      <div data-profile-has-saved class="hidden">
-        <div style="color:#f8fafc;font-weight:800;font-size:1rem;line-height:1.45;" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
-        <p style="margin:8px 0 0;color:var(--text2);line-height:1.7;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
+      <div class="commodity-summary-pill-label">Continue your saved workflow</div>
+      <div data-profile-empty class="commodity-summary-body">No workflow saved yet. Follow this commodity and save the exposed names so this hub becomes your return point whenever this market starts mattering again.</div>
+      <div data-profile-has-saved style="display:none;">
+        <div class="commodity-summary-body commodity-summary-strong" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
+        <p class="commodity-summary-body" style="margin:8px 0 0;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
       </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-        <a href="/start/" class="btn btn-secondary min-w-200-center" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
-        <a href="/simulator/" class="btn btn-secondary min-w-200-center" data-profile-secondary-link><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
+      <div class="commodity-panel-actions" style="margin-top:12px;">
+        <a href="/start/" class="btn btn-secondary" data-profile-primary-link><span data-profile-primary-label>Build my workflow</span></a>
+        <a href="/simulator/" class="btn btn-secondary" data-profile-secondary-link><span data-profile-secondary-label>Run simulator with my watchlist</span></a>
       </div>
     </div>
     <div class="profile-continuation-grid">
       <div class="profile-continuation-card">
-        <div class="eyebrow-cyan">Saved role</div>
+        <div class="commodity-summary-pill-label">Saved role</div>
         <strong data-profile-role>Not set yet</strong>
       </div>
       <div class="profile-continuation-card">
-        <div class="eyebrow-cyan">Saved commodities</div>
+        <div class="commodity-summary-pill-label">Saved commodities</div>
         <strong data-profile-commodities>No tracked commodities yet</strong>
       </div>
       <div class="profile-continuation-card">
-        <div class="eyebrow-cyan">Watchlist</div>
+        <div class="commodity-summary-pill-label">Watchlist</div>
         <strong data-profile-watchlist>No saved watchlist names yet</strong>
       </div>
       <div class="profile-continuation-card">
-        <div class="eyebrow-cyan">Freshness</div>
+        <div class="commodity-summary-pill-label">Freshness</div>
         <strong data-profile-updated>Not saved yet</strong>
       </div>
     </div>
@@ -736,19 +642,19 @@ layout: default
           </thead>
           <tbody>
             {% if page.etfs %}
-            <tr class="border-bottom-rule">
+            <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:6px 10px;font-weight:600;">Key ETFs</td>
               <td style="padding:6px 10px;">{% for etf in page.etfs %}{{ etf }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
             </tr>
             {% endif %}
             {% if page.companies %}
-            <tr class="border-bottom-rule">
+            <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:6px 10px;font-weight:600;">Key Companies</td>
               <td style="padding:6px 10px;">{% for company in page.companies %}<a href="/companies/{{ company | downcase }}/" style="color:#22d3ee;text-decoration:none;">{{ company }}</a>{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
             </tr>
             {% endif %}
             {% if page.substitutes %}
-            <tr class="border-bottom-rule">
+            <tr style="border-bottom:1px solid var(--border);">
               <td style="padding:6px 10px;font-weight:600;">Substitutes</td>
               <td style="padding:6px 10px;">{% for sub in page.substitutes %}{{ sub }}{% unless forloop.last %}, {% endunless %}{% endfor %}</td>
             </tr>
@@ -767,7 +673,7 @@ layout: default
         <h2 style="font-size:1.25rem;margin-bottom:16px;">Substitutes &amp; Alternatives</h2>
         <div style="display:flex;flex-wrap:wrap;gap:8px;">
           {% for sub in page.substitutes %}
-          <span class="entity-chip entity-chip--violet">{{ sub }}</span>
+          <span style="display:inline-block;padding:6px 14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);border-radius:20px;color:#a855f7;font-size:0.85rem;">{{ sub }}</span>
           {% endfor %}
         </div>
       </div>
@@ -781,7 +687,7 @@ layout: default
           {% for theme in page.themes %}
           {% assign theme_slug_mapped = site.data.theme_slugs[theme] %}
           {% if theme_slug_mapped %}
-          <a href="/themes/{{ theme_slug_mapped }}/" class="entity-chip entity-chip--gold">{{ theme }}</a>
+          <a href="/themes/{{ theme_slug_mapped }}/" style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:20px;color:#fbbf24;font-size:0.85rem;text-decoration:none;">{{ theme }}</a>
           {% else %}
           <span style="display:inline-block;padding:6px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.15);border-radius:20px;color:rgba(251,191,36,0.6);font-size:0.85rem;">{{ theme }}</span>
           {% endif %}
@@ -795,24 +701,24 @@ layout: default
     <aside class="toc-sidebar" aria-label="Commodity Quick Stats">
       <!-- Quick Stats -->
       <p class="toc-title">Quick Stats</p>
-      <div class="kpi-row">
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
         {% if page.sector %}
-        <div class="kpi-row-cell">
-          <span class="text-muted">Sector</span>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Sector</span>
           <span style="color:var(--gold)">{{ page.sector }}</span>
         </div>
         {% endif %}
-        <div class="kpi-row-cell">
-          <span class="text-muted">Signal Reports</span>
-          <span class="text-accent">{{ related_posts.size }}</span>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Research Reports</span>
+          <span style="color:var(--accent)">{{ related_posts.size }}</span>
         </div>
-        <div class="kpi-row-cell">
-          <span class="text-muted">Latest</span>
-          <span class="text-body2">{% if related_posts.size > 0 %}{{ related_posts.first.date | date: "%b %d" }}{% else %}—{% endif %}</span>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Latest</span>
+          <span style="color:var(--text2)">{% if related_posts.size > 0 %}{{ related_posts.first.date | date: "%b %d" }}{% else %}—{% endif %}</span>
         </div>
         {% if page.symbol %}
-        <div class="kpi-row-cell">
-          <span class="text-muted">Symbol</span>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+          <span style="color:var(--text3)">Symbol</span>
           <span style="color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:0.75rem;">{{ page.symbol }}</span>
         </div>
         {% endif %}
@@ -820,7 +726,7 @@ layout: default
 
       <!-- Top ETFs -->
       {% if page.etfs %}
-      <div class="sidebar-divider">
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
         <p class="toc-title">Top ETFs</p>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
           {% for etf in page.etfs %}
@@ -832,7 +738,7 @@ layout: default
 
       <!-- Key Companies -->
       {% if page.companies %}
-      <div class="sidebar-divider">
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
         <p class="toc-title">Key Companies</p>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
           {% for company in page.companies %}
@@ -849,7 +755,7 @@ layout: default
 
       <!-- Related Reports -->
       {% if related_posts.size > 0 %}
-      <div class="sidebar-divider">
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
         <p class="toc-title">Related Reports</p>
         <ul style="list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:8px;">
           {% for post in related_posts limit:5 %}
@@ -863,7 +769,7 @@ layout: default
         </ul>
       </div>
       {% else %}
-      <div class="sidebar-divider">
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
         <p class="toc-title">Coverage Status</p>
         <div style="margin-top:8px;padding:12px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.12);border-radius:8px;">
           <p style="font-size:0.75rem;color:var(--text3);margin-bottom:8px;">Signal reports coming soon for this commodity.</p>
@@ -884,20 +790,20 @@ layout: default
       {% endif %}
 
       <!-- Explore More -->
-      <div class="sidebar-divider">
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border);">
         <p class="toc-title">Explore More</p>
-        <ul class="toc-explore-list">
-          <li><a href="/commodities/" class="link-micro">All Commodities</a></li>
-          <li><a href="/industries/" class="link-micro">Industries</a></li>
-          <li><a href="/companies/" class="link-micro">Companies</a></li>
-          <li><a href="/themes/" class="link-micro">Themes</a></li>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <li><a href="/commodities/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">All Commodities</a></li>
+          <li><a href="/industries/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Industries</a></li>
+          <li><a href="/companies/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Companies</a></li>
+          <li><a href="/themes/" style="font-size:0.8rem;color:var(--accent);text-decoration:none;">Themes</a></li>
         </ul>
       </div>
 
       <!-- Methodology Trust Card -->
       <div style="margin-top:20px;padding:14px 16px;background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.1);border-radius:8px;">
         <div style="color:#22d3ee;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">Methodology</div>
-        <p style="color:var(--text3);font-size:0.78rem;margin:0;line-height:1.5;">Impact scores use 5-year rolling regressions (Pearson, p&lt;0.05). Sensitivity from SEC 10-K hedging data. <a href="/methodology/" class="text-accent">Learn more →</a></p>
+        <p style="color:var(--text3);font-size:0.78rem;margin:0;line-height:1.5;">Impact scores use 5-year rolling regressions (Pearson, p&lt;0.05). Sensitivity from SEC 10-K hedging data. <a href="/methodology/" style="color:#22d3ee;">Learn more →</a></p>
       </div>
     </aside>
   </div>
@@ -916,7 +822,7 @@ layout: default
 
 <!-- Related Commodities -->
 {% if page.substitutes %}
-<section class="related-posts section pt-0">
+<section class="related-posts section" style="padding-top:0;">
   <div class="container">
     <div class="section-header" data-animate>
       <p class="section-label">Related</p>
@@ -931,7 +837,7 @@ layout: default
           {% assign c_slug = c.name | remove: '.md' %}
           {% if c_slug == sub_slug %}
             {% assign found = true %}
-            <a href="{{ c.url | relative_url }}" class="substitute-card" style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color 0.2s,transform 0.2s;">
+            <a href="{{ c.url | relative_url }}" style="display:flex;align-items:center;gap:10px;padding:14px 20px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
               <span style="font-size:0.9rem;font-weight:600;color:var(--text);">{{ c.title | split: ':' | first | split: 'Price Impact' | first | strip }}</span>
               <span style="font-size:0.75rem;color:var(--text3);">&rarr;</span>
             </a>
@@ -946,22 +852,17 @@ layout: default
 </section>
 {% endif %}
 
-<!-- Conversion CTAs — unified "next best path" component. -->
-{% assign cn_title = page.title | split: ':' | first | strip %}
-{% capture nbp_primary_label %}Run a scenario on {{ cn_title }}{% endcapture %}
-{% capture nbp_secondary_label %}Read latest signal reports for {{ cn_title }}{% endcapture %}
-{% capture nbp_tertiary_label %}Add {{ cn_title }} to your watchlist{% endcapture %}
-{% include next-best-path.html
-    title="Turn this commodity page into a decision."
-    lede="One chart rarely ends the question. Pick the path that turns this page into a scenario or a watchlist move."
-    primary_href="/simulator/"
-    primary_label=nbp_primary_label
-    secondary_href="/reports/"
-    secondary_label=nbp_secondary_label
-    tertiary_href="/start/"
-    tertiary_label=nbp_tertiary_label
-    freshness_note=page.updated_at
-%}
+<!-- Conversion CTAs -->
+<section style="margin:48px 0;padding:32px 24px;background:linear-gradient(135deg,rgba(34,211,238,0.04),rgba(168,85,247,0.04));border:1px solid rgba(34,211,238,0.1);border-radius:12px;text-align:center;">
+  <h2 style="font-size:1.2rem;color:var(--text);margin-bottom:8px;">Go Deeper on {{ page.title | split: ':' | first | strip }}</h2>
+  <p style="color:var(--text2);font-size:0.9rem;margin-bottom:20px;">Model price shock scenarios, access AI forecasts, and track sensitivity across related equities.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <a href="/simulator/" style="padding:10px 20px;background:rgba(34,211,238,0.1);border:1px solid rgba(34,211,238,0.3);border-radius:8px;color:#22d3ee;text-decoration:none;font-size:0.9rem;font-weight:500;">Open Scenario Simulator →</a>
+    <a href="/signals/" style="padding:10px 20px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:8px;color:#fbbf24;text-decoration:none;font-size:0.9rem;font-weight:500;">Browse Research Reports →</a>
+    <a href="/pricing/" style="padding:10px 20px;background:var(--accent);border-radius:8px;color:#000;text-decoration:none;font-size:0.9rem;font-weight:600;">Unlock Pro →</a>
+  </div>
+  <p style="color:var(--text3);font-size:0.82rem;margin-top:16px;">Get notified on {{ page.title | split: ':' | first | strip }} price moves → <a href="/start/" style="color:#22d3ee;">Create free account</a></p>
+</section>
 
 <!-- Newsletter CTA Strip -->
 <section style="background:linear-gradient(135deg,rgba(34,211,238,0.08) 0%,rgba(168,85,247,0.08) 100%);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 24px;">
@@ -973,13 +874,13 @@ layout: default
   </div>
 </section>
 
-<!-- Full Signal Reports Grid -->
+<!-- Full Research Reports Grid -->
 {% if related_posts.size == 0 %}
-<section class="section pt-0">
+<section class="section" style="padding-top:0;">
   <div class="container">
     <div style="background:#111827;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:24px;text-align:center;margin-top:24px;">
-      <p style="color:#64748b;font-size:0.9rem;margin:0 0 8px;">Signal reports for this commodity are in development.</p>
-      <p style="color:#475569;font-size:0.82rem;margin:0;">Explore related commodities or <a href="/reports/" class="text-accent">browse all reports →</a></p>
+      <p style="color:#64748b;font-size:0.9rem;margin:0 0 8px;">{{ commodity_coverage_note }}</p>
+      <p style="color:#475569;font-size:0.82rem;margin:0;">{% if page.next_best_links and page.next_best_links.size > 0 %}{% for item in page.next_best_links %}<a href="{{ item.url | relative_url }}" style="color:#22d3ee;">{{ item.title }} →</a>{% unless forloop.last %} · {% endunless %}{% endfor %}{% else %}{% for item in commodity_default_next_best_links %}{% assign link_bits = item | split: '|' %}<a href="{{ link_bits[0] | relative_url }}" style="color:#22d3ee;">{{ link_bits[1] }} →</a>{% unless forloop.last %} · {% endunless %}{% endfor %}{% endif %}</p>
     </div>
   </div>
 </section>
@@ -990,7 +891,7 @@ layout: default
   <div class="container">
     <div class="section-header" data-animate>
       <p class="section-label">Ripple Analysis</p>
-      <h2 class="section-title" id="commodity-reports-title">Signal Reports for {{ page.title }}</h2>
+      <h2 class="section-title" id="commodity-reports-title">Research Reports for {{ page.title }}</h2>
       <p class="section-desc">All published Impact Maps and Ripple Chain analyses for this commodity.</p>
     </div>
     <div class="posts-grid">
@@ -1016,212 +917,5 @@ layout: default
 </section>
 {% endif %}
 
-<!-- AI Forecast Chart Script -->
-<script>
-(function() {
-  'use strict';
-  var SLUG_MAP = {
-    'crude-oil': 'crude_oil', 'gold': 'gold', 'copper': 'copper',
-    'silver': 'silver', 'natural-gas': 'natural_gas', 'wheat': 'wheat',
-    'corn': 'corn', 'soybeans': 'soybeans', 'coffee': 'coffee',
-    'sugar': 'sugar', 'platinum': 'platinum', 'uranium': 'uranium',
-    'lithium': 'lithium', 'aluminum': 'aluminum', 'palladium': 'palladium',
-    'coal': 'coal', 'cotton': 'cotton', 'cocoa': 'cocoa', 'lng': 'natural_gas'
-  };
-  var pageSlug = '{{ page.commodity_slug }}';
-  var fcKey = SLUG_MAP[pageSlug];
-  if (!fcKey) {
-    var section = document.getElementById('commodity-forecast-section');
-    if (section) {
-      section.innerHTML = '<div style="padding:20px;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:14px;text-align:center;">'
-        + '<p style="color:var(--text3);font-size:0.88rem;margin-bottom:12px;">AI price forecast coming soon for this commodity.</p>'
-        + '<a href="/simulator/" style="color:var(--accent);font-size:0.85rem;font-weight:600;">View forecasts in Scenario Simulator →</a>'
-        + '</div>';
-    }
-    return;
-  }
-
-  var META = {
-    crude_oil: { unit: '$', dec: 2 }, gold: { unit: '$', dec: 0 },
-    copper: { unit: '$', dec: 3 }, silver: { unit: '$', dec: 2 },
-    natural_gas: { unit: '$', dec: 3 }, wheat: { unit: '', dec: 0 },
-    corn: { unit: '', dec: 0 }, soybeans: { unit: '', dec: 0 },
-    coffee: { unit: '', dec: 2 }, sugar: { unit: '', dec: 2 },
-    platinum: { unit: '$', dec: 0 }, uranium: { unit: '$', dec: 2 },
-    lithium: { unit: '$', dec: 2 }, aluminum: { unit: '$', dec: 0 },
-    palladium: { unit: '$', dec: 0 }
-  };
-
-  function fmt(v, meta) {
-    if (v == null || Number.isNaN(Number(v))) return '—';
-    var m = meta || { unit: '$', dec: 2 };
-    return m.unit + Number(v).toLocaleString('en-US', { minimumFractionDigits: m.dec, maximumFractionDigits: m.dec });
-  }
-
-  function makeLine(joinPrice, histDates, arr) {
-    return histDates.slice(0, -1).map(function(){ return null; }).concat([joinPrice]).concat(arr || []);
-  }
-
-  Promise.all([
-    fetch('/assets/data/forecast-consensus.json').then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; }),
-    fetch('/assets/data/forecast.json').then(function(r) { return r.json(); })
-  ])
-    .then(function(responses) {
-      var consensusData = responses[0] || {};
-      var legacyData = responses[1] || {};
-      var seoForecastEl = document.getElementById('seo-forecast-today');
-      var entry = consensusData[fcKey];
-      var d = legacyData[fcKey];
-      if (!d) {
-        if (seoForecastEl) seoForecastEl.textContent = 'Forecast data is temporarily unavailable for this hub. Use the live price and linked reports until the model refresh completes.';
-        document.getElementById('cf-no-data').style.display = 'block';
-        return;
-      }
-
-      var consensus = entry && entry.consensus && entry.consensus.status === 'ready' ? entry.consensus : null;
-      var chronos = entry && entry.models ? entry.models.chronos2 : null;
-      var timesfm = entry && entry.models ? entry.models.timesfm : null;
-      var activeForecast = consensus || d.timesfm_forecast || d.forecast;
-      if (!activeForecast) {
-        if (seoForecastEl) seoForecastEl.textContent = 'Forecast data is temporarily unavailable for this hub. Use the live price and linked reports until the model refresh completes.';
-        document.getElementById('cf-no-data').style.display = 'block';
-        return;
-      }
-
-      var meta = META[fcKey] || { unit: '$', dec: 2 };
-      var histDates = (d.history.dates || []).slice(-60);
-      var histPrices = (d.history.prices || []).slice(-60);
-      var joinPrice = histPrices[histPrices.length - 1];
-      var fcDates = activeForecast.dates || [];
-      var fcMedian = activeForecast.median || [];
-      var fcP10 = (activeForecast.p10 || activeForecast.p25 || []).slice(0);
-      var fcP90 = (activeForecast.p90 || activeForecast.p75 || []).slice(0);
-      var chronosMedian = chronos && chronos.raw && chronos.raw.forecast ? (chronos.raw.forecast.median || []) : [];
-      var timesfmMedian = timesfm ? (timesfm.median || []) : [];
-
-      var labels = histDates.concat(fcDates);
-      var histLine = histPrices.concat(fcDates.map(function(){ return null; }));
-      var consensusLine = makeLine(joinPrice, histDates, fcMedian);
-      var p10Line = makeLine(joinPrice, histDates, fcP10);
-      var p90Line = makeLine(joinPrice, histDates, fcP90);
-      var chronosLine = makeLine(joinPrice, histDates, chronosMedian);
-      var timesfmLine = makeLine(joinPrice, histDates, timesfmMedian);
-
-      var canvas = document.getElementById('commodity-fc-canvas');
-      if (!canvas) return;
-      var isMobileChart = ((canvas.parentElement && canvas.parentElement.clientWidth) || window.innerWidth) <= 640 || window.innerWidth <= 640;
-      var render = function() {
-        new Chart(canvas, {
-          type: 'line',
-          data: {
-            labels: labels,
-            datasets: [
-              { label:'Range Upper', data:p90Line, borderColor:'transparent', backgroundColor:'rgba(34,211,238,0.12)', fill:'+1', pointRadius:0, tension:0.3, order:6 },
-              { label:'Range Lower', data:p10Line, borderColor:'transparent', backgroundColor:'transparent', fill:false, pointRadius:0, tension:0.3, order:7 },
-              { label:'Historical', data:histLine, borderColor:'#64748b', backgroundColor:'transparent', borderWidth:1.5, pointRadius:0, tension:0.2, order:4 },
-              { label:'Chronos-2', data:chronosLine, borderColor:'rgba(168,85,247,0.88)', backgroundColor:'transparent', borderWidth:1.6, pointRadius:0, tension:0.3, order:3, borderDash:[6,4] },
-              { label:'TimesFM 2.5', data:timesfmLine, borderColor:'rgba(251,191,36,0.96)', backgroundColor:'transparent', borderWidth:1.6, pointRadius:0, tension:0.3, order:2, borderDash:[3,4] },
-              { label:'Consensus', data:consensusLine, borderColor:'#22d3ee', backgroundColor:'transparent', borderWidth:2.8, pointRadius:0, tension:0.32, order:1 }
-            ]
-          },
-          options: {
-            responsive:true, maintainAspectRatio:false,
-            interaction:{ mode:'index', intersect:false },
-            plugins:{
-              legend:{display:false},
-              tooltip:{
-                backgroundColor:'rgba(13,13,24,0.95)', borderColor:'rgba(34,211,238,0.3)', borderWidth:1,
-                titleColor:'#94a3b8', bodyColor:'#e2e8f0',
-                titleFont:{ size:isMobileChart ? 11 : 12, weight:'700' },
-                bodyFont:{ size:isMobileChart ? 11 : 12 },
-                padding:isMobileChart ? 10 : 12,
-                displayColors:false,
-                callbacks:{ label:function(ctx){ if(ctx.parsed.y===null||ctx.dataset.label==='Range Upper'||ctx.dataset.label==='Range Lower') return null; return ctx.dataset.label + ': ' + fmt(ctx.parsed.y, meta); } }
-              }
-            },
-            scales:{
-              x:{
-                grid:{color:'rgba(255,255,255,0.04)'},
-                ticks:{
-                  color:'#94a3b8',
-                  font:{ size:isMobileChart ? 11 : 12, weight:'600' },
-                  maxTicksLimit:isMobileChart ? 5 : 7,
-                  autoSkip:true,
-                  maxRotation:0,
-                  callback:function(v){ var l=this.getLabelForValue(v); if(!l) return ''; var dt=new Date(l); return (dt.getMonth()+1)+'/'+dt.getDate(); }
-                }
-              },
-              y:{
-                grid:{color:'rgba(255,255,255,0.04)'},
-                ticks:{
-                  color:'#94a3b8',
-                  font:{ size:isMobileChart ? 11 : 12, weight:'600' },
-                  maxTicksLimit:isMobileChart ? 5 : 6,
-                  callback:function(v){ return fmt(v,meta); }
-                }
-              }
-            }
-          }
-        });
-      };
-
-      if (typeof Chart === 'undefined') {
-        var s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
-        s.onload = render;
-        document.head.appendChild(s);
-      } else {
-        render();
-      }
-
-      var target = fcMedian.length ? fcMedian[Math.min(fcMedian.length - 1, 89)] : null;
-      var pct = d.current_price && target ? ((target - d.current_price) / d.current_price * 100) : null;
-      var el = function(id){ return document.getElementById(id); };
-      if (el('cf-current')) el('cf-current').textContent = fmt(d.current_price, meta);
-      if (el('cf-target')) el('cf-target').textContent = fmt(target, meta);
-      if (el('cf-target-label')) el('cf-target-label').textContent = consensus ? '90-Day Consensus' : '90-Day Forecast';
-      if (el('cf-p90')) el('cf-p90').textContent = fmt(fcP90.length ? fcP90[Math.min(fcP90.length - 1, 89)] : null, meta);
-      if (el('cf-p10')) el('cf-p10').textContent = fmt(fcP10.length ? fcP10[Math.min(fcP10.length - 1, 89)] : null, meta);
-      if (el('cf-subtitle')) el('cf-subtitle').textContent = consensus ? 'Chronos-2 + TimesFM 2.5, combined into a decision-grade range' : 'Single-model AI forecast view';
-      if (el('cf-chg')) {
-        el('cf-chg').textContent = pct == null ? '—' : ((pct >= 0 ? '+' : '') + pct.toFixed(1) + '%');
-        el('cf-chg').style.color = pct != null && pct >= 0 ? '#10b981' : '#f43f5e';
-      }
-      if (seoForecastEl) {
-        var consensus30 = fcMedian.length ? fcMedian[Math.min(fcMedian.length - 1, 29)] : null;
-        seoForecastEl.textContent = '30-day consensus: ' + fmt(consensus30, meta) + '. 90-day consensus: ' + fmt(target, meta) + '.';
-      }
-
-      var strip = document.getElementById('cf-agreement-strip');
-      if (strip && entry) {
-        var agreement = entry.agreement || {};
-        var level = agreement.level || 'moderate';
-        var palette = level === 'high'
-          ? ['#10b981','rgba(16,185,129,0.08)','rgba(16,185,129,0.18)']
-          : level === 'divergent'
-            ? ['#ef4444','rgba(239,68,68,0.08)','rgba(239,68,68,0.18)']
-            : ['#f59e0b','rgba(245,158,11,0.08)','rgba(245,158,11,0.18)'];
-        strip.innerHTML = ''
-          + '<div style="padding:12px 14px;background:'+palette[1]+';border:1px solid '+palette[2]+';border-radius:12px;">'
-          + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:'+palette[0]+';font-weight:700;margin-bottom:6px;">Agreement</div>'
-          + '<div class="title-bold-white">' + level.toUpperCase() + '</div>'
-          + '<div style="font-size:0.76rem;color:#94a3b8;margin-top:4px;">Score ' + (((agreement.score || 0) * 100).toFixed(0)) + '%</div>'
-          + '</div>'
-          + '<div style="padding:12px 14px;background:rgba(34,211,238,0.06);border:1px solid rgba(34,211,238,0.16);border-radius:12px;">'
-          + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#22d3ee;font-weight:700;margin-bottom:6px;">Consensus 90D</div>'
-          + '<div class="title-bold-white">' + fmt(target, meta) + '</div>'
-          + '</div>'
-          + '<div style="padding:12px 14px;background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.16);border-radius:12px;">'
-          + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#a855f7;font-weight:700;margin-bottom:6px;">Chronos-2 90D</div>'
-          + '<div class="title-bold-white">' + fmt(chronos ? chronos.forecast_90d : null, meta) + '</div>'
-          + '</div>'
-          + '<div style="padding:12px 14px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.16);border-radius:12px;">'
-          + '<div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:#fbbf24;font-weight:700;margin-bottom:6px;">TimesFM 90D</div>'
-          + '<div class="title-bold-white">' + fmt(timesfm ? timesfm.forecast_90d : null, meta) + '</div>'
-          + '</div>';
-      }
-    })
-    .catch(function(e) { console.warn('Forecast load error', e); });
-})();
-</script>
+<!-- AI Forecast Chart Script moved to /assets/js/commodity-page.js -->
 

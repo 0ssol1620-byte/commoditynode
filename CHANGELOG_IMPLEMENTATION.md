@@ -86,7 +86,7 @@ Simulator UX improvements, pricing page redesign, Pro landing page.
 
 - `01e191d` **feat: Phase 3 — Pricing outcome redesign + Pro landing page**
   - Pricing page rewritten from feature-based to outcome-based framing
-  - Pro landing page (`/pro/`) created with full feature breakdown, trust signals, and Lemon Squeezy CTA
+  - Pro landing page (`/pro/`) created with full feature breakdown, trust signals, and previous checkout provider CTA
   - Simulator copy refined: preset shock labels made concrete ("China export ban", "OPEC+ cut")
   - Default commodity on simulator changed from none → Crude Oil for immediate engagement
 
@@ -94,7 +94,7 @@ Simulator UX improvements, pricing page redesign, Pro landing page.
 
 Earlier product infrastructure:
 - `9228ee8` **feat(phase1): Pro gating + teaser upsell flow** — Pro gate on API and CSV export; teaser content visible to free users
-- `b8c4cc8` **feat(phase2): Vercel Serverless Functions** — API endpoints, CSV export, Lemon Squeezy webhook, API key management UI
+- `b8c4cc8` **feat(phase2): Vercel Serverless Functions** — API endpoints, CSV export, previous checkout provider webhook, API key management UI
 
 ---
 
@@ -110,8 +110,8 @@ CTA flow optimization, trust snippets, newsletter contextualization.
   - Newsletter signup contextualized with data preview CTA
   - About page updated with trust signals (methodology transparency, data sources)
 
-- `b716bbe` **feat: connect Lemon Squeezy checkout URLs to all Pro CTA buttons**
-  - All Pro upgrade buttons wired to live Lemon Squeezy checkout
+- `b716bbe` **feat: connect previous checkout provider checkout URLs to all Pro CTA buttons**
+  - All Pro upgrade buttons wired to live previous checkout provider checkout
 
 - `3705b15` **feat: add weekly digest email template** — Dark-theme email with signals, events, and Pro CTA for subscriber nurture
 

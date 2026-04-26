@@ -1,6 +1,6 @@
 title: CommodityNode
-tagline: "Where Raw Materials Meet Markets"
-description: "Track commodity price movements with AI-powered forecasts. Real-time impact analysis for gold, oil, copper, uranium and 60+ commodities — with company sensitivity scores and supply disruption alerts."
+tagline: "Commodity Market Intelligence for Business Planning"
+description: "Commodity market intelligence and scenario analytics for supply-chain risk monitoring, procurement planning, macro research, and educational market analysis."
 url: "https://commoditynode.com"
 baseurl: ""
 
@@ -75,8 +75,8 @@ defaults:
       sitemap: false
 
 feed:
-  title: "CommodityNode Signal Reports"
-  description: "Commodity price impact analysis for markets, supply chains, and equities"
+  title: "CommodityNode Research Reports"
+  description: "Commodity market research, supply-chain risk context, and scenario analytics"
   path: "feed.xml"
 
 future: true
@@ -86,7 +86,6 @@ include:
   - llms.txt
   - indexnow-commoditynode.txt
   - c7f3a2e8b4d91f06e5a0c3b8d2e7f1a4.txt
-  - watchlist-risk-scan
 
 exclude:
   - node_modules/

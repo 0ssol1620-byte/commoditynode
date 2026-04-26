@@ -1,8 +1,8 @@
 ---
 layout: default
-title: "Privacy Policy"
-permalink: /privacy/
-description: "Privacy Policy for CommodityNode."
+title: "Business Info"
+permalink: /business-info/
+description: "Business and support information for CommodityNode."
 no_loader: true
 disable_ads: true
 ---
@@ -22,15 +22,14 @@ disable_ads: true
 <section class="legal-shell">
   <div class="legal-kicker">CommodityNode policy</div>
 
-  <h1>Privacy Policy</h1>
-  <p>This Privacy Policy explains how CommodityNode handles information related to website visitors, account users, and research-access customers.</p>
-  <h2>Information we may collect</h2>
-  <ul><li>Contact information such as email address when you create an account or contact support.</li><li>Usage information such as pages viewed, clicks, device/browser data, and analytics events.</li><li>Payment-related identifiers from payment providers if paid access is enabled. CommodityNode does not store full card numbers.</li></ul>
-  <h2>How we use information</h2>
-  <p>We use information to operate the site, provide account access, support users, improve product quality, prevent abuse, process access requests, and comply with legal or payment-provider requirements.</p>
-  <h2>Service providers</h2>
-  <p>CommodityNode may use third-party infrastructure, analytics, authentication, email, and payment providers. Those providers process information under their own terms and policies.</p>
-  <h2>Contact</h2>
-  <p>Privacy questions: <a href="mailto:contact@commoditynode.com">contact@commoditynode.com</a>.</p>
+  <h1>Business Info</h1>
+  <p>CommodityNode is an English-language commodity market intelligence and scenario analytics SaaS for research, monitoring, procurement planning, supply-chain risk analysis, and educational market analytics.</p>
+  <div class="legal-grid">
+    <div class="legal-card"><h2>Business description</h2><p>Commodity market dashboards, research memos, scenario modeling, and supply-chain risk monitoring tools for informational and business planning purposes.</p></div>
+    <div class="legal-card"><h2>Support</h2><p>Email: <a href="mailto:contact@commoditynode.com">contact@commoditynode.com</a></p></div>
+    <div class="legal-card"><h2>Services not provided</h2><p>No brokerage, funds custody, trade execution, portfolio management, personalized investment advice, or guaranteed financial outcomes.</p></div>
+  </div>
+  <h2>Customer journey</h2>
+  <p>Users can browse public commodity hubs and reports, generate or review research previews, and request paid research access or an enterprise invoice for deeper analytics.</p>
 
 </section>

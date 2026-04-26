@@ -96,14 +96,14 @@ noindex: false
     <h1 data-animate>Commodity <span>Correlation Matrix</span></h1>
     <p data-animate data-delay="100">Rolling Pearson correlation between 20 major commodities — calculated from live candle data</p>
     <div class="period-toggle" data-animate data-delay="200">
-      <button type="button" class="period-btn active" data-period="30">30D</button>
-      <button type="button" class="period-btn" data-period="60">60D <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
-      <button type="button" class="period-btn" data-period="90">90D <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button class="period-btn active" data-period="30">30D</button>
+      <button class="period-btn" data-period="60">60D <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
+      <button class="period-btn" data-period="90">90D <span style="font-size:0.65rem;opacity:0.7;">🔒</span></button>
     </div>
   </div>
 </section>
 
-<section class="section pt-0">
+<section class="section" style="padding-top:0">
   <div class="container">
 
     <!-- "What changed recently" panel + view toggles (blueprint §3-6) -->
@@ -168,8 +168,8 @@ noindex: false
         <div id="corr-loading" style="text-align:center;padding:40px;color:var(--text3);font-size:0.88rem;">
           Loading 90-day correlation data...
         </div>
-        <div id="corr-heatmap-chart" class="corr-chart-stage hidden"></div>
-        <table class="heatmap-table hidden" id="corr-matrix"></table>
+        <div id="corr-heatmap-chart" class="corr-chart-stage" style="display:none"></div>
+        <table class="heatmap-table" id="corr-matrix" style="display:none"></table>
         <!-- Static fallback for crawlers / no-JS -->
         <noscript>
         <table class="heatmap-table" style="margin:0 auto" aria-label="Commodity Correlation Matrix (30-day)">
@@ -177,16 +177,16 @@ noindex: false
             <th></th><th>Oil</th><th>Gold</th><th>Cu</th><th>Ag</th><th>Gas</th><th>Wht</th><th>Corn</th><th>Soy</th><th>Cof</th><th>Sug</th>
           </tr></thead>
           <tbody>
-            <tr><th class="row-header">Oil</th><td class="badge-solid-accent">1.00</td><td class="code-inline">0.12</td><td style="background:rgba(16,185,129,0.4);color:#e2e8f0">0.48</td><td class="code-inline">0.09</td><td style="background:rgba(16,185,129,0.25);color:#e2e8f0">0.35</td><td class="code-inline">0.07</td><td class="code-inline">0.05</td><td class="code-inline">0.04</td><td class="code-inline">0.02</td><td class="code-inline">0.08</td></tr>
-            <tr><th class="row-header">Gold</th><td class="code-inline">0.12</td><td class="badge-solid-accent">1.00</td><td style="background:rgba(16,185,129,0.35);color:#e2e8f0">0.41</td><td style="background:rgba(16,185,129,0.7);color:#fff">0.82</td><td class="code-inline">-0.05</td><td class="code-inline">0.11</td><td class="code-inline">0.09</td><td class="code-inline">0.06</td><td class="code-inline">-0.08</td><td class="code-inline">-0.03</td></tr>
-            <tr><th class="row-header">Cu</th><td style="background:rgba(16,185,129,0.4);color:#e2e8f0">0.48</td><td style="background:rgba(16,185,129,0.35);color:#e2e8f0">0.41</td><td class="badge-solid-accent">1.00</td><td style="background:rgba(16,185,129,0.45);color:#e2e8f0">0.55</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.31</td><td class="code-inline">0.14</td><td class="code-inline">0.18</td><td class="code-inline">0.12</td><td class="code-inline">-0.04</td><td class="code-inline">0.06</td></tr>
-            <tr><th class="row-header">Ag</th><td class="code-inline">0.09</td><td style="background:rgba(16,185,129,0.7);color:#fff">0.82</td><td style="background:rgba(16,185,129,0.45);color:#e2e8f0">0.55</td><td class="badge-solid-accent">1.00</td><td class="code-inline">-0.02</td><td class="code-inline">0.08</td><td class="code-inline">0.07</td><td class="code-inline">0.04</td><td class="code-inline">-0.06</td><td class="code-inline">-0.01</td></tr>
-            <tr><th class="row-header">Gas</th><td style="background:rgba(16,185,129,0.25);color:#e2e8f0">0.35</td><td class="code-inline">-0.05</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.31</td><td class="code-inline">-0.02</td><td class="badge-solid-accent">1.00</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.33</td><td style="background:rgba(16,185,129,0.18);color:#e2e8f0">0.30</td><td class="code-inline">0.22</td><td class="code-inline">0.04</td><td class="code-inline">0.01</td></tr>
-            <tr><th class="row-header">Wht</th><td class="code-inline">0.07</td><td class="code-inline">0.11</td><td class="code-inline">0.14</td><td class="code-inline">0.08</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.33</td><td class="badge-solid-accent">1.00</td><td style="background:rgba(16,185,129,0.65);color:#fff">0.76</td><td style="background:rgba(16,185,129,0.6);color:#fff">0.71</td><td class="code-inline">0.18</td><td class="code-inline">0.24</td></tr>
-            <tr><th class="row-header">Corn</th><td class="code-inline">0.05</td><td class="code-inline">0.09</td><td class="code-inline">0.18</td><td class="code-inline">0.07</td><td style="background:rgba(16,185,129,0.18);color:#e2e8f0">0.30</td><td style="background:rgba(16,185,129,0.65);color:#fff">0.76</td><td class="badge-solid-accent">1.00</td><td style="background:rgba(16,185,129,0.68);color:#fff">0.79</td><td class="code-inline">0.15</td><td class="code-inline">0.21</td></tr>
-            <tr><th class="row-header">Soy</th><td class="code-inline">0.04</td><td class="code-inline">0.06</td><td class="code-inline">0.12</td><td class="code-inline">0.04</td><td class="code-inline">0.22</td><td style="background:rgba(16,185,129,0.6);color:#fff">0.71</td><td style="background:rgba(16,185,129,0.68);color:#fff">0.79</td><td class="badge-solid-accent">1.00</td><td class="code-inline">0.11</td><td class="code-inline">0.28</td></tr>
-            <tr><th class="row-header">Cof</th><td class="code-inline">0.02</td><td class="code-inline">-0.08</td><td class="code-inline">-0.04</td><td class="code-inline">-0.06</td><td class="code-inline">0.04</td><td class="code-inline">0.18</td><td class="code-inline">0.15</td><td class="code-inline">0.11</td><td class="badge-solid-accent">1.00</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.32</td></tr>
-            <tr><th class="row-header">Sug</th><td class="code-inline">0.08</td><td class="code-inline">-0.03</td><td class="code-inline">0.06</td><td class="code-inline">-0.01</td><td class="code-inline">0.01</td><td class="code-inline">0.24</td><td class="code-inline">0.21</td><td class="code-inline">0.28</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.32</td><td class="badge-solid-accent">1.00</td></tr>
+            <tr><th class="row-header">Oil</th><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:#1e1e2e;color:#64748b">0.12</td><td style="background:rgba(16,185,129,0.4);color:#e2e8f0">0.48</td><td style="background:#1e1e2e;color:#64748b">0.09</td><td style="background:rgba(16,185,129,0.25);color:#e2e8f0">0.35</td><td style="background:#1e1e2e;color:#64748b">0.07</td><td style="background:#1e1e2e;color:#64748b">0.05</td><td style="background:#1e1e2e;color:#64748b">0.04</td><td style="background:#1e1e2e;color:#64748b">0.02</td><td style="background:#1e1e2e;color:#64748b">0.08</td></tr>
+            <tr><th class="row-header">Gold</th><td style="background:#1e1e2e;color:#64748b">0.12</td><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:rgba(16,185,129,0.35);color:#e2e8f0">0.41</td><td style="background:rgba(16,185,129,0.7);color:#fff">0.82</td><td style="background:#1e1e2e;color:#64748b">-0.05</td><td style="background:#1e1e2e;color:#64748b">0.11</td><td style="background:#1e1e2e;color:#64748b">0.09</td><td style="background:#1e1e2e;color:#64748b">0.06</td><td style="background:#1e1e2e;color:#64748b">-0.08</td><td style="background:#1e1e2e;color:#64748b">-0.03</td></tr>
+            <tr><th class="row-header">Cu</th><td style="background:rgba(16,185,129,0.4);color:#e2e8f0">0.48</td><td style="background:rgba(16,185,129,0.35);color:#e2e8f0">0.41</td><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:rgba(16,185,129,0.45);color:#e2e8f0">0.55</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.31</td><td style="background:#1e1e2e;color:#64748b">0.14</td><td style="background:#1e1e2e;color:#64748b">0.18</td><td style="background:#1e1e2e;color:#64748b">0.12</td><td style="background:#1e1e2e;color:#64748b">-0.04</td><td style="background:#1e1e2e;color:#64748b">0.06</td></tr>
+            <tr><th class="row-header">Ag</th><td style="background:#1e1e2e;color:#64748b">0.09</td><td style="background:rgba(16,185,129,0.7);color:#fff">0.82</td><td style="background:rgba(16,185,129,0.45);color:#e2e8f0">0.55</td><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:#1e1e2e;color:#64748b">-0.02</td><td style="background:#1e1e2e;color:#64748b">0.08</td><td style="background:#1e1e2e;color:#64748b">0.07</td><td style="background:#1e1e2e;color:#64748b">0.04</td><td style="background:#1e1e2e;color:#64748b">-0.06</td><td style="background:#1e1e2e;color:#64748b">-0.01</td></tr>
+            <tr><th class="row-header">Gas</th><td style="background:rgba(16,185,129,0.25);color:#e2e8f0">0.35</td><td style="background:#1e1e2e;color:#64748b">-0.05</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.31</td><td style="background:#1e1e2e;color:#64748b">-0.02</td><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.33</td><td style="background:rgba(16,185,129,0.18);color:#e2e8f0">0.30</td><td style="background:#1e1e2e;color:#64748b">0.22</td><td style="background:#1e1e2e;color:#64748b">0.04</td><td style="background:#1e1e2e;color:#64748b">0.01</td></tr>
+            <tr><th class="row-header">Wht</th><td style="background:#1e1e2e;color:#64748b">0.07</td><td style="background:#1e1e2e;color:#64748b">0.11</td><td style="background:#1e1e2e;color:#64748b">0.14</td><td style="background:#1e1e2e;color:#64748b">0.08</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.33</td><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:rgba(16,185,129,0.65);color:#fff">0.76</td><td style="background:rgba(16,185,129,0.6);color:#fff">0.71</td><td style="background:#1e1e2e;color:#64748b">0.18</td><td style="background:#1e1e2e;color:#64748b">0.24</td></tr>
+            <tr><th class="row-header">Corn</th><td style="background:#1e1e2e;color:#64748b">0.05</td><td style="background:#1e1e2e;color:#64748b">0.09</td><td style="background:#1e1e2e;color:#64748b">0.18</td><td style="background:#1e1e2e;color:#64748b">0.07</td><td style="background:rgba(16,185,129,0.18);color:#e2e8f0">0.30</td><td style="background:rgba(16,185,129,0.65);color:#fff">0.76</td><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:rgba(16,185,129,0.68);color:#fff">0.79</td><td style="background:#1e1e2e;color:#64748b">0.15</td><td style="background:#1e1e2e;color:#64748b">0.21</td></tr>
+            <tr><th class="row-header">Soy</th><td style="background:#1e1e2e;color:#64748b">0.04</td><td style="background:#1e1e2e;color:#64748b">0.06</td><td style="background:#1e1e2e;color:#64748b">0.12</td><td style="background:#1e1e2e;color:#64748b">0.04</td><td style="background:#1e1e2e;color:#64748b">0.22</td><td style="background:rgba(16,185,129,0.6);color:#fff">0.71</td><td style="background:rgba(16,185,129,0.68);color:#fff">0.79</td><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:#1e1e2e;color:#64748b">0.11</td><td style="background:#1e1e2e;color:#64748b">0.28</td></tr>
+            <tr><th class="row-header">Cof</th><td style="background:#1e1e2e;color:#64748b">0.02</td><td style="background:#1e1e2e;color:#64748b">-0.08</td><td style="background:#1e1e2e;color:#64748b">-0.04</td><td style="background:#1e1e2e;color:#64748b">-0.06</td><td style="background:#1e1e2e;color:#64748b">0.04</td><td style="background:#1e1e2e;color:#64748b">0.18</td><td style="background:#1e1e2e;color:#64748b">0.15</td><td style="background:#1e1e2e;color:#64748b">0.11</td><td style="background:#22d3ee;color:#050508">1.00</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.32</td></tr>
+            <tr><th class="row-header">Sug</th><td style="background:#1e1e2e;color:#64748b">0.08</td><td style="background:#1e1e2e;color:#64748b">-0.03</td><td style="background:#1e1e2e;color:#64748b">0.06</td><td style="background:#1e1e2e;color:#64748b">-0.01</td><td style="background:#1e1e2e;color:#64748b">0.01</td><td style="background:#1e1e2e;color:#64748b">0.24</td><td style="background:#1e1e2e;color:#64748b">0.21</td><td style="background:#1e1e2e;color:#64748b">0.28</td><td style="background:rgba(16,185,129,0.2);color:#e2e8f0">0.32</td><td style="background:#22d3ee;color:#050508">1.00</td></tr>
           </tbody>
         </table>
         <p style="text-align:center;color:#64748b;font-size:0.8rem;margin-top:12px">Static snapshot (30-day Pearson). Enable JavaScript for live interactive matrix.</p>
@@ -207,7 +207,7 @@ noindex: false
       </div>
     </div>
 
-    <div class="corr-chart-card mt-18">
+    <div class="corr-chart-card" style="margin-top:18px;">
       <h3>Correlation network graph</h3>
       <p>Shows which commodities are currently acting like the central connectors instead of just listing pairwise values.</p>
       <div id="corr-network-chart" class="corr-drilldown-stage" style="height:360px"></div>
@@ -218,7 +218,7 @@ noindex: false
     <div class="insight-grid" id="insight-grid" data-animate data-delay="200"></div>
 
     <div class="trader-insight" id="trader-insight" data-animate data-delay="300">
-      <h3>What This Means for Traders</h3>
+      <h3>What This Means for Researchers</h3>
       <p id="trader-text">Calculating correlations from live market data...</p>
     </div>
   </div>
@@ -332,7 +332,7 @@ noindex: false
     if (!pair) return;
     var drill = result.buildPairDrilldown(pair.a.key, pair.b.key);
     var delta = drill.latestCorrelation - drill.previousCorrelation;
-    document.getElementById('corr-selected-pair').innerHTML = '<strong class="white-text">'+drill.pair+'</strong><br>Rolling correlation is ' + drill.latestCorrelation.toFixed(2) + ' vs ' + drill.previousCorrelation.toFixed(2) + ' in the prior window.';
+    document.getElementById('corr-selected-pair').innerHTML = '<strong style="color:#f8fafc;">'+drill.pair+'</strong><br>Rolling correlation is ' + drill.latestCorrelation.toFixed(2) + ' vs ' + drill.previousCorrelation.toFixed(2) + ' in the prior window.';
     document.getElementById('corr-pair-meta').innerHTML = ''
       + '<div class="corr-pair-metric"><span>Current</span><strong>' + drill.latestCorrelation.toFixed(3) + '</strong></div>'
       + '<div class="corr-pair-metric"><span>Prior window</span><strong>' + drill.previousCorrelation.toFixed(3) + '</strong></div>'
@@ -427,9 +427,10 @@ noindex: false
   }
 
   document.getElementById('corr-loading').textContent='Loading correlation data from candle history...';
-  fetch('/assets/data/chart-data.json')
-    .then(function(r){return r.json();})
-    .then(function(data){
+  var corrLoader = window.CNDataStore && window.CNDataStore.getChartData
+    ? window.CNDataStore.getChartData()
+    : fetch('/assets/data/chart-data.json').then(function(r){ return r.json(); });
+  corrLoader.then(function(data){
       COMMODITIES.forEach(function(c){
         var d=data[c.key];
         if(!d||!d['1Y']||!d['1Y'].candles) return;
@@ -475,19 +476,19 @@ noindex: false
 <section class="seo-content">
   <div class="container">
     <h2>Commodity Correlation Analysis: A Comprehensive Guide</h2>
-    <p>Understanding how commodities move in relation to one another is a cornerstone of effective portfolio management, risk mitigation, and trading strategy development. The CommodityNode Correlation Matrix provides a visual, interactive representation of Pearson rolling correlations across 15 major commodity markets, updated with real market data and adjustable across 30, 60, and 90-day lookback windows. This tool empowers traders to identify diversification opportunities, detect regime changes, and build more resilient commodity portfolios.</p>
+    <p>Understanding how commodities move in relation to one another is a cornerstone of effective business planning, risk monitoring, and market research. The CommodityNode Correlation Matrix provides a visual, interactive representation of Pearson rolling correlations across 15 major commodity markets, updated with real market data and adjustable across 30, 60, and 90-day lookback windows. This tool helps researchers identify diversification context, detect regime changes, and build more resilient commodity watchlists.</p>
 
     <h3>What Is Pearson Correlation in Commodity Markets?</h3>
     <p>Pearson correlation measures the linear relationship between two variables on a scale from -1.0 to +1.0. A correlation of +1.0 means two commodities move in perfect lockstep, while -1.0 indicates they move in exactly opposite directions. Values near zero suggest no meaningful linear relationship. In commodity markets, correlations are driven by shared macro factors such as the US dollar, global growth expectations, inflation, and monetary policy, as well as sector-specific drivers like weather patterns, supply chain logistics, and geopolitical events.</p>
 
     <h3>Why Rolling Correlations Matter</h3>
-    <p>Static, long-term correlations can be misleading because commodity relationships shift over time in response to changing macro regimes. A 30-day rolling correlation captures the most recent market dynamics, revealing short-term convergences or divergences that may signal trading opportunities. The 60-day and 90-day windows smooth out noise and highlight more persistent structural relationships. Comparing across timeframes helps traders distinguish between temporary dislocations and genuine regime changes. For example, a gold-oil correlation that shifts from positive to negative over 30 days while remaining positive over 90 days may signal a short-term divergence trade rather than a permanent structural change.</p>
+    <p>Static, long-term correlations can be misleading because commodity relationships shift over time in response to changing macro regimes. A 30-day rolling correlation captures the most recent market dynamics, revealing short-term convergences or divergences that may signal research opportunities. The 60-day and 90-day windows smooth out noise and highlight more persistent structural relationships. Comparing across timeframes helps researchers distinguish between temporary dislocations and genuine regime changes. For example, a gold-oil correlation that shifts from positive to negative over 30 days while remaining positive over 90 days may signal a short-term divergence trade rather than a permanent structural change.</p>
 
     <h3>Key Commodity Correlations to Watch</h3>
-    <p>Several commodity pairs exhibit well-documented correlation patterns that traders monitor closely. Gold and silver typically show strong positive correlation (0.7–0.9) due to shared safe-haven demand and monetary policy sensitivity. Crude oil and natural gas have historically shown moderate positive correlation, though this relationship has weakened as the US shale revolution increased domestic gas supply independently of oil market dynamics. The copper-gold ratio is widely followed as a barometer of economic growth expectations — when copper outperforms gold, it signals risk-on sentiment and optimism about industrial demand. Agricultural commodities like wheat, corn, and soybeans tend to correlate positively due to shared weather patterns, substitution effects, and overlapping growing seasons.</p>
+    <p>Several commodity pairs exhibit well-documented correlation patterns that researchers monitor closely. Gold and silver typically show strong positive correlation (0.7–0.9) due to shared safe-haven demand and monetary policy sensitivity. Crude oil and natural gas have historically shown moderate positive correlation, though this relationship has weakened as the US shale revolution increased domestic gas supply independently of oil market dynamics. The copper-gold ratio is widely followed as a barometer of economic growth expectations — when copper outperforms gold, it signals risk-on sentiment and optimism about industrial demand. Agricultural commodities like wheat, corn, and soybeans tend to correlate positively due to shared weather patterns, substitution effects, and overlapping growing seasons.</p>
 
     <h3>Using Correlations for Portfolio Construction</h3>
-    <p>Effective commodity portfolio construction requires balancing exposure across correlated and uncorrelated assets. Holding heavily correlated positions amplifies both upside and downside risk, while including negatively correlated assets provides natural hedging. Traders can use this matrix to identify which commodities offer genuine diversification benefits and which simply duplicate existing exposure. Correlation breakdowns — when historically correlated commodities suddenly diverge — often represent the most profitable trading opportunities, as mean reversion tends to reassert over medium-term timeframes. Monitoring correlation regime changes alongside fundamental supply-demand analysis provides a powerful framework for commodity market decision-making.</p>
+    <p>Effective commodity watchlist construction requires balancing exposure across correlated and uncorrelated assets. Holding heavily correlated positions amplifies both upside and downside risk, while including negatively correlated assets provides natural hedging. Researchers can use this matrix to identify which commodities offer genuine diversification benefits and which simply duplicate existing exposure. Correlation breakdowns — when historically correlated commodities suddenly diverge — often represent the most profitable research opportunities, as mean reversion tends to reassert over medium-term timeframes. Monitoring correlation regime changes alongside fundamental supply-demand analysis provides a powerful framework for commodity market decision-making.</p>
   </div>
 </section>
 
@@ -519,17 +520,8 @@ noindex: false
     t.innerHTML = '<strong>' + (view==='rolling' ? 'Rolling correlation' : 'Lead-lag analysis') + ' is a Pro feature.</strong>'
       + '<p>See how the matrix evolves day by day, and which pairs lead vs lag the move.</p>'
       + '<div><a href="/pricing/" class="btn btn-primary" data-cta="cor_paywall_upgrade">Compare plans</a> '
-      + '<button type="button" class="btn btn-secondary" data-action="dismiss-paywall-toast">Dismiss</button></div>';
+      + '<button type="button" class="btn btn-secondary" onclick="this.closest(\'.cor-paywall-toast\').remove()">Dismiss</button></div>';
     document.body.appendChild(t);
   }
-})();
-</script>
-
-<script>
-(function(){
-  document.addEventListener('click', function(ev){
-    var act = ev.target.closest('[data-action="dismiss-paywall-toast"]');
-    if (act) { var t = act.closest('.cor-paywall-toast'); if (t) t.remove(); }
-  });
 })();
 </script>

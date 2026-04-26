@@ -1,100 +1,90 @@
 # CommodityNode pricing source-of-truth.
-# Every surface that mentions plans, CTAs, or guarantees must read from here.
-# Update values here only; pages, paywalls, and JSON mirrors derive from this.
+# Research-access positioning: no live checkout URLs until server-side verification exists.
 
 currency: USD
 
 checkout:
-  pro_monthly: "https://commoditynode.lemonsqueezy.com/checkout/buy/3304d5bd-2736-456e-ab67-eb0c8f546a71"
-  pro_annual: "https://commoditynode.lemonsqueezy.com/checkout/buy/b7c7444b-606f-49c0-a6ab-8f78f653702f"
+  pro_30_day: "/pricing/"
+  pro_annual: "/pricing/"
+  enterprise: "/enterprise/"
 
 plans:
   - id: free
     name: Free
     price: 0
     price_label: "$0"
-    billing: "forever"
-    tagline: "See the move, learn the workflow."
-    cta_label: "Start Free"
+    billing: "access"
+    tagline: "Public commodity intelligence preview."
+    cta_label: "Start free research workflow"
     cta_url: "/start/"
     highlights:
-      - "All 60+ commodity hubs"
-      - "3 Signal Reports per month"
-      - "Public forecast stack"
-      - "Simulator preview context"
-  - id: pro_monthly
-    name: Pro
-    price: 19
-    price_label: "$19"
-    billing: "per month"
-    tagline: "Finish the decision — stock-level translation, simulator workflow, deeper reports."
-    cta_label: "Start Pro — $19/month"
-    cta_url_ref: checkout.pro_monthly
+      - "Public commodity hubs"
+      - "Delayed market snapshot"
+      - "Sample scenario memo"
+      - "Limited simulator preview"
+  - id: pro_30_day
+    name: Pro 30-Day Research Access
+    price: 29
+    price_label: "$29"
+    billing: "30 days"
+    tagline: "Full market intelligence, scenario analytics, and research archive access."
+    cta_label: "Request 30-Day Access"
+    cta_url: "mailto:contact@commoditynode.com?subject=CommodityNode%2030-Day%20Research%20Access"
     highlights:
-      - "Unlimited Signal Reports"
-      - "Scenario Simulator (full)"
-      - "Company sensitivity + 200+ equities"
-      - "Trading notes on each signal"
-      - "7-day free trial, no card required"
+      - "Full Intelligence Lab access"
+      - "Premium research archive"
+      - "Watchlist scenario memo"
+      - "Forecast uncertainty ranges"
+      - "Commodity shock simulator"
     primary: true
   - id: pro_annual
-    name: Pro Annual
-    price: 180
-    price_label: "$180"
-    billing: "billed yearly (save 21%)"
-    tagline: "Everything in Pro, for teams who use it every week."
-    cta_label: "Go annual — $180/year"
-    cta_url_ref: checkout.pro_annual
+    name: Pro Annual Research Access
+    price: 249
+    price_label: "$249"
+    billing: "year"
+    tagline: "Annual research access for recurring market-monitoring workflows."
+    cta_label: "Request Annual Access"
+    cta_url: "mailto:contact@commoditynode.com?subject=CommodityNode%20Annual%20Research%20Access"
     highlights:
-      - "All Pro features"
-      - "Saves ~$48 vs monthly"
-      - "Billed once per year"
+      - "Everything in 30-Day Access"
+      - "Annual research archive"
+      - "Priority feature access"
+      - "Exportable research notes"
   - id: enterprise
-    name: Enterprise
-    price_label: "Contact"
-    billing: "custom"
-    tagline: "Team seats, API, exports, shared dashboards."
-    cta_label: "Talk to us"
+    name: Enterprise Research License
+    price_label: "Custom"
+    billing: "annual license"
+    tagline: "Team seats, invoice payment, procurement workflows, and custom watchlists."
+    cta_label: "Request Enterprise Invoice"
     cta_url: "/enterprise/"
     highlights:
-      - "Team seats + shared dashboards"
-      - "API access + custom exports"
-      - "Private alerts + data routing"
-      - "Priority support + onboarding"
+      - "Team seats"
+      - "Invoice payment"
+      - "Procurement and supply-chain workflows"
+      - "Custom commodity watchlists"
+      - "Dedicated onboarding"
 
 guarantees:
-  trial_days: 7
-  trial_copy: "7-day free trial. No credit card required. Cancel anytime."
-  refund_days: 14
-  refund_copy: "Full refund within 14 days if Pro isn't right for you."
-  cancel_copy: "Cancel anytime from your billing portal."
-  payment_processor: "Lemon Squeezy (Stripe under the hood, VAT-handled)."
+  refund_days_30_day: 7
+  refund_days_annual: 14
+  refund_copy: "Refund eligibility depends on product type and usage. See Refund Policy."
+  payment_processor: "Manual access requests now; PayPal and global card providers require server-side verification before unlock."
 
 benefits:
   pro_bullets:
-    - headline: "AI 90-Day Forecasts"
-      body: "Probabilistic price forecasts with confidence bands, updated daily. See direction before you position."
-    - headline: "Scenario Simulator"
-      body: "Model price shocks (+15% oil, -20% lithium) and see which stocks and ETFs get hit. Test the thesis before you trade."
-    - headline: "Unlimited Signal Reports"
-      body: "Real-time analysis when prices move — direction, magnitude, and specific equities, published within hours."
-    - headline: "Company Sensitivity"
-      body: "5-year rolling regressions, Pearson p<0.05, derived from SEC 10-K hedging disclosures."
+    - headline: "Forecast uncertainty ranges"
+      body: "Probabilistic scenario inputs with p10-p90 ranges, model spread, and timestamps."
+    - headline: "Scenario analytics"
+      body: "Stress-test commodity shocks across business, supply-chain, and market contexts."
+    - headline: "Premium research archive"
+      body: "Deeper market intelligence memos with source context and methodology links."
+    - headline: "Company exposure context"
+      body: "Research-grade exposure mapping for business planning and monitoring workflows."
 
 faqs:
-  - q: "How do I cancel?"
-    a: "Cancel anytime from your billing portal. No questions asked."
-  - q: "What's the difference between Free and Pro?"
-    a: "Free gives you access to all 60 commodity hubs, up to 3 Signal Reports per month, plus the public forecast stack and simulator preview context so you can evaluate the workflow before paying. Pro unlocks unlimited Signal Reports, the full scenario workflow, company sensitivity analysis, and trading notes on each signal."
-  - q: "What happens after the 7-day trial?"
-    a: "Your account automatically converts to the Free tier. No charge. You keep access to all commodity hubs, public reports, the public forecast stack, and simulator preview context while you decide whether Pro belongs in your workflow."
-  - q: "Can I cancel anytime?"
-    a: "Yes. Cancel from your billing portal at any time — your Pro access stays active until the end of the paid period."
+  - q: "How is paid access handled now?"
+    a: "Until PayPal or global card integration is live with server-side verification, paid access requests are handled manually or by enterprise invoice."
+  - q: "Is this investment advice?"
+    a: "No. CommodityNode provides informational market research and scenario analytics only."
   - q: "Do you offer refunds?"
-    a: "Yes — full refund within 14 days if Pro isn't right for you."
-  - q: "Do you offer API access?"
-    a: "API access is available on the Enterprise plan. Contact us for documentation and rate limits."
-  - q: "How does Enterprise work?"
-    a: "Contact us for team seats, API access, and custom data exports. We'll respond within 24 hours. Enterprise includes everything in Pro plus dedicated support and custom integrations."
-  - q: "Is Pro worth it for individual investors?"
-    a: "Yes. Most Pro members are individual investors and self-directed traders who want the same commodity intelligence that professional analysts use, without institutional pricing. If you manage a portfolio with commodity-sensitive stocks (energy, mining, agriculture, airlines), Pro pays for itself quickly."
+    a: "Yes. See the Refund Policy for 30-Day Access, Annual Access, and Enterprise terms."
