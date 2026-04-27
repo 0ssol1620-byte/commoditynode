@@ -2,22 +2,17 @@
 CommodityNode proof rail — compact horizontal strip with live model version,
 last refresh timestamp, freshness state, and (optionally) a proxy-source badge.
 
-Usage:
-  {% include components/proof-rail.html
-       module="home_hero"
-       updated_at="2026-04-24T00:00:00Z"
-       state="live"           # live | stale | proxy | low_confidence | offline
-       model="Chronos-2 + TimesFM 2.5 consensus"
-       version="v2026.04 · no-harm routing"
-       horizon="30/90/180-day"
-       proxy_note=""           # only rendered when state=proxy
-  %}
+Parameters:
+  module       — short slug used as data-module attribute (e.g. home_hero, simulator_hero)
+  updated_at   — ISO timestamp of the last refresh (defaults to site.time)
+  state        — live | stale | proxy | low_confidence | offline (default: live)
+  model        — model stack label (default: "Chronos-2 + TimesFM 2.5 consensus")
+  version      — version label (default: "no-harm routing")
+  horizon      — forecast horizon label (default: "30/90/180-day")
+  proxy_note   — optional proxy detail string, only rendered when state=proxy
 
-Notes:
-  - Default state="live" stamps the build time; pages that want to be honest
-    about staleness can pass state="stale" with a real last-refresh timestamp.
-  - The rail is semantic + screen-reader friendly: each chip has aria-label
-    so audio output speaks "Model: Chronos-2 + TimesFM 2.5, refreshed 2 hours ago".
+Sample call site (commodity hub layout):
+  include components/proof-rail.html module="commodity_hub_hero" state="proxy" proxy_note="ETF-based"
 {%- endcomment -%}
 {%- assign _state    = include.state    | default: "live" -%}
 {%- assign _model    = include.model    | default: "Chronos-2 + TimesFM 2.5 consensus" -%}
