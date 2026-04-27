@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/mt"
 image: "/assets/images/og-cocoa.png"
 title: "Cocoa Price Today, Forecast & Chocolate Stock Impact"
 description: "Track cocoa price today, forecast ranges, why cocoa is moving, and which chocolate, food, and soft-commodity names are most exposed."

@@ -9,7 +9,7 @@ symbol: "TIE"
 data_type: "proxy"
 sector: "Aerospace/Defense"
 etfs: ["ITA", "XAR"]
-companies: []
+companies: ["TIE", "ATI"]
 substitutes: ["Advanced Aluminum Alloys", "Carbon Fiber Composites"]
 themes: ["Defense Rearming"]
 tags: ["titanium"]

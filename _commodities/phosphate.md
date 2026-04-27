@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/mt"
 title: "Phosphate Price Impact: Fertilizers & Food Security"
 description: "How phosphate rock prices cascade through fertilizer production, agricultural costs, and food security with Morocco controlling 70%+ of global reserves."
 commodity_slug: "phosphate"

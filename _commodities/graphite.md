@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/mt"
 image: "/assets/images/og-graphite.png"
 title: "Graphite Price Impact: EV Batteries & Anode Supply"
 description: "Graphite as the dominant anode material in lithium-ion batteries, with Chinese processing dominance and EV-driven demand growth."

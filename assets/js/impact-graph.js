@@ -115,7 +115,7 @@
     }
 
     // ── LOADING STATE ──
-    container.innerHTML = '<div style="text-align:center;padding:60px;color:#94a3b8;"><div style="margin-bottom:16px;font-size:2rem;">&#10779;</div>Loading Impact Map...</div>';
+    container.innerHTML = '<div role="status" aria-live="polite" style="text-align:center;padding:60px;color:#94a3b8;"><div style="margin-bottom:16px;font-size:2rem;">&#10779;</div>Building impact map from latest catalyst graph…</div>';
 
     // ── DIMENSIONS ──
     const isMob = window.innerWidth < 768;

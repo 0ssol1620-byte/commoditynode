@@ -1,5 +1,7 @@
 ---
 layout: commodity
+symbol_proxy: "FERG"
+unit: "$/mt"
 noindex: true
 sitemap: false
 title: "Silicon Price Impact: Solar, Semiconductors & Alloys"
@@ -9,7 +11,7 @@ symbol: ""
 data_type: "analysis_only"
 sector: "Critical Minerals/Solar"
 etfs: ["TAN", "SMH", "REMX"]
-companies: []
+companies: ["FERG", "MGPI"]
 substitutes: ["Thin-Film Solar (CdTe)", "Perovskite Solar Cells"]
 themes: ["Clean Energy", "AI Power Demand", "US-China Tariff War"]
 tags: ["silicon", "polysilicon", "solar", "semiconductor wafer", "metallurgical silicon", "aluminum alloy"]

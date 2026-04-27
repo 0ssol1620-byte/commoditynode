@@ -11,7 +11,7 @@ sector: "Agriculture"
 etfs: ["JJA", "DBA"]
 companies: ["PEP"]
 substitutes: ["Apple Juice", "Other Citrus", "Vitamin Supplements"]
-themes: []
+themes: ["Food Inflation"]
 tags: [orange juice, commodity analysis, citrus, beverages]
 ---
 

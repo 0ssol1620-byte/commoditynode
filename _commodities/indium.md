@@ -9,7 +9,7 @@ symbol: "FRES.L"
 data_type: "proxy"
 sector: "Critical Minerals/Tech"
 etfs: ["REMX"]
-companies: []
+companies: ["TECK", "IIVI"]
 substitutes: ["Fluorine-doped Tin Oxide", "Silver Nanowires"]
 themes: ["Clean Energy"]
 tags: ["indium"]

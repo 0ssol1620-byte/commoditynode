@@ -9,7 +9,7 @@ symbol: "HO=F"
 data_type: "direct_futures"
 sector: "Energy"
 etfs: ["UGA"]
-companies: []
+companies: ["VLO", "MPC", "PSX"]
 substitutes: ["Biodiesel", "Electric Trucks", "LNG"]
 themes: ["Supply Chain Disruption"]
 tags: ["diesel"]

@@ -1,5 +1,7 @@
 ---
 layout: commodity
+symbol_proxy: "SBSW"
+unit: "$/mt"
 noindex: true
 sitemap: false
 title: "Chromium Price Impact: Stainless Steel & Auto Supply"

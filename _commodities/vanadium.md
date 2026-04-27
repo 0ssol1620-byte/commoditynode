@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/lb"
 image: "/assets/images/og-steel.png"
 title: "Vanadium Price Impact: Grid Storage & Steel Alloys"
 description: "Vanadium's dual role in high-strength steel alloys and grid-scale redox flow batteries, with Chinese supply dominance."

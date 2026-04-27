@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/lb"
 name: "Ethylene"
 title: "Ethylene Price Impact: Plastics, Petrochemicals & Chemical Industry"
 description: "Ethylene is the world's most-produced organic chemical, the building block for polyethylene plastics, PVC, and thousands of downstream products."

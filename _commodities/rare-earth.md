@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/kg"
 image: "/assets/images/og-rare-earth.png"
 title: "Rare Earth Price Impact: Tech Supply Chains & Critical Minerals"
 description: "Rare earth elements powering permanent magnets for EV motors, wind turbines, and defense systems, with extreme Chinese supply chain dominance."

@@ -48,8 +48,8 @@ sitemap: false
 </style>
 
 <!-- Gate: shown while loading -->
-<div id="api-loading" style="text-align:center;padding:80px 20px;color:#64748b;font-size:0.9rem">
-  Loading...
+<div id="api-loading" style="text-align:center;padding:80px 20px;color:#64748b;font-size:0.9rem" role="status" aria-live="polite">
+  Verifying enterprise access<span aria-hidden="true">…</span>
 </div>
 
 <!-- Gate: not enterprise -->
@@ -89,9 +89,9 @@ sitemap: false
 
       <!-- Current Key -->
       <div class="api-card">
-        <h2>Your API Key <span class="badge" id="key-status-badge" style="background:rgba(100,116,139,0.15);color:#64748b">Loading</span></h2>
+        <h2>Your API Key <span class="badge" id="key-status-badge" style="background:rgba(100,116,139,0.15);color:#64748b">Verifying…</span></h2>
         <div class="key-display" id="key-display">
-          <span class="key-val" id="key-val">Loading...</span>
+          <span class="key-val" id="key-val" aria-live="polite">Awaiting key generation — click <em>Generate New Key</em> below to create one.</span>
           <button type="button" class="copy-btn hidden" id="copy-btn" data-action="copy-key">Copy</button>
         </div>
         <button type="button" class="gen-btn" id="gen-btn" data-action="generate-key">

@@ -9,7 +9,7 @@ symbol: "NG=F"
 data_type: "direct_futures"
 sector: "Energy"
 etfs: ["UNG", "BOIL", "FCG"]
-companies: []
+companies: ["EQT", "AR", "RRC"]
 substitutes: ["Crude Oil", "Uranium", "Coal", "Hydrogen"]
 themes: ["Clean Energy", "Food Inflation"]
 tags: [natural gas, commodity analysis, supply chain]

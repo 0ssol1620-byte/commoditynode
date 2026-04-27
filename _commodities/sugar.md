@@ -9,7 +9,7 @@ symbol: "SB=F"
 data_type: "direct_futures"
 sector: "Soft Commodities"
 etfs: ["CANE", "SGG"]
-companies: []
+companies: ["SRE", "BG"]
 substitutes: ["HFCS", "Stevia", "Aspartame"]
 themes: ["Food Inflation"]
 tags: ["sugar"]

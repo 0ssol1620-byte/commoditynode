@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/kg"
 image: "/assets/images/og-natural-gas.png"
 title: "Hydrogen Price Impact: Green Energy, Electrolyzers & Fuel Cells"
 description: "Hydrogen's role as a clean energy carrier, electrolyzer economics, and the green vs grey transition."
@@ -8,7 +9,7 @@ symbol: "PLUG"
 data_type: "proxy"
 sector: "Energy/Clean"
 etfs: ["HDRO", "ICLN"]
-companies: []
+companies: ["PLUG", "BLDP", "BE"]
 substitutes: ["Batteries", "Natural Gas", "Biofuels"]
 themes: ["Clean Energy", "Carbon Transition"]
 tags: [hydrogen, clean energy, electrolysis, fuel cells, decarbonization, supply chain]

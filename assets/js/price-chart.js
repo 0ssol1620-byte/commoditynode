@@ -281,7 +281,7 @@
         </div>
       </div>
       <div class="cn-chart-body" style="position:relative">
-        <div class="cn-chart-loading"><div class="cn-loading-spinner"></div><span>Loading…</span></div>
+        <div class="cn-chart-loading" role="status" aria-live="polite"><div class="cn-loading-spinner"></div><span>Hydrating live price series…</span></div>
         <canvas style="width:100%;height:100%;display:block"></canvas>
       </div>
     `;

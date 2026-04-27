@@ -1,5 +1,7 @@
 ---
 layout: commodity
+symbol_proxy: "TECK"
+unit: "$/kg"
 noindex: true
 sitemap: false
 title: "Germanium Price Impact: Fiber Optics, Infrared Tech & Exports"

@@ -1,5 +1,7 @@
 ---
 layout: commodity
+symbol_proxy: "AMG"
+unit: "$/mtu"
 noindex: true
 sitemap: false
 title: "Tungsten Price Impact: Carbide Tools, Defense & China Supply"

@@ -384,7 +384,7 @@
     var items = safeArray(bundle.curated.ripple_ranker);
     var matches = items.filter(function(item){ return saved.indexOf(String(item.name).toLowerCase()) !== -1; });
     var useItems = matches.length ? matches : items.slice(0, 3);
-    $("exposure-screener-copy").textContent = matches.length ? 'Saved watchlist overlap found. These are the names already colliding with the current commodity state.' : 'No saved watchlist overlap yet. Use the top exposed names below as the first-pass screen.';
+    $("exposure-screener-copy").textContent = matches.length ? 'Saved watchlist overlap found. These are the names already colliding with the current commodity state.' : 'No watchlist saved yet — the top exposed names below are your first-pass screen until you add tickers.';
     $("exposure-screener-list").innerHTML = useItems.map(function(item){
       return '<div class="lab-mini-card"><div class="lab-row-title">' + item.name + '</div><div class="lab-row-sub">' + item.reason + '</div><div class="lab-chip">' + item.type + '</div></div>';
     }).join('');

@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "cents/lb"
 image: "/assets/images/og-lean-hogs.png"
 title: "Lean Hogs Price Impact: Pork Markets & Agribusiness"
 description: "Lean hogs as a globally significant protein commodity dominated by Chinese demand and disease risk."

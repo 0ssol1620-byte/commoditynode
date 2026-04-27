@@ -9,7 +9,7 @@ symbol: "WY"
 data_type: "proxy"
 sector: "Industrial Metals"
 etfs: ["WOOD"]
-companies: []
+companies: ["WY", "PCH", "RYN"]
 substitutes: ["Steel Framing", "Concrete", "Engineered Wood"]
 themes: ["Infrastructure Boom"]
 tags: ["lumber"]

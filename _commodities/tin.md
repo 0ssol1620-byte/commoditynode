@@ -1,5 +1,6 @@
 ---
 layout: commodity
+symbol_proxy: "AAUKF"
 noindex: true
 sitemap: false
 unit: "$/mt"
@@ -11,7 +12,7 @@ symbol: ""
 data_type: "analysis_only"
 sector: "Industrial Metals"
 etfs: ["JJM"]
-companies: []
+companies: ["AAUKF", "MLR.AX"]
 substitutes: ["Lead-free Alternatives", "Conductive Adhesives"]
 themes: ["Supply Chain Disruption"]
 tags: ["tin"]

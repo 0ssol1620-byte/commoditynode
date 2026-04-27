@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "cents/lb"
 image: "/assets/images/og-rubber.png"
 title: "Rubber Price Impact: Auto, Tires & Industrial Supply Chain"
 description: "Natural rubber's tire industry dominance, Southeast Asian supply concentration, and synthetic substitution dynamics."
@@ -8,7 +9,7 @@ symbol: "GT"
 data_type: "proxy"
 sector: "Agriculture/Industrial"
 etfs: ["DBA", "MOO"]
-companies: []
+companies: ["GT", "BRDCY"]
 substitutes: ["Synthetic Rubber", "Silicone", "Recycled Rubber"]
 themes: ["EV Transition", "Emerging Markets"]
 tags: [rubber, tires, agriculture, southeast asia, automotive, supply chain]

@@ -1,5 +1,7 @@
 ---
 layout: commodity
+symbol_proxy: "RIO"
+unit: "$/mcf"
 noindex: true
 sitemap: false
 title: "Helium Price Impact: MRI Systems, Semiconductors & Aerospace"

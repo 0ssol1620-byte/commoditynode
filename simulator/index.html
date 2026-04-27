@@ -854,7 +854,7 @@ disable_ads: true
   <div class="sim-saved-strip">
     <div>
       <div class="sim-inline-kicker">Saved workflow context</div>
-      <div data-profile-empty class="sim-inline-copy">No workflow saved yet. Save the commodity and your watchlist once, then this simulator becomes a much sharper daily decision surface.</div>
+      <div data-profile-empty class="sim-inline-copy">Save the commodity and your watchlist once — the simulator then becomes a much sharper daily decision surface for every preset shock.</div>
       <div data-profile-has-saved style="display:none;">
         <div class="sim-inline-copy-strong" data-profile-summary>Build your workflow once, then use CommodityNode as a faster daily decision surface.</div>
         <p class="sim-inline-copy" style="margin:8px 0 0;" data-profile-next-step>You already have a saved workflow. Re-open the live hub, then verify the scenario against your saved watchlist before the market reprices.</p>
@@ -867,19 +867,19 @@ disable_ads: true
     <div class="sim-saved-grid">
       <div class="sim-saved-card">
         <div class="sim-saved-card-label">Saved role</div>
-        <strong data-profile-role>Not set yet</strong>
+        <strong data-profile-role>Choose a role to personalize</strong>
       </div>
       <div class="sim-saved-card">
         <div class="sim-saved-card-label">Saved commodities</div>
-        <strong data-profile-commodities>No tracked commodities yet</strong>
+        <strong data-profile-commodities>Pick 3 commodities to start tracking</strong>
       </div>
       <div class="sim-saved-card">
         <div class="sim-saved-card-label">Watchlist</div>
-        <strong data-profile-watchlist>No saved watchlist names yet</strong>
+        <strong data-profile-watchlist>Add tickers to see your exposure overlay</strong>
       </div>
       <div class="sim-saved-card">
         <div class="sim-saved-card-label">Freshness</div>
-        <strong data-profile-updated>Not saved yet</strong>
+        <strong data-profile-updated>Auto-stamps on first save</strong>
       </div>
     </div>
   </div>
@@ -2531,7 +2531,7 @@ function renderWatchlistRelevance(){
     return (profile.watchlist || []).some(function(name){ return String(name).toLowerCase() === String(item.name).toLowerCase(); });
   }).sort(function(a,b){ return Math.abs(b.impact) - Math.abs(a.impact); });
   if (!profile.watchlist || !profile.watchlist.length) {
-    el.textContent = 'No saved watchlist yet. Add your names once and CommodityNode can show which ones line up with each commodity scenario.';
+    el.textContent = 'Add your names once and CommodityNode lines them up automatically with each commodity scenario you run.';
     return;
   }
   if (!matches.length) {

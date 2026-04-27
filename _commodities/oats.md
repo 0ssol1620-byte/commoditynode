@@ -11,7 +11,7 @@ sector: "Agriculture"
 etfs: ["DBA", "RJA"]
 companies: ["PEP"]
 substitutes: ["Wheat", "Barley", "Quinoa"]
-themes: []
+themes: ["Food Inflation"]
 tags: [oats, commodity analysis, plant-based, health food]
 ---
 

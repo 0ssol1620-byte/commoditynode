@@ -1,5 +1,7 @@
 ---
 layout: commodity
+symbol_proxy: "FCX"
+unit: "$/lb"
 noindex: true
 sitemap: false
 title: "Molybdenum Price Impact: Steel Alloys, Drilling & Copper Supply"

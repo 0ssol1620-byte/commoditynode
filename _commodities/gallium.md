@@ -1,5 +1,7 @@
 ---
 layout: commodity
+symbol_proxy: "REMX"
+unit: "$/kg"
 noindex: true
 sitemap: false
 title: "Gallium Price Impact: Semiconductors, 5G & Defense Supply"
@@ -9,7 +11,7 @@ symbol: ""
 data_type: "analysis_only"
 sector: "Critical Minerals/Tech"
 etfs: ["REMX", "SMH"]
-companies: []
+companies: ["TECK", "IIVI"]
 substitutes: ["Silicon Carbide (SiC)", "Indium Phosphide"]
 themes: ["US-China Tariff War", "Supply Chain Disruption"]
 tags: ["gallium", "semiconductors", "5G", "critical minerals", "china export ban", "GaAs", "GaN"]

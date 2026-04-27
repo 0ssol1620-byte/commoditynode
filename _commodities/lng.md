@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/mmbtu"
 image: "/assets/images/og-lng.png"
 title: "LNG Price Impact: Utilities, Power & Export Markets"
 description: "Liquefied natural gas and the geopolitical reshaping of global energy trade routes."
@@ -8,7 +9,7 @@ symbol: "LNG"
 data_type: "proxy"
 sector: "Energy"
 etfs: ["FCG"]
-companies: []
+companies: ["LNG", "TLP", "GLNG"]
 substitutes: ["Natural Gas", "Uranium", "Coal"]
 themes: ["Clean Energy", "Supply Chain Disruption"]
 tags: ["lng"]

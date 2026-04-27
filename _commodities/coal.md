@@ -1,5 +1,6 @@
 ---
 layout: commodity
+unit: "$/mt"
 image: "/assets/images/og-coal.png"
 title: "Coal Price Impact: Power Generation, Steel & Energy Transition"
 description: "How thermal and metallurgical coal prices affect power utilities, steel producers, and the renewable energy transition trade."
@@ -8,7 +9,7 @@ symbol: "BTU"
 data_type: "proxy"
 sector: "Energy"
 etfs: ["KOL"]
-companies: []
+companies: ["BTU", "ARCH", "ARLP"]
 substitutes: ["Natural Gas", "Uranium", "Crude Oil"]
 themes: ["Clean Energy"]
 tags: ["coal"]

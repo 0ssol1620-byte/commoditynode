@@ -9,7 +9,7 @@ symbol: "CT=F"
 data_type: "direct_futures"
 sector: "Soft Commodities"
 etfs: ["BAL"]
-companies: []
+companies: ["UFPI", "GIL"]
 substitutes: ["Polyester", "Nylon", "Rayon"]
 themes: ["Supply Chain Disruption"]
 tags: ["cotton"]

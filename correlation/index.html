@@ -166,7 +166,7 @@ noindex: false
         <h3>Investigable heatmap</h3>
         <p>Click any pair to inspect the latest rolling relationship and compare normalized paths over the active lookback window.</p>
         <div id="corr-loading" style="text-align:center;padding:40px;color:var(--text3);font-size:0.88rem;">
-          Loading 90-day correlation data...
+          Computing 90-day rolling Pearson matrix from live candle history…
         </div>
         <div id="corr-heatmap-chart" class="corr-chart-stage" style="display:none"></div>
         <table class="heatmap-table" id="corr-matrix" style="display:none"></table>
@@ -426,7 +426,7 @@ noindex: false
     document.getElementById('corr-heatmap-chart').style.display='';
   }
 
-  document.getElementById('corr-loading').textContent='Loading correlation data from candle history...';
+  document.getElementById('corr-loading').textContent='Computing rolling correlation from live candle history…';
   var corrLoader = window.CNDataStore && window.CNDataStore.getChartData
     ? window.CNDataStore.getChartData()
     : fetch('/assets/data/chart-data.json').then(function(r){ return r.json(); });

@@ -1225,7 +1225,7 @@
   }
 
   function formatRelativeProfileTime(isoString) {
-    if (!isoString) return 'Not saved yet';
+    if (!isoString) return 'Auto-stamps on first save';
     var date = new Date(isoString);
     if (Number.isNaN(date.getTime())) return 'Saved recently';
     var diffMs = Date.now() - date.getTime();
@@ -1364,16 +1364,16 @@
       el.style.display = recommendation.hasSaved ? '' : 'none';
     });
     document.querySelectorAll('[data-profile-role]').forEach(function(el) {
-      el.textContent = profile.role ? titleize(profile.role) : 'Not set yet';
+      el.textContent = profile.role ? titleize(profile.role) : 'Choose a role to personalize';
     });
     document.querySelectorAll('[data-profile-commodities]').forEach(function(el) {
-      el.textContent = profile.commodities.length ? profile.commodities.map(titleize).join(', ') : 'No tracked commodities yet';
+      el.textContent = profile.commodities.length ? profile.commodities.map(titleize).join(', ') : 'Pick 3 commodities to start tracking';
     });
     document.querySelectorAll('[data-profile-watchlist]').forEach(function(el) {
-      el.textContent = profile.watchlist.length ? profile.watchlist.join(', ') : 'No saved watchlist names yet';
+      el.textContent = profile.watchlist.length ? profile.watchlist.join(', ') : 'Add tickers to see your exposure overlay';
     });
     document.querySelectorAll('[data-profile-events]').forEach(function(el) {
-      el.textContent = profile.events.length ? profile.events.map(titleize).join(', ') : 'No event playbooks saved yet';
+      el.textContent = profile.events.length ? profile.events.map(titleize).join(', ') : 'Save an event playbook (FOMC, OPEC, WASDE, CPI)';
     });
     document.querySelectorAll('[data-profile-commodity-count]').forEach(function(el) {
       el.textContent = String(recommendation.commodityCount);
