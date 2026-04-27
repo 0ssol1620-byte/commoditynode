@@ -73,6 +73,63 @@
     return out;
   }
 
+  // ── Lightweight Charts mount (TradingView's canonical financial renderer).
+  // Preferred when window.LightweightCharts is present (loaded by vendor-loader on
+  // commodity hubs / pages with page.lightweight_chart). Falls back to the local
+  // canvas candlestick on legacy surfaces or when the CDN failed to load.
+  function tryLightweightChartsMount(body, candles, opts) {
+    if (!window.LightweightCharts || !body || !candles || candles.length < 2) return null;
+    try {
+      var stage = body.querySelector('.cn-lwc-stage');
+      if (!stage) {
+        stage = document.createElement('div');
+        stage.className = 'cn-lwc-stage';
+        stage.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+        body.appendChild(stage);
+      } else {
+        stage.innerHTML = '';
+      }
+      var rect = body.getBoundingClientRect();
+      var width = Math.max(160, Math.floor(rect.width || body.offsetWidth || 320));
+      var height = Math.max(120, Math.floor(rect.height || body.offsetHeight || 220));
+      var chart = window.LightweightCharts.createChart(stage, {
+        width: width, height: height,
+        layout: { background: { color: 'transparent' }, textColor: '#94a3b8', fontSize: 11 },
+        grid: { vertLines: { color: 'rgba(148,163,184,0.06)' }, horzLines: { color: 'rgba(148,163,184,0.06)' } },
+        crosshair: { mode: 1 },
+        rightPriceScale: { borderColor: 'rgba(148,163,184,0.18)' },
+        timeScale: { borderColor: 'rgba(148,163,184,0.18)', timeVisible: false },
+        handleScroll: false, handleScale: false,
+      });
+      var series = chart.addCandlestickSeries({
+        upColor: '#10b981', downColor: '#ef4444',
+        borderUpColor: '#10b981', borderDownColor: '#ef4444',
+        wickUpColor: '#10b981', wickDownColor: '#ef4444',
+      });
+      series.setData(candles.map(function (c) {
+        return {
+          time: Math.floor(c.x / 1000),
+          open: c.o, high: c.h, low: c.l, close: c.c,
+        };
+      }));
+      chart.timeScale().fitContent();
+      // Hide the canvas-fallback layer once LWC is mounted.
+      var legacy = body.querySelector('canvas');
+      if (legacy) legacy.style.display = 'none';
+      // Resize hook
+      var ro = new ResizeObserver(function () {
+        var r = body.getBoundingClientRect();
+        if (r.width > 16 && r.height > 16) chart.applyOptions({ width: Math.floor(r.width), height: Math.floor(r.height) });
+      });
+      ro.observe(body);
+      body.dataset.renderer = 'lightweight-charts';
+      return { chart: chart, series: series, ro: ro };
+    } catch (err) {
+      console.warn('lightweight-charts mount failed, falling back to canvas:', err && err.message);
+      return null;
+    }
+  }
+
   function drawChart(canvas, candles) {
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
@@ -321,13 +378,22 @@
         loading.style.display = 'none';
         canvas.style.opacity  = '1';
 
-        // Small delay to ensure canvas has correct dimensions
-        requestAnimationFrame(() => {
+        // Prefer Lightweight Charts on hubs / opt-in pages; fall back to canvas otherwise.
+        var body = el.querySelector('.cn-chart-body');
+        if (el._lwc && el._lwc.ro) { try { el._lwc.ro.disconnect(); } catch(_){} }
+        if (el._lwc && el._lwc.chart) { try { el._lwc.chart.remove(); } catch(_){} el._lwc = null; }
+        var lwc = tryLightweightChartsMount(body, candles);
+        if (lwc) {
+          el._lwc = lwc;
+        } else {
+          // Small delay to ensure canvas has correct dimensions
           requestAnimationFrame(() => {
-            drawChart(canvas, candles);
-            addTooltip(canvas, el.querySelector('.cn-chart-body'));
+            requestAnimationFrame(() => {
+              drawChart(canvas, candles);
+              addTooltip(canvas, el.querySelector('.cn-chart-body'));
+            });
           });
-        });
+        }
       } else {
         loading.querySelector('span').textContent = 'Price data temporarily unavailable';
         loading.querySelector('.cn-loading-spinner').style.display = 'none';

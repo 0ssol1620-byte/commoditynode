@@ -1,0 +1,71 @@
+{%- comment -%}
+CommodityNode proof rail — compact horizontal strip with live model version,
+last refresh timestamp, freshness state, and (optionally) a proxy-source badge.
+
+Usage:
+  {% include components/proof-rail.html
+       module="home_hero"
+       updated_at="2026-04-24T00:00:00Z"
+       state="live"           # live | stale | proxy | low_confidence | offline
+       model="Chronos-2 + TimesFM 2.5 consensus"
+       version="v2026.04 · no-harm routing"
+       horizon="30/90/180-day"
+       proxy_note=""           # only rendered when state=proxy
+  %}
+
+Notes:
+  - Default state="live" stamps the build time; pages that want to be honest
+    about staleness can pass state="stale" with a real last-refresh timestamp.
+  - The rail is semantic + screen-reader friendly: each chip has aria-label
+    so audio output speaks "Model: Chronos-2 + TimesFM 2.5, refreshed 2 hours ago".
+{%- endcomment -%}
+{%- assign _state    = include.state    | default: "live" -%}
+{%- assign _model    = include.model    | default: "Chronos-2 + TimesFM 2.5 consensus" -%}
+{%- assign _version  = include.version  | default: "no-harm routing" -%}
+{%- assign _horizon  = include.horizon  | default: "30/90/180-day" -%}
+{%- assign _updated  = include.updated_at | default: site.time -%}
+{%- assign _label    = _updated | date: "%Y-%m-%d %H:%M UTC" -%}
+{%- assign _module   = include.module   | default: "module" -%}
+{%- if _state == "live" -%}
+  {%- assign _state_label = "Live" -%}
+  {%- assign _state_color = "#10b981" -%}
+{%- elsif _state == "stale" -%}
+  {%- assign _state_label = "Stale data — refreshing soon" -%}
+  {%- assign _state_color = "#f59e0b" -%}
+{%- elsif _state == "proxy" -%}
+  {%- assign _state_label = "Proxy series in use" -%}
+  {%- assign _state_color = "#a855f7" -%}
+{%- elsif _state == "low_confidence" -%}
+  {%- assign _state_label = "Low-confidence — preview only" -%}
+  {%- assign _state_color = "#fbbf24" -%}
+{%- else -%}
+  {%- assign _state_label = "Source offline" -%}
+  {%- assign _state_color = "#ef4444" -%}
+{%- endif -%}
+<aside class="cn-proof-rail" data-module="{{ _module }}" data-freshness-state="{{ _state }}" role="status" aria-label="{{ _module | replace: '_', ' ' }} freshness rail">
+  <span class="cn-proof-chip cn-proof-chip--state" style="--cn-state-color:{{ _state_color }};" aria-label="Freshness: {{ _state_label }}">
+    <span class="cn-proof-dot" aria-hidden="true"></span>{{ _state_label }}
+  </span>
+  <span class="cn-proof-chip" aria-label="Model: {{ _model }}">
+    <span class="cn-proof-key">Model</span>
+    <span class="cn-proof-val">{{ _model }}</span>
+  </span>
+  <span class="cn-proof-chip" aria-label="Version: {{ _version }}">
+    <span class="cn-proof-key">Version</span>
+    <span class="cn-proof-val">{{ _version }}</span>
+  </span>
+  <span class="cn-proof-chip" aria-label="Forecast horizon: {{ _horizon }}">
+    <span class="cn-proof-key">Horizon</span>
+    <span class="cn-proof-val">{{ _horizon }}</span>
+  </span>
+  <span class="cn-proof-chip" aria-label="Refreshed {{ _label }}">
+    <span class="cn-proof-key">Refreshed</span>
+    <time datetime="{{ _updated | date_to_xmlschema }}" class="cn-proof-val">{{ _label }}</time>
+  </span>
+  {%- if _state == "proxy" and include.proxy_note -%}
+  <span class="cn-proof-chip cn-proof-chip--proxy" aria-label="Proxy detail: {{ include.proxy_note }}">
+    <span class="cn-proof-key">Proxy</span>
+    <span class="cn-proof-val">{{ include.proxy_note }}</span>
+  </span>
+  {%- endif -%}
+</aside>

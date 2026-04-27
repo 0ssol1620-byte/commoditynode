@@ -190,6 +190,17 @@ layout: default
       {% endif %}
     </div>
     <h1>{{ page.title }}{% assign sym_strip = page.symbol | strip %}{% if sym_strip == "" or sym_strip == nil %}<span class="commodity-header-title-chip commodity-header-title-chip--analysis">Analysis Only</span>{% elsif page.proxy_type == "futures" %}<span class="commodity-header-title-chip commodity-header-title-chip--futures">Direct Market Price</span>{% elsif page.proxy_type == "etf_proxy" or page.proxy_type == "equity_proxy" %}<span class="commodity-header-title-chip commodity-header-title-chip--proxy">Proxy Asset Benchmark</span>{% endif %}</h1>
+    {% if page.data_type == 'analysis_only' or sym_strip == '' or sym_strip == nil %}
+      {% assign _proof_state = "proxy" %}
+      {% assign _proof_proxy_note = page.symbol_proxy | default: "Coverage via linked reports + impact map" %}
+    {% elsif page.data_type == 'proxy' %}
+      {% assign _proof_state = "proxy" %}
+      {% assign _proof_proxy_note = page.symbol %}
+    {% else %}
+      {% assign _proof_state = "live" %}
+      {% assign _proof_proxy_note = "" %}
+    {% endif %}
+    {% include components/proof-rail.html module="commodity_hub_hero" state=_proof_state model="Chronos-2 + TimesFM 2.5 consensus" version="v2026.04 · no-harm routing" horizon="30 / 90 / 180-day" proxy_note=_proof_proxy_note %}
     {% if page.data_type == 'direct_futures' %}
     <div class="commodity-market-status">
       <span class="commodity-market-chip commodity-market-chip--futures">Live Futures</span>
